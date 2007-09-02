@@ -1,0 +1,514 @@
+//     Copyright 2002-2007 Jim Bublitz <jbublitz@nwinternet.com>
+
+// This software is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License as
+// published by the Free Software Foundation; either version 2 of
+// the License, or (at your option) any later version.
+//
+// This software is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public
+// License along with this library; see the file COPYING.
+// If not, write to the Free Software Foundation, Inc.,
+// 59 Temple Place - Suite 331, Boston, MA 02111-1307, USA.
+
+//   Version change example
+//   ======================
+
+//  KDE 3.91.0 -->> KDE 3.92.0
+//  do the following replacements:
+
+//   3.91.0   -->> 3.92.0
+//   3_91_0   -->> 3_92_0
+//   3910     -->> 3920 
+//   0x039100 -->> 0x039200
+//
+//    and bump the previous version number in the global data section  
+
+
+
+
+//                project file for PyKDE
+//                ----------------------
+
+
+// ------------- project data ---------------
+
+project     = PyKDE4
+package     = PyKDE4
+
+// $DST
+destination = /home/jim/PyKDE3920
+
+// $SRC
+source      = /server/source/KDE4Src/kdelibs-3.92.0
+
+// $COMP
+compare     = /usr/include
+
+// $IMP
+importpath  = /usr/share/sip/PyQt4
+
+prevpath    = /home/jim/PyKDEbase/sip
+
+version     = KDE_3_92_0
+secondary   = WS_X11
+previous    = KDE_3_91_0
+
+license     = LGPL
+copyright   =
+
+
+
+// ------------- module data ----------------
+
+
+module = kdecore
+
+source     = $SRC/kdecore 
+ignore     = conversion_check.h kallocator.h kdebug.h kcodecs.h kgenericfactory.h ksortablelist.h
+ignore     = ktrader.h ktypelist.h  kmulticastsocket.h kmulticastsocketdevice.h kdecore_export.h
+ignore     = kde_file.h ksocks.h kde_file.h ksharedptr.h klauncher_iface.h 
+ignore     = k3bufferedsocket.h  k3clientsocketbase.h  k3datagramsocket.h  k3httpproxysocketdevice.h
+ignore     = k3iobuffer.h  k3processcontroller.h  k3process.h  k3procio.h  k3resolver.h  k3reverseresolver.h
+ignore     = k3serversocket.h  k3socketaddress.h  k3socketbase.h  k3socketdevice.h  k3socks.h
+ignore     = k3sockssocketdevice.h  k3streamsocket.h qtest_kde.h
+
+// see if these come back to life - not in lib?
+ignore     = ksystemtimezone.h  ktzfiletimezone.h
+
+require    = ksycocafactory.sip
+
+noheader   = typedefs.sip
+
+subst      = $DST/extra/kde3920
+
+import     = QtCore/QtCoremod.sip (Qt_4_3_0 Qt_5_0_0 WS_X11)
+import     = QtGui/QtGuimod.sip (Qt_4_3_0 Qt_5_0_0 WS_X11)
+import     = QtNetwork/QtNetworkmod.sip (Qt_4_3_0 Qt_5_0_0 WS_X11)
+importpath = $IMP
+
+amend      = * ctor parent /TransferThis/
+amend      = * all parent /Transfer/
+amend      = * ctor pParent /TransferThis/
+sipslot    = pObjSlot psMethodSlot kaccel kglobalaccel
+nobase     = QSharedData  KShared
+cast       = KConfigBase KTimeZone KTimeZoneData KTimeZoneSource
+cast       = QObject QUrl KMacroExpanderBase KSycocaEntry
+
+include    = QtCore QtGui QtNetwork sonnet
+libs       = QtCore QtGui QtNetwork
+
+define     = "Q_WS_X11", "1"
+define     = "Q_SLOTS", "slots"
+define     = "Q_SIGNALS", "signals"
+define     = "Q_SCRIPTABLE"
+define     = "mutable union", "union"
+define     = "KDECORE_EXPORT", ""
+define     = "KDE_EXPORT", ""
+define     = "KIO_EXPORT", ""  
+define     = "KDE_DEPRECATED"
+define     = "KDE_CONSTRUCTOR_DEPRECATED"
+define     = "_DEPRECATED"
+define     = "Q_CORE_EXPORT"
+define     = "KConfigSkeletonGenericItem.*<.*>", "KConfigSkeletonItem"
+define     = "struct.*::termios", "termios"
+define     = "::group", "group"
+define     = "extern\ KLocalizedString", "KLocalizedString"
+define     = "inline\ QString\ tr2i18n", "QString tr2i18n"
+define     = "inline\ QString\ i18n", "QString i18n"
+
+// kwinmodule needs this
+define     = "Q_OS_UNIX"     
+
+
+retain
+
+// -----------------------------------------
+
+module = solid
+
+ignore     =
+source     = $SRC/solid
+compare    = $COMP/solid 
+subst      = $DST/extra/kde3920
+
+import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = kdecore/kdecore
+importpath = $IMP
+
+amend      = * ctor parent /Transfer/
+amend      = * all parent /Transfer/
+cast       = QObject
+nocast     = Solid::Networking::Notifier  Solid::PowerManagement::Notifier
+
+include    = QtCore QtGui solid
+libs       = QtCore QtGui kdecore
+
+define     = "SOLID_EXPORT"
+define     = "SOLID_SINGLETON.*"
+
+retain
+
+// -----------------------------------------
+
+module = kdefx
+
+ignore     = kdefx_export.h
+source     = $SRC/kdefx
+compare    = $COMP
+subst      = $DST/extra/kde3920
+import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = kdecore/kdecore
+importpath = $IMP
+
+amend      = * ctor parent /TransferThis/
+amend      = * all parent /Transfer/
+nobase     = QStylePlugin
+cast       = QObject
+
+include    = QtCore QtGui
+libs       = QtCore QtGui kdecore
+
+define     = "KDEFX_EXPORT", ""
+// PyQt doesn't implement QCommonStyle (which is only a wrapper for QStyle anyway)
+define     = "QCommonStyle", "QStyle"
+
+  
+retain
+
+// -----------------------------------------
+
+module = kdeui
+
+//trace = kgesture.h
+source     = $SRC/kdeui/ $SRC/kdeui/dialogs $SRC/kdeui/util $SRC/kdeui/widgets $DST/extra/kde3920/kdeui
+
+ignore     = kxerrorhandler.h  k3iconview.h  k3iconviewsearchline.h  k3listview.h  k3listviewlineedit.h  k3listviewsearchline.h  netwm_p.h
+ignore     = k3mimesourcefactory.h kdeui_export.h
+
+compare    = $COMP $DST/extra/kde3920
+subst      = $DST/extra/kde3920
+
+import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtSvg/QtSvgmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = kdecore/kdecore
+import     = kdefx/kdefx
+importpath = $IMP
+
+amend      = * ctor parent /TransferThis/
+amend      = KDockMainWindow all parent /TransferThis/
+amend      = KDockArea all parent /TransferThis/
+amend      = * all parent /Transfer/
+sipslot    = receiver member kaccelmenu
+sipslot    = receiver slot   kaction kactionclasses kbuttonbox ktoolbar kdialogbuttonbox
+sipslot    = recvr    slot   kstandardaction
+nobase     = Q3GridView
+cast       = KXMLGuiClient QIcon KMessageHandler KConfigSkeletonItem QObject QCursor KCompletionBase
+nocast     = KConfigSkeletonGenericItem
+
+include    = QtCore QtGui QtXml QtSvg sonnet
+libs       = QtCore QtGui QtXml QtSvg kdecore kdefx
+
+define     = "KDEUI_EXPORT", ""
+define     = "QT_MOC_COMPAT"
+define     = "enum.*?Qt::", "Qt::"
+define     = "\(.*enum.*EmptyHandling", "(EmptyHandling"
+define     = "\,.*enum.*EmptyHandling", ", EmptyHandling"
+define     = "class KMultiTabBarButton \*", "KMultiTabBarButton *"
+define     = "class KMultiTabBarTab \*", "KMultiTabBarTab *"
+
+retain
+
+// -----------------------------------------
+
+module = kio
+
+//trace = scheduler.h
+
+source     = $SRC/kio  $SRC/kfile $DST/extra/kde3920/kio
+ignore     = http_slave_defaults.h ioslave_defaults.h kmimetyperesolver.h k3mimetyperesolver.h kfiledetailview.h kfileiconview.h
+ignore     = kfiletreeview.h kfiletreeviewitem.h ksslpemcallback.h kpropsdialog.h kio_export.h
+// requires QDBusConnection
+ignore     = kdirnotify.h   
+// kfile files
+ignore     = k3filedetailview.h  k3fileiconview.h k3filetreeview.h  k3filetreeviewitem.h  k3mimetyperesolver.h
+ignore     = kfiletreebranch.h  kfile_export.h
+// exists?
+ignore     = kurlbar.h
+
+compare    = $COMP  $COMP/kio
+subst      = $DST/extra/kde3920
+import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = kdecore/kdecore
+import     = solid/solid
+import     = kdefx/kdefx
+import     = kdeui/kdeui
+importpath = $IMP
+nobase     = QDBusAbstractInterface Q3ScrollView Q3Wizard K3IconView KShared
+amend      = * ctor parent /TransferThis/
+amend      = * all parent /Transfer/
+
+include    = QtCore QtGui QtXml QtSvg solid kio kfile kssl
+libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kfile
+
+define     = "\(KIO::filesize_t\)\-1", "-1"
+define     = "KIO_EXPORT_DEPRECATED", ""
+define     = "KIO_EXPORT", ""
+// for kbookmark.h
+define     = ":\ public\ QList<KBookmark>",  ""
+define     = "STACK_OF\(X509\)", "void"
+
+define     = "const\&", "&"
+define     = "const\ QString\ \&host\,\ bool\ connected\)\)", ""
+define     = "KFILE_EXPORT.*KDir", "KDir"
+
+cast       = KIO::SlaveBase KArchive KArchiveEntry KSycocaEntry KPixmapProvider QObject KCompletionBase
+nocast     = KonqBookmarkContextMenu KImportedBookmarkMenu
+
+retain
+
+
+// -----------------------------------------
+
+module = kutils
+
+source     = $SRC/kutils/
+compare    = $COMP
+subst      = $DST/extra/kde3920
+ignore     = kcmodulecontainer.h  kutils_export.h
+import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt.p_5_0_0 WS_X11)
+import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = kdecore/kdecoremod.sip
+import     = kdefx/kdefxmod.sip
+import     = kdeui/kdeuimod.sip
+importpath = $IMP
+
+include    = QtCore QtGui QtXml QtSvg ksettings
+libs       = QtCore QtGui QtXml QtSvg kdecore kdefx kdeui
+define     = "KUTILS_EXPORT", ""
+
+cast       = QObject
+
+retain
+
+// -----------------------------------------
+
+module = kparts
+
+source     = $SRC/kparts 
+ignore     = componentfactory.h kparts_export.h
+compare    = $COMP/kparts $DST/extra/kde3920/kparts
+subst      = $DST/extra/kde3920
+import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = kdecore/kdecore
+import     = kdefx/kdefx
+import     = kdeui/kdeui
+import     = kio/kio
+importpath = $IMP
+amend      = * ctor parent /TransferThis/
+amend      = * all parent /Transfer/
+include    = QtCore QtGui QtXml QtSvg solid kio kfile kssl kparts
+libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kio
+
+cast       = QEvent QObject
+nocast     = KParts::GenericFactoryBase
+
+retain
+
+// -----------------------------------------
+
+module = ktexteditor
+
+source     = $SRC/interfaces/ktexteditor
+compare    = $COMP  $COMP/ktexteditor
+subst      = $DST/extra/kde3920
+importpath = $IMP
+import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = kdecore/kdecore
+import     = kdefx/kdefx
+import     = kdeui/kdeui
+import     = kio/kio
+import     = kutils/kutils
+import     = kparts/kparts
+ignore     = ktexteditor_export.h
+nobase     = KShared
+amend      = * ctor parent /TransferThis/
+amend      = * all parent /Transfer/
+
+include    = QtCore QtGui QtXml QtSvg ktexteditor kate solid kio kfile kssl kparts ktexteditor kate
+libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kio kutils kparts
+
+cast       = QObject
+
+define     = "KTEXTEDITOR_EXPORT"
+define     = "virtual\ enum", "virtual"
+define     = "class\ QWidget\ ", "QWidget "
+define     = "class\ Plugin\ ", "Plugin "
+
+retain
+
+// -----------------------------------------
+
+module = kate
+
+source     = /server/source/KDE4Src/kdesdk-3.92.0/kate/interfaces/kate
+compare    = $COMP
+subst      = $DST/extra/kde3920
+importpath = $IMP
+import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = kdecore/kdecore
+import     = kdefx/kdefx
+import     = kdeui/kdeui
+import     = kio/kio
+import     = kutils/kutils
+import     = kparts/kparts
+import     = ktexteditor/ktexteditor
+nobase     = KShared
+amend      = * ctor parent /TransferThis/
+amend      = * all parent /Transfer/
+
+include    = QtCore QtGui QtXml QtSvg kate ktexteditor solid kio kfile kssl kparts ktexteditor kate
+libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kio kutils kparts ktexteditor kateinterfaces
+
+cast       = QObject
+
+define     = "KATEINTERFACES_EXPORT"
+define     = "KTEXTEDITOR_EXPORT"
+define     = "virtual\ enum", "virtual"
+define     = "class\ QWidget\ ", "QWidget "
+define     = "class\ Plugin\ ", "Plugin "
+
+retain
+
+// -----------------------------------------
+
+module = khtml
+//trace = khtmlview.h
+source      = $SRC/khtml $SRC/khtml/dom
+ignore      = khtmldefaults.h dom_core.h dom_html.h khtml_events.h khtml_export.h
+compare     = $COMP  $COMP/dom
+subst       = $DST/extra/kde3920
+import      = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import      = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import      = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import      = kdecore/kdecore
+import      = kdefx/kdefx
+import      = kdeui/kdeui
+import      = kio/kio
+import      = kutils/kutils
+import      = kparts/kparts
+importpath  = $IMP
+amend       = * ctor parent /TransferThis/
+amend       = * all parent /Transfer/
+nobase      = khtml::KHTMLWidget
+nonamespace = khtmlview khtml
+
+include     = QtCore QtGui QtXml QtSvg solid kio kfile kssl kparts dom
+libs        = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kio kutils kparts
+
+//define     ="QPair\<QString\,QChar\>", "KHTMLSettings\:\:AssignPair"
+define      = "KHTML_EXPORT", ""
+define      = "ScrollBarMode", "ScrollBarPolicy"  
+
+cast        = QObject DOM::Node DOM::Event DOM::DOMShared
+
+retain
+
+// -----------------------------------------
+
+module = kdeprint
+
+ignore     = driver.h kmjobviewer.h lprhandler.h  kdeprint_export.h kmmainview.h
+ignore     = kiconselectaction.h  kmtimer.h lprsettings.h
+source     = $SRC/kdeprint
+compare    = $COMP $COMP/kdeprint
+subst      = $DST/extra/kde3920
+import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import     = kdecore/kdecore
+import     = kdefx/kdefx
+import     = kdeui/kdeui
+importpath = $IMP
+amend      = * ctor parent /TransferThis/
+amend      = * all parent /Transfer/
+
+include    = QtCore QtGui QtXml QtSvg kdeprint kdeprint/lpr
+libs       = QtCore QtGui QtXml QtSvg kdecore kdefx kdeui 
+
+define     = "KDEPRINT_EXPORT", ""
+define     = "KDEPRINT_MANAGEMENT_EXPORT", ""
+cast       = QObject  KPReloadObject
+retain
+
+
+// -----------------------------------------
+
+//module = phonon
+
+//ignore     = phonondefs.h  phonon_export.h  deinterlacefilter.h abstractaudiooutput.h
+//source     = $SRC/phonon
+//compare    = $COMP/phonon
+//subst      = $DST/extra/kde3920
+//import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+//import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+//import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+//import     = kdecore/kdecore
+//import     = kdefx/kdefx
+//import     = kdeui/kdeui
+//importpath = $IMP
+//amend      = * ctor parent /TransferThis/        const KGuiItem& nullGuiItem (QString::null);
+//amend      = * all parent /Transfer/
+//nobase     = AbstractAudioOutput  Phonon::AbstractAudioOutput  QSharedData  AbstractVideoOutput  Phonon::AbstractVideoOutput
+
+//include    = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui
+//libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui 
+
+//define     = "PHONON_EXPORT", ""
+//define     = "PHONONCORE_EXPORT", ""
+//define     = "QT_VERSION", "0x040300"
+
+//retain
+// ------------- doc data -----------------
+
+doc
+version      = 3.92.0
+KDE version  = 3.92.0
+PyQt version = 4..0
+Qt version   = 4.3.0
+changes
+<p>
+This release provides support for KDE through 4.0.0
+</p>
+end
+
+
+// ------------- build data -----------------
+
+build
+PyKDE version        = 0x039200
+PyKDE version string = 3.92.0
+KDE max version      = 0x050000
+KDE tags
+0x050000: "KDE_3_92_0",
+end
+  
+  
+

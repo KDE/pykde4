@@ -619,9 +619,11 @@ def generate_code(mname, imports=None, extra_cflags=None, extra_cxxflags=None, e
 
     makefile.extra_include_dirs.append (os.path.join ("..", "extra", kde_version_extra))
     makefile.extra_include_dirs.append (opt_kdeincdir)
+    makefile.extra_include_dirs.append (pyqtcfg.qt_inc_dir)
     if pykde_includes [mname]:
         for incdir in pykde_includes [mname]:
             makefile.extra_include_dirs.append (os.path.join (opt_kdeincdir, incdir))
+            makefile.extra_include_dirs.append (os.path.join (pyqtcfg.qt_inc_dir, incdir))
 
     if extra_include_dir:
         makefile.extra_include_dirs.append(extra_include_dir)

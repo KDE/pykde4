@@ -28,6 +28,7 @@ import glob
 import getopt
 import shutil
 import py_compile
+import subprocess
 
 try:
     import sipconfig
@@ -378,25 +379,16 @@ def discoverKDE4 ():
     global opt_kdeincdir, opt_kdebasedir, opt_kdelibdir, opt_libdir
 
     if not opt_kdebasedir:
-        kdeSearchPaths = []
-        libSearchPaths = []
-        incSearchPaths = []
-
-        try:
-            kdeSearchPaths.append (os.environ ["KDEDIR"])
-        except:
-            pass
-        kdeSearchPaths.append ("/usr")
-        kdeSearchPaths.append (os.path.join ("/opt", "kde4"))
-
-        opt_kdebasedir = search (None, kdeSearchPaths)
+        opt_kdebasedir = run_command("kde4-config","--prefix").strip()
 
     if not opt_kdelibdir:
+        libSearchPaths = []
         libSearchPaths = [os.path.join (opt_kdebasedir, "lib"), os.path.join (opt_kdebasedir, "lib64"), os.path.join (opt_kdebasedir, opt_libdir)]
 #        print opt_libdir
         opt_kdelibdir  = search ("libkdecore.so", libSearchPaths)
 
     if not opt_kdeincdir:
+        incSearchPaths = []
         incSearchPaths = [os.path.join (opt_kdebasedir, "include")]
         incSearchPaths.append (os.path.join (opt_kdebasedir, "include", "kde")) # Red Hat
         opt_kdeincdir = search ("kapplication.h", incSearchPaths)
@@ -824,7 +816,9 @@ message and post to the PyKDE mailing list at:
 You can redirect the output into a file (> output.txt) if needed
 """
 
-
+# Run a system command and return the output.
+def run_command (*args):
+    return subprocess.Popen(args, stdout=subprocess.PIPE).communicate()[0]
 
 ###############################################################################
 # The script starts here.

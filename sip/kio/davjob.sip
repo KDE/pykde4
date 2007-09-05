@@ -42,8 +42,8 @@ protected slots:
 protected:
 
 
-//igx  undefined symbol: DavJobPrivate& -- need mapped type?
-//igx                          DavJob (DavJobPrivate&, int, const QString&);
+//mt  undefined symbol: DavJobPrivate& -- need mapped type?
+//mt                          DavJob (DavJobPrivate&, int, const QString&);
 
 
 protected:

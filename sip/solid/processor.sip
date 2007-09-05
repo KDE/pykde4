@@ -39,25 +39,22 @@ public:
 
     enum InstructionSet
     {
-        NoExtensions,
-        IntelMmx,
-        IntelSse,
-        IntelSse2,
-        IntelSse3,
-        IntelSse4,
-        Amd3DNow,
+        NoExtensions, 
+        IntelMmx, 
+        IntelSse, 
+        IntelSse2, 
+        IntelSse3, 
+        IntelSse4, 
+        Amd3DNow, 
         AltiVec
     };
 
     typedef QFlags<Solid::Processor::InstructionSet> InstructionSets;
-
     static Type          deviceInterfaceType ();
     int                  number () const;
     int                  maxSpeed () const;
     bool                 canChangeFrequency () const;
-
     Solid::Processor::InstructionSets instructionSets () const;
-
 
 };  // class Processor
 

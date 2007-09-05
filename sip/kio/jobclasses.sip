@@ -101,8 +101,8 @@ protected:
     void                 storeSSLSessionFromJob (const KUrl&);
 
 
-//igx  undefined symbol: SimpleJobPrivate& -- need mapped type?
-//igx                          SimpleJob (SimpleJobPrivate&);
+//mt  undefined symbol: SimpleJobPrivate& -- need mapped type?
+//mt                          SimpleJob (SimpleJobPrivate&);
 
 
 protected:
@@ -141,8 +141,8 @@ protected slots:
 protected:
 
 
-//igx  undefined symbol: StatJobPrivate& -- need mapped type?
-//igx                          StatJob (StatJobPrivate&);
+//mt  undefined symbol: StatJobPrivate& -- need mapped type?
+//mt                          StatJob (StatJobPrivate&);
 
 
 protected:
@@ -189,8 +189,8 @@ protected slots:
 protected:
 
 
-//igx  undefined symbol: TransferJobPrivate& -- need mapped type?
-//igx                          TransferJob (TransferJobPrivate&);
+//mt  undefined symbol: TransferJobPrivate& -- need mapped type?
+//mt                          TransferJob (TransferJobPrivate&);
 
 
 protected:
@@ -212,8 +212,8 @@ public:
 protected:
 
 
-//igx  undefined symbol: StoredTransferJobPrivate& -- need mapped type?
-//igx                          StoredTransferJob (StoredTransferJobPrivate&);
+//mt  undefined symbol: StoredTransferJobPrivate& -- need mapped type?
+//mt                          StoredTransferJob (StoredTransferJobPrivate&);
 
 
 protected:
@@ -245,8 +245,8 @@ protected slots:
 protected:
 
 
-//igx  undefined symbol: MultiGetJobPrivate& -- need mapped type?
-//igx                          MultiGetJob (MultiGetJobPrivate&);
+//mt  undefined symbol: MultiGetJobPrivate& -- need mapped type?
+//mt                          MultiGetJob (MultiGetJobPrivate&);
 
 
 protected:
@@ -267,8 +267,8 @@ protected slots:
 protected:
 
 
-//igx  undefined symbol: MimetypeJobPrivate& -- need mapped type?
-//igx                          MimetypeJob (MimetypeJobPrivate&);
+//mt  undefined symbol: MimetypeJobPrivate& -- need mapped type?
+//mt                          MimetypeJob (MimetypeJobPrivate&);
 
 
 protected:
@@ -300,8 +300,8 @@ protected slots:
 protected:
 
 
-//igx  undefined symbol: FileCopyJobPrivate& -- need mapped type?
-//igx                          FileCopyJob (FileCopyJobPrivate&);
+//mt  undefined symbol: FileCopyJobPrivate& -- need mapped type?
+//mt                          FileCopyJob (FileCopyJobPrivate&);
 
 
 protected:
@@ -333,8 +333,8 @@ protected slots:
 protected:
 
 
-//igx  undefined symbol: ListJobPrivate& -- need mapped type?
-//igx                          ListJob (ListJobPrivate&);
+//mt  undefined symbol: ListJobPrivate& -- need mapped type?
+//mt                          ListJob (ListJobPrivate&);
 
 
 protected:

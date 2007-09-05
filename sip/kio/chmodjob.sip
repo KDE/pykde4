@@ -42,8 +42,8 @@ protected slots:
 protected:
 
 
-//igx  undefined symbol: ChmodJobPrivate& -- need mapped type?
-//igx                          ChmodJob (ChmodJobPrivate&);
+//mt  undefined symbol: ChmodJobPrivate& -- need mapped type?
+//mt                          ChmodJob (ChmodJobPrivate&);
 
 
 protected:

@@ -113,6 +113,9 @@ public:
                          KTimeZone (const KTimeZone&);
     bool                 operator == (const KTimeZone&) const;
     bool                 operator != (const KTimeZone&) const;
+
+    QByteArray           type () const;
+
     bool                 isValid () const;
     QString              name () const;
     QString              countryCode () const;
@@ -168,6 +171,9 @@ public:
                          KTimeZoneBackend (const QString&);
                          KTimeZoneBackend (const KTimeZoneBackend&);
     virtual KTimeZoneBackend* clone () const;
+
+    virtual QByteArray   type () const;
+
     virtual int          offsetAtZoneTime (const KTimeZone*, const QDateTime&, int* /Out/) const;
     virtual int          offsetAtUtc (const KTimeZone*, const QDateTime&) const;
     virtual int          offset (const KTimeZone*, time_t) const;

@@ -33,7 +33,10 @@ class KonqBookmarkOwner : KBookmarkOwner
 public:
     virtual void         openInNewTab (const KBookmark&)  = 0;
     virtual void         openInNewWindow (const KBookmark&)  = 0;
-    virtual void         openFolderinTabs (const KBookmark&)  = 0;
+
+public:
+
+
 
 };  // class KonqBookmarkOwner
 
@@ -46,47 +49,33 @@ class KonqBookmarkMenu : KBookmarkMenu
 
 
 public:
-
                          KonqBookmarkMenu (KBookmarkManager*, KonqBookmarkOwner*, KBookmarkActionMenu*, KActionCollection*);
                          KonqBookmarkMenu (KBookmarkManager*, KonqBookmarkOwner*, KBookmarkActionMenu*, QString);
 
-
-    class DynMenuInfo
-    {
-
-    public:
-        bool                 show;
-        QString              location;
-        QString              type;
-        QString              name;
-
-    };  // class DynMenuInfo
+protected:
 
 
-public:
-    static KonqBookmarkMenu::DynMenuInfo showDynamicBookmarks (const QString&);
-    static void          setDynamicBookmarks (const QString&, const KonqBookmarkMenu::DynMenuInfo&);
+// TODO
+//ig    static KonqBookmarkMenu::DynMenuInfo showDynamicBookmarks (const QString&);
+//ig    static void          setDynamicBookmarks (const QString&, const KonqBookmarkMenu::DynMenuInfo&);
     static QStringList   dynamicBookmarksList ();
 
-protected:
     virtual void         refill ();
     virtual QAction*     actionForBookmark (const KBookmark&);
 
-    virtual KMenu*       contextMenu (const KBookmark&);
+    virtual KMenu*       contextMenu (QAction*);
 
     void                 fillDynamicBookmarks ();
 
+public:
 
 
 
+protected:
 
 
 
 };  // class KonqBookmarkMenu
-
-
-//ig class KonqBookmarkContextMenu;
-
 
 
 class KonqBookmarkContextMenu : KBookmarkContextMenu
@@ -95,6 +84,7 @@ class KonqBookmarkContextMenu : KBookmarkContextMenu
 #include <konqbookmarkmenu.h>
 %End
 
+
 public:
                          KonqBookmarkContextMenu (const KBookmark&, KBookmarkManager*, KonqBookmarkOwner*);
     virtual void         addActions ();
@@ -102,8 +92,15 @@ public:
 public slots:
     void                 openInNewTab ();
     void                 openInNewWindow ();
-    void                 openFolderinTabs ();
+
+    void                 toggleShowInToolbar ();
+
+
+public slots:
+
+
 
 };  // class KonqBookmarkContextMenu
+
 
 

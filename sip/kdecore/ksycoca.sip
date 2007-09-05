@@ -45,7 +45,7 @@ public:
     quint32              timeStamp ();
     quint32              updateSignature ();
     QStringList          allResourceDirs ();
-//ig    void                 addFactory (KSycocaFactory*);
+//ig     void                 addFactory (KSycocaFactory*);
     virtual bool         isBuilding ();
     void                 disableAutoRebuild ();
     static bool          isChanged (const char*);

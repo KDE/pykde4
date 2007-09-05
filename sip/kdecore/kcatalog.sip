@@ -42,5 +42,11 @@ public:
     QString              translate (const char*, const char*, ulong) const;
     QString              translate (const char*, const char*, const char*, ulong) const;
 
+    QString              translateStrict (const char*) const;
+    QString              translateStrict (const char*, const char*) const;
+    QString              translateStrict (const char*, const char*, ulong) const;
+    QString              translateStrict (const char*, const char*, const char*, ulong) const;
+
+
 };  // class KCatalog
 

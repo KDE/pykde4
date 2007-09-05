@@ -47,23 +47,26 @@ signals:
 };  // class KScanDialog
 
 
-class KScanDialogFactory : KLibFactory
-{
-%TypeHeaderCode
-#include <kscan.h>
-%End
 
 
-public:
-    virtual KScanDialog* createDialog (QWidget* /Transfer/ = 0)  = 0;
+// TODO KPluginFactory should work.
+//class KScanDialogFactory : KPluginFactory
+//{
+//%TypeHeaderCode
+//#include <kscan.h>
+//%End
+//
+//public:
+//    virtual KScanDialog* createDialog (QWidget* /Transfer/ = 0)  = 0;
+//
+//protected:
+//                         KScanDialogFactory (const char* = 0, const char* = 0, QObject* /TransferThis/ = 0);
+//    virtual QObject*     createObject (QObject* /Transfer/ = 0, const char* = "QObject", const QStringList& = QStringList ());
+//    void                 setName (const QByteArray&);
+//    const KComponentData& componentData () const;
+//
+//};  // class KScanDialogFactory
 
-protected:
-                         KScanDialogFactory (QObject* /TransferThis/ = 0);
-    virtual QObject*     createObject (QObject* /Transfer/ = 0, const char* = "QObject", const QStringList& = QStringList ());
-    void                 setName (const QByteArray&);
-    const KComponentData& componentData () const;
-
-};  // class KScanDialogFactory
 
 
 class KOCRDialog : KPageDialog
@@ -87,21 +90,24 @@ signals:
 };  // class KOCRDialog
 
 
-class KOCRDialogFactory : KLibFactory
-{
-%TypeHeaderCode
-#include <kscan.h>
-%End
 
 
-public:
-    virtual KOCRDialog*  createDialog (QWidget* /Transfer/ = 0, bool = 0)  = 0;
+// TODO KPluginFactory should work.
+//class KOCRDialogFactory : KPluginFactory
+//{
+//%TypeHeaderCode
+//#include <kscan.h>
+//%End
+//
+//public:
+//    virtual KOCRDialog*  createDialog (QWidget* /Transfer/ = 0, bool = 0)  = 0;
+//
+//protected:
+//                         KOCRDialogFactory (const char* = 0, const char* = 0, QObject* /TransferThis/ = 0);
+//    virtual QObject*     createObject (QObject* /Transfer/ = 0, const char* = "QObject", const QStringList& = QStringList ());
+//    void                 setName (const QByteArray&);
+//    const KComponentData& componentData () const;
+//
+//};  // class KOCRDialogFactory
 
-protected:
-                         KOCRDialogFactory (QObject* /TransferThis/ = 0);
-    virtual QObject*     createObject (QObject* /Transfer/ = 0, const char* = "QObject", const QStringList& = QStringList ());
-    void                 setName (const QByteArray&);
-    const KComponentData& componentData () const;
-
-};  // class KOCRDialogFactory
 

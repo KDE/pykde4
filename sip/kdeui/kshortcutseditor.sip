@@ -64,11 +64,12 @@ public slots:
     void                 resizeColumns ();
     void                 allDefault ();
 
-protected:
-    virtual void         showEvent (QShowEvent*);
-
 private:
                          KShortcutsEditor (const KShortcutsEditor&) [()];
+
+protected:
+
+
 
 };  // class KShortcutsEditor
 

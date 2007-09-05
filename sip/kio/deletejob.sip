@@ -48,8 +48,8 @@ protected slots:
 protected:
 
 
-//igx  undefined symbol: DeleteJobPrivate& -- need mapped type?
-//igx                          DeleteJob (DeleteJobPrivate&);
+//mt  undefined symbol: DeleteJobPrivate& -- need mapped type?
+//mt                          DeleteJob (DeleteJobPrivate&);
 
 
 protected:

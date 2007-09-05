@@ -33,12 +33,12 @@
 #include <html_head.h>
 #include <html_form.h>
 #include <html_base.h>
+#include <html_block.h>
 #include <html_inline.h>
 #include <html_list.h>
-#include <html_block.h>
+#include <html_image.h>
 #include <html_table.h>
 #include <html_object.h>
-#include <html_image.h>
 #include <html_misc.h>
 %End
 
@@ -151,14 +151,14 @@ public:
     if (dynamic_cast<DOM::CharacterData*>(sipCpp))
     {
         sipClass = sipClass_DOM_CharacterData;
-        if (dynamic_cast<DOM::Text*>(sipCpp))
+        if (dynamic_cast<DOM::Comment*>(sipCpp))
+            sipClass = sipClass_DOM_Comment;
+        else if (dynamic_cast<DOM::Text*>(sipCpp))
         {
             sipClass = sipClass_DOM_Text;
             if (dynamic_cast<DOM::CDATASection*>(sipCpp))
                 sipClass = sipClass_DOM_CDATASection;
         }
-        else if (dynamic_cast<DOM::Comment*>(sipCpp))
-            sipClass = sipClass_DOM_Comment;
     }
     else if (dynamic_cast<DOM::Document*>(sipCpp))
     {
@@ -178,10 +178,14 @@ public:
                 sipClass = sipClass_DOM_HTMLOptionElement;
             else if (dynamic_cast<DOM::HTMLStyleElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLStyleElement;
+            else if (dynamic_cast<DOM::HTMLFormElement*>(sipCpp))
+                sipClass = sipClass_DOM_HTMLFormElement;
             else if (dynamic_cast<DOM::HTMLIFrameElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLIFrameElement;
             else if (dynamic_cast<DOM::HTMLIsIndexElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLIsIndexElement;
+            else if (dynamic_cast<DOM::HTMLPreElement*>(sipCpp))
+                sipClass = sipClass_DOM_HTMLPreElement;
             else if (dynamic_cast<DOM::HTMLFrameSetElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLFrameSetElement;
             else if (dynamic_cast<DOM::HTMLButtonElement*>(sipCpp))
@@ -196,18 +200,20 @@ public:
                 sipClass = sipClass_DOM_HTMLHtmlElement;
             else if (dynamic_cast<DOM::HTMLDListElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLDListElement;
+            else if (dynamic_cast<DOM::HTMLMapElement*>(sipCpp))
+                sipClass = sipClass_DOM_HTMLMapElement;
             else if (dynamic_cast<DOM::HTMLHeadingElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLHeadingElement;
-            else if (dynamic_cast<DOM::HTMLBlockquoteElement*>(sipCpp))
-                sipClass = sipClass_DOM_HTMLBlockquoteElement;
             else if (dynamic_cast<DOM::HTMLFrameElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLFrameElement;
-            else if (dynamic_cast<DOM::HTMLBodyElement*>(sipCpp))
-                sipClass = sipClass_DOM_HTMLBodyElement;
-            else if (dynamic_cast<DOM::HTMLTableCaptionElement*>(sipCpp))
-                sipClass = sipClass_DOM_HTMLTableCaptionElement;
             else if (dynamic_cast<DOM::HTMLOptGroupElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLOptGroupElement;
+            else if (dynamic_cast<DOM::HTMLBodyElement*>(sipCpp))
+                sipClass = sipClass_DOM_HTMLBodyElement;
+            else if (dynamic_cast<DOM::HTMLFontElement*>(sipCpp))
+                sipClass = sipClass_DOM_HTMLFontElement;
+            else if (dynamic_cast<DOM::HTMLTableCaptionElement*>(sipCpp))
+                sipClass = sipClass_DOM_HTMLTableCaptionElement;
             else if (dynamic_cast<DOM::HTMLDirectoryElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLDirectoryElement;
             else if (dynamic_cast<DOM::HTMLTextAreaElement*>(sipCpp))
@@ -224,8 +230,6 @@ public:
                 sipClass = sipClass_DOM_HTMLAppletElement;
             else if (dynamic_cast<DOM::HTMLHeadElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLHeadElement;
-            else if (dynamic_cast<DOM::HTMLMapElement*>(sipCpp))
-                sipClass = sipClass_DOM_HTMLMapElement;
             else if (dynamic_cast<DOM::HTMLDivElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLDivElement;
             else if (dynamic_cast<DOM::HTMLScriptElement*>(sipCpp))
@@ -238,16 +242,12 @@ public:
                 sipClass = sipClass_DOM_HTMLInputElement;
             else if (dynamic_cast<DOM::HTMLAnchorElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLAnchorElement;
-            else if (dynamic_cast<DOM::HTMLFormElement*>(sipCpp))
-                sipClass = sipClass_DOM_HTMLFormElement;
             else if (dynamic_cast<DOM::HTMLSelectElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLSelectElement;
             else if (dynamic_cast<DOM::HTMLOListElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLOListElement;
             else if (dynamic_cast<DOM::HTMLParamElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLParamElement;
-            else if (dynamic_cast<DOM::HTMLPreElement*>(sipCpp))
-                sipClass = sipClass_DOM_HTMLPreElement;
             else if (dynamic_cast<DOM::HTMLTableCellElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLTableCellElement;
             else if (dynamic_cast<DOM::HTMLMenuElement*>(sipCpp))
@@ -272,14 +272,14 @@ public:
                 sipClass = sipClass_DOM_HTMLAreaElement;
             else if (dynamic_cast<DOM::HTMLParagraphElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLParagraphElement;
+            else if (dynamic_cast<DOM::HTMLBlockquoteElement*>(sipCpp))
+                sipClass = sipClass_DOM_HTMLBlockquoteElement;
             else if (dynamic_cast<DOM::HTMLTableElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLTableElement;
             else if (dynamic_cast<DOM::HTMLBaseFontElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLBaseFontElement;
             else if (dynamic_cast<DOM::HTMLLabelElement*>(sipCpp))
                 sipClass = sipClass_DOM_HTMLLabelElement;
-            else if (dynamic_cast<DOM::HTMLFontElement*>(sipCpp))
-                sipClass = sipClass_DOM_HTMLFontElement;
         }
     }
     else if (dynamic_cast<DOM::Attr*>(sipCpp))

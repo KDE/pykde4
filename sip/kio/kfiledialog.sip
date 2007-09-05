@@ -58,6 +58,9 @@ public:
     QString              currentMimeFilter () const;
     void                 clearFilter ();
     void                 setPreviewWidget (const KPreviewWidgetBase*);
+
+    virtual QSize        sizeHint () const;
+
     static QString       getOpenFileName (const KUrl& = KUrl (), const QString& = QString (), QWidget* /Transfer/ = 0, const QString& = QString ());
     static QString       getOpenFileNameWId (const KUrl&, const QString&, WId, const QString&);
     static QStringList   getOpenFileNames (const KUrl& = KUrl (), const QString& = QString (), QWidget* /Transfer/ = 0, const QString& = QString ());

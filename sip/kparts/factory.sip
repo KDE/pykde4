@@ -22,29 +22,29 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace KParts
-{
+//namespace KParts
+//{
 
-class Factory : KLibFactory
-{
-%TypeHeaderCode
-#include <factory.h>
-%End
-
-
-public:
-                         Factory (QObject* /TransferThis/ = 0);
-    KParts::Part*        createPart (QWidget* = 0, QObject* /Transfer/ = 0, const char* = "KParts::Part", const QStringList& = QStringList ());
-
+//class Factory : KLibFactory
+//{
+//%TypeHeaderCode
+//#include <factory.h>
+//%End
+//
+//
+//public:
+//                         Factory (QObject* /TransferThis/ = 0);
+//    KParts::Part*        createPart (QWidget* = 0, QObject* /Transfer/ = 0, const char* = "KParts::Part", const QStringList& = QStringList ());
+//
 //    virtual KComponentData partComponentData ();
+//
+//    static KComponentData partComponentDataFromLibrary (const QString&);
+//
+//protected:
+//    virtual KParts::Part* createPartObject (QWidget* = 0, QObject* /Transfer/ = 0, const char* = "KParts::Part", const QStringList& = QStringList ())  = 0;
+//    virtual QObject*     createObject (QObject* /Transfer/ = 0, const char* = "QObject", const QStringList& = QStringList ());
+//
+//};  // class Factory
 
-    static KComponentData partComponentDataFromLibrary (const QString&);
-
-protected:
-    virtual KParts::Part* createPartObject (QWidget* = 0, QObject* /Transfer/ = 0, const char* = "KParts::Part", const QStringList& = QStringList ())  = 0;
-    virtual QObject*     createObject (QObject* /Transfer/ = 0, const char* = "QObject", const QStringList& = QStringList ());
-
-};  // class Factory
-
-};  // namespace KParts
+//};  // namespace KParts
 

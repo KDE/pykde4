@@ -23,8 +23,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-
-
 class KNSBookmarkImporterImpl : KBookmarkImporterBase
 {
 %TypeHeaderCode
@@ -70,8 +68,4 @@ protected:
     QString              folderAsString (const KBookmarkGroup& /Transfer/) const;
 
 };  // class KNSBookmarkExporterImpl
-
-
-
-
 

@@ -40,6 +40,9 @@ KIO::SimpleJob*      mount (bool, const QByteArray&, const QString&, const QStri
 KIO::SimpleJob*      unmount (const QString&, bool = 1);
 KIO::SimpleJob*      http_update_cache (const KUrl&, bool, time_t);
 KIO::StatJob*        stat (const KUrl&, bool = 1);
+
+KIO::StatJob*        stat (const KUrl&, KIO::StatJob::StatSide, short, bool = 1);
+
 KIO::StatJob*        stat (const KUrl&, bool, short, bool = 1);
 KIO::TransferJob*    get (const KUrl&, bool = 0, bool = 1);
 KIO::FileJob*        open (const KUrl&, QIODevice::OpenMode);

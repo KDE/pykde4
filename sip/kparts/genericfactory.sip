@@ -22,29 +22,29 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace KParts
-{
-
-template<TYPE>
-class GenericFactoryBase : KParts::Factory
-{
-%TypeHeaderCode
-#include <genericfactory.h>
-%End
-
-
-public:
-                         GenericFactoryBase ();
-    static const KComponentData& componentData ();
-    static KAboutData*   aboutData ();
-
+//namespace KParts
+//{
+//
+//template<TYPE>
+//class GenericFactoryBase : KParts::Factory
+//{
+//%TypeHeaderCode
+//#include <genericfactory.h>
+//%End
+//
+//
+//public:
+//                         GenericFactoryBase ();
+//    static const KComponentData& componentData ();
+//    static KAboutData*   aboutData ();
+//
 //    virtual KComponentData partComponentData ();
-
-
-protected:
-    virtual KComponentData* createComponentData ();
-
-};  // class GenericFactoryBase
-
-};  // namespace KParts
+//
+//
+//protected:
+//    virtual KComponentData* createComponentData ();
+//
+//};  // class GenericFactoryBase
+//
+//};  // namespace KParts
 

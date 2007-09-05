@@ -33,12 +33,10 @@ class BrowserRun : KRun
 
 
 public:
-
                          BrowserRun (const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&, KParts::ReadOnlyPart*, QWidget*, bool, bool, bool = 0);
     KParts::OpenUrlArguments& arguments ();
     KParts::BrowserArguments& browserArguments ();
     KParts::ReadOnlyPart* part () const;
-
     KUrl                 url () const;
     bool                 hideErrorDialog () const;
 
@@ -70,10 +68,6 @@ protected slots:
     void                 slotBrowserMimetype (KIO::Job*, const QString&);
     void                 slotCopyToTempFileResult (KJob*);
     virtual void         slotStatResult (KJob*);
-
-public:
-
-
 
 };  // class BrowserRun
 

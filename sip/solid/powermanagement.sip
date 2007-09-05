@@ -40,20 +40,22 @@ void                 requestSleep (Solid::PowerManagement::SleepState, QObject*,
 int                  beginSuppressingSleep (const QString& = QString ());
 bool                 stopSuppressingSleep (int);
 
-//This doesn't work at runtime / link time, and I'm not sure if it is needed.
+// TODO
 //class Notifier : QObject
 //{
 //%TypeHeaderCode
 //#include <powermanagement.h>
 //%End
 //
-//
 //signals:
 //    void                 appShouldConserveResourcesChanged (bool);
 //
 //};  // class Notifier
-//
+
+
+
 //Solid::PowerManagement::Notifier* notifier ();
+
 };  // namespace PowerManagement
 
 };  // namespace Solid
@@ -61,7 +63,6 @@ bool                 stopSuppressingSleep (int);
 
 
 %MappedType QSet<Solid::PowerManagement::SleepState>
-//return a Python list of Solid.PowerManagement.SleepState
 {
 %TypeHeaderCode
 #include <qset.h>

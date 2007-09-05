@@ -31,10 +31,11 @@ class KPixmapRegionSelectorWidget : QWidget
 
 
 public:
+
     enum RotateDirection
     {
-        Rotate90,
-        Rotate180,
+        Rotate90, 
+        Rotate180, 
         Rotate270
     };
 

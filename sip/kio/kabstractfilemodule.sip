@@ -25,19 +25,19 @@
 %ModuleHeaderCode
 //ctscc
 #include <kbookmarkmenu.h>
-#include <konqbookmarkmenu.h>
 #include <kbookmarkimporter.h>
-#include <kbookmarkimporter_crash.h>
 #include <kbookmarkimporter_opera.h>
 #include <kbookmarkimporter_ns.h>
+#include <kbookmarkimporter_crash.h>
 #include <kbookmarkimporter_ie.h>
+#include <konqbookmarkmenu.h>
 #include <kfiledialog.h>
 #include <kencodingfiledialog.h>
 #include <jobclasses.h>
 #include <davjob.h>
 #include <filejob.h>
-#include <metainfojob.h>
 #include <previewjob.h>
+#include <metainfojob.h>
 #include <chmodjob.h>
 #include <deletejob.h>
 #include <directorysizejob.h>
@@ -120,28 +120,14 @@ public:
 public:
 %ConvertToSubClassCode
 
-    if (dynamic_cast<KBookmarkAction*>(sipCpp))
+    if (dynamic_cast<KBookmarkContextMenu*>(sipCpp))
     {
-        sipClass = sipClass_KBookmarkAction;
-    }
-    else if (dynamic_cast<KBookmarkAction*>(sipCpp))
-    {
-        sipClass = sipClass_KBookmarkAction;
-    }
-    else if (dynamic_cast<KBookmarkActionMenu*>(sipCpp))
-    {
-        sipClass = sipClass_KBookmarkActionMenu;
-    }
-    else if (dynamic_cast<KBookmarkActionMenu*>(sipCpp))
-    {
-        sipClass = sipClass_KBookmarkActionMenu;
+        sipClass = sipClass_KBookmarkContextMenu;
     }
     else if (dynamic_cast<KBookmarkImporterBase*>(sipCpp))
     {
         sipClass = sipClass_KBookmarkImporterBase;
-        if (dynamic_cast<KCrashBookmarkImporterImpl*>(sipCpp))
-            sipClass = sipClass_KCrashBookmarkImporterImpl;
-        else if (dynamic_cast<KOperaBookmarkImporterImpl*>(sipCpp))
+        if (dynamic_cast<KOperaBookmarkImporterImpl*>(sipCpp))
             sipClass = sipClass_KOperaBookmarkImporterImpl;
         else if (dynamic_cast<KXBELBookmarkImporterImpl*>(sipCpp))
             sipClass = sipClass_KXBELBookmarkImporterImpl;
@@ -151,6 +137,8 @@ public:
             if (dynamic_cast<KMozillaBookmarkImporterImpl*>(sipCpp))
                 sipClass = sipClass_KMozillaBookmarkImporterImpl;
         }
+        else if (dynamic_cast<KCrashBookmarkImporterImpl*>(sipCpp))
+            sipClass = sipClass_KCrashBookmarkImporterImpl;
         else if (dynamic_cast<KIEBookmarkImporterImpl*>(sipCpp))
             sipClass = sipClass_KIEBookmarkImporterImpl;
     }
@@ -175,10 +163,12 @@ public:
             if (dynamic_cast<KIO::TransferJob*>(sipCpp))
             {
                 sipClass = sipClass_KIO_TransferJob;
-                if (dynamic_cast<KIO::DavJob*>(sipCpp))
-                    sipClass = sipClass_KIO_DavJob;
+                if (dynamic_cast<KIO::SpecialJob*>(sipCpp))
+                    sipClass = sipClass_KIO_SpecialJob;
                 else if (dynamic_cast<KIO::StoredTransferJob*>(sipCpp))
                     sipClass = sipClass_KIO_StoredTransferJob;
+                else if (dynamic_cast<KIO::DavJob*>(sipCpp))
+                    sipClass = sipClass_KIO_DavJob;
                 else if (dynamic_cast<KIO::MimetypeJob*>(sipCpp))
                     sipClass = sipClass_KIO_MimetypeJob;
                 else if (dynamic_cast<KIO::MultiGetJob*>(sipCpp))
@@ -191,10 +181,10 @@ public:
             else if (dynamic_cast<KIO::ListJob*>(sipCpp))
                 sipClass = sipClass_KIO_ListJob;
         }
-        else if (dynamic_cast<KIO::MetaInfoJob*>(sipCpp))
-            sipClass = sipClass_KIO_MetaInfoJob;
         else if (dynamic_cast<KIO::PreviewJob*>(sipCpp))
             sipClass = sipClass_KIO_PreviewJob;
+        else if (dynamic_cast<KIO::MetaInfoJob*>(sipCpp))
+            sipClass = sipClass_KIO_MetaInfoJob;
         else if (dynamic_cast<KIO::ChmodJob*>(sipCpp))
             sipClass = sipClass_KIO_ChmodJob;
         else if (dynamic_cast<KIO::DeleteJob*>(sipCpp))
@@ -254,6 +244,10 @@ public:
         sipClass = sipClass_KAutoMount;
     else if (dynamic_cast<KAutoUnmount*>(sipCpp))
         sipClass = sipClass_KAutoUnmount;
+    else if (dynamic_cast<KBookmarkAction*>(sipCpp))
+        sipClass = sipClass_KBookmarkAction;
+    else if (dynamic_cast<KBookmarkActionMenu*>(sipCpp))
+        sipClass = sipClass_KBookmarkActionMenu;
     else if (dynamic_cast<KBookmarkDomBuilder*>(sipCpp))
         sipClass = sipClass_KBookmarkDomBuilder;
     else if (dynamic_cast<KBookmarkManager*>(sipCpp))
@@ -338,8 +332,6 @@ public:
         sipClass = sipClass_KNFSShare;
     else if (dynamic_cast<KOCRDialog*>(sipCpp))
         sipClass = sipClass_KOCRDialog;
-    else if (dynamic_cast<KOCRDialogFactory*>(sipCpp))
-        sipClass = sipClass_KOCRDialogFactory;
     else if (dynamic_cast<KOpenWithDialog*>(sipCpp))
         sipClass = sipClass_KOpenWithDialog;
     else if (dynamic_cast<KPropertiesDialog*>(sipCpp))
@@ -350,8 +342,6 @@ public:
         sipClass = sipClass_KSambaShare;
     else if (dynamic_cast<KScanDialog*>(sipCpp))
         sipClass = sipClass_KScanDialog;
-    else if (dynamic_cast<KScanDialogFactory*>(sipCpp))
-        sipClass = sipClass_KScanDialogFactory;
     else if (dynamic_cast<KStatusBarOfflineIndicator*>(sipCpp))
         sipClass = sipClass_KStatusBarOfflineIndicator;
     else if (dynamic_cast<KUriFilterPlugin*>(sipCpp))

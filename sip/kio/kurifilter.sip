@@ -32,18 +32,20 @@ class KUriFilterData
 
 public:
 
+
     enum UriTypes
     {
-        NET_PROTOCOL, 
-        LOCAL_FILE, 
-        LOCAL_DIR, 
-        EXECUTABLE, 
-        HELP, 
-        SHELL, 
-        BLOCKED, 
-        ERROR, 
-        UNKNOWN
+        NetProtocol, 
+        LocalFile, 
+        LocalDir, 
+        Executable, 
+        Help, 
+        Shell, 
+        Blocked, 
+        Error, 
+        Unknown
     };
+
 
                          KUriFilterData ();
                          KUriFilterData (const KUrl&);
@@ -63,6 +65,10 @@ public:
     void                 setCheckForExecutables (bool);
     bool                 checkForExecutables () const;
     QString              typedString () const;
+
+public:
+
+
 
 };  // class KUriFilterData
 

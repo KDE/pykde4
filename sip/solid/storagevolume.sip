@@ -57,6 +57,9 @@ public:
     QString              uuid () const;
     qulonglong           size () const;
 
+    Solid::Device        encryptedContainer () const;
+
+
 protected:
 //ig                          StorageVolume (StorageVolumePrivate&, QObject*);
 

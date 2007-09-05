@@ -36,7 +36,7 @@ public:
     typedef KSharedPtr<KTextEditor::Attribute> Ptr;
                          Attribute ();
                          Attribute (const KTextEditor::Attribute&);
-//igL    void                 changed () const;
+//ig     void                 changed () const;
 
     enum CustomProperties
     {
@@ -61,8 +61,8 @@ public:
     void                 setBackgroundFillWhitespace (bool);
     void                 clear ();
     bool                 hasAnyProperty () const;
-//igL    void                 associateAction (KAction*);
-//igL    void                 dissociateAction (KAction*);
+//ig     void                 associateAction (KAction*);
+//ig     void                 dissociateAction (KAction*);
     const QList<KAction*>& associatedActions () const;
     void                 clearAssociatedActions ();
 

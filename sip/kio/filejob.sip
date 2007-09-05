@@ -51,8 +51,8 @@ signals:
 protected:
 
 
-//igx  undefined symbol: FileJobPrivate& -- need mapped type?
-//igx                          FileJob (FileJobPrivate&);
+//mt  undefined symbol: FileJobPrivate& -- need mapped type?
+//mt                          FileJob (FileJobPrivate&);
 
 
 protected:

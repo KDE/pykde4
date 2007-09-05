@@ -43,8 +43,8 @@ protected slots:
 protected:
 
 
-//igx  undefined symbol: DirectorySizeJobPrivate& -- need mapped type?
-//igx                          DirectorySizeJob (DirectorySizeJobPrivate&);
+//mt  undefined symbol: DirectorySizeJobPrivate& -- need mapped type?
+//mt                          DirectorySizeJob (DirectorySizeJobPrivate&);
 
 
 protected:

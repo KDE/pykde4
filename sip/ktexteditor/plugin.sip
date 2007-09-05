@@ -22,7 +22,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 namespace KTextEditor
 {
 
@@ -31,6 +30,7 @@ class Plugin : QObject
 %TypeHeaderCode
 #include <plugin.h>
 %End
+
 
 public:
                          Plugin (QObject* /TransferThis/);
@@ -51,5 +51,4 @@ public:
 
 KTextEditor::Plugin* createPlugin (const char*, QObject*);
 };  // namespace KTextEditor
-
 

@@ -58,7 +58,7 @@ public:
     bool                 contains (const KTextEditor::Range&) const;
     bool                 contains (const KTextEditor::Cursor&) const;
     bool                 containsLine (int) const;
-//igL    bool                 containsColumn (int) const;
+//ig     bool                 containsColumn (int) const;
     bool                 overlaps (const KTextEditor::Range&) const;
     bool                 overlapsLine (int) const;
     bool                 overlapsColumn (int) const;
@@ -66,7 +66,7 @@ public:
     int                  positionRelativeToLine (int) const;
     bool                 boundaryAtCursor (const KTextEditor::Cursor&) const;
     bool                 boundaryOnLine (int) const;
-//igL    bool                 boundaryOnColumn (int) const;
+//ig     bool                 boundaryOnColumn (int) const;
     KTextEditor::Range   intersect (const KTextEditor::Range&) const;
     KTextEditor::Range   encompass (const KTextEditor::Range&) const;
 //ig     KTextEditor::Range   operator + (const KTextEditor::Range&, const KTextEditor::Range&);
@@ -79,12 +79,20 @@ public:
 //ig     bool                 operator != (const KTextEditor::Range&, const KTextEditor::Range&);
 //ig     bool                 operator > (const KTextEditor::Range&, const KTextEditor::Range&);
 //ig     bool                 operator < (const KTextEditor::Range&, const KTextEditor::Range&);
-//ig     kdbgstream&          operator << (kdbgstream&, const KTextEditor::Range&);
-//ig     kndbgstream&         operator << (kndbgstream&, const KTextEditor::Range&);
+
+
+//mt  undefined symbol: QDebug -- need mapped type?
+//mt  undefined symbol: QDebug -- need mapped type?
+//mt     QDebug               operator << (QDebug, const KTextEditor::Range&);
+
 
 protected:
                          Range (KTextEditor::Cursor*, KTextEditor::Cursor*);
     virtual void         rangeChanged (KTextEditor::Cursor*, const KTextEditor::Range&);
+
+public:
+
+
 
 };  // class Range
 

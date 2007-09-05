@@ -44,9 +44,16 @@ public:
     bool                 isUrlEditable () const;
     void                 setActive (bool);
     bool                 isActive () const;
+
+    void                 setPlacesSelectorVisible (bool);
+    bool                 isPlacesSelectorVisible () const;
+
     int                  historySize () const;
     int                  historyIndex () const;
     QPoint               savedPosition () const;
+
+    KUrlComboBox*        editor () const;
+
     void                 setCustomProtocols (const QStringList&);
     QStringList          customProtocols () const;
 

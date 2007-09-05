@@ -30,17 +30,17 @@ class KBookmarkManager : QObject
 %End
 
 
-protected:
+
+private:
                          KBookmarkManager (const QString&, const QString&);
                          KBookmarkManager ();
+
 
 public:
     void                 setUpdate (bool);
     bool                 saveAs (const QString&, bool = 1) const;
-
     bool                 updateAccessMetadata (const QString&);
     void                 updateFavicon (const QString&, const QString&);
-
     QString              path ();
     KBookmarkGroup       root () const;
     KBookmarkGroup       toolbar ();
@@ -54,7 +54,6 @@ public:
     static KBookmarkManager* createTempManager ();
     static KBookmarkManager* userBookmarksManager ();
     QDomDocument         internalDocument () const;
-    KBookmarkGroup       addBookmarkDialog (const QString&, const QString&, const QString& = QString ());
 
 public slots:
     void                 slotEditBookmarks ();
@@ -71,9 +70,14 @@ signals:
     void                 configChanged ();
 
 protected:
-    void                 parse () const;
+
+
 
 public:
+
+
+
+protected:
 
 
 
@@ -93,7 +97,6 @@ public:
     virtual bool         supportsTabs () const;
     virtual QList<QPair<QString, QString>> currentBookmarkList () const;
 
-
     enum BookmarkOption
     {
         ShowAddBookmark, 
@@ -101,11 +104,12 @@ public:
     };
 
     virtual bool         enableOption (KBookmarkOwner::BookmarkOption) const;
-
     virtual void         openBookmark (const KBookmark&, Qt::MouseButtons, Qt::KeyboardModifiers)  = 0;
 
-public:
+    virtual void         openFolderinTabs (const KBookmarkGroup&);
 
+//mt  undefined symbol: KBookmarkDialog* -- need mapped type?
+//mt     virtual KBookmarkDialog* bookmarkDialog (KBookmarkManager*, QWidget* /Transfer/);
 
 
 };  // class KBookmarkOwner

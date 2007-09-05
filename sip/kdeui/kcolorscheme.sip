@@ -86,6 +86,9 @@ public:
 
                          KColorScheme (const KColorScheme&);
                          KColorScheme (KColorScheme::ColorSet = KColorScheme::View , KSharedConfigPtr = KSharedConfigPtr ());
+
+                         KColorScheme (QPalette::ColorGroup, KColorScheme::ColorSet = KColorScheme::View, KSharedConfigPtr = KSharedConfigPtr ());
+
     QBrush               background (KColorScheme::BackgroundRole = KColorScheme::NormalBackground ) const;
     QBrush               foreground (KColorScheme::ForegroundRole = KColorScheme::NormalText ) const;
     QBrush               decoration (KColorScheme::DecorationRole) const;

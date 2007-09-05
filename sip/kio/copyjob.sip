@@ -89,8 +89,8 @@ protected slots:
 protected:
 
 
-//igx  undefined symbol: CopyJobPrivate& -- need mapped type?
-//igx                          CopyJob (CopyJobPrivate&);
+//mt  undefined symbol: CopyJobPrivate& -- need mapped type?
+//mt                          CopyJob (CopyJobPrivate&);
 
 
 protected:

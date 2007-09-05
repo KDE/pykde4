@@ -154,8 +154,9 @@ public:
         sipClass = sipClass_KTextEditor_Editor;
     else if (dynamic_cast<KTextEditor::EditorChooser*>(sipCpp))
         sipClass = sipClass_KTextEditor_EditorChooser;
-    else if (dynamic_cast<KTextEditor::Factory*>(sipCpp))
-        sipClass = sipClass_KTextEditor_Factory;
+// TODO
+//    else if (dynamic_cast<KTextEditor::Factory*>(sipCpp))
+//        sipClass = sipClass_KTextEditor_Factory;
     else if (dynamic_cast<KTextEditor::Plugin*>(sipCpp))
         sipClass = sipClass_KTextEditor_Plugin;
     else if (dynamic_cast<KTextEditor::SmartCursorNotifier*>(sipCpp))

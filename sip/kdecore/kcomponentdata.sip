@@ -43,7 +43,9 @@ public:
     };
 
                          KComponentData (const QByteArray&, const QByteArray& = QByteArray (), KComponentData::MainComponentRegistration = KComponentData::RegisterAsMainComponent );
-                         KComponentData (const KAboutData*);
+
+                         KComponentData (const KAboutData*, KComponentData::MainComponentRegistration = KComponentData::RegisterAsMainComponent);
+
     bool                 isValid () const;
     KStandardDirs*       dirs () const;
     const KSharedConfig::Ptr& config () const;
@@ -55,6 +57,10 @@ protected:
     void                 setConfigName (const QString&);
     void                 _checkConfig ();
 //igx     virtual void         virtual_hook (int, void*);
+
+public:
+
+
 
 };  // class KComponentData
 

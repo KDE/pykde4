@@ -44,8 +44,8 @@ public:
         BrowserViewGUI
     };
 
-                         KHTMLPart (QWidget* = 0, QObject* /TransferThis/ = 0, KHTMLPart::GUIProfile = KHTMLPart ::DefaultGUI );
-                         KHTMLPart (KHTMLView*, QObject* /TransferThis/ = 0, KHTMLPart::GUIProfile = KHTMLPart ::DefaultGUI );
+                         KHTMLPart (QWidget* = 0, QObject* /TransferThis/ = 0, KHTMLPart::GUIProfile = KHTMLPart::DefaultGUI );
+                         KHTMLPart (KHTMLView*, QObject* /TransferThis/ = 0, KHTMLPart::GUIProfile = KHTMLPart::DefaultGUI );
     virtual bool         openUrl (const KUrl&);
     virtual bool         closeUrl ();
     virtual void         showError (KJob*);
@@ -206,9 +206,7 @@ protected:
 //ig     virtual void         khtmlDrawContentsEvent (khtml::DrawContentsEvent*);
     virtual void         guiActivateEvent (KParts::GUIActivateEvent*);
     virtual bool         openFile ();
-
-    virtual bool         urlSelected (const QString&, int, int, const QString&, const KParts::OpenUrlArguments& = KParts ::OpenUrlArguments (), const KParts::BrowserArguments& = KParts ::BrowserArguments ());
-
+    virtual bool         urlSelected (const QString&, int, int, const QString&, const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments ());
     virtual KParts::ReadOnlyPart* createPart (QWidget*, QObject* /Transfer/, const QString&, QString&, QStringList&, const QStringList&);
     bool                 pluginPageQuestionAsked (const QString&) const;
     void                 setPluginPageQuestionAsked (const QString&);
@@ -232,17 +230,13 @@ public slots:
     void                 setCaretMode (bool);
     void                 setEditable (bool);
     void                 setCaretVisible (bool);
-    void                 submitFormProxy (const char*, const QString&, const QByteArray&, const QString&, const QString& = QString ::null , const QString& = QString ::null );
+    void                 submitFormProxy (const char*, const QString&, const QByteArray&, const QString&, const QString& = QString::null , const QString& = QString::null );
 
 protected slots:
     virtual void         slotFinished (KJob*);
 
 protected:
     virtual void         startingJob (KIO::Job*);
-
-protected:
-
-
 //force
 
 private:

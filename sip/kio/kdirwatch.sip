@@ -41,7 +41,7 @@ public:
 
     typedef QFlags<KDirWatch::WatchMode> WatchModes;
                          KDirWatch (QObject* /TransferThis/ = 0);
-    void                 addDir (const QString&, KDirWatch::WatchModes = KDirWatch ::WatchDirOnly );
+    void                 addDir (const QString&, KDirWatch::WatchModes = KDirWatch::WatchDirOnly );
     void                 addFile (const QString&);
     QDateTime            ctime (const QString&);
     void                 removeDir (const QString&);

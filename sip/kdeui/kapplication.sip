@@ -156,7 +156,6 @@ public:
     int                  xioErrhandler (Display*);
 //ig     void                 iceIOErrorHandler (_IceConn*);
     static bool          loadedByKdeinit;
-//ig     static void          startKdeinit ();
 
 signals:
     void                 saveYourself ();
@@ -164,6 +163,10 @@ signals:
 private:
                          KApplication (const KApplication&);
                          KApplication (bool, bool);
+
+public:
+
+
 
 };  // class KApplication
 

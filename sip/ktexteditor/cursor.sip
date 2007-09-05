@@ -61,12 +61,20 @@ public:
 //ig     bool                 operator >= (const KTextEditor::Cursor&, const KTextEditor::Cursor&);
 //ig     bool                 operator < (const KTextEditor::Cursor&, const KTextEditor::Cursor&);
 //ig     bool                 operator <= (const KTextEditor::Cursor&, const KTextEditor::Cursor&);
-//ig     kdbgstream&          operator << (kdbgstream&, const KTextEditor::Cursor&);
-//ig     kndbgstream&         operator << (kndbgstream&, const KTextEditor::Cursor&);
+
+
+//mt  undefined symbol: QDebug -- need mapped type?
+//mt  undefined symbol: QDebug -- need mapped type?
+//mt     QDebug               operator << (QDebug, const KTextEditor::Cursor&);
+
 
 protected:
     virtual void         setRange (KTextEditor::Range*);
     void                 cursorChangedDirectly (const KTextEditor::Cursor&);
+
+public:
+
+
 
 };  // class Cursor
 

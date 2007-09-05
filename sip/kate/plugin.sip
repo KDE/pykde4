@@ -22,7 +22,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 namespace Kate
 {
 
@@ -31,6 +30,7 @@ class Plugin : QObject
 %TypeHeaderCode
 #include <plugin.h>
 %End
+
 
 public:
                          Plugin (Kate::Application* = 0, const char* = 0);
@@ -49,6 +49,7 @@ class PluginView : QObject
 #include <plugin.h>
 %End
 
+
 public:
                          PluginView (Kate::MainWindow*);
     Kate::MainWindow*    mainWindow () const;
@@ -58,5 +59,4 @@ public:
 };  // class PluginView
 
 };  // namespace Kate
-
 

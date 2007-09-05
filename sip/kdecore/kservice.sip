@@ -75,6 +75,9 @@ public:
     int                  initialPreference () const;
     bool                 noDisplay () const;
     QString              parentApp () const;
+
+    QString              pluginKeyword () const;
+
     QVariant             property (const QString&) const;
     QVariant             property (const QString&, QVariant::Type) const;
     QStringList          propertyNames () const;

@@ -28,11 +28,10 @@
 #include <kstatusbarjobtracker.h>
 #include <kwidgetjobtracker.h>
 #include <kaction.h>
-#include <ktoolbarpopupaction.h>
+#include <ktoolbarspaceraction.h>
 #include <ktoggleaction.h>
 #include <ktogglefullscreenaction.h>
 #include <ktoggletoolbaraction.h>
-#include <ktoolbarspaceraction.h>
 #include <kselectaction.h>
 #include <kfontaction.h>
 #include <krecentfilesaction.h>
@@ -41,6 +40,7 @@
 #include <ktoolbarlabelaction.h>
 #include <kactionmenu.h>
 #include <kpastetextaction.h>
+#include <ktoolbarpopupaction.h>
 #include <kapplication.h>
 #include <kuniqueapplication.h>
 #include <kcombobox.h>
@@ -56,8 +56,8 @@
 #include <kconfigdialog.h>
 #include <kassistantdialog.h>
 #include <configdialog.h>
-#include <kbugreport.h>
 #include <kaboutapplicationdialog.h>
+#include <kbugreport.h>
 #include <kfinddialog.h>
 #include <kreplacedialog.h>
 #include <kfontdialog.h>
@@ -188,8 +188,8 @@ public:
     else if (dynamic_cast<KAction*>(sipCpp))
     {
         sipClass = sipClass_KAction;
-        if (dynamic_cast<KToolBarPopupAction*>(sipCpp))
-            sipClass = sipClass_KToolBarPopupAction;
+        if (dynamic_cast<KToolBarSpacerAction*>(sipCpp))
+            sipClass = sipClass_KToolBarSpacerAction;
         else if (dynamic_cast<KToggleAction*>(sipCpp))
         {
             sipClass = sipClass_KToggleAction;
@@ -198,8 +198,6 @@ public:
             else if (dynamic_cast<KToggleToolBarAction*>(sipCpp))
                 sipClass = sipClass_KToggleToolBarAction;
         }
-        else if (dynamic_cast<KToolBarSpacerAction*>(sipCpp))
-            sipClass = sipClass_KToolBarSpacerAction;
         else if (dynamic_cast<KSelectAction*>(sipCpp))
         {
             sipClass = sipClass_KSelectAction;
@@ -218,6 +216,8 @@ public:
             sipClass = sipClass_KActionMenu;
         else if (dynamic_cast<KPasteTextAction*>(sipCpp))
             sipClass = sipClass_KPasteTextAction;
+        else if (dynamic_cast<KToolBarPopupAction*>(sipCpp))
+            sipClass = sipClass_KToolBarPopupAction;
     }
     else if (dynamic_cast<KApplication*>(sipCpp))
     {
@@ -262,10 +262,10 @@ public:
         }
         else if (dynamic_cast<Sonnet::ConfigDialog*>(sipCpp))
             sipClass = sipClass_Sonnet_ConfigDialog;
-        else if (dynamic_cast<KBugReport*>(sipCpp))
-            sipClass = sipClass_KBugReport;
         else if (dynamic_cast<KAboutApplicationDialog*>(sipCpp))
             sipClass = sipClass_KAboutApplicationDialog;
+        else if (dynamic_cast<KBugReport*>(sipCpp))
+            sipClass = sipClass_KBugReport;
         else if (dynamic_cast<KFindDialog*>(sipCpp))
         {
             sipClass = sipClass_KFindDialog;

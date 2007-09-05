@@ -84,9 +84,21 @@ signals:
     void                 clear ();
     void                 clear (const KUrl&);
     void                 newItems (const KFileItemList&);
+
+    void                 newItems (const QList<KFileItem>&);
+
     void                 itemsFilteredByMime (const KFileItemList&);
+
+    void                 itemsFilteredByMime (const QList<KFileItem>&);
+
     void                 deleteItem (KFileItem*);
+
+    void                 deleteItem (KFileItem);
+
     void                 refreshItems (const KFileItemList&);
+
+    void                 refreshItems (const QList<KFileItem>&);
+
     void                 infoMessage (const QString&);
     void                 percent (int);
     void                 totalSize (KIO::filesize_t);

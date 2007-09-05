@@ -33,6 +33,15 @@ class NetAccess : QObject
 
 
 public:
+
+
+    enum StatSide
+    {
+        SourceSide, 
+        DestinationSide
+    };
+
+
     static bool          download (const KUrl&, QString&, QWidget*);
     static void          removeTempFile (const QString&);
     static bool          upload (const QString&, const KUrl&, QWidget*);
@@ -45,6 +54,9 @@ public:
     static bool          move (const KUrl&, const KUrl&, QWidget* = 0);
     static bool          move (const KUrl::List&, const KUrl&, QWidget* = 0);
     static bool          exists (const KUrl&, bool, QWidget*);
+
+    static bool          exists (const KUrl&, KIO::NetAccess::StatSide, QWidget*);
+
     static bool          stat (const KUrl&, KIO::UDSEntry&, QWidget*);
     static KUrl          mostLocalUrl (const KUrl&, QWidget*);
     static bool          del (const KUrl&, QWidget*);

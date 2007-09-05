@@ -105,12 +105,12 @@ private:
 };  // class Part
 
 
-
 class OpenUrlArguments
 {
 %TypeHeaderCode
 #include <part.h>
 %End
+
 
 public:
                          OpenUrlArguments ();
@@ -126,7 +126,6 @@ public:
     QMap<QString, QString>& metaData ();
 
 };  // class OpenUrlArguments
-
 
 //doc
 // Even though this is an abstract class, you can use
@@ -154,10 +153,8 @@ public:
     KUrl                 url () const;
     virtual bool         closeUrl ();
     KParts::BrowserExtension* browserExtension () const;
-
     void                 setArguments (const KParts::OpenUrlArguments&);
     KParts::OpenUrlArguments arguments () const;
-
 
 public:
     bool                 openStream (const QString&, const KUrl&);
@@ -263,7 +260,7 @@ private:
 // Usage: KParts.createReadOnlyPart (lib, parent, name, args)
 // </para>
 //end
-KParts::ReadOnlyPart* createReadOnlyPart (const QString&, QObject* = 0, const QString& = QString ::null , const QStringList& = QStringList ());
+KParts::ReadOnlyPart* createReadOnlyPart (const QString&, QObject* = 0, const QString& = QString::null , const QStringList& = QStringList ());
 //doc
 // <para>
 // This is a PyKDE-only function that handles the machinery necessary
@@ -295,7 +292,7 @@ KParts::ReadOnlyPart* createReadOnlyPart (const QString&, QObject* = 0, const QS
 // Usage: KParts.createReadWritePart (lib, parent, name, args)
 // </para>
 //end
-KParts::ReadWritePart* createReadWritePart (const QString&, QObject* = 0, const QString& = QString ::null , const QStringList& = QStringList ());
+KParts::ReadWritePart* createReadWritePart (const QString&, QObject* = 0, const QString& = QString::null , const QStringList& = QStringList ());
 //end
 
 

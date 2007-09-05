@@ -83,7 +83,15 @@ protected slots:
 
 protected:
     virtual QWidget*     createWidget (QWidget* /Transfer/);
+
+    virtual void         deleteWidget (QWidget*);
+
     virtual bool         eventFilter (QObject*, QEvent*);
+
+
+//mt  undefined symbol: KSelectActionPrivate& -- need mapped type?
+//mt                          KSelectAction (KSelectActionPrivate&, QObject* /TransferThis/);
+
 
 };  // class KSelectAction
 

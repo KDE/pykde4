@@ -32,9 +32,7 @@ class KBookmarkMenu : QObject
 
 public:
                          KBookmarkMenu (KBookmarkManager*, KBookmarkOwner*, KMenu*, KActionCollection*);
-
                          KBookmarkMenu (KBookmarkManager*, KBookmarkOwner*, KMenu*, const QString&);
-
     void                 ensureUpToDate ();
 
 public slots:
@@ -46,12 +44,15 @@ protected slots:
     void                 slotAddBookmark ();
     void                 slotNewFolder ();
 
+    void                 slotOpenFolderInTabs ();
+
+
 protected:
     virtual void         clear ();
     virtual void         refill ();
     virtual QAction*     actionForBookmark (const KBookmark&);
 
-    virtual KMenu*       contextMenu (const KBookmark&);
+    virtual KMenu*       contextMenu (QAction*);
 
     void                 addActions ();
     void                 fillBookmarks ();
@@ -60,17 +61,14 @@ protected:
     void                 addEditBookmarks ();
     void                 addNewFolder ();
 
+    void                 addOpenInTabs ();
+
     bool                 isRoot () const;
     bool                 isDirty () const;
     QString              parentAddress () const;
     KBookmarkManager*    manager () const;
     KBookmarkOwner*      owner () const;
     KMenu*               parentMenu () const;
-
-
-protected slots:
-
-
 
 protected:
 
@@ -79,12 +77,12 @@ protected:
 };  // class KBookmarkMenu
 
 
-
 class KBookmarkContextMenu : KMenu
 {
 %TypeHeaderCode
 #include <kbookmarkmenu.h>
 %End
+
 
 public:
                          KBookmarkContextMenu (const KBookmark&, KBookmarkManager*, KBookmarkOwner*, QWidget* /TransferThis/ = 0);
@@ -97,17 +95,22 @@ public slots:
     void                 slotRemove ();
     void                 slotCopyLocation ();
 
+    void                 slotOpenFolderInTabs ();
+
+
 protected:
     void                 addBookmark ();
     void                 addFolderActions ();
     void                 addProperties ();
     void                 addBookmarkActions ();
+
+    void                 addOpenFolderInTabs ();
+
     KBookmarkManager*    manager () const;
     KBookmarkOwner*      owner () const;
     KBookmark            bookmark () const;
 
 };  // class KBookmarkContextMenu
-
 
 
 class KBookmarkActionInterface
@@ -119,17 +122,7 @@ class KBookmarkActionInterface
 
 public:
                          KBookmarkActionInterface (const KBookmark&);
-
     const KBookmark      bookmark () const;
-
-
-public:
-
-
-
-protected:
-
-
 
 };  // class KBookmarkActionInterface
 
@@ -144,10 +137,6 @@ class KBookmarkActionMenu : KActionMenu, KBookmarkActionInterface
 public:
                          KBookmarkActionMenu (const KBookmark&, QObject* /TransferThis/);
                          KBookmarkActionMenu (const KBookmark&, const QString&, QObject* /TransferThis/);
-
-public:
-
-
 
 };  // class KBookmarkActionMenu
 
@@ -165,13 +154,5 @@ public:
 public slots:
     void                 slotSelected (Qt::MouseButtons, Qt::KeyboardModifiers);
 
-public:
-
-
-
 };  // class KBookmarkAction
-
-
-
-
 

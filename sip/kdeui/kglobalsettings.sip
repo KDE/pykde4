@@ -108,6 +108,9 @@ public:
     static QFont         windowTitleFont ();
     static QFont         taskbarFont ();
     static QFont         largeFont (const QString& = QString ());
+
+    static QFont         smallestReadableFont ();
+
     static bool          isMultiHead ();
     static bool          wheelMouseZooms ();
     static QRect         splashScreenDesktopGeometry ();

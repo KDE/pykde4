@@ -174,7 +174,8 @@ public:
     static QString       _initLanguage (KConfigBase*);
 
 protected:
-//ig     static void          initInstance ();
+
+
 //force
 
 private:

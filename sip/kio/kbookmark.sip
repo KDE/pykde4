@@ -67,6 +67,10 @@ public:
     void                 setUrl (const KUrl&);
     QString              icon () const;
     void                 setIcon (const QString&);
+
+    bool                 showInToolbar () const;
+    void                 setShowInToolbar (bool);
+
     KBookmarkGroup       parentGroup () const;
     KBookmarkGroup       toGroup () const;
     QString              address () const;
@@ -79,7 +83,7 @@ public:
     static QString       nextAddress (const QString&);
     static QString       commonParent (const QString&, const QString&);
     QString              metaDataItem (const QString&) const;
-    void                 setMetaDataItem (const QString&, const QString&, KBookmark::MetaDataOverwriteMode = KBookmark ::OverwriteMetaData );
+    void                 setMetaDataItem (const QString&, const QString&, KBookmark::MetaDataOverwriteMode = KBookmark::OverwriteMetaData );
     void                 populateMimeData (QMimeData*) const;
     bool                 operator == (const KBookmark&) const;
 
@@ -98,19 +102,17 @@ class KBookmarkGroup : KBookmark
 public:
                          KBookmarkGroup ();
                          KBookmarkGroup (const QDomElement&);
-    QString              groupAddress () const;
     bool                 isOpen () const;
     KBookmark            first () const;
     KBookmark            previous (const KBookmark&) const;
     KBookmark            next (const KBookmark&) const;
     int                  indexOf (const KBookmark&) const;
-
     KBookmarkGroup       createNewFolder (const QString& = QString ());
-
     KBookmark            createNewSeparator ();
-
     KBookmark            addBookmark (const KBookmark&);
     KBookmark            addBookmark (const QString&, const KUrl&, const QString& = QString ());
+
+    bool                 moveBookmark (const KBookmark&, const KBookmark&);
 
     bool                 moveItem (const KBookmark&, const KBookmark&);
     void                 deleteBookmark (const KBookmark&);

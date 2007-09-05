@@ -94,8 +94,6 @@ public:
         sipClass = sipClass_KJobTrackerInterface;
     else if (dynamic_cast<KJobUiDelegate*>(sipCpp))
         sipClass = sipClass_KJobUiDelegate;
-    else if (dynamic_cast<KLibFactory*>(sipCpp))
-        sipClass = sipClass_KLibFactory;
     else if (dynamic_cast<KLibLoader*>(sipCpp))
         sipClass = sipClass_KLibLoader;
     else if (dynamic_cast<KLibrary*>(sipCpp))

@@ -23,8 +23,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-
-
 class KIEBookmarkImporterImpl : KBookmarkImporterBase
 {
 %TypeHeaderCode
@@ -52,6 +50,4 @@ public:
     virtual void         write (const KBookmarkGroup&);
 
 };  // class KIEBookmarkExporterImpl
-
-
 

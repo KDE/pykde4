@@ -39,7 +39,9 @@ public:
     qlonglong            numberValue (uint, qlonglong = 0) const;
     bool                 isDir () const;
     bool                 isLink () const;
-    void                 insert (uint, QString);
+
+    void                 insert (uint, const QString&);
+
     void                 insert (uint, qlonglong);
     int                  count () const;
     bool                 contains (uint) const;
@@ -76,6 +78,10 @@ public:
         UDS_EXTRA, 
         UDS_EXTRA_END
     };
+
+
+public:
+
 
 
 };  // class UDSEntry

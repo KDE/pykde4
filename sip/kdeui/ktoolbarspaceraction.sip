@@ -40,5 +40,8 @@ public:
     void                 setMaximumWidth (int);
     virtual QWidget*     createWidget (QWidget* /Transfer/);
 
+    virtual void         deleteWidget (QWidget*);
+
+
 };  // class KToolBarSpacerAction
 

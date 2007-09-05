@@ -22,21 +22,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace KTextEditor
-{
-
-class Factory : KParts::Factory
-{
-%TypeHeaderCode
-#include <factory.h>
-%End
-
-
-public:
-                         Factory (QObject*);
-    virtual KTextEditor::Editor* editor ()  = 0;
-
-};  // class Factory
-
-};  // namespace KTextEditor
+//namespace KTextEditor
+//{
+//
+//class Factory : KParts::Factory
+//{
+//%TypeHeaderCode
+//#include <factory.h>
+//%End
+//
+//
+//public:
+//                         Factory (QObject*);
+//    virtual KTextEditor::Editor* editor ()  = 0;
+//
+//};  // class Factory
+//
+//};  // namespace KTextEditor
 

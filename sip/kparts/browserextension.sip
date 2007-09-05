@@ -25,7 +25,6 @@
 %ModuleHeaderCode
 //ctscc
 #include <factory.h>
-#include <genericfactory.h>
 #include <part.h>
 #include <browserextension.h>
 #include <browserinterface.h>
@@ -40,12 +39,12 @@
 namespace KParts
 {
 
-
 class BrowserArguments
 {
 %TypeHeaderCode
 #include <browserextension.h>
 %End
+
 
 public:
                          BrowserArguments ();
@@ -71,7 +70,6 @@ public:
 };  // class BrowserArguments
 
 
-
 class WindowArgs
 {
 %TypeHeaderCode
@@ -84,7 +82,6 @@ public:
                          WindowArgs (const KParts::WindowArgs&);
                          WindowArgs (const QRect&, bool, bool, bool, bool, bool);
                          WindowArgs (int, int, int, int, bool, bool, bool, bool, bool);
-
     void                 setX (int);
     int                  x () const;
     void                 setY (int);
@@ -108,11 +105,6 @@ public:
     void                 setScrollBarsVisible (bool);
     bool                 scrollBarsVisible () const;
 
-
-public:
-
-
-
 };  // class WindowArgs
 
 
@@ -121,6 +113,7 @@ class OpenUrlEvent : KParts::Event
 %TypeHeaderCode
 #include <browserextension.h>
 %End
+
 
 public:
                          OpenUrlEvent (KParts::ReadOnlyPart*, const KUrl&, const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments ());
@@ -131,7 +124,6 @@ public:
     static bool          test (const QEvent*);
 
 };  // class OpenUrlEvent
-
 
 
 class BrowserExtension : QObject
@@ -159,10 +151,8 @@ public:
     };
 
     typedef QFlags<KParts::BrowserExtension::PopupFlag> PopupFlags;
-
     virtual void         setBrowserArguments (const KParts::BrowserArguments&);
     KParts::BrowserArguments browserArguments () const;
-
     virtual int          xOffset ();
     virtual int          yOffset ();
     virtual void         saveState (QDataStream&);
@@ -182,31 +172,23 @@ public:
 public:
     void                 enableAction (const char*, bool);
     void                 setActionText (const char*, const QString&);
-
-    void                 openUrlRequest (const KUrl&, const KParts::OpenUrlArguments& = KParts ::OpenUrlArguments (), const KParts::BrowserArguments& = KParts ::BrowserArguments ());
+    void                 openUrlRequest (const KUrl&, const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments ());
     void                 openUrlRequestDelayed (const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&);
-
     void                 openUrlNotify ();
     void                 setLocationBarUrl (const QString&);
     void                 setIconUrl (const KUrl&);
-
-
-//ig    void                 createNewWindow (const KUrl&, const KParts::OpenUrlArguments& = KParts ::OpenUrlArguments (), const KParts::BrowserArguments& = KParts ::BrowserArguments (), const KParts::WindowArgs& = KParts ::WindowArgs (), KParts::ReadOnlyPart** = 0);
-
-
+//ig     void                 createNewWindow (const KUrl&, const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments (), const KParts::WindowArgs& = KParts::WindowArgs (), KParts::ReadOnlyPart** = 0);
     void                 loadingProgress (int);
     void                 speedProgress (int);
     void                 infoMessage (const QString&);
     void                 popupMenu (const QPoint&, const KFileItemList&);
-
-//ig    void                 popupMenu (KXMLGUIClient*, const QPoint&, const KFileItemList&, const KParts::OpenUrlArguments& = KParts ::OpenUrlArguments (), const KParts::BrowserArguments& = KParts ::BrowserArguments (), KParts::BrowserExtension::PopupFlags = KParts::BrowserExtension::KParts ::BrowserExtension ::DefaultPopupItems);
-
+//ig     void                 popupMenu (KXMLGUIClient*, const QPoint&, const KFileItemList&, const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments (), KParts::BrowserExtension::PopupFlags = KParts::BrowserExtension::DefaultPopupItems);
     void                 popupMenu (const QPoint&, const KUrl&, const QString&, mode_t = -1);
     void                 popupMenu (KXMLGUIClient*, const QPoint&, const KUrl&, const QString&, mode_t = -1);
-
-//ig    void                 popupMenu (KXMLGUIClient*, const QPoint&, const KUrl&, const KParts::OpenUrlArguments&, const //KParts::BrowserArguments&, KParts::BrowserExtension::PopupFlags, mode_t = -1 );
+//ig     void                 popupMenu (KXMLGUIClient*, const QPoint&, const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&, KParts::BrowserExtension::PopupFlags, mode_t = -1 );
 
     void                 selectionInfo (const KFileItemList&);
+
     void                 selectionInfo (const QString&);
     void                 selectionInfo (const KUrl::List&);
     void                 mouseOverInfo (const KFileItem*);
@@ -220,12 +202,48 @@ public:
 public:
     typedef QMap<QByteArray, int> ActionNumberMap;
 
-public:
-
-
+// Subclasses for QObject
 
 public:
+%ConvertToSubClassCode
 
+/*    if (dynamic_cast<KParts::Factory*>(sipCpp))
+    {
+        sipClass = sipClass_KParts_Factory;
+    }
+    else*/ if (dynamic_cast<KParts::Part*>(sipCpp))
+    {
+        sipClass = sipClass_KParts_Part;
+        if (dynamic_cast<KParts::ReadOnlyPart*>(sipCpp))
+        {
+            sipClass = sipClass_KParts_ReadOnlyPart;
+            if (dynamic_cast<KParts::ReadWritePart*>(sipCpp))
+                sipClass = sipClass_KParts_ReadWritePart;
+        }
+    }
+    else if (dynamic_cast<KParts::BrowserExtension*>(sipCpp))
+        sipClass = sipClass_KParts_BrowserExtension;
+    else if (dynamic_cast<KParts::BrowserHostExtension*>(sipCpp))
+        sipClass = sipClass_KParts_BrowserHostExtension;
+    else if (dynamic_cast<KParts::BrowserInterface*>(sipCpp))
+        sipClass = sipClass_KParts_BrowserInterface;
+    else if (dynamic_cast<KParts::BrowserRun*>(sipCpp))
+        sipClass = sipClass_KParts_BrowserRun;
+    else if (dynamic_cast<KParts::HistoryProvider*>(sipCpp))
+        sipClass = sipClass_KParts_HistoryProvider;
+    else if (dynamic_cast<KParts::LiveConnectExtension*>(sipCpp))
+        sipClass = sipClass_KParts_LiveConnectExtension;
+    else if (dynamic_cast<KParts::MainWindow*>(sipCpp))
+        sipClass = sipClass_KParts_MainWindow;
+    else if (dynamic_cast<KParts::PartManager*>(sipCpp))
+        sipClass = sipClass_KParts_PartManager;
+    else if (dynamic_cast<KParts::Plugin*>(sipCpp))
+        sipClass = sipClass_KParts_Plugin;
+    else if (dynamic_cast<KParts::StatusBarExtension*>(sipCpp))
+        sipClass = sipClass_KParts_StatusBarExtension;
+    else
+        sipClass = NULL;
+%End
 
 
 };  // class BrowserExtension
@@ -243,14 +261,8 @@ public:
     virtual QStringList  frameNames () const;
     virtual const QList<KParts::ReadOnlyPart*> frames () const;
     virtual KParts::BrowserHostExtension* findFrameParent (KParts::ReadOnlyPart*, const QString&);
-
     virtual bool         openUrlInFrame (const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&);
-
     static KParts::BrowserHostExtension* childObject (QObject*);
-
-public:
-
-
 
 };  // class BrowserHostExtension
 
@@ -286,10 +298,6 @@ public:
     void                 partEvent (const ulong, const QString&, const KParts::LiveConnectExtension::ArgList&);
 
 };  // class LiveConnectExtension
-
-
-
-
 
 };  // namespace KParts
 

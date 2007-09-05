@@ -36,39 +36,29 @@ private:
 public:
     QString              name () const;
     QString              fileName () const;
-    KLibFactory*         factory (const char* = 0);
+
+
+//mt  undefined symbol: KPluginFactory* -- need mapped type?
+//mt     KPluginFactory*      factory (const char* = 0);
+
 //ig     void*                resolveSymbol (const char*) const;
 //ig     void_function_ptr    resolveFunction (const char*) const;
     void                 unload () const;
 
 private:
                          ~KLibrary ();
+
+public:
+
+
 //force
+
+private:
                          KLibrary (const QString&, const QString&, void* /In/);
 //end
 
 
 };  // class KLibrary
-
-
-class KLibFactory : QObject
-{
-%TypeHeaderCode
-#include <klibloader.h>
-%End
-
-
-public:
-                         KLibFactory (QObject* /TransferThis/ = 0);
-    QObject*             create (QObject* /Transfer/ = 0, const char* = "QObject", const QStringList& = QStringList ());
-
-signals:
-    void                 objectCreated (QObject*);
-
-protected:
-    virtual QObject*     createObject (QObject* /Transfer/ = 0, const char* = "QObject", const QStringList& = QStringList ())  = 0;
-
-};  // class KLibFactory
 
 
 class KLibLoader : QObject
@@ -79,7 +69,11 @@ class KLibLoader : QObject
 
 
 public:
-    KLibFactory*         factory (const QString&, QLibrary::LoadHints = 0);
+
+
+//mt  undefined symbol: KPluginFactory* -- need mapped type?
+//mt     KPluginFactory*      factory (const QString&, QLibrary::LoadHints = 0);
+
     KLibrary*            library (const QString&, QLibrary::LoadHints = 0);
     QString              lastErrorMessage () const;
     void                 unloadLibrary (const QString&);
@@ -104,5 +98,11 @@ private:
                          ~KLibLoader ();
                          KLibLoader (QObject* /TransferThis/ = 0);
 
+public:
+
+
+
 };  // class KLibLoader
+
+
 

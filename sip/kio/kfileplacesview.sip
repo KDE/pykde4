@@ -39,8 +39,12 @@ public slots:
     virtual QSize        sizeHint () const;
 
 protected:
-    void                 contextMenuEvent (QContextMenuEvent*);
-    void                 resizeEvent (QResizeEvent*);
+
+    virtual void         contextMenuEvent (QContextMenuEvent*);
+    virtual void         resizeEvent (QResizeEvent*);
+    virtual void         showEvent (QShowEvent*);
+    virtual void         hideEvent (QHideEvent*);
+
 
 protected slots:
     void                 rowsInserted (const QModelIndex& /Transfer/, int, int);
@@ -48,6 +52,10 @@ protected slots:
 
 signals:
     void                 urlChanged (const KUrl&);
+
+protected:
+
+
 
 };  // class KFilePlacesView
 

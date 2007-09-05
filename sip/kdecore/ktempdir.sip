@@ -34,6 +34,9 @@ class KTempDir
 public:
                          KTempDir (const QString& = QString (), int = 448);
     void                 setAutoRemove (bool);
+
+    bool                 autoRemove () const;
+
     int                  status () const;
     QString              name () const;
     void                 unlink ();

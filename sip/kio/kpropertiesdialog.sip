@@ -113,7 +113,9 @@ public:
 
 protected slots:
     void                 slotEditFileType ();
-    void                 slotCopyFinished (KIO::Job*);
+
+    void                 slotCopyFinished (KJob*);
+
     void                 slotFileRenamed (KIO::Job*, const KUrl&, const KUrl&);
     void                 slotDirSizeUpdate ();
     void                 slotDirSizeFinished (KJob*);
@@ -123,6 +125,10 @@ protected slots:
 
 signals:
     void                 leaveModality ();
+
+protected slots:
+
+
 
 };  // class KFilePropsPlugin
 

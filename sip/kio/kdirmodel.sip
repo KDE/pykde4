@@ -38,15 +38,11 @@ public:
                          KDirModel (QObject* /TransferThis/ = 0);
     void                 setDirLister (KDirLister*);
     KDirLister*          dirLister () const;
-
     KFileItem            itemForIndex (const QModelIndex&) const;
-
     QModelIndex          indexForItem (const KFileItem*) const;
     QModelIndex          indexForItem (const KFileItem&) const;
     QModelIndex          indexForUrl (const KUrl&) const;
-
     void                 expandToUrl (const KUrl&);
-
     void                 itemChanged (const QModelIndex&);
 
     enum ModelColumns
@@ -102,13 +98,7 @@ public:
     virtual void         sort (int, Qt::SortOrder = Qt::AscendingOrder );
 
 signals:
-
     void                 expand (const QModelIndex&);
-
-
-public:
-
-
 
 };  // class KDirModel
 

@@ -40,6 +40,9 @@ public:
     QStringList          supportedProtocols () const;
     QStringList          supportedDrivers (QString = QString ()) const;
 
+    QVariant             driverHandle (const QString&) const;
+
+
 };  // class PortableMediaPlayer
 
 };  // namespace Solid

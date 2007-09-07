@@ -83,6 +83,11 @@ opt_konsolepart   = False
 opt_dep_warnings  = 0
 opt_libdir        = "lib"
 opt_dist_name     = ""
+opt_builddir      = "."
+
+# The absolute path to the directory containing this script.
+src_path = os.path.abspath(os.path.dirname(sys.argv[0]))
+
 
 pykde_modules = ["kdecore", "solid", "kdefx", "kdeui", "kio", "kutils", "kparts", "ktexteditor", #"kate",
   "khtml", "kdeprint"]
@@ -181,6 +186,8 @@ def init_and_check_sanity ():
     """ Do some initialization and check various versions and
         attributes of sip and PyQt installations
     """
+    global opt_builddir
+    opt_builddir = os.path.abspath(opt_builddir)
 
     check_gcc ()
 
@@ -214,10 +221,11 @@ def usage(rcode = 2):
     rcode is the return code passed back to the calling process.
     """
     print "Usage:"
-    print "    python configure.py [-h] [-c] [-d dir] [-g] [-j #] [-k] {-L dir] [-n dir] [-o dir] [-r] [-u] [-v dir] [-w] [-x] [-z file]"
+    print "    python configure.py [-h] [-c] [-d dir] [-b dir] [-g] [-j #] [-k] {-L dir] [-n dir] [-o dir] [-r] [-u] [-v dir] [-w] [-x] [-z file]"
     print "where:"
     print "    -h      displays this help message"
     print "    -c      concatenates each module's C/C++ source files [default]"
+    print "    -b dir  the directory to be used to build in [default current directory]"
     print "    -d dir  where the PyKDE modules will be installed [default %s]" % opt_pykdemoddir
     print "    -g      always release the GIL (SIP v3.x behaviour - default)"
     print "    -i      no concatenation of each module's C/C++ source files"
@@ -267,7 +275,7 @@ def inform_user(stage):
     elif stage == 2:
         sipconfig.inform ("KDE version is %s (0x%x)" % (kde_version_str, kde_version))
         print
-
+        sipconfig.inform("Build directory is %s" % opt_builddir)
         sipconfig.inform("PyKDE modules will be installed in %s" % opt_pykdemoddir)
         sipconfig.inform("PyKDE .sip files will be installed in %s" % opt_pykdesipdir)
         print
@@ -422,49 +430,6 @@ def check_kde_installation():
 
     inform_user (2)
 
-def create_top_level (mname):
-    """ Create the top level sip file <mname>mod.sip from <mname>mod.sip-in
-        and add/delete any %Included sip files per the current KDE version
-    """
-    diff = os.path.join ("sip", mname, mname + kde_version_sfx)
-    plus  = []
-    minus = []
-    if os.path.exists (diff):
-        d = open (diff)
-        line = d.readline()
-        while line:
-            if string.find (line, "+") == 0:
-                plus.append (line [2:])
-            elif string.find (line, "-") == 0:
-                minus.append (line [2:])
-
-            line = d.readline()
-
-    sipin  = open (os.path.join ("sip", mname, mname + "mod.sip.in"))
-    sipout = open (os.path.join ("sip", mname, mname + "mod.sip"), "w")
-
-    line = sipin.readline()
-    while line:
-        if string.find (line, "%Include") == 0:
-            if minus and line in minus:
-                line = sipin.readline()
-                continue
-
-            sipout.write (line)
-
-        elif string.find (line, "@mark@") == 0:
-            for p in plus:                
-                sipout.write (p)
-
-        else:
-            sipout.write (line)
-
-        line = sipin.readline()
-
-    sipin.close ()
-    sipout.close ()
-
-
 def check_distribution ():
     dist = glob.glob ("/etc/*-release")
 
@@ -511,20 +476,13 @@ def generate_code(mname, imports=None, extra_cflags=None, extra_cxxflags=None, e
     """
     sipconfig.inform("Generating the C++ source for the %s module..." % mname)
 
-    create_top_level (mname)
     try:
-        #create_top_level (mname)
-        pass
-    except:
-        sipconfig.error ("Couldn't create top level sip file for %s" % mname)
-
-    try:
-        shutil.rmtree(mname)
+        shutil.rmtree(os.path.join(opt_builddir,mname))
     except:
         pass
 
     try:
-        os.mkdir(mname)
+        os.mkdir(os.path.join(opt_builddir,mname))
     except:
         sipconfig.error("Unable to create the %s directory." % mname)
 
@@ -547,21 +505,21 @@ def generate_code(mname, imports=None, extra_cflags=None, extra_cxxflags=None, e
         argv.append("-g")
 
     argv.append("-c")
-    argv.append(mname)
+    argv.append(os.path.join(opt_builddir, mname))
 
-    buildfile = os.path.join(mname, mname + ".sbf")
+    buildfile = os.path.join(opt_builddir, mname, mname + ".sbf")
     argv.append("-b")
     argv.append(buildfile)
 
-    argv.append("-I sip")
+    argv.append("-I "+os.path.join(src_path,"sip"))
     argv.append("-I %s" % pyqtcfg.pyqt_sip_dir)
 
     pyqtInclPathSeen = 0
 
     # SIP assumes POSIX style path separators.
-    argv.append(string.join(["sip", mname, mname + "mod.sip"], "/"))
+    argv.append(string.join([src_path.replace('\\','/'),"sip", mname, mname + "mod.sip"], "/"))
 
-#    print string.join (argv)
+    #print string.join (argv)
     # finally, run SIP and generate the C++ code
     os.system (string.join(argv))
 
@@ -584,9 +542,9 @@ def generate_code(mname, imports=None, extra_cflags=None, extra_cxxflags=None, e
 
     sipfiles = []
 
-    for s in os.listdir (os.path.join ("sip", mname)):
+    for s in os.listdir (os.path.join (src_path, "sip", mname)):
         if s.endswith (".sip"):
-            sipfiles.append(os.path.join("..", "sip", mname, os.path.basename(s)))
+            sipfiles.append(os.path.join(src_path, "sip", mname, os.path.basename(s)))
 
 
     installs.append([sipfiles, os.path.join(opt_pykdesipdir, mname)])
@@ -594,7 +552,7 @@ def generate_code(mname, imports=None, extra_cflags=None, extra_cxxflags=None, e
     makefile = sipconfig.SIPModuleMakefile(
         configuration = pyqtcfg,
         build_file = mname + ".sbf",
-        dir = mname,
+        dir = os.path.join(opt_builddir, mname),
         install_dir = opt_pykdemoddir,
         installs = installs,
         qt = 1,
@@ -617,7 +575,7 @@ def generate_code(mname, imports=None, extra_cflags=None, extra_cxxflags=None, e
     if extra_define:
         makefile.extra_defines.append(extra_define)
 
-    makefile.extra_include_dirs.append (os.path.join ("..", "extra", kde_version_extra))
+    makefile.extra_include_dirs.append (os.path.join (src_path, "extra", kde_version_extra))
     makefile.extra_include_dirs.append (opt_kdeincdir)
     makefile.extra_include_dirs.append (pyqtcfg.qt_inc_dir)
     if pykde_includes [mname]:
@@ -665,7 +623,9 @@ def create_makefiles():
     sipconfig.ParentMakefile(
         configuration = pyqtcfg,
         subdirs = subdirs,
-        installs= [("__init__.py", opt_pykdemoddir), ("pykdeconfig.py", opt_pykdemoddir)]
+        dir = opt_builddir,
+        installs= [(os.path.join(src_path,"__init__.py"), opt_pykdemoddir),
+            (os.path.join(opt_builddir,"pykdeconfig.py"), opt_pykdemoddir)]
     ).generate()
 
 
@@ -698,7 +658,7 @@ def main(argv):
     argv is the list of command line arguments.
     """
     try:
-        optlist, args = getopt.getopt(argv[1:], "hcd:gij:k:L:l:n:o:ruv:wxz:")
+        optlist, args = getopt.getopt(argv[1:], "hcb:d:gij:k:L:l:n:o:ruv:wxz:")
     except getopt.GetoptError:
         usage()
 
@@ -706,7 +666,7 @@ def main(argv):
     global opt_debug, opt_concat, opt_releasegil
     global opt_split, opt_tracing, opt_startModName
     global opt_startmod, opt_endmod
-    global opt_kdebasedir, opt_kdelibdir, opt_kdeincdir, opt_libdir
+    global opt_kdebasedir, opt_kdelibdir, opt_kdeincdir, opt_libdir, opt_builddir
     global pykde_modules, opt_dep_warnings, opt_dist_name
     global pykde_imports, pykde_includes, opt_konsolepart
 
@@ -728,6 +688,9 @@ def main(argv):
         # turns on concatentation (on by default, here for consistency)
         elif opt == "-c":
             opt_concat = 1
+            
+        elif opt == "-b":
+            opt_builddir = arg
 
         elif opt == "-d":
             if pykde_package:
@@ -804,7 +767,7 @@ def main(argv):
     create_makefiles()
 
     # Install the configuration module.
-    create_config("pykdeconfig.py", "pykdeconfig.py.in")
+    create_config(os.path.join(opt_builddir,"pykdeconfig.py"), os.path.join(src_path,"pykdeconfig.py.in"))
 
 
 def reporting_msg ():

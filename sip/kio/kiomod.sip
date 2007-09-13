@@ -115,7 +115,6 @@
 %Include krun.sip
 %Include ksambashare.sip
 %Include kscan.sip
-%Include kservicegroup.sip
 %Include kshellcompletion.sip
 %Include kstatusbarofflineindicator.sip
 %Include ktar.sip

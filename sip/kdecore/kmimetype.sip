@@ -33,16 +33,15 @@ class KMimeType : KServiceType
 public:
     typedef KSharedPtr<KMimeType> Ptr;
     typedef QList<KMimeType::Ptr> List;
-    QString              iconName () const;
-    virtual QString      iconName (const KUrl&) const;
+
+    QString              iconName (const KUrl& = KUrl ()) const;
+
     static QString       iconNameForUrl (const KUrl&, mode_t = 0);
     static QString       favIconForUrl (const KUrl&);
-    virtual QString      comment (const KUrl& = KUrl ()) const;
+
+    QString              comment (const KUrl& = KUrl ()) const;
+
     QStringList          patterns () const;
-    virtual void         load (QDataStream&);
-    virtual void         save (QDataStream&);
-    virtual QVariant     property (const QString&) const;
-    virtual QStringList  propertyNames () const;
 
     enum FindByNameOption
     {
@@ -69,14 +68,14 @@ public:
 protected:
                          KMimeType (QDataStream&, int);
                          KMimeType (const QString&, const QString&, const QString&);
-//ig                          KMimeType (KMimeTypePrivate&, QDataStream&, int);
-//ig                          KMimeType (KMimeTypePrivate&, const QString&, const QString&, const QString&);
+
+//igx                          KMimeType (KMimeTypePrivate&);
+//igx                          KMimeType (KMimeTypePrivate&, const QString&, const QString&);
+
     void                 addPattern (const QString&);
     void                 setParentMimeType (const QString& /Transfer/);
     void                 internalClearData ();
 
-protected:
-//igx     virtual void         virtual_hook (int, void*);
 
 };  // class KMimeType
 

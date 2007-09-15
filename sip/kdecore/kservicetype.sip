@@ -36,19 +36,13 @@ public:
                          KServiceType (KDesktopFile*);
                          KServiceType (QDataStream&, int);
     QString              comment () const;
-    QString              name () const;
     QString              desktopEntryPath () const;
     bool                 isDerived () const;
     QString              parentServiceType () const;
     bool                 inherits (const QString&) const;
-    virtual QVariant     property (const QString&) const;
-    virtual QStringList  propertyNames () const;
-    bool                 isValid () const;
     QVariant::Type       propertyDef (const QString&) const;
     QStringList          propertyDefNames () const;
     QMap<QString, QVariant::Type> propertyDefs () const;
-    virtual void         save (QDataStream&);
-    virtual void         load (QDataStream&);
     KServiceType::Ptr    parentType ();
     void                 setServiceOffersOffset (int);
     int                  serviceOffersOffset () const;
@@ -56,16 +50,27 @@ public:
     static KServiceType::List allServiceTypes ();
 
 protected:
-//ig                          KServiceType (KServiceTypePrivate&, QDataStream&, int);
-//ig                          KServiceType (KServiceTypePrivate&, const QString&, const QString&, const QString&);
+
+
+
+//igx                          KServiceType (KServiceTypePrivate&);
+
+//igx                          KServiceType (KServiceTypePrivate&, const QString&, const QString&);
+
+
+public:
+
+
 
 protected:
-//igx     virtual void         virtual_hook (int, void*);
+
+
 
 protected:
 
-private:
-                         KServiceType (const KServiceType&) [()];
+
+
+
 
 };  // class KServiceType
 

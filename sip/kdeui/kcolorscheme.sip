@@ -85,10 +85,7 @@ public:
     };
 
                          KColorScheme (const KColorScheme&);
-                         KColorScheme (KColorScheme::ColorSet = KColorScheme::View , KSharedConfigPtr = KSharedConfigPtr ());
-
-                         KColorScheme (QPalette::ColorGroup, KColorScheme::ColorSet = KColorScheme::View, KSharedConfigPtr = KSharedConfigPtr ());
-
+                         KColorScheme (QPalette::ColorGroup, KColorScheme::ColorSet = KColorScheme::View , KSharedConfigPtr = KSharedConfigPtr ());
     QBrush               background (KColorScheme::BackgroundRole = KColorScheme::NormalBackground ) const;
     QBrush               foreground (KColorScheme::ForegroundRole = KColorScheme::NormalText ) const;
     QBrush               decoration (KColorScheme::DecorationRole) const;
@@ -96,5 +93,36 @@ public:
     static QColor        shade (const QColor&, KColorScheme::ShadeRole);
     static QColor        shade (const QColor&, KColorScheme::ShadeRole, qreal, qreal = 0.0);
 
+    static void          adjustBackground (QPalette&, KColorScheme::BackgroundRole = KColorScheme::NormalBackground, QPalette::ColorRole = QPalette::Base, KColorScheme::ColorSet = KColorScheme::View, KSharedConfigPtr = KSharedConfigPtr ());
+    static void          adjustForeground (QPalette&, KColorScheme::ForegroundRole = KColorScheme::NormalText, QPalette::ColorRole = QPalette::Text, KColorScheme::ColorSet = KColorScheme::View, KSharedConfigPtr = KSharedConfigPtr ());
+
+
+public:
+
+
+
 };  // class KColorScheme
+
+
+
+class KStatefulBrush
+{
+%TypeHeaderCode
+#include <kcolorscheme.h>
+%End
+
+public:
+                         KStatefulBrush ();
+                         KStatefulBrush (KColorScheme::ColorSet, KColorScheme::ForegroundRole, KSharedConfigPtr = KSharedConfigPtr ());
+                         KStatefulBrush (KColorScheme::ColorSet, KColorScheme::BackgroundRole, KSharedConfigPtr = KSharedConfigPtr ());
+                         KStatefulBrush (KColorScheme::ColorSet, KColorScheme::DecorationRole, KSharedConfigPtr = KSharedConfigPtr ());
+                         KStatefulBrush (const QBrush&, KSharedConfigPtr = KSharedConfigPtr ());
+                         KStatefulBrush (const QBrush&, const QBrush&, KSharedConfigPtr = KSharedConfigPtr ());
+                         KStatefulBrush (const KStatefulBrush&);
+    QBrush               brush (QPalette::ColorGroup) const;
+    QBrush               brush (const QPalette&) const;
+    QBrush               brush (const QWidget*) const;
+
+};  // class KStatefulBrush
+
 

@@ -56,7 +56,7 @@ public:
     virtual void         setMimeFilter (const QStringList&, const QString& = QString ())  = 0;
     virtual QString      currentMimeFilter () const = 0;
     virtual void         clearFilter ()  = 0;
-    virtual void         setPreviewWidget (const KPreviewWidgetBase*)  = 0;
+    virtual void         setPreviewWidget (KPreviewWidgetBase*)  = 0;
     virtual void         setMode (KFile::Modes)  = 0;
     virtual KFile::Modes mode () const = 0;
     virtual void         setLocationLabel (const QString&)  = 0;
@@ -67,6 +67,9 @@ public:
     virtual KFileFilterCombo* filterWidget () const = 0;
     virtual KActionCollection* actionCollection () const = 0;
     virtual void         setCustomWidget (QWidget*)  = 0;
+
+    virtual void         setCustomWidget (const QString&, QWidget*)  = 0;
+
     virtual void         slotOk ()  = 0;
     virtual void         accept ()  = 0;
     virtual void         slotCancel ()  = 0;

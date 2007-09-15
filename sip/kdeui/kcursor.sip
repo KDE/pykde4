@@ -37,14 +37,22 @@ class KCursor : QCursor
 
 public:
                          KCursor (const QString&, Qt::CursorShape);
-
                          KCursor (const QCursor&);
-
     static void          setAutoHideCursor (QWidget*, bool, bool = 0);
     static void          setHideCursorDelay (int);
     static int           hideCursorDelay ();
     static void          autoHideEventFilter (QObject*, QEvent*);
 
+// Subclasses for QCursor
+
+public:
+%ConvertToSubClassCode
+
+    if (dynamic_cast<KCursor*>(sipCpp))
+        sipClass = sipClass_KCursor;
+    else
+        sipClass = NULL;
+%End
 
 
 };  // class KCursor

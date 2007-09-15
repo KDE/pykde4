@@ -57,7 +57,7 @@ public:
     void                 setMimeFilter (const QStringList&, const QString& = QString ());
     QString              currentMimeFilter () const;
     void                 clearFilter ();
-    void                 setPreviewWidget (const KPreviewWidgetBase*);
+    void                 setPreviewWidget (KPreviewWidgetBase*);
 
     virtual QSize        sizeHint () const;
 

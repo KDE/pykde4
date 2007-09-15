@@ -32,7 +32,8 @@ class KDirOperator : QWidget
 
 public:
 
-    enum ActionTypes
+
+    enum ActionType
     {
         SortActions, 
         ViewActions, 
@@ -40,6 +41,7 @@ public:
         FileActions, 
         AllActions
     };
+
 
                          KDirOperator (const KUrl& = KUrl (), QWidget* /TransferThis/ = 0);
     virtual void         setShowHiddenFiles (bool);
@@ -53,14 +55,9 @@ public:
     KUrl                 url () const;
     virtual void         setUrl (const KUrl&, bool);
     void                 setCurrentItem (const QString&);
-
     virtual void         setView (QAbstractItemView*);
     QAbstractItemView*   view () const;
-
-    QWidget*             viewWidget () const;
-
     virtual void         setView (KFile::FileView);
-
     void                 setSorting (QDir::SortFlags);
     QDir::SortFlags      sorting () const;
     bool                 isRoot () const;
@@ -69,9 +66,9 @@ public:
     virtual void         setMode (KFile::Modes);
     KFile::Modes         mode () const;
 
-    virtual void         setPreviewWidget (const QWidget*);
-    QList<KFileItem>     selectedItems () const;
+    virtual void         setPreviewWidget (KPreviewWidgetBase*);
 
+    QList<KFileItem>     selectedItems () const;
     bool                 isSelected (const KFileItem*) const;
     int                  numDirs () const;
     int                  numFiles () const;
@@ -84,15 +81,12 @@ public:
     virtual void         writeConfig (KConfigGroup&);
     void                 setOnlyDoubleClickSelectsFiles (bool);
     bool                 onlyDoubleClickSelectsFiles () const;
-
     virtual bool         mkdir (const QString&, bool = 1);
-    virtual KIO::DeleteJob* del (const KFileItemList&, bool = 1, bool = 1);
-    virtual KIO::DeleteJob* del (const KFileItemList&, QWidget* /Transfer/, bool = 1, bool = 1);
+
+    virtual KIO::DeleteJob* del (const QList<KFileItem>&, QWidget* /Transfer/ = 0, bool = 1, bool = 1);
 
     void                 clearHistory ();
-
     virtual void         setEnableDirHighlighting (bool);
-
     bool                 dirHighlighting () const;
     bool                 dirOnlyMode () const;
     static bool          dirOnlyMode (uint);
@@ -100,14 +94,12 @@ public:
     virtual void         setAcceptDrops (bool);
     virtual void         setDropOptions (int);
 
-    virtual KIO::CopyJob* trash (const KFileItemList&, QWidget* /Transfer/, bool = 1, bool = 1);
+    virtual KIO::CopyJob* trash (const QList<KFileItem>&, QWidget* /Transfer/, bool = 1, bool = 1);
 
 
 protected:
-
     virtual QAbstractItemView* createView (QWidget* /Transfer/, KFile::FileView);
     virtual void         setDirLister (KDirLister*);
-
     virtual void         resizeEvent (QResizeEvent*);
     void                 setupActions ();
     void                 updateSortActions ();
@@ -116,19 +108,18 @@ protected:
     void                 prepareCompletionObjects ();
     bool                 checkPreviewSupport ();
 
-public slots:
+    virtual void         activatedMenu (const KFileItem&, const QPoint&);
 
+
+public slots:
     virtual void         back ();
     virtual void         forward ();
     virtual void         home ();
     virtual void         cdUp ();
-
     void                 updateDir ();
-
     virtual void         rereadDir ();
     virtual void         mkdir ();
     virtual void         deleteSelected ();
-
     void                 updateSelectionDependentActions ();
     QString              makeCompletion (const QString&);
     QString              makeDirCompletion (const QString&);
@@ -137,15 +128,15 @@ public slots:
 protected slots:
     void                 resetCursor ();
     void                 pathChanged ();
-    void                 insertNewFiles (const KFileItemList&);
-    void                 itemDeleted (KFileItem*);
     virtual void         selectDir (const KFileItem*);
     void                 selectFile (const KFileItem*);
     void                 highlightFile (const KFileItem*);
-    virtual void         activatedMenu (const KFileItem*, const QPoint&);
     void                 sortByName ();
     void                 sortBySize ();
     void                 sortByDate ();
+
+    void                 sortByType ();
+
     void                 sortReversed ();
     void                 toggleDirsFirst ();
     void                 toggleIgnoreCase ();
@@ -156,9 +147,7 @@ signals:
     void                 updateInformation (int, int);
     void                 completion (const QString&);
     void                 finishedLoading ();
-
     void                 viewChanged (QAbstractItemView*);
-
     void                 fileHighlighted (const KFileItem*);
     void                 dirActivated (const KFileItem*);
     void                 fileSelected (const KFileItem*);
@@ -168,15 +157,7 @@ public:
 
 
 
-protected:
-
-
-
-public slots:
-
-
-
-signals:
+protected slots:
 
 
 

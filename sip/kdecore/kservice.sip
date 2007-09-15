@@ -39,7 +39,6 @@ public:
                          KService (QDataStream&, int);
     bool                 isApplication () const;
     QString              type () const;
-    QString              name () const;
     QString              exec () const;
     QString              library () const;
     QString              icon () const;
@@ -75,16 +74,9 @@ public:
     int                  initialPreference () const;
     bool                 noDisplay () const;
     QString              parentApp () const;
-
     QString              pluginKeyword () const;
-
-    QVariant             property (const QString&) const;
     QVariant             property (const QString&, QVariant::Type) const;
-    QStringList          propertyNames () const;
-    bool                 isValid () const;
     QString              locateLocal () const;
-    void                 load (QDataStream&);
-    void                 save (QDataStream&);
     void                 setMenuId (const QString&);
     void                 setTerminal (bool);
     void                 setTerminalOptions (const QString&);
@@ -99,11 +91,15 @@ public:
 protected:
     QStringList&         accessServiceTypes ();
 
-protected:
-//igx     virtual void         virtual_hook (int, void*);
+public:
 
-private:
-                         KService (const KService&);
+
+
+protected:
+
+
+
+
 
 };  // class KService
 

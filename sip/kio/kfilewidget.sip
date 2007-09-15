@@ -49,7 +49,7 @@ public:
     virtual void         setMimeFilter (const QStringList&, const QString& = QString ());
     virtual QString      currentMimeFilter () const;
     virtual void         clearFilter ();
-    virtual void         setPreviewWidget (const KPreviewWidgetBase*);
+    virtual void         setPreviewWidget (KPreviewWidgetBase*);
     virtual void         setMode (KFile::Modes);
     virtual KFile::Modes mode () const;
     virtual void         setLocationLabel (const QString&);
@@ -61,7 +61,10 @@ public:
     KActionCollection*   actionCollection () const;
     static KUrl          getStartUrl (const KUrl&, QString&);
     static void          setStartDir (const KUrl&);
-    void                 setCustomWidget (QWidget*);
+
+    virtual void         setCustomWidget (QWidget*);
+    virtual void         setCustomWidget (const QString&, QWidget*);
+
 //igx     virtual void         virtual_hook (int, void*);
 
 public slots:
@@ -78,6 +81,10 @@ signals:
     void                 selectionChanged ();
     void                 filterChanged (const QString&);
     void                 accepted ();
+
+public:
+
+
 
 };  // class KFileWidget
 

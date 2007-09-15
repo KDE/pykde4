@@ -30,11 +30,9 @@ class KBookmarkManager : QObject
 %End
 
 
-
 private:
                          KBookmarkManager (const QString&, const QString&);
                          KBookmarkManager ();
-
 
 public:
     void                 setUpdate (bool);
@@ -105,11 +103,13 @@ public:
 
     virtual bool         enableOption (KBookmarkOwner::BookmarkOption) const;
     virtual void         openBookmark (const KBookmark&, Qt::MouseButtons, Qt::KeyboardModifiers)  = 0;
-
     virtual void         openFolderinTabs (const KBookmarkGroup&);
 
-//mt  undefined symbol: KBookmarkDialog* -- need mapped type?
-//mt     virtual KBookmarkDialog* bookmarkDialog (KBookmarkManager*, QWidget* /Transfer/);
+    virtual KBookmarkDialog* bookmarkDialog (KBookmarkManager*, QWidget* /Transfer/);
+
+
+public:
+
 
 
 };  // class KBookmarkOwner

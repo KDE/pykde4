@@ -23,31 +23,32 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-class KCrash
+namespace KCrash
 {
 %TypeHeaderCode
 #include <kcrash.h>
 %End
 
+void                 defaultCrashHandler (int);
 
-public:
-    static void          defaultCrashHandler (int);
-//ig     static void          setCrashHandler (HandlerType = defaultCrashHandler);
-//ig     static HandlerType   crashHandler ();
-//ig     static void          setEmergencySaveFunction (HandlerType = 0);
-//ig     static HandlerType   emergencySaveFunction ();
+//ig void                 setCrashHandler (HandlerType = defaultCrashHandler);
+//ig HandlerType          crashHandler ();
+//ig void                 setEmergencySaveFunction (HandlerType = 0);
+//ig HandlerType          emergencySaveFunction ();
 
-    enum CrashFlag
-    {
-        KeepFDs, 
-        SaferDialog, 
-        AlwaysDirectly
-    };
+enum CrashFlag
+{
+    KeepFDs, 
+    SaferDialog, 
+    AlwaysDirectly
+};
 
-    typedef QFlags<KCrash::CrashFlag> CrashFlags;
-    static void          setFlags (KCrash::CrashFlags);
-    static void          setApplicationPath (const QString&);
-    static void          setApplicationName (const QString&);
+typedef QFlags<KCrash::CrashFlag> CrashFlags;
+void                 setFlags (KCrash::CrashFlags);
+void                 setApplicationPath (const QString&);
+void                 setApplicationName (const QString&);
+};  // namespace KCrash
 
-};  // class KCrash
+
+
 

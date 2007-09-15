@@ -34,8 +34,6 @@ public:
     typedef KSharedPtr<KProtocolInfo> Ptr;
 
 public:
-    virtual bool         isValid () const;
-    virtual QString      name () const;
     static QStringList   protocols ();
     static bool          isKnownProtocol (const KUrl&);
     static bool          isKnownProtocol (const QString&);
@@ -48,6 +46,10 @@ public:
         T_NONE, 
         T_ERROR
     };
+
+
+public:
+
 
 
     class ExtraField
@@ -89,8 +91,6 @@ public:
 
 public:
                          KProtocolInfo (QDataStream&, int);
-    virtual void         load (QDataStream&);
-    virtual void         save (QDataStream&);
 
     enum FileNameUsedForCopying
     {
@@ -107,11 +107,16 @@ protected:
     bool                 canDeleteRecursive () const;
     KProtocolInfo::FileNameUsedForCopying fileNameUsedForCopying () const;
 
-protected:
-//igx     virtual void         virtual_hook (int, void*);
-
 private:
                          KProtocolInfo (const QString&);
+
+public:
+
+
+
+protected:
+
+
 
 };  // class KProtocolInfo
 

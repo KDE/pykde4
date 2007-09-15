@@ -67,6 +67,9 @@ public:
     static bool          isSortByName (const QDir::SortFlags&);
     static bool          isSortBySize (const QDir::SortFlags&);
     static bool          isSortByDate (const QDir::SortFlags&);
+
+    static bool          isSortByType (const QDir::SortFlags&);
+
     static bool          isSortDirsFirst (const QDir::SortFlags&);
     static bool          isSortCaseInsensitive (const QDir::SortFlags&);
     static bool          isDefaultView (const KFile::FileView&);

@@ -53,6 +53,7 @@
 #include <kurlrequester.h>
 #include <kabstractfilemodule.h>
 #include <kautomount.h>
+#include <kbookmarkdialog.h>
 #include <kbookmarkdombuilder.h>
 #include <kbookmarkmanager.h>
 #include <kbuildsycocaprogressdialog.h>
@@ -248,6 +249,8 @@ public:
         sipClass = sipClass_KBookmarkAction;
     else if (dynamic_cast<KBookmarkActionMenu*>(sipCpp))
         sipClass = sipClass_KBookmarkActionMenu;
+    else if (dynamic_cast<KBookmarkDialog*>(sipCpp))
+        sipClass = sipClass_KBookmarkDialog;
     else if (dynamic_cast<KBookmarkDomBuilder*>(sipCpp))
         sipClass = sipClass_KBookmarkDomBuilder;
     else if (dynamic_cast<KBookmarkManager*>(sipCpp))

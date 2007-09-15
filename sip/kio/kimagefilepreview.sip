@@ -42,7 +42,6 @@ public slots:
 protected slots:
     void                 showPreview ();
     void                 showPreview (const KUrl&, bool);
-    void                 toggleAuto (bool);
     virtual void         gotPreview (const KFileItem&, const QPixmap&);
 
 protected:
@@ -51,6 +50,10 @@ protected:
 
 private:
                          KImageFilePreview (const KImageFilePreview&) [()];
+
+protected slots:
+
+
 
 };  // class KImageFilePreview
 

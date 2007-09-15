@@ -46,7 +46,9 @@ public:
     QString              name () const;
     QString              comment () const;
     QString              icon () const;
-    QString              desktopEntryPath () const;
+
+    QString              entryPath () const;
+
     QString              author () const;
     QString              email () const;
     QString              category () const;
@@ -68,6 +70,10 @@ public:
     bool                 operator != (const KPluginInfo&) const;
     bool                 operator < (const KPluginInfo&) const;
     bool                 operator > (const KPluginInfo&) const;
+
+public:
+
+
 
 };  // class KPluginInfo
 

@@ -44,7 +44,14 @@ public:
 
 signals:
     void                 contextMenu (int, const QPoint&);
+
+    void                 emptyAreaContextMenu (const QPoint&);
+
     void                 mouseDoubleClick (int);
+
+    void                 tabDoubleClicked (int);
+    void                 newTabRequest ();
+
     void                 mouseMiddleClick (int);
     void                 initiateDrag (int);
 //ig     void                 testCanDecode (const QDragMoveEvent*, bool&);

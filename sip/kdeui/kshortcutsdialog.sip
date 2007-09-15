@@ -34,6 +34,9 @@ public:
                          KShortcutsDialog (KShortcutsEditor::ActionTypes = KShortcutsEditor::AllActions , KShortcutsEditor::LetterShortcuts = KShortcutsEditor::LetterShortcutsAllowed , QWidget* /TransferThis/ = 0);
     void                 addCollection (KActionCollection*, const QString& = QString ());
     bool                 configure (bool = 1);
+
+    virtual QSize        sizeHint () const;
+
     static int           configure (KActionCollection*, KShortcutsEditor::LetterShortcuts = KShortcutsEditor::LetterShortcutsAllowed , QWidget* /Transfer/ = 0, bool = 1);
 
 private:

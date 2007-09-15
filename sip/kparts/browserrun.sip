@@ -40,6 +40,10 @@ public:
     KUrl                 url () const;
     bool                 hideErrorDialog () const;
 
+    QString              contentDisposition () const;
+    bool                 serverSuggestsSave () const;
+
+
     enum AskSaveResult
     {
         Save, 
@@ -48,6 +52,15 @@ public:
     };
 
     static KParts::BrowserRun::AskSaveResult askSave (const KUrl&, KService::Ptr, const QString&, const QString& = QString ());
+
+
+    enum AskEmbedOrSaveFlags
+    {
+        InlineDisposition, 
+        AttachmentDisposition
+    };
+
+
     static KParts::BrowserRun::AskSaveResult askEmbedOrSave (const KUrl&, const QString&, const QString& = QString (), int = 0);
     virtual void         save (const KUrl&, const QString&);
     static void          simpleSave (const KUrl&, const QString&, QWidget* = 0);

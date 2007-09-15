@@ -63,4 +63,4 @@ protected:
 
 };  // class KPluginFactory
 
-//ig typedef KPluginFactory KLibFactory;
+typedef KPluginFactory KLibFactory;

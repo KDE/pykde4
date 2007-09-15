@@ -24,7 +24,6 @@
 
 %ModuleHeaderCode
 //ctscc
-#include <factory.h>
 #include <part.h>
 #include <browserextension.h>
 #include <browserinterface.h>
@@ -186,9 +185,7 @@ public:
     void                 popupMenu (const QPoint&, const KUrl&, const QString&, mode_t = -1);
     void                 popupMenu (KXMLGUIClient*, const QPoint&, const KUrl&, const QString&, mode_t = -1);
 //ig     void                 popupMenu (KXMLGUIClient*, const QPoint&, const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&, KParts::BrowserExtension::PopupFlags, mode_t = -1 );
-
     void                 selectionInfo (const KFileItemList&);
-
     void                 selectionInfo (const QString&);
     void                 selectionInfo (const KUrl::List&);
     void                 mouseOverInfo (const KFileItem*);
@@ -207,11 +204,7 @@ public:
 public:
 %ConvertToSubClassCode
 
-/*    if (dynamic_cast<KParts::Factory*>(sipCpp))
-    {
-        sipClass = sipClass_KParts_Factory;
-    }
-    else*/ if (dynamic_cast<KParts::Part*>(sipCpp))
+    if (dynamic_cast<KParts::Part*>(sipCpp))
     {
         sipClass = sipClass_KParts_Part;
         if (dynamic_cast<KParts::ReadOnlyPart*>(sipCpp))

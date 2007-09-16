@@ -31,7 +31,6 @@
 %Import QtGui/QtGuimod.sip
 %Import QtNetwork/QtNetworkmod.sip
 
-//%Include ksycocafactory.sip
 %Include typedefs.sip
 %Include kfilterbase.sip
 %Include kfilterdev.sip

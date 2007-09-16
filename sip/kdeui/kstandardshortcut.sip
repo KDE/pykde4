@@ -95,7 +95,7 @@ const KShortcut&     open ();
 const KShortcut&     openNew ();
 const KShortcut&     close ();
 const KShortcut&     save ();
-const KShortcut&     print ();
+const KShortcut&     print () /PyName=print_/;
 const KShortcut&     quit ();
 const KShortcut&     undo ();
 const KShortcut&     redo ();

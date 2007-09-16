@@ -40,7 +40,7 @@ public:
     int                  marginHeight ();
     virtual void         setVerticalScrollBarPolicy (Qt::ScrollBarPolicy);
     virtual void         setHorizontalScrollBarPolicy (Qt::ScrollBarPolicy);
-    void                 print (bool = 0);
+    void                 print (bool = 0) /PyName=print_/;
     void                 displayAccessKeys ();
     int                  contentsWidth () const;
     int                  contentsHeight () const;

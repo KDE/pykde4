@@ -103,7 +103,7 @@ KAction*             save (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             saveAs (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             revert (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             close (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
-KAction*             print (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
+KAction*             print (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*) /PyName=print_/;
 KAction*             printPreview (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             mail (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             quit (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);

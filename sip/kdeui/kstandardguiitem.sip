@@ -87,7 +87,7 @@ KGuiItem             apply ();
 KGuiItem             clear ();
 KGuiItem             defaults ();
 KGuiItem             close ();
-KGuiItem             print ();
+KGuiItem             print () /PyName=print_/;
 KGuiItem             properties ();
 KGuiItem             reset ();
 KGuiItem             overwrite ();

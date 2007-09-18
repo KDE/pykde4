@@ -94,6 +94,7 @@
 %Include kstringhandler.sip
 %Include kdedmodule.sip
 %Include klibloader.sip
+%Include klibrary.sip
 %Include kmacroexpander.sip
 %Include kpluginfactory.sip
 %Include kpluginloader.sip

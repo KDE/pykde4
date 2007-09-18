@@ -40,47 +40,50 @@ class KSycocaEntry
 
 
 public:
-
     bool                 isType (KSycocaType) const;
     KSycocaType          sycocaType () const;
-
     typedef KSharedPtr<KSycocaEntry> Ptr;
     typedef QList<KSycocaEntry::Ptr> List;
     static void          read (QDataStream&, QString&);
     static void          read (QDataStream&, QStringList&);
-
     QString              name () const;
-
     QString              entryPath () const;
-
     bool                 isValid () const;
-
     bool                 isDeleted () const;
-
     QVariant             property (const QString&) const;
     QStringList          propertyNames () const;
-
     void                 setDeleted (bool);
     int                  offset () const;
-
     void                 save (QDataStream&);
 
-
 protected:
-
-
 //igx                          KSycocaEntry (KSycocaEntryPrivate&);
-
 
 private:
                          KSycocaEntry (const KSycocaEntry&) [()];
 
+// Subclasses for KSycocaEntry
+
 public:
+%ConvertToSubClassCode
 
-
-
-protected:
-
+    if (dynamic_cast<KServiceType*>(sipCpp))
+    {
+        sipClass = sipClass_KServiceType;
+        if (dynamic_cast<KMimeType*>(sipCpp))
+            sipClass = sipClass_KMimeType;
+    }
+    else if (dynamic_cast<KProtocolInfo*>(sipCpp))
+        sipClass = sipClass_KProtocolInfo;
+    else if (dynamic_cast<KService*>(sipCpp))
+        sipClass = sipClass_KService;
+    else if (dynamic_cast<KServiceGroup*>(sipCpp))
+        sipClass = sipClass_KServiceGroup;
+    else if (dynamic_cast<KServiceSeparator*>(sipCpp))
+        sipClass = sipClass_KServiceSeparator;
+    else
+        sipClass = NULL;
+%End
 
 
 };  // class KSycocaEntry

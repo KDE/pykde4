@@ -39,8 +39,10 @@ public:
     void                 highlightWord (uint, uint);
     void                 setSpellCheckingConfigFileName (const QString&);
     virtual void         createHighlighter ();
-    Sonnet::Highlighter* hightighter () const;
-    void                 setHightighter (Sonnet::Highlighter*);
+
+    Sonnet::Highlighter* highlighter () const;
+    void                 setHighlighter (Sonnet::Highlighter*);
+
 
 public slots:
     void                 checkSpelling ();
@@ -52,6 +54,10 @@ protected:
     virtual void         deleteWordBack ();
     virtual void         deleteWordForward ();
     virtual void         contextMenuEvent (QContextMenuEvent*);
+
+public:
+
+
 
 };  // class KTextEdit
 

@@ -28,19 +28,19 @@
 #include <kstatusbarjobtracker.h>
 #include <kwidgetjobtracker.h>
 #include <kaction.h>
+#include <ktoolbarpopupaction.h>
 #include <ktoolbarspaceraction.h>
+#include <kselectaction.h>
+#include <kfontsizeaction.h>
+#include <kfontaction.h>
+#include <krecentfilesaction.h>
+#include <kcodecaction.h>
 #include <ktoggleaction.h>
 #include <ktogglefullscreenaction.h>
 #include <ktoggletoolbaraction.h>
-#include <kselectaction.h>
-#include <kfontaction.h>
-#include <krecentfilesaction.h>
-#include <kfontsizeaction.h>
-#include <kcodecaction.h>
 #include <ktoolbarlabelaction.h>
 #include <kactionmenu.h>
 #include <kpastetextaction.h>
-#include <ktoolbarpopupaction.h>
 #include <kapplication.h>
 #include <kuniqueapplication.h>
 #include <kcombobox.h>
@@ -56,8 +56,8 @@
 #include <kconfigdialog.h>
 #include <kassistantdialog.h>
 #include <configdialog.h>
-#include <kaboutapplicationdialog.h>
 #include <kbugreport.h>
+#include <kaboutapplicationdialog.h>
 #include <kfinddialog.h>
 #include <kreplacedialog.h>
 #include <kfontdialog.h>
@@ -95,6 +95,7 @@
 #include <karrowbutton.h>
 #include <kbuttongroup.h>
 #include <kcmodule.h>
+#include <kcategorizedsortfilterproxymodel.h>
 #include <kcharselect.h>
 #include <kcolorbutton.h>
 #include <kcolorcombo.h>
@@ -138,6 +139,7 @@
 #include <ksqueezedtextlabel.h>
 #include <kstartupinfo.h>
 #include <kstatusbar.h>
+#include <kstyle.h>
 #include <ksvgrenderer.h>
 #include <ksystemtrayicon.h>
 #include <ktabbar.h>
@@ -188,8 +190,22 @@ public:
     else if (dynamic_cast<KAction*>(sipCpp))
     {
         sipClass = sipClass_KAction;
-        if (dynamic_cast<KToolBarSpacerAction*>(sipCpp))
+        if (dynamic_cast<KToolBarPopupAction*>(sipCpp))
+            sipClass = sipClass_KToolBarPopupAction;
+        else if (dynamic_cast<KToolBarSpacerAction*>(sipCpp))
             sipClass = sipClass_KToolBarSpacerAction;
+        else if (dynamic_cast<KSelectAction*>(sipCpp))
+        {
+            sipClass = sipClass_KSelectAction;
+            if (dynamic_cast<KFontSizeAction*>(sipCpp))
+                sipClass = sipClass_KFontSizeAction;
+            else if (dynamic_cast<KFontAction*>(sipCpp))
+                sipClass = sipClass_KFontAction;
+            else if (dynamic_cast<KRecentFilesAction*>(sipCpp))
+                sipClass = sipClass_KRecentFilesAction;
+            else if (dynamic_cast<KCodecAction*>(sipCpp))
+                sipClass = sipClass_KCodecAction;
+        }
         else if (dynamic_cast<KToggleAction*>(sipCpp))
         {
             sipClass = sipClass_KToggleAction;
@@ -198,26 +214,12 @@ public:
             else if (dynamic_cast<KToggleToolBarAction*>(sipCpp))
                 sipClass = sipClass_KToggleToolBarAction;
         }
-        else if (dynamic_cast<KSelectAction*>(sipCpp))
-        {
-            sipClass = sipClass_KSelectAction;
-            if (dynamic_cast<KFontAction*>(sipCpp))
-                sipClass = sipClass_KFontAction;
-            else if (dynamic_cast<KRecentFilesAction*>(sipCpp))
-                sipClass = sipClass_KRecentFilesAction;
-            else if (dynamic_cast<KFontSizeAction*>(sipCpp))
-                sipClass = sipClass_KFontSizeAction;
-            else if (dynamic_cast<KCodecAction*>(sipCpp))
-                sipClass = sipClass_KCodecAction;
-        }
         else if (dynamic_cast<KToolBarLabelAction*>(sipCpp))
             sipClass = sipClass_KToolBarLabelAction;
         else if (dynamic_cast<KActionMenu*>(sipCpp))
             sipClass = sipClass_KActionMenu;
         else if (dynamic_cast<KPasteTextAction*>(sipCpp))
             sipClass = sipClass_KPasteTextAction;
-        else if (dynamic_cast<KToolBarPopupAction*>(sipCpp))
-            sipClass = sipClass_KToolBarPopupAction;
     }
     else if (dynamic_cast<KApplication*>(sipCpp))
     {
@@ -262,10 +264,10 @@ public:
         }
         else if (dynamic_cast<Sonnet::ConfigDialog*>(sipCpp))
             sipClass = sipClass_Sonnet_ConfigDialog;
-        else if (dynamic_cast<KAboutApplicationDialog*>(sipCpp))
-            sipClass = sipClass_KAboutApplicationDialog;
         else if (dynamic_cast<KBugReport*>(sipCpp))
             sipClass = sipClass_KBugReport;
+        else if (dynamic_cast<KAboutApplicationDialog*>(sipCpp))
+            sipClass = sipClass_KAboutApplicationDialog;
         else if (dynamic_cast<KFindDialog*>(sipCpp))
         {
             sipClass = sipClass_KFindDialog;
@@ -383,6 +385,8 @@ public:
         sipClass = sipClass_KButtonGroup;
     else if (dynamic_cast<KCModule*>(sipCpp))
         sipClass = sipClass_KCModule;
+    else if (dynamic_cast<KCategorizedSortFilterProxyModel*>(sipCpp))
+        sipClass = sipClass_KCategorizedSortFilterProxyModel;
     else if (dynamic_cast<KCharSelect*>(sipCpp))
         sipClass = sipClass_KCharSelect;
     else if (dynamic_cast<KColorButton*>(sipCpp))
@@ -497,6 +501,8 @@ public:
         sipClass = sipClass_KStatusBar;
     else if (dynamic_cast<KStringListValidator*>(sipCpp))
         sipClass = sipClass_KStringListValidator;
+    else if (dynamic_cast<KStyle*>(sipCpp))
+        sipClass = sipClass_KStyle;
     else if (dynamic_cast<KSvgRenderer*>(sipCpp))
         sipClass = sipClass_KSvgRenderer;
     else if (dynamic_cast<KSystemTrayIcon*>(sipCpp))

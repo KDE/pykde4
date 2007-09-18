@@ -43,6 +43,7 @@
 %Include commandinterface.sip
 %Include configinterface.sip
 %Include configpage.sip
+%Include containerinterface.sip
 %Include cursor.sip
 %Include cursorfeedback.sip
 %Include document.sip

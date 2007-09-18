@@ -54,7 +54,6 @@ public:
     QPixmap              apply (const QPixmap&, int, float, const QColor&, bool) const;
     QPixmap              apply (const QPixmap&, int, float, const QColor&, const QColor&, bool) const;
     QImage               doublePixels (const QImage&) const;
-    static void          visualActivate (QWidget*, const QRect&);
     static void          toGray (QImage&, float);
     static void          colorize (QImage&, const QColor&, float);
     static void          toMonochrome (QImage&, const QColor&, const QColor&, float);
@@ -63,6 +62,10 @@ public:
     static void          semiTransparent (QImage&);
     static void          semiTransparent (QPixmap&);
     static void          overlay (QImage&, QImage&);
+
+public:
+
+
 
 };  // class KIconEffect
 

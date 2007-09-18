@@ -22,35 +22,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-%ModuleHeaderCode
-#include <kshell.h>
-extern char **pyArgvToC(PyObject *argvlist,int *argcp);
+
+
+class KLibrary : QLibrary
+{
+%TypeHeaderCode
+#include <klibrary.h>
 %End
 
-namespace KShell
-{
-
-enum Option
-{
-    NoOptions, 
-    TildeExpand, 
-    AbortOnMeta
-};
-
-typedef QFlags<KShell::Option> Options;
-
-enum Errors
-{
-    NoError, 
-    BadQuoting, 
-    FoundMeta
-};
-
-QStringList          splitArgs (const QString&, KShell::Options = KShell::NoOptions , KShell::Errors* = 0);
-QString              joinArgs (const QStringList&);
-QString              quoteArg (const QString&);
-QString              tildeExpand (const QString&);
+public:
+                         KLibrary (QObject* /TransferThis/ = 0);
+                         KLibrary (const QString&, const KComponentData& = KGlobal::mainComponent (), QObject* /TransferThis/ = 0);
+                         KLibrary (const QString&, int, const KComponentData& = KGlobal::mainComponent (), QObject* /TransferThis/ = 0);
+    KPluginFactory*      factory (const char* = 0);
+//mc    void*                resolveSymbol (const char*);
+//%MethodCode
+//returns (void*)
+//takes name (char) 
+//%End
 
 
-};  // namespace KShell
+//mt  undefined symbol: void_function_ptr -- need mapped type?
+//mt     void_function_ptr    resolveFunction (const char*);
+    void                 setFileName (const QString&, const KComponentData& = KGlobal::mainComponent ());
+    bool                 unload ();
+
+};  // class KLibrary
+
 

@@ -43,8 +43,6 @@ public:
 
     static KGlobalSettings::TearOffHandle insertTearOffHandle ();
     static bool          changeCursorOverIcon ();
-    static bool          visualActivate ();
-    static uint          visualActivateSpeed ();
     static int           autoSelectDelay ();
     static int           contextMenuKey ();
     static bool          showContextMenusOnPress ();
@@ -60,6 +58,10 @@ public:
     };
 
     static KGlobalSettings::Completion completionMode ();
+
+public:
+
+
 
     class KMouseSettings
     {
@@ -108,9 +110,7 @@ public:
     static QFont         windowTitleFont ();
     static QFont         taskbarFont ();
     static QFont         largeFont (const QString& = QString ());
-
     static QFont         smallestReadableFont ();
-
     static bool          isMultiHead ();
     static bool          wheelMouseZooms ();
     static QRect         splashScreenDesktopGeometry ();

@@ -42,13 +42,15 @@ public:
     virtual void         removeView (KTextEditor::View*);
 
 public:
-    virtual void         readConfig (KConfig* = 0);
-    virtual void         writeConfig (KConfig* = 0);
-    virtual bool         configDialogSupported () const;
-    virtual void         configDialog (QWidget* /Transfer/);
+
+
 
 };  // class Plugin
 
-KTextEditor::Plugin* createPlugin (const char*, QObject*);
+
+KTextEditor::Plugin* createPlugin (KService::Ptr, QObject*);
+
+
+
 };  // namespace KTextEditor
 

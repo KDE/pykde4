@@ -23,12 +23,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-class KDirSortFilterProxyModel : QSortFilterProxyModel
+
+
+
+class KDirSortFilterProxyModel : KCategorizedSortFilterProxyModel
 {
 %TypeHeaderCode
 #include <kdirsortfilterproxymodel.h>
 %End
-
 
 public:
                          KDirSortFilterProxyModel (QObject* /TransferThis/ = 0);
@@ -38,6 +40,9 @@ public:
 
 protected:
     virtual bool         lessThan (const QModelIndex&, const QModelIndex&) const;
+    virtual bool         lessThanCategoryPurpose (const QModelIndex&, const QModelIndex&) const;
+    virtual bool         lessThanGeneralPurpose (const QModelIndex&, const QModelIndex&) const;
 
 };  // class KDirSortFilterProxyModel
+
 

@@ -74,7 +74,7 @@ protected:
     void                 setCapabilities (KJob::Capabilities);
 
 public:
-    bool                 exec ();
+    bool                 exec () /PyName=exec_/;
 
     enum 
     {

@@ -39,7 +39,7 @@ public:
                          KService (QDataStream&, int);
     bool                 isApplication () const;
     QString              type () const;
-    QString              exec () const;
+    QString              exec () const /PyName=exec_/;
     QString              library () const;
     QString              icon () const;
     bool                 terminal () const;
@@ -90,16 +90,6 @@ public:
 
 protected:
     QStringList&         accessServiceTypes ();
-
-public:
-
-
-
-protected:
-
-
-
-
 
 };  // class KService
 

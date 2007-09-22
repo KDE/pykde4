@@ -412,7 +412,7 @@ template<TYPE*>
     // Set the list elements.
     QSet<TYPE*> set = *sipCpp;
     int i = 0;
-    foreach ((TYPE *)value, set)
+    foreach (TYPE *value, set)
     {
         PyObject *obj = sipConvertFromNewInstance(value, sipClass_TYPE, sipTransferObj);
         if (obj == NULL || PyList_SET_ITEM (l, i, obj) < 0)
@@ -457,7 +457,7 @@ template<TYPE*>
     {
         int state;
 
-        TYPE *t = reinterpret_cast<TYPE *>(sipConvertToInstance(PyList_GET_ITEM (l, i), sipClass_TYPE, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
+        TYPE *t = reinterpret_cast<TYPE *>(sipConvertToInstance(PyList_GET_ITEM (sipPy, i), sipClass_TYPE, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
  
         if (*sipIsErr)
         {

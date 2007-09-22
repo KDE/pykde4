@@ -107,7 +107,7 @@ public:
     virtual void         chown (const KUrl&, const QString&, const QString&);
     virtual void         setModificationTime (const KUrl&, const QDateTime&);
     virtual void         copy (const KUrl&, const KUrl&, int, bool);
-    virtual void         del (const KUrl&, bool);
+    virtual void         del (const KUrl&, bool) /PyName=del_/;
     virtual void         setLinkDest (const KUrl&, const QString&);
     virtual void         special (const QByteArray&);
     virtual void         multiGet (const QByteArray&);

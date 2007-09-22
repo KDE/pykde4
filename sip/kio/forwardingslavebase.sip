@@ -45,7 +45,7 @@ public:
     virtual void         chmod (const KUrl&, int);
     virtual void         setModificationTime (const KUrl&, const QDateTime&);
     virtual void         copy (const KUrl&, const KUrl&, int, bool);
-    virtual void         del (const KUrl&, bool);
+    virtual void         del (const KUrl&, bool) /PyName=del_/;
 
 protected:
     virtual bool         rewriteUrl (const KUrl&, KUrl&)  = 0;

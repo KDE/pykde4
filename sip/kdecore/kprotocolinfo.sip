@@ -37,7 +37,7 @@ public:
     static QStringList   protocols ();
     static bool          isKnownProtocol (const KUrl&);
     static bool          isKnownProtocol (const QString&);
-    static QString       exec (const QString&);
+    static QString       exec (const QString&) /PyName=exec_/;
 
     enum Type
     {
@@ -46,10 +46,6 @@ public:
         T_NONE, 
         T_ERROR
     };
-
-
-public:
-
 
 
     class ExtraField
@@ -109,14 +105,6 @@ protected:
 
 private:
                          KProtocolInfo (const QString&);
-
-public:
-
-
-
-protected:
-
-
 
 };  // class KProtocolInfo
 

@@ -37,7 +37,7 @@ class KIconLoader : QObject
 public:
                          KIconLoader (const QString& = QString (), KStandardDirs* = 0, QObject* /TransferThis/ = 0);
                          KIconLoader (const KComponentData&, QObject* /TransferThis/ = 0);
-    static KIconLoader*  global ();
+    static KIconLoader*  global () /PyName=global_/;
     void                 addAppDir (const QString&);
     QPixmap              loadIcon (const QString&, K3Icon::Group, int = 0, int = K3Icon::DefaultState , const QStringList& = QStringList (), QString* = 0, bool = 0) const;
     QPixmap              loadMimeTypeIcon (const QString&, K3Icon::Group, int = 0, int = K3Icon::DefaultState , const QStringList& = QStringList (), QString* = 0) const;

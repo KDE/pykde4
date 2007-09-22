@@ -34,7 +34,7 @@ class Command
 
 public:
     virtual const QStringList& cmds ()  = 0;
-    virtual bool         exec (KTextEditor::View*, const QString&, QString&)  = 0;
+    virtual bool         exec (KTextEditor::View*, const QString&, QString&)  = 0 /PyName=exec_/;
     virtual bool         help (KTextEditor::View*, const QString&, QString&)  = 0;
 
 };  // class Command

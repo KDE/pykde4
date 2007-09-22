@@ -34,13 +34,11 @@ class NetAccess : QObject
 
 public:
 
-
     enum StatSide
     {
         SourceSide, 
         DestinationSide
     };
-
 
     static bool          download (const KUrl&, QString&, QWidget*);
     static void          removeTempFile (const QString&);
@@ -54,12 +52,10 @@ public:
     static bool          move (const KUrl&, const KUrl&, QWidget* = 0);
     static bool          move (const KUrl::List&, const KUrl&, QWidget* = 0);
     static bool          exists (const KUrl&, bool, QWidget*);
-
     static bool          exists (const KUrl&, KIO::NetAccess::StatSide, QWidget*);
-
     static bool          stat (const KUrl&, KIO::UDSEntry&, QWidget*);
     static KUrl          mostLocalUrl (const KUrl&, QWidget*);
-    static bool          del (const KUrl&, QWidget*);
+    static bool          del (const KUrl&, QWidget*) /PyName=del_/;
     static bool          mkdir (const KUrl&, QWidget*, int = -1);
     static QString       fish_execute (const KUrl&, const QString&, QWidget*);
     static bool          synchronousRun (KIO::Job*, QWidget*, QByteArray* = 0, KUrl* = 0, QMap<QString, QString>* = 0);

@@ -33,14 +33,10 @@ class KMimeType : KServiceType
 public:
     typedef KSharedPtr<KMimeType> Ptr;
     typedef QList<KMimeType::Ptr> List;
-
     QString              iconName (const KUrl& = KUrl ()) const;
-
     static QString       iconNameForUrl (const KUrl&, mode_t = 0);
     static QString       favIconForUrl (const KUrl&);
-
     QString              comment (const KUrl& = KUrl ()) const;
-
     QStringList          patterns () const;
 
     enum FindByNameOption
@@ -62,20 +58,17 @@ public:
     static KMimeType::Ptr defaultMimeTypePtr ();
     bool                 isDefault () const;
     QString              parentMimeType () const;
-    bool                 is (const QString&) const;
+    bool                 is (const QString&) const /PyName=is_/;
     static QString       extractKnownExtension (const QString&);
 
 protected:
                          KMimeType (QDataStream&, int);
                          KMimeType (const QString&, const QString&, const QString&);
-
 //igx                          KMimeType (KMimeTypePrivate&);
 //igx                          KMimeType (KMimeTypePrivate&, const QString&, const QString&);
-
     void                 addPattern (const QString&);
     void                 setParentMimeType (const QString& /Transfer/);
     void                 internalClearData ();
-
 
 };  // class KMimeType
 

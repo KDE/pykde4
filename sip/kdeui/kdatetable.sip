@@ -41,8 +41,8 @@ public:
     void                 setMainWidget (QWidget*);
     virtual void         resizeEvent (QResizeEvent*);
     void                 popup (const QPoint&);
-    int                  exec (const QPoint&);
-    int                  exec (int, int);
+    int                  exec (const QPoint&) /PyName=exec_/;
+    int                  exec (int, int) /PyName=exec_/;
 
 signals:
     void                 leaveModality ();

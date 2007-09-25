@@ -34,6 +34,9 @@ public:
     static KGlobalAccel* self ();
     bool                 isEnabled ();
     void                 setEnabled (bool);
+
+    void                 overrideMainComponentData (const KComponentData&);
+
     static QStringList   findActionNameSystemwide (const QKeySequence&);
     static bool          promptStealShortcutSystemwide (QWidget* /Transfer/, const QStringList&, const QKeySequence&);
     static void          stealShortcutSystemwide (const QKeySequence&);

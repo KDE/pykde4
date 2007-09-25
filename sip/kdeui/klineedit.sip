@@ -42,7 +42,6 @@ public:
     bool                 urlDropsEnabled () const;
     void                 setTrapReturnKey (bool);
     bool                 trapReturnKey () const;
-    virtual bool         eventFilter (QObject*, QEvent*);
     KCompletionBox*      completionBox (bool = 1);
     virtual void         setCompletionObject (KCompletion*, bool = 1);
     virtual void         copy () const;
@@ -81,6 +80,9 @@ protected slots:
     void                 userCancelled (const QString&);
 
 protected:
+
+    virtual bool         event (QEvent*);
+
     virtual void         resizeEvent (QResizeEvent*);
     virtual void         keyPressEvent (QKeyEvent*);
     virtual void         mousePressEvent (QMouseEvent*);
@@ -96,6 +98,10 @@ protected:
     virtual void         paintEvent (QPaintEvent*);
     virtual void         focusInEvent (QFocusEvent*);
     virtual void         focusOutEvent (QFocusEvent*);
+
+public:
+
+
 
 };  // class KLineEdit
 

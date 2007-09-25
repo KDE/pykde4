@@ -32,8 +32,12 @@ class KWidgetJobTracker : KAbstractWidgetJobTracker
 
 public:
                          KWidgetJobTracker (QWidget* /TransferThis/ = 0);
-    virtual QWidget*     widget ();
-    bool                 keepOpen () const;
+
+    virtual QWidget*     widget (KJob*);
+    virtual void         registerJob (KJob*);
+    virtual void         unregisterJob (KJob*);
+    bool                 keepOpen (KJob*) const;
+
 
 protected slots:
     virtual void         infoMessage (KJob*, const QString&, const QString&);
@@ -42,9 +46,19 @@ protected slots:
     virtual void         processedAmount (KJob*, KJob::Unit, qulonglong);
     virtual void         percent (KJob*, ulong);
     virtual void         speed (KJob*, ulong);
-    virtual void         slotClean ();
+
+    virtual void         slotClean (KJob*);
+
     virtual void         suspended (KJob*);
     virtual void         resumed (KJob*);
+
+public:
+
+
+
+protected slots:
+
+
 
 };  // class KWidgetJobTracker
 

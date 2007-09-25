@@ -41,6 +41,17 @@ void                 deref ();
 KComponentData       activeComponent ();
 void                 setActiveComponent (const KComponentData&);
 QString              caption ();
-void                 setLocale (KLocale*);
+
+
+enum CopyCatalogs
+{
+    DoCopyCatalogs, 
+    DontCopyCatalogs
+};
+
+void                 setLocale (KLocale*, KGlobal::CopyCatalogs = KGlobal::DoCopyCatalogs);
+
+
+
 };  // namespace KGlobal
 

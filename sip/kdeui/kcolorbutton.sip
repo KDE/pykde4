@@ -40,6 +40,9 @@ public:
     void                 setDefaultColor (const QColor&);
     QSize                sizeHint () const;
 
+    QSize                minimumSizeHint () const;
+
+
 signals:
     void                 changed (const QColor&);
 

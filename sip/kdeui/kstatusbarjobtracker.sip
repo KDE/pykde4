@@ -33,16 +33,29 @@ class KStatusBarJobTracker : KAbstractWidgetJobTracker
 public:
                          KStatusBarJobTracker (QWidget* /TransferThis/ = 0, bool = 1);
     virtual void         registerJob (KJob*);
-    virtual QWidget*     widget ();
 
-protected:
-    virtual bool         eventFilter (QObject*, QEvent*);
+    virtual QWidget*     widget (KJob*);
 
-protected slots:
+
+public slots:
+
     virtual void         totalAmount (KJob*, KJob::Unit, qulonglong);
     virtual void         percent (KJob*, ulong);
     virtual void         speed (KJob*, ulong);
-    virtual void         slotClean ();
+    virtual void         slotClean (KJob*);
+
+
+public:
+
+
+
+protected:
+
+
+
+protected slots:
+
+
 
 };  // class KStatusBarJobTracker
 

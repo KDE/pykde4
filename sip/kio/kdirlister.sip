@@ -84,20 +84,16 @@ signals:
     void                 clear ();
     void                 clear (const KUrl&);
     void                 newItems (const KFileItemList&);
-
     void                 newItems (const QList<KFileItem>&);
-
     void                 itemsFilteredByMime (const KFileItemList&);
-
     void                 itemsFilteredByMime (const QList<KFileItem>&);
-
     void                 deleteItem (KFileItem*);
-
     void                 deleteItem (KFileItem);
-
     void                 refreshItems (const KFileItemList&);
 
-    void                 refreshItems (const QList<KFileItem>&);
+
+//mt  undefined symbol: QList<QPair<KFileItem, KFileItem>>& -- need mapped type?
+//mt     void                 refreshItems (const QList<QPair<KFileItem, KFileItem>>&);
 
     void                 infoMessage (const QString&);
     void                 percent (int);
@@ -121,6 +117,10 @@ protected:
     virtual bool         doNameFilter (const QString&, const QList<QRegExp>&) const;
     virtual bool         doMimeFilter (const QString&, const QStringList&) const;
     virtual void         handleError (KIO::Job*);
+
+signals:
+
+
 
 };  // class KDirLister
 

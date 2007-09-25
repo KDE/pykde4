@@ -35,7 +35,9 @@ public:
     virtual bool         find (const QString&, QPixmap&);
     virtual void         insert (const QString&, const QPixmap&);
     QPixmap              loadFromFile (const QString&);
-    QPixmap              loadFromSVG (const QString&, const QSize& = QSize ());
+
+    QPixmap              loadFromSvg (const QString&, const QSize& = QSize ());
+
     uint                 timestamp () const;
     void                 setTimestamp (uint);
     void                 setUseQPixmapCache (bool);
@@ -71,6 +73,10 @@ protected:
     void                 setValid (bool);
     void                 ensureInited () const;
     bool                 recreateCacheFiles ();
+
+public:
+
+
 
 };  // class KPixmapCache
 

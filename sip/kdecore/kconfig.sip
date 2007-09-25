@@ -55,6 +55,10 @@ public:
     bool                 forceGlobal () const;
     void                 checkUpdate (const QString&, const QString&);
     KConfig*             copyTo (const QString&, KConfig* = 0) const;
+
+    bool                 setLocale (const QString&);
+    QString              locale () const;
+
     KLockFile::Ptr       lockFile (bool = 0);
     QString              group () const;
     KConfigGroup         group (const char*);

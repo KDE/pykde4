@@ -59,10 +59,6 @@ public:
 
     static KGlobalSettings::Completion completionMode ();
 
-public:
-
-
-
     class KMouseSettings
     {
 
@@ -84,23 +80,16 @@ public:
     static QString       desktopPath ();
     static QString       autostartPath ();
     static QString       documentPath ();
-    static QColor        toolBarHighlightColor ();
     static QColor        inactiveTitleColor ();
     static QColor        inactiveTextColor ();
     static QColor        activeTitleColor ();
     static QColor        activeTextColor ();
     static int           contrast ();
     static qreal         contrastF (const KSharedConfigPtr& = KSharedConfigPtr ());
-    static QColor        buttonBackground ();
-    static QColor        buttonTextColor ();
     static QColor        baseColor ();
     static QColor        textColor ();
-    static QColor        linkColor ();
-    static QColor        visitedLinkColor ();
     static QColor        highlightedTextColor ();
     static QColor        highlightColor ();
-    static QColor        alternateBackgroundColor ();
-    static QColor        calculateAlternateBackgroundColor (const QColor&);
     static bool          shadeSortColumn ();
     static bool          allowDefaultBackgroundImages ();
     static QFont         generalFont ();
@@ -162,6 +151,10 @@ signals:
 
 private:
                          KGlobalSettings ();
+
+public:
+
+
 
 };  // class KGlobalSettings
 

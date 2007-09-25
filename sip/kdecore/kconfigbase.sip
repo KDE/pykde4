@@ -45,7 +45,6 @@ public:
     QString              group () const;
     bool                 hasGroup (const QString&) const;
     virtual QStringList  groupList () const = 0;
-    QString              locale () const;
     QString              readEntry (const char*, const char* = 0) const;
     QVariant             readPropertyEntry (const QString&, const QVariant&) const;
     QVariant             readPropertyEntry (const char*, const QVariant&) const;
@@ -99,7 +98,6 @@ public:
     void                 deleteGroup (const QString&, KConfigFlags::WriteConfigFlags = Normal );
     void                 setDollarExpansion (bool);
     bool                 isDollarExpansion () const;
-    bool                 localeInitialized () const;
     virtual void         rollback (bool = 1);
     virtual void         sync ();
     bool                 isDirty () const;
@@ -127,7 +125,6 @@ public:
     bool                 hasDefault (const QString&) const;
 
 protected:
-    void                 setLocale ();
     void                 setDirty (bool);
     void                 setBackEnd (KConfigBackEnd*);
     KConfigBackEnd*      backEnd () const;
@@ -149,22 +146,16 @@ protected:
     KConfigGroup&        internalGroup () const;
 //igx     virtual void         virtual_hook (int, void*);
 
-// Subclasses for KConfigBase
+public:
+
+
 
 public:
-%ConvertToSubClassCode
 
-    if (dynamic_cast<KConfig*>(sipCpp))
-    {
-        sipClass = sipClass_KConfig;
-        if (dynamic_cast<KDesktopFile*>(sipCpp))
-            sipClass = sipClass_KDesktopFile;
-        else if (dynamic_cast<KSharedConfig*>(sipCpp))
-            sipClass = sipClass_KSharedConfig;
-    }
-    else
-        sipClass = NULL;
-%End
+
+
+protected:
+
 
 
 };  // class KConfigBase

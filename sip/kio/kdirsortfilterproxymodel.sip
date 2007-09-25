@@ -23,14 +23,12 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-
-
-
 class KDirSortFilterProxyModel : KCategorizedSortFilterProxyModel
 {
 %TypeHeaderCode
 #include <kdirsortfilterproxymodel.h>
 %End
+
 
 public:
                          KDirSortFilterProxyModel (QObject* /TransferThis/ = 0);
@@ -38,11 +36,13 @@ public:
     virtual bool         canFetchMore (const QModelIndex& /Transfer/) const;
     static int           naturalCompare (const QString&, const QString&);
 
+    static int           pointsForPermissions (const QFileInfo&);
+
+
 protected:
     virtual bool         lessThan (const QModelIndex&, const QModelIndex&) const;
     virtual bool         lessThanCategoryPurpose (const QModelIndex&, const QModelIndex&) const;
     virtual bool         lessThanGeneralPurpose (const QModelIndex&, const QModelIndex&) const;
 
 };  // class KDirSortFilterProxyModel
-
 

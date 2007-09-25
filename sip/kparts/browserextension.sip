@@ -185,12 +185,12 @@ public:
     void                 popupMenu (const QPoint&, const KUrl&, const QString&, mode_t = -1);
     void                 popupMenu (KXMLGUIClient*, const QPoint&, const KUrl&, const QString&, mode_t = -1);
 //ig     void                 popupMenu (KXMLGUIClient*, const QPoint&, const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&, KParts::BrowserExtension::PopupFlags, mode_t = -1 );
-
     void                 selectionInfo (const QList<KFileItem>&);
-
     void                 selectionInfo (const QString&);
     void                 selectionInfo (const KUrl::List&);
-    void                 mouseOverInfo (const KFileItem*);
+
+    void                 mouseOverInfo (const KFileItem&);
+
     void                 addWebSideBar (const KUrl&, const QString&);
     void                 moveTopLevelWidget (int, int);
     void                 resizeTopLevelWidget (int, int);

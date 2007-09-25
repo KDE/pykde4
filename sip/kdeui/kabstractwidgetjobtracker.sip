@@ -34,26 +34,45 @@ public:
                          KAbstractWidgetJobTracker (QWidget* /TransferThis/ = 0);
     virtual void         registerJob (KJob*);
     virtual void         unregisterJob (KJob*);
-    virtual QWidget*     widget ()  = 0;
-    void                 setStopOnClose (bool);
-    bool                 stopOnClose () const;
-    void                 setAutoDelete (bool);
-    bool                 autoDelete () const;
+
+    virtual QWidget*     widget (KJob*)  = 0;
+    void                 setStopOnClose (KJob*, bool);
+    bool                 stopOnClose (KJob*) const;
+    void                 setAutoDelete (KJob*, bool);
+    bool                 autoDelete (KJob*) const;
+
 
 protected slots:
     void                 finished (KJob*);
-    void                 slotStop ();
-    void                 slotSuspend ();
-    void                 slotResume ();
-    virtual void         slotClean ();
+
+    void                 slotStop (KJob*);
+    void                 slotSuspend (KJob*);
+    void                 slotResume (KJob*);
+    virtual void         slotClean (KJob*);
+
 
 signals:
-    void                 stopped ();
-    void                 suspend ();
-    void                 resume ();
+
+    void                 stopped (KJob*);
+    void                 suspend (KJob*);
+    void                 resume (KJob*);
+
+
+public:
+
+
+
+protected slots:
+
+
+
+signals:
+
+
 
 protected:
-    bool                 eventFilter (QObject*, QEvent*);
+
+
 
 };  // class KAbstractWidgetJobTracker
 

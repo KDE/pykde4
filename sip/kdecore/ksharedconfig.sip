@@ -31,7 +31,9 @@ class KSharedConfig : KConfig
 
 
 public:
-    typedef KSharedConfigPtr Ptr;
+
+    typedef KSharedPtr<KSharedConfig> Ptr;
+
 
 public:
     static KSharedConfig::Ptr openConfig (const QString& = QString (), KConfig::OpenFlags = KConfig::IncludeGlobals , const char* = "config");
@@ -42,6 +44,10 @@ public:
 
 private:
                          KSharedConfig (const QString&, KConfig::OpenFlags, const char*, const KComponentData&);
+
+public:
+
+
 
 };  // class KSharedConfig
 

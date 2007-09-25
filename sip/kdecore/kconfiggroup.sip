@@ -115,3 +115,5 @@ protected:
 
 };  // class KConfigGroup
 
+
+typedef KSharedPtr<KSharedConfig> KSharedConfigPtr;

@@ -32,9 +32,7 @@ class KLocale
 
 public:
                          KLocale (const QString&, KSharedConfig::Ptr = KSharedConfig::Ptr ());
-
                          KLocale (const QString&, const QString&, const QString& = QString (), KConfig* = 0);
-
 //ig                          KLocale (const KLocale&);
     void                 translateRaw (const char*, QString*, QString*) const;
     void                 translateRaw (const char*, const char*, QString*, QString*) const;
@@ -171,14 +169,14 @@ public:
     static QString       defaultCountry ();
     bool                 useTranscript () const;
     bool                 isApplicationTranslatedInto (const QString&);
-    static QString       _initLanguage (KConfigBase*);
+
+    void                 copyCatalogsTo (KLocale*);
+
 
 protected:
-
     bool                 setCountry (const QString&, KConfig*);
     bool                 setLanguage (const QString&, KConfig*);
     bool                 setLanguage (const QStringList&);
-
 
 public:
 

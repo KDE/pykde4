@@ -49,3 +49,5 @@ protected:
 
 };  // class KDirSelectDialog
 
+
+typedef KSharedPtr<KSharedConfig> KSharedConfigPtr;

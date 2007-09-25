@@ -36,7 +36,7 @@ class KIcon : QIcon
 
 
 public:
-                         KIcon (const QString&, KIconLoader* = 0, const QStringList& = QStringList ());
+                         KIcon (const QString&, KIconLoader* = 0, const QStringList& = QStringList ());                         
                          KIcon (const QIcon&);
                          KIcon ();
 

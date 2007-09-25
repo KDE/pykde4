@@ -31,7 +31,9 @@ class KFindDialog : KDialog
 
 
 public:
-                         KFindDialog (QWidget* /TransferThis/ = 0, long = 0, const QStringList& = QStringList (), bool = 0);
+
+                         KFindDialog (QWidget* /TransferThis/ = 0, long = 0, const QStringList& = QStringList (), bool = 0, bool = 0);
+
     void                 setFindHistory (const QStringList&);
     QStringList          findHistory () const;
     void                 setHasSelection (bool);
@@ -58,6 +60,10 @@ protected slots:
 
 protected:
     virtual void         showEvent (QShowEvent*);
+
+public:
+
+
 
 };  // class KFindDialog
 

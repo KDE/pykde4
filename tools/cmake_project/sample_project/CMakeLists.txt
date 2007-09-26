@@ -12,7 +12,8 @@ project(sample_project NONE)
 
 # Python files to be installed and byte compiled are specified with
 # pykde4_add_files().
-pykde4_add_files(src/sample_project.py)
+pykde4_install_python_files(src/sample_project.py)
+pykde4_add_executable(src/sample_project.py sample_project)
 
 # Designer Qt files to be compiled, installed and also byte compiled are
 # specified with pykde4_add_ui_files().

@@ -65,10 +65,10 @@ public:
     void                 setCustomLocation (const QString&);
     void                 setIconSize (int);
     int                  iconSize () const;
-//ig     void                 setup (K3Icon::Group, K3Icon::Context = K3Icon::Application, bool = 0, int = 0, bool = 0, bool = 0, bool = 0);
+//ig     void                 setup (KIconLoader::Group, KIconLoader::Context = KIconLoader::Application, bool = 0, int = 0, bool = 0, bool = 0, bool = 0);
     QString              openDialog ();
     void                 showDialog ();
-//ig     static QString       getIcon (K3Icon::Group = K3Icon::Desktop, K3Icon::Context = K3Icon::Application, bool = 0, int = 0, bool = 0, QWidget* /Transfer/ = 0, const QString& = QString ());
+//ig     static QString       getIcon (KIconLoader::Group = KIconLoader::Desktop, KIconLoader::Context = KIconLoader::Application, bool = 0, int = 0, bool = 0, QWidget* /Transfer/ = 0, const QString& = QString ());
 
 signals:
     void                 newIconName (const QString&);
@@ -94,7 +94,7 @@ public:
                          KIconButton (KIconLoader*, QWidget* /TransferThis/);
     void                 setStrictIconSize (bool);
     bool                 strictIconSize () const;
-//ig     void                 setIconType (K3Icon::Group, K3Icon::Context, bool = 0);
+//ig     void                 setIconType (KIconLoader::Group, KIconLoader::Context, bool = 0);
     void                 setIcon (const QString&);
     void                 setIcon (const QIcon&);
     void                 resetIcon ();

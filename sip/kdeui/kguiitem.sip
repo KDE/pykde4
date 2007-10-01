@@ -37,7 +37,7 @@ public:
                          KGuiItem (const KGuiItem&);
     QString              text () const;
     QString              plainText () const;
-//ig     QIcon                iconSet (K3Icon::Group = K3Icon::Small, int = 0) const;
+//ig     QIcon                iconSet (KIconLoader::Group = KIconLoader::Small, int = 0) const;
     KIcon                icon () const;
     QString              iconName () const;
     QString              toolTip () const;

@@ -102,8 +102,8 @@ public:
     };
 
     int                  size;
-    K3Icon::Context      context;
-    K3Icon::Type         type;
+    KIconLoader::Context      context;
+    KIconLoader::Type         type;
     int                  threshold;
     QString              path;
 
@@ -129,12 +129,12 @@ public:
     bool                 isValid () const;
     bool                 isHidden () const;
     int                  depth () const;
-//ig     int                  defaultSize (K3Icon::Group) const;
-//ig     QList<int>           querySizes (K3Icon::Group) const;
-//ig     QStringList          queryIcons (int, K3Icon::Context = K3Icon::Any) const;
-//ig     QStringList          queryIconsByContext (int, K3Icon::Context = K3Icon::Any) const;
-//ig     K3Icon               iconPath (const QString&, int, K3Icon::MatchType) const;
-//ig     bool                 hasContext (K3Icon::Context) const;
+//ig     int                  defaultSize (KIconLoader::Group) const;
+//ig     QList<int>           querySizes (KIconLoader::Group) const;
+//ig     QStringList          queryIcons (int, KIconLoader::Context = KIconLoader::Any) const;
+//ig     QStringList          queryIconsByContext (int, KIconLoader::Context = KIconLoader::Any) const;
+//ig     K3Icon               iconPath (const QString&, int, KIconLoader::MatchType) const;
+//ig     bool                 hasContext (KIconLoader::Context) const;
     static QStringList   list ();
     static QString       current ();
     static void          reconfigure ();

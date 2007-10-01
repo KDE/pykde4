@@ -37,7 +37,7 @@ public:
     virtual bool         find (const QString&, QPixmap&);
     virtual void         insert (const QString&, const QPixmap&);
     static void          deleteCache ();
-    int                  defaultIconSize (K3Icon::Group) const;
+    int                  defaultIconSize (KIconLoader::Group) const;
     void                 setThemeInfo (const QList<KIconTheme*>&);
 
 protected:

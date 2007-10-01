@@ -39,23 +39,23 @@ public:
                          KIconLoader (const KComponentData&, QObject* /TransferThis/ = 0);
     static KIconLoader*  global () /PyName=global_/;
     void                 addAppDir (const QString&);
-    QPixmap              loadIcon (const QString&, K3Icon::Group, int = 0, int = K3Icon::DefaultState , const QStringList& = QStringList (), QString* = 0, bool = 0) const;
-    QPixmap              loadMimeTypeIcon (const QString&, K3Icon::Group, int = 0, int = K3Icon::DefaultState , const QStringList& = QStringList (), QString* = 0) const;
-//ig     QIcon                loadIconSet (const QString&, K3Icon::Group, int = 0, bool = 0);
+    QPixmap              loadIcon (const QString&, KIconLoader::Group, int = 0, int = KIconLoader::DefaultState , const QStringList& = QStringList (), QString* = 0, bool = 0) const;
+    QPixmap              loadMimeTypeIcon (const QString&, KIconLoader::Group, int = 0, int = KIconLoader::DefaultState , const QStringList& = QStringList (), QString* = 0) const;
+//ig     QIcon                loadIconSet (const QString&, KIconLoader::Group, int = 0, bool = 0);
     QString              iconPath (const QString&, int, bool = 0) const;
-//ig     QMovie*              loadMovie (const QString&, K3Icon::Group, int = 0, QObject* /Transfer/ = 0) const;
-//ig     QString              moviePath (const QString&, K3Icon::Group, int = 0) const;
-//ig     QStringList          loadAnimated (const QString&, K3Icon::Group, int = 0) const;
-//ig     QStringList          queryIcons (int, K3Icon::Context = K3Icon::Any) const;
-//ig     QStringList          queryIconsByContext (int, K3Icon::Context = K3Icon::Any) const;
-//ig     bool                 hasContext (K3Icon::Context) const;
+//ig     QMovie*              loadMovie (const QString&, KIconLoader::Group, int = 0, QObject* /Transfer/ = 0) const;
+//ig     QString              moviePath (const QString&, KIconLoader::Group, int = 0) const;
+//ig     QStringList          loadAnimated (const QString&, KIconLoader::Group, int = 0) const;
+//ig     QStringList          queryIcons (int, KIconLoader::Context = KIconLoader::Any) const;
+//ig     QStringList          queryIconsByContext (int, KIconLoader::Context = KIconLoader::Any) const;
+//ig     bool                 hasContext (KIconLoader::Context) const;
     QStringList          queryIconsByDir (const QString&) const;
-//ig     int                  currentSize (K3Icon::Group) const;
+//ig     int                  currentSize (KIconLoader::Group) const;
     KIconTheme*          theme () const;
     KIconEffect*         iconEffect () const;
     void                 reconfigure (const QString&, KStandardDirs*);
     static QPixmap       unknown ();
-//ig     bool                 alphaBlending (K3Icon::Group) const;
+//ig     bool                 alphaBlending (KIconLoader::Group) const;
     void                 addExtraDesktopThemes ();
     bool                 extraDesktopThemesAdded () const;
 
@@ -64,14 +64,14 @@ public slots:
 
 };  // class KIconLoader
 
-QPixmap              DesktopIcon (const QString&, int = 0, int = K3Icon::DefaultState , const QStringList& = QStringList ());
+QPixmap              DesktopIcon (const QString&, int = 0, int = KIconLoader::DefaultState , const QStringList& = QStringList ());
 QIcon                DesktopIconSet (const QString&, int = 0);
-QPixmap              BarIcon (const QString&, int = 0, int = K3Icon::DefaultState , const QStringList& = QStringList ());
+QPixmap              BarIcon (const QString&, int = 0, int = KIconLoader::DefaultState , const QStringList& = QStringList ());
 QIcon                BarIconSet (const QString&, int = 0);
-QPixmap              SmallIcon (const QString&, int = 0, int = K3Icon::DefaultState , const QStringList& = QStringList ());
+QPixmap              SmallIcon (const QString&, int = 0, int = KIconLoader::DefaultState , const QStringList& = QStringList ());
 QIcon                SmallIconSet (const QString&, int = 0);
-QPixmap              MainBarIcon (const QString&, int = 0, int = K3Icon::DefaultState , const QStringList& = QStringList ());
+QPixmap              MainBarIcon (const QString&, int = 0, int = KIconLoader::DefaultState , const QStringList& = QStringList ());
 QIcon                MainBarIconSet (const QString&, int = 0);
-QPixmap              UserIcon (const QString&, int = K3Icon::DefaultState , const QStringList& = QStringList ());
+QPixmap              UserIcon (const QString&, int = KIconLoader::DefaultState , const QStringList& = QStringList ());
 QIcon                UserIconSet (const QString&);
-//ig int                  IconSize (K3Icon::Group);
+//ig int                  IconSize (KIconLoader::Group);

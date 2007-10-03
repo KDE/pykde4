@@ -89,27 +89,25 @@ opt_builddir      = "."
 src_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 
 
-pykde_modules = ["kdecore", "solid", "kdefx", "kdeui", "kio", "kutils", "kparts", "ktexteditor", #"kate",
+pykde_modules = ["kdecore", "solid", "kdeui", "kio", "kutils", "kparts", "ktexteditor", #"kate",
   "khtml", "kdeprint"]
 
 pykde_imports = {
                  "kdecore":     ["QtCore", "QtGui", "QtNetwork"],
                  "solid":       ["QtCore", "QtGui", "kdecore"],
-                 "kdefx":       ["QtCore", "QtGui", "kdecore"],
-                 "kdeui":       ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "kdefx"],
-                 "kio":         ["QtCore", "QtGui", "QtXml", "kdecore", "solid", "kdefx", "kdeui"],
-                 "kutils":      ["QtCore", "QtGui", "QtXml", "kdecore", "kdefx", "kdeui"],
-                 "kparts":      ["QtCore", "QtGui", "QtXml", "kdecore", "kdefx", "kdeui", "kio"],
-                 "ktexteditor": ["QtCore", "QtGui", "QtXml", "kdecore", "kdefx", "kdeui", "kio", "kutils", "kparts"],
-#                 "kate":        ["QtCore", "QtGui", "QtXml", "kdecore", "kdefx", "kdeui", "kio", "kutils", "kparts", "ktexteditor"],
-                 "khtml":       ["QtCore", "QtGui", "QtXml", "kdecore", "kdefx", "kdeui", "kio", "kutils", "kparts"],
-                 "kdeprint":    ["QtCore", "QtGui", "QtXml", "kdecore", "kdefx", "kdeui"]
+                 "kdeui":       ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore"],
+                 "kio":         ["QtCore", "QtGui", "QtXml", "kdecore", "solid", "kdeui"],
+                 "kutils":      ["QtCore", "QtGui", "QtXml", "kdecore", "kdeui"],
+                 "kparts":      ["QtCore", "QtGui", "QtXml", "kdecore", "kdeui", "kio"],
+                 "ktexteditor": ["QtCore", "QtGui", "QtXml", "kdecore", "kdeui", "kio", "kutils", "kparts"],
+#                 "kate":        ["QtCore", "QtGui", "QtXml", "kdecore", "kdeui", "kio", "kutils", "kparts", "ktexteditor"],
+                 "khtml":       ["QtCore", "QtGui", "QtXml", "kdecore", "kdeui", "kio", "kutils", "kparts"],
+                 "kdeprint":    ["QtCore", "QtGui", "QtXml", "kdecore", "kdeui"]
                  }
 
 pykde_includes = {
                   "kdecore":     ["QtCore", "QtGui", "QtNetwork", "sonnet"],
                   "solid":       ["QtCore", "QtGui", "solid"],
-                  "kdefx":       ["QtCore", "QtGui"],
                   "kdeui":       ["QtCore", "QtGui", "QtXml", "QtSvg", "sonnet"],
                   "kio":         ["QtCore", "QtGui", "QtXml", "QtSvg", "solid", "kio", "kfile", "kssl"],
                   "kutils":      ["QtCore", "QtGui", "QtXml", "QtSvg", "ksettings"],
@@ -123,15 +121,14 @@ pykde_includes = {
 pykde_libs = {
               "kdecore":     ["QtCore", "QtGui", "QtNetwork"],
               "solid":       ["QtCore", "QtGui", "kdecore"],
-              "kdefx":       ["QtCore", "QtGui", "kdecore"],
-              "kdeui":       ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "kdefx"],
-              "kio":         ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdefx", "kdeui", "kfile"],
-              "kutils":      ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "kdefx", "kdeui"],
-              "kparts":      ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdefx", "kdeui", "kio"],
-              "ktexteditor": ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdefx", "kdeui", "kio", "kutils", "kparts"],
-#              "kate":        ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdefx", "kdeui", "kio", "kutils", "kparts", "ktexteditor", "kateinterfaces"],
-              "khtml":       ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdefx", "kdeui", "kio", "kutils", "kparts"],
-              "kdeprint":    ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "kdefx", "kdeui"]
+              "kdeui":       ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore"],
+              "kio":         ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdeui", "kfile"],
+              "kutils":      ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "kdeui"],
+              "kparts":      ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdeui", "kio"],
+              "ktexteditor": ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdeui", "kio", "kutils", "kparts"],
+#              "kate":        ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdeui", "kio", "kutils", "kparts", "ktexteditor", "kateinterfaces"],
+              "khtml":       ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdeui", "kio", "kutils", "kparts"],
+              "kdeprint":    ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "kdeui"]
               }
 
 

@@ -32,17 +32,23 @@ class KPropertiesDialog : KPageDialog
 
 public:
     static bool          canDisplay (const KFileItemList&);
-                         KPropertiesDialog (KFileItem*, QWidget* /TransferThis/ = 0);
+
+                         KPropertiesDialog (const KFileItem&, QWidget* /TransferThis/ = 0);
+
                          KPropertiesDialog (const KFileItemList&, QWidget* /TransferThis/ = 0);
                          KPropertiesDialog (const KUrl&, QWidget* /TransferThis/ = 0);
                          KPropertiesDialog (const KUrl&, const KUrl&, const QString&, QWidget* /TransferThis/ = 0);
                          KPropertiesDialog (const QString&, QWidget* /TransferThis/ = 0);
-    static bool          showDialog (KFileItem*, QWidget* /Transfer/ = 0, bool = 1);
+
+    static bool          showDialog (const KFileItem&, QWidget* /Transfer/ = 0, bool = 1);
+
     static bool          showDialog (const KUrl&, QWidget* /Transfer/ = 0, bool = 1);
     static bool          showDialog (const KFileItemList&, QWidget* /Transfer/ = 0, bool = 1);
     void                 insertPlugin (KPropertiesDialogPlugin*);
     KUrl                 kurl () const;
-    KFileItem*           item ();
+
+    KFileItem&           item ();
+
     KFileItemList        items () const;
     KUrl                 currentDir () const;
     QString              defaultName () const;
@@ -69,6 +75,10 @@ signals:
 private:
                          KPropertiesDialog (const KPropertiesDialog&) [()];
 
+public:
+
+
+
 };  // class KPropertiesDialog
 
 
@@ -82,7 +92,9 @@ class KPropertiesDialogPlugin : QObject
 public:
                          KPropertiesDialogPlugin (KPropertiesDialog*);
     virtual void         applyChanges ();
-    static bool          isDesktopFile (KFileItem*);
+
+    static bool          isDesktopFile (const KFileItem&);
+
     void                 setDirty (bool);
     bool                 isDirty () const;
 
@@ -94,142 +106,21 @@ signals:
 
 protected:
 
+public:
+
+
+
 };  // class KPropertiesDialogPlugin
 
 
-class KFilePropsPlugin : KPropertiesDialogPlugin
-{
-%TypeHeaderCode
-#include <kpropertiesdialog.h>
-%End
-
-
-public:
-                         KFilePropsPlugin (KPropertiesDialog*);
-    virtual void         applyChanges ();
-    static bool          supports (const KFileItemList&);
-    void                 postApplyChanges ();
-    void                 setFileNameReadOnly (bool);
-
-protected slots:
-    void                 slotEditFileType ();
-
-    void                 slotCopyFinished (KJob*);
-
-    void                 slotFileRenamed (KIO::Job*, const KUrl&, const KUrl&);
-    void                 slotDirSizeUpdate ();
-    void                 slotDirSizeFinished (KJob*);
-    void                 slotFoundMountPoint (const QString&, ulong, ulong, ulong);
-    void                 slotSizeStop ();
-    void                 slotSizeDetermine ();
-
-signals:
-    void                 leaveModality ();
-
-protected slots:
 
 
 
-};  // class KFilePropsPlugin
 
 
-class KFilePermissionsPropsPlugin : KPropertiesDialogPlugin
-{
-%TypeHeaderCode
-#include <kpropertiesdialog.h>
-%End
 
 
-public:
-
-    enum PermissionsMode
-    {
-        PermissionsOnlyFiles, 
-        PermissionsOnlyDirs, 
-        PermissionsOnlyLinks, 
-        PermissionsMixed
-    };
 
 
-    enum PermissionsTarget
-    {
-        PermissionsOwner, 
-        PermissionsGroup, 
-        PermissionsOthers
-    };
 
-                         KFilePermissionsPropsPlugin (KPropertiesDialog*);
-    virtual void         applyChanges ();
-    static bool          supports (const KFileItemList&);
-
-signals:
-    void                 leaveModality ();
-
-};  // class KFilePermissionsPropsPlugin
-
-
-class KUrlPropsPlugin : KPropertiesDialogPlugin
-{
-%TypeHeaderCode
-#include <kpropertiesdialog.h>
-%End
-
-
-public:
-                         KUrlPropsPlugin (KPropertiesDialog*);
-    virtual void         applyChanges ();
-    static bool          supports (const KFileItemList&);
-
-};  // class KUrlPropsPlugin
-
-
-class KBindingPropsPlugin : KPropertiesDialogPlugin
-{
-%TypeHeaderCode
-#include <kpropertiesdialog.h>
-%End
-
-
-public:
-                         KBindingPropsPlugin (KPropertiesDialog*);
-    virtual void         applyChanges ();
-    static bool          supports (const KFileItemList&);
-
-};  // class KBindingPropsPlugin
-
-
-class KDevicePropsPlugin : KPropertiesDialogPlugin
-{
-%TypeHeaderCode
-#include <kpropertiesdialog.h>
-%End
-
-
-public:
-                         KDevicePropsPlugin (KPropertiesDialog*);
-    virtual void         applyChanges ();
-    static bool          supports (const KFileItemList&);
-
-};  // class KDevicePropsPlugin
-
-
-class KDesktopPropsPlugin : KPropertiesDialogPlugin
-{
-%TypeHeaderCode
-#include <kpropertiesdialog.h>
-%End
-
-
-public:
-                         KDesktopPropsPlugin (KPropertiesDialog*);
-    virtual void         applyChanges ();
-    static bool          supports (const KFileItemList&);
-
-public slots:
-    void                 slotAddFiletype ();
-    void                 slotDelFiletype ();
-    void                 slotBrowseExec ();
-    void                 slotAdvanced ();
-
-};  // class KDesktopPropsPlugin
 

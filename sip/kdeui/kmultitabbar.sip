@@ -32,13 +32,6 @@ class KMultiTabBar : QWidget
 
 public:
 
-    enum KMultiTabBarMode
-    {
-        Horizontal, 
-        Vertical
-    };
-
-
     enum KMultiTabBarPosition
     {
         Left, 
@@ -48,16 +41,16 @@ public:
     };
 
 
+
     enum KMultiTabBarStyle
     {
         VSNET, 
-        KDEV3, 
-        KONQSBC, 
         KDEV3ICON, 
         STYLELAST
     };
 
-                         KMultiTabBar (KMultiTabBar::KMultiTabBarMode, QWidget* = 0);
+                         KMultiTabBar (KMultiTabBar::KMultiTabBarPosition, QWidget* /TransferThis/ = 0);
+
     int                  appendButton (const QPixmap&, int = -1, QMenu* = 0, const QString& = QString ());
     void                 removeButton (int);
     int                  appendTab (const QPixmap&, int = -1, const QString& = QString::null );
@@ -70,13 +63,14 @@ public:
     KMultiTabBar::KMultiTabBarPosition position () const;
     void                 setStyle (KMultiTabBar::KMultiTabBarStyle);
     KMultiTabBar::KMultiTabBarStyle tabStyle () const;
-    QList<KMultiTabBarTab*> tabs () const;
-    QList<KMultiTabBarButton*> buttons () const;
-    void                 showActiveTabTexts (bool = 1);
 
 protected:
     virtual void         fontChange (const QFont&);
     void                 updateSeparator ();
+
+public:
+
+
 
 };  // class KMultiTabBar
 
@@ -91,13 +85,6 @@ class KMultiTabBarButton : QPushButton
 public:
     int                  id () const;
 
-public slots:
-    void                 setPosition (KMultiTabBar::KMultiTabBarPosition);
-    void                 setStyle (KMultiTabBar::KMultiTabBarStyle);
-    void                 setText (const QString&);
-    QString              text () const;
-    QSize                sizeHint () const;
-
 signals:
     void                 clicked (int);
 
@@ -105,9 +92,19 @@ protected slots:
     virtual void         slotClicked ();
 
 protected:
-                         KMultiTabBarButton (const QPixmap&, const QString&, QMenu*, int, QWidget* /TransferThis/, KMultiTabBar::KMultiTabBarPosition, KMultiTabBar::KMultiTabBarStyle);
     virtual void         hideEvent (QHideEvent*);
     virtual void         showEvent (QShowEvent*);
+
+                         KMultiTabBarButton (const QPixmap&, const QString&, int, QWidget* /TransferThis/);
+
+
+public slots:
+
+
+
+protected:
+
+
 
 };  // class KMultiTabBarButton
 
@@ -120,25 +117,41 @@ class KMultiTabBarTab : KMultiTabBarButton
 
 
 public:
-    void                 setState (bool);
-    void                 showActiveTabText (bool);
-    void                 resize ();
+
+    virtual QSize        sizeHint () const;
+    virtual QSize        minimumSizeHint () const;
+
 
 public slots:
-    virtual void         setIcon (const QString&);
-    virtual void         setIcon (const QPixmap&);
 
-protected slots:
-    virtual void         slotClicked ();
-    void                 setTabsPosition (KMultiTabBar::KMultiTabBarPosition);
+    void                 setPosition (KMultiTabBar::KMultiTabBarPosition);
+    void                 setStyle (KMultiTabBar::KMultiTabBarStyle);
+    void                 setState (bool);
+    void                 setIcon (const QString&);
+    void                 setIcon (const QPixmap&);
+
 
 protected:
     virtual void         paintEvent (QPaintEvent*);
-    virtual void         drawButton (QPainter*);
-    virtual void         drawButtonLabel (QPainter*);
 
 private:
                          KMultiTabBarTab (const QPixmap&, const QString&, int, QWidget* /TransferThis/, KMultiTabBar::KMultiTabBarPosition, KMultiTabBar::KMultiTabBarStyle);
+
+public:
+
+
+
+public slots:
+
+
+
+protected slots:
+
+
+
+protected:
+
+
 
 };  // class KMultiTabBarTab
 

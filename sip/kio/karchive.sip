@@ -121,7 +121,9 @@ public:
     mode_t               permissions () const;
     QString              user () const;
     QString              group () const;
-    QString              symlink () const;
+
+    QString              symLinkTarget () const;
+
     virtual bool         isFile () const;
     virtual bool         isDirectory () const;
 
@@ -131,22 +133,8 @@ protected:
 protected:
 //igx     virtual void         virtual_hook (int, void*);
 
-// Subclasses for KArchiveEntry
-
 public:
-%ConvertToSubClassCode
 
-    if (dynamic_cast<KArchiveFile*>(sipCpp))
-    {
-        sipClass = sipClass_KArchiveFile;
-        if (dynamic_cast<KZipFileEntry*>(sipCpp))
-            sipClass = sipClass_KZipFileEntry;
-    }
-    else if (dynamic_cast<KArchiveDirectory*>(sipCpp))
-        sipClass = sipClass_KArchiveDirectory;
-    else
-        sipClass = NULL;
-%End
 
 
 };  // class KArchiveEntry

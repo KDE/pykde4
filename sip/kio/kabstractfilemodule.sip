@@ -26,9 +26,9 @@
 //ctscc
 #include <kbookmarkmenu.h>
 #include <kbookmarkimporter.h>
+#include <kbookmarkimporter_crash.h>
 #include <kbookmarkimporter_opera.h>
 #include <kbookmarkimporter_ns.h>
-#include <kbookmarkimporter_crash.h>
 #include <kbookmarkimporter_ie.h>
 #include <konqbookmarkmenu.h>
 #include <kfiledialog.h>
@@ -36,8 +36,8 @@
 #include <jobclasses.h>
 #include <davjob.h>
 #include <filejob.h>
-#include <previewjob.h>
 #include <metainfojob.h>
+#include <previewjob.h>
 #include <chmodjob.h>
 #include <deletejob.h>
 #include <directorysizejob.h>
@@ -57,7 +57,6 @@
 #include <kbookmarkdombuilder.h>
 #include <kbookmarkmanager.h>
 #include <kbuildsycocaprogressdialog.h>
-#include <kcombiview.h>
 #include <kdatatool.h>
 #include <kdevicelistmodel.h>
 #include <kdirlister.h>
@@ -71,7 +70,6 @@
 #include <kfileitemdelegate.h>
 #include <kfileplacesmodel.h>
 #include <kfileplacesview.h>
-#include <kfilepreview.h>
 #include <kfileview.h>
 #include <kfilewidget.h>
 #include <kfilewriteplugin.h>
@@ -128,7 +126,9 @@ public:
     else if (dynamic_cast<KBookmarkImporterBase*>(sipCpp))
     {
         sipClass = sipClass_KBookmarkImporterBase;
-        if (dynamic_cast<KOperaBookmarkImporterImpl*>(sipCpp))
+        if (dynamic_cast<KCrashBookmarkImporterImpl*>(sipCpp))
+            sipClass = sipClass_KCrashBookmarkImporterImpl;
+        else if (dynamic_cast<KOperaBookmarkImporterImpl*>(sipCpp))
             sipClass = sipClass_KOperaBookmarkImporterImpl;
         else if (dynamic_cast<KXBELBookmarkImporterImpl*>(sipCpp))
             sipClass = sipClass_KXBELBookmarkImporterImpl;
@@ -138,8 +138,6 @@ public:
             if (dynamic_cast<KMozillaBookmarkImporterImpl*>(sipCpp))
                 sipClass = sipClass_KMozillaBookmarkImporterImpl;
         }
-        else if (dynamic_cast<KCrashBookmarkImporterImpl*>(sipCpp))
-            sipClass = sipClass_KCrashBookmarkImporterImpl;
         else if (dynamic_cast<KIEBookmarkImporterImpl*>(sipCpp))
             sipClass = sipClass_KIEBookmarkImporterImpl;
     }
@@ -182,10 +180,10 @@ public:
             else if (dynamic_cast<KIO::ListJob*>(sipCpp))
                 sipClass = sipClass_KIO_ListJob;
         }
-        else if (dynamic_cast<KIO::PreviewJob*>(sipCpp))
-            sipClass = sipClass_KIO_PreviewJob;
         else if (dynamic_cast<KIO::MetaInfoJob*>(sipCpp))
             sipClass = sipClass_KIO_MetaInfoJob;
+        else if (dynamic_cast<KIO::PreviewJob*>(sipCpp))
+            sipClass = sipClass_KIO_PreviewJob;
         else if (dynamic_cast<KIO::ChmodJob*>(sipCpp))
             sipClass = sipClass_KIO_ChmodJob;
         else if (dynamic_cast<KIO::DeleteJob*>(sipCpp))
@@ -212,20 +210,8 @@ public:
     else if (dynamic_cast<KPropertiesDialogPlugin*>(sipCpp))
     {
         sipClass = sipClass_KPropertiesDialogPlugin;
-        if (dynamic_cast<KDevicePropsPlugin*>(sipCpp))
-            sipClass = sipClass_KDevicePropsPlugin;
-        else if (dynamic_cast<KFilePermissionsPropsPlugin*>(sipCpp))
-            sipClass = sipClass_KFilePermissionsPropsPlugin;
-        else if (dynamic_cast<KDesktopPropsPlugin*>(sipCpp))
-            sipClass = sipClass_KDesktopPropsPlugin;
-        else if (dynamic_cast<KUrlPropsPlugin*>(sipCpp))
-            sipClass = sipClass_KUrlPropsPlugin;
-        else if (dynamic_cast<KFileSharePropsPlugin*>(sipCpp))
+        if (dynamic_cast<KFileSharePropsPlugin*>(sipCpp))
             sipClass = sipClass_KFileSharePropsPlugin;
-        else if (dynamic_cast<KFilePropsPlugin*>(sipCpp))
-            sipClass = sipClass_KFilePropsPlugin;
-        else if (dynamic_cast<KBindingPropsPlugin*>(sipCpp))
-            sipClass = sipClass_KBindingPropsPlugin;
     }
     else if (dynamic_cast<KUrlCompletion*>(sipCpp))
     {
@@ -257,8 +243,6 @@ public:
         sipClass = sipClass_KBookmarkManager;
     else if (dynamic_cast<KBuildSycocaProgressDialog*>(sipCpp))
         sipClass = sipClass_KBuildSycocaProgressDialog;
-    else if (dynamic_cast<KCombiView*>(sipCpp))
-        sipClass = sipClass_KCombiView;
     else if (dynamic_cast<KCrashBookmarkImporter*>(sipCpp))
         sipClass = sipClass_KCrashBookmarkImporter;
     else if (dynamic_cast<KDataTool*>(sipCpp))
@@ -289,8 +273,6 @@ public:
         sipClass = sipClass_KFilePlacesModel;
     else if (dynamic_cast<KFilePlacesView*>(sipCpp))
         sipClass = sipClass_KFilePlacesView;
-    else if (dynamic_cast<KFilePreview*>(sipCpp))
-        sipClass = sipClass_KFilePreview;
     else if (dynamic_cast<KFileViewSignaler*>(sipCpp))
         sipClass = sipClass_KFileViewSignaler;
     else if (dynamic_cast<KFileWidget*>(sipCpp))

@@ -120,9 +120,17 @@ class KFileItemList
 
 
 public:
-    KFileItem*           findByName (const QString&) const;
-    KFileItem*           findByUrl (const KUrl&) const;
+
+                         KFileItemList ();
+                         KFileItemList (const QList<KFileItem>&);
+    KFileItem            findByName (const QString&) const;
+    KFileItem            findByUrl (const KUrl&) const;
+
     KUrl::List           urlList () const;
+
+public:
+
+
 
 public:
 //force
@@ -144,7 +152,7 @@ public:
     if ((a0 = sipConvertFromSequenceIndex(a0,len)) < 0)
         sipIsErr = 1;
     else
-        (*sipCpp)[a0] = (KFileItem *)a1;
+        (*sipCpp)[a0] = *a1;
 %End
 
     void                 __setitem__ (SIP_PYSLICE, const KFileItemList&);

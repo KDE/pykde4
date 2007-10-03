@@ -79,8 +79,6 @@ public:
         sipClass = sipClass_KService;
     else if (dynamic_cast<KServiceGroup*>(sipCpp))
         sipClass = sipClass_KServiceGroup;
-    else if (dynamic_cast<KServiceSeparator*>(sipCpp))
-        sipClass = sipClass_KServiceSeparator;
     else
         sipClass = NULL;
 %End

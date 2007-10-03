@@ -31,10 +31,16 @@ class KFileFilter
 
 
 public:
-    virtual bool         passesFilter (const KFileItem*) const = 0;
+
+    virtual bool         passesFilter (const KFileItem&) const = 0;
+
 
 protected:
 //igx     virtual void         virtual_hook (int, void*);
+
+public:
+
+
 
 };  // class KFileFilter
 
@@ -57,12 +63,18 @@ public:
     QStringList          mimeFilters () const;
     virtual void         setModeFilter (mode_t);
     mode_t               modeFilter () const;
-    virtual bool         passesFilter (const KFileItem*) const;
+
+    virtual bool         passesFilter (const KFileItem&) const;
+
 
 protected:
 
 protected:
 //igx     virtual void         virtual_hook (int, void*);
+
+public:
+
+
 
 };  // class KSimpleFileFilter
 

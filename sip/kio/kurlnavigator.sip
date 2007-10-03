@@ -44,22 +44,24 @@ public:
     bool                 isUrlEditable () const;
     void                 setActive (bool);
     bool                 isActive () const;
-
     void                 setPlacesSelectorVisible (bool);
     bool                 isPlacesSelectorVisible () const;
-
     int                  historySize () const;
     int                  historyIndex () const;
+
+    const KUrl&          savedRootUrl () const;
+
     QPoint               savedPosition () const;
-
     KUrlComboBox*        editor () const;
-
     void                 setCustomProtocols (const QStringList&);
     QStringList          customProtocols () const;
 
 public slots:
     void                 setUrl (const KUrl&);
     void                 requestActivation ();
+
+    void                 saveRootUrl (const KUrl&);
+
     void                 savePosition (int, int);
     void                 setFocus ();
 

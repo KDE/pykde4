@@ -37,12 +37,18 @@ public:
     void                 setClearButtonsShown (bool);
 //ig     KShortcut            shortcut () const;
 
+    void                 setCheckActionList (const QList<QAction*>&);
+
+
 signals:
     void                 shortcutChanged (const KShortcut&);
 
 public slots:
     void                 setShortcut (const KShortcut&);
     void                 clearShortcut ();
+
+    void                 applyStealShortcut ();
+
 
 };  // class KShortcutWidget
 

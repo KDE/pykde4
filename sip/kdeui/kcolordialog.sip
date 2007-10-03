@@ -23,32 +23,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-class KColorTable : QWidget
-{
-%TypeHeaderCode
-#include <kcolordialog.h>
-%End
-
-
-public:
-                         KColorTable (QWidget* /TransferThis/, int = 210, int = 16);
-    void                 addToCustomColors (const QColor&);
-    void                 addToRecentColors (const QColor&);
-    QString              name () const;
-
-public slots:
-    void                 setColors (const QString&);
-
-signals:
-    void                 colorSelected (const QColor&, const QString&);
-    void                 colorDoubleClicked (const QColor&, const QString&);
-
-private:
-                         KColorTable (const KColorTable&) [()];
-
-};  // class KColorTable
-
-
 class KColorCells : QTableWidget
 {
 %TypeHeaderCode
@@ -147,4 +121,6 @@ private:
                          KColorDialog (const KColorDialog&) [()];
 
 };  // class KColorDialog
+
+
 

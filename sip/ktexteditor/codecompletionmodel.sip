@@ -29,7 +29,6 @@
 #include <document.h>
 #include <editor.h>
 #include <editorchooser.h>
-#include <factory.h>
 #include <plugin.h>
 #include <cursorfeedback.h>
 #include <rangefeedback.h>
@@ -154,9 +153,6 @@ public:
         sipClass = sipClass_KTextEditor_Editor;
     else if (dynamic_cast<KTextEditor::EditorChooser*>(sipCpp))
         sipClass = sipClass_KTextEditor_EditorChooser;
-// TODO
-//    else if (dynamic_cast<KTextEditor::Factory*>(sipCpp))
-//        sipClass = sipClass_KTextEditor_Factory;
     else if (dynamic_cast<KTextEditor::Plugin*>(sipCpp))
         sipClass = sipClass_KTextEditor_Plugin;
     else if (dynamic_cast<KTextEditor::SmartCursorNotifier*>(sipCpp))

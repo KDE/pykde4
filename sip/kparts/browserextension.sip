@@ -135,6 +135,7 @@ class BrowserExtension : QObject
 public:
                          BrowserExtension (KParts::ReadOnlyPart* /TransferThis/);
 
+
     enum PopupFlag
     {
         DefaultPopupItems, 
@@ -146,8 +147,10 @@ public:
         ShowTextSelectionItems, 
         NoDeletion, 
         IsLink, 
-        ShowUrlOperations
+        ShowUrlOperations, 
+        ShowProperties
     };
+
 
     typedef QFlags<KParts::BrowserExtension::PopupFlag> PopupFlags;
     virtual void         setBrowserArguments (const KParts::BrowserArguments&);
@@ -168,6 +171,9 @@ public:
     static KParts::BrowserExtension* childObject (QObject*);
     void                 pasteRequest ();
 
+    typedef QMap<QString, QList<QAction*>> ActionGroupMap;
+
+
 public:
     void                 enableAction (const char*, bool);
     void                 setActionText (const char*, const QString&);
@@ -180,17 +186,14 @@ public:
     void                 loadingProgress (int);
     void                 speedProgress (int);
     void                 infoMessage (const QString&);
-    void                 popupMenu (const QPoint&, const KFileItemList&);
-//ig     void                 popupMenu (KXMLGUIClient*, const QPoint&, const KFileItemList&, const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments (), KParts::BrowserExtension::PopupFlags = KParts::BrowserExtension::DefaultPopupItems);
-    void                 popupMenu (const QPoint&, const KUrl&, const QString&, mode_t = -1);
-    void                 popupMenu (KXMLGUIClient*, const QPoint&, const KUrl&, const QString&, mode_t = -1);
-//ig     void                 popupMenu (KXMLGUIClient*, const QPoint&, const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&, KParts::BrowserExtension::PopupFlags, mode_t = -1 );
+
+//ig    void                 popupMenu (const QPoint&, const KFileItemList&, const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments (), KParts::BrowserExtension::PopupFlags = KParts::BrowserExtension::DefaultPopupItems, const KParts::BrowserExtension::ActionGroupMap& = KParts::BrowserExtension::ActionGroupMap ());
+//ig    void                 popupMenu (const QPoint&, const KUrl&, mode_t = -1 , const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments (), KParts::BrowserExtension::PopupFlags = KParts::BrowserExtension::DefaultPopupItems, const KParts::BrowserExtension::ActionGroupMap& = KParts::BrowserExtension::ActionGroupMap ());
+
     void                 selectionInfo (const QList<KFileItem>&);
     void                 selectionInfo (const QString&);
     void                 selectionInfo (const KUrl::List&);
-
     void                 mouseOverInfo (const KFileItem&);
-
     void                 addWebSideBar (const KUrl&, const QString&);
     void                 moveTopLevelWidget (int, int);
     void                 resizeTopLevelWidget (int, int);
@@ -200,6 +203,10 @@ public:
 
 public:
     typedef QMap<QByteArray, int> ActionNumberMap;
+
+public:
+
+
 
 public:
 

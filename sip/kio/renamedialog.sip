@@ -61,7 +61,6 @@ public:
                          RenameDialog (QWidget* /TransferThis/, const QString&, const KUrl&, const KUrl&, KIO::RenameDialog_Mode, KIO::filesize_t = -1, KIO::filesize_t = -1, time_t = -1, time_t = -1, time_t = -1, time_t = -1);
     KUrl                 newDestUrl ();
     static QString       suggestName (const KUrl&, const QString&);
-    static KIO::RenameDialog_Result open (const QString&, const KUrl&, const KUrl&, KIO::RenameDialog_Mode, QString&, KIO::filesize_t = -1, KIO::filesize_t = -1, time_t = -1, time_t = -1, time_t = -1, time_t = -1);
 
 public slots:
     void                 cancelPressed ();
@@ -76,6 +75,10 @@ public slots:
 
 protected slots:
     void                 enableRenameButton (const QString&);
+
+public:
+
+
 
 };  // class RenameDialog
 

@@ -50,9 +50,11 @@ public:
     virtual void         emitChanges ();
     virtual void         updateDirectory (const KUrl&);
     bool                 isFinished () const;
-    KFileItem*           rootItem () const;
-    virtual KFileItem*   findByUrl (const KUrl&) const;
-    virtual KFileItem*   findByName (const QString&) const;
+
+    KFileItem            rootItem () const;
+    virtual KFileItem    findByUrl (const KUrl&) const;
+    virtual KFileItem    findByName (const QString&) const;
+
     virtual void         setNameFilter (const QString&);
     QString              nameFilter () const;
     virtual void         setMimeFilter (const QStringList&);
@@ -84,13 +86,9 @@ signals:
     void                 clear ();
     void                 clear (const KUrl&);
     void                 newItems (const KFileItemList&);
-    void                 newItems (const QList<KFileItem>&);
     void                 itemsFilteredByMime (const KFileItemList&);
-    void                 itemsFilteredByMime (const QList<KFileItem>&);
-    void                 deleteItem (KFileItem*);
-    void                 deleteItem (KFileItem);
-    void                 refreshItems (const KFileItemList&);
 
+    void                 deleteItem (const KFileItem&);
 
 //mt  undefined symbol: QList<QPair<KFileItem, KFileItem>>& -- need mapped type?
 //mt     void                 refreshItems (const QList<QPair<KFileItem, KFileItem>>&);
@@ -112,13 +110,23 @@ protected:
         DIR_ONLY_MODE
     };
 
-    virtual bool         matchesFilter (const KFileItem*) const;
-    virtual bool         matchesMimeFilter (const KFileItem*) const;
+
+    virtual bool         matchesFilter (const KFileItem&) const;
+    virtual bool         matchesMimeFilter (const KFileItem&) const;
+
     virtual bool         doNameFilter (const QString&, const QList<QRegExp>&) const;
     virtual bool         doMimeFilter (const QString&, const QStringList&) const;
     virtual void         handleError (KIO::Job*);
 
+public:
+
+
+
 signals:
+
+
+
+protected:
 
 
 

@@ -51,14 +51,23 @@ public:
     void                 setItemDelegate (QAbstractItemDelegate*);
     QAbstractItemDelegate* itemDelegate () const;
 
+    void                 setDefaultWidget (QWidget*);
+
+
 signals:
     void                 currentPageChanged (const QModelIndex&, const QModelIndex&);
 
 protected:
     virtual QAbstractItemView* createView ();
     virtual bool         showPageHeader () const;
-    Qt::Alignment        viewPosition () const;
+
+    virtual Qt::Alignment viewPosition () const;
+
 //ig                          KPageView (KPageViewPrivate&, QWidget* /TransferThis/);
+
+protected:
+
+
 
 };  // class KPageView
 

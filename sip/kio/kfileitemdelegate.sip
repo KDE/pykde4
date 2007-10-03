@@ -32,7 +32,8 @@ class KFileItemDelegate : QAbstractItemDelegate
 
 public:
 
-    enum AdditionalInformation
+
+    enum Information
     {
         NoInformation, 
         Size, 
@@ -47,6 +48,8 @@ public:
         FriendlyMimeType
     };
 
+//    typedef QList<KFileItemDelegate::Information> InformationList;
+
                          KFileItemDelegate (QObject* /TransferThis/ = 0);
     virtual QSize        sizeHint (const QStyleOptionViewItem&, const QModelIndex&) const;
     virtual void         paint (QPainter*, const QStyleOptionViewItem&, const QModelIndex&) const;
@@ -55,14 +58,21 @@ public:
     virtual void         setEditorData (QWidget*, const QModelIndex&) const;
     virtual void         setModelData (QWidget*, QAbstractItemModel*, const QModelIndex&) const;
     virtual void         updateEditorGeometry (QWidget*, const QStyleOptionViewItem&, const QModelIndex&) const;
-    void                 setAdditionalInformation (KFileItemDelegate::AdditionalInformation);
-    KFileItemDelegate::AdditionalInformation additionalInformation () const;
+
+//FIXME    void                 setShowInformation (const KFileItemDelegate::InformationList&);
+    void                 setShowInformation (KFileItemDelegate::Information);
+//    KFileItemDelegate::InformationList showInformation () const;
+
 
 public slots:
     bool                 helpEvent (QHelpEvent*, QAbstractItemView*, const QStyleOptionViewItem&, const QModelIndex&);
 
 private:
                          KFileItemDelegate (const KFileItemDelegate&) [()];
+
+public:
+
+
 
 };  // class KFileItemDelegate
 

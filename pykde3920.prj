@@ -41,18 +41,18 @@ project     = PyKDE4
 package     = PyKDE4
 
 // $DST
-destination = /home/jim/PyKDE3920
+destination = /home/sbe/devel/pykde4/PyKDE_svn_sbe5
 
 // $SRC
-source      = /server/source/KDE4Src/kdelibs-3.92.0
+source      = /home/sbe/devel/svn/kde/trunk/KDE/kdelibs/
 
 // $COMP
 compare     = /usr/include
 
 // $IMP
-importpath  = /usr/share/sip/PyQt4
+importpath  = /home/sbe/devel/kde4install/share/sip/PyQt4
 
-prevpath    = /home/jim/PyKDEbase/sip
+prevpath    = /home/sbe/devel/svn/kde/trunk/KDE/kdebindings/python/pykde4/sip
 
 version     = KDE_3_92_0
 secondary   = WS_X11
@@ -102,6 +102,7 @@ cast       = QObject QUrl KMacroExpanderBase KSycocaEntry
 include    = QtCore QtGui QtNetwork sonnet
 libs       = QtCore QtGui QtNetwork
 
+define     = "QT_VERSION", "0x040300"
 define     = "Q_WS_X11", "1"
 define     = "Q_SLOTS", "slots"
 define     = "Q_SIGNALS", "signals"
@@ -226,6 +227,35 @@ define     = "class KMultiTabBarButton \*", "KMultiTabBarButton *"
 define     = "class KMultiTabBarTab \*", "KMultiTabBarTab *"
 
 retain
+
+// -----------------------------------------
+
+//module = phonon
+
+//ignore     = phonondefs.h  phonon_export.h 
+//source     = $SRC/phonon
+//compare    = $COMP/phonon
+//subst      = $DST/extra/kde3920
+//import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+//import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+//import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+//import     = kdecore/kdecore
+//import     = solid/solid
+//import     = kdefx/kdefx
+//import     = kdeui/kdeui
+//importpath = $IMP
+//amend      = * ctor parent /TransferThis/        const KGuiItem& nullGuiItem (QString::null);
+//amend      = * all parent /Transfer/
+//nobase     = AbstractAudioOutput  Phonon::AbstractAudioOutput  QSharedData  AbstractVideoOutput  Phonon::AbstractVideoOutput
+
+//include    = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui
+//libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui 
+
+//define     = "PHONON_EXPORT", ""
+//define     = "PHONONCORE_EXPORT", ""
+//define     = "QT_VERSION", "0x040300"
+
+//retain
 
 // -----------------------------------------
 
@@ -364,72 +394,38 @@ retain
 
 // -----------------------------------------
 
-module = kate
+//module = kate
 
-source     = /server/source/KDE4Src/kdesdk-3.92.0/kate/interfaces/kate
-compare    = $COMP
-subst      = $DST/extra/kde3920
-importpath = $IMP
-import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
-import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
-import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
-import     = kdecore/kdecore
-import     = kdefx/kdefx
-import     = kdeui/kdeui
-import     = kio/kio
-import     = kutils/kutils
-import     = kparts/kparts
-import     = ktexteditor/ktexteditor
-nobase     = KShared
-amend      = * ctor parent /TransferThis/
-amend      = * all parent /Transfer/
+//source     = /server/source/KDE4Src/kdesdk-3.92.0/kate/interfaces/kate
+//compare    = $COMP
+//subst      = $DST/extra/kde3920
+//importpath = $IMP
+//import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+//import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+//import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+//import     = kdecore/kdecore
+//import     = kdefx/kdefx
+//import     = kdeui/kdeui
+//import     = kio/kio
+//import     = kutils/kutils
+//import     = kparts/kparts
+//import     = ktexteditor/ktexteditor
+//nobase     = KShared
+//amend      = * ctor parent /TransferThis/
+//amend      = * all parent /Transfer/
 
-include    = QtCore QtGui QtXml QtSvg kate ktexteditor solid kio kfile kssl kparts ktexteditor kate
-libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kio kutils kparts ktexteditor kateinterfaces
+//include    = QtCore QtGui QtXml QtSvg kate ktexteditor solid kio kfile kssl kparts ktexteditor kate
+//libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kio kutils kparts ktexteditor kateinterfaces
 
-cast       = QObject
+//cast       = QObject
 
-define     = "KATEINTERFACES_EXPORT"
-define     = "KTEXTEDITOR_EXPORT"
-define     = "virtual\ enum", "virtual"
-define     = "class\ QWidget\ ", "QWidget "
-define     = "class\ Plugin\ ", "Plugin "
+//define     = "KATEINTERFACES_EXPORT"
+//define     = "KTEXTEDITOR_EXPORT"
+//define     = "virtual\ enum", "virtual"
+//define     = "class\ QWidget\ ", "QWidget "
+//define     = "class\ Plugin\ ", "Plugin "
 
-retain
-
-// -----------------------------------------
-
-module = khtml
-//trace = khtmlview.h
-source      = $SRC/khtml $SRC/khtml/dom
-ignore      = khtmldefaults.h dom_core.h dom_html.h khtml_events.h khtml_export.h
-compare     = $COMP  $COMP/dom
-subst       = $DST/extra/kde3920
-import      = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
-import      = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
-import      = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
-import      = kdecore/kdecore
-import      = kdefx/kdefx
-import      = kdeui/kdeui
-import      = kio/kio
-import      = kutils/kutils
-import      = kparts/kparts
-importpath  = $IMP
-amend       = * ctor parent /TransferThis/
-amend       = * all parent /Transfer/
-nobase      = khtml::KHTMLWidget
-nonamespace = khtmlview khtml
-
-include     = QtCore QtGui QtXml QtSvg solid kio kfile kssl kparts dom
-libs        = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kio kutils kparts
-
-//define     ="QPair\<QString\,QChar\>", "KHTMLSettings\:\:AssignPair"
-define      = "KHTML_EXPORT", ""
-define      = "ScrollBarMode", "ScrollBarPolicy"  
-
-cast        = QObject DOM::Node DOM::Event DOM::DOMShared
-
-retain
+//retain
 
 // -----------------------------------------
 
@@ -456,36 +452,65 @@ libs       = QtCore QtGui QtXml QtSvg kdecore kdefx kdeui
 define     = "KDEPRINT_EXPORT", ""
 define     = "KDEPRINT_MANAGEMENT_EXPORT", ""
 cast       = QObject  KPReloadObject
+
 retain
+
+// -----------------------------------------
+
+module = khtml
+
+source      = $SRC/khtml $SRC/khtml/dom
+ignore      = khtmldefaults.h dom_core.h dom_html.h khtml_events.h khtml_export.h
+compare     = $COMP  $COMP/dom
+subst       = $DST/extra/kde3920
+import      = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import      = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import      = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+import      = kdecore/kdecore
+import      = kdefx/kdefx
+import      = kdeui/kdeui
+import      = kio/kio
+import      = kutils/kutils
+import      = kparts/kparts
+importpath  = $IMP
+amend       = * ctor parent /TransferThis/
+amend       = * all parent /Transfer/
+nobase      = khtml::KHTMLWidget
+nonamespace = khtmlview khtml
+include     = QtCore QtGui QtXml QtSvg solid kio kfile kssl kparts dom
+libs        = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kio kutils kparts
+//   define     ="QPair\<QString\,QChar\>", "KHTMLSettings\:\:AssignPair"
+define      = "KHTML_EXPORT", ""
+define      = "ScrollBarMode", "ScrollBarPolicy"
+cast        = QObject DOM::Node DOM::Event DOM::DOMShared
+retain
+
+
 
 
 // -----------------------------------------
 
-//module = phonon
+//module = marble
 
-//ignore     = phonondefs.h  phonon_export.h  deinterlacefilter.h abstractaudiooutput.h
-//source     = $SRC/phonon
-//compare    = $COMP/phonon
+//source     = /home/sbe/devel/svn/kde/trunk/KDE/kdeedu/marble/src/lib
+//compare    = $COMP
 //subst      = $DST/extra/kde3920
-//import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
+//ignore     = marble_export.h
+//import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt.p_5_0_0 WS_X11)
 //import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 //import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
-//import     = kdecore/kdecore
-//import     = kdefx/kdefx
-//import     = kdeui/kdeui
+//import     = kdecore/kdecoremod.sip
+//import     = kdefx/kdefxmod.sip
+//import     = kdeui/kdeuimod.sip
 //importpath = $IMP
-//amend      = * ctor parent /TransferThis/        const KGuiItem& nullGuiItem (QString::null);
-//amend      = * all parent /Transfer/
-//nobase     = AbstractAudioOutput  Phonon::AbstractAudioOutput  QSharedData  AbstractVideoOutput  Phonon::AbstractVideoOutput
 
-//include    = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui
-//libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui 
+//include    = QtCore QtGui QtSvg
+//libs       = QtCore QtGui QtSvg kdecore kdeui
 
-//define     = "PHONON_EXPORT", ""
-//define     = "PHONONCORE_EXPORT", ""
-//define     = "QT_VERSION", "0x040300"
+//cast       = QObject
 
 //retain
+
 // ------------- doc data -----------------
 
 doc

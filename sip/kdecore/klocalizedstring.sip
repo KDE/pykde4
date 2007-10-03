@@ -44,10 +44,18 @@ public:
 //ig     KLocalizedString     subs (double, int = 0, char = 'g', int = -1, const QChar& = QLatin1Char (' ' )) const;
     KLocalizedString     subs (QChar, int = 0, const QChar& = QLatin1Char (' ' )) const;
     KLocalizedString     subs (const QString&, int = 0, const QChar& = QLatin1Char (' ' )) const;
-    static void          notifyCatalogsUpdated (const QStringList&, const QStringList&);
+
+
+//mt  undefined symbol: QList<KCatalogName>& -- need mapped type?
+//mt     static void          notifyCatalogsUpdated (const QStringList&, const QList<KCatalogName>&);
+
 
 private:
                          KLocalizedString (const char*, const char*, const char*);
+
+public:
+
+
 
 };  // class KLocalizedString
 

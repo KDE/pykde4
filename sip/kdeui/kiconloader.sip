@@ -35,9 +35,79 @@ class KIconLoader : QObject
 
 
 public:
+
+
+    enum Context
+    {
+        Any, 
+        Action, 
+        Application, 
+        Device, 
+        FileSystem, 
+        MimeType, 
+        Animation, 
+        Category, 
+        Emblem, 
+        Emote, 
+        International, 
+        Place, 
+        StatusIcon
+    };
+
+
+    enum Type
+    {
+        Fixed, 
+        Scalable, 
+        Threshold
+    };
+
+
+    enum MatchType
+    {
+        MatchExact, 
+        MatchBest
+    };
+
+
+    enum Group
+    {
+        NoGroup, 
+        Desktop, 
+        FirstGroup, 
+        Toolbar, 
+        MainToolbar, 
+        Small, 
+        Panel, 
+        Dialog, 
+        LastGroup, 
+        User
+    };
+
+
+    enum StdSizes
+    {
+        SizeSmall, 
+        SizeSmallMedium, 
+        SizeMedium, 
+        SizeLarge, 
+        SizeHuge, 
+        SizeEnormous
+    };
+
+
+    enum States
+    {
+        DefaultState, 
+        ActiveState, 
+        DisabledState, 
+        LastState
+    };
+
+
                          KIconLoader (const QString& = QString (), KStandardDirs* = 0, QObject* /TransferThis/ = 0);
                          KIconLoader (const KComponentData&, QObject* /TransferThis/ = 0);
-    static KIconLoader*  global () /PyName=global_/;
+    static KIconLoader*  global ()  /PyName=global_/;
     void                 addAppDir (const QString&);
     QPixmap              loadIcon (const QString&, KIconLoader::Group, int = 0, int = KIconLoader::DefaultState , const QStringList& = QStringList (), QString* = 0, bool = 0) const;
     QPixmap              loadMimeTypeIcon (const QString&, KIconLoader::Group, int = 0, int = KIconLoader::DefaultState , const QStringList& = QStringList (), QString* = 0) const;
@@ -63,6 +133,26 @@ public slots:
     void                 newIconLoader ();
 
 };  // class KIconLoader
+
+
+
+class K3Icon
+{
+%TypeHeaderCode
+#include <kiconloader.h>
+%End
+
+public:
+                         K3Icon ();
+    bool                 isValid () const;
+    int                  size;
+    KIconLoader::Context context;
+    KIconLoader::Type    type;
+    int                  threshold;
+    QString              path;
+
+};  // class K3Icon
+
 
 QPixmap              DesktopIcon (const QString&, int = 0, int = KIconLoader::DefaultState , const QStringList& = QStringList ());
 QIcon                DesktopIconSet (const QString&, int = 0);

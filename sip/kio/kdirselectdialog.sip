@@ -33,7 +33,9 @@ class KDirSelectDialog : KDialog
 public:
                          KDirSelectDialog (const KUrl& = KUrl (), bool = 0, QWidget* /TransferThis/ = 0);
     KUrl                 url () const;
-//ig     K3FileTreeView*      view () const;
+
+    QAbstractItemView*   view () const;
+
     bool                 localOnly () const;
     static KUrl          selectDirectory (const KUrl& = KUrl (), bool = 0, QWidget* /Transfer/ = 0, const QString& = QString ());
     KUrl                 startDir () const;
@@ -41,13 +43,16 @@ public:
 public slots:
     void                 setCurrentUrl (const KUrl&);
 
-protected slots:
-    virtual void         slotUser1 ();
-
 protected:
     virtual void         accept ();
 
+public:
+
+
+
+protected slots:
+
+
+
 };  // class KDirSelectDialog
 
-
-typedef KSharedPtr<KSharedConfig> KSharedConfigPtr;

@@ -397,8 +397,6 @@ public:
         sipClass = sipClass_KColorCombo;
     else if (dynamic_cast<KColorPatch*>(sipCpp))
         sipClass = sipClass_KColorPatch;
-    else if (dynamic_cast<KColorTable*>(sipCpp))
-        sipClass = sipClass_KColorTable;
     else if (dynamic_cast<KCompletion*>(sipCpp))
         sipClass = sipClass_KCompletion;
     else if (dynamic_cast<KConfigDialogManager*>(sipCpp))
@@ -425,8 +423,6 @@ public:
         sipClass = sipClass_KDoubleValidator;
     else if (dynamic_cast<KEditListBox*>(sipCpp))
         sipClass = sipClass_KEditListBox;
-    else if (dynamic_cast<KEditToolBarWidget*>(sipCpp))
-        sipClass = sipClass_KEditToolBarWidget;
     else if (dynamic_cast<KFloatValidator*>(sipCpp))
         sipClass = sipClass_KFloatValidator;
     else if (dynamic_cast<KFontChooser*>(sipCpp))

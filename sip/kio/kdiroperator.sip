@@ -65,7 +65,9 @@ public:
     KFile::Modes         mode () const;
     virtual void         setPreviewWidget (KPreviewWidgetBase*);
     QList<KFileItem>     selectedItems () const;
-    bool                 isSelected (const KFileItem*) const;
+
+    bool                 isSelected (const KFileItem&) const;
+
     int                  numDirs () const;
     int                  numFiles () const;
     KCompletion*         completionObject () const;
@@ -78,7 +80,7 @@ public:
     void                 setOnlyDoubleClickSelectsFiles (bool);
     bool                 onlyDoubleClickSelectsFiles () const;
     virtual bool         mkdir (const QString&, bool = 1);
-    virtual KIO::DeleteJob* del (const QList<KFileItem>&, QWidget* /Transfer/ = 0, bool = 1, bool = 1) /PyName=del_/;
+    virtual KIO::DeleteJob* del (const QList<KFileItem>&, QWidget* /Transfer/ = 0, bool = 1, bool = 1)  /PyName=del_/;
     void                 clearHistory ();
     virtual void         setEnableDirHighlighting (bool);
     bool                 dirHighlighting () const;
@@ -118,9 +120,11 @@ public slots:
 protected slots:
     void                 resetCursor ();
     void                 pathChanged ();
-    virtual void         selectDir (const KFileItem*);
-    void                 selectFile (const KFileItem*);
-    void                 highlightFile (const KFileItem*);
+
+    virtual void         selectDir (const KFileItem&);
+    void                 selectFile (const KFileItem&);
+    void                 highlightFile (const KFileItem&);
+
     void                 sortByName ();
     void                 sortBySize ();
     void                 sortByDate ();
@@ -136,10 +140,24 @@ signals:
     void                 completion (const QString&);
     void                 finishedLoading ();
     void                 viewChanged (QAbstractItemView*);
-    void                 fileHighlighted (const KFileItem*);
-    void                 dirActivated (const KFileItem*);
-    void                 fileSelected (const KFileItem*);
-    void                 dropped (const KFileItem*, QDropEvent*, const KUrl::List&);
+
+    void                 fileHighlighted (const KFileItem&);
+    void                 dirActivated (const KFileItem&);
+    void                 fileSelected (const KFileItem&);
+    void                 dropped (const KFileItem&, QDropEvent*, const KUrl::List&);
+
+
+public:
+
+
+
+protected slots:
+
+
+
+signals:
+
+
 
 };  // class KDirOperator
 

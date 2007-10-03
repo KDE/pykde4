@@ -32,13 +32,11 @@ class KKeySequenceWidget : QWidget
 
 public:
 
-
     enum Validation
     {
         Validate, 
         NoValidate
     };
-
 
                          KKeySequenceWidget (QWidget* /TransferThis/ = 0);
     void                 setModifierlessAllowed (bool);
@@ -46,24 +44,26 @@ public:
     void                 setClearButtonShown (bool);
     QKeySequence         keySequence () const;
 
+    void                 setCheckActionList (const QList<QAction*>&);
+
+
 signals:
     void                 keySequenceChanged (const QKeySequence&);
 
-    void                 validationHook (const QKeySequence&);
-
-
 public slots:
     void                 captureKeySequence ();
-
-    void                 setKeySequence (const QKeySequence&, KKeySequenceWidget::Validation = KKeySequenceWidget::Validate);
-
+    void                 setKeySequence (const QKeySequence&, KKeySequenceWidget::Validation = KKeySequenceWidget::Validate );
     void                 clearKeySequence ();
 
-    void                 denyValidation ();
+    void                 applyStealShortcut ();
 
 
 private:
                          KKeySequenceWidget (const KKeySequenceWidget&) [()];
+
+signals:
+
+
 
 public slots:
 

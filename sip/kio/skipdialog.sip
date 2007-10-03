@@ -45,10 +45,9 @@ class SkipDialog : KDialog
 
 
 public:
-                         SkipDialog (QWidget* /TransferThis/, bool, const QString&, bool = 0);
-    static KIO::SkipDialog_Result open (bool, const QString& = QString ());
 
-protected:
+                         SkipDialog (QWidget* /TransferThis/, bool, const QString&);
+
 
 public slots:
     void                 b0Pressed ();
@@ -57,6 +56,10 @@ public slots:
 
 signals:
     void                 result (KIO::SkipDialog*, int);
+
+public:
+
+
 
 };  // class SkipDialog
 

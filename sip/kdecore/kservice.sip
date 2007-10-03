@@ -51,15 +51,17 @@ public:
     QString              menuId () const;
     QString              storageId () const;
 
-    enum DBUSStartupType_t
+
+    enum DBusStartupType
     {
-        DBUS_None, 
-        DBUS_Unique, 
-        DBUS_Multi, 
-        DBUS_Wait
+        DBusNone, 
+        DBusUnique, 
+        DBusMulti, 
+        DBusWait
     };
 
-    KService::DBUSStartupType_t DBUSStartupType () const;
+    KService::DBusStartupType dbusStartupType () const;
+
     QString              path () const;
     QString              comment () const;
     QString              genericName () const;
@@ -90,6 +92,10 @@ public:
 
 protected:
     QStringList&         accessServiceTypes ();
+
+public:
+
+
 
 };  // class KService
 

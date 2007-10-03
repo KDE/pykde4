@@ -30,8 +30,12 @@ namespace KIO
 {
 KIO::Job*            pasteClipboard (const KUrl&, QWidget*, bool = 0);
 void                 pasteData (const KUrl&, const QByteArray&, QWidget*);
-KIO::CopyJob*        pasteDataAsync (const KUrl&, const QByteArray&, const QString& = QString ());
+
+KIO::CopyJob*        pasteDataAsync (const KUrl&, const QByteArray&, QWidget*, const QString& = QString ());
+
 KIO::CopyJob*        pasteMimeSource (const QMimeData*, const KUrl&, const QString&, QWidget*, bool = 0);
 QString              pasteActionText ();
+
+
 };  // namespace KIO
 

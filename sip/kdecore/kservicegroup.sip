@@ -94,22 +94,4 @@ protected:
 };  // class KServiceGroup
 
 
-class KServiceSeparator : KSycocaEntry
-{
-%TypeHeaderCode
-#include <kservicegroup.h>
-%End
-
-
-public:
-    typedef KSharedPtr<KServiceSeparator> Ptr;
-
-public:
-                         KServiceSeparator ();
-
-public:
-
-
-
-};  // class KServiceSeparator
 

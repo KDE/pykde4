@@ -31,19 +31,35 @@ class KFileViewSignaler : QObject
 
 
 public:
-    void                 activate (const KFileItem*);
-    void                 highlightFile (const KFileItem*);
-    void                 activateMenu (const KFileItem*, const QPoint&);
+
+    void                 activate (const KFileItem&);
+    void                 highlightFile (const KFileItem&);
+    void                 activateMenu (const KFileItem&, const QPoint&);
+
     void                 changeSorting (QDir::SortFlags);
-    void                 dropURLs (const KFileItem*, QDropEvent*, const KUrl::List&);
+
+    void                 dropURLs (const KFileItem&, QDropEvent*, const KUrl::List&);
+
 
 signals:
-    void                 dirActivated (const KFileItem*);
+
+    void                 dirActivated (const KFileItem&);
+
     void                 sortingChanged (QDir::SortFlags);
-    void                 fileHighlighted (const KFileItem*);
-    void                 fileSelected (const KFileItem*);
-    void                 activatedMenu (const KFileItem*, const QPoint&);
-    void                 dropped (const KFileItem*, QDropEvent*, const KUrl::List&);
+
+    void                 fileHighlighted (const KFileItem&);
+    void                 fileSelected (const KFileItem&);
+    void                 activatedMenu (const KFileItem&, const QPoint&);
+    void                 dropped (const KFileItem&, QDropEvent*, const KUrl::List&);
+
+
+public:
+
+
+
+signals:
+
+
 
 };  // class KFileViewSignaler
 
@@ -61,12 +77,16 @@ public:
     virtual QWidget*     widget ()  = 0;
 //ig     QWidget*             widget () const;
     void                 setCurrentItem (const QString&);
-    virtual void         setCurrentItem (const KFileItem*)  = 0;
-    virtual KFileItem*   currentFileItem () const = 0;
+
+    virtual void         setCurrentItem (const KFileItem&)  = 0;
+    virtual KFileItem    currentFileItem () const = 0;
+
     virtual void         clear ();
     virtual void         updateView (bool = 1);
-    virtual void         updateView (const KFileItem*);
-    virtual void         removeItem (const KFileItem*);
+
+    virtual void         updateView (const KFileItem&);
+    virtual void         removeItem (const KFileItem&);
+
     virtual void         listingCompleted ();
     QDir::SortFlags      sorting () const;
     virtual void         setSorting (QDir::SortFlags);
@@ -90,22 +110,30 @@ public:
     QString              viewName () const;
     void                 setViewName (const QString&);
     virtual void         setParentView (KFileView* /Transfer/);
-    virtual void         insertItem (KFileItem*);
+
+    virtual void         insertItem (const KFileItem&);
+
     virtual void         clearView ()  = 0;
-    virtual void         ensureItemVisible (const KFileItem*)  = 0;
+
+    virtual void         ensureItemVisible (const KFileItem&)  = 0;
+
     virtual void         clearSelection ()  = 0;
     virtual void         selectAll ();
     virtual void         invertSelection ();
-    virtual void         setSelected (const KFileItem*, bool)  = 0;
-    virtual bool         isSelected (const KFileItem*) const = 0;
-    const KFileItemList* selectedItems () const;
-    const KFileItemList* items () const;
-    virtual KFileItem*   firstFileItem () const = 0;
-    virtual KFileItem*   nextItem (const KFileItem*) const = 0;
-    virtual KFileItem*   prevItem (const KFileItem*) const = 0;
+
+    virtual void         setSelected (const KFileItem&, bool)  = 0;
+    virtual bool         isSelected (const KFileItem&) const = 0;
+    KFileItemList        selectedItems () const;
+    KFileItemList        items () const;
+    virtual KFileItem    firstFileItem () const = 0;
+    virtual KFileItem    nextItem (const KFileItem&) const = 0;
+    virtual KFileItem    prevItem (const KFileItem&) const = 0;
+
     void                 setOnlyDoubleClickSelectsFiles (bool);
     bool                 onlyDoubleClickSelectsFiles () const;
-    bool                 updateNumbers (const KFileItem*);
+
+    bool                 updateNumbers (const KFileItem&);
+
     virtual KActionCollection* actionCollection () const;
     KFileViewSignaler*   signaler () const;
     virtual void         readConfig (KConfigGroup*);
@@ -123,6 +151,10 @@ public:
     static int           autoOpenDelay ();
 
 protected:
+
+public:
+
+
 
 };  // class KFileView
 

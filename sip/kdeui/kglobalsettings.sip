@@ -86,10 +86,6 @@ public:
     static QColor        activeTextColor ();
     static int           contrast ();
     static qreal         contrastF (const KSharedConfigPtr& = KSharedConfigPtr ());
-    static QColor        baseColor ();
-    static QColor        textColor ();
-    static QColor        highlightedTextColor ();
-    static QColor        highlightColor ();
     static bool          shadeSortColumn ();
     static bool          allowDefaultBackgroundImages ();
     static QFont         generalFont ();

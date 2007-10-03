@@ -146,16 +146,22 @@ protected:
     KConfigGroup&        internalGroup () const;
 //igx     virtual void         virtual_hook (int, void*);
 
-public:
-
-
+// Subclasses for KConfigBase
 
 public:
+%ConvertToSubClassCode
 
-
-
-protected:
-
+    if (dynamic_cast<KConfig*>(sipCpp))
+    {
+        sipClass = sipClass_KConfig;
+        if (dynamic_cast<KDesktopFile*>(sipCpp))
+            sipClass = sipClass_KDesktopFile;
+        else if (dynamic_cast<KSharedConfig*>(sipCpp))
+            sipClass = sipClass_KSharedConfig;
+    }
+    else
+        sipClass = NULL;
+%End
 
 
 };  // class KConfigBase

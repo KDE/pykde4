@@ -45,9 +45,7 @@ public:
     };
 
                          KUser (KUser::UIDMode = UseEffectiveUID );
-
                          KUser (K_UID);
-
                          KUser (const QString&);
                          KUser (const char*);
 //ig                          KUser (const passwd*);
@@ -55,22 +53,27 @@ public:
     bool                 operator == (const KUser&) const;
     bool                 operator != (const KUser&) const;
     bool                 isValid () const;
-
     const K_UID          uid () const;
     const K_GID          gid () const;
-
     bool                 isSuperUser () const;
     QString              loginName () const;
     QString              fullName () const;
     QString              homeDir () const;
-
     QString              faceIconPath () const;
-
     QString              shell () const;
     QList<KUserGroup>    groups () const;
     QStringList          groupNames () const;
 
-    QVariant             extendedProperty (const QByteArray&) const;
+
+    enum UserProperty
+    {
+        FullName, 
+        RoomNumber, 
+        WorkPhone, 
+        HomePhone
+    };
+
+    QVariant             property (KUser::UserProperty) const;
 
     static QList<KUser>  allUsers ();
     static QStringList   allUserNames ();
@@ -93,29 +96,20 @@ public:
                          KUserGroup (const QString&);
                          KUserGroup (const char*);
                          KUserGroup (KUser::UIDMode = KUser::UseEffectiveUID );
-
                          KUserGroup (K_GID);
-
                          KUserGroup (const group*);
                          KUserGroup (const KUserGroup&);
     bool                 operator == (const KUserGroup&) const;
     bool                 operator != (const KUserGroup&) const;
     bool                 isValid () const;
-
     K_GID                gid () const;
-
     QString              name () const;
     QList<KUser>         users () const;
     QStringList          userNames () const;
     static QList<KUserGroup> allGroups ();
     static QStringList   allGroupNames ();
 
-public:
-
-
-
 };  // class KUserGroup
-
 
 typedef uid_t K_UID;
 typedef gid_t K_GID;

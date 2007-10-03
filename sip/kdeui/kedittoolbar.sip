@@ -57,27 +57,4 @@ private:
 };  // class KEditToolBar
 
 
-class KEditToolBarWidget : QWidget, KXMLGUIClient
-{
-%TypeHeaderCode
-#include <kedittoolbar.h>
-%End
-
-
-public:
-                         KEditToolBarWidget (KActionCollection*, QWidget* /TransferThis/ = 0);
-                         KEditToolBarWidget (QWidget* /TransferThis/ = 0);
-    void                 load (const QString&, bool = 1, const QString& = QString ());
-    void                 load (KXMLGUIFactory*, const QString& = QString ());
-    virtual KActionCollection* actionCollection () const;
-    bool                 save ();
-    void                 rebuildKXMLGUIClients ();
-
-signals:
-    void                 enableOk (bool);
-
-private:
-                         KEditToolBarWidget (const KEditToolBarWidget&) [()];
-
-};  // class KEditToolBarWidget
 

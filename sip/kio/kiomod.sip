@@ -47,7 +47,6 @@
 %Include kbookmarkmanager.sip
 %Include kbookmarkmenu.sip
 %Include konqbookmarkmenu.sip
-%Include kcombiview.sip
 %Include kdiroperator.sip
 %Include kdirselectdialog.sip
 %Include kdirsortfilterproxymodel.sip
@@ -71,7 +70,6 @@
 %Include kfilefiltercombo.sip
 %Include kfileplacesmodel.sip
 %Include kfileplacesview.sip
-%Include kfilepreview.sip
 %Include kfileview.sip
 %Include kfilewidget.sip
 %Include authinfo.sip

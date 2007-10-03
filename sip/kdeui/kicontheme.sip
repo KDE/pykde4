@@ -23,93 +23,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-class K3Icon
-{
-%TypeHeaderCode
-#include <kicontheme.h>
-%End
-
-
-public:
-                         K3Icon ();
-    bool                 isValid () const;
-
-    enum Context
-    {
-        Any, 
-        Action, 
-        Application, 
-        Device, 
-        FileSystem, 
-        MimeType, 
-        Animation, 
-        Category, 
-        Emblem, 
-        Emote, 
-        International, 
-        Place, 
-        StatusIcon
-    };
-
-
-    enum Type
-    {
-        Fixed, 
-        Scalable, 
-        Threshold
-    };
-
-
-    enum MatchType
-    {
-        MatchExact, 
-        MatchBest
-    };
-
-
-    enum Group
-    {
-        NoGroup, 
-        Desktop, 
-        FirstGroup, 
-        Toolbar, 
-        MainToolbar, 
-        Small, 
-        Panel, 
-        Dialog, 
-        LastGroup, 
-        User
-    };
-
-
-    enum StdSizes
-    {
-        SizeSmall, 
-        SizeSmallMedium, 
-        SizeMedium, 
-        SizeLarge, 
-        SizeHuge, 
-        SizeEnormous
-    };
-
-
-    enum States
-    {
-        DefaultState, 
-        ActiveState, 
-        DisabledState, 
-        LastState
-    };
-
-    int                  size;
-    KIconLoader::Context      context;
-    KIconLoader::Type         type;
-    int                  threshold;
-    QString              path;
-
-};  // class K3Icon
-
-
 class KIconTheme
 {
 %TypeHeaderCode
@@ -149,4 +62,6 @@ public:
     static void          assignIconsToContextMenu (KIconTheme::ContextMenus, QList<QAction*>);
 
 };  // class KIconTheme
+
+
 

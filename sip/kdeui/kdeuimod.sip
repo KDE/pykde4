@@ -32,7 +32,6 @@
 %Import QtXml/QtXmlmod.sip
 %Import QtSvg/QtSvgmod.sip
 %Import kdecore/kdecoremod.sip
-%Import kdefx/kdefxmod.sip
 
 %Include kaction.sip
 %Include kactioncollection.sip

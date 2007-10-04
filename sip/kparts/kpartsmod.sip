@@ -31,7 +31,6 @@
 %Import QtGui/QtGuimod.sip
 %Import QtXml/QtXmlmod.sip
 %Import kdecore/kdecoremod.sip
-%Import kdefx/kdefxmod.sip
 %Import kdeui/kdeuimod.sip
 %Import kio/kiomod.sip
 

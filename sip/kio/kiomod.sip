@@ -32,7 +32,6 @@
 %Import QtXml/QtXmlmod.sip
 %Import kdecore/kdecoremod.sip
 %Import solid/solidmod.sip
-%Import kdefx/kdefxmod.sip
 %Import kdeui/kdeuimod.sip
 
 %Include kbookmark.sip

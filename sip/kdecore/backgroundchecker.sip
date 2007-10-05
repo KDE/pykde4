@@ -28,7 +28,7 @@ namespace Sonnet
 class BackgroundChecker : QObject
 {
 %TypeHeaderCode
-#include <backgroundchecker.h>
+#include <sonnet/backgroundchecker.h>
 %End
 
 

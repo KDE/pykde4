@@ -24,15 +24,15 @@
 
 %ModuleHeaderCode
 //ctscc
-#include <part.h>
-#include <browserextension.h>
-#include <browserinterface.h>
-#include <browserrun.h>
-#include <historyprovider.h>
-#include <mainwindow.h>
-#include <partmanager.h>
-#include <plugin.h>
-#include <statusbarextension.h>
+#include <kparts/part.h>
+#include <kparts/browserextension.h>
+#include <kparts/browserinterface.h>
+#include <kparts/browserrun.h>
+#include <kparts/historyprovider.h>
+#include <kparts/mainwindow.h>
+#include <kparts/partmanager.h>
+#include <kparts/plugin.h>
+#include <kparts/statusbarextension.h>
 %End
 
 namespace KParts
@@ -41,7 +41,7 @@ namespace KParts
 class BrowserArguments
 {
 %TypeHeaderCode
-#include <browserextension.h>
+#include <kparts/browserextension.h>
 %End
 
 
@@ -72,7 +72,7 @@ public:
 class WindowArgs
 {
 %TypeHeaderCode
-#include <browserextension.h>
+#include <kparts/browserextension.h>
 %End
 
 
@@ -110,7 +110,7 @@ public:
 class OpenUrlEvent : KParts::Event
 {
 %TypeHeaderCode
-#include <browserextension.h>
+#include <kparts/browserextension.h>
 %End
 
 
@@ -128,7 +128,7 @@ public:
 class BrowserExtension : QObject
 {
 %TypeHeaderCode
-#include <browserextension.h>
+#include <kparts/browserextension.h>
 %End
 
 
@@ -218,7 +218,7 @@ public:
 class BrowserHostExtension : QObject
 {
 %TypeHeaderCode
-#include <browserextension.h>
+#include <kparts/browserextension.h>
 %End
 
 
@@ -236,7 +236,7 @@ public:
 class LiveConnectExtension : QObject
 {
 %TypeHeaderCode
-#include <browserextension.h>
+#include <kparts/browserextension.h>
 %End
 
 

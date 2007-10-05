@@ -29,7 +29,7 @@ namespace KTextEditor
 class ContainerInterface
 {
 %TypeHeaderCode
-#include <containerinterface.h>
+#include <ktexteditor/containerinterface.h>
 %End
 
 public:

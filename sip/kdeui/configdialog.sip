@@ -28,7 +28,7 @@ namespace Sonnet
 class ConfigDialog : KDialog
 {
 %TypeHeaderCode
-#include <configdialog.h>
+#include <sonnet/configdialog.h>
 %End
 
 

@@ -28,7 +28,7 @@ namespace KTextEditor
 class TemplateInterface
 {
 %TypeHeaderCode
-#include <templateinterface.h>
+#include <ktexteditor/templateinterface.h>
 %End
 
 

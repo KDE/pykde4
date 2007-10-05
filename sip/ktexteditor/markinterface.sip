@@ -28,7 +28,7 @@ namespace KTextEditor
 class Mark
 {
 %TypeHeaderCode
-#include <markinterface.h>
+#include <ktexteditor/markinterface.h>
 %End
 
 
@@ -42,7 +42,7 @@ public:
 class MarkInterface
 {
 %TypeHeaderCode
-#include <markinterface.h>
+#include <ktexteditor/markinterface.h>
 %End
 
 

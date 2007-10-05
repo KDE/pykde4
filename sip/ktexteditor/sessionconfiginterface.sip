@@ -28,7 +28,7 @@ namespace KTextEditor
 class SessionConfigInterface
 {
 %TypeHeaderCode
-#include <sessionconfiginterface.h>
+#include <ktexteditor/sessionconfiginterface.h>
 %End
 
 

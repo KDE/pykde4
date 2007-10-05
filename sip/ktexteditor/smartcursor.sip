@@ -28,7 +28,7 @@ namespace KTextEditor
 class SmartCursor : KTextEditor::Cursor
 {
 %TypeHeaderCode
-#include <smartcursor.h>
+#include <ktexteditor/smartcursor.h>
 %End
 
 

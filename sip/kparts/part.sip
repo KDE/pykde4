@@ -33,7 +33,7 @@ namespace KParts
 class PartBase : KXMLGUIClient
 {
 %TypeHeaderCode
-#include <part.h>
+#include <kparts/part.h>
 %End
 
 
@@ -64,7 +64,7 @@ private:
 class Part : QObject, KParts::PartBase
 {
 %TypeHeaderCode
-#include <part.h>
+#include <kparts/part.h>
 %End
 
 
@@ -108,7 +108,7 @@ private:
 class OpenUrlArguments
 {
 %TypeHeaderCode
-#include <part.h>
+#include <kparts/part.h>
 %End
 
 
@@ -136,7 +136,7 @@ public:
 class ReadOnlyPart : KParts::Part
 {
 %TypeHeaderCode
-#include <part.h>
+#include <kparts/part.h>
 %End
 
 
@@ -194,7 +194,7 @@ private:
 class ReadWritePart : KParts::ReadOnlyPart
 {
 %TypeHeaderCode
-#include <part.h>
+#include <kparts/part.h>
 %End
 
 

@@ -28,7 +28,7 @@ namespace KParts
 class BrowserRun : KRun
 {
 %TypeHeaderCode
-#include <browserrun.h>
+#include <kparts/browserrun.h>
 %End
 
 

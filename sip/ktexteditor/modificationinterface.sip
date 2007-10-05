@@ -28,7 +28,7 @@ namespace KTextEditor
 class ModificationInterface
 {
 %TypeHeaderCode
-#include <modificationinterface.h>
+#include <ktexteditor/modificationinterface.h>
 %End
 
 

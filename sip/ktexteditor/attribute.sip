@@ -28,7 +28,7 @@ namespace KTextEditor
 class Attribute : QTextCharFormat
 {
 %TypeHeaderCode
-#include <attribute.h>
+#include <ktexteditor/attribute.h>
 %End
 
 

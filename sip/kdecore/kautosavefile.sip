@@ -44,7 +44,7 @@
 #include <ksycoca.h>
 #include <ktemporaryfile.h>
 #include <ktoolinvocation.h>
-#include <backgroundchecker.h>
+#include <sonnet/backgroundchecker.h>
 %End
 
 

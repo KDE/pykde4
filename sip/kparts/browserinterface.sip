@@ -28,7 +28,7 @@ namespace KParts
 class BrowserInterface : QObject
 {
 %TypeHeaderCode
-#include <browserinterface.h>
+#include <kparts/browserinterface.h>
 %End
 
 

@@ -28,7 +28,7 @@ namespace KTextEditor
 class EditorChooser : QWidget
 {
 %TypeHeaderCode
-#include <editorchooser.h>
+#include <ktexteditor/editorchooser.h>
 %End
 
 

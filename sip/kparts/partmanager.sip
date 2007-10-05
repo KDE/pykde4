@@ -28,7 +28,7 @@ namespace KParts
 class PartManager : QObject
 {
 %TypeHeaderCode
-#include <partmanager.h>
+#include <kparts/partmanager.h>
 %End
 
 

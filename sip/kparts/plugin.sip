@@ -28,7 +28,7 @@ namespace KParts
 class Plugin : QObject, KXMLGUIClient
 {
 %TypeHeaderCode
-#include <plugin.h>
+#include <kparts/plugin.h>
 %End
 
 

@@ -28,7 +28,7 @@ namespace KTextEditor
 class TextHintInterface
 {
 %TypeHeaderCode
-#include <texthintinterface.h>
+#include <ktexteditor/texthintinterface.h>
 %End
 
 

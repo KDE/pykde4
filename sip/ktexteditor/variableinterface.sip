@@ -28,7 +28,7 @@ namespace KTextEditor
 class VariableInterface
 {
 %TypeHeaderCode
-#include <variableinterface.h>
+#include <ktexteditor/variableinterface.h>
 %End
 
 

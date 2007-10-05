@@ -29,7 +29,7 @@ namespace KTextEditor
 class Factory : KParts::Factory
 {
 %TypeHeaderCode
-#include <factory.h>
+#include <ktexteditor/factory.h>
 %End
 
 public:

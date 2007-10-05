@@ -28,7 +28,7 @@ namespace KParts
 class StatusBarExtension : QObject
 {
 %TypeHeaderCode
-#include <statusbarextension.h>
+#include <kparts/statusbarextension.h>
 %End
 
 

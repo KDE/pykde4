@@ -24,8 +24,8 @@
 
 %ModuleHeaderCode
 //ctscc
-#include <event.h>
-#include <browserextension.h>
+#include <kparts/event.h>
+#include <kparts/browserextension.h>
 %End
 
 namespace KParts
@@ -34,7 +34,7 @@ namespace KParts
 class Event : QEvent
 {
 %TypeHeaderCode
-#include <event.h>
+#include <kparts/event.h>
 %End
 
 
@@ -72,7 +72,7 @@ public:
 class GUIActivateEvent : KParts::Event
 {
 %TypeHeaderCode
-#include <event.h>
+#include <kparts/event.h>
 %End
 
 
@@ -87,7 +87,7 @@ public:
 class PartActivateEvent : KParts::Event
 {
 %TypeHeaderCode
-#include <event.h>
+#include <kparts/event.h>
 %End
 
 
@@ -104,7 +104,7 @@ public:
 class PartSelectEvent : KParts::Event
 {
 %TypeHeaderCode
-#include <event.h>
+#include <kparts/event.h>
 %End
 
 

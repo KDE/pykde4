@@ -28,7 +28,7 @@ namespace KParts
 class Factory : KPluginFactory  // was KLibFactory
 {
 %TypeHeaderCode
-#include <factory.h>
+#include <kparts/factory.h>
 %End
 
 public:

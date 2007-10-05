@@ -28,7 +28,7 @@ namespace KTextEditor
 class Command
 {
 %TypeHeaderCode
-#include <commandinterface.h>
+#include <ktexteditor/commandinterface.h>
 %End
 
 
@@ -43,7 +43,7 @@ public:
 class CommandExtension
 {
 %TypeHeaderCode
-#include <commandinterface.h>
+#include <ktexteditor/commandinterface.h>
 %End
 
 
@@ -59,7 +59,7 @@ public:
 class CommandInterface
 {
 %TypeHeaderCode
-#include <commandinterface.h>
+#include <ktexteditor/commandinterface.h>
 %End
 
 

@@ -23,7 +23,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 %ModuleHeaderCode
-#include <searchinterface.h>
+#include <ktexteditor/searchinterface.h>
 %End
 
 namespace KTextEditor
@@ -50,7 +50,7 @@ typedef QFlags<KTextEditor::Search::SearchOptionsEnum> SearchOptions;
 class SearchInterface
 {
 %TypeHeaderCode
-#include <searchinterface.h>
+#include <ktexteditor/searchinterface.h>
 %End
 
 

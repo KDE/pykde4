@@ -28,7 +28,7 @@ namespace KTextEditor
 class SmartRange : KTextEditor::Range
 {
 %TypeHeaderCode
-#include <smartrange.h>
+#include <ktexteditor/smartrange.h>
 %End
 
 

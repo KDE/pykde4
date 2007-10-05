@@ -28,7 +28,7 @@ namespace KTextEditor
 class ConfigInterface
 {
 %TypeHeaderCode
-#include <configinterface.h>
+#include <ktexteditor/configinterface.h>
 %End
 
 

@@ -28,7 +28,7 @@ namespace KTextEditor
 class Plugin : QObject
 {
 %TypeHeaderCode
-#include <plugin.h>
+#include <ktexteditor/plugin.h>
 %End
 
 

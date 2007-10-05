@@ -28,7 +28,7 @@ namespace KTextEditor
 class SmartCursorWatcher
 {
 %TypeHeaderCode
-#include <cursorfeedback.h>
+#include <ktexteditor/cursorfeedback.h>
 %End
 
 
@@ -48,7 +48,7 @@ public:
 class SmartCursorNotifier : QObject
 {
 %TypeHeaderCode
-#include <cursorfeedback.h>
+#include <ktexteditor/cursorfeedback.h>
 %End
 
 

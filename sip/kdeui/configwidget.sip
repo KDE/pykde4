@@ -28,7 +28,7 @@ namespace Sonnet
 class ConfigWidget : QWidget
 {
 %TypeHeaderCode
-#include <configwidget.h>
+#include <sonnet/configwidget.h>
 %End
 
 

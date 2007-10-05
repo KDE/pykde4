@@ -28,7 +28,7 @@ namespace KTextEditor
 class SmartRangeNotifier : QObject
 {
 %TypeHeaderCode
-#include <rangefeedback.h>
+#include <ktexteditor/rangefeedback.h>
 %End
 
 
@@ -58,7 +58,7 @@ signals:
 class SmartRangeWatcher
 {
 %TypeHeaderCode
-#include <rangefeedback.h>
+#include <ktexteditor/rangefeedback.h>
 %End
 
 

@@ -24,15 +24,15 @@
 
 %ModuleHeaderCode
 //ctscc
-#include <codecompletionmodel.h>
-#include <configpage.h>
-#include <document.h>
-#include <editor.h>
-#include <editorchooser.h>
-#include <plugin.h>
-#include <cursorfeedback.h>
-#include <rangefeedback.h>
-#include <view.h>
+#include <ktexteditor/codecompletionmodel.h>
+#include <ktexteditor/configpage.h>
+#include <ktexteditor/document.h>
+#include <ktexteditor/editor.h>
+#include <ktexteditor/editorchooser.h>
+#include <ktexteditor/plugin.h>
+#include <ktexteditor/cursorfeedback.h>
+#include <ktexteditor/rangefeedback.h>
+#include <ktexteditor/view.h>
 %End
 
 namespace KTextEditor
@@ -41,7 +41,7 @@ namespace KTextEditor
 class CodeCompletionModel : QAbstractItemModel
 {
 %TypeHeaderCode
-#include <codecompletionmodel.h>
+#include <ktexteditor/codecompletionmodel.h>
 %End
 
 

@@ -28,7 +28,7 @@ namespace KTextEditor
 class Range
 {
 %TypeHeaderCode
-#include <range.h>
+#include <ktexteditor/range.h>
 %End
 
 

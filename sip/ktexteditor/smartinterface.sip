@@ -28,7 +28,7 @@ namespace KTextEditor
 class SmartInterface
 {
 %TypeHeaderCode
-#include <smartinterface.h>
+#include <ktexteditor/smartinterface.h>
 %End
 
 

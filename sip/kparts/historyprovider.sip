@@ -28,7 +28,7 @@ namespace KParts
 class HistoryProvider : QObject
 {
 %TypeHeaderCode
-#include <historyprovider.h>
+#include <kparts/historyprovider.h>
 %End
 
 

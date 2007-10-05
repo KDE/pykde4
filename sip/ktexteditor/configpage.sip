@@ -28,7 +28,7 @@ namespace KTextEditor
 class ConfigPage : QWidget
 {
 %TypeHeaderCode
-#include <configpage.h>
+#include <ktexteditor/configpage.h>
 %End
 
 

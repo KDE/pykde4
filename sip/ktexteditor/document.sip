@@ -28,7 +28,7 @@ namespace KTextEditor
 class Document : KParts::ReadWritePart
 {
 %TypeHeaderCode
-#include <document.h>
+#include <ktexteditor/document.h>
 %End
 
 

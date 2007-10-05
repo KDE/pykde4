@@ -28,7 +28,7 @@ namespace KTextEditor
 class CodeCompletionInterface
 {
 %TypeHeaderCode
-#include <codecompletioninterface.h>
+#include <ktexteditor/codecompletioninterface.h>
 %End
 
 

@@ -28,7 +28,7 @@ namespace KTextEditor
 class View : QWidget, KXMLGUIClient
 {
 %TypeHeaderCode
-#include <view.h>
+#include <ktexteditor/view.h>
 %End
 
 

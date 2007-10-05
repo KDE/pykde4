@@ -28,7 +28,7 @@ namespace Sonnet
 class Speller
 {
 %TypeHeaderCode
-#include <speller.h>
+#include <sonnet/speller.h>
 %End
 
 

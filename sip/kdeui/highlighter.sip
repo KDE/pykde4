@@ -28,7 +28,7 @@ namespace Sonnet
 class Highlighter : QSyntaxHighlighter
 {
 %TypeHeaderCode
-#include <highlighter.h>
+#include <sonnet/highlighter.h>
 %End
 
 

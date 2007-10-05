@@ -23,7 +23,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 %ModuleHeaderCode
-#include <editor.h>
+#include <ktexteditor/editor.h>
 %End
 
 namespace KTextEditor
@@ -32,7 +32,7 @@ namespace KTextEditor
 class Editor : QObject
 {
 %TypeHeaderCode
-#include <editor.h>
+#include <ktexteditor/editor.h>
 %End
 
 

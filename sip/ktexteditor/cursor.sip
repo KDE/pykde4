@@ -28,7 +28,7 @@ namespace KTextEditor
 class Cursor
 {
 %TypeHeaderCode
-#include <cursor.h>
+#include <ktexteditor/cursor.h>
 %End
 
 

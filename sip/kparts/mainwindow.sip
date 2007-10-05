@@ -28,7 +28,7 @@ namespace KParts
 class MainWindow : KXmlGuiWindow, KParts::PartBase
 {
 %TypeHeaderCode
-#include <mainwindow.h>
+#include <kparts/mainwindow.h>
 %End
 
 

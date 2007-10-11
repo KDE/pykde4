@@ -47,9 +47,8 @@ signals:
     void                 replace (const QString&, int, int, int);
 
 protected slots:
-    void                 slotSkip ();
-    void                 slotReplace ();
-    void                 slotReplaceAll ();
+
+
 
 };  // class KReplace
 

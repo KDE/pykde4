@@ -135,38 +135,30 @@ public:
     void                 setStartupId (const QByteArray&);
     void                 clearStartupId ();
     void                 setSynchronizeClipboard (bool);
-
-public slots:
-    void                 updateUserTimestamp (int = 0);
-    void                 reparseConfiguration ();
-    void                 quit ();
-
-public:
     ulong                userTimestamp () const;
     void                 updateRemoteUserTimestamp (const QString&, int = 0);
-
-protected:
-                         KApplication (bool, const KComponentData&);
-                         KApplication (Display*, Qt::HANDLE, Qt::HANDLE, const KComponentData&);
-//ig     bool                 x11EventFilter (XEvent*);
-
-public:
     bool                 notify (QObject*, QEvent*);
 //ig     int                  xErrhandler (Display*, void*);
     int                  xioErrhandler (Display*);
 //ig     void                 iceIOErrorHandler (_IceConn*);
     static bool          loadedByKdeinit;
 
+public slots:
+    void                 updateUserTimestamp (int = 0);
+    void                 reparseConfiguration ();
+    void                 quit ();
+
 signals:
     void                 saveYourself ();
+
+protected:
+                         KApplication (bool, const KComponentData&);
+                         KApplication (Display*, Qt::HANDLE, Qt::HANDLE, const KComponentData&);
+//ig     bool                 x11EventFilter (XEvent*);
 
 private:
                          KApplication (const KApplication&);
                          KApplication (bool, bool);
-
-public:
-
-
 
 };  // class KApplication
 

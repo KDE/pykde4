@@ -36,6 +36,9 @@ class KUrlPixmapProvider : KPixmapProvider
 
 
 public:
+
+                         KUrlPixmapProvider ();
+
     virtual QPixmap      pixmapFor (const QString&, int = 0);
 
 protected:

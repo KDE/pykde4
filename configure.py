@@ -119,7 +119,7 @@ pykde_includes = {
                   }
 
 pykde_libs = {
-              "kdecore":     ["QtCore", "QtGui", "QtNetwork"],
+              "kdecore":     ["QtCore", "QtGui", "QtNetwork", "kpty"],
               "solid":       ["QtCore", "QtGui", "kdecore"],
               "kdeui":       ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore"],
               "kio":         ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdeui", "kfile"],

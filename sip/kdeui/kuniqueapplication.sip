@@ -36,8 +36,6 @@ public:
     static void          addCmdLineOptions ();
     static bool          start ();
     virtual int          newInstance ();
-
-public:
     bool                 restoringSession ();
     static void          setHandleAutoStarted ();
 

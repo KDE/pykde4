@@ -41,15 +41,16 @@ public slots:
     virtual void         back ();
     virtual void         next ();
 
-protected slots:
-    void                 slotCurrentPageChanged ();
-
 protected:
                          KAssistantDialog (KPageWidget*, QWidget* /TransferThis/ = 0, Qt::WFlags = 0);
     virtual void         showEvent (QShowEvent*);
 
 private:
                          KAssistantDialog (const KAssistantDialog&) [()];
+
+protected slots:
+
+
 
 };  // class KAssistantDialog
 

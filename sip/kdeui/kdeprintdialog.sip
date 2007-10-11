@@ -23,18 +23,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-class KAboutKdeDialog : KDialog
+namespace KdePrint
 {
 %TypeHeaderCode
-#include <kaboutkdedialog.h>
+#include <kdeprintdialog.h>
 %End
+QPrintDialog*        createPrintDialog (QPrinter*, const QList<QWidget*>&, QWidget* = 0);
+QPrintDialog*        createPrintDialog (QPrinter*, QWidget* = 0);
+};  // namespace KdePrint
 
-
-public:
-                         KAboutKdeDialog (QWidget* /TransferThis/ = 0);
-
-private:
-                         KAboutKdeDialog (const KAboutKdeDialog&) [()];
-
-};  // class KAboutKdeDialog
 

@@ -61,11 +61,11 @@
 %Include khuesaturationselect.sip
 %Include kconfigskeleton.sip
 %Include kaboutapplicationdialog.sip
-%Include kaboutkdedialog.sip
 %Include kassistantdialog.sip
 %Include kbugreport.sip
 %Include kconfigdialog.sip
 %Include kconfigdialogmanager.sip
+%Include kdeprintdialog.sip
 %Include kdialog.sip
 %Include kedittoolbar.sip
 %Include kinputdialog.sip
@@ -78,7 +78,6 @@
 %Include kshortcutsdialog.sip
 %Include kshortcutseditor.sip
 %Include ksplashscreen.sip
-%Include kswitchlanguagedialog.sip
 %Include ktip.sip
 %Include kfind.sip
 %Include kfinddialog.sip
@@ -91,7 +90,7 @@
 %Include kiconcache.sip
 %Include kiconeffect.sip
 %Include kiconloader.sip
-%Include kicontheme.sip
+//%Include kicontheme.sip
 %Include kpixmapcache.sip
 %Include kcategorizedsortfilterproxymodel.sip
 %Include klistwidget.sip

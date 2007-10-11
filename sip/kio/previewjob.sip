@@ -33,7 +33,9 @@ class PreviewJob : KIO::Job
 
 
 public:
-                         PreviewJob (const QList<KFileItem>&, int, int, int, int, bool, bool, const QStringList*);
+
+                         PreviewJob (const KFileItemList&, int, int, int, int, bool, bool, const QStringList*);
+
     void                 removeItem (const KUrl&);
     void                 setIgnoreMaximumSize (bool = 1);
     static QStringList   availablePlugins ();
@@ -46,9 +48,17 @@ signals:
 protected slots:
     virtual void         slotResult (KJob*);
 
+public:
+
+
+
 };  // class PreviewJob
 
-KIO::PreviewJob*     filePreview (const QList<KFileItem>&, int, int = 0, int = 0, int = 70, bool = 1, bool = 1, const QStringList* = 0);
+
+KIO::PreviewJob*     filePreview (const KFileItemList&, int, int = 0, int = 0, int = 70, bool = 1, bool = 1, const QStringList* = 0);
+
 KIO::PreviewJob*     filePreview (const KUrl::List&, int, int = 0, int = 0, int = 70, bool = 1, bool = 1, const QStringList* = 0);
+
+
 };  // namespace KIO
 

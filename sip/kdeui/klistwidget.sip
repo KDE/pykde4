@@ -38,19 +38,20 @@ signals:
     void                 executed (QListWidgetItem*, const QPoint&);
     void                 doubleClicked (QListWidgetItem*, const QPoint&);
 
-protected slots:
-    void                 slotItemEntered (QListWidgetItem*);
-    void                 slotOnViewport ();
-    void                 slotSettingsChanged (int);
-    void                 slotAutoSelect ();
-
 protected:
-    void                 emitExecute (QListWidgetItem*, const QPoint&);
     virtual void         keyPressEvent (QKeyEvent*);
     virtual void         focusOutEvent (QFocusEvent*);
     virtual void         leaveEvent (QEvent*);
     virtual void         mousePressEvent (QMouseEvent*);
     virtual void         mouseDoubleClickEvent (QMouseEvent*);
+
+protected slots:
+
+
+
+protected:
+
+
 
 };  // class KListWidget
 

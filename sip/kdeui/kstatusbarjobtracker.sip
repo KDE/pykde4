@@ -31,31 +31,32 @@ class KStatusBarJobTracker : KAbstractWidgetJobTracker
 
 
 public:
+
+
+    enum StatusBarMode
+    {
+        NoInformation, 
+        LabelOnly, 
+        ProgressOnly
+    };
+
+    typedef QFlags<KStatusBarJobTracker::StatusBarMode> StatusBarModes;
+
                          KStatusBarJobTracker (QWidget* /TransferThis/ = 0, bool = 1);
     virtual void         registerJob (KJob*);
-
     virtual QWidget*     widget (KJob*);
+
+    void                 setStatusBarMode (KStatusBarJobTracker::StatusBarModes);
 
 
 public slots:
+
+    virtual void         description (KJob*, const QString&, const QPair<QString, QString>&, const QPair<QString, QString>&);
 
     virtual void         totalAmount (KJob*, KJob::Unit, qulonglong);
     virtual void         percent (KJob*, ulong);
     virtual void         speed (KJob*, ulong);
     virtual void         slotClean (KJob*);
-
-
-public:
-
-
-
-protected:
-
-
-
-protected slots:
-
-
 
 };  // class KStatusBarJobTracker
 

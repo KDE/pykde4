@@ -35,7 +35,9 @@ class MetaInfoJob : KIO::Job
 
 
 public:
-                         MetaInfoJob (const QList<KFileItem>&, KFileMetaInfo::WhatFlags = KFileMetaInfo::Everything , int = 3, int = 6, const QStringList& = QStringList (), const QStringList& = QStringList ());
+
+                         MetaInfoJob (const KFileItemList&, KFileMetaInfo::WhatFlags = KFileMetaInfo::Everything, int = 3, int = 6, const QStringList& = QStringList (), const QStringList& = QStringList ());
+
     void                 removeItem (const KFileItem&);
 
 signals:
@@ -48,9 +50,17 @@ protected:
 protected slots:
     virtual void         slotResult (KJob*);
 
+public:
+
+
+
 };  // class MetaInfoJob
 
-KIO::MetaInfoJob*    fileMetaInfo (const QList<KFileItem>&);
+
+KIO::MetaInfoJob*    fileMetaInfo (const KFileItemList&);
+
 KIO::MetaInfoJob*    fileMetaInfo (const KUrl::List&);
+
+
 };  // namespace KIO
 

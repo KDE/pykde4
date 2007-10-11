@@ -59,17 +59,19 @@ signals:
     void                 urlSelected (const KUrl&);
 
 protected:
-    void                 init ();
-
-protected slots:
-    void                 slotOpenDialog ();
-
-protected:
     virtual void         changeEvent (QEvent*);
     bool                 eventFilter (QObject*, QEvent*);
 
 private:
                          KUrlRequester (const KUrlRequester&) [()];
+
+protected:
+
+
+
+protected slots:
+
+
 
 };  // class KUrlRequester
 

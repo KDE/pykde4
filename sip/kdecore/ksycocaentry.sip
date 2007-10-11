@@ -40,6 +40,9 @@ class KSycocaEntry
 
 
 public:
+
+                         KSycocaEntry ();
+
     bool                 isType (KSycocaType) const;
     KSycocaType          sycocaType () const;
     typedef KSharedPtr<KSycocaEntry> Ptr;
@@ -53,6 +56,9 @@ public:
     QVariant             property (const QString&) const;
     QStringList          propertyNames () const;
     void                 setDeleted (bool);
+
+    bool                 isSeparator () const;
+
     int                  offset () const;
     void                 save (QDataStream&);
 

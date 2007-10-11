@@ -46,9 +46,14 @@ public:
     QString              replacement () const;
     QWidget*             replaceExtension ();
 
-protected slots:
-    void                 slotOk ();
+protected:
+
     virtual void         showEvent (QShowEvent*);
+
+
+protected slots:
+
+
 
 };  // class KReplaceDialog
 

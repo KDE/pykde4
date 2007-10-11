@@ -45,15 +45,16 @@ public:
 signals:
     void                 fontSelected (const QFont&);
 
-protected:
-    void                 displaySampleText ();
-    void                 setToolTip ();
-
-protected slots:
-    virtual void         buttonClicked ();
-
 private:
                          KFontRequester (const KFontRequester&) [()];
+
+protected:
+
+
+
+protected slots:
+
+
 
 };  // class KFontRequester
 

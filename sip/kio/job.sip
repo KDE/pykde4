@@ -28,34 +28,51 @@
 
 namespace KIO
 {
+
+
+enum LoadType
+{
+    Reload, 
+    NoReload
+};
+
+
 KIO::SimpleJob*      mkdir (const KUrl&, int = -1);
 KIO::SimpleJob*      rmdir (const KUrl&);
 KIO::SimpleJob*      chmod (const KUrl&, int);
 KIO::SimpleJob*      chown (const KUrl&, const QString&, const QString&);
 KIO::SimpleJob*      setModificationTime (const KUrl&, const QDateTime&);
-KIO::SimpleJob*      rename (const KUrl&, const KUrl&, bool);
-KIO::SimpleJob*      symlink (const QString&, const KUrl&, bool, bool = 1);
-KIO::SimpleJob*      special (const KUrl&, const QByteArray&, bool = 1);
-KIO::SimpleJob*      mount (bool, const QByteArray&, const QString&, const QString&, bool = 1);
-KIO::SimpleJob*      unmount (const QString&, bool = 1);
+
+KIO::SimpleJob*      rename (const KUrl&, const KUrl&, KIO::JobFlags = KIO::DefaultFlags);
+KIO::SimpleJob*      symlink (const QString&, const KUrl&, KIO::JobFlags = KIO::DefaultFlags);
+KIO::SimpleJob*      special (const KUrl&, const QByteArray&, KIO::JobFlags = KIO::DefaultFlags);
+KIO::SimpleJob*      mount (bool, const QByteArray&, const QString&, const QString&, KIO::JobFlags = KIO::DefaultFlags);
+KIO::SimpleJob*      unmount (const QString&, KIO::JobFlags = KIO::DefaultFlags);
+
 KIO::SimpleJob*      http_update_cache (const KUrl&, bool, time_t);
-KIO::StatJob*        stat (const KUrl&, bool = 1);
 
-KIO::StatJob*        stat (const KUrl&, KIO::StatJob::StatSide, short, bool = 1);
+KIO::StatJob*        stat (const KUrl&, KIO::JobFlags = KIO::DefaultFlags);
+KIO::StatJob*        stat (const KUrl&, KIO::StatJob::StatSide, short, KIO::JobFlags = KIO::DefaultFlags);
+KIO::StatJob*        stat (const KUrl&, bool, short, KIO::JobFlags = KIO::DefaultFlags);
+KIO::TransferJob*    get (const KUrl&, KIO::LoadType = KIO::NoReload, KIO::JobFlags = KIO::DefaultFlags);
 
-KIO::StatJob*        stat (const KUrl&, bool, short, bool = 1);
-KIO::TransferJob*    get (const KUrl&, bool = 0, bool = 1);
 KIO::FileJob*        open (const KUrl&, QIODevice::OpenMode);
-KIO::TransferJob*    put (const KUrl&, int, bool, bool, bool = 1);
-KIO::TransferJob*    http_post (const KUrl&, const QByteArray&, bool = 1);
-KIO::StoredTransferJob* storedGet (const KUrl&, bool = 0, bool = 1);
-KIO::StoredTransferJob* storedPut (const QByteArray&, const KUrl&, int, bool, bool, bool = 1);
+
+KIO::TransferJob*    put (const KUrl&, int, KIO::JobFlags = KIO::DefaultFlags);
+KIO::TransferJob*    http_post (const KUrl&, const QByteArray&, KIO::JobFlags = KIO::DefaultFlags);
+KIO::StoredTransferJob* storedGet (const KUrl&, KIO::LoadType = KIO::NoReload, KIO::JobFlags = KIO::DefaultFlags);
+KIO::StoredTransferJob* storedPut (const QByteArray&, const KUrl&, int, KIO::JobFlags = KIO::DefaultFlags);
+
 KIO::MultiGetJob*    multi_get (long, const KUrl&, const KIO::MetaData&);
-KIO::MimetypeJob*    mimetype (const KUrl&, bool = 1);
-KIO::FileCopyJob*    file_copy (const KUrl&, const KUrl&, int = -1, bool = 0, bool = 0, bool = 1);
-KIO::FileCopyJob*    file_move (const KUrl&, const KUrl&, int = -1, bool = 0, bool = 0, bool = 1);
-KIO::SimpleJob*      file_delete (const KUrl&, bool = 1);
-KIO::ListJob*        listDir (const KUrl&, bool = 1, bool = 1);
-KIO::ListJob*        listRecursive (const KUrl&, bool = 1, bool = 1);
+
+KIO::MimetypeJob*    mimetype (const KUrl&, KIO::JobFlags = KIO::DefaultFlags);
+KIO::FileCopyJob*    file_copy (const KUrl&, const KUrl&, int = -1, KIO::JobFlags = KIO::DefaultFlags);
+KIO::FileCopyJob*    file_move (const KUrl&, const KUrl&, int = -1, KIO::JobFlags = KIO::DefaultFlags);
+KIO::SimpleJob*      file_delete (const KUrl&, KIO::JobFlags = KIO::DefaultFlags);
+KIO::ListJob*        listDir (const KUrl&, KIO::JobFlags = KIO::DefaultFlags, bool = 1);
+KIO::ListJob*        listRecursive (const KUrl&, KIO::JobFlags = KIO::DefaultFlags, bool = 1);
+
+
+
 };  // namespace KIO
 

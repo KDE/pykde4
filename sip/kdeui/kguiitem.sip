@@ -26,6 +26,7 @@
 class KGuiItem
 {
 %TypeHeaderCode
+#include <kiconloader.h>
 #include <kguiitem.h>
 %End
 

@@ -36,6 +36,7 @@ public:
     static bool          isDesktopFile (const QString&);
     static bool          isAuthorizedDesktopFile (const QString&);
     static QString       locateLocal (const QString&);
+    KConfigGroup         desktopGroup ();
     QString              readType () const;
     QString              readIcon () const;
     QString              readName () const;
@@ -45,7 +46,6 @@ public:
     QString              readDevice () const;
     QString              readUrl () const;
     QStringList          readActions () const;
-    void                 setActionGroup (const QString&);
     KConfigGroup         actionGroup (const QString&) const;
     bool                 hasActionGroup (const QString&) const;
     bool                 hasLinkType () const;
@@ -53,18 +53,24 @@ public:
     bool                 hasMimeTypeType () const;
     bool                 hasDeviceType () const;
     bool                 tryExec () const;
-    QString              fileName () const;
-    QString              resource () const;
     QString              readDocPath () const;
     QStringList          sortOrder () const;
     KDesktopFile*        copyTo (const QString&) const;
-    KConfigGroup         desktopGroup ();
+    QString              fileName () const;
 
-protected:
-//igx     virtual void         virtual_hook (int, void*);
+    const char*          resource () const;
+
 
 private:
                          KDesktopFile (const KDesktopFile&);
+
+public:
+
+
+
+protected:
+
+
 
 };  // class KDesktopFile
 

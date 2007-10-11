@@ -31,26 +31,28 @@ class KSharedConfig : KConfig
 
 
 public:
-
     typedef KSharedPtr<KSharedConfig> Ptr;
-
 
 public:
     static KSharedConfig::Ptr openConfig (const QString& = QString (), KConfig::OpenFlags = KConfig::IncludeGlobals , const char* = "config");
     static KSharedConfig::Ptr openConfig (const KComponentData&, const QString& = QString (), KConfig::OpenFlags = KConfig::IncludeGlobals , const char* = "config");
-    KConfigGroup         group (const QByteArray&);
-    KConfigGroup         group (const char*);
-    KConfigGroup         group (const QString&);
+
 
 private:
-                         KSharedConfig (const QString&, KConfig::OpenFlags, const char*, const KComponentData&);
+                         KSharedConfig (const KComponentData&, const QString&, KConfig::OpenFlags, const char*);
+
 
 public:
+
+
 
 
 
 };  // class KSharedConfig
 
+
+// This defined already in kgroupconfig.h
+// typedef KSharedConfig::Ptr KSharedConfigPtr;
 
 
 %MappedType KSharedConfigPtr

@@ -84,8 +84,8 @@ protected:
     QWidget*             dialogsParent () const;
 
 protected slots:
-    void                 slotFindNext ();
-    void                 slotDialogClosed ();
+
+
 
 };  // class KFind
 

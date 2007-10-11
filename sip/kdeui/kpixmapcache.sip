@@ -35,9 +35,7 @@ public:
     virtual bool         find (const QString&, QPixmap&);
     virtual void         insert (const QString&, const QPixmap&);
     QPixmap              loadFromFile (const QString&);
-
     QPixmap              loadFromSvg (const QString&, const QSize& = QSize ());
-
     uint                 timestamp () const;
     void                 setTimestamp (uint);
     void                 setUseQPixmapCache (bool);
@@ -62,19 +60,15 @@ public:
     void                 removeEntries (int = 0);
 
 protected:
-    void                 init ();
-    bool                 loadData (int, QPixmap&);
+    void                 ensureInited () const;
     virtual bool         loadCustomData (QDataStream&);
-    int                  writeData (const QString&, const QPixmap&);
     virtual bool         writeCustomData (QDataStream&);
-    void                 writeIndex (const QString&, int);
     virtual bool         loadCustomIndexHeader (QDataStream&);
     virtual void         writeCustomIndexHeader (QDataStream&);
     void                 setValid (bool);
-    void                 ensureInited () const;
     bool                 recreateCacheFiles ();
 
-public:
+protected:
 
 
 

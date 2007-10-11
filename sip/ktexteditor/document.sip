@@ -107,6 +107,10 @@ public:
     virtual bool         setMode (const QString&)  = 0;
     virtual bool         setHighlightingMode (const QString&)  = 0;
 
+    virtual QString      highlightingModeSection (int) const = 0;
+    virtual QString      modeSection (int) const = 0;
+
+
 signals:
     void                 modeChanged (KTextEditor::Document*);
     void                 highlightingModeChanged (KTextEditor::Document*);

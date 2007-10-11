@@ -38,7 +38,7 @@ public:
     virtual void         insert (const QString&, const QPixmap&);
     static void          deleteCache ();
     int                  defaultIconSize (KIconLoader::Group) const;
-    void                 setThemeInfo (const QList<KIconTheme*>&);
+//ig    void                 setThemeInfo (const QList<KIconTheme*>&);
 
 protected:
     virtual bool         loadCustomIndexHeader (QDataStream&);

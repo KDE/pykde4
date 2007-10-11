@@ -26,8 +26,6 @@
 //ctscc
 #include <kjob.h>
 #include <kcompositejob.h>
-#include <kprocess.h>
-#include <kptyprocess.h>
 #include <kautosavefile.h>
 #include <kautostart.h>
 #include <kdedmodule.h>
@@ -39,7 +37,7 @@
 #include <klocalsocket.h>
 #include <kpluginfactory.h>
 #include <kpluginloader.h>
-#include <kptydevice.h>
+#include <kprocess.h>
 #include <ksavefile.h>
 #include <ksycoca.h>
 #include <ktemporaryfile.h>
@@ -79,12 +77,6 @@ public:
         if (dynamic_cast<KCompositeJob*>(sipCpp))
             sipClass = sipClass_KCompositeJob;
     }
-    else if (dynamic_cast<KProcess*>(sipCpp))
-    {
-        sipClass = sipClass_KProcess;
-        if (dynamic_cast<KPtyProcess*>(sipCpp))
-            sipClass = sipClass_KPtyProcess;
-    }
     else if (dynamic_cast<KAutoSaveFile*>(sipCpp))
         sipClass = sipClass_KAutoSaveFile;
     else if (dynamic_cast<KAutostart*>(sipCpp))
@@ -109,8 +101,8 @@ public:
         sipClass = sipClass_KPluginFactory;
     else if (dynamic_cast<KPluginLoader*>(sipCpp))
         sipClass = sipClass_KPluginLoader;
-    else if (dynamic_cast<KPtyDevice*>(sipCpp))
-        sipClass = sipClass_KPtyDevice;
+    else if (dynamic_cast<KProcess*>(sipCpp))
+        sipClass = sipClass_KProcess;
     else if (dynamic_cast<KSaveFile*>(sipCpp))
         sipClass = sipClass_KSaveFile;
     else if (dynamic_cast<KSycoca*>(sipCpp))

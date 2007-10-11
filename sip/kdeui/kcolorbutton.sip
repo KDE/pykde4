@@ -39,15 +39,10 @@ public:
     QColor               defaultColor () const;
     void                 setDefaultColor (const QColor&);
     QSize                sizeHint () const;
-
     QSize                minimumSizeHint () const;
-
 
 signals:
     void                 changed (const QColor&);
-
-protected slots:
-    void                 chooseColor ();
 
 protected:
     virtual void         paintEvent (QPaintEvent*);
@@ -56,6 +51,10 @@ protected:
     virtual void         mousePressEvent (QMouseEvent*);
     virtual void         mouseMoveEvent (QMouseEvent*);
     virtual void         keyPressEvent (QKeyEvent*);
+
+protected slots:
+
+
 
 };  // class KColorButton
 

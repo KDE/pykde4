@@ -45,8 +45,6 @@ public:
     static bool          upload (const QString&, const KUrl&, QWidget*);
     static bool          file_copy (const KUrl&, const KUrl&, QWidget* = 0);
     static bool          copy (const KUrl&, const KUrl&, QWidget* = 0);
-    static bool          file_copy (const KUrl&, const KUrl&, int, bool = 0, bool = 0, QWidget* = 0);
-    static bool          file_move (const KUrl&, const KUrl&, int = -1, bool = 0, bool = 0, QWidget* = 0);
     static bool          dircopy (const KUrl&, const KUrl&, QWidget*);
     static bool          dircopy (const KUrl::List&, const KUrl&, QWidget* = 0);
     static bool          move (const KUrl&, const KUrl&, QWidget* = 0);
@@ -55,7 +53,7 @@ public:
     static bool          exists (const KUrl&, KIO::NetAccess::StatSide, QWidget*);
     static bool          stat (const KUrl&, KIO::UDSEntry&, QWidget*);
     static KUrl          mostLocalUrl (const KUrl&, QWidget*);
-    static bool          del (const KUrl&, QWidget*) /PyName=del_/;
+    static bool          del (const KUrl&, QWidget*)  /PyName=del_/;
     static bool          mkdir (const KUrl&, QWidget*, int = -1);
     static QString       fish_execute (const KUrl&, const QString&, QWidget*);
     static bool          synchronousRun (KIO::Job*, QWidget*, QByteArray* = 0, KUrl* = 0, QMap<QString, QString>* = 0);
@@ -69,6 +67,10 @@ signals:
 private:
                          NetAccess ();
                          ~NetAccess ();
+
+public:
+
+
 
 };  // class NetAccess
 

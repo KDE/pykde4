@@ -43,13 +43,14 @@ public slots:
 
 protected:
     virtual bool         itemMatches (const QListWidgetItem*, const QString&) const;
-    void                 init (QListWidget* = 0);
-    void                 hideItem (QListWidgetItem*);
-    void                 showItem (QListWidgetItem*);
+
+protected:
+
+
 
 protected slots:
-    void                 queueSearch (const QString&);
-    void                 activateSearch ();
+
+
 
 };  // class KListWidgetSearchLine
 

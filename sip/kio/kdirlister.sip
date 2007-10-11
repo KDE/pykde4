@@ -31,8 +31,21 @@ class KDirLister : QObject
 
 
 public:
+
+
+    enum OpenUrlFlag
+    {
+        NoFlags, 
+        Keep, 
+        Reload
+    };
+
+    typedef QFlags<KDirLister::OpenUrlFlag> OpenUrlFlags;
+
                          KDirLister (QObject* /TransferThis/ = 0);
-    virtual bool         openUrl (const KUrl&, bool = 0, bool = 0);
+
+    virtual bool         openUrl (const KUrl&, KDirLister::OpenUrlFlags = KDirLister::NoFlags);
+
     virtual void         stop ();
     virtual void         stop (const KUrl&);
     bool                 delayedMimeTypes () const;
@@ -50,11 +63,9 @@ public:
     virtual void         emitChanges ();
     virtual void         updateDirectory (const KUrl&);
     bool                 isFinished () const;
-
     KFileItem            rootItem () const;
     virtual KFileItem    findByUrl (const KUrl&) const;
     virtual KFileItem    findByName (const QString&) const;
-
     virtual void         setNameFilter (const QString&);
     QString              nameFilter () const;
     virtual void         setMimeFilter (const QStringList&);
@@ -87,8 +98,8 @@ signals:
     void                 clear (const KUrl&);
     void                 newItems (const KFileItemList&);
     void                 itemsFilteredByMime (const KFileItemList&);
-
     void                 deleteItem (const KFileItem&);
+
 
 //mt  undefined symbol: QList<QPair<KFileItem, KFileItem>>& -- need mapped type?
 //mt     void                 refreshItems (const QList<QPair<KFileItem, KFileItem>>&);
@@ -110,10 +121,8 @@ protected:
         DIR_ONLY_MODE
     };
 
-
     virtual bool         matchesFilter (const KFileItem&) const;
     virtual bool         matchesMimeFilter (const KFileItem&) const;
-
     virtual bool         doNameFilter (const QString&, const QList<QRegExp>&) const;
     virtual bool         doMimeFilter (const QString&, const QStringList&) const;
     virtual void         handleError (KIO::Job*);
@@ -123,12 +132,6 @@ public:
 
 
 signals:
-
-
-
-protected:
-
-
 
 };  // class KDirLister
 

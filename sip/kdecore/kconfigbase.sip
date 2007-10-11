@@ -27,88 +27,41 @@
 #include <kconfig.h>
 #include <kdesktopfile.h>
 #include <ksharedconfig.h>
+#include <kconfiggroup.h>
 %End
 
 
-class KConfigBase : KConfigFlags
+
+
+
+class KConfigBase /Abstract/
 {
 %TypeHeaderCode
 #include <kconfigbase.h>
 %End
 
-
 public:
-                         KConfigBase ();
-                         KConfigBase (const KComponentData&);
-    const KComponentData& componentData () const;
-    void                 setGroup (const QString&);
-    QString              group () const;
+
+    enum WriteConfigFlag
+    {
+        Persistent, 
+        Global, 
+        Localized, 
+        NLS, 
+        Normal
+    };
+
+    typedef QFlags<KConfigBase::WriteConfigFlag> WriteConfigFlags;
     bool                 hasGroup (const QString&) const;
+    bool                 hasGroup (const char*) const;
+    bool                 hasGroup (const QByteArray&) const;
     virtual QStringList  groupList () const = 0;
-    QString              readEntry (const char*, const char* = 0) const;
-    QVariant             readPropertyEntry (const QString&, const QVariant&) const;
-    QVariant             readPropertyEntry (const char*, const QVariant&) const;
-    QStringList          readListEntry (const QString&, char = ',') const;
-    QStringList          readListEntry (const char*, char = ',') const;
-    QStringList          readListEntry (const char*, const QStringList&, char = ',') const;
-    QStringList          readEntry (const char*, const QStringList&, char = ',') const;
-    QStringList          readEntry (const QString&, const QStringList&, char = ',') const;
-    QList<int>           readIntListEntry (const QString&) const;
-    QList<int>           readIntListEntry (const char*) const;
-    QString              readPathEntry (const QString&, const QString& = QString ()) const;
-    QString              readPathEntry (const char*, const QString& = QString ()) const;
-    QStringList          readPathListEntry (const QString&, char = ',') const;
-    QStringList          readPathListEntry (const char*, char = ',') const;
-    int                  readNumEntry (const QString&, int = 0) const;
-    int                  readNumEntry (const char*, int = 0) const;
-    uint                 readUnsignedNumEntry (const QString&, uint = 0) const;
-    uint                 readUnsignedNumEntry (const char*, uint = 0) const;
-    long                 readLongNumEntry (const QString&, long = 0) const;
-    long                 readLongNumEntry (const char*, long = 0) const;
-    ulong                readUnsignedLongNumEntry (const QString&, ulong = 0) const;
-    ulong                readUnsignedLongNumEntry (const char*, ulong = 0) const;
-    qint64               readNum64Entry (const QString&, qint64 = 0) const;
-    qint64               readNum64Entry (const char*, qint64 = 0) const;
-    quint64              readUnsignedNum64Entry (const QString&, quint64 = 0) const;
-    quint64              readUnsignedNum64Entry (const char*, quint64 = 0) const;
-    double               readDoubleNumEntry (const QString&, double = 0.0) const;
-    double               readDoubleNumEntry (const char*, double = 0.0) const;
-    bool                 readBoolEntry (const QString&, bool = 0) const;
-    bool                 readBoolEntry (const char*, bool = 0) const;
-    QRect                readRectEntry (const QString&, const QRect* = 0) const;
-    QRect                readRectEntry (const char*, const QRect* = 0) const;
-    QPoint               readPointEntry (const QString&, const QPoint* = 0) const;
-    QPoint               readPointEntry (const char*, const QPoint* = 0) const;
-    QSize                readSizeEntry (const QString&, const QSize* = 0) const;
-    QSize                readSizeEntry (const char*, const QSize* = 0) const;
-    QDateTime            readDateTimeEntry (const QString&, const QDateTime* = 0) const;
-    QDateTime            readDateTimeEntry (const char*, const QDateTime* = 0) const;
-    QString              readEntryUntranslated (const QString&, const QString& = QString ()) const;
-    QString              readEntryUntranslated (const char*, const QString& = QString ()) const;
-    void                 writeEntry (const QString&, const QStringList&, char = ',', KConfigFlags::WriteConfigFlags = Normal );
-    void                 writeEntry (const char*, const QStringList&, char = ',', KConfigFlags::WriteConfigFlags = Normal );
-    void                 writePathEntry (const QString&, const QString&, KConfigFlags::WriteConfigFlags = Normal );
-    void                 writePathEntry (const char*, const QString&, KConfigFlags::WriteConfigFlags = Normal );
-    void                 writePathEntry (const QString&, const QStringList&, char = ',', KConfigFlags::WriteConfigFlags = Normal );
-    void                 writePathEntry (const char*, const QStringList&, char = ',', KConfigFlags::WriteConfigFlags = Normal );
-    void                 deleteEntry (const QString&, KConfigFlags::WriteConfigFlags = Normal );
-    void                 deleteEntry (const char*, KConfigFlags::WriteConfigFlags = Normal );
-
-public:
-    void                 deleteGroup (const QString&, KConfigFlags::WriteConfigFlags = Normal );
-    void                 setDollarExpansion (bool);
-    bool                 isDollarExpansion () const;
-    virtual void         rollback (bool = 1);
-    virtual void         sync ();
-    bool                 isDirty () const;
-    bool                 hasKey (const QString&) const;
-    virtual QMap<QString, QString> entryMap (const QString&) const = 0;
-
-public:
-    virtual void         reparseConfiguration ()  = 0;
-    bool                 isImmutable () const;
-    bool                 groupIsImmutable (const QString&) const;
-    bool                 entryIsImmutable (const QString&) const;
+    KConfigGroup         group (const QByteArray&);
+    KConfigGroup         group (const QString&);
+    KConfigGroup         group (const char*);
+    virtual void         clean ()  = 0;
+    void                 rollback ();
+    virtual bool         isImmutable () const = 0;
 
     enum ConfigState
     {
@@ -117,34 +70,24 @@ public:
         ReadWrite
     };
 
-    KConfigBase::ConfigState getConfigState () const;
-    bool                 checkConfigFilesWritable (bool);
-    void                 setReadDefaults (bool);
-    bool                 readDefaults () const;
-    void                 revertToDefault (const QString&);
-    bool                 hasDefault (const QString&) const;
+    virtual KConfigBase::ConfigState getConfigState () const = 0;
+    void                 deleteGroup (const QByteArray&, KConfigBase::WriteConfigFlags = KConfigBase::Normal);
+    void                 deleteGroup (const QString&, KConfigBase::WriteConfigFlags = KConfigBase::Normal);
+    void                 deleteGroup (const char*, KConfigBase::WriteConfigFlags = KConfigBase::Normal);
+    bool                 groupIsImmutable (const QByteArray&) const;
+    bool                 groupIsImmutable (const QString&) const;
+    bool                 groupIsImmutable (const char*) const;
+    virtual void         sync ()  = 0;
 
 protected:
-    void                 setDirty (bool);
-    void                 setBackEnd (KConfigBackEnd*);
-    KConfigBackEnd*      backEnd () const;
-    virtual void         parseConfigFiles ();
-    virtual KEntryMap    internalEntryMap (const QString&) const = 0;
-    virtual KEntryMap    internalEntryMap () const = 0;
-    virtual void         putData (const KEntryKey&, const KEntry&, bool = 1)  = 0;
-    virtual KEntry       lookupData (const KEntryKey&) const = 0;
+                         KConfigBase ();
+    virtual bool         hasGroupImpl (const QByteArray&) const = 0;
+    virtual KConfigGroup groupImpl (const QByteArray&)  = 0;
+    virtual void         deleteGroupImpl (const QByteArray&, KConfigBase::WriteConfigFlags = KConfigBase::Normal)  = 0;
+    virtual bool         groupIsImmutableImpl (const QByteArray&) const = 0;
 
-public:
-    void                 setGroup (const QByteArray&);
-    void                 setGroup (const char*);
-    bool                 hasKey (const char*) const;
-    bool                 hasGroup (const QByteArray&) const;
-    bool                 hasGroup (const char*) const;
-
-protected:
-    virtual bool         internalHasGroup (const QByteArray&) const = 0;
-    KConfigGroup&        internalGroup () const;
-//igx     virtual void         virtual_hook (int, void*);
+//io argument void* ambiguous - add tag: In, Out or both
+//io    virtual void         virtual_hook (int, void*);
 
 // Subclasses for KConfigBase
 
@@ -159,10 +102,13 @@ public:
         else if (dynamic_cast<KSharedConfig*>(sipCpp))
             sipClass = sipClass_KSharedConfig;
     }
+    else if (dynamic_cast<KConfigGroup*>(sipCpp))
+        sipClass = sipClass_KConfigGroup;
     else
         sipClass = NULL;
 %End
 
 
 };  // class KConfigBase
+
 

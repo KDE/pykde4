@@ -26,6 +26,7 @@
 class KDialog : QDialog
 {
 %TypeHeaderCode
+#include <kconfigbase.h>
 #include <kdialog.h>
 %End
 
@@ -84,7 +85,10 @@ public:
     void                 setInitialSize (const QSize&);
     void                 incrementInitialSize (const QSize&);
     void                 restoreDialogSize (const KConfigGroup&);
-    void                 saveDialogSize (KConfigGroup&, KConfigFlags::WriteConfigFlags = 0) const;
+
+//FIXME
+//    void                 saveDialogSize (KConfigGroup&, KConfigBase::WriteConfigFlags = 0) const;
+
     QString              helpLinkText () const;
     bool                 isButtonEnabled (KDialog::ButtonCode) const;
     KPushButton*         button (KDialog::ButtonCode) const;

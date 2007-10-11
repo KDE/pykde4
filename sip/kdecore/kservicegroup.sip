@@ -33,16 +33,13 @@ class KServiceGroup : KSycocaEntry
 public:
     typedef KSharedPtr<KServiceGroup> Ptr;
     typedef KSharedPtr<KSycocaEntry> SPtr;
-//ig    typedef QList<KServiceGroup::SPtr> List;
-
+//ig     typedef QList<KServiceGroup::SPtr> List;
 
 public:
                          KServiceGroup (const QString&);
                          KServiceGroup (const QString&, const QString&);
                          KServiceGroup (QDataStream&, int, bool);
-
     QString              relPath () const;
-
     QString              caption () const;
     QString              icon () const;
     QString              comment () const;
@@ -62,9 +59,25 @@ public:
     void                 setLayoutInfo (const QStringList&);
     QStringList          layoutInfo () const;
     KServiceGroup::List  entries (bool, bool, bool, bool = 0);
-
     KServiceGroup::List  entries (bool, bool);
     KServiceGroup::List  entries (bool = 0);
+
+
+    enum EntriesOption
+    {
+        NoOptions, 
+        SortEntries, 
+        ExcludeNoDisplay, 
+        AllowSeparators, 
+        SortByGenericName
+    };
+
+    typedef QFlags<KServiceGroup::EntriesOption> EntriesOptions;
+
+// FIXME
+//    QList<KServiceGroup::Ptr> groupEntries (KServiceGroup::EntriesOptions = KServiceGroup::ExcludeNoDisplay);
+
+    KService::List       serviceEntries (KServiceGroup::EntriesOptions = KServiceGroup::ExcludeNoDisplay);
 
     QString              baseGroupName () const;
     QString              directoryEntryPath () const;
@@ -72,10 +85,13 @@ public:
     static KServiceGroup::Ptr root ();
     static KServiceGroup::Ptr group (const QString&);
     static KServiceGroup::Ptr childGroup (const QString& /Transfer/);
-    void                 parseAttribute (const QString&, bool& /Out/, bool& /Out/, bool& /Out/, bool& /Out/, int& /Out/);
 
 protected:
     void                 addEntry (const KSycocaEntry::Ptr&);
+
+public:
+
+
 
 public:
 //force
@@ -83,15 +99,5 @@ public:
 //end
 
 
-public:
-
-
-
-protected:
-
-
-
 };  // class KServiceGroup
-
-
 

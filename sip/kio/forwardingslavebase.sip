@@ -35,23 +35,33 @@ class ForwardingSlaveBase : QObject, KIO::SlaveBase
 public:
                          ForwardingSlaveBase (const QByteArray&, const QByteArray&, const QByteArray&);
     virtual void         get (const KUrl&);
-    virtual void         put (const KUrl&, int, bool, bool);
+
+    virtual void         put (const KUrl&, int, KIO::JobFlags);
+
     virtual void         stat (const KUrl&);
     virtual void         mimetype (const KUrl&);
     virtual void         listDir (const KUrl&);
     virtual void         mkdir (const KUrl&, int);
-    virtual void         rename (const KUrl&, const KUrl&, bool);
-    virtual void         symlink (const QString&, const KUrl&, bool);
+
+    virtual void         rename (const KUrl&, const KUrl&, KIO::JobFlags);
+    virtual void         symlink (const QString&, const KUrl&, KIO::JobFlags);
+
     virtual void         chmod (const KUrl&, int);
     virtual void         setModificationTime (const KUrl&, const QDateTime&);
-    virtual void         copy (const KUrl&, const KUrl&, int, bool);
-    virtual void         del (const KUrl&, bool) /PyName=del_/;
+
+    virtual void         copy (const KUrl&, const KUrl&, int, KIO::JobFlags);
+
+    virtual void         del (const KUrl&, bool)  /PyName=del_/;
 
 protected:
     virtual bool         rewriteUrl (const KUrl&, KUrl&)  = 0;
     virtual void         prepareUDSEntry (KIO::UDSEntry&, bool = 0) const;
     KUrl                 processedUrl () const;
     KUrl                 requestedUrl () const;
+
+public:
+
+
 
 };  // class ForwardingSlaveBase
 

@@ -51,12 +51,12 @@ protected:
     virtual bool         isDefault ();
     virtual void         showEvent (QShowEvent*);
 
-protected slots:
-    void                 updateButtons ();
-    void                 settingsChangedSlot ();
-
 private:
                          KConfigDialog (const KConfigDialog&) [()];
+
+protected slots:
+
+
 
 };  // class KConfigDialog
 

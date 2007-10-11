@@ -56,7 +56,11 @@ private:
 
 };  // class DeleteJob
 
-KIO::DeleteJob*      del (const KUrl&, bool = 0, bool = 1) /PyName=del_/;
-KIO::DeleteJob*      del (const KUrl::List&, bool = 0, bool = 1) /PyName=del_/;
+
+KIO::DeleteJob*      del (const KUrl&, KIO::JobFlags = KIO::DefaultFlags) /PyName=del_/;
+KIO::DeleteJob*      del (const KUrl::List&, KIO::JobFlags = KIO::DefaultFlags) /PyName=del_/;
+
+
+
 };  // namespace KIO
 

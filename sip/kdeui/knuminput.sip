@@ -37,7 +37,6 @@ public:
     QString              label () const;
     bool                 showSlider () const;
     void                 setSteps (int, int);
-    QSizePolicy          sizePolicy () const;
     virtual QSize        sizeHint () const;
 
 protected:
@@ -47,6 +46,10 @@ protected:
 
 private:
                          KNumInput (const KNumInput&) [()];
+
+public:
+
+
 
 };  // class KNumInput
 

@@ -36,7 +36,6 @@ class KIconLoader : QObject
 
 public:
 
-
     enum Context
     {
         Any, 
@@ -104,7 +103,6 @@ public:
         LastState
     };
 
-
                          KIconLoader (const QString& = QString (), KStandardDirs* = 0, QObject* /TransferThis/ = 0);
                          KIconLoader (const KComponentData&, QObject* /TransferThis/ = 0);
     static KIconLoader*  global ()  /PyName=global_/;
@@ -121,7 +119,7 @@ public:
 //ig     bool                 hasContext (KIconLoader::Context) const;
     QStringList          queryIconsByDir (const QString&) const;
 //ig     int                  currentSize (KIconLoader::Group) const;
-    KIconTheme*          theme () const;
+//ig    KIconTheme*          theme () const;
     KIconEffect*         iconEffect () const;
     void                 reconfigure (const QString&, KStandardDirs*);
     static QPixmap       unknown ();
@@ -134,26 +132,6 @@ public slots:
 
 };  // class KIconLoader
 
-
-
-class K3Icon
-{
-%TypeHeaderCode
-#include <kiconloader.h>
-%End
-
-public:
-                         K3Icon ();
-    bool                 isValid () const;
-    int                  size;
-    KIconLoader::Context context;
-    KIconLoader::Type    type;
-    int                  threshold;
-    QString              path;
-
-};  // class K3Icon
-
-
 QPixmap              DesktopIcon (const QString&, int = 0, int = KIconLoader::DefaultState , const QStringList& = QStringList ());
 QIcon                DesktopIconSet (const QString&, int = 0);
 QPixmap              BarIcon (const QString&, int = 0, int = KIconLoader::DefaultState , const QStringList& = QStringList ());
@@ -165,3 +143,5 @@ QIcon                MainBarIconSet (const QString&, int = 0);
 QPixmap              UserIcon (const QString&, int = KIconLoader::DefaultState , const QStringList& = QStringList ());
 QIcon                UserIconSet (const QString&);
 //ig int                  IconSize (KIconLoader::Group);
+
+

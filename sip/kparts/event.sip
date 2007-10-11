@@ -52,10 +52,10 @@ public:
     if (dynamic_cast<KParts::Event*>(sipCpp))
     {
         sipClass = sipClass_KParts_Event;
-        if (dynamic_cast<KParts::GUIActivateEvent*>(sipCpp))
-            sipClass = sipClass_KParts_GUIActivateEvent;
-        else if (dynamic_cast<KParts::OpenUrlEvent*>(sipCpp))
+        if (dynamic_cast<KParts::OpenUrlEvent*>(sipCpp))
             sipClass = sipClass_KParts_OpenUrlEvent;
+        else if (dynamic_cast<KParts::GUIActivateEvent*>(sipCpp))
+            sipClass = sipClass_KParts_GUIActivateEvent;
         else if (dynamic_cast<KParts::PartActivateEvent*>(sipCpp))
             sipClass = sipClass_KParts_PartActivateEvent;
         else if (dynamic_cast<KParts::PartSelectEvent*>(sipCpp))

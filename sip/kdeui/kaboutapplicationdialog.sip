@@ -49,22 +49,19 @@
 #include <kprogressdialog.h>
 #include <kpassworddialog.h>
 #include <kcolordialog.h>
-#include <kaboutkdedialog.h>
 #include <kedittoolbar.h>
 #include <kpixmapregionselectordialog.h>
 #include <kpagedialog.h>
 #include <kconfigdialog.h>
 #include <kassistantdialog.h>
-#include <sonnet/configdialog.h>
+#include <configdialog.h>
 #include <kbugreport.h>
 #include <kaboutapplicationdialog.h>
 #include <kfinddialog.h>
 #include <kreplacedialog.h>
 #include <kfontdialog.h>
-#include <kswitchlanguagedialog.h>
 #include <kshortcutsdialog.h>
-#include <kinputdialog.h>
-#include <sonnet/dialog.h>
+#include <dialog.h>
 #include <ktip.h>
 #include <knewpassworddialog.h>
 #include <kfind.h>
@@ -139,7 +136,6 @@
 #include <ksqueezedtextlabel.h>
 #include <kstartupinfo.h>
 #include <kstatusbar.h>
-#include <kstyle.h>
 #include <ksvgrenderer.h>
 #include <ksystemtrayicon.h>
 #include <ktabbar.h>
@@ -156,8 +152,8 @@
 #include <kwindowsystem.h>
 #include <kxmlguifactory.h>
 #include <kxmessages.h>
-#include <sonnet/configwidget.h>
-#include <sonnet/highlighter.h>
+#include <configwidget.h>
+#include <highlighter.h>
 %End
 
 
@@ -248,8 +244,6 @@ public:
             sipClass = sipClass_KPasswordDialog;
         else if (dynamic_cast<KColorDialog*>(sipCpp))
             sipClass = sipClass_KColorDialog;
-        else if (dynamic_cast<KAboutKdeDialog*>(sipCpp))
-            sipClass = sipClass_KAboutKdeDialog;
         else if (dynamic_cast<KEditToolBar*>(sipCpp))
             sipClass = sipClass_KEditToolBar;
         else if (dynamic_cast<KPixmapRegionSelectorDialog*>(sipCpp))
@@ -276,12 +270,8 @@ public:
         }
         else if (dynamic_cast<KFontDialog*>(sipCpp))
             sipClass = sipClass_KFontDialog;
-        else if (dynamic_cast<KSwitchLanguageDialog*>(sipCpp))
-            sipClass = sipClass_KSwitchLanguageDialog;
         else if (dynamic_cast<KShortcutsDialog*>(sipCpp))
             sipClass = sipClass_KShortcutsDialog;
-        else if (dynamic_cast<KInputDialog*>(sipCpp))
-            sipClass = sipClass_KInputDialog;
         else if (dynamic_cast<Sonnet::Dialog*>(sipCpp))
             sipClass = sipClass_Sonnet_Dialog;
         else if (dynamic_cast<KTipDialog*>(sipCpp))
@@ -497,8 +487,6 @@ public:
         sipClass = sipClass_KStatusBar;
     else if (dynamic_cast<KStringListValidator*>(sipCpp))
         sipClass = sipClass_KStringListValidator;
-    else if (dynamic_cast<KStyle*>(sipCpp))
-        sipClass = sipClass_KStyle;
     else if (dynamic_cast<KSvgRenderer*>(sipCpp))
         sipClass = sipClass_KSvgRenderer;
     else if (dynamic_cast<KSystemTrayIcon*>(sipCpp))

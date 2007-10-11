@@ -41,7 +41,7 @@ project     = PyKDE4
 package     = PyKDE4
 
 // $DST
-destination = /home/sbe/devel/pykde4/PyKDE_svn_sbe5
+destination = /home/sbe/devel/pykde4/PyKDE_svn_sbe7
 
 // $SRC
 source      = /home/sbe/devel/svn/kde/trunk/KDE/kdelibs/
@@ -157,41 +157,17 @@ retain
 
 // -----------------------------------------
 
-module = kdefx
-
-ignore     = kdefx_export.h
-source     = $SRC/kdefx
-compare    = $COMP
-subst      = $DST/extra/kde3920
-import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
-import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
-import     = kdecore/kdecore
-importpath = $IMP
-
-amend      = * ctor parent /TransferThis/
-amend      = * all parent /Transfer/
-nobase     = QStylePlugin
-cast       = QObject
-
-include    = QtCore QtGui
-libs       = QtCore QtGui kdecore
-
-define     = "KDEFX_EXPORT", ""
-// PyQt doesn't implement QCommonStyle (which is only a wrapper for QStyle anyway)
-define     = "QCommonStyle", "QStyle"
-
-  
-retain
-
-// -----------------------------------------
-
 module = kdeui
 
 //trace = kgesture.h
 source     = $SRC/kdeui/ $SRC/kdeui/dialogs $SRC/kdeui/util $SRC/kdeui/widgets $DST/extra/kde3920/kdeui
+//source     = $SRC/kdeui/actions  $SRC/kdeui/colors  $SRC/kdeui/config  $SRC/kdeui/findreplace  $SRC/kdeui/fonts
+//source     = $SRC/kdeui/icons $SRC/kdeui/itemviews $SRC/kdeui/jobs $SRC/kdeui/kernel $SRC/kdeui/paged $SRC/kdeui/plotting
+//source     = $SRC/kdeui/shortcuts $SRC/kdeui/windowmanagement $SRC/kdeui/xmlgui
+
 
 ignore     = kxerrorhandler.h  k3iconview.h  k3iconviewsearchline.h  k3listview.h  k3listviewlineedit.h  k3listviewsearchline.h  netwm_p.h
-ignore     = k3mimesourcefactory.h kdeui_export.h
+ignore     = k3mimesourcefactory.h kdeui_export.h k3icon_p.h
 
 compare    = $COMP $DST/extra/kde3920
 subst      = $DST/extra/kde3920
@@ -201,7 +177,6 @@ import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = QtSvg/QtSvgmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = kdecore/kdecore
-import     = kdefx/kdefx
 importpath = $IMP
 
 amend      = * ctor parent /TransferThis/
@@ -216,7 +191,7 @@ cast       = KXMLGuiClient QIcon KMessageHandler KConfigSkeletonItem QObject QCu
 nocast     = KConfigSkeletonGenericItem
 
 include    = QtCore QtGui QtXml QtSvg sonnet
-libs       = QtCore QtGui QtXml QtSvg kdecore kdefx
+libs       = QtCore QtGui QtXml QtSvg kdecore
 
 define     = "KDEUI_EXPORT", ""
 define     = "QT_MOC_COMPAT"
@@ -241,15 +216,14 @@ retain
 //import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 //import     = kdecore/kdecore
 //import     = solid/solid
-//import     = kdefx/kdefx
 //import     = kdeui/kdeui
 //importpath = $IMP
 //amend      = * ctor parent /TransferThis/        const KGuiItem& nullGuiItem (QString::null);
 //amend      = * all parent /Transfer/
 //nobase     = AbstractAudioOutput  Phonon::AbstractAudioOutput  QSharedData  AbstractVideoOutput  Phonon::AbstractVideoOutput
 
-//include    = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui
-//libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui 
+//include    = QtCore QtGui QtXml QtSvg kdecore solid kdeui
+//libs       = QtCore QtGui QtXml QtSvg kdecore solid kdeui 
 
 //define     = "PHONON_EXPORT", ""
 //define     = "PHONONCORE_EXPORT", ""
@@ -281,7 +255,6 @@ import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = kdecore/kdecore
 import     = solid/solid
-import     = kdefx/kdefx
 import     = kdeui/kdeui
 importpath = $IMP
 nobase     = QDBusAbstractInterface Q3ScrollView Q3Wizard K3IconView KShared
@@ -289,7 +262,7 @@ amend      = * ctor parent /TransferThis/
 amend      = * all parent /Transfer/
 
 include    = QtCore QtGui QtXml QtSvg solid kio kfile kssl
-libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kfile
+libs       = QtCore QtGui QtXml QtSvg kdecore solid kdeui kfile
 
 define     = "\(KIO::filesize_t\)\-1", "-1"
 define     = "KIO_EXPORT_DEPRECATED", ""
@@ -320,12 +293,11 @@ import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt.p_5_0_0 WS_X11)
 import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = kdecore/kdecoremod.sip
-import     = kdefx/kdefxmod.sip
 import     = kdeui/kdeuimod.sip
 importpath = $IMP
 
 include    = QtCore QtGui QtXml QtSvg ksettings
-libs       = QtCore QtGui QtXml QtSvg kdecore kdefx kdeui
+libs       = QtCore QtGui QtXml QtSvg kdecore kdeui
 define     = "KUTILS_EXPORT", ""
 
 cast       = QObject
@@ -344,14 +316,13 @@ import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = kdecore/kdecore
-import     = kdefx/kdefx
 import     = kdeui/kdeui
 import     = kio/kio
 importpath = $IMP
 amend      = * ctor parent /TransferThis/
 amend      = * all parent /Transfer/
 include    = QtCore QtGui QtXml QtSvg solid kio kfile kssl kparts
-libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kio
+libs       = QtCore QtGui QtXml QtSvg kdecore solid kdeui kio
 
 cast       = QEvent QObject
 nocast     = KParts::GenericFactoryBase
@@ -370,7 +341,6 @@ import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = kdecore/kdecore
-import     = kdefx/kdefx
 import     = kdeui/kdeui
 import     = kio/kio
 import     = kutils/kutils
@@ -381,7 +351,7 @@ amend      = * ctor parent /TransferThis/
 amend      = * all parent /Transfer/
 
 include    = QtCore QtGui QtXml QtSvg ktexteditor kate solid kio kfile kssl kparts ktexteditor kate
-libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kio kutils kparts
+libs       = QtCore QtGui QtXml QtSvg kdecore solid kdeui kio kutils kparts
 
 cast       = QObject
 
@@ -404,7 +374,6 @@ retain
 //import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 //import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 //import     = kdecore/kdecore
-//import     = kdefx/kdefx
 //import     = kdeui/kdeui
 //import     = kio/kio
 //import     = kutils/kutils
@@ -415,7 +384,7 @@ retain
 //amend      = * all parent /Transfer/
 
 //include    = QtCore QtGui QtXml QtSvg kate ktexteditor solid kio kfile kssl kparts ktexteditor kate
-//libs       = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kio kutils kparts ktexteditor kateinterfaces
+//libs       = QtCore QtGui QtXml QtSvg kdecore solid kdeui kio kutils kparts ktexteditor kateinterfaces
 
 //cast       = QObject
 
@@ -440,14 +409,13 @@ import     = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import     = kdecore/kdecore
-import     = kdefx/kdefx
 import     = kdeui/kdeui
 importpath = $IMP
 amend      = * ctor parent /TransferThis/
 amend      = * all parent /Transfer/
 
 include    = QtCore QtGui QtXml QtSvg kdeprint kdeprint/lpr
-libs       = QtCore QtGui QtXml QtSvg kdecore kdefx kdeui 
+libs       = QtCore QtGui QtXml QtSvg kdecore kdeui 
 
 define     = "KDEPRINT_EXPORT", ""
 define     = "KDEPRINT_MANAGEMENT_EXPORT", ""
@@ -467,7 +435,6 @@ import      = QtCore/QtCoremod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import      = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import      = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 import      = kdecore/kdecore
-import      = kdefx/kdefx
 import      = kdeui/kdeui
 import      = kio/kio
 import      = kutils/kutils
@@ -478,7 +445,7 @@ amend       = * all parent /Transfer/
 nobase      = khtml::KHTMLWidget
 nonamespace = khtmlview khtml
 include     = QtCore QtGui QtXml QtSvg solid kio kfile kssl kparts dom
-libs        = QtCore QtGui QtXml QtSvg kdecore solid kdefx kdeui kio kutils kparts
+libs        = QtCore QtGui QtXml QtSvg kdecore solid kdeui kio kutils kparts
 //   define     ="QPair\<QString\,QChar\>", "KHTMLSettings\:\:AssignPair"
 define      = "KHTML_EXPORT", ""
 define      = "ScrollBarMode", "ScrollBarPolicy"
@@ -500,7 +467,6 @@ retain
 //import     = QtGui/QtGuimod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 //import     = QtXml/QtXmlmod.sip (Qt_4_0_0 Qt_5_0_0 WS_X11)
 //import     = kdecore/kdecoremod.sip
-//import     = kdefx/kdefxmod.sip
 //import     = kdeui/kdeuimod.sip
 //importpath = $IMP
 

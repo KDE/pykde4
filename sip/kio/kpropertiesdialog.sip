@@ -32,23 +32,17 @@ class KPropertiesDialog : KPageDialog
 
 public:
     static bool          canDisplay (const KFileItemList&);
-
                          KPropertiesDialog (const KFileItem&, QWidget* /TransferThis/ = 0);
-
                          KPropertiesDialog (const KFileItemList&, QWidget* /TransferThis/ = 0);
                          KPropertiesDialog (const KUrl&, QWidget* /TransferThis/ = 0);
                          KPropertiesDialog (const KUrl&, const KUrl&, const QString&, QWidget* /TransferThis/ = 0);
                          KPropertiesDialog (const QString&, QWidget* /TransferThis/ = 0);
-
     static bool          showDialog (const KFileItem&, QWidget* /Transfer/ = 0, bool = 1);
-
     static bool          showDialog (const KUrl&, QWidget* /Transfer/ = 0, bool = 1);
     static bool          showDialog (const KFileItemList&, QWidget* /Transfer/ = 0, bool = 1);
     void                 insertPlugin (KPropertiesDialogPlugin*);
     KUrl                 kurl () const;
-
     KFileItem&           item ();
-
     KFileItemList        items () const;
     KUrl                 currentDir () const;
     QString              defaultName () const;
@@ -75,10 +69,6 @@ signals:
 private:
                          KPropertiesDialog (const KPropertiesDialog&) [()];
 
-public:
-
-
-
 };  // class KPropertiesDialog
 
 
@@ -92,9 +82,7 @@ class KPropertiesDialogPlugin : QObject
 public:
                          KPropertiesDialogPlugin (KPropertiesDialog*);
     virtual void         applyChanges ();
-
     static bool          isDesktopFile (const KFileItem&);
-
     void                 setDirty (bool);
     bool                 isDirty () const;
 
@@ -106,21 +94,8 @@ signals:
 
 protected:
 
-public:
-
+    int                  fontHeight () const;
 
 
 };  // class KPropertiesDialogPlugin
-
-
-
-
-
-
-
-
-
-
-
-
 

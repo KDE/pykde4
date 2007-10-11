@@ -35,12 +35,8 @@
 %Include kfilterbase.sip
 %Include kfilterdev.sip
 %Include kconfig.sip
-%Include kconfigbackend.sip
 %Include kconfigbase.sip
-%Include kconfigdata.sip
-%Include kconfigflags.sip
 %Include kconfiggroup.sip
-%Include kconfigini.sip
 %Include kdesktopfile.sip
 %Include ksharedconfig.sip
 %Include kcalendarsystem.sip
@@ -69,7 +65,6 @@
 %Include kglobal.sip
 %Include kstandarddirs.sip
 %Include ktoolinvocation.sip
-%Include kcatalog.sip
 %Include kcharsets.sip
 %Include kencodingdetector.sip
 %Include klocale.sip

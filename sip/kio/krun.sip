@@ -71,5 +71,26 @@ protected:
     virtual void         foundMimeType (const QString&);
     virtual void         killJob ();
 
+    void                 setUrl (const KUrl&);
+    KUrl                 url () const;
+    void                 setError (bool);
+    void                 setProgressInfo (bool);
+    bool                 progressInfo () const;
+    void                 setFinished (bool);
+    void                 setJob (KIO::Job*);
+    KIO::Job*            job ();
+    QTimer&              timer ();
+    void                 setDoScanFile (bool);
+    bool                 doScanFile () const;
+    void                 setIsDirecory (bool);
+    bool                 isDirectory () const;
+    void                 setInitializeNextAction (bool);
+    bool                 initializeNextAction () const;
+    void                 setIsLocalFile (bool);
+    bool                 isLocalFile () const;
+    void                 setMode (mode_t);
+    mode_t               mode () const;
+
+
 };  // class KRun
 

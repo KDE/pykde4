@@ -96,7 +96,6 @@
 %Include kdirmodel.sip
 %Include kdirwatch.sip
 %Include kemailsettings.sip
-%Include kfilefilter.sip
 %Include kfileitem.sip
 %Include kfileitemdelegate.sip
 %Include kfilemetainfo.sip

@@ -55,7 +55,10 @@ signals:
 
 protected slots:
     virtual void         actionTriggered (QAction*);
-    void                 subActionTriggered (QAction*);
+
+protected slots:
+
+
 
 };  // class KCodecAction
 

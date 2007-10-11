@@ -23,33 +23,29 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-class KInputDialog : KDialog
+namespace KInputDialog
 {
 %TypeHeaderCode
 #include <kinputdialog.h>
 %End
 
+QString              getText (const QString&, const QString&, const QString& = QString (), bool* /Out/ = 0, QWidget* /Transfer/ = 0, QValidator* = 0, const QString& = QString (), const QString& = QString (), const QStringList& = QStringList ());
 
-private:
-                         KInputDialog (const QString&, const QString&, const QString&, QWidget* /TransferThis/, QValidator*, const QString&);
-                         KInputDialog (const QString&, const QString&, const QString&, QWidget* /TransferThis/);
-                         KInputDialog (const QString&, const QString&, int, int, int, int, int, QWidget* /TransferThis/);
-                         KInputDialog (const QString&, const QString&, const QStringList&, int, bool, QWidget* /TransferThis/);
-                         KInputDialog (const QString&, const QString&, const QStringList&, const QStringList&, bool, QWidget* /TransferThis/);
-                         ~KInputDialog ();
+QString              getMultiLineText (const QString&, const QString&, const QString& = QString (), bool* /Out/ = 0, QWidget* /Transfer/ = 0);
 
-public:
-    static QString       getText (const QString&, const QString&, const QString& = QString (), bool* /Out/ = 0, QWidget* /Transfer/ = 0, QValidator* = 0, const QString& = QString (), const QString& = QString (), const QStringList& = QStringList ());
-    static QString       getMultiLineText (const QString&, const QString&, const QString& = QString (), bool* /Out/ = 0, QWidget* /Transfer/ = 0);
-    static int           getInteger (const QString&, const QString&, int = 0, int = -2147483647, int = 2147483647, int = 1, int = 10, bool* /Out/ = 0, QWidget* /Transfer/ = 0);
-//ig     static int           getInteger (const QString&, const QString&, int = 0, int = INT_MIN, int = INT_MAX, int = 1, bool* = 0, QWidget* /Transfer/ = 0);
-    static double        getDouble (const QString&, const QString&, double = 0, double = -2147483647, double = 2147483647, double = 0.1, int = 1, bool* /Out/ = 0, QWidget* /Transfer/ = 0);
-//ig     static double        getDouble (const QString&, const QString&, double = 0, double = -DBL_MAX , double = DBL_MAX, int = 1, bool* = 0, QWidget* /Transfer/ = 0);
-    static QString       getItem (const QString&, const QString&, const QStringList&, int = 0, bool = 0, bool* /Out/ = 0, QWidget* /Transfer/ = 0);
-    static QStringList   getItemList (const QString&, const QString&, const QStringList& = QStringList (), const QStringList& = QStringList (), bool = 0, bool* /Out/ = 0, QWidget* /Transfer/ = 0);
+int                  getInteger (const QString&, const QString&, int = 0, int = INT_MIN, int = INT_MAX, int = 1, int = 10, bool* /Out/ = 0, QWidget* /Transfer/ = 0);
 
-private:
-                         KInputDialog (const KInputDialog&) [()];
+//igint                  getInteger (const QString&, const QString&, int = 0, int = INT_MIN, int = INT_MAX, int = 1, bool* /Out/ = 0, QWidget* /Transfer/ = 0);
 
-};  // class KInputDialog
+double               getDouble (const QString&, const QString&, double = 0, double = -DBL_MAX , double = DBL_MAX, double = 0.1, int = 1, bool* /Out/ = 0, QWidget* /Transfer/ = 0);
+
+//igdouble               getDouble (const QString&, const QString&, double = 0, double = -DBL_MAX , double = DBL_MAX, int = 1, bool* /Out/ = 0, QWidget* /Transfer/ = 0);
+
+QString              getItem (const QString&, const QString&, const QStringList&, int = 0, bool = 0, bool* /Out/ = 0, QWidget* /Transfer/ = 0);
+
+QStringList          getItemList (const QString&, const QString&, const QStringList& = QStringList (), const QStringList& = QStringList (), bool = 0, bool* /Out/ = 0, QWidget* /Transfer/ = 0);
+};  // namespace KInputDialog
+
+
+
 

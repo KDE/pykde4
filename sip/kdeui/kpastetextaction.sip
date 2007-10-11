@@ -37,8 +37,8 @@ public:
     void                 setMixedMode (bool);
 
 protected slots:
-    void                 menuAboutToShow ();
-    void                 slotTriggered (QAction*);
+
+
 
 };  // class KPasteTextAction
 

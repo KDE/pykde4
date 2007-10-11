@@ -58,8 +58,8 @@ protected:
     virtual bool         canChooseColumnsCheck ();
 
 protected slots:
-    void                 queueSearch (const QString&);
-    void                 activateSearch ();
+
+
 
 };  // class KTreeWidgetSearchLine
 

@@ -162,12 +162,8 @@ enum CacheControl
 
 KIO::CacheControl    parseCacheControl (const QString&);
 QString              getCacheControlString (KIO::CacheControl);
-//ig QPixmap              pixmapForUrl (const KUrl&, mode_t = 0, KIconLoader::Group = KIconLoader::Desktop, int = 0, int = 0, QString* = 0);
-
+//ig QPixmap              pixmapForUrl (const KUrl&, mode_t = 0, KDirModel::KIconLoader::Group = KIconLoader::Desktop, int = 0, int = 0, QString* = 0);
 KJobTrackerInterface* getJobTracker ();
-
-
-
 //force
 //ig typedef QMap<QString, QString> MetaData;
 //end

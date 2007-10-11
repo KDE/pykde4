@@ -25,10 +25,11 @@
 %ModuleHeaderCode
 //ctscc
 #include <kcmultidialog.h>
-#include <dialog.h>
+#include <ksettings/dialog.h>
 #include <kcmoduleproxy.h>
 #include <kpluginselector.h>
-#include <pluginpage.h>
+#include <kprintpreview.h>
+#include <ksettings/pluginpage.h>
 %End
 
 
@@ -87,6 +88,8 @@ public:
         sipClass = sipClass_KCModuleProxy;
     else if (dynamic_cast<KPluginSelector*>(sipCpp))
         sipClass = sipClass_KPluginSelector;
+    else if (dynamic_cast<KPrintPreview*>(sipCpp))
+        sipClass = sipClass_KPrintPreview;
     else if (dynamic_cast<KSettings::PluginPage*>(sipCpp))
         sipClass = sipClass_KSettings_PluginPage;
     else

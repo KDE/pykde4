@@ -32,52 +32,94 @@ class KConfig : KConfigBase
 
 public:
 
-    enum OpenFlags
+
+    enum OpenFlag
     {
-        NoGlobals, 
-        OnlyLocal, 
-        IncludeGlobals
+        SimpleConfig, 
+        IncludeGlobals, 
+        CascadeConfig, 
+        DontMergeOnSync, 
+        FullConfig
     };
 
-                         KConfig (const QString& = QString (), KConfig::OpenFlags = KConfig::IncludeGlobals );
-                         KConfig (const char*, const QString&, KConfig::OpenFlags = KConfig::IncludeGlobals );
+    typedef QFlags<KConfig::OpenFlag> OpenFlags;
+    static const KConfig::OpenFlag OnlyLocal;
+    static const KConfig::OpenFlag NoGlobals;
+                         KConfig (const QString& = QString (), KConfig::OpenFlags = KConfig::FullConfig, const char* = "config");
+
                          KConfig (const KComponentData&, const QString& = QString (), KConfig::OpenFlags = KConfig::IncludeGlobals , const char* = "config");
-                         KConfig (KConfigBackEnd*);
-    QStringList          extraConfigFiles () const;
-    void                 setExtraConfigFiles (const QStringList&);
-    void                 removeAllExtraConfigFiles ();
-    virtual void         rollback (bool = 1);
-    virtual QStringList  groupList () const;
-    virtual QMap<QString, QString> entryMap (const QString&) const;
-    virtual void         reparseConfiguration ();
-    void                 setFileWriteMode (int);
-    void                 setForceGlobal (bool);
-    bool                 forceGlobal () const;
+
+    virtual void         sync ();
+    const KComponentData& componentData () const;
+
     void                 checkUpdate (const QString&, const QString&);
+
+    void                 clean ();
+
     KConfig*             copyTo (const QString&, KConfig* = 0) const;
 
-    bool                 setLocale (const QString&);
-    QString              locale () const;
+    void                 reparseConfiguration ();
+    virtual KConfigBase::ConfigState getConfigState () const;
+    bool                 isConfigWritable (bool);
+    void                 addConfigSources (const QStringList&);
 
-    KLockFile::Ptr       lockFile (bool = 0);
-    QString              group () const;
-    KConfigGroup         group (const char*);
-    KConfigGroup         group (const QByteArray&);
-    KConfigGroup         group (const QString&);
+// DEPRECATED
+//ig    void                 setExtraConfigFiles (const QStringList&);
+    QString              locale () const;
+    bool                 setLocale (const QString&);
+
+    void                 setReadDefaults (bool);
+    bool                 readDefaults () const;
+    bool                 isImmutable () const;
+
+// DEPRECATED
+//ig    void                 setForceGlobal (bool);
+// DEPRECATED
+//ig    bool                 forceGlobal () const;
+
+// DEPRECATED
+//ig    void                 setGroup (const QString&);
+
+// DEPRECATED
+//ig    QString              group () const;
+    virtual QStringList  groupList () const;
+
+// DEPRECATED
+//ig    QString              readEntryUntranslated (const char*, const QString& = QString ()) const;
+    QString              name () const;
+    QMap<QString, QString> entryMap (const QString& = QString ()) const;
+
 
 protected:
-    virtual void         putData (const KEntryKey&, const KEntry&, bool = 1);
-    virtual KEntry       lookupData (const KEntryKey&) const;
+
+    virtual bool         hasGroupImpl (const QByteArray&) const;
+    virtual KConfigGroup groupImpl (const QByteArray&);
+    virtual void         deleteGroupImpl (const QByteArray&, KConfigBase::WriteConfigFlags = KConfigBase::Normal);
+    virtual bool         groupIsImmutableImpl (const QByteArray&) const;
+
+//igx     virtual void         virtual_hook (int, void*);
+
+
+//mt  undefined symbol: KConfigPrivate& -- need mapped type?
+//mt                          KConfig (KConfigPrivate&);
+
 
 private:
-                         KConfig (const QString&, bool);
                          KConfig (const KConfig&);
 
+public:
+
+
+
 protected:
-    virtual bool         internalHasGroup (const QByteArray&) const;
-    virtual KEntryMap    internalEntryMap (const QString&) const;
-    virtual KEntryMap    internalEntryMap () const;
-//igx     virtual void         virtual_hook (int, void*);
+
+
+
+
+
+protected:
+
+
 
 };  // class KConfig
 

@@ -62,8 +62,8 @@ protected:
     virtual void         customEvent (QEvent*);
 
 protected slots:
-    void                 slotEntries (KIO::Job*, const KIO::UDSEntryList&);
-    void                 slotIOFinished (KJob*);
+
+
 
 };  // class KUrlCompletion
 

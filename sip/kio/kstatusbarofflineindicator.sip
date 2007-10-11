@@ -34,8 +34,8 @@ public:
                          KStatusBarOfflineIndicator (QWidget* /TransferThis/);
 
 protected slots:
-//ig     void                 networkStatusChanged (Solid::Networking::Status);
-    void                 initialize ();
+
+
 
 };  // class KStatusBarOfflineIndicator
 

@@ -29,155 +29,18 @@
 #include <QtCore/QStringList>
 #include <QtCore/QList>
 
+#include "kiconloader.h"
+
 class QAction;
-//class KIconThemeDir;
+class KIconThemeDir;
+class K3Icon;
 
 /**
- * One icon as found by KIconTheme. Also serves as a namespace containing
- * icon related constants.
- * @see KIconEffect
- * @see KIconTheme
- * @see KIconLoader
- */
-class KDEUI_EXPORT K3Icon
-{
-public:
-    K3Icon();
-    ~K3Icon();
-
-    /**
-     * Return true if this icon is valid, false otherwise.
-     */
-    bool isValid() const;
-
-    /**
-     * Defines the context of the icon.
-     */
-    enum Context {
-      Any, ///< Some icon with unknown purpose.
-      Action, ///< An action icon (e.g. 'save', 'print').
-      Application, ///< An icon that represents an application.
-      Device, ///< An icon that represents a device.
-      FileSystem, ///< An icon that represents a file system.
-      MimeType, ///< An icon that represents a mime type (or file type).
-      Animation, ///< An icon that is animated.
-      Category, ///< An icon that represents a category.
-      Emblem, ///< An icon that adds information to an existing icon.
-      Emote, ///< An icon that expresses an emotion.
-      International, ///< An icon that represents a country's flag.
-      Place, ///< An icon that represents a location (e.g. 'home', 'trash').
-      StatusIcon ///< An icon that represents an event.
-    };
-
-    /**
-     * The type of the icon.
-     */
-    enum Type {
-      Fixed, ///< Fixed-size icon.
-      Scalable, ///< Scalable-size icon.
-      Threshold ///< A threshold icon.
-    };
-
-    /**
-     * The type of a match.
-     */
-    enum MatchType {
-      MatchExact, ///< Only try to find an exact match.
-      MatchBest   ///< Take the best match if there is no exact match.
-
-    };
-
-    // if you add a group here, make sure to change the config reading in
-    // KIconLoader too
-    /**
-     * The group of the icon.
-     */
-    enum Group {
-	/// No group
-	NoGroup=-1,
-	/// Desktop icons
-	Desktop=0,
-	/// First group
-	FirstGroup=0,
-	/// Toolbar icons
-	Toolbar,
-	/// Main toolbar icons
-        MainToolbar,
-	/// Small icons, e.g. for buttons
-	Small,
-	/// Panel (Kicker) icons
-	Panel,
-	/// Icons for use in dialog titles, page lists, etc
-	Dialog,
-	/// Last group
-	LastGroup,
-	/// User icons
-	User
-         };
-
-    /**
-     * These are the standard sizes for icons.
-     */
-    enum StdSizes {
-        /// small icons for menu entries
-        SizeSmall=16,
-        /// slightly larger small icons for toolbars, panels, etc
-        SizeSmallMedium=22,
-        /// medium sized icons for the desktop
-        SizeMedium=32,
-        /// large sized icons for the panel
-        SizeLarge=48,
-        /// huge sized icons for iconviews
-        SizeHuge=64,
-        /// enormous sized icons for iconviews
-        SizeEnormous=128
-         };
-
-    /**
-     * Defines the possible states of an icon.
-     */
-    enum States { DefaultState, ///< The default state.
-		  ActiveState,  ///< Icon is active.
-		  DisabledState, ///< Icon is disabled.
-		  LastState      ///< Last state (last constant)
-    };
-
-    /**
-     * The size in pixels of the icon.
-     */
-    int size;
-
-    /**
-     * The context of the icon.
-     */
-    Context context;
-
-    /**
-     * The type of the icon: Fixed, Scalable or Threshold.
-     **/
-    Type type;
-
-    /**
-     * The threshold in case type == Threshold
-     */
-    int threshold;
-
-    /**
-     * The full path of the icon.
-     */
-    QString path;
-
-private:
-    class KIconPrivate;
-    KIconPrivate * d;
-};
-
-inline KIconLoader::Group& operator++(KIconLoader::Group& group) { group = static_cast<KIconLoader::Group>(group+1); return group; }
-inline KIconLoader::Group operator++(KIconLoader::Group& group,int) { KIconLoader::Group ret = group; ++group; return ret; }
-
-/**
+ * @internal
  * Class to use/access icon themes in KDE. This class is used by the
  * iconloader but can be used by others too.
+ * @warning You should not use this class externally. This class is exported because
+ *          the KCM needs it.
  * @see KIconLoader
  */
 class KDEUI_EXPORT KIconTheme
@@ -286,7 +149,6 @@ public:
      */
     QStringList queryIconsByContext(int size, KIconLoader::Context context = KIconLoader::Any) const;
 
-
     /**
      * Lookup an icon in the theme.
      * @param name The name of the icon, without extension.
@@ -294,7 +156,8 @@ public:
      * @param match The matching mode. KIconLoader::MatchExact returns an icon
      * only if matches exactly. KIconLoader::MatchBest returns the best matching
      * icon.
-     * @return A K3Icon class that describes the icon. If an icon is found,
+     * @return A K3Icon class that describes the icon. If an icon is found, an invalid
+     *         K3Icon object otherwise.
      * @see KIconLoader::isValid will return true, and false otherwise.
      */
     K3Icon iconPath(const QString& name, int size, KIconLoader::MatchType match) const;

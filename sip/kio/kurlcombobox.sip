@@ -62,21 +62,18 @@ public:
 signals:
     void                 urlActivated (const KUrl&);
 
-protected slots:
-    void                 slotActivated (int);
-
-protected:
-    
-//ig     class _KUrlComboItem;
-
-//ig     typedef _KUrlComboItem KUrlComboItem;
-    void                 init (KUrlComboBox::Mode);
-//ig     void                 insertUrlItem (const KUrlComboBox::KUrlComboItem*);
-    QIcon                getIcon (const KUrl&) const;
-//ig     void                 updateItem (const KUrlComboBox::KUrlComboItem*, int, const QIcon&);
-
 private:
                          KUrlComboBox (const KUrlComboBox&) [()];
+
+protected slots:
+
+
+
+protected:
+
+
+
+
 
 };  // class KUrlComboBox
 

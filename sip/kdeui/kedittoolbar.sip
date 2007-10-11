@@ -37,12 +37,6 @@ public:
     void                 setResourceFile (const QString&, bool = 1);
     static void          setGlobalDefaultToolBar (const char*);
 
-protected slots:
-    virtual void         slotOk ();
-    virtual void         slotApply ();
-    void                 acceptOK (bool);
-    void                 slotDefault ();
-
 signals:
     void                 newToolBarConfig ();
     void                 newToolbarConfig ();
@@ -54,7 +48,9 @@ protected:
 private:
                          KEditToolBar (const KEditToolBar&) [()];
 
+protected slots:
+
+
+
 };  // class KEditToolBar
-
-
 

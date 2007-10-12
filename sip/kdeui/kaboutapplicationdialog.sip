@@ -54,14 +54,14 @@
 #include <kpagedialog.h>
 #include <kconfigdialog.h>
 #include <kassistantdialog.h>
-#include <configdialog.h>
+#include <sonnet/configdialog.h>
 #include <kbugreport.h>
 #include <kaboutapplicationdialog.h>
 #include <kfinddialog.h>
 #include <kreplacedialog.h>
 #include <kfontdialog.h>
 #include <kshortcutsdialog.h>
-#include <dialog.h>
+#include <sonnet/dialog.h>
 #include <ktip.h>
 #include <knewpassworddialog.h>
 #include <kfind.h>
@@ -152,8 +152,8 @@
 #include <kwindowsystem.h>
 #include <kxmlguifactory.h>
 #include <kxmessages.h>
-#include <configwidget.h>
-#include <highlighter.h>
+#include <sonnet/configwidget.h>
+#include <sonnet/highlighter.h>
 %End
 
 

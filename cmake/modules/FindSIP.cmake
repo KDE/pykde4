@@ -26,7 +26,9 @@ IF(SIP_VERSION)
   SET(SIP_FOUND TRUE)
 ELSE(SIP_VERSION)
 
-  EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/FindSIP.py OUTPUT_VARIABLE sip_config)
+  GET_FILENAME_COMPONENT(_cmake_module_path ${CMAKE_CURRENT_LIST_FILE}  PATH)
+
+  EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE} ${_cmake_module_path}/FindSIP.py OUTPUT_VARIABLE sip_config)
   IF(sip_config)
     STRING(REGEX REPLACE "^sip_version:([^\n]+).*$" "\\1" SIP_VERSION ${sip_config})
     STRING(REGEX REPLACE ".*\nsip_version_str:([^\n]+).*$" "\\1" SIP_VERSION_STR ${sip_config})

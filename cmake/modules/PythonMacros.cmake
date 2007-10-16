@@ -12,6 +12,8 @@
 #     destination directory during install. The file will be byte compiled
 #     and both the .py file and .pyc file will be installed.
 
+GET_FILENAME_COMPONENT(PYTHON_MACROS_MODULE_PATH ${CMAKE_CURRENT_LIST_FILE}  PATH)
+
 MACRO(PYTHON_INSTALL SOURCE_FILE DESINATION_DIR)
   ADD_CUSTOM_TARGET(compile_python_files ALL)
 
@@ -34,16 +36,16 @@ MACRO(PYTHON_INSTALL SOURCE_FILE DESINATION_DIR)
   IF(_abs_bin_py STREQUAL ${_absfilename})    # Don't copy the file onto itself.
     ADD_CUSTOM_COMMAND(
       TARGET compile_python_files
-      COMMAND ${CMAKE_COMMAND} ${_message} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/print_status.cmake
-      COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/PythonCompile.py ${_bin_py}
+      COMMAND ${CMAKE_COMMAND} ${_message} -P ${PYTHON_MACROS_MODULE_PATH}/print_status.cmake
+      COMMAND ${PYTHON_EXECUTABLE} ${PYTHON_MACROS_MODULE_PATH}/PythonCompile.py ${_bin_py}
       DEPENDS ${_absfilename}
     )
   ELSE(_abs_bin_py STREQUAL ${_absfilename})
     ADD_CUSTOM_COMMAND(
       TARGET compile_python_files
-      COMMAND ${CMAKE_COMMAND} ${_message} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/print_status.cmake
+      COMMAND ${CMAKE_COMMAND} ${_message} -P ${PYTHON_MACROS_MODULE_PATH}/print_status.cmake
       COMMAND ${CMAKE_COMMAND} -E copy ${_absfilename} ${_bin_py}
-      COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/PythonCompile.py ${_bin_py}
+      COMMAND ${PYTHON_EXECUTABLE} ${PYTHON_MACROS_MODULE_PATH}/PythonCompile.py ${_bin_py}
       DEPENDS ${_absfilename}
     )
   ENDIF(_abs_bin_py STREQUAL ${_absfilename})

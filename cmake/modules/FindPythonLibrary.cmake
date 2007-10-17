@@ -1,4 +1,3 @@
-###########################################################################
 # Find Python
 # ~~~~~~~~~~~
 # Copyright (c) 2007, Simon Edwards <simon@simonzone.com>
@@ -18,6 +17,8 @@
 #     readable string.
 #
 # PYTHON_SITE_PACKAGES_DIR - Location of the Python site-packages directory.
+#
+# PYTHON_INCLUDE_DIR - Directory holding the python.h include file.
 
 IF(PYTHON_LIBRARY)
    # Already in cache, be silent
@@ -26,11 +27,14 @@ ELSE(PYTHON_LIBRARY)
 
   FIND_PACKAGE(PythonInterp REQUIRED)
 
-  EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE}  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/FindLibPython.py OUTPUT_VARIABLE python_config)
+  GET_FILENAME_COMPONENT(_cmake_module_path ${CMAKE_CURRENT_LIST_FILE}  PATH)
+
+  EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE}  ${_cmake_module_path}/FindLibPython.py OUTPUT_VARIABLE python_config)
   IF(python_config)
     STRING(REGEX REPLACE ".*exec_prefix:([^\n]+).*$" "\\1" PYTHON_PREFIX ${python_config})
     STRING(REGEX REPLACE ".*\nshort_version:([^\n]+).*$" "\\1" PYTHON_SHORT_VERSION ${python_config})
     STRING(REGEX REPLACE ".*\nlong_version:([^\n]+).*$" "\\1" PYTHON_LONG_VERSION ${python_config})
+    STRING(REGEX REPLACE ".*\npy_inc_dir:([^\n]+).*$" "\\1" PYTHON_INCLUDE_DIR ${python_config})
     STRING(REGEX REPLACE ".*\nsite_packages_dir:([^\n]+).*$" "\\1" PYTHON_SITE_PACKAGES_DIR ${python_config})
     FIND_LIBRARY(PYTHON_LIBRARY NAMES python${PYTHON_SHORT_VERSION} PATHS ${PYTHON_PREFIX}/lib NO_DEFAULT_PATH)
     SET(PYTHONLIBRARY_FOUND TRUE)

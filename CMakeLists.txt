@@ -54,3 +54,5 @@ ADD_SIP_PYTHON_MODULE(PyKDE4.khtml sip/khtml/khtmlmod.sip ${KDE4_KHTML_LIBS})
 ADD_SIP_PYTHON_MODULE(PyKDE4.kdeprint sip/kdeprint/kdeprintmod.sip ${KDE4_KDEPRINT_LIBS})
 
 PYTHON_INSTALL(__init__.py ${PYTHON_SITE_PACKAGES_DIR}/PyKDE4)
+
+ADD_SUBDIRECTORY(tools)

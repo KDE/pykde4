@@ -20,6 +20,8 @@
 #
 # SIP_INCLUDE_DIR - Directory holding the SIP C++ header file.
 #
+# SIP_DEFAULT_SIP_DIR - Default directory where .sip files should be installed
+#     into.
 
 IF(SIP_VERSION)
   # Already in cache, be silent
@@ -33,6 +35,7 @@ ELSE(SIP_VERSION)
     STRING(REGEX REPLACE "^sip_version:([^\n]+).*$" "\\1" SIP_VERSION ${sip_config})
     STRING(REGEX REPLACE ".*\nsip_version_str:([^\n]+).*$" "\\1" SIP_VERSION_STR ${sip_config})
     STRING(REGEX REPLACE ".*\nsip_bin:([^\n]+).*$" "\\1" SIP_EXECUTABLE ${sip_config})
+    STRING(REGEX REPLACE ".*\ndefault_sip_dir:([^\n]+).*$" "\\1" SIP_DEFAULT_SIP_DIR ${sip_config})
     STRING(REGEX REPLACE ".*\nsip_inc_dir:([^\n]+).*$" "\\1" SIP_INCLUDE_DIR ${sip_config})
     SET(SIP_FOUND TRUE)
   ENDIF(sip_config)

@@ -55,4 +55,11 @@ ADD_SIP_PYTHON_MODULE(PyKDE4.kdeprint sip/kdeprint/kdeprintmod.sip ${KDE4_KDEPRI
 
 PYTHON_INSTALL(__init__.py ${PYTHON_SITE_PACKAGES_DIR}/PyKDE4)
 
+# Install the .sip files for anyone that wants to build bindings on top of PyKDE4.
+# (Don't forget the / at the end of sip/.)
+INSTALL(DIRECTORY sip/ DESTINATION ${SIP_DEFAULT_SIP_DIR}/PyKDE4
+    PATTERN "*~" EXCLUDE    # This sucks, why can't I just whitelist what I _do_ want?
+    PATTERN ".svn" EXCLUDE
+    PATTERN "*.in" EXCLUDE)
+
 ADD_SUBDIRECTORY(tools)

@@ -36,6 +36,7 @@ public:
                          DOMException (ushort);
                          DOMException (const DOM::DOMException&);
 
+
     enum ExceptionCode
     {
         INDEX_SIZE_ERR, 
@@ -52,10 +53,17 @@ public:
         SYNTAX_ERR, 
         INVALID_MODIFICATION_ERR, 
         NAMESPACE_ERR, 
-        INVALID_ACCESS_ERR
+        INVALID_ACCESS_ERR, 
+        VALIDATION_ERR, 
+        TYPE_MISMATCH_ERR
     };
 
+
     ushort               code;
+
+public:
+
+
 
 };  // class DOMException
 

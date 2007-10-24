@@ -190,7 +190,8 @@ public:
 //ig    void                 popupMenu (const QPoint&, const KFileItemList&, const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments (), KParts::BrowserExtension::PopupFlags = KParts::BrowserExtension::DefaultPopupItems, const KParts::BrowserExtension::ActionGroupMap& = KParts::BrowserExtension::ActionGroupMap ());
 //ig    void                 popupMenu (const QPoint&, const KUrl&, mode_t = -1 , const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments (), KParts::BrowserExtension::PopupFlags = KParts::BrowserExtension::DefaultPopupItems, const KParts::BrowserExtension::ActionGroupMap& = KParts::BrowserExtension::ActionGroupMap ());
 
-    void                 selectionInfo (const QList<KFileItem>&);
+    void                 selectionInfo (const KFileItemList&);
+
     void                 selectionInfo (const QString&);
     void                 selectionInfo (const KUrl::List&);
     void                 mouseOverInfo (const KFileItem&);
@@ -203,10 +204,6 @@ public:
 
 public:
     typedef QMap<QByteArray, int> ActionNumberMap;
-
-public:
-
-
 
 public:
 

@@ -69,8 +69,6 @@ public:
     bool                 dndEnabled () const;
     void                 setJavaEnabled (bool);
     bool                 javaEnabled () const;
-//ig     KJavaAppletContext*  javaContext ();
-//ig     KJavaAppletContext*  createJavaContext ();
     void                 setPluginsEnabled (bool);
     bool                 pluginsEnabled () const;
     void                 setAutoloadImages (bool);
@@ -237,6 +235,10 @@ protected slots:
 
 protected:
     virtual void         startingJob (KIO::Job*);
+
+public:
+
+
 //force
 
 private:

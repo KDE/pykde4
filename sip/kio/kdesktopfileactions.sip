@@ -22,39 +22,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+#include <kdesktopfileactions.h>
+%End
 namespace KDesktopFileActions
 {
 
-enum ServiceType
-{
-    ST_MOUNT, 
-    ST_UNMOUNT, 
-    ST_USER_DEFINED
-};
+QList<KServiceAction> builtinServices (const KUrl&);
+QList<KServiceAction> userDefinedServices (const QString&, bool);
+QList<KServiceAction> userDefinedServices (const QString&, const KDesktopFile&, bool, const KUrl::List& = KUrl::List ());
+QList<KServiceAction> userDefinedServices (const KService&, bool, const KUrl::List& = KUrl::List ());
+void                 executeService (const KUrl::List&, const KServiceAction&);
 
-
-class Service
-{
-%TypeHeaderCode
-#include <kdesktopfileactions.h>
-%End
-
-
-public:
-                         Service ();
-    bool                 isEmpty () const;
-    QString              m_strName;
-    QString              m_strIcon;
-    QString              m_strExec;
-    KDesktopFileActions::ServiceType m_type;
-    bool                 m_display;
-
-};  // class Service
-
-QList<KDesktopFileActions::Service> builtinServices (const KUrl&);
-QList<KDesktopFileActions::Service> userDefinedServices (const QString&, bool);
-QList<KDesktopFileActions::Service> userDefinedServices (const QString&, const KDesktopFile&, bool, const KUrl::List& = KUrl::List ());
-void                 executeService (const KUrl::List&, const KDesktopFileActions::Service&);
 bool                 run (const KUrl&, bool);
+
 };  // namespace KDesktopFileActions
 

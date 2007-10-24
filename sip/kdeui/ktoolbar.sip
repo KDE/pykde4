@@ -56,8 +56,6 @@ protected slots:
 protected:
     virtual void         contextMenuEvent (QContextMenuEvent*);
     virtual void         actionEvent (QActionEvent*);
-    void                 applyAppearanceSettings (KConfigGroup&, bool = 0);
-    QString              settingsGroup () const;
     virtual void         dragEnterEvent (QDragEnterEvent*);
     virtual void         dragMoveEvent (QDragMoveEvent*);
     virtual void         dragLeaveEvent (QDragLeaveEvent*);
@@ -65,6 +63,10 @@ protected:
     virtual void         mousePressEvent (QMouseEvent*);
     virtual void         mouseMoveEvent (QMouseEvent*);
     virtual void         mouseReleaseEvent (QMouseEvent*);
+
+protected:
+
+
 
 };  // class KToolBar
 

@@ -90,7 +90,7 @@ src_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 
 
 pykde_modules = ["kdecore", "solid", "kdeui", "kio", "kutils", "kparts", "ktexteditor", #"kate",
-  "khtml", "kdeprint"]
+  "khtml"]
 
 pykde_imports = {
                  "kdecore":     ["QtCore", "QtGui", "QtNetwork"],
@@ -102,7 +102,6 @@ pykde_imports = {
                  "ktexteditor": ["QtCore", "QtGui", "QtXml", "kdecore", "kdeui", "kio", "kutils", "kparts"],
 #                 "kate":        ["QtCore", "QtGui", "QtXml", "kdecore", "kdeui", "kio", "kutils", "kparts", "ktexteditor"],
                  "khtml":       ["QtCore", "QtGui", "QtXml", "kdecore", "kdeui", "kio", "kutils", "kparts"],
-                 "kdeprint":    ["QtCore", "QtGui", "QtXml", "kdecore", "kdeui"]
                  }
 
 pykde_includes = {
@@ -114,8 +113,7 @@ pykde_includes = {
                   "kparts":      ["QtCore", "QtGui", "QtXml", "QtSvg", "solid", "kio", "kfile", "kssl", "kparts"],
                   "ktexteditor": ["QtCore", "QtGui", "QtXml", "QtSvg", "ktexteditor", "kate", "solid", "kio", "kfile", "kssl", "kparts", "ktexteditor", "kate"],
 #                  "kate":        ["QtCore", "QtGui", "QtXml", "QtSvg", "kate", "ktexteditor", "solid", "kio", "kfile", "kssl", "kparts", "ktexteditor", "kate"],
-                  "khtml":       ["QtCore", "QtGui", "QtXml", "QtSvg", "solid", "kio", "kfile", "kssl", "kparts", "dom"],
-                  "kdeprint":    ["QtCore", "QtGui", "QtXml", "QtSvg", "kdeprint", "kdeprint/lpr"]
+                  "khtml":       ["QtCore", "QtGui", "QtXml", "QtSvg", "solid", "kio", "kfile", "kssl", "kparts", "dom"]
                   }
 
 pykde_libs = {
@@ -128,7 +126,6 @@ pykde_libs = {
               "ktexteditor": ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdeui", "kio", "kutils", "kparts"],
 #              "kate":        ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdeui", "kio", "kutils", "kparts", "ktexteditor", "kateinterfaces"],
               "khtml":       ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "solid", "kdeui", "kio", "kutils", "kparts"],
-              "kdeprint":    ["QtCore", "QtGui", "QtXml", "QtSvg", "kdecore", "kdeui"]
               }
 
 
@@ -147,7 +144,6 @@ pykde_libs = {
                     "kparts":     None,
                     "khtml":      None,
                     "kspell":     None,
-                    "kdeprint":   None,
                     "kmdi":       None,
                     "kutils":     None #,
 #                    "kspell2":    None
@@ -595,11 +591,6 @@ def generate_code(mname, imports=None, extra_cflags=None, extra_cxxflags=None, e
         for lib in pykde_libs [mname]:
             makefile.extra_libs.append (lib)
     
-    if extra_lib == "kdeprint":
-        makefile.extra_cflags.append ("-D_KDEPRINT_COMPILE")
-        makefile.extra_cxxflags.append ("-D_KDEPRINT_COMPILE")
-
-
     if sipcfg.sip_version < 0x040000 and imports:
         # Inter-module links.
         for im in imports:

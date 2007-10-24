@@ -29,6 +29,7 @@
 namespace KStandardShortcut
 {
 
+
 enum StandardShortcut
 {
     AccelNone, 
@@ -53,6 +54,7 @@ enum StandardShortcut
     FindPrev, 
     Replace, 
     Home, 
+    Begin, 
     End, 
     Prior, 
     Next, 
@@ -80,8 +82,10 @@ enum StandardShortcut
     NextCompletion, 
     SubstringCompletion, 
     RotateUp, 
-    RotateDown
+    RotateDown, 
+    StandardShortcutCount
 };
+
 
 const KShortcut&     shortcut (KStandardShortcut::StandardShortcut);
 QString              name (KStandardShortcut::StandardShortcut);
@@ -95,7 +99,7 @@ const KShortcut&     open ();
 const KShortcut&     openNew ();
 const KShortcut&     close ();
 const KShortcut&     save ();
-const KShortcut&     print () /PyName=print_/;
+const KShortcut&     print ()  /PyName=print_/;
 const KShortcut&     quit ();
 const KShortcut&     undo ();
 const KShortcut&     redo ();
@@ -114,6 +118,9 @@ const KShortcut&     zoomIn ();
 const KShortcut&     zoomOut ();
 //ig const KShortcut&     insert ();
 const KShortcut&     home ();
+
+const KShortcut&     begin ();
+
 const KShortcut&     end ();
 const KShortcut&     beginningOfLine ();
 const KShortcut&     endOfLine ();
@@ -140,5 +147,7 @@ const KShortcut&     forward ();
 const KShortcut&     backwardWord ();
 const KShortcut&     forwardWord ();
 const KShortcut&     showMenubar ();
+
+
 };  // namespace KStandardShortcut
 

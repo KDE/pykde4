@@ -169,16 +169,14 @@ public:
     static QString       defaultCountry ();
     bool                 useTranscript () const;
     bool                 isApplicationTranslatedInto (const QString&);
-
     void                 copyCatalogsTo (KLocale*);
 
-
-protected:
     bool                 setCountry (const QString&, KConfig*);
     bool                 setLanguage (const QString&, KConfig*);
     bool                 setLanguage (const QStringList&);
 
-public:
+
+protected:
 
 
 //force

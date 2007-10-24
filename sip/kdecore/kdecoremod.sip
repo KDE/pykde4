@@ -75,6 +75,7 @@
 %Include kmimetypetrader.sip
 %Include kplugininfo.sip
 %Include kservice.sip
+%Include kserviceaction.sip
 %Include kservicegroup.sip
 %Include kservicetype.sip
 %Include kservicetypeprofile.sip

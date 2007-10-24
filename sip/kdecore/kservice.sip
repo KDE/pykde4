@@ -51,7 +51,6 @@ public:
     QString              menuId () const;
     QString              storageId () const;
 
-
     enum DBusStartupType
     {
         DBusNone, 
@@ -61,7 +60,6 @@ public:
     };
 
     KService::DBusStartupType dbusStartupType () const;
-
     QString              path () const;
     QString              comment () const;
     QString              genericName () const;
@@ -72,6 +70,9 @@ public:
     bool                 hasServiceType (const QString&) const;
     bool                 hasMimeType (const KServiceType*) const;
     bool                 allowAsDefault () const;
+
+    QList<KServiceAction> actions () const;
+
     bool                 allowMultipleFiles () const;
     int                  initialPreference () const;
     bool                 noDisplay () const;
@@ -92,10 +93,6 @@ public:
 
 protected:
     QStringList&         accessServiceTypes ();
-
-public:
-
-
 
 };  // class KService
 

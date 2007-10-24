@@ -38,8 +38,10 @@ public:
     void                 setBuilderComponentData (const KComponentData&);
     QWidget*             widget ();
     virtual QStringList  containerTags () const;
-//ig     virtual QWidget*     createContainer (QWidget* /Transfer/, int, const QDomElement&, int&);
-    virtual void         removeContainer (QWidget*, QWidget* /Transfer/, QDomElement&, int);
+
+    virtual QWidget*     createContainer (QWidget* /Transfer/, int, const QDomElement&, QAction*&);
+    virtual void         removeContainer (QWidget*, QWidget* /Transfer/, QDomElement&, QAction*);
+
     virtual QStringList  customTags () const;
     virtual QAction*     createCustomElement (QWidget* /Transfer/, int, const QDomElement&);
     virtual void         removeCustomElement (QWidget* /Transfer/, QAction*);
@@ -47,6 +49,10 @@ public:
 
 protected:
 //igx     virtual void         virtual_hook (int, void*);
+
+public:
+
+
 
 };  // class KXMLGUIBuilder
 

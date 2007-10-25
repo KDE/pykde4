@@ -35,67 +35,49 @@ public:
 
     enum OpenFlag
     {
-        SimpleConfig, 
         IncludeGlobals, 
         CascadeConfig, 
         DontMergeOnSync, 
+        SimpleConfig, 
+        NoCascade, 
+        NoGlobals, 
         FullConfig
     };
 
+
     typedef QFlags<KConfig::OpenFlag> OpenFlags;
-    static const KConfig::OpenFlag OnlyLocal;
-    static const KConfig::OpenFlag NoGlobals;
-                         KConfig (const QString& = QString (), KConfig::OpenFlags = KConfig::FullConfig, const char* = "config");
-
+                         KConfig (const QString& = QString (), KConfig::OpenFlags = KConfig::FullConfig , const char* = "config");
                          KConfig (const KComponentData&, const QString& = QString (), KConfig::OpenFlags = KConfig::IncludeGlobals , const char* = "config");
-
-    virtual void         sync ();
     const KComponentData& componentData () const;
+    QString              name () const;
 
-    void                 checkUpdate (const QString&, const QString&);
+    void                 sync ();
+    void                 markAsClean ();
+    KConfigBase::AccessMode accessMode () const;
 
-    void                 clean ();
-
-    KConfig*             copyTo (const QString&, KConfig* = 0) const;
-
-    void                 reparseConfiguration ();
-    virtual KConfigBase::ConfigState getConfigState () const;
     bool                 isConfigWritable (bool);
+    KConfig*             copyTo (const QString&, KConfig* = 0) const;
+    void                 checkUpdate (const QString&, const QString&);
+    void                 reparseConfiguration ();
     void                 addConfigSources (const QStringList&);
-
-// DEPRECATED
-//ig    void                 setExtraConfigFiles (const QStringList&);
     QString              locale () const;
     bool                 setLocale (const QString&);
-
     void                 setReadDefaults (bool);
     bool                 readDefaults () const;
     bool                 isImmutable () const;
+//ig     void                 setForceGlobal (bool);
+//ig     bool                 forceGlobal () const;
 
-// DEPRECATED
-//ig    void                 setForceGlobal (bool);
-// DEPRECATED
-//ig    bool                 forceGlobal () const;
+    QStringList          groupList () const;
 
-// DEPRECATED
-//ig    void                 setGroup (const QString&);
-
-// DEPRECATED
-//ig    QString              group () const;
-    virtual QStringList  groupList () const;
-
-// DEPRECATED
-//ig    QString              readEntryUntranslated (const char*, const QString& = QString ()) const;
-    QString              name () const;
     QMap<QString, QString> entryMap (const QString& = QString ()) const;
 
-
 protected:
-
     virtual bool         hasGroupImpl (const QByteArray&) const;
     virtual KConfigGroup groupImpl (const QByteArray&);
-    virtual void         deleteGroupImpl (const QByteArray&, KConfigBase::WriteConfigFlags = KConfigBase::Normal);
-    virtual bool         groupIsImmutableImpl (const QByteArray&) const;
+    virtual void         deleteGroupImpl (const QByteArray&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
+
+    virtual bool         isGroupImmutableImpl (const QByteArray&) const;
 
 //igx     virtual void         virtual_hook (int, void*);
 
@@ -108,12 +90,6 @@ private:
                          KConfig (const KConfig&);
 
 public:
-
-
-
-protected:
-
-
 
 
 

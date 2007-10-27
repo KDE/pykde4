@@ -407,8 +407,6 @@ public:
         sipClass = sipClass_KDialogButtonBox;
     else if (dynamic_cast<KDialogJobUiDelegate*>(sipCpp))
         sipClass = sipClass_KDialogJobUiDelegate;
-    else if (dynamic_cast<KDoubleSpinBox*>(sipCpp))
-        sipClass = sipClass_KDoubleSpinBox;
     else if (dynamic_cast<KDoubleValidator*>(sipCpp))
         sipClass = sipClass_KDoubleValidator;
     else if (dynamic_cast<KEditListBox*>(sipCpp))

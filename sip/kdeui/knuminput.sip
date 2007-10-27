@@ -117,14 +117,14 @@ public:
     double               value () const;
     QString              suffix () const;
     QString              prefix () const;
-    int                  precision () const;
+    int                  decimals () const;
     QString              specialValueText () const;
     void                 setRange (double, double, double = 1, bool = 1);
     void                 setMinimum (double);
     double               minimum () const;
     void                 setMaximum (double);
     double               maximum () const;
-    void                 setPrecision (int);
+    void                 setDecimals (int);
     double               referencePoint () const;
     double               relativeValue () const;
     void                 setSpecialValueText (const QString&);
@@ -174,45 +174,3 @@ private:
                          KIntSpinBox (const KIntSpinBox&) [()];
 
 };  // class KIntSpinBox
-
-
-class KDoubleSpinBox : QSpinBox
-{
-%TypeHeaderCode
-#include <knuminput.h>
-%End
-
-
-public:
-                         KDoubleSpinBox (QWidget* /TransferThis/ = 0);
-                         KDoubleSpinBox (double, double, double, double, QWidget* /TransferThis/, int = 2);
-    bool                 acceptLocalizedNumbers () const;
-    virtual void         setAcceptLocalizedNumbers (bool);
-    void                 setRange (double, double, double = 0.01, int = 2);
-    int                  precision () const;
-    void                 setPrecision (int);
-    virtual void         setPrecision (int, bool);
-    double               value () const;
-    double               minimum () const;
-    void                 setMinimum (double);
-    double               maximum () const;
-    void                 setMaximum (double);
-    double               singleStep () const;
-    void                 setSingleStep (double);
-    void                 setValidator (const QValidator*);
-
-signals:
-    void                 valueChanged (double);
-
-public slots:
-    virtual void         setValue (double);
-
-protected:
-    virtual QString      textFromValue (int) const;
-    virtual int          valueFromText (const QString&) const;
-
-protected slots:
-    void                 slotValueChanged (int);
-
-};  // class KDoubleSpinBox
-

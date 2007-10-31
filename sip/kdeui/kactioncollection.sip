@@ -26,6 +26,7 @@
 class KActionCollection : QObject
 {
 %TypeHeaderCode
+#include <kaction.h>
 #include <kactioncollection.h>
 %End
 

@@ -43,10 +43,8 @@ public:
     QString              name () const;
     bool                 exists () const;
     void                 sync ();
-
     void                 markAsClean ();
     KConfigBase::AccessMode accessMode () const;
-
     KConfig*             config ();
     void                 changeGroup (const QString&);
     void                 changeGroup (const QByteArray&);
@@ -55,75 +53,55 @@ public:
     QStringList          keyList () const;
     void                 deleteGroup (KConfigBase::WriteConfigFlags = KConfigBase::Normal );
     QString              readEntry (const QByteArray&, const char* = 0) const;
-    QString              readEntry (const char*, const char* = 0) const;
     QString              readEntry (const QString&, const char* = 0) const;
-
-    QStringList          readXdgListEntry (const char*, const QStringList& = QStringList ()) const;
+    QString              readEntry (const char*, const char* = 0) const;
     QStringList          readXdgListEntry (const QByteArray&, const QStringList& = QStringList ()) const;
     QStringList          readXdgListEntry (const QString&, const QStringList& = QStringList ()) const;
-
+    QStringList          readXdgListEntry (const char*, const QStringList& = QStringList ()) const;
     QString              readPathEntry (const QByteArray&, const QString& = QString ()) const;
     QString              readPathEntry (const QString&, const QString& = QString ()) const;
     QString              readPathEntry (const char*, const QString& = QString ()) const;
-
     QStringList          readPathEntry (const QByteArray&, const QStringList&) const;
     QStringList          readPathEntry (const QString&, const QStringList&) const;
     QStringList          readPathEntry (const char*, const QStringList&) const;
-
     QString              readEntryUntranslated (const QByteArray&, const QString& = QString ()) const;
     QString              readEntryUntranslated (const QString&, const QString& = QString ()) const;
     QString              readEntryUntranslated (const char*, const QString& = QString ()) const;
-    void                 writeEntry (const char*, const char*, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
     void                 writeEntry (const QByteArray&, const char*, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
     void                 writeEntry (const QString&, const char*, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
-
-    void                 writeXdgListEntry (const QByteArray&, const QStringList&, KConfigBase::WriteConfigFlags = KConfigBase::Normal);
-    void                 writeXdgListEntry (const QString&, const QStringList&, KConfigBase::WriteConfigFlags = KConfigBase::Normal);
-    void                 writeXdgListEntry (const char*, const QStringList&, KConfigBase::WriteConfigFlags = KConfigBase::Normal);
-
+    void                 writeEntry (const char*, const char*, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
+    void                 writeXdgListEntry (const QByteArray&, const QStringList&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
+    void                 writeXdgListEntry (const QString&, const QStringList&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
+    void                 writeXdgListEntry (const char*, const QStringList&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
     void                 writePathEntry (const QByteArray&, const QString&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
     void                 writePathEntry (const QString&, const QString&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
     void                 writePathEntry (const char*, const QString&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
-
-    void                 writePathEntry (const QByteArray&, const QStringList&, KConfigBase::WriteConfigFlags = KConfigBase::Normal);
-    void                 writePathEntry (const QString&, const QStringList&, KConfigBase::WriteConfigFlags = KConfigBase::Normal);
-    void                 writePathEntry (const char*, const QStringList&, KConfigBase::WriteConfigFlags = KConfigBase::Normal);
-
+    void                 writePathEntry (const QByteArray&, const QStringList&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
+    void                 writePathEntry (const QString&, const QStringList&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
+    void                 writePathEntry (const char*, const QStringList&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
+    void                 deleteEntry (const QByteArray&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
     void                 deleteEntry (const QString&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
     void                 deleteEntry (const char*, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
-    void                 deleteEntry (const QByteArray&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
     bool                 hasKey (const QByteArray&) const;
     bool                 hasKey (const QString&) const;
     bool                 hasKey (const char*) const;
     bool                 isImmutable () const;
-
-    bool                 isEntryImmutable (const QString&) const;
     bool                 isEntryImmutable (const QByteArray&) const;
+    bool                 isEntryImmutable (const QString&) const;
     bool                 isEntryImmutable (const char*) const;
-
+    void                 revertToDefault (const QByteArray&);
     void                 revertToDefault (const QString&);
     void                 revertToDefault (const char*);
-    void                 revertToDefault (const QByteArray&);
+    bool                 hasDefault (const QByteArray&) const;
     bool                 hasDefault (const QString&) const;
     bool                 hasDefault (const char*) const;
-    bool                 hasDefault (const QByteArray&) const;
     QMap<QString, QString> entryMap () const;
 
 protected:
     bool                 hasGroupImpl (const QByteArray&) const;
     KConfigGroup         groupImpl (const QByteArray&);
     void                 deleteGroupImpl (const QByteArray&, KConfigBase::WriteConfigFlags);
-
     bool                 isGroupImmutableImpl (const QByteArray&) const;
-
-
-public:
-
-
-
-protected:
-
-
 
 };  // class KConfigGroup
 

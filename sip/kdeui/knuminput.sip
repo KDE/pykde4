@@ -47,10 +47,6 @@ protected:
 private:
                          KNumInput (const KNumInput&) [()];
 
-public:
-
-
-
 };  // class KNumInput
 
 
@@ -71,7 +67,11 @@ public:
     QString              suffix () const;
     QString              prefix () const;
     QString              specialValueText () const;
+
     void                 setRange (int, int, int = 1, bool = 1);
+
+    void                 setSliderEnabled (bool = 1);
+
     void                 setMinimum (int);
     int                  minimum () const;
     void                 setMaximum (int);
@@ -125,6 +125,9 @@ public:
     void                 setMaximum (double);
     double               maximum () const;
     void                 setDecimals (int);
+
+    void                 setPrecision (int);
+
     double               referencePoint () const;
     double               relativeValue () const;
     void                 setSpecialValueText (const QString&);
@@ -174,3 +177,4 @@ private:
                          KIntSpinBox (const KIntSpinBox&) [()];
 
 };  // class KIntSpinBox
+

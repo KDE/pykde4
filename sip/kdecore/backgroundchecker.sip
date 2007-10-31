@@ -40,7 +40,6 @@ public:
     QString              currentContext () const;
     Sonnet::Speller      speller () const;
     void                 setSpeller (const Sonnet::Speller&);
-    void                 changeLanguage (const QString&);
     bool                 checkWord (const QString&);
     QStringList          suggest (const QString&) const;
     bool                 addWordToPersonal (const QString&);
@@ -49,6 +48,9 @@ public slots:
     virtual void         start ();
     virtual void         stop ();
     void                 replace (int, const QString&, const QString&);
+
+    void                 changeLanguage (const QString&);
+
     virtual void         continueChecking ();
 
 signals:
@@ -61,6 +63,10 @@ protected:
 
 protected slots:
     void                 slotEngineDone ();
+
+public:
+
+
 
 };  // class BackgroundChecker
 

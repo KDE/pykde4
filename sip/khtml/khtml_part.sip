@@ -88,14 +88,7 @@ public:
 
     KHTMLPart::CaretDisplayPolicy caretDisplayPolicyNonFocused () const;
     void                 setCaretDisplayPolicyNonFocused (KHTMLPart::CaretDisplayPolicy);
-    void                 enableJScript (bool);
-    void                 enableJava (bool);
-    void                 enablePlugins (bool);
-    void                 autoloadImages (bool);
-    void                 enableMetaRefresh (bool);
-    bool                 setCharset (const QString&, bool = 0);
     KUrl                 baseURL () const;
-    QString              baseTarget () const;
     KUrl                 backgroundURL () const;
     void                 scheduleRedirection (int, const QString&, bool = 1);
     virtual void         begin (const KUrl& = KUrl (), int = 0, int = 0);
@@ -126,7 +119,6 @@ public:
     void                 findText ();
     void                 findText (const QString&, long, QWidget* /Transfer/ = 0, KFindDialog* = 0);
     void                 findTextBegin ();
-    bool                 findTextNext (const QString&, bool, bool, bool);
     bool                 findTextNext (bool = 0);
     void                 setZoomFactor (int);
     int                  zoomFactor () const;
@@ -179,7 +171,6 @@ public:
     KHTMLPart::FormNotification formNotification () const;
     KUrl                 toplevelURL ();
     bool                 isModified () const;
-    void                 setSuppressedPopupIndicator (bool);
     void                 setSuppressedPopupIndicator (bool, KHTMLPart*);
     bool                 inProgress () const;
 
@@ -235,6 +226,10 @@ protected slots:
 
 protected:
     virtual void         startingJob (KIO::Job*);
+
+public:
+
+
 
 public:
 

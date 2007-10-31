@@ -58,6 +58,9 @@ public:
 signals:
     void                 currentPageChanged (KPageWidgetItem*, KPageWidgetItem*);
 
+    void                 pageRemoved (KPageWidgetItem*);
+
+
 protected:
                          KPageDialog (KPageWidget*, QWidget* /TransferThis/ = 0, Qt::WFlags = 0);
 //ig                          KPageDialog (KPageDialogPrivate&, KPageWidget*, QWidget* /TransferThis/, Qt::WFlags = 0);

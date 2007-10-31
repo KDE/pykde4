@@ -52,6 +52,9 @@ public:
     KShortcut            shortcut (KAction::ShortcutTypes = KAction::ActiveShortcut ) const;
     void                 setShortcut (const KShortcut&, KAction::ShortcutTypes);
     void                 setShortcut (const QKeySequence&, KAction::ShortcutTypes);
+
+    void                 setShortcuts (const QList<QKeySequence>&, KAction::ShortcutTypes);
+
     bool                 isShortcutConfigurable () const;
     void                 setShortcutConfigurable (bool);
     const KShortcut&     globalShortcut (KAction::ShortcutTypes = KAction::ActiveShortcut ) const;

@@ -52,7 +52,6 @@ public:
         Normal
     };
 
-
     typedef QFlags<KConfigBase::WriteConfigFlag> WriteConfigFlags;
     virtual QStringList  groupList () const = 0;
     bool                 hasGroup (const QString&) const;
@@ -65,7 +64,6 @@ public:
     void                 deleteGroup (const QString&, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
     void                 deleteGroup (const char*, KConfigBase::WriteConfigFlags = KConfigBase::Normal );
     virtual void         sync ()  = 0;
-
     virtual void         markAsClean ()  = 0;
 
     enum AccessMode
@@ -76,31 +74,40 @@ public:
     };
 
     virtual KConfigBase::AccessMode accessMode () const = 0;
-
     virtual bool         isImmutable () const = 0;
-
     bool                 isGroupImmutable (const QByteArray&) const;
     bool                 isGroupImmutable (const QString&) const;
     bool                 isGroupImmutable (const char*) const;
-
 
 protected:
                          KConfigBase ();
     virtual bool         hasGroupImpl (const QByteArray&) const = 0;
     virtual KConfigGroup groupImpl (const QByteArray&)  = 0;
     virtual void         deleteGroupImpl (const QByteArray&, KConfigBase::WriteConfigFlags = KConfigBase::Normal )  = 0;
-
     virtual bool         isGroupImmutableImpl (const QByteArray&) const = 0;
+
 
 //io argument void* ambiguous - add tag: In, Out or both
 //io    virtual void         virtual_hook (int, void*);
 
+// Subclasses for KConfigBase
 
 public:
+%ConvertToSubClassCode
 
-
-
-protected:
+    if (dynamic_cast<KConfig*>(sipCpp))
+    {
+        sipClass = sipClass_KConfig;
+        if (dynamic_cast<KDesktopFile*>(sipCpp))
+            sipClass = sipClass_KDesktopFile;
+        else if (dynamic_cast<KSharedConfig*>(sipCpp))
+            sipClass = sipClass_KSharedConfig;
+    }
+    else if (dynamic_cast<KConfigGroup*>(sipCpp))
+        sipClass = sipClass_KConfigGroup;
+    else
+        sipClass = NULL;
+%End
 
 
 

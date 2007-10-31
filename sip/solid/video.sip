@@ -22,61 +22,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 namespace Solid
 {
 
-class DeviceInterface : QObject
+class Video : Solid::DeviceInterface
 {
 %TypeHeaderCode
-#include <deviceinterface.h>
+#include <video.h>
 %End
 
-
-public:
-
-
-    enum Type
-    {
-        Unknown, 
-        GenericInterface, 
-        Processor, 
-        Block, 
-        StorageAccess, 
-        StorageDrive, 
-        OpticalDrive, 
-        StorageVolume, 
-        OpticalDisc, 
-        Camera, 
-        PortableMediaPlayer, 
-        NetworkInterface, 
-        AcAdapter, 
-        Battery, 
-        Button, 
-        AudioInterface, 
-        DvbInterface, 
-        Video, 
-        Last
-    };
-
-
-    bool                 isValid () const;
-    static QString       typeToString (Solid::DeviceInterface::Type);
-    static Solid::DeviceInterface::Type stringToType (const QString&);
-
-protected:
-//ig                          DeviceInterface (DeviceInterfacePrivate&, QObject*);
-
-public:
-
-
-//force
-
 private:
-                         DeviceInterface ();
-//end
+                         Video (QObject*);
 
+public:
+    static Type          deviceInterfaceType ();
+    QStringList          supportedProtocols () const;
+    QStringList          supportedDrivers (QString = QString ()) const;
+    QVariant             driverHandle (const QString&) const;
 
-};  // class DeviceInterface
+};  // class Video
 
 };  // namespace Solid
+
 

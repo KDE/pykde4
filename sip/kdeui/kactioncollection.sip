@@ -35,11 +35,9 @@ public:
                          KActionCollection (QObject* /TransferThis/, const KComponentData& = KComponentData ());
     static const QList<KActionCollection*>& allCollections ();
     void                 clear ();
-    void                 setAssociatedWidget (QWidget*);
-    void                 addAssociatedWidget (QWidget*);
-    void                 removeAssociatedWidget (QWidget*);
-    void                 clearAssociatedWidgets ();
-    QList<QWidget*>      associatedWidgets () const;
+
+    void                 associateWidget (QWidget*) const;
+
     QString              configGroup () const;
     bool                 configIsGlobal () const;
     void                 setConfigGroup (const QString&);
@@ -70,14 +68,27 @@ protected:
 
 public:
     QAction*             addAction (const QString&, QAction*);
+
+    KAction*             addAction (const QString&, KAction*);
+
     void                 removeAction (QAction*);
     QAction*             takeAction (QAction*);
-    QAction*             addAction (KStandardAction::StandardAction, const QObject* = 0, const char* = 0);
-    QAction*             addAction (KStandardAction::StandardAction, const QString&, const QObject* = 0, const char* = 0);
-    QAction*             addAction (const QString&, const QObject* = 0, const char* = 0);
+
+    KAction*             addAction (KStandardAction::StandardAction, const QObject* = 0, const char* = 0);
+    KAction*             addAction (KStandardAction::StandardAction, const QString&, const QObject* = 0, const char* = 0);
+    KAction*             addAction (const QString&, const QObject* = 0, const char* = 0);
+
 
 private:
                          KActionCollection (const KXMLGUIClient* /TransferThis/);
+
+public:
+
+
+
+public:
+
+
 
 };  // class KActionCollection
 

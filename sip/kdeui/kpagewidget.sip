@@ -46,6 +46,9 @@ signals:
     void                 currentPageChanged (KPageWidgetItem*, KPageWidgetItem*);
     void                 pageToggled (KPageWidgetItem*, bool);
 
+    void                 pageRemoved (KPageWidgetItem*);
+
+
 protected:
 //ig                          KPageWidget (KPageWidgetPrivate&, QWidget* /TransferThis/);
 

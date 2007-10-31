@@ -40,6 +40,7 @@
 #include <battery.h>
 #include <camera.h>
 #include <block.h>
+#include <video.h>
 #include <networkinterface.h>
 #include <devicenotifier.h>
 %End
@@ -106,6 +107,8 @@ public:
             sipClass = sipClass_Solid_Camera;
         else if (dynamic_cast<Solid::Block*>(sipCpp))
             sipClass = sipClass_Solid_Block;
+        else if (dynamic_cast<Solid::Video*>(sipCpp))
+            sipClass = sipClass_Solid_Video;
         else if (dynamic_cast<Solid::NetworkInterface*>(sipCpp))
             sipClass = sipClass_Solid_NetworkInterface;
     }

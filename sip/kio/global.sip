@@ -268,7 +268,7 @@ KIO::MetaData        testKIOMetaData (KIO::MetaData);
     QMap<QString,QString> *cppmap = new QMap<QString,QString>;
 
     PyObject *aelem, *belem;
-    int pos = 0;
+    Py_ssize_t pos = 0;
     QString *acpp;
     QString *bcpp;
 

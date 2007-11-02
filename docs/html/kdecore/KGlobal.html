@@ -1,0 +1,915 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KGlobal</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>Namespace KGlobal</h1><hr>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdecore</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>KGlobal</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+      <p>
+<b style="color : #ff0000;"><i>Internal </i></b>
+</p>
+<p>
+Make the struct of the K_GLOBAL_STATIC anonymous.
+@endcond
+This macro makes it easy to use non-POD types as global statics.
+The object is created on first use and creation is threadsafe.
+</p>
+<p>
+The object is destructed on library unload or application exit.
+Be careful with calling other objects in the destructor of the class
+as you have to be sure that they (or objects they depend on) are not already destructed.
+</p>
+<p>
+
+<b>TYPE</b> - The type of the global static object. Do not add a *.
+
+<b>NAME</b> - The name of the function to get a pointer to the global static object.
+</p>
+<p>
+If you have code that might be called after the global object has been destroyed you can check
+for that using the isDestroyed() function.
+</p>
+<p>
+If needed (If the destructor of the global object calls other functions that depend on other
+global statics (e.g. KConfig.sync) your destructor has to be called before those global statics
+are destroyed. A Qt post routine does that.) you can also install a post routine (@ref qAddPostRoutine) to clean up the object
+using the destroy() method. If you registered a post routine and the object is destroyed because
+of a lib unload you have to call qRemovePostRoutine!
+</p>
+<p>
+Example:
+<pre>
+class A {
+public:
+~A();
+...
+};
+</p>
+<p>
+K_GLOBAL_STATIC(A, globalA)
+// The above creates a new globally static variable named 'globalA' which you
+// can use as a pointer to an instance of A.
+</p>
+<p>
+void doSomething()
+{
+// The first time you acess globalA a new instance of A will be created automatically.
+A *a = globalA;
+...
+}
+</p>
+<p>
+void doSomethingElse()
+{
+if (globalA.isDestroyed()) {
+return;
+}
+A *a = globalA;
+...
+}
+</p>
+<p>
+void installPostRoutine()
+{
+// A post routine can be used to delete the object when QCoreApplication destructs,
+// not adding such a post routine will delete the object normally at program unload
+qAddPostRoutine(globalA.destroy);
+}
+</p>
+<p>
+A.~A()
+{
+// When you install a post routine you have to remove the post routine from the destructor of
+// the class used as global static!
+qRemovePostRoutine(globalA.destroy);
+}
+</pre>
+</p>
+<p>
+A common case for the need of deletion on lib unload/app shutdown are Singleton classes. Here's
+an example how to do it:
+<pre>
+class MySingletonPrivate;
+class EXPORT_MACRO MySingleton
+{
+friend class MySingletonPrivate;
+public:
+static MySingleton *self();
+QString someFunction();
+</p>
+<p>
+private:
+MySingleton();
+~MySingleton();
+};
+</pre>
+in the .cpp file:
+<pre>
+// This class will be instantiated and referenced as a singleton in this example
+class MySingletonPrivate
+{
+public:
+QString foo;
+MySingleton instance;
+};
+</p>
+<p>
+K_GLOBAL_STATIC(MySingletonPrivate, mySingletonPrivate)
+</p>
+<p>
+MySingleton *MySingleton.self()
+{
+// returns the singleton; automatically creates a new instance if that has not happened yet.
+return &mySingletonPrivate->instance;
+}
+QString MySingleton.someFunction()
+{
+// Refencing the singleton directly is possible for your convenience
+return mySingletonPrivate->foo;
+}
+</pre>
+</p>
+<p>
+Instead of the above you can use also the following pattern (ignore the name of the namespace):
+<pre>
+namespace MySingleton
+{
+EXPORT_MACRO QString someFunction();
+}
+</pre>
+in the .cpp file:
+<pre>
+class MySingletonPrivate
+{
+public:
+QString foo;
+};
+</p>
+<p>
+K_GLOBAL_STATIC(MySingletonPrivate, mySingletonPrivate)
+</p>
+<p>
+QString MySingleton.someFunction()
+{
+return mySingletonPrivate->foo;
+}
+</pre>
+</p>
+<p>
+Now code that wants to call someFunction() doesn't have to do
+<pre>
+MySingleton.self()->someFunction();
+</pre>
+anymore but instead:
+<pre>
+MySingleton.someFunction();
+</pre>
+</p>
+<p>
+
+This is the same as K_GLOBAL_STATIC, but can take arguments that are passed
+to the object's constructor
+</p>
+<p>
+
+<b>TYPE</b> - The type of the global static object. Do not add a *.
+
+<b>NAME</b> - The name of the function to get a pointer to the global static object.
+
+<b>ARGS</b> - the list of arguments, between brackets
+</p>
+<p>
+Example:
+<pre>
+class A
+{
+public:
+A(const char *s, int i);
+...
+};
+</p>
+<p>
+K_GLOBAL_STATIC_WITH_ARG(A, globalA, ("foo", 0))
+// The above creates a new globally static variable named 'globalA' which you
+// can use as a pointer to an instance of A.
+</p>
+<p>
+void doSomething()
+{
+// The first time you acess globalA a new instance of A will be created automatically.
+A *a = globalA;
+...
+}
+</pre>
+</p>
+<p>
+Access to the KDE global objects.
+KGlobal provides you with pointers of many central
+objects that exist only once in the process. It is also
+responsible for managing instances of KStaticDeleterBase.
+</p>
+<p>
+See also  KStaticDeleterBase
+<b>Author</b> Sirtaj Singh Kang (taj@kde.org)
+</p>
+
+      </p>
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li><b style="color : #000000;">activeComponent</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KComponentData)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+The component currently active (useful in a multi-component
+application, such as a KParts application).
+Don't use this - it's mainly for KAboutDialog and KBugReport.
+<b style="color : #ff0000;"><i>Internal </i></b>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">caption</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns a text for the window caption.
+</p>
+<p>
+This may be set by
+"-caption", otherwise it will be equivalent to the name of the
+executable.
+Returns the text for the window caption
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">charsets</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KCharsets)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+The global charset manager.
+Returns the global charset manager
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">config</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KSharedConfigPtr)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the general config object.
+Returns the global configuration object.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">deref</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Tells KGlobal that one operation such as those described in ref() just finished.
+This call makes the QApplication quit if the counter is back to 0.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">dirs</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KStandardDirs)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the application standard dirs object.
+Returns the global standard dir object
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">hasLocale</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+<b style="color : #ff0000;"><i>Internal </i></b>
+Returns whether KGlobal has a valid KLocale object
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">hasMainComponent</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+<b style="color : #ff0000;"><i>Internal </i></b>
+Returns whether a main KComponentData is available.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">locale</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KLocale)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the global locale object.
+Returns the global locale object
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">mainComponent</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KComponentData)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the global component data. There is always at least
+one instance of a component in one application (in most
+cases the application itself).
+Returns the global component data
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">ref</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Tells KGlobal about one more operations that should be finished
+before the application exits. The standard behavior is to exit on the
+"last window closed" event, but some events should outlive the last window closed
+(e.g. a file copy for a file manager, or 'compacting folders on exit' for a mail client).
+</p>
+<p>
+Note that for this to happen you must call qApp->setQuitOnLastWindowClosed(false),
+in main() for instance.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setActiveComponent</b> (d)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>d</td><td>KComponentData</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Set the active component for use by KAboutDialog and KBugReport.
+To be used only by a multi-component (KParts) application.
+</p>
+<p>
+See also  activeComponent()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setLocale</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KLocale</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+<b style="color : #ff0000;"><i>Internal </i></b>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">staticQString</b> (str)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>str</td><td>char</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Creates a static QString.
+</p>
+<p>
+To be used inside functions(!) like:
+<pre>
+static const QString &myString = KGlobal.staticQString("myText");
+</pre>
+</p>
+<p>
+Do <b>NOT</b> use code such as:
+<pre>
+static QString myString = KGlobal.staticQString("myText");
+</pre>
+This creates a static object (instead of a static reference)
+and as you know static objects are EVIL.
+</p>
+<p>
+<b>str</b> - the string to create
+Returns the static string
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">staticQString</b> (str)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>str</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Creates a static QString.
+</p>
+<p>
+To be used inside functions(!) like:
+<pre>
+static const QString &myString = KGlobal.staticQString(i18n("My Text"));
+</pre>
+</p>
+<p>
+Do <b>NOT</b> use code such as:
+<pre>
+static QString myString = KGlobal.staticQString(i18n("myText"));
+</pre>
+This creates a static object (instead of a static reference)
+and as you know static objects are EVIL.
+</p>
+<p>
+<b>str</b> - the string to create
+Returns the static string
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

@@ -1,0 +1,2012 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KTextEditor.View</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KTextEditor.View</h1><hr>
+      <h3><i style="color : #00aa00">abstract class</i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">ktexteditor Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>ktexteditor</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>ktexteditor</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KTextEditor.View</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QWidget, KXMLGUIClient</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+A text widget with KXMLGUIClient that represents a Document.
+</p>
+<p>
+Topics:
+- view_intro
+- view_hook_into_gui
+- view_selection
+- view_cursors
+- view_mouse_tracking
+- view_modes
+- view_extensions
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+The View class represents a single view of a KTextEditor.Document,
+get the document on which the view operates with document().
+A view provides both the graphical representation of the text and the
+KXMLGUIClient for the actions. The view itself does not provide
+text manipulation, use the methods from the Document instead. The only
+method to insert text is insertText(), which inserts the given text
+at the current cursor position and emits the signal textInserted().
+</p>
+<p>
+Usually a view is created by using Document.createView().
+Furthermore a view can have a context menu. Set it with setContextMenu()
+and get it with contextMenu().
+</p>
+<p>
+<b>Merging the View's GUI </b>
+</p>
+<p>
+A View is derived from the class KXMLGUIClient, so its GUI elements (like
+menu entries and toolbar items) can be merged into the application's GUI
+(or into a KXMLGUIFactory) by calling
+<pre>
+// view is of type KTextEditor.View*
+mainWindow()->guiFactory()->addClient( view );
+</pre>
+You can add only one view as client, so if you have several views, you first
+have to remove the current view, and then add the new one, like this
+<pre>
+mainWindow()->guiFactory()->removeClient( currentView );
+mainWindow()->guiFactory()->addClient( newView );
+</pre>
+</p>
+<p>
+<b>Text Selection </b>
+</p>
+<p>
+As the view is a graphical text editor it provides normal and block
+text selection. You can check with selection() whether a selection exists.
+removeSelection() will remove the selection without removing the text,
+whereas removeSelectionText() also removes both, the selection and the
+selected text. Use selectionText() to get the selected text and
+setSelection() to specify the selected textrange. The signal
+selectionChanged() is emitted whenever the selecteion changed.
+</p>
+<p>
+<b>Cursor Positions </b>
+</p>
+<p>
+A view has one Cursor which represents a line/column tuple. Two different
+kinds of cursor positions are supported: first is the real cursor
+position where a tab character only counts one character. Second is the
+virtual cursor position, where a tab character counts as many
+spaces as defined. Get the real position with cursorPosition() and the
+virtual position with cursorPositionVirtual(). Set the real cursor
+position with setCursorPosition(). You can even get the screen coordinates
+of the current cursor position in pixel by using
+cursorPositionCoordinates(). The signal cursorPositionChanged() is emitted
+whenever the cursor position changed.
+</p>
+<p>
+<b>Mouse Tracking </b>
+</p>
+<p>
+It is possible to get notified via the signal mousePositionChanged() for
+mouse move events, if mouseTrackingEnabled() returns true. Mouse tracking
+can be turned on/off by calling setMouseTrackingEnabled(). If an editor
+implementation does not support mouse tracking, mouseTrackingEnabled() will
+always return false.
+</p>
+<p>
+<b>Edit Modes </b>
+</p>
+<p>
+A view supports several edit modes (EditMode). Common edit modes are
+insert-mode (INS) and overwrite-mode (OVR). Which edit modes the
+editor supports depends on the implementation, another well-known mode is
+the command-mode for example in vim and yzis. The getter viewMode()
+returns a string like <b>INS</b> or <b>OVR</b> and is represented in the user
+interface for example in the status bar. Further you can get the edit
+mode as enum by using viewEditMode(). Whenever the edit mode changed the
+signals viewModeChanged() and viewEditModeChanged() are emitted.
+</p>
+<p>
+<b>View Extension Interfaces </b>
+</p>
+<p>
+A simple view represents the text of a Document and provides a text cursor,
+text selection, edit modes etc.
+Advanced concepts like code completion and text hints are defined in the
+extension interfaces. An KTextEditor implementation does not need to
+support all the extensions. To implement the interfaces multiple
+inheritance is used.
+</p>
+<p>
+More information about interfaces for the view can be found in
+kte_group_view_extensions.
+</p>
+<p>
+See also  KTextEditor.Document, KTextEditor.TemplateInterface,
+KTextEditor.CodeCompletionInterface,
+KTextEditor.SessionConfigInterface, KTextEditor.TemplateInterface,
+KXMLGUIClient
+<b>Author</b> Christoph Cullmann \<cullmann@kde.org\>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>EditMode</b> = { EditInsert, EditOverwrite }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">View</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Constructor.
+</p>
+<p>
+Create a view attached to the widget <b>parent.</b>
+</p>
+<p>
+<b>parent</b> - parent widget
+</p>
+<p>
+See also  Document.createView()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">blockSelection</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the status of the selection mode. true indicates that block
+selection mode is on. If this is true, selections applied via the
+SelectionInterface are handled as block selections and the Copy&Paste
+functions work on rectangular blocks of text rather than normal.
+Returns true, if block selection mode is enabled, otherwise false
+</p>
+<p>
+See also  setBlockSelection()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">contextMenu</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QMenu)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the context menu for this view. The return value can be 0
+if no context menu object was set.
+Returns context menu object
+</p>
+<p>
+See also  setContextMenu()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">contextMenuAboutToShow</b> (view, menu)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("contextMenuAboutToShow (KTextEditor.View*, QMenu*)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>view</td><td>KTextEditor.View</td><td align="right"></td></tr>
+
+              <tr><td>menu</td><td>QMenu</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Signal which is emitted immediately prior to showing the current
+context <b>menu.</b>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">cursorPosition</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KTextEditor.Cursor)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the view's current cursor position. A TAB character is
+handeled as only one character.
+Returns current cursor position
+</p>
+<p>
+See also  setCursorPosition()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">cursorPositionChanged</b> (view, newPosition)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("cursorPositionChanged (KTextEditor.View*, const KTextEditor.Cursor&)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>view</td><td>KTextEditor.View</td><td align="right"></td></tr>
+
+              <tr><td>newPosition</td><td>KTextEditor.Cursor</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This signal is emitted whenever the <b>view's</b> cursor position changed.
+</p>
+<p>
+<b>view</b> - view which emitted the signal
+</p>
+<p>
+<b>newPosition</b> - new position of the cursor (Kate will pass the real
+cursor potition, not the virtual)
+</p>
+<p>
+See also  cursorPosition(), cursorPositionVirtual()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">cursorPositionCoordinates</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QPoint)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the screen coordinates (x/y) of the cursor position in pixels.
+Returns cursor screen coordinates
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">cursorPositionVirtual</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KTextEditor.Cursor)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the current virtual cursor position, virtual means the
+tabulator character (TAB) counts multiple characters, as configured
+by the user (e.g. one TAB is 8 spaces). The virtual cursor
+position provides access to the user visible values of the current
+cursor position.
+</p>
+<p>
+Returns virtual cursor position
+</p>
+<p>
+See also  cursorPosition()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">cursorToCoordinate</b> (cursor)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPoint)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>cursor</td><td>KTextEditor.Cursor</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the screen coordinates (x, y) of the supplied <b>cursor</b> relative
+to the view widget in pixels. Thus, 0,0 represents the top left hand of
+the view widget.
+</p>
+<p>
+</p>
+<p>
+<b>cursor</b> - cursor to determine coordinate for.
+Returns cursor screen coordinates relative to the view widget
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">defaultContextMenu</b> (menu)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QMenu)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>menu</td><td>QMenu</td><td align="right">None</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Populate <b>menu</b> with default text editor actions. If <b>menu</b> is
+null, a menu will be created with the view as its parent.
+</p>
+<p>
+to use this menu, you will next need to call setContextMenu(),
+as this does not assign the new context menu.
+</p>
+<p>
+</p>
+<p>
+<b>menu</b> - the menu to be populated, or null to create a new menu
+Returns the menu, whether created or passed initially
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">document</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KTextEditor.Document)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the view's document, that means the view is a view of the
+returned document.
+Returns the view's document
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">focusIn</b> (view)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("focusIn (KTextEditor.View*)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>view</td><td>KTextEditor.View</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This signal is emitted whenever the <b>view</b> gets the focus.
+</p>
+<p>
+<b>view</b> - view which gets focus
+</p>
+<p>
+See also  focusOut()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">focusOut</b> (view)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("focusOut (KTextEditor.View*)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>view</td><td>KTextEditor.View</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This signal is emitted whenever the <b>view</b> looses the focus.
+</p>
+<p>
+<b>view</b> - view which looses focus
+</p>
+<p>
+See also  focusIn()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">horizontalScrollPositionChanged</b> (view)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("horizontalScrollPositionChanged (KTextEditor.View*)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>view</td><td>KTextEditor.View</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This signal should be emitted whenever the <b>view</b> is scrolled horizontally.
+</p>
+<p>
+<b>view</b> - view which emitted the signal
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">informationMessage</b> (view, message)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("informationMessage (KTextEditor.View*, const QString&)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>view</td><td>KTextEditor.View</td><td align="right"></td></tr>
+
+              <tr><td>message</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This signal is emitted whenever the <b>view</b> wants to display a
+information <b>message.</b> The <b>message</b> can be displayed in the status bar
+for example.
+</p>
+<p>
+<b>view</b> - view which sends out information
+</p>
+<p>
+<b>message</b> - information message
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">insertText</b> (text)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This is a convenience function which inserts <b>text</b> at the view's
+current cursor position. You do not necessarily need to reimplement
+it, except you want to do some special things.
+</p>
+<p>
+<b>text</b> - Text to be inserted
+Returns true on success of insertion, otherwise false
+</p>
+<p>
+See also  textInserted()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isActiveView</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Check whether this view is the document's active view.
+This is equal to the code:
+<pre>
+document()->activeView() == view
+</pre>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">mousePositionChanged</b> (view, newPosition)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("mousePositionChanged (KTextEditor.View*, const KTextEditor.Cursor&)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>view</td><td>KTextEditor.View</td><td align="right"></td></tr>
+
+              <tr><td>newPosition</td><td>KTextEditor.Cursor</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This signal is emitted whenever the position of the mouse changes over
+this <b>view.</b> If the mouse moves off the view, an invalid cursor position
+should be emitted, i.e. Cursor.invalid().
+If mouseTrackingEnabled() returns false, this signal is never
+emitted.
+</p>
+<p>
+<b>view</b> - view which emitted the signal
+</p>
+<p>
+<b>newPosition</b> - new position of the mouse or Cursor.invalid(), if the
+mouse moved out of the <b>view.</b>
+</p>
+<p>
+See also  mouseTrackingEnabled()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">mouseTrackingEnabled</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Check, whether mouse tracking is enabled.
+</p>
+<p>
+Mouse tracking is required to have the signal mousePositionChanged()
+emitted.
+Returns true, if mouse tracking is enabled, otherwise false
+</p>
+<p>
+See also  setMouseTrackingEnabled(), mousePositionChanged()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">removeSelection</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Remove the view's current selection, without deleting the selected
+text.
+Returns true on success, otherwise false
+</p>
+<p>
+See also  removeSelectionText()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">removeSelectionText</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Remove the view's current selection including the selected text.
+Returns true on success, otherwise false
+</p>
+<p>
+See also  removeSelection()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">selection</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Query the view whether it has selected text, i.e. whether a selection
+exists.
+Returns true if a text selection exists, otherwise false
+</p>
+<p>
+See also  setSelection(), selectionRange()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">selectionChanged</b> (view)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("selectionChanged (KTextEditor.View*)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>view</td><td>KTextEditor.View</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This signal is emitted whenever the <b>view's</b> selection changes.
+If the mode switches from block selection to normal selection
+or vice versa this signal should also be emitted.
+</p>
+<p>
+<b>view</b> - view in which the selection changed
+</p>
+<p>
+See also  selection(), selectionRange(), selectionText()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">selectionRange</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KTextEditor.Range)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the range occupied by the current selection.
+Returns selection range, valid only if a selection currently exists.
+</p>
+<p>
+See also  setSelection()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">selectionText</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the view's selected text.
+Returns the selected text
+</p>
+<p>
+See also  setSelection()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setBlockSelection</b> (on)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>on</td><td>bool</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Set block selection mode to state <b>on.</b>
+</p>
+<p>
+<b>on</b> - if true, block selection mode is turned on, otherwise off
+Returns true on success, otherwise false
+</p>
+<p>
+See also  blockSelection()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setContextMenu</b> (menu)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>menu</td><td>QMenu</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Set a context menu for this view to <b>menu.</b>
+</p>
+<p>
+any previously assigned menu is not deleted. If you are finished
+with the previous menu, you may delete it.
+</p>
+<p>
+</p>
+<p>
+<b>menu</b> - new context menu object for this view
+</p>
+<p>
+See also  contextMenu()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setCursorPosition</b> (position)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>position</td><td>KTextEditor.Cursor</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Set the view's new cursor to <b>position.</b> A TAB character
+is handeled as only on character.
+</p>
+<p>
+<b>position</b> - new cursor position
+Returns true on success, otherwise false
+</p>
+<p>
+See also  cursorPosition()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setMouseTrackingEnabled</b> (enable)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>enable</td><td>bool</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Try to enable or disable mouse tracking according to <b>enable.</b>
+The return value contains the state of mouse tracking after the
+request. Mouse tracking is required to have the mousePositionChanged()
+signal emitted.
+</p>
+<p>
+Implementation Notes: An implementation is not forced to support
+this, and should always return false if it does not have
+support.
+</p>
+<p>
+</p>
+<p>
+<b>enable</b> - if true, try to enable mouse tracking, otherwise disable
+it.
+Returns the current state of mouse tracking
+</p>
+<p>
+See also  mouseTrackingEnabled(), mousePositionChanged()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setSelection</b> (range)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>range</td><td>KTextEditor.Range</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Set the view's selection to the range <b>selection.</b>
+The old selection will be discarded.
+</p>
+<p>
+<b>range</b> - the range of the new selection
+Returns true on success, otherwise false (e.g. when the cursor
+range is invalid)
+</p>
+<p>
+See also  selectionRange(), selection()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setSelection</b> (position, length, wrap)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>position</td><td>KTextEditor.Cursor</td><td align="right"></td></tr>
+
+              <tr><td>length</td><td>int</td><td align="right"></td></tr>
+
+              <tr><td>wrap</td><td>bool</td><td align="right">True</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This is an overloaded member function, provided for convenience, it
+differs from the above function only in what argument(s) it accepts.
+An existing old selection will be discarded. If possible you should
+reimplement the default implementation with a more efficient one.
+</p>
+<p>
+<b>position</b> - start or end position of the selection, depending
+on the <b>length</b> parameter
+</p>
+<p>
+<b>length</b> - if >0 <b>position</b> defines the start of the selection,
+if <0 <b>position</b> specifies the end
+</p>
+<p>
+<b>wrap</b> - if false the selection does not wrap lines and reaches
+only to start/end of the cursors line. Default: true
+</p>
+<p>
+See also  selectionRange(), selection()
+</p>
+<p>
+To do: rodda - is this really needed? it can now be accomplished with
+SmartCursor.advance()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">textInserted</b> (view, position, text)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("textInserted (KTextEditor.View*, const KTextEditor.Cursor&, const QString&)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>view</td><td>KTextEditor.View</td><td align="right"></td></tr>
+
+              <tr><td>position</td><td>KTextEditor.Cursor</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This signal is emitted from <b>view</b> whenever the users inserts <b>text</b>
+at <b>position,</b> that means the user typed/pasted text.
+</p>
+<p>
+<b>view</b> - view in which the text was inserted
+</p>
+<p>
+<b>position</b> - position where the text was inserted
+</p>
+<p>
+<b>text</b> - the text the user has typed into the editor
+</p>
+<p>
+See also  insertText()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">verticalScrollPositionChanged</b> (view, newPos)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("verticalScrollPositionChanged (KTextEditor.View*, const KTextEditor.Cursor&)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>view</td><td>KTextEditor.View</td><td align="right"></td></tr>
+
+              <tr><td>newPos</td><td>KTextEditor.Cursor</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This signal should be emitted whenever the <b>view</b> is scrolled vertically.
+</p>
+<p>
+<b>view</b> - view which emitted the signal
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">viewEditMode</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KTextEditor.View.EditMode)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the view's current edit mode.
+The current mode can be insert mode, replace mode or any other
+the editor supports, e.g. a vim like command mode. If in doubt
+return EditInsert.
+</p>
+<p>
+Returns the current edit mode of this view
+</p>
+<p>
+See also  viewEditModeChanged()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">viewEditModeChanged</b> (view, mode)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("viewEditModeChanged (KTextEditor.View*, KTextEditor.View.EditMode)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>view</td><td>KTextEditor.View</td><td align="right"></td></tr>
+
+              <tr><td>mode</td><td>KTextEditor.View.EditMode</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This signal is emitted whenever the <b>view's</b> edit <b>mode</b> changed from
+either EditInsert to EditOverwrite or vice versa.
+</p>
+<p>
+<b>view</b> - view which changed its edit mode
+</p>
+<p>
+<b>mode</b> - new edit mode
+</p>
+<p>
+See also  viewEditMode()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">viewMode</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the current view mode/state.
+This can be used to visually indicate the view's current mode, for
+example INSERT mode, OVERWRITE mode or COMMAND mode - or
+whatever other edit modes are supported. The string should be
+translated (i18n), as this is a user aimed representation of the view
+state, which should be shown in the GUI, for example in the status bar.
+Returns
+</p>
+<p>
+See also  viewModeChanged()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">viewModeChanged</b> (view)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("viewModeChanged (KTextEditor.View*)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>view</td><td>KTextEditor.View</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This signal is emitted whenever the view mode of <b>view</b> changes.
+</p>
+<p>
+<b>view</b> - the view which changed its mode
+</p>
+<p>
+See also  viewMode()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+
+<li><b>EditMode</b> = { EditInsert, EditOverwrite }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>EditInsert</i></td>
+      <td valign="top">-</td>
+      <td>
+EditInsert = 0, < Insert mode. Characters will be added.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>EditOverwrite</i></td>
+      <td valign="top">-</td>
+      <td>EditOverwrite = 1 < Overwrite mode. Characters will be replaced.</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+</ul>
+
+</span>
+</body>
+</html>

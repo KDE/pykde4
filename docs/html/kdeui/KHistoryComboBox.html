@@ -1,0 +1,909 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KHistoryComboBox</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KHistoryComboBox</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdeui</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KHistoryComboBox</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>KComboBox</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+A combobox for offering a history and completion
+</p>
+<p>
+A combobox which implements a history like a unix shell. You can navigate
+through all the items by using the Up or Down arrows (configurable of
+course). Additionally, weighted completion is available. So you should
+load and save the completion list to preserve the weighting between
+sessions.
+</p>
+<p>
+KHistoryComboBox obeys the HISTCONTROL environment variable to determine
+whether duplicates in the history should be tolerated in
+addToHistory() or not. During construction of KHistoryComboBox,
+duplicates will be disabled when HISTCONTROL is set to "ignoredups" or
+"ignoreboth". Otherwise, duplicates are enabled by default.
+</p>
+<p>
+<b>Author</b> Carsten Pfeiffer <pfeiffer@kde.org>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KHistoryComboBox</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KHistoryComboBox object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right">None</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Constructs a "read-write" combobox. A read-only history combobox
+doesn't make much sense, so it is only available as read-write.
+Completion will be used automatically for the items in the combo.
+</p>
+<p>
+The insertion-policy is set to NoInsert, you have to add the items
+yourself via the slot addToHistory. If you want every item added,
+use
+</p>
+<p>
+<pre>
+connect( combo, SIGNAL( activated( const QString& )),
+combo, SLOT( addToHistory( const QString& )));
+</pre>
+</p>
+<p>
+Use QComboBox.setMaxCount() to limit the history.
+</p>
+<p>
+<b>parent</b> the parent object of this widget.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KHistoryComboBox</b> (useCompletion, parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KHistoryComboBox object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>useCompletion</td><td>bool</td><td align="right"></td></tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right">None</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Same as the previous constructor, but additionally has the option
+to specify whether you want to let KHistoryComboBox handle completion
+or not. If set to <b>true,</b> KHistoryComboBox will sync the completion to the
+contents of the combobox.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KHistoryComboBox</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KHistoryComboBox object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KHistoryComboBox</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">addToHistory</b> (item)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>item</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Adds an item to the end of the history list and to the completion list.
+If maxCount() is reached, the first item of the list will be
+removed.
+</p>
+<p>
+If the last inserted item is the same as <b>item,</b> it will not be
+inserted again.
+</p>
+<p>
+If duplicatesEnabled() is false, any equal existing item will be
+removed before <b>item</b> is added.
+</p>
+<p>
+Note: By using this method and not the Q and KComboBox insertItem()
+methods, you make sure that the combobox stays in sync with the
+completion. It would be annoying if completion would give an item
+not in the combobox, and vice versa.
+</p>
+<p>
+See also  removeFromHistory
+</p>
+<p>
+See also  QComboBox.setDuplicatesEnabled
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">clearHistory</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Clears the history and the completion list.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">cleared</b> ()<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("cleared ()")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Emitted when the history was cleared by the entry in the popup menu.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">historyItems</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QStringList)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the list of history items. Empty, when this is not a read-write
+combobox.
+</p>
+<p>
+See also  setHistoryItems
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">insertItems</b> (items)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>items</td><td>QStringList</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Inserts <b>items</b> into the combo, honoring pixmapProvider()
+Does not update the completionObject.
+</p>
+<p>
+Note: duplicatesEnabled() is not honored here.
+</p>
+<p>
+Called from setHistoryItems() and setPixmapProvider()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">keyPressEvent</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>QKeyEvent</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Handling key-events, the shortcuts to rotate the items.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">pixmapProvider</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KPixmapProvider)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the current pixmap provider.
+</p>
+<p>
+See also  setPixmapProvider
+</p>
+<p>
+See also  KPixmapProvider
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">removeFromHistory</b> (item)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>item</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Removes all items named <b>item.</b>
+</p>
+<p>
+Returns <b>true</b> if at least one item was removed.
+</p>
+<p>
+See also  addToHistory
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">reset</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Resets the current position of the up/down history. Call this
+when you manually call setCurrentItem() or clearEdit().
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setHistoryItems</b> (items)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>items</td><td>QStringList</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Inserts <b>items</b> into the combobox. <b>items</b> might get
+truncated if it is longer than maxCount()
+</p>
+<p>
+See also  historyItems
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setHistoryItems</b> (items, setCompletionList)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>items</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>setCompletionList</td><td>bool</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Inserts <b>items</b> into the combobox. <b>items</b> might get
+truncated if it is longer than maxCount()
+</p>
+<p>
+Set <b>setCompletionList</b> to true, if you don't have a list of
+completions. This tells KHistoryComboBox to use all the items for the
+completion object as well.
+You won't have the benefit of weighted completion though, so normally
+you should do something like
+<pre>
+KConfig *config = KApplication.kApplication ()->config();
+QStringList list;
+</p>
+<p>
+// load the history and completion list after creating the history combo
+list = config->readListEntry( "Completion list" );
+combo->completionObject()->setItems( list );
+list = config->readListEntry( "History list" );
+combo->setHistoryItems( list );
+</p>
+<p>
+[...]
+</p>
+<p>
+// save the history and completion list when the history combo is
+// destroyed
+list = combo->completionObject()->items()
+config->writeEntry( "Completion list", list );
+list = combo->historyItems();
+config->writeEntry( "History list", list );
+</pre>
+</p>
+<p>
+Be sure to use different names for saving with KConfig if you have more
+than one KHistoryComboBox.
+</p>
+<p>
+Note: When <b>setCompletionList</b> is true, the items are inserted into the
+KCompletion object with mode KCompletion.Insertion and the mode is set
+to KCompletion.Weighted afterwards.
+</p>
+<p>
+See also  historyItems
+</p>
+<p>
+See also  KComboBox.completionObject
+</p>
+<p>
+See also  KCompletion.setItems
+</p>
+<p>
+See also  KCompletion.items
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setPixmapProvider</b> (prov)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>prov</td><td>KPixmapProvider</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Sets a pixmap provider, so that items in the combobox can have a pixmap.
+KPixmapProvider is just an abstract class with the one pure virtual
+method KPixmapProvider.pixmapFor(). This method is called whenever
+an item is added to the KHistoryComboBoxBox. Implement it to return your
+own custom pixmaps, or use the KUrlPixmapProvider from libkio,
+which uses KMimeType.pixmapForUrl to resolve icons.
+</p>
+<p>
+Set <b>prov</b> to 0L if you want to disable pixmaps. Default no pixmaps.
+</p>
+<p>
+See also  pixmapProvider
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">useCompletion</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns if we can modify the completion object or not.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">wheelEvent</b> (ev)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>ev</td><td>QWheelEvent</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Handling wheel-events, to rotate the items.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

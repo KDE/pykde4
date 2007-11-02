@@ -1,0 +1,3927 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KDateTime</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KDateTime</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdecore</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KDateTime</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+
+Date/times with associated time zone
+<b>Author</b> David Jarvie <software@astrojar.org.uk>.
+A class representing a date and time with an associated time zone
+</p>
+<p>
+Topics:
+- intro
+- manipulation
+- compatibility
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+The class KDateTime combines a date and time with support for an
+associated time zone or UTC offset. When manipulating KDateTime objects,
+their time zones or UTC offsets are automatically taken into account. KDateTime
+can also be set to represent a date-only value with no associated time.
+</p>
+<p>
+The class uses QDateTime internally to represent date/time values, and
+therefore uses the Gregorian calendar for dates starting from 15 October 1582,
+and the Julian calendar for dates up to 4 October 1582. The minimum year
+number is -4712 (4713 BC), while the upper limit is more than 11,000,000. The
+actual adoption of the Gregorian calendar after 1582 was slow; the last European
+country to adopt it, Greece, did so only in 1923. See QDateTime Considerations
+section below for further discussion of the date range limitations.
+</p>
+<p>
+The time specification types which KDateTime supports are:
+- the UTC time zone
+- a local time with a specified offset from UTC
+- a local time in a specified time zone
+- a local time using the current system time zone (a special case of the
+previous item)
+- local clock time, using whatever the local system clock says on whichever
+computer it happens to be on. In this case, the equivalent UTC time will
+vary depending on system. As a result, calculations involving local clock
+times do not necessarily produce reliable results.
+</p>
+<p>
+These characteristics are more fully described in the description of the
+SpecType enumeration. Also see
+<a href="http://www.w3.org/TR/timezone/">W3C: Working with Time Zones</a>
+for a good overview of the different ways of representing times.
+</p>
+<p>
+To set the time specification, use one of the setTimeSpec() methods, to get
+the time specification, call timeSpec(), isUtc(), isLocalZone(),
+isOffsetFromUtc() or isClockTime(). To determine whether two KDateTime
+instances have the same time specification, call timeSpec() on each and
+compare the returned values using KDateTime.Spec.operator==().
+</p>
+<p>
+<b>Date and Time Manipulation </b>
+</p>
+<p>
+A KDateTime object can be created by passing a date and time in its
+constructor, together with a time specification.
+</p>
+<p>
+If both the date and time are null, isNull() returns true. If the date, time
+and time specification are all valid, isValid() returns true.
+</p>
+<p>
+A KDateTime object can be converted to a different time specification by
+using toUtc(), toLocalZone() or toClockTime(). It can be converted to a
+specific time zone by toZone(). To return the time as an elapsed time since
+1 January 1970 (as used by time(2)), use toTime_t(). The results of time
+zone conversions are cached to minimize the need for recalculation. Each
+KDateTime object caches its UTC equivalent and the last time zone
+conversion performed.
+</p>
+<p>
+The date and time can be set either in the constructor, or afterwards by
+calling setDate(), setTime() or setDateTime(). To return the date and/or
+time components of the KDateTime, use date(), time() and dateTime(). You
+can determine whether the KDateTime represents a date and time, or a date
+only, by isDateOnly(). You can change between a date and time or a date only
+value using setDateOnly().
+</p>
+<p>
+You can increment or decrement the date/time using addSecs(), addDays(),
+addMonths() and addYears(). The interval between two date/time values can
+be found using secsTo() or daysTo().
+</p>
+<p>
+The comparison operators (operator==(), operator<(), etc.) all take the time
+zone properly into account; if the two KDateTime objects have different time
+zones, they are first converted to UTC before the comparison is
+performed. An alternative to the comparison operators is compare() which will
+in addition tell you if a KDateTime object overlaps with another when one or
+both are date-only values.
+</p>
+<p>
+KDateTime values may be converted to and from a string representation using
+the toString() and fromString() methods. These handle a variety of text
+formats including ISO 8601 and RFC 2822.
+</p>
+<p>
+KDateTime uses Qt's facilities to implicitly share data. Copying instances
+is very efficient, and copied instances share cached UTC and time zone
+conversions even after the copy is performed. A separate copy of the data is
+created whenever a non-const method is called. If you want to force the
+creation of a separate copy of the data (e.g. if you want two copies to
+cache different time zone conversions), call detach().
+</p>
+<p>
+<b>QDateTime Considerations </b>
+</p>
+<p>
+KDateTime's interface is designed to be as compatible as possible with that
+of QDateTime, but with adjustments to cater for time zone handling. Because
+QDateTime lacks virtual methods, KDateTime is not inherited from QDateTime,
+but instead is implemented using a private QDateTime object.
+</p>
+<p>
+The date range restriction due to the use of QDateTime internally may at
+first sight seem a design limitation. However, two factors should be
+considered:
+</p>
+<p>
+- there are significant problems in the representation of dates before the
+Gregorian calendar was adopted. The date of adoption of the Gregorian
+calendar varied from place to place, and in the Julian calendar the
+date of the new year varied so that in different places the year number
+could differ by one. So any date/time system which attempted to represent
+dates as actually used in history would be too specialized to belong to
+the core KDE libraries. Date/time systems for scientific applications can
+be much simpler, but may differ from historical records.
+</p>
+<p>
+- time zones were not invented until the middle of the 19th century. Before
+that, solar time was used.
+</p>
+<p>
+Because of these issues, together with the fact that KDateTime's aim is to
+provide automatic time zone handling for date/time values, QDateTime was
+chosen as the basis for KDateTime. For those who need an extended date
+range, other classes exist.
+</p>
+<p>
+See also  KTimeZone, KSystemTimeZones, QDateTime, QDate, QTime
+</p>
+<p>
+See also  <a href="http://www.w3.org/TR/timezone/">W3C: Working with Time Zones</a>
+<b>Author</b> David Jarvie \<software@astrojar.org.uk\>.
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>Comparison</b> = { Before, AtStart, Inside, AtEnd, After, Equal, Outside, StartsAt, EndsAt }</li>
+
+<li><b>SpecType</b> = { Invalid, UTC, OffsetFromUTC, TimeZone, LocalZone, ClockTime }</li>
+
+<li><b>TimeFormat</b> = { ISODate, RFCDate, RFCDateDay, QtTextDate, LocalDate }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">!=</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;"><</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;"><=</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">==</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">></b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">>=</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">KDateTime</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>a KDateTime object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Constructs an invalid date/time.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KDateTime</b> (date, spec)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KDateTime object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>date</td><td>QDate</td><td align="right"></td></tr>
+
+              <tr><td>spec</td><td>KDateTime.Spec</td><td align="right">KDateTime.Spec (KDateTime.LocalZone )</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Constructs a date-only value expressed in a given time specification. The
+time is set to 00:00:00.
+</p>
+<p>
+The instance is initialised according to the time specification type of
+<b>spec</b> as follows:
+- UTC : date is stored as UTC.
+- OffsetFromUTC : date is a local time at the specified offset
+from UTC.
+- TimeZone : date is a local time in the specified time zone.
+- LocalZone : date is a local date in the current system time
+zone.
+- ClockTime : time zones are ignored.
+</p>
+<p>
+</p>
+<p>
+<b>date</b> - date in the time zone indicated by <b>spec</b>
+</p>
+<p>
+<b>spec</b> - time specification
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KDateTime</b> (date, time, spec)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KDateTime object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>date</td><td>QDate</td><td align="right"></td></tr>
+
+              <tr><td>time</td><td>QTime</td><td align="right"></td></tr>
+
+              <tr><td>spec</td><td>KDateTime.Spec</td><td align="right">KDateTime.Spec (KDateTime.LocalZone )</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Constructs a date/time expressed as specified by <b>spec.</b>
+</p>
+<p>
+<b>date</b> and <b>time</b> are interpreted and stored according to the value of
+<b>spec</b> as follows:
+- UTC : <b>date</b> and <b>time</b> are in UTC.
+- OffsetFromUTC : date/time is a local time at the specified offset
+from UTC.
+- TimeZone : date/time is a local time in the specified time zone.
+- LocalZone : <b>date</b> and <b>time</b> are local times in the current
+system time zone.
+- ClockTime : time zones are ignored.
+</p>
+<p>
+</p>
+<p>
+<b>date</b> - date in the time zone indicated by <b>spec</b>
+</p>
+<p>
+<b>time</b> - time in the time zone indicated by <b>spec</b>
+</p>
+<p>
+<b>spec</b> - time specification
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KDateTime</b> (dt, spec)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KDateTime object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dt</td><td>QDateTime</td><td align="right"></td></tr>
+
+              <tr><td>spec</td><td>KDateTime.Spec</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Constructs a date/time expressed in a given time specification.
+</p>
+<p>
+<b>dt</b> is interpreted and stored according to the time specification type
+of <b>spec</b> as follows:
+- UTC : <b>dt</b> is stored as a UTC value. If
+dt.timeSpec() is Qt.LocalTime, <b>dt</b> is first
+converted from the current system time zone to UTC
+before storage.
+- OffsetFromUTC : date/time is stored as a local time at the specified
+offset from UTC. If dt.timeSpec() is Qt.UTC,
+the time is adjusted by the UTC offset before
+storage. If dt.timeSpec() is Qt.LocalTime,
+it is assumed to be a local time at the specified
+offset from UTC, and is stored without adjustment.
+- TimeZone : if <b>dt</b> is specified as a UTC time (i.e. dt.timeSpec()
+is Qt.UTC), it is first converted to local time in
+specified time zone before being stored.
+- LocalZone : <b>dt</b> is stored as a local time in the current system
+time zone. If dt.timeSpec() is Qt.UTC, <b>dt</b> is
+first converted to local time before storage.
+- ClockTime : If dt.timeSpec() is Qt.UTC, <b>dt</b> is first
+converted to local time in the current system time zone
+before storage. After storage, the time is treated as a
+simple clock time, ignoring time zones.
+</p>
+<p>
+</p>
+<p>
+<b>dt</b> - date and time
+</p>
+<p>
+<b>spec</b> - time specification
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KDateTime</b> (dt)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KDateTime object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dt</td><td>QDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Constructs a date/time from a QDateTime.
+The KDateTime is expressed in either UTC or the local system time zone,
+according to <b>dt.timeSpec().</b>
+</p>
+<p>
+</p>
+<p>
+<b>dt</b> - date and time
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KDateTime</b> (other)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KDateTime object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>other</td><td>KDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">addDays</b> (days)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>days</td><td>int</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns a date/time <b>days</b> days later than the stored date/time.
+The result is expressed using the same time specification as the
+original instance.
+</p>
+<p>
+Note that if the instance is a local clock time (type ClockTime), any
+daylight savings changes or time zone changes during the period may
+render the result inaccurate.
+</p>
+<p>
+Returns resultant date/time
+</p>
+<p>
+See also  addSecs(), addMonths(), addYears(), daysTo()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">addMSecs</b> (msecs)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>msecs</td><td>qint64</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns a date/time <b>msecs</b> milliseconds later than the stored date/time.
+</p>
+<p>
+Except when the instance is a local clock time (type ClockTime), the
+calculation is done in UTC to ensure that the result takes proper account
+of clock changes (e.g. daylight savings) in the time zone. The result is
+expressed using the same time specification as the original instance.
+</p>
+<p>
+Note that if the instance is a local clock time (type ClockTime), any
+daylight savings changes or time zone changes during the period will
+render the result inaccurate.
+</p>
+<p>
+If the instance is date-only, <b>msecs</b> is rounded down to a whole number
+of days and that value is added to the date to find the result.
+</p>
+<p>
+Returns resultant date/time
+</p>
+<p>
+See also  addSecs(), addDays(), addMonths(), addYears(), secsTo()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">addMonths</b> (months)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>months</td><td>int</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns a date/time <b>months</b> months later than the stored date/time.
+The result is expressed using the same time specification as the
+original instance.
+</p>
+<p>
+Note that if the instance is a local clock time (type ClockTime), any
+daylight savings changes or time zone changes during the period may
+render the result inaccurate.
+</p>
+<p>
+Returns resultant date/time
+</p>
+<p>
+See also  addSecs(), addDays(), addYears(), daysTo()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">addSecs</b> (secs)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>secs</td><td>qint64</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns a date/time <b>secs</b> seconds later than the stored date/time.
+</p>
+<p>
+Except when the instance is a local clock time (type ClockTime), the
+calculation is done in UTC to ensure that the result takes proper account
+of clock changes (e.g. daylight savings) in the time zone. The result is
+expressed using the same time specification as the original instance.
+</p>
+<p>
+Note that if the instance is a local clock time (type ClockTime), any
+daylight savings changes or time zone changes during the period will
+render the result inaccurate.
+</p>
+<p>
+If the instance is date-only, <b>secs</b> is rounded down to a whole number
+of days and that value is added to the date to find the result.
+</p>
+<p>
+Returns resultant date/time
+</p>
+<p>
+See also  addMSecs(), addDays(), addMonths(), addYears(), secsTo()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">addYears</b> (years)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>years</td><td>int</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns a date/time <b>years</b> years later than the stored date/time.
+The result is expressed using the same time specification as the
+original instance.
+</p>
+<p>
+Note that if the instance is a local clock time (type ClockTime), any
+daylight savings changes or time zone changes during the period may
+render the result inaccurate.
+</p>
+<p>
+Returns resultant date/time
+</p>
+<p>
+See also  addSecs(), addDays(), addMonths(), daysTo()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">compare</b> (other)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KDateTime.Comparison)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>other</td><td>KDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Compare this instance with another to determine whether they are
+simultaneous, earlier or later, and in the case of date-only values,
+whether they overlap (i.e. partly coincide but are not wholly
+simultaneous).
+The comparison takes time zones into account: if the two instances have
+different time zones, they are first converted to UTC before comparing.
+</p>
+<p>
+If both instances are date/time values, this instance is considered to
+be either simultaneous, earlier or later, and does not overlap.
+</p>
+<p>
+If one instance is date-only and the other is a date/time, this instance
+is either strictly earlier, strictly later, or overlaps.
+</p>
+<p>
+If both instance are date-only, they are considered simultaneous if both
+their start of day and end of day times are simultaneous with each
+other. (Both start and end of day times need to be considered in case a
+daylight savings change occurs during that day.) Otherwise, this instance
+can be strictly earlier, earlier but overlapping, later but overlapping,
+or strictly later.
+</p>
+<p>
+Note that if either instance is a local clock time (type ClockTime),
+the result cannot be guaranteed to be correct, since by definition they
+contain no information about time zones or daylight savings changes.
+</p>
+<p>
+Returns true if the two instances represent the same time, false otherwise
+</p>
+<p>
+See also  operator==(), operator!=(), operator<(), operator<=(), operator>=(), operator>()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">currentDateTime</b> (spec)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>spec</td><td>KDateTime.Spec</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the current date and time, as reported by the system clock,
+expressed in a given time specification.
+</p>
+<p>
+</p>
+<p>
+<b>spec</b> - time specification
+Returns current date/time
+</p>
+<p>
+See also  currentUtcDateTime(), currentLocalDateTime()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">currentLocalDateTime</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the current date and time, as reported by the system clock,
+expressed in the local system time zone.
+</p>
+<p>
+Returns current date/time
+</p>
+<p>
+See also  currentUtcDateTime(), currentDateTime()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">currentUtcDateTime</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the current date and time, as reported by the system clock,
+expressed in UTC.
+</p>
+<p>
+Returns current date/time
+</p>
+<p>
+See also  currentLocalDateTime(), currentDateTime()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">date</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QDate)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the date part of the date/time. The value returned should be
+interpreted in terms of the instance's time zone or UTC offset.
+</p>
+<p>
+Returns date value
+</p>
+<p>
+See also  time(), dateTime()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">dateTime</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the date/time component of the instance, ignoring the time
+zone. The value returned should be interpreted in terms of the
+instance's time zone or UTC offset. The returned value's timeSpec()
+value will be Qt.UTC if the instance is a UTC time, else
+Qt.LocalTime. If the instance is date-only, the time value is set to
+00:00:00.
+</p>
+<p>
+Returns date/time
+</p>
+<p>
+See also  date(), time()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">daysTo</b> (other)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>other</td><td>KDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Calculates the number of days from this date/time to the <b>other</b> date/time.
+In calculating the result, <b>other</b> is first converted to this instance's
+time zone. The number of days difference is then calculated ignoring
+the time parts of the two date/times. For example, if this date/time
+was 13:00 on 1 January 2000, and <b>other</b> was 02:00 on 2 January 2000,
+the result would be 1.
+</p>
+<p>
+Note that if either instance is a local clock time (type ClockTime),
+the result cannot be guaranteed to be accurate, since by definition they
+contain no information about time zones or daylight savings changes.
+</p>
+<p>
+If one instance is date-only and the other is date-time, the date-time
+value is first converted to the same time specification as the date-only
+value, and the result is the difference in days between the resultant
+date and the date-only date.
+</p>
+<p>
+If both instances are date-only, the calculation ignores time zones.
+</p>
+<p>
+</p>
+<p>
+<b>other</b> - other date/time
+Returns number of days difference
+</p>
+<p>
+See also  secsTo(), addDays()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">detach</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Create a separate copy of this instance's data if it is implicitly shared
+with another instance.
+</p>
+<p>
+You would normally only call this if you want different copies of the
+same date/time value to cache conversions to different time zones. Because
+only the last conversion to another time zone is cached, and the cached
+value is implicitly shared, judicious use of detach() could improve
+efficiency when handling several time zones. But take care: if used
+inappropriately, it will reduce efficiency!
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">fromString</b> (string, format)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KDateTime), negZero (bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>string</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>format</td><td>KDateTime.TimeFormat</td><td align="right">KDateTime.ISODate</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the KDateTime represented by <b>string,</b> using the <b>format</b> given.
+</p>
+<p>
+This method is the inverse of toString(TimeFormat), except that it can
+only return a time specification of UTC, OffsetFromUTC or ClockTime. An
+actual named time zone cannot be returned since an offset from UTC only
+partially specifies a time zone.
+</p>
+<p>
+The time specification of the result is determined by the UTC offset
+present in the string:
+- if the UTC offset is zero the result is type UTC.
+- if the UTC offset is non-zero, the result is type OffsetFromUTC.
+- if there is no UTC offset, the result is by default type
+ClockTime. You can use setFromStringDefault() to change this default.
+</p>
+<p>
+If no time is found in <b>string,</b> a date-only value is returned, except
+when the specified <b>format</b> does not permit the time to be omitted, in
+which case an error is returned. An error is therefore returned for
+ISODate when <b>string</b> includes a time zone specification, and for
+RFCDate in all cases.
+</p>
+<p>
+For RFC format strings, you should normally set <b>format</b> to
+RFCDate. Only set it to RFCDateDay if you want to return an error
+when the day of the week is omitted.
+</p>
+<p>
+For <b>format</b> = ISODate or RFCDate[Day], if an invalid KDateTime is
+returned, you can check why <b>format</b> was considered invalid by use of
+outOfRange(). If that method returns true, it indicates that <b>format</b>
+was in fact valid, but the date lies outside the range which can be
+represented by QDate.
+</p>
+<p>
+</p>
+<p>
+<b>string</b> - string to convert
+</p>
+<p>
+<b>format</b> - format code. LocalDate cannot be used here.
+</p>
+<p>
+<b>negZero</b> - if non-null, the value is set to true if a UTC offset of
+'-0000' is found or, for RFC 2822 format, an unrecognised
+or invalid time zone abbreviation is found, else false.
+Returns KDateTime value, or an invalid KDateTime if either parameter is invalid
+</p>
+<p>
+See also  setFromStringDefault(), toString(), outOfRange(), QString.fromString()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">fromString</b> (string, format, zones, offsetIfAmbiguous)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>string</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>format</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>zones</td><td>KTimeZones</td><td align="right">None</td></tr>
+
+              <tr><td>offsetIfAmbiguous</td><td>bool</td><td align="right">True</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the KDateTime represented by <b>string,</b> using the <b>format</b>
+given, optionally using a time zone collection <b>zones</b> as the source of
+time zone definitions. The <b>format</b> codes are basically the same as
+those for toString(), and are similar but not identical to those used by
+strftime(3).
+</p>
+<p>
+The <b>format</b> string consists of the same codes as that for
+toString(). However, some codes which are distinct in toString() have
+the same function as each other here.
+</p>
+<p>
+Numeric values without a stated number of digits permit, but do not
+require, leading zeroes. The maximum number of digits consumed by a
+numeric code is the minimum needed to cover the possible range of the
+number (e.g. for minutes, the range is 0 - 59, so the maximum number of
+digits consumed is 2). All non-numeric values are case insensitive.
+</p>
+<p>
+<b>Date</b>
+</p>
+<p>
+- %y year excluding century (0 - 99). Years 0 - 50 return 2000 - 2050,
+while years 51 - 99 return 1951 - 1999.
+- %Y full year number (4 digits with optional sign)
+- %:Y full year number (>= 4 digits with optional sign)
+- %:m month number (1 - 12)
+- %m month number, 2 digits (01 - 12)
+- %b
+- %B month name in the current locale or, if no match, in English,
+abbreviated or in full
+- %:b
+- %:B month name in English, abbreviated or in full
+- %e day of the month (1 - 31)
+- %d day of the month, 2 digits (01 - 31)
+- %a
+- %A weekday name in the current locale or, if no match, in English,
+abbreviated or in full
+- %:a
+- %:A weekday name in English, abbreviated or in full
+</p>
+<p>
+<b>Time</b>
+</p>
+<p>
+- %H hour in the 24 hour clock, 2 digits (00 - 23)
+- %k hour in the 24 hour clock (0 - 23)
+- %I hour in the 12 hour clock, 2 digits (01 - 12)
+- %l hour in the 12 hour clock (1 - 12)
+- %M minute, 2 digits (00 - 59)
+- %:M minute (0 - 59)
+- %S seconds, 2 digits (00 - 59)
+- %s seconds (0 - 59)
+- %:S optional seconds value (0 - 59) preceded with ':'. If no colon is
+found in <b>string,</b> no input is consumed and the seconds value is
+set to zero.
+- %:s fractional seconds value, preceded with a decimal point (either '.'
+or the locale's decimal point symbol)
+- %P
+- %p "am" or "pm", in the current locale or, if no match, in
+English. This format is only useful when used with %I or %l.
+- %:P
+- %:p "am" or "pm" in English. This format is only useful when used with
+%I or %l.
+</p>
+<p>
+<b>Time</b> zone
+</p>
+<p>
+- %:u
+- %z UTC offset of the time zone in hours and optionally minutes,
+e.g. -02, -0200.
+- %:z UTC offset of the time zone in hours and minutes, colon separated,
+e.g. +02:00.
+- %Z time zone abbreviation, consisting of alphanumeric characters,
+e.g. UTC, EDT, GMT.
+- %:Z time zone name, e.g. Europe/London. The name may contain any
+characters and is delimited by the following character in the
+<b>format</b> string. It will not work if you follow %:Z with another
+escape sequence (except %% or %t).
+</p>
+<p>
+<b>Other</b>
+</p>
+<p>
+- %t matches one or more whitespace characters
+- %% literal '%' character
+</p>
+<p>
+Any other character must have a matching character in <b>string,</b> except
+that a space will match zero or more whitespace characters in the input
+string.
+</p>
+<p>
+If any time zone information is present in the string, the function
+attempts to find a matching time zone in the <b>zones</b> collection. A time
+zone name (format code %:Z) will provide an unambiguous look up in
+<b>zones.</b> Any other type of time zone information (an abbreviated time
+zone code (%Z) or UTC offset (%z, %:z, %:u) is searched for in <b>zones</b>
+and if only one time zone is found to match, the result is set to that
+zone. Otherwise:
+- If more than one match of a UTC offset is found, the action taken is
+determined by <b>offsetIfAmbiguous:</b> if <b>offsetIfAmbiguous</b> is true,
+a local time with an offset from UTC (type OffsetFromUTC) will be
+returned; if false an invalid KDateTime is returned.
+- If more than one match of a time zone abbreviation is found, the UTC
+offset for each matching time zone is compared and, if the offsets are
+the same, a local time with an offset from UTC (type OffsetFromUTC)
+will be returned provided that <b>offsetIfAmbiguous</b> is true. Otherwise
+an invalid KDateTime is returned.
+- If a time zone abbreviation does not match any time zone in <b>zones,</b>
+or the abbreviation does not apply at the parsed date/time, an
+invalid KDateTime is returned.
+- If a time zone name does not match any time zone in <b>zones,</b> an
+invalid KDateTime is returned.
+- If the time zone UTC offset does not match any time zone in <b>zones,</b>
+a local time with an offset from UTC (type OffsetFromUTC) is
+returned.
+If <b>format</b> contains more than one time zone or UTC offset code, an
+error is returned.
+</p>
+<p>
+If no time zone information is present in the string, by default a local
+clock time (type ClockTime) is returned. You can use
+setFromStringDefault() to change this default.
+</p>
+<p>
+If no time is found in <b>string,</b> a date-only value is returned.
+</p>
+<p>
+If any inconsistencies are found, i.e. the same item of information
+appears more than once but with different values, the weekday name does
+not tally with the date, an invalid KDateTime is returned.
+</p>
+<p>
+If an invalid KDateTime is returned, you can check why <b>format</b> was
+considered invalid by use of outOfRange(). If that method returns true,
+it indicates that <b>format</b> was in fact valid, but the date lies outside
+the range which can be represented by QDate.
+</p>
+<p>
+</p>
+<p>
+<b>string</b> - string to convert
+</p>
+<p>
+<b>format</b> - format string
+</p>
+<p>
+<b>zones</b> - time zone collection, or null for none
+</p>
+<p>
+<b>offsetIfAmbiguous</b> - specifies what to do if more than one zone
+matches the UTC offset found in the
+string. Ignored if <b>zones</b> is null.
+Returns KDateTime value, or an invalid KDateTime if an error occurs, if
+time zone information doesn't match any in <b>zones,</b> or if the
+time zone information is ambiguous and <b>offsetIfAmbiguous</b> is
+false
+</p>
+<p>
+See also  setFromStringDefault(), toString(), outOfRange()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isClockTime</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns whether the time specification is a local clock time.
+</p>
+<p>
+Returns true if local clock time
+</p>
+<p>
+See also  isUtc(), timeZone()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isDateOnly</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns whether the instance represents a date/time or a date-only value.
+</p>
+<p>
+Returns true if date-only, false if date and time
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isLocalZone</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns whether the time specification is the current local
+system time zone.
+</p>
+<p>
+Returns true if local system time zone
+</p>
+<p>
+See also  isUtc(), isOffsetFromUtc(), timeZone()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isNull</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns whether the date/time is null.
+</p>
+<p>
+Returns true if both date and time are null, else false
+</p>
+<p>
+See also  isValid(), QDateTime.isNull()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isOffsetFromUtc</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns whether the time specification is a local time at a fixed
+offset from UTC.
+</p>
+<p>
+Returns true if local time at fixed offset from UTC
+</p>
+<p>
+See also  isLocal(), isUtc(), utcOffset()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isSecondOccurrence</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns whether the date/time is the second occurrence of this time. This
+is only applicable to a date/time expressed in terms of a time zone (type
+TimeZone or LocalZone), around the time of change from daylight
+savings to standard time.
+</p>
+<p>
+When a shift from daylight savings time to standard time occurs, the local
+times (typically the previous hour) immediately preceding the shift occur
+twice. For example, if a time shift of 1 hour happens at 03:00, the clock
+jumps backwards to 02:00, so the local times between 02:00:00 and 02:59:59
+occur once before the shift, and again after the shift.
+</p>
+<p>
+For instances which are not of type TimeZone, or when the date/time is
+not near to a time shift, false is returned.
+</p>
+<p>
+Returns true if the time is the second occurrence, false otherwise
+</p>
+<p>
+See also  setSecondOccurrence()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isUtc</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns whether the time specification is a UTC time.
+It is considered to be a UTC time if it is either type UTC,
+or is type OffsetFromUTC with a zero UTC offset.
+</p>
+<p>
+Returns true if UTC
+</p>
+<p>
+See also  isLocal(), isOffsetFromUtc(), timeZone()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isValid</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns whether the time specification is valid.
+</p>
+<p>
+Returns true if valid, else false
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">outOfRange</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Checks whether the date/time returned by the last call to fromString()
+was invalid because an otherwise valid date was outside the range which
+can be represented by QDate. This status occurs when fromString() read
+a valid string containing a year earlier than -4712 (4713 BC). On exit
+from fromString(), if outOfRange() returns true, isValid() will
+return false.
+</p>
+<p>
+Returns true if date was earlier than -4712, else false
+</p>
+<p>
+See also  isValid(), fromString()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">secsTo</b> (other)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>other</td><td>KDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the number of seconds from this date/time to the <b>other</b> date/time.
+</p>
+<p>
+Before performing the comparison, the two date/times are converted to UTC
+to ensure that the result is correct if one of the two date/times has
+daylight saving time (DST) and the other doesn't. The exception is when
+both instances are local clock time, in which case no conversion to UTC
+is done.
+</p>
+<p>
+Note that if either instance is a local clock time (type ClockTime),
+the result cannot be guaranteed to be accurate, since by definition they
+contain no information about time zones or daylight savings changes.
+</p>
+<p>
+If one instance is date-only and the other is date-time, the date-time
+value is first converted to the same time specification as the date-only
+value, and the result is the difference in days between the resultant
+date and the date-only date.
+</p>
+<p>
+If both instances are date-only, the result is the difference in days
+between the two dates, ignoring time zones.
+</p>
+<p>
+</p>
+<p>
+<b>other</b> - other date/time
+Returns number of seconds difference
+</p>
+<p>
+See also  secsTo_long(), addSecs(), daysTo()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">secsTo_long</b> (other)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(qint64)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>other</td><td>KDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the number of seconds from this date/time to the <b>other</b> date/time.
+</p>
+<p>
+Before performing the comparison, the two date/times are converted to UTC
+to ensure that the result is correct if one of the two date/times has
+daylight saving time (DST) and the other doesn't. The exception is when
+both instances are local clock time, in which case no conversion to UTC
+is done.
+</p>
+<p>
+Note that if either instance is a local clock time (type ClockTime),
+the result cannot be guaranteed to be accurate, since by definition they
+contain no information about time zones or daylight savings changes.
+</p>
+<p>
+If one instance is date-only and the other is date-time, the date-time
+value is first converted to the same time specification as the date-only
+value, and the result is the difference in days between the resultant
+date and the date-only date.
+</p>
+<p>
+If both instances are date-only, the result is the difference in days
+between the two dates, ignoring time zones.
+</p>
+<p>
+</p>
+<p>
+<b>other</b> - other date/time
+Returns number of seconds difference
+</p>
+<p>
+See also  secsTo(), addSecs(), daysTo()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setDate</b> (date)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>date</td><td>QDate</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Sets the date part of the date/time.
+</p>
+<p>
+</p>
+<p>
+<b>date</b> - new date value
+</p>
+<p>
+See also  date(), setTime(), setTimeSpec(), setTime_t(), setDateOnly()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setDateOnly</b> (dateOnly)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dateOnly</td><td>bool</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Sets the instance either to being a date and time value, or a date-only
+value. If its status is changed to date-only, its time is set to
+00:00:00.
+</p>
+<p>
+</p>
+<p>
+<b>dateOnly</b> - true to set to date-only, false to set to date
+and time.
+</p>
+<p>
+See also  isDateOnly(), setTime()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setDateTime</b> (dt)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dt</td><td>QDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Sets the date/time part of the instance, leaving the time specification
+unaffected.
+</p>
+<p>
+If <b>dt</b> is a local time <pre> dt.timeSpec() == Qt.LocalTime </pre>
+and the instance is UTC, <b>dt</b> is first converted from the current
+system time zone to UTC before being stored.
+</p>
+<p>
+If the instance was date-only, it is changed to being a date and time
+value.
+</p>
+<p>
+</p>
+<p>
+<b>dt</b> - date and time
+</p>
+<p>
+See also  dateTime(), setDate(), setTime(), setTimeSpec()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setFromStringDefault</b> (spec)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>spec</td><td>KDateTime.Spec</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Sets the default time specification for use by fromString() when no time
+zone or UTC offset is found in the string being parsed, or when "-0000"
+is found in an RFC 2822 string.
+</p>
+<p>
+By default, fromString() returns a local clock time (type ClockTime)
+when no definite zone or UTC offset is found. You can use this method
+to make it return the local time zone, UTC, or whatever you wish.
+</p>
+<p>
+</p>
+<p>
+<b>spec</b> - the new default time specification
+</p>
+<p>
+See also  fromString()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setSecondOccurrence</b> (second)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>second</td><td>bool</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Sets whether the date/time is the second occurrence of this time. This
+is only applicable to a date/time expressed in terms of a time zone (type
+TimeZone or LocalZone), around the time of change from daylight
+savings to standard time.
+</p>
+<p>
+When a shift from daylight savings time to standard time occurs, the local
+times (typically the previous hour) immediately preceding the shift occur
+twice. For example, if a time shift of 1 hour happens at 03:00, the clock
+jumps backwards to 02:00, so the local times between 02:00:00 and 02:59:59
+occur once before the shift, and again after the shift.
+</p>
+<p>
+For instances which are not of type TimeZone, or when the date/time is
+not near to a time shift, calling this method has no effect.
+</p>
+<p>
+Note that most other setting methods clear the second occurrence indicator,
+so if you want to retain its setting, you must call setSecondOccurrence()
+again after changing the instance's value.
+</p>
+<p>
+</p>
+<p>
+<b>second</b> - true to set as the second occurrence, false to set as
+the first occurrence
+</p>
+<p>
+See also  isSecondOccurrence()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setTime</b> (time)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>time</td><td>QTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Sets the time part of the date/time. If the instance was date-only, it
+is changed to being a date and time value.
+</p>
+<p>
+</p>
+<p>
+<b>time</b> - new time value
+</p>
+<p>
+See also  time(), setDate(), setTimeSpec(), setTime_t()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setTimeSpec</b> (spec)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>spec</td><td>KDateTime.Spec</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Changes the time specification of the instance.
+</p>
+<p>
+Any previous time zone is forgotten. The stored date/time component of
+the instance is left unchanged (except that its UTC/local time setting
+is set to correspond with <b>spec).</b> Usually this method will change the
+absolute time which this instance represents.
+</p>
+<p>
+</p>
+<p>
+<b>spec</b> - new time specification
+</p>
+<p>
+See also  timeSpec(), timeZone()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setTime_t</b> (seconds)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>seconds</td><td>uint</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">time</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the time part of the date/time. The value returned should be
+interpreted in terms of the instance's time zone or UTC offset. If
+the instance is date-only, the time returned is 00:00:00.
+</p>
+<p>
+Returns time value
+</p>
+<p>
+See also  date(), dateTime(), isDateOnly()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">timeSpec</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KDateTime.Spec)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the time specification of the date/time, i.e. whether it is
+UTC, what time zone it is, etc.
+</p>
+<p>
+Returns time specification
+</p>
+<p>
+See also  isLocalZone(), isClockTime(), isUtc(), timeZone()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">timeType</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KDateTime.SpecType)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the time specification type of the date/time, i.e. whether it is
+UTC, has a time zone, etc. If the type is the local time zone,
+TimeZone is returned; use isLocalZone() to check for the local time
+zone.
+</p>
+<p>
+Returns specification type
+</p>
+<p>
+See also  timeSpec(), isLocalZone(), isClockTime(), isUtc(), timeZone()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">timeZone</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KTimeZone)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the time zone for the date/time, according to the time
+specification type as follows:
+- TimeZone : the specified time zone is returned.
+- UTC : a UTC time zone is returned.
+- LocalZone : the current local time zone is returned.
+</p>
+<p>
+Returns time zone as defined above, or invalid in all other cases
+</p>
+<p>
+See also  isUtc(), isLocal()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">toClockTime</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the time converted to the local clock time. The time is first
+converted to the local system time zone before setting its type to
+ClockTime, i.e. no associated time zone.
+If the instance is a date-only value, a date-only clock time value is
+returned, with the date unchanged.
+</p>
+<p>
+Returns converted time
+</p>
+<p>
+See also  toLocalZone(), toTimeSpec()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">toLocalZone</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the time converted to the current local system time zone.
+If the instance is a date-only value, a date-only local time zone value
+is returned, with the date unchanged.
+</p>
+<p>
+Returns converted time
+</p>
+<p>
+See also  toUtc(), toOffsetFromUtc(), toZone(), toTimeSpec(), KTimeZone.convert()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">toOffsetFromUtc</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the time expressed as an offset from UTC, using the UTC offset
+associated with this instance's date/time. The date and time
+components are unchanged. For example, 14:15 on 12 Jan 2001, US Eastern
+time zone would return a KDateTime value of 14:15 on 12 Jan 2001 with a
+UTC offset of -18000 seconds (i.e. -5 hours).
+</p>
+<p>
+If the instance is a local clock time, the offset is set to that of the
+local time zone.
+If the instance is a date-only value, the offset is set to that at the
+start of the day.
+</p>
+<p>
+Returns converted time
+</p>
+<p>
+See also  toUtc(), toOffsetFromUtc(int), toLocalZone(), toZone(), toTimeSpec(), toTime_t(), KTimeZone.convert()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">toOffsetFromUtc</b> (utcOffset)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>utcOffset</td><td>int</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the time expressed as a specified offset from UTC.
+</p>
+<p>
+If the instance is a local clock time, it is first set to the local time
+zone, and then converted to the UTC offset.
+If the instance is a date-only value, a date-only clock time value is
+returned, with the date unchanged.
+</p>
+<p>
+</p>
+<p>
+<b>utcOffset</b> - number of seconds to add to UTC to get the local time.
+Returns converted time
+</p>
+<p>
+See also  toUtc(), toOffsetFromUtc(), toLocalZone(), toZone(), toTimeSpec(), toTime_t(), KTimeZone.convert()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">toString</b> (format)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>format</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the date/time as a string. The <b>format</b> parameter determines the
+format of the result string. The <b>format</b> codes used for the date and time
+components follow those used elsewhere in KDE, and are similar but not
+identical to those used by strftime(3). Conversion specifiers are
+introduced by a '%' character, and are replaced in <b>format</b> as follows:
+</p>
+<p>
+<b>Date</b>
+</p>
+<p>
+- %y 2-digit year excluding century (00 - 99). Conversion is undefined
+if year < 0.
+- %Y full year number
+- %:m month number, without leading zero (1 - 12)
+- %m month number, 2 digits (01 - 12)
+- %b abbreviated month name in current locale
+- %B full month name in current locale
+- %:b abbreviated month name in English (Jan, Feb, ...)
+- %:B full month name in English
+- %e day of the month (1 - 31)
+- %d day of the month, 2 digits (01 - 31)
+- %a abbreviated weekday name in current locale
+- %A full weekday name in current locale
+- %:a abbreviated weekday name in English (Mon, Tue, ...)
+- %:A full weekday name in English
+</p>
+<p>
+<b>Time</b>
+</p>
+<p>
+- %H hour in the 24 hour clock, 2 digits (00 - 23)
+- %k hour in the 24 hour clock, without leading zero (0 - 23)
+- %I hour in the 12 hour clock, 2 digits (01 - 12)
+- %l hour in the 12 hour clock, without leading zero (1 - 12)
+- %M minute, 2 digits (00 - 59)
+- %S seconds (00 - 59)
+- %:S seconds preceded with ':', but omitted if seconds value is zero
+- %:s milliseconds, 3 digits (000 - 999)
+- %P "am" or "pm" in the current locale, or if undefined there, in English
+- %p "AM" or "PM" in the current locale, or if undefined there, in English
+- %:P "am" or "pm"
+- %:p "AM" or "PM"
+</p>
+<p>
+<b>Time</b> zone
+</p>
+<p>
+- %:u UTC offset of the time zone in hours, e.g. -02. If the offset
+is not a whole number of hours, the output is the same as for '%U'.
+- %z UTC offset of the time zone in hours and minutes, e.g. -0200.
+- %:z UTC offset of the time zone in hours and minutes, e.g. +02:00.
+- %Z time zone abbreviation, e.g. UTC, EDT, GMT. This is not guaranteed
+to be unique among different time zones. If not applicable (i.e. if
+the instance is type OffsetFromUTC), the UTC offset is substituted.
+- %:Z time zone name, e.g. Europe/London. This is system dependent. If
+not applicable (i.e. if the instance is type OffsetFromUTC), the
+UTC offset is substituted.
+</p>
+<p>
+<b>Other</b>
+</p>
+<p>
+- %% literal '%' character
+</p>
+<p>
+Note that if the instance has a time specification of ClockTime, the
+time zone or UTC offset in the result will be blank.
+</p>
+<p>
+If you want to use the current locale's date format, you should call
+KLocale.formatDate() to format the date part of the KDateTime.
+</p>
+<p>
+</p>
+<p>
+<b>format</b> - format for the string
+Returns formatted string
+</p>
+<p>
+See also  fromString(), KLocale.formatDate()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">toString</b> (format)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>format</td><td>KDateTime.TimeFormat</td><td align="right">KDateTime.ISODate</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the date/time as a string, formatted according to the <b>format</b>
+parameter, with the UTC offset appended.
+</p>
+<p>
+Note that if the instance has a time specification of ClockTime, the UTC
+offset in the result will be blank, except for RFC 2822 format in which
+it will be the offset for the local system time zone.
+</p>
+<p>
+If the instance is date-only, the time will when <b>format</b> permits be
+omitted from the output string. This applies to <b>format</b> = QtTextDate
+or LocalDate. It also applies to <b>format</b> = ISODate when the instance
+has a time specification of ClockTime. For all other cases, a time of
+00:00:00 will be output.
+</p>
+<p>
+For RFC 2822 format, set <b>format</b> to RFCDateDay to include the day
+of the week, or to RFCDate to omit it.
+</p>
+<p>
+</p>
+<p>
+<b>format</b> - format for output string
+Returns formatted string
+</p>
+<p>
+See also  fromString(), QDateTime.toString()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">toTimeSpec</b> (spec)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>spec</td><td>KDateTime.Spec</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the time converted to a new time specification.
+If the instance is a local clock time, it is first set to the local time
+zone, and then converted to the <b>spec</b> time specification.
+If the instance is a date-only value, a date-only value is returned,
+with the date unchanged.
+</p>
+<p>
+</p>
+<p>
+<b>spec</b> - new time specification
+Returns converted time
+</p>
+<p>
+See also  toLocalZone(), toUtc(), toOffsetFromUtc(), toZone(), KTimeZone.convert()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">toTimeSpec</b> (dt)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dt</td><td>KDateTime</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the time converted to the time specification of another instance.
+If this instance is a local clock time, it is first set to the local time
+zone, and then converted to the <b>spec</b> time specification.
+If this instance is a date-only value, a date-only value is returned,
+with the date unchanged.
+</p>
+<p>
+</p>
+<p>
+<b>dt</b> - instance providing the new time specification
+Returns converted time
+</p>
+<p>
+See also  toLocalZone(), toUtc(), toOffsetFromUtc(), toZone(), KTimeZone.convert()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">toTime_t</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(uint)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Converts the time to a UTC time, measured in seconds since 00:00:00 UTC
+1st January 1970 (as returned by time(2)).
+</p>
+<p>
+Returns converted time, or -1 if the date is out of range
+</p>
+<p>
+See also  setTime_t()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">toUtc</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the time converted to UTC. The converted time has a UTC offset
+of zero.
+If the instance is a local clock time, it is first set to the local time
+zone, and then converted to UTC.
+If the instance is a date-only value, a date-only UTC value is returned,
+with the date unchanged.
+</p>
+<p>
+Returns converted time
+</p>
+<p>
+See also  toOffsetFromUtc(), toLocalZone(), toZone(), toTimeSpec(), toTime_t(), KTimeZone.convert()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">toZone</b> (zone)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KDateTime)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>zone</td><td>KTimeZone</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the time converted to a specified time zone.
+If the instance is a local clock time, it is first set to the local time
+zone, and then converted to <b>zone.</b>
+If the instance is a date-only value, a date-only value in <b>zone</b> is
+returned, with the date unchanged.
+</p>
+<p>
+</p>
+<p>
+<b>zone</b> - time zone to convert to
+Returns converted time
+</p>
+<p>
+See also  toUtc(), toOffsetFromUtc(), toLocalZone(), toTimeSpec(), KTimeZone.convert()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">utcOffset</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the UTC offset associated with the time specification. The
+UTC offset is the number of seconds to add to UTC to get the local time.
+</p>
+<p>
+Returns UTC offset in seconds if type is OffsetFromUTC, else 0
+</p>
+<p>
+See also  isOffsetFromUtc()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+
+<li><b>Comparison</b> = { Before, AtStart, Inside, AtEnd, After, Equal, Outside, StartsAt, EndsAt }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Before</i></td>
+      <td valign="top">-</td>
+      <td>
+Before = 0x01, < This KDateTime is strictly earlier than the other,
+i.e. e1 < s2.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>AtStart</i></td>
+      <td valign="top">-</td>
+      <td>AtStart = 0x02, < This KDateTime starts at the same time as the other,
+and ends before the end of the other,
+i.e. s1 = s2, e1 < e2.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Inside</i></td>
+      <td valign="top">-</td>
+      <td>Inside = 0x04, < This KDateTime starts after the start of the other,
+and ends before the end of the other,
+i.e. s1 > s2, e1 < e2.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>AtEnd</i></td>
+      <td valign="top">-</td>
+      <td>AtEnd = 0x08, < This KDateTime starts after the start of the other,
+and ends at the same time as the other,
+i.e. s1 > s2, e1 = e2.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>After</i></td>
+      <td valign="top">-</td>
+      <td>After = 0x10, < This KDateTime is strictly later than the other,
+i.e. s1 > e2.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Equal</i></td>
+      <td valign="top">-</td>
+      <td>Simultaneous, i.e. s1 = s2 && e1 = e2.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Outside</i></td>
+      <td valign="top">-</td>
+      <td>This KDateTime starts before the start of the other,
+and ends after the end of the other,
+i.e. s1 < s2, e1 > e2.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>StartsAt</i></td>
+      <td valign="top">-</td>
+      <td>This KDateTime starts at the same time as the other,
+and ends after the end of the other,
+i.e. s1 = s2, e1 > e2.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>EndsAt</i></td>
+      <td valign="top">-</td>
+      <td>This KDateTime starts before the start of the other,
+and ends at the same time as the other,
+i.e. s1 < s2, e1 = e2.</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+<li><b>SpecType</b> = { Invalid, UTC, OffsetFromUTC, TimeZone, LocalZone, ClockTime }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Invalid</i></td>
+      <td valign="top">-</td>
+      <td>
+Invalid, < an invalid time specification.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>UTC</i></td>
+      <td valign="top">-</td>
+      <td>UTC, < a UTC time.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>OffsetFromUTC</i></td>
+      <td valign="top">-</td>
+      <td>OffsetFromUTC, < a local time which has a fixed offset from UTC.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>TimeZone</i></td>
+      <td valign="top">-</td>
+      <td>TimeZone, < a time in a specified time zone. If the time zone is
+the current system time zone (i.e. that returned by
+KSystemTimeZones.local()), LocalZone may be used
+instead.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>LocalZone</i></td>
+      <td valign="top">-</td>
+      <td>LocalZone, < a time in the current system time zone.
+When used to initialize a KDateTime or KDateTime.Spec
+instance, this is simply a shorthand for calling the
+setting method with a time zone parameter
+KSystemTimeZones.local(). Note that if the system is
+changed to a different time zone afterwards, the
+KDateTime instance will still use the original system
+time zone rather than adopting the new zone.
+When returned by a method, it indicates that the time
+zone stored in the instance is that currently returned
+by KSystemTimeZones.local().</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>ClockTime</i></td>
+      <td valign="top">-</td>
+      <td>ClockTime < a clock time which ignores time zones and simply uses
+whatever the local system clock says the time is. You
+could, for example, set a wake-up time of 07:30 on
+some date, and then no matter where you were in the
+world, you would be in time for breakfast as long as
+your computer was aligned with the local time.
+/p>
+p>
+Note that any calculations which involve clock times
+cannot be guaranteed to be accurate, since by
+definition they contain no information about time
+zones or daylight savings changes.</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+<li><b>TimeFormat</b> = { ISODate, RFCDate, RFCDateDay, QtTextDate, LocalDate }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>ISODate</i></td>
+      <td valign="top">-</td>
+      <td>
+ISODate, < ISO 8601 format, i.e. [±]YYYY-MM-DDThh[:mm[:ss[.sss]]]TZ,
+where TZ is the time zone offset (blank for local
+time, Z for UTC, or ±hhmm for an offset from UTC).
+When parsing a string, the ISO 8601 basic format,
+[±]YYYYMMDDThh[mm[ss[.sss]]]TZ, is also accepted. For
+date-only values, the formats [±]YYYY-MM-DD and
+[±]YYYYMMDD (without time zone specifier) are used. All
+formats may contain a day of the year instead of day
+and month.
+To allow for years past 9999, the year may optionally
+contain more than 4 digits. To avoid ambiguity, this is
+not allowed in the basic format containing a day
+of the year (i.e. when the date part is [±]YYYYDDD).</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>RFCDate</i></td>
+      <td valign="top">-</td>
+      <td>RFCDate, < RFC 2822 format,
+i.e. "[Wdy,] DD Mon YYYY hh:mm[:ss] ±hhmm". This format
+also covers RFCs 822, 850, 1036 and 1123.
+When parsing a string, it also accepts the format
+"Wdy Mon DD HH:MM:SS YYYY" specified by RFCs 850 and
+1036. There is no valid date-only format.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>RFCDateDay</i></td>
+      <td valign="top">-</td>
+      <td>RFCDateDay, < RFC 2822 format including day of the week,
+i.e. "Wdy, DD Mon YYYY hh:mm:ss ±hhmm"</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>QtTextDate</i></td>
+      <td valign="top">-</td>
+      <td>QtTextDate, < Same format as Qt.TextDate (i.e. Day Mon DD hh:mm:ss YYYY)
+with, if not local time, the UTC offset appended. The
+time may be omitted to indicate a date-only value.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>LocalDate</i></td>
+      <td valign="top">-</td>
+      <td>LocalDate < Same format as Qt.LocalDate (i.e. locale dependent)
+with, if not local time, the UTC offset appended. The
+time may be omitted to indicate a date-only value.</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+</ul>
+
+</span>
+</body>
+</html>

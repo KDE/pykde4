@@ -1,0 +1,1153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KXmlGuiWindow</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KXmlGuiWindow</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdeui</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KXmlGuiWindow</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>KMainWindow, KXMLGUIBuilder, KXMLGUIClient</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+%KDE top level main window
+</p>
+<p>
+Top level widget that provides toolbars, a status line and a frame.
+</p>
+<p>
+It should be used as a top level (parent-less) widget.
+It manages the geometry for all its children, including your
+main widget.
+</p>
+<p>
+Normally, you will inherit from KMainWindow,
+then construct (or use some existing) widget as
+your main view. You can set only one main view.
+</p>
+<p>
+You can add as many toolbars as you like. There can be only one menubar
+and only one statusbar.
+</p>
+<p>
+The toolbars, menubar, and statusbar can be created by the
+KMainWindow and - unlike the old KMainWindow - may, but do not
+have to, be deleted by you. KMainWindow will handle that internally.
+</p>
+<p>
+Height and width can be operated independently from each other. Simply
+define the minimum/maximum height/width of your main widget and
+KMainWindow will take this into account. For fixed size windows set
+your main widget to a fixed size.
+</p>
+<p>
+Fixed aspect ratios (heightForWidth()) and fixed width widgets are
+not supported.
+</p>
+<p>
+KMainWindow will set icon, mini icon and caption, which it gets
+from KApplication. It provides full session management, and
+will save its position, geometry and positions of toolbars and
+menubar on logout. If you want to save additional data, reimplement
+saveProperties() and (to read them again on next login)
+readProperties(). To save special data about your data, reimplement
+saveGlobalProperties(). To warn user that application or
+windows have unsaved data on close or logout, reimplement
+queryClose() and/or queryExit().
+</p>
+<p>
+There are also kRestoreMainWindows convenience functions which
+can restore all your windows on next login.
+</p>
+<p>
+Note that a KMainWindow per-default is created with the
+WDestructiveClose flag, i.e. it is automatically destroyed when the
+window is closed. If you do not want this behavior, specify 0 as
+widget flag in the constructor.
+</p>
+<p>
+See also  KApplication
+<b>Author</b> Reginald Stadlbauer (reggie@kde.org) Stephan Kulow (coolo@kde.org), Matthias Ettrich (ettrich@kde.org), Chris Schlaeger (cs@kde.org), Sven Radej (radej@kde.org). Maintained by Sven Radej (radej@kde.org)
+</p>
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>StandardWindowOption</b> = { ToolBar, Keys, StatusBar, Save, Create, Default }</li>
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KXmlGuiWindow</b> (parent, f)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KXmlGuiWindow object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right">None</td></tr>
+
+              <tr><td>f</td><td>Qt.WindowFlags</td><td align="right">0</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Construct a main window.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - The widget parent. This is usually 0 but it may also be the window
+group leader. In that case, the KMainWindow becomes sort of a
+secondary window.
+</p>
+<p>
+</p>
+<p>
+<b>f</b> - Specify the widget flags. The default is
+WType_TopLevel and WDestructiveClose. TopLevel indicates that a
+main window is a toplevel window, regardless of whether it has a
+parent or not. DestructiveClose indicates that a main window is
+automatically destroyed when its window is closed. Pass 0 if
+you do not want this behavior.
+</p>
+<p>
+#WidgetFlags-enum
+</p>
+<p>
+KMainWindows must be created on the heap with 'new', like:
+<pre>
+KMainWindow *kmw = new KMainWindow(...);
+kmw->setObjectName(...);
+</pre>
+</p>
+<p>
+IMPORTANT: For session management and window management to work
+properly, all main windows in the application should have a
+different name. If you don't do it, KMainWindow will create
+a unique name, but it's recommended to explicitly pass a window name that will
+also describe the type of the window. If there can be several windows of the same
+#' (hash) to the name, and KMainWindow will replace it with numbers to make
+the names unique. For example, for a mail client which has one main window showing
+the mails and folders, and which can also have one or more windows for composing
+mails, the name for the folders window should be e.g. "mainwindow" and
+#".
+</p>
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">applyMainWindowSettings</b> (config, force)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>config</td><td>KConfigGroup</td><td align="right"></td></tr>
+
+              <tr><td>force</td><td>bool</td><td align="right">False</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">configureToolbars</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Show a standard configure toolbar dialog.
+</p>
+<p>
+This slot can be connected directly to the action to configure toolbar.
+This is very simple to do that by adding a single line
+<pre>
+KStdAction.configureToolbars( this, SLOT( configureToolbars() ),
+actionCollection() );
+</pre>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">createGUI</b> (xmlfile)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>xmlfile</td><td>QString</td><td align="right">QString ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Create a GUI given a local XML file.
+</p>
+<p>
+If <b>xmlfile</b> is 0,
+then it will try to construct a local XML filename like
+appnameui.rc where 'appname' is your app's name. If that file
+does not exist, then the XML UI code will only use the global
+(standard) XML file for the layout purposes.
+</p>
+<p>
+</p>
+<p>
+<b>xmlfile</b> - The local xmlfile (relative or absolute)
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">createStandardStatusBarAction</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Sets whether KMainWindow should provide a menu that allows showing/hiding
+of the statusbar ( using KToggleStatusBarAction ).
+</p>
+<p>
+The menu / menu item is implemented using xmlgui. It will be inserted
+in your menu structure in the 'Settings' menu.
+</p>
+<p>
+Note that you should enable this feature before calling createGUI()
+( or similar ).
+</p>
+<p>
+If an application maintains the action on its own (i.e. never calls
+this function) a connection needs to be made to let KMainWindow
+know when that status (hidden/shown) of the statusbar has changed.
+For example:
+connect(action, SIGNAL(activated()),
+kmainwindow, SLOT(setSettingsDirty()));
+Otherwise the status (hidden/show) of the statusbar might not be saved
+by KMainWindow.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">event</b> (event)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>event</td><td>QEvent</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Reimplemented to catch QEvent.Polish in order to adjust the object name
+if needed, once all constructor code for the main window has run.
+Also reimplemented to catch when a QDockWidget is added or removed.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">finalizeGUI</b> (client)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>client</td><td>KXMLGUIClient</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">finalizeGUI</b> (force)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>force</td><td>bool</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+<b style="color : #ff0000;"><i>Internal </i></b>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">guiFactory</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KXMLGUIFactory)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isHelpMenuEnabled</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Return <b>true</b> when the help menu is enabled
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isStandardToolBarMenuEnabled</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">saveNewToolbarConfig</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Rebuilds the GUI after KEditToolbar changed the toolbar layout.
+</p>
+<p>
+See also  configureToolbars()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setHelpMenuEnabled</b> (showHelpMenu)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>showHelpMenu</td><td>bool</td><td align="right">True</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Enables the build of a standard help menu when calling createGUI().
+</p>
+<p>
+The default behavior is to build one, you must call this function
+to disable it
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setStandardToolBarMenuEnabled</b> (enable)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>enable</td><td>bool</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Sets whether KMainWindow should provide a menu that allows showing/hiding
+the available toolbars ( using KToggleToolBarAction ) . In case there
+is only one toolbar configured a simple 'Show \<toolbar name here\>' menu item
+is shown.
+</p>
+<p>
+The menu / menu item is implemented using xmlgui. It will be inserted in your
+menu structure in the 'Settings' menu.
+</p>
+<p>
+If your application uses a non-standard xmlgui resource file then you can
+specify the exact position of the menu / menu item by adding a
+&lt;Merge name="StandardToolBarMenuHandler" /&gt;
+line to the settings menu section of your resource file ( usually appname.rc ).
+</p>
+<p>
+Note that you should enable this feature before calling createGUI() ( or similar ) .
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setupGUI</b> (options, xmlfile)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>options</td><td>KXmlGuiWindow.StandardWindowOptions</td><td align="right">KXmlGuiWindow.Default</td></tr>
+
+              <tr><td>xmlfile</td><td>QString</td><td align="right">QString ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Configures the current windows and its actions in the typical KDE
+fashion. The options are all enabled by default but can be turned
+off if desired through the params or if the prereqs don't exists.
+</p>
+<p>
+Typically this function replaces createGUI().
+</p>
+<p>
+See also  StandardWindowOptions
+</p>
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setupGUI</b> (defaultSize, options, xmlfile)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>defaultSize</td><td>QSize</td><td align="right"></td></tr>
+
+              <tr><td>options</td><td>KXmlGuiWindow.StandardWindowOptions</td><td align="right">KXmlGuiWindow.Default</td></tr>
+
+              <tr><td>xmlfile</td><td>QString</td><td align="right">QString ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Configures the current windows and its actions in the typical KDE
+fashion. The options are all enabled by default but can be turned
+off if desired through the params or if the prereqs don't exists.
+</p>
+<p>
+<b>defaultSize</b> The default size of the window
+</p>
+<p>
+Typically this function replaces createGUI().
+</p>
+<p>
+See also  StandardWindowOptions
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">setupToolbarMenuActions</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+<b style="color : #ff0000;"><i>Internal </i></b> for KToolBar
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">slotStateChanged</b> (newstate)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>newstate</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Apply a state change
+</p>
+<p>
+Enable and disable actions as defined in the XML rc file
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">slotStateChanged</b> (newstate, reverse)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>newstate</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>reverse</td><td>bool</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Apply a state change
+</p>
+<p>
+Enable and disable actions as defined in the XML rc file,
+can "reverse" the state (disable the actions which should be
+enabled, and vice-versa) if specified.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">toolBarMenuAction</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QAction)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns a pointer to the mainwindows action responsible for the toolbars menu
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+
+<li><b>StandardWindowOption</b> = { ToolBar, Keys, StatusBar, Save, Create, Default }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>ToolBar</i></td>
+      <td valign="top">-</td>
+      <td>
+adds action to show/hide the toolbar(s) and adds
+action to configure the toolbar(s).
+/p>
+p>
+See also  setStandardToolBarMenuEnabled</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Keys</i></td>
+      <td valign="top">-</td>
+      <td>adds action to show the key configure action.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>StatusBar</i></td>
+      <td valign="top">-</td>
+      <td>adds action to show/hide the statusbar if the
+statusbar exists. </p>
+p>
+See also  createStandardStatusBarAction</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Save</i></td>
+      <td valign="top">-</td>
+      <td>auto-saves (and loads) the toolbar/menubar/statusbar settings and
+window size using the default name. </p>
+p>
+See also  setAutoSaveSettings
+/p>
+p>
+Typically you want to let the default window size be determined by
+the widgets size hints. Make sure that setupGUI() is called after
+all the widgets are created ( including setCentralWidget ) so the
+default size's will be correct. </p>
+p>
+See also  setAutoSaveSettings for
+more information on this topic.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Create</i></td>
+      <td valign="top">-</td>
+      <td>calls createGUI() once ToolBar, Keys and Statusbar have been
+taken care of. </p>
+p>
+See also  createGUI</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Default</i></td>
+      <td valign="top">-</td>
+      <td>All the above option
+(this is the default)</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+</ul>
+
+</span>
+</body>
+</html>

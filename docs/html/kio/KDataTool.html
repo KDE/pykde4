@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KDataTool</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KDataTool</h1><hr>
+      <h3><i style="color : #00aa00">abstract class</i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kio Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kio</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KDataTool</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QObject</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+A generic tool that processes data.
+</p>
+<p>
+A data-tool is a "plugin" for an application, that acts (reads/modifies)
+on a portion of the data present in the document (e.g. a text document,
+a single word or paragraph, a KSpread cell, an image, etc.)
+</p>
+<p>
+The application has some generic code for presenting the tools in a popupmenu
+</p>
+<p>
+See also  KDataToolAction, and for activating a tool, passing it the data
+(and possibly getting modified data from it).
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KDataTool</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KDataTool object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QObject</td><td align="right">None</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Constructor
+The data-tool is only created when a menu-item, that relates to it, is activated.
+</p>
+<p>
+<b>parent</b> - the parent of the QObject (or 0 for parent-less KDataTools)
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">componentData</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KComponentData)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the instance of the part that created this tool.
+Usually used if the tool wants to read its configuration in the app's config file.
+Returns the instance of the part that created this tool.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">run</b> (command, data, datatype, mimetype)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool), data (void)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>command</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>data</td><td>void</td><td align="right"></td></tr>
+
+              <tr><td>datatype</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>mimetype</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Interface for 'running' this tool.
+This is the method that the data-tool must implement.
+</p>
+<p>
+</p>
+<p>
+<b>command</b> - is the command that was selected (see KDataToolInfo.commands())
+</p>
+<p>
+<b>data</b> - the data provided by the application, on which to run the tool.
+The application is responsible for setting that data before running the tool,
+and for getting it back and updating itself with it, after the tool ran.
+</p>
+<p>
+<b>datatype</b> - defines the type of <b>data.</b>
+</p>
+<p>
+<b>mimetype</b> - defines the mimetype of the data (for instance datatype may be
+QString, but the mimetype can be text/plain, text/html etc.)
+Returns true if successful, false otherwise
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setComponentData</b> (componentData)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>componentData</td><td>KComponentData</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+@internal. Do not use under any circumstance (including bad weather).
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

@@ -1,0 +1,1602 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KCmdLineArgs</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KCmdLineArgs</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdecore</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KCmdLineArgs</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+A class for command-line argument handling.
+</p>
+<p>
+KCmdLineArgs provides simple access to the command-line arguments
+for an application. It takes into account Qt-specific options,
+KDE-specific options and application specific options.
+</p>
+<p>
+This class is used in %main() via the static method
+init().
+</p>
+<p>
+A typical %KDE application using %KCmdLineArgs should look like this:
+</p>
+<p>
+<pre>
+int main(int argc, char *argv[])
+{
+// Initialize command line args
+KCmdLineArgs.init(argc, argv, appName, programName, version, description);
+</p>
+<p>
+// Define the command line options using KCmdLineOptions
+KCmdLineOptions options;
+....
+</p>
+<p>
+// Register the supported options
+KCmdLineArgs.addCmdLineOptions( options );
+</p>
+<p>
+// Add options from other components
+KUniqueApplication.addCmdLineOptions();
+</p>
+<p>
+....
+</p>
+<p>
+// Create application object without passing 'argc' and 'argv' again.
+KUniqueApplication app;
+</p>
+<p>
+....
+</p>
+<p>
+// Handle our own options/arguments
+// A KApplication will usually do this in main but this is not
+// necessary.
+// A KUniqueApplication might want to handle it in newInstance().
+</p>
+<p>
+KCmdLineArgs *args = KCmdLineArgs.parsedArgs();
+</p>
+<p>
+// A binary option (on / off)
+if (args->isSet("some-option"))
+....
+</p>
+<p>
+// An option which takes an additional argument
+QString anotherOptionArg = args->getOption("another-option");
+</p>
+<p>
+// Arguments (e.g. files to open)
+for(int i = 0; i < args->count(); i++) // Counting start at 0!
+{
+openFile( args->arg(i));
+// Or more convenient:
+// openUrl( args->url(i));
+</p>
+<p>
+}
+</p>
+<p>
+args->clear(); // Free up some memory.
+....
+}
+</pre>
+</p>
+<p>
+The options that an application supports are configured using the
+KCmdLineOptions class. An example is shown below:
+</p>
+<p>
+<pre>
+KCmdLineOptions options;
+options.add("a", ki18n("A short binary option"));
+options.add("b \<file>", ki18n("A short option which takes an argument"));
+options.add("c \<speed>", ki18n("As above but with a default value"), "9600");
+options.add("option1", ki18n("A long binary option, off by default"));
+options.add("nooption2", ki18n("A long binary option, on by default"));
+options.add(":", ki18n("Extra options:"));
+options.add("option3 \<file>", ki18n("A long option which takes an argument"));
+options.add("option4 \<speed>", ki18n("A long option which takes an argument, defaulting to 9600"), "9600");
+options.add("d");
+options.add("option5", ki18n("A long option which has a short option as alias"));
+options.add("e");
+options.add("nooption6", ki18n("Another long option with an alias"));
+options.add("f");
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>StdCmdLineArg</b> = { CmdLineArgQt, CmdLineArgKDE, CmdLineArgsMask, CmdLineArgNone, Reserved }</li>
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KCmdLineArgs</b> (_options, _name, _id)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KCmdLineArgs object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>_options</td><td>KCmdLineOptions</td><td align="right"></td></tr>
+
+              <tr><td>_name</td><td>KLocalizedString</td><td align="right"></td></tr>
+
+              <tr><td>_id</td><td>QByteArray</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+<b style="color : #ff0000;"><i>Internal </i></b>
+Constructor.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">aboutData</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KAboutData)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the KAboutData for consumption by KComponentData
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">addCmdLineOptions</b> (options, name, id, afterId)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>options</td><td>KCmdLineOptions</td><td align="right"></td></tr>
+
+              <tr><td>name</td><td>KLocalizedString</td><td align="right">KLocalizedString ()</td></tr>
+
+              <tr><td>id</td><td>QByteArray</td><td align="right">QByteArray ()</td></tr>
+
+              <tr><td>afterId</td><td>QByteArray</td><td align="right">QByteArray ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Add options to your application.
+</p>
+<p>
+You must make sure that all possible options have been added before
+any class uses the command line arguments.
+</p>
+<p>
+The list of options should look like this:
+</p>
+<p>
+<pre>
+KCmdLineOptions options;
+options.add("option1 \<argument>", ki18n("Description 1"), "my_extra_arg");
+options.add("o");
+options.add("option2", ki18n("Description 2"));
+options.add("nooption3", ki18n("Description 3"));
+options.add("+file", ki18n("A required argument 'file'"));
+</pre>
+</p>
+<p>
+<li> "option1" is an option that requires an additional argument, </li>
+but if one is not provided, it uses "my_extra_arg".
+<li> "option2" is an option that can be turned on. The default is off. </li>
+<li> "option3" is an option that can be turned off. The default is on. </li>
+<li> "o" does not have a description. It is an alias for the option </li>
+that follows. In this case "option2".
+<li> "+file" specifies an argument. The '+' is removed. If your program </li>
+doesn't specify that it can use arguments your program will abort
+when an argument is passed to it. Note that the reverse is not
+true. If required, you must check yourself the number of arguments
+specified by the user:
+<pre>
+KCmdLineArgs *args = KCmdLineArgs.parsedArgs();
+if (args->count() == 0) KCmdLineArgs.usage(i18n("No file specified"));
+</pre>
+</p>
+<p>
+In BNF:
+<pre>
+cmd = myapp [options] file
+options = (option)*
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">addStdCmdLineOptions</b> (stdargs)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>stdargs</td><td>KCmdLineArgs.StdCmdLineArgs</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+add standard Qt/KDE command-line args
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">addTempFileOption</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">appName</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the appname according to argv[0].
+Returns the name of the application
+</p>
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">arg</b> (n)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>n</td><td>int</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Read out an argument.
+</p>
+<p>
+</p>
+<p>
+<b>n</b> - The argument to read. 0 is the first argument.
+count()-1 is the last argument.
+</p>
+<p>
+Returns n-th argument
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">clear</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Clear all options and arguments.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">count</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Read the number of arguments that aren't options (but,
+for example, filenames).
+</p>
+<p>
+Returns The number of arguments that aren't options
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">cwd</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the CWD (Current Working Directory) associated with the
+current command line arguments.
+</p>
+<p>
+Typically this is needed in KUniqueApplication.newInstance()
+since the CWD of the process may be different from the CWD
+where the user started a second instance.
+Returns the current working directory
+</p>
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">enable_i18n</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Enable i18n to be able to print a translated error message.
+</p>
+<p>
+N.B.: This function leaks memory, therefore you are expected to exit
+afterwards (e.g., by calling usage()).
+</p>
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">getOption</b> (option)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>option</td><td>QByteArray</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Read out a string option.
+</p>
+<p>
+The option must have a corresponding KCmdLineOptions entry
+of the form:
+<pre>
+options.add("option \<argument>", ki18n("Description"), "default");
+</pre>
+You cannot test for the presence of an alias - you must always
+test for the full option.
+</p>
+<p>
+</p>
+<p>
+<b>option</b> - The name of the option without '-'.
+</p>
+<p>
+Returns The value of the option. If the option was not
+present on the command line the default is returned.
+If the option was present more than once, the value of the
+last occurrence is used.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">getOptionList</b> (option)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QStringList)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>option</td><td>QByteArray</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Read out all occurrences of a string option.
+</p>
+<p>
+The option must have a corresponding KCmdLineOptions entry
+of the form:
+<pre>
+options.add("option \<argument>", ki18n("Description"), "default");
+</pre>
+You cannot test for the presence of an alias - you must always
+test for the full option.
+</p>
+<p>
+</p>
+<p>
+<b>option</b> - The name of the option, without '-' or '-no'.
+</p>
+<p>
+Returns A list of all option values. If no option was present
+on the command line, an empty list is returned.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">init</b> (Python list, appname, catalog, programName, version, description, stdargs)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(void)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>Python list</td><td>list</td><td align="right"></td></tr>
+
+              <tr><td>appname</td><td>QByteArray</td><td align="right"></td></tr>
+
+              <tr><td>catalog</td><td>QByteArray</td><td align="right"></td></tr>
+
+              <tr><td>programName</td><td>KLocalizedString</td><td align="right"></td></tr>
+
+              <tr><td>version</td><td>QByteArray</td><td align="right"></td></tr>
+
+              <tr><td>description</td><td>KLocalizedString - default</td><td align="right">KLocalizedString ()</td></tr>
+
+              <tr><td>stdargs</td><td>KCmdLineArgs.StdCmdLineArgs</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">init</b> (Python list, about, stdargs)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(void)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>Python list</td><td>list</td><td align="right"></td></tr>
+
+              <tr><td>about</td><td>KAboutData</td><td align="right"></td></tr>
+
+              <tr><td>stdargs</td><td>KCmdLineArgs.StdCmdLineArgs - default</td><td align="right">StdCmdLineArgs (CmdLineArgQt or CmdLineArgKDE )</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">init</b> (about)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>about</td><td>KAboutData</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Initialize Class
+</p>
+<p>
+This function should be called as the very first thing in your
+application. This method will rarely be used, since it doesn't
+provide any argument parsing. It does provide access to the
+KAboutData information.
+This method is exactly the same as calling
+init(0,0, const KAboutData *about, CmdLineArgNone).
+</p>
+<p>
+</p>
+<p>
+<b>about</b> - the about data.
+</p>
+<p>
+See also  KAboutData
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">isSet</b> (option)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>option</td><td>QByteArray</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Read out a boolean option or check for the presence of string option.
+</p>
+<p>
+</p>
+<p>
+<b>option</b> - The name of the option without '-' or '-no'.
+</p>
+<p>
+Returns The value of the option. It will be true if the option
+was specifically turned on in the command line, or if the option
+is turned on by default (in the KCmdLineOptions list) and was
+not specifically turned off in the command line. Equivalently,
+it will be false if the option was specifically turned off in
+the command line, or if the option is turned off by default (in
+the KCmdLineOptions list) and was not specifically turned on in
+the command line.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isTempFileSet</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">loadAppArgs</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>QDataStream</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Load arguments from a stream.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">makeURL</b> (urlArg)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KUrl)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>urlArg</td><td>QByteArray</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Used by url().
+Made public for apps that don't use KCmdLineArgs
+</p>
+<p>
+<b>urlArg</b> - the argument
+Returns the url.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">parsedArgs</b> (id)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KCmdLineArgs)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>id</td><td>QByteArray</td><td align="right">QByteArray ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Access parsed arguments.
+</p>
+<p>
+This function returns all command line arguments that your code
+handles. If unknown command-line arguments are encountered the program
+is aborted and usage information is shown.
+</p>
+<p>
+</p>
+<p>
+<b>id</b> - The name of the options you are interested in, can be empty.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #999999;">qtArgc</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          Method is not implemented
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the number of arguments returned by qtArgv()
+</p>
+<p>
+See also  qtArgv
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #999999;">qtArgv</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(char)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          Method is not implemented
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns command line options for consumption by Qt after parsing them in a way that
+is consistent with KDE's general command line handling. In particular this ensures
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">reset</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Reset all option definitions, i.e. cancel all addCmdLineOptions calls.
+Note that KApplication's options are removed too, you might want to
+call KApplication.addCmdLineOptions if you want them back.
+</p>
+<p>
+You usually don't want to call this method.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setCwd</b> (cwd)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>cwd</td><td>QByteArray</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Made public for apps that don't use KCmdLineArgs
+To be done before makeURL, to set the current working
+directory in case makeURL needs it.
+</p>
+<p>
+<b>cwd</b> - the new working directory
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">url</b> (n)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KUrl)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>n</td><td>int</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Read out an argument representing a URL.
+</p>
+<p>
+The argument can be
+<li> an absolute filename </li>
+<li> a relative filename </li>
+<li> a URL </li>
+</p>
+<p>
+</p>
+<p>
+<b>n</b> - The argument to read. 0 is the first argument.
+count()-1 is the last argument.
+</p>
+<p>
+Returns a URL representing the n'th argument.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">usage</b> (id)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>id</td><td>QByteArray</td><td align="right">QByteArray ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Print the usage help to stdout and exit.
+</p>
+<p>
+</p>
+<p>
+<b>id</b> - if empty, print all options. If id is set, only print the
+option specified by id. The id is the value set by
+addCmdLineOptions().
+</p>
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">usageError</b> (error)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>error</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Print an error to stderr and the usage help to stdout and exit.
+</p>
+<p>
+<b>error</b> - the error to print
+</p>
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">~KCmdLineArgs</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+
+<li><b>StdCmdLineArg</b> = { CmdLineArgQt, CmdLineArgKDE, CmdLineArgsMask, CmdLineArgNone, Reserved }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>CmdLineArgQt</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>CmdLineArgKDE</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>CmdLineArgsMask</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>CmdLineArgNone</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Reserved</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+</ul>
+
+</span>
+</body>
+</html>

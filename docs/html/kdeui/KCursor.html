@@ -1,0 +1,411 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KCursor</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KCursor</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdeui</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KCursor</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QCursor</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+The KCursor class extends QCursor with the ability to create an arbitrary
+named cursor from the cursor theme, and provides a set of static
+convenience methods for auto-hiding cursors on widgets.
+</p>
+<p>
+<b>Author</b> Kurt Granroth <granroth@kde.org>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KCursor</b> (name, fallback)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KCursor object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>fallback</td><td>Qt.CursorShape</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Attempts to load the requested <b>name</b> cursor from the current theme.
+</p>
+<p>
+This allows one to access cursors that may be in a theme but not in
+the Qt.CursorShape enum.
+</p>
+<p>
+If the specified cursor doesn't exist in the theme, or if KDE was
+built without Xcursor support, the cursor will be loaded from the X11
+cursor font instead. If the cursor doesn't exist in the cursor font,
+it falls back to the Qt.CursorShape provided as the second parameter.
+</p>
+<p>
+On platforms other than X11, the fallback shape is always used.
+</p>
+<p>
+</p>
+<p>
+<b>name</b> - the name of the cursor to try and load
+</p>
+<p>
+<b>fallback</b> - the cursor to load if <b>name</b> cursor can not be loaded
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KCursor</b> (cursor)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KCursor object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>cursor</td><td>QCursor</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Creates a copy of <b>cursor.</b>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">autoHideEventFilter</b> (a0, a1)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>QObject</td><td align="right"></td></tr>
+
+              <tr><td>a1</td><td>QEvent</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+KCursor has to install an eventFilter over the widget you want to
+auto-hide. If you have an own eventFilter() on that widget and stop
+some events by returning true, you might break auto-hiding, because
+KCursor doesn't get those events.
+</p>
+<p>
+In this case, you need to call setAutoHideCursor( widget, true, true );
+to tell KCursor not to install an eventFilter. Then you call this method
+from the beginning of your eventFilter, for example:
+<pre>
+edit = new KEdit( this, "some edit widget" );
+edit->installEventFilter( this );
+KCursor.setAutoHideCursor( edit, true, true );
+</p>
+<p>
+[...]
+</p>
+<p>
+bool YourClass.eventFilter( QObject *o, QEvent *e )
+{
+if ( o == edit ) // only that widget where you enabled auto-hide!
+KCursor.autoHideEventFilter( o, e );
+</p>
+<p>
+// now you can do your own event-processing
+[...]
+}
+</pre>
+</p>
+<p>
+Note that you must not call KCursor.autoHideEventFilter() when you
+didn't enable or after disabling auto-hiding.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">hideCursorDelay</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the current auto-hide delay time.
+</p>
+<p>
+Default is 5000, i.e. 5 seconds.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setAutoHideCursor</b> (w, enable, customEventFilter)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>w</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>enable</td><td>bool</td><td align="right"></td></tr>
+
+              <tr><td>customEventFilter</td><td>bool</td><td align="right">False</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Assigns <b>cursor</b> to this cursor, and returns a reference to this
+cursor.
+Sets auto-hiding the cursor for widget <b>w.</b> Enabling it will result in
+the cursor being hidden when
+<li> a key-event happens </li>
+<li> there are no key-events for a configured time-frame (see </li>
+setHideCursorDelay())
+</p>
+<p>
+The cursor will be shown again when the focus is lost or a mouse-event
+happens.
+</p>
+<p>
+Side effect: when enabling auto-hide, mouseTracking is enabled for the
+specified widget, because it's needed to get mouse-move-events. So
+don't disable mouseTracking for a widget while using auto-hide for it.
+</p>
+<p>
+When disabling auto-hide, mouseTracking will be disabled, so if you need
+mouseTracking after disabling auto-hide, you have to reenable
+mouseTracking.
+</p>
+<p>
+If you want to use auto-hiding for widgets that don't take focus, e.g.
+a QCanvasView, then you have to pass all key-events that should trigger
+auto-hiding to autoHideEventFilter().
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setHideCursorDelay</b> (ms)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>ms</td><td>int</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Sets the delay time in milliseconds for auto-hiding. When no keyboard
+events arrive for that time-frame, the cursor will be hidden.
+</p>
+<p>
+Default is 5000, i.e. 5 seconds.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

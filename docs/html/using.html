@@ -1,0 +1,299 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+</HEAD>
+<BODY style="font-size : 10pt;">
+<DIV CLASS="NAVHEADER">
+
+<TABLE SUMMARY="Header navigation table" WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" style="font-size : 10pt;">
+<TR><TH COLSPAN="3" ALIGN="center">PyKDE4 - Using PyKDE4</TH></TR>
+<TR><TD WIDTH="10%" ALIGN="left" VALIGN="bottom"><A HREF="install.html" ACCESSKEY="P">Prev</A></TD>
+<TD WIDTH="80%" ALIGN="center" VALIGN="bottom"></TD>
+<TD WIDTH="10%" ALIGN="right" VALIGN="bottom"><A HREF="classref.html" ACCESSKEY="N">Next</A></TD>
+</TR>
+</TABLE><HR ALIGN="LEFT" WIDTH="100%"></DIV>
+
+<h2>Using PyKDE4</h2>
+<p>
+      PyKDE4 includes many example programs and several tutorials to help you begin writing KDE4 applications using Python. The documentation has also been enhanced. The easiest way to begin with PyKDE4 is to copy some of the examples or tutorial code to your home directory, and then examine and experiment with the code provided.
+    </p>
+<p>
+PyKDE4 development is also made considerably easier by the use of an integrated environment,
+like <b>eric4</b>, or at least through the use of a debugger which can single step and allow
+you to examine values as your program executes.
+</p>
+<a name="use-import"><h3>Importing Modules</h3></a>
+<p>
+All PyKDE4 modules are included in a single Python package named (oddly) "PyKDE4". That
+means that to import a PyKDE4 module, you must also include the package name as a prefix:
+</p>
+<pre>
+from PyKDE4.kdeui import KApplication
+...
+app = KApplication ()
+</pre>
+<p>or</p>
+<pre>
+import PyKDE4.kdeui
+...
+app = PyKDE4.kdeui.KApplication
+</pre>
+<p>
+There are other forms of the import statement that will also work. All of the PyKDE4
+examples and tutorials use the first form shown above. We recommend you do not use:
+</p>
+<pre>
+from PyKDE4.kdeui import *
+</pre>
+<p>
+although we expect many users will. It will work in most, but probably not all cases,
+as there may be name clashes between objects in the different PyKDE4 modules.
+</p>
+<a name="use-kapp"><h3>KApplication Required</h3></a>
+<p>
+Nearly every KDE4 (and consequently PyKDE4) application requires a KApplication object
+be constructed before using most other PyKDE4 (KDE4) objects in your program. KApplication 
+also runs the event loop that allows PyKDE4 objects to communicate with each other.Nearly 
+every example provided with PyKDE4 includes the basic code necessary to create an
+application using KApplication. 
+</p>
+<p>
+QApplication is <b>not</b> a substitute for KApplication in programs that use KDE4
+objects.
+</p>
+<p>
+A KUniqueApplication object is a subclass of KApplication and will also work. You may
+also subclass your own classes from KApplication.
+</p>
+<p>
+See the next section for code that creates a KApplication instance.
+</p>
+<a name="use -kcmd"><h3>KCmdLineArgs, KAboutData</h3></a>
+<p>
+The notable exceptions to the above rule about constructing a KApplication object before
+using any other PyKDE4 object are the KCmdLineArgs and KAboutData classes.
+</p>
+<pre>
+import sys
+from PyKDE4.kdecore import ki18n, KAboutData, KCmdLineArgs
+from PyKDE4.kdeui import KApplication
+
+...
+
+
+appName     = "KApplication"
+catalog     = ""
+programName = ki18n ("KApplication")
+version     = "1.0"
+description = ki18n ("KApplication/KMainWindow/KAboutData example")
+license     = KAboutData.License_GPL
+copyright   = ki18n ("(c) 2007 Jim Bublitz")
+text        = ki18n ("none")
+homePage    = "www.riverbankcomputing.com"
+bugEmail    = "jbublitz@nwinternet.com"
+
+aboutData   = KAboutData (appName, catalog, programName, version, description,
+			license, copyright, text, homePage, bugEmail)
+
+
+KCmdLineArgs.init (sys.argv, aboutData)
+
+app = KApplication ()
+</pre>
+<p>
+You can, of course, substitute you own values for the KAboutData arguments.
+</p>
+<p>
+Even if you don't plan on passing command line arguments to your program, KApplication
+still requires KCmdLineArgs (or one of several equivalents) be used to pass the command 
+line arguments to KApplication.
+</p>
+<p>
+Also, KAboutData does more than set the data for your "about application" dialog on
+the help menu. The appName or programName values are used to define your application in
+other areas, especially by DBUS. DBUS apparently doesn't like dots (".") in the appName
+or programName values, so leave the ".py" extension off in those places, or replace the
+dots with an underscore ('_' - for example, application_py)
+</p>
+<p>
+The use of ki18n as shown is virtually required. The KAboutData constructor requires 
+KLocalizedString types in the four locations shown, and there is almost no way to create
+an object of KLocalizedString type except by using ki18n. i18n (without the leading 'k')
+will not work.
+</p>
+<p>
+Many of the arguments to the KAboutData constructor are optional - see the KAboutData
+docs for the complete Python signature.
+</p>
+<a name="use-sig"><h3>Signals and Slots</h3></a>
+<p>
+The PyQt4 docs have a more complete explanation of signals and slots. There are several
+points that deserve notice.
+</p>
+<p>
+First, under PyQt4 and PyKDE4, a slot may be any Python callable - a function, or class
+method. The general form for connecting a signal to a slot is:
+</p>
+<pre>
+self.connect (self.button, SIGNAL ("clicked ()"), self.buttonClicked)
+self.connect (self.tree, SIGNAL ('itemClicked (QTreeWidgetItem *, int)'), self.treeItemClicked)
+
+def buttonClicked (self):
+   ...
+
+def treeItemClicked (self, item, n):
+   ...
+</pre>
+<p>
+'self.button' and 'self.tree' are concrete instances of the objects that emit the signals. 
+The example assumes that the "self" used with "connect" is a subclass of QObject - any subclass,
+or even QObject itself, since "connect" is a static method (there is basically a single 'connect'
+method shared by all QObject descendants).
+</p>
+<p>
+Note also that the argument to SIGNAL is a string which represents the C++ signature of the
+signal, <b>without</b> variable names, but <b>with</b> argument types, <b>including</b> any
+'const', '*', '&amp;' or other decoration. The C++ signatures are reproduced in the PyKDE4
+class documentation, so you can just cut and paste them into your code.
+</p>
+<p>
+The slot named must have a signature which matches the number of arguments in the signal signature.
+The types of the arguments passed into the slot when the signal is emitted will match the types
+in the C++ signature (but in this case <b>without</b> the effect of any decorations).
+</p>
+<p>
+It's important to write both the connect and slot methods carefully, as signal/slot errors will
+often fail silently - without any error or exception being produced, but also without your code
+working as expected. If signals appear to be not connecting to slots, check the syntax in the
+connect statement and slot argument list first.
+</p>
+<a name="use-nx"><h3>Namespaces</h3></a>
+<p>
+For PyKDE4 objects which are enclosed in a (C++) namespace. importing the namespace
+also gets you all of the objects in the namespace. For example, the objects "StorageVolume",
+"DeviceInterface", "DeviceInterface.StorageVolume", and "Device", in the code snippet
+below all reside in the "Solid" namespace. All were imported via the single import
+statement shown.
+</p>
+<p>
+The namespace name ("Solid" in this case) is a required prefix for all of the 
+namespace's objects.
+</p>
+<pre>
+from PyKDE4.solid import Solid
+
+...
+
+ # convert enum values to strings for display
+    usageType2Str = { Solid.StorageVolume.Other : "Other",\
+  		      Solid.StorageVolume.Unused : "Unused",\
+		      Solid.StorageVolume.FileSystem : "File System",
+		      Solid.StorageVolume.PartitionTable : "Partition Tbl",\
+		      Solid.StorageVolume.Raid : "Raid",\
+		      Solid.StorageVolume.Encrypted : "Encrypted"
+		    }
+	
+    # retrieve a list of Solid.Device for this machine
+    deviceList = Solid.Device.allDevices ()
+	
+    # filter the list of all devices and display matching results
+    # note that we never create a Solid.StorageVolume object,
+    # but receive one from the 'asDeviceInterface" call
+    for device in deviceList:
+	if device.isDeviceInterface (Solid.DeviceInterface.StorageVolume):
+	volume = device.asDeviceInterface (Solid.DeviceInterface.StorageVolume)
+	QTreeWidgetItem (display, [device.product (),
+				   volume.fsType (),
+				   volume.label (),
+				   str (volume.isIgnored ()),
+				   "%i MB" % (volume.size ()/1024/1024),
+				   usageType2Str [volume.usage ()]])
+</pre>
+<a name="use-abs"><h3>Abstract Classes</h3></a>
+<p>
+An <i>abstract class</i> is a base class that cannot be instantiated itself, but can
+be used as a base class for other classes. You can't create an instance of an abstract
+class.
+</p>
+<p>
+Abstract classes are denoted in C++ by having one or more <i>'pure virtual'</i> methods.
+</p>
+<pre>
+virtual int someMethod (int x, int y) = 0;
+</pre>
+<p>
+is the C++ representation of a pure virtual method (the "= 0" is the defining characteristic,
+along with the <i>virtual</i> modifier on the front end).
+</p>
+<p>
+In order to derive a class from an abstract class, you have to 'overload' or define (with code)
+all of the pure virtual methods. So in the example above, your Python class derived from an
+abstract class would have to contain 'def somemethod (self, x, y)' along with code for the
+method to execute. The argument list must match the argument list in the pure virtual method (with
+the addition of 'self').
+</p>
+<p>
+The PyKDE4 docs clearly label all abstract classes, and label their pure virtual methods as well.
+</p>
+<a name="use-changes"><h3>Changes from PyKDE3/KDE3</h3></a>
+<p>
+There are a number of significant differences between code written for PyKDE4 and code written for
+PyKDE3. The list here is not exhaustive, but highlights some of the major changes (many of which
+are discussed above).
+</p>
+<p><b>KApplication</b> has been moved from the kdecore module to the kdeui module.</p>
+<p><b>KAboutData</b> requires the use of ki18n, which is available from the kdecore module</p>
+<p><b>KAction</b> - the syntax for defining KActions has changed. The 'plug' method has been 
+replaced by the use of 'QWidget.addAction' (see QAction docs)</p>
+<p><b>PyKDE4</b> is the required prefix for all modules in import statements (see above)</p>
+<p><b>KMainWindow</b> - some KMainWindow methods (related to GUI construction) have been
+relocated to KXmlGuiWindow</p>
+<p><b>Layouts</b> - adding a widget to a layout requires an explicit statement (but see KVBox
+and KHBox)</p>
+<p><b>kfile</b> - in PyKDE4, the kfile module no longer exists - all of its classes are now in
+the kio module (there are circular references which make two independent modules difficult or 
+impossible)</p>
+<a name="use-sa"><h3>See also</h3></a>
+<p>
+PyQt4 has more documentation which will help you write code for PyKDE4. PyQt4 also has an excellent
+class reference that details the use of Qt4 objects, many of which will be useful in writing apps
+for KDE4.
+</p>
+<p>
+When looking at a PyKDE4/KDE4 class, keep in mind that many are derived from PyQt4/Qt4 classes, and
+inherit many more methods than appear in the PyKDE4  or KDE4 documentation. Those inherited methods
+are available to use with PyKDE4/KDE4 classes in your programs, and in fact many things are impossible
+in PyKDE4 without the used of methods inherited from PyQt4/Qt4 superclasses.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DIV CLASS="NAVFOOTER">
+<HR ALIGN="LEFT" WIDTH="100%">
+<TABLE SUMMARY="Footer navigation table" WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0"  style="font-size : 10pt;">
+<TR>
+<TD WIDTH="33%" ALIGN="left" VALIGN="top"><A HREF="install.html" ACCESSKEY="P">Prev</li></TD>
+<TD WIDTH="34%" ALIGN="center" VALIGN="top"><A HREF="toc.html" ACCESSKEY="H">Table of Contents</A></TD>
+<TD WIDTH="33%" ALIGN="right" VALIGN="top"><A HREF="classref.html" ACCESSKEY="N">Next</A></TD>
+</TR>
+<TR>
+<TD WIDTH="33%" ALIGN="left" VALIGN="top">Installation</TD>
+<TD WIDTH="34%" ALIGN="center" VALIGN="top">&nbsp;</TD>
+<TD WIDTH="33%" ALIGN="right" VALIGN="top">Using the Class Reference</TD>
+</TR>
+</TABLE>
+</DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,401 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KParts.StatusBarExtension</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KParts.StatusBarExtension</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kparts Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kparts</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>kparts</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KParts.StatusBarExtension</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QObject</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+an extension for KParts that allows more sophisticated statusbar handling
+</p>
+<p>
+Every part can use this class to customize the statusbar as long as it is active.
+Add items via addStatusBarItem and remove an item with removeStatusBarItem.
+</p>
+<p>
+IMPORTANT: do NOT add any items immediately after constructing the extension.
+Give the application time to set the statusbar in the extension if necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">StatusBarExtension</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>KParts.ReadOnlyPart</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">addStatusBarItem</b> (widget, stretch, permanent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>widget</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>stretch</td><td>int</td><td align="right"></td></tr>
+
+              <tr><td>permanent</td><td>bool</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This adds a widget to the statusbar for this part.
+If you use this method instead of using statusBar() directly,
+this extension will take care of removing the items when the parts GUI
+is deactivated and will re-add them when it is reactivated.
+The parameters are the same as QStatusBar.addWidget().
+</p>
+<p>
+Note that you can't use KStatusBar methods (inserting text items by id)
+but you can create a KStatusBarLabel with a dummy id instead, and use
+it directly in order to get the same look and feel.
+</p>
+<p>
+</p>
+<p>
+<b>widget</b> - the widget to add
+</p>
+<p>
+<b>stretch</b> - the stretch factor. 0 for a minimum size.
+</p>
+<p>
+<b>permanent</b> - passed to QStatusBar.addWidget as the "permanent" bool.
+Note that the item isn't really permanent though, it goes away when
+the part is unactivated. This simply controls where temporary messages
+hide the <b>widget,</b> and whether it's added to the left or to the right side.
+</p>
+<p>
+IMPORTANT: do NOT add any items immediately after constructing the extension.
+Give the application time to set the statusbar in the extension if necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">childObject</b> (obj)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KParts.StatusBarExtension)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>obj</td><td>QObject</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Queries <b>obj</b> for a child object which inherits from this
+BrowserExtension class. Convenience method.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">eventFilter</b> (watched, ev)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>watched</td><td>QObject</td><td align="right"></td></tr>
+
+              <tr><td>ev</td><td>QEvent</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+<b style="color : #ff0000;"><i>Internal </i></b>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">removeStatusBarItem</b> (widget)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>widget</td><td>QWidget</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Remove a widget from the statusbar for this part.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setStatusBar</b> (status)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>status</td><td>KStatusBar</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This allows the hosting application to set a particular KStatusBar
+for this part. If it doesn't do this, the statusbar used will be
+the one of the KMainWindow in which the part is embedded.
+Konqueror uses this to assign a view-statusbar to the part.
+The part should never call this method!
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">statusBar</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KStatusBar)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the statusbar of the KMainWindow in which this part is currently embedded.
+WARNING: this could return 0L
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

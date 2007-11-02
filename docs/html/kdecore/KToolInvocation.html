@@ -1,0 +1,1226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KToolInvocation</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KToolInvocation</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdecore</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KToolInvocation</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QObject</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+KToolInvocation: for starting other programs
+</p>
+<p>
+<b>Desktop files for startServiceBy </b>
+</p>
+<p>
+The way a service gets started depends on the 'X-DBUS-StartupType'
+entry in the desktop file of the service:
+</p>
+<p>
+There are three possibilities:
+<li> X-DBUS-StartupType=None (default) </li>
+Always start a new service,
+don't wait till the service registers with dbus.
+<li> X-DBUS-StartupType=Multi </li>
+Always start a new service,
+wait until the service has registered with dbus.
+<li> X-DBUS-StartupType=Unique </li>
+Only start the service if it isn't already running,
+wait until the service has registered with dbus.
+The .desktop file can specify the name that the application will use when registering
+using X-DBUS-ServiceName=org.domain.mykapp. Otherwise org.kde.binaryname is assumed.
+</p>
+<p>
+<b>Multi-threading </b>
+</p>
+<p>
+The static members (apart from self()), have to be called from the QApplication main thread.
+Calls to members are only allowed if there is a Q(Core)Application object created
+If you call the members with signal/slot connections across threads, you can't use the return values
+If a function is called from the wrong thread and it has a return value -1 is returned
+Investigate if this is really needed or if DCOP/DBUS is threadsafe anyway
+</p>
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li><b style="color : #000000;">KToolInvocation</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>a KToolInvocation object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">invokeBrowser</b> (url, startup_id)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>url</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right">""</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Invokes the standard browser.
+Note that you should only do this when you know for sure that the browser can
+handle the URL (i.e. its mimetype). In doubt, if the URL can point to an image
+or anything else than directory or HTML, prefer to use new KRun( url ).
+</p>
+<p>
+</p>
+<p>
+<b>url</b> - The destination address
+</p>
+<p>
+<b>startup_id</b> - for app startup notification, "0" for none,
+"" ( empty string ) is the default
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">invokeHelp</b> (anchor, appname, startup_id)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>anchor</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>appname</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right">""</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Invokes the KHelpCenter HTML help viewer from docbook sources.
+</p>
+<p>
+</p>
+<p>
+<b>anchor</b> - This has to be a defined anchor in your
+docbook sources. If empty the main index
+is loaded
+</p>
+<p>
+<b>appname</b> - This allows you to show the help of another
+application. If empty the current name() is
+used
+</p>
+<p>
+<b>startup_id</b> - for app startup notification, "0" for none,
+"" ( empty string ) is the default
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">invokeMailer</b> (address, subject, startup_id)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>address</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>subject</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right">""</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Convenience method; invokes the standard email application.
+</p>
+<p>
+</p>
+<p>
+<b>address</b> - The destination address
+</p>
+<p>
+<b>subject</b> - Subject string. Can be QString().
+</p>
+<p>
+<b>startup_id</b> - for app startup notification, "0" for none,
+"" ( empty string ) is the default
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">invokeMailer</b> (mailtoURL, startup_id, allowAttachments)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>mailtoURL</td><td>KUrl</td><td align="right"></td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right">""</td></tr>
+
+              <tr><td>allowAttachments</td><td>bool</td><td align="right">False</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Invokes the standard email application.
+</p>
+<p>
+</p>
+<p>
+<b>mailtoURL</b> - A mailto URL.
+</p>
+<p>
+<b>startup_id</b> - for app startup notification, "0" for none,
+"" ( empty string ) is the default
+</p>
+<p>
+<b>allowAttachments</b> - whether attachments specified in mailtoURL should be honoured.
+The default is false; do not honor requests for attachments.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">invokeMailer</b> (to, cc, bcc, subject, body, messageFile, attachURLs, startup_id)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>to</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>cc</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>bcc</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>subject</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>body</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>messageFile</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>attachURLs</td><td>QStringList</td><td align="right">QStringList ()</td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right">""</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Convenience method; invokes the standard email application.
+</p>
+<p>
+All parameters are optional.
+</p>
+<p>
+</p>
+<p>
+<b>to</b> - The destination address.
+</p>
+<p>
+<b>cc</b> - The Cc field
+</p>
+<p>
+<b>bcc</b> - The Bcc field
+</p>
+<p>
+<b>subject</b> - Subject string
+</p>
+<p>
+<b>body</b> - A string containing the body of the mail (exclusive with messageFile)
+</p>
+<p>
+<b>messageFile</b> - A file (URL) containing the body of the mail (exclusive with body) - currently unsupported
+</p>
+<p>
+<b>attachURLs</b> - List of URLs to be attached to the mail.
+</p>
+<p>
+<b>startup_id</b> - for app startup notification, "0" for none,
+"" ( empty string ) is the default
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">kapplication_hook</b> (env, startup_id)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("kapplication_hook (QStringList&, QByteArray&)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>env</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Hook for KApplication in kdeui
+<b style="color : #ff0000;"><i>Internal </i></b>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">kdeinitExec</b> (name, args, error, startup_id)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int), pid (int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>args</td><td>QStringList</td><td align="right">QStringList ()</td></tr>
+
+              <tr><td>error</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right">""</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Starts a program via kdeinit.
+</p>
+<p>
+program name and arguments are converted to according to the
+local encoding and passed as is to kdeinit.
+</p>
+<p>
+</p>
+<p>
+<b>name</b> - Name of the program to start
+</p>
+<p>
+<b>args</b> - Arguments to pass to the program
+</p>
+<p>
+<b>error</b> - On failure, <b>error</b> contains a description of the error
+that occurred. If the pointer is 0, the argument will be
+ignored
+</p>
+<p>
+<b>pid</b> - On success, the process id of the new service will be written
+here. If the pointer is 0, the argument will be ignored.
+</p>
+<p>
+<b>startup_id</b> - for app startup notification, "0" for none,
+"" ( empty string ) is the default
+Returns an error code indicating success (== 0) or failure (> 0).
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">kdeinitExecWait</b> (name, args, error, startup_id)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int), pid (int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>args</td><td>QStringList</td><td align="right">QStringList ()</td></tr>
+
+              <tr><td>error</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right">""</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Starts a program via kdeinit and wait for it to finish.
+</p>
+<p>
+Like kdeinitExec(), but it waits till the program is finished.
+As such it behaves similar to the system(...) function.
+</p>
+<p>
+</p>
+<p>
+<b>name</b> - Name of the program to start
+</p>
+<p>
+<b>args</b> - Arguments to pass to the program
+</p>
+<p>
+<b>error</b> - On failure, <b>error</b> contains a description of the error
+that occurred. If the pointer is 0, the argument will be
+ignored
+</p>
+<p>
+<b>pid</b> - On success, the process id of the new service will be written
+here. If the pointer is 0, the argument will be ignored.
+</p>
+<p>
+<b>startup_id</b> - for app startup notification, "0" for none,
+"" ( empty string ) is the default
+Returns an error code indicating success (== 0) or failure (> 0).
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #999999;">klauncher</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(OrgKdeKLauncherInterface)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          Method is not implemented
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the DBus interface of the service launcher.
+The returned object is owned by KApplication, do not delete it!
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">self</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KToolInvocation)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">startServiceByDesktopName</b> (_name, URL, error, serviceName, startup_id, noWait)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int), pid (int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>_name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>URL</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>error</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>serviceName</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right">""</td></tr>
+
+              <tr><td>noWait</td><td>bool</td><td align="right">False</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Starts a service based on the desktop name of the service.
+E.g. "konqueror"
+</p>
+<p>
+</p>
+<p>
+<b>_name</b> - the desktop name of the service
+</p>
+<p>
+<b>URL</b> - if not empty this URL is passed to the service
+</p>
+<p>
+<b>error</b> - On failure, <b>error</b> contains a description of the error
+that occurred. If the pointer is 0, the argument will be
+ignored
+</p>
+<p>
+<b>serviceName</b> - On success, <b>serviceName</b> contains the D-Bus service name
+under which this service is available. If empty, the service does
+not provide D-Bus services. If the pointer is 0 the argument
+will be ignored
+</p>
+<p>
+<b>pid</b> - On success, the process id of the new service will be written
+here. If the pointer is 0, the argument will be ignored.
+</p>
+<p>
+<b>startup_id</b> - for app startup notification, "0" for none,
+"" ( empty string ) is the default
+</p>
+<p>
+<b>noWait</b> - if set, the function does not wait till the service is running.
+Returns an error code indicating success (== 0) or failure (> 0).
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">startServiceByDesktopName</b> (_name, URLs, error, serviceName, startup_id, noWait)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int), pid (int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>_name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>URLs</td><td>QStringList</td><td align="right">QStringList ()</td></tr>
+
+              <tr><td>error</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>serviceName</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right">""</td></tr>
+
+              <tr><td>noWait</td><td>bool</td><td align="right">False</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Starts a service based on the desktop name of the service.
+E.g. "konqueror"
+</p>
+<p>
+</p>
+<p>
+<b>_name</b> - the desktop name of the service
+</p>
+<p>
+<b>URLs</b> - if not empty these URLs will be passed to the service
+</p>
+<p>
+<b>error</b> - On failure, <b>error</b> contains a description of the error
+that occurred. If the pointer is 0, the argument will be
+ignored
+</p>
+<p>
+<b>serviceName</b> - On success, <b>serviceName</b> contains the D-Bus service name
+under which this service is available. If empty, the service does
+not provide D-Bus services. If the pointer is 0 the argument
+will be ignored
+</p>
+<p>
+<b>pid</b> - On success, the process id of the new service will be written
+here. If the pointer is 0, the argument will be ignored.
+</p>
+<p>
+<b>startup_id</b> - for app startup notification, "0" for none,
+"" ( empty string ) is the default
+</p>
+<p>
+<b>noWait</b> - if set, the function does not wait till the service is running.
+Returns an error code indicating success (== 0) or failure (> 0).
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">startServiceByDesktopPath</b> (_name, URL, error, serviceName, startup_id, noWait)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int), pid (int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>_name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>URL</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>error</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>serviceName</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right">""</td></tr>
+
+              <tr><td>noWait</td><td>bool</td><td align="right">False</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Starts a service based on the desktop path of the service.
+E.g. "Applications/konqueror.desktop" or "/home/user/bla/myfile.desktop"
+</p>
+<p>
+</p>
+<p>
+<b>_name</b> - the path of the desktop file
+</p>
+<p>
+<b>URL</b> - if not empty this URL is passed to the service
+</p>
+<p>
+<b>error</b> - On failure, <b>error</b> contains a description of the error
+that occurred. If the pointer is 0, the argument will be
+ignored
+</p>
+<p>
+<b>serviceName</b> - On success, <b>serviceName</b> contains the DCOP name
+under which this service is available. If empty, the service does
+not provide DCOP services. If the pointer is 0 the argument
+will be ignored
+</p>
+<p>
+<b>pid</b> - On success, the process id of the new service will be written
+here. If the pointer is 0, the argument will be ignored.
+</p>
+<p>
+<b>startup_id</b> - for app startup notification, "0" for none,
+"" ( empty string ) is the default
+</p>
+<p>
+<b>noWait</b> - if set, the function does not wait till the service is running.
+Returns an error code indicating success (== 0) or failure (> 0).
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">startServiceByDesktopPath</b> (_name, URLs, error, serviceName, startup_id, noWait)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int), pid (int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>_name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>URLs</td><td>QStringList</td><td align="right">QStringList ()</td></tr>
+
+              <tr><td>error</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>serviceName</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right">""</td></tr>
+
+              <tr><td>noWait</td><td>bool</td><td align="right">False</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Starts a service based on the desktop path of the service.
+E.g. "Applications/konqueror.desktop" or "/home/user/bla/myfile.desktop"
+</p>
+<p>
+</p>
+<p>
+<b>_name</b> - the path of the desktop file
+</p>
+<p>
+<b>URLs</b> - if not empty these URLs will be passed to the service
+</p>
+<p>
+<b>error</b> - On failure, <b>error</b> contains a description of the error
+that occurred. If the pointer is 0, the argument will be
+ignored * 
+<b>serviceName</b> - On success, <b>serviceName</b> contains the DCOP name
+under which this service is available. If empty, the service does
+not provide DCOP services. If the pointer is 0 the argument
+will be ignored
+</p>
+<p>
+<b>pid</b> - On success, the process id of the new service will be written
+here. If the pointer is 0, the argument will be ignored.
+</p>
+<p>
+<b>startup_id</b> - for app startup notification, "0" for none,
+"" ( empty string ) is the default
+</p>
+<p>
+<b>noWait</b> - if set, the function does not wait till the service is running.
+Returns an error code indicating success (== 0) or failure (> 0).
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">startServiceByName</b> (_name, URL, error, serviceName, startup_id, noWait)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int), pid (int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>_name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>URL</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>error</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>serviceName</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right">""</td></tr>
+
+              <tr><td>noWait</td><td>bool</td><td align="right">False</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Starts a service based on the (translated) name of the service.
+E.g. "Web Browser"
+</p>
+<p>
+</p>
+<p>
+<b>_name</b> - the name of the service
+</p>
+<p>
+<b>URL</b> - if not empty this URL is passed to the service
+</p>
+<p>
+<b>error</b> - On failure, error contains a description of the error
+that occurred. If the pointer is 0, the argument will be
+ignored
+</p>
+<p>
+<b>serviceName</b> - On success, serviceName contains the DCOP name
+under which this service is available. If empty, the service does
+not provide DCOP services. If the pointer is 0 the argument
+will be ignored
+</p>
+<p>
+<b>pid</b> - On success, the process id of the new service will be written
+here. If the pointer is 0, the argument will be ignored.
+</p>
+<p>
+<b>startup_id</b> - for app startup notification, "0" for none,
+"" ( empty string ) is the default
+</p>
+<p>
+<b>noWait</b> - if set, the function does not wait till the service is running.
+Returns an error code indicating success (== 0) or failure (> 0).
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">startServiceByName</b> (_name, URLs, error, serviceName, startup_id, noWait)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int), pid (int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>_name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>URLs</td><td>QStringList</td><td align="right">QStringList ()</td></tr>
+
+              <tr><td>error</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>serviceName</td><td>QString</td><td align="right">None</td></tr>
+
+              <tr><td>startup_id</td><td>QByteArray</td><td align="right">""</td></tr>
+
+              <tr><td>noWait</td><td>bool</td><td align="right">False</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Starts a service based on the (translated) name of the service.
+E.g. "Web Browser"
+</p>
+<p>
+</p>
+<p>
+<b>_name</b> - the name of the service
+</p>
+<p>
+<b>URLs</b> - if not empty these URLs will be passed to the service
+</p>
+<p>
+<b>error</b> - On failure, <b>error</b> contains a description of the error
+that occurred. If the pointer is 0, the argument will be
+ignored
+</p>
+<p>
+<b>serviceName</b> - On success, <b>serviceName</b> contains the DCOP name
+under which this service is available. If empty, the service does
+not provide DCOP services. If the pointer is 0 the argument
+will be ignored
+</p>
+<p>
+<b>pid</b> - On success, the process id of the new service will be written
+here. If the pointer is 0, the argument will be ignored.
+</p>
+<p>
+<b>startup_id</b> - for app startup notification, "0" for none,
+"" ( empty string ) is the default
+</p>
+<p>
+<b>noWait</b> - if set, the function does not wait till the service is running.
+Returns an error code indicating success (== 0) or failure (> 0).
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

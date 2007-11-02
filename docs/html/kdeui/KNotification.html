@@ -1,0 +1,1855 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KNotification</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KNotification</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdeui</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KNotification</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QObject</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+KNotification is used to notify some event to the user.
+</p>
+<p>
+<b>introduction </b>
+</p>
+<p>
+There is mainly two kind of notifications
+</p>
+<p>
+<li> Feedback events: </li>
+For notifying the user that he/she just performed an operation, like maximizing a
+window. This allows us to play sounds when a dialog appears.
+This is an instant notification. It ends automatically after a small timeout
+</p>
+<p>
+<li> persistant notifications: </li>
+Notify when one received a new message, or when something important happened
+the user has to know. This notification has a start and a end. It start when
+the event actually occurs, and finish when the message is acknowledged or read.
+</p>
+<p>
+Example of a persistant notification in an instant messaging application:
+The application emit the notification whe the message actually received, and close it only
+when the user has read the message (when the message window has received the focus) using the close() slot
+Persistant notification must have the Persistant flag.
+</p>
+<p>
+In order to do a notification, you need to create a description files, which contains
+default parametters of the notification, and use KNotification.event at the place of the
+code where the notification occurs.
+the returned KNotification pointer may be used to connect signals or slots
+</p>
+<p>
+<b>The global config file </b>
+On installation, there should be a file called
+<em>$KDEDIR/share/apps/appname/appname.notifyrc</em>
+This file contains mainly 3 parts
+<ol><li>\ref global "Global information"</li>
+<li>\ref context "Context information"</li>
+<li>\ref events "Information about every events"</li></ol>
+</p>
+<p>
+The global part looks like that
+<pre>
+[Global]
+IconName=Filename
+Comment=Freindly Name of app
+</pre>
+The icon filename is just the name, without extension, it's found with the KIconLoader
+</p>
+<p>
+This part is only hints for the configuration widget
+<pre>
+[Context/group]
+Name=Group name
+Comment=The name of the group of the contact
+</p>
+<p>
+[Context/folder]
+Name=Group name
+</pre>
+the second part of the groupname is the context identifier.
+It should not contains special characters.
+The Name field is the one the user will see (and which is translated)
+</p>
+<p>
+Now comes the most important, the description of each events.
+<pre>
+[Event/newmail]
+Name=New email
+Comment=You have got a new email
+Contexts=folder,group
+Action=Sound|Popup
+</p>
+<p>
+[Event/contactOnline]
+Name=Contact goes online
+Comment=One of your contact has been connected
+Contexts=group
+Sound=filetoplay.ogg
+Action=None
+</pre>
+All you put there are the default value.
+Action is a bitmask of KNotification.NotifyPresentation
+</p>
+<p>
+Contexts is a comma separated list of possible context for this event.
+</p>
+<p>
+<b>The user's config file </b>
+</p>
+<p>
+This is only an implementation detail, for your information.
+</p>
+<p>
+On the config file, there is two parts: the events configuration, and the context information
+This is only hints for the configuration dialog. It contains both the internal id of the context, and the user visible string.
+<pre>
+[Context/group]
+Values=1:Friends,2:Work,3:Family
+</pre>
+This contains the configuration of events for the user.
+It contains the same fields as the description file.
+The key of groups is in the form
+<em>Event/&lt;EventName&gt;/&lt;ContextName&gt;/&lt;ContextValue&gt;</em>
+<pre>
+[Event/contactOnline]
+Action=Sound
+Sound=/usr/share/sounds/super.ogg
+</p>
+<p>
+[Event/contactOnline/group/1]
+Action=PassivePopup|Sound
+</pre>
+</p>
+<p>
+<b>Example of code </b>
+</p>
+<p>
+This portion of code will fire the event for the "contactOnline" event
+</p>
+<p>
+<pre>
+notification= new KNotification ( "contactOnline" );
+notification->setText( i18n("The contact <i>%1</i> has gone online").arg( contact->name() ) );
+notification->setPixmap( contact->pixmap() );
+notification->setActions( QStringList( i18n( "Open chat" ) ) );
+</p>
+<p>
+foreach( const QString &group , contact->groups() ) {
+notification->addContext( "group" , group ) ;
+}
+</p>
+<p>
+connect(notification, SIGNAL(activated(unsigned int )), contact , SLOT(slotOpenChat()) );
+</p>
+<p>
+notification->sendEvent();
+</pre>
+</p>
+<p>
+<b>Author</b> Olivier Goffart \<ogoffart at kde.org\>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>NotificationFlag</b> = { RaiseWidgetOnActivation, CloseOnTimeout, Persistant, CloseWhenWidgetActivated, DefaultEvent }</li>
+<li><b>StandardEvent</b> = { Notification, Warning, Error, Catastrophe }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KNotification</b> (eventId, widget, flags)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KNotification object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>eventId</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>widget</td><td>QWidget</td><td align="right">None</td></tr>
+
+              <tr><td>flags</td><td>KNotification.NotificationFlags</td><td align="right">KNotification.CloseOnTimeout</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Create a new notification.
+</p>
+<p>
+you need to use sendEvent to show the notification.
+</p>
+<p>
+The pointer is automatically deleted when the event is closed.
+</p>
+<p>
+Make sure you use one of the CloseOnTimeOut or CloseWhenWidgetActivated, if not,
+you have to close yourself the notification.
+</p>
+<p>
+</p>
+<p>
+<b>eventId</b> - is the name of the event
+</p>
+<p>
+<b>widget</b> - is a widget where the notification reports to
+</p>
+<p>
+<b>flags</b> - is a bitmask of NotificationFlag
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">action1Activated</b> ()<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("action1Activated ()")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Convenance signal that is emitted when the first action is activated.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">action2Activated</b> ()<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("action2Activated ()")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+</p>
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">action3Activated</b> ()<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("action3Activated ()")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+</p>
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">actions</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QStringList)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the list of actions
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">activate</b> (action)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>action</td><td>uint</td><td align="right">0</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Active the action specified action
+If the action is zero, then the default action is activated
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">activated</b> ()<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("activated ()")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Emit only when the default activation has occurred
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">activated</b> (action)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("activated (uint)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>action</td><td>uint</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Emit when an action has been activated.
+</p>
+<p>
+<b>action</b> - will be 0 is the default aciton was activated, or any actiton id
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">addContext</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(), context (KNotification.Context)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+append a context at the list of contexts, see KNotificaiton.Context
+</p>
+<p>
+<b>context</b> - the context which is added
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">addContext</b> (context_key, context_value)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>context_key</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>context_value</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+</p>
+<p>
+
+<b>context_key</b> - is the key of the context
+</p>
+<p>
+<b>context_value</b> - is the value of the context
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">beep</b> (reason, widget)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>reason</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>widget</td><td>QWidget</td><td align="right">None</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This is a simple substitution for QApplication.beep()
+</p>
+<p>
+</p>
+<p>
+<b>reason</b> - a small text explaining what's happen (may be null)
+</p>
+<p>
+<b>widget</b> - the widget where the notification refer to
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">close</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+close the notification without activate it.
+</p>
+<p>
+This will delete the notification
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">closed</b> ()<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("closed ()")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Emit when the notification is closed. Both if it's activated or just ignored
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">contexts</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KNotification.ContextList)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the list of contexts, see KNotification.Context
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">deref</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+remove a reference made with ref()
+the notification may be closed when calling this.
+</p>
+<p>
+See also  ref
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">event</b> (eventId, text, pixmap, widget, flags, componentData)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KNotification)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>eventId</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right">QPixmap ()</td></tr>
+
+              <tr><td>widget</td><td>QWidget</td><td align="right">None</td></tr>
+
+              <tr><td>flags</td><td>KNotification.NotificationFlags</td><td align="right">KNotification.CloseOnTimeout</td></tr>
+
+              <tr><td>componentData</td><td>KComponentData</td><td align="right">KComponentData ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+emit an event
+</p>
+<p>
+This method creates the KNotification, setting every parameter, and fire the event.
+You don't need to call sendEvent
+</p>
+<p>
+A popup may be displayed or a sound may be played, depending the config.
+</p>
+<p>
+return a KNotification . You may use that pointer to connect some signals or slot.
+the pointer is automatically deleted when the event is closed.
+</p>
+<p>
+Make sure you use one of the CloseOnTimeOut or CloseWhenWidgetActivated, if not,
+you have to close yourself the notification.
+</p>
+<p>
+the text is shown in a QLabel, you should escape HTML, if needed.
+</p>
+<p>
+</p>
+<p>
+<b>eventId</b> - is the name of the event
+</p>
+<p>
+<b>text</b> - is the text of the notification to show in the popup.
+</p>
+<p>
+<b>pixmap</b> - is a picture which may be shown in the popup.
+</p>
+<p>
+<b>widget</b> - is a widget where the notification reports to
+</p>
+<p>
+<b>flags</b> - is a bitmask of NotificationFlag
+</p>
+<p>
+<b>componentData</b> - used to determine the location of the config file. by default, KApplication.kApplication () is used
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">event</b> (eventId, text, pixmap, widget, flags)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KNotification)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>eventId</td><td>KNotification.StandardEvent</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right">QPixmap ()</td></tr>
+
+              <tr><td>widget</td><td>QWidget</td><td align="right">None</td></tr>
+
+              <tr><td>flags</td><td>KNotification.NotificationFlags</td><td align="right">KNotification.CloseOnTimeout</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+emit standard an event
+</p>
+<p>
+</p>
+<p>
+This will emit a standard event
+</p>
+<p>
+</p>
+<p>
+<b>eventId</b> - is the name of the event
+</p>
+<p>
+<b>text</b> - is the text of the notification to show in the popup.
+</p>
+<p>
+<b>pixmap</b> - is a picture which may be shown in the popup.
+</p>
+<p>
+<b>widget</b> - is a widget where the notification reports to
+</p>
+<p>
+<b>flags</b> - is a bitmask of NotificationFlag
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">eventFilter</b> (watched, event)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>watched</td><td>QObject</td><td align="right"></td></tr>
+
+              <tr><td>event</td><td>QEvent</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+reimplemented for internals raison
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">eventId</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the name of the event
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">flags</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KNotification.NotificationFlags)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the notifications flags.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">ignored</b> ()<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("ignored ()")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+The notification has been ignored
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">pixmap</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the pixmap shown in the popup
+</p>
+<p>
+See also  setPixmap
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">raiseWidget</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Raise the widget.
+This will change the desktop, activate the window, and the tab if needed.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">ref</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+The notification will automatically be closed if all presentation are finished.
+if you want to show your own presentation in your application, you should use this
+function, so it will not be automatically closed when there is nothing to show.
+</p>
+<p>
+don't forgot to deref, or the notification may be never closed if there is no timeout.
+</p>
+<p>
+See also  ref
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">sendEvent</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Emit or re-emit the event.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setActions</b> (actions)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>actions</td><td>QStringList</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Set the list of actions link shown in the popup.
+</p>
+<p>
+<b>actions</b> - the list of actions
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setComponentData</b> (componentData)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>componentData</td><td>KComponentData</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+The componentData is used to determine the location of the config file. By default, KApplication.kApplication () is used
+</p>
+<p>
+<b>componentData</b> - the new componentData
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setContexts</b> (contexts)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>contexts</td><td>KNotification.ContextList</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+set the list of context, see KNotification.Context
+</p>
+<p>
+The list of context must be set before calling sendEvent;
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setFlags</b> (flags)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>flags</td><td>KNotification.NotificationFlags</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Set the notification flags.
+should be called before sendEvent().
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setPixmap</b> (pix)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pix</td><td>QPixmap</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+set the pixmap that will be shown in the popup.
+</p>
+<p>
+<b>pix</b> - the pixmap
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setText</b> (text)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Set the notification text that will appears in the popup.
+</p>
+<p>
+The text is shown in a QLabel, you should make sure to escape the html is needed.
+You can use some of the qt basic html tags.
+</p>
+<p>
+</p>
+<p>
+<b>text</b> - the text
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setWidget</b> (widget)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>widget</td><td>QWidget</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Set the widget associated to the notification.
+The notification is reparented to the new widget.
+</p>
+<p>
+See also  widget()
+</p>
+<p>
+<b>widget</b> - the new widget
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">text</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the notification text
+</p>
+<p>
+See also  setText
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">widget</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QWidget)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+the widget associated to the notification
+</p>
+<p>
+If the widget is destroyed, the notification will be automatically canceled.
+If the widget is activated, the notificaiton will be automatically closed if the flags said that
+</p>
+<p>
+When the notification is activated, the widget might be raised.
+Depending of the configuration, the taskbar entry of the window containing the widget may blink.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+
+<li><b>NotificationFlag</b> = { RaiseWidgetOnActivation, CloseOnTimeout, Persistant, CloseWhenWidgetActivated, DefaultEvent }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>RaiseWidgetOnActivation</i></td>
+      <td valign="top">-</td>
+      <td>
+When the notification is activated, raise the notification's widget.
+/p>
+p>
+This will change the desktop, raise the window, and switch to the tab.
+To do: doesn't works yet</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>CloseOnTimeout</i></td>
+      <td valign="top">-</td>
+      <td>The notification will be automatically closed after a timeout. (this is the default)</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Persistant</i></td>
+      <td valign="top">-</td>
+      <td>The notification will NOT be automatically closed after a timeout.
+You will have to track the notification, and close it with the
+close function manually when the event is done, otherwise there will be a memory leak</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>CloseWhenWidgetActivated</i></td>
+      <td valign="top">-</td>
+      <td>The notification will be automatically closed if the widget() becomes
+activated.
+/p>
+p>
+If the widget is already activated when the notification occurs, the
+notification will be closed after a small timeout.
+/p>
+p>
+This only works if the widget is the toplevel widget
+To do: make it work with tabulated widget</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>DefaultEvent</i></td>
+      <td valign="top">-</td>
+      <td>b style="color : #ff0000;"><i>Internal </i></b>
+The event is a standard kde event, and not an event of the application</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+<li><b>StandardEvent</b> = { Notification, Warning, Error, Catastrophe }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Notification</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Warning</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Error</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Catastrophe</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+</ul>
+
+</span>
+</body>
+</html>

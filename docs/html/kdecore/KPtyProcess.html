@@ -1,0 +1,450 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KPtyProcess</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KPtyProcess</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdecore</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KPtyProcess</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>KProcess</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+This class extends KProcess by support for PTYs (pseudo TTYs).
+</p>
+<p>
+The PTY is opened as soon as the class is instantiated. Verify that
+it was opened successfully by checking that pty()->masterFd() is not -1.
+</p>
+<p>
+The PTY is always made the process' controlling TTY.
+Utmp registration and connecting the stdio handles to the PTY are optional.
+</p>
+<p>
+No attempt to integrate with QProcess' waitFor*() functions was made,
+for it is impossible. Note that execute() does not work with the PTY, too.
+Use the PTY device's waitFor*() functions or use it asynchronously.
+</p>
+<p>
+<b>Author</b> Oswald Buddenhagen <ossi@kde.org>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>PtyChannelFlag</b> = { NoChannels, StdinChannel, StdoutChannel, StderrChannel, AllOutputChannels, AllChannels }</li>
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KPtyProcess</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KPtyProcess object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QObject</td><td align="right">None</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Constructor
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isUseUtmp</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get whether to register the process as a TTY login in utmp.
+</p>
+<p>
+Returns whether to register in utmp
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">pty</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KPtyDevice)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Get the PTY device of this process.
+</p>
+<p>
+Returns the PTY device
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">ptyChannels</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KPtyProcess.PtyChannels)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Query to which channels the PTY is assigned.
+</p>
+<p>
+Returns the output channel handling mode
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setPtyChannels</b> (channels)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>channels</td><td>KPtyProcess.PtyChannels</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Set to which channels the PTY should be assigned.
+</p>
+<p>
+This function must be called before starting the process.
+</p>
+<p>
+</p>
+<p>
+<b>channels</b> - the output channel handling mode
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setUseUtmp</b> (value)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>value</td><td>bool</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Set whether to register the process as a TTY login in utmp.
+</p>
+<p>
+Utmp is disabled by default.
+It should enabled for interactively fed processes, like terminal
+emulations.
+</p>
+<p>
+This function must be called before starting the process.
+</p>
+<p>
+</p>
+<p>
+<b>value</b> - whether to register in utmp.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">setupChildProcess</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+</p>
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+
+<li><b>PtyChannelFlag</b> = { NoChannels, StdinChannel, StdoutChannel, StderrChannel, AllOutputChannels, AllChannels }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>NoChannels</i></td>
+      <td valign="top">-</td>
+      <td>
+NoChannels = 0, < The PTY is not connected to any channel.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>StdinChannel</i></td>
+      <td valign="top">-</td>
+      <td>StdinChannel = 1, < Connect PTY to stdin.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>StdoutChannel</i></td>
+      <td valign="top">-</td>
+      <td>StdoutChannel = 2, < Connect PTY to stdout.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>StderrChannel</i></td>
+      <td valign="top">-</td>
+      <td>StderrChannel = 4, < Connect PTY to stderr.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>AllOutputChannels</i></td>
+      <td valign="top">-</td>
+      <td>AllOutputChannels = 6, < Connect PTY to all output channels.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>AllChannels</i></td>
+      <td valign="top">-</td>
+      <td>AllChannels = 7 < Connect PTY to all channels.</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+</ul>
+
+</span>
+</body>
+</html>

@@ -1,0 +1,838 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KLocalizedString</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KLocalizedString</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdecore</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KLocalizedString</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+klocalizedstring.h
+I18N_NOOP marks a string to be translated without translating it.
+Do not use this unless you know you need it.
+#q2.11.2
+</p>
+<p>
+Example usage where say_something() returns either "hello" or "goodbye":
+<pre>
+(void) I18N_NOOP("hello");
+(void) I18N_NOOP("goodbye");
+...
+mystring = i18n(say_something());
+</pre>
+If the string is too ambiguous to be translated well to a non-english
+language, use this instead of I18N_NOOP to separate lookup string and
+english.
+</p>
+<p>
+Example usage where say_something() returns either "hello" or "goodbye":
+<pre>
+(void) I18N_NOOP2("greeting", "hello");
+(void) I18N_NOOP2("greeting", "goodbye");
+...
+mystring = i18nc("greeting", say_something());
+</pre>
+You need to call i18nc(context, stringVar) later on, not just
+i18n(stringVar).
+Class for producing and handling localized messages
+</p>
+<p>
+KLocalizedString handles translation and specific needs of argument
+substitution and formatting in localized message strings.
+</p>
+<p>
+Topics:
+- gen_usage
+- spec_usage
+- subs_notes
+- other_ref
+</p>
+<p>
+<b>General Usage </b>
+</p>
+<p>
+This class should mostly not be used directly, but through wrapper i18n
+calls which return QString, for localization of user visible messages in
+applications.
+</p>
+<p>
+For the most frequent message type, the one without any arguments, you would
+use simply:
+<pre>
+QString msg = i18n("Just plain info");
+</pre>
+</p>
+<p>
+If there are arguments to be substitued into the message, you just add them
+after the message string:
+<pre>
+QString msg = i18n("%1 has scored %2", playerName, score);
+</pre>
+There can be up to some final number of arguments added like this (i18n
+is realized by overloaded templates). If you overrun this number, use
+ki18n* series of calls (described below). You can use several types as
+arguments, see subs methods.
+</p>
+<p>
+Sometimes a short message can be ambiguous in English, then you would use
+the context version, i18nc. There the first string is context, and the
+second is the message which really gets displayed:
+<pre>
+QString msg = i18nc("Player name - score", "%1 - %2", playerName, score);
+</pre>
+</p>
+<p>
+While English diferentiates plural forms only between 1 and else, in other
+languages it might not be that simple, or it might be simpler. To handle
+this properly, use plural call, i18np:
+<pre>
+QString msg = i18np("One image in album %2", "%1 images in album %2",
+numImages, albumName);
+</pre>
+Note that the plural form shall be decided by first integer-valued argument,
+(numImages in the example above). In rare cases when there are two integer
+arguments, you should take care to order them properly.
+</p>
+<p>
+Finally, message might need both context and plural, which is provided by
+i18ncp call:
+<pre>
+QString msg = i18ncp("Personal file", "One file", "%1 files", numFiles);
+</pre>
+</p>
+<p>
+Be carefull not to use literal string as first argument after message text
+in basic i18n() call. In debug mode, it will even trigger the static assert,
+giving error at compile time. This is in order to prevent misnamed calls:
+it may happen that you add context or plural to previously basic message,
+but forget to change the name of the call.
+</p>
+<p>
+<b>Specialized Usage </b>
+</p>
+<p>
+There are some situations where i18n* calls are not sufficient or
+convenient. For one, if you need to substitute many arguments. Or, if you
+find that you need to defer the substitution. For this you can use the
+ki18n call which returns a KLocalizedString, substitute arguments
+using its subs methods, and finalize the translation by calling
+its toString method. For example:
+<pre>
+KLocalizedString ks;
+case (reportSource) {
+SRC_ENG: ks = ki18n("Engineering reports: %1"); break;
+SRC_HEL: ks = ki18n("Helm reports: %1"); break;
+SRC_SON: ks = ki18n("Sonar reports: %1"); break;
+default: ks = ki18n("General report: %1");
+}
+QString msg = ks.subs(reportText).toString();
+</pre>
+</p>
+<p>
+Another case is when you want extra formatting of arguments, like field
+width or number of decimals. subs methods can take these formatting
+parameters. In particular, you should never use some custom way to
+format arguments, as subs methods will also properly localize them:
+<pre>
+QString s = i18n("Rounds: %1", myNumberFormat(n, 8)); // bad, number not localized
+QString s = ki18n("Rounds: %1").subs(n, 8).toString(); // good, number localized
+</pre>
+</p>
+<p>
+There are also context, plural and context-plural variants:
+<pre>
+QString s = ki18nc("No function", "None").toString();
+QString s = ki18np("File found", "%1 files found").subs(n).toString();
+QString s = ki18ncp("Personal file", "One file", "%1 files").subs(n).toString();
+</pre>
+</p>
+<p>
+If you need translation using locale (ie. KLocale object) other than the
+default, you can use overloaded toString method which takes pointer to a
+locale:
+<pre>
+KLocale *myLocale;
+...
+ki18n("Welcome").toString(myLocale);
+</pre>
+</p>
+<p>
+<b>Placeholder Substitution </b>
+</p>
+<p>
+Hopefully, for the most part placeholders are being substituted the way
+you would intuitively expect them to be. Nevertheless:
+</p>
+<p>
+<li> Placeholders are substituted in one pass, so no need to worry about </li>
+argument itself containing a placeholder.
+</p>
+<p>
+<li> All same-numbered placeholders are substituted with same argument. </li>
+</p>
+<p>
+<li> Placeholders directly index arguments: they should be numbered from 1 </li>
+upwards, without gaps in the sequence so that each argument is indexed.
+Otherwise you will get error marks in messages at runtime (when compiled
+in debug mode), and any invalid placeholder will be left unsubstituted.
+The exception is plural-deciding argument in plural call, where it is
+allowed to drop its placeholder in either singular or plural form.
+</p>
+<p>
+<li> If none of the arguments supplied to a plural call is integer-valued, </li>
+you will get an error mark in message at runtime (in debug mode).
+</p>
+<p>
+<b>Further References </b>
+</p>
+<p>
+<a href="http://techbase.kde.org/">KDE Techbase</a> contains a
+<a href="http://techbase.kde.org/Development/Tutorials/Localization/i18n">
+series of tutorials</a> on preparing the code for localization (and on
+internationalization process in general), where the intended patterns of
+usage of i18n API are covered in great detail.
+</p>
+<p>
+All i18n'd messages, whether sent to widgets expecting plain text or
+allowing Qt rich text (HTML), support the new KDE semantic markup for
+user interface text, KUIT in short. Semantic markup both increases the
+consistency of visual presentation for the end user, and provides extra
+information to translators, so that translations can be of higher quality.
+KUIT is documented in an
+<a href="http://techbase.kde.org/Development/Tutorials/Localization/i18n_Semantics">
+Techbase article</a> as well.
+</p>
+<p>
+See also  KLocale
+<b>Author</b> Chusslove Illich \<caslav.ilic@gmx.net\>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li><b style="color : #000000;">KLocalizedString</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>a KLocalizedString object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Constructs an empty message, which is not valid for finalization.
+Usefull when you later need to assign KLocalizedString obtained by one
+of ki18n* calls.
+</p>
+<p>
+See also  isEmpty()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KLocalizedString</b> (rhs)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KLocalizedString object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>rhs</td><td>KLocalizedString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Copy constructor.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KLocalizedString</b> (ctxt, msg, plural)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KLocalizedString object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>ctxt</td><td>char</td><td align="right"></td></tr>
+
+              <tr><td>msg</td><td>char</td><td align="right"></td></tr>
+
+              <tr><td>plural</td><td>char</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isEmpty</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Checks whether the message is empty. This will happen if you just
+constructed the object via default constructor.
+</p>
+<p>
+Empty messages are not valid for finalization; if you use toString() on
+them, you will get error mark instead of empty QString (in debug mode).
+</p>
+<p>
+Returns true if the message is empty, else false
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">notifyCatalogsUpdated</b> (languages, catalogs)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>languages</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>catalogs</td><td>QStringList</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+<b style="color : #ff0000;"><i>Internal </i></b> Called from KLocale on addition or removal of catalogs.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">subs</b> (a, fieldWidth, base, fillChar)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KLocalizedString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a</td><td>int</td><td align="right"></td></tr>
+
+              <tr><td>fieldWidth</td><td>int</td><td align="right">0</td></tr>
+
+              <tr><td>base</td><td>int</td><td align="right">10</td></tr>
+
+              <tr><td>fillChar</td><td>QChar</td><td align="right">QLatin1Char (' ' )</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Substitutes an int argument into the message.
+</p>
+<p>
+</p>
+<p>
+<b>a</b> - the argument
+</p>
+<p>
+<b>fieldWidth</b> - width of the formatted field, padded by spaces.
+Positive value aligns right, negative aligns left
+</p>
+<p>
+<b>base</b> - the radix used to represent the number as a string.
+Valid values range from 2 to 36
+</p>
+<p>
+<b>fillChar</b> - the character used to fill up the empty places when
+field width is greater than argument width
+Returns resultant KLocalizedString
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #999999;">subs</b> (a, fieldWidth, format, precision, fillChar)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KLocalizedString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          Method is not implemented
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a</td><td>double</td><td align="right"></td></tr>
+
+              <tr><td>fieldWidth</td><td>int</td><td align="right">0</td></tr>
+
+              <tr><td>format</td><td>char</td><td align="right">'g'</td></tr>
+
+              <tr><td>precision</td><td>int</td><td align="right">-1</td></tr>
+
+              <tr><td>fillChar</td><td>QChar</td><td align="right">QLatin1Char (' ' )</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Substitutes a double argument into the message.
+</p>
+<p>
+</p>
+<p>
+<b>a</b> - the argument
+</p>
+<p>
+<b>fieldWidth</b> - width of the formatted field, padded by spaces.
+Positive value aligns right, negative aligns left
+</p>
+<p>
+<b>format</b> - type of floating point formating, like in QString.arg
+</p>
+<p>
+<b>precision</b> - number of digits after the decimal separator
+</p>
+<p>
+<b>fillChar</b> - the character used to fill up the empty places when
+field width is greater than argument width
+Returns resultant KLocalizedString
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">subs</b> (a, fieldWidth, fillChar)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KLocalizedString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a</td><td>QChar</td><td align="right"></td></tr>
+
+              <tr><td>fieldWidth</td><td>int</td><td align="right">0</td></tr>
+
+              <tr><td>fillChar</td><td>QChar</td><td align="right">QLatin1Char (' ' )</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Substitutes a QChar argument into the message.
+</p>
+<p>
+</p>
+<p>
+<b>a</b> - the argument
+</p>
+<p>
+<b>fieldWidth</b> - width of the formatted field, padded by spaces.
+Positive value aligns right, negative aligns left
+</p>
+<p>
+<b>fillChar</b> - the character used to fill up the empty places when
+field width is greater than argument width
+Returns resultant KLocalizedString
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">subs</b> (a, fieldWidth, fillChar)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KLocalizedString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>fieldWidth</td><td>int</td><td align="right">0</td></tr>
+
+              <tr><td>fillChar</td><td>QChar</td><td align="right">QLatin1Char (' ' )</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Substitutes a QString argument into the message.
+</p>
+<p>
+</p>
+<p>
+<b>a</b> - the argument
+</p>
+<p>
+<b>fieldWidth</b> - width of the formatted field, padded by spaces.
+Positive value aligns right, negative aligns left
+</p>
+<p>
+<b>fillChar</b> - the character used to fill up the empty places when
+field width is greater than argument width
+Returns resultant KLocalizedString
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">toString</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Finalizes the translation, creates QString with placeholders
+substituted. Translations is obtained from default locale.
+</p>
+<p>
+If there was any mismatch between placeholders and arguments
+returned string will contain error marks (in debug mode).
+</p>
+<p>
+Returns finalized translation
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">toString</b> (locale)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>locale</td><td>KLocale</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Finalizes the translation, creates QString with placeholders
+substituted. Translations is obtained from given locale. If locale
+is 0, original message is used instead of translated.
+</p>
+<p>
+If there was any mismatch between placeholders and arguments
+returned string will contain error marks (in debug mode).
+</p>
+<p>
+</p>
+<p>
+<b>locale</b> - locale from which translations are to be taken
+Returns finalized translation
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

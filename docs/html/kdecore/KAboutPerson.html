@@ -1,0 +1,420 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KAboutPerson</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KAboutPerson</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdecore</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KAboutPerson</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+This class is used to store information about a person or developer.
+It can store the person's name, a task, an email address and a
+link to a home page. This class is intended for use in the
+KAboutData class, but it can be used elsewhere as well.
+Normally you should at least define the person's name.
+Creating a KAboutPerson object by yourself is relatively useless,
+but the KAboutData methods KAboutData.authors() and KAboutData.credits()
+return lists of KAboutPerson data objects which you can examine.
+</p>
+<p>
+Example usage within a main(), retrieving the list of people involved
+with a program and re-using data from one of them:
+</p>
+<p>
+<pre>
+KAboutData about("khello", "khello", ki18n("KHello"), "0.1",
+ki18n("A KDE version of Hello, world!"),
+KAboutData.License_LGPL,
+ki18n("Copyright (c) 2003 Developer"));
+</p>
+<p>
+about.addAuthor(ki18n("Joe Developer"), ki18n("developer"), "joe@host.com", 0);
+QList<KAboutPerson> people = about.authors();
+about.addCredit(people[0].name(), people[0].task());
+</pre>
+</p>
+<p>
+Instead of the more usual i18n calls, for translatable text the ki18n
+calls are used to produce KLocalizedStrings, which can delay the translation
+lookup. This is necessary because the translation catalogs are usualy not
+yet initialized at the point where KAboutData is constructed.
+</p>
+<p>
+KDE4
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KAboutPerson</b> (name, task, emailAddress, webAddress)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KAboutPerson object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>name</td><td>KLocalizedString</td><td align="right"></td></tr>
+
+              <tr><td>task</td><td>KLocalizedString</td><td align="right">KLocalizedString ()</td></tr>
+
+              <tr><td>emailAddress</td><td>QByteArray</td><td align="right">QByteArray ()</td></tr>
+
+              <tr><td>webAddress</td><td>QByteArray</td><td align="right">QByteArray ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Convenience constructor
+</p>
+<p>
+</p>
+<p>
+<b>name</b> - The name of the person.
+</p>
+<p>
+</p>
+<p>
+<b>task</b> - The task of this person.
+</p>
+<p>
+</p>
+<p>
+<b>emailAddress</b> - The email address of the person.
+</p>
+<p>
+</p>
+<p>
+<b>webAddress</b> - Home page of the person.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KAboutPerson</b> (other)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KAboutPerson object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>other</td><td>KAboutPerson</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Copy constructor. Performs a deep copy.
+</p>
+<p>
+<b>other</b> - object to copy
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KAboutPerson</b> (name, email)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KAboutPerson object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>email</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+<b style="color : #ff0000;"><i>Internal </i></b> Used by KAboutData to construct translator data.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">emailAddress</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+The person's email address
+Returns the person's email address (can be QString(), if it has been
+constructed with an empty email)
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">name</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Assignment operator. Performs a deep copy.
+</p>
+<p>
+<b>other</b> - object to copy
+The person's name
+Returns the person's name (can be QString(), if it has been
+constructed with an empty name)
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">task</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+The person's task
+Returns the person's task (can be QString(), if it has been
+constructed with an empty task)
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">webAddress</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+The home page or a relevant link
+Returns the persons home page (can be QString(), if it has been
+constructed with an empty home page)
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

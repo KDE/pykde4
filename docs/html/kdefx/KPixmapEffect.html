@@ -1,0 +1,932 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KPixmapEffect</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>Namespace KPixmapEffect</h1><hr>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdefx Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdefx</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>KPixmapEffect</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+      <p>
+Provides various pixmap-based graphical effects.
+</p>
+
+      </p>
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>KPixmapEffect.GradientType</b> = { VerticalGradient, HorizontalGradient, DiagonalGradient, CrossDiagonalGradient, PyramidGradient, RectangleGradient, PipeCrossGradient, EllipticGradient }</li>
+
+<li><b>KPixmapEffect.Lighting</b> = { NorthLite, NWLite, WestLite, SWLite, SouthLite, SELite, EastLite, NELite }</li>
+
+<li><b>KPixmapEffect.RGBComponent</b> = { Red, Green, Blue }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">blend</b> (pixmap, initial_intensity, bgnd, eff, anti_dir, ncols)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>initial_intensity</td><td>float</td><td align="right"></td></tr>
+
+              <tr><td>bgnd</td><td>QColor</td><td align="right"></td></tr>
+
+              <tr><td>eff</td><td>KPixmapEffect.GradientType</td><td align="right"></td></tr>
+
+              <tr><td>anti_dir</td><td>bool</td><td align="right">False</td></tr>
+
+              <tr><td>ncols</td><td>int</td><td align="right">3</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Blends the provided pixmap into a background of the indicated color.
+</p>
+<p>
+</p>
+<p>
+<b>pixmap</b> - The pixmap to process.
+</p>
+<p>
+<b>initial_intensity</b> - this parameter takes values from -1 to 1:
+<li> If positive, it tells how much to fade the image in its </li>
+less affected spot.
+<li> If negative, it tells roughly indicates how much of the image </li>
+remains unaffected
+</p>
+<p>
+<b>bgnd</b> - Indicates the color of the background to blend in.
+</p>
+<p>
+<b>eff</b> - Lets you choose what kind of blending you like.
+</p>
+<p>
+<b>anti_dir</b> - Blend in the opposite direction (makes no much sense
+with concentric blending effects).
+</p>
+<p>
+<b>ncols</b> - The number of colors to dither the pixmap to. Only
+used for 8 bpp pixmaps.
+Returns Returns the pixmap(), provided for convenience.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">channelIntensity</b> (pixmap, ratio, channel)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>ratio</td><td>float</td><td align="right"></td></tr>
+
+              <tr><td>channel</td><td>KPixmapEffect.RGBComponent</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Modifies the intensity of a pixmap's RGB channel component.
+</p>
+<p>
+</p>
+<p>
+<b>pixmap</b> - The pixmap to process.
+</p>
+<p>
+<b>ratio</b> - value. Use negative value to dim.
+</p>
+<p>
+<b>channel</b> - Which channel(s) should be modified
+Returns Returns the pixmap(), provided for convenience.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">contrast</b> (pixmap, c)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>c</td><td>int</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Modifies the contrast of a pixmap.
+</p>
+<p>
+</p>
+<p>
+<b>pixmap</b> - The pixmap to process.
+</p>
+<p>
+<b>c</b> - A contrast value between -255 and 255.
+Returns Returns the pixmap(), provided for convenience.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">createTiled</b> (pixmap, size)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>size</td><td>QSize</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Creates a pixmap of a given size with the given pixmap.
+</p>
+<p>
+if the
+given size is bigger than the size of the pixmap, the pixmap is
+tiled.
+</p>
+<p>
+</p>
+<p>
+<b>pixmap</b> - This is the source pixmap
+</p>
+<p>
+<b>size</b> - The size the new pixmap should have.
+Returns The generated, tiled pixmap.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">desaturate</b> (pixmap, desat)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>desat</td><td>float</td><td align="right">0.3</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Desaturates a pixmap.
+</p>
+<p>
+</p>
+<p>
+<b>pixmap</b> - The pixmap to process.
+</p>
+<p>
+<b>desat</b> - A value between 0 and 1 setting the degree of desaturation
+Returns Returns The pixmap(), provided for convenience.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">dither</b> (pixmap, palette, size)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>palette</td><td>QColor</td><td align="right"></td></tr>
+
+              <tr><td>size</td><td>int</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Dithers a pixmap using Floyd-Steinberg dithering for low-color
+situations.
+</p>
+<p>
+</p>
+<p>
+<b>pixmap</b> - The pixmap to process.
+</p>
+<p>
+<b>palette</b> - The color palette to use.
+</p>
+<p>
+<b>size</b> - The size of the palette.
+Returns Returns the pixmap(), provided for convenience.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">fade</b> (pixmap, val, color)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>val</td><td>double</td><td align="right"></td></tr>
+
+              <tr><td>color</td><td>QColor</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Fades a pixmap to a certain color.
+</p>
+<p>
+</p>
+<p>
+<b>pixmap</b> - The pixmap to process.
+</p>
+<p>
+<b>val</b> - The strength of the effect. 0 <= val <= 1.
+</p>
+<p>
+<b>color</b> - The color to blend to.
+Returns Returns the pixmap(), provided for convenience.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">gradient</b> (pixmap, ca, cb, type, ncols)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>ca</td><td>QColor</td><td align="right"></td></tr>
+
+              <tr><td>cb</td><td>QColor</td><td align="right"></td></tr>
+
+              <tr><td>type</td><td>KPixmapEffect.GradientType</td><td align="right"></td></tr>
+
+              <tr><td>ncols</td><td>int</td><td align="right">3</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Creates a gradient from color a to color b of the specified type.
+</p>
+<p>
+</p>
+<p>
+<b>pixmap</b> - The pixmap to process.
+</p>
+<p>
+<b>ca</b> - Color a.
+</p>
+<p>
+<b>cb</b> - Color b.
+</p>
+<p>
+<b>type</b> - The type of gradient.
+</p>
+<p>
+<b>ncols</b> - The number of colors to use when not running on a
+truecolor display. The gradient will be dithered to this number of
+colors. Pass 0 to prevent dithering.
+Returns Returns the generated pixmap, for convenience.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">hash</b> (pixmap, lite, spacing, ncols)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>lite</td><td>KPixmapEffect.Lighting</td><td align="right">KPixmapEffect.NorthLite</td></tr>
+
+              <tr><td>spacing</td><td>uint</td><td align="right">0</td></tr>
+
+              <tr><td>ncols</td><td>int</td><td align="right">3</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Builds a hash on any given pixmap.
+</p>
+<p>
+</p>
+<p>
+<b>pixmap</b> - The pixmap to process.
+</p>
+<p>
+<b>lite</b> - The hash faces the indicated lighting (cardinal poles)
+</p>
+<p>
+<b>spacing</b> - How many unmodified pixels inbetween hashes.
+</p>
+<p>
+<b>ncols</b> - The number of colors to dither the pixmap to.
+Only used for 8 bpp pixmaps.
+Returns Returns The pixmap(), provided for convenience.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">intensity</b> (pixmap, ratio)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>ratio</td><td>float</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Either brightens or dims a pixmap by a specified ratio.
+</p>
+<p>
+</p>
+<p>
+<b>pixmap</b> - The pixmap to process.
+</p>
+<p>
+<b>ratio</b> - The ratio to use. Use negative value to dim.
+Returns Returns The pixmap(), provided for convenience.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">pattern</b> (pixmap, size, ca, cb, ncols)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>size</td><td>QSize</td><td align="right"></td></tr>
+
+              <tr><td>ca</td><td>QColor</td><td align="right"></td></tr>
+
+              <tr><td>cb</td><td>QColor</td><td align="right"></td></tr>
+
+              <tr><td>ncols</td><td>int</td><td align="right">8</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Creates a pattern from a pixmap.
+</p>
+<p>
+The given pixmap is "flattened"
+between color a to color b.
+Doesn't change the original pixmap.
+</p>
+<p>
+</p>
+<p>
+<b>pixmap</b> - The pixmap to process.
+</p>
+<p>
+<b>size</b> - The size of the returned pixmap. If <b>size</b> is larger than
+the original, the resulting pixmap will be tiled.
+</p>
+<p>
+<b>ca</b> - Color a.
+</p>
+<p>
+<b>cb</b> - Color b.
+</p>
+<p>
+<b>ncols</b> - The number of colors to use. The image will be
+dithered to this depth. Pass zero to prevent dithering.
+Returns The resulting pixmap.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">selectedPixmap</b> (pixmap, col)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>col</td><td>QColor</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Calculate a 'selected' pixmap, for instance a selected icon
+on the desktop.
+</p>
+<p>
+<b>pixmap</b> - the pixmap to select
+</p>
+<p>
+<b>col</b> - the selected color, usually from QPalette.highlight().
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">toGray</b> (pixmap, fast)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>fast</td><td>bool</td><td align="right">False</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Converts a pixmap to grayscale.
+</p>
+<p>
+</p>
+<p>
+<b>pixmap</b> - The pixmap to process.
+</p>
+<p>
+<b>fast</b> - Set to <b>true</b> in order to use a faster but non-photographic
+quality algorithm. Appropriate for things such as toolbar icons.
+Returns Returns the pixmap(), provided for convenience.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">unbalancedGradient</b> (pixmap, ca, cb, type, xfactor, yfactor, ncols)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QPixmap)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>pixmap</td><td>QPixmap</td><td align="right"></td></tr>
+
+              <tr><td>ca</td><td>QColor</td><td align="right"></td></tr>
+
+              <tr><td>cb</td><td>QColor</td><td align="right"></td></tr>
+
+              <tr><td>type</td><td>KPixmapEffect.GradientType</td><td align="right"></td></tr>
+
+              <tr><td>xfactor</td><td>int</td><td align="right">100</td></tr>
+
+              <tr><td>yfactor</td><td>int</td><td align="right">100</td></tr>
+
+              <tr><td>ncols</td><td>int</td><td align="right">3</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Creates an unbalanced gradient.
+</p>
+<p>
+An unbalanced gradient is a gradient where the transition from
+color a to color b is not linear, but in this case, exponential.
+</p>
+<p>
+</p>
+<p>
+<b>pixmap</b> - The pixmap that should be written.
+</p>
+<p>
+<b>ca</b> - Color a.
+</p>
+<p>
+<b>cb</b> - Color b.
+</p>
+<p>
+<b>type</b> - The type of gradient.
+</p>
+<p>
+<b>xfactor</b> - The x decay length. Use a value between -200 and 200.
+</p>
+<p>
+<b>yfactor</b> - The y decay length.
+#gradient.
+Returns The generated pixmap, for convencience.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

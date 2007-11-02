@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KTextEditor.EditorChooser</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KTextEditor.EditorChooser</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">ktexteditor Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>ktexteditor</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>ktexteditor</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KTextEditor.EditorChooser</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QWidget</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+Editor Component Chooser.
+</p>
+<p>
+Topics:
+- chooser_intro
+- chooser_gui
+- chooser_editor
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+The EditorChooser is responsible for two different tasks: It provides
+- a GUI, with which the user can choose the preferred editor part
+- a static accessor, with which the current selected editor part can be
+obtained.
+</p>
+<p>
+<b>The GUI Editor Chooser </b>
+The EditorChooser is a simple widget with a group box containing an
+information label and a combo box which lists all available KTextEditor
+implementations. To give the user the possibility to choose a text editor
+implementation, create an instance of this class and put it into the GUI:
+<pre>
+KTextEditor.EditorChooser* ec = new KTextEditor.EditorChooser(parent);
+// read the settings from the application's KConfig object
+ec->readAppSetting();
+// optionally connect the signal changed()
+// plug the widget into a layout
+layout->addWidget(ec);
+</pre>
+Later, for example when the user clicks the Apply-button:
+<pre>
+// save the user's choice
+ec->writeAppSetting();
+</pre>
+After this, the static accessor editor() will return the new editor part
+object. Now, either the application has to be restarted, or you need code
+that closes all current documents so that you can safely switch and use the
+new editor part. Restarting is probably much easier.
+</p>
+<p>
+If you do not put the EditorChooser into the GUI, the default editor
+component will be used. The default editor is configurable in KDE's
+control center in
+"KDE Components > Component Chooser > Embedded Text Editor".
+</p>
+<p>
+<b>Accessing the Editor Part </b>
+The call of editor() will return the currently used editor part, either the
+KDE default or the one configured with the EditorChooser's GUI
+(see chooser_gui). Example:
+<pre>
+KTextEditor.Editor* editor = KTextEditor.EditorChooser.editor();
+</pre>
+</p>
+<p>
+See also  KTextEditor.Editor
+<b>Author</b> Joseph Wenninger \<jowenn@kde.org\>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">EditorChooser</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right">None</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Constructor.
+</p>
+<p>
+Create an editor chooser widget.
+</p>
+<p>
+<b>parent</b> - the parent widget
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">changed</b> ()<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("changed ()")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This signal is emitted whenever the selected item in the combo box
+changed.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">editor</b> (postfix, fallBackToKatePart)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KTextEditor.Editor)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>postfix</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>fallBackToKatePart</td><td>bool</td><td align="right">True</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Static accessor to get the Editor instance of the currently used
+KTextEditor component.
+</p>
+<p>
+That Editor instance can be qobject-cast to specific extensions.
+If the result of the cast is not 0, that extension is supported:
+</p>
+<p>
+</p>
+<p>
+<b>postfix</b> - config group postfix string
+</p>
+<p>
+<b>fallBackToKatePart</b> - if true, the returned Editor component
+will be a katepart if no other implementation can be found
+Returns Editor controller or 0, if no editor component could be
+found
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">readAppSetting</b> (postfix)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>postfix</td><td>QString</td><td align="right">QString ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Read the configuration from the application's config file. The group
+is handeled internally (it is called "KTEXTEDITOR:", but it is possible
+to add a string to extend the group name with <b>postfix.</b>
+</p>
+<p>
+<b>postfix</b> - config group postfix string
+</p>
+<p>
+See also  writeAppSetting()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">writeAppSetting</b> (postfix)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>postfix</td><td>QString</td><td align="right">QString ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Write the configuration to the application's config file.
+</p>
+<p>
+<b>postfix</b> - config group postfix string
+</p>
+<p>
+See also  readAppSetting()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

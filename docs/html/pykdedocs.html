@@ -1,0 +1,298 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+</HEAD>
+<BODY style="font-size : 10pt;">
+<DIV CLASS="NAVHEADER">
+
+<TABLE SUMMARY="Header navigation table" WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" style="font-size : 10pt;">
+<TR><TH COLSPAN="3" ALIGN="center">PyKDE4 - pykdedocs</TH></TR>
+<TR><TD WIDTH="10%" ALIGN="left" VALIGN="bottom"><A HREF="classref.html" ACCESSKEY="P">Prev</A></TD>
+<TD WIDTH="80%" ALIGN="center" VALIGN="bottom"></TD>
+<TD WIDTH="10%" ALIGN="right" VALIGN="bottom"><A HREF="designer.html" ACCESSKEY="N">Next</A></TD>
+</TR>
+</TABLE><HR ALIGN="LEFT" WIDTH="100%"></DIV>
+<h2>pykdedocs</h2>
+<p><b>pykdedocs</b> is the example/tutorial/documentation browser that ships with PyKDE4.</p>
+<p>
+pykdedocs allows you to:
+</p>
+<ul>
+<li>View PyKDE4 HTML documentation</li>
+<li>View live, often interactive samples of PyKDE4 classes and widgets while simultaneously viewing sample source code and documentation</li>
+<li>Save copies of documentation or source code to your own directory</li>
+<li>View and bookmark HTML documentation from other sources, like Qt,PyQt4 or Python (you can bookmark other types of documentation - like .pdf or
+.txt files, but pykdedocs will launch external viewers for them)</li>
+<li>Browse the web for other linked documentation or tutorial materials</li>
+</ul>
+<p>
+pykdedocs will load HTML files from the internet or launch external viewers for non-HTML links,<b>but</b> it is not intended 
+to be a full-featured, secure web browser. It isn't recommended for use in doing your online banking or submitting credit card
+numbers, and may not load some types of web pages (or crash). pykdedocs uses KHTMLPart, which is capable of running JavaScript
+or JavaApplets, but ships with both of those capabilities disabled. You can enable them in the Settings dialog.
+</p>
+<p>
+pykdedocs ships with predefined folders for PyQt, Qt, Python and sip, but no links, as the location of documentation for these
+is not consistent nor easy to discover automatically. See "Bookmarks" below on how to add links and bookmarks to these folders.
+</p>
+<p>
+pykdedocs is written entirely in Python using PyKDE4 (our favorite dog food), and hacking is encouraged. Improvements submitted will be considered for future versions.
+</p>
+
+<a name="pk-install"><h3>Installing</h3></a>
+<p>
+Mormally, pykdedocs will install as an executable along with your PyKDE4 installation. To install pykdedocs from the
+PyKDE4 tarball, change (cd) to the top level PyKDE4 directory and <b>as root</b> run:
+</p>
+<p>
+pykdedocs requires installed KDE4, PyKDE4 and PyQt4 to run. It will run under KDE3 if KDE4/PyKDE4 are installed,
+even if KDE4 is not running.
+</p>
+<pre>
+python installdocs.py
+</pre>
+<p>
+The installer copies files to known locations on your system.
+</p>
+<a name="pk-using"><h3>Using</h3></a>
+<p>
+To use pykdedocs, simply type:
+</p>
+<pre>
+pykdedocs
+</pre>
+<p>
+at the command prompt, or create a menu entry or taskbar icon to launch pykdedocs. At present, there
+are no pykdedocs specific command line options.
+</p>
+<h4>User interface</h4>
+<table style="font-size : 10pt;">
+  <tr>
+    <td>
+      <p>The pykdedocs ui consists of a tree view at left, a viewing area at right, a toolbar and menu above and a
+        status bar below. The tabs on the viewing area can be repostioned as you prefer (see "Settings" below)
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="images/pk.png" width="612" height="440" align="center" border="0">
+    </td>
+  </tr>
+</table>
+<h4>Tree View</h4>
+<table style="font-size : 10pt;">
+  <tr>
+    <td>
+      <p>
+      The tree view is the index to all of the resources pykdedocs manages - documentation, tutorials, samples,
+      PyKDE4 class documemtation and external documentation (with bookmarks).
+      </p>
+      <p>
+      The entries in the tree are all expandable and link to views of the various resources available. The tree
+      entries with icons are hardcoded into pykdedocs and represent the following:
+      </p>
+      <ul>
+        <li><b>Documentation</b> - the written, PyKDE4 specific pages (like this page)</li>
+        <li><b>Tutorials</b> - information about using PyKDE4 in specific instances</li>
+        <li><b>Modules</b> - each PyKDE4 module has an entry in the tree. The module entries, when
+        expanded, are further divided into namespaces, and under namespaces are the individual classes.
+        For most modules, most of the classes can be found under the "global" entry in the tree.
+        </li>
+      </ul>
+      <p>
+      Below the permanent tree entries is a user-defined area. It can be used to link to external HTML
+      documentation (like Qt, PyQt4 or Python documentation), to collect links to other external (including
+      online) resources, and to store user-defined bookmarks.
+      </p>
+      <p>
+      Above the tree is a search box. It will filter the tree entries to those which contain the substring
+      entered in box (for example, "List" will match both KListWidget and KFileList). After a threshhold
+      number of characters has been typed (default is 2, can be configured), the tree will be expanded
+      to show all matches, and as more characters are typed, non-matching entries will disappear. To 
+      restore the entire tree, clear the search box using the small button at the left of the text
+      entry area.
+      </p>
+      <p>
+      Next to the search box is a button which will collapse any expanded nodes back to the state shown
+      in the image at left.
+      </p>
+    </td>
+    <td>
+      <IMG src="images/pktree.png" width="160" height="329" align="left" border="0">
+    </td>
+  </tr>
+</table>
+<h4>Viewer area</h4>
+<table style="font-size : 10pt;">
+  <tr>
+    <td>
+      <p>
+      On the right side is the viewer area. The three tabs shown are permanent tabs and can't be
+      closed.
+      </p>
+      <p>
+      The tabs represent the following resources:
+      </p>
+      <ul>
+        <li><b>Sample</b> - displays the output of sample programs</li>
+        <li><b>Source</b> - displays the source code for sample programs</li>
+        <li><b>Docs</b> - displays the documentation for a selected class, or
+        documentation (like this page) under the "Documentation" node.
+        </li>
+      </ul>
+      <p>
+      If you expand a PyKDE4 module node in the tree view, and select a class, the
+      sample (if any - classes with samples are flagged in the tree view) will appear
+      in the sample tab, and the display will automatically switch to this tab (you
+      can also disable samples, or cause the display to switch to the "Docs" tab
+      when a class is selected - see "Settings"). The source code for the sample
+      will appear in the "Source" tab and the documentation for the class will
+      appear in the "Docs" tab. You can save the source code or documentation
+      to a local read/write directory you specify by selecting File | Save from
+      the main menu, or clicking the "Save" button on the "Source" tab's display.
+      </p>
+      <p>
+      Some samples open dialog boxes or run external programs - the "Sample" tab
+      will provide a button to launch the dialog or program in those cases.
+      </p>
+      <p>
+      All other top level nodes in the tree view (except "Documentation" and the
+      PyKDE4 module nodes) will open a new tab in the view area. For example,
+      clicking "Tutorials" in the tree view will open a "Tutorials" tab. Tutorials
+      also use the "Sample" tab to present a button to run the tutorial code, and
+      use the "Source" tab to display the full source code for the tutorial 
+      section being viewd.
+      </p>
+      <p>
+      The user-defined nodes, or bookmarks collected under user-defined nodes, also open
+      a new tab for each user-defined node. The "Sample" and "Source" tabs are unaffected
+      by the user-defined nodes.
+      </p>
+      <p>
+      The location of the tabs (left, as shown, or top, right or bottom) is can be changed
+      in the "Settings" dialog. All tabs except "Sample", "Source" and "Docs" can be closed
+      by right-clicking on the tab and confirming in the popup dialog.
+      </p>
+      <p>
+      The back and forward buttons on the toolbar are specific to each tab, as is the history
+      button next to the back and forward tabs. The home button on the toolbar is only
+      available for user-defined tabs.
+      </p>
+    </td>
+    <td>
+      <img src="images/pkview.png" width="204" height="234" align="left" border="0">
+    </td>
+  </tr>
+</table>
+
+<a name="pk-settings"><h3>Settings</h3></a>
+<table style="font-size : 10pt;">
+  <tr>
+    <td>
+      <p>
+      The Settings dialog items are fairly self-explanatory
+      </p>
+      <p>
+      </p>
+      <ul>
+        <li><b>Tab Position</b> - sets the tab position in the view area</li>
+        <li><b>Samples</b> - enables/disables samples (useful if you just want to browse class docs)</li>
+        <li><b>Favor</b> - favoring "Docs" causes the "Docs" tab to be selected when a class name is clicked in the tree view</li>
+        <li><b>Browsers</b> - enable/disable JavaScript and Java appplets</li>
+        <li><b>Characters ...</b> - number of search characters typed before the tree view automatically expands nodes with matching entries</li>
+        <li><b>Url History ...</b> - how many entries in the URL box in the tool bar are saved between sessions</li>
+      </ul>
+      <p>
+      Changes are automatically saved when you click "OK".
+      </p>
+      <p>
+      The "Paths" tab allows you to change the path to the pykdedocs directory tree, or the default path to which pykdedocs
+      will save source code.
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="images/pksettings.png" width="715" height="279" align="center" border="0" vspace="15">
+    </td>
+  </tr>
+</table>
+<a name="pk-book"><h3>Bookmarks</h3></a>
+<table style="font-size : 10pt;">
+  <tr>
+    <td>
+      <p>
+      You can create your own folders and bookmarks to link to other HTML documentation.
+      </p>
+      <p>
+      To create a new folder in the tree view, choose Bookmarks | New Bookmark Folder from the main menu or
+      click the New Bookmark Folder button on the toolbar.
+      </p>
+      <p>
+      Enter a name for your new folder and the URL it links to. The button at the left will pop up a file
+      dialog for local files, or you can enter any URL (like a website link). If the URL specified isn't a
+      link to a .html file (for example a .pdf or .txt file), pykdedocs will open an external viewer when
+      the node in the tree view is clicked. If you leave the URL field empty, pykdedocs will still open
+      a new tab when the node is clicked, and you can still add bookmarks to the folder.
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="images/pkfolder.png" width="500" height="167" align="left" border="0"  vspace="15">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>
+      You can also add, edit or delete the folder name and URL, or edit and delete (but not add) bookmarks under the folder 
+      and their URLs in the Edit Bookmarks dialog (Bookmarks | Edit Bookmarks in the main menu, or toolbar button).
+      </p>
+      <p>
+      Highlight the folder or bookmark to be edited or deleted, then edit in the text boxes if desired, and press
+      Apply or Delete as appropriate. No changes are saved until OK is clicked.
+      </p>
+      <p>
+      To create a new folder, click New and then enter the informantion. The Browse button pops up a file dialog
+      for locating local files.
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <IMG src="images/pkbookmarks.png" width="648" height="378" align="left" border="0"  vspace="15">
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DIV CLASS="NAVFOOTER">
+<HR ALIGN="LEFT" WIDTH="100%">
+<TABLE SUMMARY="Footer navigation table" WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0"  style="font-size : 10pt;">
+<TR>
+<TD WIDTH="33%" ALIGN="left" VALIGN="top"><A HREF="classref.html" ACCESSKEY="P">Prev</li></TD>
+<TD WIDTH="34%" ALIGN="center" VALIGN="top"><A HREF="toc.html" ACCESSKEY="H">Table of Contents</A></TD>
+<TD WIDTH="33%" ALIGN="right" VALIGN="top"><A HREF="designer.html" ACCESSKEY="N">Next</A></TD>
+</TR>
+<TR>
+<TD WIDTH="33%" ALIGN="left" VALIGN="top">Using the Class Reference</TD>
+<TD WIDTH="34%" ALIGN="center" VALIGN="top">&nbsp;</TD>
+<TD WIDTH="33%" ALIGN="right" VALIGN="top">PyKDE4 and QtDesigner</TD>
+</TR>
+</TABLE>
+</DIV>
+</BODY>
+</HTML>

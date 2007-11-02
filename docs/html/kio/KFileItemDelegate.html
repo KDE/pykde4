@@ -1,0 +1,781 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KFileItemDelegate</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KFileItemDelegate</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kio Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kio</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KFileItemDelegate</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QAbstractItemDelegate</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+KFileItemDelegate is intended to be used to provide a KDE file system
+view, when using one of the standard item views in Qt with KDirModel.
+</p>
+<p>
+While primarily intended to be used with KDirModel, it uses
+Qt.DecorationRole and Qt.DisplayRole for the icons and text labels,
+just like QItemDelegate, and can thus be used with any standard model.
+</p>
+<p>
+When used with KDirModel however, KFileItemDelegate can change the way
+the display and/or decoration roles are drawn, based on properties
+of the file items. For example, if the file item is a symbolic link,
+it will use an italic font to draw the file name.
+</p>
+<p>
+KFileItemDelegate also supports showing additional information about
+the file items below the icon labels.
+</p>
+<p>
+Which information should be shown, if any, is controlled by the
+information property, which can be set by calling
+setAdditionalInformation(), and read by calling additionalInformation().
+The default value for this property is NoInformation.
+</p>
+<p>
+To use KFileItemDelegate, instantiate an object from the delegate,
+and call setItemDelegate() in one of the standard item views in Qt:
+</p>
+<p>
+<pre>
+QListView *listview = new QListView(this);
+KFileItemDelegate *delegate = new KFileItemDelegate(this);
+listview->setItemDelegate(delegate);
+</pre>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>AdditionalInformation</b> = { NoInformation, Size, Permissions, OctalPermissions, Owner, OwnerAndGroup, CreationTime, ModificationTime, AccessTime, MimeType, FriendlyMimeType }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KFileItemDelegate</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KFileItemDelegate object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QObject</td><td align="right">None</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Constructs a new KFileItemDelegate.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - The parent object for the delegate.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KFileItemDelegate</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KFileItemDelegate object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KFileItemDelegate</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+<b style="color : #ff0000;"><i>Internal </i></b>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">additionalInformation</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KFileItemDelegate.AdditionalInformation)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the additional information that should be shown below item labels in icon views.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">createEditor</b> (parent, option, index)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QWidget)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>option</td><td>QStyleOptionViewItem</td><td align="right"></td></tr>
+
+              <tr><td>index</td><td>QModelIndex</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Reimplemented from QAbstractItemDelegate.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">editorEvent</b> (event, model, option, index)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>event</td><td>QEvent</td><td align="right"></td></tr>
+
+              <tr><td>model</td><td>QAbstractItemModel</td><td align="right"></td></tr>
+
+              <tr><td>option</td><td>QStyleOptionViewItem</td><td align="right"></td></tr>
+
+              <tr><td>index</td><td>QModelIndex</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Reimplemented from QAbstractItemDelegate.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">helpEvent</b> (event, view, option, index)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>event</td><td>QHelpEvent</td><td align="right"></td></tr>
+
+              <tr><td>view</td><td>QAbstractItemView</td><td align="right"></td></tr>
+
+              <tr><td>option</td><td>QStyleOptionViewItem</td><td align="right"></td></tr>
+
+              <tr><td>index</td><td>QModelIndex</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Reimplemented from QAbstractItemDelegate.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">paint</b> (painter, option, index)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>painter</td><td>QPainter</td><td align="right"></td></tr>
+
+              <tr><td>option</td><td>QStyleOptionViewItem</td><td align="right"></td></tr>
+
+              <tr><td>index</td><td>QModelIndex</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Paints the item indicated by <b>index,</b> using <b>painter.</b>
+</p>
+<p>
+The item will be drawn in the rectangle specified by option.rect.
+The correct size for that rectangle can be obtained by calling
+sizeHint().
+</p>
+<p>
+This function will use the following data values if the model provides
+them for the item, in place of the values in <b>option:</b>
+</p>
+<p>
+<li> Qt.FontRole The font that should be used for the display role. </li>
+<li> Qt.AlignmentRole The alignment of the display role. </li>
+<li> Qt.ForegroundRole The text color for the display role. </li>
+<li> Qt.BackgroundRole The background color for the item. </li>
+</p>
+<p>
+This function is reimplemented from QAbstractItemDelegate.
+</p>
+<p>
+</p>
+<p>
+<b>painter</b> - The painter with which to draw the item.
+</p>
+<p>
+<b>option</b> - The style options that should be used when painting the item.
+</p>
+<p>
+<b>index</b> - The index to the item that should be painted.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setAdditionalInformation</b> (information)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>information</td><td>KFileItemDelegate.AdditionalInformation</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Sets the additional information that should be shown below below item labels in icon views.
+</p>
+<p>
+</p>
+<p>
+<b>information</b> - The information that should be shown
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setEditorData</b> (editor, index)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>editor</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>index</td><td>QModelIndex</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Reimplemented from QAbstractItemDelegate.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setModelData</b> (editor, model, index)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>editor</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>model</td><td>QAbstractItemModel</td><td align="right"></td></tr>
+
+              <tr><td>index</td><td>QModelIndex</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Reimplemented from QAbstractItemDelegate.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">sizeHint</b> (option, index)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QSize)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>option</td><td>QStyleOptionViewItem</td><td align="right"></td></tr>
+
+              <tr><td>index</td><td>QModelIndex</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the nominal size for the item referred to by <b>index,</b> given the
+provided options.
+</p>
+<p>
+If the model provides a valid Qt.FontRole and/or Qt.AlignmentRole for the item,
+those will be used instead of the ones specified in the style options.
+</p>
+<p>
+This function is reimplemented from QAbstractItemDelegate.
+</p>
+<p>
+</p>
+<p>
+<b>option</b> - The style options that should be used when painting the item.
+</p>
+<p>
+<b>index</b> - The index to the item for which to return the size hint.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">updateEditorGeometry</b> (editor, option, index)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>editor</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>option</td><td>QStyleOptionViewItem</td><td align="right"></td></tr>
+
+              <tr><td>index</td><td>QModelIndex</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Reimplemented from QAbstractItemDelegate.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+
+<li><b>AdditionalInformation</b> = { NoInformation, Size, Permissions, OctalPermissions, Owner, OwnerAndGroup, CreationTime, ModificationTime, AccessTime, MimeType, FriendlyMimeType }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>NoInformation</i></td>
+      <td valign="top">-</td>
+      <td>
+No additional information will be shown for items .</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Size</i></td>
+      <td valign="top">-</td>
+      <td>The file size for files , and the number of items for folders .</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Permissions</i></td>
+      <td valign="top">-</td>
+      <td>A UNIX permissions string , e . g . - rwxr - xr - x .</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>OctalPermissions</i></td>
+      <td valign="top">-</td>
+      <td>The permissions as an octal value , e . g . 0644.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Owner</i></td>
+      <td valign="top">-</td>
+      <td>The user name of the file owner , e . g . root</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>OwnerAndGroup</i></td>
+      <td valign="top">-</td>
+      <td>The user and group that owns the file , e . g . root : root</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>CreationTime</i></td>
+      <td valign="top">-</td>
+      <td>The date and time the file / folder was created .</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>ModificationTime</i></td>
+      <td valign="top">-</td>
+      <td>The date and time the file / folder was last modified .</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>AccessTime</i></td>
+      <td valign="top">-</td>
+      <td>The date and time the file / folder was last accessed .</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>MimeType</i></td>
+      <td valign="top">-</td>
+      <td>The mime type for the item , e . g . text / html .</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>FriendlyMimeType</i></td>
+      <td valign="top">-</td>
+      <td>The descriptive name for the mime type , e . g . HTML Document .</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+</ul>
+
+</span>
+</body>
+</html>

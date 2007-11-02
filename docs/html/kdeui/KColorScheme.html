@@ -1,0 +1,813 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KColorScheme</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KColorScheme</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdeui</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KColorScheme</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+A set of methods used to work with colors.
+</p>
+<p>
+KColorScheme currently provides access to the system color palette that the
+user has selected (in the future, it is expected to do more). As of KDE4,
+this class is the correct way to look up colors from the system palette,
+as opposed to KGlobalSettings (such usage is deprecated). It greatly expands
+on KGlobalSettings and QPalette by providing five distinct "sets" with
+several color choices each, covering background, foreground, and decoration
+colors.
+</p>
+<p>
+A KColorScheme instance represents colors corresponding to a "set", where a
+set consists of those colors used to draw a particular type of element, such
+as a menu, button, view, selected text, or tooltip. Each set has a distinct
+set of colors, so you should always use the correct set for drawing and
+never assume that a particular foreground for one set is the same as the
+foreground for any other set. Individual colors may be quickly referenced by
+creating an anonymous instance and invoking a lookup member.
+</p>
+<p>
+See also  KColorScheme.ColorSet, KColorScheme.ForegroundRole,
+KColorScheme.BackgroundRole, KColorScheme.DecorationRole,
+KColorScheme.ShadeRole
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>BackgroundRole</b> = { NormalBackground, AlternateBackground, ActiveBackground, LinkBackground, VisitedBackground, NegativeBackground, NeutralBackground, PositiveBackground }</li>
+
+<li><b>ColorSet</b> = { View, Window, Button, Selection, Tooltip }</li>
+
+<li><b>DecorationRole</b> = { FocusColor, HoverColor }</li>
+
+<li><b>ForegroundRole</b> = { NormalText, InactiveText, ActiveText, LinkText, VisitedText, NegativeText, NeutralText, PositiveText }</li>
+
+<li><b>ShadeRole</b> = { LightShade, MidlightShade, MidShade, DarkShade, ShadowShade }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KColorScheme</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KColorScheme object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KColorScheme</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KColorScheme</b> (a0, a1)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KColorScheme object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KColorScheme.ColorSet</td><td align="right">KColorScheme.View</td></tr>
+
+              <tr><td>a1</td><td>KSharedConfigPtr</td><td align="right">KSharedConfigPtr ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Construct a palette from given color set, using the colors from the
+given KConfig (if null, the system colors are used).
+</p>
+<p>
+<b style="color : #ff0000;"><i>Deprecated </i></b> Use the other constructor that takes a state.
+In KDE4 it will not be safe to assume that the palette for different
+states (Active, Inactive, Disabled as of Qt 4.3) are identical.
+Therefore users <i>really should</i> specify a state. This constructor
+will most likely be removed before 4.0 final.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KColorScheme</b> (a0, a1, a2)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KColorScheme object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>QPalette.ColorGroup</td><td align="right"></td></tr>
+
+              <tr><td>a1</td><td>KColorScheme.ColorSet</td><td align="right">KColorScheme.View</td></tr>
+
+              <tr><td>a2</td><td>KSharedConfigPtr</td><td align="right">KSharedConfigPtr ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Construct a palette from given color set and state, using the colors
+from the given KConfig (if null, the system colors are used).
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">background</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QBrush)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KColorScheme.BackgroundRole</td><td align="right">KColorScheme.NormalBackground</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Retrieve the requested background brush.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">decoration</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QBrush)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KColorScheme.DecorationRole</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Retrieve the requested decoration brush.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">foreground</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QBrush)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KColorScheme.ForegroundRole</td><td align="right">KColorScheme.NormalText</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Retrieve the requested foreground brush.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">shade</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QColor)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>KColorScheme.ShadeRole</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Retrieve the requested shade color, using
+KColorScheme.background(KColorScheme.NormalBackground)
+as the base color and the contrast setting from the KConfig used to
+create this KColorScheme instance (the system contrast setting, if no
+KConfig was specified).
+</p>
+<p>
+Shades are chosen such that all shades would contrast with the
+base color. This means that if base is very dark, the 'dark' shades will
+be lighter than the base color, with midlight() == shadow().
+Conversely, if the base color is very light, the 'light' shades will be
+darker than the base color, with light() == mid().
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">shade</b> (a0, a1)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QColor)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>QColor</td><td align="right"></td></tr>
+
+              <tr><td>a1</td><td>KColorScheme.ShadeRole</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Retrieve the requested shade color, using the specified color as the
+base color and the system contrast setting.
+</p>
+<p>
+Shades are chosen such that all shades would contrast with the
+base color. This means that if base is very dark, the 'dark' shades will
+be lighter than the base color, with midlight() == shadow().
+Conversely, if the base color is very light, the 'light' shades will be
+darker than the base color, with light() == mid().
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">shade</b> (a0, a1, contrast, chromaAdjust)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QColor)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>a0</td><td>QColor</td><td align="right"></td></tr>
+
+              <tr><td>a1</td><td>KColorScheme.ShadeRole</td><td align="right"></td></tr>
+
+              <tr><td>contrast</td><td>qreal</td><td align="right"></td></tr>
+
+              <tr><td>chromaAdjust</td><td>qreal</td><td align="right">0.0</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Retrieve the requested shade color, using the specified color as the
+base color and the specified contrast.
+</p>
+<p>
+</p>
+<p>
+<b>contrast</b> - Amount roughly specifying the contrast by which to
+adjust the base color, between -1.0 and 1.0 (values between 0.0 and 1.0
+correspond to the value from KGlobalSettings.contrastF)
+</p>
+<p>
+<b>chromaAdjust</b> - (optional) Amount by which to adjust the chroma of
+the shade (1.0 means no adjustment)
+</p>
+<p>
+Shades are chosen such that all shades would contrast with the
+base color. This means that if base is very dark, the 'dark' shades will
+be lighter than the base color, with midlight() == shadow().
+Conversely, if the base color is very light, the 'light' shades will be
+darker than the base color, with light() == mid().
+</p>
+<p>
+See also  KColorUtils.shade
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+
+<li><b>BackgroundRole</b> = { NormalBackground, AlternateBackground, ActiveBackground, LinkBackground, VisitedBackground, NegativeBackground, NeutralBackground, PositiveBackground }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>NormalBackground</i></td>
+      <td valign="top">-</td>
+      <td>
+Normal background.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>AlternateBackground</i></td>
+      <td valign="top">-</td>
+      <td>Alternate background, e.g. for use in lists. May be the same as
+BackgroundNormal, especially in sets other than View and Window.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>ActiveBackground</i></td>
+      <td valign="top">-</td>
+      <td>Third color, e.g. items which are new, active, requesting
+attention, etc. Alerting the user that a certain field must be
+filled out would be a good usage. (Unlike ActiveText, this should
+not be used for mouseover effects.)</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>LinkBackground</i></td>
+      <td valign="top">-</td>
+      <td>Fourth color, e.g. (unvisited) links or other clickable items.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>VisitedBackground</i></td>
+      <td valign="top">-</td>
+      <td>Fifth color, e.g. (visited) links.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>NegativeBackground</i></td>
+      <td valign="top">-</td>
+      <td>Sixth color, e.g. errors, untrusted content, etc.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>NeutralBackground</i></td>
+      <td valign="top">-</td>
+      <td>Seventh color, e.g. warnings, secure/encrypted content.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>PositiveBackground</i></td>
+      <td valign="top">-</td>
+      <td>Eigth color, e.g. success messages, trusted content.</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+<li><b>ColorSet</b> = { View, Window, Button, Selection, Tooltip }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>View</i></td>
+      <td valign="top">-</td>
+      <td>
+Views; e.g. frames, input fields, etc.
+/p>
+p>
+If it contains things that can be selected, it is probably a View.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Window</i></td>
+      <td valign="top">-</td>
+      <td>Non-editable window elements; e.g. menus.
+/p>
+p>
+If it isn't a Button, View, or Tooltip, it is probably a Window.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Button</i></td>
+      <td valign="top">-</td>
+      <td>Buttons.
+/p>
+p>
+In addition to buttons, "button-like" controls such as non-editable
+dropdowns should also use this role.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Selection</i></td>
+      <td valign="top">-</td>
+      <td>Selected items in views.
+/p>
+p>
+Note that unfocused or disabled selections should use the Window
+role. This makes it more obvious to the user that the view
+containing the selection does not have input focus.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Tooltip</i></td>
+      <td valign="top">-</td>
+      <td>Tooltips.
+/p>
+p>
+The tooltip set can often be substituted for the view
+set when editing is not possible, but the Window set is deemed
+inappropriate. "What's This" help is an excellent example, another
+might be pop-up notifications (depending on taste).</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+<li><b>DecorationRole</b> = { FocusColor, HoverColor }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>FocusColor</i></td>
+      <td valign="top">-</td>
+      <td>
+Color used to draw decorations for items which have input focus.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>HoverColor</i></td>
+      <td valign="top">-</td>
+      <td>Color used to draw decorations for items which will be activated by
+clicking.</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+<li><b>ForegroundRole</b> = { NormalText, InactiveText, ActiveText, LinkText, VisitedText, NegativeText, NeutralText, PositiveText }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>NormalText</i></td>
+      <td valign="top">-</td>
+      <td>
+Normal foreground.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>InactiveText</i></td>
+      <td valign="top">-</td>
+      <td>Second color, e.g. comments, items which are old, inactive or
+disabled.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>ActiveText</i></td>
+      <td valign="top">-</td>
+      <td>Third color, e.g. items which are new, active, requesting
+attention, etc. May be used as a hover color for clickable items.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>LinkText</i></td>
+      <td valign="top">-</td>
+      <td>Fourth color, e.g. (unvisited) links or other clickable items.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>VisitedText</i></td>
+      <td valign="top">-</td>
+      <td>Fifth color, e.g. (visited) links.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>NegativeText</i></td>
+      <td valign="top">-</td>
+      <td>Sixth color, e.g. errors, untrusted content, etc.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>NeutralText</i></td>
+      <td valign="top">-</td>
+      <td>Seventh color, e.g. warnings, secure/encrypted content.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>PositiveText</i></td>
+      <td valign="top">-</td>
+      <td>Eigth color, e.g. success messages, trusted content.</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+<li><b>ShadeRole</b> = { LightShade, MidlightShade, MidShade, DarkShade, ShadowShade }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>LightShade</i></td>
+      <td valign="top">-</td>
+      <td>
+The light color is lighter than dark() or shadow() and contrasts
+with the base color.</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>MidlightShade</i></td>
+      <td valign="top">-</td>
+      <td>The midlight color is in between base() and light().</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>MidShade</i></td>
+      <td valign="top">-</td>
+      <td>The mid color is in between base() and dark().</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>DarkShade</i></td>
+      <td valign="top">-</td>
+      <td>The dark color is in between mid() and shadow().</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>ShadowShade</i></td>
+      <td valign="top">-</td>
+      <td>The shadow color is darker than light() or midlight() and contrasts
+the base color.</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+</ul>
+
+</span>
+</body>
+</html>

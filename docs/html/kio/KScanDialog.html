@@ -1,0 +1,530 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KScanDialog</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KScanDialog</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kio Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kio</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KScanDialog</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>KPageDialog</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+This is a base class for scanning dialogs. You can derive from this class
+and implement your own dialog. An implementation is available in
+kdegraphics/libkscan.
+</p>
+<p>
+Application developers that wish to add scanning support to their program
+can use the static method <b>KScanDialog.getScanDialog()</b> to get an instance
+of the user's preferred scanning dialog.
+</p>
+<p>
+Typical usage looks like this (e.g. in a slotShowScanDialog() method):
+</p>
+<p>
+<pre>
+if ( !m_scanDialog ) {
+m_scanDialog = KScanDialog.getScanDialog( this );
+if ( !m_scanDialog ) // no scanning support installed?
+return;
+</p>
+<p>
+connect( m_scanDialog, SIGNAL( finalImage( const QImage&, int )),
+SLOT( slotScanned( const QImage&, int ) ));
+}
+</p>
+<p>
+if ( m_scanDialog->setup() ) // only if scanner configured/available
+m_scanDialog->show();
+</pre>
+</p>
+<p>
+This will create and show a non-modal scanning dialog. Connect to more
+signals if you like.
+</p>
+<p>
+If you implement an own scan-dialog, you also have to implement a
+KScanDialogFactory.
+</p>
+<p>
+A baseclass and accessor for Scanning Dialogs
+<b>Author</b> Carsten Pfeiffer <pfeiffer@kde.org>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KScanDialog</b> (dialogFace, buttonMask, parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KScanDialog object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dialogFace</td><td>int</td><td align="right">Tabbed</td></tr>
+
+              <tr><td>buttonMask</td><td>int</td><td align="right">65</td></tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right">None</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Constructs the scan dialog. If you implement an own dialog, you can
+customize it with the usual KPageDialog flags.
+</p>
+<p>
+</p>
+<p>
+<b>dialogFace</b> - The KPageDialog.FaceType
+</p>
+<p>
+<b>buttonMask</b> - An ORed mask of all buttons (see
+KDialog.ButtonCode)
+</p>
+<p>
+<b>parent</b> - The QWidget's parent, or 0
+</p>
+<p>
+See also  KPageDialog
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">finalImage</b> (img, id)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("finalImage (const QImage&, int)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>img</td><td>QImage</td><td align="right"></td></tr>
+
+              <tr><td>id</td><td>int</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Informs you that an image has scanned. <b>id</b> is the same as in the
+<b>preview()</b> signal, if this image had been previewed before.
+</p>
+<p>
+Note, that those id's may not be properly implemented in the current
+libkscan.
+</p>
+<p>
+<b>img</b> - the image
+</p>
+<p>
+<b>id</b> - the image's id
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">getScanDialog</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KScanDialog)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right">None</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Creates the user's preferred scanning dialog and returns it,
+or 0L if no scan-support
+is available. Pass a suitable <b>parent</b> widget, if you like. If you
+don't you have to 'delete' the returned pointer yourself.
+</p>
+<p>
+<b>parent</b> - the QWidget's parent, or 0
+Returns the KScanDialog, or 0 if the function failed
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">id</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the current id for an image. You can use that in your subclass
+for the signals. The id is used in the signals to let people know
+which preview and which text-recognition belongs to which scan.
+</p>
+<p>
+Returns the current id for the image
+</p>
+<p>
+See also  nextId
+</p>
+<p>
+See also  finalImage
+</p>
+<p>
+See also  preview
+</p>
+<p>
+See also  textRecognized
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">nextId</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the id for the next image. You can use that in your subclass
+for the signals.
+</p>
+<p>
+Returns the id for the next image
+</p>
+<p>
+See also  id
+</p>
+<p>
+See also  finalImage
+</p>
+<p>
+See also  preview
+</p>
+<p>
+See also  textRecognized
+</p>
+<p>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">preview</b> (img, id)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("preview (const QImage&, int)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>img</td><td>QImage</td><td align="right"></td></tr>
+
+              <tr><td>id</td><td>int</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Informs you that an image has been previewed.
+</p>
+<p>
+<b>img</b> - the image
+</p>
+<p>
+<b>id</b> - the image's id
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">setup</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Reimplement this if you need to set up some things, before showing the
+dialog, e.g. to ask the user for the scanner device to use. If you
+return false (e.g. there is no device available or the user aborted
+device selection), the dialog will not be shown.
+</p>
+<p>
+Returns true by default.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">textRecognized</b> (text, id)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("textRecognized (const QString&, int)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>id</td><td>int</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Informs you that the image with the id <b>id</b> has been run through
+text-recognition. The text is in the QString parameter. In the future,
+a compound document, using rich text will be used instead.
+</p>
+<p>
+</p>
+<p>
+<b>text</b> - the text that has been recognized
+</p>
+<p>
+<b>id</b> - the id of the image
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

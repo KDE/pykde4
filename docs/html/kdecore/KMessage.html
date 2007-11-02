@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KMessage</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>Namespace KMessage</h1><hr>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdecore</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>KMessage</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+      <p>
+Display an informative message using a KMessageHandler.
+</p>
+<p>
+This class does not define how to display a message, it is just
+a clean interface for developers to use.
+The job is done by the current KMessageHandler set in the class.
+</p>
+<p>
+If no KMessageHandler is currently registered in KMessage,
+the message will be outputed to stderr.
+</p>
+<p>
+Use KMessage.setMessageHandler() to use a KMessageHandler.
+</p>
+<p>
+<pre>
+KMessage.setMessageHandler( new KMessageBoxHandler(this) );
+// some operation
+</p>
+<p>
+KMessage.message( KMessage.Error, i18n("Could not load service. Use kbuildsycoca to fix the service database."), i18n("KService") );
+</pre>
+</p>
+<p>
+Some KMessageHandler are already done such as KMessageBoxMessageHandler and KPassivePopupMessageHandler.
+<b>Author</b> Michaël Larouche <michael.larouche@kdemail.net>
+</p>
+
+      </p>
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>KMessage.MessageType</b> = { Error, Information, Warning, Sorry, Fatal }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">message</b> (messageType, text, caption)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>messageType</td><td>KMessage.MessageType</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display a long message of a certain type.
+A long message span on multiple lines and can have a caption.
+</p>
+<p>
+</p>
+<p>
+<b>messageType</b> - Currrent type of message. See MessageType enum.
+</p>
+<p>
+<b>text</b> - Long message to be displayed.
+</p>
+<p>
+<b>caption</b> - Caption to be used. This is optional.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setMessageHandler</b> (handler)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>handler</td><td>KMessageHandler</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Set the current KMessageHandler
+Note that this method take ownership of the KMessageHandler.
+</p>
+<p>
+<b>handler</b> - Instance of a real KMessageHandler.
+</p>
+<p>
+This function isn't thread-safe. You don't want to
+change the message handler during the program's
+execution anyways. Do so <b>only</b> at start-up.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

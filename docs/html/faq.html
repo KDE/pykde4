@@ -1,0 +1,236 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+</HEAD>
+<body style="font-size : 10pt;">
+<p style="font-size : 10pt;">
+<DIV CLASS="NAVHEADER">
+<TABLE SUMMARY="Header navigation table" WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" style="font-size : 10pt;">
+<TR><TH COLSPAN="3" ALIGN="center">PyKDE4 - FAQ</TH></TR>
+<TR><TD WIDTH="10%" ALIGN="left" VALIGN="bottom"><p HREF="designer.html" ACCESSKEY="P">Prev</A></TD>
+<TD WIDTH="80%" ALIGN="center" VALIGN="bottom"></TD>
+</TR>
+</TABLE><HR ALIGN="LEFT" WIDTH="100%"></DIV>
+
+
+<h2>Frequently Asked Questions</h2>
+<ol>
+<li><a href="#faq-icon">How do I set the icon for my program?</a></li>
+<li><a href="#faq-logo">How do I set the logo in the "about application" dialog box?</a></li>
+<li><a href="#faq-linkclick">Nothing happens when I click a link in KHTMLPart</a></li>
+<li><a href="#faq-kapp">My program doesn't use KApplication ...</a></li>
+<li><a href="#faq-kapperror">What is "QWidget: Must construct a QApplication before a QPaintDevice"?</a></li>
+<li><a href="#faq-nomain">My program doesn't have KMainWindow (or descendant) ...</a></li>
+<li><a href="#faq-exit">My program works, but crashes when I quit</a></li>
+<li><a href="#faq_init">What is "underlying C/C++ object deleted"?</a></li>
+</ol>
+<hr>
+
+
+<p> <b name="faq-icon"><b>How do I set the icon for my program?</b></a></b></p>
+<p>
+Your program should subclass KMainWindow (or KXmlGuiWindow, or KParts::MainWindow). If the
+name of your instance is "mainWindow" then add:
+</p>
+<pre>
+mainWindow.setWindowIcon (KIcon (&lt;icon name or path&gt;))
+</pre>
+<p>
+Or inside the main window constructor:
+</p>
+<pre>
+self.setWindowIcon (KIcon (&lt;icon name or path&gt;))
+</pre>
+<hr>
+<p><b><a name="faq-logo">How do I set the logo in the "about application" dialog box?</a></b></p>
+<p>
+The method that allows you to set the logo shown in the "About Application" dialog box
+from the Help menu is:
+</p>
+<pre>
+KAboutData.setProgramLogo (image)
+</pre>
+<p>
+but there are several problems with using this. First, the image must be contained within a QVariant,
+and with PyQt4, the only method call available to put a QImage inside a variant is
+</p>
+<pre>
+QVariant (int, void*)
+</pre>
+<p>
+where the second parameter has to be an actual C++ pointer to void. The int is an int
+equivalent of the enumerator QVariant.Image. There are two possible ways to accomplish 
+this. The first is to use the PyKDE4 predefined method:
+</p>
+<pre>
+from PyKDE4 setprogramlogo import setprogramlogo
+...
+image = QImage (&lt;path to your image file&gt;)
+aboutData = KAboutData (&lt;arguments&gt;)
+
+setprogramlogo (aboutData, image)
+</pre>
+<p>
+The alternative is to duplicate the setprogramlogo code in your file:
+</p>
+<pre>
+import sip
+...
+image = QImage (&lt;path to your image file&gt;)
+aboutData = KAboutData (&lt;arguments&gt;)
+
+vptr  = sip.voidptr (sip.unwrapinstance (image))
+vtype = int (QVariant.Image)
+aboutData.setProgramLogo (QVariant (vtype, vptr))
+ </pre>
+<p>
+Of course you need to do the required PyKDE4 and PyQt4 imports as well, which
+aren't shown here.
+</p>
+<hr>
+<p><a name="faq-linkclick"><b>Nothing happens when I click a link in KHTMLPart</b></a></p>
+<p>
+Actually, something does happen - you just have to figure out how to connect to it. KHTMLPart
+itself doesn't handle link clicks. The signal emitted when a link is clicked comes instead
+from a KParts.BrowserExtension that your KHTMLPart instance already owns. You connect to it
+like this:
+</p>
+<pre>
+self.htmlpart  = KHTMLPart (self)
+self.extension = self.htmlpart.browserExtension ()
+
+
+self.connect (self.extension, 
+              SIGNAL ('openUrlRequest (const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)'), 
+              self.slotOpenURL)
+
+</pre>
+<p>
+The slot you connect to then has to hand the link's URL back to KHTMLPart to load. However, before doing
+that, you also need to determine the mime type of the content at the link. KHTMLPart only displays HTML,
+not .pdf or .tar.gz files (actually, it will display those, but as binary). One way to check is:
+</p>
+<pre>
+mimetype = KIO.NetAccess.mimetype (url, None)
+if mimetype != "text/html":
+    &lt;insert code to handle non-HTML here&gt;
+</pre>
+<p>
+KIO.NetAccess.mimetype is slow and it's also synchronous (you have to wait for it to complete before
+moving on with the rest of your code). There are asynchronous KIO.Job ways of determining the mime
+type. If you expect a lot of local files (as pykdedocs does), it may be faster to check for those
+first using os.path.exists () and checking for a ".html" extension.
+</p>
+<hr>
+<p><b><a name="faq-kapp">My program doesn't use KApplication ...</a></b></p>
+<p>
+That's probably not a good thing. Most of KDE relies on the existence of a KApplication object,
+and most KDE code won't work without either a KApplication or KUniqueApplication instance.
+</p>
+<p>
+QApplication <b>can't</b> be substituted for KApplication, either.
+</p>
+<p>
+See the next question for what happens when you don't have a KApplication.
+</p>
+<hr>
+<p><b><a name="faq-kapperror">What is "QWidget: Must construct a QApplication before a QPaintDevice"?</a></b></p>
+<p>
+Your application hasn't created a KApplication or KUniqueApplication instance. See
+the previous question.
+</p>
+<p>
+Note that the error message comes from Qt, so it refers to QApplication, but for PyKDE4,
+KApplication is what you have to use.
+</p>
+<hr>
+<p><b><a name="faq-exit">My program works, but crashes when I quit</a></b></p>
+<p>
+Does your program use KMainWindow (or a KMainWindow subclass, like KXmlGuiWindow or 
+KParts.MainWindow) as its main widget?
+</p>
+<p>
+If it doesn't, that's likely the cause of the crash (see next question). If it does,
+it may be a PyKDE4 bug and should be reported.
+</p>
+<hr>
+<p><b><a name="faq-nomain">My program doesn't have KMainWindow (or descendant) ...</a></b></p>
+<p>
+That's not as big a problem as not having a KApplication instance, but it may still cause a problem.
+The shutdown code (run when your program exits) more or less expects a KMainWindow (or KMainWindow
+subclass like KXmlGuiWindow or KParts::MainWindow) to own the objects to be destroyed at exit.
+</p>
+<p>
+Not having a KMainWindow or similar class that "owns" the GUI can lead to crashes at exit, as
+objects are not destroyed in the proper order. This is more of a problem in PyKDE than in KDE
+itself - it may work fine in C++, but may not work in Python.
+</p>
+<p>
+From my perspective, troubleshooting exit code problems is nasty and fixing them reliably is
+not alway possible - what works for one situation may cause others to fail. It's simpler just
+to subclass KMainWindow when writing your application.
+</p>
+<hr>
+<p><b><a name="faq_init">What is "underlying C/C++ object deleted"?</a></b></p>
+<p>
+You've probably subclassed a PyKDE4 or PyQt4 class, but you forgot to call the original class's
+__init__ method. The error is caused by doing something like this:
+</p>
+<pre>
+class WidgetSubClass (QWidget):
+    def __ init__ (self, parent):
+	self.parent = parent
+
+    def someOtherMethod (self):
+	...
+</pre>
+<p>
+What you need to do is
+</p>
+<pre>
+class WidgetSubClass (QWidget):
+    def __ init__ (self, parent):
+        QWidget.__init__ (self, parent) # don't forget this !
+	self.parent = parent
+
+    def someOtherMethod (self):
+	...
+</pre>
+<p>
+and make sure you pass "self" as the first argument.
+</p>
+<p>
+The QWidget__init__ call (or whatever is equivalent in your code) doesn't have to be the first
+statement in your object's __init__ method, but it has to be there. And it has to be there
+before you start attempting to use the parent class's methods.
+</p>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<DIV CLASS="NAVFOOTER">
+<HR ALIGN="LEFT" WIDTH="100%">
+<TABLE SUMMARY="Footer navigation table" WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0"  style="font-size : 10pt;">
+<TR>
+<TD WIDTH="33%" ALIGN="left" VALIGN="top"><A HREF="designer.html" ACCESSKEY="P">Prev</A></TD>
+<TD WIDTH="34%" ALIGN="center" VALIGN="top"><A HREF="toc.html" ACCESSKEY="H">Table of Contents</A></TD>
+<td></td>
+</TR>
+<TR>
+<TD WIDTH="33%" ALIGN="left" VALIGN="top">PyKDE4 and QtDesigner</TD>
+<TD WIDTH="34%" ALIGN="center" VALIGN="top">&nbsp;</TD>
+</TR>
+</TABLE>
+</DIV>
+</BODY>
+</HTML>

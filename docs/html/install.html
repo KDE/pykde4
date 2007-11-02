@@ -1,0 +1,212 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+</HEAD>
+<BODY style="font-size : 10pt;">
+<DIV CLASS="NAVHEADER">
+<TABLE SUMMARY="Header navigation table" WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" style="font-size : 10pt;">
+<TR><TH COLSPAN="3" ALIGN="center">PyKDE4 - Python Bindings for KDE4</TH></TR>
+<TR><TD WIDTH="10%" ALIGN="left" VALIGN="bottom"><A HREF="general.html" ACCESSKEY="P">Prev</A></TD>
+<TD WIDTH="80%" ALIGN="center" VALIGN="bottom"></TD>
+<TD WIDTH="10%" ALIGN="right" VALIGN="bottom"><A HREF="using.html" ACCESSKEY="N">Next</A></TD>
+</TR>
+</TABLE><HR ALIGN="LEFT" WIDTH="100%"></DIV>
+
+<h2>Installing PyKDE4</h2>
+<a name="ins-pkg"><h3>Packages</h3></a>
+<p>
+The easiest way to install PyKDE4 is from packages provided by your Linux distribution
+or by third parties. PyKDE4 is now included in the kdebindings section of the KDE4 SVN,
+so most distributions should have packages available.
+</p>
+<p>
+The remainder of this section is for those who want to install from the PyKDE4 source
+tarball, or need to upgrade a distribution installation to get recent PyKDE4 enhancements
+or bug fixes.
+</p>
+<a name="ins-req"><h3>Requirements</h3></a>
+<p>
+PyKDE4 requires 
+</p>
+<ul>
+<li><b>KDE4</b> - including header files (often in a kdelibs-devel package</li>
+<li><b>sip</b> - a version later than September 2007 version 4.7 snapshots</li>
+<li><b>PyQt4</b> - version 4.3 or later, compiled against the currently installed sip version</li>
+<li><b>PyQt4 sip files</b> - These are required to generate the PyKDE4 C++ code. They're installed
+automatically if you compiled PyQt4 on your system. If you installed from a pre-built package, you
+may need a PyQt4 devel package for these files.</li>
+</ul>
+<p>
+PyQt4 and sip tarballs are available from <a href="http://riverbankcomputing.com">Riverbank Computing</a>,
+as is the most recent PyKDE4 tarball.
+</p>
+<a name="ins-config"><h3>Configuring PyKDE4</h3></a>
+<p>
+PyKDE4 is configured for you machine by running
+<p>
+<pre>
+python configure.py
+</pre>
+<p>
+As a normal user (not root), change (cd) to the top level PyKDE4 directory both to run configure.py 
+and to run make and make install (below).
+</p>
+<p>
+The option switches for configure.py are detailed at the end of this page - most people won't need
+them. configure.py will normally detect automatically:
+</p>
+<ul>
+<li>Whether sip and PyQt4 are installed and are compatible versions</li>
+<li>The location of KDE4 files (h files, libs) needed to build PyKDE4</li>
+<li>The location where PyKDE4 files will be installed</li>
+</ul>
+<p>
+After determining your machine's setup, configure.py will generate the PyKDE4 C++ files using
+the <b>sip</b> program. This takes well under 5 minutes on most machines. configure.py will
+also determine the best way to structure the C++ files for your installed version of g++ (gcc).
+</p>
+<p>
+Some versions of gcc 4.0 or 4.2 aren't capable of compiling the large files that are normally
+generated for PyKDE4. configure.py will detect the gcc version installed and adjust the
+generation of C++ code accordingly.
+</p>
+<p>
+The options (see below) are whether sip concatenates all of the PyKDE4 code into one or two
+very large files per PyKDE4 module (for faster compilation) or generates a file-per-class
+for each module (somewhat slower, but still fairly speedy on recent gcc versions).
+</p>
+<a name="ins-comp"><h3>Compiling and Installing</h3></a>
+<p>To compile PyKDE4, in the top level PyKDE4 directory, type (as a normal user - not root):</p>
+<pre>
+make
+</pre>
+<p>
+PyKDE4 will require anywhere from less than 5 minutes to over 30 minutes to compile, depending
+on the speed of your machine and availaable memory. If PyKDE4's C++ files were concatenated,
+compiling may require that you have more than 256MB of memory installed. If available memory
+is low, you can use the switches detailed below to reduce memory requirements during compilation.
+</p>
+<p>
+After PyKDE4 has successfully compiled, you will need to install PyKDE4 <b>as the root user</b>.
+Either change (su) to root, or as a normal user type:
+</p>
+<pre>
+su -c"make install"
+</pre>
+<a name="ins-test"><h3>Testing the Installation</h3></a>
+<p>
+If PyKDE4 configured, compiled and installed successfully, you are ready to test PyKDE4. A simple
+test that catches most build errors is (from the top level PyKDE4 directory):
+</p>
+<pre>
+python importTest.py
+</pre>
+<p>
+This test simply imports each of the modules built. If any "missing symbol" errors prevent loading,
+report a bug. The fix is simple, but requires a recompile. This kind of problem should be extremely
+rare, and is dependent on how your distribution built KDE4 (the build is non-standard).
+</p>
+<p>
+If importTest.py succeeds in importing all modules, you can beging coding, or start exploring the
+example programs and samples that PyKDE4 installed. <b>pykdedocs</b> should have installed in
+your executables path - that program provides access to example code, documentation (including this
+documentation) and tutorials about using PyKDE4.
+</p>
+<p>
+You can issue a single command line to configure, compile, install and test PyKDE4 (you'll be prompted
+for your root password before installation takes place):
+</p>
+<pre>
+python configure.py &amp;&amp; make &amp;&amp; su -c"make install" &amp;&amp; python importTest.py
+</pre>
+<a name="ins-34"><h3>PyKDE4 and KDE3/PyKDE3</h3></a>
+<p>
+PyKDE4 will co-exist with a PyKDE3 installation. It should also be possible to execute PyKDE4 programs
+from a KDE3 desktop if you have KDE4 also installed but not currently running (all of PyKDE4 development
+was done under KDE3).
+</p>
+<a name="ins-detail"><h3>configure.py Options</h3></a>
+<p>configure.py has the following options, which are described below.</p>
+<pre>
+Usage:
+    python configure.py [-h] [-c] [-d dir] [-g] [-j #] [-k] {-L dir] [-n dir] [-o dir] [-r] [-u] [-v dir] [-w] [-x] [-z file]
+
+where:
+    -h      displays this help message
+    -c      concatenates each module's C/C++ source files [default]
+    -d dir  where the PyKDE modules will be installed [default /usr/lib/python/site-packages]
+    -g      always release the GIL (SIP v3.x behaviour - default)
+    -i      no concatenation of each module's C/C++ source files
+    -j #    splits the concatenated C++ source files into # pieces [default 1]
+    -k dir  the KDE base directory
+    -L dir  the library directory name [default lib]
+    -n dir  the directory containing the KDE lib files
+    -o dir  the directory containing the KDE header files
+    -r      generates code with tracing enabled [default disabled]
+    -u      build with debugging symbols
+    -v dir  where the PyKDE .sip files will be installed [default /usr/share/sip/PyKDE4]
+    -w      turn on KDE deprecated object warnings when compiling [default off]
+    -z file the name of a file containing command line flags
+</pre>
+<ul style="line-height : 15pt;">
+<li><b>-h</b> - displays the help message above</li>
+<li><b>-c</b> - concatenates C++ source files.
+<p style="margin-left : 20px; padding-top : 5px;">With this option, sip generates a single large source file
+for each module (2 files for kdeui and kio because of their size) instead of many small modules (basically one
+file per class otherwise.
+</p>
+<p  style="margin-left : 20px;">
+This speeds up compilation significantly - up to 80% faster with older gcc versions, less with newer versions.
+It can also cause gcc to freeze, and consumes a large amount of memory during compilation.
+</p>
+<p  style="margin-left : 20px;">
+PyKDE4's configure.py detects gcc versions which are problematical automatically, and disables concatenation
+for those gcc versions. Otherwise, concatenation is on by default. It can be turned off using the '-i' switch,
+or modified by using -j.
+</p></li>
+<li><b>-d dir</b> - allows you to specify the directory where the PyKDE4 libraries will be installed. Normally
+this is /usr/lib/pythonX.Y/site-packages. configure.py detects the version info from the python interpreter that
+runs configure.py. You can specify an alternate location.</li>
+<li><b>-g</b> - always release Python's GIL before calling a C++ function (default)</li>
+<li><b>-i</b> - generate individual files instead of large concatenated files (see -c above)</li>
+<li><b>-j #</b> - split each module's C++ file into # pieces; can speed compilation on multicore systems</li>
+<li><b>-k dir</b> - the KDE4 base directory; configure.py will normally find this for you</li>
+<li><b>-L dir</b> - the directory containing system libs; configure.py will normally find this for you</li>
+<li><b>-n dir</b> - the directory containing KDE4 libs; configure.py will normally find this for you</li>
+<li><b>-o dir</b> - the directory containing KDE4 header (*.h) files; configure.py will normally find this for you</li>
+<li><b>-r</b>- generates code with tracing enabled (default is disabled)</li>
+<li><b>-u</b> - retain debugging symbols from compile/link</li>
+<li><b>-v dir</b> - the directory where PyKDE4 sip files will be installed; these are required only for bindings that
+depend on PyKDE4 (as PyKDE4 depends on PyQt4); default is /usr/share/sip/PyKDE4</li>
+<li><b>-w</b> - turn on KDE4 deprecated warnings during compilation; these are off by default</li>
+<li><b>-z file</b> - you can put the command line flags in a separate file (one switch per line) and then
+specify that file with -z instead of putting the switches on the command line</li>
+</ul>
+<p>
+PyKDE4 should build in most environments without the use of any switches at all.
+</p>
+
+
+
+
+
+
+
+
+<DIV CLASS="NAVFOOTER">
+<HR ALIGN="LEFT" WIDTH="100%">
+<TABLE SUMMARY="Footer navigation table" WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0"  style="font-size : 10pt;">
+<TR>
+<TD WIDTH="33%" ALIGN="left" VALIGN="top"><A HREF="general.html" ACCESSKEY="P">Prev</A></TD>
+<TD WIDTH="34%" ALIGN="center" VALIGN="top"><A HREF="toc.html" ACCESSKEY="H">Table of Contents</A></TD>
+<TD WIDTH="33%" ALIGN="right" VALIGN="top"><A HREF="using.html" ACCESSKEY="N">Next</A></TD>
+</TR>
+<TR>
+<TD WIDTH="33%" ALIGN="left" VALIGN="top">General Information</TD>
+<TD WIDTH="34%" ALIGN="center" VALIGN="top">&nbsp;</TD>
+<TD WIDTH="33%" ALIGN="right" VALIGN="top">Using PyKDE4</TD>
+</TR>
+</TABLE>
+</DIV>
+</BODY>
+</HTML>

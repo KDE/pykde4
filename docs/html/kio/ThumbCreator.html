@@ -1,0 +1,295 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>ThumbCreator</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class ThumbCreator</h1><hr>
+      <h3><i style="color : #00aa00">abstract class</i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kio Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kio</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>ThumbCreator</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+This is the baseclass for "thumbnail-plugins" in KDE. Using the class
+KIO.PreviewJob allows you to generate small images (thumbnails)
+for any kind of file, where a "ThumbCreator" is available. Have a look
+at kdebase/kioslave/thumbnail/ for existing ThumbCreators.
+</p>
+<p>
+What you need to do to create and register a ThumbCreator:
+<li> Inherit from this class and reimplement the create() method to </li>
+generate a thumbnail for the given file-path.
+<li> Provide a factory method in your implementation file to instantiate </li>
+your plugin, e.g.:
+<pre>
+extern "C"
+{
+ThumbCreator *new_creator()
+{
+return new YourThumbCreator();
+}
+};
+</pre>
+</p>
+<p>
+Compile your ThumbCreator as a module. The contents of CMakeLists.txt
+should look something like this, with "filetype" replaced by the type of
+file this plugin creates thumbnails for:
+<pre>
+project(filetypethumbcreator)
+</p>
+<p>
+find_package(KDE4 REQUIRED)
+include (KDE4Defaults)
+include(MacroOptionalAddSubdirectory)
+</p>
+<p>
+set(filetypethumbnail_SRCS filetypethumbnail.cpp)
+</p>
+<p>
+kde4_add_ui_files(filetypethumbnail_SRCS config.ui )
+</p>
+<p>
+kde4_add_plugin(filetypethumbnail ${filetypethumbnail_SRCS})
+target_link_libraries(filetypethumbnail ${KDE4_KIO_LIBS})
+</p>
+<p>
+install(TARGETS filetypethumbnail DESTINATION ${PLUGIN_INSTALL_DIR})
+install(FILES filetypethumbcreator.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+</p>
+<p>
+</pre>
+</p>
+<p>
+<li> Create a file filetypethumbcreator.desktop with the following contents: </li>
+<pre>
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=Name of the type of files your ThumbCreator supports
+ServiceTypes=ThumbCreator
+MimeTypes=application/x-somemimetype
+CacheThumbnail=true
+X-KDE-Library=yourthumbcreator
+</pre>
+</p>
+<p>
+You can supply a comma-separated list of mimetypes to the MimeTypes entry,
+naming all mimetypes your ThumbCreator supports. You can also use simple
+wildcards, like (where you see [slash], put a /)
+<pre>
+text[slash]* or image[slash]*.
+</pre>
+</p>
+<p>
+If your plugin is rather inexpensive (e.g. like the text preview ThumbCreator),
+you can set CacheThumbnail=false to prevent your thumbnails from being cached
+on disk.
+</p>
+<p>
+Baseclass for thumbnail-generating plugins.
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>Flags</b> = { None, DrawFrame, BlendIcon }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">create</b> (path, width, height, img)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>path</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>width</td><td>int</td><td align="right"></td></tr>
+
+              <tr><td>height</td><td>int</td><td align="right"></td></tr>
+
+              <tr><td>img</td><td>QImage</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Creates a thumbnail
+Note that the width and height parameters should not be used
+for scaling. Only plugins that create an image "from scratch",
+like the TextCreator should directly use the specified size.
+If the resulting preview is larger than width x height, it will be
+scaled down.
+</p>
+<p>
+</p>
+<p>
+<b>path</b> - the (always local) file path to create a preview for
+</p>
+<p>
+<b>width</b> - maximum width for the preview
+</p>
+<p>
+<b>height</b> - maximum height for the preview
+</p>
+<p>
+<b>img</b> - this image will contain the preview on success
+</p>
+<p>
+Returns true if preview generation succeeded
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">flags</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(ThumbCreator.Flags)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+The flags of this plugin:
+<li> None nothing special </li>
+<li> DrawFrame a frame should be painted around the preview </li>
+<li> BlendIcon the mimetype icon should be blended over the preview </li>
+</p>
+<p>
+Returns flags for this plugin
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+
+<li><b>Flags</b> = { None, DrawFrame, BlendIcon }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>None</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>DrawFrame</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>BlendIcon</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+</ul>
+
+</span>
+</body>
+</html>

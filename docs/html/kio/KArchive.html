@@ -1,0 +1,1647 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KArchive</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KArchive</h1><hr>
+      <h3><i style="color : #00aa00">abstract class</i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kio Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kio</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KArchive</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+KArchive is a base class for reading and writing archives.
+generic class for reading/writing archives
+<b>Author</b> David Faure <faure@kde.org>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>&lt;anonymous&gt;</b> = { UnknownTime }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KArchive</b> (fileName)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KArchive object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>fileName</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Base constructor (protected since this is a pure virtual class).
+</p>
+<p>
+<b>fileName</b> - is a local path (e.g. "/tmp/myfile.ext"),
+from which the archive will be read from, or into which the archive
+will be written, depending on the mode given to open().
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">KArchive</b> (dev)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KArchive object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dev</td><td>QIODevice</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Base constructor (protected since this is a pure virtual class).
+</p>
+<p>
+<b>dev</b> - the I/O device where the archive reads its data
+Note that this can be a file, but also a data buffer, a compression filter, etc.
+For a file in writing mode it is better to use the other constructor
+though, to benefit from the use of KSaveFile when saving.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">addLocalDirectory</b> (path, destName)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>path</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>destName</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Writes a local directory into the archive, including all its contents, recursively.
+Calls addLocalFile for each file to be added.
+</p>
+<p>
+Since KDE 3.2 it will also add a <b>path</b> that is a symbolic link to a
+directory. The symbolic link will be dereferenced and the content of the
+directory it is pointing to added recursively. However, symbolic links
+*under* <b>path</b> will be stored as is.
+</p>
+<p>
+<b>path</b> - full path to an existing local directory, to be added to the archive.
+</p>
+<p>
+<b>destName</b> - the resulting name (or relative path) of the file in the archive.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">addLocalFile</b> (fileName, destName)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>fileName</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>destName</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Writes a local file into the archive. The main difference with writeFile,
+is that this method minimizes memory usage, by not loading the whole file
+into memory in one go.
+</p>
+<p>
+If <b>fileName</b> is a symbolic link, it will be written as is, i. e.
+it will not be resolved before.
+</p>
+<p>
+<b>fileName</b> - full path to an existing local file, to be added to the archive.
+</p>
+<p>
+<b>destName</b> - the resulting name (or relative path) of the file in the archive.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">close</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Closes the archive.
+Inherited classes might want to reimplement closeArchive instead.
+</p>
+<p>
+Returns true if close succeeded without problems
+</p>
+<p>
+See also  open
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">closeArchive</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Closes the archive.
+Called by close.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">createDevice</b> (mode)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>mode</td><td>QIODevice.OpenMode</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Can be reimplemented in order to change the creation of the device
+(when using the fileName constructor). By default this method uses
+KSaveFile when saving, and a simple QFile on reading.
+This method is called by open().
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">device</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QIODevice)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+The underlying device.
+Returns the underlying device.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">directory</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KArchiveDirectory)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+If an archive is opened for reading, then the contents
+of the archive can be accessed via this function.
+Returns the directory of the archive
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">doFinishWriting</b> (size)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>size</td><td>qint64</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Called after writing the data.
+This virtual method must be implemented by subclasses.
+</p>
+<p>
+</p>
+<p>
+<b>size</b> - the size of the file
+</p>
+<p>
+See also  finishWriting()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">doPrepareWriting</b> (name, user, group, size, perm, atime, mtime, ctime)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>user</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>size</td><td>qint64</td><td align="right"></td></tr>
+
+              <tr><td>perm</td><td>mode_t</td><td align="right"></td></tr>
+
+              <tr><td>atime</td><td>time_t</td><td align="right"></td></tr>
+
+              <tr><td>mtime</td><td>time_t</td><td align="right"></td></tr>
+
+              <tr><td>ctime</td><td>time_t</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This virtual method must be implemented by subclasses.
+</p>
+<p>
+Depending on the archive type not all metadata might be used.
+</p>
+<p>
+</p>
+<p>
+<b>name</b> - the name of the file
+</p>
+<p>
+<b>user</b> - the user that owns the file
+</p>
+<p>
+<b>group</b> - the group that owns the file
+</p>
+<p>
+<b>size</b> - the size of the file
+</p>
+<p>
+<b>perm</b> - permissions of the file. Use 0100644 if you don't have any more specific permissions to set.
+</p>
+<p>
+<b>atime</b> - time the file was last accessed
+</p>
+<p>
+<b>mtime</b> - modification time of the file
+</p>
+<p>
+<b>ctime</b> - time of last status change
+</p>
+<p>
+See also  prepareWriting
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">doWriteDir</b> (name, user, group, perm, atime, mtime, ctime)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>user</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>perm</td><td>mode_t</td><td align="right"></td></tr>
+
+              <tr><td>atime</td><td>time_t</td><td align="right"></td></tr>
+
+              <tr><td>mtime</td><td>time_t</td><td align="right"></td></tr>
+
+              <tr><td>ctime</td><td>time_t</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Write a directory to the archive.
+This virtual method must be implemented by subclasses.
+</p>
+<p>
+Depending on the archive type not all metadata might be used.
+</p>
+<p>
+</p>
+<p>
+<b>name</b> - the name of the directory
+</p>
+<p>
+<b>user</b> - the user that owns the directory
+</p>
+<p>
+<b>group</b> - the group that owns the directory
+</p>
+<p>
+<b>perm</b> - permissions of the directory. Use 040755 if you don't have any other information.
+</p>
+<p>
+<b>atime</b> - time the file was last accessed
+</p>
+<p>
+<b>mtime</b> - modification time of the file
+</p>
+<p>
+<b>ctime</b> - time of last status change
+</p>
+<p>
+See also  writeDir
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">doWriteSymLink</b> (name, target, user, group, perm, atime, mtime, ctime)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>target</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>user</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>perm</td><td>mode_t</td><td align="right"></td></tr>
+
+              <tr><td>atime</td><td>time_t</td><td align="right"></td></tr>
+
+              <tr><td>mtime</td><td>time_t</td><td align="right"></td></tr>
+
+              <tr><td>ctime</td><td>time_t</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Writes a symbolic link to the archive.
+This virtual method must be implemented by subclasses.
+</p>
+<p>
+</p>
+<p>
+<b>name</b> - name of symbolic link
+</p>
+<p>
+<b>target</b> - target of symbolic link
+</p>
+<p>
+<b>user</b> - the user that owns the directory
+</p>
+<p>
+<b>group</b> - the group that owns the directory
+</p>
+<p>
+<b>perm</b> - permissions of the directory
+</p>
+<p>
+<b>atime</b> - time the file was last accessed
+</p>
+<p>
+<b>mtime</b> - modification time of the file
+</p>
+<p>
+<b>ctime</b> - time of last status change
+</p>
+<p>
+See also  writeSymLink
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">fileName</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+The name of the archive file, as passed to the constructor that takes a
+fileName, or an empty string if you used the QIODevice constructor.
+Returns the name of the file, or QString() if unknown
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">findOrCreate</b> (path)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KArchiveDirectory)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>path</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Ensures that <b>path</b> exists, create otherwise.
+This handles e.g. tar files missing directory entries, like mico-2.3.0.tar.gz :)
+</p>
+<p>
+<b>path</b> - the path of the directory
+Returns the directory with the given <b>path</b>
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">finishWriting</b> (size)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>size</td><td>qint64</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Call finishWriting after writing the data.
+</p>
+<p>
+<b>size</b> - the size of the file
+</p>
+<p>
+See also  prepareWriting()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">isOpen</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Checks whether the archive is open.
+Returns true if the archive is opened
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">mode</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QIODevice.OpenMode)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns the mode in which the archive was opened
+Returns the mode in which the archive was opened (QIODevice.ReadOnly or QIODevice.WriteOnly)
+</p>
+<p>
+See also  open()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">open</b> (mode)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>mode</td><td>QIODevice.OpenMode</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Opens the archive for reading or writing.
+Inherited classes might want to reimplement openArchive instead.
+</p>
+<p>
+<b>mode</b> - may be QIODevice.ReadOnly or QIODevice.WriteOnly
+</p>
+<p>
+See also  close
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">openArchive</b> (mode)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>mode</td><td>QIODevice.OpenMode</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Opens an archive for reading or writing.
+Called by open.
+</p>
+<p>
+<b>mode</b> - may be QIODevice.ReadOnly or QIODevice.WriteOnly
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">prepareWriting</b> (name, user, group, size, perm, atime, mtime, ctime)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>user</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>size</td><td>qint64</td><td align="right"></td></tr>
+
+              <tr><td>perm</td><td>mode_t</td><td align="right">33188</td></tr>
+
+              <tr><td>atime</td><td>time_t</td><td align="right">KArchive.UnknownTime</td></tr>
+
+              <tr><td>mtime</td><td>time_t</td><td align="right">KArchive.UnknownTime</td></tr>
+
+              <tr><td>ctime</td><td>time_t</td><td align="right">KArchive.UnknownTime</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Here's another way of writing a file into an archive:
+Call prepareWriting(), then call writeData()
+as many times as wanted then call finishWriting( totalSize ).
+For tar.gz files, you need to know the size before hand, it is needed in the header!
+For zip files, size isn't used.
+</p>
+<p>
+This method also allows some file metadata to be
+set. However, depending on the archive type not all metadata might be
+regarded.
+</p>
+<p>
+<b>name</b> - the name of the file
+</p>
+<p>
+<b>user</b> - the user that owns the file
+</p>
+<p>
+<b>group</b> - the group that owns the file
+</p>
+<p>
+<b>size</b> - the size of the file
+</p>
+<p>
+<b>perm</b> - permissions of the file
+</p>
+<p>
+<b>atime</b> - time the file was last accessed
+</p>
+<p>
+<b>mtime</b> - modification time of the file
+</p>
+<p>
+<b>ctime</b> - time of last status change
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">rootDir</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KArchiveDirectory)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Retrieves or create the root directory.
+The default implementation assumes that openArchive() did the parsing,
+so it creates a dummy rootdir if none was set (write mode, or no '/' in the archive).
+Reimplement this to provide parsing/listing on demand.
+Returns the root directory
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setDevice</b> (dev)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dev</td><td>QIODevice</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Can be called by derived classes in order to set the underlying device.
+Note that KArchive will -not- own the device, it must be deleted by the derived class.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setRootDir</b> (rootDir)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>rootDir</td><td>KArchiveDirectory</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Derived classes call setRootDir from openArchive,
+to set the root directory after parsing an existing archive.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">writeData</b> (data, size)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>data</td><td>char</td><td align="right"></td></tr>
+
+              <tr><td>size</td><td>qint64</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Write data into the current file - to be called after calling prepareWriting
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">writeDir</b> (name, user, group, perm, atime, mtime, ctime)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>user</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>perm</td><td>mode_t</td><td align="right">16877</td></tr>
+
+              <tr><td>atime</td><td>time_t</td><td align="right">KArchive.UnknownTime</td></tr>
+
+              <tr><td>mtime</td><td>time_t</td><td align="right">KArchive.UnknownTime</td></tr>
+
+              <tr><td>ctime</td><td>time_t</td><td align="right">KArchive.UnknownTime</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+If an archive is opened for writing then you can add new directories
+using this function. KArchive won't write one directory twice.
+</p>
+<p>
+This method also allows some file metadata to be set.
+However, depending on the archive type not all metadata might be regarded.
+</p>
+<p>
+</p>
+<p>
+<b>name</b> - the name of the directory
+</p>
+<p>
+<b>user</b> - the user that owns the directory
+</p>
+<p>
+<b>group</b> - the group that owns the directory
+</p>
+<p>
+<b>perm</b> - permissions of the directory
+</p>
+<p>
+<b>atime</b> - time the file was last accessed
+</p>
+<p>
+<b>mtime</b> - modification time of the file
+</p>
+<p>
+<b>ctime</b> - time of last status change
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">writeFile</b> (name, user, group, data, size, perm, atime, mtime, ctime)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>user</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>data</td><td>char</td><td align="right"></td></tr>
+
+              <tr><td>size</td><td>qint64</td><td align="right"></td></tr>
+
+              <tr><td>perm</td><td>mode_t</td><td align="right">33188</td></tr>
+
+              <tr><td>atime</td><td>time_t</td><td align="right">KArchive.UnknownTime</td></tr>
+
+              <tr><td>mtime</td><td>time_t</td><td align="right">KArchive.UnknownTime</td></tr>
+
+              <tr><td>ctime</td><td>time_t</td><td align="right">KArchive.UnknownTime</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+If an archive is opened for writing then you can add a new file
+using this function. If the file name is for example "mydir/test1" then
+the directory "mydir" is automatically appended first if that did not
+happen yet.
+</p>
+<p>
+This method also allows some file metadata to be
+set. However, depending on the archive type not all metadata might be
+regarded.
+</p>
+<p>
+<b>name</b> - the name of the file
+</p>
+<p>
+<b>user</b> - the user that owns the file
+</p>
+<p>
+<b>group</b> - the group that owns the file
+</p>
+<p>
+<b>data</b> - the data to write (@p size bytes)
+</p>
+<p>
+<b>size</b> - the size of the file
+</p>
+<p>
+<b>perm</b> - permissions of the file
+</p>
+<p>
+<b>atime</b> - time the file was last accessed
+</p>
+<p>
+<b>mtime</b> - modification time of the file
+</p>
+<p>
+<b>ctime</b> - time of last status change
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">writeSymLink</b> (name, target, user, group, perm, atime, mtime, ctime)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>target</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>user</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>perm</td><td>mode_t</td><td align="right">41453</td></tr>
+
+              <tr><td>atime</td><td>time_t</td><td align="right">KArchive.UnknownTime</td></tr>
+
+              <tr><td>mtime</td><td>time_t</td><td align="right">KArchive.UnknownTime</td></tr>
+
+              <tr><td>ctime</td><td>time_t</td><td align="right">KArchive.UnknownTime</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Writes a symbolic link to the archive if supported.
+The archive must be opened for writing.
+</p>
+<p>
+</p>
+<p>
+<b>name</b> - name of symbolic link
+</p>
+<p>
+<b>target</b> - target of symbolic link
+</p>
+<p>
+<b>user</b> - the user that owns the directory
+</p>
+<p>
+<b>group</b> - the group that owns the directory
+</p>
+<p>
+<b>perm</b> - permissions of the directory
+</p>
+<p>
+<b>atime</b> - time the file was last accessed
+</p>
+<p>
+<b>mtime</b> - modification time of the file
+</p>
+<p>
+<b>ctime</b> - time of last status change
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+
+<li><b>&lt;anonymous&gt;</b> = { UnknownTime }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>UnknownTime</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+</ul>
+
+</span>
+</body>
+</html>

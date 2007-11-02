@@ -1,0 +1,398 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KTextEditor.ModificationInterface</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KTextEditor.ModificationInterface</h1><hr>
+      <h3><i style="color : #00aa00">abstract class</i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">ktexteditor Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>ktexteditor</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>ktexteditor</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KTextEditor.ModificationInterface</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+External modification extension interface for the Document.
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+The class ModificationInterface provides methods to handle modifications
+of all opened files caused by external programs. Whenever the
+modified-on-disk state changes the signal modifiedOnDisk() is emitted
+along with a ModifiedOnDiskReason. Set the state by calling
+setModifiedOnDisk(). Whether the Editor should show warning dialogs to
+inform the user about external modified files can be controlled with
+setModifiedOnDiskWarning(). The slot modifiedOnDisk() is called to ask
+the user what to do whenever a file was modified.
+</p>
+<p>
+<b>Accessing the ModificationInterface </b>
+</p>
+<p>
+The ModificationInterface is supposed to be an extension interface for a
+Document, i.e. the Document inherits the interface provided that the
+used KTextEditor library implements the interface. Use qobject_cast to
+access the interface:
+<pre>
+// doc is of type KTextEditor.Document*
+KTextEditor.ModificationInterface *iface =
+qobject_cast<KTextEditor.ModificationInterface*>( doc );
+</p>
+<p>
+if( iface ) {
+// the implementation supports the interface
+// do stuff
+}
+</pre>
+</p>
+<p>
+See also  KTextEditor.Document
+<b>Author</b> Christoph Cullmann \<cullmann@kde.org\>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>ModifiedOnDiskReason</b> = { OnDiskUnmodified, OnDiskModified, OnDiskCreated, OnDiskDeleted }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li><b style="color : #000000;">ModificationInterface</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Virtual destructor.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">modifiedOnDisk</b> (document, isModified, reason)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>document</td><td>KTextEditor.Document</td><td align="right"></td></tr>
+
+              <tr><td>isModified</td><td>bool</td><td align="right"></td></tr>
+
+              <tr><td>reason</td><td>KTextEditor.ModificationInterface.ModifiedOnDiskReason</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This signal is emitted whenever the <b>document</b> changed its
+modified-on-disk state.
+</p>
+<p>
+<b>document</b> - the Document object that represents the file on disk
+</p>
+<p>
+<b>isModified</b> - if true, the file was modified rather than created
+or deleted
+</p>
+<p>
+<b>reason</b> - the reason why the signal was emitted
+</p>
+<p>
+See also  setModifiedOnDisk()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setModifiedOnDisk</b> (reason)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>reason</td><td>KTextEditor.ModificationInterface.ModifiedOnDiskReason</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Set the document's modified-on-disk state to <b>reason.</b>
+KTextEditor implementations should emit the signal modifiedOnDisk()
+along with the reason. When the document is in a clean state again the
+reason should be ModifiedOnDiskReason.OnDiskUnmodified.
+</p>
+<p>
+</p>
+<p>
+<b>reason</b> - the modified-on-disk reason.
+</p>
+<p>
+See also  ModifiedOnDiskReason, modifiedOnDisk()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setModifiedOnDiskWarning</b> (on)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>on</td><td>bool</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Control, whether the editor should show a warning dialog whenever a file
+was modified on disk. If <b>on</b> is true the editor will show warning
+dialogs.
+</p>
+<p>
+<b>on</b> - controls, whether the editor should show a warning dialog for
+files modified on disk
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">slotModifiedOnDisk</b> (view)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>view</td><td>KTextEditor.View</td><td align="right">None</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Ask the user what to do, if the file was modified on disk.
+The argument <b>view</b> is used to avoid asking again, when the editor
+regains focus after the dialog is hidden.
+</p>
+<p>
+<b>view</b> - the view that should be notified of the user's decision
+</p>
+<p>
+See also  setModifiedOnDisk(), modifiedOnDisk()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+
+<li><b>ModifiedOnDiskReason</b> = { OnDiskUnmodified, OnDiskModified, OnDiskCreated, OnDiskDeleted }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>OnDiskUnmodified</i></td>
+      <td valign="top">-</td>
+      <td>
+Not modified</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>OnDiskModified</i></td>
+      <td valign="top">-</td>
+      <td>The file was modified by another program</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>OnDiskCreated</i></td>
+      <td valign="top">-</td>
+      <td>The file was created by another program</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>OnDiskDeleted</i></td>
+      <td valign="top">-</td>
+      <td>The file was deleted</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+</ul>
+
+</span>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KIO.MetaInfoJob</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KIO.MetaInfoJob</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kio Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kio</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>kio</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KIO.MetaInfoJob</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>KIO.Job</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+MetaInfoJob is a KIO Job to retrieve meta information from files.
+</p>
+<p>
+KIO Job to retrieve meta information from files.
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">MetaInfoJob</b> (items, w, iocost, cpucost, requiredfields, requestedfields)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>items</td><td>list of KFileItem</td><td align="right"></td></tr>
+
+              <tr><td>w</td><td>KFileMetaInfo.WhatFlags</td><td align="right">KFileMetaInfo.Everything</td></tr>
+
+              <tr><td>iocost</td><td>int</td><td align="right">3</td></tr>
+
+              <tr><td>cpucost</td><td>int</td><td align="right">6</td></tr>
+
+              <tr><td>requiredfields</td><td>QStringList</td><td align="right">QStringList ()</td></tr>
+
+              <tr><td>requestedfields</td><td>QStringList</td><td align="right">QStringList ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Creates a new MetaInfoJob.
+</p>
+<p>
+<b>items</b> - A list of KFileItems to get the metainfo for
+</p>
+<p>
+<b>w</b> - Flags which serve as a preset which can be customized
+with other parameters.
+</p>
+<p>
+<b>iocost</b> - The allowed cost in terms of io to retrieve the
+metainfo. The approximate maximum number of bytes to
+be read is 10^iocost. Negative values mean that
+there is no limit on the cost. 0 means that no fields
+other than the required fields will be retrieved.
+The default value of 3 means about 1024 bytes per
+file may be read. This is merely a suggestion and not
+a hard limit.
+</p>
+<p>
+<b>cpucost</b> - The allowed cost in terms of cpu to determine the
+information in the fields. The number mean the amount
+of instructions allowed is 10^cpucost and is a suggestion only.
+The default value of 6 means that about a million
+instructions (10^6) are allowed. This is useful for
+expensive fields like md5 or thumbnails.
+</p>
+<p>
+<b>requiredfields</b> - The names of fields or groups of fields that should
+be retrieved regardless of cost.
+</p>
+<p>
+<b>requestedfields</b> - The names of fields or groups of fields that should
+be retrieved first.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">failed</b> (item)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("failed (const KFileItem&)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>item</td><td>KFileItem</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Emitted when metainfo for <b>item</b> could not be extracted,
+either because a plugin for its MIME type does not
+exist, or because something went wrong.
+</p>
+<p>
+<b>item</b> - the KFileItem of the file that failed
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">getMetaInfo</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">gotMetaInfo</b> (item)<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("gotMetaInfo (const KFileItem&)")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>item</td><td>KFileItem</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Emitted when the meta info for <b>item</b> has been successfully
+retrieved.
+</p>
+<p>
+<b>item</b> - the KFileItem describing the fetched item
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">removeItem</b> (item)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>item</td><td>KFileItem</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Removes an item from metainfo extraction.
+</p>
+<p>
+</p>
+<p>
+<b>item</b> - the item that should be removed from the queue
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">slotResult</b> (job)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>job</td><td>KJob</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

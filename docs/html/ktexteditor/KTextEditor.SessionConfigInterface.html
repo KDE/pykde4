@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KTextEditor.SessionConfigInterface</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KTextEditor.SessionConfigInterface</h1><hr>
+      <h3><i style="color : #00aa00">abstract class</i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">ktexteditor Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>ktexteditor</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>ktexteditor</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KTextEditor.SessionConfigInterface</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+Session config interface extension for the Document, View and Plugin.
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+The SessionConfigInterface is an extension for Documents, Views and Plugins
+to add support for session-specific configuration settings.
+readSessionConfig() is called whenever session-specific settings are to be
+read from the given KConfig* and writeSessionConfig() whenever they are to
+be written, for example when a session changed or was closed.
+</p>
+<p>
+A session does not have anything to do with an X-session under Unix.
+What is meant is rather a context, think of sessions in Kate or
+projects in KDevelop for example.
+</p>
+<p>
+<b>Adding Session Support </b>
+</p>
+<p>
+To add support for sessions a KTextEditor implementation has to derive the
+Document and View class from SessionConfigInterface and reimplement
+readSessionConfig() and writeSessionConfig().
+</p>
+<p>
+The same applies to a Plugin, read the detailed description for plugins.
+</p>
+<p>
+<b>Accessing the SessionConfigInterface </b>
+</p>
+<p>
+The SessionConfigInterface is supposed to be an extension interface for a
+Document, a View or a Plugin, i.e. the Document/View/Plugin inherits the
+interface provided that it implements the interface. Use qobject_cast to
+access the interface:
+<pre>
+// object is of type KTextEditor.Document* or View* or Plugin*
+KTextEditor.SessionConfigInterface *iface =
+qobject_cast<KTextEditor.SessionConfigInterface*>( object );
+</p>
+<p>
+if( iface ) {
+// interface is supported
+// do stuff
+}
+</pre>
+</p>
+<p>
+See also  KTextEditor.Document, KTextEditor.View, KTextEditor.Plugin
+<b>Author</b> Christoph Cullmann \<cullmann@kde.org\>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li><b style="color : #000000;">SessionConfigInterface</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Virtual destructor.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">readSessionConfig</b> (config)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>config</td><td>KConfigGroup</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Read session settings from the given <b>config.</b>
+</p>
+<p>
+That means for example
+- a Document should reload the file, restore all marks etc...
+- a View should scroll to the last position and restore the cursor
+position etc...
+- a Plugin should restore session specific settings
+- If no file is being loaded, because an empty new document is going to be displayed,
+this function should emit ReadOnlyPart.completed
+</p>
+<p>
+</p>
+<p>
+<b>config</b> - read the session settings from this KConfigGroup
+</p>
+<p>
+See also  writeSessionConfig()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">writeSessionConfig</b> (config)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #00aa00">pure virtual</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>config</td><td>KConfigGroup</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Write session settings to the <b>config.</b>
+See readSessionConfig() for more details.
+</p>
+<p>
+</p>
+<p>
+<b>config</b> - write the session settings to this KConfigGroup
+</p>
+<p>
+See also  readSessionConfig()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

@@ -1,0 +1,633 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KLibLoader</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KLibLoader</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdecore</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KLibLoader</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QObject</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+The KLibLoader allows you to load libraries dynamically at runtime.
+Dependent libraries are loaded automatically.
+</p>
+<p>
+KLibLoader follows the singleton pattern. You can not create multiple
+instances. Use self() to get a pointer to the loader.
+</p>
+<p>
+See also  KLibrary
+<b>Author</b> Torben Weis <weis@kde.org>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>ComponentLoadingError</b> = { ErrNoLibrary, ErrNoFactory, ErrNoComponent, ErrServiceProvidesNoLibrary, ErrNoServiceFound }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KLibLoader</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KLibLoader object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QObject</td><td align="right">None</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">errorString</b> (componentLoadingError)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>componentLoadingError</td><td>int</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns a translated error message for <b>componentLoadingError</b>
+</p>
+<p>
+<b>componentLoadingError</b> - the error code, as returned in the "error"
+output parameter of createInstance.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">factory</b> (libname, loadHint)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KPluginFactory)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>libname</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>loadHint</td><td>QLibrary.LoadHints</td><td align="right">0</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Loads and initializes a library. Loading a library multiple times is
+handled gracefully.
+</p>
+<p>
+This is a convenience function that returns the factory immediately
+</p>
+<p>
+<b>libname</b> - This is the library name without extension. Usually that is something like
+"libkspread". The function will then search for a file named
+"libkspread.la" in the KDE library paths.
+The *.la files are created by libtool and contain
+important information especially about the libraries dependencies
+on other shared libs. Loading a "libfoo.so" could not solve the
+dependencies problem.
+</p>
+<p>
+You can, however, give a library name ending in ".so"
+(or whatever is used on your platform), and the library
+will be loaded without resolving dependencies. Use with caution.
+Returns the KPluginFactory, or 0 if the library does not exist or it does
+not have a factory
+</p>
+<p>
+See also  library
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">findLibrary</b> (libname, cData)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>libname</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>cData</td><td>KComponentData</td><td align="right">KGlobal.mainComponent ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Helper method which looks for a library in the standard paths
+("module" and "lib" resources).
+Made public for code that doesn't use KLibLoader itself, but still
+wants to open modules.
+</p>
+<p>
+<b>libname</b> - of the library. If it is not a path, the function searches in
+the "module" and "lib" resources. If there is no extension,
+".la" will be appended.
+</p>
+<p>
+<b>cData</b> - a KComponentData used to get the standard paths
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">kapplication_hook_clearClipboard</b> ()<i style="color : #0000ff">   signal</i>
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          SIGNAL ("kapplication_hook_clearClipboard ()")
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This template allows to load the specified library and ask the
+factory to create an instance of the given template type.
+</p>
+<p>
+</p>
+<p>
+<b>libraryName</b> - The library to open
+</p>
+<p>
+<b>parent</b> - The parent object (see QObject constructor)
+</p>
+<p>
+<b>args</b> - A list of string arguments, passed to the factory and possibly
+to the component (see KPluginFactory)
+</p>
+<p>
+<b>error</b> -
+Returns A pointer to the newly created object or a null pointer if the
+factory was unable to create an object of the given type.
+<b style="color : #ff0000;"><i>Internal </i></b> for KApplication . Do not use .
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">lastErrorMessage</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(QString)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns an error message that can be useful to debug the problem.
+Returns QString() if the last call to library() was successful.
+You can call this function more than once. The error message is only
+reset by a new call to library().
+Returns the last error message, or QString() if there was no error
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">library</b> (libname, loadHint)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(KLibrary)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>libname</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>loadHint</td><td>QLibrary.LoadHints</td><td align="right">0</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Loads and initializes a library. Loading a library multiple times is
+handled gracefully.
+</p>
+<p>
+</p>
+<p>
+<b>libname</b> - This is the library name without extension. Usually that is something like
+"libkspread". The function will then search for a file named
+"libkspread.la" in the KDE library paths.
+The *.la files are created by libtool and contain
+important information especially about the libraries dependencies
+on other shared libs. Loading a "libfoo.so" could not solve the
+dependencies problem.
+</p>
+<p>
+You can, however, give a library name ending in ".so"
+(or whatever is used on your platform), and the library
+will be loaded without resolving dependencies. Use with caution.
+Returns KLibrary is invalid (0) when the library couldn't be dlopened. in such
+a case you can retrieve the error message by calling KLibLoader.lastErrorMessage()
+</p>
+<p>
+See also  factory
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">self</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>(KLibLoader)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns a pointer to the factory. Use this function to get an instance
+of KLibLoader.
+Returns a pointer to the loader. If no loader exists until now
+then one is created.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">unloadLibrary</b> (libname)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>libname</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Unloads the library with the given name.
+</p>
+<p>
+<b>libname</b> - This is the library name without extension. Usually that is something like
+"libkspread". The function will then search for a file named
+"libkspread.la" in the KDE library paths.
+The *.la files are created by libtool and contain
+important information especially about the libraries dependencies
+on other shared libs. Loading a "libfoo.so" could not solve the
+dependencies problem.
+</p>
+<p>
+You can, however, give a library name ending in ".so"
+(or whatever is used on your platform), and the library
+will be loaded without resolving dependencies. Use with caution.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">~KLibLoader</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+
+<li><b>ComponentLoadingError</b> = { ErrNoLibrary, ErrNoFactory, ErrNoComponent, ErrServiceProvidesNoLibrary, ErrNoServiceFound }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>ErrNoLibrary</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>ErrNoFactory</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>ErrNoComponent</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>ErrServiceProvidesNoLibrary</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>ErrNoServiceFound</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+</ul>
+
+</span>
+</body>
+</html>

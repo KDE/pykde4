@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KTemporaryFile</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KTemporaryFile</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdecore</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KTemporaryFile</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QTemporaryFile</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+A QTemporaryFile that will save in the KDE temp directory.
+</p>
+<p>
+This class derives from QTemporaryFile and makes sure that your temporary
+files go in the temporary directory defined by KDE. (This is retrieved by
+using KStandardDirs to locate the "tmp" resource.) In general, whenever you
+would use a QTemporaryFile() use a KTemporaryFile() instead.
+</p>
+<p>
+By default the filename will start with your application's instance name,
+followed by six random characters and an extension of ".tmp". You can use
+setPrefix() and setSuffix() to change the beginning and ending of the random
+name, as well as change the directory if you wish (read the descriptions of
+these functions for more information). For complex specifications, you may
+be better off calling QTemporaryFile.setFileTemplate() directly.
+</p>
+<p>
+For example, let's make a new temporary file:
+</p>
+<p>
+<pre>
+KTemporaryFile temp;
+</pre>
+</p>
+<p>
+This temporary file will currently be stored in the default KDE temporary
+directory and have an extension of ".tmp". Now, let's change the directory:
+</p>
+<p>
+<pre>
+temp.setPrefix("/var/lib/foodata/");
+</pre>
+</p>
+<p>
+Now the temporary file will be stored in "/var/lib/foodata" instead of the
+default KDE temporary directory, with an extension of ".tmp". It's important
+to remember the leading and trailing slashes to properly define the path!
+Next, let's change the suffix to a particular extension:
+</p>
+<p>
+<pre>
+temp.setSuffix(".pdf");
+</pre>
+</p>
+<p>
+Now the temporary file will be stored in "/var/lib/foodata" and have an
+extension of ".pdf" instead of ".tmp".
+</p>
+<p>
+Once you are done determining the name of the file, call open() to
+create the file.
+</p>
+<p>
+<pre>
+if ( !temp.open() ) {
+// handle error...
+}
+</pre>
+</p>
+<p>
+If open() is unable to create the file it will return false. If the call to
+open() returns true you are ready to use your temporary file. If you don't
+want the file removed automatically when the KTemporaryFile object is
+destroyed, you need to call setAutoRemove(false), but make sure you have a
+good reason for leaving your temp files around.
+</p>
+<p>
+See also  QTemporaryFile
+</p>
+<p>
+<b>Author</b> Jaison Lee <lee.jaison@gmail.com>
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KTemporaryFile</b> (componentData)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>a KTemporaryFile object</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>componentData</td><td>KComponentData</td><td align="right">KGlobal.mainComponent ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Construct a new KTemporaryFile. The file will be stored in the temporary
+directory configured in KDE. The default prefix is the value of the
+default KDE temporary directory, plus your application's instance name.
+The default suffix is ".tmp".
+</p>
+<p>
+</p>
+<p>
+<b>componentData</b> - The KComponentData to use for the name of the file and to look up the
+directory.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setPrefix</b> (prefix)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>prefix</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Sets a prefix to use when creating the file.
+</p>
+<p>
+This function sets a prefix to use when creating the file. The random
+part of the filename will come after this prefix. The prefix can also
+change or modify the target directory. If <b>prefix</b> is an absolute
+path it will override the default temporary directory. If <b>prefix</b> is
+a relative directory it will be relative to the default temporary
+location. To set a relative directory for the current working directory
+you should use QTemporaryFile.setFileTemplate() directly.
+</p>
+<p>
+<b>prefix</b> - The prefix to use when creating the file. Remember to
+end the prefix with a '/' if you are designating a directory.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setSuffix</b> (suffix)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>suffix</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Sets a suffix to use when creating the file.
+</p>
+<p>
+Sets a suffix to use when creating the file. The random part of the
+filename will come before this suffix.
+</p>
+<p>
+<b>suffix</b> - The suffix to use when creating the file.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+</span>
+</body>
+</html>

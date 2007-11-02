@@ -1,0 +1,3728 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KMessageBox</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KMessageBox</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+    <td  width="30%" valign="top" align="right">
+      <table>
+        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
+        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
+        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
+        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdeui</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>global</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KMessageBox</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      <p>
+Easy message dialog box.
+</p>
+<p>
+Provides convenience functions for some i18n'ed standard dialogs.
+</p>
+<p>
+The text in message boxes is wrapped automatically. The text may either
+be plaintext or richtext. If the text is plaintext, a newline-character
+may be used to indicate the end of a paragraph.
+</p>
+<p>
+Where applicable, the static functions now take an additional
+argument to specify the cancel button. Since a default argument is
+provided, this will affect your code only, if you specified
+dontAskAgainName and/or options. In those cases, adding an additional
+parameter KStandardGuiItem.cancel() leads to the old behavior. The
+following functions are affected (omitting function arguments in the
+list): questionYesNoCancel(), questionYesNoCancelWId(),
+warningContinueCancel(), warningContinueCancelWId(),
+warningContinueCancelList(), warningContinueCancelListWId(),
+warningYesNoCancel(), warningYesNoCancelWId(),
+warningYesNoCancelList(), warningYesNoCancelListWId(), messageBox(),
+messageBoxWId().
+<b>Author</b> Waldo Bastian (bastian@kde.org)
+</p>
+
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+
+<h3>enums</h3><ul>
+<li><b>ButtonCode</b> = { Ok, Cancel, Yes, No, Continue }</li>
+
+<li><b>DialogType</b> = { QuestionYesNo, WarningYesNo, WarningContinueCancel, WarningYesNoCancel, Information, Sorry, Error, QuestionYesNoCancel }</li>
+
+<li><b>Option</b> = { Notify, AllowLink, Dangerous, PlainCaption, NoExec }</li>
+</ul><a href="#extended"><i>enum details</i></a><hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">about</b> (parent, text, caption, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display an "About" dialog.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("About \<appname\>").
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Your program wants to show some general information about the application
+like the authors's names and email addresses.
+</p>
+<p>
+The default button is "&OK".
+</p>
+<p>
+NOTE: The ok button will always have the i18n'ed text '&OK'.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">createKMessageBox</b> (dialog, icon, text, strlist, ask, checkboxReturn, options, details)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int), checkboxReturn (bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dialog</td><td>KDialog</td><td align="right"></td></tr>
+
+              <tr><td>icon</td><td>QMessageBox.Icon</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>ask</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>checkboxReturn</td><td>bool</td><td align="right"></td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right"></td></tr>
+
+              <tr><td>details</td><td>QString</td><td align="right">QString ()</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Create content and layout of a standard dialog
+</p>
+<p>
+</p>
+<p>
+<b>dialog</b> - The parent dialog base
+</p>
+<p>
+<b>icon</b> - Which predefined icon the message box shall show.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>strlist</b> - List of strings to be written in the listbox.
+If the list is empty, it doesn't show any listbox
+</p>
+<p>
+<b>ask</b> - The text of the checkbox. If empty none will be shown.
+</p>
+<p>
+<b>checkboxReturn</b> - The result of the checkbox. If it's initially
+true then the checkbox will be checked by default.
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+<b>details</b> - Detailed message string.
+Returns A KDialog button code, not a KMessageBox button code,
+based on the buttonmask given to the constructor of the
+<b>dialog</b> (ie. will return KDialog.Yes [256] instead of
+KMessageBox.Yes [3]). Will return KMessageBox.Cancel
+if the message box is queued for display instead of
+exec()ed immediately or if the option NoExec is set.
+The <b>dialog</b> that is passed in is deleted by this
+function. Do not delete it yourself.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">createKMessageBox</b> (dialog, icon, text, strlist, ask, options, details, notifyType)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int), checkboxReturn (bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dialog</td><td>KDialog</td><td align="right"></td></tr>
+
+              <tr><td>icon</td><td>QIcon</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>ask</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right"></td></tr>
+
+              <tr><td>details</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>notifyType</td><td>QMessageBox.Icon</td><td align="right">QMessageBox.Information</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Create content and layout of a standard dialog
+</p>
+<p>
+</p>
+<p>
+<b>dialog</b> - The parent dialog base
+</p>
+<p>
+<b>icon</b> - A QPixmap containing the icon to be displayed in the
+dialog next to the text.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>strlist</b> - List of strings to be written in the listbox.
+If the list is empty, it doesn't show any listbox
+</p>
+<p>
+<b>ask</b> - The text of the checkbox. If empty none will be shown.
+</p>
+<p>
+<b>checkboxReturn</b> - The result of the checkbox. If it's initially
+true then the checkbox will be checked by default.
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+<b>details</b> - Detailed message string.
+</p>
+<p>
+<b>notifyType</b> - The type of notification to send when this message
+is presentend.
+Returns A KDialog button code, not a KMessageBox button code,
+based on the buttonmask given to the constructor of the
+<b>dialog</b> (ie. will return KDialog.Yes [256] instead of
+KMessageBox.Yes [3]). Will return KMessageBox.Cancel
+if the message box is queued for display instead of
+exec()ed immediately or if the option NoExec is set.
+The <b>dialog</b> that is passed in is deleted by this
+function. Do not delete it yourself.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">detailedError</b> (parent, text, details, caption, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>details</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Displays an "Error" dialog with a "Details >>" button.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>details</b> - Detailed message string.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Error").
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Your program messed up and now it's time to inform the user.
+To be used for important things like "Sorry, I deleted your hard disk."
+</p>
+<p>
+The <b>details</b> message can conatin additional information about
+the problem and can be shown on request to advanced/interested users.
+</p>
+<p>
+If your program detects the action specified by the user is somehow
+not allowed, this should never be reported with error(). Use sorry()
+instead to explain to the user that this action is not allowed.
+</p>
+<p>
+The default button is "&OK". Pressing "Esc" selects the OK-button.
+</p>
+<p>
+NOTE: The OK button will always have the i18n'ed text '&OK'.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">detailedErrorWId</b> (parent_id, text, details, caption, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>details</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">detailedSorry</b> (parent, text, details, caption, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>details</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Displays a "Sorry" dialog with a "Details >>" button.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>details</b> - Detailed message string.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Sorry").
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Either your program messed up and asks for understanding
+or your user did something stupid.
+</p>
+<p>
+To be used for small problems like
+"Sorry, I can't find the file you specified."
+</p>
+<p>
+And then <b>details</b> can contain something like
+"foobar.txt was not found in any of
+the following directories:
+/usr/bin,/usr/local/bin,/usr/sbin"
+</p>
+<p>
+The default button is "&OK". Pressing "Esc" selects the OK-button.
+</p>
+<p>
+NOTE: The ok button will always have the i18n'ed text '&OK'.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">detailedSorryWId</b> (parent_id, text, details, caption, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>details</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li><b style="color : #000000;">enableAllMessages</b> ()
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Enable all messages which have been turned off with the
+<b>dontShowAgainName</b> feature.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">enableMessage</b> (dontShowAgainName)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dontShowAgainName</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Re-enable a specific <b>dontShowAgainName</b> messages that had
+previously been turned off.
+</p>
+<p>
+See also  saveDontShowAgainYesNo()
+</p>
+<p>
+See also  saveDontShowAgainContinue()
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">error</b> (parent, text, caption, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display an "Error" dialog.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Error").
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Your program messed up and now it's time to inform the user.
+To be used for important things like "Sorry, I deleted your hard disk."
+</p>
+<p>
+If your program detects the action specified by the user is somehow
+not allowed, this should never be reported with error(). Use sorry()
+instead to explain to the user that this action is not allowed.
+</p>
+<p>
+The default button is "&OK". Pressing "Esc" selects the OK-button.
+</p>
+<p>
+NOTE: The OK button will always have the i18n'ed text '&OK'.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">errorList</b> (parent, text, strlist, caption, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display an "Error" dialog with a listbox.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>strlist</b> - List of strings to be written in the listbox. If the
+list is empty, it doesn't show any listbox, working
+as error().
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Error").
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Your program messed up and now it's time to inform the user.
+To be used for important things like "Sorry, I deleted your hard disk."
+</p>
+<p>
+If your program detects the action specified by the user is somehow
+not allowed, this should never be reported with error(). Use sorry()
+instead to explain to the user that this action is not allowed.
+</p>
+<p>
+The default button is "&OK". Pressing "Esc" selects the OK-button.
+</p>
+<p>
+NOTE: The OK button will always have the i18n'ed text '&OK'.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">errorListWId</b> (parent_id, text, strlist, caption, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">errorWId</b> (parent_id, text, caption, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">information</b> (parent, text, caption, dontShowAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>dontShowAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display an "Information" dialog.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Information").
+</p>
+<p>
+<b>dontShowAgainName</b> - If provided, a checkbox is added with which
+further notifications can be turned off.
+The string is used to lookup and store the setting
+in the applications config file.
+The setting is stored in the "Notification Messages" group.
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Your program wants to tell the user something.
+To be used for things like:
+"Your bookmarks have been rearranged."
+</p>
+<p>
+The default button is "&OK". Pressing "Esc" selects the OK-button.
+</p>
+<p>
+NOTE: The OK button will always have the i18n'ed text '&OK'.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">informationList</b> (parent, text, strlist, caption, dontShowAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>dontShowAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display an "Information" dialog with a listbox.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>strlist</b> - List of strings to be written in the listbox. If the
+list is empty, it doesn't show any listbox, working
+as information.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Information").
+</p>
+<p>
+<b>dontShowAgainName</b> - If provided, a checkbox is added with which
+further notifications can be turned off.
+The string is used to lookup and store the setting
+in the applications config file.
+The setting is stored in the "Notification Messages" group.
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Your program wants to tell the user something.
+To be used for things like:
+"The following bookmarks have been rearranged:"
+</p>
+<p>
+The default button is "&OK". Pressing "Esc" selects the OK-button.
+</p>
+<p>
+NOTE: The OK button will always have the i18n'ed text '&OK'.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">informationListWId</b> (parent_id, text, strlist, caption, dontShowAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>dontShowAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">informationWId</b> (parent_id, text, caption, dontShowAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>dontShowAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">messageBox</b> (parent, type, text, caption, buttonYes, buttonNo, buttonCancel, dontShowAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>type</td><td>KMessageBox.DialogType</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>buttonCancel</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cancel ()</td></tr>
+
+              <tr><td>dontShowAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Alternate method to show a messagebox:
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>type</b> - type of message box: QuestionYesNo, WarningYesNo, WarningContinueCancel...
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>caption</b> - Message box title.
+</p>
+<p>
+<b>buttonYes</b> - The text for the first button.
+The default is i18n("&Yes").
+</p>
+<p>
+<b>buttonNo</b> - The text for the second button.
+The default is i18n("&No").
+</p>
+<p>
+<b>buttonCancel</b> - The text for the third button.
+The default is i18n("&Cancel").
+</p>
+<p>
+<b>dontShowAskAgainName</b> - If provided, a checkbox is added with which
+further questions/information can be turned off. If turned off
+all questions will be automatically answered with the
+last answer (either Yes or No), if the message box needs an answer.
+The string is used to lookup and store the setting
+in the applications config file.
+</p>
+<p>
+<b>options</b> - see Options
+Note: for ContinueCancel, buttonYes is the continue button and buttonNo is unused.
+and for Information, none is used.
+Returns a button code, as defined in KMessageBox.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">messageBoxWId</b> (parent_id, type, text, caption, buttonYes, buttonNo, buttonCancel, dontShowAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>type</td><td>KMessageBox.DialogType</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>buttonCancel</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cancel ()</td></tr>
+
+              <tr><td>dontShowAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">questionYesNo</b> (parent, text, caption, buttonYes, buttonNo, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display a simple "question" dialog.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Question").
+</p>
+<p>
+<b>buttonYes</b> - The text for the first button.
+The default is i18n("&Yes").
+</p>
+<p>
+<b>buttonNo</b> - The text for the second button.
+The default is i18n("&No").
+</p>
+<p>
+<b>dontAskAgainName</b> - If provided, a checkbox is added with which
+further confirmation can be turned off.
+The string is used to lookup and store the setting
+in the applications config file.
+The setting is stored in the "Notification Messages" group.
+If <b>dontAskAgainName</b> starts with a ':' then the setting
+is stored in the global config file.
+</p>
+<p>
+<b>options</b> - see Option
+</p>
+<p>
+Returns 'Yes' is returned if the Yes-button is pressed. 'No' is returned
+if the No-button is pressed.
+</p>
+<p>
+To be used for questions like "Do you have a printer?"
+</p>
+<p>
+The default button is "Yes". Pressing "Esc" selects "No".
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">questionYesNoCancel</b> (parent, text, caption, buttonYes, buttonNo, buttonCancel, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>buttonCancel</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cancel ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display a simple "question" dialog.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Question").
+</p>
+<p>
+<b>buttonYes</b> - The text for the first button.
+The default is i18n("&Yes").
+</p>
+<p>
+<b>buttonNo</b> - The text for the second button.
+The default is i18n("&No").
+</p>
+<p>
+<b>buttonCancel</b> - The text for the third button.
+The default is i18n("&Cancel").
+</p>
+<p>
+<b>dontAskAgainName</b> - If provided, a checkbox is added with which
+further confirmation can be turned off.
+The string is used to lookup and store the setting
+in the applications config file.
+The setting is stored in the "Notification Messages" group.
+If <b>dontAskAgainName</b> starts with a ':' then the setting
+is stored in the global config file.
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Returns 'Yes' is returned if the Yes-button is pressed. 'No' is returned
+if the No-button is pressed.
+</p>
+<p>
+To be used for questions like "Do you want to discard the message or save it for later?",
+</p>
+<p>
+The default button is "Yes". Pressing "Esc" selects "Cancel".
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">questionYesNoCancelWId</b> (parent_id, text, caption, buttonYes, buttonNo, buttonCancel, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>buttonCancel</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cancel ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">questionYesNoList</b> (parent, text, strlist, caption, buttonYes, buttonNo, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display a "question" dialog with a listbox to show information to the user
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>strlist</b> - List of strings to be written in the listbox. If the list is
+empty, it doesn't show any listbox, working as questionYesNo.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Question").
+</p>
+<p>
+<b>buttonYes</b> - The text for the first button.
+The default is i18n("&Yes").
+</p>
+<p>
+<b>buttonNo</b> - The text for the second button.
+The default is i18n("&No").
+</p>
+<p>
+<b>dontAskAgainName</b> - If provided, a checkbox is added with which
+further confirmation can be turned off.
+The string is used to lookup and store the setting
+in the applications config file.
+The setting is stored in the "Notification Messages" group.
+If <b>dontAskAgainName</b> starts with a ':' then the setting
+is stored in the global config file.
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Returns 'Yes' is returned if the Yes-button is pressed. 'No' is returned
+if the No-button is pressed.
+</p>
+<p>
+To be used for questions like "Do you really want to delete these files?"
+And show the user exactly which files are going to be deleted in case
+he presses "Yes"
+</p>
+<p>
+The default button is "Yes". Pressing "Esc" selects "No".
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">questionYesNoListWId</b> (parent_id, text, strlist, caption, buttonYes, buttonNo, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">questionYesNoWId</b> (parent_id, text, caption, buttonYes, buttonNo, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">queuedDetailedError</b> (parent, text, details, caption)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>details</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString.null</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Like detailedError
+</p>
+<p>
+This function will return immediately, the messagebox will be shown
+once the application enters an event loop and no other messagebox
+is being shown.
+</p>
+<p>
+Note that if the parent gets deleted, the messagebox will not be
+shown.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">queuedDetailedErrorWId</b> (parent_id, text, details, caption)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>details</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString.null</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">queuedMessageBox</b> (parent, type, text, caption, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>type</td><td>KMessageBox.DialogType</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Like messageBox
+</p>
+<p>
+Only for message boxes of type Information, Sorry or Error.
+</p>
+<p>
+This function will return immediately, the messagebox will be shown
+once the application enters an event loop and no other messagebox
+is being shown.
+</p>
+<p>
+Note that if the parent gets deleted, the messagebox will not be
+shown.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">queuedMessageBox</b> (parent, type, text, caption)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>type</td><td>KMessageBox.DialogType</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString.null</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+</p>
+<p>
+</p>
+<p>
+This is an overloaded member function, provided for convenience.
+It behaves essentially like the above function.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">queuedMessageBoxWId</b> (parent_id, type, text, caption, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>type</td><td>KMessageBox.DialogType</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">queuedMessageBoxWId</b> (parent_id, type, text, caption)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>type</td><td>KMessageBox.DialogType</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString.null</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">saveDontShowAgainContinue</b> (dontShowAgainName)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dontShowAgainName</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Save the fact that the continue/cancel message box should not be shown
+again.
+</p>
+<p>
+<b>dontShowAgainName</b> - the name that identify the message box. If
+empty, this method does nothing.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">saveDontShowAgainYesNo</b> (dontShowAgainName, result)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dontShowAgainName</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>result</td><td>KMessageBox.ButtonCode</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Save the fact that the yes/no message box should not be shown again.
+</p>
+<p>
+<b>dontShowAgainName</b> - the name that identify the message box. If
+empty, this method does nothing.
+</p>
+<p>
+<b>result</b> - the value (Yes or No) that should be used as the result
+for the message box.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">setDontShowAskAgainConfig</b> (cfg)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>cfg</td><td>KConfig</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Use <b>cfg</b> for all settings related to the dontShowAgainName feature.
+If <b>cfg</b> is 0 (default) KGlobal.config() will be used.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">shouldBeShownContinue</b> (dontShowAgainName)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dontShowAgainName</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns true if the corresponding continue/cancel message box should be
+shown.
+</p>
+<p>
+<b>dontShowAgainName</b> - the name that identify the message box. If
+empty, true is always returned.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">shouldBeShownYesNo</b> (dontShowAgainName)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(bool), result (KMessageBox.ButtonCode)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>dontShowAgainName</td><td>QString</td><td align="right"></td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Returns true if the corresponding yes/no message box should be shown.
+</p>
+<p>
+<b>dontShowAgainName</b> - the name that identify the message box. If
+empty, true is always returned.
+</p>
+<p>
+<b>result</b> - is set to the result (Yes or No) that was chosen the last
+time the message box was shown. Only meaningful, if the message box
+should not be shown.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">sorry</b> (parent, text, caption, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display an "Sorry" dialog.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Sorry").
+</p>
+<p>
+<b>options</b> - see OptionsType
+</p>
+<p>
+Either your program messed up and asks for understanding
+or your user did something stupid.
+</p>
+<p>
+To be used for small problems like
+"Sorry, I can't find the file you specified."
+</p>
+<p>
+The default button is "&OK". Pressing "Esc" selects the OK-button.
+</p>
+<p>
+NOTE: The ok button will always have the i18n'ed text '&OK'.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">sorryWId</b> (parent_id, text, caption, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">warningContinueCancel</b> (parent, text, caption, buttonContinue, buttonCancel, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonContinue</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cont ()</td></tr>
+
+              <tr><td>buttonCancel</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cancel ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display a "warning" dialog.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Warning").
+</p>
+<p>
+<b>buttonContinue</b> - The text for the first button.
+</p>
+<p>
+<b>buttonCancel</b> - The text for the second button.
+</p>
+<p>
+<b>dontAskAgainName</b> - If provided, a checkbox is added with which
+further confirmation can be turned off.
+The string is used to lookup and store the setting
+in the applications config file.
+The setting is stored in the "Notification Messages" group.
+If <b>dontAskAgainName</b> starts with a ':' then the setting
+is stored in the global config file.
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Returns <b>Continue</b> is returned if the Continue-button is pressed.
+<b>Cancel</b> is returned if the Cancel-button is pressed.
+</p>
+<p>
+To be used for questions like "You are about to Print. Are you sure?"
+the continueButton should then be labeled "Print".
+</p>
+<p>
+The default button is buttonContinue. Pressing "Esc" selects "Cancel".
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">warningContinueCancelList</b> (parent, text, strlist, caption, buttonContinue, buttonCancel, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonContinue</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cont ()</td></tr>
+
+              <tr><td>buttonCancel</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cancel ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display a "warning" dialog with a listbox to show information to the user.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>strlist</b> - List of strings to be written in the listbox. If the
+list is empty, it doesn't show any listbox, working
+as warningContinueCancel.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Warning").
+</p>
+<p>
+<b>buttonContinue</b> - The text for the first button.
+</p>
+<p>
+<b>buttonCancel</b> - The text for the second button.
+</p>
+<p>
+<b>dontAskAgainName</b> - If provided, a checkbox is added with which
+further confirmation can be turned off.
+The string is used to lookup and store the setting
+in the applications config file.
+The setting is stored in the "Notification Messages" group.
+If <b>dontAskAgainName</b> starts with a ':' then the setting
+is stored in the global config file.
+</p>
+<p>
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Returns <b>Continue</b> is returned if the Continue-button is pressed.
+<b>Cancel</b> is returned if the Cancel-button is pressed.
+</p>
+<p>
+To be used for questions like "You are about to Print. Are you sure?"
+the continueButton should then be labeled "Print".
+</p>
+<p>
+The default button is buttonContinue. Pressing "Esc" selects "Cancel".
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">warningContinueCancelListWId</b> (parent_id, text, strlist, caption, buttonContinue, buttonCancel, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonContinue</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cont ()</td></tr>
+
+              <tr><td>buttonCancel</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cancel ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">warningContinueCancelWId</b> (parent_id, text, caption, buttonContinue, buttonCancel, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonContinue</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cont ()</td></tr>
+
+              <tr><td>buttonCancel</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cancel ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">warningYesNo</b> (parent, text, caption, buttonYes, buttonNo, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Dangerous</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display a "warning" dialog.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Warning").
+</p>
+<p>
+<b>buttonYes</b> - The text for the first button.
+The default is i18n("&Yes").
+</p>
+<p>
+<b>buttonNo</b> - The text for the second button.
+The default is i18n("&No").
+</p>
+<p>
+<b>dontAskAgainName</b> - If provided, a checkbox is added with which
+further confirmation can be turned off.
+The string is used to lookup and store the setting
+in the applications config file.
+The setting is stored in the "Notification Messages" group.
+If <b>dontAskAgainName</b> starts with a ':' then the setting
+is stored in the global config file.
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Returns <b>Yes</b> is returned if the Yes-button is pressed. <b>No</b> is returned
+if the No-button is pressed.
+</p>
+<p>
+To be used for questions "Shall I update your configuration?"
+The text should explain the implication of both options.
+</p>
+<p>
+The default button is "No". Pressing "Esc" selects "No".
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">warningYesNoCancel</b> (parent, text, caption, buttonYes, buttonNo, buttonCancel, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>buttonCancel</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cancel ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display a Yes/No/Cancel "warning" dialog.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Warning").
+</p>
+<p>
+<b>buttonYes</b> - The text for the first button.
+The default is i18n("&Yes").
+</p>
+<p>
+<b>buttonNo</b> - The text for the second button.
+The default is i18n("&No").
+</p>
+<p>
+<b>buttonCancel</b> - The text for the third button.
+The default is i18n("&Cancel").
+</p>
+<p>
+<b>dontAskAgainName</b> - If provided, a checkbox is added with which
+further questions can be turned off. If turned off
+all questions will be automatically answered with the
+last answer (either Yes or No).
+The string is used to lookup and store the setting
+in the applications config file.
+The setting is stored in the "Notification Messages" group.
+If <b>dontAskAgainName</b> starts with a ':' then the setting
+is stored in the global config file.
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Returns <b>Yes</b> is returned if the Yes-button is pressed. <b>No</b> is returned
+if the No-button is pressed. <b>Cancel</b> is retunred if the Cancel-
+button is pressed.
+</p>
+<p>
+To be used for questions "Do you want to save your changes?"
+The text should explain the implication of choosing 'No'.
+</p>
+<p>
+The default button is "Yes". Pressing "Esc" selects "Cancel"
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">warningYesNoCancelList</b> (parent, text, strlist, caption, buttonYes, buttonNo, buttonCancel, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>buttonCancel</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cancel ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display a Yes/No/Cancel "warning" dialog with a listbox to show information
+to the user.
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>strlist</b> - List of strings to be written in the listbox. If the
+list is empty, it doesn't show any listbox, working
+as warningYesNoCancel.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Warning").
+</p>
+<p>
+<b>buttonYes</b> - The text for the first button.
+The default is i18n("&Yes").
+</p>
+<p>
+<b>buttonNo</b> - The text for the second button.
+The default is i18n("&No").
+</p>
+<p>
+<b>buttonCancel</b> - The text for the third button.
+The default is i18n("&Cancel").
+</p>
+<p>
+<b>dontAskAgainName</b> - If provided, a checkbox is added with which
+further questions can be turned off. If turned off
+all questions will be automatically answered with the
+last answer (either Yes or No).
+The string is used to lookup and store the setting
+in the applications config file.
+The setting is stored in the "Notification Messages" group.
+If <b>dontAskAgainName</b> starts with a ':' then the setting
+is stored in the global config file.
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Returns <b>Yes</b> is returned if the Yes-button is pressed. <b>No</b> is returned
+if the No-button is pressed. <b>Cancel</b> is retunred if the Cancel-
+button is pressed.
+</p>
+<p>
+To be used for questions "Do you want to save your changes?"
+The text should explain the implication of choosing 'No'.
+</p>
+<p>
+The default button is "Yes". Pressing "Esc" selects "Cancel"
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">warningYesNoCancelListWId</b> (parent_id, text, strlist, caption, buttonYes, buttonNo, buttonCancel, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>buttonCancel</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cancel ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">warningYesNoCancelWId</b> (parent_id, text, caption, buttonYes, buttonNo, buttonCancel, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>buttonCancel</td><td>KGuiItem</td><td align="right">KStandardGuiItem.cancel ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Notify</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">warningYesNoList</b> (parent, text, strlist, caption, buttonYes, buttonNo, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Dangerous</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+Display a "warning" dialog with a listbox to show information to the user
+</p>
+<p>
+</p>
+<p>
+<b>parent</b> - If <b>parent</b> is 0, then the message box becomes an
+application-global modal dialog box. If <b>parent</b> is a
+widget, the message box becomes modal relative to parent.
+</p>
+<p>
+<b>text</b> - Message string.
+</p>
+<p>
+<b>strlist</b> - List of strings to be written in the listbox. If the list is
+empty, it doesn't show any listbox, working as questionYesNo.
+</p>
+<p>
+<b>caption</b> - Message box title. The application name is added to
+the title. The default title is i18n("Question").
+</p>
+<p>
+<b>buttonYes</b> - The text for the first button.
+The default is i18n("&Yes").
+</p>
+<p>
+<b>buttonNo</b> - The text for the second button.
+The default is i18n("&No").
+</p>
+<p>
+<b>dontAskAgainName</b> - If provided, a checkbox is added with which
+further confirmation can be turned off.
+The string is used to lookup and store the setting
+in the applications config file.
+The setting is stored in the "Notification Messages" group.
+If <b>dontAskAgainName</b> starts with a ':' then the setting
+is stored in the global config file.
+</p>
+<p>
+<b>options</b> - see Options
+</p>
+<p>
+Returns 'Yes' is returned if the Yes-button is pressed. 'No' is returned
+if the No-button is pressed.
+</p>
+<p>
+To be used for questions like "Do you really want to delete these files?"
+And show the user exactly which files are going to be deleted in case
+he presses "Yes"
+</p>
+<p>
+The default button is "No". Pressing "Esc" selects "No".
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">warningYesNoListWId</b> (parent_id, text, strlist, caption, buttonYes, buttonNo, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>strlist</td><td>QStringList</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Dangerous</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+<li style="list-style-type : none"><b style="color : #000000;">warningYesNoWId</b> (parent_id, text, caption, buttonYes, buttonNo, dontAskAgainName, options)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>(int)</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #0000ff">static</i>
+          </td>
+        </tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+
+              <tr><td>parent_id</td><td>WId</td><td align="right"></td></tr>
+
+              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
+
+              <tr><td>caption</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>buttonYes</td><td>KGuiItem</td><td align="right">KStandardGuiItem.yes ()</td></tr>
+
+              <tr><td>buttonNo</td><td>KGuiItem</td><td align="right">KStandardGuiItem.no ()</td></tr>
+
+              <tr><td>dontAskAgainName</td><td>QString</td><td align="right">QString ()</td></tr>
+
+              <tr><td>options</td><td>KMessageBox.Options</td><td align="right">KMessageBox.Dangerous</td></tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<p>
+This function accepts the window id of the parent window, instead
+of QWidget*. It should be used only when necessary.
+</p>
+
+    </td>
+  </tr>
+</table>
+
+
+</li><hr>
+
+
+</li><hr>
+
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+
+<li><b>ButtonCode</b> = { Ok, Cancel, Yes, No, Continue }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Ok</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Cancel</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Yes</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>No</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Continue</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+<li><b>DialogType</b> = { QuestionYesNo, WarningYesNo, WarningContinueCancel, WarningYesNoCancel, Information, Sorry, Error, QuestionYesNoCancel }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>QuestionYesNo</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>WarningYesNo</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>WarningContinueCancel</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>WarningYesNoCancel</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Information</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Sorry</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Error</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>QuestionYesNoCancel</i></td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+<li><b>Option</b> = { Notify, AllowLink, Dangerous, PlainCaption, NoExec }
+  <table cellspacing="5">
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Notify</i></td>
+      <td valign="top">-</td>
+      <td>
+Emit a KNotify event</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>AllowLink</i></td>
+      <td valign="top">-</td>
+      <td>The message may contain links .</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>Dangerous</i></td>
+      <td valign="top">-</td>
+      <td>The action to be confirmed by the dialog is a potentially destructive one</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>PlainCaption</i></td>
+      <td valign="top">-</td>
+      <td>Do not use KApplication . makeStdCaption ( )</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td valign="top"><i>NoExec</i></td>
+      <td valign="top">-</td>
+      <td>Do not call exec ( ) in createKMessageBox ( )</td>
+    </tr>
+
+  </table>
+</li>
+<hr>
+
+</ul>
+
+</span>
+</body>
+</html>

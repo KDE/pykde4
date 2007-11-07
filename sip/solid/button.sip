@@ -53,7 +53,13 @@ public:
     bool                 stateValue () const;
 
 signals:
-    void                 pressed (Solid::Button::ButtonType);
+
+    void                 pressed (Solid::Button::ButtonType, const QString&);
+
+
+signals:
+
+
 
 };  // class Button
 

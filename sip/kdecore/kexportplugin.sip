@@ -23,39 +23,18 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-class KLibLoader : QObject
+
+class KDEPluginVerificationData
 {
 %TypeHeaderCode
-#include <klibloader.h>
+#include <kexportplugin.h>
 %End
 
-
 public:
-    KPluginFactory*      factory (const QString&, QLibrary::LoadHints = 0);
-    KLibrary*            library (const QString&, QLibrary::LoadHints = 0);
-    QString              lastErrorMessage () const;
-    void                 unloadLibrary (const QString&);
-    static KLibLoader*   self ();
-    static QString       findLibrary (const QString&, const KComponentData& = KGlobal::mainComponent ());
+    quint8               dataVersion;
+    quint32              KDEVersion;
+    const char*          KDEVersionString;
 
-    enum ComponentLoadingError
-    {
-        ErrNoLibrary, 
-        ErrNoFactory, 
-        ErrNoComponent, 
-        ErrServiceProvidesNoLibrary, 
-        ErrNoServiceFound
-    };
+};  // class KDEPluginVerificationData
 
-    static QString       errorString (int);
-
-private:
-                         ~KLibLoader ();
-
-                         KLibLoader ();
-
-
-
-
-};  // class KLibLoader
 

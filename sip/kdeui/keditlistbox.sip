@@ -36,9 +36,9 @@ public:
     {
 
     public:
-                             CustomEditor ();
-                             CustomEditor (QWidget*, KLineEdit*);
-                             CustomEditor (KComboBox*);
+//ig                             CustomEditor ();
+                             CustomEditor (QWidget*=0, KLineEdit*=0);
+//ig                             CustomEditor (KComboBox*);
         void                 setRepresentationWidget (QWidget*);
         void                 setLineEdit (KLineEdit*);
         virtual QWidget*     representationWidget () const;
@@ -63,9 +63,13 @@ public:
     };
 
     typedef QFlags<KEditListBox::Button> Buttons;
+
+//ig                         KEditListBox (QWidget* /TransferThis/ = 0);
+//ig                         KEditListBox (const QString&, QWidget* /TransferThis/ = 0);
+
                          KEditListBox (QWidget* /TransferThis/ = 0, const char* = 0, bool = 0, KEditListBox::Buttons = KEditListBox::All );
                          KEditListBox (const QString&, QWidget* /TransferThis/ = 0, const char* = 0, bool = 0, KEditListBox::Buttons = KEditListBox::All );
-                         KEditListBox (const QString&, const KEditListBox::CustomEditor&, QWidget* /TransferThis/ = 0, const char* = 0, bool = 0, KEditListBox::Buttons = KEditListBox::All );
+//ig                         KEditListBox (const QString&, const KEditListBox::CustomEditor&, QWidget* /TransferThis/ = 0, const char* = 0, bool = 0, KEditListBox::Buttons = KEditListBox::All );
     QListView*           listView () const;
     KLineEdit*           lineEdit () const;
     QPushButton*         addButton () const;
@@ -83,6 +87,10 @@ public:
     void                 setItems (const QStringList&);
     KEditListBox::Buttons buttons () const;
     void                 setButtons (KEditListBox::Buttons);
+
+    void                 setCheckAtEntering (bool);
+    bool                 checkAtEntering ();
+
 
 signals:
     void                 changed ();

@@ -151,7 +151,6 @@ public:
         ShowProperties
     };
 
-
     typedef QFlags<KParts::BrowserExtension::PopupFlag> PopupFlags;
     virtual void         setBrowserArguments (const KParts::BrowserArguments&);
     KParts::BrowserArguments browserArguments () const;
@@ -170,9 +169,7 @@ public:
     static KParts::BrowserExtension::ActionSlotMap* actionSlotMapPtr ();
     static KParts::BrowserExtension* childObject (QObject*);
     void                 pasteRequest ();
-
     typedef QMap<QString, QList<QAction*>> ActionGroupMap;
-
 
 public:
     void                 enableAction (const char*, bool);
@@ -186,12 +183,9 @@ public:
     void                 loadingProgress (int);
     void                 speedProgress (int);
     void                 infoMessage (const QString&);
-
-//ig    void                 popupMenu (const QPoint&, const KFileItemList&, const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments (), KParts::BrowserExtension::PopupFlags = KParts::BrowserExtension::DefaultPopupItems, const KParts::BrowserExtension::ActionGroupMap& = KParts::BrowserExtension::ActionGroupMap ());
-//ig    void                 popupMenu (const QPoint&, const KUrl&, mode_t = -1 , const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments (), KParts::BrowserExtension::PopupFlags = KParts::BrowserExtension::DefaultPopupItems, const KParts::BrowserExtension::ActionGroupMap& = KParts::BrowserExtension::ActionGroupMap ());
-
+//ig     void                 popupMenu (const QPoint&, const KFileItemList&, const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments (), KParts::BrowserExtension::PopupFlags = KParts::BrowserExtension::DefaultPopupItems, const KParts::BrowserExtension::ActionGroupMap& = KParts::BrowserExtension::ActionGroupMap ());
+//ig     void                 popupMenu (const QPoint&, const KUrl&, mode_t = -1 , const KParts::OpenUrlArguments& = KParts::OpenUrlArguments (), const KParts::BrowserArguments& = KParts::BrowserArguments (), KParts::BrowserExtension::PopupFlags = KParts::BrowserExtension::DefaultPopupItems, const KParts::BrowserExtension::ActionGroupMap& = KParts::BrowserExtension::ActionGroupMap ());
     void                 selectionInfo (const KFileItemList&);
-
     void                 selectionInfo (const QString&);
     void                 selectionInfo (const KUrl::List&);
     void                 mouseOverInfo (const KFileItem&);
@@ -205,8 +199,44 @@ public:
 public:
     typedef QMap<QByteArray, int> ActionNumberMap;
 
-public:
+// Subclasses for QObject
 
+public:
+%ConvertToSubClassCode
+
+    if (dynamic_cast<KParts::Part*>(sipCpp))
+    {
+        sipClass = sipClass_KParts_Part;
+        if (dynamic_cast<KParts::ReadOnlyPart*>(sipCpp))
+        {
+            sipClass = sipClass_KParts_ReadOnlyPart;
+            if (dynamic_cast<KParts::ReadWritePart*>(sipCpp))
+                sipClass = sipClass_KParts_ReadWritePart;
+        }
+    }
+    else if (dynamic_cast<KParts::BrowserExtension*>(sipCpp))
+        sipClass = sipClass_KParts_BrowserExtension;
+    else if (dynamic_cast<KParts::BrowserHostExtension*>(sipCpp))
+        sipClass = sipClass_KParts_BrowserHostExtension;
+    else if (dynamic_cast<KParts::BrowserInterface*>(sipCpp))
+        sipClass = sipClass_KParts_BrowserInterface;
+    else if (dynamic_cast<KParts::BrowserRun*>(sipCpp))
+        sipClass = sipClass_KParts_BrowserRun;
+    else if (dynamic_cast<KParts::HistoryProvider*>(sipCpp))
+        sipClass = sipClass_KParts_HistoryProvider;
+    else if (dynamic_cast<KParts::LiveConnectExtension*>(sipCpp))
+        sipClass = sipClass_KParts_LiveConnectExtension;
+    else if (dynamic_cast<KParts::MainWindow*>(sipCpp))
+        sipClass = sipClass_KParts_MainWindow;
+    else if (dynamic_cast<KParts::PartManager*>(sipCpp))
+        sipClass = sipClass_KParts_PartManager;
+    else if (dynamic_cast<KParts::Plugin*>(sipCpp))
+        sipClass = sipClass_KParts_Plugin;
+    else if (dynamic_cast<KParts::StatusBarExtension*>(sipCpp))
+        sipClass = sipClass_KParts_StatusBarExtension;
+    else
+        sipClass = NULL;
+%End
 
 
 };  // class BrowserExtension

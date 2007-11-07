@@ -67,9 +67,15 @@ public:
     Solid::Battery::ChargeState chargeState () const;
 
 signals:
-    void                 chargePercentChanged (int);
-    void                 chargeStateChanged (int);
-    void                 plugStateChanged (bool);
+
+    void                 chargePercentChanged (int, const QString&);
+    void                 chargeStateChanged (int, const QString&);
+    void                 plugStateChanged (bool, const QString&);
+
+
+signals:
+
+
 
 };  // class Battery
 

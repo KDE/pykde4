@@ -68,8 +68,14 @@ public:
     bool                 eject ();
 
 signals:
-    void                 ejectPressed ();
-    void                 ejectDone (Solid::ErrorType, QVariant);
+
+    void                 ejectPressed (const QString&);
+    void                 ejectDone (Solid::ErrorType, QVariant, const QString&);
+
+
+signals:
+
+
 
 };  // class OpticalDrive
 

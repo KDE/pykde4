@@ -89,6 +89,7 @@
 %Include kascii.sip
 %Include kstringhandler.sip
 %Include kdedmodule.sip
+%Include kexportplugin.sip
 %Include klibloader.sip
 %Include klibrary.sip
 %Include kmacroexpander.sip

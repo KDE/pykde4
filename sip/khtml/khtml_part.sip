@@ -54,7 +54,6 @@ public:
     QString              documentSource () const;
     DOM::Node            activeNode () const;
     KParts::BrowserExtension* browserExtension () const;
-//ig     KParts::LiveConnectExtension* liveConnectExtension (const khtml::RenderPart*) const;
     KParts::BrowserHostExtension* browserHostExtension () const;
     KHTMLView*           view () const;
     void                 setJScriptEnabled (bool);
@@ -226,10 +225,6 @@ protected slots:
 
 protected:
     virtual void         startingJob (KIO::Job*);
-
-public:
-
-
 
 public:
 

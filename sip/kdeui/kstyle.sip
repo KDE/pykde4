@@ -34,6 +34,7 @@ class KStyle : QCommonStyle
 
 public:
                          KStyle ();
+    static QString       defaultStyle ();
 
 protected:
     void                 drawInsideRect (QPainter*, const QRect&) const;

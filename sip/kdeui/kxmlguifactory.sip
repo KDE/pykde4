@@ -32,14 +32,11 @@ class KXMLGUIFactory : QObject
 
 public:
                          KXMLGUIFactory (KXMLGUIBuilder*, QObject* /TransferThis/ = 0);
-    static QString       readConfigFile (const QString&, bool, const KComponentData& = KComponentData ());
-    static QString       readConfigFile (const QString&, const KComponentData& = KComponentData ());
-    static bool          saveConfigFile (const QDomDocument&, const QString&, const KComponentData& = KComponentData ());
-    static QString       documentToXML (const QDomDocument&);
-    static QString       elementToXML (const QDomElement&);
-    static void          removeDOMComments (QDomNode&);
-    static QDomElement   actionPropertiesElement (QDomDocument&);
-    static QDomElement   findActionByName (QDomElement&, const QString&, bool);
+//internal
+//ig    static QString       readConfigFile (const QString&, const KComponentData& = KComponentData ());
+//ig    static bool          saveConfigFile (const QDomDocument&, const QString&, const KComponentData& = KComponentData ());
+//ig    static QDomElement   actionPropertiesElement (QDomDocument&);
+//ig    static QDomElement   findActionByName (QDomElement&, const QString&, bool);
     void                 addClient (KXMLGUIClient*);
     void                 removeClient (KXMLGUIClient*);
     void                 plugActionList (KXMLGUIClient*, const QString&, const QList<QAction*>&);
@@ -56,6 +53,10 @@ public slots:
 signals:
     void                 clientAdded (KXMLGUIClient*);
     void                 clientRemoved (KXMLGUIClient*);
+
+public:
+
+
 
 };  // class KXMLGUIFactory
 

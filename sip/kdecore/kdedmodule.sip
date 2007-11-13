@@ -31,7 +31,9 @@ class KDEDModule : QObject
 
 
 public:
-                         KDEDModule ();
+
+                         KDEDModule (QObject* /TransferThis/ = 0);
+
     void                 setModuleName (const QString&);
     QString              moduleName () const;
 
@@ -39,6 +41,10 @@ signals:
     void                 moduleDeleted (KDEDModule*);
     void                 windowRegistered (qint64);
     void                 windowUnregistered (qint64);
+
+public:
+
+
 
 };  // class KDEDModule
 

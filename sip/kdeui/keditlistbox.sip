@@ -37,7 +37,7 @@ public:
 
     public:
 //ig                             CustomEditor ();
-                             CustomEditor (QWidget*=0, KLineEdit*=0);
+                             CustomEditor (QWidget* = 0, KLineEdit* = 0);
 //ig                             CustomEditor (KComboBox*);
         void                 setRepresentationWidget (QWidget*);
         void                 setLineEdit (KLineEdit*);

@@ -37,7 +37,6 @@ public:
     {
         IncludeGlobals, 
         CascadeConfig, 
-        DontMergeOnSync, 
         SimpleConfig, 
         NoCascade, 
         NoGlobals, 

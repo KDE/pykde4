@@ -85,11 +85,7 @@ public:
         void                 __setitem__ (SIP_PYSLICE, const KUrl::List&);
 %MethodCode
 //takes range | (a Python slice) | urlList | (KUrl.List)
-#if PY_VERSION_HEX >= 0x02050000
-    Py_ssize_t len, start, stop, step, slicelength, i;
-#else
-    int len, start, stop, step, slicelength, i;
-#endif
+    SIP_SSIZE_T len, start, stop, step, slicelength, i;
 
     len = sipCpp -> count();
 
@@ -132,11 +128,8 @@ public:
         void                 __delitem__ (SIP_PYSLICE);
 %MethodCode
 //takes range | (a Python slice)
-#if PY_VERSION_HEX >= 0x02050000
-    Py_ssize_t len, start, stop, step, slicelength, i;
-#else
-    int len, start, stop, step, slicelength, i;
-#endif
+    
+    SIP_SSIZE_T len, start, stop, step, slicelength, i;
 
     len = sipCpp -> count();
     if (sipConvertFromSliceObject(a0,len,&start,&stop,&step,&slicelength) < 0)
@@ -167,11 +160,8 @@ public:
 %MethodCode
 //returns (KUrl.List)
 //takes range | (a Python slice)
-#if PY_VERSION_HEX >= 0x02050000
-    Py_ssize_t len, start, stop, step, slicelength, i;
-#else
-    int len, start, stop, step, slicelength, i;
-#endif
+
+    SIP_SSIZE_T len, start, stop, step, slicelength, i;
 
     len = sipCpp -> count();
 

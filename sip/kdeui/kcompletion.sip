@@ -222,11 +222,7 @@ public:
 
 %ConvertToTypeCode
     PyObject *kobj, *tobj;
-#if PY_VERSION_HEX >= 0x02050000
-    Py_ssize_t i = 0;
-#else
-    int i = 0;
-#endif
+    SIP_SSIZE_T i = 0;
 
     // Check the type if that is all that is required.
     if (sipIsErr == NULL)

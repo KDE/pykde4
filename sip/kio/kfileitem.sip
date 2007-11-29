@@ -159,7 +159,7 @@ public:
 %MethodCode
 //takes range | (a Python slice) | urlList | (KFileItemList)
 
-    Py_ssize_t len, start, stop, step, slicelength;
+    SIP_SSIZE_T len, start, stop, step, slicelength;
 
     len = sipCpp -> count();
 
@@ -202,7 +202,7 @@ public:
     void                 __delitem__ (SIP_PYSLICE);
 %MethodCode
 //takes range | (a Python slice)
-    Py_ssize_t len, start, stop, step, slicelength;
+    SIP_SSIZE_T len, start, stop, step, slicelength;
 
     len = sipCpp -> count();
     if (sipConvertFromSliceObject(a0,len,&start,&stop,&step,&slicelength) < 0)

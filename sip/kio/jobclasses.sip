@@ -106,7 +106,6 @@ public slots:
 protected slots:
     virtual void         slotFinished ();
     virtual void         slotWarning (const QString&);
-    virtual void         slotInfoMessage (const QString&);
     virtual void         slotMetaData (const KIO::MetaData&);
 
 protected:

@@ -71,7 +71,6 @@ enum StandardShortcut
     ZoomIn, 
     ZoomOut, 
     FullScreen, 
-    PopupMenuContext, 
     ShowMenubar, 
     TabNext, 
     TabPrev, 
@@ -138,7 +137,6 @@ const KShortcut&     nextCompletion ();
 const KShortcut&     substringCompletion ();
 const KShortcut&     rotateUp ();
 const KShortcut&     rotateDown ();
-const KShortcut&     popupMenuContext ();
 const KShortcut&     whatsThis ();
 const KShortcut&     reload ();
 const KShortcut&     up ();

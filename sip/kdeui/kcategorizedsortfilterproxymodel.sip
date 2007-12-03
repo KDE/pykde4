@@ -38,68 +38,16 @@ public:
     };
 
                          KCategorizedSortFilterProxyModel (QObject* /TransferThis/ = 0);
-    virtual void         setSourceModel (QAbstractItemModel*);
     virtual void         sort (int, Qt::SortOrder = Qt::AscendingOrder);
-    virtual QModelIndex  mapFromSource (const QModelIndex&) const;
-    virtual QModelIndex  mapToSource (const QModelIndex&) const;
-    virtual QItemSelection mapSelectionFromSource (const QItemSelection&) const;
-    virtual QItemSelection mapSelectionToSource (const QItemSelection&) const;
-    virtual QRegExp      filterRegExp () const;
-    virtual void         setFilterRegExp (const QRegExp&);
-    virtual void         setFilterRegExp (const QString&);
-    virtual int          filterKeyColumn () const;
-    virtual void         setFilterKeyColumn (int);
-    virtual Qt::CaseSensitivity filterCaseSensitivity () const;
-    virtual void         setFilterCaseSensitivity (Qt::CaseSensitivity);
-    virtual Qt::CaseSensitivity sortCaseSensitivity () const;
-    virtual void         setSortCaseSensitivity (Qt::CaseSensitivity);
-    virtual bool         isSortLocaleAware () const;
-    virtual void         setSortLocaleAware (bool);
-    virtual bool         dynamicSortFilter () const;
-    virtual void         setDynamicSortFilter (bool);
-    virtual int          sortRole () const;
-    virtual void         setSortRole (int);
-    virtual int          filterRole () const;
-    virtual void         setFilterRole (int);
-    virtual QModelIndex  index (int, int, const QModelIndex& /Transfer/ = QModelIndex ()) const;
-    virtual bool         hasChildren (const QModelIndex& /Transfer/ = QModelIndex ()) const;
-    virtual QVariant     data (const QModelIndex&, int = Qt::DisplayRole) const;
-    virtual bool         setData (const QModelIndex&, const QVariant&, int = Qt::EditRole);
-    virtual QVariant     headerData (int, Qt::Orientation, int = Qt::EditRole) const;
-    virtual bool         setHeaderData (int, Qt::Orientation, const QVariant&, int = Qt::EditRole);
-    virtual QModelIndex  buddy (const QModelIndex&) const;
-    virtual Qt::ItemFlags flags (const QModelIndex&) const;
-    virtual QModelIndexList match (const QModelIndex&, int, const QVariant&, int = 1, Qt::MatchFlags=Qt::MatchFlags(Qt::MatchStartsWith | Qt::MatchWrap)) const;
-    virtual QModelIndex  parent (const QModelIndex&) const;
-    virtual QSize        span (const QModelIndex&) const;
-    virtual QStringList  mimeTypes () const;
-    virtual QMimeData*   mimeData (const QModelIndexList&) const;
-    virtual bool         dropMimeData (const QMimeData*, Qt::DropAction, int, int, const QModelIndex& /Transfer/);
-    virtual Qt::DropActions supportedDropActions () const;
-    virtual int          rowCount (const QModelIndex& /Transfer/ = QModelIndex ()) const;
-    virtual int          columnCount (const QModelIndex& /Transfer/ = QModelIndex ()) const;
-    virtual bool         insertRows (int, int, const QModelIndex& /Transfer/ = QModelIndex ());
-    virtual bool         insertColumns (int, int, const QModelIndex& /Transfer/ = QModelIndex ());
-    virtual bool         removeRows (int, int, const QModelIndex& /Transfer/ = QModelIndex ());
-    virtual bool         removeColumns (int, int, const QModelIndex& /Transfer/ = QModelIndex ());
-    virtual void         fetchMore (const QModelIndex& /Transfer/);
-    virtual bool         canFetchMore (const QModelIndex& /Transfer/) const;
-    int                  sortColumn () const;
-    Qt::SortOrder        sortOrder () const;
     bool                 isCategorizedModel () const;
     void                 setCategorizedModel (bool);
-
-public slots:
-    void                 setFilterWildcard (const QString&);
-    void                 setFilterFixedString (const QString&);
-    void                 clear ();
-    void                 invalidate ();
+    int                  sortColumn () const;
+    Qt::SortOrder        sortOrder () const;
 
 protected:
-    virtual bool         lessThanGeneralPurpose (const QModelIndex&, const QModelIndex&) const = 0;
-    virtual bool         lessThanCategoryPurpose (const QModelIndex&, const QModelIndex&) const = 0;
-    virtual bool         filterAcceptsRow (int, const QModelIndex&) const;
-    virtual bool         filterAcceptsColumn (int, const QModelIndex&) const;
+    virtual bool         lessThan (const QModelIndex &, const QModelIndex &) const;
+    virtual bool         subsortLessThan (const QModelIndex &, const QModelIndex &) const;
+    virtual int          compareCategories (const QModelIndex &, const QModelIndex &) const;
 
 };  // class KCategorizedSortFilterProxyModel
 

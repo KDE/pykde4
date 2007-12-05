@@ -34,7 +34,8 @@ public:
 
     enum AdditionalRoles
     {
-        CategoryRole
+        CategoryDisplayRole,
+        CategorySortRole
     };
 
                          KCategorizedSortFilterProxyModel (QObject* /TransferThis/ = 0);
@@ -43,12 +44,14 @@ public:
     void                 setCategorizedModel (bool);
     int                  sortColumn () const;
     Qt::SortOrder        sortOrder () const;
+    void                 setSortCategoriesByNaturalComparison (bool);
+    bool                 sortCategoriesByNaturalComparison () const;
+    static int           naturalCompare(const QString &, const QString &);
 
 protected:
     virtual bool         lessThan (const QModelIndex &, const QModelIndex &) const;
-    virtual bool         subsortLessThan (const QModelIndex &, const QModelIndex &) const;
+    virtual bool         subSortLessThan (const QModelIndex &, const QModelIndex &) const;
     virtual int          compareCategories (const QModelIndex &, const QModelIndex &) const;
-
 };  // class KCategorizedSortFilterProxyModel
 
 

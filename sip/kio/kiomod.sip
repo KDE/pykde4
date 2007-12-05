@@ -69,7 +69,6 @@
 %Include kfilefiltercombo.sip
 %Include kfileplacesmodel.sip
 %Include kfileplacesview.sip
-%Include kfileview.sip
 %Include kfilewidget.sip
 %Include authinfo.sip
 %Include chmodjob.sip

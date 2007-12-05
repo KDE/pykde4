@@ -77,8 +77,8 @@ signals:
     void                 connected (KIO::Job*);
 
 protected:
-    virtual void         addSubjob (KIO::Job*, bool = 1);
-    bool                 removeSubjob (KJob*, bool = 0);
+    virtual bool         addSubjob (KJob*);
+    virtual bool         removeSubjob (KJob*);
 
 };  // class Job
 

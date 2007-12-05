@@ -108,6 +108,7 @@ protected:
     virtual bool         julianDayToDate (int, int& /Out/, int& /Out/, int& /Out/) const = 0;
     virtual bool         dateToJulianDay (int, int, int, int& /Out/) const = 0;
     const KLocale*       locale () const;
-
+private:
+                         KCalendarSystem (const KCalendarSystem&) [()];
 };  // class KCalendarSystem
 

@@ -91,7 +91,8 @@ protected:
     virtual void         postProcessMatch (QString*) const;
     virtual void         postProcessMatches (QStringList*) const;
 //ig     virtual void         postProcessMatches (KCompletionMatches*) const;
-
+private:
+                         KCompletion (const KCompletion&) [()];
 };  // class KCompletion
 
 
@@ -166,7 +167,8 @@ public:
     else
         sipClass = NULL;
 %End
-
+private:
+                         KCompletionBase (const KCompletionBase&) [()];
 
 };  // class KCompletionBase
 

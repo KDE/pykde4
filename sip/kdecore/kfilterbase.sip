@@ -63,6 +63,7 @@ protected:
 
 protected:
 //igx     virtual void         virtual_hook (int, void*);
-
+private:
+                         KFilterBase (const KFilterBase&) [()];
 };  // class KFilterBase
 

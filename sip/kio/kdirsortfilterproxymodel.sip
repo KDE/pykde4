@@ -40,7 +40,7 @@ public:
 
 
 protected:
-    virtual bool         subsortLessThan(const QModelIndex &, const QModelIndex &) const;
+    virtual bool         subSortLessThan(const QModelIndex &, const QModelIndex &) const;
     virtual int          compareCategories(const QModelIndex &, const QModelIndex &) const;
 };  // class KDirSortFilterProxyModel
 

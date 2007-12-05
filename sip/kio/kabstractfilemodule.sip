@@ -70,7 +70,6 @@
 #include <kfileitemdelegate.h>
 #include <kfileplacesmodel.h>
 #include <kfileplacesview.h>
-#include <kfileview.h>
 #include <kfilewidget.h>
 #include <kfilewriteplugin.h>
 #include <connection.h>
@@ -273,8 +272,6 @@ public:
         sipClass = sipClass_KFilePlacesModel;
     else if (dynamic_cast<KFilePlacesView*>(sipCpp))
         sipClass = sipClass_KFilePlacesView;
-    else if (dynamic_cast<KFileViewSignaler*>(sipCpp))
-        sipClass = sipClass_KFileViewSignaler;
     else if (dynamic_cast<KFileWidget*>(sipCpp))
         sipClass = sipClass_KFileWidget;
     else if (dynamic_cast<KFileWritePlugin*>(sipCpp))

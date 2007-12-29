@@ -25,6 +25,7 @@
 namespace KStandardAction
 {
 
+
 enum StandardAction
 {
     ActionNone, 
@@ -69,6 +70,8 @@ enum StandardAction
     GotoLine, 
     FirstPage, 
     LastPage, 
+    DocumentBack, 
+    DocumentForward, 
     AddBookmark, 
     EditBookmarks, 
     Spelling, 
@@ -93,6 +96,7 @@ enum StandardAction
     SwitchApplicationLanguage
 };
 
+
 KAction*             create (KStandardAction::StandardAction, SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 const char*          name (KStandardAction::StandardAction);
 QStringList          stdNames ();
@@ -103,7 +107,7 @@ KAction*             save (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             saveAs (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             revert (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             close (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
-KAction*             print (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*) /PyName=print_/;
+KAction*             print (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*)  /PyName=print_/;
 KAction*             printPreview (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             mail (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             quit (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
@@ -144,6 +148,10 @@ KAction*             gotoPage (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             gotoLine (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             firstPage (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             lastPage (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
+
+KAction*             documentBack (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
+KAction*             documentForward (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
+
 KAction*             addBookmark (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             editBookmarks (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             spelling (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
@@ -162,5 +170,7 @@ KAction*             tipOfDay (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             reportBug (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             aboutApp (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
 KAction*             aboutKDE (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject*);
+
+
 };  // namespace KStandardAction
 

@@ -34,14 +34,17 @@ public:
     typedef QPair<QString, QString> Context;
 //ig     typedef QList<KNotification::Context> ContextList;
 
+
     enum NotificationFlag
     {
         RaiseWidgetOnActivation, 
         CloseOnTimeout, 
-        Persistant, 
+        Persistent, 
         CloseWhenWidgetActivated, 
+        Persistant, 
         DefaultEvent
     };
+
 
     typedef QFlags<KNotification::NotificationFlag> NotificationFlags;
 
@@ -87,6 +90,9 @@ public slots:
     void                 ref ();
     void                 deref ();
     void                 sendEvent ();
+
+    void                 update ();
+
 
 protected:
     virtual bool         eventFilter (QObject*, QEvent*);

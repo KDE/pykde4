@@ -27,7 +27,6 @@
 #include <deviceinterface.h>
 #include <storagedrive.h>
 #include <opticaldrive.h>
-#include <audiointerface.h>
 #include <storagevolume.h>
 #include <opticaldisc.h>
 #include <storageaccess.h>
@@ -39,6 +38,7 @@
 #include <processor.h>
 #include <battery.h>
 #include <camera.h>
+#include <audiointerface.h>
 #include <block.h>
 #include <video.h>
 #include <networkinterface.h>
@@ -63,12 +63,60 @@ public:
     bool                 isPlugged () const;
 
 signals:
-
     void                 plugStateChanged (bool, const QString&);
 
+// Subclasses for QObject
 
-signals:
+public:
+%ConvertToSubClassCode
 
+    if (dynamic_cast<Solid::DeviceInterface*>(sipCpp))
+    {
+        sipClass = sipClass_Solid_DeviceInterface;
+        if (dynamic_cast<Solid::StorageDrive*>(sipCpp))
+        {
+            sipClass = sipClass_Solid_StorageDrive;
+            if (dynamic_cast<Solid::OpticalDrive*>(sipCpp))
+                sipClass = sipClass_Solid_OpticalDrive;
+        }
+        else if (dynamic_cast<Solid::StorageVolume*>(sipCpp))
+        {
+            sipClass = sipClass_Solid_StorageVolume;
+            if (dynamic_cast<Solid::OpticalDisc*>(sipCpp))
+                sipClass = sipClass_Solid_OpticalDisc;
+        }
+        else if (dynamic_cast<Solid::StorageAccess*>(sipCpp))
+            sipClass = sipClass_Solid_StorageAccess;
+        else if (dynamic_cast<Solid::AcAdapter*>(sipCpp))
+            sipClass = sipClass_Solid_AcAdapter;
+        else if (dynamic_cast<Solid::Button*>(sipCpp))
+            sipClass = sipClass_Solid_Button;
+        else if (dynamic_cast<Solid::DvbInterface*>(sipCpp))
+            sipClass = sipClass_Solid_DvbInterface;
+        else if (dynamic_cast<Solid::PortableMediaPlayer*>(sipCpp))
+            sipClass = sipClass_Solid_PortableMediaPlayer;
+        else if (dynamic_cast<Solid::GenericInterface*>(sipCpp))
+            sipClass = sipClass_Solid_GenericInterface;
+        else if (dynamic_cast<Solid::Processor*>(sipCpp))
+            sipClass = sipClass_Solid_Processor;
+        else if (dynamic_cast<Solid::Battery*>(sipCpp))
+            sipClass = sipClass_Solid_Battery;
+        else if (dynamic_cast<Solid::Camera*>(sipCpp))
+            sipClass = sipClass_Solid_Camera;
+        else if (dynamic_cast<Solid::AudioInterface*>(sipCpp))
+            sipClass = sipClass_Solid_AudioInterface;
+        else if (dynamic_cast<Solid::Block*>(sipCpp))
+            sipClass = sipClass_Solid_Block;
+        else if (dynamic_cast<Solid::Video*>(sipCpp))
+            sipClass = sipClass_Solid_Video;
+        else if (dynamic_cast<Solid::NetworkInterface*>(sipCpp))
+            sipClass = sipClass_Solid_NetworkInterface;
+    }
+    else if (dynamic_cast<Solid::DeviceNotifier*>(sipCpp))
+        sipClass = sipClass_Solid_DeviceNotifier;
+    else
+        sipClass = NULL;
+%End
 
 
 };  // class AcAdapter

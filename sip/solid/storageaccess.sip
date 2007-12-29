@@ -43,12 +43,18 @@ public:
     bool                 teardown ();
 
 signals:
-    void                 accessibilityChanged (bool);
-    void                 setupDone (Solid::ErrorType, QVariant);
-    void                 teardownDone (Solid::ErrorType, QVariant);
+
+    void                 accessibilityChanged (bool, const QString&);
+    void                 setupDone (Solid::ErrorType, QVariant, const QString&);
+    void                 teardownDone (Solid::ErrorType, QVariant, const QString&);
+
 
 protected:
 //ig                          StorageAccess (StorageAccessPrivate&, QObject*);
+
+signals:
+
+
 
 };  // class StorageAccess
 

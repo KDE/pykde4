@@ -125,7 +125,6 @@
 %Include previewjob.sip
 %Include renamedialog.sip
 %Include renamedialogplugin.sip
-%Include safesite.sip
 %Include scheduler.sip
 %Include sessiondata.sip
 %Include skipdialog.sip

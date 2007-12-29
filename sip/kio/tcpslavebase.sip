@@ -33,39 +33,28 @@ class TCPSlaveBase : KIO::SlaveBase
 
 
 public:
-                         TCPSlaveBase (ushort, const QByteArray&, const QByteArray&, const QByteArray&, bool);
+                         TCPSlaveBase (const QByteArray&, const QByteArray&, const QByteArray&, bool);
 
 protected:
+    enum SslResult {
+        ResultOk,
+        ResultFailed,
+        ResultOverridden
+    };
     ssize_t              write (const char*, ssize_t);
     ssize_t              read (char*, ssize_t);
     ssize_t              readLine (char*, ssize_t);
-    void                 setBlockSize (int);
-    bool                 connectToHost (const QString&, const QString&, quint16, bool = 1);
-    void                 setDefaultPort (quint16);
-    quint16              defaultPort () const;
+    bool                 connectToHost (const QString &, const QString&, quint16 port);
     quint16              port () const;
-    bool                 usingSSL () const;
-    bool                 usingTLS ();
-    bool                 canUseTLS ();
-    int                  startTLS ();
-    void                 stopTLS ();
-    void                 closeDescriptor ();
+    bool                 isAutoSsl() const;
+    bool                 isUsingSsl() const; 
+    bool                 startSsl();
+    void                 disconnectFromHost();
     bool                 atEnd ();
-    void                 setSSLMetaData ();
-    bool                 initializeSSL ();
-    void                 cleanSSL ();
-    bool                 isConnectionValid ();
-    int                  connectResult ();
+    bool                 isConnected() const;
     bool                 waitForResponse (int);
-    void                 setBlockConnection (bool);
-    void                 setConnectTimeout (int);
-    bool                 isSSLTunnelEnabled ();
-    void                 setEnableSSLTunnel (bool);
-    void                 setRealHost (const QString&);
-    int                  verifyCertificate ();
-    void                 certificatePrompt ();
-    bool                 userAborted () const;
-    QIODevice*           socket () const;
+    void                 setBlocking (bool);
+//ig    KTcpSocket*          socket () const;
 
 protected:
 //igx     virtual void         virtual_hook (int, void*);

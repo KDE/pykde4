@@ -213,7 +213,9 @@ signals:
 //ig     void                 sigQueryClose (bool*, bool*);
 
 public slots:
-    virtual void         setModified ();
+
+    void                 setModified ();
+
     virtual bool         save ();
     bool                 waitSaveComplete ();
 
@@ -223,6 +225,10 @@ protected:
 
 private:
                          ReadWritePart (const KParts::ReadWritePart&) [()];
+
+public slots:
+
+
 
 };  // class ReadWritePart
 

@@ -112,7 +112,6 @@ signals:
     void                 mimeType (const QString&);
     void                 warning (const QString&);
     void                 infoMessage (const QString&);
-    void                 connectFinished ();
 
 protected:
     virtual bool         dispatch ();
@@ -126,6 +125,10 @@ protected slots:
     void                 calcSpeed ();
 
 protected:
+
+signals:
+
+
 //force
 
 private:

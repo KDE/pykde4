@@ -42,8 +42,6 @@ public:
                          SlaveBase (const QByteArray&, const QByteArray&, const QByteArray&);
     void                 exit ();
     void                 dispatchLoop ();
-    void                 setConnection (KIO::Connection*);
-    KIO::Connection*     connection () const;
     void                 data (const QByteArray&);
     void                 dataReq ();
     void                 opened ();
@@ -131,28 +129,14 @@ public:
     void                 dropNetwork (const QString& = QString::null );
     int                  waitForAnswer (int, int, QByteArray&, int* /Out/);
     void                 sendMetaData ();
-//ig     QCString             mProtocol;
-    KIO::Connection*     m_pConnection;
-    KIO::MetaData        mOutgoingMetaData;
-    KIO::MetaData        mIncomingMetaData;
     bool                 wasKilled () const;
     void                 setKillFlag ();
 
 protected:
 //igx     virtual void         virtual_hook (int, void*);
 
-// Subclasses for KIO::SlaveBase
-
 public:
-%ConvertToSubClassCode
 
-    if (dynamic_cast<KIO::ForwardingSlaveBase*>(sipCpp))
-        sipClass = sipClass_KIO_ForwardingSlaveBase;
-    else if (dynamic_cast<KIO::TCPSlaveBase*>(sipCpp))
-        sipClass = sipClass_KIO_TCPSlaveBase;
-    else
-        sipClass = NULL;
-%End
 
 
 };  // class SlaveBase

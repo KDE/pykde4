@@ -37,7 +37,9 @@ public:
     QString              fileName () const;
     QFile::FileError     error () const;
     QString              errorString () const;
-    bool                 open ();
+
+    virtual bool         open (QIODevice::OpenMode = QIODevice::ReadWrite);
+
     void                 abort ();
     bool                 finalize ();
     static bool          backupFile (const QString&, const QString& = QString ());
@@ -47,6 +49,10 @@ public:
 
 private:
                          KSaveFile (const KSaveFile&);
+
+public:
+
+
 
 };  // class KSaveFile
 

@@ -66,7 +66,7 @@ protected:
                          KMimeType (const QString&, const QString&, const QString&);
 //igx                          KMimeType (KMimeTypePrivate&);
 //igx                          KMimeType (KMimeTypePrivate&, const QString&, const QString&);
-    void                 addPattern (const QString&);
+    void                 setPatterns (const QStringList&);
     void                 setParentMimeType (const QString& /Transfer/);
     void                 internalClearData ();
 

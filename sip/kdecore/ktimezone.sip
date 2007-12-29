@@ -142,9 +142,7 @@ public:
     KTimeZoneSource*     source () const;
     bool                 parse () const;
     const KTimeZoneData* data (bool = 0) const;
-
     bool                 updateBase (const KTimeZone&);
-
     static QDateTime     fromTime_t (time_t);
     static time_t        toTime_t (const QDateTime&);
     static KTimeZone     utc ();
@@ -155,10 +153,6 @@ public:
 protected:
                          KTimeZone (KTimeZoneBackend*);
     void                 setData (KTimeZoneData*, KTimeZoneSource* = 0);
-
-protected:
-
-
 
 };  // class KTimeZone
 
@@ -199,6 +193,14 @@ class KTimeZoneSource
 public:
                          KTimeZoneSource ();
     virtual KTimeZoneData* parse (const KTimeZone&) const;
+
+    bool                 useZoneParse () const;
+
+
+protected:
+
+                         KTimeZoneSource (bool);
+
 
 };  // class KTimeZoneSource
 

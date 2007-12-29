@@ -46,7 +46,10 @@ public:
     static void          drawFadeoutText (QPainter*, int, int, int, const QString&);
     static void          drawTruncateText (QPainter*, int, int, int, const QString&);
 
+
 private:
+                         KWordWrap (const KWordWrap&) [()];
+
                          KWordWrap (const QRect&);
 
 };  // class KWordWrap

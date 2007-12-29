@@ -51,6 +51,9 @@ public:
 
                          KShortcutsEditor (KActionCollection*, QWidget* /TransferThis/, KShortcutsEditor::ActionTypes = KShortcutsEditor::AllActions , KShortcutsEditor::LetterShortcuts = KShortcutsEditor::LetterShortcutsAllowed );
                          KShortcutsEditor (QWidget* /TransferThis/, KShortcutsEditor::ActionTypes = KShortcutsEditor::AllActions , KShortcutsEditor::LetterShortcuts = KShortcutsEditor::LetterShortcutsAllowed );
+
+    void                 clearCollections ();
+
     void                 addCollection (KActionCollection*, const QString& = QString ());
     void                 undoChanges ();
     void                 save ();
@@ -66,10 +69,6 @@ public slots:
 
 private:
                          KShortcutsEditor (const KShortcutsEditor&) [()];
-
-protected:
-
-
 
 };  // class KShortcutsEditor
 

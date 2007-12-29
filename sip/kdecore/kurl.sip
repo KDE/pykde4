@@ -52,6 +52,9 @@ public:
                              List ();
                              List (const KUrl&);
                              List (const QStringList&);
+
+                             List (const QList<KUrl>&);
+
         QStringList          toStringList () const;
 //ig                              operator QVariant () const;
         void                 populateMimeData (QMimeData*, const KUrl::MetaDataMap& = KUrl::MetaDataMap (), KUrl::MimeDataFlags = KUrl::DefaultMimeDataFlags ) const;

@@ -62,6 +62,9 @@ protected:
     void                 sizeAndPosition ();
     virtual bool         eventFilter (QObject*, QEvent*);
 
+    virtual QPoint       globalPositionHint () const;
+
+
 protected slots:
     virtual void         slotActivated (QListWidgetItem*);
 

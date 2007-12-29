@@ -34,13 +34,18 @@ public:
                          KDirSortFilterProxyModel (QObject* /TransferThis/ = 0);
     virtual bool         hasChildren (const QModelIndex& /Transfer/ = QModelIndex ()) const;
     virtual bool         canFetchMore (const QModelIndex& /Transfer/) const;
-    static int           naturalCompare (const QString&, const QString&);
-
     static int           pointsForPermissions (const QFileInfo&);
+
+protected:
+    virtual bool         subSortLessThan (const QModelIndex&, const QModelIndex&) const;
+
+public:
+
 
 
 protected:
-    virtual bool         subSortLessThan(const QModelIndex &, const QModelIndex &) const;
-    virtual int          compareCategories(const QModelIndex &, const QModelIndex &) const;
+
+
+
 };  // class KDirSortFilterProxyModel
 

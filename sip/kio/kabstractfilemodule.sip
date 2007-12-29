@@ -95,7 +95,6 @@
 #include <kurlcombobox.h>
 #include <kurlnavigator.h>
 #include <kurlrequesterdialog.h>
-#include <safesite.h>
 %End
 
 
@@ -334,8 +333,6 @@ public:
         sipClass = sipClass_KUrlNavigator;
     else if (dynamic_cast<KUrlRequesterDialog*>(sipCpp))
         sipClass = sipClass_KUrlRequesterDialog;
-    else if (dynamic_cast<SafeSite::Report*>(sipCpp))
-        sipClass = sipClass_SafeSite_Report;
     else
         sipClass = NULL;
 %End

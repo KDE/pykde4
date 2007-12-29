@@ -40,9 +40,7 @@ public:
     QList<QTreeWidget*>  treeWidgets () const;
 
 signals:
-
     void                 hiddenChanged (QTreeWidgetItem*, bool);
-
 
 public slots:
     void                 addTreeWidget (QTreeWidget*);
@@ -61,6 +59,9 @@ protected:
     virtual void         connectTreeWidget (QTreeWidget*);
     virtual void         disconnectTreeWidget (QTreeWidget*);
     virtual bool         canChooseColumnsCheck ();
+
+    virtual bool         event (QEvent*);
+
 
 };  // class KTreeWidgetSearchLine
 

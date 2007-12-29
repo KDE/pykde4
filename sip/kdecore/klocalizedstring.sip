@@ -45,6 +45,7 @@ public:
     KLocalizedString     subs (QChar, int = 0, const QChar& = QLatin1Char (' ' )) const;
     KLocalizedString     subs (const QString&, int = 0, const QChar& = QLatin1Char (' ' )) const;
 
+    KLocalizedString     inContext (const QString&, const QString&) const;
 
 //mt  undefined symbol: QList<KCatalogName>& -- need mapped type?
 //mt     static void          notifyCatalogsUpdated (const QStringList&, const QList<KCatalogName>&);

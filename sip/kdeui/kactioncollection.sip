@@ -35,8 +35,12 @@ public:
                          KActionCollection (QObject* /TransferThis/, const KComponentData& = KComponentData ());
     static const QList<KActionCollection*>& allCollections ();
     void                 clear ();
-
     void                 associateWidget (QWidget*) const;
+
+    void                 addAssociatedWidget (QWidget*);
+    void                 removeAssociatedWidget (QWidget*);
+    QList<QWidget*>      associatedWidgets () const;
+    void                 clearAssociatedWidgets ();
 
     QString              configGroup () const;
     bool                 configIsGlobal () const;
@@ -61,32 +65,26 @@ signals:
     void                 actionHighlighted (QAction*);
     void                 actionTriggered (QAction*);
 
-protected:
-//ig     virtual void         connectNotify (const char*);
+protected slots:
+
+//ig    virtual void         connectNotify (const char*);
     virtual void         slotActionTriggered ();
     virtual void         slotActionHighlighted ();
 
+
 public:
     QAction*             addAction (const QString&, QAction*);
-
     KAction*             addAction (const QString&, KAction*);
-
     void                 removeAction (QAction*);
     QAction*             takeAction (QAction*);
-
     KAction*             addAction (KStandardAction::StandardAction, const QObject* = 0, const char* = 0);
     KAction*             addAction (KStandardAction::StandardAction, const QString&, const QObject* = 0, const char* = 0);
     KAction*             addAction (const QString&, const QObject* = 0, const char* = 0);
 
-
 private:
                          KActionCollection (const KXMLGUIClient* /TransferThis/);
 
-public:
-
-
-
-public:
+protected:
 
 
 

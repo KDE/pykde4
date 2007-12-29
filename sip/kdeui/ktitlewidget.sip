@@ -66,6 +66,9 @@ public slots:
     void                 setAutoHideTimeout (int);
 
 protected:
+
+    void                 changeEvent (QEvent*);
+
     void                 showEvent (QShowEvent*);
     bool                 eventFilter (QObject*, QEvent*);
 

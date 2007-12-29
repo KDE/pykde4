@@ -33,6 +33,7 @@ class KDialog : QDialog
 
 public:
 
+
     enum ButtonCode
     {
         None, 
@@ -45,12 +46,14 @@ public:
         Close, 
         No, 
         Yes, 
+        Reset, 
         Details, 
         User1, 
         User2, 
         User3, 
         NoDefault
     };
+
 
     typedef QFlags<KDialog::ButtonCode> ButtonCodes;
 
@@ -134,6 +137,9 @@ signals:
     void                 layoutHintChanged ();
     void                 helpClicked ();
     void                 defaultClicked ();
+
+    void                 resetClicked ();
+
     void                 user3Clicked ();
     void                 user2Clicked ();
     void                 user1Clicked ();
@@ -163,6 +169,10 @@ protected:
 
 private:
                          KDialog (const KDialog&) [()];
+
+public:
+
+
 
 };  // class KDialog
 

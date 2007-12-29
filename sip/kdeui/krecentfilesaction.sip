@@ -44,6 +44,9 @@ public:
     void                 addUrl (const KUrl&, const QString& = QString ());
     void                 removeUrl (const KUrl&);
 
+    KUrl::List           urls () const;
+
+
 signals:
     void                 urlSelected (const KUrl&);
 

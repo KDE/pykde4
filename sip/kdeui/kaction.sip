@@ -50,8 +50,8 @@ public:
                          KAction (const QString&, QObject* /TransferThis/);
                          KAction (const KIcon&, const QString&, QObject* /TransferThis/);
     KShortcut            shortcut (KAction::ShortcutTypes = KAction::ActiveShortcut ) const;
-    void                 setShortcut (const KShortcut&, KAction::ShortcutTypes);
-    void                 setShortcut (const QKeySequence&, KAction::ShortcutTypes);
+    void                 setShortcut (const KShortcut&, KAction::ShortcutTypes = KAction::ShortcutTypes(KAction::ActiveShortcut | KAction::DefaultShortcut));
+    void                 setShortcut (const QKeySequence&, KAction::ShortcutTypes = KAction::ShortcutTypes(KAction::ActiveShortcut | KAction::DefaultShortcut));
 
     void                 setShortcuts (const QList<QKeySequence>&, KAction::ShortcutTypes);
 

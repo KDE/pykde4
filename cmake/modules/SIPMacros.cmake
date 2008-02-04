@@ -45,7 +45,6 @@ MACRO(ADD_SIP_PYTHON_MODULE MODULE_NAME MODULE_SIP)
 
     # FIXME this removes -fvisibility=hidden from the compiler flags and has global affect.
     STRING(REPLACE "-fvisibility=hidden" "" CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})
-
     SET(EXTRA_LINK_LIBRARIES ${ARGN})
 
     STRING(REPLACE "." "/" _x ${MODULE_NAME})
@@ -88,13 +87,24 @@ MACRO(ADD_SIP_PYTHON_MODULE MODULE_NAME MODULE_SIP)
         ENDIF( ${CONCAT_NUM} LESS ${SIP_CONCAT_PARTS} )
     ENDFOREACH(CONCAT_NUM RANGE 0 ${SIP_CONCAT_PARTS} )
 
+    IF(NOT WIN32)
+        SET(TOUCH_COMMAND touch)
+    ELSE(NOT WIN32)
+        SET(TOUCH_COMMAND echo)
+        # instead of a touch command, give out the name and append to the files
+        # this is basically what the touch command does.
+        FOREACH(filename ${_sip_output_files})
+            FILE(APPEND filename "")
+        ENDFOREACH(filename ${_sip_output_files})
+    ENDIF(NOT WIN32)
     ADD_CUSTOM_COMMAND(
         OUTPUT ${_sip_output_files} 
         COMMAND ${CMAKE_COMMAND} ${_message} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/print_status.cmake
-        COMMAND touch ${_sip_output_files} 
+        COMMAND ${TOUCH_COMMAND} ${_sip_output_files} 
         COMMAND ${SIP_EXECUTABLE} ${_sip_tags} ${_sip_x} ${SIP_EXTRA_OPTIONS} -j ${SIP_CONCAT_PARTS} -c ${CMAKE_CURRENT_BINARY_DIR}/${_module_path} ${_sip_includes} ${_abs_module_sip}
         DEPENDS ${_abs_module_sip}
     )
+    
     ADD_LIBRARY(${_logical_name} SHARED ${_sip_output_files} )
     TARGET_LINK_LIBRARIES(${_logical_name} ${PYTHON_LIBRARY})
     TARGET_LINK_LIBRARIES(${_logical_name} ${EXTRA_LINK_LIBRARIES})

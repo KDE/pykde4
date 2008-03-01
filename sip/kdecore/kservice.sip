@@ -91,9 +91,6 @@ public:
     static KService::List allServices ();
     static QString       newServicePath (bool, const QString&, QString* = 0, const QStringList* = 0);
 
-protected:
-    QStringList&         accessServiceTypes ();
-
 };  // class KService
 
 

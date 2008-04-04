@@ -27,6 +27,110 @@
 #include <kcoreconfigskeleton.h>
 %End
 
+%ModuleHeaderCode
+// Need to keep a reference alive for 'val' for scalar types
+// These are called in the respective class ctor %MethodCode
+// and in the KCoreConfigSkeleton add* methods %MethodCode
+
+class PyItemBool : public KCoreConfigSkeleton::ItemBool
+{
+public:
+    PyItemBool (const QString &group, const QString &key, bool val, bool defaultValue = 1) :
+        KCoreConfigSkeleton::ItemBool (group, key, this->value, defaultValue)
+    {
+        value = val;
+    }
+
+private:
+    bool value;
+};
+
+
+class PyItemInt : public KCoreConfigSkeleton::ItemInt
+{
+public:
+    PyItemInt (const QString &group, const QString &key, qint32 val, qint32 defaultValue = 1) :
+        KCoreConfigSkeleton::ItemInt (group, key, this->value, defaultValue)
+    {
+        value = val;
+    }
+
+private:
+    qint32 value;
+};
+    
+
+class PyItemUInt : public KCoreConfigSkeleton::ItemUInt
+{
+public:
+    PyItemUInt (const QString &group, const QString &key, quint32 val, quint32 defaultValue = 1) :
+        KCoreConfigSkeleton::ItemUInt (group, key, this->value, defaultValue)
+    {
+        value = val;
+    }
+
+private:
+    quint32 value;
+};
+    
+
+class PyItemLongLong : public KCoreConfigSkeleton::ItemLongLong
+{
+public:
+    PyItemLongLong (const QString &group, const QString &key, qint64 val, qint64 defaultValue = 1) :
+        KCoreConfigSkeleton::ItemLongLong (group, key, this->value, defaultValue)
+    {
+        value = val;
+    }
+
+private:
+    qint64 value;
+};
+    
+    
+class PyItemULongLong : public KCoreConfigSkeleton::ItemULongLong
+{
+public:
+    PyItemULongLong (const QString &group, const QString &key, quint64 val, quint64 defaultValue = 1) :
+        KCoreConfigSkeleton::ItemULongLong (group, key, this->value, defaultValue)
+    {
+        value = val;
+    }
+
+private:
+    quint64 value;
+};
+    
+    
+class PyItemDouble : public KCoreConfigSkeleton::ItemDouble
+{
+public:
+    PyItemDouble (const QString &group, const QString &key, double val, double defaultValue = 1) :
+        KCoreConfigSkeleton::ItemDouble (group, key, this->value, defaultValue)
+    {
+        value = val;
+    }
+
+private:
+    double value;
+};
+
+    
+class PyItemEnum : public KCoreConfigSkeleton::ItemEnum
+{
+public:
+    PyItemEnum (const QString& group, const QString& key, int& val, const QList<KCoreConfigSkeleton::ItemEnum::Choice>& choices, int defaultValue = 0) :
+        KCoreConfigSkeleton::ItemEnum(group, key, this->value, choices, defaultValue)
+    {
+        value = val;
+    };
+
+private:
+    int value;
+};
+
+%End
+
 class KConfigSkeletonItem
 {
 %TypeHeaderCode
@@ -119,6 +223,16 @@ public:
 
     public:
                                 ItemPassword (const QString& _group, const QString& _key, QString& reference, const QString& defaultValue = QLatin1String(""));
+
+//force
+        void                    setValue (const QString& v);
+        QString&                value ();
+        virtual void            setDefaultValue (const QString& v);
+        virtual void            setDefault ();
+        void                    readDefault (KConfig* config);
+        void                    swapDefault ();
+//end
+
     };   // ItemPassword
 
 
@@ -129,6 +243,16 @@ public:
 
     public:
                                 ItemPath (const QString& _group, const QString& _key, QString& reference, const QString& defaultValue = QString());
+
+//force
+        void                    setValue (const QString& v);
+        QString&                value ();
+        virtual void            setDefaultValue (const QString& v);
+        virtual void            setDefault ();
+        void                    readDefault (KConfig* config);
+        void                    swapDefault ();
+//end
+
     };   // ItemPath
 
 
@@ -190,9 +314,10 @@ public:
     public:
                                 ItemBool (const QString& _group, const QString& _key, bool reference, bool defaultValue = 1) [(const QString& _group, const QString& _key, bool& reference, bool defaultValue = 1)];
 %MethodCode
-Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemBool (*a0, *a1, a2, a3);
+    Py_BEGIN_ALLOW_THREADS
+    sipCpp = new sipKCoreConfigSkeleton_ItemBool (PyItemBool (*a0, *a1, a2, a3));
     Py_END_ALLOW_THREADS
+
 %End
 
         void                    readConfig (KConfig* config);
@@ -202,6 +327,7 @@ Py_BEGIN_ALLOW_THREADS
 
 //force
         void                    setValue (const bool& v /In/);
+        bool                    value ();
         virtual void            setDefaultValue (const bool& v /In/);
         virtual void            setDefault ();
         virtual void            writeConfig (KConfig* config);
@@ -277,9 +403,10 @@ public:
     public:
                                 ItemInt (const QString& _group, const QString& _key, qint32 reference, qint32 defaultValue = 0) [(const QString& _group, const QString& _key, qint32& reference, qint32 defaultValue = 0)];
 %MethodCode
-Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemInt (*a0, *a1, a2, a3);
+    Py_BEGIN_ALLOW_THREADS
+    sipCpp = new sipKCoreConfigSkeleton_ItemInt (PyItemInt (*a0, *a1, a2, a3));
     Py_END_ALLOW_THREADS
+
 %End
 
         void                    readConfig (KConfig* config);
@@ -293,6 +420,7 @@ Py_BEGIN_ALLOW_THREADS
 
 //force
         void                    setValue (const qint32& v /In/);
+        qint32                  value ();
         virtual void            setDefaultValue (const qint32& v /In/);
         virtual void            setDefault ();
         virtual void            writeConfig (KConfig* config);
@@ -311,8 +439,8 @@ public:
     public:
                                 ItemLongLong (const QString& _group, const QString& _key, qint64 reference, qint64 defaultValue = 0) [(const QString& _group, const QString& _key, qint64& reference, qint64 defaultValue = 0)];
 %MethodCode
-Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemLongLong (*a0, *a1, a2, a3);
+    Py_BEGIN_ALLOW_THREADS
+    sipCpp = new sipKCoreConfigSkeleton_ItemLongLong (PyItemLongLong (*a0, *a1, a2, a3));
     Py_END_ALLOW_THREADS
 %End
 
@@ -327,6 +455,7 @@ Py_BEGIN_ALLOW_THREADS
 
 //force
         void                    setValue (const qint64& v /In/);
+        quint64                 value ();
         virtual void            setDefaultValue (const qint64& v /In/);
         virtual void            setDefault ();
         virtual void            writeConfig (KConfig* config);
@@ -359,14 +488,23 @@ public:
     public:
                                 ItemEnum (const QString& _group, const QString& _key, qint32 reference, const QList<KCoreConfigSkeleton::ItemEnum::Choice> choices, qint32 defaultValue = 0) [(const QString& _group, const QString& _key, qint32& reference, const QList<KCoreConfigSkeleton::ItemEnum::Choice>& choices, qint32 defaultValue = 0)];
 %MethodCode
-Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemEnum (*a0, *a1, a2, *a3, a4);
+    Py_BEGIN_ALLOW_THREADS
+    sipCpp = new sipKCoreConfigSkeleton_ItemEnum (PyItemEnum (*a0, *a1, a2, *a3, a4));
     Py_END_ALLOW_THREADS
 %End
 
         QList<KCoreConfigSkeleton::ItemEnum::Choice>  choices () const;
         void                    readConfig (KConfig* config);
         void                    writeConfig (KConfig* config);
+
+//force
+        void                    setValue (const qint32& v /In/);
+        qint32                  value ();
+        virtual void            setDefaultValue (const qint32& v /In/);
+        virtual void            setDefault ();
+        void                    readDefault (KConfig* config);
+        void                    swapDefault ();
+//end
     };   // ItemEnum
 
 
@@ -378,8 +516,8 @@ public:
     public:
                                 ItemUInt (const QString& _group, const QString& _key, quint32 reference, quint32 defaultValue = 0) [(const QString& _group, const QString& _key, quint32& reference, quint32 defaultValue = 0)];
 %MethodCode
-Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemUInt (*a0, *a1, a2, a3);
+    Py_BEGIN_ALLOW_THREADS
+    sipCpp = new sipKCoreConfigSkeleton_ItemUInt (PyItemUInt (*a0, *a1, a2, a3));
     Py_END_ALLOW_THREADS
 %End
 
@@ -394,6 +532,7 @@ Py_BEGIN_ALLOW_THREADS
 
 //force
         void                    setValue (const quint32& v /In/);
+        quint32                 value ();
         virtual void            setDefaultValue (const quint32& v /In/);
         virtual void            setDefault ();
         virtual void            writeConfig (KConfig* config);
@@ -412,8 +551,8 @@ public:
     public:
                                 ItemULongLong (const QString& _group, const QString& _key, quint64 reference, quint64 defaultValue = 0) [(const QString& _group, const QString& _key, quint64& reference, quint64 defaultValue = 0)];
 %MethodCode
-Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemULongLong (*a0, *a1, a2, a3);
+    Py_BEGIN_ALLOW_THREADS
+    sipCpp = new sipKCoreConfigSkeleton_ItemULongLong (PyItemULongLong (*a0, *a1, a2, a3));
     Py_END_ALLOW_THREADS
 %End
 
@@ -428,6 +567,7 @@ Py_BEGIN_ALLOW_THREADS
 
 //force
         void                    setValue (const quint64& v /In/);
+        quint64                 value ();
         virtual void            setDefaultValue (const quint64& v /In/);
         virtual void            setDefault ();
         virtual void            writeConfig (KConfig* config);
@@ -448,8 +588,8 @@ public:
     public:
                                 ItemDouble (const QString& _group, const QString& _key, double reference, double defaultValue = 0) [(const QString& _group, const QString& _key, double& reference, double defaultValue = 0)];
 %MethodCode
-Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemDouble(*a0, *a1, a2, a3);
+    Py_BEGIN_ALLOW_THREADS
+    sipCpp = new sipKCoreConfigSkeleton_ItemDouble (PyItemDouble (*a0, *a1, a2, a3));
     Py_END_ALLOW_THREADS
 %End
 
@@ -464,6 +604,7 @@ Py_BEGIN_ALLOW_THREADS
 
 //force
         void                    setValue (const double& v /In/);
+        double                  value ();
         virtual void            setDefaultValue (const double& v /In/);
         virtual void            setDefault ();
         virtual void            writeConfig (KConfig* config);
@@ -675,13 +816,69 @@ public:
     KCoreConfigSkeleton::ItemPath*  addItemPath (const QString& name, QString& reference, const QString& defaultValue = QLatin1String(""), const QString& key = QString());
     KCoreConfigSkeleton::ItemProperty*  addItemProperty (const QString& name, QVariant& reference, const QVariant& defaultValue = QVariant(), const QString& key = QString());
     KCoreConfigSkeleton::ItemBool*  addItemBool (const QString& name, bool& reference /In/, bool defaultValue = 0, const QString& key = QString());
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = new PyItemBool (sipCpp->currentGroup(), a3->isNull() ? *a0 : *a3, a1, a2);
+    sipCpp->addItem(sipRes, *a0);
+    Py_END_ALLOW_THREADS
+%End
+    
     KCoreConfigSkeleton::ItemInt*  addItemInt (const QString& name, qint32& reference /In/, qint32 defaultValue = 0, const QString& key = QString());
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = new PyItemInt (sipCpp->currentGroup(), a3->isNull() ? *a0 : *a3, a1, a2);
+    sipCpp->addItem(sipRes, *a0);
+    Py_END_ALLOW_THREADS
+%End
+    
     KCoreConfigSkeleton::ItemUInt*  addItemUInt (const QString& name, quint32& reference /In/, quint32 defaultValue = 0, const QString& key = QString());
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = new PyItemUInt (sipCpp->currentGroup(), a3->isNull() ? *a0 : *a3, a1, a2);
+    sipCpp->addItem(sipRes, *a0);
+    Py_END_ALLOW_THREADS
+%End
+    
     KCoreConfigSkeleton::ItemLongLong*  addItemLongLong (const QString& name, qint64& reference /In/, qint64 defaultValue = 0, const QString& key = QString());
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = new PyItemLongLong (sipCpp->currentGroup(), a3->isNull() ? *a0 : *a3, a1, a2);
+    sipCpp->addItem(sipRes, *a0);
+    Py_END_ALLOW_THREADS
+%End
+    
     KCoreConfigSkeleton::ItemLongLong*  addItemInt64 (const QString& name, qint64& reference /In/, qint64 defaultValue = 0, const QString& key = QString());
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = new PyItemLongLong (sipCpp->currentGroup(), a3->isNull() ? *a0 : *a3, a1, a2);
+    sipCpp->addItem(sipRes, *a0);
+    Py_END_ALLOW_THREADS
+%End
+    
     KCoreConfigSkeleton::ItemULongLong*  addItemULongLong (const QString& name, quint64& reference /In/, quint64 defaultValue = 0, const QString& key = QString());
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = new PyItemULongLong (sipCpp->currentGroup(), a3->isNull() ? *a0 : *a3, a1, a2);
+    sipCpp->addItem(sipRes, *a0);
+    Py_END_ALLOW_THREADS
+%End
+    
     KCoreConfigSkeleton::ItemULongLong*  addItemUInt64 (const QString& name, quint64& reference /In/, quint64 defaultValue = 0, const QString& key = QString());
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = new PyItemULongLong (sipCpp->currentGroup(), a3->isNull() ? *a0 : *a3, a1, a2);
+    sipCpp->addItem(sipRes, *a0);
+    Py_END_ALLOW_THREADS
+%End
+    
     KCoreConfigSkeleton::ItemDouble*  addItemDouble (const QString& name, double& reference /In/, double defaultValue = 0.0, const QString& key = QString());
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = new PyItemDouble (sipCpp->currentGroup(), a3->isNull() ? *a0 : *a3, a1, a2);
+    sipCpp->addItem(sipRes, *a0);
+    Py_END_ALLOW_THREADS
+%End
+    
     KCoreConfigSkeleton::ItemRect*  addItemRect (const QString& name, QRect& reference, const QRect& defaultValue = QRect(), const QString& key = QString());
     KCoreConfigSkeleton::ItemPoint*  addItemPoint (const QString& name, QPoint& reference, const QPoint& defaultValue = QPoint(), const QString& key = QString());
     KCoreConfigSkeleton::ItemSize*  addItemSize (const QString& name, QSize& reference, const QSize& defaultValue = QSize(), const QString& key = QString());

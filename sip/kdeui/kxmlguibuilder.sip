@@ -26,7 +26,8 @@ class KXMLGUIBuilder
 %TypeHeaderCode
 #include <kxmlguibuilder.h>
 %End
-
+private:
+                            KXMLGUIBuilder (const KXMLGUIBuilder &other);
 
 public:
     explicit                KXMLGUIBuilder (QWidget* widget);

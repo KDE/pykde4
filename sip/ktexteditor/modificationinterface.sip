@@ -55,7 +55,8 @@ public:
 
 public:
     virtual void         modifiedOnDisk (KTextEditor::Document*, bool, KTextEditor::ModificationInterface::ModifiedOnDiskReason)  = 0;
-
+private:
+                         ModificationInterface (const KTextEditor::ModificationInterface &other);
 };  // class ModificationInterface
 
 };  // namespace KTextEditor

@@ -73,6 +73,8 @@ public:
 protected:
     virtual void         attributeDynamic (KTextEditor::Attribute::Ptr)  = 0;
     virtual void         attributeNotDynamic (KTextEditor::Attribute::Ptr)  = 0;
+private:
+                         SmartInterface (const KTextEditor::SmartInterface &other);
 
 };  // class SmartInterface
 

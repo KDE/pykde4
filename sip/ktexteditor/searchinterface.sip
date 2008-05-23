@@ -60,7 +60,8 @@ public:
 public:
     virtual QVector<KTextEditor::Range> searchText (const KTextEditor::Range&, const QString&, const KTextEditor::Search::SearchOptions = KTextEditor::Search::Default )  = 0;
     virtual KTextEditor::Search::SearchOptions supportedSearchOptions () const = 0;
-
+private:
+                        SearchInterface (const KTextEditor::SearchInterface &other);
 };  // class SearchInterface
 
 };  // namespace KTextEditor

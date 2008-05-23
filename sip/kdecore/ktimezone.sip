@@ -199,6 +199,9 @@ public:
 
 protected:
     explicit                KTimeZoneSource (bool useZoneParse);
+private:
+                            KTimeZoneSource (const KTimeZoneSource &other);
+
 };   // KTimeZoneSource
 
 

@@ -27,6 +27,8 @@ class KIconEffect
 #include <kiconeffect.h>
 %End
 
+private:
+                            KIconEffect (const KIconEffect &other);
 
 public:
                             KIconEffect ();

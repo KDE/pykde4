@@ -137,7 +137,8 @@ class KConfigSkeletonItem
 #include <kcoreconfigskeleton.h>
 %End
 
-
+private:
+                            KConfigSkeletonItem (const KConfigSkeletonItem &other);
 public:
     typedef QList<KConfigSkeletonItem*> List;
 
@@ -315,7 +316,8 @@ public:
                                 ItemBool (const QString& _group, const QString& _key, bool reference, bool defaultValue = 1) [(const QString& _group, const QString& _key, bool& reference, bool defaultValue = 1)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemBool (PyItemBool (*a0, *a1, a2, a3));
+//    sipCpp = new sipKCoreConfigSkeleton_ItemBool (PyItemBool (*a0, *a1, a2, a3));
+    sipCpp = new sipKCoreConfigSkeleton_ItemBool (*a0, *a1, a2, a3);
     Py_END_ALLOW_THREADS
 
 %End
@@ -404,7 +406,8 @@ public:
                                 ItemInt (const QString& _group, const QString& _key, qint32 reference, qint32 defaultValue = 0) [(const QString& _group, const QString& _key, qint32& reference, qint32 defaultValue = 0)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemInt (PyItemInt (*a0, *a1, a2, a3));
+//    sipCpp = new sipKCoreConfigSkeleton_ItemInt (PyItemInt (*a0, *a1, a2, a3));
+    sipCpp = new sipKCoreConfigSkeleton_ItemInt (*a0, *a1, a2, a3);
     Py_END_ALLOW_THREADS
 
 %End
@@ -440,7 +443,8 @@ public:
                                 ItemLongLong (const QString& _group, const QString& _key, qint64 reference, qint64 defaultValue = 0) [(const QString& _group, const QString& _key, qint64& reference, qint64 defaultValue = 0)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemLongLong (PyItemLongLong (*a0, *a1, a2, a3));
+//    sipCpp = new sipKCoreConfigSkeleton_ItemLongLong (PyItemLongLong (*a0, *a1, a2, a3));
+    sipCpp = new sipKCoreConfigSkeleton_ItemLongLong (*a0, *a1, a2, a3);
     Py_END_ALLOW_THREADS
 %End
 
@@ -489,7 +493,8 @@ public:
                                 ItemEnum (const QString& _group, const QString& _key, qint32 reference, const QList<KCoreConfigSkeleton::ItemEnum::Choice> choices, qint32 defaultValue = 0) [(const QString& _group, const QString& _key, qint32& reference, const QList<KCoreConfigSkeleton::ItemEnum::Choice>& choices, qint32 defaultValue = 0)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemEnum (PyItemEnum (*a0, *a1, a2, *a3, a4));
+    sipCpp = new sipKCoreConfigSkeleton_ItemEnum (*a0, *a1, a2, *a3, a4);
+//    sipCpp = new sipKCoreConfigSkeleton_ItemEnum (PyItemEnum (*a0, *a1, a2, *a3, a4));
     Py_END_ALLOW_THREADS
 %End
 
@@ -517,7 +522,8 @@ public:
                                 ItemUInt (const QString& _group, const QString& _key, quint32 reference, quint32 defaultValue = 0) [(const QString& _group, const QString& _key, quint32& reference, quint32 defaultValue = 0)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemUInt (PyItemUInt (*a0, *a1, a2, a3));
+//    sipCpp = new sipKCoreConfigSkeleton_ItemUInt (PyItemUInt (*a0, *a1, a2, a3));
+    sipCpp = new sipKCoreConfigSkeleton_ItemUInt (*a0, *a1, a2, a3);
     Py_END_ALLOW_THREADS
 %End
 
@@ -552,7 +558,8 @@ public:
                                 ItemULongLong (const QString& _group, const QString& _key, quint64 reference, quint64 defaultValue = 0) [(const QString& _group, const QString& _key, quint64& reference, quint64 defaultValue = 0)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemULongLong (PyItemULongLong (*a0, *a1, a2, a3));
+//    sipCpp = new sipKCoreConfigSkeleton_ItemULongLong (PyItemULongLong (*a0, *a1, a2, a3));
+    sipCpp = new sipKCoreConfigSkeleton_ItemULongLong (*a0, *a1, a2, a3);
     Py_END_ALLOW_THREADS
 %End
 
@@ -589,7 +596,8 @@ public:
                                 ItemDouble (const QString& _group, const QString& _key, double reference, double defaultValue = 0) [(const QString& _group, const QString& _key, double& reference, double defaultValue = 0)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
-    sipCpp = new sipKCoreConfigSkeleton_ItemDouble (PyItemDouble (*a0, *a1, a2, a3));
+//    sipCpp = new sipKCoreConfigSkeleton_ItemDouble (PyItemDouble (*a0, *a1, a2, a3));
+    sipCpp = new sipKCoreConfigSkeleton_ItemDouble (*a0, *a1, a2, a3);
     Py_END_ALLOW_THREADS
 %End
 

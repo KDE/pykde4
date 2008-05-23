@@ -61,7 +61,25 @@ QString                 tr2i18n (const char* message, const char* comment = 0);
 
 //ig class I18nTypeCheck;
 
-QString                 i18n (const char* text);
+//QString                 i18n (const char* text);
+QString                 i18n (const char* text,...);
+%MethodCode
+    KLocalizedString result = ki18n(a0);
+    QString arg;
+    int iserr = 0;
+    for (int i=0; i < PyTuple_Size(a1); i++) {
+        PyObject *pyarg = PyTuple_GET_ITEM (a1, i);
+        arg = *(QString *)sipForceConvertTo_QString (pyarg, &iserr);
+        if (iserr) {
+            sipIsErr = 1;
+            return 0;
+        }
+
+        result = result.subs(arg);
+    }
+    *sipRes = result.toString();
+%End
+
 QString                 i18nc (const char* ctxt, const char* text);
 %ModuleHeaderCode
 #include <klocalizedstring.h>

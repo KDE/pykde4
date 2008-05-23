@@ -37,6 +37,8 @@ public:
     virtual void         enableTextHints (int)  = 0;
     virtual void         disableTextHints ()  = 0;
     virtual void         needTextHint (const KTextEditor::Cursor&, QString&)  = 0;
+private:
+                         TextHintInterface (const KTextEditor::TextHintInterface &other);
 
 };  // class TextHintInterface
 

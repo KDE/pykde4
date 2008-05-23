@@ -60,6 +60,8 @@ protected:
     virtual bool            closeArchive ();
     virtual bool            doWriteDir (const QString& name, const QString& user, const QString& group, mode_t perm, time_t atime, time_t mtime, time_t ctime);
 //ig     virtual void       virtual_hook (int id, void* data);
+private:
+                            KZip (const KZip &other);
 };   // KZip
 
 
@@ -82,6 +84,9 @@ public:
     const QString&          path () const;
     virtual QByteArray      data () const;
     virtual QIODevice*      createDevice () const;
+
+private:
+                            KZipFileEntry (const KZipFileEntry &other);
 };   // KZipFileEntry
 
 

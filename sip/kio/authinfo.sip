@@ -94,6 +94,7 @@ protected:
 private:
                             NetRC ();
                             ~NetRC ();
+                            NetRC (const KIO::NetRC &other);
 };   // NetRC
 
 };   // KIO

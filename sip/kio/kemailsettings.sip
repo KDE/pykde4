@@ -68,6 +68,9 @@ public:
     void                    setDefault (const QString& def);
     QString                 getSetting (KEMailSettings::Setting s) const;
     void                    setSetting (KEMailSettings::Setting s, const QString& v);
+private:
+                            KEMailSettings (const KEMailSettings &other);
+
 };   // KEMailSettings
 
 

@@ -64,7 +64,8 @@ public:
                 sipClass = sipClass_KParts_PartSelectEvent;
         }
 %End
-
+private:
+                            Event (const KParts::Event &other);
 };   // Event
 
 
@@ -79,6 +80,8 @@ public:
                             GUIActivateEvent (bool activated);
     bool                    activated () const;
     static bool             test (const QEvent* event);
+private:
+                            GUIActivateEvent (const KParts::GUIActivateEvent &other);
 };   // GUIActivateEvent
 
 
@@ -95,6 +98,8 @@ public:
     KParts::Part*           part () const;
     QWidget*                widget () const;
     static bool             test (const QEvent* event);
+private:
+                            PartActivateEvent (const KParts::PartActivateEvent &other);
 };   // PartActivateEvent
 
 
@@ -111,6 +116,8 @@ public:
     KParts::Part*           part () const;
     QWidget*                widget () const;
     static bool             test (const QEvent* event);
+private:
+                            PartSelectEvent (const KParts::PartSelectEvent &other);
 };   // PartSelectEvent
 
 };   // KParts

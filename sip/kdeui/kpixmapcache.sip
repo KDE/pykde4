@@ -27,6 +27,8 @@ class KPixmapCache
 #include <kpixmapcache.h>
 %End
 
+private:
+                            KPixmapCache (const KPixmapCache& other);
 
 public:
     explicit                KPixmapCache (const QString& name);

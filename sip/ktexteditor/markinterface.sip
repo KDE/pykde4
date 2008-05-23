@@ -123,7 +123,8 @@ public:
 
 public:
     virtual void         markChanged (KTextEditor::Document*, KTextEditor::Mark, KTextEditor::MarkInterface::MarkChangeAction)  = 0;
-
+private:
+                         MarkInterface (const KTextEditor::MarkInterface &other);
 };  // class MarkInterface
 
 };  // namespace KTextEditor

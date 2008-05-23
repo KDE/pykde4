@@ -26,7 +26,8 @@ class KIconTheme
 %TypeHeaderCode
 #include <kicontheme.h>
 %End
-
+private:
+                            KIconTheme (const KIconTheme &other);
 
 public:
     explicit                KIconTheme (const QString& name, const QString& appName = QString());

@@ -1,6 +1,6 @@
 # Find PyQt4
 # ~~~~~~~~~~
-# Copyright (c) 2007, Simon Edwards <simon@simonzone.com>
+# Copyright (c) 2007-2008, Simon Edwards <simon@simonzone.com>
 # Redistribution and use is allowed according to the terms of the BSD license.
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 #
@@ -16,6 +16,8 @@
 #
 # PYQT4_VERSION_STR - The version of PyQt4 as a human readable string.
 #
+# PYQT4_VERSION_TAG - The PyQt version tag using by PyQt's sip files.
+#
 # PYQT4_SIP_DIR - The directory holding the PyQt4 .sip files.
 
 IF(EXISTS PYQT4_VERSION)
@@ -29,6 +31,7 @@ ELSE(EXISTS PYQT4_VERSION)
   IF(pyqt_config)
     STRING(REGEX REPLACE "^pyqt_version:([^\n]+).*$" "\\1" PYQT4_VERSION ${pyqt_config})
     STRING(REGEX REPLACE ".*\npyqt_version_str:([^\n]+).*$" "\\1" PYQT4_VERSION_STR ${pyqt_config})
+    STRING(REGEX REPLACE ".*\npyqt_version_tag:([^\n]+).*$" "\\1" PYQT4_VERSION_TAG ${pyqt_config})
     STRING(REGEX REPLACE ".*\npyqt_sip_dir:([^\n]+).*$" "\\1" PYQT4_SIP_DIR ${pyqt_config})
     SET(PYQT4_FOUND TRUE)
   ENDIF(pyqt_config)

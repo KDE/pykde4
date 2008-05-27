@@ -38,8 +38,8 @@ public:
 //ig     KLocalizedString   subs (uint a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
 //ig     KLocalizedString   subs (long a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
 //ig     KLocalizedString   subs (ulong a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
-//ig     KLocalizedString   subs (qlonglong a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
-    KLocalizedString        subs (qulonglong a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
+     KLocalizedString   subs (qlonglong a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
+//ig    KLocalizedString        subs (qulonglong a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
 //ig     KLocalizedString   subs (double a, int fieldWidth = 0, char format = 'g', int precision = -1, const QChar& fillChar = QLatin1Char(' ')) const;
     KLocalizedString        subs (QChar a, int fieldWidth = 0, const QChar& fillChar = QLatin1Char(' ')) const;
     KLocalizedString        subs (const QString& a, int fieldWidth = 0, const QChar& fillChar = QLatin1Char(' ')) const;
@@ -58,11 +58,88 @@ QString                 tr2i18n (const char* message, const char* comment = 0);
 
 //ig class I18nTypeCheck;
 
+%ModuleCode
+QString klocalizedstring_i18n_template(KLocalizedString base, PyObject *list,int *sipIsErr) {
+    KLocalizedString result = base;    
+    QString *arg;
+    long long_arg;
+    double double_arg;
+    int iserr = 0;
+
+    for (int i=0; i < PyTuple_Size(list); i++) {
+        PyObject *pyarg = PyTuple_GET_ITEM (list, i);
+        if (PyInt_Check(pyarg)) {
+            long_arg = PyInt_AsLong(pyarg);
+            if (long_arg==-1 && PyErr_Occurred()) {
+                *sipIsErr = 1;
+                return QString();
+            }
+            result = result.subs(long_arg);
+
+        } else if (PyLong_Check(pyarg)) {
+            long_arg = PyLong_AsLong(pyarg);
+            if (long_arg==-1 && PyErr_Occurred()) {
+                *sipIsErr = 1;
+                return QString();
+            }
+            result = result.subs(long_arg);
+
+        } else if (PyFloat_Check(pyarg)) {
+            double_arg = PyFloat_AsDouble(pyarg);
+            result = result.subs(double_arg);
+
+        } else {
+
+          arg = (QString *)sipForceConvertTo_QString (pyarg, &iserr);
+          if (iserr) {
+              *sipIsErr = 1;
+              return QString();
+          }
+  
+          result = result.subs(*arg);
+          delete arg;
+          arg = 0;
+          }
+    }
+
+    return result.toString();
+}
+%End
 
 //ig class I18nTypeCheck;
 
-QString                 i18n (const char* text);
-QString                 i18nc (const char* ctxt, const char* text);
+QString                 i18n (const char* text,...);
+%MethodCode
+    QString result = klocalizedstring_i18n_template(ki18n(a0),a1,&sipIsErr);
+    if (!sipIsErr) {
+        sipRes = new QString(result);
+    }
+%End
+
+QString                 i18nc (const char* ctxt, const char* text,...);
+%MethodCode
+    QString result = klocalizedstring_i18n_template(ki18nc(a0,a1),a2,&sipIsErr);
+    if (!sipIsErr) {
+        sipRes = new QString(result);
+    }
+%End
+
+QString                 i18np (const char*sing, const char*plur,...);
+%MethodCode
+    QString result = klocalizedstring_i18n_template(ki18np(a0,a1),a2,&sipIsErr);
+    if (!sipIsErr) {
+        sipRes = new QString(result);
+    }
+%End
+
+QString                 i18ncp (const char *ctxt, const char*sing, const char*plur,...);
+%MethodCode
+    QString result = klocalizedstring_i18n_template(ki18ncp(a0,a1,a2),a3,&sipIsErr);
+    if (!sipIsErr) {
+        sipRes = new QString(result);
+    }
+%End
+
 %ModuleHeaderCode
 #include <klocalizedstring.h>
 %End

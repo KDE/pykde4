@@ -41,7 +41,8 @@ public:
 
 protected:
     virtual bool         insertTemplateTextImplementation (const KTextEditor::Cursor&, const QString&, const QMap<QString, QString>&)  = 0;
-
+private:
+                          TemplateInterface (const KTextEditor::TemplateInterface &other);
 };  // class TemplateInterface
 
 };  // namespace KTextEditor

@@ -56,6 +56,9 @@ public:
     int                     staleTime () const;
     void                    setStaleTime (int _staleTime);
     bool                    getLockInfo (int& pid /Out/, QString& hostname /Out/, QString& appname /Out/);
+
+private:
+                            KLockFile (const KLockFile &other);
 };   // KLockFile
 
 

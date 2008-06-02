@@ -26,9 +26,8 @@ namespace KIO
 class TCPSlaveBase : KIO::SlaveBase
 {
 %TypeHeaderCode
-#include <tcpslavebase.h>
+#include <kio/tcpslavebase.h>
 %End
-
 
 public:
                             TCPSlaveBase (const QByteArray& protocol, const QByteArray& poolSocket, const QByteArray& appSocket, bool autoSsl = 0);
@@ -57,6 +56,8 @@ protected:
     void                    setBlocking (bool b);
     QIODevice*              socket () const;
 //ig     virtual void       virtual_hook (int id, void* data);
+private:
+                            TCPSlaveBase (const KIO::TCPSlaveBase &other);
 };   // TCPSlaveBase
 
 };   // KIO

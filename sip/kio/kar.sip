@@ -48,6 +48,8 @@ protected:
     virtual bool            openArchive (QIODevice::OpenMode mode);
     virtual bool            closeArchive ();
 //ig     virtual void       virtual_hook (int id, void* data);
+private:
+                            KAr (const KAr &other);
 
 public:
 

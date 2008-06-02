@@ -26,7 +26,8 @@ class KXMLGUIClient
 %TypeHeaderCode
 #include <kxmlguiclient.h>
 %End
-
+private:
+                            KXMLGUIClient (const KXMLGUIClient &other);
 
 public:
                             KXMLGUIClient ();

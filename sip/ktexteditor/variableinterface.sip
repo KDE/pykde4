@@ -38,6 +38,8 @@ public:
 
 public:
     virtual void         variableChanged (KTextEditor::Document*, const QString&, const QString&)  = 0;
+private:
+                         VariableInterface (const KTextEditor::VariableInterface &other);
 
 };  // class VariableInterface
 

@@ -52,7 +52,8 @@ public:
     if (dynamic_cast<KUrlPixmapProvider*>(sipCpp))
         sipClass = sipClass_KUrlPixmapProvider;
 %End
-
+private:
+                            KUrlPixmapProvider (const KUrlPixmapProvider &other);
 };   // KUrlPixmapProvider
 
 

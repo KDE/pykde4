@@ -85,6 +85,8 @@ protected:
     bool                    errorsIfUtf8 (const char* data, int length);
     bool                    analyze (const char* data, int len);
     QTextDecoder*           decoder ();
+private:
+                            KEncodingDetector (const KEncodingDetector &other);
 };   // KEncodingDetector
 
 

@@ -75,6 +75,7 @@ public:
 
 private:
                             KMountPoint ();
+                            KMountPoint (const KMountPoint &other);
 };   // KMountPoint
 
 

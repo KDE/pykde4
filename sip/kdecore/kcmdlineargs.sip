@@ -136,6 +136,9 @@ KCmdLineArgs::StdCmdLineArgs cmdLineArgs = (KCmdLineArgs::StdCmdLineArgs) a2;
 protected:
                             KCmdLineArgs (const KCmdLineOptions& _options, const KLocalizedString& _name, const QByteArray& _id);
                             ~KCmdLineArgs ();
+
+private:
+                            KCmdLineArgs (const KCmdLineArgs  &other);
 };   // KCmdLineArgs
 
 

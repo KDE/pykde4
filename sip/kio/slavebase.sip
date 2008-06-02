@@ -126,6 +126,8 @@ public:
 
 protected:
 //ig     virtual void       virtual_hook (int id, void* data);
+private:
+                            SlaveBase (const KIO::SlaveBase &other);
 };   // SlaveBase
 
 };   // KIO

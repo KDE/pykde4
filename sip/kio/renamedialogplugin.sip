@@ -42,6 +42,8 @@ public:
         KIO::filesize_t         fileSize () const;
         time_t                  cTime () const;
         time_t                  mTime () const;
+    private:
+                                FileItem (const KIO::RenameDialogPlugin::FileItem &other);
     };   // FileItem
 
 
@@ -49,6 +51,10 @@ public:
                             RenameDialogPlugin (QDialog* dialog);
     virtual bool            wantToHandle (KIO::RenameDialog_Mode mode, const KIO::RenameDialogPlugin::FileItem& srcFile, const KIO::RenameDialogPlugin::FileItem& dstFile) const = 0;
     virtual void            handle (KIO::RenameDialog_Mode mode, const KIO::RenameDialogPlugin::FileItem& srcFile, const KIO::RenameDialogPlugin::FileItem& dstFile) = 0;
+
+//private:
+//                                RenameDialogPlugin (const KIO::RenameDialogPlugin &other);
+
 };   // RenameDialogPlugin
 
 };   // KIO

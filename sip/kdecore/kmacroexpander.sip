@@ -33,6 +33,8 @@ class KMacroExpanderBase
 #include <kmacroexpander.h>
 %End
 
+private:
+                            KMacroExpanderBase (const KMacroExpanderBase &other);
 
 public:
     explicit                KMacroExpanderBase (QChar c = QLatin1Char('%'));
@@ -45,6 +47,7 @@ public:
 protected:
     virtual int             expandPlainMacro (const QString& str, int pos, QStringList& ret);
     virtual int             expandEscapedMacro (const QString& str, int pos, QStringList& ret);
+
 };   // KMacroExpanderBase
 
 %ModuleHeaderCode
@@ -66,6 +69,9 @@ protected:
     virtual int             expandPlainMacro (const QString& str, int pos, QStringList& ret);
     virtual int             expandEscapedMacro (const QString& str, int pos, QStringList& ret);
     virtual bool            expandMacro (const QString& str, QStringList& ret) = 0;
+private:
+                            KWordMacroExpander (const KWordMacroExpander &other);
+
 };   // KWordMacroExpander
 
 %ModuleHeaderCode
@@ -82,6 +88,9 @@ class KCharMacroExpander : KMacroExpanderBase
 
 public:
     explicit                KCharMacroExpander (QChar c = QLatin1Char('%'));
+
+private:
+                            KCharMacroExpander (const KCharMacroExpander &other);
 
 protected:
     virtual int             expandPlainMacro (const QString& str, int pos, QStringList& ret);

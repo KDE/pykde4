@@ -83,7 +83,7 @@ public:
     };
 
                             KHTMLSettings ();
-                            KHTMLSettings (const KHTMLSettings& other);
+//                            KHTMLSettings (const KHTMLSettings& other);
     void                    init ();
     void                    init (KConfig* config, bool reset = 1);
     bool                    changeCursor () const;
@@ -142,6 +142,9 @@ public:
     QList<QPair<QString,QChar>>  fallbackAccessKeysAssignments () const;
     void                    setJSPopupBlockerPassivePopup (bool enabled);
     bool                    jsPopupBlockerPassivePopup () const;
+
+private:
+    KHTMLSettings(const KHTMLSettings &);
 };   // KHTMLSettings
 
 

@@ -39,7 +39,8 @@ public:
     virtual QStringList  configKeys () const = 0;
     virtual QVariant     configValue (const QString&)  = 0;
     virtual void         setConfigValue (const QString&, const QVariant&)  = 0;
-
+private:
+                         ConfigInterface (const KTextEditor::ConfigInterface &other);
 };  // class ConfigInterface
 
 };  // namespace KTextEditor

@@ -38,6 +38,8 @@ public:
 public:
     virtual void         readSessionConfig (const KConfigGroup&)  = 0;
     virtual void         writeSessionConfig (KConfigGroup&)  = 0;
+private:
+                         SessionConfigInterface (const KTextEditor::SessionConfigInterface &other);
 
 };  // class SessionConfigInterface
 

@@ -35,6 +35,7 @@ public:
 
 private:
                             KMimeTypeTrader ();
+                            KMimeTypeTrader (const KMimeTypeTrader &other);
 };   // KMimeTypeTrader
 
 

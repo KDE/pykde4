@@ -53,6 +53,9 @@ public:
     QString                 languageForEncoding (const QString& encoding) const;
     QString                 descriptionForEncoding (const QString& encoding) const;
     QString                 encodingForName (const QString& descriptiveName) const;
+
+private:
+                            KCharsets(const KCharsets &other);
 };   // KCharsets
 
 

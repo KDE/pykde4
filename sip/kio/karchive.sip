@@ -38,6 +38,8 @@ class KArchive
 protected:
                             KArchive (const QString& fileName);
                             KArchive (QIODevice* dev);
+private:
+                            KArchive (const KArchive &other);
 
 public:
     virtual bool            open (QIODevice::OpenMode mode);
@@ -100,6 +102,8 @@ public:
 protected:
     KArchive*               archive () const;
 //ig     virtual void       virtual_hook (int id, void* data);
+private:
+                            KArchiveEntry (const KArchiveEntry &other);
 };   // KArchiveEntry
 
 
@@ -122,6 +126,8 @@ public:
 
 protected:
 //ig     virtual void       virtual_hook (int id, void* data);
+private:
+                            KArchiveFile (const KArchiveFile &other);
 };   // KArchiveFile
 
 
@@ -160,7 +166,8 @@ public:
                 sipClass = sipClass_KZipFileEntry;
         }
 %End
-
+private:
+                            KArchiveDirectory (const KArchiveDirectory &other);
 };   // KArchiveDirectory
 
 

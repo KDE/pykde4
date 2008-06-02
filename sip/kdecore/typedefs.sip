@@ -258,7 +258,7 @@ template <TYPE>
 %End
 };
 
-
+/*
 template <TYPE1,TYPE2>
 %MappedType QHash<TYPE1,TYPE2>
 {
@@ -361,7 +361,7 @@ template <TYPE1,TYPE2>
     return sipGetState(sipTransferObj);
 %End
 };
-
+*/
 
 template <TYPE1,TYPE2*>
 %MappedType QHash<TYPE1,TYPE2*>

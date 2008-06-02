@@ -73,8 +73,6 @@ public:
     bool                    hasAttribute (const DOM::DOMString& name);
     bool                    hasAttributeNS (const DOM::DOMString& namespaceURI, const DOM::DOMString& localName);
     DOM::CSSStyleDeclaration  style ();
-    bool                    contentEditable () const;
-    void                    setContentEditable (bool enabled);
     bool                    isHTMLElement () const;
     DOM::Element            form () const;
     static bool             khtmlValidAttrName (const DOM::DOMString& name);

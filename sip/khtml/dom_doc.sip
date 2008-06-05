@@ -75,6 +75,9 @@ public:
     DOM::Element            getElementById (const DOM::DOMString& elementId) const;
     DOM::NodeList           getElementsByTagName (const DOM::DOMString& tagname);
     DOM::NodeList           getElementsByTagNameNS (const DOM::DOMString& namespaceURI, const DOM::DOMString& localName);
+
+    DOM::NodeList           getElementsByClassName (const DOM::DOMString& className);
+
     DOM::Node               importNode (const DOM::Node& importedNode, bool deep);
     bool                    isHTMLDocument () const;
     DOM::Range              createRange ();
@@ -99,6 +102,14 @@ public:
     void                    setDesignMode (bool enable);
     DOM::DOMString          completeURL (const DOM::DOMString& url);
     DOM::DOMString          toString () const;
+
+    bool                    execCommand (const DOM::DOMString& command, bool userInterface, const DOM::DOMString& value);
+    bool                    queryCommandEnabled (const DOM::DOMString& command);
+    bool                    queryCommandIndeterm (const DOM::DOMString& command);
+    bool                    queryCommandState (const DOM::DOMString& command);
+    bool                    queryCommandSupported (const DOM::DOMString& command);
+    DOM::DOMString          queryCommandValue (const DOM::DOMString& command);
+
     void                    updateRendering ();
 //ig                        Document (DocumentImpl* i);
 };   // Document

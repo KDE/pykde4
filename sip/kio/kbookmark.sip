@@ -64,6 +64,10 @@ public:
     void                    setUrl (const KUrl& url);
     QString                 icon () const;
     void                    setIcon (const QString& icon);
+
+    QString                 mimeType () const;
+    void                    setMimeType (const QString& mimeType);
+
     bool                    showInToolbar () const;
     void                    setShowInToolbar (bool show);
     KBookmarkGroup          parentGroup () const;
@@ -77,6 +81,9 @@ public:
     static QString          previousAddress (const QString& address);
     static QString          nextAddress (const QString& address);
     static QString          commonParent (const QString& A, const QString& B);
+
+    QDomNode                metaData (const QString& owner, bool create) const;
+
     QString                 metaDataItem (const QString& key) const;
     void                    setMetaDataItem (const QString& key, const QString& value, KBookmark::MetaDataOverwriteMode mode = KBookmark::OverwriteMetaData);
     void                    populateMimeData (QMimeData* mimeData) const;

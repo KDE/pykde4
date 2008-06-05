@@ -60,6 +60,9 @@ public:
 signals:
     void                    activated ();
     void                    urlChanged (const KUrl& url);
+
+    void                    editableStateChanged (bool editable);
+
     void                    historyChanged ();
     void                    urlsDropped (const KUrl::List& urls, const KUrl& destination);
     void                    returnPressed ();

@@ -41,6 +41,7 @@ public:
 
 private:
                          KSystemTimeZones ();
+const KSystemTimeZones &KSystemTimeZones (const KSystemTimeZones &other);
 
 };  // class KSystemTimeZones
 
@@ -91,22 +92,3 @@ public:
     static void          endParseBlock ();
 
 };  // class KSystemTimeZoneSource
-
-
-class KSystemTimeZoneData : KTimeZoneData
-{
-%TypeHeaderCode
-#include <ksystemtimezone.h>
-%End
-
-
-public:
-                         KSystemTimeZoneData ();
-                         KSystemTimeZoneData (const KSystemTimeZoneData&);
-//igL    virtual KTimeZoneData* clone ();
-    virtual QList<QByteArray> abbreviations () const;
-    virtual QByteArray   abbreviation (const QDateTime&) const;
-    virtual QList<int>   utcOffsets () const;
-
-};  // class KSystemTimeZoneData
-

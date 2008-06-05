@@ -46,6 +46,16 @@ public:
     };
 
 
+
+    enum KSmoothScrollingMode
+    {
+        KSmoothScrollingDisabled,
+        KSmoothScrollingWhenEfficient,
+        KSmoothScrollingEnabled
+    };
+
+
+
     enum KJSWindowOpenPolicy
     {
         KJSWindowOpenAllow,
@@ -92,6 +102,9 @@ public:
     bool                    allowTabulation () const;
     bool                    autoSpellCheck () const;
     KHTMLSettings::KAnimationAdvice  showAnimations () const;
+
+    KHTMLSettings::KSmoothScrollingMode  smoothScrolling () const;
+
     QString                 stdFontName () const;
     QString                 fixedFontName () const;
     QString                 serifFontName () const;

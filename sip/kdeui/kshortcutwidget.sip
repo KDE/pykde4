@@ -34,6 +34,9 @@ public:
     bool                    isModifierlessAllowed ();
     void                    setClearButtonsShown (bool show);
 //ig     KShortcut          shortcut () const;
+
+    void                    setCheckActionCollections (const QList<KActionCollection*>& actionCollections);
+
     void                    setCheckActionList (const QList<QAction*>& checkList);
 
 signals:

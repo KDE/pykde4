@@ -160,12 +160,21 @@ class ConfigWidget : QWidget
 public:
                             ConfigWidget (KConfig* config, QWidget* parent /TransferThis/);
     bool                    backgroundCheckingButtonShown () const;
+
+    void                    setLanguage (const QString& language);
+    QString                 language () const;
+
     void                    save ();
     void                    setBackgroundCheckingButtonShown (bool);
     void                    slotDefault ();
 
 protected:
     void                    slotChanged ();
+
+
+signals:
+    void                    configChanged ();
+
 
 public:
 

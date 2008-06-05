@@ -32,6 +32,17 @@ public:
     explicit                KUniqueApplication (bool GUIenabled = 1, bool configUnique = 0);
     explicit                KUniqueApplication (Display* display, Qt::HANDLE visual = 0, Qt::HANDLE colormap = 0, bool configUnique = 0);
     static void             addCmdLineOptions ();
+
+
+    enum StartFlag
+    {
+        NonUniqueInstance
+    };
+
+    typedef QFlags<KUniqueApplication::StartFlag> StartFlags;
+
+    static bool             start (KUniqueApplication::StartFlags flags);
+
     static bool             start ();
     virtual int             newInstance ();
     bool                    restoringSession ();

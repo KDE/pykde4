@@ -40,6 +40,9 @@ signals:
 
 protected:
     virtual bool            event (QEvent*);
+
+    virtual bool            eventFilter (QObject* watched, QEvent* event);
+
 };   // KToolBarLabelAction
 
 

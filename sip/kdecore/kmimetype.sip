@@ -58,6 +58,10 @@ public:
     static KMimeType::Ptr   defaultMimeTypePtr ();
     bool                    isDefault () const;
     QString                 parentMimeType () const;
+
+    QStringList             parentMimeTypes () const;
+    QStringList             allParentMimeTypes () const;
+
     bool                    is (const QString& mimeTypeName) const /PyName=is_/;
     static QString          extractKnownExtension (const QString& fileName);
 

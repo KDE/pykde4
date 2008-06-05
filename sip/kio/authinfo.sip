@@ -47,6 +47,20 @@ public:
     bool verifyPath;
     bool readOnly;
     bool keepPassword;
+
+
+    enum FieldFlags
+    {
+        ExtraFieldNoFlags,
+        ExtraFieldReadOnly,
+        ExtraFieldMandatory
+    };
+
+    void                    setExtraField (const QString& fieldName, const QVariant& value);
+    void                    setExtraFieldFlags (const QString& fieldName, const KIO::AuthInfo::FieldFlags flags);
+    QVariant                getExtraField (const QString& fieldName) const;
+    KIO::AuthInfo::FieldFlags  getExtraFieldFlags (const QString& fieldName) const;
+
 };   // AuthInfo
 
 

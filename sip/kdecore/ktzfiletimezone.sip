@@ -66,7 +66,7 @@ class KTzfileTimeZoneSource : KTimeZoneSource
 
 public:
                          KTzfileTimeZoneSource (const QString&);
-    QString              location ();
+//ig    QString              location ();
 
     virtual KTimeZoneData* parse (const KTimeZone&) const;
 
@@ -78,18 +78,17 @@ public:
 };  // class KTzfileTimeZoneSource
 
 
-class KTzfileTimeZoneData : KTimeZoneData
-{
-%TypeHeaderCode
-#include <ktzfiletimezone.h>
-%End
+//class KTzfileTimeZoneData : KTimeZoneData
+//{
+//%TypeHeaderCode
+//#include <ktzfiletimezone.h>
+//%End
 
+//public:
+//                         KTzfileTimeZoneData ();
+//                         KTzfileTimeZoneData (const KTzfileTimeZoneData&);
+////igL    virtual KTimeZoneData* clone ();
+//    virtual bool         hasTransitions () const;
 
-public:
-                         KTzfileTimeZoneData ();
-                         KTzfileTimeZoneData (const KTzfileTimeZoneData&);
-//igL    virtual KTimeZoneData* clone ();
-    virtual bool         hasTransitions () const;
-
-};  // class KTzfileTimeZoneData
+//};  // class KTzfileTimeZoneData
 

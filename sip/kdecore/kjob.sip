@@ -87,6 +87,10 @@ public:
     qulonglong              totalAmount (KJob::Unit unit) const;
     unsigned long           percent () const;
 
+    void                    setAutoDelete (bool autodelete);
+    bool                    isAutoDelete () const;
+
+
 signals:
     void                    description (KJob* job, const QString& title, const QPair<QString,QString>& field1 = qMakePair(QString(),QString()), const QPair<QString,QString>& field2 = qMakePair(QString(),QString()));
     void                    infoMessage (KJob* job, const QString& plain, const QString& rich = QString());

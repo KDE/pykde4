@@ -75,6 +75,8 @@ public:
         UDS_EXTENDED_ACL,
         UDS_ACL_STRING,
         UDS_DEFAULT_ACL_STRING,
+        UDS_DISPLAY_NAME,
+        UDS_TARGET_URL,
         UDS_EXTRA,
         UDS_EXTRA_END
     };

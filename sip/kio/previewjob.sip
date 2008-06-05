@@ -41,6 +41,9 @@ public:
     static QStringList      availablePlugins ();
     static QStringList      supportedMimeTypes ();
 
+    static KIO::filesize_t  maximumFileSize ();
+
+
 signals:
     void                    gotPreview (const KFileItem& item, const QPixmap& preview);
     void                    failed (const KFileItem& item);

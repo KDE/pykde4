@@ -41,6 +41,9 @@ public:
 
     explicit                KStatusBarJobTracker (QWidget* parent /TransferThis/ = 0, bool button = 1);
     virtual void            registerJob (KJob* job);
+
+    virtual void            unregisterJob (KJob* job);
+
     virtual QWidget*        widget (KJob* job);
     void                    setStatusBarMode (KStatusBarJobTracker::StatusBarModes statusBarMode);
     virtual void            description (KJob* job, const QString& title, const QPair<QString,QString>& field1, const QPair<QString,QString>& field2);

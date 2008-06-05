@@ -51,7 +51,13 @@ Py_BEGIN_ALLOW_THREADS
 
     explicit                Predicate (const QString& ifaceName);
     Solid::Predicate        operator & (const Solid::Predicate& other);
+
+    Solid::Predicate&       operator &= (const Solid::Predicate& other);
+
     Solid::Predicate        operator | (const Solid::Predicate& other);
+
+    Solid::Predicate&       operator |= (const Solid::Predicate& other);
+
     bool                    isValid () const;
     bool                    matches (const Solid::Device& device) const;
     QSet<Solid::DeviceInterface::Type>  usedTypes () const;

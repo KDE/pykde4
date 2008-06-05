@@ -40,6 +40,9 @@ public:
 
 protected:
     void                    resizeEvent (QResizeEvent*);
+
+    void                    contextMenuEvent (QContextMenuEvent*);
+
     void                    squeezeTextToLabel ();
 };   // KSqueezedTextLabel
 

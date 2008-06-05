@@ -35,7 +35,10 @@ public:
         NoFlags,
         ShowKeepPassword,
         ShowUsernameLine,
-        UsernameReadOnly
+        UsernameReadOnly,
+        ShowAnonymousLoginCheckBox,
+        ShowDomainLine,
+        DomainReadOnly
     };
 
     typedef QFlags<KPasswordDialog::KPasswordDialogFlag> KPasswordDialogFlags;
@@ -46,7 +49,8 @@ public:
         UnknownError,
         UsernameError,
         PasswordError,
-        FatalError
+        FatalError,
+        DomainError
     };
 
     explicit                KPasswordDialog (QWidget* parent /TransferThis/ = 0, const KPasswordDialog::KPasswordDialogFlags& flags = 0, const KDialog::ButtonCodes otherButtons = 0);
@@ -59,6 +63,12 @@ public:
     QString                 password () const;
     void                    setUsername (const QString&);
     QString                 username () const;
+
+    void                    setDomain (const QString&);
+    QString                 domain () const;
+    void                    setAnonymousMode (bool anonymous);
+    bool                    anonymousMode () const;
+
     bool                    keepPassword () const;
     void                    setKeepPassword (bool b);
     void                    setUsernameReadOnly (bool readOnly);

@@ -41,6 +41,9 @@ public:
     bool                    isModifierlessAllowed ();
     void                    setClearButtonShown (bool show);
     QKeySequence            keySequence () const;
+
+    void                    setCheckActionCollections (const QList<KActionCollection*>& actionCollections);
+
     void                    setCheckActionList (const QList<QAction*>& checkList);
 
 signals:

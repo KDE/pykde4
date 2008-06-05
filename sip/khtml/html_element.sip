@@ -55,6 +55,11 @@ public:
     void                    setInnerText (const DOM::DOMString& text);
     DOM::HTMLCollection     children () const;
     DOM::HTMLCollection     all () const;
+
+    bool                    isContentEditable () const;
+    DOM::DOMString          contentEditable () const;
+    void                    setContentEditable (const DOM::DOMString& enabled);
+
     void                    removeCSSProperty (const DOM::DOMString& property);
     void                    addCSSProperty (const DOM::DOMString& property, const DOM::DOMString& value);
 

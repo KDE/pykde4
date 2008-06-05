@@ -36,12 +36,36 @@ public:
     bool                    checkSpellingEnabled () const;
     void                    highlightWord (int length, int pos);
     void                    setSpellCheckingConfigFileName (const QString& fileName);
+
+    void                    setSpellCheckingLanguage (const QString& language);
+
     virtual void            createHighlighter ();
     Sonnet::Highlighter*    highlighter () const;
     void                    setHighlighter (Sonnet::Highlighter* _highLighter);
+
+    QMenu*                  mousePopupMenu ();
+    void                    enableFindReplace (bool enabled);
+
+signals:
+    void                    checkSpellingChanged (bool);
+    void                    spellCheckStatus (const QString&);
+    void                    languageChanged (const QString& language);
+
+
+public:
     void                    checkSpelling ();
 
+    void                    replace ();
+
 protected:
+    void                    slotDoReplace ();
+    void                    slotReplaceNext ();
+    void                    slotDoFind ();
+    void                    slotFind ();
+    void                    slotFindNext ();
+    void                    slotReplace ();
+    virtual bool            event (QEvent*);
+
     virtual void            keyPressEvent (QKeyEvent*);
     virtual void            focusInEvent (QFocusEvent*);
     virtual void            wheelEvent (QWheelEvent*);

@@ -35,6 +35,23 @@ public:
     virtual void            setWindow (QWidget* window);
     virtual KIO::RenameDialog_Result  askFileRename (KJob* job, const QString& caption, const QString& src, const QString& dest, KIO::RenameDialog_Mode mode, QString& newDest, KIO::filesize_t sizeSrc = -1, KIO::filesize_t sizeDest = -1, time_t ctimeSrc = -1, time_t ctimeDest = -1, time_t mtimeSrc = -1, time_t mtimeDest = -1);
     virtual KIO::SkipDialog_Result  askSkip (KJob* job, bool multi, const QString& error_text);
+
+
+    enum DeletionType
+    {
+        Delete,
+        Trash
+    };
+
+
+    enum ConfirmationType
+    {
+        DefaultConfirmation,
+        ForceConfirmation
+    };
+
+    bool                    askDeleteConfirmation (const KUrl::List& urls, KIO::JobUiDelegate::DeletionType deletionType, KIO::JobUiDelegate::ConfirmationType confirmationType);
+
 };   // JobUiDelegate
 
 };   // KIO

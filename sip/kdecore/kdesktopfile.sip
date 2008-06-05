@@ -54,6 +54,9 @@ public:
     bool                    tryExec () const;
     QString                 readDocPath () const;
     QStringList             sortOrder () const;
+
+    bool                    noDisplay () const;
+
     KDesktopFile*           copyTo (const QString& file) const;
     QString                 fileName () const;
     const char*             resource () const;

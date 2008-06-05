@@ -33,9 +33,17 @@ class ConfigDialog : KDialog
 public:
                             ConfigDialog (KConfig* config, QWidget* parent /TransferThis/);
 
+    void                    setLanguage (const QString& language);
+
+
 protected:
     virtual void            slotOk ();
     virtual void            slotApply ();
+
+
+signals:
+    void                    languageChanged (const QString& language);
+
 
 private:
                             ConfigDialog (const Sonnet::ConfigDialog&);

@@ -32,6 +32,14 @@ protected:
     explicit                KSycoca (bool);
 
 public:
+
+    enum DatabaseType
+    {
+        LocalDatabase,
+        GlobalDatabase
+    };
+
+
                             KSycoca ();
     static KSycoca*         self ();
     static int              version ();
@@ -39,6 +47,9 @@ public:
     QDataStream*            findEntry (int offset, KSycocaType& type);
     QDataStream*            findFactory (KSycocaFactoryId id);
     QString                 kfsstnd_prefixes ();
+
+    static QString          absoluteFilePath (KSycoca::DatabaseType type = KSycoca::LocalDatabase);
+
     QString                 language ();
     quint32                 timeStamp ();
     quint32                 updateSignature ();
@@ -58,6 +69,8 @@ protected:
 
 private:
                             KSycoca (const KSycoca&);
+
+
 };   // KSycoca
 
 

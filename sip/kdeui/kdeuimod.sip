@@ -184,3 +184,4 @@
 %Include kxmlguifactory.sip
 %Include kxmlguiwindow.sip
 
+//%Include fixx11h.sip

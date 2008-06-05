@@ -53,6 +53,11 @@ public:
 //ig     const KConfig*     config () const;
     void                    changeGroup (const QString& group);
     void                    changeGroup (const char* group);
+
+    void                    copyTo (KConfigBase* other, KConfigBase::WriteConfigFlags pFlags = KConfigBase::Normal) const;
+    void                    reparent (KConfigBase* parent, KConfigBase::WriteConfigFlags pFlags = KConfigBase::Normal);
+    KConfigGroup            parent () const;
+
     QStringList             groupList () const;
     QStringList             keyList () const;
     void                    deleteGroup (KConfigBase::WriteConfigFlags pFlags = KConfigBase::Normal);

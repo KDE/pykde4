@@ -87,6 +87,9 @@ protected:
     virtual void            partSelectEvent (KParts::PartSelectEvent* event);
     virtual void            guiActivateEvent (KParts::GUIActivateEvent* event);
     QWidget*                hostContainer (const QString& containerName);
+
+    void                    loadPlugins ();
+
     void                    slotWidgetDestroyed ();
 //ig                        Part (PartPrivate& dd, QObject* parent /TransferThis/);
 
@@ -113,6 +116,10 @@ public:
     void                    setYOffset (int y);
     QString                 mimeType () const;
     void                    setMimeType (const QString& mime);
+
+    bool                    actionRequestedByUser () const;
+    void                    setActionRequestedByUser (bool userRequested);
+
     QMap<QString,QString>&  metaData ();
 //ig     const QMap<QString,QString>&  metaData () const;
 };   // OpenUrlArguments

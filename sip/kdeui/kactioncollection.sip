@@ -42,6 +42,10 @@ public:
     void                    setConfigGroup (const QString& group);
     void                    setConfigGlobal (bool global);
     void                    readSettings (KConfigGroup* config = 0);
+
+    void                    importGlobalShortcuts (KConfigGroup* config);
+    void                    exportGlobalShortcuts (KConfigGroup* config, bool writeDefaults = 0) const;
+
     void                    writeSettings (KConfigGroup* config = 0, bool writeDefaults = 0, QAction* oneAction = 0) const;
     int                     count () const;
     bool                    isEmpty () const;
@@ -58,6 +62,9 @@ signals:
     void                    inserted (QAction* action);
     void                    removed (QAction* action);
     void                    actionHighlighted (QAction* action);
+
+    void                    actionHovered (QAction* action);
+
     void                    actionTriggered (QAction* action);
 
 protected:

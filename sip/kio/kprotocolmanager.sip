@@ -37,7 +37,13 @@ class KProtocolManager
 public:
     static QString          defaultUserAgent ();
     static QString          defaultUserAgent (const QString& keys);
+
+    static QString          userAgentForApplication (const QString& appName, const QString& appVersion, const QStringList& extraInfo = QStringList());
+
     static QString          userAgentForHost (const QString& hostname);
+
+    static bool             getSystemNameVersionAndMachine (QString& systemName, QString& systemVersion, QString& machine);
+
     static int              readTimeout ();
     static int              connectTimeout ();
     static int              proxyConnectTimeout ();
@@ -97,6 +103,9 @@ public:
     static KProtocolInfo::Type  outputType (const KUrl& url);
     static QStringList      listing (const KUrl& url);
     static bool             isSourceProtocol (const KUrl& url);
+
+    static QString          protocolForArchiveMimetype (const QString& mimeType);
+
     static void             reparseConfiguration ();
     static QString          slaveProtocol (const KUrl& url, QString& proxy);
     static QString          acceptLanguagesHeader ();

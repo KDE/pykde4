@@ -44,7 +44,7 @@ public:
     };
 
                             KFileItem ();
-                            KFileItem (const KIO::UDSEntry& entry, const KUrl& url, bool delayedMimeTypes = 0, bool urlIsDirectory = 0);
+                            KFileItem (const KIO::UDSEntry& entry, const KUrl& directoryUrl, bool delayedMimeTypes = 0, bool urlIsDirectory = 0);
                             KFileItem (mode_t mode, mode_t permissions, const KUrl& url, bool delayedMimeTypes = 0);
                             KFileItem (const KUrl& url, const QString& mimeType, mode_t mode);
                             KFileItem (const KFileItem& other);
@@ -67,7 +67,13 @@ public:
     bool                    isReadable () const;
     bool                    isWritable () const;
     bool                    isHidden () const;
+
+    bool                    isDesktopFile () const;
+
     QString                 linkDest () const;
+
+    KUrl                    targetUrl () const;
+
     QString                 localPath () const;
     KIO::filesize_t         size () const;
     KDateTime               time (KFileItem::FileTimes which) const;

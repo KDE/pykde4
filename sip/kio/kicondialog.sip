@@ -96,6 +96,10 @@ public:
     void                    setIconSize (int size);
     int                     iconSize () const;
 
+    void                    setButtonIconSize (int size);
+    int                     buttonIconSize () const;
+
+
 signals:
     void                    iconChanged (const QString& icon);
 

@@ -28,6 +28,9 @@ class KBookmarkManager : QObject
 %End
 
                             KBookmarkManager (const QString& bookmarksFile, const QString& dbusObjectName);
+
+                            KBookmarkManager (const QString& bookmarksFile);
+
                             KBookmarkManager ();
 
 public:
@@ -45,6 +48,9 @@ public:
     void                    emitConfigChanged ();
     void                    setEditorOptions (const QString& caption, bool browser);
     static KBookmarkManager*  managerForFile (const QString& bookmarksFile, const QString& dbusObjectName);
+
+    static KBookmarkManager*  managerForExternalFile (const QString& bookmarksFile);
+
     static KBookmarkManager*  createTempManager ();
     static KBookmarkManager*  userBookmarksManager ();
     QDomDocument            internalDocument () const;

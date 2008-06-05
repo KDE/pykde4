@@ -67,6 +67,18 @@ public:
     void                    repaintContents (int x, int y, int w, int h);
     void                    setZoomLevel (int percent);
     int                     zoomLevel () const;
+
+
+    enum SmoothScrollingMode
+    {
+        SSMDisabled,
+        SSMWhenEfficient,
+        SSMEnabled
+    };
+
+    void                    setSmoothScrollingMode (KHTMLView::SmoothScrollingMode m);
+    KHTMLView::SmoothScrollingMode  smoothScrollingMode () const;
+
     virtual void            resizeContents (int w, int h);
     void                    layout ();
 
@@ -104,6 +116,9 @@ protected:
     void                    keyReleaseEvent (QKeyEvent* _ke);
     void                    doAutoScroll ();
     void                    timerEvent (QTimerEvent*);
+
+    void                    setSmoothScrollingModeDefault (KHTMLView::SmoothScrollingMode m);
+
     void                    slotPaletteChanged ();
 
 public:

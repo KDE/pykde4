@@ -37,6 +37,10 @@ public:
     bool                    parentWidgetTrayClose () const;
     static QIcon            loadIcon (const QString& icon, const KComponentData& componentData = KGlobal::mainComponent());
 
+    void                    setContextMenuTitle (QAction* action);
+    QAction*                contextMenuTitle () const;
+
+
 signals:
     void                    quitSelected ();
 

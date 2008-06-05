@@ -60,6 +60,12 @@ public:
 signals:
     void                    urlActivated (const KUrl& url);
 
+
+protected:
+    virtual void            mousePressEvent (QMouseEvent* event);
+    virtual void            mouseMoveEvent (QMouseEvent* event);
+
+
 private:
                             KUrlComboBox (const KUrlComboBox&);
 };   // KUrlComboBox

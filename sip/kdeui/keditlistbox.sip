@@ -86,6 +86,10 @@ public:
     void                    setCheckAtEntering (bool check);
     bool                    checkAtEntering ();
 
+    void                    setCustomEditor (const KEditListBox::CustomEditor& editor);
+    bool                    eventFilter (QObject* o, QEvent* e);
+
+
 signals:
     void                    changed ();
     void                    added (const QString& text);

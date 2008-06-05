@@ -27,4 +27,4 @@
 %Include partmanager.sip
 %Include plugin.sip
 %Include statusbarextension.sip
-
+%Include genericfactory.sip

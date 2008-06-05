@@ -79,4 +79,11 @@
 %Include krandomsequence.sip
 %Include kshell.sip
 %Include kuser.sip
+%Include ksystemtimezone.sip
+%Include ktzfiletimezone.sip
 
+//%Include kconfigdata.sip
+//%Include kconfigini.sip
+%Include kptydevice.sip
+%Include kptyprocess.sip
+%Include kpty.sip

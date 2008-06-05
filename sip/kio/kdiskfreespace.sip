@@ -34,7 +34,7 @@ public:
     static KDiskFreeSpace*  findUsageInfo (const QString& path);
 
 signals:
-    void                    foundMountPoint (const QString& mountPoint, quint64 kBSize, quint64 kBUsed, quint64 kBAvail);
+    void                    foundMountPoint (const QString& mountPoint, quint64 kibSize, quint64 kibUsed, quint64 kibAvail);
     void                    done ();
 };   // KDiskFreeSpace
 

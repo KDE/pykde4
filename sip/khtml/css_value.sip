@@ -139,6 +139,8 @@ public:
         CSS_COUNTER,
         CSS_RECT,
         CSS_RGBCOLOR,
+        CSS_DPI,
+        CSS_DPCM,
         CSS_PAIR,
         CSS_HTML_RELATIVE
     };

@@ -172,6 +172,10 @@ public:
     bool                    setCountry (const QString& country, KConfig* config);
     bool                    setLanguage (const QString& language, KConfig* config);
     bool                    setLanguage (const QStringList& languages);
+
+    QString                 localizedFilePath (const QString& filePath) const;
+
+
 };   // KLocale
 
 

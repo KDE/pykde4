@@ -32,6 +32,7 @@ public:
 
     enum Button
     {
+        NoAdditionalButton,
         Help,
         Default,
         Apply

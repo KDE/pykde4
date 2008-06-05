@@ -58,6 +58,17 @@ public:
 //ig     void               setShowInformation (const KFileItemDelegate::InformationList& list);
     void                    setShowInformation (KFileItemDelegate::Information information);
 //ig     KFileItemDelegate::InformationList  showInformation () const;
+
+    void                    setShadowColor (const QColor& color);
+    QColor                  shadowColor () const;
+    void                    setShadowOffset (const QPointF& offset);
+    QPointF                 shadowOffset () const;
+    void                    setShadowBlur (qreal radius);
+    qreal                   shadowBlur () const;
+    void                    setMaximumSize (const QSize& size);
+    QSize                   maximumSize () const;
+    virtual bool            eventFilter (QObject* object, QEvent* event);
+
     bool                    helpEvent (QHelpEvent* event, QAbstractItemView* view, const QStyleOptionViewItem& option, const QModelIndex& index);
 
 private:

@@ -32,6 +32,7 @@ public:
     explicit                KToggleFullScreenAction (QObject* parent /TransferThis/);
                             KToggleFullScreenAction (QWidget* window, QObject* parent /TransferThis/);
     void                    setWindow (QWidget* window);
+    static void             setFullScreen (QWidget* window, bool set);
 
 protected:
     bool                    eventFilter (QObject* object, QEvent* event);

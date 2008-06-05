@@ -34,13 +34,21 @@ public:
 
 protected:
 
-    enum SslResult
+    enum SslResultDetail
     {
         ResultOk,
+        ResultOverridden,
         ResultFailed,
-        ResultOverridden
+        ResultFailedEarly
     };
 
+
+public:
+    typedef QFlags<KIO::TCPSlaveBase::SslResultDetail> SslResult;
+
+
+
+protected:
     ssize_t                 write (const char* data, ssize_t len);
     ssize_t                 read (char* data, ssize_t len);
     ssize_t                 readLine (char* data, ssize_t len);

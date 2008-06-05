@@ -42,6 +42,9 @@ public:
     KToolBar*               toolBar (const QString& name = QString());
     QList<KToolBar*>        toolBars () const;
     void                    setAutoSaveSettings (const QString& groupName = QLatin1String("MainWindow"), bool saveWindowSize = 1);
+
+    void                    setAutoSaveSettings (const KConfigGroup& group, bool saveWindowSize = 1);
+
     void                    resetAutoSaveSettings ();
     bool                    autoSaveSettings () const;
     QString                 autoSaveGroup () const;

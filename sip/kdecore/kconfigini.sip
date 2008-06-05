@@ -23,33 +23,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-class KPty
+class KConfigINIBackEnd : KConfigBackEnd
 {
 %TypeHeaderCode
-#include <kpty.h>
+#include <kconfigini.h>
 %End
 
 
 public:
-                         KPty ();
-    bool                 open ();
-    void                 close ();
-    void                 closeSlave ();
-    void                 setCTty ();
-    void                 login (const char* = 0, const char* = 0);
-    void                 logout ();
-//ig     bool                 tcGetAttr (termios*) const;
-//ig     bool                 tcSetAttr (termios*);
-    bool                 setWinSize (int, int);
-    bool                 setEcho (bool);
-    const char*          ttyName () const;
-    int                  masterFd () const;
-    int                  slaveFd () const;
+                         KConfigINIBackEnd (KConfigBase*, const QString&, const char*, bool = 1);
+    bool                 parseConfigFiles ();
+    virtual void         sync (bool = 1);
 
 protected:
-//ig                          KPty (KPtyPrivate*);
-private:
-                         KPty(const KPty &other);
+    void                 parseSingleConfigFile (QFile&, KEntryMap* = 0, bool = 0, bool = 0);
+    bool                 writeConfigFile (const QString&, bool = 0, bool = 1);
+    bool                 getEntryMap (KEntryMap&, bool, QFile*);
 
-};  // class KPty
+};  // class KConfigINIBackEnd
 

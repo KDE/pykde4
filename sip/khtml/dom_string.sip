@@ -53,12 +53,21 @@ public:
     DOM::DOMString          lower () const;
     DOM::DOMString          upper () const;
     QChar*                  unicode () const;
+
+    QChar*                  characters () const;
+
     QString                 string () const;
     int                     toInt () const;
     bool                    percentage (int& _percentage /Out/) const;
+
+    static DOM::DOMString   number (float f);
+
     DOM::DOMString          copy () const;
     bool                    isNull () const;
     bool                    isEmpty () const;
+
+    bool                    endsWith (const DOM::DOMString& str) const;
+
 //ig     DOMStringImpl*     implementation () const;
 };   // DOMString
 

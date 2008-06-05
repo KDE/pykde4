@@ -65,6 +65,9 @@ public:
     DOM::Attr               removeAttributeNode (const DOM::Attr& oldAttr);
     DOM::NodeList           getElementsByTagName (const DOM::DOMString& name);
     DOM::NodeList           getElementsByTagNameNS (const DOM::DOMString& namespaceURI, const DOM::DOMString& localName);
+
+    DOM::NodeList           getElementsByClassName (const DOM::DOMString& className);
+
     DOM::DOMString          getAttributeNS (const DOM::DOMString& namespaceURI, const DOM::DOMString& localName);
     void                    setAttributeNS (const DOM::DOMString& namespaceURI, const DOM::DOMString& qualifiedName, const DOM::DOMString& value);
     void                    removeAttributeNS (const DOM::DOMString& namespaceURI, const DOM::DOMString& localName);

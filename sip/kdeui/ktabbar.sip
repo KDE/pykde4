@@ -36,6 +36,10 @@ public:
     bool                    hoverCloseButton () const;
     void                    setHoverCloseButtonDelayed (bool);
     bool                    hoverCloseButtonDelayed () const;
+
+    void                    setCloseButtonEnabled (bool);
+    bool                    isCloseButtonEnabled () const;
+
     void                    setTabCloseActivatePrevious (bool);
     bool                    tabCloseActivatePrevious () const;
     int                     selectTab (const QPoint& position) const;
@@ -63,6 +67,11 @@ protected:
     virtual void            dragEnterEvent (QDragEnterEvent* event);
     virtual void            dragMoveEvent (QDragMoveEvent* event);
     virtual void            dropEvent (QDropEvent* event);
+
+    virtual void            paintEvent (QPaintEvent* event);
+    virtual void            leaveEvent (QEvent* event);
+    virtual QSize           tabSizeHint (int index) const;
+
     void                    closeButtonClicked ();
     void                    enableCloseButton ();
     virtual void            activateDragSwitchTab ();

@@ -117,3 +117,6 @@
 %Include thumbcreator.sip
 %Include udsentry.sip
 %Include kurlnavigator.sip
+%Include kurifilter.sip
+
+//%Include kdirnotify.sip

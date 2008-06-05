@@ -146,7 +146,13 @@ public:
     QString                 lastModified () const;
     void                    preloadStyleSheet (const QString& url, const QString& stylesheet);
     void                    preloadScript (const QString& url, const QString& script);
+
+    bool                    isPointInsideSelection (int x, int y);
+
     bool                    restored () const;
+
+    void                    setAlwaysHonourDoctype (bool b = 1);
+
 
     enum FormNotification
     {
@@ -200,6 +206,9 @@ protected:
     virtual bool            doOpenStream (const QString& mimeType);
     virtual bool            doWriteStream (const QByteArray& data);
     virtual bool            doCloseStream ();
+
+    virtual void            timerEvent (QTimerEvent*);
+
 
 public:
     void                    setActiveNode (const DOM::Node& node);

@@ -99,6 +99,21 @@ public:
     static QRect            desktopGeometry (const QPoint& point);
     static QRect            desktopGeometry (const QWidget* w);
     static bool             showIconsOnPushButtons ();
+
+
+    enum GraphicEffect
+    {
+        NoEffects,
+        GradientEffects,
+        SimpleAnimationEffects,
+        ComplexAnimationEffects
+    };
+
+    typedef QFlags<KGlobalSettings::GraphicEffect> GraphicEffects;
+
+    static KGlobalSettings::GraphicEffects  graphicEffectsLevel ();
+    static KGlobalSettings::GraphicEffects  graphicEffectsLevelDefault ();
+
     static bool             showFilePreview (const KUrl&);
     static bool             opaqueResize ();
     static int              buttonLayout ();

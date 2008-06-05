@@ -127,6 +127,9 @@ KCmdLineArgs::StdCmdLineArgs cmdLineArgs = (KCmdLineArgs::StdCmdLineArgs) a2;
     void                    clear ();
     static void             reset ();
     static void             loadAppArgs (QDataStream&);
+
+    static void             saveAppArgs (QDataStream&);
+
     static void             addTempFileOption ();
     static bool             isTempFileSet ();
 //ig     static int&        qtArgc ();

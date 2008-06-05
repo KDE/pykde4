@@ -53,6 +53,9 @@ public:
     QString                 version () const;
     QString                 website () const;
     QString                 license () const;
+
+    KAboutLicense           fullLicense () const;
+
     QStringList             dependencies () const;
     KService::Ptr           service () const;
     QList<KService::Ptr>    kcmServices () const;

@@ -46,7 +46,9 @@ public:
                             KUriFilterData ();
     explicit                KUriFilterData (const KUrl& url);
     explicit                KUriFilterData (const QString& url);
+private:
                             KUriFilterData (const KUriFilterData& data);
+public:
     KUrl                    uri () const;
     QString                 errorMsg () const;
     KUriFilterData::UriTypes  uriType () const;
@@ -104,6 +106,8 @@ public:
 protected:
                             KUriFilter ();
     void                    loadPlugins ();
+private:
+                            KUriFilter(const KUriFilter &other);
 };   // KUriFilter
 
 

@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KMainWindow</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,8 +38,7 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-%KDE top level main window
+      %KDE top level main window
 </p>
 <p>
 Top level widget that provides toolbars, a status line and a frame.
@@ -98,24 +88,18 @@ There are also kRestoreMainWindows convenience functions which
 can restore all your windows on next login.
 </p>
 <p>
-Note that a KMainWindow per-default is created with the
-WDestructiveClose flag, i.e. it is automatically destroyed when the
-window is closed. If you do not want this behavior, specify 0 as
-widget flag in the constructor.
+Note that KMainWindow uses KGlobal.ref() and KGlobal.deref() so that closing
+the last mainwindow will quit the application unless there is still something
+that holds a ref in KGlobal - like a KIO job, or a systray icon.
 </p>
 <p>
 See also  KApplication
-<b>Author</b> Reginald Stadlbauer (reggie@kde.org) Stephan Kulow (coolo@kde.org), Matthias Ettrich (ettrich@kde.org), Chris Schlaeger (cs@kde.org), Sven Radej (radej@kde.org). Maintained by Sven Radej (radej@kde.org)
-</p>
-<p>
-</p>
-
+<b>Author</b> Reginald Stadlbauer (reggie@kde.org) Stephan Kulow (coolo@kde.org), Matthias Ettrich (ettrich@kde.org), Chris Schlaeger (cs@kde.org), Sven Radej (radej@kde.org). Maintained by David Faure (faure@kde.org)
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>methods</h3><ul style="list-style-type : none">
 <li style="list-style-type : none"><b style="color : #000000;">KMainWindow</b> (parent, f)
 <table width="100%">
@@ -124,7 +108,7 @@ See also  KApplication
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KMainWindow object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -132,45 +116,42 @@ See also  KApplication
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>parent</td><td>QWidget</td><td align="right">None</td></tr>
-
+              <tr><td>parent</td><td>QWidget</td><td align="right">0</td></tr>
               <tr><td>f</td><td>Qt.WindowFlags</td><td align="right">0</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Construct a main window.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>parent</b> - The widget parent. This is usually 0 but it may also be the window
 group leader. In that case, the KMainWindow becomes sort of a
 secondary window.
 </p>
+<p></p>
 <p>
+<b>f</b> - Specify the window flags. The default is none.
 </p>
 <p>
-<b>f</b> - Specify the widget flags. The default is
-WType_TopLevel and WDestructiveClose. TopLevel indicates that a
-main window is a toplevel window, regardless of whether it has a
-parent or not. DestructiveClose indicates that a main window is
-automatically destroyed when its window is closed. Pass 0 if
-you do not want this behavior.
-</p>
-<p>
-#WidgetFlags-enum
+Note that a KMainWindow per-default is created with the
+WA_DeleteOnClose attribute, i.e. it is automatically destroyed when the
+window is closed. If you do not want this behavior, call
+setAttribute(Qt.WA_DeleteOnClose, false);
 </p>
 <p>
 KMainWindows must be created on the heap with 'new', like:
@@ -185,22 +166,16 @@ properly, all main windows in the application should have a
 different name. If you don't do it, KMainWindow will create
 a unique name, but it's recommended to explicitly pass a window name that will
 also describe the type of the window. If there can be several windows of the same
-#' (hash) to the name, and KMainWindow will replace it with numbers to make
+type, append '#' (hash) to the name, and KMainWindow will replace it with numbers to make
 the names unique. For example, for a mail client which has one main window showing
 the mails and folders, and which can also have one or more windows for composing
 mails, the name for the folders window should be e.g. "mainwindow" and
-#".
-</p>
-<p>
-</p>
-
+for the composer windows "composer#".
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">KMainWindow</b> (dd, parent, f)
 <table width="100%">
@@ -209,27 +184,28 @@ mails, the name for the folders window should be e.g. "mainwindow" and
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KMainWindow object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>dd</td><td>KMainWindowPrivate</td><td align="right"></td></tr>
-
               <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
-
               <tr><td>f</td><td>Qt.WFlags</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -237,23 +213,20 @@ mails, the name for the folders window should be e.g. "mainwindow" and
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">appHelpActivated</b> ()
+<li style="list-style-type : none"><b style="color : #000000;">KMainWindow</b> (a0, a1)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
-      <table>
+      <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -261,18 +234,62 @@ mails, the name for the folders window should be e.g. "mainwindow" and
           
           </td>
         </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
-              <tr><td></td></tr>
-
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>QWidget</td><td align="right">0</td></tr>
+              <tr><td>a1</td><td>Qt.WindowFlags</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">appHelpActivated</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 Open the help page for the application.
 </p>
 <p>
@@ -290,22 +307,14 @@ Example (adding a help button to the first toolbar):
 </p>
 <p>
 <pre>
-KIconLoader &loader = *KGlobal.iconLoader();
-QPixmap pixmap = loader.loadIcon( "help-contents" );
-toolBar(0)->insertButton( pixmap, 0, SIGNAL(clicked()),
-this, SLOT(appHelpActivated()), true, i18n("Help") );
+toolBar(0)->addAction(KIcon("help-contents"), i18n("Help"),
+this, SLOT(appHelpActivated()));
 </pre>
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">applyMainWindowSettings</b> (config, force)
 <table width="100%">
@@ -314,7 +323,7 @@ this, SLOT(appHelpActivated()), true, i18n("Help") );
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -322,52 +331,47 @@ this, SLOT(appHelpActivated()), true, i18n("Help") );
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>config</td><td>KConfigGroup</td><td align="right"></td></tr>
-
-              <tr><td>force</td><td>bool</td><td align="right">False</td></tr>
-
+              <tr><td>force</td><td>bool</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Read settings for statusbar, menubar and toolbar from their respective
 groups in the config file and apply them.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>config</b> - Config group to read the settings from.
-</p>
+<b>config</b> - Config group to read the settings from.</p>
 <p>
 <b>force</b> - if set, even default settings are re-applied
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">autoSaveGroup</b> ()
+<li><b style="color : #000000;">autoSaveGroup</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -375,40 +379,39 @@ groups in the config file and apply them.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the group used for setting-autosaving.
 Only meaningful if setAutoSaveSettings() was called.
 This can be useful for forcing a save or an apply, e.g. before and after
 using KEditToolbar.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">autoSaveSettings</b> ()
+<li><b style="color : #000000;">autoSaveSettings</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -416,29 +419,28 @@ using KEditToolbar.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the current autosave setting, i.e. true if setAutoSaveSettings() was called,
 false by default or if resetAutoSaveSettings() was called.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">canBeRestored</b> (number)
 <table width="100%">
@@ -447,30 +449,32 @@ false by default or if resetAutoSaveSettings() was called.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>number</td><td>int</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 <b>Session Management</b>
 </p>
 <p>
@@ -548,17 +552,11 @@ See also  restore()
 </p>
 <p>
 See also  classNameOfToplevel()
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">classNameOfToplevel</b> (number)
 <table width="100%">
@@ -567,45 +565,43 @@ See also  classNameOfToplevel()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>number</td><td>int</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the className() of the <b>number</b> of the toplevel window which
 should be restored.
 </p>
 <p>
 This is only useful if your application uses
 different kinds of toplevel windows.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">closeEvent</b> (a0)
 <table width="100%">
@@ -614,7 +610,7 @@ different kinds of toplevel windows.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -622,37 +618,35 @@ different kinds of toplevel windows.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>a0</td><td>QCloseEvent</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Reimplemented to call the queryClose() and queryExit() handlers.
 </p>
 <p>
 We recommend that you reimplement the handlers rather than closeEvent().
 If you do it anyway, ensure to call the base implementation to keep
 queryExit() running.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">customHelpMenu</b> (showWhatsThis)
 <table width="100%">
@@ -661,7 +655,7 @@ queryExit() running.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KMenu)</i>
+            returns <i>KMenu</i>
           </td>
         </tr>
         <tr>
@@ -669,22 +663,24 @@ queryExit() running.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>showWhatsThis</td><td>bool</td><td align="right">True</td></tr>
-
+              <tr><td>showWhatsThis</td><td>bool</td><td align="right">1</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the help menu. Creates a standard help menu if none exists yet.
 </p>
 <p>
@@ -700,26 +696,59 @@ information.
 <p>
 Example (adding a help menu to your application):
 <pre>
-menuBar()->insertItem( i18n("&Help"), customHelpMenu() );
+menuBar()->addMenu( customHelpMenu() );
 </pre>
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>showWhatsThis</b> - Set this to <b>false</b> if you do not want to include
 the "What's This" menu entry.
 </p>
 <p>
 Returns A standard help menu.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li><b style="color : #000000;">dbusName</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>QString</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the path under which this window's D-Bus object is exported.
+@since 4.0.1
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">event</b> (event)
 <table width="100%">
@@ -728,7 +757,7 @@ Returns A standard help menu.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -736,43 +765,41 @@ Returns A standard help menu.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>event</td><td>QEvent</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Reimplemented to catch QEvent.Polish in order to adjust the object name
 if needed, once all constructor code for the main window has run.
 Also reimplemented to catch when a QDockWidget is added or removed.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">hasMenuBar</b> ()
+<li><b style="color : #000000;">hasMenuBar</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -780,28 +807,27 @@ Also reimplemented to catch when a QDockWidget is added or removed.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns true, if there is a menubar
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">helpMenu</b> (aboutAppText, showWhatsThis)
 <table width="100%">
@@ -810,7 +836,7 @@ Returns true, if there is a menubar
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KMenu)</i>
+            returns <i>KMenu</i>
           </td>
         </tr>
         <tr>
@@ -818,28 +844,29 @@ Returns true, if there is a menubar
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>aboutAppText</td><td>QString</td><td align="right">QString ()</td></tr>
-
-              <tr><td>showWhatsThis</td><td>bool</td><td align="right">True</td></tr>
-
+              <tr><td>aboutAppText</td><td>QString</td><td align="right">QString()</td></tr>
+              <tr><td>showWhatsThis</td><td>bool</td><td align="right">1</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Retrieve the standard help menu.
 </p>
 <p>
-It contains entires for the
+It contains entries for the
 help system (activated by F1), an optional "What's This?" entry
 (activated by Shift F1), an application specific dialog box,
 and an "About KDE" dialog box.
@@ -848,43 +875,37 @@ and an "About KDE" dialog box.
 Example (adding a standard help menu to your application):
 <pre>
 KMenu *help = helpMenu( <myTextString> );
-menuBar()->insertItem( i18n("&Help"), help );
+menuBar()->addMenu( help );
 </pre>
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>aboutAppText</b> - The string that is used in the application
 specific dialog box. If you leave this string empty the
 information in the global KAboutData of the
 application will be used to make a standard dialog box.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>showWhatsThis</b> - Set this to false if you do not want to include
 the "What's This" menu entry.
 </p>
 <p>
 Returns A standard help menu.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">ignoreInitialGeometry</b> ()
+<li><b style="color : #000000;">ignoreInitialGeometry</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -892,38 +913,37 @@ Returns A standard help menu.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 <b style="color : #ff0000;"><i>Internal </i></b>
 Used from Konqueror when reusing the main window.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">initialGeometrySet</b> ()
+<li><b style="color : #000000;">initialGeometrySet</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -931,76 +951,74 @@ Used from Konqueror when reusing the main window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns true if a -geometry argument was given on the command line,
 and this is the first window created (the one on which this option applies)
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">memberList</b> ()
+<li><b style="color : #000000;">memberList</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(list of KMainWindow)</i>
+            returns <i>QList<KMainWindow</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 List of members of KMainWindow class.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">menuBar</b> ()
+<li><b style="color : #000000;">menuBar</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KMenuBar)</i>
+            returns <i>KMenuBar</i>
           </td>
         </tr>
         <tr>
@@ -1008,33 +1026,30 @@ List of members of KMainWindow class.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns a pointer to the menu bar.
 </p>
 <p>
 If there is no menu bar yet one will be created.
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">parseGeometry</b> (parsewidth)
 <table width="100%">
@@ -1043,7 +1058,7 @@ If there is no menu bar yet one will be created.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1051,41 +1066,39 @@ If there is no menu bar yet one will be created.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>parsewidth</td><td>bool</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 parse the geometry from the geometry command line argument
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">queryClose</b> ()
+<li><b style="color : #000000;">queryClose</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -1093,18 +1106,21 @@ parse the geometry from the geometry command line argument
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Called before the window is closed, either by the user or indirectly by
 the session manager.
 </p>
@@ -1144,24 +1160,20 @@ See also  queryExit()
 </p>
 <p>
 See also  KApplication.sessionSaving()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">queryExit</b> ()
+<li><b style="color : #000000;">queryExit</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -1169,18 +1181,21 @@ See also  KApplication.sessionSaving()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Called before the very last window is closed, either by the
 user or indirectly by the session manager.
 </p>
@@ -1213,15 +1228,11 @@ See also  queryClose()
 </p>
 <p>
 See also  KApplication.sessionSaving()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">readGlobalProperties</b> (sessionConfig)
 <table width="100%">
@@ -1230,7 +1241,7 @@ See also  KApplication.sessionSaving()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1238,35 +1249,33 @@ See also  KApplication.sessionSaving()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>sessionConfig</td><td>KConfig</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 The counterpart of saveGlobalProperties().
 </p>
 <p>
 Read the application-specific properties in again.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">readProperties</b> (a0)
 <table width="100%">
@@ -1275,7 +1284,7 @@ Read the application-specific properties in again.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1283,32 +1292,30 @@ Read the application-specific properties in again.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>a0</td><td>KConfigGroup</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Read your instance-specific properties.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">readPropertiesInternal</b> (a0, a1)
 <table width="100%">
@@ -1317,7 +1324,7 @@ Read your instance-specific properties.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -1325,17 +1332,19 @@ Read your instance-specific properties.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>a0</td><td>KConfig</td><td align="right"></td></tr>
-
               <tr><td>a1</td><td>int</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -1343,23 +1352,20 @@ Read your instance-specific properties.
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">resetAutoSaveSettings</b> ()
+<li><b style="color : #000000;">resetAutoSaveSettings</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1367,29 +1373,28 @@ Read your instance-specific properties.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Disable the auto-save-settings feature.
 You don't normally need to call this, ever.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">restore</b> (number, show)
 <table width="100%">
@@ -1398,7 +1403,7 @@ You don't normally need to call this, ever.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -1406,24 +1411,25 @@ You don't normally need to call this, ever.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>number</td><td>int</td><td align="right"></td></tr>
-
-              <tr><td>show</td><td>bool</td><td align="right">True</td></tr>
-
+              <tr><td>show</td><td>bool</td><td align="right">1</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Restore the session specified by <b>number.</b>
 </p>
 <p>
@@ -1431,15 +1437,11 @@ Returns <b>false</b> if this
 fails, otherwise returns <b>true</b> and shows the window.
 You should call canBeRestored() first.
 If <b>show</b> is true (default), this widget will be shown automatically.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">restoreWindowSize</b> (config)
 <table width="100%">
@@ -1448,7 +1450,7 @@ If <b>show</b> is true (default), this widget will be shown automatically.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1456,42 +1458,40 @@ If <b>show</b> is true (default), this widget will be shown automatically.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>config</td><td>KConfigGroup</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 For inherited classes
 Note that a -geometry on the command line has priority.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">saveAutoSaveSettings</b> ()
+<li><b style="color : #000000;">saveAutoSaveSettings</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1499,18 +1499,21 @@ Note that a -geometry on the command line has priority.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This slot should only be called in case you reimplement closeEvent() and
 if you are using the "auto-save" feature. In all other cases,
 setSettingsDirty() should be called instead to benefit from the delayed
@@ -1535,15 +1538,11 @@ saveAutoSaveSettings();
 ..
 }
 </pre>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">saveGlobalProperties</b> (sessionConfig)
 <table width="100%">
@@ -1552,7 +1551,7 @@ saveAutoSaveSettings();
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1560,22 +1559,24 @@ saveAutoSaveSettings();
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>sessionConfig</td><td>KConfig</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Save your application-wide properties. The function is
 invoked when the session manager requests your application
 to save its state.
@@ -1593,15 +1594,11 @@ it.
 </p>
 <p>
 Default implementation does nothing.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">saveMainWindowSettings</b> (config)
 <table width="100%">
@@ -1610,7 +1607,7 @@ Default implementation does nothing.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1618,38 +1615,35 @@ Default implementation does nothing.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>config</td><td>KConfigGroup</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Save settings for statusbar, menubar and toolbar to their respective
 groups in the config group <b>config.</b>
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>config</b> - Config group to save the settings to.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">saveProperties</b> (a0)
 <table width="100%">
@@ -1658,7 +1652,7 @@ groups in the config group <b>config.</b>
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1666,22 +1660,24 @@ groups in the config group <b>config.</b>
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>a0</td><td>KConfigGroup</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Save your instance-specific properties. The function is
 invoked when the session manager requests your application
 to save its state.
@@ -1692,17 +1688,11 @@ Please reimplement these function in childclasses.
 <p>
 Note: No user interaction is allowed
 in this function!
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">savePropertiesInternal</b> (a0, a1)
 <table width="100%">
@@ -1711,7 +1701,7 @@ in this function!
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1719,17 +1709,19 @@ in this function!
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>a0</td><td>KConfig</td><td align="right"></td></tr>
-
               <tr><td>a1</td><td>int</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -1737,14 +1729,11 @@ in this function!
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">saveWindowSize</b> (config)
 <table width="100%">
@@ -1753,7 +1742,7 @@ in this function!
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1761,32 +1750,30 @@ in this function!
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>config</td><td>KConfigGroup</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 For inherited classes
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setAutoSaveSettings</b> (groupName, saveWindowSize)
 <table width="100%">
@@ -1795,7 +1782,7 @@ For inherited classes
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1803,37 +1790,36 @@ For inherited classes
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>groupName</td><td>QString</td><td align="right">QLatin1String ("MainWindow" )</td></tr>
-
-              <tr><td>saveWindowSize</td><td>bool</td><td align="right">True</td></tr>
-
+              <tr><td>groupName</td><td>QString</td><td align="right">QLatin1String("MainWindow")</td></tr>
+              <tr><td>saveWindowSize</td><td>bool</td><td align="right">1</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Call this to enable "auto-save" of toolbar/menubar/statusbar settings
 (and optionally window size).
 If the *bars were moved around/shown/hidden when the window is closed,
 saveMainWindowSettings( KConfigGroup(KGlobal.config(), groupName) ) will be called.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>groupName</b> - a name that identifies this "type of window".
 You can have several types of window in the same application.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>saveWindowSize</b> - set it to true to include the window size
 when saving.
@@ -1858,15 +1844,54 @@ apps setCentralWidget())
 - Widgets that inherit from QWidget (like game boards) should overload
 "virtual QSize sizeHint() const;" to specify a default size rather
 than letting QWidget.adjust use the default size of 0x0.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">setAutoSaveSettings</b> (group, saveWindowSize)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>group</td><td>KConfigGroup</td><td align="right"></td></tr>
+              <tr><td>saveWindowSize</td><td>bool</td><td align="right">1</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Overload that lets you specify a KConfigGroup.
+This allows the settings to be saved into another file than KGlobal.config().
+@since 4.1
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">setCaption</b> (caption)
 <table width="100%">
@@ -1875,7 +1900,7 @@ than letting QWidget.adjust use the default size of 0x0.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1883,39 +1908,36 @@ than letting QWidget.adjust use the default size of 0x0.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>caption</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Makes a KDE compliant caption.
+Makes a KDE compliant caption (window title).
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>caption</b> - Your caption. <b>Do</b> <b>not</b> include the application name
 in this string. It will be added automatically according to the KDE
 standard.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setCaption</b> (caption, modified)
 <table width="100%">
@@ -1924,7 +1946,7 @@ standard.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1932,45 +1954,40 @@ standard.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>caption</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>modified</td><td>bool</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Makes a KDE compliant caption.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>caption</b> - Your caption. <b>Do</b> <b>not</b> include the application name
 in this string. It will be added automatically according to the KDE
-standard.
-</p>
+standard.</p>
 <p>
 <b>modified</b> - Specify whether the document is modified. This displays
 an additional sign in the title bar, usually "**".
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setPlainCaption</b> (caption)
 <table width="100%">
@@ -1979,7 +1996,7 @@ an additional sign in the title bar, usually "**".
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1987,47 +2004,44 @@ an additional sign in the title bar, usually "**".
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>caption</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Make a plain caption without any modifications.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>caption</b> - Your caption. This is the string that will be
 displayed in the window title.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">setSettingsDirty</b> ()
+<li><b style="color : #000000;">setSettingsDirty</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -2035,41 +2049,40 @@ displayed in the window title.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Tell the main window that it should save its settings when being closed.
 This is part of the auto-save-settings feature.
 For everything related to toolbars this happens automatically,
 but you have to call setSettingsDirty() in the slot that toggles
 the visibility of the statusbar.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">settingsDirty</b> ()
+<li><b style="color : #000000;">settingsDirty</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -2077,37 +2090,36 @@ the visibility of the statusbar.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 For inherited classes
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">showAboutApplication</b> ()
+<li><b style="color : #000000;">showAboutApplication</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -2115,18 +2127,21 @@ For inherited classes
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This slot does nothing.
 </p>
 <p>
@@ -2143,7 +2158,7 @@ Example:
 void MyMainLevel.setupInterface()
 {
 ..
-menuBar()->insertItem( i18n("&Help"), customHelpMenu() );
+menuBar()->addMenu( customHelpMenu() );
 ..
 }
 </p>
@@ -2153,24 +2168,20 @@ void MyMainLevel.showAboutApplication()
 <activate your custom dialog>
 }
 </pre>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">statusBar</b> ()
+<li><b style="color : #000000;">statusBar</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KStatusBar)</i>
+            returns <i>KStatusBar</i>
           </td>
         </tr>
         <tr>
@@ -2178,18 +2189,21 @@ void MyMainLevel.showAboutApplication()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns a pointer to the status bar.
 </p>
 <p>
@@ -2202,15 +2216,11 @@ See the KActionCollection documentation for more details.
 </p>
 <p>
 See also  KActionCollection
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">toolBar</b> (name)
 <table width="100%">
@@ -2219,7 +2229,7 @@ See also  KActionCollection
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KToolBar)</i>
+            returns <i>KToolBar</i>
           </td>
         </tr>
         <tr>
@@ -2227,54 +2237,49 @@ See also  KActionCollection
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>name</td><td>QString</td><td align="right">QString()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns a pointer to the toolbar with the specified name.
 This refers to toolbars created dynamically from the XML UI
 framework. If the toolbar does not exist one will be created.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>name</b> - The internal name of the toolbar. If no name is
 specified "mainToolBar" is assumed.
 </p>
 <p>
 Returns A pointer to the toolbar
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">toolBars</b> ()
+<li><b style="color : #000000;">toolBars</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(list of KToolBar)</i>
+            returns <i>QList<KToolBar</i>
           </td>
         </tr>
         <tr>
@@ -2282,31 +2287,29 @@ Returns A pointer to the toolbar
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns A list of all toolbars for this window
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
 </li><hr>
-
 
 </span>
 </body>

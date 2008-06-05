@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KIconLoader</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,8 +38,7 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-Iconloader for KDE.
+      Iconloader for KDE.
 </p>
 <p>
 KIconLoader will load the current icon theme and all its base themes.
@@ -67,12 +57,12 @@ all KDE applications.
 The standard groups are defined below.
 </p>
 <p>
-<li> K3Icon.Desktop: Icons in the iconview of konqueror, kdesktop and similar apps. </li>
-<li> K3Icon.Toolbar: Icons in toolbars. </li>
-<li> K3Icon.MainToolbar: Icons in the main toolbars. </li>
-<li> K3Icon.Small: Various small (typical 16x16) places: titlebars, listviews </li>
+<li> KIconLoader.Desktop: Icons in the iconview of konqueror, kdesktop and similar apps. </li>
+<li> KIconLoader.Toolbar: Icons in toolbars. </li>
+<li> KIconLoader.MainToolbar: Icons in the main toolbars. </li>
+<li> KIconLoader.Small: Various small (typical 16x16) places: titlebars, listviews </li>
 and menu entries.
-<li> K3Icon.Panel: Icons in kicker's panel </li>
+<li> KIconLoader.Panel: Icons in kicker's panel </li>
 </p>
 <p>
 The icons are stored on disk in an icon theme or in a standalone
@@ -86,15 +76,25 @@ The standalone directories contain just one version of an icon. The
 directories that are searched are: $appdir/pics and $appdir/toolbar.
 Icons in these directories can be loaded by using the special group
 "User".
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 <hr>
 <hr>
+<h3>enums</h3><ul>
+<li style="padding-bottom : 8px;"><b>Context</b> { Any, Action, Application, Device, FileSystem, MimeType, Animation, Category, Emblem, Emote, International, Place, StatusIcon }</li>
+
+<li style="padding-bottom : 8px;"><b>Group</b> { NoGroup, Desktop, FirstGroup, Toolbar, MainToolbar, Small, Panel, Dialog, LastGroup, User }</li>
+
+<li style="padding-bottom : 8px;"><b>MatchType</b> { MatchExact, MatchBest }</li>
+
+<li style="padding-bottom : 8px;"><b>States</b> { DefaultState, ActiveState, DisabledState, LastState }</li>
+
+<li style="padding-bottom : 8px;"><b>StdSizes</b> { SizeSmall, SizeSmallMedium, SizeMedium, SizeLarge, SizeHuge, SizeEnormous }</li>
+
+<li style="padding-bottom : 8px;"><b>Type</b> { Fixed, Scalable, Threshold }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
 
 <h3>methods</h3><ul style="list-style-type : none">
 <li style="list-style-type : none"><b style="color : #000000;">KIconLoader</b> (appname, dirs, parent)
@@ -104,7 +104,7 @@ Icons in these directories can be loaded by using the special group
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KIconLoader object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -112,33 +112,31 @@ Icons in these directories can be loaded by using the special group
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>appname</td><td>QString</td><td align="right">QString ()</td></tr>
-
-              <tr><td>dirs</td><td>KStandardDirs</td><td align="right">None</td></tr>
-
-              <tr><td>parent</td><td>QObject</td><td align="right">None</td></tr>
-
+              <tr><td>appname</td><td>QString</td><td align="right">QString()</td></tr>
+              <tr><td>dirs</td><td>KStandardDirs</td><td align="right">0</td></tr>
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Constructs an iconloader.
-</p>
+Constructs an iconloader.</p>
 <p>
 <b>appname</b> - Add the data directories of this application to the
 icon search path for the "User" group. The default argument adds the
-directories of the current application.
-</p>
+directories of the current application.</p>
 <p>
 <b>dirs</b> - the KStandardDirs object to use. If null the global one is used
 </p>
@@ -147,15 +145,11 @@ Usually, you use the default iconloader, which can be accessed via
 KIconLoader.global(), so you hardly ever have to create an
 iconloader object yourself. That one is the current KComponentData's
 (typically KApplication's) iconloader.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">KIconLoader</b> (componentData, parent)
 <table width="100%">
@@ -164,7 +158,7 @@ iconloader object yourself. That one is the current KComponentData's
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KIconLoader object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -172,26 +166,26 @@ iconloader object yourself. That one is the current KComponentData's
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>componentData</td><td>KComponentData</td><td align="right"></td></tr>
-
-              <tr><td>parent</td><td>QObject</td><td align="right">None</td></tr>
-
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Constructs an iconloader.
-</p>
+Constructs an iconloader.</p>
 <p>
 <b>componentData</b> - the KComponentData to use to create this icon loader.
 </p>
@@ -200,15 +194,94 @@ Usually, you use the default iconloader, which can be accessed via
 KIconLoader.global(), so you hardly ever have to create an
 iconloader object yourself. That one is the current KComponentData's
 (typically KApplication's) iconloader.
-</p>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">KIconLoader</b> (a0, a1, a2)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>QString</td><td align="right">QString()</td></tr>
+              <tr><td>a1</td><td>KStandardDirs</td><td align="right">0</td></tr>
+              <tr><td>a2</td><td>QObject</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">KIconLoader</b> (a0, a1)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>KComponentData</td><td align="right"></td></tr>
+              <tr><td>a1</td><td>QObject</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">addAppDir</b> (appname)
 <table width="100%">
@@ -217,7 +290,7 @@ iconloader object yourself. That one is the current KComponentData's
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -225,44 +298,41 @@ iconloader object yourself. That one is the current KComponentData's
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>appname</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Adds <b>appname</b> to the list of application specific directories.
-</p>
+Adds <b>appname</b> to the list of application specific directories.</p>
 <p>
 <b>appname</b> - The application name.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">addExtraDesktopThemes</b> ()
+<li><b style="color : #000000;">addExtraDesktopThemes</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -270,29 +340,28 @@ Adds <b>appname</b> to the list of application specific directories.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Adds all the default themes from other desktops at the end of
 the list of icon themes.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">alphaBlending</b> (group)
 <table width="100%">
@@ -301,46 +370,43 @@ the list of icon themes.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>group</td><td>K3Icon.Group</td><td align="right"></td></tr>
-
+              <tr><td>group</td><td>KIconLoader.Group</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Checks whether the user wants to blend the icons with the background
-using the alpha channel information for a given group.
-</p>
+using the alpha channel information for a given group.</p>
 <p>
 <b>group</b> - the group to check
 Returns true if alpha blending is desired
 <b style="color : #ff0000;"><i>Obsolete </i></b>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">currentSize</b> (group)
 <table width="100%">
@@ -349,53 +415,50 @@ Returns true if alpha blending is desired
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(int)</i>
+            returns <i>int</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>group</td><td>K3Icon.Group</td><td align="right"></td></tr>
-
+              <tr><td>group</td><td>KIconLoader.Group</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Returns the current size of the group.
-</p>
+Returns the current size of the group.</p>
 <p>
 <b>group</b> - the group to check.
 Returns the current size for an icon group.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">extraDesktopThemesAdded</b> ()
+<li><b style="color : #000000;">extraDesktopThemesAdded</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -403,65 +466,67 @@ Returns the current size for an icon group.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns if the default icon themes of other desktops have been added
 to the list of icon themes where icons are searched.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">global_</b> ()
+<li><b style="color : #000000;">global</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KIconLoader)</i>
+            returns <i>KIconLoader</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-
-
+Returns the global icon loader initialized with the global KComponentData.
+Therefore you must have a KComponentData instantiated before calling this.
+Returns global icon loader
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">hasContext</b> (context)
 <table width="100%">
@@ -470,49 +535,47 @@ to the list of icon themes where icons are searched.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>context</td><td>K3Icon.Context</td><td align="right"></td></tr>
-
+              <tr><td>context</td><td>KIconLoader.Context</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 <b style="color : #ff0000;"><i>Internal </i></b>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">iconEffect</b> ()
+<li><b style="color : #000000;">iconEffect</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KIconEffect)</i>
+            returns <i>KIconEffect</i>
           </td>
         </tr>
         <tr>
@@ -520,29 +583,28 @@ to the list of icon themes where icons are searched.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns a pointer to the KIconEffect object used by the icon loader.
 Returns the KIconEffect.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">iconPath</b> (name, group_or_size, canReturnNull)
 <table width="100%">
@@ -551,7 +613,7 @@ Returns the KIconEffect.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -559,53 +621,46 @@ Returns the KIconEffect.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>group_or_size</td><td>int</td><td align="right"></td></tr>
-
-              <tr><td>canReturnNull</td><td>bool</td><td align="right">False</td></tr>
-
+              <tr><td>canReturnNull</td><td>bool</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Returns the path of an icon.
-</p>
+Returns the path of an icon.</p>
 <p>
 <b>name</b> - The name of the icon, without extension. If an absolute
 path is supplied for this parameter, iconPath will return it
-directly.
-</p>
+directly.</p>
 <p>
 <b>group_or_size</b> - If positive, search icons whose size is
 specified by the icon group <b>group_or_size.</b> If negative, search
 icons whose size is - <b>group_or_size.</b>
-See K3Icon.Group and K3Icon.StdSizes
-</p>
+See KIconLoader.Group and KIconLoader.StdSizes</p>
 <p>
 <b>canReturnNull</b> - Can return a null string? If not, a path to the
 "unknown" icon will be returned.
 Returns the path of an icon, can be null or the "unknown" icon when
 not found, depending on <b>canReturnNull.</b>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">loadAnimated</b> (name, group, size)
 <table width="100%">
@@ -614,57 +669,50 @@ not found, depending on <b>canReturnNull.</b>
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>group</td><td>K3Icon.Group</td><td align="right"></td></tr>
-
+              <tr><td>group</td><td>KIconLoader.Group</td><td align="right"></td></tr>
               <tr><td>size</td><td>int</td><td align="right">0</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Loads an animated icon as a series of still frames. If you want to load
-a .mng animation as QMovie instead, please use loadMovie() instead.
-</p>
+a .mng animation as QMovie instead, please use loadMovie() instead.</p>
 <p>
-<b>name</b> - The name of the icon.
-</p>
+<b>name</b> - The name of the icon.</p>
 <p>
-<b>group</b> - The icon group. See loadIcon().
-</p>
+<b>group</b> - The icon group. See loadIcon().</p>
 <p>
 <b>size</b> - Override the default size for <b>group.</b>
-See K3Icon.StdSizes.
+See KIconLoader.StdSizes.
 Returns A QStringList containing the absolute path of all the frames
 making up the animation.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">loadIcon</b> (name, group, size, state, overlays, path_store, canReturnNull)
 <table width="100%">
@@ -673,7 +721,7 @@ making up the animation.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QPixmap)</i>
+            returns <i>QPixmap</i>
           </td>
         </tr>
         <tr>
@@ -681,80 +729,65 @@ making up the animation.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>group</td><td>K3Icon.Group</td><td align="right"></td></tr>
-
+              <tr><td>group</td><td>KIconLoader.Group</td><td align="right"></td></tr>
               <tr><td>size</td><td>int</td><td align="right">0</td></tr>
-
-              <tr><td>state</td><td>int</td><td align="right">K3Icon.DefaultState</td></tr>
-
-              <tr><td>overlays</td><td>QStringList</td><td align="right">QStringList ()</td></tr>
-
-              <tr><td>path_store</td><td>QString</td><td align="right">None</td></tr>
-
-              <tr><td>canReturnNull</td><td>bool</td><td align="right">False</td></tr>
-
+              <tr><td>state</td><td>int</td><td align="right">KIconLoader.DefaultState</td></tr>
+              <tr><td>overlays</td><td>QStringList</td><td align="right">QStringList()</td></tr>
+              <tr><td>path_store</td><td>QString</td><td align="right">0</td></tr>
+              <tr><td>canReturnNull</td><td>bool</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Loads an icon. It will try very hard to find an icon which is
 suitable. If no exact match is found, a close match is searched.
 If neither an exact nor a close match is found, a null pixmap or
 the "unknown" pixmap is returned, depending on the value of the
 <b>canReturnNull</b> parameter.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>name</b> - The name of the icon, without extension.
-</p>
+<b>name</b> - The name of the icon, without extension.</p>
 <p>
 <b>group</b> - The icon group. This will specify the size of and effects to
-be applied to the icon.
-</p>
+be applied to the icon.</p>
 <p>
 <b>size</b> - If nonzero, this overrides the size specified by <b>group.</b>
-See K3Icon.StdSizes.
-</p>
+See KIconLoader.StdSizes.</p>
 <p>
 <b>state</b> - The icon state: <b>DefaultState,</b> <b>ActiveState</b> or
 <b>DisabledState.</b> Depending on the user's preferences, the iconloader
-may apply a visual effect to hint about its state.
-</p>
+may apply a visual effect to hint about its state.</p>
 <p>
 <b>overlays</b> - a list of emblem icons to overlay, by name. the emblem
 prefix is applied automatically to each name, e.g.
-"zip" becomes "emblem-zip"
-</p>
+"zip" becomes "emblem-zip"</p>
 <p>
-<b>path_store</b> - If not null, the path of the icon is stored here.
-</p>
+<b>path_store</b> - If not null, the path of the icon is stored here.</p>
 <p>
 <b>canReturnNull</b> - Can return a null pixmap? If false, the
 "unknown" pixmap is returned when no appropriate icon has been found.
 Returns the QPixmap. Can be null when not found, depending on
 <b>canReturnNull.</b>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">loadIconSet</b> (name, group, size, canReturnNull)
 <table width="100%">
@@ -763,52 +796,47 @@ Returns the QPixmap. Can be null when not found, depending on
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QIcon)</i>
+            returns <i>QIcon</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>group</td><td>K3Icon.Group</td><td align="right"></td></tr>
-
+              <tr><td>group</td><td>KIconLoader.Group</td><td align="right"></td></tr>
               <tr><td>size</td><td>int</td><td align="right">0</td></tr>
-
-              <tr><td>canReturnNull</td><td>bool</td><td align="right">False</td></tr>
-
+              <tr><td>canReturnNull</td><td>bool</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Creates an icon set, that will do on-demand loading of the icon.
 Loading itself is done by calling loadIcon .
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>name</b> - The name of the icon, without extension.
-</p>
+<b>name</b> - The name of the icon, without extension.</p>
 <p>
 <b>group</b> - The icon group. This will specify the size of and effects to
-be applied to the icon.
-</p>
+be applied to the icon.</p>
 <p>
 <b>size</b> - If nonzero, this overrides the size specified by <b>group.</b>
-See K3Icon.StdSizes.
-</p>
+See KIconLoader.StdSizes.</p>
 <p>
 <b>canReturnNull</b> - Can return a null iconset? If false, iconset
 containing the "unknown" pixmap is returned when no appropriate icon has
@@ -818,15 +846,11 @@ Returns the icon set. Can be null when not found, depending on
 </p>
 <p>
 <b style="color : #ff0000;"><i>Deprecated </i></b> use KIcon instead, which uses the iconloader internally
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">loadMimeTypeIcon</b> (iconName, group, size, state, overlays, path_store)
 <table width="100%">
@@ -835,7 +859,7 @@ Returns the icon set. Can be null when not found, depending on
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QPixmap)</i>
+            returns <i>QPixmap</i>
           </td>
         </tr>
         <tr>
@@ -843,71 +867,58 @@ Returns the icon set. Can be null when not found, depending on
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>iconName</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>group</td><td>K3Icon.Group</td><td align="right"></td></tr>
-
+              <tr><td>group</td><td>KIconLoader.Group</td><td align="right"></td></tr>
               <tr><td>size</td><td>int</td><td align="right">0</td></tr>
-
-              <tr><td>state</td><td>int</td><td align="right">K3Icon.DefaultState</td></tr>
-
-              <tr><td>overlays</td><td>QStringList</td><td align="right">QStringList ()</td></tr>
-
-              <tr><td>path_store</td><td>QString</td><td align="right">None</td></tr>
-
+              <tr><td>state</td><td>int</td><td align="right">KIconLoader.DefaultState</td></tr>
+              <tr><td>overlays</td><td>QStringList</td><td align="right">QStringList()</td></tr>
+              <tr><td>path_store</td><td>QString</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Loads an icon for a mimetype.
 This is basically like loadIcon except that extra desktop themes are loaded if necessary.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>iconName</b> - The name of the icon, without extension, usually from KMimeType.
-</p>
+<b>iconName</b> - The name of the icon, without extension, usually from KMimeType.</p>
 <p>
 <b>group</b> - The icon group. This will specify the size of and effects to
-be applied to the icon.
-</p>
+be applied to the icon.</p>
 <p>
 <b>size</b> - If nonzero, this overrides the size specified by <b>group.</b>
-See K3Icon.StdSizes.
-</p>
+See KIconLoader.StdSizes.</p>
 <p>
 <b>state</b> - The icon state: <b>DefaultState,</b> <b>ActiveState</b> or
 <b>DisabledState.</b> Depending on the user's preferences, the iconloader
-may apply a visual effect to hint about its state.
-</p>
+may apply a visual effect to hint about its state.</p>
 <p>
-<b>path_store</b> - If not null, the path of the icon is stored here.
-</p>
+<b>path_store</b> - If not null, the path of the icon is stored here.</p>
 <p>
 <b>overlays</b> - a list of emblem icons to overlay, by name. the emblem
 prefix is applied automatically to each name, e.g.
 "zip" becomes "emblem-zip"
 Returns the QPixmap. Can not be null, the
 "unknown" pixmap is returned when no appropriate icon has been found.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">loadMovie</b> (name, group, size, parent)
 <table width="100%">
@@ -916,61 +927,52 @@ Returns the QPixmap. Can not be null, the
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QMovie)</i>
+            returns <i>QMovie</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>group</td><td>K3Icon.Group</td><td align="right"></td></tr>
-
+              <tr><td>group</td><td>KIconLoader.Group</td><td align="right"></td></tr>
               <tr><td>size</td><td>int</td><td align="right">0</td></tr>
-
-              <tr><td>parent</td><td>QObject</td><td align="right">None</td></tr>
-
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
+Loads an animated icon.</p>
 <p>
-Loads an animated icon.
-</p>
+<b>name</b> - The name of the icon.</p>
 <p>
-<b>name</b> - The name of the icon.
-</p>
-<p>
-<b>group</b> - The icon group. See loadIcon().
-</p>
+<b>group</b> - The icon group. See loadIcon().</p>
 <p>
 <b>size</b> - Override the default size for <b>group.</b>
-See K3Icon.StdSizes.
-</p>
+See KIconLoader.StdSizes.</p>
 <p>
 <b>parent</b> - The parent object of the returned QMovie.
 Returns A QMovie object. Can be null if not found or not valid.
 Ownership is passed to the caller.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">moviePath</b> (name, group, size)
 <table width="100%">
@@ -979,65 +981,58 @@ Ownership is passed to the caller.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>group</td><td>K3Icon.Group</td><td align="right"></td></tr>
-
+              <tr><td>group</td><td>KIconLoader.Group</td><td align="right"></td></tr>
               <tr><td>size</td><td>int</td><td align="right">0</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
+Returns the path to an animated icon.</p>
 <p>
-Returns the path to an animated icon.
-</p>
+<b>name</b> - The name of the icon.</p>
 <p>
-<b>name</b> - The name of the icon.
-</p>
-<p>
-<b>group</b> - The icon group. See loadIcon().
-</p>
+<b>group</b> - The icon group. See loadIcon().</p>
 <p>
 <b>size</b> - Override the default size for <b>group.</b>
-See K3Icon.StdSizes.
+See KIconLoader.StdSizes.
 Returns the full path to the movie, ready to be passed to QMovie's constructor.
 Empty string if not found.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">newIconLoader</b> ()
+<li><b style="color : #000000;">newIconLoader</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1045,28 +1040,27 @@ Empty string if not found.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Re-initialize the global icon loader
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">queryIcons</b> (group_or_size, context)
 <table width="100%">
@@ -1075,53 +1069,48 @@ Re-initialize the global icon loader
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>group_or_size</td><td>int</td><td align="right"></td></tr>
-
-              <tr><td>context</td><td>K3Icon.Context</td><td align="right">K3Icon.Any</td></tr>
-
+              <tr><td>context</td><td>KIconLoader.Context</td><td align="right">KIconLoader.Any</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Queries all available icons for a specific group, having a specific
-context.
-</p>
+context.</p>
 <p>
 <b>group_or_size</b> - If positive, search icons whose size is
 specified by the icon group <b>group_or_size.</b> If negative, search
 icons whose size is - <b>group_or_size.</b>
-See K3Icon.Group and K3Icon.StdSizes
-</p>
+See KIconLoader.Group and KIconLoader.StdSizes</p>
 <p>
 <b>context</b> - The icon context.
 Returns a list of all icons
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">queryIconsByContext</b> (group_or_size, context)
 <table width="100%">
@@ -1130,54 +1119,49 @@ Returns a list of all icons
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>group_or_size</td><td>int</td><td align="right"></td></tr>
-
-              <tr><td>context</td><td>K3Icon.Context</td><td align="right">K3Icon.Any</td></tr>
-
+              <tr><td>context</td><td>KIconLoader.Context</td><td align="right">KIconLoader.Any</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Queries all available icons for a specific context.
-</p>
+Queries all available icons for a specific context.</p>
 <p>
 <b>group_or_size</b> - The icon preferred group or size. If available
 at this group or size, those icons will be returned, in other case,
 icons of undefined size will be returned. Positive numbers are groups,
-negative numbers are negated sizes. See K3Icon.Group and
-K3Icon.StdSizes
-</p>
+negative numbers are negated sizes. See KIconLoader.Group and
+KIconLoader.StdSizes</p>
 <p>
 <b>context</b> - The icon context.
 Returns A QStringList containing the icon names
 available for that context
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">queryIconsByDir</b> (iconsDir)
 <table width="100%">
@@ -1186,7 +1170,7 @@ available for that context
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
@@ -1194,37 +1178,34 @@ available for that context
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>iconsDir</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns a list of all icons (*.png or *.xpm extension) in the
-given directory.
-</p>
+given directory.</p>
 <p>
 <b>iconsDir</b> - the directory to search in
 Returns A QStringList containing the icon paths
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">reconfigure</b> (_appname, _dirs)
 <table width="100%">
@@ -1233,7 +1214,7 @@ Returns A QStringList containing the icon paths
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1241,50 +1222,45 @@ Returns A QStringList containing the icon paths
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>_appname</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>_dirs</td><td>KStandardDirs</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
+Called by KComponentData.newIconLoader to reconfigure the icon loader.</p>
 <p>
-Called by KComponentData.newIconLoader to reconfigure the icon loader.
-</p>
-<p>
-<b>_appname</b> - the new application name
-</p>
+<b>_appname</b> - the new application name</p>
 <p>
 <b>_dirs</b> - the new standard directories. If 0, the directories
 from KGlobal will be taken.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">theme</b> ()
+<li><b style="color : #000000;">theme</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KIconTheme)</i>
+            returns <i>KIconTheme</i>
           </td>
         </tr>
         <tr>
@@ -1292,74 +1268,379 @@ from KGlobal will be taken.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns a pointer to the current theme. Can be used to query
 available and default sizes for groups.
+The KIconTheme will change if reconfigure() is called and
+therefore it's not recommed to store the pointer somewhere.
 Returns a pointer to the current theme. 0 if no theme set.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">unknown</b> ()
+<li><b style="color : #000000;">unknown</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QPixmap)</i>
+            returns <i>QPixmap</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the unknown icon. An icon that is used when no other icon
 can be found.
 Returns the unknown pixmap
-</p>
-
     </td>
   </tr>
 </table>
 
+</li><hr>
 
 </li><hr>
 
-
-</li><hr>
-
-
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+<li><b>Context</b>  { Any, Action, Application, Device, FileSystem, MimeType, Animation, Category, Emblem, Emote, International, Place, StatusIcon }
+  <p style="padding-top : 9px;">Defines the context of the icon.</p>
+  <table cellspacing="5">
+    <tr>
+      <td></td>
+      <td valign="top"><i>Any</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Action</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Application</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Device</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>FileSystem</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>MimeType</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Animation</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Category</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Emblem</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Emote</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>International</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Place</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>StatusIcon</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
+<li><b>Group</b>  { NoGroup, Desktop, FirstGroup, Toolbar, MainToolbar, Small, Panel, Dialog, LastGroup, User }
+  <p style="padding-top : 9px;">No group</p>
+  <table cellspacing="5">
+    <tr>
+      <td></td>
+      <td valign="top"><i>NoGroup</i></td>
+      <td valign="top">- -1 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Desktop</i></td>
+      <td valign="top">- 0 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>FirstGroup</i></td>
+      <td valign="top">- 0 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Toolbar</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>MainToolbar</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Small</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Panel</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Dialog</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>LastGroup</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>User</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
+<li><b>MatchType</b>  { MatchExact, MatchBest }
+  <p style="padding-top : 9px;">The type of a match.</p>
+  <table cellspacing="5">
+    <tr>
+      <td></td>
+      <td valign="top"><i>MatchExact</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>MatchBest</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
+<li><b>States</b>  { DefaultState, ActiveState, DisabledState, LastState }
+  <p style="padding-top : 9px;">Defines the possible states of an icon.</p>
+  <table cellspacing="5">
+    <tr>
+      <td></td>
+      <td valign="top"><i>DefaultState</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>ActiveState</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>DisabledState</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>LastState</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
+<li><b>StdSizes</b>  { SizeSmall, SizeSmallMedium, SizeMedium, SizeLarge, SizeHuge, SizeEnormous }
+  <p style="padding-top : 9px;">small icons for menu entries</p>
+  <table cellspacing="5">
+    <tr>
+      <td></td>
+      <td valign="top"><i>SizeSmall</i></td>
+      <td valign="top">- 16 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>SizeSmallMedium</i></td>
+      <td valign="top">- 22 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>SizeMedium</i></td>
+      <td valign="top">- 32 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>SizeLarge</i></td>
+      <td valign="top">- 48 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>SizeHuge</i></td>
+      <td valign="top">- 64 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>SizeEnormous</i></td>
+      <td valign="top">- 128 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
+<li><b>Type</b>  { Fixed, Scalable, Threshold }
+  <p style="padding-top : 9px;">The type of the icon.</p>
+  <table cellspacing="5">
+    <tr>
+      <td></td>
+      <td valign="top"><i>Fixed</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Scalable</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Threshold</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
+</ul>
 </span>
 </body>
 </html>

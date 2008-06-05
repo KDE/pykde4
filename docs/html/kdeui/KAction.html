@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KAction</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,26 +38,7 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-^$begin$
-^$NoError
-^$UnexpectedElementError
-^$CustomError
-^$NotWellFormedError
-^$PrematureEndOfDocumentError
-^$begin$
-^$NoToken
-^$Invalid
-^$StartDocument
-^$EndDocument
-^$StartElement
-^$EndElement
-^$Characters
-^$Comment
-^$DTD
-^$EntityReference
-^$ProcessingInstruction
-Class to encapsulate user-driven action or event
+      Class to encapsulate user-driven action or event
 </p>
 <p>
 The KAction class (and derived and super classes) extends QAction,
@@ -76,19 +48,204 @@ action or event in your program.
 <p>
 For instance, a user may want to <b>paste</b> the contents of
 the clipboard, <b>scroll</b> <b>down</b> a document, or <b>quit</b> the
+application. These are all <b>actions</b> -- events that the
+user causes to happen. The KAction class allows the developer to
+deal with these actions in an easy and intuitive manner, and conforms
+to KDE's extended functionality requirements - including supporting
+multiple user-configurable shortcuts, and KDE named icons. Actions
+also improve accessibility.
 </p>
-
+<p>
+Specifically, QAction (and thus KAction) encapsulates the various attributes
+of an event/action. For instance, an action might have an icon()
+that provides a visual representation (a clipboard for a "paste" action or
+scissors for a "cut" action). The action should also be described by some text().
+It will certainly be connected to a method that actually <b>executes</b> the action!
+All these attributes are contained within the action object.
+</p>
+<p>
+The advantage of dealing with actions is that you can manipulate
+the Action without regard to the GUI representation of it. For
+instance, in the "normal" way of dealing with actions like "cut",
+you would manually insert a item for Cut into a menu and a button
+into a toolbar. If you want to disable the cut action for a moment
+(maybe nothing is selected), you would have to hunt down the pointer
+to the menu item and the toolbar button and disable both
+individually. Setting the menu item and toolbar item up uses very
+similar code - but has to be done twice!
+</p>
+<p>
+With the action concept, you simply add the action to whatever
+GUI element you want. The KAction class will then take care of
+correctly defining the menu item (with icons, accelerators, text,
+etc), toolbar button, or other. From then on, if you
+manipulate the action at all, the effect will propagate through all
+GUI representations of it. Back to the "cut" example: if you want
+to disable the Cut Action, you would simply call
+'cutAction->setEnabled(false)' and both the menuitem and button would
+instantly be disabled!
+</p>
+<p>
+This is the biggest advantage to the action concept -- there is a
+one-to-one relationship between the "real" action and <b>all</b>
+GUI representations of it.
+</p>
+<p>
+KAction emits the hovered() signal on mouseover, and the triggered(bool checked)
+signal on activation of a corresponding GUI element ( menu item, toolbar button, etc. )
+</p>
+<p>
+If you are in the situation of wanting to map the triggered()
+signal of multiple action objects to one slot, with a special
+argument bound to each action, you have several options:
+</p>
+<p>
+Using QActionGroup:
+<li> Create a QActionGroup and assign it to each of the actions with setActionGroup(), then </li>
+<li> Connect the QActionGroup.triggered(QAction*) signal to your slot. </li>
+</p>
+<p>
+Using QSignalMapper:
+<pre>
+QSignalMapper *desktopNumberMapper = new QSignalMapper( this );
+connect( desktopNumberMapper, SIGNAL( mapped( int ) ),
+this, SLOT( moveWindowToDesktop( int ) ) );
+</p>
+<p>
+for ( uint i = 0; i < numberOfDesktops; ++i ) {
+KAction *desktopAction = new KAction( i18n( "Move Window to Desktop %i" ).arg( i ), ... );
+connect( desktopAction, SIGNAL( triggered(bool) ), desktopNumberMapper, SLOT( map() ) );
+desktopNumberMapper->setMapping( desktopAction, i );
+}
+</pre>
+</p>
+<p>
+<b>General Usage </b>
+</p>
+<p>
+The steps to using actions are roughly as follows:
+</p>
+<p>
+<li> Decide which attributes you want to associate with a given </li>
+action (icons, text, keyboard shortcut, etc)
+<li> Create the action using KAction (or derived or super class). </li>
+<li> Add the action into whatever GUI element you want. Typically, </li>
+this will be a menu or toolbar.
+</p>
+<p>
+<b>The kinds of shortcuts </b>
+</p>
+<p>
+Local shortcuts are active
+in their context, global shortcus are active everywhere, usually even if
+another program has focus.
+</p>
+<p>
+<li> Active shortcuts trigger a KAction if activated. </li>
+<li> Default shortcuts are what the active shortcuts revert to if the user chooses </li>
+to reset shortcuts to default.
+</p>
+<p>
+<b>Detailed Example </b>
+</p>
+<p>
+Here is an example of enabling a "New [document]" action
+<pre>
+KAction *newAct = actionCollection()->addAction(
+KStandardAction.New, //< see KStandardAction
+this, //< Receiver
+SLOT(fileNew()) ); //< SLOT
+</pre>
+</p>
+<p>
+This section creates our action. Text, Icon and Shortcut will be set from
+KStandardAction. KStandardAction ensures your application complies to the
+platform standards. When triggered the fileNew() slot will be called.
+</p>
+<p>
+See also  KStandardAction for more information.
+</p>
+<p>
+If you want to create your own non standard action use
+<pre>
+KAction *newAct = actionCollection()->addAction("quick-connect");
+newAct->setText(i18n("Quick Connect"))
+newAct->setIcon(KIcon("quick-connect"));
+newAct->setShortcut(Qt.Key_F6);
+connect(newAct, SIGNAL(triggered()), this, SLOT(quickConnect()));
+</pre>
+</p>
+<p>
+This section creates our action. It will display the text "Quick Connect"
+and use the Icon "quick-connect". F6 will trigger the action. It further
+says that whenever this action is invoked, it will use the quickConnect()
+slot to execute it.
+</p>
+<p>
+<pre>
+QMenu *file = new QMenu;
+file->addAction(newAct);
+</pre>
+That just inserted the action into the File menu. The point is, it's not
+important in which menu it is: all manipulation of the item is
+done through the newAct object.
+</p>
+<p>
+<pre>
+toolBar()->addAction(newAct);
+</pre>
+And this added the action into the main toolbar as a button.
+</p>
+<p>
+That's it!
+</p>
+<p>
+If you want to disable that action sometime later, you can do so
+with
+<pre>
+newAct->setEnabled(false)
+</pre>
+and both the menuitem in File and the toolbar button will instantly
+be disabled.
+</p>
+<p>
+Unlike with previous versions of KDE, the action can simply be deleted
+when you have finished with it - the destructor takes care of all
+of the cleanup.
+</p>
+<p>
+calling QAction.setShortcut() on a KAction may lead to unexpected
+behavior. There is nothing we can do about it because QAction.setShortcut()
+is not virtual.
+</p>
+<p>
+if you are using a "standard" action like "new", "paste",
+"quit", or any other action described in the KDE UI Standards,
+please use the methods in the KStandardAction class rather than
+defining your own.
+</p>
+<p>
+<b>Usage Within the XML Framework </b>
+</p>
+<p>
+If you are using KAction within the context of the XML menu and
+toolbar building framework, you do not ever
+have to add your actions to containers manually. The framework
+does that for you.
+</p>
+<p>
+See also  KStandardAction
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>enums</h3><ul>
-<li><b>GlobalShortcutLoading</b> = { Autoloading, NoAutoloading }</li>
+<li style="padding-bottom : 8px;"><b>GlobalShortcutLoading</b> { Autoloading, NoAutoloading }</li>
 
-<li><b>ShortcutType</b> = { ActiveShortcut, DefaultShortcut }</li>
+<li style="padding-bottom : 8px;"><b>ShortcutType</b> { ActiveShortcut, DefaultShortcut }<br><i  style="color : #aa00aa">typesafe object: </i><b>ShortcutTypes</b></li>
 </ul><a href="#extended"><i>enum details</i></a><hr>
+
 <h3>methods</h3><ul style="list-style-type : none">
 <li style="list-style-type : none"><b style="color : #000000;">KAction</b> (parent)
 <table width="100%">
@@ -97,7 +254,7 @@ the clipboard, <b>scroll</b> <b>down</b> a document, or <b>quit</b> the
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KAction object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -105,32 +262,30 @@ the clipboard, <b>scroll</b> <b>down</b> a document, or <b>quit</b> the
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>parent</td><td>QObject</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Constructs an action.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">KAction</b> (text, parent)
 <table width="100%">
@@ -139,7 +294,7 @@ Constructs an action.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KAction object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -147,42 +302,37 @@ Constructs an action.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>text</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>parent</td><td>QObject</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Constructs an action with the specified parent and visible text.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>text</b> - The visible text for this action.
-</p>
+<b>text</b> - The visible text for this action.</p>
 <p>
 <b>parent</b> - The parent for this action.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">KAction</b> (icon, text, parent)
 <table width="100%">
@@ -191,7 +341,7 @@ Constructs an action with the specified parent and visible text.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KAction object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -199,26 +349,26 @@ Constructs an action with the specified parent and visible text.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>icon</td><td>KIcon</td><td align="right"></td></tr>
-
               <tr><td>text</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>parent</td><td>QObject</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Constructs an action with text and icon; a shortcut may be specified by
 the ampersand character (e.g. \"&amp;Option\" creates a shortcut with key O )
 </p>
@@ -226,25 +376,101 @@ the ampersand character (e.g. \"&amp;Option\" creates a shortcut with key O )
 This is the other common KAction constructor used. Use it when you
 do have a corresponding icon.
 </p>
+<p></p>
 <p>
-</p>
+<b>icon</b> - The icon to display.</p>
 <p>
-<b>icon</b> - The icon to display.
-</p>
-<p>
-<b>text</b> - The text that will be displayed.
-</p>
+<b>text</b> - The text that will be displayed.</p>
 <p>
 <b>parent</b> - The parent for this action.
-</p>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">KAction</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>QObject</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li><b style="color : #000000;">forgetGlobalShortcut</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets the globalShortcutEnabled property to false and sets the global shortcut to an
+empty shortcut.
+This will also wipe out knowlegde about the existence of this action's global shorctut
+so it will not be considered anymore for shortcut conflict resolution. It will also not be
+visible anymore in the shortcuts KControl module.
+This method should not be used unless these effects are explicitly desired.
+@since: 4.1
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">globalShortcut</b> (type)
 <table width="100%">
@@ -253,7 +479,7 @@ do have a corresponding icon.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KShortcut)</i>
+            returns <i>KShortcut</i>
           </td>
         </tr>
         <tr>
@@ -261,29 +487,30 @@ do have a corresponding icon.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right">KAction.ActiveShortcut</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Get the global shortcut for this action, if one exists. Global shortcuts
 allow your actions to respond to accellerators independently of the focused window.
 Unlike regular shortcuts, the application's window does not need focus
 for them to be activated.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>type</b> - the type of shortcut to be returned. Should both be specified, only the
 active shortcut will be returned. Defaults to the active shortcut,
@@ -294,24 +521,20 @@ See also  KGlobalAccel
 </p>
 <p>
 See also  setGlobalShortcut()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">globalShortcutAllowed</b> ()
+<li><b style="color : #000000;">globalShortcutAllowed</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -319,38 +542,38 @@ See also  setGlobalShortcut()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns true if this action is permitted to have a global shortcut.
 Defaults to false.
-</p>
-
+Use isGlobalShortcutEnabled() instead.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">isShortcutConfigurable</b> ()
+<li><b style="color : #000000;">isGlobalShortcutEnabled</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -358,28 +581,66 @@ Defaults to false.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Returns true if this action's shortcut is configurable.
-</p>
-
+Returns true if this action is enabled to have a global shortcut.
+This will be respected by \class KGlobalShortcutsEditor.
+Defaults to false.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li><b style="color : #000000;">isShortcutConfigurable</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns true if this action's shortcut is configurable.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">rockerGesture</b> (type)
 <table width="100%">
@@ -388,7 +649,7 @@ Returns true if this action's shortcut is configurable.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KRockerGesture)</i>
+            returns <i>KRockerGesture</i>
           </td>
         </tr>
         <tr>
@@ -396,15 +657,18 @@ Returns true if this action's shortcut is configurable.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right">KAction.ActiveShortcut</td></tr>
-
             </table>
           </td>
         </tr>
@@ -412,14 +676,11 @@ Returns true if this action's shortcut is configurable.
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setGlobalShortcut</b> (shortcut, type, loading)
 <table width="100%">
@@ -428,7 +689,7 @@ Returns true if this action's shortcut is configurable.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -436,69 +697,76 @@ Returns true if this action's shortcut is configurable.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>shortcut</td><td>KShortcut</td><td align="right"></td></tr>
-
-              <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right"></td></tr>
-
+              <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right">KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut)</td></tr>
               <tr><td>loading</td><td>KAction.GlobalShortcutLoading</td><td align="right">KAction.Autoloading</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Assign a global shortcut for this action. Global shortcuts
-allow your actions to respond to keys independently of the focused window.
-Unlike regular shortcuts, the application's window does not need focus
-for them to be activated.
+allow an action to respond to key shortcuts independently of the focused window,
+i.e. the action will trigger if the keys were pressed no matter where in the X session.
 </p>
 <p>
-When an action, identified by main component name and text(), is assigned
+The action must have a per main component unique
+objectName() to enable cross-application bookeeping. If the objectName() is empty this method will
+do nothing, otherwise the isGlobalShortcutEnabled() property will be set to true and the
+shortcut will be enabled.
+It is mandatory that the objectName() doesn't change once isGlobalshortcutEnabled()
+has become true.
+</p>
+<p>
+KActionCollection.insert(name, action) will set action's objectName to name so you often
+don't have to set an objectName explicitly.
+</p>
+<p>
+When an action, identified by main component name and objectName(), is assigned
 a global shortcut for the first time on a KDE installation the assignment will
-be saved and restored every time the action's globalShortcutAllowed flag
-becomes true. This includes calling setGlobalShortcut()!
-If you actually want to change the global shortcut you have to set
-<b>loading</b> to NoAutoloading. The new shortcut will be saved again.
-The only way to forget the action's global shortcut is to do
-<pre>
-setGlobalShortcut(KShortcut(), KAction.ActiveShortcut | KAction.DefaultShortcut,
-KAction.NoAutoloading)
-</pre>
+be saved. The shortcut will then be restored every time setGlobalShortcut() is
+called with <b>loading</b> == Autoloading.
 </p>
 <p>
-<b>shortcut</b> - global shortcut(s) to assign
+If you actually want to change the global shortcut you have to set
+<b>loading</b> to NoAutoloading. The new shortcut will be automatically saved again.
 </p>
+<p></p>
+<p>
+<b>shortcut</b> - global shortcut(s) to assign. Will be ignored unless <b>loading</b> is set to NoAutoloading or this is the first time ever you call this method (see above).</p>
 <p>
 <b>type</b> - the type of shortcut to be set, whether the active shortcut, the default shortcut,
-or both (the default).
+or both (the default).</p>
+<p>
+<b>loading</b> - if Autoloading, assign the global shortcut this action has previously had if any.
+That way user preferences and changes made to avoid clashes will be conserved.
+if NoAutoloading the given shortcut will be assigned without looking up old values.
+You should only do this if the user wants to change the shortcut or if you have
+another very good reason. Key combinations that clash with other shortcuts will be
+dropped.
 </p>
 <p>
-<b>loading</b> - load the previous shortcut (Autoloading, the default) or really set a new
-shortcut (NoAutoloading).
-</p>
-<p>
-See also  KGlobalAccel
+the default shortcut will never be influenced by autoloading - it will be set as given.
 </p>
 <p>
 See also  globalShortcut()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setGlobalShortcutAllowed</b> (allowed, loading)
 <table width="100%">
@@ -507,7 +775,7 @@ See also  globalShortcut()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -515,40 +783,39 @@ See also  globalShortcut()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>allowed</td><td>bool</td><td align="right"></td></tr>
-
               <tr><td>loading</td><td>KAction.GlobalShortcutLoading</td><td align="right">KAction.Autoloading</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Indicate whether the programmer and/or user may define a global shortcut for this action.
 Defaults to false. Note that calling setGlobalShortcut() turns this on automatically.
 </p>
+<p></p>
 <p>
-</p>
+<b>allowed</b> - set to true if this action may have a global shortcut, otherwise false.</p>
 <p>
-<b>allowed</b> - set to true if this action may have a global shortcut, otherwise false.
-</p>
-
+<b>loading</b> - if Autoloading, assign to this action the global shortcut it has previously had
+if any.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setRockerGesture</b> (gest, type)
 <table width="100%">
@@ -557,7 +824,7 @@ Defaults to false. Note that calling setGlobalShortcut() turns this on automatic
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -565,17 +832,19 @@ Defaults to false. Note that calling setGlobalShortcut() turns this on automatic
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>gest</td><td>KRockerGesture</td><td align="right"></td></tr>
-
-              <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right"></td></tr>
-
+              <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right">KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut)</td></tr>
             </table>
           </td>
         </tr>
@@ -583,14 +852,11 @@ Defaults to false. Note that calling setGlobalShortcut() turns this on automatic
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setShapeGesture</b> (gest, type)
 <table width="100%">
@@ -599,7 +865,7 @@ Defaults to false. Note that calling setGlobalShortcut() turns this on automatic
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -607,17 +873,19 @@ Defaults to false. Note that calling setGlobalShortcut() turns this on automatic
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>gest</td><td>KShapeGesture</td><td align="right"></td></tr>
-
-              <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right"></td></tr>
-
+              <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right">KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut)</td></tr>
             </table>
           </td>
         </tr>
@@ -625,14 +893,11 @@ Defaults to false. Note that calling setGlobalShortcut() turns this on automatic
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setShortcut</b> (shortcut, type)
 <table width="100%">
@@ -641,7 +906,7 @@ Defaults to false. Note that calling setGlobalShortcut() turns this on automatic
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -649,47 +914,42 @@ Defaults to false. Note that calling setGlobalShortcut() turns this on automatic
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>shortcut</td><td>KShortcut</td><td align="right"></td></tr>
-
-              <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right"></td></tr>
-
+              <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right">KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut)</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Set the shortcut for this action.
 </p>
 <p>
 This is preferred over QAction.setShortcut(), as it allows for multiple shortcuts
 per action.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>shortcut</b> - shortcut(s) to use for this action in its specified shortcutContext()
-</p>
+<b>shortcut</b> - shortcut(s) to use for this action in its specified shortcutContext()</p>
 <p>
 <b>type</b> - type of shortcut to be set: active shortcut,
 default shortcut, or both (the default).
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setShortcut</b> (shortcut, type)
 <table width="100%">
@@ -698,7 +958,7 @@ default shortcut, or both (the default).
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -706,24 +966,25 @@ default shortcut, or both (the default).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>shortcut</td><td>QKeySequence</td><td align="right"></td></tr>
-
-              <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right"></td></tr>
-
+              <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right">KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut)</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 void setShortcut(const KShortcut& shortcut)
 </p>
 <p>
@@ -733,23 +994,17 @@ Set the primary shortcut only for this action.
 This function is there to explicitly override QAction.setShortcut(const QKeySequence&).
 QAction.setShortcut() will bypass everything in KAction and may lead to unexpected behavior.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>shortcut</b> - shortcut(s) to use for this action in its specified shortcutContext()
-</p>
+<b>shortcut</b> - shortcut(s) to use for this action in its specified shortcutContext()</p>
 <p>
 <b>type</b> - type of shortcut to be set: active shortcut,
 default shortcut, or both (default argument value).
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setShortcutConfigurable</b> (configurable)
 <table width="100%">
@@ -758,7 +1013,7 @@ default shortcut, or both (default argument value).
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -766,37 +1021,89 @@ default shortcut, or both (default argument value).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>configurable</td><td>bool</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Indicate whether the user may configure the action's shortcut.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>configurable</b> - set to true if this shortcut may be configured by the user, otherwise false.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">setShortcuts</b> (shortcuts, type)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>shortcuts</td><td>QList<QKeySequence></td><td align="right"></td></tr>
+              <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right">KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut)</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+void setShortcuts(const QList\<QKeySequence\>& shortcuts).
+</p>
+<p>
+Set the shortcuts for this action.
+</p>
+<p>
+This function is there to explicitly override QAction.setShortcut(const QList\<QKeySequence\>&).
+QAction.setShortcuts() will bypass everything in KAction and may lead to unexpected behavior.
+</p>
+<p></p>
+<p>
+<b>shortcut</b> - shortcut(s) to use for this action in its specified shortcutContext()</p>
+<p>
+<b>type</b> - type of shortcut to be set: active shortcut,
+default shortcut, or both (default argument value).
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">shapeGesture</b> (type)
 <table width="100%">
@@ -805,7 +1112,7 @@ Indicate whether the user may configure the action's shortcut.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KShapeGesture)</i>
+            returns <i>KShapeGesture</i>
           </td>
         </tr>
         <tr>
@@ -813,15 +1120,18 @@ Indicate whether the user may configure the action's shortcut.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>KAction.ShortcutTypes</td><td align="right">KAction.ActiveShortcut</td></tr>
-
             </table>
           </td>
         </tr>
@@ -829,14 +1139,11 @@ Indicate whether the user may configure the action's shortcut.
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">shortcut</b> (types)
 <table width="100%">
@@ -845,7 +1152,7 @@ Indicate whether the user may configure the action's shortcut.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KShortcut)</i>
+            returns <i>KShortcut</i>
           </td>
         </tr>
         <tr>
@@ -853,22 +1160,24 @@ Indicate whether the user may configure the action's shortcut.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>types</td><td>KAction.ShortcutTypes</td><td align="right">KAction.ActiveShortcut</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Get the shortcut for this action.
 </p>
 <p>
@@ -876,127 +1185,113 @@ This is preferred over QAction.shortcut(), as it allows for multiple shortcuts
 per action. The first and second shortcut as reported by shortcuts() will be the
 primary and alternate shortcut of the shortcut returned.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>types</b> - the type of shortcut to return. Should both be specified, only the
 active shortcut will be returned. Defaults to the active shortcut, if one exists.
 </p>
 <p>
 See also  shortcuts()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">triggered</b> (buttons, modifiers)<i style="color : #0000ff">   signal</i>
+<li style="list-style-type : none"><b style="color : #000000;">triggered</b> (buttons, modifiers)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("triggered (Qt.MouseButtons, Qt.KeyboardModifiers)")
+          <p style="color : #ee360a">SIGNAL ("triggered (MouseButtons, KeyboardModifiers)")</p>
+
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>buttons</td><td>Qt.MouseButtons</td><td align="right"></td></tr>
-
               <tr><td>modifiers</td><td>Qt.KeyboardModifiers</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Emitted when the action is triggered. Also provides the state of the
 keyboard modifiers and mouse buttons at the time.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
 </li><hr>
-
 
 <a name="extended">
 <h3>enums - detail</h3>
 <ul style="list-style-type : none">
-
-<li><b>GlobalShortcutLoading</b> = { Autoloading, NoAutoloading }
+<li><b>GlobalShortcutLoading</b>  { Autoloading, NoAutoloading }
+  <p style="padding-top : 9px;">Look up the action in global settings (using its main component's name and text())
+and set the shortcut as saved there.
+</p>
+<p>
+See also  setGlobalShortcut()</p>
   <table cellspacing="5">
-
     <tr>
       <td></td>
       <td valign="top"><i>Autoloading</i></td>
+      <td valign="top">- 0x0 </td>
       <td valign="top">-</td>
-      <td>
-/p>
-p>
-See also  setGlobalShortcut ( )
-and set the shortcut as saved there .
-Look up the action in global settings ( using its main component ' s name and text ( ) )</td>
+      <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>NoAutoloading</i></td>
+      <td valign="top">- 0x4 </td>
       <td valign="top">-</td>
-      <td>Prevent autoloading of saved global shortcut for action</td>
+      <td></td>
     </tr>
-
   </table>
 </li>
 <hr>
-
-<li><b>ShortcutType</b> = { ActiveShortcut, DefaultShortcut }
+<li><b>ShortcutType</b>  { ActiveShortcut, DefaultShortcut }
+  <p style="padding-top : 9px;">The shortcut will immediately become active but may be reset to "default".</p>
   <table cellspacing="5">
-
+<br><i  style="color : #aa00aa">typesafe object: </i><b>ShortcutTypes</b></li>
     <tr>
       <td></td>
       <td valign="top"><i>ActiveShortcut</i></td>
+      <td valign="top">- 0x1 </td>
       <td valign="top">-</td>
-      <td>
-The shortcut will immediately become active but may be reset to "default" .</td>
+      <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>DefaultShortcut</i></td>
+      <td valign="top">- 0x2 </td>
       <td valign="top">-</td>
-      <td>reset shortcuts to default .
-The shortcut is a default shortcut - it becomes active when somebody decides to</td>
+      <td></td>
     </tr>
-
   </table>
 </li>
 <hr>
-
 </ul>
-
 </span>
 </body>
 </html>

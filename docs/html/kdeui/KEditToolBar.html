@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KEditToolBar</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,8 +38,7 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-A dialog used to customize or configure toolbars.
+      A dialog used to customize or configure toolbars.
 </p>
 <p>
 This dialog only works if your application uses the XML UI
@@ -57,82 +47,44 @@ files to describe the toolbar layouts and it requires the actions
 to determine which buttons are active.
 </p>
 <p>
-Typically, you would include the KStdAction.configureToolBars()
-standard action in your application. In your slot to this action,
-you would have something like so:
+Typically you do not need to use it directly as KXmlGuiWindow.setupGUI
+takes care of it.
+</p>
+<p>
+If you use plugListAction you need to overload saveNewToolbarConfig()
+to plug actions again:
 </p>
 <p>
 <pre>
-KEditToolBar dlg(actionCollection());
-if (dlg.exec())
+void MyClass.saveNewToolbarConfig()
 {
-createGUI();
+KXmlGuiWindow.saveNewToolbarConfig();
+plugActionList( "list1", list1Actions );
+plugActionList( "list2", list2Actions );
 }
 </pre>
 </p>
 <p>
-That code snippet also takes care of redrawing the menu and
-toolbars if you have made any changes.
+When created, KEditToolBar takes a KXMLGUIFactory object, and uses it to
+find all of the action collections and XML files (there is one of each for the
+mainwindow, but there could be more, when adding other XMLGUI clients like
+KParts or plugins). The editor aims to be semi-intelligent about where it
+assigns any modifications. In other words, it will not write out part specific
+changes to your application's main XML file.
 </p>
 <p>
-If you are using KMainWindow's settings methods (either save/apply manually
-or autoSaveSettings), you should write something like:
-<pre>
-void MyClass.slotConfigureToolBars()
-{
-saveMainWindowSettings( KGlobal.config(), "MainWindow" );
-KEditToolBar dlg(actionCollection());
-connect(&dlg,SIGNAL(newToolBarConfig()),this,SLOT(slotNewToolBarConfig()));
-dlg.exec();
-}
-</p>
-<p>
-void MyClass.slotNewToolBarConfig() // This is called when OK, Apply or Defaults is clicked
-{
-...if you use any action list, use plugActionList on each here...
-createGUI();
-applyMainWindowSettings( KGlobal.config(), "MainWindow" );
-}
-</pre>
-</p>
-<p>
-Note that the procedure is a bit different for KParts applications.
-In this case, you need only pass along a pointer to your
-application's KXMLGUIFactory object. The editor will take care of
-finding all of the action collections and XML files. The editor
-aims to be semi-intelligent about where it assigns any
-modifications. In other words, it will not write out part specific
-changes to your shell's XML file.
-</p>
-<p>
-An example would be:
-</p>
-<p>
-<pre>
-saveMainWindowSettings( KGlobal.config(), "MainWindow" );
-KEditToolBar dlg(factory());
-connect(&dlg,SIGNAL(newToolBarConfig()),this,SLOT(slotNewToolBarConfig()));
-dlg.exec();
-</p>
-<p>
-void MyClass.slotNewToolBarConfig() // This is called when OK, Apply or Defaults is clicked
-{
-...if you use any action list, use plugActionList on each here...
-// Do NOT call createGUI()!
-applyMainWindowSettings( KGlobal.config(), "MainWindow" );
-}
-</pre>
+KXmlGuiWindow and KParts.MainWindow take care of creating KEditToolBar correctly
+and connecting to its newToolBarConfig slot, but if you really really want to do it
+yourself, see the KXmlGuiWindow.configureToolbars() and KXmlGuiWindow.saveNewToolbarConfig() code.
 </p>
 <p>
 <b>Author</b> Kurt Granroth <granroth@kde.org>
-</p>
-
+@maintainer David Faure <faure@kde.org>
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>methods</h3><ul style="list-style-type : none">
 <li style="list-style-type : none"><b style="color : #000000;">KEditToolBar</b> (collection, parent)
 <table width="100%">
@@ -141,7 +93,7 @@ applyMainWindowSettings( KGlobal.config(), "MainWindow" );
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KEditToolBar object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -149,54 +101,44 @@ applyMainWindowSettings( KGlobal.config(), "MainWindow" );
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>collection</td><td>KActionCollection</td><td align="right"></td></tr>
-
-              <tr><td>parent</td><td>QWidget</td><td align="right">None</td></tr>
-
+              <tr><td>parent</td><td>QWidget</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Constructor for apps that do not use components.
+Old constructor for apps that do not use components.
+This constructor is somewhat deprecated, since it doesn't work
+with any KXMLGuiClient being added to the mainwindow.
+You really want to use the other constructor.
 </p>
 <p>
-This is the
-only entry point to this class. You <b>must</b> pass along your
-collection of actions (some of which appear in your toolbars).
+You <b>must</b> pass along your collection of actions (some of which appear in your toolbars).
 The other two parameters are optional.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>collection</b> - The collection of actions to work on.
-</p>
-<p>
-<b>defaultToolBar</b> - The toolbar with this name will appear for editing.
-Pass in QString() for the default behaviour,
-generallyd desired for apps that do not use
-components.
-</p>
+<b>collection</b> - The collection of actions to work on.</p>
 <p>
 <b>parent</b> - The parent of the dialog.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">KEditToolBar</b> (factory, parent)
 <table width="100%">
@@ -205,7 +147,7 @@ components.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KEditToolBar object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -213,25 +155,26 @@ components.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>factory</td><td>KXMLGUIFactory</td><td align="right"></td></tr>
-
-              <tr><td>parent</td><td>QWidget</td><td align="right">None</td></tr>
-
+              <tr><td>parent</td><td>QWidget</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Constructor for KParts based apps.
+Main constructor.
 </p>
 <p>
 The main parameter, factory(), is a pointer to the
@@ -243,55 +186,48 @@ xml files) and the toolbar editor uses that.
 Use this like so:
 <pre>
 KEditToolBar edit(factory());
-if ( edit.exec() )
+if (edit.exec())
 ...
 </pre>
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>factory</b> - Your application's factory object
-</p>
-<p>
-<b>defaultToolBar</b> - The toolbar with this name will appear for editing.
-Pass in QString() for default behavior.
-</p>
+<b>factory</b> - Your application's factory object</p>
 <p>
 <b>parent</b> - The usual parent for the dialog.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">KEditToolBar</b> (a0)
+<li style="list-style-type : none"><b style="color : #999999;">KEditToolBar</b> (a0)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KEditToolBar object</i>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
         <tr>
           <td>
           
           </td>
-        </tr>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>a0</td><td>KEditToolBar</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -299,23 +235,20 @@ Pass in QString() for default behavior.
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">acceptOK</b> (b)
+<li style="list-style-type : none"><b style="color : #000000;">KEditToolBar</b> (a0, a1)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -323,35 +256,72 @@ Pass in QString() for default behavior.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>b</td><td>bool</td><td align="right"></td></tr>
-
+              <tr><td>a0</td><td>KActionCollection</td><td align="right"></td></tr>
+              <tr><td>a1</td><td>QWidget</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-should OK really save?
-<b style="color : #ff0000;"><i>Internal </i></b>
-</p>
-<p>
-</p>
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">KEditToolBar</b> (a0, a1)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>KXMLGUIFactory</td><td align="right"></td></tr>
+              <tr><td>a1</td><td>QWidget</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">hideEvent</b> (event)
 <table width="100%">
@@ -360,7 +330,7 @@ should OK really save?
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -368,15 +338,18 @@ should OK really save?
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>event</td><td>QHideEvent</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -384,75 +357,77 @@ should OK really save?
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">newToolBarConfig</b> ()<i style="color : #0000ff">   signal</i>
+<li><b style="color : #000000;">newToolBarConfig</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("newToolBarConfig ()")
+          <p style="color : #ee360a">SIGNAL ("newToolBarConfig ()")</p>
+
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Signal emitted when 'apply' or 'ok' is clicked or toolbars were reset.
 Connect to it, to plug action lists and to call applyMainWindowSettings
 (see sample code in this class's documentation)
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">newToolbarConfig</b> ()<i style="color : #0000ff">   signal</i>
+<li><b style="color : #000000;">newToolbarConfig</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("newToolbarConfig ()")
+          <p style="color : #ee360a">SIGNAL ("newToolbarConfig ()")</p>
+
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
@@ -460,14 +435,11 @@ Connect to it, to plug action lists and to call applyMainWindowSettings
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setDefaultToolBar</b> (toolBarName)
 <table width="100%">
@@ -476,7 +448,7 @@ Connect to it, to plug action lists and to call applyMainWindowSettings
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -484,40 +456,37 @@ Connect to it, to plug action lists and to call applyMainWindowSettings
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>toolBarName</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the default toolbar that will be selected when the dialog is shown.
 If not set, or QString() is passed in, the global default tool bar name
-will be used.
-</p>
+will be used.</p>
 <p>
 <b>toolBarName</b> - the name of the tool bar
 </p>
 <p>
 See also  setGlobalDefaultToolBar
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setGlobalDefaultToolBar</b> (toolBarName)
 <table width="100%">
@@ -526,45 +495,42 @@ See also  setGlobalDefaultToolBar
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>toolBarName</td><td>char</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the default toolbar which will be auto-selected for all
 KEditToolBar instances. Can be overridden on a per-dialog basis
-by calling setDefaultToolBar( const QString& ) on the dialog.
-</p>
+by calling setDefaultToolBar( const QString& ) on the dialog.</p>
 <p>
 <b></b> - toolbarName the name of the tool bar
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setResourceFile</b> (file, global)
 <table width="100%">
@@ -573,7 +539,7 @@ by calling setDefaultToolBar( const QString& ) on the dialog.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -581,24 +547,25 @@ by calling setDefaultToolBar( const QString& ) on the dialog.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>file</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>global</td><td>bool</td><td align="right">True</td></tr>
-
+              <tr><td>global</td><td>bool</td><td align="right">1</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 The name (absolute or relative) of your application's UI resource file
 is assumed to be share/apps/appname/appnameui.rc though this can be
 overridden by calling this method.
@@ -606,15 +573,23 @@ overridden by calling this method.
 <p>
 The global parameter controls whether or not the
 global resource file is used. If this is <b>true,</b> then you may
+edit all of the actions in your toolbars -- global ones and
+local one. If it is <b>false,</b> then you may edit only your
+application's entries. The only time you should set this to
+false is if your application does not use the global resource
+file at all (very rare).
 </p>
-
+<p></p>
+<p>
+<b>xmlfile</b> - The application's local resource file.</p>
+<p>
+<b>global</b> - If <b>true,</b> then the global resource file will also
+be parsed.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">showEvent</b> (event)
 <table width="100%">
@@ -623,7 +598,7 @@ global resource file is used. If this is <b>true,</b> then you may
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -631,15 +606,18 @@ global resource file is used. If this is <b>true,</b> then you may
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>event</td><td>QShowEvent</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -647,133 +625,13 @@ global resource file is used. If this is <b>true,</b> then you may
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">slotApply</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-idem
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
 </li><hr>
-
-
-<li><b style="color : #000000;">slotDefault</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Set toolbars to default value
-</p>
-<p>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">slotOk</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Overridden in order to save any changes made to the toolbars
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-</li><hr>
-
 
 </span>
 </body>

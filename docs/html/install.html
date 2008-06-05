@@ -13,6 +13,19 @@
 </TABLE><HR ALIGN="LEFT" WIDTH="100%"></DIV>
 
 <h2>Installing PyKDE4</h2>
+<a name="ins-doc"><h3>Install Documentation Only</h3></a>
+<p>
+If you already have PyKDE4 installed and only want to install or update the documentation,
+from the top-level directory run "installdocs.py" as root. For example:
+</p>
+<pre>
+    su -c"python installdocs.py"
+</pre>
+<p>
+This will only work if PyKDE4 is already installed. If you follow the installation procedure below,
+the documentation installation will be included automatically. You can also modify the location
+of the pykdedocs executable or html and example files by modifying installdocs.py.
+</p>
 <a name="ins-pkg"><h3>Packages</h3></a>
 <p>
 The easiest way to install PyKDE4 is from packages provided by your Linux distribution
@@ -30,7 +43,7 @@ PyKDE4 requires
 </p>
 <ul>
 <li><b>KDE4</b> - including header files (often in a kdelibs-devel package</li>
-<li><b>sip</b> - a version later than September 2007 version 4.7 snapshots</li>
+<li><b>sip</b> - a version later than September 2007 version 4.7 snapshots (4.7.4 preferred)</li>
 <li><b>PyQt4</b> - version 4.3 or later, compiled against the currently installed sip version</li>
 <li><b>PyQt4 sip files</b> - These are required to generate the PyKDE4 C++ code. They're installed
 automatically if you compiled PyQt4 on your system. If you installed from a pre-built package, you
@@ -66,9 +79,10 @@ the <b>sip</b> program. This takes well under 5 minutes on most machines. config
 also determine the best way to structure the C++ files for your installed version of g++ (gcc).
 </p>
 <p>
-Some versions of gcc 4.0 or 4.2 aren't capable of compiling the large files that are normally
-generated for PyKDE4. configure.py will detect the gcc version installed and adjust the
-generation of C++ code accordingly.
+Some versions of gcc after 4.0 (including 4.2.x) aren't capable of compiling the large files that are 
+generated for PyKDE4 when concatenation (-c switch) is used. configure.py now defaults to generating
+individual files per class (-i switch is default). Use -c if you think concatenation will work
+on your system.
 </p>
 <p>
 The options (see below) are whether sip concatenates all of the PyKDE4 code into one or two
@@ -129,14 +143,14 @@ was done under KDE3).
 <p>configure.py has the following options, which are described below.</p>
 <pre>
 Usage:
-    python configure.py [-h] [-c] [-d dir] [-g] [-j #] [-k] {-L dir] [-n dir] [-o dir] [-r] [-u] [-v dir] [-w] [-x] [-z file]
+    python configure.py [-h] [-c] [-d dir] [-g] [-i] [-j #] [-k] {-L dir] [-n dir] [-o dir] [-r] [-u] [-v dir] [-w] [-x] [-z file]
 
 where:
     -h      displays this help message
-    -c      concatenates each module's C/C++ source files [default]
+    -c      concatenates each module's C/C++ source files 
     -d dir  where the PyKDE modules will be installed [default /usr/lib/python/site-packages]
     -g      always release the GIL (SIP v3.x behaviour - default)
-    -i      no concatenation of each module's C/C++ source files
+    -i      no concatenation of each module's C/C++ source files [default]
     -j #    splits the concatenated C++ source files into # pieces [default 1]
     -k dir  the KDE base directory
     -L dir  the library directory name [default lib]
@@ -168,7 +182,7 @@ or modified by using -j.
 this is /usr/lib/pythonX.Y/site-packages. configure.py detects the version info from the python interpreter that
 runs configure.py. You can specify an alternate location.</li>
 <li><b>-g</b> - always release Python's GIL before calling a C++ function (default)</li>
-<li><b>-i</b> - generate individual files instead of large concatenated files (see -c above)</li>
+<li><b>-i</b> - generate individual files instead of large concatenated files (see -c above). This is the default.</li>
 <li><b>-j #</b> - split each module's C++ file into # pieces; can speed compilation on multicore systems</li>
 <li><b>-k dir</b> - the KDE4 base directory; configure.py will normally find this for you</li>
 <li><b>-L dir</b> - the directory containing system libs; configure.py will normally find this for you</li>

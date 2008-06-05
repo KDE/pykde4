@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KBookmarkOwner</h1><hr>
-      <h3><i style="color : #00aa00">abstract class</i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kio Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
+      <h3><i style="color : #00aa00">abstract</i></h3>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,51 +38,26 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-The KBookmarkMenu and KBookmarkBar classes gives the user
-the ability to either edit bookmarks or add their own. In the
-first case, the app may want to open the bookmark in a special way.
-In the second case, the app <em>must</em> supply the name and the
-URL for the bookmark.
-</p>
-<p>
-This class gives the app this callback-like ability.
-</p>
-<p>
-If your app does not give the user the ability to add bookmarks and
-you don't mind using the default bookmark editor to edit your
-bookmarks, then you don't need to overload this class at all.
-Rather, just use something like:
-</p>
-<p>
-<CODE>
-bookmarks = new KBookmarkMenu( mgr, 0, menu, actioncollec )
-</CODE>
-</p>
-<p>
-If you wish to use your own editor or allow the user to add
-bookmarks, you must overload this class.
-</p>
-
+      
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>enums</h3><ul>
-<li><b>BookmarkOption</b> = { ShowAddBookmark, ShowEditBookmark }</li>
+<li style="padding-bottom : 8px;"><b>BookmarkOption</b> { ShowAddBookmark, ShowEditBookmark }</li>
 
 </ul><a href="#extended"><i>enum details</i></a><hr>
+
 <h3>methods</h3><ul style="list-style-type : none">
-<li><b style="color : #000000;">currentBookmarkList</b> ()
+<li style="list-style-type : none"><b style="color : #000000;">bookmarkDialog</b> (mgr, parent)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
-      <table>
+      <table vspace="5">
         <tr>
           <td>
-            returns <i>(list of tuple of (QString, QStrin))</i>
+            returns <i>KBookmarkDialog</i>
           </td>
         </tr>
         <tr>
@@ -99,37 +65,40 @@ bookmarks, you must overload this class.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
-              <tr><td></td></tr>
-
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>mgr</td><td>KBookmarkManager</td><td align="right"></td></tr>
+              <tr><td>parent</td><td>QWidget</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Returns a list of title, URL pairs of the open tabs.
-</p>
 
     </td>
   </tr>
 </table>
-
 
 </li><hr>
 
-
-<li><b style="color : #000000;">currentTitle</b> ()
+<li><b style="color : #000000;">currentBookmarkList</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QList<QPair<QString,QString>></i>
           </td>
         </tr>
         <tr>
@@ -137,18 +106,58 @@ Returns a list of title, URL pairs of the open tabs.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
+Returns a list of title, URL pairs of the open tabs.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">currentTitle</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>QString</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 This function is called whenever the user wants to add the
 current page to the bookmarks list. The title will become the
 "name" of the bookmark. You must overload this function if you
@@ -156,24 +165,20 @@ wish to give your users the ability to add bookmarks.
 </p>
 <p>
 Returns the title of the current page.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">currentUrl</b> ()
+<li><b style="color : #000000;">currentUrl</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -181,18 +186,21 @@ Returns the title of the current page.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This function is called whenever the user wants to add the
 current page to the bookmarks list. The URL will become the URL
 of the bookmark. You must overload this function if you wish to
@@ -200,15 +208,11 @@ give your users the ability to add bookmarks.
 </p>
 <p>
 Returns the URL of the current page.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">enableOption</b> (option)
 <table width="100%">
@@ -217,7 +221,7 @@ Returns the URL of the current page.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -225,36 +229,34 @@ Returns the URL of the current page.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>option</td><td>KBookmarkOwner.BookmarkOption</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns true if <b>action</b> should be shown in the menu
 The default is to show both a add and editBookmark Entry
 //TODO ContextMenuAction? to disable the contextMenu?
 Delete and Propeties to disable those in the
 context menu?
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">openBookmark</b> (bm, mb, km)
 <table width="100%">
@@ -263,53 +265,49 @@ context menu?
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #00aa00">pure virtual</i>
+          <b style="color : #00aa00">pure virtual</b>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>bm</td><td>KBookmark</td><td align="right"></td></tr>
-
               <tr><td>mb</td><td>Qt.MouseButtons</td><td align="right"></td></tr>
-
               <tr><td>km</td><td>Qt.KeyboardModifiers</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Called if a bookmark is selected. You need to override this.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">supportsTabs</b> ()
+<li style="list-style-type : none"><b style="color : #000000;">openFolderinTabs</b> (bm)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
-      <table>
+      <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -317,59 +315,96 @@ Called if a bookmark is selected. You need to override this.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
-              <tr><td></td></tr>
-
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>bm</td><td>KBookmarkGroup</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-This function returns whether the owner supports tabs.
-</p>
-
+Called if the user wants to open every bookmark in this folder in a new tab.
+The default implementation does nothing.
+This is only called if supportsTabs() returns true
     </td>
   </tr>
 </table>
 
+</li><hr>
+
+<li><b style="color : #000000;">supportsTabs</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+This function returns whether the owner supports tabs.
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
-
 </li><hr>
-
 
 <a name="extended">
 <h3>enums - detail</h3>
 <ul style="list-style-type : none">
-
-<li><b>BookmarkOption</b> = { ShowAddBookmark, ShowEditBookmark }
+<li><b>BookmarkOption</b>  { ShowAddBookmark, ShowEditBookmark }
+  <p style="padding-top : 9px;"></p>
   <table cellspacing="5">
-
     <tr>
       <td></td>
       <td valign="top"><i>ShowAddBookmark</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>ShowEditBookmark</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
   </table>
 </li>
 <hr>
-
 </ul>
-
 </span>
 </body>
 </html>

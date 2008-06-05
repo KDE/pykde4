@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class ThumbCreator</h1><hr>
-      <h3><i style="color : #00aa00">abstract class</i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kio Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
+      <h3><i style="color : #00aa00">abstract</i></h3>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,8 +38,7 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-This is the baseclass for "thumbnail-plugins" in KDE. Using the class
+      This is the baseclass for "thumbnail-plugins" in KDE. Using the class
 KIO.PreviewJob allows you to generate small images (thumbnails)
 for any kind of file, where a "ThumbCreator" is available. Have a look
 at kdebase/kioslave/thumbnail/ for existing ThumbCreators.
@@ -62,7 +52,7 @@ your plugin, e.g.:
 <pre>
 extern "C"
 {
-ThumbCreator *new_creator()
+KDE_EXPORT ThumbCreator *new_creator()
 {
 return new YourThumbCreator();
 }
@@ -106,7 +96,7 @@ Encoding=UTF-8
 Type=Service
 Name=Name of the type of files your ThumbCreator supports
 ServiceTypes=ThumbCreator
-MimeTypes=application/x-somemimetype
+MimeType=application/x-somemimetype;
 CacheThumbnail=true
 X-KDE-Library=yourthumbcreator
 </pre>
@@ -126,18 +116,16 @@ on disk.
 </p>
 <p>
 Baseclass for thumbnail-generating plugins.
-</p>
-
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>enums</h3><ul>
-<li><b>Flags</b> = { None, DrawFrame, BlendIcon }</li>
+<li style="padding-bottom : 8px;"><b>Flags</b> { None, DrawFrame, BlendIcon }</li>
 
 </ul><a href="#extended"><i>enum details</i></a><hr>
+
 <h3>methods</h3><ul style="list-style-type : none">
 <li style="list-style-type : none"><b style="color : #000000;">create</b> (path, width, height, img)
 <table width="100%">
@@ -146,36 +134,35 @@ Baseclass for thumbnail-generating plugins.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #00aa00">pure virtual</i>
+          <b style="color : #00aa00">pure virtual</b>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>path</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>width</td><td>int</td><td align="right"></td></tr>
-
               <tr><td>height</td><td>int</td><td align="right"></td></tr>
-
               <tr><td>img</td><td>QImage</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Creates a thumbnail
 Note that the width and height parameters should not be used
 for scaling. Only plugins that create an image "from scratch",
@@ -183,40 +170,32 @@ like the TextCreator should directly use the specified size.
 If the resulting preview is larger than width x height, it will be
 scaled down.
 </p>
+<p></p>
 <p>
-</p>
+<b>path</b> - the (always local) file path to create a preview for</p>
 <p>
-<b>path</b> - the (always local) file path to create a preview for
-</p>
+<b>width</b> - maximum width for the preview</p>
 <p>
-<b>width</b> - maximum width for the preview
-</p>
-<p>
-<b>height</b> - maximum height for the preview
-</p>
+<b>height</b> - maximum height for the preview</p>
 <p>
 <b>img</b> - this image will contain the preview on success
 </p>
 <p>
 Returns true if preview generation succeeded
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">flags</b> ()
+<li><b style="color : #000000;">flags</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(ThumbCreator.Flags)</i>
+            returns <i>ThumbCreator.Flags</i>
           </td>
         </tr>
         <tr>
@@ -224,18 +203,21 @@ Returns true if preview generation succeeded
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 The flags of this plugin:
 <li> None nothing special </li>
 <li> DrawFrame a frame should be painted around the preview </li>
@@ -243,53 +225,48 @@ The flags of this plugin:
 </p>
 <p>
 Returns flags for this plugin
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
 </li><hr>
-
 
 <a name="extended">
 <h3>enums - detail</h3>
 <ul style="list-style-type : none">
-
-<li><b>Flags</b> = { None, DrawFrame, BlendIcon }
+<li><b>Flags</b>  { None, DrawFrame, BlendIcon }
+  <p style="padding-top : 9px;">The flags of this plugin.
+</p>
+<p>
+See also  flags()</p>
   <table cellspacing="5">
-
     <tr>
       <td></td>
       <td valign="top"><i>None</i></td>
+      <td valign="top">- 0 </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>DrawFrame</i></td>
+      <td valign="top">- 1 </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>BlendIcon</i></td>
+      <td valign="top">- 2 </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
   </table>
 </li>
 <hr>
-
 </ul>
-
 </span>
 </body>
 </html>

@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KConfigBase</h1><hr>
-      <h3><i style="color : #00aa00">abstract class</i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
+      <h3><i style="color : #00aa00">abstract</i></h3>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -42,66 +33,32 @@
         </tr>
         <tr>
           <td>Inherits</td>
-          <td>KConfigFlags</td>
+          <td></td>
         </tr>
       </table>
     </td>
     <td width="65%">
-      <p>
-KDE Configuration Management abstract base class
-</p>
-<p>
-This class forms the base for all %KDE configuration. It is an
-abstract base class, meaning that you cannot directly instantiate
-objects of this class. Either use KConfig (for usual %KDE
-configuration) or even KSharedConfig (stores values in shared memory).
-</p>
-<p>
-All configuration entries are key, value pairs. Each entry also
-belongs to a specific group of related entries. All configuration
-entries that do not explicitly specify which group they are in are
-in a special group called the default group.
-</p>
-<p>
-If there is a $ character in an entry, KConfigBase tries to expand
-environment variable and uses its value instead of its name. You
-can avoid this feature by having two consecutive $ characters in
-your config file which get expanded to one.
-</p>
-<p>
-the '=' char is not allowed in keys and the ']' char is not allowed in
-a group name.
-</p>
-<p>
-<b>Author</b> Kalle Dalheimer <kalle@kde.org>, Preston Brown <pbrown@kde.org>
-#config()
-</p>
-<p>
-See also  KConfig
-</p>
-<p>
-See also  KSharedConfig
-</p>
-
+      \class KConfigBase kconfigbase.h <KConfigBase>
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>enums</h3><ul>
-<li><b>ConfigState</b> = { NoAccess, ReadOnly, ReadWrite }</li>
+<li style="padding-bottom : 8px;"><b>AccessMode</b> { NoAccess, ReadOnly, ReadWrite }</li>
 
+<li style="padding-bottom : 8px;"><b>WriteConfigFlag</b> { Persistent, Global, Localized, Normal }<br><i  style="color : #aa00aa">typesafe object: </i><b>WriteConfigFlags</b></li>
 </ul><a href="#extended"><i>enum details</i></a><hr>
+
 <h3>methods</h3><ul style="list-style-type : none">
-<li><b style="color : #000000;">KConfigBase</b> ()
+<li><b style="color : #000000;">KConfigBase</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>a KConfigBase object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -109,482 +66,59 @@ See also  KSharedConfig
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Construct a KConfigBase object.
-</p>
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">KConfigBase</b> (componentData)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>a KConfigBase object</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>componentData</td><td>KComponentData</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Construct a KConfigBase object.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">backEnd</b> ()
+<li><b style="color : #000000;">accessMode</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KConfigBackEnd)</i>
+            returns <i>KConfigBase.AccessMode</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
           </td>
         </tr>
         <tr>
           <td>
           
           </td>
-        </tr>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Returns the backend associated with this config object
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">checkConfigFilesWritable</b> (warnUser)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>warnUser</td><td>bool</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Check whether the config files are writable.
-</p>
-<p>
-<b>warnUser</b> - Warn the user if the configuration files are not writable.
-Returns Indicates that all of the configuration files used are writable.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">componentData</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(KComponentData)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">deleteEntry</b> (pKey, pFlags)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>pFlags</td><td>KConfigFlags.WriteConfigFlags</td><td align="right">Normal</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Deletes the entry specified by <b>pKey</b> in the current group.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to delete.
-</p>
-<p>
-<b>pFlags</b> - The flags to use when deleting this entry.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">deleteEntry</b> (pKey, pFlags)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>pFlags</td><td>KConfigFlags.WriteConfigFlags</td><td align="right">Normal</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Deletes the entry specified by <b>pKey</b> in the current group.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to delete.
-</p>
-<p>
-<b>pFlags</b> - The flags to use when deleting this entry.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">deleteGroup</b> (group, pFlags)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>pFlags</td><td>KConfigFlags.WriteConfigFlags</td><td align="right">Normal</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Deletes a configuration entry group
-</p>
-<p>
-If the group is not empty and Recursive is not set, nothing gets deleted
-If this group is the current group and it is deleted, the
-current group is undefined and should be set with setGroup()
-before the next operation on the configuration object.
-</p>
-<p>
-</p>
-<p>
-<b>group</b> - The name of the group
-</p>
-<p>
-<b>pFlags</b> - The flags to use when writing this entry.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">entryIsImmutable</b> (key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>key</td><td>QString</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Checks whether it is possible to change the given entry.
-</p>
-<p>
-<b>key</b> - the key to check
-Returns whether the entry <b>key</b> may be changed in the current group
-in this configuration file.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">entryMap</b> (group)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(dict of (QString, QString))</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <i style="color : #00aa00">pure virtual</i>
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Returns a map (tree) of entries for all entries in a particular
-group. Only the actual entry string is returned, none of the
-other internal data should be included.
-</p>
-<p>
-</p>
-<p>
-<b>group</b> - A group to get keys from.
-Returns A map of entries in the group specified, indexed by key.
-The returned map may be empty if the group is not found.
-</p>
-<p>
-See also  QMap
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">getConfigState</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(KConfigBase.ConfigState)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Returns the state of the app-config object.
+Returns the access mode of the app-config object.
 </p>
 <p>
 Possible return values
@@ -595,68 +129,21 @@ read-write) and ReadWrite (the application-specific config
 file is opened read-write).
 </p>
 <p>
-See also  ConfigState()
-Returns the state of the app-config object
-</p>
-
+Returns the access mode of the app-config object
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">group</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(QString)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Returns the name of the group in which we are
-searching for keys and from which we are retrieving entries.
-</p>
-<p>
-Returns The current group.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">groupIsImmutable</b> (group)
+<li style="list-style-type : none"><b style="color : #000000;">deleteGroup</b> (group, flags)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -664,149 +151,521 @@ Returns The current group.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
-
+              <tr><td>group</td><td>QByteArray</td><td align="right"></td></tr>
+              <tr><td>flags</td><td>KConfigBase.WriteConfigFlags</td><td align="right">KConfigBase.Normal</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Checks whether it is possible to change the given group.
-</p>
-<p>
-<b>group</b> - the group to check
-Returns whether changes may be made to <b>group</b> in this configuration
-file.
-</p>
+Delete <b>aGroup.</b> This marks <b>aGroup</b> as <b>deleted</b> in the config object. This effectively
+removes any cascaded values from config files earlier in the stack.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">deleteGroup</b> (group, flags)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
+              <tr><td>flags</td><td>KConfigBase.WriteConfigFlags</td><td align="right">KConfigBase.Normal</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 
     </td>
   </tr>
 </table>
 
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">deleteGroup</b> (group, flags)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>group</td><td>char</td><td align="right"></td></tr>
+              <tr><td>flags</td><td>KConfigBase.WriteConfigFlags</td><td align="right">KConfigBase.Normal</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">deleteGroupImpl</b> (group, flags)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>group</td><td>QByteArray</td><td align="right"></td></tr>
+              <tr><td>flags</td><td>KConfigBase.WriteConfigFlags</td><td align="right">KConfigBase.Normal</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 
-<li><b style="color : #000000;">groupList</b> ()
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">group</b> (group)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>KConfigGroup</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>group</td><td>QByteArray</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns an object for the named subgroup.
+</p>
+<p></p>
+<p>
+<b>group</b> - the group to open. Pass a null string on to the KConfig
+object to obtain a handle on the root group.
+Returns The list of groups.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">group</b> (group)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>KConfigGroup</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">group</b> (group)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>KConfigGroup</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>group</td><td>char</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #999999;">group</b> (group)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>KConfigGroup</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>group</td><td>QByteArray</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #999999;">group</b> (group)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>KConfigGroup</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #999999;">group</b> (group)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>KConfigGroup</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>group</td><td>char</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">groupImpl</b> (b)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>KConfigGroup</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>b</td><td>QByteArray</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #999999;">groupImpl</b> (b)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>KConfigGroup</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>b</td><td>QByteArray</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">groupList</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #00aa00">pure virtual</i>
+          <b style="color : #00aa00">pure virtual</b>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns a list of groups that are known about.
 </p>
 <p>
 Returns The list of groups.
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">hasDefault</b> (key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>key</td><td>QString</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Returns whether a default is specified for an entry in either the
-system wide configuration file or the global KDE config file.
-</p>
-<p>
-If an application computes a default value at runtime for
-a certain entry, e.g. like:
-<pre>
-QColor computedDefault = qApp->palette().color(QPalette.Active, QPalette.Text)
-QColor color = config->readEntry(key, computedDefault);
-</pre>
-</p>
-<p>
-Then it may wish to make the following check before
-writing back changes:
-<pre>
-if ( (value == computedDefault) && !config->hasDefault(key) )
-config->revertToDefault(key)
-else
-config->writeEntry(key, value)
-</pre>
-</p>
-<p>
-This ensures that as long as the entry is not modified to differ from
-the computed default, the application will keep using the computed default
-and will follow changes the computed default makes over time.
-</p>
-<p>
-<b>key</b> - The key of the entry to check.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">hasGroup</b> (group)
 <table width="100%">
@@ -815,7 +674,7 @@ and will follow changes the computed default makes over time.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -823,47 +682,44 @@ and will follow changes the computed default makes over time.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>group</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns true if the specified group is known about.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>group</b> - The group to search for.
 Returns true if the group exists.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">hasGroup</b> (_pGroup)
+<li style="list-style-type : none"><b style="color : #000000;">hasGroup</b> (group)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -871,15 +727,18 @@ Returns true if the group exists.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>_pGroup</td><td>QByteArray</td><td align="right"></td></tr>
-
+              <tr><td>group</td><td>char</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
@@ -887,23 +746,20 @@ Returns true if the group exists.
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">hasGroup</b> (_pGroup)
+<li style="list-style-type : none"><b style="color : #000000;">hasGroup</b> (group)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -911,3995 +767,462 @@ Returns true if the group exists.
           
           </td>
         </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>_pGroup</td><td>char</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">hasKey</b> (key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
         <tr>
           <td>
           
           </td>
-        </tr>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>key</td><td>QString</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Checks whether the key has an entry in the currently active group.
-Use this to determine whether a key is not specified for the current
-group (hasKey() returns false). Keys with null data are considered
-nonexistent.
-</p>
-<p>
-</p>
-<p>
-<b>key</b> - The key to search for.
-Returns If true, the key is available.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">hasKey</b> (pKey)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">internalEntryMap</b> (pGroup)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KEntryMap)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <i style="color : #00aa00">pure virtual</i>
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pGroup</td><td>QString</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Returns a map (tree) of the entries in the specified group.
-This may or may not return all entries that belong to the
-config object. The only guarantee that you are given is that
-any entries that are dirty (i.e. modified and not yet written back
-to the disk) will be contained in the map. Some derivative
-classes may choose to return everything.
-</p>
-<p>
-Do not use this function, the implementation / return type are
-subject to change.
-</p>
-<p>
-</p>
-<p>
-<b>pGroup</b> - The group to provide a KEntryMap for.
-Returns The map of the entries in the group.
-<b style="color : #ff0000;"><i>Internal </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">internalEntryMap</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(KEntryMap)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <i style="color : #00aa00">pure virtual</i>
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Returns a map (tree) of the entries in the tree.
-</p>
-<p>
-Do not use this function, the implementation / return type are
-subject to change.
-</p>
-<p>
-Returns A map of the entries in the tree.
-</p>
-<p>
-<b style="color : #ff0000;"><i>Internal </i></b>
-</p>
-<p>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">internalGroup</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(KConfigGroup)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">internalHasGroup</b> (group)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <i style="color : #00aa00">pure virtual</i>
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
               <tr><td>group</td><td>QByteArray</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-<b style="color : #ff0000;"><i>Internal </i></b>
-</p>
 
     </td>
   </tr>
 </table>
 
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">hasGroupImpl</b> (group)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>group</td><td>QByteArray</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">isGroupImmutable</b> (aGroup)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>aGroup</td><td>QByteArray</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Can changes be made to the entries in <b>aGroup?</b>
+</p>
+<p></p>
+<p>
+<b>aGroup</b> - The group to check for immutability.
+Returns false if the entries in <b>aGroup</b> can be modified.
+    </td>
+  </tr>
+</table>
 
-<li><b style="color : #000000;">isDirty</b> ()
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">isGroupImmutable</b> (aGroup)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>aGroup</td><td>QString</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">isGroupImmutable</b> (aGroup)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>aGroup</td><td>char</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">isGroupImmutableImpl</b> (aGroup)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>aGroup</td><td>QByteArray</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">isImmutable</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
           </td>
         </tr>
         <tr>
           <td>
           
           </td>
-        </tr>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Checks whether the config file has any dirty (modified) entries.
-Returns true if the config file has any dirty (modified) entries.
-</p>
-
+Checks whether this configuration object can be modified.
+Returns whether changes may be made to this configuration object.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">isDollarExpansion</b> ()
+<li><b style="color : #000000;">markAsClean</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
           </td>
         </tr>
         <tr>
           <td>
           
           </td>
-        </tr>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Returns whether dollar expansion is on or off. It is initially OFF.
-</p>
-<p>
-Returns true if dollar expansion is on.
-</p>
-
+Reset the dirty flags of all entries in the entry map, so the
+values will not be written to disk on a later call to sync().
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">isImmutable</b> ()
+<li><b style="color : #000000;">sync</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
           </td>
         </tr>
         <tr>
           <td>
           
           </td>
-        </tr>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Checks whether this configuration file can be modified.
-Returns whether changes may be made to this configuration file.
-</p>
-
+Syncs the configuration object that this group belongs to.
+Unrelated concurrent changes to the same file are merged and thus
+not overwritten. Note however, that this object is <b>not</b> automatically
+updated with those changes.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">locale</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(QString)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Returns a the current locale.
-</p>
-<p>
-Returns A string representing the current locale.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">localeInitialized</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Returns whether the locale has been set.
-Returns true if the locale has been initialized
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">lookupData</b> (_key)
+<li style="list-style-type : none"><b style="color : #999999;">virtual_hook</b> (id, data)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KEntry)</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #00aa00">pure virtual</i>
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>_key</td><td>KEntryKey</td><td align="right"></td></tr>
-
+              <tr><td>id</td><td>int</td><td align="right"></td></tr>
+              <tr><td>data</td><td>void</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Looks up an entry in the config object's internal structure.
-Classes that derive from KConfigBase will need to implement this
-method in a storage-specific manner.
-</p>
-<p>
-Do not use this function, the implementation and return type are
-subject to change.
-</p>
-<p>
-</p>
-<p>
-<b>_key</b> - The key to look up It contains information both on
-the group of the key and the entry's key itself.
-Returns The KEntry value (data) found for the key. <b>KEntry.aValue</b>
-will be the null string if nothing was located.
-<b style="color : #ff0000;"><i>Internal </i></b>
-</p>
-
+Virtual hook, used to add new "virtual" functions while maintaining
+binary compatibility. Unused in this class.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">parseConfigFiles</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Parses all configuration files for a configuration object.
-</p>
-<p>
-The actual parsing is done by the associated KConfigBackEnd.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
 </li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">putData</b> (_key, _data, _checkGroup)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <i style="color : #00aa00">pure virtual</i>
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>_key</td><td>KEntryKey</td><td align="right"></td></tr>
-
-              <tr><td>_data</td><td>KEntry</td><td align="right"></td></tr>
-
-              <tr><td>_checkGroup</td><td>bool</td><td align="right">True</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Inserts a (key/value) pair into the internal storage mechanism of
-the configuration object. Classes that derive from KConfigBase
-will need to implement this method in a storage-specific manner.
-</p>
-<p>
-Do not use this function, the implementation / return type are
-subject to change.
-</p>
-<p>
-</p>
-<p>
-<b>_key</b> - The key to insert. It contains information both on
-the group of the key and the key itself. If the key already
-exists, the old value will be replaced.
-</p>
-<p>
-<b>_data</b> - the KEntry that is to be stored.
-</p>
-<p>
-<b>_checkGroup</b> - When false, assume that the group already exists.
-<b style="color : #ff0000;"><i>Internal </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readBoolEntry</b> (pKey, bDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>bDefault</td><td>bool</td><td align="right">False</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a boolean entry.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it as a boolean value. Currently "on", "yes", "1" and
-"true" are accepted as true, everything else if false.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for
-</p>
-<p>
-<b>bDefault</b> - A default value returned if the key was not found.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readBoolEntry</b> (pKey, bDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>bDefault</td><td>bool</td><td align="right">False</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a boolean entry.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it as a boolean value. Currently "on", "yes", "1" and
-"true" are accepted as true, everything else if false.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for
-</p>
-<p>
-<b>bDefault</b> - A default value returned if the key was not found.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readDateTimeEntry</b> (pKey, pDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QDateTime)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>pDefault</td><td>QDateTime</td><td align="right">None</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a QDateTime entry.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it as a date and time.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>pDefault</b> - A default value ( currentDateTime() by default)
-returned if the key was not found or if the read value cannot be
-interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readDateTimeEntry</b> (pKey, pDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QDateTime)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>pDefault</td><td>QDateTime</td><td align="right">None</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a QDateTime entry.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it as a date and time.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>pDefault</b> - A default value ( currentDateTime() by default)
-returned if the key was not found or if the read value cannot be
-interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">readDefaults</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Returns true if all readEntry and readXXXEntry calls return the system
-wide (default) values instead of the user's preference.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readDoubleNumEntry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(double)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>double</td><td align="right">0.0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a floating point value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readDoubleNumEntry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(double)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>double</td><td align="right">0.0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a floating point value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readEntry</b> (pKey, aDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QString)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>aDefault</td><td>char</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads the value of an entry specified by <b>pKey</b> in the current group.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>aDefault</b> - A default value returned if the key was not found.
-Returns The value for this key. Can be QString() if aDefault is null.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readEntry</b> (pKey, aDefault, sep)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QStringList)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>aDefault</td><td>QStringList</td><td align="right"></td></tr>
-
-              <tr><td>sep</td><td>char</td><td align="right">','</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a list of strings from the config object.
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>aDefault</b> - The default value to use if the key does not exist.
-</p>
-<p>
-<b>sep</b> - The list separator.
-Returns The list. Contains <b>aDefault</b> if <b>pKey</b> does not exist.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readEntry</b> (pKey, aDefault, sep)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QStringList)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>aDefault</td><td>QStringList</td><td align="right"></td></tr>
-
-              <tr><td>sep</td><td>char</td><td align="right">','</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a list of strings, but returns a default if the key
-did not exist.
-</p>
-<p>
-readEntry(const char*, const QStringList&, char) const
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readEntryUntranslated</b> (pKey, aDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QString)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>aDefault</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads the value of an entry specified by <b>pKey</b> in the current group.
-The untranslated entry is returned, you normally do not need this.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>aDefault</b> - A default value returned if the key was not found.
-Returns The value for this key.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readEntryUntranslated</b> (pKey, aDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QString)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>aDefault</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads the value of an entry specified by <b>pKey</b> in the current group.
-The untranslated entry is returned, you normally do not need this.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>aDefault</b> - A default value returned if the key was not found.
-Returns The value for this key.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readIntListEntry</b> (pKey)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(list of int)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a list of Integers.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-Returns The list. Empty if the entry does not exist.
-<b style="color : #ff0000;"><i>Deprecated </i></b> use readEntry(const QString&, const QList<T>&) const instead.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readIntListEntry</b> (pKey)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(list of int)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a list of Integers.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-Returns The list. Empty if the entry does not exist.
-<b style="color : #ff0000;"><i>Deprecated </i></b> use readEntry(const char*, const QList<T>&) const instead.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readListEntry</b> (pKey, sep)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QStringList)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>sep</td><td>char</td><td align="right">','</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a list of strings.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>sep</b> - The list separator (default is ",").
-Returns The list. Empty if the entry does not exist.
-<b style="color : #ff0000;"><i>Deprecated </i></b> use readEntry( const QString&, const QStringList&, char) const instead.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readListEntry</b> (pKey, sep)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QStringList)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>sep</td><td>char</td><td align="right">','</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a list of strings.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>sep</b> - The list separator (default is ",").
-Returns The list. Empty if the entry does not exist.
-<b style="color : #ff0000;"><i>Deprecated </i></b> use readEntry(const char*, const QStringList&, char) const instead.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readListEntry</b> (pKey, aDefault, sep)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QStringList)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>aDefault</td><td>QStringList</td><td align="right"></td></tr>
-
-              <tr><td>sep</td><td>char</td><td align="right">','</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a list of strings, but returns a default if the key
-did not exist.
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>aDefault</b> - The default value to use if the key does not exist.
-</p>
-<p>
-<b>sep</b> - The list separator (default is ",").
-Returns The list. Contains <b>aDefault</b> if the Key does not exist.
-<b style="color : #ff0000;"><i>Deprecated </i></b> use readEntry(const char*, const QStringList&, char) const instead.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readLongNumEntry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(long)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>long</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a numerical value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readLongNumEntry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(long)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>long</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a numerical value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readNum64Entry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(qint64)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>qint64</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a 64-bit numerical value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readNum64Entry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(qint64)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>qint64</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a 64-bit numerical value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readNumEntry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(int)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>int</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a numerical value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readNumEntry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(int)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>int</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a numerical value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readPathEntry</b> (pKey, aDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QString)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>aDefault</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a path.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it as a path. This means, dollar expansion is activated
-for this value, so that e.g. $HOME gets expanded.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>aDefault</b> - A default value returned if the key was not found.
-Returns The value for this key. Can be QString() if aDefault is null.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readPathEntry</b> (pKey, aDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QString)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>aDefault</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a path.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it as a path. This means, dollar expansion is activated
-for this value, so that e.g. $HOME gets expanded.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>aDefault</b> - A default value returned if the key was not found.
-Returns The value for this key. Can be QString() if aDefault is null.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readPathListEntry</b> (pKey, sep)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QStringList)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>sep</td><td>char</td><td align="right">','</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a list of string paths.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it as a list of paths. This means, dollar expansion is activated
-for this value, so that e.g. $HOME gets expanded.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>sep</b> - The list separator (default is ",").
-Returns The list. Empty if the entry does not exist.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readPathListEntry</b> (pKey, sep)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QStringList)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>sep</td><td>char</td><td align="right">','</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a list of string paths.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it as a list of paths. This means, dollar expansion is activated
-for this value, so that e.g. $HOME gets expanded.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>sep</b> - The list separator (default is ",").
-Returns The list. Empty if the entry does not exist.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readPointEntry</b> (pKey, pDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QPoint)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>pDefault</td><td>QPoint</td><td align="right">None</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a QPoint entry.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it as a QPoint object.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for
-</p>
-<p>
-<b>pDefault</b> - A default value (null QPoint by default) returned if the
-key was not found or if the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readPointEntry</b> (pKey, pDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QPoint)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>pDefault</td><td>QPoint</td><td align="right">None</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a QPoint entry.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it as a QPoint object.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for
-</p>
-<p>
-<b>pDefault</b> - A default value (null QPoint by default) returned if the
-key was not found or if the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readPropertyEntry</b> (pKey, aDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QVariant)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>aDefault</td><td>QVariant</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads the value of an entry specified by <b>pKey</b> in the current group.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>aDefault</b> - A default value returned if the key was not found.
-Returns The value for this key, or <b>aDefault.</b>
-Reads the value of an entry specified by <b>pKey</b> in the current group.
-readEntry(const char*, const T&) const
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readPropertyEntry</b> (pKey, aDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QVariant)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>aDefault</td><td>QVariant</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readRectEntry</b> (pKey, pDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QRect)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>pDefault</td><td>QRect</td><td align="right">None</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a QRect entry.
-</p>
-<p>
-Read the value of an entry specified by pKey in the current group
-and interpret it as a QRect object.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for
-</p>
-<p>
-<b>pDefault</b> - A default value (null QRect by default) returned if the
-key was not found or if the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readRectEntry</b> (pKey, pDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QRect)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>pDefault</td><td>QRect</td><td align="right">None</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a QRect entry.
-</p>
-<p>
-Read the value of an entry specified by pKey in the current group
-and interpret it as a QRect object.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for
-</p>
-<p>
-<b>pDefault</b> - A default value (null QRect by default) returned if the
-key was not found or if the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readSizeEntry</b> (pKey, pDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QSize)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>pDefault</td><td>QSize</td><td align="right">None</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a QSize entry.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it as a QSize object.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for
-</p>
-<p>
-<b>pDefault</b> - A default value (null QSize by default) returned if the
-key was not found or if the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readSizeEntry</b> (pKey, pDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(QSize)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>pDefault</td><td>QSize</td><td align="right">None</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads a QSize entry.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it as a QSize object.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for
-</p>
-<p>
-<b>pDefault</b> - A default value (null QSize by default) returned if the
-key was not found or if the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readUnsignedLongNumEntry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(ulong)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>ulong</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Read an unsigned numerical value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readUnsignedLongNumEntry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(ulong)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>ulong</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Read an unsigned numerical value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readUnsignedNum64Entry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(quint64)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>quint64</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Read an 64-bit unsigned numerical value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readUnsignedNum64Entry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(quint64)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>quint64</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Read an 64-bit unsigned numerical value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readUnsignedNumEntry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(uint)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>uint</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads an unsigned numerical value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">readUnsignedNumEntry</b> (pKey, nDefault)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(uint)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>nDefault</td><td>uint</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads an unsigned numerical value.
-</p>
-<p>
-Read the value of an entry specified by <b>pKey</b> in the current group
-and interpret it numerically.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to search for.
-</p>
-<p>
-<b>nDefault</b> - A default value returned if the key was not found or if
-the read value cannot be interpreted.
-Returns The value for this key.
-<b style="color : #ff0000;"><i>Deprecated </i></b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">reparseConfiguration</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <i style="color : #00aa00">pure virtual</i>
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reparses all configuration files. This is useful for programs
-that use stand alone graphical configuration tools. The base
-method implemented here only clears the group list and then
-appends the default group.
-</p>
-<p>
-Derivative classes should clear any internal data structures and
-then simply call parseConfigFiles() when implementing this
-method.
-</p>
-<p>
-See also  parseConfigFiles()
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">revertToDefault</b> (key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>key</td><td>QString</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reverts the entry with key <b>key</b> in the current group in the
-application specific config file to either the system wide (default)
-value or the value specified in the global KDE config file.
-</p>
-<p>
-To revert entries in the global KDE config file, the global KDE config
-file should be opened explicitly in a separate config object.
-</p>
-<p>
-</p>
-<p>
-<b>key</b> - The key of the entry to revert.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">rollback</b> (bDeep)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>bDeep</td><td>bool</td><td align="right">True</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Mark the config object as "clean," i.e. don't write dirty entries
-at destruction time. If <b>bDeep</b> is false, only the global dirty
-flag of the KConfig object gets cleared. If you then call
-writeEntry() again, the global dirty flag is set again and all
-dirty entries will be written at a subsequent sync() call.
-</p>
-<p>
-Classes that derive from KConfigBase should override this
-method and implement storage-specific behavior, as well as
-calling the KConfigBase.rollback() explicitly in the initializer.
-</p>
-<p>
-</p>
-<p>
-<b>bDeep</b> - If true, the dirty flags of all entries are cleared,
-as well as the global dirty flag.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">setBackEnd</b> (backEnd)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>backEnd</td><td>KConfigBackEnd</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Sets the backend to use with this config object.
-Ownership of the backend is taken over by the config object.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">setDirty</b> (_bDirty)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>_bDirty</td><td>bool</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Sets the global dirty flag of the config object
-</p>
-<p>
-</p>
-<p>
-<b>_bDirty</b> - How to mark the object's dirty status
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">setDollarExpansion</b> (_bExpand)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>_bExpand</td><td>bool</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Turns on or off "dollar expansion" (see KConfigBase introduction)
-when reading config entries.
-Dollar sign expansion is initially OFF.
-</p>
-<p>
-</p>
-<p>
-<b>_bExpand</b> - Tf true, dollar expansion is turned on.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">setGroup</b> (group)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Specifies the group in which keys will be read and written.
-</p>
-<p>
-Subsequent
-calls to readEntry() and writeEntry() will be applied only in the
-activated group.
-</p>
-<p>
-Switch back to the default group by passing a null string.
-</p>
-<p>
-<b>group</b> - The name of the new group.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">setGroup</b> (pGroup)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pGroup</td><td>QByteArray</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Overloaded public methods:
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">setGroup</b> (pGroup)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pGroup</td><td>char</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">setLocale</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Reads the locale and put in the configuration data struct.
-Note that this should be done in the constructor, but this is not
-possible due to some mutual dependencies in KApplication.init()
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">setReadDefaults</b> (b)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>b</td><td>bool</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-When set, all readEntry and readXXXEntry calls return the system
-wide (default) values instead of the user's preference.
-This is off by default.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">sync</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Flushes all changes that currently reside only in memory
-back to disk / permanent storage. Dirty configuration entries are
-written to the most specific file available.
-</p>
-<p>
-Asks the back end to flush out all pending writes, and then calls
-rollback(). No changes are made if the object has <b>readOnly</b>
-status.
-</p>
-<p>
-You should call this from your destructor in derivative classes.
-</p>
-<p>
-See also  rollback()
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">writeEntry</b> (pKey, value, sep, pFlags)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>value</td><td>QStringList</td><td align="right"></td></tr>
-
-              <tr><td>sep</td><td>char</td><td align="right">','</td></tr>
-
-              <tr><td>pFlags</td><td>KConfigFlags.WriteConfigFlags</td><td align="right">Normal</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-writeEntry( const char*, const QString&, WriteConfigFlags )
-writeEntry( const char*, const QString&, WriteConfigFlags )
-writeEntry() overridden to accept a list of strings.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to write
-</p>
-<p>
-<b>value</b> - The list to write
-</p>
-<p>
-<b>sep</b> - The list separator (default is ",").
-</p>
-<p>
-<b>pFlags</b> - The flags to use when writing this entry.
-</p>
-<p>
-See also  writeEntry()
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">writeEntry</b> (pKey, value, sep, pFlags)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>value</td><td>QStringList</td><td align="right"></td></tr>
-
-              <tr><td>sep</td><td>char</td><td align="right">','</td></tr>
-
-              <tr><td>pFlags</td><td>KConfigFlags.WriteConfigFlags</td><td align="right">Normal</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-writeEntry() overridden to accept a list of strings.
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to write
-</p>
-<p>
-<b>value</b> - The list to write
-</p>
-<p>
-<b>sep</b> - The list separator (default is ",").
-</p>
-<p>
-<b>pFlags</b> - The flags to use when writing this entry.
-</p>
-<p>
-See also  writeEntry()
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">writePathEntry</b> (pKey, path, pFlags)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>path</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>pFlags</td><td>KConfigFlags.WriteConfigFlags</td><td align="right">Normal</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Writes a file path.
-</p>
-<p>
-It is checked whether the path is located under $HOME. If so the
-path is written out with the user's home-directory replaced with
-$HOME. The path should be read back with readPathEntry()
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to write.
-</p>
-<p>
-<b>path</b> - The path to write.
-</p>
-<p>
-<b>pFlags</b> - The flags to use when writing this entry.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">writePathEntry</b> (pKey, path, pFlags)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>path</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>pFlags</td><td>KConfigFlags.WriteConfigFlags</td><td align="right">Normal</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Writes a file path.
-</p>
-<p>
-It is checked whether the path is located under $HOME. If so the
-path is written out with the user's home-directory replaced with
-$HOME. The path should be read back with readPathEntry()
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to write.
-</p>
-<p>
-<b>path</b> - The path to write.
-</p>
-<p>
-<b>pFlags</b> - The flags to use when writing this entry.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">writePathEntry</b> (pKey, value, sep, pFlags)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>value</td><td>QStringList</td><td align="right"></td></tr>
-
-              <tr><td>sep</td><td>char</td><td align="right">','</td></tr>
-
-              <tr><td>pFlags</td><td>KConfigFlags.WriteConfigFlags</td><td align="right">Normal</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-writePathEntry() overridden to accept a list of paths (strings).
-</p>
-<p>
-It is checked whether the paths are located under $HOME. If so each of
-the paths are written out with the user's home-directory replaced with
-$HOME. The paths should be read back with readPathListEntry()
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to write
-</p>
-<p>
-<b>value</b> - The list to write
-</p>
-<p>
-<b>sep</b> - The list separator (default is ",").
-</p>
-<p>
-<b>pFlags</b> - The flags to use when writing this entry.
-</p>
-<p>
-See also  writePathEntry()
-</p>
-<p>
-See also  readPathListEntry()
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">writePathEntry</b> (pKey, value, sep, pFlags)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pKey</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>value</td><td>QStringList</td><td align="right"></td></tr>
-
-              <tr><td>sep</td><td>char</td><td align="right">','</td></tr>
-
-              <tr><td>pFlags</td><td>KConfigFlags.WriteConfigFlags</td><td align="right">Normal</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-writePathEntry() overridden to accept a list of paths (strings).
-</p>
-<p>
-It is checked whether the paths are located under $HOME. If so each of
-the paths are written out with the user's home-directory replaced with
-$HOME. The paths should be read back with readPathListEntry()
-</p>
-<p>
-</p>
-<p>
-<b>pKey</b> - The key to write
-</p>
-<p>
-<b>value</b> - The list to write
-</p>
-<p>
-<b>sep</b> - The list separator (default is ",").
-</p>
-<p>
-<b>pFlags</b> - The flags to use when writing this entry.
-</p>
-<p>
-See also  writePathEntry()
-</p>
-<p>
-See also  readPathListEntry()
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-</li><hr>
-
 
 <a name="extended">
 <h3>enums - detail</h3>
 <ul style="list-style-type : none">
-
-<li><b>ConfigState</b> = { NoAccess, ReadOnly, ReadWrite }
+<li><b>AccessMode</b>  { NoAccess, ReadOnly, ReadWrite }
+  <p style="padding-top : 9px;">Possible return values for accessMode().</p>
   <table cellspacing="5">
-
     <tr>
       <td></td>
       <td valign="top"><i>NoAccess</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>ReadOnly</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>ReadWrite</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
   </table>
 </li>
 <hr>
-
+<li><b>WriteConfigFlag</b>  { Persistent, Global, Localized, Normal }
+  <p style="padding-top : 9px;">Flags to control write entry</p>
+  <table cellspacing="5">
+<br><i  style="color : #aa00aa">typesafe object: </i><b>WriteConfigFlags</b></li>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Persistent</i></td>
+      <td valign="top">- 0x01 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Global</i></td>
+      <td valign="top">- 0x02 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Localized</i></td>
+      <td valign="top">- 0x04 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Normal</i></td>
+      <td valign="top">- Persistent </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
 </ul>
-
 </span>
 </body>
 </html>

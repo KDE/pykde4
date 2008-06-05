@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KStandardDirs</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,34 +38,180 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-Site-independent access to standard KDE directories.
+      Site-independent access to standard KDE directories.
 <b>Author</b> Stephan Kulow <coolo@kde.org> and Sirtaj Singh Kang <taj@kde.org>
 </p>
 <p>
 This is one of the most central classes in kdelibs as
 it provides a basic service: It knows where the files
 reside on the user's hard disk. And it's meant to be the
+only one that knows -- to make the real location as
+transparent as possible to both the user and the applications.
 </p>
-
+<p>
+To this end it insulates the application from all information
+and applications always refer to a file with a resource type
+(e.g. icon) and a filename (e.g. <tt>khexdit.xpm</tt>). In an ideal world
+the application would make no assumption where this file is and
+leave it up to KStandardDirs.findResource("apps", "Home.desktop")
+to apply this knowledge to return <tt>/opt/kde/share/applnk/Home.desktop</tt>
+or .locate("data", "kgame/background.jpg") to return
+<tt>/opt/kde/share/apps/kgame/background.jpg</tt>
+</p>
+<p>
+The main idea behind KStandardDirs is that there are several
+toplevel prefixes below which the files lie. One of these prefixes is
+the one where the user installed kdelibs, one is where the
+application was installed, and one is <tt>$HOME/.kde</tt>, but there
+may be even more. Under these prefixes there are several well
+defined suffixes where specific resource types are to be found.
+For example, for the resource type "html" the suffixes could be
+share/doc/HTML and share/doc/kde/HTML.
+So the search algorithm basically appends to each prefix each registered
+suffix and tries to locate the file there.
+To make the thing even more complex, it's also possible to register
+absolute paths that KStandardDirs looks up after not finding anything
+in the former steps. They can be useful if the user wants to provide
+specific directories that aren't in his <tt>$HOME/.kde</tt> directory for,
+for example, icons.
+</p>
+<p>
+<b>Standard resources that kdelibs allocates are:</b>\n
+</p>
+<p>
+<li> apps - Applications menu (.desktop files). </li>
+<li> cache - Cached information (e.g. favicons, web-pages) </li>
+<li> cgi - CGIs to run from kdehelp. </li>
+<li> config - Configuration files. </li>
+<li> data - Where applications store data. </li>
+<li> emoticons - Emoticons themes </li>
+<li> exe - Executables in $prefix/bin. findExe() for a function that takes $PATH into account. </li>
+<li> html - HTML documentation. </li>
+<li> icon - Icons, see KIconLoader. </li>
+<li> kcfg - KConfigXT config files. </li>
+<li> lib - Libraries. </li>
+<li> locale - Translation files for KLocale. </li>
+<li> mime - Mime types defined by KDE-specific .desktop files. </li>
+<li> module - Module (dynamically loaded library). </li>
+<li> qtplugins - Qt plugins (dynamically loaded objects for Qt) </li>
+<li> services - Services. </li>
+<li> servicetypes - Service types. </li>
+<li> sound - Application sounds. </li>
+<li> templates - Templates for the "Create new file" functionality. </li>
+<li> wallpaper - Wallpapers. </li>
+<li> tmp - Temporary files (specific for both current host and current user) </li>
+<li> socket - UNIX Sockets (specific for both current host and current user) </li>
+<li> xdgconf-menu - Freedesktop.org standard location for menu layout (.menu) files. </li>
+<li> xdgdata-apps - Freedesktop.org standard location for application desktop files. </li>
+<li> xdgdata-dirs - Freedesktop.org standard location for menu descriptions (.directory files). </li>
+<li> xdgdata-mime - Freedesktop.org standard location for MIME type definitions. </li>
+<li> xdgdata-icon - Freedesktop.org standard location for icons. </li>
+<li> xdgdata-pixmap - Gnome-compatibility location for pixmaps. </li>
+</p>
+<p>
+A type that is added by the class KApplication if you use it, is
+appdata. This one makes the use of the type data a bit easier as it
+appends the name of the application.
+So while you had to .locate("data", "appname/filename") so you can
+also write .locate("appdata", "filename") if your KApplication instance
+is called "appname" (as set via KApplication's constructor or KAboutData, if
+you use the global KStandardDirs object KGlobal.dirs()).
+Please note though that you cannot use the "appdata"
+type if you intend to use it in an applet for Kicker because 'appname' would
+be "Kicker" instead of the applet's name. Therefore, for applets, you've got
+to work around this by using .locate("data", "appletname/filename").
+</p>
+<p>
+<b>KStandardDirs supports the following environment variables:</b>
+</p>
+<p>
+<li> KDEDIRS - This may set an additional number of directory prefixes to </li>
+search for resources. The directories should be separated
+by <tt>':'</tt>. The directories are searched in the order they are
+specified.
+<li> KDEHOME - The directory where changes are saved to. This directory is </li>
+used to search for resources first. If KDEHOME is not
+specified it defaults to "$HOME/.kde"
+<li> KDEROOTHOME - Like KDEHOME, but used for the root user. </li>
+If KDEROOTHOME is not set it defaults to the <tt>.kde</tt> directory in the
+home directory of root, usually "/root/.kde".
+Note that the setting of $HOME is ignored in this case.
+</p>
+<p>
+See also  KGlobalSettings
+</p>
+<p>
+On The Usage Of 'locate' and 'locateLocal'
+</p>
+<p>
+Typical KDE applications use resource files in one out of
+three ways:
+</p>
+<p>
+1) A resource file is read but is never written. A system
+default is supplied but the user can override this
+default in his local .kde directory:
+</p>
+<p>
+<pre>
+// Code example
+myFile = KStandardDirs.locate("appdata", "groups.lst");
+myData = myReadGroups(myFile); // myFile may be null
+</pre>
+</p>
+<p>
+2) A resource file is read and written. If the user has no
+local version of the file the system default is used.
+The resource file is always written to the users local
+.kde directory.
+</p>
+<p>
+<pre>
+// Code example
+myFile = KStandardDirs.locate("appdata", "groups.lst")
+myData = myReadGroups(myFile);
+...
+doSomething(myData);
+...
+myFile = KStandardDirs.locateLocal("appdata", "groups.lst");
+myWriteGroups(myFile, myData);
+</pre>
+</p>
+<p>
+3) A resource file is read and written. No system default
+is used if the user has no local version of the file.
+The resource file is always written to the users local
+.kde directory.
+</p>
+<p>
+<pre>
+// Code example
+myFile = KStandardDirs.locateLocal("appdata", "groups.lst");
+myData = myReadGroups(myFile);
+...
+doSomething(myData);
+...
+myFile = KStandardDirs.locateLocal("appdata", "groups.lst");
+myWriteGroups(myFile, myData);
+</pre>
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>enums</h3><ul>
-<li><b>SearchOption</b> = { NoSearchOptions, Recursive, NoDuplicates, IgnoreExecBit }</li>
+<li style="padding-bottom : 8px;"><b>SearchOption</b> { NoSearchOptions, Recursive, NoDuplicates, IgnoreExecBit }<br><i  style="color : #aa00aa">typesafe object: </i><b>SearchOptions</b></li>
 </ul><a href="#extended"><i>enum details</i></a><hr>
+
 <h3>methods</h3><ul style="list-style-type : none">
-<li style="list-style-type : none"><b style="color : #000000;">KStandardDirs</b> (componentData)
+<li><b style="color : #000000;">KStandardDirs</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
-      <table vspace="5">
+      <table>
         <tr>
           <td>
-            returns <i>a KStandardDirs object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -82,59 +219,55 @@ reside on the user's hard disk. And it's meant to be the
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>componentData</td><td>KComponentData</td><td align="right">KGlobal.mainComponent ()</td></tr>
-
+              <tr><td></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 KStandardDirs' constructor. It just initializes the caches.
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">KStandardDirs</b> (a0)
+<li style="list-style-type : none"><b style="color : #999999;">KStandardDirs</b> (a0)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KStandardDirs object</i>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
         <tr>
           <td>
           
           </td>
-        </tr>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>a0</td><td>KStandardDirs</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -142,14 +275,11 @@ KStandardDirs' constructor. It just initializes the caches.
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addCustomized</b> (config)
 <table width="100%">
@@ -158,7 +288,7 @@ KStandardDirs' constructor. It just initializes the caches.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -166,43 +296,38 @@ KStandardDirs' constructor. It just initializes the caches.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>config</td><td>KConfig</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Reads customized entries out of the given config object and add
 them via addResourceDirs().
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>config</b> - The object the entries are read from. This should
 contain global config files
 Returns true if new config paths have been added
 from <b>config.</b>
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addPrefix</b> (dir)
 <table width="100%">
@@ -211,7 +336,7 @@ from <b>config.</b>
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -219,22 +344,24 @@ from <b>config.</b>
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>dir</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Adds another search dir to front of the <b>fsstnd</b> list.
 </p>
 <p>
@@ -242,19 +369,14 @@ Adds another search dir to front of the <b>fsstnd</b> list.
 <li> KDEDIRS is taken into account </li>
 <li> Additional dirs may be loaded from kdeglobals. </li>
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>dir</b> - The directory to append relative paths to.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addResourceDir</b> (type, absdir, priority)
 <table width="100%">
@@ -263,7 +385,7 @@ Adds another search dir to front of the <b>fsstnd</b> list.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -271,26 +393,26 @@ Adds another search dir to front of the <b>fsstnd</b> list.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>absdir</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>priority</td><td>bool</td><td align="right">True</td></tr>
-
+              <tr><td>priority</td><td>bool</td><td align="right">1</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Adds absolute path at the beginning of the search path for
 particular types (for example in case of icons where
 the user specifies extra paths).
@@ -300,29 +422,22 @@ You shouldn't need this
 function in 99% of all cases besides adding user-given
 paths.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>type</b> - Specifies a short descriptive string to access files
-of this type.
-</p>
+of this type.</p>
 <p>
 <b>absdir</b> - Points to directory where to look for this specific
-type. Non-existant directories may be saved but pruned.
-</p>
+type. Non-existent directories may be saved but pruned.</p>
 <p>
 <b>priority</b> - if true, the directory is added before any other,
 otherwise after
 Returns true if successful, false otherwise.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addResourceType</b> (type, relativename, priority)
 <table width="100%">
@@ -331,7 +446,7 @@ Returns true if successful, false otherwise.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -339,26 +454,26 @@ Returns true if successful, false otherwise.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>relativename</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>priority</td><td>bool</td><td align="right">True</td></tr>
-
+              <tr><td>priority</td><td>bool</td><td align="right">1</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Adds suffixes for types.
 </p>
 <p>
@@ -373,29 +488,25 @@ suffix should end with / but doesn't have to start with one (as prefixes
 should end with one). So adding a suffix for app_pics would look
 like KGlobal.dirs()->addResourceType("app_pics", "data" ,"app/pics");
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>type</b> - Specifies a short descriptive string to access
-files of this type.
-</p>
+files of this type.</p>
 <p>
 <b>relativename</b> - Specifies a directory relative to the root
-of the KFSSTND.
-</p>
+of the KFSSTND.</p>
 <p>
 <b>priority</b> - if true, the directory is added before any other,
 otherwise after
 Returns true if successful, false otherwise.
 </p>
-
+<p>
+<b style="color : #ff0000;"><i>Deprecated </i></b>
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addResourceType</b> (type, basetype, relativename, priority)
 <table width="100%">
@@ -404,7 +515,7 @@ Returns true if successful, false otherwise.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -412,28 +523,27 @@ Returns true if successful, false otherwise.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>basetype</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>relativename</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>priority</td><td>bool</td><td align="right">True</td></tr>
-
+              <tr><td>priority</td><td>bool</td><td align="right">1</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Adds suffixes for types.
 </p>
 <p>
@@ -448,31 +558,23 @@ suffix should end with / but doesn't have to start with one (as prefixes
 should end with one). So adding a suffix for app_pics would look
 like KGlobal.dirs()->addResourceType("app_pics", "data", "app/pics");
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>type</b> - Specifies a short descriptive string to access
-files of this type.
-</p>
+files of this type.</p>
 <p>
-<b>basetype</b> - Specifies an already known type, or 0 if none
-</p>
+<b>basetype</b> - Specifies an already known type, or 0 if none</p>
 <p>
-<b>relativename</b> - Specifies a directory relative to the basetype
-</p>
+<b>relativename</b> - Specifies a directory relative to the basetype</p>
 <p>
 <b>priority</b> - if true, the directory is added before any other,
 otherwise after
 Returns true if successful, false otherwise.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addResourceType</b> (type, basetype, relativename, priority)
 <table width="100%">
@@ -481,7 +583,7 @@ Returns true if successful, false otherwise.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -489,38 +591,33 @@ Returns true if successful, false otherwise.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>basetype</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>relativename</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>priority</td><td>bool</td><td align="right">True</td></tr>
-
+              <tr><td>priority</td><td>bool</td><td align="right">1</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 <b style="color : #ff0000;"><i>Internal </i></b> - just to avoid unwanted overload
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addXdgConfigPrefix</b> (dir)
 <table width="100%">
@@ -529,7 +626,7 @@ Returns true if successful, false otherwise.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -537,39 +634,36 @@ Returns true if successful, false otherwise.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>dir</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Adds another search dir to front of the XDG_CONFIG_XXX list
 of prefixes.
 This prefix is only used for resources that start with "xdgconf-"
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>dir</b> - The directory to append relative paths to.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addXdgDataPrefix</b> (dir)
 <table width="100%">
@@ -578,7 +672,7 @@ This prefix is only used for resources that start with "xdgconf-"
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -586,48 +680,45 @@ This prefix is only used for resources that start with "xdgconf-"
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>dir</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Adds another search dir to front of the XDG_DATA_XXX list
 of prefixes.
 This prefix is only used for resources that start with "xdgdata-"
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>dir</b> - The directory to append relative paths to.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">allTypes</b> ()
+<li><b style="color : #000000;">allTypes</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
@@ -635,32 +726,31 @@ This prefix is only used for resources that start with "xdgdata-"
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This function will return a list of all the types that KStandardDirs
 supports.
 </p>
 <p>
 Returns All types that KDE supports
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">calcResourceHash</b> (type, filename, options)
 <table width="100%">
@@ -669,7 +759,7 @@ Returns All types that KDE supports
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(quint32)</i>
+            returns <i>quint32</i>
           </td>
         </tr>
         <tr>
@@ -677,37 +767,34 @@ Returns All types that KDE supports
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>filename</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>options</td><td>KStandardDirs.SearchOptions</td><td align="right">KStandardDirs.NoSearchOptions</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns a number that identifies this version of the resource.
 When a change is made to the resource this number will change.
 </p>
+<p></p>
 <p>
-</p>
+<b>type</b> - The type of the wanted resource</p>
 <p>
-<b>type</b> - The type of the wanted resource
-</p>
-<p>
-<b>filename</b> - A relative filename of the resource.
-</p>
+<b>filename</b> - A relative filename of the resource.</p>
 <p>
 <b>options</b> - If the flags includes Recursive,
 all resources are taken into account
@@ -716,15 +803,11 @@ otherwise only the one returned by findResource().
 <p>
 Returns A number identifying the current version of the
 resource.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">checkAccess</b> (pathname, mode)
 <table width="100%">
@@ -733,32 +816,33 @@ resource.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>pathname</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>mode</td><td>int</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Check, if a file may be accessed in a given mode.
 This is a wrapper around the access() system call.
 checkAccess() calls access() with the given parameters.
@@ -768,26 +852,20 @@ the directory. If yes, checkAccess() returns true.
 In all other cases checkAccess() returns false.
 </p>
 <p>
-Other than access() this function EXPLICITLY ignores non-existant
+Other than access() this function EXPLICITLY ignores non-existent
 files if checking for write access.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>pathname</b> - The full path of the file you want to test
-</p>
+<b>pathname</b> - The full path of the file you want to test</p>
 <p>
 <b>mode</b> - The access mode, as in the access() system call.
 Returns Whether the access is allowed, true = Access allowed
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">exists</b> (fullPath)
 <table width="100%">
@@ -796,46 +874,43 @@ Returns Whether the access is allowed, true = Access allowed
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>fullPath</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Checks for existence and accessability of a file or directory.
-Faster than creating a QFileInfo first.
-</p>
+Faster than creating a QFileInfo first.</p>
 <p>
 <b>fullPath</b> - the path to check. IMPORTANT: must end with a slash if expected to be a directory
 (and no slash for a file, obviously).
 Returns true if the directory exists, false otherwise
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">findAllExe</b> (list, appname, pathstr, options)
 <table width="100%">
@@ -844,54 +919,49 @@ Returns true if the directory exists, false otherwise
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(int)</i>
+            returns <i>int</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>list</td><td>QStringList</td><td align="right"></td></tr>
-
               <tr><td>appname</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>pathstr</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>pathstr</td><td>QString</td><td align="right">QString()</td></tr>
               <tr><td>options</td><td>KStandardDirs.SearchOptions</td><td align="right">KStandardDirs.NoSearchOptions</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Finds all occurrences of an executable in the system path.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>list</b> - will be filled with the pathnames of all the
 executables found. Will be empty if the executable
-was not found.
-</p>
+was not found.</p>
 <p>
 <b>appname</b> - the name of the executable for which to
-search.
-</p>
+search.</p>
 <p>
 <b>pathstr</b> - the path list which will be searched. If this
 is 0 (default), the $PATH environment variable will
-be searched.
-</p>
+be searched.</p>
 <p>
 <b>options</b> - if the flags passed include IgnoreExecBit the path returned
 may not have the executable bit set.
@@ -901,15 +971,11 @@ Returns The number of executables found, 0 if none were found.
 </p>
 <p>
 See also  findExe()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">findAllResources</b> (type, filter, options)
 <table width="100%">
@@ -918,7 +984,7 @@ See also  findExe()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
@@ -926,43 +992,40 @@ See also  findExe()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>filter</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>filter</td><td>QString</td><td align="right">QString()</td></tr>
               <tr><td>options</td><td>KStandardDirs.SearchOptions</td><td align="right">KStandardDirs.NoSearchOptions</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Tries to find all resources with the specified type.
 </p>
 <p>
 The function will look into all specified directories
 and return all filenames in these directories.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>type</b> - The type of resource to locate directories for.
-</p>
+<b>type</b> - The type of resource to locate directories for.</p>
 <p>
 <b>filter</b> - Only accept filenames that fit to filter. The filter
 may consist of an optional directory and a QRegExp
 wildcard expression. E.g. <tt>"images\*.jpg"</tt>.
-Use QString() if you do not want a filter.
-</p>
+Use QString() if you do not want a filter.</p>
 <p>
 <b>options</b> - if the flags passed include Recursive, subdirectories
 will also be search; if NoDuplicates is passed then only entries with
@@ -971,15 +1034,11 @@ unique filenames will be returned eliminating duplicates.
 <p>
 Returns List of all the files whose filename matches the
 specified filter.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">findAllResources</b> (type, filter, options, relPaths)
 <table width="100%">
@@ -988,7 +1047,7 @@ specified filter.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
@@ -996,28 +1055,27 @@ specified filter.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>filter</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>options</td><td>KStandardDirs.SearchOptions</td><td align="right"></td></tr>
-
               <tr><td>relPaths</td><td>QStringList</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Tries to find all resources with the specified type.
 </p>
 <p>
@@ -1025,24 +1083,20 @@ The function will look into all specified directories
 and return all filenames (full and relative paths) in
 these directories.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>type</b> - The type of resource to locate directories for.
-</p>
+<b>type</b> - The type of resource to locate directories for.</p>
 <p>
 <b>filter</b> - Only accept filenames that fit to filter. The filter
 may consist of an optional directory and a QRegExp
 wildcard expression. E.g. <tt>"images\*.jpg"</tt>.
-Use QString() if you do not want a filter.
-</p>
+Use QString() if you do not want a filter.</p>
 <p>
 <b>options</b> - if the flags passed include Recursive, subdirectories
 will also be search; if NoDuplicates is passed then only entries with
 unique filenames will be returned eliminating duplicates.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>relPaths</b> - The list to store the relative paths into
 These can be used later to .locate() the file
@@ -1050,15 +1104,11 @@ These can be used later to .locate() the file
 <p>
 Returns List of all the files whose filename matches the
 specified filter.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">findDirs</b> (type, reldir)
 <table width="100%">
@@ -1067,7 +1117,7 @@ specified filter.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
@@ -1075,24 +1125,25 @@ specified filter.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>reldir</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Tries to find all directories whose names consist of the
 specified type and a relative path. So would
 findDirs("apps", "Settings") return
@@ -1103,26 +1154,20 @@ findDirs("apps", "Settings") return
 Note that it appends / to the end of the directories,
 so you can use this right away as directory names.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>type</b> - The type of the base directory.
-</p>
+<b>type</b> - The type of the base directory.</p>
 <p>
 <b>reldir</b> - Relative directory.
 </p>
 <p>
 Returns A list of matching directories, or an empty
 list if the resource specified is not found.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">findExe</b> (appname, pathstr, options)
 <table width="100%">
@@ -1131,50 +1176,50 @@ list if the resource specified is not found.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>appname</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>pathstr</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>pathstr</td><td>QString</td><td align="right">QString()</td></tr>
               <tr><td>options</td><td>KStandardDirs.SearchOptions</td><td align="right">KStandardDirs.NoSearchOptions</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Finds the executable in the system path.
 </p>
 <p>
 A valid executable must
 be a file and have its executable bit set.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>appname</b> - The name of the executable file for which to search.
-</p>
+if this contains a path separator, it will be resolved
+according to the current working directory
+(shell-like behaviour).</p>
 <p>
 <b>pathstr</b> - The path which will be searched. If this is
 null (default), the $PATH environment variable will
-be searched.
-</p>
+be searched.</p>
 <p>
 <b>options</b> - if the flags passed include IgnoreExecBit the path returned
 may not have the executable bit set.
@@ -1185,15 +1230,11 @@ it will return QString().
 </p>
 <p>
 See also  findAllExe()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">findResource</b> (type, filename)
 <table width="100%">
@@ -1202,7 +1243,7 @@ See also  findAllExe()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -1210,24 +1251,25 @@ See also  findAllExe()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>filename</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Tries to find a resource in the following order:
 <li> All PREFIX/\<relativename> paths (most recent first). </li>
 <li> All absolute paths (most recent first). </li>
@@ -1240,26 +1282,20 @@ then look into the subdir lib of all elements of all prefixes
 ($KDEDIRS) for a file libkdecore.la and return the path to
 the first one it finds (e.g. /opt/kde/lib/libkdecore.la)
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>type</b> - The type of the wanted resource
-</p>
+<b>type</b> - The type of the wanted resource</p>
 <p>
 <b>filename</b> - A relative filename of the resource.
 </p>
 <p>
 Returns A full path to the filename specified in the second
 argument, or QString() if not found.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">findResourceDir</b> (type, filename)
 <table width="100%">
@@ -1268,7 +1304,7 @@ argument, or QString() if not found.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -1276,24 +1312,25 @@ argument, or QString() if not found.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>filename</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Tries to find the directory the file is in.
 It works the same as findResource(), but it doesn't
 return the filename but the name of the directory.
@@ -1308,26 +1345,20 @@ findResourceDir("lib", "libkdecore.la") would return the
 path of the subdir libkdecore.la is found first in
 (e.g. /opt/kde/lib/)
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>type</b> - The type of the wanted resource
-</p>
+<b>type</b> - The type of the wanted resource</p>
 <p>
 <b>filename</b> - A relative filename of the resource.
 Returns The directory where the file specified in the second
 argument is located, or QString() if the type
 of resource specified is unknown or the resource
 cannot be found.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">installPath</b> (type)
 <table width="100%">
@@ -1336,41 +1367,39 @@ cannot be found.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the path where type was installed to by kdelibs. This is an absolute path and only
 one out of many search paths
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">isRestrictedResource</b> (type, relPath)
 <table width="100%">
@@ -1379,7 +1408,7 @@ one out of many search paths
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -1387,24 +1416,25 @@ one out of many search paths
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>relPath</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>relPath</td><td>QString</td><td align="right">QString()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Checks whether a resource is restricted as part of the KIOSK
 framework. When a resource is restricted it means that user-
 specific files in the resource are ignored.
@@ -1414,25 +1444,19 @@ E.g. by restricting the "wallpaper" resource, only system-wide
 installed wallpapers will be found by this class. Wallpapers
 installed under the $KDEHOME directory will be ignored.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>type</b> - The type of the resource to check
-</p>
+<b>type</b> - The type of the resource to check</p>
 <p>
 <b>relPath</b> - A relative path in the resource.
 </p>
 <p>
 Returns True if the resource is restricted.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">kde_default</b> (type)
 <table width="100%">
@@ -1441,30 +1465,32 @@ Returns True if the resource is restricted.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This returns a default relative path for the standard KDE
 resource types. Below is a list of them so you get an idea
 of what this is all about.
@@ -1507,24 +1533,20 @@ See also  locate()
 </p>
 <p>
 See also  locateLocal()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">kfsstnd_prefixes</b> ()
+<li><b style="color : #000000;">kfsstnd_prefixes</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -1532,37 +1554,36 @@ See also  locateLocal()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 <b style="color : #ff0000;"><i>Internal </i></b> (for use by sycoca only)
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">kfsstnd_xdg_conf_prefixes</b> ()
+<li><b style="color : #000000;">kfsstnd_xdg_conf_prefixes</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -1570,37 +1591,36 @@ See also  locateLocal()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 <b style="color : #ff0000;"><i>Internal </i></b> (for use by sycoca only)
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">kfsstnd_xdg_data_prefixes</b> ()
+<li><b style="color : #000000;">kfsstnd_xdg_data_prefixes</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -1608,37 +1628,36 @@ See also  locateLocal()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 <b style="color : #ff0000;"><i>Internal </i></b> (for use by sycoca only)
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">localkdedir</b> ()
+<li><b style="color : #000000;">localkdedir</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -1646,40 +1665,39 @@ See also  locateLocal()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the toplevel directory in which KStandardDirs
 will store things. Most likely <tt>$HOME/.kde</tt>.
 Don't use this function if you can use locateLocal()
 Returns the toplevel directory
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">localxdgconfdir</b> ()
+<li><b style="color : #000000;">localxdgconfdir</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -1687,38 +1705,37 @@ Returns the toplevel directory
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns $XDG_CONFIG_HOME
 See also http://www.freedesktop.org/standards/basedir/draft/basedir-spec/basedir-spec.html
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">localxdgdatadir</b> ()
+<li><b style="color : #000000;">localxdgdatadir</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -1726,29 +1743,28 @@ See also http://www.freedesktop.org/standards/basedir/draft/basedir-spec/basedir
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns $XDG_DATA_HOME
 See also http://www.freedesktop.org/standards/basedir/draft/basedir-spec/basedir-spec.html
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">locate</b> (type, filename, cData)
 <table width="100%">
@@ -1757,62 +1773,53 @@ See also http://www.freedesktop.org/standards/basedir/draft/basedir-spec/basedir
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>filename</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>cData</td><td>KComponentData</td><td align="right">KGlobal.mainComponent ()</td></tr>
-
+              <tr><td>cData</td><td>KComponentData</td><td align="right">KGlobal.mainComponent()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This function is just for convenience. It simply calls
 instance->dirs()->\link KStandardDirs.findResource() findResource\endlink(type, filename).
 </p>
+<p></p>
 <p>
-</p>
+<b>type</b> - The type of the wanted resource, see KStandardDirs</p>
 <p>
-<b>type</b> - The type of the wanted resource, see KStandardDirs
-</p>
-<p>
-<b>filename</b> - A relative filename of the resource
-</p>
+<b>filename</b> - A relative filename of the resource</p>
 <p>
 <b>cData</b> - The KComponentData object
 </p>
 <p>
 Returns A full path to the filename specified in the second
 argument, or QString() if not found
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">locateLocal</b> (type, filename, cData)
 <table width="100%">
@@ -1821,65 +1828,56 @@ argument, or QString() if not found
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>filename</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>cData</td><td>KComponentData</td><td align="right">KGlobal.mainComponent ()</td></tr>
-
+              <tr><td>cData</td><td>KComponentData</td><td align="right">KGlobal.mainComponent()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This function is much like locate. However it returns a
 filename suitable for writing to. No check is made if the
 specified <b>filename</b> actually exists. Missing directories
 are created. If <b>filename</b> is only a directory, without a
 specific file, <b>filename</b> must have a trailing slash.
 </p>
+<p></p>
 <p>
-</p>
+<b>type</b> - The type of the wanted resource, see KStandardDirs</p>
 <p>
-<b>type</b> - The type of the wanted resource, see KStandardDirs
-</p>
-<p>
-<b>filename</b> - A relative filename of the resource
-</p>
+<b>filename</b> - A relative filename of the resource</p>
 <p>
 <b>cData</b> - The KComponentData object
 </p>
 <p>
 Returns A full path to the filename specified in the second
 argument, or QString() if not found
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">locateLocal</b> (type, filename, createDir, cData)
 <table width="100%">
@@ -1888,71 +1886,60 @@ argument, or QString() if not found
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>filename</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>createDir</td><td>bool</td><td align="right"></td></tr>
-
-              <tr><td>cData</td><td>KComponentData</td><td align="right">KGlobal.mainComponent ()</td></tr>
-
+              <tr><td>cData</td><td>KComponentData</td><td align="right">KGlobal.mainComponent()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This function is much like locate. No check is made if the
 specified filename actually exists. Missing directories
 are created if <b>createDir</b> is true. If <b>filename</b> is only
 a directory, without a specific file, <b>filename</b> must have
 a trailing slash.
 </p>
+<p></p>
 <p>
-</p>
+<b>type</b> - The type of the wanted resource, see KStandardDirs</p>
 <p>
-<b>type</b> - The type of the wanted resource, see KStandardDirs
-</p>
-<p>
-<b>filename</b> - A relative filename of the resource
-</p>
+<b>filename</b> - A relative filename of the resource</p>
 <p>
 <b>createDir</b> - If true, missing directories are created,
-if false, no directory is created
-</p>
+if false, no directory is created</p>
 <p>
 <b>cData</b> - The KComponentData object
 </p>
 <p>
 Returns A full path to the filename specified in the second
 argument, or QString() if not found
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">makeDir</b> (dir, mode)
 <table width="100%">
@@ -1961,55 +1948,50 @@ argument, or QString() if not found
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>dir</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>mode</td><td>int</td><td align="right">493</td></tr>
-
+              <tr><td>mode</td><td>int</td><td align="right">0755</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Recursively creates still-missing directories in the given path.
 </p>
 <p>
 The resulting permissions will depend on the current umask setting.
 <tt>permission = mode & ~umask</tt>.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>dir</b> - Absolute path of the directory to be made.
-</p>
+<b>dir</b> - Absolute path of the directory to be made.</p>
 <p>
 <b>mode</b> - Directory permissions.
 Returns true if successful, false otherwise
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">realFilePath</b> (filename)
 <table width="100%">
@@ -2018,44 +2000,42 @@ Returns true if successful, false otherwise
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>filename</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Expands all symbolic links and resolves references to
 '/./', '/../' and extra '/' characters in <b>filename</b>
 and returns the canonicalized absolute pathname.
 The resulting path will have no symbolic link, '/./'
 or '/../' components.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">realPath</b> (dirname)
 <table width="100%">
@@ -2064,44 +2044,42 @@ or '/../' components.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>dirname</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Expands all symbolic links and resolves references to
 '/./', '/../' and extra '/' characters in <b>dirname</b>
 and returns the canonicalized absolute pathname.
 The resulting path will have no symbolic link, '/./'
 or '/../' components.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">relativeLocation</b> (type, absPath)
 <table width="100%">
@@ -2110,7 +2088,7 @@ or '/../' components.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -2118,24 +2096,25 @@ or '/../' components.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
               <tr><td>absPath</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Converts an absolute path to a path relative to a certain
 resource.
 </p>
@@ -2143,13 +2122,11 @@ resource.
 If "abs = .locate(resource, rel)"
 then "rel = relativeLocation(resource, abs)" and vice versa.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>type</b> - The type of resource.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>absPath</b> - An absolute path to make relative.
 </p>
@@ -2157,15 +2134,11 @@ then "rel = relativeLocation(resource, abs)" and vice versa.
 Returns A relative path relative to resource <b>type</b> that
 will find <b>absPath.</b> If no such relative path exists, <b>absPath</b>
 will be returned unchanged.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">resourceDirs</b> (type)
 <table width="100%">
@@ -2174,7 +2147,7 @@ will be returned unchanged.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
@@ -2182,27 +2155,28 @@ will be returned unchanged.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This function is used internally by almost all other function as
 it serves and fills the directories cache.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>type</b> - The type of resource
 Returns The list of possible directories for the specified <b>type.</b>
@@ -2210,15 +2184,11 @@ The function updates the cache if possible. If the resource
 type specified is unknown, it will return an empty list.
 Note, that the directories are assured to exist beside the save
 location, which may not exist, but is returned anyway.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">saveLocation</b> (type, suffix, create)
 <table width="100%">
@@ -2227,7 +2197,7 @@ location, which may not exist, but is returned anyway.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -2235,42 +2205,39 @@ location, which may not exist, but is returned anyway.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>suffix</td><td>QString</td><td align="right">QString ()</td></tr>
-
-              <tr><td>create</td><td>bool</td><td align="right">True</td></tr>
-
+              <tr><td>suffix</td><td>QString</td><td align="right">QString()</td></tr>
+              <tr><td>create</td><td>bool</td><td align="right">1</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Finds a location to save files into for the given type
 in the user's home directory.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>type</b> - The type of location to return.
-</p>
+<b>type</b> - The type of location to return.</p>
 <p>
 <b>suffix</b> - A subdirectory name.
 Makes it easier for you to create subdirectories.
 You can't pass filenames here, you _have_ to pass
 directory names only and add possible filename in
 that directory yourself. A directory name always has a
-trailing slash ('/').
-</p>
+trailing slash ('/').</p>
 <p>
 <b>create</b> - If set, saveLocation() will create the directories
 needed (including those given by <b>suffix).</b>
@@ -2278,15 +2245,11 @@ needed (including those given by <b>suffix).</b>
 <p>
 Returns A path where resources of the specified type should be
 saved, or QString() if the resource type is unknown.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">systemPaths</b> (pstr)
 <table width="100%">
@@ -2295,34 +2258,35 @@ saved, or QString() if the resource type is unknown.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>pstr</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>pstr</td><td>QString</td><td align="right">QString()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns a QStringList list of pathnames in the system path.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>pstr</b> - The path which will be searched. If this is
 null (default), the $PATH environment variable will
@@ -2330,60 +2294,53 @@ be searched.
 </p>
 <p>
 Returns a QStringList list of pathnames in the system path.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
 </li><hr>
-
 
 <a name="extended">
 <h3>enums - detail</h3>
 <ul style="list-style-type : none">
-
-<li><b>SearchOption</b> = { NoSearchOptions, Recursive, NoDuplicates, IgnoreExecBit }
+<li><b>SearchOption</b>  { NoSearchOptions, Recursive, NoDuplicates, IgnoreExecBit }
+  <p style="padding-top : 9px;"></p>
   <table cellspacing="5">
-
+<br><i  style="color : #aa00aa">typesafe object: </i><b>SearchOptions</b></li>
     <tr>
       <td></td>
       <td valign="top"><i>NoSearchOptions</i></td>
+      <td valign="top">- 0 </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>Recursive</i></td>
+      <td valign="top">- 1 </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>NoDuplicates</i></td>
+      <td valign="top">- 2 </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>IgnoreExecBit</i></td>
+      <td valign="top">- 4 </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
   </table>
 </li>
 <hr>
-
 </ul>
-
 </span>
 </body>
 </html>

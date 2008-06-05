@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KRun</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kio Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,35 +38,12 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-To open files with their associated applications in KDE, use KRun.
-</p>
-<p>
-It can execute any desktop entry, as well as any file, using
-the default application or another application "bound" to the file type
-(or URL protocol).
-</p>
-<p>
-In that example, the mimetype of the file is not known by the application,
-so a KRun instance must be created. It will determine the mimetype by itself.
-If the mimetype is known, or if you even know the service (application) to
-use for this file, use one of the static methods.
-</p>
-<p>
-By default KRun uses auto deletion. It causes the KRun instance to delete
-itself when the it finished its task. If you allocate the KRun
-object on the stack you must disable auto deletion, otherwise it will crash.
-</p>
-<p>
-Opens files with their associated applications in KDE
-</p>
-
+      
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>methods</h3><ul style="list-style-type : none">
 <li style="list-style-type : none"><b style="color : #000000;">KRun</b> (url, window, mode, isLocalFile, showProgressInfo, asn)
 <table width="100%">
@@ -84,7 +52,7 @@ Opens files with their associated applications in KDE
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KRun object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -92,52 +60,45 @@ Opens files with their associated applications in KDE
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>url</td><td>KUrl</td><td align="right"></td></tr>
-
               <tr><td>window</td><td>QWidget</td><td align="right"></td></tr>
-
               <tr><td>mode</td><td>mode_t</td><td align="right">0</td></tr>
-
-              <tr><td>isLocalFile</td><td>bool</td><td align="right">False</td></tr>
-
-              <tr><td>showProgressInfo</td><td>bool</td><td align="right">True</td></tr>
-
+              <tr><td>isLocalFile</td><td>bool</td><td align="right">0</td></tr>
+              <tr><td>showProgressInfo</td><td>bool</td><td align="right">1</td></tr>
               <tr><td>asn</td><td>QByteArray</td><td align="right">""</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-</p>
-<p>
+
 <b>url</b> - the URL of the file or directory to 'run'
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>window</b> -
 The top-level widget of the app that invoked this object.
 It is used to make sure private information like passwords
 are properly handled per application.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>mode</b> - The <b>st_mode</b> field of <tt>struct stat</tt>. If
 you don't know this set it to 0.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>isLocalFile</b> -
 If this parameter is set to <b>false</b> then <b>url</b> is
@@ -145,37 +106,31 @@ examined to find out whether it is a local URL or
 not. This flag is just used to improve speed, since the
 function KUrl.isLocalFile is a bit slow.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>showProgressInfo</b> -
 Whether to show progress information when determining the
 type of the file (i.e. when using KIO.stat and KIO.mimetype)
 Before you set this to false to avoid a dialog box, think about
 a very slow FTP server...
-It is always better to provide progress info in such cases.
-</p>
+It is always better to provide progress info in such cases.</p>
 <p>
 <b>asn</b> -
 Application startup notification id, if available (otherwise "").
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">abort</b> ()
+<li><b style="color : #000000;">abort</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -183,40 +138,39 @@ Application startup notification id, if available (otherwise "").
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Abort this KRun. This kills any jobs launched by it,
 and leads to deletion if auto-deletion is on.
 This is much safer than deleting the KRun (in case it's
 currently showing an error dialog box, for instance)
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">autoDelete</b> ()
+<li><b style="color : #000000;">autoDelete</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -224,32 +178,31 @@ currently showing an error dialog box, for instance)
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Checks whether auto delete is activated.
 Auto-deletion causes the KRun instance to delete itself
 when it finished its task.
 By default auto deletion is on.
 Returns true if auto deletion is on, false otherwise
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">binaryName</b> (execLine, removePath)
 <table width="100%">
@@ -258,96 +211,88 @@ Returns true if auto deletion is on, false otherwise
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>execLine</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>removePath</td><td>bool</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Given a full command line (e.g. the Exec= line from a .desktop file),
-extract the name of the binary being run.
-</p>
+extract the name of the binary being run.</p>
 <p>
-<b>execLine</b> - the full command line
-</p>
+<b>execLine</b> - the full command line</p>
 <p>
 <b>removePath</b> - if true, remove a (relative or absolute) path. E.g. /usr/bin/ls becomes ls.
 Returns the name of the binary to run
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #999999;">checkStartupNotify</b> (binName, service, wmclass_arg)
+<li style="list-style-type : none"><b style="color : #999999;">checkStartupNotify</b> (binName, service, silent_arg, wmclass_arg)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool), silent_arg (bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>binName</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>service</td><td>KService</td><td align="right"></td></tr>
-
+              <tr><td>silent_arg</td><td>bool</td><td align="right"></td></tr>
               <tr><td>wmclass_arg</td><td>QByteArray</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 <b style="color : #ff0000;"><i>Internal </i></b>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">displayOpenWithDialog</b> (lst, window, tempFiles, suggestedFileName, asn)
 <table width="100%">
@@ -356,147 +301,174 @@ Returns the name of the binary to run
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>lst</td><td>KUrl.List</td><td align="right"></td></tr>
-
               <tr><td>window</td><td>QWidget</td><td align="right"></td></tr>
-
-              <tr><td>tempFiles</td><td>bool</td><td align="right">False</td></tr>
-
-              <tr><td>suggestedFileName</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>tempFiles</td><td>bool</td><td align="right">0</td></tr>
+              <tr><td>suggestedFileName</td><td>QString</td><td align="right">QString()</td></tr>
               <tr><td>asn</td><td>QByteArray</td><td align="right">""</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
+Display the Open-With dialog for those URLs, and run the chosen application.</p>
 <p>
-Display the Open-With dialog for those URLs, and run the chosen application.
-</p>
+<b>lst</b> - the list of applications to run</p>
 <p>
-<b>lst</b> - the list of applications to run
-</p>
-<p>
-<b>window</b> - The top-level widget of the app that invoked this object.
-</p>
+<b>window</b> - The top-level widget of the app that invoked this object.</p>
 <p>
 <b>tempFiles</b> - if true and lst are local files, they will be deleted
-when the application exits.
-</p>
+when the application exits.</p>
 <p>
-<b>suggestedFileName</b> - see setSuggestedFileName
-</p>
+<b>suggestedFileName</b> - see setSuggestedFileName</p>
 <p>
 <b>asn</b> - Application startup notification id, if any (otherwise "").
 Returns false if the dialog was canceled
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">error</b> ()<i style="color : #0000ff">   signal</i>
+<li><b style="color : #000000;">doScanFile</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("error ()")
+          
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
+Returns whether the file shall be scanned.
+<b style="color : #ff0000;"><i>Deprecated </i></b> not useful in public API
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">error</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("error ()")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 Emitted when the operation had an error.
 </p>
 <p>
 See also  hasError()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">finished</b> ()<i style="color : #0000ff">   signal</i>
+<li><b style="color : #000000;">finished</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("finished ()")
+          <p style="color : #ee360a">SIGNAL ("finished ()")</p>
+
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Emitted when the operation finished.
 </p>
 <p>
 See also  hasFinished()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">foundMimeType</b> (type)
 <table width="100%">
@@ -505,7 +477,7 @@ See also  hasFinished()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -513,43 +485,42 @@ See also  hasFinished()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>type</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Called if the mimetype has been detected. The function checks
-whether the document <XXX - what?> and appends the gzip protocol to the
-URL. Otherwise runUrl is called to finish the job.
-</p>
-
+Called if the mimetype has been detected. The function runs
+the application associated with this mimetype.
+Reimplement this method to implement a different behavior,
+like opening the component for displaying the URL embedded.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">hasError</b> ()
+<li><b style="color : #000000;">hasError</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -557,41 +528,40 @@ URL. Otherwise runUrl is called to finish the job.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns true if the KRun instance has an error.
 Returns true when an error occurred
 </p>
 <p>
 See also  error()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">hasFinished</b> ()
+<li><b style="color : #000000;">hasFinished</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -599,41 +569,40 @@ See also  error()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns true if the KRun instance has finished.
 Returns true if the KRun instance has finished
 </p>
 <p>
 See also  finished()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">init</b> ()
+<li><b style="color : #000000;">init</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -641,26 +610,101 @@ See also  finished()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-
-
+Initializes the krun object.
     </td>
   </tr>
 </table>
 
+</li><hr>
+
+<li><b style="color : #000000;">initializeNextAction</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<b style="color : #ff0000;"><i>Deprecated </i></b> not useful in public API
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
+<li><b style="color : #000000;">isDirectory</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns whether it is a directory.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">isExecutable</b> (serviceType)
 <table width="100%">
@@ -669,41 +713,39 @@ See also  finished()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>serviceType</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns whether <b>serviceType</b> refers to an executable program instead
 of a data file.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">isExecutableFile</b> (url, mimetype)
 <table width="100%">
@@ -712,60 +754,57 @@ of a data file.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>url</td><td>KUrl</td><td align="right"></td></tr>
-
               <tr><td>mimetype</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns whether the <b>url</b> of <b>mimetype</b> is executable.
 To be executable the file must pass the following rules:
-#Must reside on the local filesystem.
-#Must be marked as executable for the user by the filesystem.
-#The mime type must inherit application/x-executable or application/x-executable-script.
+-# Must reside on the local filesystem.
+-# Must be marked as executable for the user by the filesystem.
+-# The mime type must inherit application/x-executable or application/x-executable-script.
 To allow a script to run when the above rules are satisfied add the entry
 <pre>
 X-KDE-IsAlso=application/x-executable-script
 </pre>
 to the mimetype's desktop file.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">killJob</b> ()
+<li><b style="color : #000000;">isLocalFile</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -773,26 +812,180 @@ to the mimetype's desktop file.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-
-
+Returns whether it is a local file.
     </td>
   </tr>
 </table>
 
+</li><hr>
+
+<li><b style="color : #000000;">job</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>KIO.Job</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the job.
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
+<li><b style="color : #000000;">killJob</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Kills the file scanning job.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">mimeTypeDetermined</b> (mimeType)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>mimeType</td><td>QString</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Call this from subclasses when you have determined the mimetype.
+It will call foundMimeType, but also sets up protection against deletion during message boxes.
+@since 4.0.2
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">mode</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>mode_t</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the file mode.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">processDesktopExec</b> (_service, _urls, tempFiles, suggestedFileName)
 <table width="100%">
@@ -801,62 +994,90 @@ to the mimetype's desktop file.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>_service</td><td>KService</td><td align="right"></td></tr>
-
               <tr><td>_urls</td><td>KUrl.List</td><td align="right"></td></tr>
-
-              <tr><td>tempFiles</td><td>bool</td><td align="right">False</td></tr>
-
-              <tr><td>suggestedFileName</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>tempFiles</td><td>bool</td><td align="right">0</td></tr>
+              <tr><td>suggestedFileName</td><td>QString</td><td align="right">QString()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
+Processes a Exec= line as found in .desktop files.</p>
 <p>
-Processes a Exec= line as found in .desktop files.
-</p>
+<b>_service</b> - the service to extract information from.</p>
 <p>
-<b>_service</b> - the service to extract information from.
-</p>
-<p>
-<b>_urls</b> - The urls the service should open.
-</p>
+<b>_urls</b> - The urls the service should open.</p>
 <p>
 <b>tempFiles</b> - if true and urls are local files, they will be deleted
-when the application exits.
-</p>
+when the application exits.</p>
 <p>
 <b>suggestedFileName</b> - see setSuggestedFileName
 </p>
 <p>
 Returns a list of arguments suitable for KProcess.setProgram().
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li><b style="color : #000000;">progressInfo</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns whether progress information are shown.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">run</b> (service, urls, window, tempFiles, suggestedFileName, asn)
 <table width="100%">
@@ -865,73 +1086,60 @@ Returns a list of arguments suitable for KProcess.setProgram().
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>service</td><td>KService</td><td align="right"></td></tr>
-
               <tr><td>urls</td><td>KUrl.List</td><td align="right"></td></tr>
-
               <tr><td>window</td><td>QWidget</td><td align="right"></td></tr>
-
-              <tr><td>tempFiles</td><td>bool</td><td align="right">False</td></tr>
-
-              <tr><td>suggestedFileName</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>tempFiles</td><td>bool</td><td align="right">0</td></tr>
+              <tr><td>suggestedFileName</td><td>QString</td><td align="right">QString()</td></tr>
               <tr><td>asn</td><td>QByteArray</td><td align="right">""</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Open a list of URLs with a certain service (application).
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>service</b> - the service to run
-</p>
+<b>service</b> - the service to run</p>
 <p>
 <b>urls</b> - the list of URLs, can be empty (app launched
-without argument)
-</p>
+without argument)</p>
 <p>
-<b>window</b> - The top-level widget of the app that invoked this object.
-</p>
+<b>window</b> - The top-level widget of the app that invoked this object.</p>
 <p>
 <b>tempFiles</b> - if true and urls are local files, they will be deleted
-when the application exits.
-</p>
+when the application exits.</p>
 <p>
-<b>suggestedFileName</b> - see setSuggestedFileName
-</p>
+<b>suggestedFileName</b> - see setSuggestedFileName</p>
 <p>
 <b>asn</b> - Application startup notification id, if any (otherwise "").
 Returns true on success, false on error
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">run</b> (exec, urls, window, name, icon, asn)
 <table width="100%">
@@ -940,73 +1148,60 @@ Returns true on success, false on error
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>exec</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>urls</td><td>KUrl.List</td><td align="right"></td></tr>
-
               <tr><td>window</td><td>QWidget</td><td align="right"></td></tr>
-
-              <tr><td>name</td><td>QString</td><td align="right">QString ()</td></tr>
-
-              <tr><td>icon</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>name</td><td>QString</td><td align="right">QString()</td></tr>
+              <tr><td>icon</td><td>QString</td><td align="right">QString()</td></tr>
               <tr><td>asn</td><td>QByteArray</td><td align="right">""</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Open a list of URLs with.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>exec</b> - the name of the executable, for example
-"/usr/bin/netscape".
-</p>
+"/usr/bin/netscape".</p>
 <p>
-<b>urls</b> - the list of URLs to open, can be empty (app launched without argument)
-</p>
+<b>urls</b> - the list of URLs to open, can be empty (app launched without argument)</p>
 <p>
-<b>window</b> - The top-level widget of the app that invoked this object.
-</p>
+<b>window</b> - The top-level widget of the app that invoked this object.</p>
 <p>
 <b>name</b> - the logical name of the application, for example
-"Netscape 4.06".
-</p>
+"Netscape 4.06".</p>
 <p>
-<b>icon</b> - the icon which should be used by the application.
-</p>
+<b>icon</b> - the icon which should be used by the application.</p>
 <p>
 <b>asn</b> - Application startup notification id, if any (otherwise "").
 Returns true on success, false on error
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">runCommand</b> (cmd, window)
 <table width="100%">
@@ -1015,32 +1210,33 @@ Returns true on success, false on error
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>cmd</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>window</td><td>QWidget</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Run the given shell command and notifies kicker of the starting
 of the application. If the program to be called doesn't exist,
 an error box will be displayed.
@@ -1051,22 +1247,17 @@ static methods, or KRun's constructor.
 </p>
 <p>
 <b>cmd</b> must be a shell command. You must not append "&"
-to it, since the function will do that for you.
-</p>
+to it, since the function will do that for you.</p>
 <p>
 <b>window</b> - The top-level widget of the app that invoked this object.
 </p>
 <p>
 Returns true on success, false on error
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">runCommand</b> (cmd, execName, icon, window, asn)
 <table width="100%">
@@ -1075,68 +1266,57 @@ Returns true on success, false on error
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>cmd</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>execName</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>icon</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>window</td><td>QWidget</td><td align="right"></td></tr>
-
               <tr><td>asn</td><td>QByteArray</td><td align="right">""</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Same as the other runCommand(), but it also takes the name of the
 binary, to display an error message in case it couldn't find it.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>cmd</b> - must be a shell command. You must not append "&"
-to it, since the function will do that for you.
-</p>
+to it, since the function will do that for you.</p>
 <p>
-<b>execName</b> - the name of the executable
-</p>
+<b>execName</b> - the name of the executable</p>
 <p>
-<b>icon</b> - icon for app starting notification
-</p>
+<b>icon</b> - icon for app starting notification</p>
 <p>
-<b>window</b> - The top-level widget of the app that invoked this object.
-</p>
+<b>window</b> - The top-level widget of the app that invoked this object.</p>
 <p>
 <b>asn</b> - Application startup notification id, if any (otherwise "").
 Returns true on success, false on error
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">runUrl</b> (url, mimetype, window, tempFile, runExecutables, suggestedFileName, asn)
 <table width="100%">
@@ -1145,91 +1325,76 @@ Returns true on success, false on error
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>url</td><td>KUrl</td><td align="right"></td></tr>
-
               <tr><td>mimetype</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>window</td><td>QWidget</td><td align="right"></td></tr>
-
-              <tr><td>tempFile</td><td>bool</td><td align="right">False</td></tr>
-
-              <tr><td>runExecutables</td><td>bool</td><td align="right">True</td></tr>
-
-              <tr><td>suggestedFileName</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>tempFile</td><td>bool</td><td align="right">0</td></tr>
+              <tr><td>runExecutables</td><td>bool</td><td align="right">1</td></tr>
+              <tr><td>suggestedFileName</td><td>QString</td><td align="right">QString()</td></tr>
               <tr><td>asn</td><td>QByteArray</td><td align="right">""</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Open the given URL.
 </p>
 <p>
 This function is used after the mime type
 is found out. It will search for all services which can handle
-the mime type and call run() afterwards.
-</p>
+the mime type and call run() afterwards.</p>
 <p>
-<b>url</b> - the URL to open
-</p>
+<b>url</b> - the URL to open</p>
 <p>
-<b>mimetype</b> - the mime type of the resource
-</p>
+<b>mimetype</b> - the mime type of the resource</p>
 <p>
-<b>window</b> - The top-level widget of the app that invoked this object.
-</p>
+<b>window</b> - The top-level widget of the app that invoked this object.</p>
 <p>
 <b>tempFile</b> - if true and url is a local file, it will be deleted
-when the launched application exits.
-</p>
+when the launched application exits.</p>
 <p>
 <b>runExecutables</b> - if false then local .desktop files,
 executables and shell scripts will not be run.
-See also isExecutable().
-</p>
+See also isExecutable().</p>
 <p>
-<b>suggestedFileName</b> - see setSuggestedFileName
-</p>
+<b>suggestedFileName</b> - see setSuggestedFileName</p>
 <p>
 <b>asn</b> - Application startup notification id, if any (otherwise "").
 Returns true on success, false on error
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">scanFile</b> ()
+<li><b style="color : #000000;">scanFile</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1237,26 +1402,27 @@ Returns true on success, false on error
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-
-
+Start scanning a file.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setAutoDelete</b> (b)
 <table width="100%">
@@ -1265,7 +1431,7 @@ Returns true on success, false on error
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1273,39 +1439,77 @@ Returns true on success, false on error
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>b</td><td>bool</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Enables or disabled auto deletion.
 Auto deletion causes the KRun instance to delete itself
 when it finished its task. If you allocate the KRun
 object on the stack you must disable auto deletion.
-By default auto deletion is on.
-</p>
+By default auto deletion is on.</p>
 <p>
 <b>b</b> - true to enable auto deletion, false to disable
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">setDoScanFile</b> (scanFile)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>scanFile</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Indicate that the next action is to scan the file.
+<b style="color : #ff0000;"><i>Deprecated </i></b> not useful in public API
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">setEnableExternalBrowser</b> (b)
 <table width="100%">
@@ -1314,7 +1518,7 @@ By default auto deletion is on.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1322,37 +1526,315 @@ By default auto deletion is on.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>b</td><td>bool</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets whether the external webbrowser setting should be honoured.
 This is enabled by default.
-This should only be disabled in webbrowser applications.
-</p>
+This should only be disabled in webbrowser applications.</p>
 <p>
 <b>b</b> - whether to enable the external browser or not.
-</p>
-
     </td>
   </tr>
 </table>
 
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setError</b> (error)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>error</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets whether an error has occured.
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">setFinished</b> (finished)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>finished</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Marks this 'KRun' instance as finished.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setInitializeNextAction</b> (initialize)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>initialize</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+<b style="color : #ff0000;"><i>Deprecated </i></b> not useful in public API
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setIsDirecory</b> (isDirectory)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>isDirectory</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets whether it is a directory.
+<b style="color : #ff0000;"><i>Deprecated </i></b> typo in the name, and not useful as a public method
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setIsLocalFile</b> (isLocalFile)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>isLocalFile</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets whether it is a local file.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setJob</b> (job)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>job</td><td>KIO.Job</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets the job.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setMode</b> (mode)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>mode</td><td>mode_t</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets the file mode.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">setPreferredService</b> (desktopEntryName)
 <table width="100%">
@@ -1361,7 +1843,7 @@ This should only be disabled in webbrowser applications.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1369,39 +1851,76 @@ This should only be disabled in webbrowser applications.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>desktopEntryName</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Set the preferred service for opening this URL, after
 its mimetype will have been found by KRun. IMPORTANT: the service is
 only used if its configuration says it can handle this mimetype.
 This is used for instance for the X-KDE-LastOpenedWith key, for
-the recent documents list.
-</p>
+the recent documents list.</p>
 <p>
 <b>desktopEntryName</b> - the desktopEntryName of the service, e.g. "kate".
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">setProgressInfo</b> (progressInfo)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>progressInfo</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets whether progress information shall be shown.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">setRunExecutables</b> (b)
 <table width="100%">
@@ -1410,7 +1929,7 @@ the recent documents list.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1418,39 +1937,36 @@ the recent documents list.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>b</td><td>bool</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets whether executables, .desktop files or shell scripts should
-be run by KRun. This is enabled by default.
-</p>
+be run by KRun. This is enabled by default.</p>
 <p>
 <b>b</b> - whether to run executable files or not.
 </p>
 <p>
 See also  isExecutable()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setSuggestedFileName</b> (fileName)
 <table width="100%">
@@ -1459,7 +1975,7 @@ See also  isExecutable()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1467,36 +1983,74 @@ See also  isExecutable()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>fileName</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the file name to use in the case of downloading the file to a tempfile
 in order to give to a non-url-aware application. Some apps rely on the extension
 to determine the mimetype of the file. Usually the file name comes from the URL,
 but in the case of the HTTP Content-Disposition header, we need to override the
 file name.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">setUrl</b> (url)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>url</td><td>KUrl</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets the url.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">shellQuote</b> (str)
 <table width="100%">
@@ -1505,30 +2059,32 @@ file name.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>str</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Quotes a string for the shell.
 An empty string will <b>not</b> be quoted.
 </p>
@@ -1537,19 +2093,14 @@ An empty string will <b>not</b> be quoted.
 behaves differently for empty arguments and returns the result
 differently.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>str</b> - the string to quote. The quoted string will be written here
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">slotScanFinished</b> (a0)
 <table width="100%">
@@ -1558,7 +2109,7 @@ differently.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1566,30 +2117,30 @@ differently.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>a0</td><td>KJob</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-
-
+This slot is called when the scan job is finished.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">slotScanMimeType</b> (a0, type)
 <table width="100%">
@@ -1598,7 +2149,7 @@ differently.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1606,32 +2157,32 @@ differently.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>a0</td><td>KIO.Job</td><td align="right"></td></tr>
-
               <tr><td>type</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-
-
+This slot is called when the scan job has found out
+the mime type.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">slotStatResult</b> (a0)
 <table width="100%">
@@ -1640,7 +2191,7 @@ differently.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1648,39 +2199,39 @@ differently.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>a0</td><td>KJob</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-
-
+This slot is called when the 'stat' job has finished.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">slotTimeout</b> ()
+<li><b style="color : #000000;">slotTimeout</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1688,35 +2239,37 @@ differently.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-
-
+This slot is called whenever the internal time has
+a timeout.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">suggestedFileName</b> ()
+<li><b style="color : #000000;">suggestedFileName</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -1724,31 +2277,103 @@ differently.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Suggested file name given by the server (e.g. HTTP content-disposition)
-</p>
-
     </td>
   </tr>
 </table>
 
+</li><hr>
+
+<li><b style="color : #000000;">timer</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>QTimer</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the timer object.
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
+<li><b style="color : #000000;">url</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>KUrl</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the url.
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
+</li><hr>
 
 </span>
 </body>

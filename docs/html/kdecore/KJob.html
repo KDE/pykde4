@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KJob</h1><hr>
-      <h3><i style="color : #00aa00">abstract class</i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
+      <h3><i style="color : #00aa00">abstract</i></h3>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,8 +38,7 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-The base class for all jobs.
+      The base class for all jobs.
 For all jobs created in an application, the code looks like
 </p>
 <p>
@@ -86,23 +76,25 @@ else
 </pre>
 </p>
 <p>
-</p>
-
+@note: KJob and its subclasses is meant to be used
+in a fire-and-forget way. It's deleting itself when
+it has finished using deleteLater() so the job
+instance disappears after the next event loop run.
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>enums</h3><ul>
-<li><b>&lt;anonymous&gt;</b> = { NoError, KilledJobError, UserDefinedError }</li>
+<li style="padding-bottom : 8px;"><b>Capability</b> { NoCapabilities, Killable, Suspendable }<br><i  style="color : #aa00aa">typesafe object: </i><b>Capabilities</b></li>
+<li style="padding-bottom : 8px;"><b>KillVerbosity</b> { Quietly, EmitResult }</li>
 
-<li><b>Capability</b> = { NoCapabilities, Killable, Suspendable }</li>
-<li><b>KillVerbosity</b> = { Quietly, EmitResult }</li>
+<li style="padding-bottom : 8px;"><b>Unit</b> { Bytes, Files, Directories }</li>
 
-<li><b>Unit</b> = { Bytes, Files, Directories }</li>
+<li style="padding-bottom : 8px;"><b>anonymous</b> { NoError, KilledJobError, UserDefinedError }</li>
 
 </ul><a href="#extended"><i>enum details</i></a><hr>
+
 <h3>methods</h3><ul style="list-style-type : none">
 <li style="list-style-type : none"><b style="color : #000000;">KJob</b> (parent)
 <table width="100%">
@@ -111,7 +103,7 @@ else
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KJob object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -119,37 +111,34 @@ else
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>parent</td><td>QObject</td><td align="right">None</td></tr>
-
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Creates a new KJob object.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>parent</b> - the parent QObject
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">KJob</b> (dd, parent)
 <table width="100%">
@@ -158,25 +147,27 @@ Creates a new KJob object.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KJob object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>dd</td><td>KJobPrivate</td><td align="right"></td></tr>
-
               <tr><td>parent</td><td>QObject</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -184,23 +175,20 @@ Creates a new KJob object.
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">capabilities</b> ()
+<li style="list-style-type : none"><b style="color : #000000;">KJob</b> (a0)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
-      <table>
+      <table vspace="5">
         <tr>
           <td>
-            returns <i>(KJob.Capabilities)</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -208,18 +196,61 @@ Creates a new KJob object.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
-              <tr><td></td></tr>
-
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>QObject</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">capabilities</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>KJob.Capabilities</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 Returns the capabilities of this job.
 </p>
 <p>
@@ -227,53 +258,49 @@ Returns the capabilities that this job supports
 </p>
 <p>
 See also  setCapabilities()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">description</b> (job, title, field1, field2)<i style="color : #0000ff">   signal</i>
+<li style="list-style-type : none"><b style="color : #000000;">description</b> (job, title, field1, field2)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("description (KJob*, const QString&, const QPair<QString, QString>&, const QPair<QString, QString>&)")
+          <p style="color : #ee360a">SIGNAL ("description (KJob*, const QString&, const QPair<QString,QString>&, const QPair<QString,QString>&)")</p>
+
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>job</td><td>KJob</td><td align="right"></td></tr>
-
               <tr><td>title</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>field1</td><td>tuple of (QString, QString)</td><td align="right">qMakePair (QString (),QString ())</td></tr>
-
-              <tr><td>field2</td><td>tuple of (QString, QString)</td><td align="right">qMakePair (QString (),QString ())</td></tr>
-
+              <tr><td>field1</td><td>QPair<QString,QString></td><td align="right">qMakePair(QString(),QString())</td></tr>
+              <tr><td>field2</td><td>QPair<QString,QString></td><td align="right">qMakePair(QString(),QString())</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Emitted to display general description of this job. A description has
 a title and two optional fields which can be used to complete the
 description.
@@ -281,37 +308,29 @@ description.
 <p>
 Examples of titles are "Copying", "Creating resource", etc.
 The fields of the description can be "Source" with an URL, and,
-"Destination" with an URL for a "Copying" description.
-</p>
+"Destination" with an URL for a "Copying" description.</p>
 <p>
-<b>job</b> - the job that emitted this signal
-</p>
+<b>job</b> - the job that emitted this signal</p>
 <p>
-<b>title</b> - the general description of the job
-</p>
+<b>title</b> - the general description of the job</p>
 <p>
-<b>field1</b> - first field (localized name and value)
-</p>
+<b>field1</b> - first field (localized name and value)</p>
 <p>
 <b>field2</b> - second field (localized name and value)
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">doKill</b> ()
+<li><b style="color : #000000;">doKill</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -319,41 +338,40 @@ The fields of the description can be "Source" with an URL, and,
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Aborts this job quietly.
 This simply kills the job, no error reporting or job deletion should be involved.
 </p>
 <p>
 Returns true if the operation is supported and succeeded, false otherwise
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">doResume</b> ()
+<li><b style="color : #000000;">doResume</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -361,40 +379,39 @@ Returns true if the operation is supported and succeeded, false otherwise
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Resumes this job.
 </p>
 <p>
 Returns true if the operation is supported and succeeded, false otherwise
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">doSuspend</b> ()
+<li><b style="color : #000000;">doSuspend</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -402,31 +419,30 @@ Returns true if the operation is supported and succeeded, false otherwise
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Suspends this job.
 </p>
 <p>
 Returns true if the operation is supported and succeeded, false otherwise
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">emitPercent</b> (processedAmount, totalAmount)
 <table width="100%">
@@ -435,7 +451,7 @@ Returns true if the operation is supported and succeeded, false otherwise
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -443,56 +459,51 @@ Returns true if the operation is supported and succeeded, false otherwise
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>processedAmount</td><td>qulonglong</td><td align="right"></td></tr>
-
               <tr><td>totalAmount</td><td>qulonglong</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Utility function for inherited jobs.
 Emits the percent signal if bigger than previous value,
 after calculating it from the parameters.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>processedAmount</b> - the processed amount
-</p>
+<b>processedAmount</b> - the processed amount</p>
 <p>
 <b>totalAmount</b> - the total amount
 </p>
 <p>
 See also  percent()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">emitResult</b> ()
+<li><b style="color : #000000;">emitResult</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -500,36 +511,38 @@ See also  percent()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Utility function to emit the result signal, and suicide this job.
 It first notifies the observers to hide the progress for this job using
 the finished() signal.
+</p>
+<p>
+@note: Deletes this job using deleteLater().
 </p>
 <p>
 See also  result()
 </p>
 <p>
 See also  finished()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">emitSpeed</b> (speed)
 <table width="100%">
@@ -538,7 +551,7 @@ See also  finished()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -546,47 +559,44 @@ See also  finished()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>speed</td><td>ulong</td><td align="right"></td></tr>
-
+              <tr><td>speed</td><td>unsigned long</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Utility function for inherited jobs.
 Emits the speed signal and starts the timer for removing that info
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>speed</b> - the speed in bytes/s
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">error</b> ()
+<li><b style="color : #000000;">error</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(int)</i>
+            returns <i>int</i>
           </td>
         </tr>
         <tr>
@@ -594,41 +604,40 @@ Emits the speed signal and starts the timer for removing that info
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the error code, if there has been an error.
 Only call this method from the slot connected to result().
 </p>
 <p>
 Returns the error code for this job, 0 if no error.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">errorString</b> ()
+<li><b style="color : #000000;">errorString</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -636,18 +645,21 @@ Returns the error code for this job, 0 if no error.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Converts an error code and a non-i18n error message into an
 error message in the current language. The low level (non-i18n)
 error message (usually a url) is put into the translated error
@@ -656,7 +668,7 @@ message using %1.
 <p>
 Example for errid == ERR_CANNOT_OPEN_FOR_READING:
 <pre>
-i18n( "Could not read\n%1" ).arg( errorText() );
+i18n( "Could not read\n%1" , errorText() );
 </pre>
 Do not call it if error() is not 0.
 </p>
@@ -664,24 +676,20 @@ Do not call it if error() is not 0.
 Returns the error message and if there is no error, a message
 telling the user that the app is broken, so check with
 error() whether there is an error
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">errorText</b> ()
+<li><b style="color : #000000;">errorText</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -689,18 +697,21 @@ error() whether there is an error
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the error text if there has been an error.
 Only call if error is not 0.
 This is really internal, better use errorString.
@@ -708,118 +719,20 @@ This is really internal, better use errorString.
 <p>
 Returns a string to help understand the error, usually the url
 related to the error. Only valid if error() is not 0.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">exec_</b> ()
+<li><b style="color : #000000;">exec</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <i style="color : #0000ff">renamed from exec</i>
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">infoMessage</b> (job, plain, rich)<i style="color : #0000ff">   signal</i>
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          SIGNAL ("infoMessage (KJob*, const QString&, const QString&)")
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>job</td><td>KJob</td><td align="right"></td></tr>
-
-              <tr><td>plain</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>rich</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Emitted to display state information about this job.
-Examples of message are "Resolving host", "Connecting to host...", etc.
-</p>
-<p>
-</p>
-<p>
-<b>job</b> - the job that emitted this signal
-</p>
-<p>
-<b>plain</b> - the info message
-</p>
-<p>
-<b>rich</b> - the rich text version of the message, or QString() is none is available
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">isSuspended</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -827,18 +740,155 @@ Examples of message are "Resolving host", "Connecting to host...", etc.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
+Executes the job synchronously.
+</p>
 <p>
+Returns true if the job has been executed without error, false otherwise
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">infoMessage</b> (job, plain, rich)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("infoMessage (KJob*, const QString&, const QString&)")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>job</td><td>KJob</td><td align="right"></td></tr>
+              <tr><td>plain</td><td>QString</td><td align="right"></td></tr>
+              <tr><td>rich</td><td>QString</td><td align="right">QString()</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Emitted to display state information about this job.
+Examples of message are "Resolving host", "Connecting to host...", etc.
+</p>
+<p></p>
+<p>
+<b>job</b> - the job that emitted this signal</p>
+<p>
+<b>plain</b> - the info message</p>
+<p>
+<b>rich</b> - the rich text version of the message, or QString() is none is available
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">isAutoDelete</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns whether this job automatically deletes itself once
+the job is finished.
+</p>
+<p>
+Returns whether the job is deleted automatically after
+finishing.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">isSuspended</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 Returns if the job was suspended with the suspend() call.
 </p>
 <p>
@@ -846,15 +896,11 @@ Returns if the job was suspended
 </p>
 <p>
 See also  suspend() resume()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">kill</b> (verbosity)
 <table width="100%">
@@ -863,7 +909,7 @@ See also  suspend() resume()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -871,27 +917,28 @@ See also  suspend() resume()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>verbosity</td><td>KJob.KillVerbosity</td><td align="right">KJob.Quietly</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Aborts this job.
 This kills and deletes the job.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>verbosity</b> - if equals to EmitResult, Job will emit signal result
 and ask uiserver to close the progress window.
@@ -899,24 +946,20 @@ and ask uiserver to close the progress window.
 should call with Quietly or EmitResult depends on whether they rely
 on result being emitted or not.
 Returns true if the operation is supported and succeeded, false otherwise
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">percent</b> ()
+<li><b style="color : #000000;">percent</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(ulong)</i>
+            returns <i>unsigned long</i>
           </td>
         </tr>
         <tr>
@@ -924,31 +967,30 @@ Returns true if the operation is supported and succeeded, false otherwise
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the overall progress of this job.
 </p>
 <p>
 Returns the overall progress of this job
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">processedAmount</b> (unit)
 <table width="100%">
@@ -957,7 +999,7 @@ Returns the overall progress of this job
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(qulonglong)</i>
+            returns <i>qulonglong</i>
           </td>
         </tr>
         <tr>
@@ -965,47 +1007,44 @@ Returns the overall progress of this job
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>unit</td><td>KJob.Unit</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the processed amount of a given unit for this job.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>unit</b> - the unit of the requested amount
 Returns the processed size
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">resume</b> ()
+<li><b style="color : #000000;">resume</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -1013,31 +1052,79 @@ Returns the processed size
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Resumes this job.
 </p>
 <p>
 Returns true if the operation is supported and succeeded, false otherwise
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">setAutoDelete</b> (autodelete)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>autodelete</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+set the auto-delete property of the job. If <b>autodelete</b> is
+set to false the job will not delete itself once its finished.
+</p>
+<p>
+The default for any KJob is to automatically delete itself.
+</p>
+<p></p>
+<p>
+<b>autodelete</b> - set to false to disable automatic deletion
+of the job.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">setCapabilities</b> (capabilities)
 <table width="100%">
@@ -1046,7 +1133,7 @@ Returns true if the operation is supported and succeeded, false otherwise
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1054,40 +1141,37 @@ Returns true if the operation is supported and succeeded, false otherwise
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>capabilities</td><td>KJob.Capabilities</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the capabilities for this job.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>capabilities</b> - are the capabilities supported by this job
 </p>
 <p>
 See also  capabilities()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setError</b> (errorCode)
 <table width="100%">
@@ -1096,7 +1180,7 @@ See also  capabilities()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1104,41 +1188,38 @@ See also  capabilities()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>errorCode</td><td>int</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the error code. It should be called when an error
 is encountered in the job, just before calling emitResult().
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>errorCode</b> - the error code
 </p>
 <p>
 See also  emitResult()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setErrorText</b> (errorText)
 <table width="100%">
@@ -1147,7 +1228,7 @@ See also  emitResult()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1155,41 +1236,38 @@ See also  emitResult()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>errorText</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the error text. It should be called when an error
 is encountered in the job, just before calling emitResult().
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>errorText</b> - the error text
 </p>
 <p>
 See also  emitResult()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setPercent</b> (percentage)
 <table width="100%">
@@ -1198,7 +1276,7 @@ See also  emitResult()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1206,38 +1284,35 @@ See also  emitResult()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>percentage</td><td>ulong</td><td align="right"></td></tr>
-
+              <tr><td>percentage</td><td>unsigned long</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the overall progress of the job. The percent() signal
 is emitted if the value changed.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>percentage</b> - the new overall progress
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setProcessedAmount</b> (unit, amount)
 <table width="100%">
@@ -1246,7 +1321,7 @@ is emitted if the value changed.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1254,44 +1329,39 @@ is emitted if the value changed.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>unit</td><td>KJob.Unit</td><td align="right"></td></tr>
-
               <tr><td>amount</td><td>qulonglong</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the processed size. The processedAmount() and percent() signals
 are emitted if the values changed. The percent() signal is emitted
 only for the progress unit.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>unit</b> - the unit of the new processed amount
-</p>
+<b>unit</b> - the unit of the new processed amount</p>
 <p>
 <b>amount</b> - the new processed amount
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setTotalAmount</b> (unit, amount)
 <table width="100%">
@@ -1300,7 +1370,7 @@ only for the progress unit.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1308,44 +1378,39 @@ only for the progress unit.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>unit</td><td>KJob.Unit</td><td align="right"></td></tr>
-
               <tr><td>amount</td><td>qulonglong</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the total size. The totalSize() and percent() signals
 are emitted if the values changed. The percent() signal is emitted
 only for the progress unit.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>unit</b> - the unit of the new total amount
-</p>
+<b>unit</b> - the unit of the new total amount</p>
 <p>
 <b>amount</b> - the new total amount
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setUiDelegate</b> (delegate)
 <table width="100%">
@@ -1354,7 +1419,7 @@ only for the progress unit.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1362,92 +1427,88 @@ only for the progress unit.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>delegate</td><td>KJobUiDelegate</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Attach a UI delegate to this job.
 </p>
 <p>
 If the job had another UI delegate, it's automatically deleted. Once
 attached to the job, the UI delegate will be deleted with the job.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>delegate</b> - the new UI delegate to use
 </p>
 <p>
 See also  KJobUiDelegate
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">start</b> ()
+<li><b style="color : #000000;">start</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #00aa00">pure virtual</i>
+          <b style="color : #00aa00">pure virtual</b>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Starts the job asynchronously. When the job is finished,
 result() is emitted.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">suspend</b> ()
+<li><b style="color : #000000;">suspend</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -1455,32 +1516,31 @@ result() is emitted.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Suspends this job.
 The job should be kept in a state in which it is possible to resume it.
 </p>
 <p>
 Returns true if the operation is supported and succeeded, false otherwise
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">totalAmount</b> (unit)
 <table width="100%">
@@ -1489,7 +1549,7 @@ Returns true if the operation is supported and succeeded, false otherwise
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(qulonglong)</i>
+            returns <i>qulonglong</i>
           </td>
         </tr>
         <tr>
@@ -1497,47 +1557,44 @@ Returns true if the operation is supported and succeeded, false otherwise
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>unit</td><td>KJob.Unit</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the total amount of a given unit for this job.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>unit</b> - the unit of the requested amount
 Returns the total size
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">uiDelegate</b> ()
+<li><b style="color : #000000;">uiDelegate</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KJobUiDelegate)</i>
+            returns <i>KJobUiDelegate</i>
           </td>
         </tr>
         <tr>
@@ -1545,203 +1602,190 @@ Returns the total size
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Retrieves the delegate attached to this job.
 </p>
 <p>
 Returns the delegate attached to this job, or 0 if there's no such delegate
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">warning</b> (job, plain, rich)<i style="color : #0000ff">   signal</i>
+<li style="list-style-type : none"><b style="color : #000000;">warning</b> (job, plain, rich)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("warning (KJob*, const QString&, const QString&)")
+          <p style="color : #ee360a">SIGNAL ("warning (KJob*, const QString&, const QString&)")</p>
+
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>job</td><td>KJob</td><td align="right"></td></tr>
-
               <tr><td>plain</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>rich</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>rich</td><td>QString</td><td align="right">QString()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Emitted to display a warning about this job.
 </p>
+<p></p>
 <p>
-</p>
+<b>job</b> - the job that emitted this signal</p>
 <p>
-<b>job</b> - the job that emitted this signal
-</p>
-<p>
-<b>plain</b> - the warning message
-</p>
+<b>plain</b> - the warning message</p>
 <p>
 <b>rich</b> - the rich text version of the message, or QString() is none is available
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
 </li><hr>
-
 
 <a name="extended">
 <h3>enums - detail</h3>
 <ul style="list-style-type : none">
-
-<li><b>&lt;anonymous&gt;</b> = { NoError, KilledJobError, UserDefinedError }
+<li><b>Capability</b>  { NoCapabilities, Killable, Suspendable }
+  <p style="padding-top : 9px;"></p>
   <table cellspacing="5">
-
-    <tr>
-      <td></td>
-      <td valign="top"><i>NoError</i></td>
-      <td valign="top">-</td>
-      <td></td>
-    </tr>
-
-    <tr>
-      <td></td>
-      <td valign="top"><i>KilledJobError</i></td>
-      <td valign="top">-</td>
-      <td></td>
-    </tr>
-
-    <tr>
-      <td></td>
-      <td valign="top"><i>UserDefinedError</i></td>
-      <td valign="top">-</td>
-      <td></td>
-    </tr>
-
-  </table>
-</li>
-<hr>
-
-<li><b>Capability</b> = { NoCapabilities, Killable, Suspendable }
-  <table cellspacing="5">
-
+<br><i  style="color : #aa00aa">typesafe object: </i><b>Capabilities</b></li>
     <tr>
       <td></td>
       <td valign="top"><i>NoCapabilities</i></td>
+      <td valign="top">- 0x0000 </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>Killable</i></td>
+      <td valign="top">- 0x0001 </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>Suspendable</i></td>
+      <td valign="top">- 0x0002 </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
   </table>
 </li>
 <hr>
-
-<li><b>KillVerbosity</b> = { Quietly, EmitResult }
+<li><b>KillVerbosity</b>  { Quietly, EmitResult }
+  <p style="padding-top : 9px;"></p>
   <table cellspacing="5">
-
     <tr>
       <td></td>
       <td valign="top"><i>Quietly</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>EmitResult</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
   </table>
 </li>
 <hr>
-
-<li><b>Unit</b> = { Bytes, Files, Directories }
+<li><b>Unit</b>  { Bytes, Files, Directories }
+  <p style="padding-top : 9px;"></p>
   <table cellspacing="5">
-
     <tr>
       <td></td>
       <td valign="top"><i>Bytes</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>Files</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>Directories</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
   </table>
 </li>
 <hr>
-
+<li><b>anonymous</b>  { NoError, KilledJobError, UserDefinedError }
+  <p style="padding-top : 9px;"></p>
+  <table cellspacing="5">
+    <tr>
+      <td></td>
+      <td valign="top"><i>NoError</i></td>
+      <td valign="top">- 0 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>KilledJobError</i></td>
+      <td valign="top">- 1 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>UserDefinedError</i></td>
+      <td valign="top">- 100 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
 </ul>
-
 </span>
 </body>
 </html>

@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KCompletion</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,103 +38,127 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-Helper to determine if the given offset in the string could be a
-legal alphanumeric accelerator.
-</p>
-<p>
-
-<b>str</b> - base string
-
-<b>index</b> - offset to check
-Loads all legal predefined accelerators in the (implicitly
-specified) collection into the given QMap.
-</p>
-<p>
-
-<b>begin</b> - start iterator
-
-<b>end</b> - (last+1) iterator
-
-<b>keys</b> - map to store output
-Main, maximally flexible template function that assigns
-accelerators to the elements of a collection of QStrings. Clients
-will seldom use this directly, as it's usually easier to use one of
-the wrapper functions that simply takes a collection (see below).
-</p>
-<p>
-The Deref template parameter is a class containing a static
-dereferencing function, modeled after the comparison class C in
-Stroustrup 13.4.
-</p>
-<p>
-
-<b>begin</b> - (you know)
-
-<b>end</b> - (you know)
-
-<b>target</b> - collection to store generated strings
-Another convenience function; looks up the key instead of
-dereferencing directly for the given iterator.
-</p>
-<p>
-
-<b>begin</b> -
-
-<b>end</b> -
-
-<b>target</b> -
-Convenience function; generates accelerators for all the items in
-a QStringList.
-</p>
-<p>
-
-<b>source</b> - Strings for which to generate accelerators
-
-<b>target</b> - Output for accelerator-added strings
-Convenience function; generates accelerators for all the values in
-a QMap<T,QString>.
-</p>
-<p>
-
-<b>source</b> - Map with input strings as VALUES.
-
-<b>target</b> - Output for accelerator-added strings
-Convenience function; generates an accelerator mapping from all the
-keys in a QMap<QString,T>
-</p>
-<p>
-
-<b>source</b> - Map with input strings as KEYS.
-
-<b>target</b> - Output for accelerator-added strings
-A generic class for completing QStrings
+      A generic class for completing QStrings
 </p>
 <p>
 This class offers easy use of "auto-completion", "manual-completion" or
 "shell completion" on QString objects. A common use is completing filenames
 or URLs (see KUrlCompletion()).
+But it is not limited to URL-completion -- everything should be completable!
+The user should be able to complete email-addresses, telephone-numbers,
+commands, SQL queries, ...
+Every time your program knows what the user can type into an edit-field, you
+should offer completion. With KCompletion, this is very easy, and if you are
+using a line edit widget ( KLineEdit), it is even more easy.
+Basically, you tell a KCompletion object what strings should be completable
+and whenever completion should be invoked, you call makeCompletion().
+KLineEdit and (an editable) KComboBox even do this automatically for you.
 </p>
-
+<p>
+KCompletion offers the completed string via the signal match() and
+all matching strings (when the result is ambiguous) via the method
+allMatches().
+</p>
+<p>
+Notice: auto-completion, shell completion and manual completion work
+slightly differently:
+</p>
+<p>
+<li> auto-completion always returns a complete item as match. </li>
+When more than one matching items are available, it will deliver just
+the first (depending on sorting order) item. Iterating over all matches
+is possible via nextMatch() and previousMatch().
+</p>
+<p>
+<li> popup-completion works in the same way, the only difference being that </li>
+the completed items are not put into the edit-widget, but into a
+separate popup-box.
+</p>
+<p>
+<li> manual completion works the same way as auto-completion, the </li>
+subtle difference is, that it isn't invoked automatically while the user
+is typing, but only when the user presses a special key. The difference
+of manual and auto-completion is therefore only visible in UI classes,
+KCompletion needs to know whether to deliver partial matches
+(shell completion) or whole matches (auto/manual completion), therefore
+KGlobalSettings.CompletionMan and
+KGlobalSettings.CompletionAuto have the exact same effect in
+KCompletion.
+</p>
+<p>
+<li> shell completion works like how shells complete filenames: </li>
+when multiple matches are available, the longest possible string of all
+matches is returned (i.e. only a partial item).
+Iterating over all matching items (complete, not partial) is possible
+via nextMatch() and previousMatch().
+</p>
+<p>
+You don't have to worry much about that though, KCompletion handles
+that for you, according to the setting setCompletionMode().
+The default setting is globally configured by the user and read
+from KGlobalSettings.completionMode().
+</p>
+<p>
+A short example:
+<pre>
+KCompletion completion;
+completion.setOrder( KCompletion.Sorted );
+completion.addItem( "pfeiffer@kde.org" );
+completion.addItem( "coolo@kde.org" );
+completion.addItem( "carpdjih@sp.zrz.tu-berlin.de" );
+completion.addItem( "carp@cs.tu-berlin.de" );
+</p>
+<p>
+cout << completion.makeCompletion( "ca" ).latin1() << endl;
+</pre>
+</p>
+<p>
+In shell-completion-mode, this will be "carp"; in auto-completion-
+mode it will be "carp\@cs.tu-berlin.de", as that is alphabetically
+smaller.
+If setOrder was set to Insertion, "carpdjih\@sp.zrz.tu-berlin.de"
+would be completed in auto-completion-mode, as that was inserted before
+"carp\@cs.tu-berlin.de".
+</p>
+<p>
+You can dynamically update the completable items by removing and adding them
+whenever you want.
+For advanced usage, you could even use multiple KCompletion objects. E.g.
+imagine an editor like kwrite with multiple open files. You could store
+items of each file in a different KCompletion object, so that you know (and
+tell the user) where a completion comes from.
+</p>
+<p>
+Note: KCompletion does not work with strings that contain 0x0 characters
+(unicode nul), as this is used internally as a delimiter.
+</p>
+<p>
+You may inherit from KCompletion and override makeCompletion() in
+special cases (like reading directories/urls and then supplying the
+contents to KCompletion, as KUrlCompletion does), but generally, this is
+not necessary.
+</p>
+<p>
+<b>Author</b> Carsten Pfeiffer <pfeiffer@kde.org>
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>enums</h3><ul>
-<li><b>CompOrder</b> = { Sorted, Insertion, Weighted }</li>
+<li style="padding-bottom : 8px;"><b>CompOrder</b> { Sorted, Insertion, Weighted }</li>
 
 </ul><a href="#extended"><i>enum details</i></a><hr>
+
 <h3>methods</h3><ul style="list-style-type : none">
-<li><b style="color : #000000;">KCompletion</b> ()
+<li><b style="color : #000000;">KCompletion</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>a KCompletion object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -151,28 +166,67 @@ or URLs (see KUrlCompletion()).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Constructor, nothing special here :)
-</p>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #999999;">KCompletion</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>KCompletion</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addItem</b> (item)
 <table width="100%">
@@ -181,7 +235,7 @@ Constructor, nothing special here :)
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -189,37 +243,34 @@ Constructor, nothing special here :)
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>item</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Adds an item to the list of available completions.
 Resets the current item-state ( previousMatch() and nextMatch()
-won't work anymore).
-</p>
+won't work anymore).</p>
 <p>
 <b>item</b> - the item to add
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addItem</b> (item, weight)
 <table width="100%">
@@ -228,7 +279,7 @@ won't work anymore).
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -236,24 +287,25 @@ won't work anymore).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>item</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>weight</td><td>uint</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Adds an item to the list of available completions.
 Resets the current item-state ( previousMatch() and nextMatch()
 won't work anymore).
@@ -261,31 +313,25 @@ won't work anymore).
 <p>
 Sets the weighting of the item to <b>weight</b> or adds it to the current
 weighting if the item is already available. The weight has to be greater
-than 1 to take effect (default weight is 1).
-</p>
+than 1 to take effect (default weight is 1).</p>
 <p>
-<b>item</b> - the item to add
-</p>
+<b>item</b> - the item to add</p>
 <p>
 <b>weight</b> - the weight of the item, default is 1
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">allMatches</b> ()
+<li><b style="color : #000000;">allMatches</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
@@ -293,33 +339,32 @@ than 1 to take effect (default weight is 1).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns a list of all items matching the last completed string.
 Might take some time, when you have LOTS of items.
 Returns a list of all matches for the last completed string.
 </p>
 <p>
 See also  substringCompletion
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">allMatches</b> (string)
 <table width="100%">
@@ -328,7 +373,7 @@ See also  substringCompletion
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
@@ -336,64 +381,64 @@ See also  substringCompletion
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>string</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Returns a list of all items matching <b>string.</b>
-</p>
+Returns a list of all items matching <b>string.</b></p>
 <p>
 <b>string</b> - the string to match
 Returns the list of all matches
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #999999;">allWeightedMatches</b> ()
+<li><b style="color : #999999;">allWeightedMatches</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KCompletionMatches)</i>
+            returns <i>KCompletionMatches</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns a list of all items matching the last completed string.
 Might take some time, when you have LOTS of items.
 The matches are returned as KCompletionMatches, which also
@@ -407,15 +452,11 @@ Returns a list of all completion matches
 </p>
 <p>
 See also  substringCompletion
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">allWeightedMatches</b> (string)
 <table width="100%">
@@ -424,53 +465,50 @@ See also  substringCompletion
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KCompletionMatches)</i>
+            returns <i>KCompletionMatches</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>string</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Returns a list of all items matching <b>string.</b>
-</p>
+Returns a list of all items matching <b>string.</b></p>
 <p>
 <b>string</b> - the string to match
 Returns a list of all matches
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">clear</b> ()
+<li><b style="color : #000000;">clear</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -478,37 +516,36 @@ Returns a list of all matches
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Removes all inserted items.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">completionMode</b> ()
+<li><b style="color : #000000;">completionMode</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KGlobalSettings.Completion)</i>
+            returns <i>KGlobalSettings.Completion</i>
           </td>
         </tr>
         <tr>
@@ -516,18 +553,21 @@ Removes all inserted items.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Return the current completion mode.
 May be different from KGlobalSettings.completionMode(), if you
 explicitly called setCompletionMode().
@@ -535,24 +575,20 @@ Returns the current completion mode
 </p>
 <p>
 See also  setCompletionMode
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">hasMultipleMatches</b> ()
+<li><b style="color : #000000;">hasMultipleMatches</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -560,41 +596,40 @@ See also  setCompletionMode
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns true when more than one match is found.
 Returns true if there are more than one match
 </p>
 <p>
 See also  multipleMatches
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">ignoreCase</b> ()
+<li><b style="color : #000000;">ignoreCase</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -602,33 +637,32 @@ See also  multipleMatches
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Return whether KCompletion acts case insensitively or not.
 Default is false (case sensitive).
 Returns true if the case will be ignored
 </p>
 <p>
 See also  setIgnoreCase
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">insertItems</b> (items)
 <table width="100%">
@@ -637,7 +671,7 @@ See also  setIgnoreCase
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -645,45 +679,42 @@ See also  setIgnoreCase
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>items</td><td>QStringList</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Inserts <b>items</b> into the list of possible completions.
-Does the same as setItems(), but does not call clear() before.
-</p>
+Does the same as setItems(), but does not call clear() before.</p>
 <p>
 <b>items</b> - the items to insert
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">isEmpty</b> ()
+<li><b style="color : #000000;">isEmpty</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -691,37 +722,36 @@ Does the same as setItems(), but does not call clear() before.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns true when the completion object contains no entries.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">items</b> ()
+<li><b style="color : #000000;">items</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
@@ -729,18 +759,21 @@ Returns true when the completion object contains no entries.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns a list of all items inserted into KCompletion. This is useful
 if you need to save the state of a KCompletion object and restore it
 later.
@@ -762,24 +795,20 @@ Returns a list of all items
 </p>
 <p>
 See also  setItems
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">lastMatch</b> ()
+<li><b style="color : #000000;">lastMatch</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -787,31 +816,30 @@ See also  setItems
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the last match. Might be useful if you need to check whether
 a completion is different from the last one.
 Returns the last match. QString() is returned when there is no
 last match.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">makeCompletion</b> (string)
 <table width="100%">
@@ -820,7 +848,7 @@ last match.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -828,22 +856,24 @@ last match.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>string</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Attempts to find an item in the list of available completions,
 that begins with <b>string.</b> Will either return the first matching item
 (if there is more than one match) or QString(), if no match was
@@ -858,11 +888,10 @@ match().
 <p>
 If this is called twice or more often with the same string while no
 items were added or removed in the meantime, all available completions
-#matches().
+will be emitted via the signal #matches().
 This happens only in shell-completion-mode.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>string</b> - the string to complete
 Returns the matching item, or QString() if there is no matching
@@ -873,160 +902,152 @@ See also  slotMakeCompletion
 </p>
 <p>
 See also  substringCompletion
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">match</b> (item)<i style="color : #0000ff">   signal</i>
+<li style="list-style-type : none"><b style="color : #000000;">match</b> (item)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("match (const QString&)")
+          <p style="color : #ee360a">SIGNAL ("match (const QString&)")</p>
+
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>item</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 The matching item. Will be emitted by makeCompletion(),
 previousMatch() or nextMatch(). May be QString() if there
-is no matching item.
-</p>
+is no matching item.</p>
 <p>
 <b>item</b> - the match, or QString() if there is none
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">matches</b> (matchlist)<i style="color : #0000ff">   signal</i>
+<li style="list-style-type : none"><b style="color : #000000;">matches</b> (matchlist)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("matches (const QStringList&)")
+          <p style="color : #ee360a">SIGNAL ("matches (const QStringList&)")</p>
+
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>matchlist</td><td>QStringList</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 All matching items. Will be emitted by makeCompletion() in shell-
 completion-mode, when the same string is passed to makeCompletion twice
-or more often.
-</p>
+or more often.</p>
 <p>
 <b>matchlist</b> - the list of matches
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">multipleMatches</b> ()<i style="color : #0000ff">   signal</i>
+<li><b style="color : #000000;">multipleMatches</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("multipleMatches ()")
+          <p style="color : #ee360a">SIGNAL ("multipleMatches ()")</p>
+
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This signal is emitted, when calling makeCompletion() and more than
 one matching item is found.
 </p>
 <p>
 See also  hasMultipleMatches
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">nextMatch</b> ()
+<li><b style="color : #000000;">nextMatch</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -1034,18 +1055,21 @@ See also  hasMultipleMatches
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the next item from the matching-items-list.
 When reaching the last item, the list is rotated, so it will return
 the first match and a sound is issued (depending on
@@ -1055,24 +1079,20 @@ match, QString() is returned and a sound is issued
 </p>
 <p>
 See also  slotNextMatch
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">order</b> ()
+<li><b style="color : #000000;">order</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KCompletion.CompOrder)</i>
+            returns <i>KCompletion.CompOrder</i>
           </td>
         </tr>
         <tr>
@@ -1080,32 +1100,31 @@ See also  slotNextMatch
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the completion order.
 Returns the current completion order.
 </p>
 <p>
 See also  setOrder
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">postProcessMatch</b> (pMatch)
 <table width="100%">
@@ -1114,7 +1133,7 @@ See also  setOrder
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1122,22 +1141,24 @@ See also  setOrder
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>pMatch</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This method is called after a completion is found and before the
 matching string is emitted. You can override this method to modify the
 string that will be emitted.
@@ -1147,22 +1168,17 @@ unescaped inside KCompletion.
 Never delete that pointer!
 </p>
 <p>
-Default implementation does nothing.
-</p>
+Default implementation does nothing.</p>
 <p>
 <b>pMatch</b> - the match to process
 </p>
 <p>
 See also  postProcessMatches
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">postProcessMatches</b> (pMatches)
 <table width="100%">
@@ -1171,7 +1187,7 @@ See also  postProcessMatches
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1179,44 +1195,41 @@ See also  postProcessMatches
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>pMatches</td><td>QStringList</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This method is called before a list of all available completions is
-#matches. You can override this method to modify the
-#matches are emitted.
+emitted via #matches. You can override this method to modify the
+found items before match() or #matches are emitted.
 Never delete that pointer!
 </p>
 <p>
-Default implementation does nothing.
-</p>
+Default implementation does nothing.</p>
 <p>
 <b>pMatches</b> - the matches to process
 </p>
 <p>
 See also  postProcessMatch
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">postProcessMatches</b> (pMatches)
 <table width="100%">
@@ -1225,61 +1238,58 @@ See also  postProcessMatch
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>pMatches</td><td>KCompletionMatches</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This method is called before a list of all available completions is
-#matches. You can override this method to modify the
-##matches() are emitted.
+emitted via #matches. You can override this method to modify the
+found items before #match() or #matches() are emitted.
 Never delete that pointer!
 </p>
 <p>
-Default implementation does nothing.
-</p>
+Default implementation does nothing.</p>
 <p>
 <b>pMatches</b> - the matches to process
 </p>
 <p>
 See also  postProcessMatch
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">previousMatch</b> ()
+<li><b style="color : #000000;">previousMatch</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -1287,18 +1297,21 @@ See also  postProcessMatch
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the next item from the matching-items-list.
 When reaching the beginning, the list is rotated so it will return the
 last match and a sound is issued (depending on soundsEnabled()).
@@ -1308,15 +1321,11 @@ a sound is be issued.
 </p>
 <p>
 See also  slotPreviousMatch
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">removeItem</b> (item)
 <table width="100%">
@@ -1325,7 +1334,7 @@ See also  slotPreviousMatch
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1333,37 +1342,34 @@ See also  slotPreviousMatch
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>item</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Removes an item from the list of available completions.
 Resets the current item-state ( previousMatch() and nextMatch()
-won't work anymore).
-</p>
+won't work anymore).</p>
 <p>
 <b>item</b> - the item to remove
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setCompletionMode</b> (mode)
 <table width="100%">
@@ -1372,7 +1378,7 @@ won't work anymore).
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1380,27 +1386,28 @@ won't work anymore).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>mode</td><td>KGlobalSettings.Completion</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the completion mode to Auto/Manual, Shell or None.
 If you don't set the mode explicitly, the global default value
 KGlobalSettings.completionMode() is used.
-KGlobalSettings.CompletionNone disables completion.
-</p>
+KGlobalSettings.CompletionNone disables completion.</p>
 <p>
 <b>mode</b> - the completion mode
 </p>
@@ -1409,15 +1416,11 @@ See also  completionMode
 </p>
 <p>
 See also  KGlobalSettings.completionMode
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setIgnoreCase</b> (ignoreCase)
 <table width="100%">
@@ -1426,7 +1429,7 @@ See also  KGlobalSettings.completionMode
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1434,40 +1437,37 @@ See also  KGlobalSettings.completionMode
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>ignoreCase</td><td>bool</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Setting this to true makes KCompletion behave case insensitively.
 E.g. makeCompletion( "CA" ); might return "carp\@cs.tu-berlin.de".
-Default is false (case sensitive).
-</p>
+Default is false (case sensitive).</p>
 <p>
 <b>ignoreCase</b> - true to ignore the case
 </p>
 <p>
 See also  ignoreCase
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setItems</b> (list)
 <table width="100%">
@@ -1476,7 +1476,7 @@ See also  ignoreCase
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1484,22 +1484,24 @@ See also  ignoreCase
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>list</td><td>QStringList</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the list of items available for completion. Removes all previous
 items.
 </p>
@@ -1513,22 +1515,17 @@ If you don't like this, call
 setOrder( KCompletion.Insertion )
 before calling setItems().
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>list</b> - the list of items that are available for completion
 </p>
 <p>
 See also  items
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setOrder</b> (order)
 <table width="100%">
@@ -1537,7 +1534,7 @@ See also  items
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1545,22 +1542,24 @@ See also  items
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>order</td><td>KCompletion.CompOrder</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 KCompletion offers three different ways in which it offers its items:
 <li> in the order of insertion </li>
 <li> sorted alphabetically </li>
@@ -1579,22 +1578,17 @@ want to call setOrder( Sorted ) before inserting items, when you want
 everything sorted.
 </p>
 <p>
-Default is insertion order.
-</p>
+Default is insertion order.</p>
 <p>
 <b>order</b> - the new order
 </p>
 <p>
 See also  order
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setSoundsEnabled</b> (enable)
 <table width="100%">
@@ -1603,7 +1597,7 @@ See also  order
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1611,22 +1605,24 @@ See also  order
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>enable</td><td>bool</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Enables/disables playing a sound when
 <li> makeCompletion() can't find a match </li>
 <li> there is a partial completion (= multiple matches in </li>
@@ -1637,22 +1633,17 @@ match . rotation
 <p>
 For playing the sounds, KNotifyClient() is used.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>enable</b> - true to enable sounds
 </p>
 <p>
 See also  soundsEnabled
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">slotMakeCompletion</b> (string)
 <table width="100%">
@@ -1661,7 +1652,7 @@ See also  soundsEnabled
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1669,48 +1660,45 @@ See also  soundsEnabled
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>string</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Attempts to complete "string" and emits the completion via match().
-Same as makeCompletion() (just as a slot).
-</p>
+Same as makeCompletion() (just as a slot).</p>
 <p>
 <b>string</b> - the string to complete
 </p>
 <p>
 See also  makeCompletion
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">slotNextMatch</b> ()
+<li><b style="color : #000000;">slotNextMatch</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1718,41 +1706,40 @@ See also  makeCompletion
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Searches the next matching item and emits it via match().
 Same as nextMatch() (just as a slot).
 </p>
 <p>
 See also  nextMatch
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">slotPreviousMatch</b> ()
+<li><b style="color : #000000;">slotPreviousMatch</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1760,41 +1747,40 @@ See also  nextMatch
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Searches the previous matching item and emits it via match().
 Same as previousMatch() (just as a slot).
 </p>
 <p>
 See also  previousMatch
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">soundsEnabled</b> ()
+<li><b style="color : #000000;">soundsEnabled</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -1802,33 +1788,32 @@ See also  previousMatch
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Tells you whether KCompletion will play sounds on certain occasions.
 Default is enabled.
 Returns true if sounds are enabled
 </p>
 <p>
 See also  setSoundsEnabled
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">substringCompletion</b> (string)
 <table width="100%">
@@ -1837,7 +1822,7 @@ See also  setSoundsEnabled
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
@@ -1845,24 +1830,25 @@ See also  setSoundsEnabled
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>string</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Returns a list of all completion items that contain the given <b>string.</b>
-</p>
+Returns a list of all completion items that contain the given <b>string.</b></p>
 <p>
 <b>string</b> - the string to complete
 Returns a list of items which all contain <b>text</b> as a substring,
@@ -1870,54 +1856,46 @@ i.e. not necessarily at the beginning.
 </p>
 <p>
 See also  makeCompletion
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
 </li><hr>
-
 
 <a name="extended">
 <h3>enums - detail</h3>
 <ul style="list-style-type : none">
-
-<li><b>CompOrder</b> = { Sorted, Insertion, Weighted }
+<li><b>CompOrder</b>  { Sorted, Insertion, Weighted }
+  <p style="padding-top : 9px;">Constants that represent the order in which KCompletion performs
+completion-lookups.</p>
   <table cellspacing="5">
-
     <tr>
       <td></td>
       <td valign="top"><i>Sorted</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
-      <td>
-Use alphabetically sorted order</td>
+      <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>Insertion</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
-      <td>Use order of insertion</td>
+      <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>Weighted</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
-      <td>Use weighted order</td>
+      <td></td>
     </tr>
-
   </table>
 </li>
 <hr>
-
 </ul>
-
 </span>
 </body>
 </html>

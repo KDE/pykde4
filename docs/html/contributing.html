@@ -1,0 +1,123 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+</HEAD>
+<BODY style="font-size : 10pt;">
+<DIV CLASS="NAVHEADER">
+<TABLE SUMMARY="Header navigation table" WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" style="font-size : 10pt;">
+<TR><TH COLSPAN="3" ALIGN="center">Contributing to PyKDE</TH></TR>
+<TR><TD WIDTH="10%" ALIGN="left" VALIGN="bottom"><A HREF="using.html" ACCESSKEY="P">Prev</A></TD>
+<TD WIDTH="80%" ALIGN="center" VALIGN="bottom"></TD>
+<TD WIDTH="10%" ALIGN="right" VALIGN="bottom"><A HREF="classref.html" ACCESSKEY="N">Next</A></TD>
+</TR>
+</TABLE><HR ALIGN="LEFT" WIDTH="100%"></DIV>
+<h3>How PyKDE4 is Created</h3>
+<p>
+Very little of PyKDE4 is actually handwritten code - most of PyKDE4 is machine-generated from the KDE4 C++
+header files, including all of the PyKDE4 class reference documentation. On a reasonably fast machine, it
+takes less than a minute to generate the basic PyKDE4 (including docs) - most of the development time
+is taken up doing test builds of PyKDE4, making a few minor bug fixes (usually to the code generation tool),
+and handwriting a small amount of code that can't be generated from templates or otherwise machine generated.
+</p>
+<h3>What PyKDE4 Needs Help With</h3>
+<p>
+PyKDE4 includes around 600 different classes and about 10,000 different methods. While the machine-generated
+code is usually accurate and kdelibs (which underlies PyKDE4) is mature and thoroughly tested, there are
+always small bugs that creep in. In addition, first-time PyKDE4 users need assistance and information
+about constructing PyKDE apps or using PyKDE classes.
+</p>
+<p>
+So where PyKDE4 really needs community assistance is in writing short example programs or longer tutorials for
+developing applications or using major subsystems included in PyKDE. A small number of examples are included
+in this release, but much of the PyKDE code has never been tested in actual use.
+</p>
+<h3>Areas Where You Can Help</h3>
+<p>
+Example programs can be as short as a demo of a single widget, or as long as a full application. Nearly
+every class and widget in PyKDE4 could use a simple usage demo. In addition, example programs or tutorials
+would be helpful for the following areas:
+</p>
+<ul>
+<li>Using icons within a program in accordance with KDE reccomendations (KIcon, KIconLoader, KStandardDirs, etc)</li>
+<li>Configuration files and settings of apps (KConfig, KConfigSkeleton and related classes)</li>
+<li>Using KHTML and related support features (building a browser - see pykdedocs for a simple example)</li>
+<li>Using KBookmark and related classes</li>
+<li>Using KIO Slaves</li>
+<li>Using PyKDE's DOM facilities</li>
+<li>Using the Sonnet spellchecker</li>
+<li>Using KPLotWidget</li>
+<li>Using layout widgets in designing an application</li>
+<li>Using PyKDE widgets and classes with Qt Designer</li>
+</ul>
+<p>
+There are almost certainly other kinds of example code, demos or tutorials that would be useful for PyKDE.
+</p>
+<h3>What Are the Requirements for Example Code or Tutorials?</h3>
+<p>
+Basically any contributions in any form would be greatly appreciated. If you want your example code to
+function within the pykdedocs framework, the requirements for that are outlined below (but any examples
+are welcome).
+</p>
+<p>
+Otherwise, there are only two requirements:
+</p>
+<ul>
+<li>The code has to work</li>
+<li>The code has to include a license statement that allows it to be distributed with PyKDE - either a GPL/LGPL license,
+a BSD-style license, or a declaration that the code is in public domain. The copyright and ownership of the code
+remains with the author, whose name and copyright notice should also be included.</li>
+</ul>
+<h3>Writing Example Code for pykdedocs</h3>
+<p>
+pykdedocs (included in the PyKDE4 tarball distribution) incorporates example programs for classes as live (working)
+examples and simulataneously displays the source code for the example and the HTML docs for the class being demo'd. The
+examples for pykdedocs function like plugins to the program and should meet certain requirements. There is an example
+template (example_template.py) in the contrib/ directory of the tarball. The basic requirements are:
+</p>
+<ul>
+<li><b>helpText</b> - there should be a global variable named 'helpText' that contains a brief string describing
+what the example does</li>
+<li><b>MainFrame</b> - the main "window" of the program must be a class named 'MainFrame' and a subclass of KVBox.</li>
+<li><b>__main__</b> - the example program should have a '__main__' section so it can be run standalone</li></li>
+</ul>
+<p>
+If the example isn't suitable for running within the pykdedocs framework, the example can include a button in the MainFrame
+window which allows the user to launch the example outside of pykdedocs (see dialog examples in pykdedocs for how to do it).
+</p>
+<h3>Writing Tutorials for pykdedocs</h3>
+<p>
+Tutorials also have few requirements. The main requirements are that they include both runnable code and HTML text. In addition,
+to work with pykdedocs, all of the files (.html and .py) should fit under a single top level directory which will become a
+subdirectory of Tutorials/ in the PyKDE4 distribution. Other subdirectories can exist under the top level directory for
+the tutorial, but only HTML files in the top level directory will appear in pykdedocs tree view.
+</p>
+<h3>Where Do Additional Contributions End Up?</h3>
+<p>
+Anything that isn't suitable for inclusion in the pykdedocs framework will be placed in the contrib/ directory
+that's part of the PyKDE4 distribution tarball.
+</p>
+<h3>I Need a New Feature or Module in PyKDE4</h3>
+<p>
+Because of the difficulty in testing and verifying new features that might be added to PyKDE4, the following
+policy will be used: If a new feature or module seems appropriate, I'll generate the bindings and provide a
+modified tarball to the requestor. If in return I receive suitable example code to test, verify and demonstrate
+the feature's use, the feature will be included in PyKDE4 and maintained. If no suitable code is provided
+by the requestor, the feature won't be included in PyKDE4 or maintained for future releases.
+</p>
+<DIV CLASS="NAVFOOTER">
+<HR ALIGN="LEFT" WIDTH="100%">
+<TABLE SUMMARY="Footer navigation table" WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0"  style="font-size : 10pt;">
+<TR>
+<TD WIDTH="33%" ALIGN="left" VALIGN="top"><A HREF="using.html" ACCESSKEY="P">Prev</A></TD>
+<TD WIDTH="34%" ALIGN="center" VALIGN="top"><A HREF="toc.html" ACCESSKEY="H">Table of Contents</A></TD>
+<TD WIDTH="33%" ALIGN="right" VALIGN="top"><A HREF="classref.html" ACCESSKEY="N">Next</A></TD>
+</TR>
+<TR>
+<TD WIDTH="33%" ALIGN="left" VALIGN="top">Using PyKDE4</TD>
+<TD WIDTH="34%" ALIGN="center" VALIGN="top">&nbsp;</TD>
+<TD WIDTH="33%" ALIGN="right" VALIGN="top">Using the Class Reference</TD>
+</TR>
+</TABLE>
+</DIV>
+</BODY>
+</HTML>

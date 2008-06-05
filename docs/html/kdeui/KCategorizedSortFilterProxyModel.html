@@ -1,0 +1,642 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>KCategorizedSortFilterProxyModel</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class KCategorizedSortFilterProxyModel</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>kdeui</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left></td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>KCategorizedSortFilterProxyModel</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QSortFilterProxyModel</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      This class lets you categorize a view. It is meant to be used along with
+KCategorizedView class.
+</p>
+<p>
+In general terms all you need to do is to reimplement subSortLessThan() and
+compareCategories() methods. In order to make categorization work, you need
+to also call setCategorizedModel() class to enable it, since the categorization
+is disabled by default.
+</p>
+<p>
+See also  KCategorizedView
+</p>
+<p>
+<b>Author</b> Rafael Fernández López <ereslibre@kde.org>
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>enums</h3><ul>
+<li style="padding-bottom : 8px;"><b>AdditionalRoles</b> { CategoryDisplayRole, CategorySortRole }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">KCategorizedSortFilterProxyModel</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+This role is used for sorting categories. You can return a
+string or a long long value. Strings will be sorted alphabetically
+while long long will be sorted by their value. Please note that this
+value won't be shown on the view, is only for sorting purposes. What will
+be shown as "Category" on the view will be asked with the role
+CategoryDisplayRole.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">compareCategories</b> (left, right)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>int</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>left</td><td>QModelIndex</td><td align="right"></td></tr>
+              <tr><td>right</td><td>QModelIndex</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+This method compares the category of the <b>left</b> index with the category
+of the <b>right</b> index.
+</p>
+<p>
+Internally and if not reimplemented, this method will ask for <b>left</b> and
+<b>right</b> models for role CategorySortRole. In order to correctly sort
+categories, the data() metod of the model should return a qlonglong (or numeric) value, or
+a QString object. QString objects will be sorted with QString.localeAwareCompare if
+sortCategoriesByNaturalComparison() is true.
+</p>
+<p>
+Please have present that:
+QString(QChar(QChar.ObjectReplacementCharacter)) >
+QString(QChar(QChar.ReplacementCharacter)) >
+[ all possible strings ] >
+QString();
+</p>
+<p>
+This means that QString() will be sorted the first one, while
+QString(QChar(QChar.ObjectReplacementCharacter)) and
+QString(QChar(QChar.ReplacementCharacter)) will be sorted in last
+position.
+</p>
+<p>
+Please note that data() method of the model should return always
+information of the same type. If you return a QString for an index,
+you should return always QStrings for all indexes for role CategorySortRole
+in order to correctly sort categories. You can't mix by returning
+a QString for one index, and a qlonglong for other.
+</p>
+<p>
+If you need a more complex layout, you will have to reimplement this
+method.
+</p>
+<p>
+Returns A negative value if the category of <b>left</b> should be placed before the
+category of <b>right.</b> 0 if <b>left</b> and <b>right</b> are on the same category, and
+a positive value if the category of <b>left</b> should be placed after the
+category of <b>right.</b>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">isCategorizedModel</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns whether the model is categorized or not. Disabled by default.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">lessThan</b> (left, right)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>left</td><td>QModelIndex</td><td align="right"></td></tr>
+              <tr><td>right</td><td>QModelIndex</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Overridden from QSortFilterProxyModel. If you are subclassing
+KCategorizedSortFilterProxyModel, you will probably not need to reimplement this
+method.
+</p>
+<p>
+It calls compareCategories() to sort by category. If the both items are in the
+same category (i.e. compareCategories returns 0), then subSortLessThan is called.
+</p>
+<p>
+Returns Returns true if the item <b>left</b> is less than the item <b>right</b> when sorting.
+</p>
+<p>
+You usually won't need to reimplement this method when subclassing
+from KCategorizedSortFilterProxyModel.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">naturalCompare</b> (a, b)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>int</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #0000aa">static</b> 
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a</td><td>QString</td><td align="right"></td></tr>
+              <tr><td>b</td><td>QString</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Does a natural comparing of the strings. A negative value is returned if <b>a</b>
+is smaller than <b>b.</b> A positive value is returned if <b>a</b> is greater than <b>b.</b> 0
+is returned if both values are equal.
+<b style="color : #ff0000;"><i>Deprecated </i></b>
+Use KStringHandler.naturalCompare() instead.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setCategorizedModel</b> (categorizedModel)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>categorizedModel</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Enables or disables the categorization feature.
+</p>
+<p></p>
+<p>
+<b>categorizedModel</b> - whether to enable or disable the categorization feature.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setSortCategoriesByNaturalComparison</b> (sortCategoriesByNaturalComparison)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>sortCategoriesByNaturalComparison</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Set if the sorting using CategorySortRole will use a natural comparison
+in the case that strings were returned. If enabled, QString.localeAwareCompare
+will be used for sorting.
+</p>
+<p></p>
+<p>
+<b>sortCategoriesByNaturalComparison</b> - whether to sort using a natural comparison or not.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">sort</b> (column, order)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>column</td><td>int</td><td align="right"></td></tr>
+              <tr><td>order</td><td>Qt.SortOrder</td><td align="right">Qt.AscendingOrder</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Overridden from QSortFilterProxyModel. Sorts the source model using
+<b>column</b> for the given <b>order.</b>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">sortCategoriesByNaturalComparison</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns whether it is being used a natural comparison for sorting. Enabled by default.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">sortColumn</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>int</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the column being used for sorting.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">sortOrder</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Qt.SortOrder</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the sort order being used for sorting.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">subSortLessThan</b> (left, right)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>left</td><td>QModelIndex</td><td align="right"></td></tr>
+              <tr><td>right</td><td>QModelIndex</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+This method has a similar purpose as lessThan() has on QSortFilterProxyModel.
+It is used for sorting items that are in the same category.
+</p>
+<p>
+Returns Returns true if the item <b>left</b> is less than the item <b>right</b> when sorting.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+<li><b>AdditionalRoles</b>  { CategoryDisplayRole, CategorySortRole }
+  <p style="padding-top : 9px;"></p>
+  <table cellspacing="5">
+    <tr>
+      <td></td>
+      <td valign="top"><i>CategoryDisplayRole</i></td>
+      <td valign="top">- 0x17CE990A </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>CategorySortRole</i></td>
+      <td valign="top">- 0x27857E60 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
+</ul>
+</span>
+</body>
+</html>

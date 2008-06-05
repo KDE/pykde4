@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KUniqueApplication</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,30 +38,43 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-Maintains only a single instance of a running application at a time.
-Please note that this supports only one instance per KDE session. If
-your application can only be opened once per user or once per host, you
-need to ensure this independently of KUniqueApplication.
+      KUniqueApplication is a KApplication which only uses a single process. When
+a KUniqueApplication is started, it attempts to contact an existing copy
+of the application. If successful, the program asks the
+existing process to create a new instance by calling its newInstance() method
+and then exits. If there is no existing process then the program forks and
+calls the newInstance() method. When newInstance() is called, the application
+will typically create a new window or activate an existing one.
 </p>
 <p>
-If another instance
-is started, it will determine (via DBUS) whether it is the first instance
-or a second instance. If it is a second instance, it will forward on
-the information to the first instance and then quit.
+Instances of KUniqueApplication can be made to behave like a normal application by passing
+the StartFlag.NonUniqueInstance flag to start().
+</p>
+<p>
+Please note that this supports only one process per KDE session. If
+your application can only be opened once per user or once per host, you
+need to ensure this independently of KUniqueApplication.
 </p>
 <p>
 The .desktop file for the application should state X-DBUS-StartupType=Unique,
 see ktoolinvocation.h
 </p>
 <p>
+If your application is used to open files, it should also support the --tempfile
+option (see KCmdLineArgs.addTempFileOption()), to delete tempfiles after use.
+Add X-KDE-HasTempFileOption=true to the .desktop file to indicate this.
 </p>
-
+<p>
+See also  KApplication
+<b>Author</b> Preston Brown <pbrown@kde.org>
     </td>
   </tr>
 </table>
 <hr>
 <hr>
+<h3>enums</h3><ul>
+<li style="padding-bottom : 8px;"><b>StartFlag</b> { NonUniqueInstance }<br><i  style="color : #aa00aa">typesafe object: </i><b>StartFlags</b></li>
+</ul><a href="#extended"><i>enum details</i></a><hr>
 
 <h3>methods</h3><ul style="list-style-type : none">
 <li style="list-style-type : none"><b style="color : #000000;">KUniqueApplication</b> (GUIenabled, configUnique)
@@ -80,7 +84,7 @@ see ktoolinvocation.h
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KUniqueApplication object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -88,45 +92,40 @@ see ktoolinvocation.h
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>GUIenabled</td><td>bool</td><td align="right">True</td></tr>
-
-              <tr><td>configUnique</td><td>bool</td><td align="right">False</td></tr>
-
+              <tr><td>GUIenabled</td><td>bool</td><td align="right">1</td></tr>
+              <tr><td>configUnique</td><td>bool</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Constructor. Takes command line arguments from KCmdLineArgs
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>GUIenabled</b> - Set to false to disable all GUI stuff. This implies
-no styles either.
-</p>
+no styles either.</p>
 <p>
 <b>configUnique</b> - If true, the uniqueness of the application will
 depend on the value of the "MultipleInstances"
 key in the "KDE" group of the application config file.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">KUniqueApplication</b> (display, visual, colormap, configUnique)
 <table width="100%">
@@ -135,7 +134,7 @@ key in the "KDE" group of the application config file.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KUniqueApplication object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -143,114 +142,63 @@ key in the "KDE" group of the application config file.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>display</td><td>Display</td><td align="right"></td></tr>
-
               <tr><td>visual</td><td>Qt.HANDLE</td><td align="right">0</td></tr>
-
               <tr><td>colormap</td><td>Qt.HANDLE</td><td align="right">0</td></tr>
-
-              <tr><td>configUnique</td><td>bool</td><td align="right">False</td></tr>
-
+              <tr><td>configUnique</td><td>bool</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Constructor. Takes command line arguments from KCmdLineArgs
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>display</b> - Will be passed to Qt as the X display. The display
 must be valid and already opened.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>visual</b> - Pointer to the X11 visual that should be used by the
-application. If 0, the default visual will be used instead.
+application. If NULL, the default visual will be used instead.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>colormap</b> - The colormap that should be used by the application.
 If 0, the default colormap will be used instead.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>configUnique</b> - If true, the uniqueness of the application will
 depend on the value of the "MultipleInstances"
 key in the "KDE" group of the application config file.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">addCmdLineOptions</b> ()
+<li style="list-style-type : none"><b style="color : #000000;">KUniqueApplication</b> (a0, a1)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
-      <table>
+      <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <i style="color : #0000ff">static</i>
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Adds command line options specific for KUniqueApplication.
-</p>
-<p>
-Should be called before calling KUniqueApplication constructor
-and / or start().
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">newInstance</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(int)</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -258,18 +206,146 @@ and / or start().
           
           </td>
         </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
-              <tr><td></td></tr>
-
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>bool</td><td align="right">1</td></tr>
+              <tr><td>a1</td><td>bool</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">KUniqueApplication</b> (a0, a1, a2, a3)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>Display</td><td align="right"></td></tr>
+              <tr><td>a1</td><td>Qt.HANDLE</td><td align="right">0</td></tr>
+              <tr><td>a2</td><td>Qt.HANDLE</td><td align="right">0</td></tr>
+              <tr><td>a3</td><td>bool</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">addCmdLineOptions</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #0000aa">static</b> 
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Adds command line options specific for KUniqueApplication.
+</p>
 <p>
+Should be called before calling KUniqueApplication constructor
+and / or start().
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">newInstance</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>int</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 Creates a new "instance" of the application.
 </p>
 <p>
@@ -283,34 +359,52 @@ function is called and can be checked in the usual way.
 </p>
 <p>
 The default implementation ensures the mainwindow of the already
-running instance is shown and activated if necessary. You should
-prefer using it from your overridden method instead of doing
-it directly.
+running instance is shown and activated if necessary. If your
+application has only one mainwindow, you should call this default
+implementation and only add your special handling if needed.
 </p>
 <p>
 Note that newInstance() is called also in the first started
 application process.
 </p>
 <p>
-Returns An exit value. The calling process will exit with this value.
+For applications that share one process for several mainwindows,
+the reimplementation could be:
+<pre>
+int MyApp.newInstance()
+{
+KCmdLineArgs.setCwd(QDir.currentPath().toUtf8());
+KCmdLineArgs* args = KCmdLineArgs.parsedArgs();
+static bool first = true;
+if (args->count() > 0) {
+for (int i = 0; i < args->count(); ++i) {
+openWindow(args->url(i));
+}
+} else if( !first || !isSessionRestored()) {
+openWindow(KUrl()); // create a new window
+}
+first = false;
+args->clear();
+return 0;
+}
+</pre>
 </p>
-
+<p>
+Returns An exit value. The calling process will exit with this value.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">restoringSession</b> ()
+<li><b style="color : #000000;">restoringSession</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -318,95 +412,99 @@ Returns An exit value. The calling process will exit with this value.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns whether newInstance() is being called while session
 restoration is in progress.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">setHandleAutoStarted</b> ()
+<li><b style="color : #000000;">setHandleAutoStarted</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 <b style="color : #ff0000;"><i>Internal </i></b>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">start</b> ()
+<li style="list-style-type : none"><b style="color : #000000;">start</b> (flags)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
-      <table>
+      <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
-              <tr><td></td></tr>
-
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>flags</td><td>KUniqueApplication.StartFlags</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Forks and registers with D-Bus.
 </p>
 <p>
@@ -439,22 +537,85 @@ been called yet, without any performance impact.
 Also note that you MUST call KUniqueApplication.addCmdLineOptions(),
 if you use command line options before start() is called.
 </p>
+<p></p>
 <p>
+<b>flags</b> - 	Optional flags which control how a new instance
+of the application is started.
 Returns true if registration is successful.
 false if another process was already running.
-</p>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">start</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #0000aa">static</b> 
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 
     </td>
   </tr>
 </table>
 
+</li><hr>
 
 </li><hr>
 
-
-</li><hr>
-
-
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+<li><b>StartFlag</b>  { NonUniqueInstance }
+  <p style="padding-top : 9px;">Create a new instance of the application in a new process and
+do not attempt to re-use an existing process.
+</p>
+<p>
+With this flag set, the new instance of the application will
+behave as if it were a plain KApplication rather than a KUniqueApplication.
+</p>
+<p>
+This is useful if you have an application where all instances are typically run
+in a single process but under certain circumstances new instances may require
+their own process.</p>
+  <table cellspacing="5">
+<br><i  style="color : #aa00aa">typesafe object: </i><b>StartFlags</b></li>
+    <tr>
+      <td></td>
+      <td valign="top"><i>NonUniqueInstance</i></td>
+      <td valign="top">- 0x1 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
+</ul>
 </span>
 </body>
 </html>

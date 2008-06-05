@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KDBusServiceStarter</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kio Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,31 +38,27 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-A generic DBUS service starter, using KServiceTypeTrader.
+      A generic DBUS service starter, using KServiceTypeTrader.
 The default implementation starts new processes, but this interface can
 also be reimplemented by specific applications to provide dlopened in-process DBus objects.
 This interface is similar to the startServiceByName() function found in QDBusBusService, but
 with the added benefit of using KTrader (and, therefore, additional constraints and the
 ability to search the standard KDE dirs).
 <b>Author</b> David Faure <faure@kde.org>
-</p>
-
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>methods</h3><ul style="list-style-type : none">
-<li><b style="color : #000000;">KDBusServiceStarter</b> ()
+<li><b style="color : #000000;">KDBusServiceStarter</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>a KDBusServiceStarter object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -79,11 +66,15 @@ ability to search the standard KDE dirs).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
@@ -91,14 +82,48 @@ ability to search the standard KDE dirs).
     </td>
     <td width="40%" align="left">
 
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">KDBusServiceStarter</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>dtor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">findServiceFor</b> (serviceType, constraint, error, dbusService, flags)
 <table width="100%">
@@ -107,7 +132,7 @@ ability to search the standard KDE dirs).
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(int)</i>
+            returns <i>int</i>
           </td>
         </tr>
         <tr>
@@ -115,30 +140,28 @@ ability to search the standard KDE dirs).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>serviceType</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>constraint</td><td>QString</td><td align="right">QString ()</td></tr>
-
-              <tr><td>error</td><td>QString</td><td align="right">None</td></tr>
-
-              <tr><td>dbusService</td><td>QString</td><td align="right">None</td></tr>
-
+              <tr><td>constraint</td><td>QString</td><td align="right">QString()</td></tr>
+              <tr><td>error</td><td>QString</td><td align="right">0</td></tr>
+              <tr><td>dbusService</td><td>QString</td><td align="right">0</td></tr>
               <tr><td>flags</td><td>int</td><td align="right">0</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Check if a given DBus service is available - from the serviceType it's supposed to implement.
 </p>
 <p>
@@ -147,59 +170,54 @@ with the constraint that its X-DBus-ServiceName property must be defined.
 Then the DBus server is checked. If the service is not available,
 this method will call startServiceFor to start it.
 </p>
+<p></p>
 <p>
-</p>
+<b>serviceType</b> - the type of service we're looking for</p>
 <p>
-<b>serviceType</b> - the type of service we're looking for
-</p>
-<p>
-<b>constraint</b> - see KServiceTypeTrader
-</p>
+<b>constraint</b> - see KServiceTypeTrader</p>
 <p>
 <b>error</b> - On failure, <b>error</b> contains a description of the error
 that occurred. If the pointer is 0, the argument will be
-ignored
-</p>
+ignored</p>
 <p>
 <b>dbusService</b> - On success, <b>dbusService</b> contains the DBus service name
 under which this service is available. If the pointer is 0 the argument
-will be ignored
-</p>
+will be ignored</p>
 <p>
 <b>flags</b> - for future extensions (currently unused)
 </p>
 <p>
 Returns an error code indicating success (== 0) or failure (> 0).
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">self</b> ()
+<li><b style="color : #000000;">self</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KDBusServiceStarter)</i>
+            returns <i>KDBusServiceStarter</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
@@ -207,14 +225,11 @@ Returns an error code indicating success (== 0) or failure (> 0).
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">startServiceFor</b> (serviceType, constraint, error, dbusService, flags)
 <table width="100%">
@@ -223,7 +238,7 @@ Returns an error code indicating success (== 0) or failure (> 0).
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(int)</i>
+            returns <i>int</i>
           </td>
         </tr>
         <tr>
@@ -231,30 +246,28 @@ Returns an error code indicating success (== 0) or failure (> 0).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>serviceType</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>constraint</td><td>QString</td><td align="right">QString ()</td></tr>
-
-              <tr><td>error</td><td>QString</td><td align="right">None</td></tr>
-
-              <tr><td>dbusService</td><td>QString</td><td align="right">None</td></tr>
-
+              <tr><td>constraint</td><td>QString</td><td align="right">QString()</td></tr>
+              <tr><td>error</td><td>QString</td><td align="right">0</td></tr>
+              <tr><td>dbusService</td><td>QString</td><td align="right">0</td></tr>
               <tr><td>flags</td><td>int</td><td align="right">0</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Find an implementation of the given <b>serviceType,</b>
 and start it, to use its DBus interface.
 The default implementation uses KServiceTypeTrader to find the preferred Application,
@@ -264,77 +277,31 @@ and then starts it using KToolInvocation.startService...
 However applications (like kontact) can reimplement this method, to provide
 an in-process way of loading the implementation for this service type.
 </p>
+<p></p>
 <p>
-</p>
+<b>serviceType</b> - the type of service we're looking for</p>
 <p>
-<b>serviceType</b> - the type of service we're looking for
-</p>
-<p>
-<b>constraint</b> - see KServiceTypeTrader
-</p>
+<b>constraint</b> - see KServiceTypeTrader</p>
 <p>
 <b>error</b> - On failure, <b>error</b> contains a description of the error
 that occurred. If the pointer is 0, the argument will be
-ignored
-</p>
+ignored</p>
 <p>
 <b>dbusService</b> - On success, <b>dbusService</b> contains the DBus service name
 under which this service is available. If the pointer is 0 the argument
-will be ignored
-</p>
+will be ignored</p>
 <p>
 <b>flags</b> - for future extensions (currently unused)
 </p>
 <p>
 Returns an error code indicating success (== 0) or failure (> 0).
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">~KDBusServiceStarter</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
 </li><hr>
-
-
-</li><hr>
-
 
 </span>
 </body>

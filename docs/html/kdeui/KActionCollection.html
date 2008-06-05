@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KActionCollection</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,11 +38,10 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-A container for a set of QAction objects.
+      A container for a set of QAction objects.
 </p>
 <p>
-KActionCollection acts as the owning QObject for a set of QAction objects. It
+KActionCollection manages a set of QAction objects. It
 allows them to be grouped for organized presentation of configuration to the user,
 saving + loading of configuration, and optionally for automatic plugging into
 specified widget(s).
@@ -60,13 +50,15 @@ specified widget(s).
 Additionally, KActionCollection provides several convenience functions for locating
 named actions, and actions grouped by QActionGroup.
 </p>
-
+<p>
+If you create your own action collection and need to assign shortcuts
+to the actions within, you have to call associateWidget() or
+addAssociatedWidget() to have them working.
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>methods</h3><ul style="list-style-type : none">
 <li style="list-style-type : none"><b style="color : #000000;">KActionCollection</b> (parent, cData)
 <table width="100%">
@@ -75,7 +67,7 @@ named actions, and actions grouped by QActionGroup.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KActionCollection object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -83,44 +75,81 @@ named actions, and actions grouped by QActionGroup.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>parent</td><td>QObject</td><td align="right"></td></tr>
-
-              <tr><td>cData</td><td>KComponentData</td><td align="right">KComponentData ()</td></tr>
-
+              <tr><td>cData</td><td>KComponentData</td><td align="right">KComponentData()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Constructor. Allows specification of a KComponentData other than the default
 global KComponentData, where needed.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">KActionCollection</b> (parent)
+<li style="list-style-type : none"><b style="color : #999999;">KActionCollection</b> (parent)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KActionCollection object</i>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>parent</td><td>KXMLGUIClient</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">KActionCollection</b> (a0, a1)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -128,34 +157,31 @@ global KComponentData, where needed.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>parent</td><td>KXMLGUIClient</td><td align="right"></td></tr>
-
+              <tr><td>a0</td><td>QObject</td><td align="right"></td></tr>
+              <tr><td>a1</td><td>KComponentData</td><td align="right">KComponentData()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Creates a new action under the given name, adds it to the collection and connects the action's triggered()
-signal to the specified receiver/member. The type of the action is specified by the template
-parameter ActionType.
-</p>
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">action</b> (index)
 <table width="100%">
@@ -164,7 +190,7 @@ parameter ActionType.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QAction)</i>
+            returns <i>QAction</i>
           </td>
         </tr>
         <tr>
@@ -172,35 +198,33 @@ parameter ActionType.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>index</td><td>int</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Return the QAction* at position "index" in the action collection.
 </p>
 <p>
 This is equivalent to actions().value(index);
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">action</b> (name)
 <table width="100%">
@@ -209,7 +233,7 @@ This is equivalent to actions().value(index);
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QAction)</i>
+            returns <i>QAction</i>
           </td>
         </tr>
         <tr>
@@ -217,48 +241,45 @@ This is equivalent to actions().value(index);
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Find the first action with a given <b>name</b> in the action collection.
+Get the action with the given <b>name</b> from the action collection.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>name</b> - Name of the KAction, or null to match all actions
-Returns A pointer to the first KAction in the collection which matches the parameters or
+<b>name</b> - Name of the KAction
+Returns A pointer to the KAction in the collection which matches the parameters or
 null if nothing matches.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">actionGroups</b> ()
+<li><b style="color : #000000;">actionGroups</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(list of QActionGroup)</i>
+            returns <i>QList<QActionGroup</i>
           </td>
         </tr>
         <tr>
@@ -266,121 +287,160 @@ null if nothing matches.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the list of all QActionGroups associated with actions in this action collection.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">actionHighlighted</b> (action)<i style="color : #0000ff">   signal</i>
+<li style="list-style-type : none"><b style="color : #000000;">actionHighlighted</b> (action)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("actionHighlighted (QAction*)")
+          <p style="color : #ee360a">SIGNAL ("actionHighlighted (QAction*)")</p>
+
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>action</td><td>QAction</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Indicates that <b>action</b> was highlighted
-</p>
-
+Indicates that <b>action</b> was highlighted (hovered over).
+<b style="color : #ff0000;"><i>Deprecated </i></b> Replaced by actionHovered(QAction* action);
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">actionTriggered</b> (action)<i style="color : #0000ff">   signal</i>
+<li style="list-style-type : none"><b style="color : #000000;">actionHovered</b> (action)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("actionTriggered (QAction*)")
+          <p style="color : #ee360a">SIGNAL ("actionHovered (QAction*)")</p>
+
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>action</td><td>QAction</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
+Indicates that <b>action</b> was hovered.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">actionTriggered</b> (action)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("actionTriggered (QAction*)")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>action</td><td>QAction</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 Indicates that <b>action</b> was triggered
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">actions</b> ()
+<li><b style="color : #000000;">actions</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(list of QAction)</i>
+            returns <i>QList<QAction</i>
           </td>
         </tr>
         <tr>
@@ -388,37 +448,36 @@ Indicates that <b>action</b> was triggered
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the list of KActions which belong to this action collection.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">actionsWithoutGroup</b> ()
+<li><b style="color : #000000;">actionsWithoutGroup</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(list of QAction)</i>
+            returns <i>QList<QAction</i>
           </td>
         </tr>
         <tr>
@@ -426,28 +485,27 @@ Returns the list of KActions which belong to this action collection.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the list of KActions without an QAction.actionGroup() which belong to this action collection.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addAction</b> (name, action)
 <table width="100%">
@@ -456,7 +514,7 @@ Returns the list of KActions without an QAction.actionGroup() which belong to th
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QAction)</i>
+            returns <i>QAction</i>
           </td>
         </tr>
         <tr>
@@ -464,24 +522,25 @@ Returns the list of KActions without an QAction.actionGroup() which belong to th
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>action</td><td>QAction</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Add an action under the given name to the collection.
 </p>
 <p>
@@ -493,22 +552,57 @@ the new one.
 Inserting an action under a name that is already used for another action will replace
 the other action in the collection.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>name</b> - The name by which the action be retrieved again from the collection.
-</p>
+<b>name</b> - The name by which the action be retrieved again from the collection.</p>
 <p>
 <b>action</b> - The action to add.
-</p>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">addAction</b> (name, action)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>KAction</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
+              <tr><td>action</td><td>KAction</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addAction</b> (actionType, receiver, member)
 <table width="100%">
@@ -517,7 +611,7 @@ the other action in the collection.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QAction)</i>
+            returns <i>KAction</i>
           </td>
         </tr>
         <tr>
@@ -525,41 +619,37 @@ the other action in the collection.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>actionType</td><td>KStandardAction.StandardAction</td><td align="right"></td></tr>
-
-              <tr><td>receiver</td><td>QObject</td><td align="right">None</td></tr>
-
+              <tr><td>receiver</td><td>QObject</td><td align="right">0</td></tr>
               <tr><td>member</td><td>char</td><td align="right">0</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Creates a new standard action, adds it to the collection and connects the action's triggered() signal to the
 specified receiver/member. The newly created action is also returned.
 </p>
 <p>
 The action can be retrieved later from the collection by its standard name as per
 KStandardAction.stdName.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addAction</b> (actionType, name, receiver, member)
 <table width="100%">
@@ -568,7 +658,7 @@ KStandardAction.stdName.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QAction)</i>
+            returns <i>KAction</i>
           </td>
         </tr>
         <tr>
@@ -576,42 +666,37 @@ KStandardAction.stdName.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>actionType</td><td>KStandardAction.StandardAction</td><td align="right"></td></tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>receiver</td><td>QObject</td><td align="right">None</td></tr>
-
+              <tr><td>receiver</td><td>QObject</td><td align="right">0</td></tr>
               <tr><td>member</td><td>char</td><td align="right">0</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Creates a new standard action, adds to the collection under the given name and connects the action's triggered() signal to the
 specified receiver/member. The newly created action is also returned.
 </p>
 <p>
 The action can be retrieved later from the collection by the specified name.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addAction</b> (name, receiver, member)
 <table width="100%">
@@ -620,7 +705,7 @@ The action can be retrieved later from the collection by the specified name.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QAction)</i>
+            returns <i>KAction</i>
           </td>
         </tr>
         <tr>
@@ -628,26 +713,26 @@ The action can be retrieved later from the collection by the specified name.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>receiver</td><td>QObject</td><td align="right">None</td></tr>
-
+              <tr><td>receiver</td><td>QObject</td><td align="right">0</td></tr>
               <tr><td>member</td><td>char</td><td align="right">0</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Creates a new action under the given name to the collection and connects the action's triggered()
 signal to the specified receiver/member. The newly created action is returned.
 </p>
@@ -660,22 +745,16 @@ the new one.
 Inserting an action under a name that is already used for another action will replace
 the other action in the collection.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>name</b> - The name by which the action be retrieved again from the collection.
-</p>
+<b>name</b> - The name by which the action be retrieved again from the collection.</p>
 <p>
 <b>action</b> - The action to add.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addAssociatedWidget</b> (widget)
 <table width="100%">
@@ -684,7 +763,7 @@ the other action in the collection.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -692,83 +771,82 @@ the other action in the collection.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>widget</td><td>QWidget</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Add an associated widget. Associated widgets automatically have all actions
-in the action collection added to themselves.
+Associate all actions in this collection to the given <b>widget,</b> including any actions
+added after this association is made.
 </p>
 <p>
-See also  setAssociatedWidget(), removeAssociatedWidget(), clearAssociatedWidgets() and associatedWidgets().
-</p>
-
+This does not change the action's shortcut context, so if you need to have the actions only
+trigger when the widget has focus, you'll need to set the shortcut context on each action
+to Qt.WidgetShortcut (or better still, Qt.WidgetWithChildrenShortcut with Qt 4.4+)
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">allCollections</b> ()
+<li><b style="color : #000000;">allCollections</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(list of KActionCollection)</i>
+            returns <i>QList<KActionCollection</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Access the list of all action collections in existence for this app
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">associatedWidgets</b> ()
+<li style="list-style-type : none"><b style="color : #000000;">associateWidget</b> (widget)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
-      <table>
+      <table vspace="5">
         <tr>
           <td>
-            returns <i>(list of QWidget)</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -776,46 +854,43 @@ Access the list of all action collections in existence for this app
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
-              <tr><td></td></tr>
-
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>widget</td><td>QWidget</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Returns a list of widgets currently associated with this action collection.
-</p>
-<p>
-Associations are created to enable custom widgets to provide keyboard interactivity
-via KActions without having to use QWidget.grabShortcut(). An example of its use
-is katepart, which creates actions for each editor command and then sets its view
-as an associated widget.
-</p>
-<p>
-See also  addAssociatedWidget(), setAssociatedWidget(), removeAssociatedWidget(), and clearAssociatedWidgets().
-</p>
-
+Associate all actions in this collection to the given <b>widget.</b>
+Unlike addAssociatedWidget, this method only adds all current actions
+in the collection to the given widget. Any action added after this call
+will not be added to the given widget automatically.
+So this is just a shortcut for a foreach loop and a widget->addAction call.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">clear</b> ()
+<li><b style="color : #000000;">associatedWidgets</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>QList<QWidget</i>
           </td>
         </tr>
         <tr>
@@ -823,37 +898,73 @@ See also  addAssociatedWidget(), setAssociatedWidget(), removeAssociatedWidget()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
+Return a list of all associated widgets.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">clear</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 Clears the entire action collection, deleting all actions.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">clearAssociatedWidgets</b> ()
+<li><b style="color : #000000;">clearAssociatedWidgets</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -861,41 +972,36 @@ Clears the entire action collection, deleting all actions.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Clears all associated widgets. All actions in this collection will be removed
-from associated widgets.
-</p>
-<p>
-See also  addAssociatedWidget(), setAssociatedWidget(), removeAssociatedWidget(), and associatedWidgets().
-</p>
-
+Clear all associated widgets and remove the actions from those widgets.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">componentData</b> ()
+<li><b style="color : #000000;">componentData</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KComponentData)</i>
+            returns <i>KComponentData</i>
           </td>
         </tr>
         <tr>
@@ -903,37 +1009,36 @@ See also  addAssociatedWidget(), setAssociatedWidget(), removeAssociatedWidget()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 The KComponentData with which this class is associated.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">configGroup</b> ()
+<li><b style="color : #000000;">configGroup</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QString)</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -941,37 +1046,36 @@ The KComponentData with which this class is associated.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the KConfig group with which settings will be loaded and saved.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">configIsGlobal</b> ()
+<li><b style="color : #000000;">configIsGlobal</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -979,29 +1083,28 @@ Returns the KConfig group with which settings will be loaded and saved.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns whether this action collection's configuration should be global to KDE ( true ),
 or specific to the application ( false ).
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">connectNotify</b> (signal)
 <table width="100%">
@@ -1010,49 +1113,47 @@ or specific to the application ( false ).
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>signal</td><td>char</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Overridden to perform connections when someone wants to know whether an action was highlighted or triggered
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">count</b> ()
+<li><b style="color : #000000;">count</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(int)</i>
+            returns <i>int</i>
           </td>
         </tr>
         <tr>
@@ -1060,82 +1161,177 @@ Overridden to perform connections when someone wants to know whether an action w
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the number of actions in the collection.
 </p>
 <p>
 This is equivalent to actions().count().
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">inserted</b> (action)<i style="color : #0000ff">   signal</i>
+<li style="list-style-type : none"><b style="color : #000000;">exportGlobalShortcuts</b> (config, writeDefaults)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("inserted (QAction*)")
+          
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
+              <tr><td>config</td><td>KConfigGroup</td><td align="right"></td></tr>
+              <tr><td>writeDefaults</td><td>bool</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Export the current configurable global key associations to <b>config.</b>
+</p>
+<p>
+\since 4.1
+</p>
+<p></p>
+<p>
+<b>config</b> - Config object to save to</p>
+<p>
+<b>writeDefaults</b> - set to true to write settings which are already at defaults.
+    </td>
+  </tr>
+</table>
 
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">importGlobalShortcuts</b> (config)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>config</td><td>KConfigGroup</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Import from <b>config</b> all configurable global key associations.
+</p>
+<p>
+\since 4.1
+</p>
+<p></p>
+<p>
+<b>config</b> - Config object to read from
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">inserted</b> (action)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("inserted (QAction*)")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
               <tr><td>action</td><td>QAction</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Indicates that <b>action</b> was inserted into this action collection.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">isEmpty</b> ()
+<li><b style="color : #000000;">isEmpty</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -1143,37 +1339,36 @@ Indicates that <b>action</b> was inserted into this action collection.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns whether the action collection is empty or not.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">parentGUIClient</b> ()
+<li><b style="color : #000000;">parentGUIClient</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KXMLGUIClient)</i>
+            returns <i>KXMLGUIClient</i>
           </td>
         </tr>
         <tr>
@@ -1181,28 +1376,27 @@ Returns whether the action collection is empty or not.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 The parent KXMLGUIClient, or null if not available.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">readSettings</b> (config)
 <table width="100%">
@@ -1211,7 +1405,7 @@ The parent KXMLGUIClient, or null if not available.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1219,37 +1413,35 @@ The parent KXMLGUIClient, or null if not available.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>config</td><td>KConfigGroup</td><td align="right">None</td></tr>
-
+              <tr><td>config</td><td>KConfigGroup</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Read all key associations from <b>config.</b>
 </p>
 <p>
 If <b>config</b> is zero, read all key associations from the
 application's configuration file KGlobal.config(),
 in the group set by setConfigGroup().
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">removeAction</b> (action)
 <table width="100%">
@@ -1258,7 +1450,7 @@ in the group set by setConfigGroup().
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1266,35 +1458,32 @@ in the group set by setConfigGroup().
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>action</td><td>QAction</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Removes an action from the collection and deletes it.
-</p>
+Removes an action from the collection and deletes it.</p>
 <p>
 <b>action</b> - The action to remove.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">removeAssociatedWidget</b> (widget)
 <table width="100%">
@@ -1303,7 +1492,7 @@ Removes an action from the collection and deletes it.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1311,124 +1500,73 @@ Removes an action from the collection and deletes it.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>widget</td><td>QWidget</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Remove an associated widget. Removes all actions in this collection from
-the removed associated widget.
-</p>
-<p>
-See also  addAssociatedWidget(), setAssociatedWidget(), clearAssociatedWidgets(), and associatedWidgets().
-</p>
-
+Remove an association between all actions in this collection and the given <b>widget,</b> i.e.
+remove those actions from the widget, and stop associating newly added actions as well.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">removed</b> (action)<i style="color : #0000ff">   signal</i>
+<li style="list-style-type : none"><b style="color : #000000;">removed</b> (action)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          SIGNAL ("removed (QAction*)")
+          <p style="color : #ee360a">SIGNAL ("removed (QAction*)")</p>
+
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>action</td><td>QAction</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Indicates that <b>action</b> was removed from this action collection.
-</p>
-
+<b style="color : #ff0000;"><i>Deprecated </i></b>
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">setAssociatedWidget</b> (widget)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>widget</td><td>QWidget</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Set an associated widget (clears any others). Associated widgets automatically have all actions
-in the action collection added to themselves.
-</p>
-<p>
-See also  addAssociatedWidget(), removeAssociatedWidget(), clearAssociatedWidgets() and associatedWidgets().
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setComponentData</b> (componentData)
 <table width="100%">
@@ -1437,7 +1575,7 @@ See also  addAssociatedWidget(), removeAssociatedWidget(), clearAssociatedWidget
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1445,38 +1583,39 @@ See also  addAssociatedWidget(), removeAssociatedWidget(), clearAssociatedWidget
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>componentData</td><td>KComponentData</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Set the <b>componentData</b> associated with this action collection.
 </p>
 <p>
+Don't call this method on a KActionCollection that contains
+actions. This is not supported.
 </p>
+<p></p>
 <p>
 <b>componentData</b> - the KComponentData which is to be associated with this action collection,
 or an invalid KComponentData instance to indicate the default KComponentData.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setConfigGlobal</b> (global)
 <table width="100%">
@@ -1485,7 +1624,7 @@ or an invalid KComponentData instance to indicate the default KComponentData.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1493,33 +1632,31 @@ or an invalid KComponentData instance to indicate the default KComponentData.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>global</td><td>bool</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Set whether this action collection's configuration should be global to KDE ( true ),
 or specific to the application ( false ).
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setConfigGroup</b> (group)
 <table width="100%">
@@ -1528,7 +1665,7 @@ or specific to the application ( false ).
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1536,41 +1673,39 @@ or specific to the application ( false ).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>group</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets <b>group</b> as the KConfig group with which settings will be loaded and saved.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">slotActionHighlighted</b> ()
+<li><b style="color : #000000;">slotActionHighlighted</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1578,35 +1713,37 @@ Sets <b>group</b> as the KConfig group with which settings will be loaded and sa
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-
-
+<b style="color : #ff0000;"><i>Internal </i></b>
+<b style="color : #ff0000;"><i>Deprecated </i></b> Replaced by slotActionHovered();
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">slotActionTriggered</b> ()
+<li><b style="color : #000000;">slotActionTriggered</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1614,11 +1751,15 @@ Sets <b>group</b> as the KConfig group with which settings will be loaded and sa
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
@@ -1626,14 +1767,11 @@ Sets <b>group</b> as the KConfig group with which settings will be loaded and sa
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">takeAction</b> (action)
 <table width="100%">
@@ -1642,7 +1780,7 @@ Sets <b>group</b> as the KConfig group with which settings will be loaded and sa
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(QAction)</i>
+            returns <i>QAction</i>
           </td>
         </tr>
         <tr>
@@ -1650,35 +1788,32 @@ Sets <b>group</b> as the KConfig group with which settings will be loaded and sa
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>action</td><td>QAction</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Removes an action from the collection.
-</p>
+Removes an action from the collection.</p>
 <p>
 <b>action</b> - the action to remove.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">writeSettings</b> (config, writeDefaults, oneAction)
 <table width="100%">
@@ -1687,7 +1822,7 @@ Removes an action from the collection.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1695,53 +1830,51 @@ Removes an action from the collection.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>config</td><td>KConfigGroup</td><td align="right">None</td></tr>
-
-              <tr><td>writeDefaults</td><td>bool</td><td align="right">False</td></tr>
-
-              <tr><td>oneAction</td><td>QAction</td><td align="right">None</td></tr>
-
+              <tr><td>config</td><td>KConfigGroup</td><td align="right">0</td></tr>
+              <tr><td>writeDefaults</td><td>bool</td><td align="right">0</td></tr>
+              <tr><td>oneAction</td><td>QAction</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
+Write the current configurable key associations to <b>config.</b> What the
+function does if <b>config</b> is zero depends. If this action collection
+belongs to a KXMLGuiClient the setting are saved to the kxmlgui
+definition file. If not the settings are written to the applications
+config file.
+</p>
 <p>
-Write the current configurable key associations to <b>config,</b>
-or (if <b>config</b> is zero) to the application's
+oneAction() and writeDefaults() have no meaning for the kxmlgui
 configuration file.
 </p>
+<p></p>
 <p>
-</p>
+<b>config</b> - Config object to save to, or null (see above)</p>
 <p>
-<b>config</b> - Config object to save to, or null to use the application's config object.
-</p>
-<p>
-<b>writeDefaults</b> - set to true to write settings which are already at defaults.
-</p>
+<b>writeDefaults</b> - set to true to write settings which are already at defaults.</p>
 <p>
 <b>oneAction</b> - pass an action here if you just want to save the values for one action, eg.
 if you know that action is the only one which has changed.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
 </li><hr>
-
 
 </span>
 </body>

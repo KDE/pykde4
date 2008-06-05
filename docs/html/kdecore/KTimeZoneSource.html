@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KTimeZoneSource</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,45 +38,21 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-Base class representing a source of time zone information.
-</p>
-<p>
-Derive subclasses from KTimeZoneSource to read and parse time zone details
-from a time zone database or other source of time zone information. If can know
-in advance what KTimeZone instances to create without having to parse the source
-data, you should reimplement the virtual method parse(const KTimeZone&). Otherwise,
-you need to define your own parse() methods with appropriate signatures, to both
-read and parse the new data, and create new KTimeZone instances.
-</p>
-<p>
-KTimeZoneSource itself may be used as a dummy source which returns empty
-time zone details.
-</p>
-<p>
-Base class representing a source of time zone information
-</p>
-<p>
-See also  KTimeZone, KTimeZoneData
-<b>Author</b> David Jarvie <software@astrojar.org.uk>.
-<b>Author</b> S.R.Haque <srhaque@iee.org>.
-</p>
-
+      
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>methods</h3><ul style="list-style-type : none">
-<li><b style="color : #000000;">KTimeZoneSource</b> ()
+<li><b style="color : #000000;">KTimeZoneSource</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>a KTimeZoneSource object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -93,11 +60,15 @@ See also  KTimeZone, KTimeZoneData
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
@@ -105,14 +76,109 @@ See also  KTimeZone, KTimeZoneData
     </td>
     <td width="40%" align="left">
 
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">KTimeZoneSource</b> (useZoneParse)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>useZoneParse</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Constructor for use by derived classes, which specifies whether the
+source database supports the ad hoc extraction of data for individual
+time zones using parse(const KTimeZone&).
+</p>
+<p>
+If parse(const KTimeZone&) cannot be used, KTimeZone derived classes
+which use this KTimeZoneSource derived class must create a
+KTimeZoneData object at construction time so that KTimeZone.data()
+will always return a data object.
+</p>
+<p>
+Note the default constructor is equivalent to KTimeZoneSource(true), i.e.
+it is only necessary to use this constructor if parse(const KTimeZone&)
+does not work.
+</p>
+<p></p>
+<p>
+<b>useZoneParse</b> - true if parse(const KTimeZone&) works, false if
+parsing must be performed by other methods
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">KTimeZoneSource</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">parse</b> (zone)
 <table width="100%">
@@ -121,7 +187,7 @@ See also  KTimeZone, KTimeZoneData
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KTimeZoneData)</i>
+            returns <i>KTimeZoneData</i>
           </td>
         </tr>
         <tr>
@@ -129,47 +195,90 @@ See also  KTimeZone, KTimeZoneData
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>zone</td><td>KTimeZone</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Extracts detail information for one time zone from the source database.
+</p>
+<p>
 In this base class, the method always succeeds and returns an empty data
 instance. Derived classes should reimplement this method to return an
-appropriate data class derived from KTimeZoneData.
+appropriate data class derived from KTimeZoneData. Some source databases
+may not be compatible with this method of parsing. In these cases, they
+should use the constructor KTimeZoneSource(false) and calling this method
+will produce a fatal error.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>zone</b> - the time zone for which data is to be extracted.
 Returns an instance of a class derived from KTimeZoneData containing
 the parsed data. The caller is responsible for deleting the
 KTimeZoneData instance.
 Null is returned on error.
-</p>
-
     </td>
   </tr>
 </table>
 
+</li><hr>
+
+<li><b style="color : #000000;">useZoneParse</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Return whether the source database supports the ad hoc extraction of data for
+individual time zones using parse(const KTimeZone&).
+</p>
+<p>
+Returns true if parse(const KTimeZone&) works, false if parsing must be
+performed by other methods
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
-
 </li><hr>
-
 
 </span>
 </body>

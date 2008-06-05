@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KConfig</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,39 +38,58 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-Access KDE Configuration entries.
+      \class KConfig kconfig.h <KConfig>
 </p>
 <p>
-This class implements KDE's default configuration system.
+The central class of the KDE configuration data system.
 </p>
 <p>
-<b>Author</b> Kalle Dalheimer <kalle@kde.org>, Preston Brown <pbrown@kde.org>
+Quickstart:
 </p>
 <p>
-See also  KGlobal.config(), KConfigBase, KConfigGroup
-KDE Configuration Management class
+Get the default application config object via KGlobal.config().
 </p>
-
+<p>
+Load a specific configuration file:
+<pre>
+KConfig config( "/etc/kderc", KConfig.SimpleConfig );
+</pre>
+</p>
+<p>
+Load the configuration of a specific component (taking into account
+possible custom dirs in KStandardDirs):
+<pre>
+KConfig config( componentData(), "pluginrc" );
+</pre>
+</p>
+<p>
+In general it is recommended to use KSharedConfig instead of
+creating multiple instances of KConfig to avoid the overhead of
+separate objects or concerns about synchronizing writes to disk
+even if the configuration object is updated from multiple code paths.
+KSharedConfig provides a set of open methods as counterparts for the
+KConfig constructors.
+</p>
+<p>
+See also  KSharedConfig, KConfigGroup, <a href="http://techbase.kde.org/index.php?title=Development/Tutorials/KConfig">the techbase HOWTO on KConfig</a>.
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>enums</h3><ul>
-<li><b>OpenFlags</b> = { NoGlobals, OnlyLocal, IncludeGlobals }</li>
-
+<li style="padding-bottom : 8px;"><b>OpenFlag</b> { IncludeGlobals, CascadeConfig, SimpleConfig, NoCascade, NoGlobals, FullConfig }<br><i  style="color : #aa00aa">typesafe object: </i><b>OpenFlags</b></li>
 </ul><a href="#extended"><i>enum details</i></a><hr>
+
 <h3>methods</h3><ul style="list-style-type : none">
-<li style="list-style-type : none"><b style="color : #000000;">KConfig</b> (fileName, flags)
+<li style="list-style-type : none"><b style="color : #000000;">KConfig</b> (file, mode, resourceType)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KConfig object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -87,56 +97,41 @@ KDE Configuration Management class
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>fileName</td><td>QString</td><td align="right">QString ()</td></tr>
-
-              <tr><td>flags</td><td>KConfig.OpenFlags</td><td align="right">KConfig.IncludeGlobals</td></tr>
-
+              <tr><td>file</td><td>QString</td><td align="right">QString()</td></tr>
+              <tr><td>mode</td><td>KConfig.OpenFlags</td><td align="right">KConfig.FullConfig</td></tr>
+              <tr><td>resourceType</td><td>char</td><td align="right">"config"</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Constructs a KConfig object.
-</p>
-<p>
-</p>
-<p>
-<b>fileName</b> - A file to parse in addition to the
-system-wide file(s). If it is not provided, only global
-KDE configuration data will be read (depending on the value of
-<b>flags).</b>
-</p>
-<p>
-<b>flags</b> - determines how the configuration file is created and accessed. Passing in
-IncludeGlobals will result in entries in kdeglobals being parsed and included in the
-merged settings
-</p>
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">KConfig</b> (resType, fileName, flags)
+<li style="list-style-type : none"><b style="color : #000000;">KConfig</b> (componentData, file, mode, resourceType)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KConfig object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -144,145 +139,21 @@ merged settings
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>resType</td><td>char</td><td align="right"></td></tr>
-
-              <tr><td>fileName</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>flags</td><td>KConfig.OpenFlags</td><td align="right">KConfig.IncludeGlobals</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Constructs a KConfig object.
-</p>
-<p>
-</p>
-<p>
-<b>resType</b> - the place to look in (config, data, etc) See KStandardDirs.
-</p>
-<p>
-<b>fileName</b> - A file to parse in addition to the
-system-wide file(s). If it is not provided, only global
-KDE configuration data will be read (depending on the value of
-<b>flags).</b>
-</p>
-<p>
-<b>flags</b> - determines how the configuration file is created and accessed. Passing in
-IncludeGlobals will result in entries in kdeglobals being parsed and included in the
-merged settings
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">KConfig</b> (componentData, fileName, flags, resType)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>a KConfig object</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
               <tr><td>componentData</td><td>KComponentData</td><td align="right"></td></tr>
-
-              <tr><td>fileName</td><td>QString</td><td align="right">QString ()</td></tr>
-
-              <tr><td>flags</td><td>KConfig.OpenFlags</td><td align="right">KConfig.IncludeGlobals</td></tr>
-
-              <tr><td>resType</td><td>char</td><td align="right">"config"</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Constructs a KConfig object.
-</p>
-<p>
-</p>
-<p>
-<b>componentData</b> - The KComponentData object of your component. If you don't know what this
-is you likely want to use the above constructor.
-</p>
-<p>
-<b>fileName</b> - A file to parse in addition to the
-system-wide file(s). If it is not provided, only global
-KDE configuration data will be read (depending on the value of
-<b>flags).</b>
-</p>
-<p>
-<b>flags</b> - determines how the configuration file is created and accessed. Passing in
-IncludeGlobals will result in entries in kdeglobals being parsed and included in the
-merged settings
-</p>
-<p>
-<b>resType</b> - the place to look in (config, data, etc) See KStandardDirs.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">KConfig</b> (backEnd)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>a KConfig object</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>backEnd</td><td>KConfigBackEnd</td><td align="right"></td></tr>
-
+              <tr><td>file</td><td>QString</td><td align="right">QString()</td></tr>
+              <tr><td>mode</td><td>KConfig.OpenFlags</td><td align="right">KConfig.FullConfig</td></tr>
+              <tr><td>resourceType</td><td>char</td><td align="right">"config"</td></tr>
             </table>
           </td>
         </tr>
@@ -290,23 +161,20 @@ merged settings
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">KConfig</b> (fileName, fal)
+<li style="list-style-type : none"><b style="color : #000000;">KConfig</b> (file, backend, resourceType)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KConfig object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -314,17 +182,69 @@ merged settings
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
+              <tr><td>file</td><td>QString</td><td align="right"></td></tr>
+              <tr><td>backend</td><td>QString</td><td align="right"></td></tr>
+              <tr><td>resourceType</td><td>char</td><td align="right">"config"</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Creates a KConfig oject using the specified backend. If the backend can not
+be found or loaded, then the standard configuration parser is used as a fallback.
+</p>
+<p>
+@arg file the file to be parsed
+@arg backend the backend to load
+@arg resourceType where to look for the file if an absolute path is not provided
+</p>
+<p>
+@since 4.1
+    </td>
+  </tr>
+</table>
 
-              <tr><td>fileName</td><td>QString</td><td align="right"></td></tr>
+</li><hr>
 
-              <tr><td>fal</td><td>bool</td><td align="right"></td></tr>
-
+<li style="list-style-type : none"><b style="color : #999999;">KConfig</b> (d)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>d</td><td>KConfigPrivate</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
@@ -332,57 +252,230 @@ merged settings
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">KConfig</b> (a0)
+<li style="list-style-type : none"><b style="color : #999999;">KConfig</b> (a0)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KConfig object</i>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
         <tr>
           <td>
           
           </td>
-        </tr>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>a0</td><td>KConfig</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-<b style="color : #ff0000;"><i>Internal </i></b>
-copy-construction and assignment are not allowed
-</p>
 
     </td>
   </tr>
 </table>
 
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">KConfig</b> (a0, a1, a2)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>QString</td><td align="right">QString()</td></tr>
+              <tr><td>a1</td><td>KConfig.OpenFlags</td><td align="right">KConfig.FullConfig</td></tr>
+              <tr><td>a2</td><td>char</td><td align="right">"config"</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">KConfig</b> (a0, a1, a2, a3)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>KComponentData</td><td align="right"></td></tr>
+              <tr><td>a1</td><td>QString</td><td align="right">QString()</td></tr>
+              <tr><td>a2</td><td>KConfig.OpenFlags</td><td align="right">KConfig.FullConfig</td></tr>
+              <tr><td>a3</td><td>char</td><td align="right">"config"</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">accessMode</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>KConfigBase.AccessMode</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+configuration object state
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">addConfigSources</b> (sources)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>sources</td><td>QStringList</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets the merge stack to the list of files. The stack is last in first out with
+the top of the stack being the most specific config file. The files in the merge
+stack will be read before the file passed to the constructor and any files that
+cascade from that file. This means that the entries read from the files in the
+merge stack will be treated as defaults. This function will automatically call
+reparseConfiguration() for you.
+</p>
+<p>
+@note: Most specific config file is relative to this list, the overall
+most specific file of this KConfig object is still the file it was
+created with, no matter which file is passed last into this function.
+This means that writing always goes to the file which was used to
+create the KConfig object.
+</p>
+<p></p>
+<p>
+<b>files</b> - A list of extra config files.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">checkUpdate</b> (id, updateFile)
 <table width="100%">
@@ -391,7 +484,7 @@ copy-construction and assignment are not allowed
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -399,24 +492,25 @@ copy-construction and assignment are not allowed
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>id</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>updateFile</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Checks whether the config file contains the update <b>id</b>
 as contained in <b>updateFile.</b> If not, it runs kconf_update
 to update the config file.
@@ -426,22 +520,53 @@ If you install config update files with critical fixes
 you may wish to use this method to verify that a critical
 update has indeed been performed to catch the case where
 a user restores an old config file from backup that has
-not been updated yet.
-</p>
+not been updated yet.</p>
 <p>
-<b>id</b> - the update to check
-</p>
+<b>id</b> - the update to check</p>
 <p>
 <b>updateFile</b> - the file containing the update
-</p>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">componentData</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>KComponentData</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">copyTo</b> (file, config)
 <table width="100%">
@@ -450,7 +575,7 @@ not been updated yet.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KConfig)</i>
+            returns <i>KConfig</i>
           </td>
         </tr>
         <tr>
@@ -458,24 +583,25 @@ not been updated yet.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>file</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>config</td><td>KConfig</td><td align="right">None</td></tr>
-
+              <tr><td>config</td><td>KConfig</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Copies all entries from this config object to a new config
 object that will save itself to <b>file.</b>
 </p>
@@ -483,31 +609,29 @@ object that will save itself to <b>file.</b>
 Actual saving to <b>file</b> happens when the returned object is
 destructed or when sync() is called upon it.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>file</b> - the new config object will save itself to.
-</p>
+<b>file</b> - the new config object will save itself to.</p>
 <p>
 <b>config</b> - optional config object to reuse
 </p>
-
+<p>
+Returns the same as <b>config</b> if it was set, otherwise a new KConfig object.
+In that case, do not forget to delete it!
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">entryMap</b> (pGroup)
+<li style="list-style-type : none"><b style="color : #000000;">deleteGroupImpl</b> (group, flags)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(dict of (QString, QString))</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -515,53 +639,92 @@ destructed or when sync() is called upon it.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>pGroup</td><td>QString</td><td align="right"></td></tr>
-
+              <tr><td>group</td><td>QByteArray</td><td align="right"></td></tr>
+              <tr><td>flags</td><td>KConfigBase.WriteConfigFlags</td><td align="right">KConfigBase.Normal</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">entryMap</b> (aGroup)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>QMap<QString,QString></i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>aGroup</td><td>QString</td><td align="right">QString()</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns a map (tree) of entries in a particular group. Only the actual entry as a string
+is returned.
+</p>
+<p></p>
 <p>
-Returns a map (tree) of entries for all entries in a particular
-group.
+<b>aGroup</b> - The group to get entries from.
 </p>
 <p>
-Only the actual entry string is returned, none of the
-other internal data should be included.
-</p>
-<p>
-</p>
-<p>
-<b>pGroup</b> - A group to get keys from.
 Returns A map of entries in the group specified, indexed by key.
-The returned map may be empty if the group is not found.
+The returned map may be empty if the group is empty, or not found.
 </p>
-
+<p>
+See also  QMap
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">extraConfigFiles</b> ()
+<li><b style="color : #000000;">forceGlobal</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -569,115 +732,41 @@ The returned map may be empty if the group is not found.
           
           </td>
         </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Gets the extraConfigFiles in the merge stack.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">forceGlobal</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
         <tr>
           <td>
           
           </td>
-        </tr>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Returns true if all entries are being written into kdeglobals.
-Returns true if all entries are being written into kdeglobals
+Returns whether all entries are being written to kdeglobals.
+Returns true if all entries are being written to kdeglobals
 </p>
 <p>
 See also  setForceGlobal
-</p>
-
+<b style="color : #ff0000;"><i>Deprecated </i></b>
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">group</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(QString)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">group</b> (s)
+<li style="list-style-type : none"><b style="color : #000000;">groupImpl</b> (b)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KConfigGroup)</i>
+            returns <i>KConfigGroup</i>
           </td>
         </tr>
         <tr>
@@ -685,55 +774,18 @@ See also  setForceGlobal
           
           </td>
         </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>s</td><td>char</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">group</b> (b)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigGroup)</i>
-          </td>
-        </tr>
         <tr>
           <td>
           
           </td>
-        </tr>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>b</td><td>QByteArray</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -741,39 +793,39 @@ See also  setForceGlobal
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">group</b> (str)
+<li style="list-style-type : none"><b style="color : #999999;">groupImpl</b> (b)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KConfigGroup)</i>
+            returns <i>KConfigGroup</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
         <tr>
           <td>
           
           </td>
-        </tr>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>str</td><td>QString</td><td align="right"></td></tr>
-
+              <tr><td>b</td><td>QByteArray</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
@@ -781,23 +833,20 @@ See also  setForceGlobal
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">groupList</b> ()
+<li><b style="color : #000000;">groupList</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(QStringList)</i>
+            returns <i>QStringList</i>
           </td>
         </tr>
         <tr>
@@ -805,38 +854,36 @@ See also  setForceGlobal
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Returns a list of groups that are known.
-Returns a list of of groups
-</p>
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">internalEntryMap</b> (pGroup)
+<li style="list-style-type : none"><b style="color : #000000;">hasGroupImpl</b> (group)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KEntryMap)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -844,148 +891,39 @@ Returns a list of of groups
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>pGroup</td><td>QString</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-<b style="color : #ff0000;"><i>Internal </i></b>
-Returns a map (tree) of the entries in the specified group.
-</p>
-<p>
-Do not use this function, the implementation / return type are
-subject to change.
-</p>
-<p>
-</p>
-<p>
-<b>pGroup</b> - the group to provide a KEntryMap for.
-Returns The map of the entries in the group.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">internalEntryMap</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(KEntryMap)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-<b style="color : #ff0000;"><i>Internal </i></b>
-Returns a copy of the internal map used to hold all entries.
-</p>
-<p>
-Do not use this function, the implementation / return type are
-subject to change.
-</p>
-<p>
-Returns The map of the entries in the group.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">internalHasGroup</b> (group)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
               <tr><td>group</td><td>QByteArray</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-<b style="color : #ff0000;"><i>Internal </i></b>
-copy-construction and assignment are not allowed
-Returns true if the specified group is known.
-</p>
-<p>
-</p>
-<p>
-<b>group</b> - The group to search for.
-Returns true if the group exists.
-</p>
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">lockFile</b> (bGlobal)
+<li style="list-style-type : none"><b style="color : #000000;">isConfigWritable</b> (warnUser)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KLockFile.Ptr)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -993,52 +931,43 @@ Returns true if the group exists.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>bGlobal</td><td>bool</td><td align="right">False</td></tr>
-
+              <tr><td>warnUser</td><td>bool</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
+Return false if the user cannot write to this KConfig instance,
+for instance because of permission problems.</p>
 <p>
-Returns a lock file object for the configuration file or 0 if
-the backend does not support locking.
-</p>
-<p>
-<b>bGlobal</b> - if true, return the lock file for the global config file
-</p>
-<p>
-NOTE: KConfig.sync() requires a lock on both the normal and global
-config file. When calling KConfig.sync() while having a lock on the
-global config file, the normal config file MUST be locked AS WELL and the
-normal config file MUST be locked BEFORE the global config file!
-Otherwise there is a risk of deadlock.
-</p>
-
+<b>warnUser</b> - if true, show a message box telling the user to
+contact his system administrator for getting this problem fixed.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">lookupData</b> (_key)
+<li style="list-style-type : none"><b style="color : #000000;">isGroupImmutableImpl</b> (aGroup)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KEntry)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -1046,109 +975,39 @@ Otherwise there is a risk of deadlock.
           
           </td>
         </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>_key</td><td>KEntryKey</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Looks up an entry in the config object's internal structure.
-</p>
-<p>
-</p>
-<p>
-<b>_key</b> - The key to look up It contains information both on
-the group of the key and the entry's key itself.
-Returns the KEntry value (data) found for the key. KEntry.aValue
-will be the null string if nothing was located.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">putData</b> (_key, _data, _checkGroup)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
         <tr>
           <td>
           
           </td>
-        </tr>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>_key</td><td>KEntryKey</td><td align="right"></td></tr>
-
-              <tr><td>_data</td><td>KEntry</td><td align="right"></td></tr>
-
-              <tr><td>_checkGroup</td><td>bool</td><td align="right">True</td></tr>
-
+              <tr><td>aGroup</td><td>QByteArray</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Inserts a (key, value) pair into the internal storage mechanism of
-the configuration object.
-</p>
-<p>
-</p>
-<p>
-<b>_key</b> - The key to insert. It contains information both on
-the group of the key and the key itself. If the key already
-exists, the old value will be replaced.
-</p>
-<p>
-<b>_data</b> - the KEntry that is to be stored.
-</p>
-<p>
-<b>_checkGroup</b> - When false, assume that the group already exists.
-</p>
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">removeAllExtraConfigFiles</b> ()
+<li><b style="color : #000000;">isImmutable</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -1156,38 +1015,37 @@ exists, the old value will be replaced.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Remove all files from merge stack. This does not include the local file that
-was specified in the constructor.
-</p>
+immutability
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">reparseConfiguration</b> ()
+<li><b style="color : #000000;">locale</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>QString</i>
           </td>
         </tr>
         <tr>
@@ -1195,181 +1053,176 @@ was specified in the constructor.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
+Returns the current locale.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">markAsClean</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">name</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>QString</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the filename passed to the constructor.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">readDefaults</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">reparseConfiguration</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 Clears all internal data structures and then reread
-configuration information from disk.
-</p>
-
+configuration information from persistent storage.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">rollback</b> (bDeep)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>bDeep</td><td>bool</td><td align="right">True</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Clears all entries out of the <b>dirtyEntryMap,</b> so the
-values will not be written to disk on a later call to
-sync().
-</p>
-<p>
-</p>
-<p>
-<b>bDeep</b> - If true, the dirty map is actually emptied.
-otherwise, the config object's global dirty flag is set to
-false, but the dirty entries remain in the dirty entry
-map.
-</p>
-<p>
-See also  KConfigBase.rollback
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">setExtraConfigFiles</b> (files)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>files</td><td>QStringList</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Sets the merge stack to the list of files. The stack is last in first out with
-the top of the stack being the most specific config file.
-</p>
-<p>
-<b>files</b> - A list of extra config files containing the full path of the
-local config file to remove from the stack.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">setFileWriteMode</b> (mode)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>mode</td><td>int</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Set the file mode for newly created files.
-</p>
-<p>
-</p>
-<p>
-<b>mode</b> - the mode for new files as described in chmod(2)
-</p>
-<p>
-See also  man:chmod(2) for a description of <b>mode</b>
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setForceGlobal</b> (force)
 <table width="100%">
@@ -1378,7 +1231,7 @@ See also  man:chmod(2) for a description of <b>mode</b>
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1386,77 +1239,257 @@ See also  man:chmod(2) for a description of <b>mode</b>
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>force</td><td>bool</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
+Forces all following write-operations to be performed on kdeglobals,
+independent of the Global flag in writeEntry().</p>
 <p>
-Forces all following write-operations being performed on kdeglobals,
-independent of the bGlobal flag in writeEntry().
-</p>
-<p>
-<b>force</b> - true to force writing in kdeglobals
+<b>force</b> - true to force writing to kdeglobals
 </p>
 <p>
 See also  forceGlobal
-</p>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setLocale</b> (aLocale)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>aLocale</td><td>QString</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets the locale to <b>aLocale.</b>
+The global locale is used by default.
+If set to the empty string, <b>no</b> locale will be matched. This effectively disables
+reading translated entries.
+Returns true if locale was changed and configuration was reparsed.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setReadDefaults</b> (b)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>b</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+When set, all readEntry calls return the system-wide (default) values instead of
+the user's preference.
+This is off by default.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">sync</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 
     </td>
   </tr>
 </table>
 
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #999999;">virtual_hook</b> (id, data)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>id</td><td>int</td><td align="right"></td></tr>
+              <tr><td>data</td><td>void</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Virtual hook, used to add new "virtual" functions while maintaining
+binary compatibility. Unused in this class.
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
-
 </li><hr>
-
 
 <a name="extended">
 <h3>enums - detail</h3>
 <ul style="list-style-type : none">
-
-<li><b>OpenFlags</b> = { NoGlobals, OnlyLocal, IncludeGlobals }
+<li><b>OpenFlag</b>  { IncludeGlobals, CascadeConfig, SimpleConfig, NoCascade, NoGlobals, FullConfig }
+  <p style="padding-top : 9px;"></p>
   <table cellspacing="5">
-
-    <tr>
-      <td></td>
-      <td valign="top"><i>NoGlobals</i></td>
-      <td valign="top">-</td>
-      <td></td>
-    </tr>
-
-    <tr>
-      <td></td>
-      <td valign="top"><i>OnlyLocal</i></td>
-      <td valign="top">-</td>
-      <td></td>
-    </tr>
-
+<br><i  style="color : #aa00aa">typesafe object: </i><b>OpenFlags</b></li>
     <tr>
       <td></td>
       <td valign="top"><i>IncludeGlobals</i></td>
+      <td valign="top">- 0x01 </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
+    <tr>
+      <td></td>
+      <td valign="top"><i>CascadeConfig</i></td>
+      <td valign="top">- 0x02 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>SimpleConfig</i></td>
+      <td valign="top">- 0x00 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>NoCascade</i></td>
+      <td valign="top">- IncludeGlobals </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>NoGlobals</i></td>
+      <td valign="top">- CascadeConfig </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>FullConfig</i></td>
+      <td valign="top">- IncludeGlobals|CascadeConfig </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
   </table>
 </li>
 <hr>
-
 </ul>
-
 </span>
 </body>
 </html>

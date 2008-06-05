@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
-      <h1>class KIO.JobUiDelegate</h1><hr>
+      <h1>class JobUiDelegate</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kio Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,11 +25,11 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>kio</td>
+          <td width="30%" align=left>KIO</td>
         </tr>
         <tr>
           <td>Class</td>
-          <td>KIO.JobUiDelegate</td>
+          <td>JobUiDelegate</td>
         </tr>
         <tr>
           <td>Inherits</td>
@@ -47,28 +38,28 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-A UI delegate tuned to be used with KIO Jobs.
-</p>
-<p>
-It uses KIO.Observer to do the tracking.
-</p>
-
+      A UI delegate tuned to be used with KIO Jobs.
     </td>
   </tr>
 </table>
 <hr>
 <hr>
+<h3>enums</h3><ul>
+<li style="padding-bottom : 8px;"><b>ConfirmationType</b> { DefaultConfirmation, ForceConfirmation }</li>
+
+<li style="padding-bottom : 8px;"><b>DeletionType</b> { Delete, Trash }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
 
 <h3>methods</h3><ul style="list-style-type : none">
-<li><b style="color : #000000;">JobUiDelegate</b> ()
+<li><b style="color : #000000;">JobUiDelegate</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -76,28 +67,83 @@ It uses KIO.Observer to do the tracking.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Constructs a new KIO Job UI delegate.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">askDeleteConfirmation</b> (urls, deletionType, confirmationType)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>urls</td><td>KUrl.List</td><td align="right"></td></tr>
+              <tr><td>deletionType</td><td>KIO::JobUiDelegate.DeletionType</td><td align="right"></td></tr>
+              <tr><td>confirmationType</td><td>KIO::JobUiDelegate.ConfirmationType</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Ask for confirmation before deleting/trashing <b>urls.</b>
+</p>
+<p>
+Note that this method is not called automatically by KIO jobs. It's the application's
+responsibility to ask the user for confirmation before calling KIO.del() or KIO.trash().
+</p>
+<p></p>
+<p>
+<b>urls</b> - the urls about to be deleted/trashed</p>
+<p>
+<b>method</b> - the type of deletion (Delete for real deletion, Trash otherwise)</p>
+<p>
+<b>confirmation</b> - see ConfirmationType. Normally set to DefaultConfirmation.
+Note: the window passed to setWindow is used as the parent for the message box.
+Returns true if confirmed
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">askFileRename</b> (job, caption, src, dest, mode, newDest, sizeSrc, sizeDest, ctimeSrc, ctimeDest, mtimeSrc, mtimeDest)
 <table width="100%">
@@ -106,7 +152,7 @@ Constructs a new KIO Job UI delegate.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KIO.RenameDialog_Result)</i>
+            returns <i>KIO.RenameDialog_Result</i>
           </td>
         </tr>
         <tr>
@@ -114,94 +160,70 @@ Constructs a new KIO Job UI delegate.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>job</td><td>KJob</td><td align="right"></td></tr>
-
               <tr><td>caption</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>src</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>dest</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>mode</td><td>KIO.RenameDialog_Mode</td><td align="right"></td></tr>
-
               <tr><td>newDest</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>sizeSrc</td><td>KIO.filesize_t</td><td align="right">-1</td></tr>
-
               <tr><td>sizeDest</td><td>KIO.filesize_t</td><td align="right">-1</td></tr>
-
               <tr><td>ctimeSrc</td><td>time_t</td><td align="right">-1</td></tr>
-
               <tr><td>ctimeDest</td><td>time_t</td><td align="right">-1</td></tr>
-
               <tr><td>mtimeSrc</td><td>time_t</td><td align="right">-1</td></tr>
-
               <tr><td>mtimeDest</td><td>time_t</td><td align="right">-1</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 \relates KIO.RenameDialog
 Construct a modal, parent-less "rename" dialog, and return
 a result code, as well as the new dest. Much easier to use than the
 class RenameDialog directly.
 </p>
+<p></p>
 <p>
-</p>
+<b>caption</b> - the caption for the dialog box</p>
 <p>
-<b>caption</b> - the caption for the dialog box
-</p>
+<b>src</b> - the URL of the file/dir we're trying to copy, as it's part of the text message</p>
 <p>
-<b>src</b> - the URL of the file/dir we're trying to copy, as it's part of the text message
-</p>
-<p>
-<b>dest</b> - the URL of the destination file/dir, i.e. the one that already exists
-</p>
+<b>dest</b> - the URL of the destination file/dir, i.e. the one that already exists</p>
 <p>
 <b>mode</b> - parameters for the dialog (which buttons to show...),
-see RenameDialog_Mode
-</p>
+see RenameDialog_Mode</p>
 <p>
-<b>newDestPath</b> - the new destination path, valid if R_RENAME was returned.
-</p>
+<b>newDestPath</b> - the new destination path, valid if R_RENAME was returned.</p>
 <p>
-<b>sizeSrc</b> - size of source file
-</p>
+<b>sizeSrc</b> - size of source file</p>
 <p>
-<b>sizeDest</b> - size of destination file
-</p>
+<b>sizeDest</b> - size of destination file</p>
 <p>
-<b>ctimeSrc</b> - creation time of source file
-</p>
+<b>ctimeSrc</b> - creation time of source file</p>
 <p>
-<b>ctimeDest</b> - creation time of destination file
-</p>
+<b>ctimeDest</b> - creation time of destination file</p>
 <p>
-<b>mtimeSrc</b> - modification time of source file
-</p>
+<b>mtimeSrc</b> - modification time of source file</p>
 <p>
 <b>mtimeDest</b> - modification time of destination file
 Returns the result
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">askSkip</b> (job, multi, error_text)
 <table width="100%">
@@ -210,7 +232,7 @@ Returns the result
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KIO.SkipDialog_Result)</i>
+            returns <i>KIO.SkipDialog_Result</i>
           </td>
         </tr>
         <tr>
@@ -218,37 +240,33 @@ Returns the result
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>job</td><td>KJob</td><td align="right"></td></tr>
-
               <tr><td>multi</td><td>bool</td><td align="right"></td></tr>
-
               <tr><td>error_text</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 <b style="color : #ff0000;"><i>Internal </i></b>
 See skipdialog.h
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setWindow</b> (window)
 <table width="100%">
@@ -257,7 +275,7 @@ See skipdialog.h
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -265,42 +283,87 @@ See skipdialog.h
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>window</td><td>QWidget</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Associate this job with a window given by <b>window.</b>
-</p>
+Associate this job with a window given by <b>window.</b></p>
 <p>
 <b>window</b> - the window to associate to
 </p>
 <p>
 See also  window()
-</p>
-
     </td>
   </tr>
 </table>
 
+</li><hr>
 
 </li><hr>
 
-
-</li><hr>
-
-
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+<li><b>ConfirmationType</b>  { DefaultConfirmation, ForceConfirmation }
+  <p style="padding-top : 9px;">ForceConfirmation: always ask the user for confirmation
+DefaultConfirmation: don't ask the user if he/she said "don't ask again".
+</p>
+<p>
+Used by askDeleteConfirmation.</p>
+  <table cellspacing="5">
+    <tr>
+      <td></td>
+      <td valign="top"><i>DefaultConfirmation</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>ForceConfirmation</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
+<li><b>DeletionType</b>  { Delete, Trash }
+  <p style="padding-top : 9px;">The type of deletion: real deletion, or moving the files to the trash
+Used by askDeleteConfirmation.</p>
+  <table cellspacing="5">
+    <tr>
+      <td></td>
+      <td valign="top"><i>Delete</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Trash</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
+</ul>
 </span>
 </body>
 </html>

@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KCmdLineOptions</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,8 +38,7 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-Class that holds command line options.
+      Class that holds command line options.
 </p>
 <p>
 This class is intended to be used with the KCmdLineArgs class, which
@@ -57,23 +47,20 @@ handling functionality.
 </p>
 <p>
 See also  KCmdLineArgs for additional usage information
-</p>
-
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>methods</h3><ul style="list-style-type : none">
-<li><b style="color : #000000;">KCmdLineOptions</b> ()
+<li><b style="color : #000000;">KCmdLineOptions</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>a KCmdLineOptions object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -81,28 +68,27 @@ See also  KCmdLineArgs for additional usage information
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Constructor.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">KCmdLineOptions</b> (options)
 <table width="100%">
@@ -111,7 +97,7 @@ Constructor.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KCmdLineOptions object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -119,32 +105,30 @@ Constructor.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>options</td><td>KCmdLineOptions</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Copy constructor.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">add</b> (name, description, defaultValue)
 <table width="100%">
@@ -153,7 +137,7 @@ Copy constructor.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KCmdLineOptions)</i>
+            returns <i>KCmdLineOptions</i>
           </td>
         </tr>
         <tr>
@@ -161,36 +145,55 @@ Copy constructor.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QByteArray</td><td align="right"></td></tr>
-
-              <tr><td>description</td><td>KLocalizedString</td><td align="right">KLocalizedString ()</td></tr>
-
-              <tr><td>defaultValue</td><td>QByteArray</td><td align="right">QByteArray ()</td></tr>
-
+              <tr><td>description</td><td>KLocalizedString</td><td align="right">KLocalizedString()</td></tr>
+              <tr><td>defaultValue</td><td>QByteArray</td><td align="right">QByteArray()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Add command line option, by providing its name, description, and
+possibly a default value. These will print out when <i>myapp --help</i>
+is called on the command line.
 </p>
-
+<p>
+Note that if the option name begins with "no" that you will need to test
+for the name without the "no" and the result will be the inverse of what
+is specified. i.e. if "nofoo" is the name of the option and
+<i>myapp --nofoo</i> is called:
+</p>
+<p>
+<pre>
+KCmdLineArgs.parsedArgs()->isSet("foo"); // false
+</pre>
+</p>
+<p></p>
+<p>
+<b>name</b> - option name</p>
+<p>
+<b>description</b> - option description, made available for translation;
+can be left off</p>
+<p>
+<b>defaultValue</b> - default option value, when the value is not specified
+on the command line; can be left off
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">add</b> (options)
 <table width="100%">
@@ -199,7 +202,7 @@ Add command line option, by providing its name, description, and
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KCmdLineOptions)</i>
+            returns <i>KCmdLineOptions</i>
           </td>
         </tr>
         <tr>
@@ -207,40 +210,36 @@ Add command line option, by providing its name, description, and
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>options</td><td>KCmdLineOptions</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Add all options from another KCmdLineOptions object.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>options</b> - options to add
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
 </li><hr>
-
 
 </span>
 </body>

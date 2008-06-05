@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KConfigSkeleton</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -42,87 +33,21 @@
         </tr>
         <tr>
           <td>Inherits</td>
-          <td>QObject</td>
+          <td>KCoreConfigSkeleton</td>
         </tr>
       </table>
     </td>
     <td width="65%">
-      <p>
-< Stores the value for this item
-< The default value for this item
-Class for handling preferences settings for an application.
+      Class for handling preferences settings for an application.
 <b>Author</b> Cornelius Schumacher
 </p>
 <p>
-See also  KConfigSkeletonItem
-</p>
-<p>
-This class provides an interface to preferences settings. Preferences items
-can be registered by the addItem() function corresponding to the data type of
-the seetting. KConfigSkeleton then handles reading and writing of config files and
-setting of default values.
-</p>
-<p>
-Normally you will subclass KConfigSkeleton, add data members for the preferences
-settings and register the members in the constructor of the subclass.
-</p>
-<p>
-Example:
-<pre>
-class MyPrefs : public KConfigSkeleton
-{
-public:
-MyPrefs()
-{
-setCurrentGroup("MyGroup");
-addItemBool("MySetting1",mMyBool,false);
-addItemColor("MySetting2",mMyColor,QColor(1,2,3));
-</p>
-<p>
-setCurrentGroup("MyOtherGroup");
-addItemFont("MySetting3",mMyFont,QFont("helvetica",12));
-}
-</p>
-<p>
-bool mMyBool;
-QColor mMyColor;
-QFont mMyFont;
-}
-</pre>
-</p>
-<p>
-It might be convenient in many cases to make this subclass of KConfigSkeleton a
-singleton for global access from all over the application without passing
-references to the KConfigSkeleton object around.
-</p>
-<p>
-You can write the data to the configuration file by calling writeConfig()
-and read the data from the configuration file by calling readConfig().
-If you want to watch for config changes, use configChanged() signal.
-</p>
-<p>
-If you have items, which are not covered by the existing addItem() functions
-you can add customized code for reading, writing and default setting by
-implementing the functions usrUseDefaults(), usrReadConfig() and
-usrWriteConfig().
-</p>
-<p>
-Internally preferences settings are stored in instances of subclasses of
-KConfigSkeletonItem. You can also add KConfigSkeletonItem subclasses
-for your own types and call the generic addItem() to register them.
-</p>
-<p>
-In many cases you don't have to write the specific KConfigSkeleton
-subclasses yourself, but you can use kconfig_compiler to automatically
-generate the C++ code from an XML description of the configuration options.
-</p>
-
+This class extends KCoreConfigSkeleton by support for GUI types.
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>methods</h3><ul style="list-style-type : none">
 <li style="list-style-type : none"><b style="color : #000000;">KConfigSkeleton</b> (configname, parent)
 <table width="100%">
@@ -131,7 +56,7 @@ generate the C++ code from an XML description of the configuration options.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KConfigSkeleton object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -139,40 +64,36 @@ generate the C++ code from an XML description of the configuration options.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>configname</td><td>QString</td><td align="right">QString ()</td></tr>
-
-              <tr><td>parent</td><td>QObject</td><td align="right">None</td></tr>
-
+              <tr><td>configname</td><td>QString</td><td align="right">QString()</td></tr>
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Constructor.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>configname</b> - name of config file. If no name is given, the default
 config file as returned by KGlobal.config() is used.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">KConfigSkeleton</b> (config, parent)
 <table width="100%">
@@ -181,7 +102,7 @@ config file as returned by KGlobal.config() is used.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KConfigSkeleton object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -189,48 +110,44 @@ config file as returned by KGlobal.config() is used.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>config</td><td>KSharedConfig.Ptr</td><td align="right"></td></tr>
-
-              <tr><td>parent</td><td>QObject</td><td align="right">None</td></tr>
-
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Constructor.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>config</b> - configuration object to use.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">addItem</b> (a0, name)
+<li style="list-style-type : none"><b style="color : #000000;">KConfigSkeleton</b> (a0, a1)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -238,46 +155,40 @@ Constructor.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>a0</td><td>KConfigSkeletonItem</td><td align="right"></td></tr>
-
-              <tr><td>name</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>a0</td><td>QString</td><td align="right">QString()</td></tr>
+              <tr><td>a1</td><td>QObject</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Register a custom KConfigSkeletonItem with a given name. If the name
-parameter is null, take the name from KConfigSkeletonItem.key().
-Note that all names must be unique but that multiple entries can have
-the same key if they reside in different groups.
-</p>
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemBool</b> (name, reference, defaultValue, key)
+<li style="list-style-type : none"><b style="color : #000000;">KConfigSkeleton</b> (a0, a1)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KConfigSkeleton.ItemBool), reference (bool)</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -285,55 +196,31 @@ the same key if they reside in different groups.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>bool</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>bool</td><td align="right">False</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>a0</td><td>KSharedConfig.Ptr</td><td align="right"></td></tr>
+              <tr><td>a1</td><td>QObject</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Register an item of type bool.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addItemColor</b> (name, reference, defaultValue, key)
 <table width="100%">
@@ -342,7 +229,7 @@ Returns The created item
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KConfigSkeleton.ItemColor)</i>
+            returns <i>KConfigSkeleton.ItemColor</i>
           </td>
         </tr>
         <tr>
@@ -350,185 +237,46 @@ Returns The created item
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>reference</td><td>QColor</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>QColor</td><td align="right">QColor (128 ,128 ,128 )</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>defaultValue</td><td>QColor</td><td align="right">QColor(128,128,128)</td></tr>
+              <tr><td>key</td><td>QString</td><td align="right">QString()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Register an item of type QColor.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
+<b>name</b> - Name used to identify this setting. Names must be unique.</p>
 <p>
 <b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
+calls and read by writeConfig() calls.</p>
 <p>
 <b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
+does not yet contain the key of this item.</p>
 <p>
 <b>key</b> - Key used in config file. If key is null, name is used as key.
 Returns The created item
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemDateTime</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemDateTime)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>QDateTime</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>QDateTime</td><td align="right">QDateTime ()</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register an item of type QDateTime.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemDouble</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemDouble), reference (double)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>double</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>double</td><td align="right">0.0</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register an item of type double.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">addItemFont</b> (name, reference, defaultValue, key)
 <table width="100%">
@@ -537,7 +285,7 @@ Returns The created item
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KConfigSkeleton.ItemFont)</i>
+            returns <i>KConfigSkeleton.ItemFont</i>
           </td>
         </tr>
         <tr>
@@ -545,1676 +293,48 @@ Returns The created item
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>reference</td><td>QFont</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>QFont</td><td align="right">KGlobalSettings.generalFont ()</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>defaultValue</td><td>QFont</td><td align="right">QFont()</td></tr>
+              <tr><td>key</td><td>QString</td><td align="right">QString()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Register an item of type QFont.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
+<b>name</b> - Name used to identify this setting. Names must be unique.</p>
 <p>
 <b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
+calls and read by writeConfig() calls.</p>
 <p>
 <b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
+does not yet contain the key of this item.</p>
 <p>
 <b>key</b> - Key used in config file. If key is null, name is used as key.
 Returns The created item
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemInt</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemInt), reference (qint32)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>qint32</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>qint32</td><td align="right">0</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register an item of type qint32.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
 </li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemInt64</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemLongLong), reference (qint64)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>qint64</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>qint64</td><td align="right">0</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemIntList</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemIntList)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>list of int</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>list of int</td><td align="right"></td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register an item of type QList<int>.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemLongLong</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemLongLong), reference (qint64)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>qint64</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>qint64</td><td align="right">0</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register an item of type qint64.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemPassword</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemPassword)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>QString</td><td align="right">QLatin1String ("" )</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register a password item of type QString. The string value is written
-encrypted to the config file. Note that the current encryption scheme
-is very weak.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemPath</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemPath)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>QString</td><td align="right">QLatin1String ("" )</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register a path item of type QString. The string value is interpreted
-as a path. This means, dollar expension is activated for this value, so
-that e.g. $HOME gets expanded.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemPoint</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemPoint)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>QPoint</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>QPoint</td><td align="right">QPoint ()</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register an item of type QPoint.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemProperty</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemProperty)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>QVariant</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>QVariant</td><td align="right">QVariant ()</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register a property item of type QVariant. Note that only the following
-QVariant types are allowed: String, StringList, Font, Point, Rect, Size,
-Color, Int, UInt, Bool, Double, DateTime and Date.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemRect</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemRect)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>QRect</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>QRect</td><td align="right">QRect ()</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register an item of type QRect.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemSize</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemSize)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>QSize</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>QSize</td><td align="right">QSize ()</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register an item of type QSize.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemString</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemString)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>QString</td><td align="right">QLatin1String ("" )</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register an item of type QString.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemStringList</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemStringList)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>QStringList</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>QStringList</td><td align="right">QStringList ()</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register an item of type QStringList.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemUInt</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemUInt), reference (quint32)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>quint32</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>quint32</td><td align="right">0</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register an item of type quint32.
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemUInt64</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemULongLong), reference (quint64)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>quint64</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>quint64</td><td align="right">0</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">addItemULongLong</b> (name, reference, defaultValue, key)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeleton.ItemULongLong), reference (quint64)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>reference</td><td>quint64</td><td align="right"></td></tr>
-
-              <tr><td>defaultValue</td><td>quint64</td><td align="right">0</td></tr>
-
-              <tr><td>key</td><td>QString</td><td align="right">QString ()</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Register an item of type quint64
-</p>
-<p>
-</p>
-<p>
-<b>name</b> - Name used to identify this setting. Names must be unique.
-</p>
-<p>
-<b>reference</b> - Pointer to the variable, which is set by readConfig()
-calls and read by writeConfig() calls.
-</p>
-<p>
-<b>defaultValue</b> - Default value, which is used when the config file
-does not yet contain the key of this item.
-</p>
-<p>
-<b>key</b> - Key used in config file. If key is null, name is used as key.
-Returns The created item
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">config</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(KConfig)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Return the KConfig object used for reading and writing the settings.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">configChanged</b> ()<i style="color : #0000ff">   signal</i>
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          SIGNAL ("configChanged ()")
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-This signal is emitted when the configuration change.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">currentGroup</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(QString)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Returns the current group used for addItem() calls.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">findItem</b> (name)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KConfigSkeletonItem)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Lookup item by name
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">isImmutable</b> (name)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Return whether a certain item is immutable
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">items</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>(KConfigSkeletonItem.List)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Return list of items managed by this KConfigSkeleton object.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">readConfig</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Read preferences from config file. All registered items are set to the
-values read from disk.
-This method calls usrReadConfig() after reading the settings of the
-registered items from the KConfig. You can overridde usrReadConfig()
-in derived classes if you have special requirements.
-If you need more fine-grained control of storing the settings from
-the registered items you can override readConfig() in a derived class.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">setCurrentGroup</b> (group)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>group</td><td>QString</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Set the config file group for subsequent addItem() calls. It is valid
-until setCurrentGroup() is called with a new argument. Call this before
-you add any items. The default value is "No Group".
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">setDefaults</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Set all registered items to their default values.
-This method calls usrSetDefaults() after setting the defaults for the
-registered items. You can overridde usrSetDefaults() in derived classes
-if you have special requirements.
-If you need more fine-grained control of setting the default values of
-the registered items you can override setDefaults() in a derived class.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">setSharedConfig</b> (pConfig)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>pConfig</td><td>KSharedConfig.Ptr</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Set the KSharedConfig object used for reading and writing the settings.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">useDefaults</b> (b)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>b</td><td>bool</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Specify whether this object should reflect the actual values or the
-default values.
-This method is implemented by usrUseDefaults(), which can be overridden
-in derived classes if you have special requirements and can call
-usrUseDefaults() directly.
-If you don't have control wether useDefaults() or usrUseDefaults() is
-called override useDefaults() directly.
-</p>
-<p>
-<b>b</b> - true to make this object reflect the default values,
-false to make it reflect the actual values.
-Returns The state prior to this call
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">usrReadConfig</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Perform the actual reading of the configuration file.
-Override in derived classes to read special config values.
-Called from readConfig()
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">usrSetDefaults</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Perform the actual setting of default values.
-Override in derived classes to set special default values.
-Called from setDefaults()
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">usrUseDefaults</b> (b)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(bool)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>b</td><td>bool</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Implemented by subclasses that use special defaults.
-It replaces the default values with the actual values and
-vice versa. Called from useDefaults()
-</p>
-<p>
-<b>b</b> - true to make this object reflect the default values,
-false to make it reflect the actual values.
-Returns The state prior to this call
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">usrWriteConfig</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Perform the actual writing of the configuration file.
-Override in derived classes to write special config values.
-Called from writeConfig()
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">writeConfig</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr><td></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-<p>
-Write preferences to config file. The values of all registered items are
-written to disk.
-This method calls usrWriteConfig() after writing the settings from the
-registered items to the KConfig. You can overridde usrWriteConfig()
-in derived classes if you have special requirements.
-If you need more fine-grained control of storing the settings from
-the registered items you can override writeConfig() in a derived class.
-</p>
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-</li><hr>
-
 
 </span>
 </body>

@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class NETWinInfo</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdeui Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,48 +38,26 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-Common API for application window properties/protocols.
-</p>
-<p>
-The NETWinInfo class provides a common API for clients and window managers to
-set/read/change properties on an application window as defined by the NET
-Window Manager Specification.
-</p>
-<p>
-<b>Author</b> Bradley T. Hughes <bhughes@trolltech.com>
-</p>
-<p>
-See also  NET
-</p>
-<p>
-See also  NETRootInfo
-</p>
-<p>
-See also  http://www.freedesktop.org/standards/wm-spec/
-</p>
-<p>
-</p>
-
+      
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>enums</h3><ul>
-<li><b>&lt;anonymous&gt;</b> = { PROTOCOLS, PROTOCOLS2, PROPERTIES_SIZE }</li>
+<li style="padding-bottom : 8px;"><b>anonymous</b> { PROTOCOLS, PROTOCOLS2, PROPERTIES_SIZE }</li>
 
 </ul><a href="#extended"><i>enum details</i></a><hr>
+
 <h3>methods</h3><ul style="list-style-type : none">
-<li style="list-style-type : none"><b style="color : #000000;">NETWinInfo</b> (window, rootWindow, properties, role, a3)
+<li style="list-style-type : none"><b style="color : #000000;">NETWinInfo</b> (a0, a1, a2, a3, a4)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a NETWinInfo object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -96,47 +65,74 @@ See also  http://www.freedesktop.org/standards/wm-spec/
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>window</td><td>Window</td><td align="right"></td></tr>
-
-              <tr><td>rootWindow</td><td>Window</td><td align="right"></td></tr>
-
-              <tr><td>properties</td><td>ulong</td><td align="right"></td></tr>
-
-              <tr><td>role</td><td>int</td><td align="right"></td></tr>
-
-              <tr><td>a3</td><td>Role</td><td align="right">Client</td></tr>
-
+              <tr><td>a0</td><td>Display</td><td align="right"></td></tr>
+              <tr><td>a1</td><td>Window</td><td align="right"></td></tr>
+              <tr><td>a2</td><td>Window</td><td align="right"></td></tr>
+              <tr><td>a3</td><td>SIP_PYLIST</td><td align="right"></td></tr>
+              <tr><td>a4</td><td>NET.Role</td><td align="right">NET.Client</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-
-
+Create a NETWinInfo object, which will be used to set/read/change
+information stored on an application window.
+</p>
+<p></p>
+<p>
+<b>display</b> - An X11 Display struct.
+</p>
+<p></p>
+<p>
+<b>window</b> - The Window id of the application window.
+</p>
+<p></p>
+<p>
+<b>rootWindow</b> - The Window id of the root window.
+</p>
+<p></p>
+<p>
+<b>properties</b> - An array of elements listing all properties the client
+is interested in.The elements contain OR'ed values of constants
+from the NET base class, in the following order: [0]= NET.Property,
+[1]= NET.Property2.
+In future versions, the list may be extended. In case you pass less elements,
+the missing ones will be replaced with default values.
+</p>
+<p></p>
+<p>
+<b>properties_size</b> - The number of elements in the properties array.
+</p>
+<p></p>
+<p>
+<b>role</b> - Select the application role. If this argument is omitted,
+the role will default to Client.
     </td>
   </tr>
 </table>
-
 
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">NETWinInfo</b> (window (Window), properties (ulong))
+<li style="list-style-type : none"><b style="color : #000000;">NETWinInfo</b> (display, window, rootWindow, properties, role)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a NETWinInfo object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -144,39 +140,37 @@ See also  http://www.freedesktop.org/standards/wm-spec/
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>window (Window)</td><td>ootWindow (Window</td><td align="right"></td></tr>
-
-              <tr><td>properties (ulong)</td><td>ole (Role</td><td align="right">Client</td></tr>
-
+              <tr><td>display</td><td>Display</td><td align="right"></td></tr>
+              <tr><td>window</td><td>Window</td><td align="right"></td></tr>
+              <tr><td>rootWindow</td><td>Window</td><td align="right"></td></tr>
+              <tr><td>properties</td><td>unsigned long</td><td align="right"></td></tr>
+              <tr><td>role</td><td>NET.Role</td><td align="right">NET.Client</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This constructor differs from the above one only in the way it accepts
 the list of properties the client is interested in. The properties argument
 is equivalent to the first element of the properties array
 in the above constructor.
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">NETWinInfo</b> (wininfo)
 <table width="100%">
@@ -185,7 +179,7 @@ in the above constructor.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a NETWinInfo object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -193,48 +187,43 @@ in the above constructor.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>wininfo</td><td>NETWinInfo</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Creates a shared copy of the specified NETWinInfo object.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>wininfo</b> - the NETWinInfo to copy
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">allowedActions</b> ()
+<li><b style="color : #000000;">allowedActions</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(ulong)</i>
+            returns <i>unsigned long</i>
           </td>
         </tr>
         <tr>
@@ -242,28 +231,27 @@ Creates a shared copy of the specified NETWinInfo object.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns actions that the window manager allows for the window.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">changeDesktop</b> (desktop)
 <table width="100%">
@@ -272,7 +260,7 @@ Returns actions that the window manager allows for the window.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -280,48 +268,36 @@ Returns actions that the window manager allows for the window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>desktop</td><td>int</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Sentinel value to indicate that the client wishes to be visible on
-all desktops.
-</p>
-<p>
-Returns the value to be on all desktops
-</p>
-<p>
 A Window Manager should subclass NETWinInfo and reimplement this function when
 it wants to know when a Client made a request to change desktops (ie. move to
 another desktop).
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>desktop</b> - the number of the desktop
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">changeState</b> (state, mask)
 <table width="100%">
@@ -330,7 +306,7 @@ another desktop).
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -338,57 +314,50 @@ another desktop).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>state</td><td>ulong</td><td align="right"></td></tr>
-
-              <tr><td>mask</td><td>ulong</td><td align="right"></td></tr>
-
+              <tr><td>state</td><td>unsigned long</td><td align="right"></td></tr>
+              <tr><td>mask</td><td>unsigned long</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 A Window Manager should subclass NETWinInfo and reimplement this function when
 it wants to know when a Client made a request to change state (ie. to
 Shade / Unshade).
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>state</b> - the new state
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>mask</b> - the mask for the state
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">clientMachine</b> ()
+<li><b style="color : #000000;">clientMachine</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(char)</i>
+            returns <i>char</i>
           </td>
         </tr>
         <tr>
@@ -396,28 +365,27 @@ Shade / Unshade).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the client machine for the window (i.e. WM_CLIENT_MACHINE property).
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">desktop</b> (ignore_viewport)
 <table width="100%">
@@ -426,7 +394,7 @@ Returns the client machine for the window (i.e. WM_CLIENT_MACHINE property).
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(int)</i>
+            returns <i>int</i>
           </td>
         </tr>
         <tr>
@@ -434,22 +402,24 @@ Returns the client machine for the window (i.e. WM_CLIENT_MACHINE property).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>ignore_viewport</td><td>bool</td><td align="right">False</td></tr>
-
+              <tr><td>ignore_viewport</td><td>bool</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the desktop where the window is residing.
 </p>
 <p>
@@ -457,8 +427,7 @@ NOTE: KDE uses virtual desktops and does not directly support
 viewport in any way. It is however mapped to virtual desktops
 if needed.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>ignore_viewport</b> - if false, viewport is mapped to virtual desktops
 </p>
@@ -467,51 +436,47 @@ Returns the number of the window's desktop
 </p>
 <p>
 See also  OnAllDesktops()
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #999999;">event</b> (event, properties_size)
+<li style="list-style-type : none"><b style="color : #999999;">event</b> (event, properties, properties_size)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(), properties (ulong)</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>event</td><td>XEvent</td><td align="right"></td></tr>
-
+              <tr><td>properties</td><td>unsigned long</td><td align="right"></td></tr>
               <tr><td>properties_size</td><td>int</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This function takes the passed XEvent and returns an OR'ed list of
 NETWinInfo properties that have changed in the properties argument.
 The new information will be read immediately by the class.
@@ -520,27 +485,18 @@ to the constructor, if the array is not large enough,
 changed properties that don't fit in it won't be listed there
 (they'll be updated in the class though).
 </p>
+<p></p>
 <p>
-</p>
+<b>event</b> - the event</p>
 <p>
-<b>event</b> - the event
-</p>
-<p>
-<b>properties</b> - properties that changed
-</p>
+<b>properties</b> - properties that changed</p>
 <p>
 <b>properties_size</b> - size of the passed properties array
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">event</b> (event)
 <table width="100%">
@@ -549,63 +505,58 @@ changed properties that don't fit in it won't be listed there
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(ulong)</i>
+            returns <i>unsigned long</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>event</td><td>XEvent</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 This function takes the pass XEvent and returns an OR'ed list of NETWinInfo
 properties that have changed. The new information will be read
 immediately by the class. This overloaded version returns
 only a single mask, and therefore cannot check state of all properties
 like the other variant.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>event</b> - the event
 </p>
 <p>
 Returns the properties
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">extendedStrut</b> ()
+<li><b style="color : #000000;">extendedStrut</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(NETExtendedStrut)</i>
+            returns <i>NETExtendedStrut</i>
           </td>
         </tr>
         <tr>
@@ -613,40 +564,37 @@ Returns the properties
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the extended (partial) strut specified by this client.
 See _NET_WM_STRUT_PARTIAL in the spec.
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">groupLeader</b> ()
+<li><b style="color : #000000;">groupLeader</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(Window)</i>
+            returns <i>Window</i>
           </td>
         </tr>
         <tr>
@@ -654,37 +602,36 @@ See _NET_WM_STRUT_PARTIAL in the spec.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the leader window for the group the window is in, if any.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">handledIcons</b> ()
+<li><b style="color : #000000;">handledIcons</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(Bool)</i>
+            returns <i>Bool</i>
           </td>
         </tr>
         <tr>
@@ -692,42 +639,39 @@ Returns the leader window for the group the window is in, if any.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns whether or not this client handles icons.
 </p>
 <p>
 Returns true if this client handles icons, false otherwise
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">hasNETSupport</b> ()
+<li><b style="color : #000000;">hasNETSupport</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -735,38 +679,70 @@ Returns true if this client handles icons, false otherwise
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
-Assignment operator. Ensures that the shared data reference counts are
-correct.
-</p>
-<p>
 Returns true if the window has any window type set, even if the type
 itself is not known to this implementation. Presence of a window type
 as specified by the NETWM spec is considered as the window supporting
 this specification.
 Returns true if the window has support for the NETWM spec
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li><b style="color : #000000;">hasWindowType</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+This function returns false if the window has not window type
+specified at all. Used by KWindowInfo.windowType() to return either
+NET.Normal or NET.Dialog as appropriate as a fallback.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #999999;">icon</b> (width, height)
 <table width="100%">
@@ -775,68 +751,61 @@ Returns true if the window has support for the NETWM spec
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(NETIcon)</i>
+            returns <i>NETIcon</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>width</td><td>int</td><td align="right">-1</td></tr>
-
               <tr><td>height</td><td>int</td><td align="right">-1</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns an icon. If width and height are passed, the icon returned will be
 the closest it can find (the next biggest). If width and height are omitted,
 then the largest icon in the list is returned.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>width</b> - the preferred width for the icon, -1 to ignore
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>height</b> - the preferred height for the icon, -1 to ignore
 </p>
 <p>
 Returns the icon
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">iconGeometry</b> ()
+<li><b style="color : #000000;">iconGeometry</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(NETRect)</i>
+            returns <i>NETRect</i>
           </td>
         </tr>
         <tr>
@@ -844,42 +813,39 @@ Returns the icon
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the icon geometry.
 </p>
 <p>
 Returns the geometry of the icon
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">iconName</b> ()
+<li><b style="color : #000000;">iconName</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(char)</i>
+            returns <i>char</i>
           </td>
         </tr>
         <tr>
@@ -887,18 +853,21 @@ Returns the geometry of the icon
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the iconic name of the window in UTF-8 format. Note that this has
 nothing to do with icons, but it's for "iconic"
 representations of the window (taskbars etc.), that should be shown
@@ -907,17 +876,11 @@ for details.
 </p>
 <p>
 Returns the iconic name
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">kdeGeometry</b> (frame, window)
 <table width="100%">
@@ -926,7 +889,7 @@ Returns the iconic name
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -934,56 +897,49 @@ Returns the iconic name
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>frame</td><td>NETRect</td><td align="right"></td></tr>
-
               <tr><td>window</td><td>NETRect</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Places the window frame geometry in frame, and the application window
 geometry in window. Both geometries are relative to the root window.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>frame</b> - the geometry for the frame
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>window</b> - the geometry for the window
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">mappingState</b> ()
+<li><b style="color : #000000;">mappingState</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(MappingState)</i>
+            returns <i>NET.MappingState</i>
           </td>
         </tr>
         <tr>
@@ -991,43 +947,40 @@ geometry in window. Both geometries are relative to the root window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the mapping state for the window (see the NET base class
 documentation for a description of mapping state).
 </p>
 <p>
 Returns the mapping state
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">name</b> ()
+<li><b style="color : #000000;">name</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(char)</i>
+            returns <i>char</i>
           </td>
         </tr>
         <tr>
@@ -1035,42 +988,39 @@ Returns the mapping state
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the name of the window in UTF-8 format.
 </p>
 <p>
 Returns the name of the window
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">opacity</b> ()
+<li><b style="color : #000000;">opacity</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(ulong)</i>
+            returns <i>unsigned long</i>
           </td>
         </tr>
         <tr>
@@ -1078,37 +1028,36 @@ Returns the name of the window
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the opacity of the window.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">passedProperties</b> ()
+<li><b style="color : #000000;">passedProperties</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>( Python list of ulon)</i>
+            returns <i>unsigned long</i>
           </td>
         </tr>
         <tr>
@@ -1116,40 +1065,37 @@ Returns the opacity of the window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          KDE 4.1.0 and later only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the properties argument passed to the constructor.
 The size is the maximum array size the constructor accepts.
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">pid</b> ()
+<li><b style="color : #000000;">passedProperties</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(int)</i>
+            returns <i>SIP_PYLIST</i>
           </td>
         </tr>
         <tr>
@@ -1157,33 +1103,104 @@ The size is the maximum array size the constructor accepts.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">passedProperties</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>SIP_PYLIST</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          before KDE 4.1.0 only
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">pid</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>int</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 Returns the process id for the client window.
 </p>
 <p>
 Returns the process id of the window
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setAllowedActions</b> (actions)
 <table width="100%">
@@ -1192,7 +1209,7 @@ Returns the process id of the window
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1200,32 +1217,30 @@ Returns the process id of the window
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>actions</td><td>ulong</td><td align="right"></td></tr>
-
+              <tr><td>actions</td><td>unsigned long</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets actions that the window manager allows for the window.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setDesktop</b> (desktop, ignore_viewport)
 <table width="100%">
@@ -1234,7 +1249,7 @@ Sets actions that the window manager allows for the window.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1242,24 +1257,25 @@ Sets actions that the window manager allows for the window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>desktop</td><td>int</td><td align="right"></td></tr>
-
-              <tr><td>ignore_viewport</td><td>bool</td><td align="right">False</td></tr>
-
+              <tr><td>ignore_viewport</td><td>bool</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Set which window the desktop is (should be) on.
 </p>
 <p>
@@ -1267,27 +1283,19 @@ NOTE: KDE uses virtual desktops and does not directly support
 viewport in any way. It is however mapped to virtual desktops
 if needed.
 </p>
+<p></p>
 <p>
-</p>
-<p>
-<b>desktop</b> - the number of the new desktop
-</p>
+<b>desktop</b> - the number of the new desktop</p>
 <p>
 <b>ignore_viewport</b> - if false, viewport is mapped to virtual desktops
 </p>
 <p>
 See also  OnAllDesktops()
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setExtendedStrut</b> (extended_strut)
 <table width="100%">
@@ -1296,7 +1304,7 @@ See also  OnAllDesktops()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1304,39 +1312,34 @@ See also  OnAllDesktops()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>extended_strut</td><td>NETExtendedStrut</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Set the extended (partial) strut for the application window.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>extended_strut</b> - the new strut
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setFrameExtents</b> (strut)
 <table width="100%">
@@ -1345,7 +1348,7 @@ Set the extended (partial) strut for the application window.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1353,39 +1356,34 @@ Set the extended (partial) strut for the application window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>strut</td><td>NETStrut</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Set the frame decoration strut, i.e. the width of the decoration borders.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>strut</b> - the new strut
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setHandledIcons</b> (handled)
 <table width="100%">
@@ -1394,7 +1392,7 @@ Set the frame decoration strut, i.e. the width of the decoration borders.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1402,39 +1400,34 @@ Set the frame decoration strut, i.e. the width of the decoration borders.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>handled</td><td>Bool</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Set whether this application window handles icons.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>handled</b> - true if the window handles icons, false otherwise
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #999999;">setIcon</b> (icon, replace)
 <table width="100%">
@@ -1443,56 +1436,49 @@ Set whether this application window handles icons.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          Method is not implemented
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>icon</td><td>NETIcon</td><td align="right"></td></tr>
-
               <tr><td>replace</td><td>Bool</td><td align="right">True</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Set icons for the application window. If replace is True, then
 the specified icon is defined to be the only icon. If replace is False,
 then the specified icon is added to a list of icons.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>icon</b> - the new icon
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>replace</b> - true to replace, false to append to the list of icons
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setIconGeometry</b> (geometry)
 <table width="100%">
@@ -1501,7 +1487,7 @@ then the specified icon is added to a list of icons.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1509,39 +1495,34 @@ then the specified icon is added to a list of icons.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>geometry</td><td>NETRect</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Set the icon geometry for the application window.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>geometry</b> - the new icon geometry
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setIconName</b> (name)
 <table width="100%">
@@ -1550,7 +1531,7 @@ Set the icon geometry for the application window.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1558,39 +1539,34 @@ Set the icon geometry for the application window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>char</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the iconic name for the application window.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>name</b> - the new iconic name
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setName</b> (name)
 <table width="100%">
@@ -1599,7 +1575,7 @@ Sets the iconic name for the application window.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1607,39 +1583,34 @@ Sets the iconic name for the application window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>char</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the name for the application window.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>name</b> - the new name of the window
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setOpacity</b> (opacity)
 <table width="100%">
@@ -1648,7 +1619,7 @@ Sets the name for the application window.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1656,32 +1627,30 @@ Sets the name for the application window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>opacity</td><td>ulong</td><td align="right"></td></tr>
-
+              <tr><td>opacity</td><td>unsigned long</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets opacity (0 = transparent, 0xffffffff = opaque ) on the window.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setPid</b> (pid)
 <table width="100%">
@@ -1690,7 +1659,7 @@ Sets opacity (0 = transparent, 0xffffffff = opaque ) on the window.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1698,39 +1667,34 @@ Sets opacity (0 = transparent, 0xffffffff = opaque ) on the window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>pid</td><td>int</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Set the application window's process id.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>pid</b> - the window's process id
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setStartupId</b> (startup_id)
 <table width="100%">
@@ -1739,7 +1703,7 @@ Set the application window's process id.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1747,32 +1711,30 @@ Set the application window's process id.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>startup_id</td><td>char</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the startup notification id <b>id</b> on the window.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setState</b> (state, mask)
 <table width="100%">
@@ -1781,7 +1743,7 @@ Sets the startup notification id <b>id</b> on the window.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1789,47 +1751,40 @@ Sets the startup notification id <b>id</b> on the window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>state</td><td>ulong</td><td align="right"></td></tr>
-
-              <tr><td>mask</td><td>ulong</td><td align="right"></td></tr>
-
+              <tr><td>state</td><td>unsigned long</td><td align="right"></td></tr>
+              <tr><td>mask</td><td>unsigned long</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Set the state for the application window (see the NET base class documentation
 for a description of window state).
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>state</b> - the name state
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>mask</b> - the mask for the state
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setStrut</b> (strut)
 <table width="100%">
@@ -1838,7 +1793,7 @@ for a description of window state).
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1846,40 +1801,35 @@ for a description of window state).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>strut</td><td>NETStrut</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 <b style="color : #ff0000;"><i>Deprecated </i></b> use setExtendedStrut()
 Set the strut for the application window.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>strut</b> - the new strut
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setUserTime</b> (time)
 <table width="100%">
@@ -1888,7 +1838,7 @@ Set the strut for the application window.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1896,36 +1846,34 @@ Set the strut for the application window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>time</td><td>Time</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets user timestamp <b>time</b> on the window (property _NET_WM_USER_TIME).
 The timestamp is expressed as XServer time. If a window
 is shown with user timestamp older than the time of the last
 user action, it won't be activated after being shown, with the special
 value 0 meaning not to activate the window after being shown.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setVisibleIconName</b> (name)
 <table width="100%">
@@ -1934,7 +1882,7 @@ value 0 meaning not to activate the window after being shown.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1942,40 +1890,35 @@ value 0 meaning not to activate the window after being shown.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>char</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 For Window Managers only: set the visible iconic name ( i.e. xterm, xterm <2>,
 xterm <3>, ... )
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>name</b> - the new visible iconic name
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setVisibleName</b> (visibleName)
 <table width="100%">
@@ -1984,7 +1927,7 @@ xterm <3>, ... )
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -1992,40 +1935,35 @@ xterm <3>, ... )
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>visibleName</td><td>char</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 For Window Managers only: set the visible name ( i.e. xterm, xterm <2>,
 xterm <3>, ... )
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>visibleName</b> - the new visible name
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">setWindowType</b> (type)
 <table width="100%">
@@ -2034,7 +1972,7 @@ xterm <3>, ... )
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -2042,49 +1980,44 @@ xterm <3>, ... )
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>type</td><td>WindowType</td><td align="right"></td></tr>
-
+              <tr><td>type</td><td>NET.WindowType</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Sets the window type for this client (see the NET base class
 documentation for a description of the various window types).
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>type</b> - the window type
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">startupId</b> ()
+<li><b style="color : #000000;">startupId</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(char)</i>
+            returns <i>char</i>
           </td>
         </tr>
         <tr>
@@ -2092,37 +2025,36 @@ documentation for a description of the various window types).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the startup notification id of the window.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">state</b> ()
+<li><b style="color : #000000;">state</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(ulong)</i>
+            returns <i>unsigned long</i>
           </td>
         </tr>
         <tr>
@@ -2130,43 +2062,40 @@ Returns the startup notification id of the window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the state of the window (see the NET base class documentation for a
 description of the various states).
 </p>
 <p>
 Returns the state of the window
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">strut</b> ()
+<li><b style="color : #000000;">strut</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(NETStrut)</i>
+            returns <i>NETStrut</i>
           </td>
         </tr>
         <tr>
@@ -2174,43 +2103,40 @@ Returns the state of the window
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 <b style="color : #ff0000;"><i>Deprecated </i></b> use strutPartial()
 Returns the strut specified by this client.
 </p>
 <p>
 Returns the strut of the window
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">transientFor</b> ()
+<li><b style="color : #000000;">transientFor</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(Window)</i>
+            returns <i>Window</i>
           </td>
         </tr>
         <tr>
@@ -2218,38 +2144,37 @@ Returns the strut of the window
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the WM_TRANSIENT_FOR property for the window, i.e. the mainwindow
 for this window.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">userTime</b> ()
+<li><b style="color : #000000;">userTime</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(Time)</i>
+            returns <i>Time</i>
           </td>
         </tr>
         <tr>
@@ -2257,37 +2182,78 @@ for this window.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the time of last user action on the window, or -1 if not set.
-</p>
-
     </td>
   </tr>
 </table>
 
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #999999;">virtual_hook</b> (id, data)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>id</td><td>int</td><td align="right"></td></tr>
+              <tr><td>data</td><td>void</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Virtual hook, used to add new "virtual" functions while maintaining
+binary compatibility. Unused in this class.
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
-
-<li><b style="color : #000000;">visibleIconName</b> ()
+<li><b style="color : #000000;">visibleIconName</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(char)</i>
+            returns <i>char</i>
           </td>
         </tr>
         <tr>
@@ -2295,18 +2261,21 @@ Returns the time of last user action on the window, or -1 if not set.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the visible iconic name as set by the window manager in UTF-8 format.
 Note that this has nothing to do with icons, but it's for "iconic"
 representations of the window (taskbars etc.), that should be shown
@@ -2315,26 +2284,20 @@ for details.
 </p>
 <p>
 Returns the visible iconic name
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">visibleName</b> ()
+<li><b style="color : #000000;">visibleName</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(char)</i>
+            returns <i>char</i>
           </td>
         </tr>
         <tr>
@@ -2342,42 +2305,39 @@ Returns the visible iconic name
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the visible name as set by the window manager in UTF-8 format.
 </p>
 <p>
 Returns the visible name of the window
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">windowClassClass</b> ()
+<li><b style="color : #000000;">windowClassClass</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(char)</i>
+            returns <i>char</i>
           </td>
         </tr>
         <tr>
@@ -2385,38 +2345,37 @@ Returns the visible name of the window
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the class component of the window class for the window
 (i.e. WM_CLASS property).
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">windowClassName</b> ()
+<li><b style="color : #000000;">windowClassName</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(char)</i>
+            returns <i>char</i>
           </td>
         </tr>
         <tr>
@@ -2424,38 +2383,37 @@ Returns the class component of the window class for the window
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the name component of the window class for the window
 (i.e. WM_CLASS property).
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">windowRole</b> ()
+<li><b style="color : #000000;">windowRole</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(char)</i>
+            returns <i>char</i>
           </td>
         </tr>
         <tr>
@@ -2463,28 +2421,27 @@ Returns the name component of the window class for the window
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the window role for the window (i.e. WM_WINDOW_ROLE property).
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">windowType</b> (supported_types)
 <table width="100%">
@@ -2493,7 +2450,7 @@ Returns the window role for the window (i.e. WM_WINDOW_ROLE property).
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(WindowType)</i>
+            returns <i>NET.WindowType</i>
           </td>
         </tr>
         <tr>
@@ -2501,22 +2458,24 @@ Returns the window role for the window (i.e. WM_WINDOW_ROLE property).
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>supported_types</td><td>ulong</td><td align="right"></td></tr>
-
+              <tr><td>supported_types</td><td>unsigned long</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the window type for this client (see the NET base class
 documentation for a description of the various window types).
 Since clients may specify several windows types for a window
@@ -2529,21 +2488,56 @@ or NET.Unknown if none of the window types is supported.
 </p>
 <p>
 Returns the type of the window
-</p>
-<p>
-</p>
-
     </td>
   </tr>
 </table>
 
+</li><hr>
 
 </li><hr>
 
+<h3>variables</h3>
+<table>
+<tr><td width="60%" valign="top"><b>int</b> <i>OnAllDesktops</i></td><td width="40%" align="left">Sentinel value to indicate that the client wishes to be visible on
+all desktops.
+</p>
+<p>
+Returns the value to be on all desktops</td></tr>
+<tr><td width="60%" valign="top"><b>int</b> <i>OnAllDesktops</i></td><td width="40%" align="left"></td></tr>
+</table>
+<hr>
 
-</li><hr>
-
-
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+<li><b>anonymous</b>  { PROTOCOLS, PROTOCOLS2, PROPERTIES_SIZE }
+  <p style="padding-top : 9px;">Indexes for the properties array.</p>
+  <table cellspacing="5">
+    <tr>
+      <td></td>
+      <td valign="top"><i>PROTOCOLS</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>PROTOCOLS2</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>PROPERTIES_SIZE</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
+</ul>
 </span>
 </body>
 </html>

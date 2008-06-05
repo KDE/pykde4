@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
-      <h1>class KParts.BrowserRun</h1><hr>
+      <h1>class BrowserRun</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kparts Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,11 +25,11 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>kparts</td>
+          <td width="30%" align=left>KParts</td>
         </tr>
         <tr>
           <td>Class</td>
-          <td>KParts.BrowserRun</td>
+          <td>BrowserRun</td>
         </tr>
         <tr>
           <td>Inherits</td>
@@ -47,8 +38,7 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-This class extends KRun to provide additional functionality for browsers:
+      This class extends KRun to provide additional functionality for browsers:
 - "save or open" dialog boxes
 - "save" functionality
 - support for HTTP POST (including saving the result to a temp file if
@@ -57,20 +47,20 @@ opening a separate application)
 - custom error handling (i.e. treating errors as HTML pages)
 - generation of SSL metadata depending on the previous URL shown by the part
 <b>Author</b> David Faure <faure@kde.org>
-</p>
-
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>enums</h3><ul>
-<li><b>AskSaveResult</b> = { Save, Open, Cancel }</li>
+<li style="padding-bottom : 8px;"><b>AskEmbedOrSaveFlags</b> { InlineDisposition, AttachmentDisposition }</li>
 
-<li><b>NonEmbeddableResult</b> = { Not Implfunction handleNonEmbeddable:$ | (KParts.BrowserRun.NonEmbeddableResult):mimeType | (QString):ig }</li>
+<li style="padding-bottom : 8px;"><b>AskSaveResult</b> { Save, Open, Cancel }</li>
+
+<li style="padding-bottom : 8px;"><b>NonEmbeddableResult</b> { Handled, NotHandled, Delayed }</li>
 
 </ul><a href="#extended"><i>enum details</i></a><hr>
+
 <h3>methods</h3><ul style="list-style-type : none">
 <li style="list-style-type : none"><b style="color : #000000;">BrowserRun</b> (url, args, browserArgs, part, window, removeReferrer, trustedSource, hideErrorDialog)
 <table width="100%">
@@ -79,7 +69,7 @@ opening a separate application)
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -87,70 +77,53 @@ opening a separate application)
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>url</td><td>KUrl</td><td align="right"></td></tr>
-
               <tr><td>args</td><td>KParts.OpenUrlArguments</td><td align="right"></td></tr>
-
               <tr><td>browserArgs</td><td>KParts.BrowserArguments</td><td align="right"></td></tr>
-
               <tr><td>part</td><td>KParts.ReadOnlyPart</td><td align="right"></td></tr>
-
               <tr><td>window</td><td>QWidget</td><td align="right"></td></tr>
-
               <tr><td>removeReferrer</td><td>bool</td><td align="right"></td></tr>
-
               <tr><td>trustedSource</td><td>bool</td><td align="right"></td></tr>
-
-              <tr><td>hideErrorDialog</td><td>bool</td><td align="right">False</td></tr>
-
+              <tr><td>hideErrorDialog</td><td>bool</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
+
+<b>url</b> - the URL we're probing</p>
 <p>
-</p>
+<b>args</b> - URL args - includes reload, metaData, etc.</p>
 <p>
-<b>url</b> - the URL we're probing
-</p>
+<b>browserArgs</b> - browser-related args - includes data for a HTTP POST, etc.</p>
 <p>
-<b>args</b> - URL args - includes reload, metaData, etc.
-</p>
+<b>part</b> - the part going to open this URL - can be 0 if not created yet</p>
 <p>
-<b>browserArgs</b> - browser-related args - includes data for a HTTP POST, etc.
-</p>
+<b>window</b> - the mainwindow - passed to KIO.Job.setWindow()</p>
 <p>
-<b>part</b> - the part going to open this URL - can be 0 if not created yet
-</p>
-<p>
-<b>window</b> - the mainwindow - passed to KIO.Job.setWindow()
-</p>
-<p>
-<b>removeReferrer</b> - if true, the "referrer" metadata from <b>args</b> isn't passed on
-</p>
+<b>removeReferrer</b> - if true, the "referrer" metadata from <b>args</b> isn't passed on</p>
 <p>
 <b>trustedSource</b> - if false, a warning will be shown before launching an executable.
-Always pass false for <b>trustedSource,</b> except for local directory views.
-</p>
+Always pass false for <b>trustedSource,</b> except for local directory views.</p>
 <p>
 <b>hideErrorDialog</b> - if true, no dialog will be shown in case of errors.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">allowExecution</b> (mimeType, url)
 <table width="100%">
@@ -159,25 +132,27 @@ Always pass false for <b>trustedSource,</b> except for local directory views.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>mimeType</td><td>QString</td><td align="right"></td></tr>
-
               <tr><td>url</td><td>KUrl</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -185,23 +160,20 @@ Always pass false for <b>trustedSource,</b> except for local directory views.
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">arguments</b> ()
+<li><b style="color : #000000;">arguments</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KParts.OpenUrlArguments)</i>
+            returns <i>KParts.OpenUrlArguments</i>
           </td>
         </tr>
         <tr>
@@ -209,11 +181,15 @@ Always pass false for <b>trustedSource,</b> except for local directory views.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
@@ -221,14 +197,11 @@ Always pass false for <b>trustedSource,</b> except for local directory views.
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">askEmbedOrSave</b> (url, mimeType, suggestedFileName, flags)
 <table width="100%">
@@ -237,60 +210,51 @@ Always pass false for <b>trustedSource,</b> except for local directory views.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KParts.BrowserRun.AskSaveResult)</i>
+            returns <i>KParts::BrowserRun.AskSaveResult</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>url</td><td>KUrl</td><td align="right"></td></tr>
-
               <tr><td>mimeType</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>suggestedFileName</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>suggestedFileName</td><td>QString</td><td align="right">QString()</td></tr>
               <tr><td>flags</td><td>int</td><td align="right">0</td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Similar to askSave but for the case where the current application is
-able to embed the url itself (instead of passing it to another app).
-</p>
+able to embed the url itself (instead of passing it to another app).</p>
 <p>
-<b>url</b> - the URL in question
-</p>
+<b>url</b> - the URL in question</p>
 <p>
-<b>mimeType</b> - the mimetype of the URL
-</p>
+<b>mimeType</b> - the mimetype of the URL</p>
 <p>
-<b>suggestedFileName</b> - optional filename suggested by the server
-</p>
+<b>suggestedFileName</b> - optional filename suggested by the server</p>
 <p>
-<b>flags</b> - reserved for later use
+<b>flags</b> - set to AttachmentDisposition if suggested by the server
 Returns Save, Open or Cancel.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">askSave</b> (url, offer, mimeType, suggestedFileName)
 <table width="100%">
@@ -299,68 +263,59 @@ Returns Save, Open or Cancel.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KParts.BrowserRun.AskSaveResult)</i>
+            returns <i>KParts::BrowserRun.AskSaveResult</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>url</td><td>KUrl</td><td align="right"></td></tr>
-
               <tr><td>offer</td><td>KService.Ptr</td><td align="right"></td></tr>
-
               <tr><td>mimeType</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>suggestedFileName</td><td>QString</td><td align="right">QString ()</td></tr>
-
+              <tr><td>suggestedFileName</td><td>QString</td><td align="right">QString()</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
+Ask the user whether to save or open a url in another application.</p>
 <p>
-Ask the user whether to save or open a url in another application.
-</p>
+<b>url</b> - the URL in question</p>
 <p>
-<b>url</b> - the URL in question
-</p>
+<b>offer</b> - the application that will be used to open the URL</p>
 <p>
-<b>offer</b> - the application that will be used to open the URL
-</p>
-<p>
-<b>mimeType</b> - the mimetype of the URL
-</p>
+<b>mimeType</b> - the mimetype of the URL</p>
 <p>
 <b>suggestedFileName</b> - optional file name suggested by the server
 Returns Save, Open or Cancel.
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">browserArguments</b> ()
+<li><b style="color : #000000;">browserArguments</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KParts.BrowserArguments)</i>
+            returns <i>KParts.BrowserArguments</i>
           </td>
         </tr>
         <tr>
@@ -368,11 +323,15 @@ Returns Save, Open or Cancel.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
@@ -380,14 +339,48 @@ Returns Save, Open or Cancel.
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
+<li><b style="color : #000000;">contentDisposition</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>QString</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns Suggested disposition by the server (e.g. HTTP content-disposition)
+    </td>
+  </tr>
+</table>
+
+</li><hr>
 
 <li style="list-style-type : none"><b style="color : #000000;">handleError</b> (job)
 <table width="100%">
@@ -396,7 +389,7 @@ Returns Save, Open or Cancel.
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -404,45 +397,83 @@ Returns Save, Open or Cancel.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>job</td><td>KJob</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Called when an error happens.
-NOTE: <b>job</b> could be 0L, if you passed hideErrorDialog=true.
+NOTE: <b>job</b> could be 0, if you passed hideErrorDialog=true.
 The default implementation shows a message box, but only when job != 0 ....
 It is strongly recommended to reimplement this method if
 you passed hideErrorDialog=true.
-</p>
-
     </td>
   </tr>
 </table>
 
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #999999;">handleNonEmbeddable</b> (mimeType)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>KParts::BrowserRun.NonEmbeddableResult</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>mimeType</td><td>QString</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Helper for foundMimeType: call this if the mimetype couldn't be embedded
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
-
-<li><b style="color : #000000;">hideErrorDialog</b> ()
+<li><b style="color : #000000;">hideErrorDialog</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -450,11 +481,15 @@ you passed hideErrorDialog=true.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
@@ -462,23 +497,20 @@ you passed hideErrorDialog=true.
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">init</b> ()
+<li><b style="color : #000000;">init</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -486,28 +518,27 @@ you passed hideErrorDialog=true.
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Reimplemented from KRun
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">isTextExecutable</b> (mimeType)
 <table width="100%">
@@ -516,23 +547,26 @@ Reimplemented from KRun
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>mimeType</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -540,23 +574,20 @@ Reimplemented from KRun
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">part</b> ()
+<li><b style="color : #000000;">part</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KParts.ReadOnlyPart)</i>
+            returns <i>KParts.ReadOnlyPart</i>
           </td>
         </tr>
         <tr>
@@ -564,11 +595,15 @@ Reimplemented from KRun
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
@@ -576,14 +611,11 @@ Reimplemented from KRun
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">save</b> (url, suggestedFileName)
 <table width="100%">
@@ -592,7 +624,7 @@ Reimplemented from KRun
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -600,17 +632,19 @@ Reimplemented from KRun
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>url</td><td>KUrl</td><td align="right"></td></tr>
-
               <tr><td>suggestedFileName</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -618,23 +652,20 @@ Reimplemented from KRun
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">scanFile</b> ()
+<li><b style="color : #000000;">scanFile</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -642,28 +673,64 @@ Reimplemented from KRun
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Reimplemented from KRun
-</p>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">serverSuggestsSave</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">simpleSave</b> (url, suggestedFileName, window)
 <table width="100%">
@@ -672,27 +739,28 @@ Reimplemented from KRun
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
           <td>
-          <i style="color : #0000ff">static</i>
+          <b style="color : #0000aa">static</b> 
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>url</td><td>KUrl</td><td align="right"></td></tr>
-
               <tr><td>suggestedFileName</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>window</td><td>QWidget</td><td align="right">None</td></tr>
-
+              <tr><td>window</td><td>QWidget</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
@@ -700,14 +768,11 @@ Reimplemented from KRun
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">slotBrowserMimetype</b> (job, type)
 <table width="100%">
@@ -716,7 +781,7 @@ Reimplemented from KRun
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -724,17 +789,19 @@ Reimplemented from KRun
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>job</td><td>KIO.Job</td><td align="right"></td></tr>
-
               <tr><td>type</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -742,14 +809,11 @@ Reimplemented from KRun
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">slotBrowserScanFinished</b> (job)
 <table width="100%">
@@ -758,7 +822,7 @@ Reimplemented from KRun
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -766,15 +830,18 @@ Reimplemented from KRun
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>job</td><td>KJob</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -782,14 +849,11 @@ Reimplemented from KRun
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">slotCopyToTempFileResult</b> (job)
 <table width="100%">
@@ -798,7 +862,7 @@ Reimplemented from KRun
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -806,15 +870,18 @@ Reimplemented from KRun
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>job</td><td>KJob</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -822,14 +889,11 @@ Reimplemented from KRun
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">slotStatResult</b> (job)
 <table width="100%">
@@ -838,7 +902,7 @@ Reimplemented from KRun
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -846,15 +910,18 @@ Reimplemented from KRun
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>job</td><td>KJob</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -862,23 +929,20 @@ Reimplemented from KRun
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">url</b> ()
+<li><b style="color : #000000;">url</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KUrl)</i>
+            returns <i>KUrl</i>
           </td>
         </tr>
         <tr>
@@ -886,11 +950,15 @@ Reimplemented from KRun
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
@@ -898,80 +966,93 @@ Reimplemented from KRun
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
 </li><hr>
-
 
 <a name="extended">
 <h3>enums - detail</h3>
 <ul style="list-style-type : none">
-
-<li><b>AskSaveResult</b> = { Save, Open, Cancel }
+<li><b>AskEmbedOrSaveFlags</b>  { InlineDisposition, AttachmentDisposition }
+  <p style="padding-top : 9px;"></p>
   <table cellspacing="5">
-
+    <tr>
+      <td></td>
+      <td valign="top"><i>InlineDisposition</i></td>
+      <td valign="top">- 0 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>AttachmentDisposition</i></td>
+      <td valign="top">- 1 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
+<li><b>AskSaveResult</b>  { Save, Open, Cancel }
+  <p style="padding-top : 9px;"></p>
+  <table cellspacing="5">
     <tr>
       <td></td>
       <td valign="top"><i>Save</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>Open</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>Cancel</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
   </table>
 </li>
 <hr>
-
-<li><b>NonEmbeddableResult</b> = { Not Implfunction handleNonEmbeddable:$ | (KParts.BrowserRun.NonEmbeddableResult):mimeType | (QString):ig }
+<li><b>NonEmbeddableResult</b>  { Handled, NotHandled, Delayed }
+  <p style="padding-top : 9px;">NotHandled means that foundMimeType should call KRun.foundMimeType,
+i.e. launch an external app.</p>
   <table cellspacing="5">
-
     <tr>
       <td></td>
       <td valign="top"><i>Handled</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>NotHandled</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
     <tr>
       <td></td>
       <td valign="top"><i>Delayed</i></td>
+      <td valign="top">-  </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
   </table>
 </li>
 <hr>
-
 </ul>
-
 </span>
 </body>
 </html>

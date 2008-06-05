@@ -7,20 +7,11 @@
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
       <h1>class KTimeZones</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdecore Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -34,7 +25,7 @@
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left></td>
         </tr>
         <tr>
           <td>Class</td>
@@ -47,284 +38,7 @@
       </table>
     </td>
     <td width="65%">
-      <p>
-
-Time zone functions
-<b>Author</b> David Jarvie <software@astrojar.org.uk>.
-<b>Author</b> S.R.Haque <srhaque@iee.org>.
-</p>
-<p>
-The time zone classes provide a framework for accessing time zone data, and
-converting times and dates between different time zones. They provide access
-to the system time zone database, and also allow developers to derive classes
-to access custom sources of time zone information such as calendar files.
-</p>
-<p>
-A time zone is represented by the KTimeZone class. This provides access to
-the time zone's detailed definition and contains methods to convert times to
-and from that zone. In order to save processing, KTimeZone obtains its time
-zone details only when they are actually required. Each KTimeZone class has
-a corresponding KTimeZoneBackend backend class which implements reference
-counting of the time zone's data.
-</p>
-<p>
-A collection of time zones is represented by the KTimeZones class, which acts
-as a container of KTimeZone objects. Within any KTimeZones object, each
-KTimeZone instance is uniquely identified by its name. Typically, each
-individual source of time zone information would be represented by a different
-KTimeZones object. This scheme allows conflicting time zone definitions
-between the different sources to be handled, since KTimeZone names need only
-be unique within a single KTimeZones object. Note that KTimeZone instances do
-not have to belong to any KTimeZones container.
-</p>
-<p>
-Time zone source data can come in all sorts of different forms: TZFILE format
-for a UNIX system time zone database, definitions within calendar files, calls
-to libraries (e.g. libc), etc. The KTimeZoneSource class provides reading and
-parsing functions to access such data, handing off the parsed data for a
-specific time zone in a KTimeZoneData object. Both of these are base classes
-from which should be derived other classes which know about the particular
-access method and data format (KTimeZoneSource) and which details are actually
-provided (KTimeZoneData). When a KTimeZone instance needs its time zone's
-definition, it calls KTimeZoneSource.parse() and receives the data back in a
-KTimeZoneData object which it keeps for reference.
-</p>
-<p>
-KTimeZoneData holds the definitions of the different daylight saving time and
-standard time phases in KTimeZone.Phase objects, and the timed sequence of
-daylight saving time changes in KTimeZone.Transition objects. Leap seconds
-adjustments are held in KTimeZone.LeapSeconds objects. You can access this
-data directly via KTimeZone and KTimeZoneData methods if required.
-</p>
-<p>
-The mapping of the different classes to external data is as follows:
-</p>
-<p>
-- Each different source data format or access method is represented by a
-different KTimeZoneSource class.
-</p>
-<p>
-- Each different set of data provided from source data is represented by a
-different KTimeZoneData class. For example, some time zone sources provide
-only the absolute basic information about time zones, i.e. name, transition
-times and offsets from UTC. Others provide information on leap second
-adjustments, while still others might contain information on which countries
-use the time zone. To allow for this variation, KTimeZoneData is made
-available for inheritance. When the necessary information is not available,
-the KTimeZone.Phase, KTimeZone.Transition and KTimeZone.LeapSeconds data
-will be empty.
-</p>
-<p>
-- Each KTimeZoneData class will have a corresponding KTimeZone class, and
-related KTimeZoneBackend class, which can interpret its data.
-</p>
-<p>
-- Each different source database will typically be represented by a different
-KTimeZones instance, to avoid possible conflicts between time zone definitions.
-If it is known that two source databases are definitely compatible, they can
-be grouped together into the same KTimeZones instance.
-</p>
-<p>
-<b>System time zones </b>
-</p>
-<p>
-Access to system time zones is provided by the KSystemTimeZones class, which
-reads the zone.tab file to obtain the list of system time zones, and creates a
-KSystemTimeZone instance for each one. KSystemTimeZone has a
-KSystemTimeZoneBackend backend class, and uses the KSystemTimeZoneSource
-and KSystemTimeZoneData classes to obtain time zone data via libc library
-functions.
-</p>
-<p>
-Normally, KSystemTimeZoneSource and KSystemTimeZoneData operate in the
-background and you will not need to use them directly.
-</p>
-<p>
-The KSystemTimeZone class uses the standard system libraries to
-access time zone data, and its functionality is limited to what these libraries
-provide. On many systems, dates earlier than 1902 are not handled, and on
-non-GNU systems there is no guarantee that the time zone abbreviation returned
-for a given date will be correct if the abbreviations applicable then were
-not those currently in use. The KSystemTimeZones.readZone() method overcomes
-these restrictions by reading the time zone definition directly from the
-system time zone database files.
-</p>
-<p>
-<b>Tzfile access </b>
-</p>
-<p>
-The KTzfileTimeZone class provides access to tzfile(5) time zone definition
-files, which are used to form the time zone database on UNIX systems. Usually,
-for current information, it is easier to use the KSystemTimeZones class to
-access system tzfile data. However, for dealing with past data the
-KTzfileTimeZone class provides better guarantees of accurary, although it
-cannot handle dates earlier than 1902. It also provides more detailed
-information, and allows you to read non-system tzfile files. Alternatively,
-the KSystemTimeZones.readZone() method uses the KTzfileTimeZone class to
-read system time zone definition files.
-</p>
-<p>
-KTzfileTimeZone has a KTzfileTimeZoneBackend backend class, and uses the
-KTzfileTimeZoneSource and KTzfileTimeZoneData classes to obtain time zone
-data from tzfile files.
-</p>
-<p>
-<b>Handling time zone data from other sources </b>
-</p>
-<p>
-To implement time zone classes to access a new time zone data source, you need
-as a minimum to derive a new class from KTimeZoneSource, and implement one or
-more parse() methods. If you can know in advance what KTimeZone instances to create
-without having to parse the source data, you should reimplement the virtual method
-KTimeZoneSource.parse(const KTimeZone&). Otherwise, you need to define your
-own parse() methods with appropriate signatures, to both read and parse the new
-data, and create new KTimeZone instances.
-</p>
-<p>
-If the data for each time zone which is available from the new source happens
-to be the same as for another source for which KTimeZone classes already exist,
-you could simply use the existing KTimeZone, KTimeZoneBackend and KTimeZoneData
-derived classes to receive the parsed data from your new KTimeZoneSource class:
-</p>
-<p>
-<pre>
-class NewTimeZoneSource : public KTimeZoneSource
-{
-public:
-NewTimeZoneSource(...); // parameters might include location of data source ...
-~NewTimeZoneSource();
-</p>
-<p>
-// Option 1: reimplement KTimeZoneSource.parse() if you can
-// pre-create the KTimeZone instances.
-KTimeZoneData *parse(const KTimeZone &zone) const;
-</p>
-<p>
-// Option 2: implement new parse() methods if you don't know
-// in advance what KTimeZone instances to create.
-void parse(..., KTimeZones *zones) const;
-NewTimeZone *parse(...) const;
-};
-</p>
-<p>
-// Option 1:
-KTimeZoneData *NewTimeZoneSource.parse(const KTimeZone &zone) const
-{
-QString zoneName = zone.name();
-ExistingTimeZoneData* data = new ExistingTimeZoneData();
-</p>
-<p>
-// Read the data for 'zoneName' from the new data source.
-</p>
-<p>
-// Parse what we have read, and write it into 'data'.
-// Compile the sequence of daylight savings changes and leap
-// seconds adjustments (if available) and write into 'data'.
-</p>
-<p>
-return data;
-}
-</pre>
-</p>
-<p>
-If the data from the new source is different from what any existing
-KTimeZoneData class contains, you will need to implement new KTimeZone,
-KTimeZoneBackend and KTimeZoneData classes in addition to the KTimeZoneSource
-class illustrated above:
-</p>
-<p>
-<pre>
-class NewTimeZone : public KTimeZone
-{
-public:
-NewTimeZone(NewTimeZoneSource *source, const QString &name, ...);
-~NewTimeZone();
-</p>
-<p>
-// Methods implementing KTimeZone virtual methods are implemented
-// in NewTimeZoneBackend, not here.
-</p>
-<p>
-// Anything else which you need
-private:
-// No d-pointer !
-};
-</p>
-<p>
-class NewTimeZoneBackend : public KTimeZoneBackend
-{
-public:
-NewTimeZoneBackend(NewTimeZoneSource *source, const QString &name, ...);
-~NewTimeZoneBackend();
-</p>
-<p>
-KTimeZoneBackend *clone() const;
-</p>
-<p>
-// Virtual methods which need to be reimplemented
-int offsetAtZoneTime(const KTimeZone *caller, const QDateTime &zoneDateTime, int *secondOffset = 0) const;
-int offsetAtUtc(const KTimeZone *caller, const QDateTime &utcDateTime) const;
-int offset(const KTimeZone *caller, time_t t) const;
-int isDstAtUtc(const KTimeZone *caller, const QDateTime &utcDateTime) const;
-bool isDst(const KTimeZone *caller, time_t t) const;
-</p>
-<p>
-// Anything else which you need
-private:
-NewTimeZonePrivate *d; // non-const !
-};
-</p>
-<p>
-class NewTimeZoneData : public KTimeZoneData
-{
-friend class NewTimeZoneSource;
-</p>
-<p>
-public:
-NewTimeZoneData();
-~NewTimeZoneData();
-</p>
-<p>
-// Virtual methods which need to be reimplemented
-KTimeZoneData *clone() const;
-QList<QByteArray> abbreviations() const;
-QByteArray abbreviation(const QDateTime &utcDateTime) const;
-</p>
-<p>
-// Data members containing whatever is read by NewTimeZoneSource
-};
-</pre>
-</p>
-<p>
-Here is a guide to implementing the offset() and offsetAtUtc() methods, in
-the case where the source data does not use time_t for its time measurement:
-</p>
-<p>
-<pre>
-int NewTimeZoneBackend.offsetAtUtc(const KTimeZone *caller, const QDateTime &utcDateTime) const
-{
-// Access this time zone's data. If we haven't already read it,
-// force a read from source now.
-NewTimeZoneData *zdata = caller->data(true);
-</p>
-<p>
-// Use 'zdata' contents to work out the UTC offset
-</p>
-<p>
-return offset;
-}
-</p>
-<p>
-int NewTimeZoneBackend.offset(const KTimeZone *caller, time_t t) const
-{
-return offsetAtUtc(KTimeZone.fromTime_t(t));
-}
-</pre>
-</p>
-<p>
-The other NewTimeZoneBackend methods would work in an analogous way to
-NewTimeZoneBackend.offsetAtUtc() and NewTimeZoneBackend.offset().
-The KTimeZones class represents a time zone database which consists of a
+      The KTimeZones class represents a time zone database which consists of a
 collection of individual time zone definitions.
 </p>
 <p>
@@ -345,25 +59,22 @@ If you want to access system time zones, use the KSystemTimeZones class.
 </p>
 <p>
 Represents a time zone database or collection
-<b>Author</b> David Jarvie <software@astrojar.org.uk>.
+<b>Author</b> David Jarvie <djarvie@kde.org>.
 <b>Author</b> S.R.Haque <srhaque@iee.org>.
-</p>
-
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>methods</h3><ul style="list-style-type : none">
-<li><b style="color : #000000;">KTimeZones</b> ()
+<li><b style="color : #000000;">KTimeZones</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>a KTimeZones object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -371,11 +82,15 @@ Represents a time zone database or collection
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
@@ -383,39 +98,39 @@ Represents a time zone database or collection
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">KTimeZones</b> (a0)
+<li style="list-style-type : none"><b style="color : #999999;">KTimeZones</b> (a0)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KTimeZones object</i>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
           </td>
         </tr>
         <tr>
           <td>
           
           </td>
-        </tr>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>a0</td><td>KTimeZones</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
@@ -423,14 +138,11 @@ Represents a time zone database or collection
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">add</b> (zone)
 <table width="100%">
@@ -439,7 +151,7 @@ Represents a time zone database or collection
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(bool)</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -447,51 +159,48 @@ Represents a time zone database or collection
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>zone</td><td>KTimeZone</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Adds a time zone to the collection.
 The time zone's name must be unique within the collection.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>zone</b> - time zone to add
 Returns true if successful, false if zone's name duplicates one already in the collection
 </p>
 <p>
 See also  remove()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">clear</b> ()
+<li><b style="color : #000000;">clear</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>Nothing</i>
           </td>
         </tr>
         <tr>
@@ -499,31 +208,30 @@ See also  remove()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Clears the collection.
 </p>
 <p>
 See also  remove()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">remove</b> (zone)
 <table width="100%">
@@ -532,7 +240,7 @@ See also  remove()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KTimeZone)</i>
+            returns <i>KTimeZone</i>
           </td>
         </tr>
         <tr>
@@ -540,41 +248,38 @@ See also  remove()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>zone</td><td>KTimeZone</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Removes a time zone from the collection.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>zone</b> - time zone to remove
 Returns the time zone which was removed, or invalid if not found
 </p>
 <p>
 See also  clear(), add()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">remove</b> (name)
 <table width="100%">
@@ -583,7 +288,7 @@ See also  clear(), add()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KTimeZone)</i>
+            returns <i>KTimeZone</i>
           </td>
         </tr>
         <tr>
@@ -591,41 +296,38 @@ See also  clear(), add()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Removes a time zone from the collection.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>name</b> - name of time zone to remove
 Returns the time zone which was removed, or invalid if not found
 </p>
 <p>
 See also  clear(), add()
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
-
 
 <li style="list-style-type : none"><b style="color : #000000;">zone</b> (name)
 <table width="100%">
@@ -634,7 +336,7 @@ See also  clear(), add()
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KTimeZone)</i>
+            returns <i>KTimeZone</i>
           </td>
         </tr>
         <tr>
@@ -642,47 +344,44 @@ See also  clear(), add()
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
               <tr><td>name</td><td>QString</td><td align="right"></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns the time zone with the given name.
 </p>
-<p>
-</p>
+<p></p>
 <p>
 <b>name</b> - name of time zone
 Returns time zone, or 0 if not found
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li><b style="color : #000000;">zones</b> ()
+<li><b style="color : #000000;">zones</b> ( )
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table>
         <tr>
           <td>
-            returns <i>(KTimeZones.ZoneMap)</i>
+            returns <i>KTimeZones.ZoneMap</i>
           </td>
         </tr>
         <tr>
@@ -690,34 +389,32 @@ Returns time zone, or 0 if not found
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr><td></td></tr>
-
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-<p>
 Returns all the time zones defined in this collection.
 </p>
 <p>
 Returns time zone collection
-</p>
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
 </li><hr>
-
 
 </span>
 </body>

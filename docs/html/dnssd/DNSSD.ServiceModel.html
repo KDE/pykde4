@@ -2,25 +2,16 @@
 <html>
 
 <head>
-  <title>KPrintAction</title>
+  <title>DNSSD.ServiceModel</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
 <body>
 <span style="font-size : 10pt;">
-
 <table width="100%">
   <tr>
     <td width ="70%">
-      <h1>class KPrintAction</h1><hr>
+      <h1>class ServiceModel</h1><hr>
       <h3><i style="color : #00aa00"></i></h3>
-    </td>
-    <td  width="30%" valign="top" align="right">
-      <table>
-        <tr><td align="right"><a href="../index.html">Table of contents</a></td></tr>
-        <tr><td align="right"><a href="../modules.html">Modules</a></td></tr>
-        <tr><td align="right"><a href="index.html">kdeprint Classes</a></td></tr>
-        <tr><td align="right"><a href="../allclasses.html">All Classes</a></td></tr>
-      </table>
     </td>
   </tr>
 </table>
@@ -30,44 +21,70 @@
       <table bgcolor="#f7f7ff" cellpadding="4">
         <tr>
           <td width="10%" align=left>Module</td>
-          <td width="30%" align=left>kdeprint</td>
+          <td width="30%" align=left>dnssd</td>
         </tr>
         <tr>
           <td width="10%" align=left>Namespace</td>
-          <td width="30%" align=left>global</td>
+          <td width="30%" align=left>DNSSD</td>
         </tr>
         <tr>
           <td>Class</td>
-          <td>KPrintAction</td>
+          <td>ServiceModel</td>
         </tr>
         <tr>
           <td>Inherits</td>
-          <td>KActionMenu</td>
+          <td>QAbstractItemModel</td>
         </tr>
       </table>
     </td>
     <td width="65%">
-      
-
+      \class ServiceModel servicemodel.h DNSSD/ServiceModel
+</p>
+<p>
+ServiceModel implements Qt Model interface around ServiceBrowser to allow easy integration
+of service discovery into GUI.
+Example of combo box showing list of HTTP servers on local network:
+<pre>
+DNSSD.ServiceModel* m=new ServiceModel(new DNSSD.ServiceBrowser("_http._tcp"));
+QComboBox *c=new QComboBox();
+c->setModel(m);
+</pre>
+</p>
+<p>
+After user makes the selection, application typically needs pointer to selected service
+in order to get host name and port. RemoteService.Ptr can be obtained from QModelIndex
+using:
+<pre>
+void onSelected(const QModelIndex& selection) {
+DNSSD.RemoteService.Ptr service=selection.data(DNSSD.ServiceModel.ServicePtrRole).
+value<DNSSD.RemoteService.Ptr>();
+</pre>
+</p>
+<p>
+\since 4.1
+Model for list of Zeroconf services
+<b>Author</b> Jakub Stachowski
     </td>
   </tr>
 </table>
 <hr>
 <hr>
-
 <h3>enums</h3><ul>
-<li><b>PrinterType</b> = { All, Regular, Specials }</li>
+<li style="padding-bottom : 8px;"><b>AdditionalRoles</b> { ServicePtrRole }</li>
+
+<li style="padding-bottom : 8px;"><b>ModelColumns</b> { ServiceName, Host, Port }</li>
 
 </ul><a href="#extended"><i>enum details</i></a><hr>
+
 <h3>methods</h3><ul style="list-style-type : none">
-<li style="list-style-type : none"><b style="color : #000000;">KPrintAction</b> (text, type, parentWidget)
+<li style="list-style-type : none"><b style="color : #000000;">ServiceModel</b> (browser, parent)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KPrintAction object</i>
+            returns <i>ctor</i>
           </td>
         </tr>
         <tr>
@@ -75,43 +92,41 @@
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>type</td><td>KPrintAction.PrinterType</td><td align="right">KPrintAction.All</td></tr>
-
-              <tr><td>parentWidget</td><td>QWidget</td><td align="right">None</td></tr>
-
+              <tr><td>browser</td><td>DNSSD.ServiceBrowser</td><td align="right"></td></tr>
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
             </table>
           </td>
         </tr>
       </table>
     </td>
     <td width="40%" align="left">
-
-
+Creates model for given service browses and starts browsing for services. The model becomes parent of the
+browser so there is no need to delete it afterwards.
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">KPrintAction</b> (icon, text, type, parentWidget)
+<li style="list-style-type : none"><b style="color : #000000;">columnCount</b> (parent)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>a KPrintAction object</i>
+            returns <i>int</i>
           </td>
         </tr>
         <tr>
@@ -119,21 +134,18 @@
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>icon</td><td>KIcon</td><td align="right"></td></tr>
-
-              <tr><td>text</td><td>QString</td><td align="right"></td></tr>
-
-              <tr><td>type</td><td>KPrintAction.PrinterType</td><td align="right">KPrintAction.All</td></tr>
-
-              <tr><td>parentWidget</td><td>QWidget</td><td align="right">None</td></tr>
-
+              <tr><td>parent</td><td>QModelIndex</td><td align="right">QModelIndex()</td></tr>
             </table>
           </td>
         </tr>
@@ -141,155 +153,20 @@
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">exportAll</b> (parentWidget, parent, name)
+<li style="list-style-type : none"><b style="color : #000000;">data</b> (index, role)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>(KPrintAction)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <i style="color : #0000ff">static</i>
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>parentWidget</td><td>QWidget</td><td align="right">None</td></tr>
-
-              <tr><td>parent</td><td>KActionCollection</td><td align="right">None</td></tr>
-
-              <tr><td>name</td><td>char</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">exportRegular</b> (parentWidget, parent, name)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KPrintAction)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <i style="color : #0000ff">static</i>
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>parentWidget</td><td>QWidget</td><td align="right">None</td></tr>
-
-              <tr><td>parent</td><td>KActionCollection</td><td align="right">None</td></tr>
-
-              <tr><td>name</td><td>char</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">exportSpecial</b> (parentWidget, parent, name)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>(KPrintAction)</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          <i style="color : #0000ff">static</i>
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>parentWidget</td><td>QWidget</td><td align="right">None</td></tr>
-
-              <tr><td>parent</td><td>KActionCollection</td><td align="right">None</td></tr>
-
-              <tr><td>name</td><td>char</td><td align="right">0</td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li style="list-style-type : none"><b style="color : #000000;">initialize</b> (type, parentWidget)
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table vspace="5">
-        <tr>
-          <td>
-            returns <i>nothing</i>
+            returns <i>QVariant</i>
           </td>
         </tr>
         <tr>
@@ -297,17 +174,19 @@
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>type</td><td>KPrintAction.PrinterType</td><td align="right"></td></tr>
-
-              <tr><td>parentWidget</td><td>QWidget</td><td align="right"></td></tr>
-
+              <tr><td>index</td><td>QModelIndex</td><td align="right"></td></tr>
+              <tr><td>role</td><td>int</td><td align="right">Qt.DisplayRole</td></tr>
             </table>
           </td>
         </tr>
@@ -315,63 +194,20 @@
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">print_</b> (a0)<i style="color : #0000ff">   signal</i>
+<li style="list-style-type : none"><b style="color : #000000;">hasIndex</b> (row, column, parent)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
-          </td>
-        </tr>
-        <tr>
-          <td>
-          SIGNAL ("print (KPrinter*)")<i style="color : #0000ff">renamed from print</i>
-          </td>
-        </tr>
-        <tr valign="bottom">
-          <td>
-            <table>
-              <tr  bgcolor="#e7e7ff">
-                <th>Argument</th><th>Type</th><th>Default</th>
-              </tr>
-
-              <tr><td>a0</td><td>KPrinter</td><td align="right"></td></tr>
-
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-    <td width="40%" align="left">
-
-
-    </td>
-  </tr>
-</table>
-
-
-</li><hr>
-
-
-<li><b style="color : #000000;">slotAboutToShow</b> ()
-<table width="100%">
-  <tr>
-    <td width="60%" valign="top">
-      <table>
-        <tr>
-          <td>
-            returns <i>nothing</i>
+            returns <i>bool</i>
           </td>
         </tr>
         <tr>
@@ -379,11 +215,20 @@
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
-              <tr><td></td></tr>
-
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>row</td><td>int</td><td align="right"></td></tr>
+              <tr><td>column</td><td>int</td><td align="right"></td></tr>
+              <tr><td>parent</td><td>QModelIndex</td><td align="right"></td></tr>
             </table>
           </td>
         </tr>
@@ -391,23 +236,20 @@
     </td>
     <td width="40%" align="left">
 
-
     </td>
   </tr>
 </table>
 
-
 </li><hr>
 
-
-<li style="list-style-type : none"><b style="color : #000000;">slotActivated</b> (a0)
+<li style="list-style-type : none"><b style="color : #000000;">headerData</b> (section, orientation, role)
 <table width="100%">
   <tr>
     <td width="60%" valign="top">
       <table vspace="5">
         <tr>
           <td>
-            returns <i>nothing</i>
+            returns <i>QVariant</i>
           </td>
         </tr>
         <tr>
@@ -415,15 +257,20 @@
           
           </td>
         </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
         <tr valign="bottom">
           <td>
             <table>
               <tr  bgcolor="#e7e7ff">
                 <th>Argument</th><th>Type</th><th>Default</th>
               </tr>
-
-              <tr><td>a0</td><td>QAction</td><td align="right"></td></tr>
-
+              <tr><td>section</td><td>int</td><td align="right"></td></tr>
+              <tr><td>orientation</td><td>Qt.Orientation</td><td align="right"></td></tr>
+              <tr><td>role</td><td>int</td><td align="right">Qt.DisplayRole</td></tr>
             </table>
           </td>
         </tr>
@@ -431,52 +278,181 @@
     </td>
     <td width="40%" align="left">
 
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">index</b> (row, column, parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>QModelIndex</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>row</td><td>int</td><td align="right"></td></tr>
+              <tr><td>column</td><td>int</td><td align="right"></td></tr>
+              <tr><td>parent</td><td>QModelIndex</td><td align="right">QModelIndex()</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
 
     </td>
   </tr>
 </table>
 
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">parent</b> (index)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>QModelIndex</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>index</td><td>QModelIndex</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
+<li style="list-style-type : none"><b style="color : #000000;">rowCount</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>int</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>parent</td><td>QModelIndex</td><td align="right">QModelIndex()</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
 
 </li><hr>
 
+</li><hr>
 
 <a name="extended">
 <h3>enums - detail</h3>
 <ul style="list-style-type : none">
-
-<li><b>PrinterType</b> = { All, Regular, Specials }
+<li><b>AdditionalRoles</b>  { ServicePtrRole }
+  <p style="padding-top : 9px;"></p>
   <table cellspacing="5">
-
     <tr>
       <td></td>
-      <td valign="top"><i>All</i></td>
+      <td valign="top"><i>ServicePtrRole</i></td>
+      <td valign="top">- 0xA06519DE </td>
       <td valign="top">-</td>
       <td></td>
     </tr>
-
-    <tr>
-      <td></td>
-      <td valign="top"><i>Regular</i></td>
-      <td valign="top">-</td>
-      <td></td>
-    </tr>
-
-    <tr>
-      <td></td>
-      <td valign="top"><i>Specials</i></td>
-      <td valign="top">-</td>
-      <td></td>
-    </tr>
-
   </table>
 </li>
 <hr>
-
+<li><b>ModelColumns</b>  { ServiceName, Host, Port }
+  <p style="padding-top : 9px;">Default columns for this model. If service browser is not set to resolve automatically, then the model
+has only one column (service name).</p>
+  <table cellspacing="5">
+    <tr>
+      <td></td>
+      <td valign="top"><i>ServiceName</i></td>
+      <td valign="top">- 0 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Host</i></td>
+      <td valign="top">- 1 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Port</i></td>
+      <td valign="top">- 2 </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
 </ul>
-
 </span>
 </body>
 </html>

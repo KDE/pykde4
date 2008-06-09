@@ -38,6 +38,8 @@ INCLUDE_DIRECTORIES(
     ${KDE4_INCLUDE_DIR}/kdeprint/lpr
     ${KDE4_INCLUDE_DIR}/dom
     ${KDE4_INCLUDE_DIR}/ksettings
+    ${KDE4_INCLUDE_DIR}/knewstuff2
+    ${KDE4_INCLUDE_DIR}/dnssd
     extra/kde3930
 )
 
@@ -57,6 +59,8 @@ ADD_SIP_PYTHON_MODULE(PyKDE4.kutils sip/kutils/kutilsmod.sip ${KDE4_KUTILS_LIBS}
 ADD_SIP_PYTHON_MODULE(PyKDE4.kparts sip/kparts/kpartsmod.sip ${KDE4_KPARTS_LIBS})
 ADD_SIP_PYTHON_MODULE(PyKDE4.ktexteditor sip/ktexteditor/ktexteditormod.sip ${KDE4_KTEXTEDITOR_LIBS})
 ADD_SIP_PYTHON_MODULE(PyKDE4.khtml sip/khtml/khtmlmod.sip ${KDE4_KHTML_LIBS})
+ADD_SIP_PYTHON_MODULE(PyKDE4.knewstuff sip/knewstuff/knewstuffmod.sip ${KDE4_KNEWSTUFF2_LIBS})
+ADD_SIP_PYTHON_MODULE(PyKDE4.dnssd sip/dnssd/dnssdmod.sip ${KDE4_KDNSSD_LIBS})
 
 PYTHON_INSTALL(__init__.py ${PYTHON_SITE_PACKAGES_DIR}/PyKDE4)
 

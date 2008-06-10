@@ -8,15 +8,15 @@ FIND_PACKAGE(PythonLibrary REQUIRED)
 INCLUDE(PythonMacros)
 
 FIND_PACKAGE(SIP REQUIRED)
-IF(SIP_VERSION STRLESS "040701")    # These version numbers also appear in ../CMakeLists.txt
-    MESSAGE(FATAL_ERROR "The version of SIP found is too old. 4.7.1 or later is needed.")
-ENDIF(SIP_VERSION STRLESS "040701")
+IF(SIP_VERSION STRLESS "040706")    # These version numbers also appear in ../CMakeLists.txt
+    MESSAGE(FATAL_ERROR "The version of SIP found is too old. 4.7.6 or later is needed.")
+ENDIF(SIP_VERSION STRLESS "040706")
 INCLUDE(SIPMacros)
 
 FIND_PACKAGE(PyQt4 REQUIRED)
-IF(PYQT4_VERSION STRLESS "040301")  # These version numbers also appear in ../CMakeLists.txt
-    MESSAGE(FATAL_ERROR "The version of PyQt found is too old. 4.3.1 or later is required.")
-ENDIF(PYQT4_VERSION STRLESS "040301")
+IF(PYQT4_VERSION STRLESS "040402")  # These version numbers also appear in ../CMakeLists.txt
+    MESSAGE(FATAL_ERROR "The version of PyQt found is too old. 4.4.2 or later is required.")
+ENDIF(PYQT4_VERSION STRLESS "040402")
 
 INCLUDE_DIRECTORIES(
     ${PYTHON_INCLUDE_PATH}

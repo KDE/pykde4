@@ -21,7 +21,9 @@ SET(SOPRANO_MIN_VERSION "2.0")
 MACRO_OPTIONAL_FIND_PACKAGE(Soprano)
 MACRO_LOG_FEATURE(Soprano_FOUND "Soprano" "Soprano Libraries" "kdesupport" FALSE "" "Required for Soprano Python bindings.")
 
-#FIND_PACKAGE(Nepomuk REQUIRED)
+MACRO_OPTIONAL_FIND_PACKAGE(Nepomuk)
+MACRO_LOG_FEATURE(Nepomuk_FOUND "Nepomuk" "Nepomuk Libraries" "kdesupport" FALSE "" "Required for Nepomuk Python bindings.")
+
 
 INCLUDE_DIRECTORIES(
     ${PYTHON_INCLUDE_PATH}
@@ -72,7 +74,9 @@ IF(Soprano_FOUND)
     ADD_SIP_PYTHON_MODULE(PyKDE4.soprano sip/soprano/sopranomod.sip ${SOPRANO_LIBRARIES} ${SOPRANO_INDEX_LIBRARIES} ${SOPRANO_CLIENT_LIBRARIES} ${SOPRANO_SERVER_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY})
 ENDIF(Soprano_FOUND)
 
-#ADD_SIP_PYTHON_MODULE(PyKDE4.nepomuk sip/nepomuk/nepomukmod.sip ${NEPOMUK_LIBRARIES} ${QT_QTCORE_LIBRARY}  ${SOPRANO_LIBRARIES})
+IF(Nepomuk_FOUND)
+    ADD_SIP_PYTHON_MODULE(PyKDE4.nepomuk sip/nepomuk/nepomukmod.sip ${NEPOMUK_LIBRARIES} ${QT_QTCORE_LIBRARY}  ${SOPRANO_LIBRARIES})
+ENDIF(Nepomuk_FOUND)
 
 PYTHON_INSTALL(__init__.py ${PYTHON_SITE_PACKAGES_DIR}/PyKDE4)
 

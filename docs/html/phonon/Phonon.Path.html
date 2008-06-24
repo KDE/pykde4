@@ -1,0 +1,605 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Phonon.Path</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class Path</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>phonon</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Phonon</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>Path</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      \class Path path.h Phonon/Path
+Connection object providing convenient effect insertion
+</p>
+<p>
+<pre>
+MediaObject *media = new MediaObject;
+AudioOutput *output = new AudioOutput(Phonon.MusicCategory);
+Path path = Phonon.createPath(media, output);
+Q_ASSERT(path.isValid()); // for this simple case the path should always be
+//valid - there are unit tests to ensure it
+// insert an effect
+QList<EffectDescription> effectList = BackendCapabilities.availableAudioEffects();
+if (!effectList.isEmpty()) {
+Effect *effect = path.insertEffect(effectList.first());
+}
+</pre>
+<b>Author</b> Matthias Kretz <kretz@kde.org>
+<b>Author</b> Thierry Bastian <thierry.bastian@trolltech.com>
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li><b style="color : #000000;">Path</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Creates an invalid path.
+</p>
+<p>
+You can still make it a valid path by calling reconnect. To create a path you should use
+createPath, though.
+</p>
+<p>
+See also  createPath
+</p>
+<p>
+See also  isValid
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">Path</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>Phonon.Path</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Constructs a copy of the given path.
+</p>
+<p>
+This constructor is fast thanks to explicit sharing.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">disconnect</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Disconnects the path from the MediaNodes it was connected to. This invalidates the path
+(isValid returns <b>false</b> then).
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">effects</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>QList<Phonon::Effect</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns a list of Effect objects that are currently
+used as effects. The order in the list determines the order the
+signal is sent through the effects.
+</p>
+<p>
+Returns A list with all current effects.
+</p>
+<p>
+See also  insertEffect
+</p>
+<p>
+See also  removeEffect
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">insertEffect</b> (desc, insertBefore)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Phonon.Effect</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>desc</td><td>Phonon.EffectDescription</td><td align="right"></td></tr>
+              <tr><td>insertBefore</td><td>Phonon.Effect</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Creates and inserts an effect into the path.
+</p>
+<p>
+You may insert effects of the same class as often as you like,
+but if you insert the same object, the call will fail.
+</p>
+<p></p>
+<p>
+<b>desc</b> - The EffectDescription object for the effect to be inserted.
+</p>
+<p></p>
+<p>
+<b>insertBefore</b> - If you already inserted an effect you can
+tell with this parameter in which order the data gets
+processed. If this is 0 the effect is appended at the end of
+the processing list. If the effect has not been inserted before
+the method will do nothing and return false.
+</p>
+<p>
+Returns Returns a pointer to the effect object if it could be inserted
+at the specified position. If 0 is returned the effect was not
+inserted.
+</p>
+<p>
+See also  removeEffect
+</p>
+<p>
+See also  effects
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">insertEffect</b> (newEffect, insertBefore)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>newEffect</td><td>Phonon.Effect</td><td align="right"></td></tr>
+              <tr><td>insertBefore</td><td>Phonon.Effect</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Inserts an effect into the path.
+</p>
+<p>
+You may insert effects of the same class as often as you like,
+but if you insert the same object, the call will fail.
+</p>
+<p></p>
+<p>
+<b>newEffect</b> - An Effect object.
+</p>
+<p></p>
+<p>
+<b>insertBefore</b> - If you already inserted an effect you can
+tell with this parameter in which order the data gets
+processed. If this is 0 the effect is appended at the end of
+the processing list. If the effect has not been inserted before
+the method will do nothing and return false.
+</p>
+<p>
+Returns Returns whether the effect could be inserted at the
+specified position. If false is returned the effect was not
+inserted.
+</p>
+<p>
+See also  removeEffect
+</p>
+<p>
+See also  effects
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">isValid</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns whether the path object connects two MediaNodes or not.
+</p>
+<p>
+Returns <b>true</b> when the path connects two MediaNodes
+Returns <b>false</b> when the path is disconnected
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">operator !=</b> (p)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>p</td><td>Phonon.Path</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns <b>true</b> if this Path is not equal to <b>p;</b> otherwise returns <b>false;</b>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">operator ==</b> (p)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>p</td><td>Phonon.Path</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns <b>true</b> if this Path is equal to <b>p;</b> otherwise returns <b>false;</b>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">reconnect</b> (source, sink)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>source</td><td>Phonon.MediaNode</td><td align="right"></td></tr>
+              <tr><td>sink</td><td>Phonon.MediaNode</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Tries to change the MediaNodes the path is connected to.
+</p>
+<p>
+If reconnect fails the old connection is kept.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">removeEffect</b> (effect)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>effect</td><td>Phonon.Effect</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Removes an effect from the path.
+</p>
+<p>
+If the effect gets deleted while it is still connected the effect
+will be removed automatically.
+</p>
+<p></p>
+<p>
+<b>effect</b> - The effect to be removed.
+</p>
+<p>
+Returns Returns whether the call was successful. If it returns
+false the effect could not be found in the path, meaning it
+has not been inserted before.
+</p>
+<p>
+See also  insertEffect
+</p>
+<p>
+See also  effects
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+</span>
+</body>
+</html>

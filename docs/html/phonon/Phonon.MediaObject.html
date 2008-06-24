@@ -1,0 +1,2029 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Phonon.MediaObject</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class MediaObject</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>phonon</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Phonon</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>MediaObject</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QObject,Phonon::MediaNode</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      \class MediaObject mediaobject.h Phonon/MediaObject
+Interface for media playback of a given URL.
+</p>
+<p>
+This class is the most important class in %Phonon. Use it to open a media
+file at an arbitrary location, a CD or DVD or to stream media data from
+the application to the backend.
+</p>
+<p>
+This class controls the state (play, pause, stop, seek)
+and you can use it to get a lot of information about the media data.
+</p>
+<p>
+Notice that most functions of this class are asynchronous.
+That means if you call play() the object only starts playing when the
+stateChanged() signal tells you that the object changed into PlayingState.
+The states you can expect are documented for those methods.
+</p>
+<p>
+A common usage example is the following:
+<pre>
+media = new MediaObject(this);
+connect(media, SIGNAL(finished()), SLOT(slotFinished());
+media->setCurrentSource("/home/username/music/filename.ogg");
+media->play();
+</pre>
+</p>
+<p>
+If you want to play more that one media file (one after another) you can
+either tell MediaObject about all those files
+<pre>
+media->setCurrentSource(":/sounds/startsound.ogg");
+media->enqueue("/home/username/music/song.mp3");
+media->enqueue(":/sounds/endsound.ogg");
+</pre>
+or provide the next file just in time:
+<pre>
+media->setCurrentSource(":/sounds/startsound.ogg");
+connect(media, SIGNAL(aboutToFinish()), SLOT(enqueueNextSource()));
+}
+</p>
+<p>
+void enqueueNextSource()
+{
+media->enqueue("/home/username/music/song.mp3");
+}
+</pre>
+</p>
+<p>
+<b>Author</b> Matthias Kretz <kretz@kde.org>
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li><b style="color : #000000;">aboutToFinish</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("aboutToFinish ()")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Emitted before the playback of the whole queue stops. When this
+signal is emitted you still have time to provide the next
+MediaSource (using enqueue) so that playback continues.
+</p>
+<p>
+This signal can be used to provide the next MediaSource just in
+time for the transition still to work.
+</p>
+<p>
+See also  enqueue
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">bufferStatus</b> (percentFilled)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("bufferStatus (int)")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>percentFilled</td><td>int</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Tells about the status of the buffer.
+</p>
+<p>
+You can use this signal to show a progress bar to the user when
+in BufferingState:
+</p>
+<p>
+<pre>
+progressBar->setRange(0, 100); // this is the default
+connect(media, SIGNAL(bufferStatus(int)), progressBar, SLOT(setValue(int)));
+</pre>
+</p>
+<p></p>
+<p>
+<b>percentFilled</b> - A number between 0 and 100 telling you how
+much the buffer is filled.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">clearQueue</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Clears the queue of sources.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">currentSource</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Phonon.MediaSource</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the current media source.
+</p>
+<p>
+See also  setCurrentSource
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">currentSourceChanged</b> (newSource)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("currentSourceChanged (const MediaSource&)")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>newSource</td><td>Phonon.MediaSource</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Emitted when the MediaObject makes a transition to the next
+MediaSource in the queue.
+</p>
+<p>
+In other words, it is emitted when an individual MediaSource is
+finished.
+</p>
+<p></p>
+<p>
+<b>newSource</b> - The source that starts to play at the time the
+signal is emitted.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">currentTime</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>qint64</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Get the current time (in milliseconds) of the file currently being played.
+</p>
+<p>
+Returns The current time in milliseconds.
+</p>
+<p>
+See also  tick
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">enqueue</b> (source)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>source</td><td>Phonon.MediaSource</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Appends one source to the queue. Use this function to provide
+the next source just in time after the aboutToFinish signal was
+emitted.
+</p>
+<p>
+See also  aboutToFinish
+</p>
+<p>
+See also  setQueue
+</p>
+<p>
+See also  clearQueue
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">enqueue</b> (sources)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>sources</td><td>QList<Phonon::MediaSource></td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Appends multiple sources to the queue.
+</p>
+<p>
+See also  setQueue
+</p>
+<p>
+See also  clearQueue
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">enqueue</b> (urls)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>urls</td><td>QList<QUrl></td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Appends multiple sources to the queue.
+</p>
+<p>
+See also  setQueue
+</p>
+<p>
+See also  clearQueue
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">errorString</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>QString</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns a human-readable description of the last error that occurred.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">errorType</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>ErrorType</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Tells your program what to do about the error.
+</p>
+<p>
+See also  Phonon.ErrorType
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">finished</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("finished ()")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Emitted when the object has finished playback.
+It is not emitted if you call stop(), pause() or
+load(), but only on end-of-queue or a critical error.
+</p>
+<p>
+This signal is not emitted when the current source has
+finished and there's another source in the queue. It is only
+emitted when the queue is empty.
+</p>
+<p>
+See also  currentSourceChanged
+</p>
+<p>
+See also  aboutToFinish
+</p>
+<p>
+See also  prefinishMarkReached
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">hasVideo</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Check whether the media data includes a video stream.
+</p>
+<p>
+This information cannot be known immediately. It is best
+to also listen to the hasVideoChanged signal.
+</p>
+<p>
+<pre>
+connect(media, SIGNAL(hasVideoChanged(bool)), hasVideoChanged(bool));
+media->setCurrentSource("somevideo.avi");
+media->hasVideo(); // returns false;
+}
+</p>
+<p>
+void hasVideoChanged(bool b)
+{
+// b == true
+media->hasVideo(); // returns true;
+}
+</pre>
+</p>
+<p>
+Returns true if the media contains video data. false
+otherwise.
+</p>
+<p>
+See also  hasVideoChanged
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">hasVideoChanged</b> (hasVideo)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("hasVideoChanged (bool)")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>hasVideo</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Emitted whenever the return value of hasVideo() changes.
+</p>
+<p>
+Normally you'll check hasVideo() first and then let this signal
+tell you whether video is available now or not. That way you
+don't have to poll hasVideo().
+</p>
+<p></p>
+<p>
+<b>hasVideo</b> - <b>true</b> The stream contains video and adding a
+VideoWidget will show a video.
+<b>false</b> There is no video data in the stream and
+adding a VideoWidget will show an empty (black)
+VideoWidget.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">isSeekable</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Check whether the current media may be seeked.
+</p>
+<p>
+This information cannot be known immediately. It is best
+to also listen to the hasVideoChanged signal.
+</p>
+<p>
+<pre>
+connect(media, SIGNAL(hasVideoChanged(bool)), hasVideoChanged(bool));
+media->setCurrentSource("somevideo.avi");
+media->hasVideo(); // returns false;
+}
+</p>
+<p>
+void hasVideoChanged(bool b)
+{
+// b == true
+media->hasVideo(); // returns true;
+}
+</pre>
+</p>
+<p>
+Returns true when the current media may be seeked. false
+otherwise.
+</p>
+<p>
+See also  seekableChanged()
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">metaData</b> (key)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>QStringList</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>key</td><td>QString</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the strings associated with the given <b>key.</b>
+</p>
+<p>
+Backends should use the keys specified in the Ogg Vorbis
+documentation: http://xiph.org/vorbis/doc/v-comment.html
+</p>
+<p>
+Therefore the following should work with every backend:
+</p>
+<p>
+A typical usage looks like this:
+<pre>
+setMetaArtist (media->metaData("ARTIST" ));
+setMetaAlbum (media->metaData("ALBUM" ));
+setMetaTitle (media->metaData("TITLE" ));
+setMetaDate (media->metaData("DATE" ));
+setMetaGenre (media->metaData("GENRE" ));
+setMetaTrack (media->metaData("TRACKNUMBER"));
+setMetaComment(media->metaData("DESCRIPTION"));
+</pre>
+</p>
+<p>
+For Audio CDs you can query
+<pre>
+metaData("MUSICBRAINZ_DISCID");
+</pre>
+to get a DiscID hash that you can use with the MusicBrainz
+service:
+http://musicbrainz.org/doc/ClientHOWTO
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">metaData</b> (key)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>QStringList</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>key</td><td>Phonon.MetaData</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the strings associated with the given <b>key.</b>
+</p>
+<p>
+Same as above except that the keys are defined in the
+Phonon.MetaData enum.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">metaData</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>QMultiMap<QString,QString></i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns all meta data.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">metaDataChanged</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("metaDataChanged ()")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+This signal is emitted whenever the audio/video data that is
+being played is associated with new meta data. E.g. for radio
+streams this happens when the next song is played.
+</p>
+<p>
+You can get the new meta data with the metaData methods.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">pause</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Requests playback to pause. If it was paused before nothing changes.
+</p>
+<p>
+Possible states right after this call:
+<li> PlayingState </li>
+<li> PausedState </li>
+<li> (\ref ErrorState) </li>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">play</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Requests playback of the media data to start. Playback only
+starts when stateChanged() signals that it goes into PlayingState,
+though.
+</p>
+<p>
+Possible states right after this call:
+<li> BufferingState </li>
+<li> PlayingState </li>
+<li> (\ref ErrorState) </li>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">prefinishMark</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>qint32</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">prefinishMarkReached</b> (msecToEnd)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("prefinishMarkReached (qint32)")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>msecToEnd</td><td>qint32</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Emitted when there are only <b>msecToEnd</b> milliseconds left
+for playback.
+</p>
+<p></p>
+<p>
+<b>msecToEnd</b> - The remaining time until the playback queue finishes.
+</p>
+<p>
+This signal is not emitted when there is another source in the queue.
+It is only emitted when the queue is empty.
+</p>
+<p>
+See also  setPrefinishMark
+</p>
+<p>
+See also  prefinishMark
+</p>
+<p>
+See also  aboutToFinish
+</p>
+<p>
+See also  finished
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">queue</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>QList<Phonon::MediaSource></i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the queued media sources. This does list does not include
+the current source (returned by currentSource).
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">remainingTime</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>qint64</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Get the remaining time (in milliseconds) of the file currently being played.
+</p>
+<p>
+Returns The remaining time in milliseconds.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">seek</b> (time)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>time</td><td>qint64</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Requests a seek to the time indicated.
+</p>
+<p>
+You can only seek if state() == PlayingState, BufferingState or PausedState.
+</p>
+<p>
+The call is asynchronous, so currentTime can still be the old
+value right after this method was called. If all you need is a
+slider that shows the current position and allows the user to
+seek use the class SeekSlider.
+</p>
+<p></p>
+<p>
+<b>time</b> - The time in milliseconds where to continue playing.
+</p>
+<p>
+Possible states right after this call:
+<li> BufferingState </li>
+<li> PlayingState </li>
+<li> (\ref ErrorState) </li>
+</p>
+<p>
+See also  SeekSlider
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">seekableChanged</b> (isSeekable)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("seekableChanged (bool)")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>isSeekable</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Emitted whenever the return value of isSeekable() changes.
+</p>
+<p>
+Normally you'll check isSeekable() first and then let this signal
+tell you whether seeking is possible now or not. That way you
+don't have to poll isSeekable().
+</p>
+<p></p>
+<p>
+<b>isSeekable</b> - <b>true</b> if the stream is seekable (i.e. calling
+seek() works)
+<b>false</b> if the stream is not seekable (i.e.
+all calls to seek() will be ignored)
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setCurrentSource</b> (source)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>source</td><td>Phonon.MediaSource</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Set the media source the MediaObject should use.
+</p>
+<p></p>
+<p>
+<b>source</b> - The MediaSource object to the media data. You can
+just as well use a QUrl or QString (for a local file) here.
+</p>
+<p>
+<pre>
+QUrl url("http://www.example.com/music.ogg");
+media->setCurrentSource(url);
+</pre>
+</p>
+<p>
+See also  currentSource
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setPrefinishMark</b> (msecToEnd)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>msecToEnd</td><td>qint32</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setQueue</b> (sources)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>sources</td><td>QList<Phonon::MediaSource></td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Set the MediaSources to play when the current media has finished.
+</p>
+<p>
+This function will overwrite the current queue.
+</p>
+<p>
+See also  clearQueue
+</p>
+<p>
+See also  enqueue
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setQueue</b> (urls)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>urls</td><td>QList<QUrl></td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Set the MediaSources to play when the current media has finished.
+</p>
+<p>
+This function overwrites the current queue.
+</p>
+<p>
+See also  clearQueue
+</p>
+<p>
+See also  enqueue
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setTickInterval</b> (newTickInterval)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>newTickInterval</td><td>qint32</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setTransitionTime</b> (msec)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>msec</td><td>qint32</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">state</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>State</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Get the current state.
+</p>
+<p>
+Returns The state of the object.
+</p>
+<p>
+See also  State
+</p>
+<p>
+See also  stateChanged
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">stateChanged</b> (newstate, oldstate)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("stateChanged (State, State)")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>newstate</td><td>Phonon.State</td><td align="right"></td></tr>
+              <tr><td>oldstate</td><td>Phonon.State</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Emitted when the state of the MediaObject has changed.
+In case you're not interested in the old state you can also
+connect to a slot that only has one State argument.
+</p>
+<p></p>
+<p>
+<b>newstate</b> - The state the Player is in now.</p>
+<p>
+<b>oldstate</b> - The state the Player was in before.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">stop</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Requests playback to stop. If it was stopped before nothing changes.
+</p>
+<p>
+Possible states right after this call:
+<li> the state it was in before (e.g. PlayingState) </li>
+<li> StoppedState </li>
+<li> (\ref ErrorState) </li>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">tick</b> (time)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("tick (qint64)")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>time</td><td>qint64</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+This signal gets emitted every tickInterval milliseconds.
+</p>
+<p></p>
+<p>
+<b>time</b> - The position of the media file in milliseconds.
+</p>
+<p>
+See also  setTickInterval, tickInterval
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">tickInterval</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>qint32</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">totalTime</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>qint64</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Get the total time (in milliseconds) of the file currently being played.
+</p>
+<p>
+Returns The total time in milliseconds.
+</p>
+<p>
+See also  totalTimeChanged
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">totalTimeChanged</b> (newTotalTime)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("totalTimeChanged (qint64)")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>newTotalTime</td><td>qint64</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+This signal is emitted as soon as the total time of the media file is
+known or has changed. For most non-local media data the total
+time of the media can only be known after some time. At that time the
+totalTime function can not return useful information. You have
+to wait for this signal to know the real total time.
+</p>
+<p></p>
+<p>
+<b>newTotalTime</b> - The length of the media file in milliseconds.
+</p>
+<p>
+See also  totalTime
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">transitionTime</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>qint32</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+</span>
+</body>
+</html>

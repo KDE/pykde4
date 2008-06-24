@@ -1,0 +1,682 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Phonon.AbstractMediaStream</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class AbstractMediaStream</h1><hr>
+      <h3><i style="color : #00aa00">abstract</i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>phonon</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Phonon</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>AbstractMediaStream</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QObject</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      \class AbstractMediaStream abstractmediastream.h Phonon/AbstractMediaStream
+Base class for custom media data streams.
+</p>
+<p>
+Implement this class to provide a custom data stream to the backend. The class supports both, the
+push and the pull model.
+</p>
+<p>
+Push:
+<pre>
+PushStream.PushStream(QObject *parent)
+: AbstractMediaStream(parent), m_timer(new QTimer(this))
+{
+setStreamSize(getMediaStreamSize());
+</p>
+<p>
+connect(m_timer, SIGNAL(timeout()), SLOT(moreData()));
+m_timer->setInterval(0);
+}
+</p>
+<p>
+void PushStream.moreData()
+{
+const QByteArray data = getMediaData();
+if (data.isEmpty()) {
+endOfData();
+} else {
+writeData(data);
+}
+}
+</p>
+<p>
+void PushStream.needData()
+{
+m_timer->start();
+moreData();
+}
+</p>
+<p>
+void PushStream.enoughData()
+{
+m_timer->stop();
+}
+</pre>
+</p>
+<p>
+Pull:
+<pre>
+PullStream.PullStream(QObject *parent)
+: AbstractMediaStream(parent)
+{
+setStreamSize(getMediaStreamSize());
+}
+</p>
+<p>
+void PullStream.needData()
+{
+const QByteArray data = getMediaData();
+if (data.isEmpty()) {
+endOfData();
+} else {
+writeData(data);
+}
+}
+</pre>
+</p>
+<p>
+<b>Author</b> Matthias Kretz <kretz@kde.org>
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">AbstractMediaStream</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Constructs an AbstractMediaStream object with a <b>parent.</b>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">AbstractMediaStream</b> (dd, parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>dd</td><td>AbstractMediaStreamPrivate</td><td align="right"></td></tr>
+              <tr><td>parent</td><td>QObject</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">endOfData</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Tells the backend that the media data stream is at its end.
+</p>
+<p>
+Don't call this function before the first needData() is emitted.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">enoughData</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Reimplement this function to be notified when the backend has enough data and your stream
+object may take a break. This method is important for pushing data to the backend in
+order to not fill the backend buffer unnecessarily.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">error</b> (errorType, errorString)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>errorType</td><td>Phonon.ErrorType</td><td align="right"></td></tr>
+              <tr><td>errorString</td><td>QString</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+If an I/O error occurs you should call this function to make MediaObject go into
+ErrorState.
+</p>
+<p>
+See also  MediaObject.errorType()
+</p>
+<p>
+See also  MediaObject.errorString()
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">needData</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Reimplement this function to be notified when the backend needs data.
+</p>
+<p>
+When this function is called you should try to call writeData or endOfData before
+returning.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">reset</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Reimplement this function to reset the stream. Subsequent calls to writeData should start
+from the first position of the data unless a seek is requested.
+</p>
+<p>
+The function is necessary for the case where a non-seekable MediaStream is
+played more than once. For a seekable stream the implementation can simply call
+<pre>
+seekStream(0);
+\endcode.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">seekStream</b> (offset)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>offset</td><td>qint64</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Reimplement this function if your stream is seekable.
+</p>
+<p>
+When this function is called the next call to writeData has to be at the requested \p
+offset.
+</p>
+<p>
+Do not call the parent implementation.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setStreamSeekable</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets whether your data stream is seekable.
+</p>
+<p>
+Defaults to false.
+</p>
+<p>
+If you set this to true you have to implement the seekStream function.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setStreamSize</b> (a0)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>a0</td><td>qint64</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets the size of the stream in number of bytes.
+</p>
+<p>
+A negative value means that the length of the stream cannot be known.
+</p>
+<p>
+Defaults to 0.
+</p>
+<p>
+This function has to be called. A backend will not call needData() until the
+stream size is set.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">streamSeekable</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns whether your data stream is set as seekable.
+</p>
+<p>
+Defaults to false.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">streamSize</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>qint64</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the stream size that was set with setStreamSize.
+</p>
+<p>
+A negative value means that the length of the stream cannot be known.
+</p>
+<p>
+Defaults to 0.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">writeData</b> (data)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>data</td><td>QByteArray</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sends the media <b>data</b> to the backend for decoding.
+</p>
+<p>
+Don't call this function before the first needData() is emitted.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+</span>
+</body>
+</html>

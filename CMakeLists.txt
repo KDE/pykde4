@@ -17,10 +17,10 @@ IF(PYQT4_VERSION STRLESS "040402")  # These version numbers also appear in ../CM
     MESSAGE(FATAL_ERROR "The version of PyQt found is too old. 4.4.2 or later is required.")
 ENDIF(PYQT4_VERSION STRLESS "040402")
 
-#SET(SOPRANO_MIN_VERSION "2.0")
-#MACRO_OPTIONAL_FIND_PACKAGE(Soprano)
-#MACRO_LOG_FEATURE(Soprano_FOUND "Soprano" "Soprano Libraries" "kdesupport" FALSE "" "Required for Soprano Python bindings.")
-#
+SET(SOPRANO_MIN_VERSION "2.0")
+MACRO_OPTIONAL_FIND_PACKAGE(Soprano)
+MACRO_LOG_FEATURE(Soprano_FOUND "Soprano" "Soprano Libraries" "kdesupport" FALSE "" "Required for Soprano Python bindings.")
+
 #FIND_PACKAGE(Nepomuk REQUIRED)
 
 INCLUDE_DIRECTORIES(
@@ -68,9 +68,9 @@ ADD_SIP_PYTHON_MODULE(PyKDE4.knewstuff sip/knewstuff/knewstuffmod.sip ${KDE4_KNE
 ADD_SIP_PYTHON_MODULE(PyKDE4.dnssd sip/dnssd/dnssdmod.sip ${KDE4_KDNSSD_LIBS})
 ADD_SIP_PYTHON_MODULE(PyKDE4.phonon sip/phonon/phononmod.sip ${PHONON_LIBS} ${QT_QTDBUS_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
 
-#IF(Soprano_FOUND)
-#    ADD_SIP_PYTHON_MODULE(PyKDE4.soprano sip/soprano/sopranomod.sip ${SOPRANO_LIBRARIES} ${SOPRANO_INDEX_LIBRARIES} ${SOPRANO_CLIENT_LIBRARIES} ${SOPRANO_SERVER_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY})
-#ENDIF(Soprano_FOUND)
+IF(Soprano_FOUND)
+    ADD_SIP_PYTHON_MODULE(PyKDE4.soprano sip/soprano/sopranomod.sip ${SOPRANO_LIBRARIES} ${SOPRANO_INDEX_LIBRARIES} ${SOPRANO_CLIENT_LIBRARIES} ${SOPRANO_SERVER_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY})
+ENDIF(Soprano_FOUND)
 
 #ADD_SIP_PYTHON_MODULE(PyKDE4.nepomuk sip/nepomuk/nepomukmod.sip ${NEPOMUK_LIBRARIES} ${QT_QTCORE_LIBRARY}  ${SOPRANO_LIBRARIES})
 

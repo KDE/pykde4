@@ -24,6 +24,8 @@ MACRO_LOG_FEATURE(Soprano_FOUND "Soprano" "Soprano Libraries" "kdesupport" FALSE
 MACRO_OPTIONAL_FIND_PACKAGE(Nepomuk)
 MACRO_LOG_FEATURE(Nepomuk_FOUND "Nepomuk" "Nepomuk Libraries" "kdesupport" FALSE "" "Required for Nepomuk Python bindings.")
 
+MACRO_OPTIONAL_FIND_PACKAGE(KdepimLibs)
+MACRO_LOG_FEATURE(KDEPIMLIBS_FOUND "Kdepimlibs" "KDE pim Libraries" "kdepimlibs" FALSE "" "Required for Akonadi Python bindings.")
 
 INCLUDE_DIRECTORIES(
     ${PYTHON_INCLUDE_PATH}
@@ -77,6 +79,10 @@ ENDIF(Soprano_FOUND)
 IF(Nepomuk_FOUND)
     ADD_SIP_PYTHON_MODULE(PyKDE4.nepomuk sip/nepomuk/nepomukmod.sip ${NEPOMUK_LIBRARIES} ${QT_QTCORE_LIBRARY}  ${SOPRANO_LIBRARIES})
 ENDIF(Nepomuk_FOUND)
+
+IF(KDEPIMLIBS_FOUND)
+    ADD_SIP_PYTHON_MODULE(PyKDE4.akonadi sip/akonadi/akonadimod.sip ${KDE4_AKONADI_LIBS} ${KDE4_AKONADI_KMIME_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
+ENDIF(KDEPIMLIBS_FOUND)
 
 PYTHON_INSTALL(__init__.py ${PYTHON_SITE_PACKAGES_DIR}/PyKDE4)
 

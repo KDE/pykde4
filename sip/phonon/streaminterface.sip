@@ -43,20 +43,6 @@ protected:
                             StreamInterface ();
 };   // StreamInterface
 
-
-class StreamInterface2 : QObject, Phonon::StreamInterface
-{
-%TypeHeaderCode
-#include <phonon/streaminterface.h>
-%End
-
-public:
-    void                    needData (quint32);
-
-protected:
-                            StreamInterface2 (QObject* parent /TransferThis/ = 0);
-};   // StreamInterface2
-
 };   // Phonon
 
 

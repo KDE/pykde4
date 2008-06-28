@@ -19,7 +19,6 @@
 %Include objectdescription.sip
 %Include objectdescriptionmodel.sip
 %Include abstractmediastream.sip
-%Include abstractmediastream2.sip
 %Include abstractvideooutput.sip
 %Include audiooutput.sip
 %Include backendcapabilities.sip

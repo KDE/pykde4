@@ -37,7 +37,6 @@ QUrl                    unsignedInt ();
 QUrl                    unsignedShort ();
 QUrl                    unsignedLong ();
 QUrl                    string ();
-QUrl                    xsdFloat ();
 QUrl                    xsdDouble ();
 QUrl                    boolean ();
 QUrl                    date ();

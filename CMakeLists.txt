@@ -49,7 +49,6 @@ INCLUDE_DIRECTORIES(
     ${KDE4_INCLUDE_DIR}/ksettings
     ${KDE4_INCLUDE_DIR}/knewstuff2
     ${KDE4_INCLUDE_DIR}/dnssd
-    extra/kde3930
 )
 
 SET(SIP_INCLUDES ${PYQT4_SIP_DIR} sip)

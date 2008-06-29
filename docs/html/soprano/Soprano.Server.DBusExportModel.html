@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Soprano.Server.DBusExportModel</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class DBusExportModel</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>soprano</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Soprano::Server</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>DBusExportModel</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>Soprano::FilterModel</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      \class DBusExportModel dbusexportmodel.h Soprano/Server/DBusExportModel
+</p>
+<p>
+Exports a %Soprano Model via D-Bus.
+</p>
+<p>
+DBusExportModel is a FilterModel like any other. As such,
+it can occure anywhere in a stack of models. However,
+the model exported via D-Bus is actually the FilterModel.parentModel,
+not the DBusExportModel itself. Thus, subclassing DBusExportModel
+to modify the behaviour of methods called via D-Bus does not
+make sense. Instead stack the DBusExportModel on top of
+your own custom FilterModel.
+</p>
+<p>
+For creating a simple %Soprano D-Bus server see
+ServerCore.registerAsDBusObject.
+</p>
+<p>
+The interface exported can be accessed via Client.DBusModel.
+</p>
+<p>
+DBusExportModel automatically makes use of a Util.AsyncModel as
+parent model to create delayed D-Bus replies. If the parent model
+is not a Util.AsyncModel all calls will be performed syncroneously.
+</p>
+<p>
+<b>Author</b> Sebastian Trueg <trueg@kde.org>
+</p>
+<p>
+See also  soprano_server_dbus
+</p>
+<p>
+\since 2.1
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">DBusExportModel</b> (model)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>model</td><td>Soprano.Model</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Create a new D-Bus export model.</p>
+<p>
+<b>model</b> - The parent model which should be exported.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">dbusObjectPath</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>QString</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+The path this model is exported on.
+This is an empty string if the model is not exported.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">registerModel</b> (dbusObjectPath)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>dbusObjectPath</td><td>QString</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Register the model under the given D-Bus object path.
+</p>
+<p>
+See also  QDBusConnection.registerObject
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">unregisterModel</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Unregister the model from D-Bus.
+</p>
+<p>
+See also  QDBusConnection.unregisterObject
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+</span>
+</body>
+</html>

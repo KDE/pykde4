@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Akonadi.ItemSerializerPlugin</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class ItemSerializerPlugin</h1><hr>
+      <h3><i style="color : #00aa00">abstract</i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>akonadi</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Akonadi</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>ItemSerializerPlugin</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      Base class for PIM item type serializer plugins.
+Serializer plugins convert between the payload of Akonadi.Item objects and
+a textual or binary representation of the actual content data.
+This allows to easily add support for new types to Akonadi.
+</p>
+<p>
+<h4>How to write an Akonadi serializer plugin</h4>
+</p>
+<p>
+The following describes the basic steps needed to write an Akonadi
+serializer plugin.
+</p>
+<p>
+<h5>(de-)Serialization Code</h5>
+</p>
+<p>
+Create a class that inherits Akonadi.ItemSerializerPlugin and
+implement its two pure virtual methods, serialize() and deserialize().
+</p>
+<p>
+<h5>Plugin Framework</h5>
+</p>
+<p>
+To do: Factory macro
+</p>
+<p>
+To do: Desktop file example
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">deserialize</b> (item, label, data, version)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>item</td><td>Akonadi.Item</td><td align="right"></td></tr>
+              <tr><td>label</td><td>QByteArray</td><td align="right"></td></tr>
+              <tr><td>data</td><td>QIODevice</td><td align="right"></td></tr>
+              <tr><td>version</td><td>int</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Convert serialized item data provided in <b>data</b> into payload for <b>item.</b></p>
+<p>
+<b>item</b> - The item to which the payload should be added.
+It is guaranteed to have a mimetype matching one of the supported mimetypes of this
+plugin. However it might contain a unsuited payload added manually by the application
+developer. Verifying the payload type in case a payload is already available is recommended
+therefore.</p>
+<p>
+<b>label</b> - The part identifier of the part to deserialize. <b>label</b> might be an unsupported
+item part, return false if this is the case.</p>
+<p>
+<b>data</b> - A QIODevice providing access to the serialized data. The QIODevice is opened in
+read-only mode and positioned at the beginning. The QIODevice is guaranteed to be valid.
+Returns false if the specified part is not supported by this plugin, true if the part
+could be de-serialized successfully.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">parts</b> (item)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>QSet<QByteArray></i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>item</td><td>Akonadi.Item</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns a list of available parts for the given item payload.
+The default implementation returns Item.FullPayload if a payload is set.</p>
+<p>
+<b>item</b> - The item.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">serialize</b> (item, label, data, version)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>item</td><td>Akonadi.Item</td><td align="right"></td></tr>
+              <tr><td>label</td><td>QByteArray</td><td align="right"></td></tr>
+              <tr><td>data</td><td>QIODevice</td><td align="right"></td></tr>
+              <tr><td>version</td><td>int</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Convert the payload object provided in <b>item</b> into its serialzed form into <b>data.</b></p>
+<p>
+<b>item</b> - The item which contains the payload.
+It is guaranteed to have a mimetype matching one of the supported mimetypes of this
+plugin as well as the existence of a payload object. However it might contain an unsupported
+payload added manually by the application developer. Verifying the payload type is recommended
+therefore.</p>
+<p>
+<b>label</b> - The part identifier of the part to serialize. <b>label</b> will
+be one of the item parts returned by parts().</p>
+<p>
+<b>data</b> - The QIODevice where the serialized data should be writtne to.
+The QIODevice is opened in write-only mode and positioned at the beginning.
+The QIODevice is guaranteed to be valid.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+</span>
+</body>
+</html>

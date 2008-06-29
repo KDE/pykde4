@@ -1,0 +1,546 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Soprano.Server.DBusExportIterator</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class DBusExportIterator</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>soprano</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Soprano::Server</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>DBusExportIterator</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QObject,Soprano::Error::ErrorCache</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      \class DBusExportIterator dbusexportiterator.h Soprano/Server/DBusExportIterator
+</p>
+<p>
+Exports a %Soprano Iterator via D-Bus.
+</p>
+<p>
+The DBusExportIterator can be used to export a single iterator via
+D-Bus. This may be useful in case one does not want to expose
+the complete Model API but restrict access via custom methods
+that return %Soprano Iterators.
+</p>
+<p>
+The most common usage is probably as a fire-and-forget class:
+<pre>
+void myDbusMethod( const QDBusMessage& m ) {
+Soprano.StatementIterator it = model->listStatements();
+Soprano.Server.DBusExportIterator* dbusIt = new Soprano.Server.DBusExportIterator( it, this );
+dbusIt->setDeleteOnClose( true );
+dbusIt->registerIterator( myFancyDBusObjectPath, m.service() );
+return myFancyDBusObjectPath;
+}
+</pre>
+</p>
+<p>
+This is a class for advanced usage. In most situations using
+DBusExportModel or even ServerCore.registerAsDBusObject
+is probably enough.
+</p>
+<p>
+<b>Author</b> Sebastian Trueg <trueg@kde.org>
+</p>
+<p>
+See also  soprano_server_dbus
+</p>
+<p>
+\since 2.1
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">DBusExportIterator</b> (it, parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>it</td><td>Soprano.StatementIterator</td><td align="right"></td></tr>
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Create a new instance to export a StatementIterator
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">DBusExportIterator</b> (it, parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>it</td><td>Soprano.NodeIterator</td><td align="right"></td></tr>
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Create a new instance to export a NodeIterator
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">DBusExportIterator</b> (it, parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>it</td><td>Soprano.QueryResultIterator</td><td align="right"></td></tr>
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Create a new instance to export a QueryResultIterator
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">dbusObjectPath</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>QString</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+The path this iterator is exported on.
+This is an empty string if the iterator is not exported.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">deleteOnClose</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+The DBusExportIterator instance can delete itself once the
+iterator is closed. The default value is false, i.e.
+the creator has to delete the instance.
+</p>
+<p>
+See also  setDeleteOnClose, Iterator.close
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">nodeIterator</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Soprano.NodeIterator</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns The used NodeIterator or an invalid one if
+this DBusExportIterator does not export a NodeIterator.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">queryResultIterator</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Soprano.QueryResultIterator</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns The used QueryResultIterator or an invalid one if
+this DBusExportIterator does not export a QueryResultIterator.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">registerIterator</b> (dbusObjectPath, dbusClient)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>dbusObjectPath</td><td>QString</td><td align="right"></td></tr>
+              <tr><td>dbusClient</td><td>QString</td><td align="right">QString()</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Register the iterator under the given D-Bus object path.
+</p>
+<p>
+See also  QDBusConnection.registerObject
+</p>
+<p></p>
+<p>
+<b>dbusObjectPath</b> - The D-Bus object path to register the iterator under.</p>
+<p>
+<b>dbusClient</b> - The optional D-Bus client which uses the iterator, i.e. which called
+the method that triggered the creation of the iterator. If set, the iterator
+will be closed once the client dies. In combination with setDeleteOnClose
+this class can thus be used in a fire-and-forget manner.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setDeleteOnClose</b> (deleteOnClose)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>deleteOnClose</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Set if the iterator should delete itself
+once it has been closed. The default value is false,
+i.e. the creator has to delete the instance.
+</p>
+<p>
+This only works if the iterator is closed
+from the outside, i.e. by the D-Bus client.
+</p>
+<p>
+See also  deleteOnClose
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">statementIterator</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Soprano.StatementIterator</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns The used StatementIterator or an invalid one if
+this DBusExportIterator does not export a StatementIterator.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">unregisterIterator</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Unregister the iterator from D-Bus.
+</p>
+<p>
+See also  QDBusConnection.unregisterObject
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+</span>
+</body>
+</html>

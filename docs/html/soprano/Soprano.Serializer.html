@@ -1,0 +1,321 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Soprano.Serializer</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class Serializer</h1><hr>
+      <h3><i style="color : #00aa00">abstract</i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>soprano</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Soprano</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>Serializer</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>Soprano::Plugin,Soprano::Error::ErrorCache</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      \class Serializer serializer.h Soprano/Serializer
+</p>
+<p>
+Soprano.Serializer defines the interface for a Soprano RDF serializer plugin.
+</p>
+<p>
+Each serializer plugin may support multiple RDF serializations (supportedSerializations()).
+</p>
+<p>
+<b>Usage </b>
+</p>
+<p>
+Using a Serializer is straightforward. One starts by getting a plugin that supports the requested
+RDF data serialization:
+</p>
+<p>
+<pre>
+Soprano.Serializer* s = Soprano.PluginManager.instance()->discoverSerializerForSerialization( Soprano.SerializationRdfXml );
+</pre>
+</p>
+<p>
+Then serializing RDF data is done in a single method call which writes the serialized data to a QTextStream:
+</p>
+<p>
+<pre>
+QTextStream stream( stdout );
+s->serialize( model->listStatements(), stream, Soprano.SerializationRdfXml );
+</pre>
+</p>
+<p>
+See also  soprano_writing_plugins
+</p>
+<p>
+<b>Author</b> Sebastian Trueg <trueg@kde.org>
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">Serializer</b> (name)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>name</td><td>QString</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">serialize</b> (it, stream, serialization, userSerialization)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>it</td><td>Soprano.StatementIterator</td><td align="right"></td></tr>
+              <tr><td>stream</td><td>QTextStream</td><td align="right"></td></tr>
+              <tr><td>serialization</td><td>Soprano.RdfSerialization</td><td align="right"></td></tr>
+              <tr><td>userSerialization</td><td>QString</td><td align="right">QString()</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Serialize a list of statements.
+</p>
+<p></p>
+<p>
+<b>it</b> - An iterator containing the statements to be serialized.</p>
+<p>
+<b>stream</b> - The stream the serialized data should be written to.</p>
+<p>
+<b>serialization</b> - The encoding to be used.</p>
+<p>
+<b>userSerialization</b> - If serialization is set to Soprano.SerializationUser this parameter specifies the
+serialization to use. It allows the extension of the %Soprano Serializer interface with new
+RDF serializations that are not officially supported by %Soprano.
+</p>
+<p>
+Returns <b>true</b> if the %serialization was successful, false otherwise.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">supportedSerializations</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Soprano.RdfSerializations</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #00aa00">pure virtual</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+The serialiazation types supported by this serializer.
+Returns A combination of Soprano.RdfSerialization types. If
+the list contains Soprano.SerializationUser the serializer
+supports additional RDF serialiazations not
+officially supported by %Soprano.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">supportedUserSerializations</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>QStringList</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+A serializer can support additional RDF serializations that are not defined in Soprano.RdfSerialization.
+In that case supportedSerializations() has to include Soprano.SerializationUser.
+</p>
+<p>
+The default implementation returns an empty list.
+</p>
+<p>
+Returns A list of supported user RDF serializations.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">supportsSerialization</b> (s, userSerialization)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>s</td><td>Soprano.RdfSerialization</td><td align="right"></td></tr>
+              <tr><td>userSerialization</td><td>QString</td><td align="right">QString()</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Check if a plugin supports a specific serialization.
+</p>
+<p></p>
+<p>
+<b>s</b> - The requested serialization.</p>
+<p>
+<b>userSerialization</b> - If serialization is set to Soprano.SerializationUser this parameter specifies the
+requested serialization. It allows the extension of the %Soprano Serializer interface with new
+RDF serializations that are not officially supported by %Soprano.
+</p>
+<p>
+Returns <b>true</b> if the serializer is able to parse RDF data encoded
+in serialization s, <b>false</b> otherwise.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+</span>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Akonadi.AgentInstanceCreateJob</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class AgentInstanceCreateJob</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>akonadi</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Akonadi</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>AgentInstanceCreateJob</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>KJob</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      Job for creating new agent instances.
+</p>
+<p>
+This class encapsulates the procedure of creating a new agent instance
+and optionally configuring it immediately.
+</p>
+<p>
+<pre>
+</p>
+<p>
+MyClass.MyClass( QWidget *parent )
+: QWidget( parent )
+{
+// Get agent type object
+Akonadi.AgentType type = Akonadi.AgentManager.type( "akonadi_vcard_resource" );
+</p>
+<p>
+Akonadi.AgentInstanceCreateJob *job = new Akonadi.AgentInstanceCreateJob( type );
+connect( job, SIGNAL( result( KJob * ) ),
+this, SLOT( slotCreated( KJob * ) ) );
+</p>
+<p>
+// use this widget as parent for the config dialog
+job->configure( this );
+</p>
+<p>
+job->start();
+}
+</p>
+<p>
+...
+</p>
+<p>
+void MyClass.slotCreated( KJob *job )
+{
+Akonadi.AgentInstanceCreateJob *createJob = static_cast<Akonadi.AgentInstanceCreateJob*>( job );
+</p>
+<p>
+qDebug() << "Created agent instance:" << createJob->instance().identifier();
+}
+</p>
+<p>
+</pre>
+</p>
+<p>
+<b>Author</b> Volker Krause <vkrause@kde.org>
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">AgentInstanceCreateJob</b> (type, parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>type</td><td>Akonadi.AgentType</td><td align="right"></td></tr>
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Create a new agent instance creation job.</p>
+<p>
+<b>type</b> - The type of the agent to create.</p>
+<p>
+<b>parent</b> - The parent object.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">configure</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>parent</td><td>QWidget</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Setup the job to show agent configuration dialog once the agent instance
+has been successfully started.</p>
+<p>
+<b>parent</b> - The parent window for the configuration dialog.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">instance</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Akonadi.AgentInstance</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the AgentInstance object of the newly created agent instance.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">start</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Starts the instance creation.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+</span>
+</body>
+</html>

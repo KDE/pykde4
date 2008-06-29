@@ -1,0 +1,495 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Akonadi.CollectionFetchJob</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class CollectionFetchJob</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>akonadi</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Akonadi</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>CollectionFetchJob</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>Akonadi::Job</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      Job that fetches collections from the Akonadi storage.
+</p>
+<p>
+This class can be used to retrieve the complete or partial collection tree
+from the Akonadi storage.
+</p>
+<p>
+<pre>
+</p>
+<p>
+using namespace Akonadi;
+</p>
+<p>
+// fetching all collections recursive, starting at the root collection
+CollectionFetchJob *job = new CollectionFetchJob( Collection.root(), CollectionFetchJob.Recursive );
+if ( job->exec() ) {
+Collection.List collections = job->collections();
+foreach( const Collection &collection, collections ) {
+qDebug() << "Name:" << collection.name();
+}
+}
+</p>
+<p>
+</pre>
+</p>
+<p>
+<b>Author</b> Volker Krause <vkrause@kde.org>
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>enums</h3><ul>
+<li style="padding-bottom : 8px;"><b>Type</b> { Base, FirstLevel, Recursive }</li>
+
+</ul><a href="#extended"><i>enum details</i></a><hr>
+
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">CollectionFetchJob</b> (collection, type, parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>collection</td><td>Akonadi.Collection</td><td align="right"></td></tr>
+              <tr><td>type</td><td>Akonadi.CollectionFetchJob.Type</td><td align="right">Akonadi.CollectionFetchJob.FirstLevel</td></tr>
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Creates a new collection fetch job.
+</p>
+<p></p>
+<p>
+<b>collection</b> - The base collection for the listing. Must be valid.</p>
+<p>
+<b>type</b> - The type of fetch depth.</p>
+<p>
+<b>parent</b> - The parent object.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">CollectionFetchJob</b> (colletions, parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>colletions</td><td>Akonadi.Collection.List</td><td align="right"></td></tr>
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Creates a new collection fetch job to retrieve a list of collections.
+</p>
+<p></p>
+<p>
+<b>collections</b> - A list of collections to fetch. Must not be empty, content must be valid.</p>
+<p>
+<b>parent</b> - The parent object.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">collections</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Akonadi.Collection.List</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns the list of fetched collection.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">collectionsReceived</b> (collections)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <p style="color : #ee360a">SIGNAL ("collectionsReceived (const List&)")</p>
+
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>collections</td><td>Akonadi.Collection.List</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+This signal is emitted whenever the job has received collections.
+</p>
+<p></p>
+<p>
+<b>collections</b> - The received collections.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">doHandleResponse</b> (tag, data)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>tag</td><td>QByteArray</td><td align="right"></td></tr>
+              <tr><td>data</td><td>QByteArray</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">doStart</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">includeUnsubscribed</b> (include)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>include</td><td>bool</td><td align="right">1</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Include also unsubscribed collections.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setResource</b> (resource)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>resource</td><td>QString</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets a resource identifier to limit collection listing to one resource.
+</p>
+<p></p>
+<p>
+<b>resource</b> - The resource identifier.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">slotResult</b> (job)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>job</td><td>KJob</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+<a name="extended">
+<h3>enums - detail</h3>
+<ul style="list-style-type : none">
+<li><b>Type</b>  { Base, FirstLevel, Recursive }
+  <p style="padding-top : 9px;">Describes the type of fetch depth.</p>
+  <table cellspacing="5">
+    <tr>
+      <td></td>
+      <td valign="top"><i>Base</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>FirstLevel</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td valign="top"><i>Recursive</i></td>
+      <td valign="top">-  </td>
+      <td valign="top">-</td>
+      <td></td>
+    </tr>
+  </table>
+</li>
+<hr>
+</ul>
+</span>
+</body>
+</html>

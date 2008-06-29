@@ -1,0 +1,672 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Soprano.Util.AsyncModel</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class AsyncModel</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>soprano</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Soprano::Util</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>AsyncModel</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>Soprano::FilterModel</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      \class AsyncModel asyncmodel.h Soprano/Server/AsyncModel
+</p>
+<p>
+Filter model that allows to perform operations
+asyncroneously.
+</p>
+<p>
+The main purpose is to protect a Model against deadlocks
+in a single threaded situation.
+</p>
+<p>
+Usage:
+<pre>
+AsyncResult* result = model->listStatementsAsync( s );
+connect( result, SIGNAL(resultReady(AsyncResult*)),
+this, SLOT(slotResultReady(AsyncResult*)) );
+</pre>
+</p>
+<p>
+<b>Author</b> Sebastian Trueg <trueg@kde.org>
+</p>
+<p>
+\since 2.1
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">AsyncModel</b> (parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>parent</td><td>Soprano.Model</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Create a new Model.
+</p>
+<p></p>
+<p>
+<b>parent</b> - The parent model to forward the operations to.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">addStatementAsync</b> (statement)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.Util.AsyncResult</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>statement</td><td>Soprano.Statement</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Asyncroneously add the Statement to the Model.
+</p>
+<p></p>
+<p>
+<b>statement</b> - The Statement to add.
+</p>
+<p>
+See also  addStatement
+</p>
+<p>
+Returns an AsyncResult with result type Error.ErrorCode
+object which will signal when the result is ready.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">containsAnyStatementAsync</b> (statement)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.Util.AsyncResult</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>statement</td><td>Soprano.Statement</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Asyncroneously check if the model contains certain statements.
+</p>
+<p></p>
+<p>
+<b>statement</b> - A partially defined statement that serves as
+a pattern.
+</p>
+<p>
+See also  containsAnyStatement
+</p>
+<p>
+Returns an AsyncResult with result type bool
+object which will signal when the result is ready.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">containsStatementAsync</b> (statement)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.Util.AsyncResult</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>statement</td><td>Soprano.Statement</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+AsyncResult check if the model contains a statements.
+</p>
+<p></p>
+<p>
+<b>statement</b> - The statement in question. This has to be a valid statement,
+i.e. subject, predicate, and object need to be defined. If the context node
+is empty the default graph is searched.
+</p>
+<p>
+See also  containsStatement
+</p>
+<p>
+Returns an AsyncResult with result type bool
+object which will signal when the result is ready.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">createBlankNodeAsync</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Soprano.Util.AsyncResult</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Asyncroneously create a new blank node with a unique identifier.
+</p>
+<p>
+See also  createBlankNode
+</p>
+<p>
+Returns an AsyncResult with result type Node
+object which will signal when the result is ready.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">executeQueryAsync</b> (query, language, userQueryLanguage)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.Util.AsyncResult</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>query</td><td>QString</td><td align="right"></td></tr>
+              <tr><td>language</td><td>Soprano.Query.QueryLanguage</td><td align="right"></td></tr>
+              <tr><td>userQueryLanguage</td><td>QString</td><td align="right">QString()</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Asyncroneously execute the given query over the Model.
+</p>
+<p>
+This is a const read-only method. As such Model implementations should not
+support SPARQL extensions such as INSERT or UPDATE through this method.
+A future version of %Soprano will provide an additional API for queries
+that change the Model.
+</p>
+<p></p>
+<p>
+<b>query</b> - The query to evaluate.</p>
+<p>
+<b>language</b> - The %query language used to encode <b>query.</b></p>
+<p>
+<b>userQueryLanguage</b> - If <b>language</b> equals Query.QueryLanguageUser
+userQueryLanguage defines the language to use.
+</p>
+<p>
+See also  executeQuery
+</p>
+<p>
+Returns an AsyncResult with result type QueryResultIterator
+object which will signal when the result is ready.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">isEmptyAsync</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Soprano.Util.AsyncResult</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Asyncroneously check if the Model does contain any Statement.
+</p>
+<p>
+See also  isEmpty
+</p>
+<p>
+Returns an AsyncResult with result type bool
+object which will signal when the result is ready.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">listContextsAsync</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Soprano.Util.AsyncResult</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Asyncroneously list all contexts in the model, i.e. all named graphs.
+</p>
+<p>
+See also  listContexts
+</p>
+<p>
+Returns an AsyncResult with result type NodeIterator
+object which will signal when the result is ready.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">listStatementsAsync</b> (statement)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.Util.AsyncResult</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>statement</td><td>Soprano.Statement</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Asyncroneously return an iterator over Model Statements that "partial"
+match the input Statement.
+</p>
+<p></p>
+<p>
+<b>statement</b> - The partial Statement to match.
+</p>
+<p>
+See also  listStatements
+</p>
+<p>
+Returns an AsyncResult with result type StatementIterator
+object which will signal when the result is ready.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">removeAllStatementsAsync</b> (statement)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.Util.AsyncResult</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>statement</td><td>Soprano.Statement</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Asyncroneously remove all statements that match the partial statement.
+For removing one specific statement see removeStatement().
+</p>
+<p></p>
+<p>
+<b>statement</b> - A possible partially defined statement that serves as
+a filter for all statements that should be removed.
+</p>
+<p>
+See also  removeAllStatements
+</p>
+<p>
+Returns an AsyncResult with result type Error.ErrorCode
+object which will signal when the result is ready.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">removeStatementAsync</b> (statement)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.Util.AsyncResult</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>statement</td><td>Soprano.Statement</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Asyncroneously remove one statement. For removing statements
+with wildward matching see removeAllStatementsAsync().
+</p>
+<p></p>
+<p>
+<b>statement</b> - The statement that should be removed.
+This has to be a valid statement.
+</p>
+<p>
+See also  removeStatement
+</p>
+<p>
+Returns an AsyncResult with result type Error.ErrorCode
+object which will signal when the result is ready.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">statementCountAsync</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Soprano.Util.AsyncResult</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Asyncroneously determine the number of statements stored in this Model.
+</p>
+<p>
+See also  statementCount
+</p>
+<p>
+Returns an AsyncResult with result type int
+object which will signal when the result is ready.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+</span>
+</body>
+</html>

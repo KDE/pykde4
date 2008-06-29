@@ -1,0 +1,356 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Akonadi.ItemSync</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class ItemSync</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>akonadi</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Akonadi</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>ItemSync</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>Akonadi::TransactionSequence</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      Syncs between items known to a client (usually a resource) and Akonadi.
+</p>
+<p>
+Remote Id must only be set by the resource storing the item, other clients
+should leave it empty, since the resource responsible for the target collection
+will be notified about the addition and then create a suitable remote Id.
+</p>
+<p>
+There are two different forms of ItemSync usage:
+- Full-Sync: meaning the client provides all valid items, i.e. any item not
+part of the list but currently stored in Akonadi will be removed
+- Incremental-Sync: meaning the client provides two lists, one for items which
+are new or modified and one for items which should be removed. Any item not
+part of either list but currently stored in Akonadi will not be changed.
+</p>
+<p>
+This is provided for convenience to implement "save all" like behavior,
+however it is strongly recommended to use single item jobs whenever
+possible, e.g. ItemCreateJob, ItemModifyJob and ItemDeleteJob
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">ItemSync</b> (collection, parent)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>collection</td><td>Akonadi.Collection</td><td align="right"></td></tr>
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Creates a new item synchronizer.
+</p>
+<p></p>
+<p>
+<b>collection</b> - The collection we are syncing.</p>
+<p>
+<b>parent</b> - The parent object.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">doStart</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setFullSyncItems</b> (items)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>items</td><td>Akonadi.Item.List</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets the full item list for the collection.
+</p>
+<p>
+Usually the result of a full item listing.
+</p>
+<p>
+If the client using this is a resource, all items must have
+a valid remote identifier.
+</p>
+<p></p>
+<p>
+<b>items</b> - A list of items.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setIncrementalSyncItems</b> (changedItems, removedItems)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>changedItems</td><td>Akonadi.Item.List</td><td align="right"></td></tr>
+              <tr><td>removedItems</td><td>Akonadi.Item.List</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets the item lists for incrementally syncing the collection.
+</p>
+<p>
+Usually the result of an incremental remote item listing.
+</p>
+<p>
+If the client using this is a resource, all items must have
+a valid remote identifier.
+</p>
+<p></p>
+<p>
+<b>changedItems</b> - A list of items added or changed by the client.</p>
+<p>
+<b>removedItems</b> - A list of items deleted by the client.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setPartSyncItems</b> (items)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>items</td><td>Akonadi.Item.List</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Sets the item list for the collection, but not the full list,
+a part of the list. Call this as many times as you wish. But you
+need to remember to call setTotalItems() first.
+</p>
+<p>
+Do not pass more or less items then announced in setTotalItems();
+</p>
+<p>
+If the client using this is a resource, all items must have
+a valid remote identifier.
+</p>
+<p></p>
+<p>
+<b>items</b> - A list of items.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setTotalItems</b> (amount)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>amount</td><td>int</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Set the amount of items which you are going to return in total
+by using the setPartSyncItems() method.
+</p>
+<p>
+@params amount The amount of items in total.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+</span>
+</body>
+</html>

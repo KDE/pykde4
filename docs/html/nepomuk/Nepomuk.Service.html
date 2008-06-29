@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Nepomuk.Service</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class Service</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>nepomuk</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Nepomuk</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>Service</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>QObject</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      \class Service nepomukservice.h Nepomuk/Service
+</p>
+<p>
+Base class for all Nepomuk services.
+</p>
+<p>
+A %Nepomuk service is intended to perform some kind of
+operation on the %Nepomuk data storage. This can include
+data gathering, data enrichment, or enhanced data query.
+</p>
+<p>
+%Nepomuk services are started and managed by the %Nepomuk
+server. Very much like KDED modules a %Nepomuk service
+has autostart and start-on-demand properties. In addition
+a %Nepomuk service can define an arbitrary number of
+dependencies which are necessary to run the service. These
+dependencies name other services.
+</p>
+<p>
+To create a new %Nepomuk service one derives a new class from
+Nepomuk.Service and exports it as a standard KDE module, i.e.
+plugin.
+</p>
+<p>
+<pre>
+class MyService : public Nepomuk.Service
+{
+// do fancy stuff
+};
+</pre>
+</p>
+<p>
+Export it as a %Nepomuk service plugin:
+</p>
+<p>
+<pre>
+_SERVICE(MyService, "mynepomukservice")
+</pre>
+</p>
+<p>
+A desktop file describes the service's properties:
+</p>
+<p>
+<pre>
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=NepomukService
+X-KDE-Library=mynepomukservice
+X-KDE-Nepomuk-autostart=true
+X-KDE-Nepomuk-start-on-demand=false
+# Dependencies default to 'nepomukstorage'
+X-KDE-Nepomuk-dependencies=nepomukfoobar
+Name=My fancy Nepomuk Service
+Comment=A Nepomuk service that does fancy things
+</pre>
+</p>
+<p>
+The %Nepomuk server will automatically export all D-Bus
+interfaces defined on the service instance. Thus, the
+simplest way to export methods via D-Bus is by marking
+them with .
+</p>
+<p>
+<b>Author</b> Sebastian Trueg <trueg@kde.org>
+</p>
+<p>
+\since 4.1
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">Service</b> (parent, delayedInitialization)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>parent</td><td>QObject</td><td align="right">0</td></tr>
+              <tr><td>delayedInitialization</td><td>bool</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Create a new Service.
+</p>
+<p></p>
+<p>
+<b>parent</b> - The parent object</p>
+<p>
+<b>delayedInitialization</b> - If <b>true</b> the service will not
+be usable until setServiceInitialized has been called.
+This allows to design services that need to perform
+long initialization tasks.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">mainModel</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Soprano.Model</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Returns A wrapper model which provides
+a connection to the %Nepomuk server.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setServiceInitialized</b> (succcess)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>succcess</td><td>bool</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+A %Nepomuk service can make use of a warmup phase in which
+it is not usable yet. Call this method once your service
+is fully initialized.
+</p>
+<p>
+Most services do not need to call this method.
+</p>
+<p></p>
+<p>
+<b>success</b> - Set to <b>true</b> if initialization was
+successful, <b>false</b> otherwise.
+</p>
+<p>
+See also  Service.Service
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+</span>
+</body>
+</html>

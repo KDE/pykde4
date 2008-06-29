@@ -1,0 +1,1039 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Soprano.RdfSchemaModel</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class RdfSchemaModel</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>soprano</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Soprano</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>RdfSchemaModel</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td>Soprano::FilterModel</td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      \class RdfSchemaModel rdfschemamodel.h Soprano/RdfSchemaModel
+</p>
+<p>
+Provides convenience methods to handle RDFS data.
+</p>
+<p>
+Interface based on Sesame's RdfSchemaSource. (Copyright (C) 2002-2006 Aduna BV, GNU LGPL License applies.)
+</p>
+<p>
+Backward inferencing has not been implemented yet. Thus, methods like subClassOf() return the same
+as directSubClassOf().
+</p>
+<p>
+<b>Author</b> Sebastian Trueg <trueg@kde.org>
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li style="list-style-type : none"><b style="color : #000000;">RdfSchemaModel</b> (parentModel)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>parentModel</td><td>Soprano.Model</td><td align="right">0</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Create a new RDF Schema wrapper model that performs actions
+on <b>model</b>
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">classes</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Soprano.StatementIterator</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Get all defined RDF/S classes.
+Returns a StatementIterator that iterates over all statements in the model
+defining an RDF/S class.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">directSubClassOf</b> (subClass, superClass)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.StatementIterator</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>subClass</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>superClass</td><td>Soprano.Node</td><td align="right">Soprano.Node()</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Gets all direct subClassOf relations with a specific sub- and/or superclass.
+A class A is a direct subclass of class B if there is no class C such that A is
+a subclass of C and C is a subclass of B.
+</p>
+<p></p>
+<p>
+<b>subClass</b> - The subclass of the relations that should be returned,
+or an empty node if relations with any subclass should be returned.</p>
+<p>
+<b>superClass</b> - The superclass of the relations that should be returned,
+or an empty node if relations with any superclass should be returned.
+</p>
+<p>
+Returns A StatementIterator containing statements of the form
+(subClass, rdfs:subClassOf, superClass).
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">directSubPropertyOf</b> (subProperty, superProperty)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.StatementIterator</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>subProperty</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>superProperty</td><td>Soprano.Node</td><td align="right">Soprano.Node()</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Gets all direct subPropertyOf relations with a specific sub- and/or superproperty.
+A property A is a direct subproperty of property B if there is no property C such
+that A is a subproperty of C and C is a subproperty of B.
+</p>
+<p></p>
+<p>
+<b>subProperty</b> - The subproperty of the relations that should be returned,
+or an empty node if relations with any subproperty should be returned.</p>
+<p>
+<b>superProperty</b> - The superproperty of the relations that should be returned,
+or an empty node if relations with any superproperty should be returned.
+</p>
+<p>
+Returns A StatementIterator containing statements of the form
+(subProperty, rdfs:subPropertyOf, superProperty).
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">directType</b> (someClass, someType)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.StatementIterator</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>someClass</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>someType</td><td>Soprano.Node</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Gets all direct type relations with a specific instance and/or class.
+</p>
+<p></p>
+<p>
+<b>someClass</b> - The instance of the relations that should be returned,
+or an empty node if relations with any instance should be returned.</p>
+<p>
+<b>someType</b> - The class of the relations that should be returned,
+or an empty node if relations with any class should be returned.
+</p>
+<p>
+Returns A StatementIterator containing statements of the form
+(someClass, rdf:type, someType).
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">domain</b> (prop, domain)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.StatementIterator</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>prop</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>domain</td><td>Soprano.Node</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Gets all domain relations with a specific property and/or domain class.
+</p>
+<p></p>
+<p>
+<b>prop</b> - The property of the relations that should be returned,
+or an empty node if relations with any property should be returned.</p>
+<p>
+<b>domain</b> - The domain of the relations that should be returned,
+or an empty node if relations with any domain should be returned.
+</p>
+<p>
+Returns A StatementIterator containing statements of the form
+(prop, rdfs:domain, domain).
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">isClass</b> (resource)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>resource</td><td>Soprano.Node</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Checks whether the supplied resource represents a class.
+</p>
+<p></p>
+<p>
+<b>resource</b> - The resource to check.
+</p>
+<p>
+Returns true if resource is a class, false otherwise.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">isDirectSubClassOf</b> (subClass, superClass)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>subClass</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>superClass</td><td>Soprano.Node</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Checks whether one resource is a direct subclass of another.
+</p>
+<p></p>
+<p>
+<b>subClass</b> - A class.</p>
+<p>
+<b>superClass</b> - A class.
+</p>
+<p>
+Returns true if subClass is a direct subclass of superClass, false otherwise.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">isDirectSubPropertyOf</b> (subProperty, superProperty)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>subProperty</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>superProperty</td><td>Soprano.Node</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Checks whether one resource is a direct subproperty of another.
+</p>
+<p></p>
+<p>
+<b>subProperty</b> - A property.</p>
+<p>
+<b>superProperty</b> - A property.
+</p>
+<p>
+Returns true if subProperty is a direct subproperty of superProperty, false otherwise.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">isDirectType</b> (someClass, someType)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>someClass</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>someType</td><td>Soprano.Node</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Checks whether one resource is a direct instance of another.
+</p>
+<p></p>
+<p>
+<b>someClass</b> - An instance.</p>
+<p>
+<b>someType</b> - A class.
+</p>
+<p>
+Returns true if someClass is a direct instance of someType, false otherwise.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">isProperty</b> (resource)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>resource</td><td>Soprano.Node</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Checks whether the supplied resource represents a property.
+</p>
+<p></p>
+<p>
+<b>resource</b> - The resource to check.
+</p>
+<p>
+Returns true if resource is a property, false otherwise.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">isSubClassOf</b> (subClass, superClass)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>subClass</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>superClass</td><td>Soprano.Node</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Checks whether one resource is a subclass of another.
+</p>
+<p>
+Do not use this method if the Soprano backend supports inferencing.
+Use isDirectSubClassOf instead which is much faster.
+</p>
+<p></p>
+<p>
+<b>subClass</b> - A class.</p>
+<p>
+<b>superClass</b> - A class.
+</p>
+<p>
+Returns true if subClass is a subclass of superClass, false otherwise.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">isSubPropertyOf</b> (subProperty, superProperty)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>subProperty</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>superProperty</td><td>Soprano.Node</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Checks whether one resource is a subproperty of another.
+</p>
+<p>
+Do not use this method if the Soprano backend supports inferencing.
+Use isDirectSubPropertyOf instead which is much faster.
+</p>
+<p></p>
+<p>
+<b>subProperty</b> - A property.</p>
+<p>
+<b>superProperty</b> - A property.
+</p>
+<p>
+Returns true if subProperty is a subproperty of superProperty, false otherwise.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">isType</b> (someClass, someType)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>bool</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>someClass</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>someType</td><td>Soprano.Node</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Checks whether one resource is a instance of another.
+</p>
+<p>
+Do not use this method if the Soprano backend supports inferencing.
+Use isDirectType instead which is much faster.
+</p>
+<p></p>
+<p>
+<b>someClass</b> - An instance.</p>
+<p>
+<b>someType</b> - A class.
+</p>
+<p>
+Returns true if someClass is an instance of someType, false otherwise.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">properties</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Soprano.StatementIterator</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Gets all defined properties.
+</p>
+<p>
+Returns A StatementIterator containing statements of the form
+(someProperty, rdf:type, rdf:Property).
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">range</b> (prop, range)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.StatementIterator</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>prop</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>range</td><td>Soprano.Node</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Gets all range relations with a specific property and/or range class.
+</p>
+<p></p>
+<p>
+<b>prop</b> - The property of the relations that should be returned,
+or an empty node if relations with any property should be returned.</p>
+<p>
+<b>range</b> - The range of the relations that should be returned,
+or an empty node if relations with any range should be returned.
+</p>
+<p>
+Returns A StatementIterator containing statements of the form
+(prop, rdfs:range, range).
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">subClassOf</b> (subClass, superClass)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.StatementIterator</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>subClass</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>superClass</td><td>Soprano.Node</td><td align="right">Soprano.Node()</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Gets all subClassOf relations with a specific sub- and/or superclass.
+Note that the subClassOf relation is reflexive: a class is implicitly
+always a subclass of itself.
+</p>
+<p>
+Do not use this method if the Soprano backend supports inferencing.
+Use directSubClassOf instead which is much faster.
+</p>
+<p></p>
+<p>
+<b>subClass</b> - The subclass of the relations that should be returned,
+or an empty node if relations with any subclass should be returned.</p>
+<p>
+<b>superClass</b> - The superclass of the relations that should be returned,
+or an emtpy node if relations with any superclass should be returned.
+</p>
+<p>
+Returns A StatementIterator containing all valid statements of the form
+(subClass, rdfs:subClassOf, superClass) including those calculated through
+direct inferencing.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">subPropertyOf</b> (subProperty, superProperty)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.StatementIterator</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>subProperty</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>superProperty</td><td>Soprano.Node</td><td align="right">Soprano.Node()</td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Gets all subPropertyOf relations with a specific sub- and/or superproperty.
+Note that the subPropertyOf relation is reflexive: a property is implicitly
+always a subproperty of itself.
+</p>
+<p>
+Do not use this method if the Soprano backend supports inferencing.
+Use directSubPropertyOf instead which is much faster.
+</p>
+<p></p>
+<p>
+<b>subProperty</b> - The subproperty of the relations that should be returned,
+or an empty node if relations with any subproperty should be returned.</p>
+<p>
+<b>superProperty</b> - The superproperty of the relations that should be returned,
+or an empty node if relations with any superproperty should be returned.
+</p>
+<p>
+Returns A StatementIterator containing all valid statements of the form
+(subProperty, rdfs:subPropertyOf, superProperty) including those calculated through
+direct inferencing.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">type</b> (someClass, someType)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Soprano.StatementIterator</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>someClass</td><td>Soprano.Node</td><td align="right"></td></tr>
+              <tr><td>someType</td><td>Soprano.Node</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Gets all type relations with a specific instance and/or class.
+</p>
+<p>
+Do not use this method if the Soprano backend supports inferencing.
+Use directType instead which is much faster.
+</p>
+<p></p>
+<p>
+<b>someClass</b> - The instance of the relations that should be returned,
+or an empty node if relations with any instance should be returned.</p>
+<p>
+<b>someType</b> - The class of the relations that should be returned,
+or an empty node if relations with any class should be returned.
+</p>
+<p>
+Returns A StatementIterator containing all valid statements of the form
+(someClass, rdf:type, someType) including those calculated through
+direct inferencing.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+</span>
+</body>
+</html>

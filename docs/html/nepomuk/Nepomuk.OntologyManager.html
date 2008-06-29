@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <title>Nepomuk.OntologyManager</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<table width="100%">
+  <tr>
+    <td width ="70%">
+      <h1>class OntologyManager</h1><hr>
+      <h3><i style="color : #00aa00"></i></h3>
+    </td>
+  </tr>
+</table>
+<table cellpadding="10">
+  <tr>
+    <td valign="top" width="35%">
+      <table bgcolor="#f7f7ff" cellpadding="4">
+        <tr>
+          <td width="10%" align=left>Module</td>
+          <td width="30%" align=left>nepomuk</td>
+        </tr>
+        <tr>
+          <td width="10%" align=left>Namespace</td>
+          <td width="30%" align=left>Nepomuk</td>
+        </tr>
+        <tr>
+          <td>Class</td>
+          <td>OntologyManager</td>
+        </tr>
+        <tr>
+          <td>Inherits</td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+    <td width="65%">
+      The OntologyManager is the central ontology cache handler.
+It is modeled as a singleton and its instance can be accessed
+through OntologyManager.instance.
+</p>
+<p>
+<b style="color : #ff0000;"><i>Deprecated </i></b> Ontologies should be handled via the classes in
+Nepomuk.Types.
+    </td>
+  </tr>
+</table>
+<hr>
+<hr>
+<h3>methods</h3><ul style="list-style-type : none">
+<li><b style="color : #999999;">OntologyManager</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>ctor</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <i style="color : #aa0000">Not implemented</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">getOntology</b> (uri)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nepomuk.Ontology</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>uri</td><td>QUrl</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Attempt to load the ontology referenced by uri.
+If the manager already has the ontology in the cache
+it is simply returned. Otherwise the manager tries
+to load the ontology from one of the configured
+OntologyLoader instances.
+</p>
+<p>
+Returns The requested ontology or 0 in case it could
+not be found, i.e. none of the OntologyLoader instances
+could provide the RDF statements making up the ontology.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li><b style="color : #000000;">instance</b> ( )
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table>
+        <tr>
+          <td>
+            returns <i>Nepomuk.OntologyManager</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <b style="color : #0000aa">static</b> 
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr><td></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+<li style="list-style-type : none"><b style="color : #000000;">setOntologyLoader</b> (loader)
+<table width="100%">
+  <tr>
+    <td width="60%" valign="top">
+      <table vspace="5">
+        <tr>
+          <td>
+            returns <i>Nothing</i>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          
+          </td>
+        <tr>
+        <tr valign="bottom">
+          <td>
+            <table>
+              <tr  bgcolor="#e7e7ff">
+                <th>Argument</th><th>Type</th><th>Default</th>
+              </tr>
+              <tr><td>loader</td><td>OntologyLoader</td><td align="right"></td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="40%" align="left">
+Set an OntologyLoader to be used to retrieve
+the RDF statements that make up an ontology.
+</p>
+<p>
+By default Nepomuk uses a combination of the
+NepomukOntologyLoader and DesktopOntologyLoader
+where the NepomukOntologyLoader is the preferred
+one, i.e. only if it is not able to load the
+ontology DesktopOntologyLoader is used as a fallback.
+</p>
+<p>
+If an OntologyLoader is set no fallback loader will
+be used. Thus, to force one of the default loaders
+(for example the DesktopOntologyLoader) just do:
+</p>
+<p>
+<pre>
+OntologyManager.instance()->setOntologyLoader( new DesktopOntologyLoader() );
+</pre>
+</p>
+<p>
+OntologyManager will take over ownership of loader.
+</p>
+<p>
+Overwriting the loader will delete any loader previously
+set via setOntologyLoader.
+    </td>
+  </tr>
+</table>
+
+</li><hr>
+
+</li><hr>
+
+</span>
+</body>
+</html>

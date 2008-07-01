@@ -183,5 +183,13 @@
 %Include kxmlguiclient.sip
 %Include kxmlguifactory.sip
 %Include kxmlguiwindow.sip
+%Include kcategorizedview.sip
+%Include kcategorydrawer.sip
+%Include kextendableitemdelegate.sip
+%Include kfadewidgeteffect.sip
+%Include krichtextedit.sip
+%Include krichtextwidget.sip
+%Include kwidgetitemdelegate.sip
+%Include kxutils.sip
 
 //%Include fixx11h.sip

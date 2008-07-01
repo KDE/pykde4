@@ -24,4 +24,7 @@
 %Include dialog.sip
 %Include dispatcher.sip
 %Include pluginpage.sip
+%Include kemoticonsprovider.sip
+%Include kemoticons.sip
+%Include kemoticonstheme.sip
 

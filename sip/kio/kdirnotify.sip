@@ -1,6 +1,5 @@
 //
 //     Copyright 2007 Jim Bublitz <jbublitz@nwinternet.com>
-//     Earlier copyrights 1998 - 2006 Jim Bublitz and/or Phil Thompson
 //     may also apply
 
 

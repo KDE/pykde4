@@ -118,5 +118,7 @@
 %Include udsentry.sip
 %Include kurlnavigator.sip
 %Include kurifilter.sip
+%Include fileundomanager.sip
+//%Include kservicegroup.sip
 
 //%Include kdirnotify.sip

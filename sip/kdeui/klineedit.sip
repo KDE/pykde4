@@ -51,6 +51,7 @@ public:
     QString                 clickMessage () const;
     void                    setClearButtonShown (bool show);
     bool                    isClearButtonShown () const;
+    QSize                   clearButtonUsedSize() const;
 
 signals:
     void                    completionBoxActivated (const QString&);

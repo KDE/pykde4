@@ -67,6 +67,7 @@ public:
     virtual void            slotCancel ();
 
 protected:
+    virtual void            resizeEvent(QResizeEvent* event);
     virtual void            showEvent (QShowEvent* event);
 
 signals:

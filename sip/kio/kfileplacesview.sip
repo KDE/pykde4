@@ -33,7 +33,8 @@ public:
 
     void                    setDropOnPlaceEnabled (bool enabled);
     bool                    isDropOnPlaceEnabled () const;
-
+    void                    setAutoResizeItemsEnabled(bool enabled);
+    bool                    isAutoResizeItemsEnabled() const;
     void                    setUrl (const KUrl& url);
     void                    setShowAll (bool showAll);
     virtual QSize           sizeHint () const;

@@ -38,7 +38,8 @@ enum CrashFlag
 {
     KeepFDs,
     SaferDialog,
-    AlwaysDirectly
+    AlwaysDirectly,
+    AutoRestart
 };
 
 typedef QFlags<KCrash::CrashFlag> CrashFlags;

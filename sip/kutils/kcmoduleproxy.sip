@@ -56,6 +56,7 @@ public:
     KCModuleInfo            moduleInfo () const;
     QString                 dbusService () const;
     QString                 dbusPath () const;
+    QSize                   minimumSizeHint() const;
     void                    defaults ();
     void                    deleteClient ();
 

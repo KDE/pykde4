@@ -22,7 +22,7 @@
 namespace Akonadi
 {
 
-class ItemSync : Akonadi::TransactionSequence
+class ItemSync : Akonadi::Job
 {
 %TypeHeaderCode
 #include <akonadi/itemsync.h>
@@ -31,12 +31,18 @@ class ItemSync : Akonadi::TransactionSequence
 public:
     explicit                ItemSync (const Akonadi::Collection& collection, QObject* parent /TransferThis/ = 0);
     void                    setFullSyncItems (const Akonadi::Item::List& items);
-    void                    setPartSyncItems (const Akonadi::Item::List& items);
     void                    setTotalItems (int amount);
+    void                    setStreamingEnabled (bool enable);
+    void                    deliveryDone();
+
     void                    setIncrementalSyncItems (const Akonadi::Item::List& changedItems, const Akonadi::Item::List& removedItems);
+
+    void                    setFetchScope (Akonadi::ItemFetchScope &fetchScope);
+    Akonadi::ItemFetchScope&         fetchScope();
 
 protected:
     void                    doStart ();
+    bool                    updateItem (const Akonadi::Item &storedItem, Akonadi::Item &newItem);
 };   // ItemSync
 
 };   // Akonadi

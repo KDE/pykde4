@@ -34,6 +34,9 @@ public:
                             RuleParser ();
     bool                    parseFile (const QString& path);
     Soprano::Inference::RuleSet  rules () const;
+private:
+                            RuleParser (const Soprano::Inference::RuleParser &other);
+
 };   // RuleParser
 
 };   // Inference

@@ -89,6 +89,8 @@ signals:
 
 protected:
     virtual void            keyPressEvent (QKeyEvent* e);
+    virtual void            hideEvent (QHideEvent *event);
+
     virtual void            slotOk ();
     virtual void            accept ();
     virtual void            slotCancel ();

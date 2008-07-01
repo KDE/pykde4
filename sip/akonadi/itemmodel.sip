@@ -59,6 +59,7 @@ public:
     Akonadi::Item           itemForIndex (const QModelIndex& index) const;
     QModelIndex             indexForItem (const Akonadi::Item& item, const int column) const;
     bool                    dropMimeData (const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent);
+    Akonadi::Collection     collection() const;
     void                    setCollection (const Akonadi::Collection& collection);
 
 signals:

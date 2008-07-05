@@ -38,6 +38,7 @@
 #include <kbugreport.h>
 #include <kbuttongroup.h>
 #include <kcategorizedsortfilterproxymodel.h>
+#include <kcategorizedview.h>
 #include <kcharselect.h>
 #include <kcmodule.h>
 #include <kcolorbutton.h>
@@ -58,9 +59,12 @@
 #include <kdialogjobuidelegate.h>
 #include <keditlistbox.h>
 #include <kedittoolbar.h>
+#include <kextendableitemdelegate.h>
+#include <kfadewidgeteffect.h>
 #include <kfind.h>
 #include <kfinddialog.h>
 #include <kfontchooser.h>
+#include <kfontcombobox.h>
 #include <kfontdialog.h>
 #include <kfontrequester.h>
 #include <kglobalaccel.h>
@@ -103,6 +107,7 @@
 #include <kpushbutton.h>
 #include <kreplace.h>
 #include <krestrictedline.h>
+#include <krichtextedit.h>
 #include <kruler.h>
 #include <kselectaction.h>
 #include <kselector.h>
@@ -138,6 +143,7 @@
 #include <kurllabel.h>
 #include <kvbox.h>
 #include <kwallet.h>
+#include <kwidgetitemdelegate.h>
 #include <kwidgetjobtracker.h>
 #include <kwindowsystem.h>
 #include <kxmessages.h>
@@ -159,10 +165,8 @@ class ConfigWidget : QWidget
 public:
                             ConfigWidget (KConfig* config, QWidget* parent /TransferThis/);
     bool                    backgroundCheckingButtonShown () const;
-
     void                    setLanguage (const QString& language);
     QString                 language () const;
-
     void                    save ();
     void                    setBackgroundCheckingButtonShown (bool);
     void                    slotDefault ();
@@ -170,10 +174,8 @@ public:
 protected:
     void                    slotChanged ();
 
-
 signals:
     void                    configChanged ();
-
 
 public:
 
@@ -233,6 +235,8 @@ public:
         sipClass = sipClass_KCModule;
     else if (dynamic_cast<KCategorizedSortFilterProxyModel*>(sipCpp))
         sipClass = sipClass_KCategorizedSortFilterProxyModel;
+    else if (dynamic_cast<KCategorizedView*>(sipCpp))
+        sipClass = sipClass_KCategorizedView;
     else if (dynamic_cast<KCharSelect*>(sipCpp))
         sipClass = sipClass_KCharSelect;
     else if (dynamic_cast<KColorButton*>(sipCpp))
@@ -246,7 +250,9 @@ public:
     else if (dynamic_cast<KComboBox*>(sipCpp))
         {
             sipClass = sipClass_KComboBox;
-            if (dynamic_cast<KHistoryComboBox*>(sipCpp))
+            if (dynamic_cast<KFontComboBox*>(sipCpp))
+                sipClass = sipClass_KFontComboBox;
+            else if (dynamic_cast<KHistoryComboBox*>(sipCpp))
                 sipClass = sipClass_KHistoryComboBox;
         }
     else if (dynamic_cast<KCompletion*>(sipCpp))
@@ -307,6 +313,10 @@ public:
         sipClass = sipClass_KDoubleValidator;
     else if (dynamic_cast<KEditListBox*>(sipCpp))
         sipClass = sipClass_KEditListBox;
+    else if (dynamic_cast<KExtendableItemDelegate*>(sipCpp))
+        sipClass = sipClass_KExtendableItemDelegate;
+    else if (dynamic_cast<KFadeWidgetEffect*>(sipCpp))
+        sipClass = sipClass_KFadeWidgetEffect;
     else if (dynamic_cast<KFind*>(sipCpp))
         {
             sipClass = sipClass_KFind;
@@ -462,7 +472,11 @@ public:
     else if (dynamic_cast<KTextBrowser*>(sipCpp))
         sipClass = sipClass_KTextBrowser;
     else if (dynamic_cast<KTextEdit*>(sipCpp))
-        sipClass = sipClass_KTextEdit;
+        {
+            sipClass = sipClass_KTextEdit;
+            if (dynamic_cast<KRichTextEdit*>(sipCpp))
+                sipClass = sipClass_KRichTextEdit;
+        }
     else if (dynamic_cast<KTimeZoneWidget*>(sipCpp))
         sipClass = sipClass_KTimeZoneWidget;
     else if (dynamic_cast<KTitleWidget*>(sipCpp))
@@ -477,6 +491,8 @@ public:
         sipClass = sipClass_KUndoStack;
     else if (dynamic_cast<KUrlLabel*>(sipCpp))
         sipClass = sipClass_KUrlLabel;
+    else if (dynamic_cast<KWidgetItemDelegate*>(sipCpp))
+        sipClass = sipClass_KWidgetItemDelegate;
     else if (dynamic_cast<KWindowSystem*>(sipCpp))
         sipClass = sipClass_KWindowSystem;
     else if (dynamic_cast<KXMLGUIFactory*>(sipCpp))

@@ -65,6 +65,7 @@
 %Include kreplace.sip
 %Include kreplacedialog.sip
 %Include kfontchooser.sip
+%Include kfontcombobox.sip
 %Include kfontdialog.sip
 %Include kfontrequester.sip
 %Include k3icon_p.sip

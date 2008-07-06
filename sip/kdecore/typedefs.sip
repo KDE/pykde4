@@ -215,6 +215,7 @@ template <TYPE1,TYPE2*>
 %End
 };
 
+class KShared;
 
 template <TYPE>
 %MappedType KSharedPtr<TYPE>

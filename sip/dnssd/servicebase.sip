@@ -20,7 +20,7 @@
 
 namespace DNSSD
 {
-class ServiceBase
+class ServiceBase : KShared
 {
 %TypeHeaderCode
 #include <dnssd/servicebase.h>
@@ -43,7 +43,7 @@ private:
 };   // ServiceBase
 
 // //This should be public but it doesn't appear to be exported by the library.
-//bool                    domainIsLocal (const QString& domain);
+//ig bool                    domainIsLocal (const QString& domain);
 };   // DNSSD
 
 

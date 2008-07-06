@@ -47,7 +47,7 @@ public:
                             Error ();
                             Error (const QString& message, int code = Soprano::Error::ErrorUnknown);
                             Error (const Soprano::Error::Error&);
-//ig    bool                    operator bool() const;
+//    bool                    operator bool() const;
     QString                 message () const;
     int                     code () const;
     bool                    isParserError () const;

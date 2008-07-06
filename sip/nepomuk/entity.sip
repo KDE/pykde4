@@ -44,7 +44,7 @@ public:
     bool                    isValid () const;
     bool                    isAvailable ();
     void                    reset (bool recursive = 0);
-//ig    QUrl                    operator QUrl () const;
+//    QUrl                    operator QUrl () const;
     bool                    operator == (const Nepomuk::Types::Entity& other) const;
     bool                    operator != (const Nepomuk::Types::Entity& other) const;
 

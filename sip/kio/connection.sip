@@ -20,11 +20,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 %ModuleHeaderCode
 //ctscc
 #include <connection.h>
 #include <copyjob.h>
 #include <deletejob.h>
+#include <fileundomanager.h>
 #include <forwardingslavebase.h>
 #include <jobclasses.h>
 #include <jobuidelegate.h>
@@ -71,6 +73,7 @@
 #include <kscan.h>
 #include <kshellcompletion.h>
 #include <kstatusbarofflineindicator.h>
+#include <kurifilter.h>
 #include <kurlcombobox.h>
 #include <kurlcompletion.h>
 #include <kurlnavigator.h>
@@ -128,6 +131,8 @@ public:
         sipClass = sipClass_KIO_Connection;
     else if (dynamic_cast<KIO::ConnectionServer*>(sipCpp))
         sipClass = sipClass_KIO_ConnectionServer;
+    else if (dynamic_cast<KIO::FileUndoManager*>(sipCpp))
+        sipClass = sipClass_KIO_FileUndoManager;
     else if (dynamic_cast<KIO::ForwardingSlaveBase*>(sipCpp))
         sipClass = sipClass_KIO_ForwardingSlaveBase;
     else if (dynamic_cast<KIO::Job*>(sipCpp))
@@ -260,6 +265,8 @@ public:
         sipClass = sipClass_KScanDialog;
     else if (dynamic_cast<KStatusBarOfflineIndicator*>(sipCpp))
         sipClass = sipClass_KStatusBarOfflineIndicator;
+    else if (dynamic_cast<KUriFilterPlugin*>(sipCpp))
+        sipClass = sipClass_KUriFilterPlugin;
     else if (dynamic_cast<KUrlComboBox*>(sipCpp))
         sipClass = sipClass_KUrlComboBox;
     else if (dynamic_cast<KUrlCompletion*>(sipCpp))

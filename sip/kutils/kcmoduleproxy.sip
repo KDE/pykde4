@@ -21,14 +21,18 @@
 
 
 
+
+
 %ModuleHeaderCode
 //ctscc
-#include <ksettings/dialog.h>
+#include <dialog.h>
 #include <kcmoduleproxy.h>
 #include <kcmultidialog.h>
+#include <kemoticons.h>
+#include <kemoticonsprovider.h>
 #include <kpluginselector.h>
 #include <kprintpreview.h>
-#include <ksettings/pluginpage.h>
+#include <pluginpage.h>
 %End
 
 class KCModuleProxy : QWidget
@@ -55,7 +59,7 @@ public:
     KCModuleInfo            moduleInfo () const;
     QString                 dbusService () const;
     QString                 dbusPath () const;
-    QSize                   minimumSizeHint() const;
+    QSize                   minimumSizeHint () const;
     void                    defaults ();
     void                    deleteClient ();
 
@@ -84,6 +88,10 @@ public:
             if (dynamic_cast<KSettings::Dialog*>(sipCpp))
                 sipClass = sipClass_KSettings_Dialog;
         }
+    else if (dynamic_cast<KEmoticons*>(sipCpp))
+        sipClass = sipClass_KEmoticons;
+    else if (dynamic_cast<KEmoticonsProvider*>(sipCpp))
+        sipClass = sipClass_KEmoticonsProvider;
     else if (dynamic_cast<KPluginSelector*>(sipCpp))
         sipClass = sipClass_KPluginSelector;
     else if (dynamic_cast<KPrintPreview*>(sipCpp))

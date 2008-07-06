@@ -37,7 +37,7 @@ public:
     };
 
     explicit                CollectionFetchJob (const Akonadi::Collection& collection, Akonadi::CollectionFetchJob::Type type = Akonadi::CollectionFetchJob::FirstLevel, QObject* parent /TransferThis/ = 0);
-    explicit                CollectionFetchJob (const Akonadi::Collection::List& colletions, QObject* parent /TransferThis/ = 0);
+    explicit                CollectionFetchJob (const Akonadi::Collection::List& collections, QObject* parent /TransferThis/ = 0);
     Akonadi::Collection::List  collections () const;
     void                    setResource (const QString& resource);
     void                    includeUnsubscribed (bool include = 1);

@@ -41,7 +41,7 @@ public:
 
 protected:
     void                    doStart ();
-    bool                    updateItem (const Akonadi::Item &storedItem, Akonadi::Item &newItem);
+    virtual bool            updateItem (const Akonadi::Item &storedItem, Akonadi::Item &newItem);
 };   // ItemSync
 
 };   // Akonadi

@@ -33,6 +33,8 @@
 #include <dvbinterface.h>
 #include <genericinterface.h>
 #include <networkinterface.h>
+#include <opticaldisc.h>
+#include <opticaldrive.h>
 #include <portablemediaplayer.h>
 #include <processor.h>
 #include <storageaccess.h>
@@ -126,9 +128,18 @@ public:
             else if (dynamic_cast<Solid::StorageAccess*>(sipCpp))
                 sipClass = sipClass_Solid_StorageAccess;
             else if (dynamic_cast<Solid::StorageDrive*>(sipCpp))
+            {
                 sipClass = sipClass_Solid_StorageDrive;
+                if (dynamic_cast<Solid::OpticalDrive*>(sipCpp))
+                    sipClass = sipClass_Solid_OpticalDrive;
+
+            }
             else if (dynamic_cast<Solid::StorageVolume*>(sipCpp))
+            {
                 sipClass = sipClass_Solid_StorageVolume;
+                if (dynamic_cast<Solid::OpticalDisc*>(sipCpp))
+                    sipClass = sipClass_Solid_OpticalDisc;
+            }
             else if (dynamic_cast<Solid::Video*>(sipCpp))
                 sipClass = sipClass_Solid_Video;
         }

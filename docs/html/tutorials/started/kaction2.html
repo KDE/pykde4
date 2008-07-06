@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Action!</title>
+  <meta name="GENERATOR" content="Quanta Plus">
+  <meta name="AUTHOR" content="Jim Bublitz">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<h1>Tutorial - Fifth Program</h1>
+<h3>KAction - Keyboard Shortcut</h3>
+<p>
+In this last section, all we do is add a keyboard shortcut (CTRL-W) for the Clear
+action we created in the previous section. This is pretty straightforward, except
+for one significant change implemented in Qt4 and KDE4.
+</p>
+<p>
+The only additional code is three lines in the <i>setupActions</i> method:
+</p>
+
+<pre style="background-color : #f0f8ff">
+
+    def setupActions (self):
+        clearAction = KAction(KIcon("edit-clear"), i18n("Clear"), self)
+
+
+        dfltShortcut   = KAction.ShortcutTypes (KAction.DefaultShortcut)
+        activeShortcut = KAction.ShortcutTypes (KAction.ActiveShortcut)
+
+        clearAction.setShortcut(Qt.CTRL+Qt.Key_W, dfltShortcut | activeShortcut)
+
+        self.actionCollection().addAction("clear", clearAction)
+
+        self.connect (clearAction, SIGNAL ("triggered(bool)"), self.textArea.clear)
+
+ 
+        KStandardAction.quit (app.quit, self.actionCollection())
+
+        self.setupGUI(QSize (600, 400), KXmlGuiWindow.Default, os.path.join (sys.path [0], kactionui.rc"))
+
+</pre>
+<p>
+This line:
+</p>
+<pre style="background-color : #f0f8ff">
+        clearAction.setShortcut(Qt.CTRL+Qt.Key_W, dfltShortcut | activeShortcut)
+</pre>
+<p>
+actually adds the shortcut (or keyboard accelerator) to our action. If we look up the <i>setShortcut</i>
+method in the PyKDE docs (it's in the kdeui/global/KAction class), we'll find that it takes a QKeySequence
+(which is obviously Qt.CTRL+Qt.Key_W, for CTRL-W) and a KAction.ShortcutType<b>s</b> - and note the important
+<b>s</b> on the end of 'ShortcutTypes'.
+</p>
+<p>
+The enum in KAction which defines some shortcut characteristics is ShortcutType (no 's' on the end), but the
+method requires ShortcutTypes (<i>with</i> an 's' on the end). ShortcutTypes is a <b>class</b>, not an enum,
+and Qt4 and KDE4 use this method (a class overlaying an enum) to enforce type safety.
+</p>
+<p>
+In the <i>setShortcut</i> method call we're or'ing ( | ) together two enumerators. The idea behind 'type safety'
+is to prevent us from or'ing together two values that produce a result which doesn't exist in the ShortcutType
+enum. The ShortcutTypes class only allows values to be created from enumerators in ShortcutType and only
+allows valid ShortcutType enumerators as the result of operations like or'ing.
+</p>
+<p>
+For any enum which has a typesafe class associated with it, the PyKDE docs indicate the name of that typesafe
+class. Not all enums use this feature (usually only those which are 'flags' that can be or'ed together). Nearly
+all enums which use this feature in Qt4 and KDE4 use the singular form (no 's' on the end) for the enum name
+and the plural form ('s' on the end) for the typesafe class name.
+</p>
+<p>
+In these two lines:
+</p>
+<pre style="background-color : #f0f8ff">
+
+        dfltShortcut   = KAction.ShortcutTypes (KAction.DefaultShortcut)
+        activeShortcut = KAction.ShortcutTypes (KAction.ActiveShortcut)
+
+</pre>
+<p>
+the use of the typesafe values has been broken out using two variables. The only reason for doing this is
+readability - KAction.ShortcutTypes (KAction.DefaultShortcut) could have been used instead of 'dfltShortcut'
+in the <i>setShortcut</i> call, and similarly for 'activeShortcut', but the line would be quite long. The 'KAction'
+specifier is required every place it's used in this example - the enumerators and typesafe class are
+both members of the KAction class.
+</p>
+<p>
+Having defined the keyboard shortcut, you can run the program (kaction2.py if not running it from the
+'Sample' tab in pykdedocs), enter some text into the editor window, and then use CTRL-W to clear the
+window.
+</p>
+<p>
+This is the final section of the 'Getting Started' tutorial.
+</p>

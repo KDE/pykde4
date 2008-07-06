@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Hello, World</title>
+  <meta name="GENERATOR" content="Quanta Plus">
+  <meta name="AUTHOR" content="Jim Bublitz">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<h1>Tutorial - First Program</h1>
+<h3>Hello, World</h3>
+<p>
+This is the first tutorial for PyKDE4. 
+</p>
+<p>
+PyKDE is a set of bindings for KDE's kdelibs. That means it provides programming access
+to KDE's basic classes and methods directly from the Python programming language.
+</p>
+<p>
+This tutorial does a thorough dissection of a simple program - the traditional "Hello, World"
+program. You can see the complete source code for this program (and other tutorial programs and
+example programs) in the <b>Source</b> on pykdedocs. You can also run the program just by
+clicking a button in the <b>Sample</b> tab of pykdedocs (or you can run the program from the
+command line as well).
+</p>
+
+<h3>Basics</h3>
+<p>
+The first section of most Python programs is the import section, where the programmer specifies
+the Python modules the program will use
+</p>
+<pre style="background-color : #f0f8ff;">
+
+import sys
+
+from PyQt4.QtCore import QString
+
+from PyKDE4.kdecore import ki18n, KAboutData, KCmdLineArgs
+from PyKDE4.kdeui import KApplication, KGuiItem, KMessageBox
+
+</pre>
+<p>
+In our import section, we import the <i>sys</i> mdoule to get <i>sys.argv</i> for the command
+line arguments. We also need one class from PyQt (<i>QString</i>) and a method (<i>ki18n</i>)
+and a number of classes from PyKDE's <b><i>kdecore</i></b> and <b><i>kdeui</i></b> modules.
+</p>
+<p>
+The next section is fairly typical code for the startup of most PyKDE programs (KDE programs written
+in C++ follow similar steps).
+</p>
+<p>
+First, we define some variables:
+</p>
+<pre style="background-color : #f0f8ff;">
+file:///home/jim/pykdedocs/tutorials/started/helloworld.html
+appName     = "helloworld"
+catalog     = ""
+programName = ki18n ("helloworld")
+version     = "1.0"
+description = ki18n ("Tutorial - First Program")
+license     = KAboutData.License_GPL
+copyright   = ki18n ("(c) 2007 Jim Bublitz")
+text        = ki18n ("none")
+homePage    = "www.riverbank.com"
+bugEmail    = "jbublitz@nwinternet.com"
+
+</pre>
+<p>
+The <i>k18n</i> calls used to wrap some of the character strings are part of KDE's localization
+(translation) features. In this case they're required, because we want to use the variables in
+creating a KAboutData object:
+</p>
+<pre style="background-color : #f0f8ff;">
+
+aboutData   = KAboutData (appName, catalog, programName, version, description,
+                            license, copyright, text, homePage, bugEmail)
+
+</pre>
+<p>
+<i>KAboutData</i> is the class that fills in the data in the About box you can pop up from the Help menu.
+</p>
+<p>
+In the <i></i>KAboutData</i> constructor (the method call that creates the KAboutData object), the arguments
+programName, description, copyright, and text are all of type <i>KLocalizedString</i> (see the <i>KAboutData</i>
+class reference page - select kdecore - global - KAboutData from the tree on the left side of pykdedocs).
+</p>
+<p>
+About the only way to create an object of <i>KLocalizedString</i> type is to use the ki18n function.
+</p>
+<p>
+Nearly every PyKDE program also require and call to <i>KCmdLineArgs.init</i>, or something effecitively the same.
+In order to create a <i>KApplication</i> object to run our program, we need to call this method with the command
+line arguments entered when the program was started (<i>sys.argv)</i> and a valid <i>KAboutData</i> object.
+</p>
+<pre style="background-color : #f0f8ff;">
+KCmdLineArgs.init (sys.argv, aboutData)
+</pre>
+<p>
+Since we want this to be a KDE-based application and have access to KDE's other components, we have to create
+a <i>KApplication</i> object. Programs without a <i>KApplication</i> object won't be able to access much
+of PyKDE, since most of KDE's components depend on the existence of this object.
+</p>
+<pre style="background-color : #f0f8ff;">
+app = KApplication ()
+</pre>
+<p>
+Next, we create a <i>KGuiItem</i> to handle some basic information - some text ("Hello"), no icon (the
+empty <i>QString ()</i> constructor), a tooltip and a "what's this?" entry.
+</p>
+<pre style="background-color : #f0f8ff;">
+
+guiItem = KGuiItem (QString( "Hello"), QString(),
+                    QString( "this is a tooltip" ),
+                    QString( "this is a whatsthis" ))
+
+</pre>
+<p>
+Finally, we pop up a <i>KMessageBox</i> dialog to display our message.
+</p>
+<pre style="background-color : #f0f8ff;">
+KMessageBox.questionYesNo (None, "Hello World", "Hello", guiItem )
+</pre>
+<h3>Final Notes</h3>
+<p>
+You may have noted that we didn't explicitly create a <i>KMessageBox</i> object to create the message box. That's
+because most of the <i>KMessageBox</i> methods are <i>static</i> - we can call them directly without creating
+an object. (<i>The KCmdLineArgs.init</i> call is also a static method - we didn't create a <i>KCmdLineArgs</i>
+object before using <i>KCmdLineArgs.init</i>.
+</p>
+<p>
+There are also two things missing from this program that most PyKDE applications have - a KMainWindow and a call
+to KApplication.exec_. Those are covered in the next Tutorial.
+</p>
+<h4>Acknowledgement</h4>
+This tutorial is based on the original KDE "Hello, World" tutorial found on
+<a href="http://techbase.kde.org/Development/Tutorials/First_program">Techbase</a>.
+
+</span>
+</body>
+</html>

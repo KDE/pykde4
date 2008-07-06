@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Main Window</title>
+  <meta name="GENERATOR" content="Quanta Plus">
+  <meta name="AUTHOR" content="Jim Bublitz">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<h1>Tutorial - Second Program</h1>
+<h3>KMainWindow</h3>
+<p>
+In this tutorial, we turn the simple "Hello, World" program into a full-fledged
+KDE program (but not one that does anything useful).
+</p>
+<p>
+Most KDE programs have at least two features in common: the have a main window
+that manages all of the other elements that make up the graphical interface of
+the program, and they have an event loop, that handles the communication between
+the program elements and between the user and the program (mouse clicks and keyboarding).
+</p>
+<p>
+First, we change the objects we imports from <b><i>kdeui</i></b>:
+</p>
+<pre style="background-color : #f0f8ff">
+from PyKDE4.kdeui import KApplication, KMainWindow
+</pre>
+<p>
+We're no longer importing the <i>KGuiItem</i> or <i>KMessageBox</i> we used in the first
+program.
+</p>
+<p>
+Next, we create our own customized main window by subclassing (inheriting from) <i>KMainWindow</i>:
+</p>
+<pre style="background-color : #f0f8ff">
+
+class MainWindow (KMainWindow):
+    def __init__ (self):
+        KMainWindow.__init__ (self)
+
+</pre>
+<p>
+When you derive a new class from an existing class, it's important to call the constructor or
+<i>__init__</i> of the parent class. In this case, <i>KMainWindow.__init__</i> doesn't
+require any arguments, so we just pass <i>self</i> to it.
+</p>
+<p>
+Notice that our main window (<i>MainWindow</i>) does absolutely nothing but create itself.
+</p>
+<p>
+In order to display our main window and have our program operate, we add just three lines to
+the end of our program:
+</p>
+<pre style="background-color : #f0f8ff">
+
+mainWindow = MainWindow ()
+mainWindow.show ()
+app.exec_ ()
+
+</pre>
+<p>
+The first line:
+</p>
+<pre style="background-color : #f0f8ff">
+mainWindow = MainWindow ()
+</pre>
+<p>
+creates an instance of our <i>MainWindow</i> class. The next line:
+</p>
+<pre style="background-color : #f0f8ff">
+mainWindow.show ()
+</pre>
+<p>
+causes our main window to be displayed. The final line:
+</p>
+<pre style="background-color : #f0f8ff">
+app.exec_ ()
+</pre>
+<p>
+starts <i>KApplication</i>'s event loop. In the previous program we didn't have an event
+loop running, but the program could still respond to mouse clicks - that's because KDE
+dialogs run their own private event loop behind the scenes.
+</p>
+<p>
+Note also that in PyKDE, the call to run the event loop is <i>exec_</i> - the extra underscore
+at the end of the name is necessary because otherwise the name would clash with Python's
+built-in <i>exec</i> keyword.
+</p>
+<p>
+<i>app.exec_</i> runs continuously, handling all the events that make up the actions of our
+program - it doesn't return until program execution ends. Once app.exec_ begins to run,
+nothing else in our program will occur unless initiated by some event or action,
+either from the user, some external source, or some event we create, like a timer timing-out.
+</p>
+<p>
+That means that usually all initialization and setup takes place before we start the event loop.
+</p>
+<h3>What now?</h3>
+<p>
+In PyKDE for KDE3, this would be a good start for a complete program. In KDE4, programs operate
+a little differently, and most probably won't use <i>KMainWindow</i> directly any longer - much of
+the functionality that was in <i>KMainWindow</i> in KDE3 has been moved into another class.
+We'll look at that class - <i>KXmlGuiWindow</i> - in the next tutorial.
+</p>
+
+</span>
+</body>
+</html>
+

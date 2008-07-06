@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>KXmlGui Main Window</title>
+  <meta name="GENERATOR" content="Quanta Plus">
+  <meta name="AUTHOR" content="Jim Bublitz">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<h1>Tutorial - Third Program</h1>
+<h3>KXmlGuiWindow</h3>
+<p>
+In this tutorial, we'll take another step towards building a more useful (if still
+simple) application. Most graphical programs include things like menus, toolbars and statusbars. This
+tutorial will move us in the direction of being able to provide those things.
+</p>
+<p>
+Once again, we've made a few simple changes to the previous program. The first is in the
+class we've subclassed to create our main window. In fact all of the changes take place
+in <i>class MainWindow</i>
+</p>
+<pre style="background-color : #f0f8ff;">
+
+class MainWindow (KXmlGuiWindow):
+    def __init__ (self):
+        KXmlGuiWindow.__init__ (self)
+
+        textArea =  KTextEdit ();
+        self.setCentralWidget(textArea);
+        self.setupGUI()
+
+</pre>
+<p>
+Note first that <i>MainWindow</i> now inherits <i>KXmlGuiMainWindow</i>, not <i>KMainWindow</i>
+as in the previous tutorial. Correspondingly, we also change the initialization call.
+</p>
+<p>
+We've also added a <i>KTextEdit</i>, which is a simple text editor widget, and made it the main (central)
+widget in our program.
+</p>
+<p>
+Lastly, we've made a call to <i>setupGUI ()</i>. To see what effect this has, run the program. You'll
+find it now has a menubar and statusbar. From the Help menu, you can select About KXmlGuiWindow and see
+what effect <i>KAboutData</i> has.
+</p>
+<p>
+KXmlGuiWindow manages the machinery necessary to provide menus, toolbars and a statusbar. In this case,
+KDE gave us some simple menus, but probably not exactly what we need for our application. The next
+step looks at using KAction and KStandardAction to tailor the user interface to what we want.
+</p>
+<h4>Acknowledgement</h4>
+This tutorial is based on the original KDE KXmlGuiWindow tutorial found on
+<a href="http://techbase.kde.org/Development/Tutorials/Using_KXmlGuiWindow">Techbase</a>.
+
+</span>
+</body>
+</html>

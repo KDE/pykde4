@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Action!</title>
+  <meta name="GENERATOR" content="Quanta Plus">
+  <meta name="AUTHOR" content="Jim Bublitz">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<span style="font-size : 10pt;">
+<h1>Tutorial - Fourth Program</h1>
+<h3>KAction</h3>
+<p>
+In a graphical application, users interact with application using menus, toolbar
+buttons and keyboard shortcuts. The KAction class provides a convenient and efficient
+way. 
+</p>
+<p>
+This tutorial differs slightly from the
+<a href="http://techbase.kde.org/Development/Tutorials/Using_KActions">Techbase
+tutorial</a> it was derived from.
+</p>
+<p>
+In even a small application, it's common to create a number of KActions - one
+for each of the different menu entries - so coding them compactly is important.
+</p>
+<p>
+Our goal in this tutorial is to add two menu items: a Clear menu item with an
+associated button that appears in the toolbar, and a Quit menu item that we
+can link to something, possibly in our code.  The Clear menu item and toolbar
+button will clear whatever text has been typed in the edit window of the app.
+</p>
+<p>
+All of the necessary changes occur in the <i>MainWindow</i> class, which
+now looks like this:
+</p>
+<pre style="background-color : #f0f8ff">
+
+class MainWindow (KXmlGuiWindow):
+    def __init__ (self):
+        KXmlGuiWindow.__init__ (self)
+
+        self.textArea =  KTextEdit ()
+        self.setCentralWidget(self.textArea)
+
+        self.setupActions()
+
+    def setupActions (self):
+        clearAction = KAction(KIcon("edit-clear"), i18n("Clear"), self)
+        self.actionCollection().addAction("clear", clearAction)
+        self.connect (clearAction, SIGNAL ("triggered(bool)"), self.textArea.clear)
+
+        KStandardAction.quit (app.quit, self.actionCollection())
+
+        self.setupGUI(QSize (600, 400), KXmlGuiWindow.Default, os.path.join (sys.path [0],"kactionui.rc"))
+
+</pre>
+<p>
+We've removed the <i>setupGUI</i> call from <i>MainWindow.__init__</i> and placed it (with
+argeuments) at the end of a new method called <i>setupActions</i>
+</p>
+<p>
+To create our Clear menu/toolbar entries, we need to create a KAction that represents this
+action. Creating a KAction from scratch requires 4 steps and a lot of explanation.
+</p>
+<p>
+The first step is to create a KAction and give it three properties: an icon, a name, and an
+owner:
+</p>
+<pre style="background-color : #f0f8ff">
+clearAction = KAction(KIcon("edit-clear"), i18n("Clear"), self)
+</pre>
+<p>
+The icon chosen ("edit-clear") is a standard KDE icon, and KIcon will find it automatically. The name
+for the action ("Clear") will appear in the menu - <i>i18n</i> wraps it so that it can be
+automatically translated into different languages. Lastly, the <i>KXmlGuiWindow</i> (self) will be
+the owner of this action. We could have created an empty <i>KAction</i> objects and used
+<i>KAction</i>'s methods to set the action's properties, but that requires 4 lines of code instead
+of one - a big difference if you're creating 10 or 20 actions.
+</p>
+<p>
+If you've done actions using PyKDE3, you may notice that the owner is no longer the main window's
+action collection, and the action collection isn't referenced in the <i>KAction</i> constructor
+call. In PyKDE4 (or plain KDE4), it's necessary to do an explicit call to add the action to
+the action collection, so our second step is:
+</p>
+<pre style="background-color : #f0f8ff">
+self.actionCollection().addAction("clear", clearAction)
+</pre>
+<p>
+Notice that <i>KXmlGuiWindow</i> already owns an action collection that we can reference using
+<i>self.actionCollection ()</i>. Notice also that we've given the action a different name (its
+"internal" name - "clear"), and provided a reference to the action itself (<i>clearAction</i>).
+</p>
+<p>
+For our action to actually cause something to happen, we have to link the action to some code
+that does what we want. We accomplish this using Qt's "signals and slots" mechanism, so our
+third step is:
+</p>
+<pre style="background-color : #f0f8ff">
+self.connect (clearAction, SIGNAL ("triggered(bool)"), self.textArea.clear)
+</pre>
+<p>
+<i>connect</i> is a static method belonging to <i>QObject</i>, so we can call it using any
+<i>QObject</i> descendant - in this case our <i>KXmlGuiWindow</i> descendant (self).
+</p>
+Specifying a connection in PyQt/PyKDE is simpler than in C++. We just specify the object which
+emits the signal (our action <i>clearAction</i> in this case), we use the <i>SIGNAL</i>
+function from <b><i>QtCore</i></b> to provide the signal's C++ signature (in this case
+<i>"triggered(bool)"</i>) specified as a character string, and we tell <i>connect</i> what
+slot to connect the signal to. In this case, the slot we're using already exists in the
+<i>KTextEdit</i> we're using, so we specify <i>self.textArea.clear</i>. The slot can
+be any callable Python function or method.
+</p>
+<p>
+If you've been keeping count, we said there were four steps to creating an action, and we
+only competed three. The last step applies to all actions we create: We need a GUI file
+written in XML that tells KDE how to build the GUI using our actions:
+</p>
+
+<pre  style="background-color : #eeeeee;">
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE kpartgui SYSTEM "kpartgui.dtd"&gt;
+&lt;gui name="KAction" version="1.2"&gt;
+  &lt;ToolBar name="mainToolBar" &gt;
+    &lt;text&gt;Main Toolbar&lt;/text&gt;
+      &lt;Action name="clear" /&gt;
+      &lt;ActionList name="dynamicActionlist" /&gt;
+  &lt;/ToolBar&gt;
+  &lt;MenuBar&gt;
+    &lt;Menu name="file" &gt;
+        &lt;text&gt;&amp;File&lt;/text&gt;
+        &lt;Action name="clear" /&gt;
+    &lt;/Menu&gt;
+  &lt;/MenuBar&gt;
+&lt;/gui&gt;
+
+</pre>
+<p>
+At the time this is being written, no KDE specification exists to guide the writing of
+the XML file, so I generally use an XML file stolen from another application as a guide. Note
+that the "internal" name of our action (<i>clear</i>) appears in the ToolBar and MenuBar
+sections of the XML file. When we run the application, we should expect a "Clear" entry
+to appear in the File menu, and a "Clear" button on the toolbar, and in fact that's what
+happens.
+</p>
+<p>
+The second action we want to creat - Quit - is much easier. There are a number of pre-defined
+actions collected in <i>KStandardAction</i>. Using them requires only a single line of code:
+</p>
+<pre style="background-color : #f0f8ff">
+KStandardAction.quit (app.quit, self.actionCollection())
+</pre>
+<p>
+For our Quit action we can use the standard action <i>quit</i>. We just need to specify what
+slot it connects to (<i>app.quit</i>) and indicate the action collection to add it to.
+</p>
+<p>
+Lastly, we need to tell KDE we're done defining things and it's time to actually build the GUI
+</p>
+<pre style="background-color : #f0f8ff">
+self.setupGUI(QSize (600, 400), KXmlGuiWindow.Default, os.path.join (sys.path [0], "kactionui.rc"))</pre>
+</pre>
+<p>
+This is more complicated than the <i>setupGUI</i> call in the previous tutorial. This call specifies
+an initial size for our application (<i>QSize (600, 400)</i>), a flag (which will usually be
+<i>KXmlGuiWindow.Default</i> for applications), and a location for our XML file. In this, the .rc
+file is located in the same directory as the program we're running, so the path to it can be
+found at sys.path [0], where Python inserts the path to the program being run.
+</p>
+<p>
+Normally, KDE looks for XML files in well-known locations. If we had our XML file properly installed,
+we could still use <i>setupGUI</i> with no arguments, and KDE would find the XML file from our
+application name.
+</p>
+<p>
+However, during development of an application, not all of the files are in their final locations,
+so we specify the file's location explicitly here.
+</p>
+<p>
+If you run the application now, you can verify the new Clear menu entry and toolbar button, and
+type some text in the app and clear it using the button or menu item.
+</p>
+<p>
+The only thing we haven't done is add a keyboard shortcut for our Clear action. This isn't
+difficult, but it involves some other considerations, so I've postponed that to the next
+tutorial - KAction2.
+</p>
+</span>
+</body>
+</html>

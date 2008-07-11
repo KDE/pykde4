@@ -59,6 +59,7 @@ SET(SIP_EXTRA_OPTIONS -g)
 
 ADD_DEFINITIONS(-D_REENTRANT -DQT_NO_DEBUG -DQT_CORE_LIB -DQT_GUI_LIB)
 
+
 ADD_SIP_PYTHON_MODULE(PyKDE4.kdecore sip/kdecore/kdecoremod.sip ${KDE4_KDECORE_LIBS} ${KDE4_KPTY_LIBS})
 ADD_SIP_PYTHON_MODULE(PyKDE4.solid sip/solid/solidmod.sip ${KDE4_SOLID_LIBS})
 ADD_SIP_PYTHON_MODULE(PyKDE4.kdeui sip/kdeui/kdeuimod.sip ${KDE4_KDEUI_LIBS})
@@ -70,20 +71,71 @@ ADD_SIP_PYTHON_MODULE(PyKDE4.khtml sip/khtml/khtmlmod.sip ${KDE4_KHTML_LIBS})
 ADD_SIP_PYTHON_MODULE(PyKDE4.knewstuff sip/knewstuff/knewstuffmod.sip ${KDE4_KNEWSTUFF2_LIBS})
 ADD_SIP_PYTHON_MODULE(PyKDE4.dnssd sip/dnssd/dnssdmod.sip ${KDE4_KDNSSD_LIBS})
 ADD_SIP_PYTHON_MODULE(PyKDE4.phonon sip/phonon/phononmod.sip ${PHONON_LIBS} ${QT_QTDBUS_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
+SET(PYKDE_MODULES "kdecore solid kdeui kio kutils kparts ktexteditor dnssd phonon ")
 
 IF(Soprano_FOUND)
     ADD_SIP_PYTHON_MODULE(PyKDE4.soprano sip/soprano/sopranomod.sip ${SOPRANO_LIBRARIES} ${SOPRANO_INDEX_LIBRARIES} ${SOPRANO_CLIENT_LIBRARIES} ${SOPRANO_SERVER_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY})
+    SET(PYKDE_MODULES "${PYKDE_MODULES} soprano")
 ENDIF(Soprano_FOUND)
 
 IF(Nepomuk_FOUND)
     ADD_SIP_PYTHON_MODULE(PyKDE4.nepomuk sip/nepomuk/nepomukmod.sip ${NEPOMUK_LIBRARIES} ${QT_QTCORE_LIBRARY}  ${SOPRANO_LIBRARIES})
+    SET(PYKDE_MODULES "${PYKDE_MODULES} nepomuk")
 ENDIF(Nepomuk_FOUND)
 
 IF(KDEPIMLIBS_FOUND)
 	ADD_SIP_PYTHON_MODULE(PyKDE4.akonadi sip/akonadi/akonadimod.sip ${KDE4_AKONADI_LIBS} ${KDE4_AKONADI_KMIME_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
+    SET(PYKDE_MODULES "${PYKDE_MODULES} akonadi")
 ENDIF(KDEPIMLIBS_FOUND)
 
 PYTHON_INSTALL(__init__.py ${PYTHON_SITE_PACKAGES_DIR}/PyKDE4)
+
+MESSAGE(STATUS "KDEVERSION: ${KDEVERSION}")
+MESSAGE(STATUS "KDE4_INCLUDE_DIR: ${KDE4_INCLUDE_DIR}")
+MESSAGE(STATUS "KDE4_LIB_DIR: ${KDE4_LIB_DIR}")
+MESSAGE(STATUS "PYTHON_SITE_PACKAGES_DIR: ${PYTHON_SITE_PACKAGES_DIR}")
+
+# Setup and install pykdeconfig.py
+
+# Turn these into formatted strings.
+SET(_SIP_TAGS)
+FOREACH (_TAG ${SIP_TAGS})
+    SET(_SIP_TAGS "${_SIP_TAGS} -t ${_TAG}")
+ENDFOREACH (_TAG)
+
+SET(_SIP_X)
+FOREACH (_X ${SIP_DISABLE_FEATURES})
+    SET(_SIP_X "${_SIP_X} -X ${_X}")
+ENDFOREACH (_X ${SIP_DISABLE_FEATURES})
+
+GET_FILENAME_COMPONENT(LIB_DIR ${KDE4_LIB_DIR} NAME)
+
+SET(SIP_CONFIGURATION "
+kde_version_parts = '${KDEVERSION}'.split('.')
+kde_version_hex = int(kde_version_parts[0])*65536 + int(kde_version_parts[1])*256 + int(kde_version_parts[2])
+_pkg_config = {
+    'dist_name':            '',
+    'kde_version':          kde_version_hex,
+    'kde_version_extra':    '',
+    'kde_version_sfx':      '',
+    'kde_version_str':      '${KDEVERSION}',
+    'kdebasedir':           '${CMAKE_INSTALL_PREFIX}',
+    'kdeincdir':            '${KDE4_INCLUDE_DIR}',
+    'kdelibdir':            '${KDE4_LIB_DIR}',
+    'konsolepart':          'False',
+    'libdir':               '${LIB_DIR}',
+    'pykde_kde_sip_flags':  '${_SIP_TAGS} ${_SIP_X} ${SIP_EXTRA_OPTIONS}',
+    'pykde_mod_dir':        '${PYTHON_SITE_PACKAGES_DIR}/PyKDE4',
+    'pykde_modules':        '${PYKDE_MODULES}',
+    'pykde_sip_dir':        '${SIP_DEFAULT_SIP_DIR}/PyKDE4',
+    'pykde_version':        kde_version_hex,
+    'pykde_version_str':    '${KDEVERSION}'
+}
+
+_default_macros = None")
+
+CONFIGURE_FILE(pykdeconfig.py.in ${CMAKE_CURRENT_BINARY_DIR}/pykdeconfig.py)
+PYTHON_INSTALL(${CMAKE_CURRENT_BINARY_DIR}/pykdeconfig.py ${PYTHON_SITE_PACKAGES_DIR}/PyKDE4)
 
 # Install the .sip files for anyone that wants to build bindings on top of PyKDE4.
 # (Don't forget the / at the end of sip/.)

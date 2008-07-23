@@ -38,6 +38,6 @@ protected:
                             StorageModel (const Soprano::Backend* backend);
 };   // StorageModel
 
-};   // Soprano
+}   // Soprano
 
 

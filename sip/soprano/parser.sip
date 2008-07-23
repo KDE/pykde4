@@ -39,6 +39,6 @@ protected:
                             Parser (const QString& name);
 };   // Parser
 
-};   // Soprano
+}   // Soprano
 
 

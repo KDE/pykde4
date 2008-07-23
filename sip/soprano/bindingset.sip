@@ -40,6 +40,6 @@ public:
     void                    insert (const QString& name, const Soprano::Node& value);
 };   // BindingSet
 
-};   // Soprano
+}   // Soprano
 
 

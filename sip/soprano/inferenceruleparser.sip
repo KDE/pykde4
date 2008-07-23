@@ -38,8 +38,8 @@ private:
 
 };   // RuleParser
 
-};   // Inference
+}   // Inference
 
-};   // Soprano
+}   // Soprano
 
 

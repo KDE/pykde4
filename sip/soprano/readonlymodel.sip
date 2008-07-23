@@ -45,9 +45,9 @@ public:
     Soprano::Node           createBlankNode ();
 };   // ReadOnlyModel
 
-};   // Util
+}   // Util
 
-};   // Soprano
+}   // Soprano
 
 
 */

@@ -40,10 +40,10 @@ QUrl                    rest ();
 QUrl                    subject ();
 QUrl                    type ();
 QUrl                    value ();
-};   // RDF
+}   // RDF
 
-};   // Vocabulary
+}   // Vocabulary
 
-};   // Soprano
+}   // Soprano
 
 

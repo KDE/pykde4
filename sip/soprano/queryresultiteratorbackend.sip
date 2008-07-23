@@ -23,7 +23,7 @@
 namespace Soprano
 {
 typedef IteratorBackend<Soprano::BindingSet> QueryResultIteratorBackendBase;
-};
+}
 %End
 
 namespace Soprano
@@ -49,6 +49,6 @@ protected:
                             QueryResultIteratorBackend ();
 };   // QueryResultIteratorBackend
 
-};   // Soprano
+}   // Soprano
 
 

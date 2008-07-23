@@ -23,7 +23,7 @@
 namespace Soprano
 {
 typedef Iterator<Soprano::BindingSet> QueryResultIteratorBase;
-};
+}
 %End
 
 namespace Soprano
@@ -52,6 +52,6 @@ public:
     Soprano::NodeIterator   iterateBindings (int offset) const;
 };   // QueryResultIterator
 
-};   // Soprano
+}   // Soprano
 
 

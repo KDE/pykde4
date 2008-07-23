@@ -35,8 +35,8 @@ public:
                             SimpleNodeIterator (const Soprano::Util::SimpleNodeIterator&);
 };   // SimpleNodeIterator
 
-};   // Util
+}   // Util
 
-};   // Soprano
+}   // Soprano
 
 

@@ -37,8 +37,8 @@ public:
     void                    removeModel (const QString& name);
 };   // DBusClient
 
-};   // Client
+}   // Client
 
-};   // Soprano
+}   // Soprano
 
 

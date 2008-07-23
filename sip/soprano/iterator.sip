@@ -43,6 +43,6 @@ protected:
 //ig    IteratorBackend<T>*     backend () const;
 };   // Iterator
 
-};   // Soprano
+}   // Soprano
 
 

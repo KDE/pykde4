@@ -51,8 +51,8 @@ public:
     static Soprano::Inference::RuleSet  standardRuleSet (Soprano::Inference::StandardRuleSet);
 };   // RuleSet
 
-};   // Inference
+}   // Inference
 
-};   // Soprano
+}   // Soprano
 
 

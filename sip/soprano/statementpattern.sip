@@ -40,8 +40,8 @@ public:
     QString                 createSparqlGraphPattern (const Soprano::BindingSet& bindings) const;
 };   // StatementPattern
 
-};   // Inference
+}   // Inference
 
-};   // Soprano
+}   // Soprano
 
 

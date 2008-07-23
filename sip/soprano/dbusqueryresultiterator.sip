@@ -33,8 +33,8 @@ public:
                             DBusQueryResultIterator (const QString& serviceName, const QString& dbusObject);
 };   // DBusQueryResultIterator
 
-};   // Client
+}   // Client
 
-};   // Soprano
+}   // Soprano
 
 

@@ -78,6 +78,6 @@ public:
     static QUrl             dataTypeUriFromType (QVariant::Type type);
 };   // LiteralValue
 
-};   // Soprano
+}   // Soprano
 
 

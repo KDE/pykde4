@@ -46,8 +46,8 @@ public:
     Soprano::Node           createBlankNode ();
 };   // DBusModel
 
-};   // Client
+}   // Client
 
-};   // Soprano
+}   // Soprano
 
 

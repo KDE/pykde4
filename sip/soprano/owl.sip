@@ -69,10 +69,10 @@ QUrl                    sameAs ();
 QUrl                    someValuesFrom ();
 QUrl                    unionOf ();
 QUrl                    versionInfo ();
-};   // OWL
+}   // OWL
 
-};   // Vocabulary
+}   // Vocabulary
 
-};   // Soprano
+}   // Soprano
 
 

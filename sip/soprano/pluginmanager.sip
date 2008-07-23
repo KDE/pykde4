@@ -43,7 +43,7 @@ private:
                             PluginManager (QObject* parent /TransferThis/ = 0);
 };   // PluginManager
 
-};   // Soprano
+}   // Soprano
 
 %MappedType QList<const Soprano::Backend*>
 {

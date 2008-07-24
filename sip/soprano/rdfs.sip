@@ -40,10 +40,10 @@ QUrl                    range ();
 QUrl                    seeAlso ();
 QUrl                    subClassOf ();
 QUrl                    subPropertyOf ();
-}   // RDFS
+};   // RDFS
 
-}   // Vocabulary
+};   // Vocabulary
 
-}   // Soprano
+};   // Soprano
 
 

@@ -48,8 +48,8 @@ protected:
     virtual Soprano::Model*  createModel (const QList<Soprano::BackendSetting>& settings);
 };   // ServerCore
 
-}   // Server
+};   // Server
 
-}   // Soprano
+};   // Soprano
 
 

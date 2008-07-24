@@ -87,8 +87,8 @@ typedef QFlags<Soprano::Query::QueryLanguage> QueryLanguages;
 
 QString                 queryLanguageToString (Soprano::Query::QueryLanguage lang, const QString& userQueryLanguage = QString());
 Soprano::Query::QueryLanguage  queryLanguageFromString (const QString& queryLanguage);
-}   // Query
+};   // Query
 
-}   // Soprano
+};   // Soprano
 
 

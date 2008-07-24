@@ -42,9 +42,9 @@ public:
     void                    setOptimizedQueriesEnabled (bool b);
 };   // InferenceModel
 
-}   // Inference
+};   // Inference
 
-}   // Soprano
+};   // Soprano
 
 // not exported
 //ig uint                    qHash (const Soprano::Node& node);

@@ -36,8 +36,8 @@ public:
     QString                 dbusObjectPath () const;
 };   // DBusExportModel
 
-}   // Server
+};   // Server
 
-}   // Soprano
+};   // Soprano
 
 

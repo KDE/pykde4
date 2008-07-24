@@ -24,7 +24,7 @@ namespace Soprano
 {
 typedef Iterator<Soprano::Node> NodeIteratorBase;
 typedef IteratorBackend<Soprano::Node> NodeIteratorBackendBase;
-}
+};
 %End
 
 namespace Soprano
@@ -42,6 +42,6 @@ public:
     QList<Soprano::Node>    allNodes ();
 };   // NodeIterator
 
-}   // Soprano
+};   // Soprano
 
 

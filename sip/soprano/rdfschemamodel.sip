@@ -49,7 +49,7 @@ public:
     bool                    isType (const Soprano::Node& someClass, const Soprano::Node& someType) const;
 };   // RdfSchemaModel
 
-}   // Soprano
+};   // Soprano
 
 
 */

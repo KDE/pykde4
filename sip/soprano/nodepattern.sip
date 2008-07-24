@@ -41,8 +41,8 @@ public:
     QString                 createSparqlNodePattern (const Soprano::BindingSet& bindings) const;
 };   // NodePattern
 
-}   // Inference
+};   // Inference
 
-}   // Soprano
+};   // Soprano
 
 

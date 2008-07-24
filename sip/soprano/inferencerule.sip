@@ -43,8 +43,8 @@ public:
     QList<Soprano::Statement>  bindPreconditions (const Soprano::BindingSet& bindings) const;
 };   // Rule
 
-};   // Inference
+}   // Inference
 
-};   // Soprano
+}   // Soprano
 
 

@@ -296,10 +296,10 @@ QUrl                    wordCount ();
 QUrl                    workEmailAddress ();
 QUrl                    workPhoneNumber ();
 QUrl                    workPostalAddress ();
-};   // Xesam
+}   // Xesam
 
-};   // Vocabulary
+}   // Vocabulary
 
-};   // Soprano
+}   // Soprano
 
 

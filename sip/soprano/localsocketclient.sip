@@ -38,8 +38,8 @@ public:
     void                    disconnect ();
 };   // LocalSocketClient
 
-};   // Client
+}   // Client
 
-};   // Soprano
+}   // Soprano
 
 

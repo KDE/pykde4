@@ -67,6 +67,6 @@ private:
                             Model (const Soprano::Model&);
 };   // Model
 
-};   // Soprano
+}   // Soprano
 
 

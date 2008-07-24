@@ -37,6 +37,6 @@ protected:
                             Serializer (const QString& name);
 };   // Serializer
 
-};   // Soprano
+}   // Soprano
 
 

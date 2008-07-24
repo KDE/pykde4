@@ -55,10 +55,10 @@ QUrl                    rating ();
 QUrl                    serializationLanguage ();
 QUrl                    status ();
 QUrl                    version ();
-};   // NAO
+}   // NAO
 
-};   // Vocabulary
+}   // Vocabulary
 
-};   // Soprano
+}   // Soprano
 
 

@@ -37,6 +37,6 @@ protected:
                             IteratorBackend ();
 };   // IteratorBackend
 
-};   // Soprano
+}   // Soprano
 
 

@@ -32,10 +32,10 @@ QUrl                    InferenceMetaData ();
 QUrl                    InferenceGraph ();
 QUrl                    sourceStatement ();
 QUrl                    context ();
-};   // SIL
+}   // SIL
 
-};   // Vocabulary
+}   // Vocabulary
 
-};   // Soprano
+}   // Soprano
 
 

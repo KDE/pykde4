@@ -120,8 +120,8 @@ public:
     Soprano::Util::AsyncResult*  createBlankNodeAsync ();
 };   // AsyncModel
 
-};   // Util
+}   // Util
 
-};   // Soprano
+}   // Soprano
 
 

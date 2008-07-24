@@ -43,8 +43,8 @@ public:
     void                    setFileName (const QString& fileName);
 };   // Locator
 
-};   // Error
+}   // Error
 
-};   // Soprano
+}   // Soprano
 
 

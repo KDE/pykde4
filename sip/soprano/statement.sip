@@ -45,6 +45,6 @@ public:
     void                    setContext (const Soprano::Node& context);
 };   // Statement
 
-};   // Soprano
+}   // Soprano
 
 

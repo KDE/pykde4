@@ -58,6 +58,6 @@ protected:
     virtual void            parentStatementRemoved (const Soprano::Statement&);
 };   // FilterModel
 
-};   // Soprano
+}   // Soprano
 
 

@@ -41,8 +41,8 @@ public:
     void                    removeModel (const QString& name);
 };   // TcpClient
 
-};   // Client
+}   // Client
 
-};   // Soprano
+}   // Soprano
 
 

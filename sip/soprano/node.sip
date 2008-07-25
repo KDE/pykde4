@@ -65,6 +65,6 @@ public:
     static Soprano::Node    createLiteralNode (const Soprano::LiteralValue& value, const QString& language);
 };   // Node
 
-}   // Soprano
+};   // Soprano
 
 

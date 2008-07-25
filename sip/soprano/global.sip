@@ -28,6 +28,6 @@ const Soprano::Backend*  discoverBackendByFeatures (Soprano::BackendFeatures fea
 void                    setUsedBackend (const Soprano::Backend*);
 const Soprano::Backend*  usedBackend ();
 Soprano::Model*         createModel (const QList<Soprano::BackendSetting>& settings = QList<Soprano::BackendSetting>());
-}   // Soprano
+};   // Soprano
 
 

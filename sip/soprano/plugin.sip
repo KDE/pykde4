@@ -37,6 +37,6 @@ private:
                             Plugin(const Soprano::Plugin &other);
 };   // Plugin
 
-}   // Soprano
+};   // Soprano
 
 

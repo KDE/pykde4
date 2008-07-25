@@ -91,8 +91,8 @@ private:
                             ErrorCache(const Soprano::Error::ErrorCache &other);
 };   // ErrorCache
 
-}   // Error
+};   // Error
 
-}   // Soprano
+};   // Soprano
 
 

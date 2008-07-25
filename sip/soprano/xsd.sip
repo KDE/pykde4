@@ -42,10 +42,10 @@ QUrl                    date ();
 QUrl                    dateTime ();
 QUrl                    time ();
 QUrl                    base64Binary ();
-}   // XMLSchema
+};   // XMLSchema
 
-}   // Vocabulary
+};   // Vocabulary
 
-}   // Soprano
+};   // Soprano
 
 

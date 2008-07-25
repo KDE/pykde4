@@ -35,8 +35,8 @@ public:
                             SimpleStatementIterator (const Soprano::Util::SimpleStatementIterator&);
 };   // SimpleStatementIterator
 
-}   // Util
+};   // Util
 
-}   // Soprano
+};   // Soprano
 
 

@@ -57,6 +57,6 @@ public:
     bool                    supportsFeatures (Soprano::BackendFeatures feature, const QStringList& userFeatures = QStringList()) const;
 };   // Backend
 
-}   // Soprano
+};   // Soprano
 
 

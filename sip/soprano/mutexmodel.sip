@@ -51,8 +51,8 @@ public:
     int                     statementCount () const;
 };   // MutexModel
 
-}   // Util
+};   // Util
 
-}   // Soprano
+};   // Soprano
 
 

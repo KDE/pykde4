@@ -43,8 +43,8 @@ public:
     void                    unregisterIterator ();
 };   // DBusExportIterator
 
-}   // Server
+};   // Server
 
-}   // Soprano
+};   // Soprano
 
 

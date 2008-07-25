@@ -65,10 +65,10 @@ QUrl                    subGraphOf ();
 QUrl                    superGraphOf ();
 QUrl                    updatable ();
 QUrl                    viewOn ();
-}   // NRL
+};   // NRL
 
-}   // Vocabulary
+};   // Vocabulary
 
-}   // Soprano
+};   // Soprano
 
 

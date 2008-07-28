@@ -40,8 +40,8 @@ protected:
     void                    timerEvent (QTimerEvent* event);
 };   // SignalCacheModel
 
-}   // Util
+};   // Util
 
-}   // Soprano
+};   // Soprano
 
 

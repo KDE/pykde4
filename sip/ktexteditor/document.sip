@@ -28,6 +28,14 @@ class Document : KParts::ReadWritePart
 {
 %TypeHeaderCode
 #include <ktexteditor/document.h>
+
+#include <ktexteditor/modificationinterface.h>
+#include <ktexteditor/markinterface.h>
+#include <ktexteditor/searchinterface.h>
+#include <ktexteditor/sessionconfiginterface.h>
+#include <ktexteditor/smartinterface.h>
+#include <ktexteditor/templateinterface.h>
+#include <ktexteditor/variableinterface.h>
 %End
 
 
@@ -123,6 +131,67 @@ public:
 protected:
     void                 setOpeningError (bool);
     void                 setOpeningErrorMessage (const QString&);
+
+public:
+    // Python cannot dynamic_cast, so methods are provided that attempt
+    // to convert the Document to the required interface. They return
+    // None on failure.
+//     Why no annotationinterface.sip?
+//     KTextEditor::AnnotationInterface *annotationInterface();
+// %MethodCode
+//     Py_BEGIN_ALLOW_THREADS
+//     sipRes = dynamic_cast<KTextEditor::AnnotationInterface*>(sipCpp);
+//     Py_END_ALLOW_THREADS
+// %End
+    
+    KTextEditor::MarkInterface *markInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::MarkInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::ModificationInterface *modificationInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::ModificationInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::SearchInterface *searchInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::SearchInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::SmartInterface *smartInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::SmartInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::TemplateInterface *templateInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::TemplateInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::TextHintInterface *textHintInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::TextHintInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::VariableInterface *variableInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::VariableInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
 
 };  // class Document
 

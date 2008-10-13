@@ -30,9 +30,10 @@ IF(EXISTS PYTHON_LIBRARY)
 ELSE(EXISTS PYTHON_LIBRARY)
 
   FIND_PACKAGE(PythonInterp REQUIRED)
-  GET_FILENAME_COMPONENT(_cmake_module_path ${CMAKE_CURRENT_LIST_FILE}  PATH)
 
-  EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE}  ${_cmake_module_path}/FindLibPython.py OUTPUT_VARIABLE python_config)
+  FIND_FILE(_find_lib_python_py FindLibPython.py PATHS ${CMAKE_MODULE_PATH})
+
+  EXECUTE_PROCESS(COMMAND ${PYTHON_EXECUTABLE}  ${_find_lib_python_py} OUTPUT_VARIABLE python_config)
   IF(python_config)
     STRING(REGEX REPLACE ".*exec_prefix:([^\n]+).*$" "\\1" PYTHON_PREFIX ${python_config})
     STRING(REGEX REPLACE ".*\nshort_version:([^\n]+).*$" "\\1" PYTHON_SHORT_VERSION ${python_config})

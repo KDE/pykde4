@@ -15,6 +15,9 @@
 GET_FILENAME_COMPONENT(PYTHON_MACROS_MODULE_PATH ${CMAKE_CURRENT_LIST_FILE}  PATH)
 
 MACRO(PYTHON_INSTALL SOURCE_FILE DESINATION_DIR)
+
+  FIND_FILE(_python_compile_py PythonCompile.py PATHS ${CMAKE_MODULE_PATH})
+
   ADD_CUSTOM_TARGET(compile_python_files ALL)
 
   # Install the source file.
@@ -37,7 +40,7 @@ MACRO(PYTHON_INSTALL SOURCE_FILE DESINATION_DIR)
     ADD_CUSTOM_COMMAND(
       TARGET compile_python_files
       COMMAND ${CMAKE_COMMAND} ${_message} -P ${PYTHON_MACROS_MODULE_PATH}/print_status.cmake
-      COMMAND ${PYTHON_EXECUTABLE} ${PYTHON_MACROS_MODULE_PATH}/PythonCompile.py ${_bin_py}
+      COMMAND ${PYTHON_EXECUTABLE} ${_python_compile_py} ${_bin_py}
       DEPENDS ${_absfilename}
     )
   ELSE(_abs_bin_py STREQUAL ${_absfilename})
@@ -45,7 +48,7 @@ MACRO(PYTHON_INSTALL SOURCE_FILE DESINATION_DIR)
       TARGET compile_python_files
       COMMAND ${CMAKE_COMMAND} ${_message} -P ${PYTHON_MACROS_MODULE_PATH}/print_status.cmake
       COMMAND ${CMAKE_COMMAND} -E copy ${_absfilename} ${_bin_py}
-      COMMAND ${PYTHON_EXECUTABLE} ${PYTHON_MACROS_MODULE_PATH}/PythonCompile.py ${_bin_py}
+      COMMAND ${PYTHON_EXECUTABLE} ${_python_compile_py} ${_bin_py}
       DEPENDS ${_absfilename}
     )
   ENDIF(_abs_bin_py STREQUAL ${_absfilename})

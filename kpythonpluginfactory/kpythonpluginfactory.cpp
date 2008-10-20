@@ -1,6 +1,7 @@
-/* copyright 2003 Jim Bublitz <jbublitz@nwinternet.com>
-   copyright 2008 Simon Edwards <simon@simonzone.com>
-   
+/* Copyright 2003 Jim Bublitz <jbublitz@nwinternet.com>
+   Copyright 2008 Simon Edwards <simon@simonzone.com>
+   Copyright 2008 David Boddie <david@boddie.org.uk>
+
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
    License as published by the Free Software Foundation; either
@@ -23,6 +24,13 @@
 #include <kstandarddirs.h>
 #include <kcmodule.h>
 #include <Python.h>
+#include <kcomponentdata.h>
+#include <kdebug.h>
+
+/*
+This implements a plugin factory for running Python plugins. It also
+supports io-slaves with a kdemain() entry point.
+*/
 
 class KPythonPluginFactory : public KPluginFactory
 {
@@ -251,6 +259,8 @@ PyObject *KPythonPluginFactory::importModule (QString moduleName)
     return module;
 }
 
+#define debug 1
+
 PyObject *KPythonPluginFactory::runFunction(PyObject *object, PyObject *args)
 {
     if (!PyCallable_Check (object))
@@ -260,4 +270,167 @@ PyObject *KPythonPluginFactory::runFunction(PyObject *object, PyObject *args)
     Py_XINCREF (res);
 
     return res;
+}
+
+PyObject* call_object(PyObject *callable, PyObject *args)
+{
+    PyObject *result = NULL, *pArgs;
+    
+    if (callable == NULL)
+    {
+        return NULL;
+    }
+    
+    if (PyCallable_Check(callable))
+    {
+        if (args == NULL)
+            pArgs = PyTuple_New(0);
+        else
+            pArgs = args;
+        
+        result = PyObject_CallObject(callable, pArgs);
+        
+        /* If the arguments were created in this function then decrease
+           their reference count. */
+        if (args == NULL) {
+            Py_XDECREF(pArgs);
+            /* pDict and pFunc are borrowed and must not be Py_DECREF-ed */
+        }
+
+        if (result == NULL)
+        {
+            #if debug == 1
+            PyErr_Print();
+            #else
+            PyErr_Clear();
+            #endif
+        }
+    }
+    
+    return result;
+}
+
+PyObject* call_method(PyObject *callable, const char *method)
+{
+    PyObject *result = NULL;
+    
+    if (callable == NULL)
+    {
+        return NULL;
+    }
+    
+    result = PyObject_CallMethod(callable, (char *)method, NULL);
+
+    if (result == NULL)
+    {
+        #if debug == 1
+        PyErr_Print();
+        #else
+        PyErr_Clear();
+        #endif
+    }
+
+    return result;
+}
+
+extern "C"
+{
+    /*
+        The main function initializes the Python interpreter, if not already
+        running, imports the Python module containing the kioslave class to
+        use, and performs the equivalent of the following Python code:
+
+        def SlaveFactory(pool, app):
+
+            slave = SlaveClass(pool, app)
+            slave.dispatchLoop()
+    */
+
+    int kdemain( int argc, char **argv )
+    {
+        Q_UNUSED(argc);
+        PyObject *pModule, *pName, *pDict;
+        char *protocol = argv[1];
+
+        fprintf(stderr,"kio_launcher: Starting in kdemain...\n");
+        fprintf(stderr,"kio_launcher: \n");
+        KComponentData slave(protocol);
+
+        fprintf(stderr,"kio_launcher: Created KComponentData\n");
+        fprintf(stderr,"kio_launcher: protocol %s\n",protocol);
+
+        QLibrary *pyLib = new QLibrary();
+        pyLib->setLoadHints(QLibrary::ExportExternalSymbolsHint);
+        pyLib->setFileName(LIB_PYTHON);
+        pyLib->load();
+        Py_SetProgramName(argv[0]);
+        Py_Initialize();
+        fprintf(stderr,"kio_launcher: Initialized Python\n");
+
+        //PyEval_InitThreads();
+        PySys_SetArgv(1, argv);
+
+        QString completePath = KStandardDirs::locate("data", QString("kio_python/%1.py").arg(protocol));
+        fprintf(stderr,"Path:::: %s\n",completePath.toLatin1().data());
+        QFileInfo pathInfo(completePath);
+        QString path = pathInfo.absoluteDir().absolutePath();
+        PyRun_SimpleString("import sys\n");
+        PyRun_SimpleString(QString("sys.path.append('%1')\n").arg(path).toLatin1().data());
+ 
+        fprintf(stderr,"kio_launcher: Appended to syspath\n");
+
+        pName = PyString_FromString(protocol);
+
+        pModule = PyImport_Import(pName);
+        fprintf(stderr,"kio_launcher: Imported module\n");
+
+        Py_XDECREF(pName);
+
+        if (pModule == NULL)
+        {
+            fprintf(stderr,"kio_launcher: module is NULL!!!!!\n");
+            return 1;
+        }
+        else
+        {
+            PyObject *pClass, *pArgs, *pArg1, *pArg2;
+            
+            pDict = PyModule_GetDict(pModule);
+            /* pDict is a borrowed reference */
+            
+            pClass = PyDict_GetItemString(pDict, "SlaveClass");
+            
+            if (pClass == NULL)
+            {
+                fprintf(stderr,"kio_launcher: Class is NULL!!!\n");
+                return 1;
+            }
+            else
+            {
+                pArgs = PyTuple_New(2);
+                
+                pArg1 = PyString_FromString(argv[2]);
+                pArg2 = PyString_FromString(argv[3]);
+                
+                PyTuple_SetItem(pArgs, 0, pArg1);
+                PyTuple_SetItem(pArgs, 1, pArg2);
+                
+                PyObject *pObject = call_object(pClass, pArgs);
+                
+                Py_XDECREF(pClass);
+                Py_XDECREF(pArgs);
+                
+                call_method(pObject, "dispatchLoop");
+                
+                /* Some time later... */
+                
+                Py_XDECREF(pObject);
+            }
+            
+            Py_XDECREF(pModule);
+        }
+        
+        Py_Finalize();
+        return 0;
+    }
 }

@@ -60,7 +60,7 @@ public:
     unsigned short          eventPhase () const;
     bool                    bubbles () const;
     bool                    cancelable () const;
-    DOMTimeStamp            timeStamp () const;
+    DOM::DOMTimeStamp            timeStamp () const;
     void                    stopPropagation ();
     void                    preventDefault ();
     void                    initEvent (const DOM::DOMString& eventTypeArg, bool canBubbleArg, bool cancelableArg);

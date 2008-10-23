@@ -75,8 +75,8 @@ public:
 
     QString                 localPath () const;
     KIO::filesize_t         size () const;
-    KDateTime               time (KFileItem::FileTimes which) const;
-    time_t                  time (unsigned int which) const;
+    KDateTime               time (KFileItem::FileTimes which /Constrained/) const;
+    time_t                  time (unsigned int which /Constrained/) const;
     QString                 timeString (KFileItem::FileTimes which = KFileItem::ModificationTime) const;
     QString                 timeString (unsigned int which) const;
     bool                    isLocalFile () const;

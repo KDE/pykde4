@@ -132,7 +132,7 @@ public:
     };
 
     void                    setSide (KIO::StatJob::StatSide side);
-    void                    setSide (bool source);
+    void                    setSide (bool source /Constrained/);
     void                    setDetails (short details);
     const KIO::UDSEntry&    statResult () const;
 

@@ -45,7 +45,7 @@ KIO::SimpleJob*         unmount (const QString& point, KIO::JobFlags flags = KIO
 KIO::SimpleJob*         http_update_cache (const KUrl& url, bool no_cache, time_t expireDate);
 KIO::StatJob*           stat (const KUrl& url, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::StatJob*           stat (const KUrl& url, KIO::StatJob::StatSide side, short details, KIO::JobFlags flags = KIO::DefaultFlags);
-KIO::StatJob*           stat (const KUrl& url, bool sideIsSource, short details, KIO::JobFlags flags = KIO::DefaultFlags);
+KIO::StatJob*           stat (const KUrl& url, bool sideIsSource /Constrained/, short details, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::TransferJob*       get (const KUrl& url, KIO::LoadType reload = KIO::NoReload, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::FileJob*           open (const KUrl& url, QIODevice::OpenMode mode);
 KIO::TransferJob*       put (const KUrl& url, int permissions, KIO::JobFlags flags = KIO::DefaultFlags);

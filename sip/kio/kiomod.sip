@@ -15,6 +15,10 @@
 %Import solid/solidmod.sip
 %Import kdeui/kdeuimod.sip
 
+%ModuleHeaderCode
+#include <knotification.h>
+%End
+
 %Include kbookmark.sip
 %Include kbookmarkdialog.sip
 %Include kbookmarkdombuilder.sip

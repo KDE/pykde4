@@ -46,7 +46,7 @@ public:
     static bool             dircopy (const KUrl::List& src, const KUrl& target, QWidget* window = 0);
     static bool             move (const KUrl& src, const KUrl& target, QWidget* window = 0);
     static bool             move (const KUrl::List& src, const KUrl& target, QWidget* window = 0);
-    static bool             exists (const KUrl& url, bool source, QWidget* window);
+    static bool             exists (const KUrl& url, bool source /Constrained/, QWidget* window);
     static bool             exists (const KUrl& url, KIO::NetAccess::StatSide statSide, QWidget* window);
     static bool             stat (const KUrl& url, KIO::UDSEntry& entry, QWidget* window);
     static KUrl             mostLocalUrl (const KUrl& url, QWidget* window);

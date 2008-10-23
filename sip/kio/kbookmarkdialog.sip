@@ -58,8 +58,8 @@ protected:
 
 //force
 
-private:
-    typedef QList<QPair<QString,QString>> BookmarkList;
+//private:
+//    typedef QList<QPair<QString,QString>> BookmarkList;
 
 //end
 

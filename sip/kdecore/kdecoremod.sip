@@ -21,6 +21,7 @@
 %Include kcoreconfigskeleton.sip
 %Include kdesktopfile.sip
 %Include ksharedconfig.sip
+%Include kservice.sip
 %Include kcalendarsystem.sip
 %Include kdatetime.sip
 %Include ktimezone.sip
@@ -53,7 +54,6 @@
 %Include kmimetype.sip
 %Include kmimetypetrader.sip
 %Include kplugininfo.sip
-%Include kservice.sip
 %Include kserviceaction.sip
 %Include kservicegroup.sip
 %Include kservicetype.sip

@@ -51,7 +51,7 @@ signals:
 
 public:
     QVariant                value () const;
-    void                    setResult (const QVariant& result, const Soprano::Error::Error& error);
+//ig    void                    setResult (const QVariant& result, const Soprano::Error::Error& error);
 
 private:
                             AsyncResult ();

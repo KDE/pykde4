@@ -30,7 +30,7 @@ namespace Soprano
 {
 typedef Iterator<Soprano::Statement> StatementIteratorBase;
 typedef IteratorBackend<Soprano::Statement> StatementIteratorBackendBase;
-};
+}
 %End
 
 public:

@@ -24,7 +24,7 @@ namespace Soprano
 {
 typedef Iterator<Soprano::Node> NodeIteratorBase;
 typedef IteratorBackend<Soprano::Node> NodeIteratorBackendBase;
-};
+}
 %End
 
 namespace Soprano

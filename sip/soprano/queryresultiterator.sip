@@ -23,7 +23,7 @@
 namespace Soprano
 {
 typedef Iterator<Soprano::BindingSet> QueryResultIteratorBase;
-};
+}
 %End
 
 namespace Soprano

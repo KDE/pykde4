@@ -27,6 +27,8 @@
 #include <kcomponentdata.h>
 #include <kdebug.h>
 
+#define KDE_DEFAULT_DEBUG_AREA 15000
+
 /*
 This implements a plugin factory for running Python plugins. It also
 supports io-slaves with a kdemain() entry point.
@@ -42,18 +44,22 @@ class KPythonPluginFactory : public KPluginFactory
         virtual QObject *create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args, const QString &keyword);
     private:
         void initialize();
-        bool appendToSysPath (QString newPath);
-        PyObject *importModule (QString moduleName);
-        PyObject *runFunction(PyObject *object, PyObject *args);
         QLibrary *pythonLib;
 };
 K_EXPORT_PLUGIN(KPythonPluginFactory("kpythonpluginfactory"))
 K_GLOBAL_STATIC(KComponentData, KPythonPluginFactory_factorycomponentdata)
 
+bool AppendToSysPath (QString newPath);
+PyObject *ImportModule (QString moduleName);
+QLibrary *LoadPythonLibrary();
+PyObject *RunFunction(PyObject *object, PyObject *args);
+
 KPythonPluginFactory::KPythonPluginFactory(const char *name) : KPluginFactory(name)
 {
     pythonLib = 0;
-    printf("KPythonPluginFactory::KPythonPluginFactory()\n");
+
+    kDebug() << "KPythonPluginFactory::KPythonPluginFactory()";
+
     if (KPythonPluginFactory_factorycomponentdata->isValid())
     {
         setComponentData(*KPythonPluginFactory_factorycomponentdata); \
@@ -68,12 +74,8 @@ void KPythonPluginFactory::initialize()
 {
    if (!Py_IsInitialized ())
    {
-        // Reload libpython, but this time tell the runtime linker to make the
-        // symbols global and available for later loaded libraries/module.
-        pythonLib = new QLibrary();
-        pythonLib->setLoadHints(QLibrary::ExportExternalSymbolsHint);
-        pythonLib->setFileName(LIB_PYTHON);
-        pythonLib->load();
+        kDebug() << "Initializing Python interpreter.";
+        pythonLib = LoadPythonLibrary();
 
         PyEval_InitThreads ();
         Py_Initialize ();
@@ -83,7 +85,7 @@ void KPythonPluginFactory::initialize()
             return;
         }
 
-        printf ("Python interpreter initialized!\n\n");
+        kDebug() << "Succesfully initialized Python interpreter.";
 
         // free the lock
         PyEval_ReleaseLock();
@@ -93,36 +95,35 @@ void KPythonPluginFactory::initialize()
 QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args, const QString &keyword)
 {
     initialize();
-    printf("KPythonPluginFactory::create iface: %s\n",iface);
-    printf("keyword: %s\n",(char *)keyword.toLatin1().data());
+
+    kDebug() << "KPythonPluginFactory::create iface: " << iface;
+    kDebug() << "keyword to be used for finding the plugin code: " << keyword;
     QString completePath = KStandardDirs::locate("data", keyword);
-    printf("keyword path: %s\n",(char *)completePath.toLatin1().data());
+    kDebug() << "Path to plugin code is: " << completePath;
+
     if (completePath.isEmpty())
     {
-        printf("*** Unable to find script: %s\n",(char *)keyword.toLatin1().data());
+        kError() << "Unable to find plugin code: " << keyword;
         return 0;
     }
-    
-    printf("args: %i\n",args.count());
     
     QFileInfo pathInfo(completePath);
     QString path = pathInfo.absoluteDir().absolutePath();
     QString scriptName = pathInfo.baseName();
-printf("module path is %s\n",(char *)path.toLatin1().data());
 
     // Set up the Python module path.
-    if(!appendToSysPath(path.toLatin1().data()))
+    if(!AppendToSysPath(path.toLatin1().data()))
     {
-        printf("*** Failed to set sys.path with %s\n",(char *)path.toLatin1().data());
+        kError() << "Failed to set sys.path to " << path;
         return 0;
     }
     
     // Load the Python script.
-    PyObject *pyModule = importModule(scriptName);
+    PyObject *pyModule = ImportModule(scriptName);
     if(!pyModule)
     {
+        kError() << "Failed to import module";
         PyErr_Print();
-        printf("*** failed to import module\n");
         return 0;
     }
 
@@ -146,15 +147,13 @@ printf("module path is %s\n",(char *)path.toLatin1().data());
                              "        wcomponentData = None\n"
                              "    inst = CreatePlugin(wparentWidget,wparent,wcomponentData)\n"
                              "    return (inst,sip.unwrapinstance(inst))\n");
-printf("bridge: %s\n",(char *)bridge.toLatin1().data());
-
     PyRun_String(bridge.toLatin1().data(), Py_file_input, PyModule_GetDict(pyModule), PyModule_GetDict(pyModule));
 
     // Get the Python module's factory function.
     PyObject *factoryFunction = PyObject_GetAttrString(pyModule, "kpythonpluginfactory_bridge");
     if(!factoryFunction)
     {
-        printf("***failed to find factory function\n");
+        kDebug() << "Failed to find factory function";
         return 0;
     }
 
@@ -164,14 +163,6 @@ printf("bridge: %s\n",(char *)bridge.toLatin1().data());
     PyObject *pyParentWidget = PyLong_FromVoidPtr(parentWidget);
     PyObject *pyParent = PyLong_FromVoidPtr(parent);
     PyObject *pyComponentData = PyLong_FromVoidPtr(KPythonPluginFactory_factorycomponentdata);
-    
-/*
-KComponentData kd = KPythonPluginFactory::componentData();
-    printf("kd is value(): %i\n",(int)kd.isValid());
-    kd = componentData();
-    printf("kd2 is value(): %i\n",(int)kd.isValid());
-*/
-    printf("kd1 is valid(): %i\n",(int)KPythonPluginFactory_factorycomponentdata->isValid());
 
     // Using NNN here is effect gives our references to the arguement away.
     PyObject *functionArgs = Py_BuildValue ("NNN", pyParentWidget, pyParent, pyComponentData);
@@ -179,17 +170,17 @@ KComponentData kd = KPythonPluginFactory::componentData();
     if(pyParentWidget && pyParent && functionArgs)
     {
         // run the factory function
-        pyResultTuple = runFunction(factoryFunction, functionArgs);
+        pyResultTuple = RunFunction(factoryFunction, functionArgs);
         if(!pyResultTuple)
         {
-            printf("*** runFunction failure\n;");
+            kError() << "Error while running factory function for Python plugin: " << keyword;
             PyErr_Print();
             return 0;
         }
     }
     else
     {
-        printf("***failed to create args\n");
+        kError() << "Failed to create args.";
         return 0;
     }
     // cleanup a bit
@@ -205,26 +196,20 @@ KComponentData kd = KPythonPluginFactory::componentData();
     QObject *resultQObject = (QObject *)PyLong_AsVoidPtr(pyQObject);
     if(!resultQObject)
     {
-        printf("***failed sip conversion to C++ pointer\n");
+        kError() << "Failed sip conversion to C++ pointer";
         return 0;
     }
     Py_XDECREF(pyResultTuple);
     
-    // PyKDE can't run the module without this - Pythonize
-    // grabs the lock at initialization and we have to give
-    // it back before exiting. At this point, we no longer need
-    // it.
-    //pyize->releaseLock ();
-
     // take care of any translation info
 //    KGlobal::locale()->insertCatalogue(script);
-    printf("returning result qobject\n");
+    kDebug() << "Returning result qobject";
     return resultQObject;
 }
 
 KPythonPluginFactory::~KPythonPluginFactory()
 {
-    printf("KPythonPluginFactory::~KPythonPluginFactory()\n");
+    kDebug() << "KPythonPluginFactory::~KPythonPluginFactory()";
     if (Py_IsInitialized())
     {
         Py_Finalize();
@@ -235,202 +220,122 @@ KPythonPluginFactory::~KPythonPluginFactory()
     }
 }
 
-bool KPythonPluginFactory::appendToSysPath (QString newPath)
+bool AppendToSysPath (QString newPath)
 {
-    if (newPath.isEmpty()) return false;
+    if (newPath.isEmpty())
+    {
+        return false;
+    }
 
     QString line = QString("import sys\nif not '%1' in sys.path:\n\tsys.path.append ('%2')\n")
                            .arg(newPath).arg(newPath);
-    printf("load line: %s\n",(char *)line.toLatin1().data());
-
-    int res = PyRun_SimpleString (line.toLatin1().data());
-    return res == 0;
+    return PyRun_SimpleString (line.toLatin1().data()) == 0;
 }
 
-PyObject *KPythonPluginFactory::importModule (QString moduleName)
+PyObject *ImportModule (QString moduleName)
 {
-    if (moduleName.isEmpty()) return 0;
+    if (moduleName.isEmpty())
+    {
+        return 0;
+    }
 
     PyObject *module = PyImport_ImportModule (moduleName.toLatin1().data());
-
-    //objects = new ObjectRef (objects, module);
-    //if (!objects) return NULL;
-
     return module;
 }
 
-#define debug 1
+// Reload libpython, but this time tell the runtime linker to make the
+// symbols global and available for later loaded libraries/module.
+QLibrary *LoadPythonLibrary()
+{
+    QLibrary *pythonLib = new QLibrary();
+    pythonLib->setLoadHints(QLibrary::ExportExternalSymbolsHint);
+    pythonLib->setFileName(LIB_PYTHON);
+    pythonLib->load();
+    return pythonLib;
+}
 
-PyObject *KPythonPluginFactory::runFunction(PyObject *object, PyObject *args)
+PyObject *RunFunction(PyObject *object, PyObject *args)
 {
     if (!PyCallable_Check (object))
+    {
         return NULL;
+    }
 
     PyObject *res = PyObject_CallObject (object, args ? args : PyTuple_New (0));
     Py_XINCREF (res);
-
     return res;
-}
-
-PyObject* call_object(PyObject *callable, PyObject *args)
-{
-    PyObject *result = NULL, *pArgs;
-    
-    if (callable == NULL)
-    {
-        return NULL;
-    }
-    
-    if (PyCallable_Check(callable))
-    {
-        if (args == NULL)
-            pArgs = PyTuple_New(0);
-        else
-            pArgs = args;
-        
-        result = PyObject_CallObject(callable, pArgs);
-        
-        /* If the arguments were created in this function then decrease
-           their reference count. */
-        if (args == NULL) {
-            Py_XDECREF(pArgs);
-            /* pDict and pFunc are borrowed and must not be Py_DECREF-ed */
-        }
-
-        if (result == NULL)
-        {
-            #if debug == 1
-            PyErr_Print();
-            #else
-            PyErr_Clear();
-            #endif
-        }
-    }
-    
-    return result;
-}
-
-PyObject* call_method(PyObject *callable, const char *method)
-{
-    PyObject *result = NULL;
-    
-    if (callable == NULL)
-    {
-        return NULL;
-    }
-    
-    result = PyObject_CallMethod(callable, (char *)method, NULL);
-
-    if (result == NULL)
-    {
-        #if debug == 1
-        PyErr_Print();
-        #else
-        PyErr_Clear();
-        #endif
-    }
-
-    return result;
 }
 
 extern "C"
 {
-    /*
-        The main function initializes the Python interpreter, if not already
-        running, imports the Python module containing the kioslave class to
-        use, and performs the equivalent of the following Python code:
+/*
+The main function initializes the Python interpreter, if not already
+running, imports the Python module containing the kioslave class to
+use, and calls the kdemain() function in module with the pool and app
+parameters. The Python kdemain code will typically do this:
 
-        def SlaveFactory(pool, app):
+    def kdemain(pool, app):
+        slave = SlaveClass(pool, app)
+        slave.dispatchLoop()
+*/
+int kdemain( int argc, char **argv )
+{
+    Q_UNUSED(argc);
+    PyObject *pModule;
+    char *protocol = argv[1];
 
-            slave = SlaveClass(pool, app)
-            slave.dispatchLoop()
-    */
+    kDebug() << "Python kioslave starting";
+    KComponentData slave(protocol);
+    kDebug() << "Created KComponentData for protocol " << protocol;
 
-    int kdemain( int argc, char **argv )
+    QLibrary *pyLib = LoadPythonLibrary();
+
+    Py_SetProgramName(argv[0]);
+    Py_Initialize();
+
+    //PyEval_InitThreads();
+    PySys_SetArgv(1, argv);
+
+    QString completePath = KStandardDirs::locate("data", QString("kio_python/%1/%2.py").arg(protocol).arg(protocol));
+    kDebug() << "Path to Python kioslace is " << completePath;
+    QFileInfo pathInfo(completePath);
+    QString path = pathInfo.absoluteDir().absolutePath();
+
+    // Set up the Python module path.
+    if(!AppendToSysPath(path.toLatin1().data()))
     {
-        Q_UNUSED(argc);
-        PyObject *pModule, *pName, *pDict;
-        char *protocol = argv[1];
-
-        fprintf(stderr,"kio_launcher: Starting in kdemain...\n");
-        fprintf(stderr,"kio_launcher: \n");
-        KComponentData slave(protocol);
-
-        fprintf(stderr,"kio_launcher: Created KComponentData\n");
-        fprintf(stderr,"kio_launcher: protocol %s\n",protocol);
-
-        QLibrary *pyLib = new QLibrary();
-        pyLib->setLoadHints(QLibrary::ExportExternalSymbolsHint);
-        pyLib->setFileName(LIB_PYTHON);
-        pyLib->load();
-        Py_SetProgramName(argv[0]);
-        Py_Initialize();
-        fprintf(stderr,"kio_launcher: Initialized Python\n");
-
-        //PyEval_InitThreads();
-        PySys_SetArgv(1, argv);
-
-        QString completePath = KStandardDirs::locate("data", QString("kio_python/%1.py").arg(protocol));
-        fprintf(stderr,"Path:::: %s\n",completePath.toLatin1().data());
-        QFileInfo pathInfo(completePath);
-        QString path = pathInfo.absoluteDir().absolutePath();
-        PyRun_SimpleString("import sys\n");
-        PyRun_SimpleString(QString("sys.path.append('%1')\n").arg(path).toLatin1().data());
- 
-        fprintf(stderr,"kio_launcher: Appended to syspath\n");
-
-        pName = PyString_FromString(protocol);
-
-        pModule = PyImport_Import(pName);
-        fprintf(stderr,"kio_launcher: Imported module\n");
-
-        Py_XDECREF(pName);
-
-        if (pModule == NULL)
-        {
-            fprintf(stderr,"kio_launcher: module is NULL!!!!!\n");
-            return 1;
-        }
-        else
-        {
-            PyObject *pClass, *pArgs, *pArg1, *pArg2;
-            
-            pDict = PyModule_GetDict(pModule);
-            /* pDict is a borrowed reference */
-            
-            pClass = PyDict_GetItemString(pDict, "SlaveClass");
-            
-            if (pClass == NULL)
-            {
-                fprintf(stderr,"kio_launcher: Class is NULL!!!\n");
-                return 1;
-            }
-            else
-            {
-                pArgs = PyTuple_New(2);
-                
-                pArg1 = PyString_FromString(argv[2]);
-                pArg2 = PyString_FromString(argv[3]);
-                
-                PyTuple_SetItem(pArgs, 0, pArg1);
-                PyTuple_SetItem(pArgs, 1, pArg2);
-                
-                PyObject *pObject = call_object(pClass, pArgs);
-                
-                Py_XDECREF(pClass);
-                Py_XDECREF(pArgs);
-                
-                call_method(pObject, "dispatchLoop");
-                
-                /* Some time later... */
-                
-                Py_XDECREF(pObject);
-            }
-            
-            Py_XDECREF(pModule);
-        }
-        
-        Py_Finalize();
-        return 0;
+        kError() << "Failed to set sys.path to " << path;
+        return 1;
     }
+
+    pModule = ImportModule(QString(protocol));
+    if (pModule == NULL)
+    {
+        kError() << "Python kioslace module is NULL.";
+        PyErr_Print();
+        return 1;
+    }
+
+    // Get the Python module's kdemain function and call it.
+    PyObject *factoryFunction = PyObject_GetAttrString(pModule, "kdemain");
+    if(!factoryFunction)
+    {
+        kError() << "Failed to find factory function";
+        return 1;
+    }
+    PyObject *pClass, *pArgs, *pArg1, *pArg2;
+    pArgs = PyTuple_New(2);
+    pArg1 = PyString_FromString(argv[2]);
+    pArg2 = PyString_FromString(argv[3]);
+    PyTuple_SetItem(pArgs, 0, pArg1);
+    PyTuple_SetItem(pArgs, 1, pArg2);
+    RunFunction(factoryFunction, pArgs);
+    
+    Py_XDECREF(pClass);
+    Py_XDECREF(pArgs);
+    Py_XDECREF(pModule);
+    
+    Py_Finalize();
+    return 0;
+}
 }

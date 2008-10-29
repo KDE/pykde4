@@ -88,15 +88,15 @@ QString klocalizedstring_i18n_template(KLocalizedString base, PyObject *list,int
             result = result.subs(double_arg);
 
         } else {
-
-          arg = (QString *)sipForceConvertTo_QString (pyarg, &iserr);
+          int state = 0;
+          arg = (QString *)sipForceConvertToInstance(pyarg, sipClass_QString, NULL, SIP_NOT_NONE, &state, &iserr);
           if (iserr) {
               *sipIsErr = 1;
               return QString();
           }
   
           result = result.subs(*arg);
-          delete arg;
+          sipReleaseInstance(arg,sipClass_QString,state);
           arg = 0;
           }
     }

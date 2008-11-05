@@ -73,34 +73,48 @@ ADD_SIP_PYTHON_MODULE(PyKDE4.kdecore sip/kdecore/kdecoremod.sip ${KDE4_KDECORE_L
 FILE(GLOB solid_files_sip sip/solid/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${solid_files_sip})
 ADD_SIP_PYTHON_MODULE(PyKDE4.solid sip/solid/solidmod.sip ${KDE4_SOLID_LIBS} ${QT_QTCORE_LIBRARY})
+
 FILE(GLOB kdeui_files_sip sip/kdeui/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${kdeui_files_sip})
 ADD_SIP_PYTHON_MODULE(PyKDE4.kdeui sip/kdeui/kdeuimod.sip ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY})
+
 FILE(GLOB kio_files_sip sip/kio/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${kio_files_sip})
 ADD_SIP_PYTHON_MODULE(PyKDE4.kio sip/kio/kiomod.sip ${KDE4_KIO_LIBS} ${KDE4_KFILE_LIBS})
+
 FILE(GLOB kutils_files_sip sip/kutils/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${kutils_files_sip})
 ADD_SIP_PYTHON_MODULE(PyKDE4.kutils sip/kutils/kutilsmod.sip ${KDE4_KUTILS_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDEUI_LIBS})
+
 FILE(GLOB kparts_files_sip sip/kparts/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${kparts_files_sip})
 ADD_SIP_PYTHON_MODULE(PyKDE4.kparts sip/kparts/kpartsmod.sip ${KDE4_KPARTS_LIBS})
+
 FILE(GLOB ktexteditor_files_sip sip/ktexteditor/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${ktexteditor_files_sip})
 ADD_SIP_PYTHON_MODULE(PyKDE4.ktexteditor sip/ktexteditor/ktexteditormod.sip ${KDE4_KTEXTEDITOR_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
+
 FILE(GLOB khtml_files_sip sip/khtml/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${khtml_files_sip})
 ADD_SIP_PYTHON_MODULE(PyKDE4.khtml sip/khtml/khtmlmod.sip ${KDE4_KHTML_LIBS})
+
 FILE(GLOB knewstuff_files_sip sip/knewstuff/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${knewstuff_files_sip})
 ADD_SIP_PYTHON_MODULE(PyKDE4.knewstuff sip/knewstuff/knewstuffmod.sip ${KDE4_KNEWSTUFF2_LIBS} ${QT_QTCORE_LIBRARY})
+
 FILE(GLOB dnssd_files_sip sip/dnssd/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${dnssd_files_sip})
 ADD_SIP_PYTHON_MODULE(PyKDE4.dnssd sip/dnssd/dnssdmod.sip ${KDE4_KDNSSD_LIBS} ${QT_QTCORE_LIBRARY})
+
 FILE(GLOB phonon_files_sip sip/phonon/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${phonon_files_sip})
 ADD_SIP_PYTHON_MODULE(PyKDE4.phonon sip/phonon/phononmod.sip ${PHONON_LIBS} ${QT_QTDBUS_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
-SET(PYKDE_MODULES "kdecore solid kdeui kio kutils kparts ktexteditor dnssd phonon ")
+
+FILE(GLOB plasma_files_sip sip/plasma/*.sip)
+set(SIP_EXTRA_FILES_DEPEND ${plasma_files_sip})
+ADD_SIP_PYTHON_MODULE(PyKDE4.plasma sip/plasma/plasmamod.sip ${KDE4_PLASMA_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTUITOOLS_LIBRARY} ${KDE4_KIO_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY})
+
+SET(PYKDE_MODULES "kdecore solid kdeui kio kutils kparts ktexteditor dnssd phonon plasma")
 
 IF(Soprano_FOUND)
     FILE(GLOB soprano_files_sip sip/soprano/*.sip)

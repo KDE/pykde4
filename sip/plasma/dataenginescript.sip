@@ -31,8 +31,12 @@ public:
     explicit                DataEngineScript (QObject* parent /TransferThis/ = 0);
     void                    setDataEngine (Plasma::DataEngine* dataEngine);
     Plasma::DataEngine*     dataEngine () const;
+    virtual QStringList     sources() const;
+
     virtual bool            sourceRequestEvent (const QString& name);
     virtual bool            updateSourceEvent (const QString& source);
+//FIXME
+//    Plasma::Service*        serviceForSource(const QString &source);
 
 protected:
     void                    setData (const QString& source, const QString& key, const QVariant& value);

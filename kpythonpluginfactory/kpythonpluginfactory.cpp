@@ -20,6 +20,7 @@
 
 #include <QFileInfo>
 #include <QDir>
+#include <QSet>
 #include <klibloader.h>
 #include <kstandarddirs.h>
 #include <kcmodule.h>
@@ -45,7 +46,10 @@ class KPythonPluginFactory : public KPluginFactory
     private:
         void initialize();
         QLibrary *pythonLib;
+        static QSet<QString> loadedKeywords;
 };
+QSet<QString> KPythonPluginFactory::loadedKeywords;
+
 K_EXPORT_PLUGIN(KPythonPluginFactory("kpythonpluginfactory"))
 K_GLOBAL_STATIC(KComponentData, KPythonPluginFactory_factorycomponentdata)
 
@@ -111,13 +115,18 @@ QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, 
     QString path = pathInfo.absoluteDir().absolutePath();
     QString scriptName = pathInfo.baseName();
 
+    bool loaded = loadedKeywords.contains(keyword);
+
     // Set up the Python module path.
-    if(!AppendToSysPath(path.toLatin1().data()))
+    if (!loaded)
     {
-        kError() << "Failed to set sys.path to " << path;
-        return 0;
-    }
-    
+        if(!AppendToSysPath(path.toLatin1().data()))
+        {
+            kError() << "Failed to set sys.path to " << path;
+            return 0;
+        }
+    }    
+
     // Load the Python script.
     PyObject *pyModule = ImportModule(scriptName);
     if(!pyModule)
@@ -127,27 +136,30 @@ QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, 
         return 0;
     }
 
-    // Inject a helper function
-    QString bridge = QString("def kpythonpluginfactory_bridge(parentWidget,parent,componentData):\n"
-                             "    import sip\n"
-                             "    from PyQt4 import QtCore\n"
-                             "    from PyQt4 import QtGui\n"
-                             "    from PyKDE4 import kdecore\n"
-                             "    if parentWidget!=0:\n"
-                             "        wparentWidget = sip.wrapinstance(parent,QtGui.QWidget)\n"
-                             "    else:\n"
-                             "        wparentWidget = None\n"
-                             "    if parent!=0:\n"
-                             "        wparent = sip.wrapinstance(parent,QtCore.QObject)\n"
-                             "    else:\n"
-                             "        wparent = None\n"
-                             "    if componentData!=0:\n"
-                             "        wcomponentData = sip.wrapinstance(componentData,kdecore.KComponentData)\n"
-                             "    else:\n"
-                             "        wcomponentData = None\n"
-                             "    inst = CreatePlugin(wparentWidget,wparent,wcomponentData)\n"
-                             "    return (inst,sip.unwrapinstance(inst))\n");
-    PyRun_String(bridge.toLatin1().data(), Py_file_input, PyModule_GetDict(pyModule), PyModule_GetDict(pyModule));
+
+    if (!loaded) {
+        // Inject a helper function
+        QString bridge = QString("def kpythonpluginfactory_bridge(parentWidget,parent,componentData):\n"
+                                "    import sip\n"
+                                "    from PyQt4 import QtCore\n"
+                                "    from PyQt4 import QtGui\n"
+                                "    from PyKDE4 import kdecore\n"
+                                "    if parentWidget!=0:\n"
+                                "        wparentWidget = sip.wrapinstance(parent,QtGui.QWidget)\n"
+                                "    else:\n"
+                                "        wparentWidget = None\n"
+                                "    if parent!=0:\n"
+                                "        wparent = sip.wrapinstance(parent,QtCore.QObject)\n"
+                                "    else:\n"
+                                "        wparent = None\n"
+                                "    if componentData!=0:\n"
+                                "        wcomponentData = sip.wrapinstance(componentData,kdecore.KComponentData)\n"
+                                "    else:\n"
+                                "        wcomponentData = None\n"
+                                "    inst = CreatePlugin(wparentWidget,wparent,wcomponentData)\n"
+                                "    return (inst,sip.unwrapinstance(inst))\n");
+        PyRun_String(bridge.toLatin1().data(), Py_file_input, PyModule_GetDict(pyModule), PyModule_GetDict(pyModule));
+    }
 
     // Get the Python module's factory function.
     PyObject *factoryFunction = PyObject_GetAttrString(pyModule, "kpythonpluginfactory_bridge");
@@ -157,8 +169,13 @@ QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, 
         return 0;
     }
 
-    registerPlugin<KCModule>(keyword,0);//,&QObject::staticMetaObject,0);
+    if (!loaded)
+    {
+        registerPlugin<KCModule>(keyword,0);//,&QObject::staticMetaObject,0);
+    }
     
+    loadedKeywords << keyword;
+
     // Call the factory function. Set up the args.
     PyObject *pyParentWidget = PyLong_FromVoidPtr(parentWidget);
     PyObject *pyParent = PyLong_FromVoidPtr(parent);

@@ -28,6 +28,7 @@
 %Import QtNetwork/QtNetworkmod.sip
 %Import QtXml/QtXmlmod.sip
 %Import QtSvg/QtSvgmod.sip
+%Import QtWebKit/QtWebKitmod.sip
 %Import kdecore/kdecoremod.sip
 %Import kdeui/kdeuimod.sip
 

@@ -33,24 +33,9 @@ public:
     void                    setHtml (const QByteArray& html, const QUrl& baseUrl = QUrl());
     void                    setHtml (const QString& html, const QUrl& baseUrl = QUrl());
     QRectF                  geometry () const;
-
-
-//mt undefined symbol: QWebPage* page -- need mapped type?
-//mt     void               setPage (QWebPage* page);
-
-
-
-
-//mt undefined symbol: QWebPage* None -- need mapped type?
-//mt     QWebPage*          page () const;
-
-
-
-
-//mt undefined symbol: QWebFrame* None -- need mapped type?
-//mt     QWebFrame*         mainFrame () const;
-
-
+    void                    setPage (QWebPage* page);
+    QWebPage*               page () const;
+    QWebFrame*              mainFrame () const;
     void                    setGeometry (const QRectF& geometry);
 
 signals:

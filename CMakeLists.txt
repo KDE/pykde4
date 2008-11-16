@@ -119,7 +119,7 @@ SET(PYKDE_MODULES "kdecore solid kdeui kio kutils kparts ktexteditor dnssd phono
 IF(Soprano_FOUND)
     FILE(GLOB soprano_files_sip sip/soprano/*.sip)
     set(SIP_EXTRA_FILES_DEPEND ${soprano_files_sip})
-    ADD_SIP_PYTHON_MODULE(PyKDE4.soprano sip/soprano/sopranomod.sip ${SOPRANO_LIBRARIES} ${SOPRANO_INDEX_LIBRARIES} ${SOPRANO_CLIENT_LIBRARIES} ${SOPRANO_SERVER_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY})
+    ADD_SIP_PYTHON_MODULE(PyKDE4.soprano sip/soprano/sopranomod.sip ${SOPRANO_LIBRARIES} ${SOPRANO_CLIENT_LIBRARIES} ${SOPRANO_SERVER_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY})
     SET(PYKDE_MODULES "${PYKDE_MODULES} soprano")
 ENDIF(Soprano_FOUND)
 

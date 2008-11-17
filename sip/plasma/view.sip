@@ -34,7 +34,7 @@ public:
     bool                    isWallpaperEnabled () const;
     void                    setScreen (int screen);
     int                     screen () const;
-    void                    setDesktop (int desktop);
+//    void                    setDesktop (int desktop);
     int                     desktop () const;
     int                     effectiveDesktop () const;
     Plasma::Containment*    containment () const;

@@ -18,6 +18,7 @@
    Boston, MA 02111-1307, USA.
 */
 
+#include <QtCore/QCoreApplication>
 #include <QFileInfo>
 #include <QDir>
 #include <QSet>
@@ -27,8 +28,6 @@
 #include <Python.h>
 #include <kcomponentdata.h>
 #include <kdebug.h>
-
-#define KDE_DEFAULT_DEBUG_AREA 15000
 
 /*
 This implements a plugin factory for running Python plugins. It also
@@ -58,11 +57,24 @@ PyObject *ImportModule (QString moduleName);
 QLibrary *LoadPythonLibrary();
 PyObject *RunFunction(PyObject *object, PyObject *args);
 
+// This cleanup function is run just before program unload but before
+// any static data is destroyed. It makes sure that the interpreter
+// is shutdown before the PyQt shared libraries etc are unloaded.
+static void KPythonPluginFactoryCleanup_PostRoutine()
+{
+    if (Py_IsInitialized())
+    {
+        Py_Finalize();
+    }
+}
+
 KPythonPluginFactory::KPythonPluginFactory(const char *name) : KPluginFactory(name)
 {
     pythonLib = 0;
 
     kDebug() << "KPythonPluginFactory::KPythonPluginFactory()";
+
+    qAddPostRoutine(KPythonPluginFactoryCleanup_PostRoutine);
 
     if (KPythonPluginFactory_factorycomponentdata->isValid())
     {

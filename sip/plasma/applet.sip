@@ -33,6 +33,14 @@ public:
     {
         setHasConfigurationInterface(hasInterface);
     }
+    static inline void static_public_setConfigurationRequired (Applet *applet, bool needsConfiguring, const QString& reason = QString()) {
+        ((AppletProtectedThunk *) applet ) -> public_setConfigurationRequired(needsConfiguring, reason);
+    };
+
+    inline void public_setConfigurationRequired(bool needsConfiguring, const QString& reason = QString())
+    {
+        setConfigurationRequired(needsConfiguring, reason);
+    }
 };
 }
 
@@ -164,6 +172,7 @@ class AppletProtectedThunk : Plasma::Applet
 {
 public:
     static void static_public_setHasConfigurationInterface (Plasma::Applet *applet, bool hasInterface);
+    static void static_public_setConfigurationRequired (Plasma::Applet *applet, bool needsConfiguring, const QString& reason = QString());
 };
 
 };   // Plasma

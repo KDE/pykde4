@@ -27,7 +27,7 @@ class ScrollBar : QGraphicsProxyWidget
 %End
 
 public:
-    explicit                ScrollBar (Qt::Orientation orientation, QGraphicsWidget* parent);
+    explicit                ScrollBar (QGraphicsWidget* parent);
     void                    setRange (int min, int max);
     void                    setSingleStep (int val);
     int                     singleStep ();

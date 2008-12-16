@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KShortcutsEditor : QWidget
 {
 %TypeHeaderCode
@@ -50,17 +51,14 @@ public:
                             KShortcutsEditor (KActionCollection* collection, QWidget* parent /TransferThis/, KShortcutsEditor::ActionTypes actionTypes = KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcuts allowLetterShortcuts = KShortcutsEditor::LetterShortcutsAllowed);
     explicit                KShortcutsEditor (QWidget* parent /TransferThis/, KShortcutsEditor::ActionTypes actionTypes = KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcuts allowLetterShortcuts = KShortcutsEditor::LetterShortcutsAllowed);
     bool                    isModified () const;
-
     void                    clearCollections ();
     void                    addCollection (KActionCollection*, const QString& title = QString());
     void                    undoChanges ();
     void                    save ();
-//ig     static bool        checkGlobalShortcutsConflict (const KShortcut& cut, bool warnUser, QWidget* parent /Transfer/);
-//ig     static bool        checkStandardShortcutsConflict (const KShortcut& cut, bool warnUser, QWidget* parent /Transfer/);
+    void                    commit ();
     void                    writeConfiguration (KConfigGroup* config = 0) const;
     void                    exportConfiguration (KConfig* config) const;
     void                    importConfiguration (KConfig* config);
-
 
 signals:
     void                    keyChange ();
@@ -68,12 +66,14 @@ signals:
 public:
     void                    resizeColumns ();
     void                    allDefault ();
-
     void                    printShortcuts () const;
-
 
 private:
                             KShortcutsEditor (const KShortcutsEditor&);
+
+public:
+//ig     static bool        checkGlobalShortcutsConflict (const KShortcut& cut, bool warnUser, QWidget* parent /Transfer/);
+//ig     static bool        checkStandardShortcutsConflict (const KShortcut& cut, bool warnUser, QWidget* parent /Transfer/);
 };   // KShortcutsEditor
 
 

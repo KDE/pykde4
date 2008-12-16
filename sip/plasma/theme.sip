@@ -27,19 +27,23 @@ class Theme : QObject
 #include <plasma/theme.h>
 %End
 
+
 public:
 
     enum ColorRole
     {
         TextColor,
         HighlightColor,
-        BackgroundColor
+        BackgroundColor,
+        ButtonTextColor,
+        ButtonBackgroundColor
     };
 
 
     enum FontRole
     {
-        DefaultFont
+        DefaultFont,
+        DesktopFont
     };
 
     static Plasma::Theme*   defaultTheme ();
@@ -58,12 +62,19 @@ public:
     bool                    windowTranslucencyEnabled () const;
     void                    setUseGlobalSettings (bool useGlobal);
     bool                    useGlobalSettings () const;
+    bool                    findInCache (const QString& key, QPixmap& pix);
+    void                    insertIntoCache (const QString& key, const QPixmap& pix);
+    void                    setCacheLimit (int kbytes);
+    bool                    findInRectsCache (const QString& image, const QString& element, QRectF& rect) const;
+    void                    insertIntoRectsCache (const QString& image, const QString& element, const QRectF& rect);
+    void                    invalidateRectsCache (const QString& image);
 
 signals:
     void                    themeChanged ();
 
 public:
     void                    settingsChanged ();
+
 };   // Theme
 
 };   // Plasma

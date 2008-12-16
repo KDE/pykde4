@@ -88,6 +88,7 @@ public:
     void                    updateConstraints (Plasma::Constraints constraints = Plasma::AllConstraints);
     virtual Plasma::FormFactor  formFactor () const;
     virtual Plasma::Location  location () const;
+    Plasma::Context*        context () const;
     Plasma::AspectRatioMode  aspectRatioMode () const;
     void                    setAspectRatioMode (Plasma::AspectRatioMode);
     static KPluginInfo::List  listAppletInfo (const QString& category = QString(), const QString& parentApp = QString());
@@ -107,6 +108,7 @@ public:
     Plasma::ImmutabilityType  immutability () const;
     void                    paintWindowFrame (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
     bool                    hasFailedToLaunch () const;
+    bool                    isBusy () const;
     bool                    configurationRequired () const;
     bool                    hasConfigurationInterface () const;
     virtual QList<QAction*>  contextualActions ();
@@ -128,11 +130,14 @@ public:
     KShortcut               globalShortcut () const;
     virtual void            addAssociatedWidget (QWidget* widget);
     virtual void            removeAssociatedWidget (QWidget* widget);
+    virtual void            initExtenderItem (Plasma::ExtenderItem* item);
     explicit                Applet (QGraphicsItem* parent = 0, const QString& serviceId = QString(), uint appletId = 0);
+    bool                    destroyed () const;
 
 signals:
     void                    releaseVisualFocus ();
     void                    geometryChanged ();
+    void                    sizeHintChanged (Qt::SizeHint which);
     void                    configNeedsSaving ();
     void                    activate ();
 
@@ -144,6 +149,8 @@ public:
     void                    lower ();
     void                    flushPendingConstraintsEvents ();
     virtual void            init ();
+    virtual void            configChanged ();
+    void                    setBusy (bool busy);
 
 protected:
                             Applet (QObject* parent /TransferThis/, const QVariantList& args);
@@ -156,22 +163,32 @@ protected:
     void                    registerAsDragHandle (QGraphicsItem* item);
     void                    unregisterAsDragHandle (QGraphicsItem* item);
     bool                    isRegisteredAsDragHandle (QGraphicsItem* item);
+    Plasma::Extender*       extender () const;
     bool                    eventFilter (QObject* o, QEvent* e);
     bool                    sceneEventFilter (QGraphicsItem* watched, QEvent* event);
     void                    mouseMoveEvent (QGraphicsSceneMouseEvent* event);
-    void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
     void                    focusInEvent (QFocusEvent* event);
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
     QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
     QPainterPath            shape () const;
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
+    void                    hoverEnterEvent (QGraphicsSceneHoverEvent* event);
+    void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
     void                    timerEvent (QTimerEvent* event);
+
+protected:
+    void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
 };   // Applet
+
 
 class AppletProtectedThunk : Plasma::Applet
 {
+%TypeHeaderCode
+#include <plasma/applet.h>
+%End
+
 public:
-    static void static_public_setHasConfigurationInterface (Plasma::Applet *applet, bool hasInterface);
+    static void             static_public_setHasConfigurationInterface (Plasma::Applet* applet, bool hasInterface);
     static void static_public_setConfigurationRequired (Plasma::Applet *applet, bool needsConfiguring, const QString& reason = QString());
 };
 

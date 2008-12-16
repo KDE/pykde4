@@ -86,3 +86,4 @@
 %Include kptydevice.sip
 %Include kptyprocess.sip
 %Include kpty.sip
+%Include globals.sip

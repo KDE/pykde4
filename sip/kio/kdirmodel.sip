@@ -94,6 +94,7 @@ public:
     virtual int             rowCount (const QModelIndex& parent /Transfer/ = QModelIndex()) const;
     virtual bool            setData (const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
     virtual void            sort (int column, Qt::SortOrder order = Qt::AscendingOrder);
+    static KUrl::List       simplifiedUrlList (const KUrl::List& urls);
 
 signals:
     void                    expand (const QModelIndex& index);

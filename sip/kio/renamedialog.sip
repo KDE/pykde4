@@ -34,7 +34,8 @@ enum RenameDialog_Mode
     M_SINGLE,
     M_MULTI,
     M_RESUME,
-    M_NORENAME
+    M_NORENAME,
+    M_ISDIR
 };
 
 

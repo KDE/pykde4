@@ -46,6 +46,7 @@ signals:
     void                    instanceNameChanged (const Akonadi::AgentInstance& instance);
     void                    instanceError (const Akonadi::AgentInstance& instance, const QString& message);
     void                    instanceWarning (const Akonadi::AgentInstance& instance, const QString& message);
+    void                    instanceOnline (const Akonadi::AgentInstance& instance, bool online);
 
 private:
                             AgentManager ();

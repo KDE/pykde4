@@ -27,6 +27,7 @@ class QueryMatch
 #include <plasma/querymatch.h>
 %End
 
+
 public:
 
     enum Type
@@ -61,6 +62,8 @@ public:
     void                    setSubtext (const QString& text);
     void                    setIcon (const QIcon& icon);
     void                    setEnabled (bool enable);
+    QAction*                selectedAction () const;
+    void                    setSelectedAction (QAction* action);
 };   // QueryMatch
 
 };   // Plasma

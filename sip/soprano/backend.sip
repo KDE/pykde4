@@ -41,6 +41,9 @@ public:
 
 typedef QList<Soprano::BackendSetting> BackendSettings;
 
+bool                    isOptionInSettings (const Soprano::BackendSettings& settings, Soprano::BackendOption option, const QString& userOptionName = QString());
+Soprano::BackendSetting&  settingInSettings (Soprano::BackendSettings& settings, Soprano::BackendOption option, const QString& userOptionName = QString());
+QVariant                valueInSettings (const Soprano::BackendSettings& settings, Soprano::BackendOption option, const QString& userOptionName = QString());
 
 class Backend : Soprano::Plugin, Soprano::Error::ErrorCache
 {

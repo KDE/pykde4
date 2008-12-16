@@ -18,13 +18,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Soprano
-{
-typedef Iterator<Soprano::Statement> StatementIteratorBase;
-typedef IteratorBackend<Soprano::Statement> StatementIteratorBackendBase;
-class StatementIterator : Soprano::StatementIteratorBase
-{
-%TypeHeaderCode
+%ModuleHeaderCode
 #include <soprano/statementiterator.h>
 namespace Soprano
 {
@@ -32,6 +26,13 @@ typedef Iterator<Soprano::Statement> StatementIteratorBase;
 typedef IteratorBackend<Soprano::Statement> StatementIteratorBackendBase;
 }
 %End
+
+namespace Soprano
+{
+typedef Iterator<Soprano::Statement> StatementIteratorBase;
+typedef IteratorBackend<Soprano::Statement> StatementIteratorBackendBase;
+class StatementIterator : Soprano::StatementIteratorBase
+{
 
 public:
                             StatementIterator ();

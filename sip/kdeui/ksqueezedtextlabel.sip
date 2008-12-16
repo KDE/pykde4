@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KSqueezedTextLabel : QLabel
 {
 %TypeHeaderCode
@@ -36,12 +37,11 @@ public:
     Qt::TextElideMode       textElideMode () const;
     void                    setTextElideMode (Qt::TextElideMode mode);
     void                    setText (const QString& text);
+    void                    clear ();
 
 protected:
     void                    resizeEvent (QResizeEvent*);
-
     void                    contextMenuEvent (QContextMenuEvent*);
-
     void                    squeezeTextToLabel ();
 };   // KSqueezedTextLabel
 

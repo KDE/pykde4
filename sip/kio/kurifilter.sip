@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KUriFilterData
 {
 %TypeHeaderCode
@@ -45,9 +46,6 @@ public:
                             KUriFilterData ();
     explicit                KUriFilterData (const KUrl& url);
     explicit                KUriFilterData (const QString& url);
-private:
-                            KUriFilterData (const KUriFilterData& data);
-public:
     KUrl                    uri () const;
     QString                 errorMsg () const;
     KUriFilterData::UriTypes  uriType () const;
@@ -62,6 +60,9 @@ public:
     void                    setCheckForExecutables (bool check);
     bool                    checkForExecutables () const;
     QString                 typedString () const;
+
+private:
+                            KUriFilterData (const KUriFilterData& data);
 };   // KUriFilterData
 
 
@@ -105,8 +106,9 @@ public:
 protected:
                             KUriFilter ();
     void                    loadPlugins ();
+
 private:
-                            KUriFilter(const KUriFilter &other);
+                            KUriFilter (const KUriFilter& other);
 };   // KUriFilter
 
 

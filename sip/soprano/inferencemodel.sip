@@ -46,7 +46,4 @@ public:
 
 };   // Soprano
 
-// not exported
-//ig uint                    qHash (const Soprano::Node& node);
-
 

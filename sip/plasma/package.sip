@@ -27,6 +27,7 @@ class Package
 #include <plasma/package.h>
 %End
 
+
 public:
                             Package (const QString& packageRoot, const QString& package, Plasma::PackageStructure::Ptr structure);
                             Package (const QString& packagePath, Plasma::PackageStructure::Ptr structure);
@@ -38,7 +39,8 @@ public:
     const QString           path () const;
     const Plasma::PackageStructure::Ptr  structure () const;
     static QStringList      listInstalled (const QString& packageRoot);
-    static bool             installPackage (const QString& package, const QString& packageRoot, const QString &servicePrefix);
+    static bool             installPackage (const QString& package, const QString& packageRoot, const QString& servicePrefix);
+    static bool             uninstallPackage (const QString& package, const QString& packageRoot, const QString& servicePrefix);
     static bool             registerPackage (const Plasma::PackageMetadata& data, const QString& iconPath);
     static bool             createPackage (const Plasma::PackageMetadata& metadata, const QString& source, const QString& destination, const QString& icon = QString());
 

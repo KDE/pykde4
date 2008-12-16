@@ -27,6 +27,7 @@ class Corona : QGraphicsScene
 #include <plasma/corona.h>
 %End
 
+
 public:
     explicit                Corona (QObject* parent /TransferThis/ = 0);
     void                    setAppletMimeType (const QString& mimetype);
@@ -35,7 +36,13 @@ public:
     void                    clearContainments ();
     KSharedConfig::Ptr      config () const;
     Plasma::Containment*    addContainment (const QString& name, const QVariantList& args = QVariantList());
-    Plasma::Containment*    containmentForScreen (int screen) const;
+    Plasma::Containment*    containmentForScreen (int screen, int desktop = -1) const;
+    void                    addOffscreenWidget (QGraphicsWidget* widget);
+    void                    removeOffscreenWidget (QGraphicsWidget* widget);
+    virtual int             numScreens () const;
+    virtual QRect           screenGeometry (int id) const;
+    virtual QRegion         availableScreenRegion (int id) const;
+    QPoint                  popupPosition (const QGraphicsItem* item, const QSize& s);
     void                    initializeLayout (const QString& config = QString());
     void                    loadLayout (const QString& config = QString());
     void                    saveLayout (const QString& config = QString()) const;
@@ -48,6 +55,7 @@ signals:
     void                    screenOwnerChanged (int wasScreen, int isScreen, Plasma::Containment* containment);
     void                    releaseVisualFocus ();
     void                    configSynced ();
+    void                    availableScreenRegionChanged ();
 
 protected:
     virtual void            loadDefaultLayout ();

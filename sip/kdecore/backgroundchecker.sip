@@ -20,30 +20,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-%ModuleHeaderCode
-//ctscc
-#include <sonnet/backgroundchecker.h>
-#include <kautosavefile.h>
-#include <kautostart.h>
-#include <kcompositejob.h>
-#include <kcoreconfigskeleton.h>
-#include <kdedmodule.h>
-#include <kfilterdev.h>
-#include <kjob.h>
-#include <kjobtrackerinterface.h>
-#include <kjobuidelegate.h>
-#include <klibloader.h>
-#include <klibrary.h>
-#include <klocalsocket.h>
-#include <kpluginfactory.h>
-#include <kpluginloader.h>
-#include <kprocess.h>
-#include <ksavefile.h>
-#include <ksycoca.h>
-#include <ktemporaryfile.h>
-#include <ktoolinvocation.h>
-%End
-
 namespace Sonnet
 {
 
@@ -79,61 +55,6 @@ protected:
     virtual QString         fetchMoreText ();
     virtual void            finishedCurrentFeed ();
     void                    slotEngineDone ();
-
-public:
-
-//  Subclasses of QObject
-
-%ConvertToSubClassCode
-
-    sipClass = NULL;
-
-    if (dynamic_cast<Sonnet::BackgroundChecker*>(sipCpp))
-        sipClass = sipClass_Sonnet_BackgroundChecker;
-    else if (dynamic_cast<KAutoSaveFile*>(sipCpp))
-        sipClass = sipClass_KAutoSaveFile;
-    else if (dynamic_cast<KAutostart*>(sipCpp))
-        sipClass = sipClass_KAutostart;
-    else if (dynamic_cast<KCoreConfigSkeleton*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton;
-    else if (dynamic_cast<KDEDModule*>(sipCpp))
-        sipClass = sipClass_KDEDModule;
-    else if (dynamic_cast<KFilterDev*>(sipCpp))
-        sipClass = sipClass_KFilterDev;
-    else if (dynamic_cast<KJob*>(sipCpp))
-        {
-            sipClass = sipClass_KJob;
-            if (dynamic_cast<KCompositeJob*>(sipCpp))
-                sipClass = sipClass_KCompositeJob;
-        }
-    else if (dynamic_cast<KJobTrackerInterface*>(sipCpp))
-        sipClass = sipClass_KJobTrackerInterface;
-    else if (dynamic_cast<KJobUiDelegate*>(sipCpp))
-        sipClass = sipClass_KJobUiDelegate;
-    else if (dynamic_cast<KLibLoader*>(sipCpp))
-        sipClass = sipClass_KLibLoader;
-    else if (dynamic_cast<KLibrary*>(sipCpp))
-        sipClass = sipClass_KLibrary;
-    else if (dynamic_cast<KLocalSocket*>(sipCpp))
-        sipClass = sipClass_KLocalSocket;
-    else if (dynamic_cast<KLocalSocketServer*>(sipCpp))
-        sipClass = sipClass_KLocalSocketServer;
-    else if (dynamic_cast<KPluginFactory*>(sipCpp))
-        sipClass = sipClass_KPluginFactory;
-    else if (dynamic_cast<KPluginLoader*>(sipCpp))
-        sipClass = sipClass_KPluginLoader;
-    else if (dynamic_cast<KProcess*>(sipCpp))
-        sipClass = sipClass_KProcess;
-    else if (dynamic_cast<KSaveFile*>(sipCpp))
-        sipClass = sipClass_KSaveFile;
-    else if (dynamic_cast<KSycoca*>(sipCpp))
-        sipClass = sipClass_KSycoca;
-    else if (dynamic_cast<KTemporaryFile*>(sipCpp))
-        sipClass = sipClass_KTemporaryFile;
-    else if (dynamic_cast<KToolInvocation*>(sipCpp))
-        sipClass = sipClass_KToolInvocation;
-%End
-
 };   // BackgroundChecker
 
 };   // Sonnet

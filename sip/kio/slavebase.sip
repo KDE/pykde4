@@ -120,13 +120,17 @@ public:
     void                    dropNetwork (const QString& host = QString());
     int                     waitForAnswer (int expected1, int expected2, QByteArray& data, int* pCmd /Out/ = 0);
     void                    sendMetaData ();
+    void                    sendAndKeepMetaData ();
     bool                    wasKilled () const;
     void                    setKillFlag ();
+    void                    lookupHost (const QString& host);
+    int                     waitForHostInfo (QHostInfo& info);
 
 protected:
 //ig     virtual void       virtual_hook (int id, void* data);
+
 private:
-                            SlaveBase (const KIO::SlaveBase &other);
+                            SlaveBase (const KIO::SlaveBase& other);
 };   // SlaveBase
 
 };   // KIO

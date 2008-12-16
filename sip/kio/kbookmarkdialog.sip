@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KBookmarkDialog : KDialog
 {
 %TypeHeaderCode
@@ -55,14 +56,6 @@ protected:
     void                    fillGroup (QTreeWidgetItem* parentItem, const KBookmarkGroup& group);
     void                    initLayoutPrivate ();
     void                    newFolderButton ();
-
-//force
-
-//private:
-//    typedef QList<QPair<QString,QString>> BookmarkList;
-
-//end
-
 };   // KBookmarkDialog
 
 

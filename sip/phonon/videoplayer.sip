@@ -29,12 +29,15 @@ class VideoPlayer : QWidget
 
 public:
     explicit           VideoPlayer (Phonon::Category category, QWidget* parent /TransferThis/ = 0);
-
+                            VideoPlayer (QWidget* parent /TransferThis/ = 0);
     qint64                  totalTime () const;
     qint64                  currentTime () const;
     float                   volume () const;
     bool                    isPlaying () const;
     bool                    isPaused () const;
+    Phonon::MediaObject*    mediaObject () const;
+    Phonon::AudioOutput*    audioOutput () const;
+    Phonon::VideoWidget*    videoWidget () const;
     void                    load (const Phonon::MediaSource& source);
     void                    play (const Phonon::MediaSource& source);
     void                    play ();
@@ -42,9 +45,6 @@ public:
     void                    stop ();
     void                    seek (qint64 ms);
     void                    setVolume (float volume);
-    Phonon::MediaObject*    mediaObject () const;
-    Phonon::AudioOutput*    audioOutput () const;
-    Phonon::VideoWidget*    videoWidget () const;
 
 signals:
     void                    finished ();

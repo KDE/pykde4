@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KFilePlacesModel : QAbstractItemModel
 {
 %TypeHeaderCode
@@ -46,7 +47,9 @@ public:
     Solid::Device           deviceForIndex (const QModelIndex& index) const;
     KBookmark               bookmarkForIndex (const QModelIndex& index) const;
     QAction*                teardownActionForIndex (const QModelIndex& index) const;
+    QAction*                ejectActionForIndex (const QModelIndex& index) const;
     void                    requestTeardown (const QModelIndex& index);
+    void                    requestEject (const QModelIndex& index);
     void                    requestSetup (const QModelIndex& index);
     void                    addPlace (const QString& text, const KUrl& url, const QString& iconName = QString(), const QString& appName = QString());
     void                    editPlace (const QModelIndex& index, const QString& text, const KUrl& url, const QString& iconName = QString(), const QString& appName = QString());

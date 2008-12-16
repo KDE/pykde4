@@ -75,7 +75,8 @@ enum Command
     CMD_READ,
     CMD_WRITE,
     CMD_SEEK,
-    CMD_CLOSE
+    CMD_CLOSE,
+    CMD_HOST_INFO
 };
 
 

@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KStyle : QStyle
 {
 %TypeHeaderCode
@@ -30,8 +31,14 @@ class KStyle : QStyle
 public:
                             KStyle ();
     static QString          defaultStyle ();
+    static QStyle::StyleHint  customStyleHint (const QString& element, const QWidget* widget);
+    static QStyle::ControlElement  customControlElement (const QString& element, const QWidget* widget);
+    static QStyle::SubElement  customSubElement (const QString& element, const QWidget* widget);
 
 protected:
+    QStyle::StyleHint       newStyleHint (const QString& element);
+    QStyle::ControlElement  newControlElement (const QString& element);
+    QStyle::SubElement      newSubElement (const QString& element);
     void                    drawInsideRect (QPainter* p, const QRect& r) const;
     QRect                   centerRect (const QRect& in, int w, int h) const;
     QRect                   centerRect (const QRect& in, const QSize& size) const;

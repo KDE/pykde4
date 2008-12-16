@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KKeySequenceWidget : QWidget
 {
 %TypeHeaderCode
@@ -36,17 +37,33 @@ public:
     };
 
     explicit                KKeySequenceWidget (QWidget* parent /TransferThis/ = 0);
+
+    enum ShortcutType
+    {
+        None,
+        LocalShortcuts,
+        StandardShortcuts,
+        GlobalShortcuts
+    };
+
+    typedef QFlags<KKeySequenceWidget::ShortcutType> ShortcutTypes;
+
+    void                    setCheckForConflictsAgainst (KKeySequenceWidget::ShortcutTypes types);
+    KKeySequenceWidget::ShortcutTypes  checkForConflictsAgainst () const;
+    void                    setMultiKeyShortcutsAllowed (bool);
+    bool                    multiKeyShortcutsAllowed () const;
     void                    setModifierlessAllowed (bool allow);
     bool                    isModifierlessAllowed ();
     void                    setClearButtonShown (bool show);
+    bool                    isKeySequenceAvailable (const QKeySequence& seq) const;
     QKeySequence            keySequence () const;
-
     void                    setCheckActionCollections (const QList<KActionCollection*>& actionCollections);
-
     void                    setCheckActionList (const QList<QAction*>& checkList);
+    void                    setComponentName (const QString& componentName);
 
 signals:
     void                    keySequenceChanged (const QKeySequence& seq);
+    void                    stealShortcut (const QKeySequence& seq, KAction* action);
 
 public:
     void                    captureKeySequence ();

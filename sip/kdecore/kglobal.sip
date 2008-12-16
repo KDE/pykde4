@@ -46,6 +46,7 @@ const QString&          staticQString (const char* str);
 const QString&          staticQString (const QString& str);
 void                    ref ();
 void                    deref ();
+void                    setAllowQuit (bool allowQuit);
 KComponentData          activeComponent ();
 void                    setActiveComponent (const KComponentData& d);
 QString                 caption ();

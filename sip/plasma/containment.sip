@@ -27,6 +27,7 @@ class Containment : Plasma::Applet
 #include <plasma/containment.h>
 %End
 
+
 public:
 
     class StyleOption : QStyleOptionGraphicsItem
@@ -74,8 +75,9 @@ public:
     void                    addApplet (Plasma::Applet* applet, const QPointF& pos = QPointF(-1,-1), bool dontInit = 1);
     Plasma::Applet::List    applets () const;
     void                    clearApplets ();
-    void                    setScreen (int screen);
+    void                    setScreen (int screen, int desktop = -1);
     int                     screen () const;
+    int                     desktop () const;
     void                    save (KConfigGroup& group) const;
     void                    restore (KConfigGroup& group);
     void                    enableAction (const QString& name, bool enable);
@@ -86,6 +88,13 @@ public:
     void                    closeToolBox ();
     void                    addAssociatedWidget (QWidget* widget);
     void                    removeAssociatedWidget (QWidget* widget);
+    bool                    drawWallpaper ();
+    void                    setWallpaper (const QString& pluginName, const QString& mode = QString());
+    Plasma::Wallpaper*      wallpaper () const;
+    void                    setActivity (const QString& activity);
+    QString                 activity () const;
+    void                    showContextMenu (const QPointF& containmentPos, const QPoint& screenPos);
+    virtual void            showDropZone (const QPoint pos);
 
 signals:
     void                    appletAdded (Plasma::Applet* applet, const QPointF& pos);
@@ -95,7 +104,8 @@ signals:
     void                    addSiblingContainment (Plasma::Containment*);
     void                    showAddWidgetsInterface (const QPointF& pos);
     void                    screenChanged (int wasScreen, int isScreen, Plasma::Containment* containment);
-    void                    focusRequested (Plasma::Containment* containment);
+    void                    configureRequested (Plasma::Containment* containment);
+    void                    contextChanged (Plasma::Context* context);
 
 public:
     void                    setLocation (Plasma::Location location);
@@ -104,20 +114,34 @@ public:
     void                    focusNextApplet ();
     void                    focusPreviousApplet ();
     void                    destroy ();
+    void                    destroy (bool confirm);
+    void                    showConfigurationInterface ();
 
 protected:
     void                    setContainmentType (Plasma::Containment::Type type);
+    void                    setDrawWallpaper (bool drawWallpaper);
     virtual void            saveContents (KConfigGroup& group) const;
     virtual void            restoreContents (KConfigGroup& group);
+    void                    mouseMoveEvent (QGraphicsSceneMouseEvent* event);
+    void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
+    void                    mouseReleaseEvent (QGraphicsSceneMouseEvent* event);
     void                    contextMenuEvent (QGraphicsSceneContextMenuEvent* event);
-    void                    hoverEnterEvent (QGraphicsSceneHoverEvent* event);
-    void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
     void                    keyPressEvent (QKeyEvent* event);
+    void                    wheelEvent (QGraphicsSceneWheelEvent* event);
     bool                    sceneEventFilter (QGraphicsItem* watched, QEvent* event);
     QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
     void                    dragEnterEvent (QGraphicsSceneDragDropEvent* event);
     void                    dragMoveEvent (QGraphicsSceneDragDropEvent* event);
     void                    dropEvent (QGraphicsSceneDragDropEvent* event);
+    void                    resizeEvent (QGraphicsSceneResizeEvent* event);
+    const QGraphicsItem*    toolBoxItem () const;
+
+signals:
+    void                    focusRequested (Plasma::Containment* containment);
+
+protected:
+    void                    hoverEnterEvent (QGraphicsSceneHoverEvent* event);
+    void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
 };   // Containment
 
 };   // Plasma

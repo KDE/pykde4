@@ -27,6 +27,7 @@ class Label : QGraphicsProxyWidget
 #include <plasma/widgets/label.h>
 %End
 
+
 public:
     explicit                Label (QGraphicsWidget* parent = 0);
     void                    setText (const QString& text);
@@ -36,6 +37,11 @@ public:
     void                    setStyleSheet (const QString& stylesheet);
     QString                 styleSheet ();
     QLabel*                 nativeWidget () const;
+
+signals:
+    void                    linkActivated (const QString& link);
+
+public:
     void                    dataUpdated (const QString& sourceName, const Plasma::DataEngine::Data& data);
 
 protected:

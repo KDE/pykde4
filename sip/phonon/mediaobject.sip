@@ -61,6 +61,7 @@ public:
     void                    pause ();
     void                    stop ();
     void                    seek (qint64 time);
+    void                    clear ();
 
 signals:
     void               stateChanged (Phonon::State newstate, Phonon::State oldstate);

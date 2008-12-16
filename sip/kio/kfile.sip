@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KFile
 {
 %TypeHeaderCode
@@ -50,6 +51,8 @@ public:
         SeparateDirs,
         PreviewContents,
         PreviewInfo,
+        Tree,
+        DetailTree,
         FileViewMax
     };
 
@@ -74,9 +77,12 @@ public:
     static bool             isSeparateDirs (const KFile::FileView& view);
     static bool             isPreviewContents (const KFile::FileView& view);
     static bool             isPreviewInfo (const KFile::FileView& view);
+    static bool             isTreeView (const KFile::FileView& view);
+    static bool             isDetailTreeView (const KFile::FileView& view);
 
 private:
                             KFile ();
+
 };   // KFile
 
 

@@ -25,6 +25,7 @@ namespace Vocabulary
 namespace NAO
 {
 QUrl                    naoNamespace ();
+QUrl                    FreeDesktopIcon ();
 QUrl                    Party ();
 QUrl                    Symbol ();
 QUrl                    Tag ();
@@ -41,6 +42,7 @@ QUrl                    hasDefaultNamespaceAbbreviation ();
 QUrl                    hasSymbol ();
 QUrl                    hasTag ();
 QUrl                    hasTopic ();
+QUrl                    iconName ();
 QUrl                    identifier ();
 QUrl                    isRelated ();
 QUrl                    isTagFor ();
@@ -49,9 +51,12 @@ QUrl                    lastModified ();
 QUrl                    modified ();
 QUrl                    numericRating ();
 QUrl                    personalIdentifier ();
+QUrl                    pluralPrefLabel ();
 QUrl                    prefLabel ();
 QUrl                    prefSymbol ();
 QUrl                    rating ();
+QUrl                    score ();
+QUrl                    scoreParameter ();
 QUrl                    serializationLanguage ();
 QUrl                    status ();
 QUrl                    version ();

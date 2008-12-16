@@ -39,6 +39,8 @@ public:
     bool                    disconnect ();
     bool                    operator == (const Phonon::Path& p) const;
     bool                    operator != (const Phonon::Path& p) const;
+    Phonon::MediaNode*      source () const;
+    Phonon::MediaNode*      sink () const;
 };   // Path
 
 Phonon::Path            createPath (Phonon::MediaNode* source, Phonon::MediaNode* sink);

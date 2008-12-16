@@ -27,6 +27,7 @@ class ComboBox : QGraphicsProxyWidget
 #include <plasma/widgets/combobox.h>
 %End
 
+
 public:
     explicit                ComboBox (QGraphicsWidget* parent = 0);
     QString                 text () const;
@@ -41,6 +42,9 @@ signals:
 
 protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
+    void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+    void                    hoverEnterEvent (QGraphicsSceneHoverEvent* event);
+    void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
 };   // ComboBox
 
 };   // Plasma

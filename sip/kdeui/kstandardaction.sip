@@ -100,6 +100,8 @@ KAction*                create (KStandardAction::StandardAction id, SIP_RXOBJ_CO
 const char*             name (KStandardAction::StandardAction id);
 const char*             stdName (KStandardAction::StandardAction act_enum);
 QStringList             stdNames ();
+QList<KStandardAction::StandardAction>  actionIds ();
+KStandardShortcut::StandardShortcut  shortcutForActionId (KStandardAction::StandardAction id);
 KAction*                openNew (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject* parent /Transfer/);
 KAction*                open (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject* parent /Transfer/);
 KRecentFilesAction*     openRecent (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject* parent /Transfer/);
@@ -175,4 +177,51 @@ KAction*                aboutKDE (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject* paren
 %ModuleHeaderCode
 #include <kstandardaction.h>
 %End
+
+%MappedType QList<KStandardAction::StandardAction>
+{
+%TypeHeaderCode
+#include <qlist.h>
+%End
+
+%ConvertFromTypeCode
+    // Create the list.
+    PyObject *l;
+
+    if ((l = PyList_New(sipCpp->size())) == NULL)
+        return NULL;
+
+    // Set the list elements.
+    for (int i = 0; i < sipCpp->size(); ++i)
+    {
+        PyObject *pobj;
+
+        if ((pobj = PyInt_FromLong ((long)sipCpp->value(i))) == NULL)
+        {
+            Py_DECREF(l);
+
+            return NULL;
+        }
+
+        PyList_SET_ITEM(l, i, pobj);
+    }
+
+    return l;
+%End
+
+%ConvertToTypeCode
+    // Check the type if that is all that is required.
+    if (sipIsErr == NULL)
+        return PyList_Check(sipPy);
+
+    QList<KStandardAction::StandardAction> *ql = new QList<KStandardAction::StandardAction>;
+ 
+    for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
+        ql->append((KStandardAction::StandardAction)PyInt_AS_LONG (PyList_GET_ITEM(sipPy, i)));
+ 
+    *sipCppPtr = ql;
+ 
+    return sipGetState(sipTransferObj);
+%End
+};
 

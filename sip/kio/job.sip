@@ -52,6 +52,7 @@ KIO::TransferJob*       put (const KUrl& url, int permissions, KIO::JobFlags fla
 KIO::TransferJob*       http_post (const KUrl& url, const QByteArray& postData, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::StoredTransferJob*  storedGet (const KUrl& url, KIO::LoadType reload = KIO::NoReload, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::StoredTransferJob*  storedPut (const QByteArray& arr, const KUrl& url, int permissions, KIO::JobFlags flags = KIO::DefaultFlags);
+KIO::StoredTransferJob*  storedHttpPost (const QByteArray& arr, const KUrl& url, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::MultiGetJob*       multi_get (long id, const KUrl& url, const KIO::MetaData& metaData);
 KIO::MimetypeJob*       mimetype (const KUrl& url, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::FileCopyJob*       file_copy (const KUrl& src, const KUrl& dest, int permissions = -1, KIO::JobFlags flags = KIO::DefaultFlags);

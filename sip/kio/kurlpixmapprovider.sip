@@ -21,6 +21,8 @@
 
 
 
+
+
 %ModuleHeaderCode
 //ctscc
 #include <kurlpixmapprovider.h>
@@ -40,6 +42,9 @@ public:
 protected:
 //ig     virtual void       virtual_hook (int id, void* data);
 
+private:
+                            KUrlPixmapProvider (const KUrlPixmapProvider& other);
+
 public:
 
 //  Subclasses of KPixmapProvider
@@ -51,8 +56,7 @@ public:
     if (dynamic_cast<KUrlPixmapProvider*>(sipCpp))
         sipClass = sipClass_KUrlPixmapProvider;
 %End
-private:
-                            KUrlPixmapProvider (const KUrlPixmapProvider &other);
+
 };   // KUrlPixmapProvider
 
 

@@ -55,6 +55,7 @@ public:
     void                    addDefaultUrl (const KUrl& url, const QIcon& icon, const QString& text = QString());
     void                    setDefaults ();
     void                    removeUrl (const KUrl& url, bool checkDefaultURLs = 1);
+    virtual void            setCompletionObject (KCompletion* compObj, bool hsig = 1);
 
 signals:
     void                    urlActivated (const KUrl& url);

@@ -27,17 +27,19 @@ class View : QGraphicsView
 #include <plasma/view.h>
 %End
 
+
 public:
     explicit                View (Plasma::Containment* containment, QWidget* parent /TransferThis/ = 0);
                             View (Plasma::Containment* containment, int viewId, QWidget* parent /TransferThis/ = 0);
     void                    setWallpaperEnabled (bool draw);
     bool                    isWallpaperEnabled () const;
-    void                    setScreen (int screen);
+    void                    setScreen (int screen, int desktop = -1);
     int                     screen () const;
-//    void                    setDesktop (int desktop);
     int                     desktop () const;
     int                     effectiveDesktop () const;
     Plasma::Containment*    containment () const;
+    Plasma::Containment*    swapContainment (Plasma::Containment* existing, const QString& name, const QVariantList& args = QVariantList());
+    Plasma::Containment*    swapContainment (const QString& name, const QVariantList& args = QVariantList());
     void                    setTrackContainmentChanges (bool trackChanges);
     bool                    trackContainmentChanges ();
     static Plasma::View*    topLevelViewAt (const QPoint& pos);
@@ -52,6 +54,7 @@ public:
 
 protected:
     KConfigGroup            config () const;
+
 };   // View
 
 };   // Plasma

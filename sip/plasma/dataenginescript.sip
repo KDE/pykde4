@@ -27,18 +27,20 @@ class DataEngineScript : Plasma::ScriptEngine
 #include <plasma/scripting/dataenginescript.h>
 %End
 
+
 public:
     explicit                DataEngineScript (QObject* parent /TransferThis/ = 0);
     void                    setDataEngine (Plasma::DataEngine* dataEngine);
     Plasma::DataEngine*     dataEngine () const;
-    virtual QStringList     sources() const;
-
+    virtual QStringList     sources () const;
     virtual bool            sourceRequestEvent (const QString& name);
     virtual bool            updateSourceEvent (const QString& source);
 //FIXME
 //    Plasma::Service*        serviceForSource(const QString &source);
 
 protected:
+    QString                 mainScript () const;
+    const Plasma::Package*  package () const;
     void                    setData (const QString& source, const QString& key, const QVariant& value);
     void                    setData (const QString& source, const QVariant& value);
     void                    removeAllData (const QString& source);

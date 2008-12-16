@@ -34,6 +34,7 @@ void                    shadowBlur (QImage& image, int radius, const QColor& col
 
 
 QPainterPath            roundedRectangle (const QRectF& rect, qreal radius);
+QPixmap                 transition (const QPixmap& from, const QPixmap& to, qreal amount);
 };   // PaintUtils
 
 };   // Plasma

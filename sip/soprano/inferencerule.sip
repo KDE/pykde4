@@ -38,6 +38,7 @@ public:
     void                    setEffect (const Soprano::Inference::StatementPattern&);
     bool                    match (const Soprano::Statement& statement) const;
     void                    bindToStatement (const Soprano::Statement& statement);
+    Soprano::Statement      boundToStatement () const;
     QString                 createSparqlQuery (bool bindVariables = 0) const;
     Soprano::Statement      bindEffect (const Soprano::BindingSet& bindings) const;
     QList<Soprano::Statement>  bindPreconditions (const Soprano::BindingSet& bindings) const;

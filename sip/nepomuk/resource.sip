@@ -18,6 +18,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+#include <nepomuk/resource.h>
+#include <nepomuk/tag.h>
+
+%End
+
+
 namespace Nepomuk
 {
 
@@ -37,29 +44,40 @@ class Resource
 #include <nepomuk/resource.h>
 %End
 
+
 public:
                             Resource ();
                             Resource (const Nepomuk::Resource&);
                             Resource (const QString& uriOrIdentifier, const QUrl& type = QUrl());
+                            Resource (const QString& uriOrIdentifier, const QString& type);
                             Resource (const QUrl& uri, const QUrl& type = QUrl());
 //ig                        Resource (ResourceData*);
-
+    QString                 uri () const;
     QUrl                    resourceUri () const;
+    QString                 type () const;
     QUrl                    resourceType () const;
     QList<QUrl>             types () const;
+    void                    setTypes (const QList<QUrl>& types);
+    void                    addType (const QUrl& type);
     bool                    hasType (const QUrl& typeUri) const;
     QString                 className () const;
-    QHash<QUrl,Nepomuk::Variant>  properties () const;
+//FIXME    QHash<QString,Nepomuk::Variant>  allProperties () const;
+//FIXME    QHash<QUrl,Nepomuk::Variant>  properties () const;
     bool                    hasProperty (const QUrl& uri) const;
+    bool                    hasProperty (const QString& uri) const;
     Nepomuk::Variant        property (const QUrl& uri) const;
+    Nepomuk::Variant        property (const QString& uri) const;
     void                    setProperty (const QUrl& uri, const Nepomuk::Variant& value);
+    void                    setProperty (const QString& uri, const Nepomuk::Variant& value);
     void                    removeProperty (const QUrl& uri);
+    void                    removeProperty (const QString& uri);
     void                    remove ();
     bool                    exists () const;
     bool                    isValid () const;
     QString                 genericLabel () const;
     QString                 genericDescription () const;
     QString                 genericIcon () const;
+    Nepomuk::Thing          pimoThing ();
     bool                    operator == (const Nepomuk::Resource&) const;
     QString                 description () const;
     void                    setDescription (const QString& value);

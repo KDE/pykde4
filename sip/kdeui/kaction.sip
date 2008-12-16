@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KAction : QWidgetAction
 {
 %TypeHeaderCode
@@ -57,17 +58,17 @@ public:
     void                    setGlobalShortcut (const KShortcut& shortcut, KAction::ShortcutTypes type = KAction::ShortcutTypes(KAction::ActiveShortcut|KAction::DefaultShortcut), KAction::GlobalShortcutLoading loading = KAction::Autoloading);
     bool                    globalShortcutAllowed () const;
     void                    setGlobalShortcutAllowed (bool allowed, KAction::GlobalShortcutLoading loading = KAction::Autoloading);
-
     bool                    isGlobalShortcutEnabled () const;
     void                    forgetGlobalShortcut ();
-
     KShapeGesture           shapeGesture (KAction::ShortcutTypes type = KAction::ActiveShortcut) const;
     KRockerGesture          rockerGesture (KAction::ShortcutTypes type = KAction::ActiveShortcut) const;
     void                    setShapeGesture (const KShapeGesture& gest, KAction::ShortcutTypes type = KAction::ShortcutTypes(KAction::ActiveShortcut|KAction::DefaultShortcut));
     void                    setRockerGesture (const KRockerGesture& gest, KAction::ShortcutTypes type = KAction::ShortcutTypes(KAction::ActiveShortcut|KAction::DefaultShortcut));
+    bool                    event (QEvent*);
 
 signals:
     void                    triggered (Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers);
+    void                    globalShortcutChanged (const QKeySequence&);
 };   // KAction
 
 

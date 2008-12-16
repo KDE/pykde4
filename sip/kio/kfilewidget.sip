@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KFileWidget : QWidget, KAbstractFileWidget
 {
 %TypeHeaderCode
@@ -66,8 +67,9 @@ public:
     virtual void            slotCancel ();
 
 protected:
-    virtual void            resizeEvent(QResizeEvent* event);
+    virtual void            resizeEvent (QResizeEvent* event);
     virtual void            showEvent (QShowEvent* event);
+    virtual bool            eventFilter (QObject* watched, QEvent* event);
 
 signals:
     void                    fileSelected (const QString&);

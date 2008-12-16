@@ -27,6 +27,7 @@ class FlashingLabel : QGraphicsWidget
 #include <plasma/widgets/flashinglabel.h>
 %End
 
+
 public:
     explicit                FlashingLabel (QGraphicsItem* parent = 0);
     void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
@@ -40,6 +41,8 @@ public:
 
 
     void                    flash (const QPixmap& pixmap, int duration = 0, Qt::Alignment align = Qt::AlignCenter);
+    void                    setAutohide (bool autohide);
+    bool                    autohide () const;
     void                    kill ();
 
 protected:

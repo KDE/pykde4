@@ -27,6 +27,7 @@ class DataEngine : QObject
 #include <plasma/dataengine.h>
 %End
 
+
 public:
     typedef QHash<QString,Plasma::DataEngine*> Dict;
 
@@ -53,7 +54,7 @@ public:
     uint                    maxSourceCount () const;
     QString                 icon () const;
     const Plasma::Package*  package () const;
-    QString pluginName() const;
+    QString                 pluginName () const;
 
 signals:
     void                    sourceAdded (const QString& source);
@@ -80,6 +81,8 @@ protected:
     void                    setIcon (const QString& icon);
     void                    scheduleSourcesUpdated ();
     void                    removeSource (const QString& source);
+    void                    updateAllSources ();
+
 };   // DataEngine
 
 };   // Plasma

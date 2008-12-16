@@ -45,6 +45,7 @@ public:
     DOM::DOMString          href () const;
     DOM::DOMString          title () const;
     DOM::MediaList          media () const;
+    KUrl                    baseUrl ();
     bool                    isCSSStyleSheet () const;
 //ig     StyleSheetImpl*    handle () const;
     bool                    isNull () const;
@@ -90,6 +91,7 @@ public:
     DOM::CSSRuleList        cssRules () const;
     unsigned long           insertRule (const DOM::DOMString& rule, unsigned long index);
     void                    deleteRule (unsigned long index);
+    DOM::DOMString          charset () const;
 };   // CSSStyleSheet
 
 

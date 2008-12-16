@@ -27,11 +27,14 @@ class Svg : QObject
 #include <plasma/svg.h>
 %End
 
+
 public:
     explicit                Svg (QObject* parent /TransferThis/ = 0);
+    QPixmap                 pixmap (const QString& elementID = QString());
     void                    paint (QPainter* painter, const QPointF& point, const QString& elementID = QString());
     void                    paint (QPainter* painter, int x, int y, const QString& elementID = QString());
     void                    paint (QPainter* painter, const QRectF& rect, const QString& elementID = QString());
+    void                    paint (QPainter* painter, int x, int y, int width, int height, const QString& elementID = QString());
     QSize                   size () const;
     void                    resize (qreal width, qreal height);
     void                    resize (const QSizeF& size);

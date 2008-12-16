@@ -27,11 +27,12 @@ class WebView : QGraphicsWidget
 #include <plasma/widgets/webview.h>
 %End
 
+
 public:
     explicit                WebView (QGraphicsItem* parent = 0);
-    void                    setUrl (const QUrl& url);
-    void                    setHtml (const QByteArray& html, const QUrl& baseUrl = QUrl());
-    void                    setHtml (const QString& html, const QUrl& baseUrl = QUrl());
+    void                    setUrl (const KUrl& url);
+//ig    void                    setHtml (const QByteArray& html, const KUrl& baseUrl = KUrl());
+    void                    setHtml (const QString& html, const KUrl& baseUrl = KUrl());
     QRectF                  geometry () const;
     void                    setPage (QWebPage* page);
     QWebPage*               page () const;
@@ -45,6 +46,7 @@ signals:
 protected:
     void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
     void                    mouseMoveEvent (QGraphicsSceneMouseEvent* event);
+    void                    hoverMoveEvent (QGraphicsSceneHoverEvent* event);
     void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
     void                    mouseDoubleClickEvent (QGraphicsSceneMouseEvent* event);
     void                    mouseReleaseEvent (QGraphicsSceneMouseEvent* event);
@@ -58,6 +60,7 @@ protected:
     void                    dragLeaveEvent (QGraphicsSceneDragDropEvent* event);
     void                    dragMoveEvent (QGraphicsSceneDragDropEvent* event);
     void                    dropEvent (QGraphicsSceneDragDropEvent* event);
+
 };   // WebView
 
 };   // Plasma

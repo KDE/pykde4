@@ -30,6 +30,7 @@ enum Constraint
     SizeConstraint,
     ImmutableConstraint,
     StartupCompletedConstraint,
+    ContextConstraint,
     AllConstraints
 };
 
@@ -83,6 +84,20 @@ enum Position
 };
 
 
+enum PopupPlacement
+{
+    FloatingPopup,
+    TopPosedLeftAlignedPopup,
+    TopPosedRightAlignedPopup,
+    LeftPosedTopAlignedPopup,
+    LeftPosedBottomAlignedPopup,
+    BottomPosedLeftAlignedPopup,
+    BottomPosedRightAlignedPopup,
+    RightPosedTopAlignedPopup,
+    RightPosedBottomAlignedPopup
+};
+
+
 enum FlipDirection
 {
     NoFlip,
@@ -126,10 +141,12 @@ enum ImmutabilityType
 
 enum AspectRatioMode
 {
+    InvalidAspectRatioMode,
     IgnoreAspectRatio,
     KeepAspectRatio,
     Square,
-    ConstrainedSquare
+    ConstrainedSquare,
+    FixedSize
 };
 
 
@@ -155,6 +172,6 @@ enum MarginEdge
 
 qreal                   scalingFactor (Plasma::ZoomLevel level);
 Plasma::Direction       locationToDirection (Plasma::Location location);
+QGraphicsView*          viewFor (const QGraphicsItem* item);
+
 };   // Plasma
-
-

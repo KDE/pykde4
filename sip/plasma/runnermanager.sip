@@ -27,6 +27,7 @@ class RunnerManager : QObject
 #include <plasma/runnermanager.h>
 %End
 
+
 public:
     explicit                RunnerManager (QObject* parent /TransferThis/ = 0);
     explicit                RunnerManager (KConfigGroup& config, QObject* parent /TransferThis/ = 0);
@@ -35,6 +36,7 @@ public:
     QList<Plasma::QueryMatch>  matches () const;
     void                    run (const Plasma::QueryMatch& match);
     void                    run (const QString& id);
+    QList<QAction*>         actionsForMatch (const Plasma::QueryMatch& match);
     QString                 query () const;
     void                    reloadConfiguration ();
     void                    launchQuery (const QString& term, const QString& runnerName);

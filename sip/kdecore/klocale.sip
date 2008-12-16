@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KLocale
 {
 %TypeHeaderCode
@@ -64,6 +65,7 @@ public:
     QString                 formatLong (long num) const;
     QString                 formatByteSize (double size) const;
     QString                 formatDuration (unsigned long mSec) const;
+    QString                 prettyFormatDuration (unsigned long mSec) const;
     bool                    nounDeclension () const;
 
     enum DateFormat
@@ -90,6 +92,9 @@ public:
     QString                 formatTime (const QTime& pTime, bool includeSecs = 0, bool isDuration = 0) const;
     bool                    use12Clock () const;
     int                     weekStartDay () const;
+    int                     workingWeekStartDay () const;
+    int                     workingWeekEndDay () const;
+    int                     weekDayOfPray () const;
     const KCalendarSystem*  calendar () const;
     QString                 calendarType () const;
     void                    setCalendar (const QString& calendarType);
@@ -126,6 +131,9 @@ public:
     void                    setDateMonthNamePossessive (bool possessive);
     void                    setTimeFormat (const QString& format);
     void                    setWeekStartDay (int day);
+    void                    setWorkingWeekStartDay (int day);
+    void                    setWorkingWeekEndDay (int day);
+    void                    setWeekDayOfPray (int day);
     QString                 dateFormat () const;
     QString                 dateFormatShort () const;
     QString                 timeFormat () const;
@@ -171,10 +179,8 @@ public:
     bool                    setCountry (const QString& country, KConfig* config);
     bool                    setLanguage (const QString& language, KConfig* config);
     bool                    setLanguage (const QStringList& languages);
-
     QString                 localizedFilePath (const QString& filePath) const;
-
-
+    QString                 removeAcceleratorMarker (const QString& label) const;
 };   // KLocale
 
 

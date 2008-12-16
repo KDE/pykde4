@@ -54,6 +54,7 @@ public:
     QStringList             availableBackends () const;
     QStringList             availableLanguages () const;
     QStringList             availableLanguageNames () const;
+    QMap<QString,QString>   availableDictionaries () const;
     void                    setDefaultLanguage (const QString& lang);
     QString                 defaultLanguage () const;
     void                    setDefaultClient (const QString& client);

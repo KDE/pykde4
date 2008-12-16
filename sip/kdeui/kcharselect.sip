@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KCharSelect : QWidget
 {
 %TypeHeaderCode
@@ -37,12 +38,14 @@ public:
         BlockCombos,
         CharacterTable,
         DetailBrowser,
+        HistoryButtons,
         AllGuiElements
     };
 
     typedef QFlags<KCharSelect::Control> Controls;
 
     explicit                KCharSelect (QWidget* parent /TransferThis/, const KCharSelect::Controls controls = KCharSelect::AllGuiElements);
+    explicit                KCharSelect (QWidget* parent /TransferThis/, KActionCollection* collection, const KCharSelect::Controls controls = KCharSelect::AllGuiElements);
     virtual QSize           sizeHint () const;
     QChar                   currentChar () const;
     QFont                   currentFont () const;
@@ -55,6 +58,7 @@ signals:
     void                    currentCharChanged (const QChar& c);
     void                    displayedCharsChanged ();
     void                    charSelected (const QChar& c);
+
 };   // KCharSelect
 
 

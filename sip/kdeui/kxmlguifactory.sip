@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KXMLGUIFactory : QObject
 {
 %TypeHeaderCode
@@ -42,11 +43,14 @@ public:
     QList<QWidget*>         containers (const QString& tagName);
     void                    reset ();
     void                    resetContainer (const QString& containerName, bool useTagName = 0);
+    void                    refreshActionProperties ();
     int                     configureShortcuts (bool bAllowLetterShortcuts = 1, bool bSaveSettings = 1);
+    void                    changeShortcutScheme (const QString& scheme);
 
 signals:
     void                    clientAdded (KXMLGUIClient* client);
     void                    clientRemoved (KXMLGUIClient* client);
+    void                    makingChanges (bool);
 };   // KXMLGUIFactory
 
 

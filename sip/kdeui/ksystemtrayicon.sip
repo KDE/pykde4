@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KSystemTrayIcon : QSystemTrayIcon
 {
 %TypeHeaderCode
@@ -31,14 +32,15 @@ public:
     explicit                KSystemTrayIcon (QWidget* parent /TransferThis/ = 0);
     explicit                KSystemTrayIcon (const QString& icon, QWidget* parent /TransferThis/ = 0);
     explicit                KSystemTrayIcon (const QIcon& icon, QWidget* parent /TransferThis/ = 0);
+    explicit                KSystemTrayIcon (QMovie* movie, QWidget* parent /TransferThis/);
+    void                    setMovie (QMovie* movie);
+    const QMovie*           movie () const;
     KActionCollection*      actionCollection ();
     QWidget*                parentWidget () const;
     bool                    parentWidgetTrayClose () const;
     static QIcon            loadIcon (const QString& icon, const KComponentData& componentData = KGlobal::mainComponent());
-
     void                    setContextMenuTitle (QAction* action);
     QAction*                contextMenuTitle () const;
-
 
 signals:
     void                    quitSelected ();

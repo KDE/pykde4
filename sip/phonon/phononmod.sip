@@ -36,3 +36,24 @@
 %Include videowidgetinterface.sip
 %Include volumefadereffect.sip
 %Include volumeslider.sip
+
+//Experimental stuff is currently disabled.
+//%Include packet.sip
+//%Include packetpool.sip
+//%Include audioformat.sip
+//%Include abstractaudiodataoutput.sip
+//%Include abstractvideodataoutput.sip
+//%Include avcapture.sip
+//%Include audiodataoutput.sip
+//%Include audiodataoutputinterface.sip
+//%Include experimental_backendcapabilities.sip
+//%Include experimental_mediasource.sip
+//%Include experimental_objectdescription.sip
+//%Include visualization.sip
+//%Include experimental_videowidget.sip
+//%Include videodataoutput.sip
+//%Include videodataoutput2.sip
+//%Include videodataoutputinterface.sip
+//%Include videoframe.sip
+//%Include videoframe2.sip
+//%Include snapshotinterface.sip

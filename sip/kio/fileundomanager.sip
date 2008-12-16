@@ -25,8 +25,9 @@ namespace KIO
 class FileUndoManager : QObject
 {
 %TypeHeaderCode
-#include <kio/fileundomanager.h>
+#include <fileundomanager.h>
 %End
+
 
 public:
     static KIO::FileUndoManager*  self ();
@@ -78,6 +79,8 @@ signals:
     void                    undoAvailable (bool avail);
     void                    undoTextChanged (const QString& text);
     void                    undoJobFinished ();
+    void                    jobRecordingStarted (KIO::FileUndoManager::CommandType op);
+    void                    jobRecordingFinished (KIO::FileUndoManager::CommandType op);
 
 private:
                             FileUndoManager ();

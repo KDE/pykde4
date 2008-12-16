@@ -35,7 +35,8 @@ public:
         LocalFile,
         Url,
         Disc,
-        Stream
+        Stream,
+        Empty
     };
 
                             MediaSource ();

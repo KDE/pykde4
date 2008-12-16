@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KService : KSycocaEntry
 {
 %TypeHeaderCode
@@ -75,6 +76,7 @@ public:
     bool                    noDisplay () const;
     QString                 parentApp () const;
     QString                 pluginKeyword () const;
+    QString                 docPath () const;
     QVariant                property (const QString& _name, QVariant::Type t) const;
     QString                 locateLocal () const;
     void                    setMenuId (const QString& menuId);
@@ -90,7 +92,6 @@ public:
 
 protected:
 //ig     QVector<ServiceTypeAndPreference>&  _k_accessServiceTypes ();
-
 };   // KService
 
 

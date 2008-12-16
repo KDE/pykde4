@@ -23,10 +23,8 @@
 
 
 
-%ModuleHeaderCode
-//ctscc
-#include <khtmlview.h>
-%End
+//ig namespace khtml;
+
 
 class KHTMLView : QScrollArea
 {
@@ -67,7 +65,6 @@ public:
     void                    setZoomLevel (int percent);
     int                     zoomLevel () const;
 
-
     enum SmoothScrollingMode
     {
         SSMDisabled,
@@ -77,7 +74,6 @@ public:
 
     void                    setSmoothScrollingMode (KHTMLView::SmoothScrollingMode m);
     KHTMLView::SmoothScrollingMode  smoothScrollingMode () const;
-
     virtual void            resizeContents (int w, int h);
     void                    layout ();
 
@@ -115,23 +111,8 @@ protected:
     void                    keyReleaseEvent (QKeyEvent* _ke);
     void                    doAutoScroll ();
     void                    timerEvent (QTimerEvent*);
-
     void                    setSmoothScrollingModeDefault (KHTMLView::SmoothScrollingMode m);
-
     void                    slotPaletteChanged ();
-
-public:
-
-//  Subclasses of QObject
-
-%ConvertToSubClassCode
-
-    sipClass = NULL;
-
-    if (dynamic_cast<KHTMLView*>(sipCpp))
-        sipClass = sipClass_KHTMLView;
-%End
-
 };   // KHTMLView
 
 

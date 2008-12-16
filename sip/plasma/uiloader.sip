@@ -27,18 +27,13 @@ class UiLoader : QObject
 #include <plasma/scripting/uiloader.h>
 %End
 
+
 public:
                             UiLoader (QObject* parent /TransferThis/ = 0);
     QStringList             availableWidgets () const;
     QGraphicsWidget*        createWidget (const QString& className, QGraphicsWidget* parent = 0);
     QStringList             availableLayouts () const;
-
-
-//mt undefined symbol: LayoutItem* parent -- need mapped type?
-//mt undefined symbol: Layout* None -- need mapped type?
-//mt     Layout*            createLayout (const QString& className, LayoutItem* parent);
-
-
+    QGraphicsLayout*        createLayout (const QString& className, QGraphicsLayoutItem* parent);
 };   // UiLoader
 
 };   // Plasma

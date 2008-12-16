@@ -54,6 +54,7 @@ public:
     void                    synchronize ();
     void                    synchronizeCollectionTree ();
     bool                    operator == (const Akonadi::AgentInstance& other) const;
+
 };   // AgentInstance
 
 };   // Akonadi

@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KUrlNavigator : QWidget
 {
 %TypeHeaderCode
@@ -39,6 +40,8 @@ public:
     void                    setHomeUrl (const QString& homeUrl);
     void                    setUrlEditable (bool editable);
     bool                    isUrlEditable () const;
+    void                    setShowFullPath (bool show);
+    bool                    showFullPath () const;
     void                    setActive (bool active);
     bool                    isActive () const;
     void                    setPlacesSelectorVisible (bool visible);
@@ -59,17 +62,17 @@ public:
 signals:
     void                    activated ();
     void                    urlChanged (const KUrl& url);
-
     void                    editableStateChanged (bool editable);
-
     void                    historyChanged ();
     void                    urlsDropped (const KUrl::List& urls, const KUrl& destination);
+    void                    urlsDropped (const KUrl& destination, QDropEvent* event);
     void                    returnPressed ();
 
 protected:
     virtual void            keyReleaseEvent (QKeyEvent* event);
     virtual void            mouseReleaseEvent (QMouseEvent* event);
     virtual void            resizeEvent (QResizeEvent* event);
+    virtual bool            eventFilter (QObject* watched, QEvent* event);
 
 private:
                             KUrlNavigator (const KUrlNavigator&);

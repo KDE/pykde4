@@ -27,11 +27,17 @@ class ConfigLoader : KConfigSkeleton
 #include <plasma/configloader.h>
 %End
 
+
 public:
                             ConfigLoader (const QString& configFile, QIODevice* xml, QObject* parent /TransferThis/ = 0);
                             ConfigLoader (KSharedConfigPtr config, QIODevice* xml, QObject* parent /TransferThis/ = 0);
                             ConfigLoader (const KConfigGroup* config, QIODevice* xml, QObject* parent /TransferThis/ = 0);
     KConfigSkeletonItem*    findItem (const QString& group, const QString& key);
+    bool                    hasGroup (const QString& group) const;
+    QStringList             groupList () const;
+
+protected:
+    void                    usrWriteConfig ();
 };   // ConfigLoader
 
 };   // Plasma

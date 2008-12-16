@@ -19,85 +19,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-%ModuleHeaderCode
-//ctscc
-#include <soprano/asyncmodel.h>
-#include <soprano/dbusclient.h>
-#include <soprano/dbusexportiterator.h>
-#include <soprano/dummymodel.h>
-#include <soprano/filtermodel.h>
-#include <soprano/localsocketclient.h>
-#include <soprano/model.h>
-#include <soprano/pluginmanager.h>
-#include <soprano/readonlymodel.h>
-#include <soprano/servercore.h>
-#include <soprano/storagemodel.h>
-#include <soprano/tcpclient.h>
-%End
-
 namespace Soprano
 {
 namespace Util
 {
-
-class AsyncResult : QObject, Soprano::Error::ErrorCache
-{
-%TypeHeaderCode
-#include <soprano/asyncmodel.h>
-%End
-
-signals:
-    void                    resultReady (Soprano::Util::AsyncResult*);
-
-public:
-    QVariant                value () const;
-//ig    void                    setResult (const QVariant& result, const Soprano::Error::Error& error);
-
-private:
-                            AsyncResult ();
-
-public:
-
-//  Subclasses of QObject
-
-%ConvertToSubClassCode
-
-    sipClass = NULL;
-
-    if (dynamic_cast<Soprano::Util::AsyncResult*>(sipCpp))
-        sipClass = sipClass_Soprano_Util_AsyncResult;
-    else if (dynamic_cast<Soprano::Client::DBusClient*>(sipCpp))
-        sipClass = sipClass_Soprano_Client_DBusClient;
-    else if (dynamic_cast<Soprano::Client::DBusClient*>(sipCpp))
-        sipClass = sipClass_Soprano_Client_DBusClient;
-    else if (dynamic_cast<Soprano::Server::DBusExportIterator*>(sipCpp))
-        sipClass = sipClass_Soprano_Server_DBusExportIterator;
-    else if (dynamic_cast<Soprano::Server::DBusExportIterator*>(sipCpp))
-        sipClass = sipClass_Soprano_Server_DBusExportIterator;
-    else if (dynamic_cast<Soprano::Client::LocalSocketClient*>(sipCpp))
-        sipClass = sipClass_Soprano_Client_LocalSocketClient;
-    else if (dynamic_cast<Soprano::Model*>(sipCpp))
-        {
-            sipClass = sipClass_Soprano_Model;
-            if (dynamic_cast<Soprano::Util::DummyModel*>(sipCpp))
-                sipClass = sipClass_Soprano_Util_DummyModel;
-            else if (dynamic_cast<Soprano::FilterModel*>(sipCpp))
-                sipClass = sipClass_Soprano_FilterModel;
-//            else if (dynamic_cast<Soprano::Util::ReadOnlyModel*>(sipCpp))
-//                sipClass = sipClass_Soprano_Util_ReadOnlyModel;
-            else if (dynamic_cast<Soprano::StorageModel*>(sipCpp))
-                sipClass = sipClass_Soprano_StorageModel;
-        }
-    else if (dynamic_cast<Soprano::PluginManager*>(sipCpp))
-        sipClass = sipClass_Soprano_PluginManager;
-    else if (dynamic_cast<Soprano::Server::ServerCore*>(sipCpp))
-        sipClass = sipClass_Soprano_Server_ServerCore;
-    else if (dynamic_cast<Soprano::Client::TcpClient*>(sipCpp))
-        sipClass = sipClass_Soprano_Client_TcpClient;
-%End
-
-};   // AsyncResult
-
 
 class AsyncModel : Soprano::FilterModel
 {
@@ -105,23 +30,44 @@ class AsyncModel : Soprano::FilterModel
 #include <soprano/asyncmodel.h>
 %End
 
+
 public:
                             AsyncModel (Soprano::Model* parent = 0);
+
+    enum AsyncModelMode
+    {
+        SingleThreaded,
+        MultiThreaded
+    };
+
+    void                    setMode (Soprano::Util::AsyncModel::AsyncModelMode mode);
+    Soprano::Util::AsyncModel::AsyncModelMode  mode () const;
     Soprano::Util::AsyncResult*  addStatementAsync (const Soprano::Statement& statement);
+    Soprano::Util::AsyncResult*  addStatementAsync (const Soprano::Node& subject, const Soprano::Node& predicate, const Soprano::Node& object, const Soprano::Node& context = Soprano::Node());
+    Soprano::Util::AsyncResult*  addStatementsAsync (const QList<Soprano::Statement>& statements);
     Soprano::Util::AsyncResult*  removeStatementAsync (const Soprano::Statement& statement);
+    Soprano::Util::AsyncResult*  removeStatementAsync (const Soprano::Node& subject, const Soprano::Node& predicate, const Soprano::Node& object, const Soprano::Node& context = Soprano::Node());
+    Soprano::Util::AsyncResult*  removeStatementsAsync (const QList<Soprano::Statement>& statements);
     Soprano::Util::AsyncResult*  removeAllStatementsAsync (const Soprano::Statement& statement);
+    Soprano::Util::AsyncResult*  removeAllStatementsAsync (const Soprano::Node& subject, const Soprano::Node& predicate, const Soprano::Node& object, const Soprano::Node& context = Soprano::Node());
     Soprano::Util::AsyncResult*  isEmptyAsync () const;
     Soprano::Util::AsyncResult*  statementCountAsync () const;
     Soprano::Util::AsyncResult*  listStatementsAsync (const Soprano::Statement& statement) const;
+    Soprano::Util::AsyncResult*  listStatementsAsync (const Soprano::Node& subject, const Soprano::Node& predicate, const Soprano::Node& object, const Soprano::Node& context = Soprano::Node()) const;
+    Soprano::Util::AsyncResult*  listStatementsAsync () const;
     Soprano::Util::AsyncResult*  listContextsAsync () const;
     Soprano::Util::AsyncResult*  executeQueryAsync (const QString& query, Soprano::Query::QueryLanguage language, const QString& userQueryLanguage = QString()) const;
     Soprano::Util::AsyncResult*  containsStatementAsync (const Soprano::Statement& statement) const;
+    Soprano::Util::AsyncResult*  containsStatementAsync (const Soprano::Node& subject, const Soprano::Node& predicate, const Soprano::Node& object, const Soprano::Node& context = Soprano::Node()) const;
     Soprano::Util::AsyncResult*  containsAnyStatementAsync (const Soprano::Statement& statement) const;
+    Soprano::Util::AsyncResult*  containsAnyStatementAsync (const Soprano::Node& subject, const Soprano::Node& predicate, const Soprano::Node& object, const Soprano::Node& context = Soprano::Node()) const;
     Soprano::Util::AsyncResult*  createBlankNodeAsync ();
 };   // AsyncModel
 
 };   // Util
 
 };   // Soprano
+
+
 
 

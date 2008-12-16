@@ -154,6 +154,8 @@ public:
     QString                 name () const;
     void                    setLabel (const QString& l);
     QString                 label () const;
+    void                    setToolTip (const QString& t);
+    QString                 toolTip () const;
     void                    setWhatsThis (const QString& w);
     QString                 whatsThis () const;
     virtual void            readConfig (KConfig*) = 0;

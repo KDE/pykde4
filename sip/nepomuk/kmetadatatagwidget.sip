@@ -44,5 +44,5 @@ public:
 
 };   // Nepomuk
 
-uint                    qHash (const Nepomuk::Tag& res);
+//ig uint                    qHash (const Nepomuk::Tag& res);
 

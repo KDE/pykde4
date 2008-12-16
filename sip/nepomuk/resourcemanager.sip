@@ -19,12 +19,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-%ModuleHeaderCode
-//ctscc
-#include <nepomuk/nepomukservice.h>
-#include <nepomuk/resourcemanager.h>
-%End
-
 namespace Nepomuk
 {
 
@@ -33,6 +27,7 @@ class ResourceManager : QObject
 %TypeHeaderCode
 #include <nepomuk/resourcemanager.h>
 %End
+
 
 public:
     static Nepomuk::ResourceManager*  instance ();
@@ -57,6 +52,7 @@ public:
     QList<Nepomuk::Resource>  allResourcesWithProperty (const QUrl& uri, const Nepomuk::Variant& v);
     QList<Nepomuk::Resource>  allResourcesWithProperty (const QString& uri, const Nepomuk::Variant& v);
     QString                 generateUniqueUri ();
+    QUrl                    generateUniqueUri (const QString& label);
     void                    notifyError (const QString& uri, int errorCode);
 
 signals:
@@ -66,23 +62,10 @@ signals:
 private:
                             ResourceManager ();
                             ~ResourceManager ();
-
-public:
-
-//  Subclasses of QObject
-
-%ConvertToSubClassCode
-
-    sipClass = NULL;
-
-    if (dynamic_cast<Nepomuk::ResourceManager*>(sipCpp))
-        sipClass = sipClass_Nepomuk_ResourceManager;
-    else if (dynamic_cast<Nepomuk::Service*>(sipCpp))
-        sipClass = sipClass_Nepomuk_Service;
-%End
-
 };   // ResourceManager
 
 };   // Nepomuk
+
+
 
 

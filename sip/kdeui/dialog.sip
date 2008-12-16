@@ -25,7 +25,7 @@ namespace Sonnet
 class Dialog : KDialog
 {
 %TypeHeaderCode
-#include <dialog.h>
+#include <sonnet/dialog.h>
 %End
 
 

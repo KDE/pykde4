@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KRun : QObject
 {
 %TypeHeaderCode
@@ -28,7 +29,7 @@ class KRun : QObject
 
 
 public:
-                            KRun (const KUrl& url, QWidget* window, mode_t mode = 0, bool isLocalFile = 0, bool showProgressInfo = 1, const QByteArray& asn = "");
+                            KRun (const KUrl& url, QWidget* window, mode_t mode = 0, bool isLocalFile = 0, bool showProgressInfo = 1, const QByteArray& asn = QByteArray());
     void                    abort ();
     bool                    hasError () const;
     bool                    hasFinished () const;
@@ -39,12 +40,12 @@ public:
     void                    setEnableExternalBrowser (bool b);
     void                    setSuggestedFileName (const QString& fileName);
     QString                 suggestedFileName () const;
-    static bool             run (const KService& service, const KUrl::List& urls, QWidget* window, bool tempFiles = 0, const QString& suggestedFileName = QString(), const QByteArray& asn = "");
-    static bool             run (const QString& exec, const KUrl::List& urls, QWidget* window, const QString& name = QString(), const QString& icon = QString(), const QByteArray& asn = "");
-    static bool             runUrl (const KUrl& url, const QString& mimetype, QWidget* window, bool tempFile = 0, bool runExecutables = 1, const QString& suggestedFileName = QString(), const QByteArray& asn = "");
+    static bool             run (const KService& service, const KUrl::List& urls, QWidget* window, bool tempFiles = 0, const QString& suggestedFileName = QString(), const QByteArray& asn = QByteArray());
+    static bool             run (const QString& exec, const KUrl::List& urls, QWidget* window, const QString& name = QString(), const QString& icon = QString(), const QByteArray& asn = QByteArray());
+    static bool             runUrl (const KUrl& url, const QString& mimetype, QWidget* window, bool tempFile = 0, bool runExecutables = 1, const QString& suggestedFileName = QString(), const QByteArray& asn = QByteArray());
     static bool             runCommand (const QString& cmd, QWidget* window);
-    static bool             runCommand (const QString& cmd, const QString& execName, const QString& icon, QWidget* window, const QByteArray& asn = "");
-    static bool             displayOpenWithDialog (const KUrl::List& lst, QWidget* window, bool tempFiles = 0, const QString& suggestedFileName = QString(), const QByteArray& asn = "");
+    static bool             runCommand (const QString& cmd, const QString& execName, const QString& icon, QWidget* window, const QByteArray& asn = QByteArray());
+    static bool             displayOpenWithDialog (const KUrl::List& lst, QWidget* window, bool tempFiles = 0, const QString& suggestedFileName = QString(), const QByteArray& asn = QByteArray());
     static void             shellQuote (QString& str);
     static QStringList      processDesktopExec (const KService& _service, const KUrl::List& _urls, bool tempFiles = 0, const QString& suggestedFileName = QString());
     static QString          binaryName (const QString& execLine, bool removePath);

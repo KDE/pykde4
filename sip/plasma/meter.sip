@@ -27,6 +27,7 @@ class Meter : QGraphicsWidget
 #include <plasma/widgets/meter.h>
 %End
 
+
 public:
 
     enum MeterType
@@ -55,6 +56,7 @@ public:
     QFont                   labelFont (int index) const;
     void                    setLabelAlignment (int index, const Qt::Alignment alignment);
     Qt::Alignment           labelAlignment (int index) const;
+    QRectF                  labelRect (int index) const;
     void                    dataUpdated (const QString& sourceName, const Plasma::DataEngine::Data& data);
 
 protected:

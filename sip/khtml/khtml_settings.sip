@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KHTMLSettings
 {
 %TypeHeaderCode
@@ -45,7 +46,6 @@ public:
     };
 
 
-
     enum KSmoothScrollingMode
     {
         KSmoothScrollingDisabled,
@@ -53,6 +53,13 @@ public:
         KSmoothScrollingEnabled
     };
 
+
+    enum KDNSPrefetch
+    {
+        KDNSPrefetchDisabled,
+        KDNSPrefetchOnlyWWWAndSLD,
+        KDNSPrefetchEnabled
+    };
 
 
     enum KJSWindowOpenPolicy
@@ -92,7 +99,7 @@ public:
     };
 
                             KHTMLSettings ();
-//                            KHTMLSettings (const KHTMLSettings& other);
+//ig                            KHTMLSettings (const KHTMLSettings& other);
     void                    init ();
     void                    init (KConfig* config, bool reset = 1);
     bool                    changeCursor () const;
@@ -101,9 +108,8 @@ public:
     bool                    allowTabulation () const;
     bool                    autoSpellCheck () const;
     KHTMLSettings::KAnimationAdvice  showAnimations () const;
-
     KHTMLSettings::KSmoothScrollingMode  smoothScrolling () const;
-
+    KHTMLSettings::KDNSPrefetch  dnsPrefetch () const;
     QString                 stdFontName () const;
     QString                 fixedFontName () const;
     QString                 serifFontName () const;
@@ -156,7 +162,7 @@ public:
     bool                    jsPopupBlockerPassivePopup () const;
 
 private:
-    KHTMLSettings(const KHTMLSettings &);
+                            KHTMLSettings (const KHTMLSettings&);
 };   // KHTMLSettings
 
 

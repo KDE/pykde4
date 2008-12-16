@@ -20,6 +20,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
+
+%ModuleHeaderCode
+//ctscc
+#include <khtml_part.h>
+#include <khtmlview.h>
+%End
+
 class KHTMLPart : KParts::ReadOnlyPart
 {
 %TypeHeaderCode
@@ -33,6 +41,14 @@ public:
     {
         DefaultGUI,
         BrowserViewGUI
+    };
+
+
+    enum DNSPrefetch
+    {
+        DNSPrefetchDisabled,
+        DNSPrefetchEnabled,
+        DNSPrefetchOnlyWWWAndSLD
     };
 
                             KHTMLPart (QWidget* parentWidget = 0, QObject* parent /TransferThis/ = 0, KHTMLPart::GUIProfile prof = KHTMLPart::DefaultGUI);
@@ -64,6 +80,8 @@ public:
     void                    setAutoloadImages (bool enable);
     bool                    autoloadImages () const;
     void                    setOnlyLocalReferences (bool enable);
+    void                    setDNSPrefetch (KHTMLPart::DNSPrefetch pmode);
+    KHTMLPart::DNSPrefetch  dnsPrefetch () const;
     bool                    onlyLocalReferences () const;
     bool                    isCaretMode () const;
     bool                    isEditable () const;
@@ -118,6 +136,12 @@ public:
     void                    selection (DOM::Node& startNode, long& startOffset /Out/, DOM::Node& endNode, long& endOffset /Out/) const;
     void                    setSelection (const DOM::Range&);
     bool                    hasSelection () const;
+
+
+//mt undefined symbol: Editor* None -- need mapped type?
+//mt     DOM::Editor*       editor () const;
+
+
     void                    selectAll ();
     void                    show ();
     void                    hide ();
@@ -145,13 +169,9 @@ public:
     QString                 lastModified () const;
     void                    preloadStyleSheet (const QString& url, const QString& stylesheet);
     void                    preloadScript (const QString& url, const QString& script);
-
     bool                    isPointInsideSelection (int x, int y);
-
     bool                    restored () const;
-
     void                    setAlwaysHonourDoctype (bool b = 1);
-
 
     enum FormNotification
     {
@@ -205,9 +225,8 @@ protected:
     virtual bool            doOpenStream (const QString& mimeType);
     virtual bool            doWriteStream (const QByteArray& data);
     virtual bool            doCloseStream ();
-
     virtual void            timerEvent (QTimerEvent*);
-
+    bool                    mayPrefetchHostname (const QString& name);
 
 public:
     void                    setActiveNode (const DOM::Node& node);
@@ -227,6 +246,21 @@ protected:
 private:
     void                    setStatusBarText (const QString&, int);
 //end
+
+
+public:
+
+//  Subclasses of QObject
+
+%ConvertToSubClassCode
+
+    sipClass = NULL;
+
+    if (dynamic_cast<KHTMLPart*>(sipCpp))
+        sipClass = sipClass_KHTMLPart;
+    else if (dynamic_cast<KHTMLView*>(sipCpp))
+        sipClass = sipClass_KHTMLView;
+%End
 
 };   // KHTMLPart
 

@@ -19,14 +19,21 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+%ModuleHeaderCode
+//ctscc
+#include <tcpslavebase.h>
+%End
+
 namespace KIO
 {
 
 class TCPSlaveBase : KIO::SlaveBase
 {
 %TypeHeaderCode
-#include <kio/tcpslavebase.h>
+#include <tcpslavebase.h>
 %End
+
 
 public:
                             TCPSlaveBase (const QByteArray& protocol, const QByteArray& poolSocket, const QByteArray& appSocket, bool autoSsl = 0);
@@ -46,7 +53,6 @@ public:
     typedef QFlags<KIO::TCPSlaveBase::SslResultDetail> SslResult;
 
 
-
 protected:
     ssize_t                 write (const char* data, ssize_t len);
     ssize_t                 read (char* data, ssize_t len);
@@ -63,8 +69,22 @@ protected:
     void                    setBlocking (bool b);
     QIODevice*              socket () const;
 //ig     virtual void       virtual_hook (int id, void* data);
+
 private:
-                            TCPSlaveBase (const KIO::TCPSlaveBase &other);
+                            TCPSlaveBase (const KIO::TCPSlaveBase& other);
+
+public:
+
+//  Subclasses of KIO::SlaveBase
+
+%ConvertToSubClassCode
+
+    sipClass = NULL;
+
+    if (dynamic_cast<KIO::TCPSlaveBase*>(sipCpp))
+        sipClass = sipClass_KIO_TCPSlaveBase;
+%End
+
 };   // TCPSlaveBase
 
 };   // KIO

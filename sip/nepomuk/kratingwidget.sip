@@ -22,13 +22,13 @@
 
 %ModuleHeaderCode
 //ctscc
-#include <kmetadatatagcloud.h>
-#include <kmetadatatagwidget.h>
-#include <kratingwidget.h>
-#include <ktagcloudwidget.h>
-#include <ktagdisplaywidget.h>
-#include <nepomukservice.h>
-#include <resourcemanager.h>
+#include <nepomuk/kmetadatatagcloud.h>
+#include <nepomuk/kmetadatatagwidget.h>
+#include <nepomuk/kratingwidget.h>
+#include <nepomuk/ktagcloudwidget.h>
+#include <nepomuk/ktagdisplaywidget.h>
+#include <nepomuk/nepomukservice.h>
+#include <nepomuk/resourcemanager.h>
 %End
 
 class KRatingWidget : QFrame
@@ -49,14 +49,11 @@ public:
     QIcon                   icon () const;
 
 signals:
-    void                    ratingChanged (unsigned int rating);
     void                    ratingChanged (int rating);
 
 public:
     void                    setRating (int rating);
-    void                    setRating (unsigned int rating);
     void                    setMaxRating (int max);
-    void                    setMaxRating (unsigned int max);
     void                    setHalfStepsEnabled (bool enabled);
     void                    setOnlyPaintFullSteps (bool);
     void                    setSpacing (int);

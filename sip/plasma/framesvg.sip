@@ -27,6 +27,7 @@ class FrameSvg : Plasma::Svg
 #include <plasma/framesvg.h>
 %End
 
+
 public:
 
     enum EnabledBorder
@@ -48,11 +49,8 @@ public:
     void                    resizeFrame (const QSizeF& size);
     QSizeF                  frameSize () const;
     qreal                   marginSize (const Plasma::MarginEdge edge) const;
-
-
     void                    getMargins (qreal& left /out/, qreal& top /out/, qreal& right /out/, qreal& bottom /out/) const;
-
-
+    QRectF                  contentsRect () const;
     void                    setElementPrefix (Plasma::Location location);
     void                    setElementPrefix (const QString& prefix);
     bool                    hasElementPrefix (const QString& prefix) const;
@@ -62,8 +60,9 @@ public:
     void                    setCacheAllRenderedFrames (bool cache);
     bool                    cacheAllRenderedFrames () const;
     void                    clearCache ();
-    void                    paintFrame(QPainter* painter, const QRectF& target, const QRectF& source = QRectF());
-    void                    paintFrame(QPainter* painter, const QPointF& pos = QPointF(0, 0));
+    QPixmap                 framePixmap ();
+    void                    paintFrame (QPainter* painter, const QRectF& target, const QRectF& source = QRectF());
+    void                    paintFrame (QPainter* painter, const QPointF& pos = QPointF(0,0));
 };   // FrameSvg
 
 };   // Plasma

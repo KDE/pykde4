@@ -35,6 +35,7 @@ public:
                             Literal (const QUrl& dataTypeUri);
     QUrl                    dataTypeUri () const;
     QVariant::Type          dataType () const;
+    bool                    isValid () const;
 };   // Literal
 
 };   // Types

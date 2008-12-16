@@ -33,7 +33,9 @@ public:
     QList<Phonon::Path>     outputPaths () const;
 
 protected:
-//ig                        MediaNode (MediaNodePrivate& dd);
+//ig                       MediaNode (MediaNodePrivate& dd);
+private:
+                            MediaNode(const Phonon::MediaNode &other);
 
 };   // MediaNode
 

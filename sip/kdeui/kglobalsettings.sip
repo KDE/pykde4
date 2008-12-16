@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KGlobalSettings : QObject
 {
 %TypeHeaderCode
@@ -30,6 +31,7 @@ class KGlobalSettings : QObject
 public:
     static int              dndEventDelay ();
     static bool             singleClick ();
+    static bool             smoothScroll ();
 
     enum TearOffHandle
     {
@@ -76,6 +78,10 @@ public:
     static QString          desktopPath ();
     static QString          autostartPath ();
     static QString          documentPath ();
+    static QString          musicPath ();
+    static QString          videosPath ();
+    static QString          downloadPath ();
+    static QString          picturesPath ();
     static QColor           inactiveTitleColor ();
     static QColor           inactiveTextColor ();
     static QColor           activeTitleColor ();
@@ -99,7 +105,6 @@ public:
     static QRect            desktopGeometry (const QWidget* w);
     static bool             showIconsOnPushButtons ();
 
-
     enum GraphicEffect
     {
         NoEffects,
@@ -112,7 +117,6 @@ public:
 
     static KGlobalSettings::GraphicEffects  graphicEffectsLevel ();
     static KGlobalSettings::GraphicEffects  graphicEffectsLevelDefault ();
-
     static bool             showFilePreview (const KUrl&);
     static bool             opaqueResize ();
     static int              buttonLayout ();

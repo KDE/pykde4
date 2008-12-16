@@ -20,6 +20,20 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
+class KTextEditSpellInterface
+{
+%TypeHeaderCode
+#include <ktextedit.h>
+%End
+
+public:
+    virtual bool            isSpellCheckingEnabled () const = 0;
+    virtual void            setSpellCheckingEnabled (bool enable) = 0;
+    virtual bool            shouldBlockBeSpellChecked (const QString& block) const = 0;
+};   // KTextEditSpellInterface
+
+
 class KTextEdit : QTextEdit
 {
 %TypeHeaderCode
@@ -35,25 +49,23 @@ public:
     bool                    checkSpellingEnabled () const;
     void                    highlightWord (int length, int pos);
     void                    setSpellCheckingConfigFileName (const QString& fileName);
-
-    void                    setSpellCheckingLanguage (const QString& language);
-
     virtual void            createHighlighter ();
     Sonnet::Highlighter*    highlighter () const;
     void                    setHighlighter (Sonnet::Highlighter* _highLighter);
-
     QMenu*                  mousePopupMenu ();
     void                    enableFindReplace (bool enabled);
+    void                    setSpellInterface (KTextEditSpellInterface* spellInterface);
+    const QString&          spellCheckingLanguage () const;
 
 signals:
     void                    checkSpellingChanged (bool);
     void                    spellCheckStatus (const QString&);
     void                    languageChanged (const QString& language);
 
-
 public:
+    void                    setSpellCheckingLanguage (const QString& language);
     void                    checkSpelling ();
-
+    void                    showSpellConfigDialog (const QString& configFileName, const QString& windowIcon = QString());
     void                    replace ();
 
 protected:
@@ -64,13 +76,14 @@ protected:
     void                    slotFindNext ();
     void                    slotReplace ();
     virtual bool            event (QEvent*);
-
     virtual void            keyPressEvent (QKeyEvent*);
     virtual void            focusInEvent (QFocusEvent*);
     virtual void            wheelEvent (QWheelEvent*);
     virtual void            deleteWordBack ();
     virtual void            deleteWordForward ();
     virtual void            contextMenuEvent (QContextMenuEvent*);
+    void                    setCheckSpellingEnabledInternal (bool check);
+    bool                    checkSpellingEnabledInternal () const;
 };   // KTextEdit
 
 

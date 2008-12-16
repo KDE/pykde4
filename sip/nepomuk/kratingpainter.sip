@@ -47,6 +47,7 @@ public:
     int                     ratingFromPosition (const QRect& rect, const QPoint& pos) const;
     static void             paintRating (QPainter* p, const QRect& rect, Qt::Alignment align, int rating, int hoverRating = -1);
     static int              getRatingFromPosition (const QRect& rect, Qt::Alignment align, Qt::LayoutDirection direction, const QPoint& pos);
+
+private:
+                            KRatingPainter(const KRatingPainter &other);
 };   // KRatingPainter
-
-

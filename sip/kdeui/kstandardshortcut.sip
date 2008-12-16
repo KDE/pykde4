@@ -78,6 +78,35 @@ enum StandardShortcut
     SubstringCompletion,
     RotateUp,
     RotateDown,
+    OpenRecent,
+    SaveAs,
+    Revert,
+    PrintPreview,
+    Mail,
+    Clear,
+    ActualSize,
+    FitToPage,
+    FitToWidth,
+    FitToHeight,
+    Zoom,
+    Goto,
+    GotoPage,
+    DocumentBack,
+    DocumentForward,
+    EditBookmarks,
+    Spelling,
+    ShowToolbar,
+    ShowStatusbar,
+    SaveOptions,
+    KeyBindings,
+    Preferences,
+    ConfigureToolbars,
+    ConfigureNotifications,
+    TipofDay,
+    ReportBug,
+    SwitchApplicationLanguage,
+    AboutApp,
+    AboutKDE,
     StandardShortcutCount
 };
 
@@ -138,11 +167,5 @@ const KShortcut&        forward ();
 const KShortcut&        backwardWord ();
 const KShortcut&        forwardWord ();
 const KShortcut&        showMenubar ();
+
 };   // KStandardShortcut
-
-
-
-%ModuleHeaderCode
-#include <kstandardshortcut.h>
-%End
-

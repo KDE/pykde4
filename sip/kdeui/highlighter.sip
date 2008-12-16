@@ -45,6 +45,7 @@ public:
     QStringList             suggestionsForWord (const QString& word, int max = 10);
     bool                    isWordMisspelled (const QString& word);
 
+    void                    setMisspelledColor (const QColor& color);
 
 signals:
     void                    activeChanged (const QString& description);

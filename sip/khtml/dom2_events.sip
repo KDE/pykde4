@@ -230,6 +230,29 @@ public:
 
 protected:
 //ig                        MutationEvent (MutationEventImpl* impl);
+
+public:
+
+//  Subclasses of DOM::Event
+
+%ConvertToSubClassCode
+
+    sipClass = NULL;
+
+    if (dynamic_cast<DOM::MutationEvent*>(sipCpp))
+        sipClass = sipClass_DOM_MutationEvent;
+    else if (dynamic_cast<DOM::UIEvent*>(sipCpp))
+        {
+            sipClass = sipClass_DOM_UIEvent;
+            if (dynamic_cast<DOM::KeyboardEvent*>(sipCpp))
+                sipClass = sipClass_DOM_KeyboardEvent;
+            else if (dynamic_cast<DOM::MouseEvent*>(sipCpp))
+                sipClass = sipClass_DOM_MouseEvent;
+            else if (dynamic_cast<DOM::TextEvent*>(sipCpp))
+                sipClass = sipClass_DOM_TextEvent;
+        }
+%End
+
 };   // MutationEvent
 
 };   // DOM

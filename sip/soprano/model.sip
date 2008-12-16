@@ -18,6 +18,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+%ModuleHeaderCode
+//ctscc
+#include <soprano/filtermodel.h>
+#include <soprano/model.h>
+#include <soprano/pluginmanager.h>
+#include <soprano/rdfschemamodel.h>
+#include <soprano/storagemodel.h>
+%End
+
 namespace Soprano
 {
 
@@ -26,6 +36,7 @@ class Model : QObject, Soprano::Error::ErrorCache
 %TypeHeaderCode
 #include <soprano/model.h>
 %End
+
 
 public:
     virtual Soprano::Error::ErrorCode  addStatement (const Soprano::Statement& statement) = 0;
@@ -65,6 +76,33 @@ protected:
 
 private:
                             Model (const Soprano::Model&);
+
+public:
+
+//  Subclasses of QObject
+
+%ConvertToSubClassCode
+
+    sipClass = NULL;
+
+    if (dynamic_cast<Soprano::Model*>(sipCpp))
+        {
+            sipClass = sipClass_Soprano_Model;
+            if (dynamic_cast<Soprano::FilterModel*>(sipCpp))
+                {
+                    sipClass = sipClass_Soprano_FilterModel;
+//                    if (dynamic_cast<Soprano::RdfSchemaModel*>(sipCpp))
+//                        sipClass = sipClass_Soprano_RdfSchemaModel;
+                }
+            else if (dynamic_cast<Soprano::StorageModel*>(sipCpp))
+                {
+                    sipClass = sipClass_Soprano_StorageModel;
+                }
+        }
+    else if (dynamic_cast<Soprano::PluginManager*>(sipCpp))
+        sipClass = sipClass_Soprano_PluginManager;
+%End
+
 };   // Model
 
 };   // Soprano

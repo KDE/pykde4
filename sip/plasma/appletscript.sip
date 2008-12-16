@@ -27,6 +27,7 @@ class AppletScript : Plasma::ScriptEngine
 #include <plasma/scripting/appletscript.h>
 %End
 
+
 public:
     explicit                AppletScript (QObject* parent /TransferThis/ = 0);
     void                    setApplet (Plasma::Applet* applet);
@@ -36,7 +37,9 @@ public:
     virtual void            constraintsEvent (Plasma::Constraints constraints);
     virtual QList<QAction*>  contextualActions ();
     virtual QPainterPath    shape () const;
+    void                    setHasConfigurationInterface (bool hasInterface);
     virtual void            showConfigurationInterface ();
+    virtual void            configChanged ();
 
 protected:
     Plasma::DataEngine*     dataEngine (const QString& engine) const;

@@ -19,11 +19,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KRichTextWidget : KRichTextEdit
 {
 %TypeHeaderCode
 #include <krichtextwidget.h>
 %End
+
 
 public:
 
@@ -48,6 +50,7 @@ public:
         SupportHyperlinks,
         SupportFormatPainting,
         SupportToPlainText,
+        SupportSuperScriptAndSubScript,
         FullSupport
     };
 
@@ -63,6 +66,7 @@ public:
 
 protected:
     virtual void            mouseReleaseEvent (QMouseEvent* event);
+
 };   // KRichTextWidget
 
 

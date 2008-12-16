@@ -30,7 +30,7 @@ class PackageStructure : QObject
 public:
     typedef KSharedPtr<Plasma::PackageStructure> Ptr;
 
-    explicit                PackageStructure (QObject* parent /TransferThis/ = 0, const QString& type = i18n("Invalid"));
+    explicit                PackageStructure (QObject* parent /TransferThis/ = 0, const QString& type = i18nc("A non-functional package","Invalid"));
     static Plasma::PackageStructure::Ptr  load (const QString& packageFormat);
     QString                 type () const;
 // FIXME
@@ -53,11 +53,23 @@ public:
     void                    write (KConfigBase* config) const;
     virtual bool            installPackage (const QString& archivePath, const QString& packageRoot);
     virtual bool            uninstallPackage (const QString& packageName, const QString& packageRoot);
+    virtual void            createNewWidgetBrowser (QWidget* parent /Transfer/ = 0);
     QString                 contentsPrefix () const;
+    QString                 defaultPackageRoot () const;
+    QString                 servicePrefix () const;
+    void                    setServicePrefix (const QString& servicePrefix);
+
+//FIXME PackageMetadata needs a custom = operator for this to work.
+//    virtual Plasma::PackageMetadata  metadata ();
+
+signals:
+    void                    newWidgetBrowserFinished ();
 
 protected:
     void                    setContentsPrefix (const QString& prefix);
+    void                    setDefaultPackageRoot (const QString& packageRoot);
     virtual void            pathChanged ();
+
 };   // PackageStructure
 
 };   // Plasma

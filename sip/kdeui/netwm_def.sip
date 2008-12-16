@@ -22,6 +22,9 @@
 //end
 
 
+//end
+
+
 class NETPoint
 {
 %TypeHeaderCode
@@ -115,6 +118,22 @@ public:
     int top;
     int bottom;
 };   // NETStrut
+
+
+class NETFullscreenMonitors
+{
+%TypeHeaderCode
+#include <netwm_def.h>
+%End
+
+public:
+                            NETFullscreenMonitors ();
+    int top;
+    int bottom;
+    int left;
+    int right;
+    bool                    isSet () const;
+};   // NETFullscreenMonitors
 
 
 class NET
@@ -291,7 +310,8 @@ public:
         WM2ShowingDesktop,
         WM2Opacity,
         WM2DesktopLayout,
-        WM2FullPlacement
+        WM2FullPlacement,
+        WM2FullscreenMonitors
     };
 
 
@@ -325,8 +345,7 @@ public:
     };
 
     static int              timestampCompare (unsigned long time1, unsigned long time2);
-    static int              timestampDiff (unsigned long time1_, unsigned long time2_);
-
+    static int              timestampDiff (unsigned long time1, unsigned long time2);
 
 };   // NET
 

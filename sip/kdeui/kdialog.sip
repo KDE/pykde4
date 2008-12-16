@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KDialog : QDialog
 {
 %TypeHeaderCode
@@ -82,12 +83,13 @@ public:
     void                    setInitialSize (const QSize& size);
     void                    incrementInitialSize (const QSize& size);
     void                    restoreDialogSize (const KConfigGroup& config);
-    void                    saveDialogSize (KConfigGroup& config, KConfigBase::WriteConfigFlags options = KConfigBase::Normal) const;
+    void                    saveDialogSize (KConfigGroup& config, KConfigBase::WriteConfigFlags options = KConfigGroup::Normal) const;
     QString                 helpLinkText () const;
     bool                    isButtonEnabled (KDialog::ButtonCode id) const;
     KPushButton*            button (KDialog::ButtonCode id) const;
     static int              marginHint ();
     static int              spacingHint ();
+    static int              groupSpacingHint ();
 
     enum CaptionFlag
     {

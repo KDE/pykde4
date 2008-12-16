@@ -225,7 +225,11 @@ public:
         {
             sipClass = sipClass_KParts_Part;
             if (dynamic_cast<KParts::ReadOnlyPart*>(sipCpp))
-                sipClass = sipClass_KParts_ReadOnlyPart;
+                {
+                    sipClass = sipClass_KParts_ReadOnlyPart;
+                    if (dynamic_cast<KParts::ReadWritePart*>(sipCpp))
+                        sipClass = sipClass_KParts_ReadWritePart;
+                }
         }
     else if (dynamic_cast<KParts::PartManager*>(sipCpp))
         sipClass = sipClass_KParts_PartManager;

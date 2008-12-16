@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KFileDialog : KDialog
 {
 %TypeHeaderCode
@@ -55,6 +56,8 @@ public:
     QString                 currentMimeFilter () const;
     void                    clearFilter ();
     void                    setPreviewWidget (KPreviewWidgetBase* w);
+    void                    setInlinePreviewShown (bool show);
+    void                    setConfirmOverwrite (bool enable);
     virtual QSize           sizeHint () const;
     static QString          getOpenFileName (const KUrl& startDir = KUrl(), const QString& filter = QString(), QWidget* parent /Transfer/ = 0, const QString& caption = QString());
     static QString          getOpenFileNameWId (const KUrl& startDir, const QString& filter, WId parent_id, const QString& caption);
@@ -88,8 +91,7 @@ signals:
 
 protected:
     virtual void            keyPressEvent (QKeyEvent* e);
-    virtual void            hideEvent (QHideEvent *event);
-
+    virtual void            hideEvent (QHideEvent* event);
     virtual void            slotOk ();
     virtual void            accept ();
     virtual void            slotCancel ();

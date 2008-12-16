@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KFileItemDelegate : QAbstractItemDelegate
 {
 %TypeHeaderCode
@@ -57,7 +58,6 @@ public:
 //ig     void               setShowInformation (const KFileItemDelegate::InformationList& list);
     void                    setShowInformation (KFileItemDelegate::Information information);
 //ig     KFileItemDelegate::InformationList  showInformation () const;
-
     void                    setShadowColor (const QColor& color);
     QColor                  shadowColor () const;
     void                    setShadowOffset (const QPointF& offset);
@@ -66,9 +66,11 @@ public:
     qreal                   shadowBlur () const;
     void                    setMaximumSize (const QSize& size);
     QSize                   maximumSize () const;
+    void                    setShowToolTipWhenElided (bool showToolTip);
+    bool                    showToolTipWhenElided () const;
     virtual bool            eventFilter (QObject* object, QEvent* event);
-
     bool                    helpEvent (QHelpEvent* event, QAbstractItemView* view, const QStyleOptionViewItem& option, const QModelIndex& index);
+    QRegion                 shape (const QStyleOptionViewItem& option, const QModelIndex& index);
 
 private:
                             KFileItemDelegate (const KFileItemDelegate&);

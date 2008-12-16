@@ -27,6 +27,7 @@ class Installation
 #include <knewstuff2/core/installation.h>
 %End
 
+
 public:
                             Installation ();
 
@@ -46,6 +47,7 @@ public:
 
     void                    setUncompression (const QString& uncompression);
     void                    setCommand (const QString& command);
+    void                    setUninstallCommand (const QString& command);
     void                    setStandardResourceDir (const QString& dir);
     void                    setTargetDir (const QString& dir);
     void                    setInstallPath (const QString& dir);
@@ -56,6 +58,7 @@ public:
     void                    setCustomName (bool customname);
     QString                 uncompression () const;
     QString                 command () const;
+    QString                 uninstallCommand () const;
     QString                 standardResourceDir () const;
     QString                 targetDir () const;
     QString                 installPath () const;

@@ -27,6 +27,7 @@ class TcpClient : QObject, Soprano::Error::ErrorCache
 {
 %TypeHeaderCode
 #include <soprano/tcpclient.h>
+#include <soprano/servercore.h>
 %End
 
 public:

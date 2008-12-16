@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KGlobalAccel : QObject
 {
 %TypeHeaderCode
@@ -28,17 +29,28 @@ class KGlobalAccel : QObject
 
 
 public:
+
+    enum actionIdFields
+    {
+        ComponentUnique,
+        ActionUnique,
+        ComponentFriendly,
+        ActionFriendly
+    };
+
     static KGlobalAccel*    self ();
+    static void             stealShortcutSystemwide (const QKeySequence& seq);
+    static void             activateGlobalShortcutContext (const QString& contextUnique, const QString& contextFriendly, const KComponentData& component = KGlobal::mainComponent());
+    static QList<KGlobalShortcutInfo>  getGlobalShortcutsByKey (const QKeySequence& seq);
+    static bool             isGlobalShortcutAvailable (const QKeySequence& seq, const QString& component = QString());
+    static bool             promptStealShortcutSystemwide (QWidget* parent /Transfer/, const QList<KGlobalShortcutInfo>& shortcuts, const QKeySequence& seq);
     bool                    isEnabled () const;
     void                    setEnabled (bool enabled);
     void                    overrideMainComponentData (const KComponentData& componentData);
-
     QList<QStringList>      allMainComponents ();
     QList<QStringList>      allActionsForComponent (const QStringList& actionId);
-
     static QStringList      findActionNameSystemwide (const QKeySequence& seq);
     static bool             promptStealShortcutSystemwide (QWidget* parent /Transfer/, const QStringList& actionIdentifier, const QKeySequence& seq);
-    static void             stealShortcutSystemwide (const QKeySequence& seq);
 
 private:
                             KGlobalAccel ();

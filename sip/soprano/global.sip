@@ -27,7 +27,8 @@ const Soprano::Backend*  discoverBackendByName (const QString& name);
 const Soprano::Backend*  discoverBackendByFeatures (Soprano::BackendFeatures features, const QStringList& userFeatures = QStringList());
 void                    setUsedBackend (const Soprano::Backend*);
 const Soprano::Backend*  usedBackend ();
-Soprano::Model*         createModel (const QList<Soprano::BackendSetting>& settings = QList<Soprano::BackendSetting>());
+Soprano::Model*         createModel (const Soprano::BackendSettings& settings = Soprano::BackendSettings());
+Soprano::Model*         createModel (const QList<Soprano::BackendSetting>& settings);
 };   // Soprano
 
 

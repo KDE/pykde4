@@ -14,8 +14,13 @@
 %Include class.sip
 //%Include desktopontologyloader.sip
 %Include entity.sip
-//%Include fileontologyloader.sip
 //%Include global.sip
+%Include kmetadatatagcloud.sip
+%Include kmetadatatagwidget.sip
+%Include kratingpainter.sip
+%Include kratingwidget.sip
+%Include ktagcloudwidget.sip
+%Include ktagdisplaywidget.sip
 %Include literal.sip
 //%Include nepomukontologyloader.sip
 %Include nepomukservice.sip
@@ -25,6 +30,7 @@
 %Include resource.sip
 %Include resourcemanager.sip
 %Include tag.sip
+%Include thing.sip
 %Include tools.sip
 %Include variant.sip
 

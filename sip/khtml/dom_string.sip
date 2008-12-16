@@ -38,6 +38,7 @@ public:
                             DOMString (const QChar* str, uint len);
                             DOMString (const QString&);
                             DOMString (const char* str);
+                            DOMString (const char* str, uint len);
 //ig                        DOMString (DOMStringImpl* i);
                             DOMString (const DOM::DOMString& str);
     DOM::DOMString&         operator += (const DOM::DOMString& str);
@@ -45,6 +46,8 @@ public:
     void                    insert (DOM::DOMString str, uint pos);
     const QChar&            operator [] (unsigned int i) const;
     int                     find (const QChar c, int start = 0) const;
+    int                     reverseFind (const QChar c, int start = -1) const;
+    DOM::DOMString          substring (unsigned pos, unsigned len = UINT_MAX) const;
     uint                    length () const;
     void                    truncate (unsigned int len);
     void                    remove (unsigned int pos, int len = 1);
@@ -52,22 +55,26 @@ public:
     DOM::DOMString          lower () const;
     DOM::DOMString          upper () const;
     QChar*                  unicode () const;
-
     QChar*                  characters () const;
-
     QString                 string () const;
-    int                     toInt () const;
+//ig    int                     toInt () const;
+    int                     toInt (bool* ok /Out/) const;
+    float                   toFloat (bool* ok /Out/ = 0) const;
+    
     bool                    percentage (int& _percentage /Out/) const;
-
     static DOM::DOMString   number (float f);
-
     DOM::DOMString          copy () const;
     bool                    isNull () const;
     bool                    isEmpty () const;
-
     bool                    endsWith (const DOM::DOMString& str) const;
-
+    bool                    startsWith (const DOM::DOMString& str) const;
 //ig     DOMStringImpl*     implementation () const;
+
+
+//mt undefined symbol: ... None -- need mapped type?
+//mt     static DOM::DOMString  format (const char* format, ...);
+
+
 };   // DOMString
 
 bool                    strcmp (const DOM::DOMString& a, const DOM::DOMString& b);

@@ -38,6 +38,7 @@
 %Include kabstractfilewidget.sip
 %Include kdevicelistmodel.sip
 %Include kdiskfreespace.sip
+%Include kdiskfreespaceinfo.sip
 %Include kencodingfiledialog.sip
 %Include kfile.sip
 %Include kfiledialog.sip
@@ -54,6 +55,7 @@
 %Include kfilefiltercombo.sip
 %Include kfileplacesmodel.sip
 %Include kfileplacesview.sip
+%Include kfilepreviewgenerator.sip
 %Include kfilewidget.sip
 %Include authinfo.sip
 %Include chmodjob.sip
@@ -63,6 +65,7 @@
 %Include deletejob.sip
 %Include directorysizejob.sip
 %Include filejob.sip
+%Include fileundomanager.sip
 %Include forwardingslavebase.sip
 %Include global.sip
 %Include job.sip
@@ -98,6 +101,7 @@
 %Include kshellcompletion.sip
 %Include kstatusbarofflineindicator.sip
 %Include ktar.sip
+%Include kurifilter.sip
 %Include kurlcompletion.sip
 %Include kurlpixmapprovider.sip
 %Include kzip.sip

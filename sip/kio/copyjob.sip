@@ -60,12 +60,12 @@ public:
         Link
     };
 
-
     KIO::CopyJob::CopyMode  operationMode () const;
-
     KUrl::List              srcUrls () const;
     KUrl                    destUrl () const;
     void                    setDefaultPermissions (bool b);
+    void                    setAutoSkip (bool autoSkip);
+    void                    setWriteIntoExistingDirectories (bool overwriteAllDirs);
     virtual bool            doSuspend ();
 
 signals:

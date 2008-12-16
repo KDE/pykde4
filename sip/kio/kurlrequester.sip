@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KUrlRequester : KHBox
 {
 %TypeHeaderCode
@@ -42,6 +43,8 @@ public:
     KPushButton*            button () const;
     KUrlCompletion*         completionObject () const;
     const KEditListBox::CustomEditor&  customEditor ();
+    QString                 clickMessage () const;
+    void                    setClickMessage (const QString& msg);
     void                    setUrl (const KUrl& url);
     void                    setPath (const QString& path);
     void                    clear ();

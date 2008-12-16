@@ -19,6 +19,7 @@
 
 
 
+
 %ModuleHeaderCode
 //ctscc
 #include <plasma/abstractrunner.h>
@@ -59,6 +60,21 @@
 #include <plasma/theme.h>
 #include <plasma/view.h>
 #include <plasma/widgets/webview.h>
+#include <plasma/widgets/busywidget.h>
+#include <plasma/context.h>
+#include <plasma/extender.h>
+#include <plasma/extenderitem.h>
+#include <plasma/widgets/frame.h>
+#include <plasma/popupapplet.h>
+#include <plasma/widgets/scrollbar.h>
+#include <plasma/service.h>
+#include <plasma/widgets/slider.h>
+#include <plasma/widgets/svgwidget.h>
+#include <plasma/widgets/tabbar.h>
+#include <plasma/widgets/toolbutton.h>
+#include <plasma/tooltipmanager.h>
+#include <plasma/widgets/treeview.h>
+#include <plasma/wallpaper.h>
 %End
 
 namespace Plasma
@@ -69,6 +85,7 @@ class AbstractRunner : QObject
 %TypeHeaderCode
 #include <plasma/abstractrunner.h>
 %End
+
 
 public:
 
@@ -94,7 +111,7 @@ public:
     void                    performMatch (Plasma::RunnerContext& context);
     bool                    hasRunOptions ();
     virtual void            createRunOptions (QWidget* widget);
-    virtual void            run (const Plasma::RunnerContext& context, const Plasma::QueryMatch& action);
+    virtual void            run (const Plasma::RunnerContext& context, const Plasma::QueryMatch& match);
     Plasma::AbstractRunner::Speed  speed () const;
     Plasma::AbstractRunner::Priority  priority () const;
     Plasma::RunnerContext::Types  ignoredTypes () const;
@@ -114,6 +131,13 @@ protected:
     void                    setPriority (Plasma::AbstractRunner::Priority newPriority);
     KService::List          serviceQuery (const QString& serviceType, const QString& constraint = QString()) const;
     QMutex*                 bigLock () const;
+    virtual QList<QAction*>  actionsForMatch (const Plasma::QueryMatch& match);
+    QAction*                addAction (const QString& id, const QIcon& icon, const QString& text);
+    void                    addAction (const QString& id, QAction* action);
+    void                    removeAction (const QString& id);
+    QAction*                action (const QString& id) const;
+    QHash<QString,QAction*>  actions () const;
+    void                    clearActions ();
     void                    init ();
 
 public:
@@ -137,13 +161,19 @@ public:
                 sipClass = sipClass_Plasma_Containment;
             else if (dynamic_cast<Plasma::GLApplet*>(sipCpp))
                 sipClass = sipClass_Plasma_GLApplet;
+            else if (dynamic_cast<Plasma::PopupApplet*>(sipCpp))
+                sipClass = sipClass_Plasma_PopupApplet;
         }
+    else if (dynamic_cast<Plasma::BusyWidget*>(sipCpp))
+        sipClass = sipClass_Plasma_BusyWidget;
     else if (dynamic_cast<Plasma::CheckBox*>(sipCpp))
         sipClass = sipClass_Plasma_CheckBox;
     else if (dynamic_cast<Plasma::ComboBox*>(sipCpp))
         sipClass = sipClass_Plasma_ComboBox;
     else if (dynamic_cast<Plasma::ConfigLoader*>(sipCpp))
         sipClass = sipClass_Plasma_ConfigLoader;
+    else if (dynamic_cast<Plasma::Context*>(sipCpp))
+        sipClass = sipClass_Plasma_Context;
     else if (dynamic_cast<Plasma::Corona*>(sipCpp))
         sipClass = sipClass_Plasma_Corona;
     else if (dynamic_cast<Plasma::DataContainer*>(sipCpp))
@@ -154,8 +184,16 @@ public:
         sipClass = sipClass_Plasma_DataEngineManager;
     else if (dynamic_cast<Plasma::Delegate*>(sipCpp))
         sipClass = sipClass_Plasma_Delegate;
+    else if (dynamic_cast<Plasma::Dialog*>(sipCpp))
+        sipClass = sipClass_Plasma_Dialog;
+    else if (dynamic_cast<Plasma::Extender*>(sipCpp))
+        sipClass = sipClass_Plasma_Extender;
+    else if (dynamic_cast<Plasma::ExtenderItem*>(sipCpp))
+        sipClass = sipClass_Plasma_ExtenderItem;
     else if (dynamic_cast<Plasma::FlashingLabel*>(sipCpp))
         sipClass = sipClass_Plasma_FlashingLabel;
+    else if (dynamic_cast<Plasma::Frame*>(sipCpp))
+        sipClass = sipClass_Plasma_Frame;
     else if (dynamic_cast<Plasma::GroupBox*>(sipCpp))
         sipClass = sipClass_Plasma_GroupBox;
     else if (dynamic_cast<Plasma::IconWidget*>(sipCpp))
@@ -186,22 +224,42 @@ public:
             else if (dynamic_cast<Plasma::RunnerScript*>(sipCpp))
                 sipClass = sipClass_Plasma_RunnerScript;
         }
+    else if (dynamic_cast<Plasma::ScrollBar*>(sipCpp))
+        sipClass = sipClass_Plasma_ScrollBar;
+    else if (dynamic_cast<Plasma::Service*>(sipCpp))
+        sipClass = sipClass_Plasma_Service;
     else if (dynamic_cast<Plasma::SignalPlotter*>(sipCpp))
         sipClass = sipClass_Plasma_SignalPlotter;
+    else if (dynamic_cast<Plasma::Slider*>(sipCpp))
+        sipClass = sipClass_Plasma_Slider;
     else if (dynamic_cast<Plasma::Svg*>(sipCpp))
         {
             sipClass = sipClass_Plasma_Svg;
             if (dynamic_cast<Plasma::FrameSvg*>(sipCpp))
                 sipClass = sipClass_Plasma_FrameSvg;
         }
+    else if (dynamic_cast<Plasma::SvgWidget*>(sipCpp))
+        sipClass = sipClass_Plasma_SvgWidget;
+    else if (dynamic_cast<Plasma::TabBar*>(sipCpp))
+        sipClass = sipClass_Plasma_TabBar;
     else if (dynamic_cast<Plasma::TextEdit*>(sipCpp))
         sipClass = sipClass_Plasma_TextEdit;
     else if (dynamic_cast<Plasma::Theme*>(sipCpp))
         sipClass = sipClass_Plasma_Theme;
+    else if (dynamic_cast<Plasma::ToolButton*>(sipCpp))
+        sipClass = sipClass_Plasma_ToolButton;
+    else if (dynamic_cast<Plasma::ToolTipManager*>(sipCpp))
+        sipClass = sipClass_Plasma_ToolTipManager;
+    else if (dynamic_cast<Plasma::ToolTipManager*>(sipCpp))
+        sipClass = sipClass_Plasma_ToolTipManager;
+    else if (dynamic_cast<Plasma::TreeView*>(sipCpp))
+        sipClass = sipClass_Plasma_TreeView;
     else if (dynamic_cast<Plasma::UiLoader*>(sipCpp))
         sipClass = sipClass_Plasma_UiLoader;
     else if (dynamic_cast<Plasma::View*>(sipCpp))
         sipClass = sipClass_Plasma_View;
+    else if (dynamic_cast<Plasma::Wallpaper*>(sipCpp))
+        sipClass = sipClass_Plasma_Wallpaper;
     else if (dynamic_cast<Plasma::WebView*>(sipCpp))
         sipClass = sipClass_Plasma_WebView;
 %End
@@ -209,5 +267,7 @@ public:
 };   // AbstractRunner
 
 };   // Plasma
+
+
 
 

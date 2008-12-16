@@ -65,7 +65,8 @@ enum Message
     MSG_AUTH_KEY,
     MSG_DEL_AUTH_KEY,
     MSG_OPENED,
-    MSG_WRITTEN
+    MSG_WRITTEN,
+    MSG_HOST_INFO_REQ
 };
 
 

@@ -59,6 +59,7 @@ public:
     QUrl                    dataType () const;
     QString                 language () const;
     QString                 toString () const;
+    QString                 toN3 () const;
     static Soprano::Node    createEmptyNode ();
     static Soprano::Node    createResourceNode (const QUrl& uri);
     static Soprano::Node    createBlankNode (const QString& id);

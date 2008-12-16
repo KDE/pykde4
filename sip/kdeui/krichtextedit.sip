@@ -19,11 +19,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KRichTextEdit : KTextEdit
 {
 %TypeHeaderCode
 #include <krichtextedit.h>
 %End
+
 
 public:
 
@@ -65,6 +67,8 @@ public:
     void                    insertHorizontalRule ();
     void                    switchToPlainText ();
     QString                 toCleanHtml () const;
+    void                    setTextSuperScript (bool superscript);
+    void                    setTextSubScript (bool subscript);
 
 signals:
     void                    textModeChanged (KRichTextEdit::Mode mode);

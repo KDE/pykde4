@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KDirOperator : QWidget
 {
 %TypeHeaderCode
@@ -49,8 +50,10 @@ public:
     void                    clearFilter ();
     KUrl                    url () const;
     virtual void            setUrl (const KUrl& url, bool clearforward);
-    void                    setCurrentItem (const QString& filename);
+    void                    setCurrentItem (const QString& url);
     void                    setCurrentItem (const KFileItem& item);
+    void                    setCurrentItems (const QStringList& urls);
+    void                    setCurrentItems (const KFileItemList& items);
     virtual void            setView (QAbstractItemView* view);
     QAbstractItemView*      view () const;
     virtual void            setView (KFile::FileView viewKind);
@@ -86,6 +89,10 @@ public:
     virtual void            setAcceptDrops (bool b);
     virtual void            setDropOptions (int options);
     virtual KIO::CopyJob*   trash (const KFileItemList& items, QWidget* parent /Transfer/, bool ask = 1, bool showProgress = 1);
+    KFilePreviewGenerator*  previewGenerator () const;
+    void                    setInlinePreviewShown (bool show);
+    bool                    isInlinePreviewShown () const;
+    int                     iconsZoom () const;
 
 protected:
     virtual QAbstractItemView*  createView (QWidget* parent /Transfer/, KFile::FileView viewKind);
@@ -99,9 +106,7 @@ protected:
     bool                    checkPreviewSupport ();
     virtual void            activatedMenu (const KFileItem& item, const QPoint& pos);
     virtual void            changeEvent (QEvent* event);
-
     virtual bool            eventFilter (QObject* watched, QEvent* event);
-
 
 public:
     virtual void            back ();
@@ -116,6 +121,7 @@ public:
     QString                 makeCompletion (const QString&);
     QString                 makeDirCompletion (const QString&);
     virtual void            trashSelected ();
+    void                    setIconsZoom (int value);
 
 protected:
     void                    resetCursor ();
@@ -142,6 +148,8 @@ signals:
     void                    dirActivated (const KFileItem& item);
     void                    fileSelected (const KFileItem& item);
     void                    dropped (const KFileItem& item, QDropEvent* event, const KUrl::List& urls);
+    void                    contextMenuAboutToShow (const KFileItem& item, QMenu* menu);
+    void                    currentIconSizeChanged (int size);
 };   // KDirOperator
 
 

@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KDirLister : QObject
 {
 %TypeHeaderCode
@@ -79,6 +80,7 @@ public:
 
     KFileItemList           items (KDirLister::WhichItems which = KDirLister::FilteredItems) const;
     KFileItemList           itemsForDir (const KUrl& dir, KDirLister::WhichItems which = KDirLister::FilteredItems) const;
+    static KFileItem        cachedItemForUrl (const KUrl& url);
 
 signals:
     void                    started (const KUrl& _url);
@@ -91,8 +93,10 @@ signals:
     void                    clear ();
     void                    clear (const KUrl& _url);
     void                    newItems (const KFileItemList& items);
+    void                    itemsAdded (const KUrl& directoryUrl, const KFileItemList& items);
     void                    itemsFilteredByMime (const KFileItemList& items);
     void                    deleteItem (const KFileItem& _fileItem);
+    void                    itemsDeleted (const KFileItemList& items);
     void                    refreshItems (const QList<QPair<KFileItem,KFileItem>>& items);
     void                    infoMessage (const QString& msg);
     void                    percent (int percent);

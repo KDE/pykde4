@@ -27,12 +27,41 @@ class Dialog : QWidget
 #include <plasma/dialog.h>
 %End
 
+
 public:
+
+    enum ResizeCorner
+    {
+        NoCorner,
+        NorthEast,
+        SouthEast,
+        NorthWest,
+        SouthWest,
+        All
+    };
+
+    typedef QFlags<Plasma::Dialog::ResizeCorner> ResizeCorners;
+
     explicit                Dialog (QWidget* parent /TransferThis/ = 0, Qt::WindowFlags f = Qt::Window);
+    void                    setGraphicsWidget (QGraphicsWidget* widget);
+    QGraphicsWidget*        graphicsWidget ();
+    void                    setResizeHandleCorners (Plasma::Dialog::ResizeCorners corners);
+    Plasma::Dialog::ResizeCorners  resizeCorners () const;
+
+signals:
+    void                    dialogResized ();
+    void                    dialogVisible (bool status);
 
 protected:
     void                    paintEvent (QPaintEvent* e);
     void                    resizeEvent (QResizeEvent* e);
+    bool                    eventFilter (QObject* watched, QEvent* event);
+    void                    hideEvent (QHideEvent* event);
+    void                    showEvent (QShowEvent* event);
+    void                    mouseMoveEvent (QMouseEvent* event);
+    void                    mousePressEvent (QMouseEvent* event);
+    void                    mouseReleaseEvent (QMouseEvent* event);
+    bool                    inControlArea (const QPoint& point);
 };   // Dialog
 
 };   // Plasma

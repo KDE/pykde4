@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KNewPasswordDialog : KDialog
 {
 %TypeHeaderCode
@@ -48,6 +49,7 @@ public:
 
 protected:
     virtual bool            checkPassword (const QString&);
+    bool                    checkAndGetPassword (QString* pwd);
 
 signals:
     void                    newPassword (const QString& password);

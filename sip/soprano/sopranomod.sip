@@ -39,6 +39,7 @@
 %Include literalvalue.sip
 %Include localsocketclient.sip
 %Include locator.sip
+%Include rdfschemamodel.sip
 %Include model.sip
 %Include node.sip
 %Include nodeiterator.sip
@@ -47,7 +48,6 @@
 %Include pluginmanager.sip
 %Include queryresultiterator.sip
 %Include queryresultiteratorbackend.sip
-%Include rdfschemamodel.sip
 %Include serializer.sip
 %Include servercore.sip
 %Include sopranotypes.sip
@@ -61,8 +61,10 @@
 %Include readonlymodel.sip
 %Include signalcachemodel.sip
 %Include simplenodeiterator.sip
-//FIXME
+
+//FIXME this can be reenabled once the simplenodeiterator.h file is fixed.
 //%Include simplestatementiterator.sip
+
 %Include nao.sip
 %Include nrl.sip
 %Include owl.sip
@@ -70,4 +72,5 @@
 %Include rdfs.sip
 %Include xesam.sip
 %Include xsd.sip
-
+%Include asyncresult.sip
+%Include sparqlmodel.sip

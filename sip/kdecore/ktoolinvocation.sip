@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KToolInvocation : QObject
 {
 %TypeHeaderCode
@@ -35,9 +36,7 @@ public:
     static void             invokeMailer (const KUrl& mailtoURL, const QByteArray& startup_id = QByteArray(), bool allowAttachments = 0);
     static void             invokeMailer (const QString& to, const QString& cc, const QString& bcc, const QString& subject, const QString& body, const QString& messageFile = QString(), const QStringList& attachURLs = QStringList(), const QByteArray& startup_id = QByteArray());
     static void             invokeBrowser (const QString& url, const QByteArray& startup_id = QByteArray());
-
-    static void             invokeTerminal (const QString& command, const QByteArray& startup_id = "");
-
+    static void             invokeTerminal (const QString& command, const QString& workdir = QString(), const QByteArray& startup_id = "");
 //ig     static OrgKdeKLauncherInterface*  klauncher ();
     static int              startServiceByName (const QString& _name, const QString& URL, QString* error = 0, QString* serviceName = 0, int* pid /Out/ = 0, const QByteArray& startup_id = QByteArray(), bool noWait = 0);
     static int              startServiceByName (const QString& _name, const QStringList& URLs = QStringList(), QString* error = 0, QString* serviceName = 0, int* pid /Out/ = 0, const QByteArray& startup_id = QByteArray(), bool noWait = 0);
@@ -50,6 +49,9 @@ public:
 
 signals:
     void                    kapplication_hook (QStringList& env, QByteArray& startup_id);
+
+public:
+//ig    static void             invokeTerminal (const QString& command, const QByteArray& startup_id = "");
 };   // KToolInvocation
 
 

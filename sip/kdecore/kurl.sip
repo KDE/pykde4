@@ -54,6 +54,7 @@ public:
                                 List (const QList<KUrl>& list);
         QStringList             toStringList () const;
         void                    populateMimeData (QMimeData* mimeData, const KUrl::MetaDataMap& metaData = KUrl::MetaDataMap(), KUrl::MimeDataFlags flags = KUrl::DefaultMimeDataFlags) const;
+        void                    populateMimeData (const KUrl::List& mostLocalUrls, QMimeData* mimeData, const KUrl::MetaDataMap& metaData = KUrl::MetaDataMap(), KUrl::MimeDataFlags flags = KUrl::DefaultMimeDataFlags) const;
         static bool             canDecode (const QMimeData* mimeData);
         static QStringList      mimeDataTypes ();
         static KUrl::List       fromMimeData (const QMimeData* mimeData, KUrl::MetaDataMap* metaData = 0);

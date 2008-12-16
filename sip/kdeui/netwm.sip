@@ -86,8 +86,14 @@ int count   = PyList_Size (a1);
     bool                    isSupported (NET::State state) const;
     bool                    isSupported (NET::Action action) const;
 
+
 //io     const unsigned long*  supportedProperties () const;
+
+
+
+
 //io     const unsigned long*  passedProperties () const;
+
 
 //ig     const Window*      clientList () const;
     int                     clientListCount () const;
@@ -145,12 +151,7 @@ protected:
     virtual void            gotTakeActivity (Window window, Time timestamp, long flags);
     virtual void            changeShowingDesktop (bool showing);
 //ig     virtual void       virtual_hook (int id, void* data);
-
 };   // NETRootInfo
-
-%ModuleHeaderCode
-#include <netwm.h>
-%End
 
 
 class NETWinInfo : NET
@@ -188,7 +189,9 @@ int count   = PyList_Size (a3);
                             NETWinInfo (const NETWinInfo& wininfo);
     bool                    hasNETSupport () const;
 
+
 //io     const unsigned long*  passedProperties () const;
+
 
     NETRect                 iconGeometry () const;
     unsigned long           state () const;
@@ -237,17 +240,53 @@ int count   = PyList_Size (a3);
 //ig     void               event (XEvent* event, unsigned long* properties, int properties_size);
 //ig     unsigned long      event (XEvent* event);
 //ig    const int OnAllDesktops;
-//force
-    static const int OnAllDesktops;
-//end
 
 protected:
     virtual void            changeDesktop (int desktop);
     virtual void            changeState (unsigned long state, unsigned long mask);
 //ig     virtual void       virtual_hook (int id, void* data);
 
+//force
+
+public:
+    static const int OnAllDesktops;
+//end
+
 };   // NETWinInfo
 
+/*
+class NETWinInfo2 : NETWinInfo
+{
+%TypeHeaderCode
+#include <netwm.h>
+%End
+
+public:
+
+
+//mt undefined symbol: Display* display -- need mapped type?
+//io ambiguous symbol: unsigned long* properties -- specify In, Out or both
+//mt io                     NETWinInfo2 (Display* display, Window window, Window rootWindow, const unsigned long* properties, int properties_size, NET::Role role = NET::Client);
+
+
+
+
+//mt undefined symbol: Display* display -- need mapped type?
+//mt                        NETWinInfo2 (Display* display, Window window, Window rootWindow, unsigned long properties, NET::Role role = NET::Client);
+
+
+    void                    setFullscreenMonitors (NETFullscreenMonitors topology);
+    NETFullscreenMonitors   fullscreenMonitors () const;
+
+protected:
+    virtual void            changeFullscreenMonitors (NETFullscreenMonitors topology);
+};   // NETWinInfo2
+*/
+
+
+%ModuleHeaderCode
+#include <netwm.h>
+%End
 
 //force
 typedef ulong Time;

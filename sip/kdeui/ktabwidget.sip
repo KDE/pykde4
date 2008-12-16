@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KTabWidget : QTabWidget
 {
 %TypeHeaderCode
@@ -34,9 +35,7 @@ public:
     bool                    isTabReorderingEnabled () const;
     bool                    hoverCloseButton () const;
     bool                    hoverCloseButtonDelayed () const;
-
     bool                    isCloseButtonEnabled () const;
-
     bool                    tabCloseActivatePrevious () const;
     bool                    automaticResizeTabs () const;
     void                    setTabBarHidden (bool hide);
@@ -49,9 +48,7 @@ public:
     void                    setTabReorderingEnabled (bool enable);
     void                    setHoverCloseButton (bool enable);
     void                    setHoverCloseButtonDelayed (bool delayed);
-
     void                    setCloseButtonEnabled (bool);
-
     void                    setTabCloseActivatePrevious (bool previous);
     void                    setAutomaticResizeTabs (bool enable);
 
@@ -86,6 +83,7 @@ protected:
 //ig     virtual void       mouseDoubleClick (int);
 //ig     virtual void       mouseMiddleClick (int);
 //ig     virtual void       closeRequest (int);
+    void                    currentChanged (int);
     virtual void            wheelDelta (int);
 };   // KTabWidget
 

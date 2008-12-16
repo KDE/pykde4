@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KShortcutsDialog : KDialog
 {
 %TypeHeaderCode
@@ -30,6 +31,7 @@ class KShortcutsDialog : KDialog
 public:
     explicit                KShortcutsDialog (KShortcutsEditor::ActionTypes types = KShortcutsEditor::AllActions, KShortcutsEditor::LetterShortcuts allowLetterShortcuts = KShortcutsEditor::LetterShortcutsAllowed, QWidget* parent /TransferThis/ = 0);
     void                    addCollection (KActionCollection*, const QString& title = QString());
+    QList<KActionCollection*>  actionCollections () const;
     bool                    configure (bool saveSettings = 1);
     virtual QSize           sizeHint () const;
     static int              configure (KActionCollection* collection, KShortcutsEditor::LetterShortcuts allowLetterShortcuts = KShortcutsEditor::LetterShortcutsAllowed, QWidget* parent /Transfer/ = 0, bool bSaveSettings = 1);

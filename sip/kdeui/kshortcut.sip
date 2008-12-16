@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KShortcut
 {
 %TypeHeaderCode
@@ -46,7 +47,9 @@ public:
     QKeySequence            alternate () const;
     bool                    isEmpty () const;
     bool                    contains (const QKeySequence& needle) const;
+    bool                    conflictsWith (const QKeySequence& needle) const;
     QString                 toString () const;
+    QString                 toString (QKeySequence::SequenceFormat format) const;
     bool                    operator == (const KShortcut& other) const;
     bool                    operator != (const KShortcut& other) const;
     QList<QKeySequence>     toList (KShortcut::EmptyHandling handleEmpty = KShortcut::RemoveEmpty) const;

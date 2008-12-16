@@ -126,7 +126,7 @@ ENDIF(Soprano_FOUND)
 IF(Nepomuk_FOUND)
     FILE(GLOB nepomuk_files_sip sip/nepomuk/*.sip)
     set(SIP_EXTRA_FILES_DEPEND ${nepomuk_files_sip})
-    ADD_SIP_PYTHON_MODULE(PyKDE4.nepomuk sip/nepomuk/nepomukmod.sip ${NEPOMUK_LIBRARIES} ${QT_QTCORE_LIBRARY}  ${SOPRANO_LIBRARIES})
+    ADD_SIP_PYTHON_MODULE(PyKDE4.nepomuk sip/nepomuk/nepomukmod.sip ${NEPOMUK_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${SOPRANO_LIBRARIES})
     SET(PYKDE_MODULES "${PYKDE_MODULES} nepomuk")
 ENDIF(Nepomuk_FOUND)
 

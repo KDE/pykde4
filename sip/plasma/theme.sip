@@ -68,6 +68,7 @@ public:
     bool                    findInRectsCache (const QString& image, const QString& element, QRectF& rect) const;
     void                    insertIntoRectsCache (const QString& image, const QString& element, const QRectF& rect);
     void                    invalidateRectsCache (const QString& image);
+    void                    releaseRectsCache (const QString& image);
 
 signals:
     void                    themeChanged ();

@@ -46,6 +46,7 @@ public:
                             KUriFilterData ();
     explicit                KUriFilterData (const KUrl& url);
     explicit                KUriFilterData (const QString& url);
+//ig                            KUriFilterData (const KUriFilterData& data);
     KUrl                    uri () const;
     QString                 errorMsg () const;
     KUriFilterData::UriTypes  uriType () const;

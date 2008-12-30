@@ -37,6 +37,7 @@ public:
     unsigned short          port () const;
     QMap<QString,QByteArray>  textData () const;
     bool                    operator == (const DNSSD::ServiceBase& o) const;
+    bool                    operator != (const DNSSD::ServiceBase& o) const;
 
 private:
                             ServiceBase(const DNSSD::ServiceBase&other);

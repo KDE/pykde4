@@ -317,6 +317,7 @@ public:
     QString                 url (KUrl::AdjustPathOption trailing = KUrl::LeaveTrailingSlash) const;
     QString                 prettyUrl (KUrl::AdjustPathOption trailing = KUrl::LeaveTrailingSlash) const;
     QString                 pathOrUrl () const;
+    QString                 pathOrUrl (KUrl::AdjustPathOption trailing) const;
     QString                 toMimeDataString () const;
     KUrl                    upUrl () const;
     bool                    operator == (const KUrl& _u) const;

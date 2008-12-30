@@ -54,6 +54,7 @@ signals:
 
 protected:
     void                    paintEvent (QPaintEvent* e);
+    bool                    event (QEvent* event);
     void                    resizeEvent (QResizeEvent* e);
     bool                    eventFilter (QObject* watched, QEvent* event);
     void                    hideEvent (QHideEvent* event);

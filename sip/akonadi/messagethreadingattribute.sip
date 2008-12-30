@@ -27,6 +27,7 @@ class MessageThreadingAttribute : Akonadi::Attribute /NoDefaultCtors/
 #include <akonadi/kmime/messagethreadingattribute.h>
 %End
 
+
 public:
                             MessageThreadingAttribute ();
                             MessageThreadingAttribute (const Akonadi::MessageThreadingAttribute& other);

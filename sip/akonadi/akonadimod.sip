@@ -19,6 +19,7 @@
 %Include agentinstancewidget.sip
 %Include agentmanager.sip
 %Include agenttype.sip
+%Include agenttypedialog.sip
 %Include agenttypemodel.sip
 %Include agenttypewidget.sip
 %Include attribute.sip
@@ -42,6 +43,7 @@
 %Include collectionview.sip
 %Include control.sip
 %Include entity.sip
+%Include entitydisplayattribute.sip
 %Include item.sip
 %Include itemcopyjob.sip
 %Include itemcreatejob.sip
@@ -56,6 +58,7 @@
 %Include itemsync.sip
 %Include itemview.sip
 %Include job.sip
+%Include linkjob.sip
 %Include messagemodel.sip
 %Include messageparts.sip
 %Include messagethreaderproxymodel.sip
@@ -63,8 +66,9 @@
 %Include monitor.sip
 //%Include resourcebase.sip
 %Include searchcreatejob.sip
+%Include servermanager.sip
 %Include session.sip
 %Include standardactionmanager.sip
 %Include transactionjobs.sip
 %Include transactionsequence.sip
-
+%Include unlinkjob.sip

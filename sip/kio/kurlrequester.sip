@@ -33,6 +33,7 @@ public:
     explicit                KUrlRequester (const KUrl& url, QWidget* parent /TransferThis/ = 0);
                             KUrlRequester (QWidget* editWidget, QWidget* parent /TransferThis/);
     KUrl                    url () const;
+    QString                 text () const;
     void                    setMode (KFile::Modes m);
     KFile::Modes            mode () const;
     void                    setFilter (const QString& filter);

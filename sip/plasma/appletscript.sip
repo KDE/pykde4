@@ -38,6 +38,8 @@ public:
     virtual QList<QAction*>  contextualActions ();
     virtual QPainterPath    shape () const;
     void                    setHasConfigurationInterface (bool hasInterface);
+    void                    setConfigurationRequired (bool req, const QString& reason = QString());
+    void                    setFailedToLaunch (bool failed, const QString& reason = QString());
     virtual void            showConfigurationInterface ();
     virtual void            configChanged ();
 

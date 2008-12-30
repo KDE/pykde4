@@ -34,6 +34,7 @@ public:
 
 signals:
     void                    currentChanged (const Akonadi::AgentType& current, const Akonadi::AgentType& previous);
+    void                    activated ();
 };   // AgentTypeWidget
 
 };   // Akonadi

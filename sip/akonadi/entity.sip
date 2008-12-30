@@ -31,7 +31,7 @@ class Entity
 public:
     typedef qint64 Id;
 
-    void                    setId (Id id);
+    void                    setId (Id identifier);
     Id                      id () const;
     void                    setRemoteId (const QString& id);
     QString                 remoteId () const;

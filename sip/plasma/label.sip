@@ -34,6 +34,8 @@ public:
     QString                 text () const;
     void                    setImage (const QString& path);
     QString                 image () const;
+    void                    setAlignment (Qt::Alignment alignment);
+    Qt::Alignment           alignment () const;
     void                    setStyleSheet (const QString& stylesheet);
     QString                 styleSheet ();
     QLabel*                 nativeWidget () const;

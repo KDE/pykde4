@@ -162,7 +162,7 @@ public:
     virtual void            writeConfig (KConfig*) = 0;
     virtual void            readDefault (KConfig*) = 0;
     virtual void            setProperty (const QVariant& p) = 0;
-    virtual bool            isEqual (const QVariant& v) const = 0;
+    virtual bool            isEqual (const QVariant& p) const = 0;
     virtual QVariant        property () const = 0;
     virtual QVariant        minValue () const;
     virtual QVariant        maxValue () const;
@@ -491,6 +491,19 @@ public:
 
 
     public:
+
+        class Choice2
+        {
+
+        public:
+            QString name;
+            QString label;
+            QString toolTip;
+            QString whatsThis;
+        };   // Choice2
+
+
+    public:
                                 ItemEnum (const QString& _group, const QString& _key, qint32 reference, const QList<KCoreConfigSkeleton::ItemEnum::Choice> choices, qint32 defaultValue = 0) [(const QString& _group, const QString& _key, qint32& reference, const QList<KCoreConfigSkeleton::ItemEnum::Choice>& choices, qint32 defaultValue = 0)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
@@ -500,6 +513,7 @@ public:
 %End
 
         QList<KCoreConfigSkeleton::ItemEnum::Choice>  choices () const;
+        QList<KCoreConfigSkeleton::ItemEnum::Choice2>  choices2 () const;
         void                    readConfig (KConfig* config);
         void                    writeConfig (KConfig* config);
 

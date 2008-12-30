@@ -41,6 +41,8 @@ public:
                             Item (const Akonadi::Item& other);
     static Akonadi::Item    fromUrl (const KUrl& url);
     Akonadi::Item::Flags    flags () const;
+    QDateTime               modificationTime () const;
+    void                    setModificationTime (const QDateTime& datetime);
     bool                    hasFlag (const QByteArray& name) const;
     void                    setFlag (const QByteArray& name);
     void                    clearFlag (const QByteArray& name);
@@ -51,6 +53,8 @@ public:
     QSet<QByteArray>        loadedPayloadParts () const;
     void                    setRevision (int revision);
     int                     revision () const;
+    void                    setSize (qint64 size);
+    qint64                  size () const;
     void                    setMimeType (const QString& mimeType);
     QString                 mimeType () const;
     bool                    hasPayload () const;

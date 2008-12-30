@@ -33,13 +33,17 @@ public:
     int                     singleStep ();
     void                    setPageStep (int val);
     int                     pageStep ();
-    void                    setValue (int val);
     int                     value () const;
     int                     minimum () const;
     int                     maximum () const;
     void                    setStyleSheet (const QString& stylesheet);
     QString                 styleSheet ();
     QScrollBar*             nativeWidget () const;
+    void                    setValue (int val);
+    void                    setOrientation (Qt::Orientation orientation);
+
+signals:
+    void                    valueChanged (int value);
 };   // ScrollBar
 
 };   // Plasma

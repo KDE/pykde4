@@ -112,6 +112,9 @@ public:
     QPixmap                 standardPixmap (QStyle::StandardPixmap standardPixmap, const QStyleOption* opt, const QWidget* widget = 0) const;
     QPixmap                 generatedIconPixmap (QIcon::Mode iconMode, const QPixmap& pixmap, const QStyleOption* opt) const;
     bool                    eventFilter (QObject*, QEvent*);
+
+protected:
+    int                     layoutSpacingImplementation (QSizePolicy::ControlType control1, QSizePolicy::ControlType control2, Qt::Orientation orientation, const QStyleOption* option, const QWidget* widget) const;
 };   // KStyle
 
 

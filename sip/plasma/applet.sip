@@ -128,6 +128,7 @@ public:
     Plasma::Containment*    containment () const;
     void                    setGlobalShortcut (const KShortcut& shortcut);
     KShortcut               globalShortcut () const;
+    virtual bool            isPopupShowing () const;
     virtual void            addAssociatedWidget (QWidget* widget);
     virtual void            removeAssociatedWidget (QWidget* widget);
     virtual void            initExtenderItem (Plasma::ExtenderItem* item);

@@ -93,6 +93,8 @@ public:
     void                    setInlinePreviewShown (bool show);
     bool                    isInlinePreviewShown () const;
     int                     iconsZoom () const;
+    void                    setIsSaving (bool isSaving);
+    bool                    isSaving () const;
 
 protected:
     virtual QAbstractItemView*  createView (QWidget* parent /Transfer/, KFile::FileView viewKind);

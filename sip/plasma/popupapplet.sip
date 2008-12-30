@@ -36,6 +36,7 @@ public:
     Plasma::PopupPlacement  popupPlacement () const;
     void                    setPassivePopup (bool passive);
     bool                    isPassivePopup () const;
+    bool                    isPopupShowing () const;
     void                    hidePopup ();
     void                    showPopup (uint displayTime = 0);
     void                    togglePopup ();

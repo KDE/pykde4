@@ -43,12 +43,14 @@ public:
     virtual QRect           screenGeometry (int id) const;
     virtual QRegion         availableScreenRegion (int id) const;
     QPoint                  popupPosition (const QGraphicsItem* item, const QSize& s);
+//FIXME    QList<Plasma::Location>  freeEdges (int screen) const;
     void                    initializeLayout (const QString& config = QString());
     void                    loadLayout (const QString& config = QString());
     void                    saveLayout (const QString& config = QString()) const;
     Plasma::ImmutabilityType  immutability () const;
     void                    setImmutability (const Plasma::ImmutabilityType immutable);
     void                    requestConfigSync ();
+    void                    requireConfigSync ();
 
 signals:
     void                    containmentAdded (Plasma::Containment* containment);

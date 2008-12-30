@@ -29,6 +29,12 @@ class Control : QObject
 
 public:
     static bool             start ();
+    static bool             start (QWidget* parent /Transfer/);
+    static bool             stop ();
+    static bool             stop (QWidget* parent /Transfer/);
+    static bool             restart ();
+    static bool             restart (QWidget* parent /Transfer/);
+    static void             widgetNeedsAkonadi (QWidget* widget);
 
 protected:
                             Control ();

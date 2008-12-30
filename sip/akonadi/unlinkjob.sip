@@ -17,34 +17,22 @@
 // Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-namespace Phonon
-{
-namespace Experimental
+namespace Akonadi
 {
 
-enum 
-{
-    VisualizationType
-};
-
-//FIXME
-// typedef ObjectDescription<static_cast<Phonon::ObjectDescriptionType>(VisualizationType)> VisualizationDescription;
-// typedef ObjectDescriptionModel<static_cast<Phonon::ObjectDescriptionType>(VisualizationType)> VisualizationDescriptionModel;
-
-
-class Visualization : QObject, Phonon::MediaNode
+class UnlinkJob : Akonadi::Job
 {
 %TypeHeaderCode
-#include <phonon/experimental/visualization.h>
+#include <akonadi/unlinkjob.h>
 %End
 
 public:
-//    Phonon::Experimental::VisualizationDescription  visualization () const;
-//    void                    setVisualization (const Phonon::Experimental::VisualizationDescription& newVisualization);
-};   // Visualization
+                            UnlinkJob (const Akonadi::Collection& collection, const Akonadi::Item::List& items, QObject* parent /TransferThis/ = 0);
 
-};   // Experimental
+protected:
+    void                    doStart ();
+};   // UnlinkJob
 
-};   // Phonon
+};   // Akonadi
 
 

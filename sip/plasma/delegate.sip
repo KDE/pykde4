@@ -47,6 +47,7 @@ public:
     void                    setRoleMapping (Plasma::Delegate::SpecificRoles role, int actual);
     int                     roleMapping (Plasma::Delegate::SpecificRoles role) const;
     virtual void            paint (QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+    bool                    showToolTip () const;
 
 protected:
     QRect                   rectAfterTitle (const QStyleOptionViewItem& option, const QModelIndex& index) const;

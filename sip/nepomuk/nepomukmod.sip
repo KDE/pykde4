@@ -7,6 +7,10 @@
 
 %Module PyKDE4.nepomuk
 
+%ModuleHeaderCode
+#pragma GCC visibility push(default)
+%End
+
 %Import QtCore/QtCoremod.sip
 %Import kdecore/kdecoremod.sip
 %Import soprano/sopranomod.sip

@@ -13,6 +13,8 @@
 %Import kdeui/kdeuimod.sip
 
 %ModuleHeaderCode
+#pragma GCC visibility push(default)
+
 #include <knewstuff2/engine.h>
 %End
 

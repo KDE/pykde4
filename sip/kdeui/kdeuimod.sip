@@ -9,6 +9,10 @@
 
 %Module PyKDE4.kdeui
 
+%ModuleHeaderCode
+#pragma GCC visibility push(default)
+%End
+
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
 %Import QtXml/QtXmlmod.sip

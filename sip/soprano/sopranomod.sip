@@ -12,6 +12,8 @@
 %Import kdecore/kdecoremod.sip
 
 %ModuleHeaderCode
+#pragma GCC visibility push(default)
+
 #include <soprano/vocabulary.h>
 %End
 

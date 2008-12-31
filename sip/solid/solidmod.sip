@@ -8,6 +8,10 @@
 
 %Module PyKDE4.solid
 
+%ModuleHeaderCode
+#pragma GCC visibility push(default)
+%End
+
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
 %Import kdecore/kdecoremod.sip

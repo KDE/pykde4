@@ -26,6 +26,10 @@
 
 %Module PyKDE4.ktexteditor
 
+%ModuleHeaderCode
+#pragma GCC visibility push(default)
+%End
+
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
 %Import QtXml/QtXmlmod.sip

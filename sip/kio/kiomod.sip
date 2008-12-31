@@ -16,6 +16,8 @@
 %Import kdeui/kdeuimod.sip
 
 %ModuleHeaderCode
+#pragma GCC visibility push(default)
+
 #include <knotification.h>
 %End
 

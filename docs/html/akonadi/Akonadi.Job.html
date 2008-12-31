@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Akonadi.Job</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>Job Class Reference</h1>
+<code>from PyKDE4.akonadi import *</code>
+<p>
+Inherits: <a href="../kdecore/KCompositeJob.html">KCompositeJob</a> &#x2192; <a href="../kdecore/KJob.html">KJob</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+Subclasses: <a href="../akonadi/Akonadi.CollectionCopyJob.html">Akonadi.CollectionCopyJob</a>, <a href="../akonadi/Akonadi.CollectionCreateJob.html">Akonadi.CollectionCreateJob</a>, <a href="../akonadi/Akonadi.CollectionDeleteJob.html">Akonadi.CollectionDeleteJob</a>, <a href="../akonadi/Akonadi.CollectionFetchJob.html">Akonadi.CollectionFetchJob</a>, <a href="../akonadi/Akonadi.CollectionModifyJob.html">Akonadi.CollectionModifyJob</a>, <a href="../akonadi/Akonadi.CollectionStatisticsJob.html">Akonadi.CollectionStatisticsJob</a>, <a href="../akonadi/Akonadi.ItemCopyJob.html">Akonadi.ItemCopyJob</a>, <a href="../akonadi/Akonadi.ItemCreateJob.html">Akonadi.ItemCreateJob</a>, <a href="../akonadi/Akonadi.ItemDeleteJob.html">Akonadi.ItemDeleteJob</a>, <a href="../akonadi/Akonadi.ItemFetchJob.html">Akonadi.ItemFetchJob</a>, <a href="../akonadi/Akonadi.ItemModifyJob.html">Akonadi.ItemModifyJob</a>, <a href="../akonadi/Akonadi.ItemMoveJob.html">Akonadi.ItemMoveJob</a>, <a href="../akonadi/Akonadi.ItemSync.html">Akonadi.ItemSync</a>, <a href="../akonadi/Akonadi.LinkJob.html">Akonadi.LinkJob</a>, <a href="../akonadi/Akonadi.SearchCreateJob.html">Akonadi.SearchCreateJob</a>, <a href="../akonadi/Akonadi.TransactionBeginJob.html">Akonadi.TransactionBeginJob</a>, <a href="../akonadi/Akonadi.TransactionCommitJob.html">Akonadi.TransactionCommitJob</a>, <a href="../akonadi/Akonadi.TransactionRollbackJob.html">Akonadi.TransactionRollbackJob</a>, <a href="../akonadi/Akonadi.TransactionSequence.html">Akonadi.TransactionSequence</a>, <a href="../akonadi/Akonadi.UnlinkJob.html">Akonadi.UnlinkJob</a>, <a href="../kio/KIO.CopyJob.html">KIO.CopyJob</a>, <a href="../kio/KIO.DeleteJob.html">KIO.DeleteJob</a>, <a href="../kio/KIO.FileCopyJob.html">KIO.FileCopyJob</a><br />
+Namespace: Akonadi<br />
+<h2>Detailed Description</h2>
+<dl class="abstract" compact><dt><b>Abstract class:</b></dt>
+<dd>This class can be used as a base class for new classes, but can not be instantiated directly.</dd></dl>
+<p>Base class for all actions in the Akonadi storage.
+</p>
+<p>
+This class encapsulates a request to the pim storage service,
+the code looks like
+</p>
+<p>
+<pre class="fragment">
+
+  Akonadi.Job *job = new Akonadi.SomeJob( some parameter );
+  connect( job, SIGNAL( result( KJob* ) ),
+           this, SLOT( slotResult( KJob* ) ) );
+
+</pre>
+</p>
+<p>
+The job is queued for execution as soon as the event loop is entered
+again.
+</p>
+<p>
+And the slotResult is usually at least:
+</p>
+<p>
+<pre class="fragment">
+
+  if ( job-&gt;error() ) {
+    // handle error...
+  }
+
+</pre>
+</p>
+<p>
+With the synchronous interface the code looks like
+</p>
+<p>
+<pre class="fragment">
+   Akonadi.SomeJob *job = new Akonadi.SomeJob( some parameter );
+   if ( !job-&gt;exec() ) {
+     qDebug() &lt;&lt; "Error:" &lt;&lt; job-&gt;errorString();
+   } else {
+     // do something
+   }
+</pre>
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> Using the synchronous method is error prone, use this only
+if the asynchronous access is not possible and none of the following
+known issues apply:
+</dd></dl> </p>
+<p>
+- exec() must not be called directly from a result slot of another
+job in the same Session. This will trigger a dead-lock since the
+program won't return from the result slot and thus will never complete
+the finishing of the current job, keeping it in the internal queue
+and blocking the execution of any following job.
+- exec() must not be called from within another event-loop that might
+finish before the newly started inner sub-eventloop. This will crash!
+</p>
+<p>
+Subclasses must reimplement doStart().
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> KJob-derived objects delete itself, it is thus not possible
+to create job objects on the stack!
+</dd></dl> </p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Volker Krause &lt;vkrause@kde.org&gt;, Tobias Koenig &lt;tokoe@kde.org&gt;, Marc Mutz &lt;mutz@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj179944428">Error</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ConnectionFailed, ProtocolVersionMismatch, UserCanceled, Unknown, UserError&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196949100">aboutToStart</a> (<a href="../akonadi/Akonadi.Job.html">Akonadi.Job</a> job)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196948588">writeFinished</a> (<a href="../akonadi/Akonadi.Job.html">Akonadi.Job</a> job)</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj179943916">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164048684">__init__</a> (self, JobPrivate dd, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196949100">aboutToStart</a> (self, <a href="../akonadi/Akonadi.Job.html">Akonadi.Job</a> job)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187403404">addSubjob</a> (self, <a href="../kdecore/KJob.html">KJob</a> job)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187402316">doHandleResponse</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> tag, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> data)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181808876">doKill</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187403244">doStart</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj202095692">emitWriteFinished</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196948620">errorString</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj202096620">removeSubjob</a> (self, <a href="../kdecore/KJob.html">KJob</a> job)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181805836">slotResult</a> (self, <a href="../kdecore/KJob.html">KJob</a> job)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196949708">start</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196948588">writeFinished</a> (self, <a href="../akonadi/Akonadi.Job.html">Akonadi.Job</a> job)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj179943916"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Creates a new job.
+</p>
+<p>
+If the parent object is a Job object, the new job will be a subjob of <b>parent.</b>
+If the parent object is a Session object, it will be used for server communication
+instead of the default session.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent object, job or session.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj164048684"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">JobPrivate&nbsp;</td>
+<td class="paramname"><em>dd</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj196949100"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> aboutToStart</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Job.html">Akonadi.Job</a>&nbsp;</td>
+<td class="paramname"><em>job</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted directly before the job will be started.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>job</em>&nbsp;</td><td> The started job.
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("aboutToStart(Job*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj187403404"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool addSubjob</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KJob.html">KJob</a>&nbsp;</td>
+<td class="paramname"><em>job</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds the given job as a subjob to this job. This method is automatically called
+if you construct a job using another job as parent object.
+The base implementation does the necessary setup to share the network connection
+with the backend.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>job</em>&nbsp;</td><td> The new subjob.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj187402316"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> doHandleResponse</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td>
+<td class="paramname"><em>tag</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td>
+<td class="paramname"><em>data</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This method should be reimplemented in the concrete jobs in case you want
+to handle incoming data. It will be called on received data from the backend.
+The default implementation does nothing.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>tag</em>&nbsp;</td><td> The tag of the corresponding command, empty if this is an untagged response.
+
+<tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> The received data.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj181808876"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool doKill</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Kills the execution of the job.
+</p></div></div><a class="anchor" name="obj187403244"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> doStart</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>This method must be reimplemented in the concrete jobs. It will be called
+after the job has been started and a connection to the Akonadi backend has
+been established.
+</p></div></div><a class="anchor" name="obj202095692"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> emitWriteFinished</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Call this method to indicate that this job will not call writeData() again.
+<dl class="see" compact><dt><b>See also:</b></dt><dd> writeFinished()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj196948620"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> errorString</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the error string, if there has been an error, an empty
+string otherwise.
+</p></div></div><a class="anchor" name="obj202096620"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool removeSubjob</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KJob.html">KJob</a>&nbsp;</td>
+<td class="paramname"><em>job</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Removes the given subjob of this job.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>job</em>&nbsp;</td><td> The subjob to remove.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj181805836"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> slotResult</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KJob.html">KJob</a>&nbsp;</td>
+<td class="paramname"><em>job</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj196949708"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> start</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Jobs are started automatically once entering the event loop again, no need
+to explicitly call this.
+</p></div></div><a class="anchor" name="obj196948588"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> writeFinished</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Job.html">Akonadi.Job</a>&nbsp;</td>
+<td class="paramname"><em>job</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted if the job has finished all write operations, ie.
+if this signal is emitted, the job guarantees to not call writeData() again.
+Do not emit this signal directly, call emitWriteFinished() instead.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>job</em>&nbsp;</td><td> This job.
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> emitWriteFinished()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("writeFinished(Job*)"), target_slot)</code></dd></dl></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj179944428"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">Error</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Describes the error codes that can be emitted by this class.
+Subclasses can provide additional codes, starting from UserError
+onwards
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>ConnectionFailed</em>&nbsp;=&nbsp;UserDefinedError</td><td><tr><td valign="top"><em>ProtocolVersionMismatch</em>&nbsp;</td><td><tr><td valign="top"><em>UserCanceled</em>&nbsp;</td><td><tr><td valign="top"><em>Unknown</em>&nbsp;</td><td><tr><td valign="top"><em>UserError</em>&nbsp;=&nbsp;UserDefinedError+42</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

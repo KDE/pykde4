@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Soprano.Server.ServerCore</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>ServerCore Class Reference</h1>
+<code>from PyKDE4.soprano import *</code>
+<p>
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,Soprano::Error::ErrorCache<br />
+
+Namespace: Soprano::Server<br />
+<h2>Detailed Description</h2>
+
+<p>\class ServerCore servercore.h Soprano/Server/ServerCore
+</p>
+<p>
+Central %Soprano server class.
+</p>
+<p>
+The %ServerCore provides a %Soprano server which maintains a set
+of named Model instances that can be accessed by clients over
+a tcp connection through Server.BackendPlugin.
+</p>
+<p>
+Creating a server is very simple: Either derive from ServerCore or
+create an instance and then call start() to make the server listen
+for incoming connections.
+</p>
+<p>
+<pre class="fragment">
+ Soprano.Server.ServerCore core;
+ core.start();
+</pre>
+</p>
+<p>
+Optionally ServerCore can be configured using normal BackendSetting
+settings through setBackendSettings().
+</p>
+<p>
+Be aware the ServerCode supports multiple ways of communication.
+start() opens a TCP socket to accept new connections, registerAsDBusObject()
+registers a DBus interface on the DBus session bus. Both ways of
+communication can be used simultaneously.
+</p>
+<p>
+ServerCore is designed for single-threaded usage. Thus, model() uses
+Util.AsyncModel to protect against deadlocks.
+This behaviour can of course be changed by reimplementing model().
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Sebastian Trueg &lt;trueg@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Attributes</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#var195427148">DEFAULT_PORT</a></td></tr><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj195424940">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181412364">allModels</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Backend.html">Soprano.Backend</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj195426732">backend</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../soprano/Soprano.BackendSetting.html">Soprano.BackendSetting</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj195424684">backendSettings</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Model.html">Soprano.Model</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj174786124">createModel</a> (self, [<a href="../soprano/Soprano.BackendSetting.html">Soprano.BackendSetting</a>] settings)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181944460">listen</a> (self, int port=DEFAULT_PORT)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Model.html">Soprano.Model</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181414796">model</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181415628">registerAsDBusObject</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> objectPath=QString())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185661804">removeModel</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj177012172">serverPort</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj195425036">setBackend</a> (self, <a href="../soprano/Soprano.Backend.html">Soprano.Backend</a> backend)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181421164">setBackendSettings</a> (self, [<a href="../soprano/Soprano.BackendSetting.html">Soprano.BackendSetting</a>] settings)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181412972">start</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> socketPath=QString())</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj195424940"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj181412364"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> allModels</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Retrieve all models that have been loaded.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> A list of Model names.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj195426732"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Backend.html">Soprano.Backend</a> backend</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The Backend used by the Server to create Model instances.
+</p></div></div><a class="anchor" name="obj195424684"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../soprano/Soprano.BackendSetting.html">Soprano.BackendSetting</a>] backendSettings</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Retrieve the backend settings configured via setBackendSettings().
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> A list of BackendSetting objects.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj174786124"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Model.html">Soprano.Model</a> createModel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="../soprano/Soprano.BackendSetting.html">Soprano.BackendSetting</a>]&nbsp;</td>
+<td class="paramname"><em>settings</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Create a new Model. The default implementation uses the configured Backend
+with the configured settings to create a new Model. This method can be
+reimplemented to create specialized Model, for example in combination with
+some FilterModel.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>settings</em>&nbsp;</td><td> The settings to use (a reimplementation may choose to ignore the
+settings.)
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A newly create Model.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj181944460"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool listen</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>port=DEFAULT_PORT</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Start the Server. Calling this method will make the Server
+listen on the specified port for incoming client connections.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>port</em>&nbsp;</td><td> The port to listen on for client connections.
+</td></tr>
+</table></dl>
+<p> Use Client.TcpClient to connect.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> Via the TCP connection signals are not supported. Thus, the models created
+by it will not emit signals such as Model.statementAdded. Also no permission handling or
+any kind of security is implemented at the moment. Thus, if a server is running and is
+listening on a port, it is open to connections from any client on any computer in the
+network.
+</dd></dl> </p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> <b>true</b> if the server was successfully started, <b>false</b> otherwise.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj181414796"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Model.html">Soprano.Model</a> model</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get or create Model with the specific name.
+The default implementation will use createModel() to create a new Model
+if none with the specified name exists and protect it against deadlocks
+with a Util.AsyncModel.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> The name of the requested Model.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj181415628"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> registerAsDBusObject</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>objectPath=QString()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Register the ServerCore as a DBus object. The process needs to be registered
+as a DBus service before (QDBusConnection.registerService()).
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>objectPath</em>&nbsp;</td><td> The DBus object path to register the server as. If empty
+the default path will be used (/org/soprano/Server).
+</td></tr>
+</table></dl>
+<p> Use Client.DBusClient to connect.
+</p></div></div><a class="anchor" name="obj185661804"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeModel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Remove a model and delete all data in it.
+Use with care.
+</p>
+<p>
+Be aware that the Model instance will also be deleted.
+</p>
+<p>
+Should be reimplemented if model() is reimplemented.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> The name of the requested Model.
+</td></tr>
+</table></dl>
+<p> <dl class="warning" compact><dt><b>Warning:</b></dt><dd> This is not the same as deleting the Model instance.
+It will also delete all the data on the harddisk.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj177012172"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int serverPort</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The port this server is listening on or 0 if listen has not
+been called successfully.
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 2.1
+</dd></dl>
+</p></div></div><a class="anchor" name="obj195425036"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setBackend</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Backend.html">Soprano.Backend</a>&nbsp;</td>
+<td class="paramname"><em>backend</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj181421164"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setBackendSettings</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="../soprano/Soprano.BackendSetting.html">Soprano.BackendSetting</a>]&nbsp;</td>
+<td class="paramname"><em>settings</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the settings that are to be used by createModel() to create new Model
+instances. Be aware that Soprano.BackendOptionStorageDir will be changed
+to include a subdir which is the Model's name.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>settings</em>&nbsp;</td><td> The settings to use for new Models.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj181412972"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool start</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>socketPath=QString()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Start the core on a local socket.
+On Windows this is a named pipe and on Unix this this is a local domain socket.
+</p>
+<p>
+Use Client.LocalSocketClient to connect.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> Via the local socket connection signals are not supported.
+</dd></dl> </p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> <b>true</b> if the local socket could be successfully
+opened. <b>false</b> on error. See ErrorCache.lastError() for details.
+</dd></dl>
+</p></div></div><hr><h2>Attribute Documentation</h2><a class="anchor" name="var195427148"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">int DEFAULT_PORT</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Set the Backend used in the Server to create Models.
+</p></div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

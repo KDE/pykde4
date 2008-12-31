@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KUniqueApplication</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>KUniqueApplication Class Reference</h1>
+<code>from PyKDE4.kdeui import *</code>
+<p>
+Inherits: <a href="../kdeui/KApplication.html">KApplication</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qapplication.html">QApplication</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qcoreapplication.html">QCoreApplication</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+
+
+<h2>Detailed Description</h2>
+
+<p>KUniqueApplication is a KApplication which only uses a single process. When
+a KUniqueApplication is started, it attempts to contact an existing copy
+of the application. If successful, the program asks the
+existing process to create a new instance by calling its newInstance() method
+and then exits. If there is no existing process then the program forks and
+calls the newInstance() method. When newInstance() is called, the application
+will typically create a new window or activate an existing one.
+</p>
+<p>
+Instances of KUniqueApplication can be made to behave like a normal application by passing
+the StartFlag.NonUniqueInstance flag to start().
+</p>
+<p>
+Please note that this supports only one process per KDE session. If
+your application can only be opened once per user or once per host, you
+need to ensure this independently of KUniqueApplication.
+</p>
+<p>
+The .desktop file for the application should state X-DBUS-StartupType=Unique,
+see ktoolinvocation.h
+</p>
+<p>
+If your application is used to open files, it should also support the --tempfile
+option (see KCmdLineArgs.addTempFileOption()), to delete tempfiles after use.
+Add X-KDE-HasTempFileOption=true to the .desktop file to indicate this.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KApplication
+</dd></dl> 
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Preston Brown &lt;pbrown@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj166531436">StartFlag</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NonUniqueInstance&nbsp;}<br><i>Typesafe wrapper:</i> StartFlags</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166532812">__init__</a> (self, bool GUIenabled=1, bool configUnique=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166532748">__init__</a> (self, Display display, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt.HANDLE</a> visual=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt.HANDLE</a> colormap=0, bool configUnique=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163886412">newInstance</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163886060">restoringSession</a> (self)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166533868">addCmdLineOptions</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163887052">setHandleAutoStarted</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163886476">start</a> (KUniqueApplication.StartFlags flags)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163887500">start</a> ()</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj166532812"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>GUIenabled=1</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>configUnique=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Constructor. Takes command line arguments from KCmdLineArgs
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>GUIenabled</em>&nbsp;</td><td> Set to false to disable all GUI stuff. This implies
+no styles either.
+
+<tr><td></td><td valign="top"><em>configUnique</em>&nbsp;</td><td> If true, the uniqueness of the application will
+depend on the value of the "MultipleInstances"
+key in the "KDE" group of the application config file.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj166532748"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Display&nbsp;</td>
+<td class="paramname"><em>display</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt.HANDLE</a>&nbsp;</td>
+<td class="paramname"><em>visual=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt.HANDLE</a>&nbsp;</td>
+<td class="paramname"><em>colormap=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>configUnique=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Constructor. Takes command line arguments from KCmdLineArgs
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>display</em>&nbsp;</td><td> Will be passed to Qt as the X display. The display
+must be valid and already opened.
+</td></tr>
+
+<tr><td></td><td valign="top"><em>visual</em>&nbsp;</td><td> Pointer to the X11 visual that should be used by the
+application. If NULL, the default visual will be used instead.
+</td></tr>
+
+<tr><td></td><td valign="top"><em>colormap</em>&nbsp;</td><td> The colormap that should be used by the application.
+If 0, the default colormap will be used instead.
+</td></tr>
+
+<tr><td></td><td valign="top"><em>configUnique</em>&nbsp;</td><td> If true, the uniqueness of the application will
+depend on the value of the "MultipleInstances"
+key in the "KDE" group of the application config file.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj166533868"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addCmdLineOptions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Adds command line options specific for KUniqueApplication.
+</p>
+<p>
+Should be called before calling KUniqueApplication constructor
+and / or start().
+</p></div></div><a class="anchor" name="obj163886412"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int newInstance</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Creates a new "instance" of the application.
+</p>
+<p>
+Usually this will involve making some calls into the GUI portion of your
+application asking for a new window to be created, possibly with
+some data already loaded based on the arguments received.
+</p>
+<p>
+Command line arguments have been passed to KCmdLineArgs before this
+function is called and can be checked in the usual way.
+</p>
+<p>
+The default implementation ensures the mainwindow of the already
+running instance is shown and activated if necessary. If your
+application has only one mainwindow, you should call this default
+implementation and only add your special handling if needed.
+</p>
+<p>
+Note that newInstance() is called also in the first started
+application process.
+</p>
+<p>
+For applications that share one process for several mainwindows,
+the reimplementation could be:
+<pre class="fragment">
+int MyApp.newInstance()
+{
+KCmdLineArgs.setCwd(QDir.currentPath().toUtf8());
+KCmdLineArgs* args = KCmdLineArgs.parsedArgs();
+static bool first = true;
+if (args-&gt;count() &gt; 0) {
+for (int i = 0; i &lt; args-&gt;count(); ++i) {
+openWindow(args-&gt;url(i));
+}
+} else if( !first || !isSessionRestored()) {
+openWindow(KUrl()); // create a new window
+}
+first = false;
+args-&gt;clear();
+return 0;
+}
+</pre>
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> An exit value. The calling process will exit with this value.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj163886060"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool restoringSession</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns whether newInstance() is being called while session
+restoration is in progress.
+</p></div></div><a class="anchor" name="obj163887052"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setHandleAutoStarted</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd>
+</dd></dl>
+</p></div></div><a class="anchor" name="obj163886476"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool start</td>
+<td>(</td>
+<td class="paramtype">KUniqueApplication.StartFlags&nbsp;</td>
+<td class="paramname"><em>flags</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Forks and registers with D-Bus.
+</p>
+<p>
+The command line arguments are being sent via D-Bus to newInstance()
+and will be received once the application enters the event loop.
+</p>
+<p>
+Typically this is used like:
+<pre class="fragment">
+ int main(int argc, char **argv) {
+    KAboutData about("myappname", 0, ki18n("myAppName"), .....);
+    KCmdLineArgs.init(argc, argv, &amp;about);
+    KCmdLineArgs.addCmdLineOptions( myCmdOptions );
+    KUniqueApplication.addCmdLineOptions();
+
+    if (!KUniqueApplication.start()) {
+       fprintf(stderr, "myAppName is already running!\n");
+       return 0;
+    }
+    KUniqueApplication a;
+    return a.exec();
+ }
+</pre>
+Note that it's not necessary to call start() explicitly. It will be
+called automatically before creating KUniqueApplication if it hasn't
+been called yet, without any performance impact.
+</p>
+<p>
+Also note that you MUST call KUniqueApplication.addCmdLineOptions(),
+if you use command line options before start() is called.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>flags</em>&nbsp;</td><td> 	Optional flags which control how a new instance
+of the application is started.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if registration is successful.
+false if another process was already running.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj163887500"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool start</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj166531436"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">StartFlag</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Create a new instance of the application in a new process and
+do not attempt to re-use an existing process.
+</p>
+<p>
+With this flag set, the new instance of the application will
+behave as if it were a plain KApplication rather than a KUniqueApplication.
+</p>
+<p>
+This is useful if you have an application where all instances are typically run
+in a single process but under certain circumstances new instances may require
+their own process.
+</p><dl compact><dt><b>Note:</b></dt><dd>It is necessary to wrap members of this enumeration in a <code>StartFlags</code> instance when passing them to a method as group of flags. </dd></dl><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NonUniqueInstance</em>&nbsp;=&nbsp;0x1</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

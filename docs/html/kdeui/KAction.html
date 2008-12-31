@@ -1,0 +1,1092 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KAction</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>KAction Class Reference</h1>
+<code>from PyKDE4.kdeui import *</code>
+<p>
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidgetaction.html">QWidgetAction</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+Subclasses: <a href="../kdeui/KActionMenu.html">KActionMenu</a>, <a href="../kdeui/KPasteTextAction.html">KPasteTextAction</a>, <a href="../kdeui/KSelectAction.html">KSelectAction</a>, <a href="../kdeui/KToggleAction.html">KToggleAction</a>, <a href="../kdeui/KToolBarLabelAction.html">KToolBarLabelAction</a>, <a href="../kdeui/KToolBarPopupAction.html">KToolBarPopupAction</a>, <a href="../kdeui/KToolBarSpacerAction.html">KToolBarSpacerAction</a><br />
+
+<h2>Detailed Description</h2>
+
+<p>Class to encapsulate user-driven action or event
+</p>
+<p>
+The KAction class (and derived and super classes) extends QAction,
+which provides a way to easily encapsulate a "real" user-selected
+action or event in your program.
+</p>
+<p>
+For instance, a user may want to <b>paste</b> the contents of
+the clipboard, <b>scroll</b> <b>down</b> a document, or <b>quit</b> the
+application. These are all <b>actions</b> -- events that the
+user causes to happen. The KAction class allows the developer to
+deal with these actions in an easy and intuitive manner, and conforms
+to KDE's extended functionality requirements - including supporting
+multiple user-configurable shortcuts, and KDE named icons. Actions
+also improve accessibility.
+</p>
+<p>
+Specifically, QAction (and thus KAction) encapsulates the various attributes
+of an event/action. For instance, an action might have an icon()
+that provides a visual representation (a clipboard for a "paste" action or
+scissors for a "cut" action). The action should also be described by some text().
+It will certainly be connected to a method that actually <b>executes</b> the action!
+All these attributes are contained within the action object.
+</p>
+<p>
+The advantage of dealing with actions is that you can manipulate
+the Action without regard to the GUI representation of it. For
+instance, in the "normal" way of dealing with actions like "cut",
+you would manually insert a item for Cut into a menu and a button
+into a toolbar. If you want to disable the cut action for a moment
+(maybe nothing is selected), you would have to hunt down the pointer
+to the menu item and the toolbar button and disable both
+individually. Setting the menu item and toolbar item up uses very
+similar code - but has to be done twice!
+</p>
+<p>
+With the action concept, you simply add the action to whatever
+GUI element you want. The KAction class will then take care of
+correctly defining the menu item (with icons, accelerators, text,
+etc), toolbar button, or other. From then on, if you
+manipulate the action at all, the effect will propagate through all
+GUI representations of it. Back to the "cut" example: if you want
+to disable the Cut Action, you would simply call
+'cutAction-&gt;setEnabled(false)' and both the menuitem and button would
+instantly be disabled!
+</p>
+<p>
+This is the biggest advantage to the action concept -- there is a
+one-to-one relationship between the "real" action and <b>all</b>
+GUI representations of it.
+</p>
+<p>
+KAction emits the hovered() signal on mouseover, and the triggered(bool checked)
+signal on activation of a corresponding GUI element ( menu item, toolbar button, etc. )
+</p>
+<p>
+If you are in the situation of wanting to map the triggered()
+signal of multiple action objects to one slot, with a special
+argument bound to each action, you have several options:
+</p>
+<p>
+Using QActionGroup:
+<li> Create a QActionGroup and assign it to each of the actions with setActionGroup(), then </li>
+<li> Connect the QActionGroup.triggered(QAction*) signal to your slot. </li>
+</p>
+<p>
+Using QSignalMapper:
+<pre class="fragment">
+ QSignalMapper *desktopNumberMapper = new QSignalMapper( this );
+ connect( desktopNumberMapper, SIGNAL( mapped( int ) ),
+          this, SLOT( moveWindowToDesktop( int ) ) );
+
+ for ( uint i = 0; i &lt; numberOfDesktops; ++i ) {
+     KAction *desktopAction = new KAction( i18n( "Move Window to Desktop %i" ).arg( i ), ... );
+     connect( desktopAction, SIGNAL( triggered(bool) ), desktopNumberMapper, SLOT( map() ) );
+     desktopNumberMapper-&gt;setMapping( desktopAction, i );
+ }
+</pre>
+</p>
+<p>
+<b>General Usage </b>
+</p>
+<p>
+The steps to using actions are roughly as follows:
+</p>
+<p>
+<li> Decide which attributes you want to associate with a given </li>
+action (icons, text, keyboard shortcut, etc)
+<li> Create the action using KAction (or derived or super class). </li>
+<li> Add the action into whatever GUI element you want. Typically, </li>
+this will be a menu or toolbar.
+</p>
+<p>
+<b>The kinds of shortcuts </b>
+</p>
+<p>
+Local shortcuts are active if their context has the focus, global shortcus
+are active even if the program does not have the focus. If a global
+shortcut and a local shortcut are ambiguous the global shortcut wins.
+</p>
+<p>
+<li> Active shortcuts trigger a KAction if activated. </li>
+<li> Default shortcuts are what the active shortcuts revert to if the user chooses </li>
+to reset shortcuts to default.
+</p>
+<p>
+<b>Detailed Example </b>
+</p>
+<p>
+Here is an example of enabling a "New [document]" action
+<pre class="fragment">
+ KAction *newAct = actionCollection()-&gt;addAction(
+              KStandardAction.New,   //&lt; see KStandardAction
+              this,                   //&lt; Receiver
+              SLOT(fileNew())  );     //&lt; SLOT
+</pre>
+</p>
+<p>
+This section creates our action. Text, Icon and Shortcut will be set from
+KStandardAction. KStandardAction ensures your application complies to the
+platform standards. When triggered the fileNew() slot will be called.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KStandardAction for more information.
+</dd></dl> </p>
+<p>
+If you want to create your own actions use
+<pre class="fragment">
+ KAction *newAct = actionCollection()-&gt;addAction("quick-connect");
+ newAct-&gt;setText(i18n("Quick Connect"))
+ newAct-&gt;setIcon(KIcon("quick-connect"));
+ newAct-&gt;setShortcut(Qt.Key_F6);
+ connect(newAct, SIGNAL(triggered()), this, SLOT(quickConnect()));
+</pre>
+</p>
+<p>
+This section creates our action. It displays the text "Quick Connect",
+uses the Icon "quick-connect" and pressing F6 will trigger it. When
+invoked, the slot quickConnect() is called.
+</p>
+<p>
+<pre class="fragment">
+ QMenu *file = new QMenu;
+ file-&gt;addAction(newAct);
+</pre>
+That just inserted the action into the File menu. The point is, it's not
+important in which menu it is: all manipulation of the item is
+done through the newAct object.
+</p>
+<p>
+<pre class="fragment">
+ toolBar()-&gt;addAction(newAct);
+</pre>
+And this added the action into the main toolbar as a button.
+</p>
+<p>
+That's it!
+</p>
+<p>
+If you want to disable that action sometime later, you can do so
+with
+<pre class="fragment">
+ newAct-&gt;setEnabled(false)
+</pre>
+and both the menuitem in File and the toolbar button will instantly
+be disabled.
+</p>
+<p>
+Unlike with previous versions of KDE, the action can simply be deleted
+when you have finished with it - the destructor takes care of all
+of the cleanup.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> calling QAction.setShortcut() on a KAction may lead to unexpected
+behavior. There is nothing we can do about it because QAction.setShortcut()
+is not virtual.
+</dd></dl> </p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> if you are using a "standard" action like "new", "paste",
+"quit", or any other action described in the KDE UI Standards,
+please use the methods in the KStandardAction class rather than
+defining your own.
+</dd></dl> </p>
+<p>
+<b>Using QActions </b>
+</p>
+<p>
+Mixing QActions and KActions in an application is not a
+good idea. KShortcutsEditor doesn't handle QActions at all.
+</p>
+<p>
+<b>Usage Within the XML Framework </b>
+</p>
+<p>
+If you are using KAction within the context of the XML menu and
+toolbar building framework, you do not ever
+have to add your actions to containers manually. The framework
+does that for you.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KStandardAction
+</dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj162649996">GlobalShortcutLoading</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Autoloading, NoAutoloading&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj188081900">ShortcutType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ActiveShortcut, DefaultShortcut&nbsp;}<br><i>Typesafe wrapper:</i> ShortcutTypes</td></tr>
+<tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185641260">globalShortcutChanged</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qkeysequence.html">QKeySequence</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185640460">triggered</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt.MouseButtons</a> buttons, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt.KeyboardModifiers</a> modifiers)</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj162648172">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj162651724">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj162651852">__init__</a> (self, <a href="../kdeui/KIcon.html">KIcon</a> icon, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185639212">event</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188017612">forgetGlobalShortcut</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KShortcut.html">KShortcut</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163289228">globalShortcut</a> (self, KAction.ShortcutTypes type=KAction.ActiveShortcut)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188016268">globalShortcutAllowed</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185641260">globalShortcutChanged</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qkeysequence.html">QKeySequence</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188017644">isGlobalShortcutEnabled</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163291084">isShortcutConfigurable</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KRockerGesture.html">KRockerGesture</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188017676">rockerGesture</a> (self, KAction.ShortcutTypes type=KAction.ActiveShortcut)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163290188">setGlobalShortcut</a> (self, <a href="../kdeui/KShortcut.html">KShortcut</a> shortcut, KAction.ShortcutTypes type=KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut), KAction.GlobalShortcutLoading loading=KAction.Autoloading)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188016556">setGlobalShortcutAllowed</a> (self, bool allowed, KAction.GlobalShortcutLoading loading=KAction.Autoloading)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj162719212">setRockerGesture</a> (self, <a href="../kdeui/KRockerGesture.html">KRockerGesture</a> gest, KAction.ShortcutTypes type=KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut))</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188017964">setShapeGesture</a> (self, <a href="../kdeui/KShapeGesture.html">KShapeGesture</a> gest, KAction.ShortcutTypes type=KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut))</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj162648844">setShortcut</a> (self, <a href="../kdeui/KShortcut.html">KShortcut</a> shortcut, KAction.ShortcutTypes type=KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut))</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj179352524">setShortcut</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qkeysequence.html">QKeySequence</a> shortcut, KAction.ShortcutTypes type=KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut))</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163290316">setShortcutConfigurable</a> (self, bool configurable)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj179353196">setShortcuts</a> (self, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qkeysequence.html">QKeySequence</a>] shortcuts, KAction.ShortcutTypes type=KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut))</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KShapeGesture.html">KShapeGesture</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188018476">shapeGesture</a> (self, KAction.ShortcutTypes type=KAction.ActiveShortcut)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KShortcut.html">KShortcut</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181333548">shortcut</a> (self, KAction.ShortcutTypes types=KAction.ActiveShortcut)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185640460">triggered</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt.MouseButtons</a> buttons, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt.KeyboardModifiers</a> modifiers)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj162648172"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Constructs an action.
+</p></div></div><a class="anchor" name="obj162651724"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Constructs an action with the specified parent and visible text.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> The visible text for this action.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent for this action.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj162651852"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KIcon.html">KIcon</a>&nbsp;</td>
+<td class="paramname"><em>icon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Constructs an action with text and icon; a shortcut may be specified by
+the ampersand character (e.g. \"&amp;amp;Option\" creates a shortcut with key O )
+</p>
+<p>
+This is the other common KAction constructor used. Use it when you
+do have a corresponding icon.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>icon</em>&nbsp;</td><td> The icon to display.
+
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> The text that will be displayed.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent for this action.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj185639212"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool event</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>
+</p></div></div><a class="anchor" name="obj188017612"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> forgetGlobalShortcut</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Sets the globalShortcutEnabled property to false and sets the global shortcut to an
+empty shortcut.
+This will also wipe out knowlegde about the existence of this action's global shorctut
+so it will not be considered anymore for shortcut conflict resolution. It will also not be
+visible anymore in the shortcuts KControl module.
+This method should not be used unless these effects are explicitly desired.
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.1
+</dd></dl>
+</p></div></div><a class="anchor" name="obj163289228"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KShortcut.html">KShortcut</a> globalShortcut</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KAction.ShortcutTypes&nbsp;</td>
+<td class="paramname"><em>type=KAction.ActiveShortcut</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get the global shortcut for this action, if one exists. Global shortcuts
+allow your actions to respond to accellerators independently of the focused window.
+Unlike regular shortcuts, the application's window does not need focus
+for them to be activated.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> the type of shortcut to be returned. Should both be specified, only the
+active shortcut will be returned. Defaults to the active shortcut,
+if one exists.
+</td></tr>
+</table></dl>
+<p> \sa KGlobalAccel
+\sa setGlobalShortcut()
+</p></div></div><a class="anchor" name="obj188016268"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool globalShortcutAllowed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns true if this action is permitted to have a global shortcut.
+Defaults to false.
+Use isGlobalShortcutEnabled() instead.
+</p></div></div><a class="anchor" name="obj185641260"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> globalShortcutChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qkeysequence.html">QKeySequence</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted when the global shortcut is changed. A global shortcut is
+subject to be changed by the global shortcuts kcm.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("globalShortcutChanged(const QKeySequence&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj188017644"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isGlobalShortcutEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns true if this action is enabled to have a global shortcut.
+This will be respected by \class KGlobalShortcutsEditor.
+Defaults to false.
+</p></div></div><a class="anchor" name="obj163291084"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isShortcutConfigurable</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns true if this action's shortcut is configurable.
+</p></div></div><a class="anchor" name="obj188017676"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KRockerGesture.html">KRockerGesture</a> rockerGesture</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KAction.ShortcutTypes&nbsp;</td>
+<td class="paramname"><em>type=KAction.ActiveShortcut</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj163290188"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setGlobalShortcut</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KShortcut.html">KShortcut</a>&nbsp;</td>
+<td class="paramname"><em>shortcut</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KAction.ShortcutTypes&nbsp;</td>
+<td class="paramname"><em>type=KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut)</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KAction.GlobalShortcutLoading&nbsp;</td>
+<td class="paramname"><em>loading=KAction.Autoloading</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Assign a global shortcut for this action. Global shortcuts
+allow an action to respond to key shortcuts independently of the focused window,
+i.e. the action will trigger if the keys were pressed no matter where in the X session.
+</p>
+<p>
+The action must have a per main component unique
+objectName() to enable cross-application bookeeping. If the objectName() is empty this method will
+do nothing, otherwise the isGlobalShortcutEnabled() property will be set to true and the
+shortcut will be enabled.
+It is mandatory that the objectName() doesn't change once isGlobalshortcutEnabled()
+has become true.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> KActionCollection.insert(name, action) will set action's objectName to name so you often
+don't have to set an objectName explicitly.
+</dd></dl> </p>
+<p>
+When an action, identified by main component name and objectName(), is assigned
+a global shortcut for the first time on a KDE installation the assignment will
+be saved. The shortcut will then be restored every time setGlobalShortcut() is
+called with <b>loading</b> == Autoloading.
+</p>
+<p>
+If you actually want to change the global shortcut you have to set
+<b>loading</b> to NoAutoloading. The new shortcut will be automatically saved again.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>shortcut</em>&nbsp;</td><td> global shortcut(s) to assign. Will be ignored unless <b>loading</b> is set to NoAutoloading or this is the first time ever you call this method (see above).
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> the type of shortcut to be set, whether the active shortcut, the default shortcut,
+or both (the default).
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>loading</em>&nbsp;</td><td> if Autoloading, assign the global shortcut this action has previously had if any.
+That way user preferences and changes made to avoid clashes will be conserved.
+if NoAutoloading the given shortcut will be assigned without looking up old values.
+You should only do this if the user wants to change the shortcut or if you have
+another very good reason. Key combinations that clash with other shortcuts will be
+dropped.
+</td></tr>
+</table></dl>
+<p> <dl class="note" compact><dt><b>Note:</b></dt><dd> the default shortcut will never be influenced by autoloading - it will be set as given.
+</dd></dl> \sa globalShortcut()
+</p></div></div><a class="anchor" name="obj188016556"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setGlobalShortcutAllowed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>allowed</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KAction.GlobalShortcutLoading&nbsp;</td>
+<td class="paramname"><em>loading=KAction.Autoloading</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Indicate whether the programmer and/or user may define a global shortcut for this action.
+Defaults to false. Note that calling setGlobalShortcut() turns this on automatically.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>allowed</em>&nbsp;</td><td> set to true if this action may have a global shortcut, otherwise false.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>loading</em>&nbsp;</td><td> if Autoloading, assign to this action the global shortcut it has previously had
+if any.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj162719212"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setRockerGesture</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KRockerGesture.html">KRockerGesture</a>&nbsp;</td>
+<td class="paramname"><em>gest</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KAction.ShortcutTypes&nbsp;</td>
+<td class="paramname"><em>type=KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut)</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj188017964"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShapeGesture</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KShapeGesture.html">KShapeGesture</a>&nbsp;</td>
+<td class="paramname"><em>gest</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KAction.ShortcutTypes&nbsp;</td>
+<td class="paramname"><em>type=KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut)</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj162648844"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShortcut</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KShortcut.html">KShortcut</a>&nbsp;</td>
+<td class="paramname"><em>shortcut</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KAction.ShortcutTypes&nbsp;</td>
+<td class="paramname"><em>type=KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut)</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the shortcut for this action.
+</p>
+<p>
+This is preferred over QAction.setShortcut(), as it allows for multiple shortcuts
+per action.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>shortcut</em>&nbsp;</td><td> shortcut(s) to use for this action in its specified shortcutContext()
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> type of shortcut to be set: active shortcut,
+default shortcut, or both (the default).
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj179352524"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShortcut</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qkeysequence.html">QKeySequence</a>&nbsp;</td>
+<td class="paramname"><em>shortcut</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KAction.ShortcutTypes&nbsp;</td>
+<td class="paramname"><em>type=KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut)</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>void setShortcut(const KShortcut&amp; shortcut)
+</p>
+<p>
+Set the primary shortcut only for this action.
+</p>
+<p>
+This function is there to explicitly override QAction.setShortcut(const QKeySequence&amp;).
+QAction.setShortcut() will bypass everything in KAction and may lead to unexpected behavior.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>shortcut</em>&nbsp;</td><td> shortcut(s) to use for this action in its specified shortcutContext()
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> type of shortcut to be set: active shortcut,
+default shortcut, or both (default argument value).
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj163290316"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShortcutConfigurable</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>configurable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Indicate whether the user may configure the action's shortcut.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>configurable</em>&nbsp;</td><td> set to true if this shortcut may be configured by the user, otherwise false.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj179353196"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShortcuts</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qkeysequence.html">QKeySequence</a>]&nbsp;</td>
+<td class="paramname"><em>shortcuts</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KAction.ShortcutTypes&nbsp;</td>
+<td class="paramname"><em>type=KAction.ShortcutTypes(KAction.ActiveShortcut|KAction.DefaultShortcut)</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>void setShortcuts(const QList&lt;QKeySequence&gt;&amp; shortcuts).
+</p>
+<p>
+Set the shortcuts for this action.
+</p>
+<p>
+This function is there to explicitly override QAction.setShortcut(const QList&lt;QKeySequence&gt;&amp;).
+QAction.setShortcuts() will bypass everything in KAction and may lead to unexpected behavior.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>shortcut</em>&nbsp;</td><td> shortcut(s) to use for this action in its specified shortcutContext()
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> type of shortcut to be set: active shortcut,
+default shortcut, or both (default argument value).
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj188018476"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KShapeGesture.html">KShapeGesture</a> shapeGesture</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KAction.ShortcutTypes&nbsp;</td>
+<td class="paramname"><em>type=KAction.ActiveShortcut</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj181333548"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KShortcut.html">KShortcut</a> shortcut</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KAction.ShortcutTypes&nbsp;</td>
+<td class="paramname"><em>types=KAction.ActiveShortcut</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get the shortcut for this action.
+</p>
+<p>
+This is preferred over QAction.shortcut(), as it allows for multiple shortcuts
+per action. The first and second shortcut as reported by shortcuts() will be the
+primary and alternate shortcut of the shortcut returned.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>types</em>&nbsp;</td><td> the type of shortcut to return. Should both be specified, only the
+active shortcut will be returned. Defaults to the active shortcut, if one exists.
+</td></tr> </table></dl>
+<p> \sa shortcuts()
+</p></div></div><a class="anchor" name="obj185640460"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> triggered</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt.MouseButtons</a>&nbsp;</td>
+<td class="paramname"><em>buttons</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt.KeyboardModifiers</a>&nbsp;</td>
+<td class="paramname"><em>modifiers</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted when the action is triggered. Also provides the state of the
+keyboard modifiers and mouse buttons at the time.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("triggered(MouseButtons, KeyboardModifiers)"), target_slot)</code></dd></dl></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj162649996"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">GlobalShortcutLoading</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Look up the action in global settings (using its main component's name and text())
+and set the shortcut as saved there.
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setGlobalShortcut()
+</dd></dl>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Autoloading</em>&nbsp;=&nbsp;0x0</td><td><tr><td valign="top"><em>NoAutoloading</em>&nbsp;=&nbsp;0x4</td><td></table>
+</dl>
+</div></div><p><a class="anchor" name="obj188081900"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">ShortcutType</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The shortcut will immediately become active but may be reset to "default".
+</p><dl compact><dt><b>Note:</b></dt><dd>It is necessary to wrap members of this enumeration in a <code>ShortcutTypes</code> instance when passing them to a method as group of flags. For example: <code>ShortcutTypes( ActiveShortcut | DefaultShortcut)</code></dd></dl><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>ActiveShortcut</em>&nbsp;=&nbsp;0x1</td><td><tr><td valign="top"><em>DefaultShortcut</em>&nbsp;=&nbsp;0x2</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

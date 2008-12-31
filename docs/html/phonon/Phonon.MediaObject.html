@@ -1,0 +1,1321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Phonon.MediaObject</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>MediaObject Class Reference</h1>
+<code>from PyKDE4.phonon import *</code>
+<p>
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,<a href="../phonon/Phonon.MediaNode.html">Phonon.MediaNode</a><br />
+
+Namespace: Phonon<br />
+<h2>Detailed Description</h2>
+
+<p>\class MediaObject mediaobject.h Phonon/MediaObject
+Interface for media playback of a given URL.
+</p>
+<p>
+This class is the most important class in %Phonon. Use it to open a media
+file at an arbitrary location, a CD or DVD or to stream media data from
+the application to the backend.
+</p>
+<p>
+This class controls the state (play, pause, stop, seek)
+and you can use it to get a lot of information about the media data.
+</p>
+<p>
+Notice that most functions of this class are asynchronous.
+That means if you call play() the object only starts playing when the
+stateChanged() signal tells you that the object changed into PlayingState.
+The states you can expect are documented for those methods.
+</p>
+<p>
+A common usage example is the following:
+<pre class="fragment">
+ media = new MediaObject(this);
+ connect(media, SIGNAL(finished()), SLOT(slotFinished());
+ media-&gt;setCurrentSource("/home/username/music/filename.ogg");
+ media-&gt;play();
+</pre>
+</p>
+<p>
+If you want to play more that one media file (one after another) you can
+either tell MediaObject about all those files
+<pre class="fragment">
+ media-&gt;setCurrentSource(":/sounds/startsound.ogg");
+ media-&gt;enqueue("/home/username/music/song.mp3");
+ media-&gt;enqueue(":/sounds/endsound.ogg");
+</pre>
+or provide the next file just in time:
+<pre class="fragment">
+   media-&gt;setCurrentSource(":/sounds/startsound.ogg");
+   connect(media, SIGNAL(aboutToFinish()), SLOT(enqueueNextSource()));
+ }
+
+ void enqueueNextSource()
+ {
+   media-&gt;enqueue("/home/username/music/song.mp3");
+ }
+</pre>
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Matthias Kretz &lt;kretz@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184858124">aboutToFinish</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170690252">bufferStatus</a> (int percentFilled)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184857676">currentSourceChanged</a> (<a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a> newSource)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184860396">finished</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170689804">hasVideoChanged</a> (bool hasVideo)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164600556">metaDataChanged</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184858508">prefinishMarkReached</a> (int msecToEnd)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164600908">seekableChanged</a> (bool isSeekable)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164601100">stateChanged</a> (Phonon.State newstate, Phonon.State oldstate)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164599116">tick</a> (long time)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184860012">totalTimeChanged</a> (long newTotalTime)</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184858124">aboutToFinish</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170690252">bufferStatus</a> (self, int percentFilled)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164598668">clear</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184785292">clearQueue</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj200534156">currentSource</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184857676">currentSourceChanged</a> (self, <a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a> newSource)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184783468">currentTime</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193797356">enqueue</a> (self, <a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a> source)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184785164">enqueue</a> (self, [<a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a>] sources)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184784844">enqueue</a> (self, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qurl.html">QUrl</a>] urls)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj200533836">errorString</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">ErrorType&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj201372652">errorType</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184860396">finished</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj200535084">hasVideo</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170689804">hasVideoChanged</a> (self, bool hasVideo)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj200535308">isSeekable</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180319436">metaData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> key)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj201371724">metaData</a> (self, Phonon.MetaData key)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QMultiMap<QString,QString>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180321484">metaData</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164600556">metaDataChanged</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191312460">pause</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191315500">play</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180622380">prefinishMark</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184858508">prefinishMarkReached</a> (self, int msecToEnd)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187439500">queue</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180625132">remainingTime</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191315852">seek</a> (self, long time)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164600908">seekableChanged</a> (self, bool isSeekable)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj172847948">setCurrentSource</a> (self, <a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a> source)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180625292">setPrefinishMark</a> (self, int msecToEnd)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193795756">setQueue</a> (self, [<a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a>] sources)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193796940">setQueue</a> (self, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qurl.html">QUrl</a>] urls)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191177836">setTickInterval</a> (self, int newTickInterval)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191179308">setTransitionTime</a> (self, int msec)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">State&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj200535628">state</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164601100">stateChanged</a> (self, Phonon.State newstate, Phonon.State oldstate)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191313420">stop</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164599116">tick</a> (self, long time)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180321836">tickInterval</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180623532">totalTime</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184860012">totalTimeChanged</a> (self, long newTotalTime)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191179852">transitionTime</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj184858124"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> aboutToFinish</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emitted before the playback of the whole queue stops. When this
+signal is emitted you still have time to provide the next
+MediaSource (using enqueue) so that playback continues.
+</p>
+<p>
+This signal can be used to provide the next MediaSource just in
+time for the transition still to work.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> enqueue
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("aboutToFinish()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj170690252"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> bufferStatus</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>percentFilled</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Tells about the status of the buffer.
+</p>
+<p>
+You can use this signal to show a progress bar to the user when
+in BufferingState:
+</p>
+<p>
+<pre class="fragment">
+ progressBar-&gt;setRange(0, 100); // this is the default
+ connect(media, SIGNAL(bufferStatus(int)), progressBar, SLOT(setValue(int)));
+</pre>
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>percentFilled</em>&nbsp;</td><td> A number between 0 and 100 telling you how
+much the buffer is filled.
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("bufferStatus(int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj164598668"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clear</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Stops and removes all playing and enqueued media sources.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setCurrentSource
+</dd></dl>
+</p></div></div><a class="anchor" name="obj184785292"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearQueue</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Clears the queue of sources.
+</p></div></div><a class="anchor" name="obj200534156"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a> currentSource</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the current media source.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setCurrentSource
+</dd></dl>
+</p></div></div><a class="anchor" name="obj184857676"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> currentSourceChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a>&nbsp;</td>
+<td class="paramname"><em>newSource</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted when the MediaObject makes a transition to the next
+MediaSource in the queue.
+</p>
+<p>
+In other words, it is emitted when an individual MediaSource is
+finished.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>newSource</em>&nbsp;</td><td> The source that starts to play at the time the
+signal is emitted.
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("currentSourceChanged(const MediaSource&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj184783468"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">long currentTime</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the current time (in milliseconds) of the file currently being played.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The current time in milliseconds.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> tick
+</dd></dl>
+</p></div></div><a class="anchor" name="obj193797356"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> enqueue</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a>&nbsp;</td>
+<td class="paramname"><em>source</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Appends one source to the queue. Use this function to provide
+the next source just in time after the aboutToFinish signal was
+emitted.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> aboutToFinish
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setQueue
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> clearQueue
+</dd></dl>
+</p></div></div><a class="anchor" name="obj184785164"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> enqueue</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a>]&nbsp;</td>
+<td class="paramname"><em>sources</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Appends multiple sources to the queue.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setQueue
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> clearQueue
+</dd></dl>
+</p></div></div><a class="anchor" name="obj184784844"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> enqueue</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qurl.html">QUrl</a>]&nbsp;</td>
+<td class="paramname"><em>urls</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Appends multiple sources to the queue.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setQueue
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> clearQueue
+</dd></dl>
+</p></div></div><a class="anchor" name="obj200533836"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> errorString</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a human-readable description of the last error that occurred.
+</p></div></div><a class="anchor" name="obj201372652"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">ErrorType errorType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Tells your program what to do about the error.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> Phonon.ErrorType
+</dd></dl>
+</p></div></div><a class="anchor" name="obj184860396"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> finished</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emitted when the object has finished playback.
+It is not emitted if you call stop(), pause() or
+load(), but only on end-of-queue or a critical error.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> This signal is not emitted when the current source has
+finished and there's another source in the queue. It is only
+emitted when the queue is empty.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> currentSourceChanged
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> aboutToFinish
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> prefinishMarkReached
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("finished()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj200535084"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool hasVideo</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Check whether the media data includes a video stream.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> This information cannot be known immediately. It is best
+to also listen to the hasVideoChanged signal.
+</dd></dl> </p>
+<p>
+<pre class="fragment">
+   connect(media, SIGNAL(hasVideoChanged(bool)), hasVideoChanged(bool));
+   media-&gt;setCurrentSource("somevideo.avi");
+   media-&gt;hasVideo(); // returns false;
+ }
+
+ void hasVideoChanged(bool b)
+ {
+   // b == true
+   media-&gt;hasVideo(); // returns true;
+ }
+</pre>
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the media contains video data. false
+otherwise.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> hasVideoChanged
+</dd></dl>
+</p></div></div><a class="anchor" name="obj170689804"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> hasVideoChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>hasVideo</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted whenever the return value of hasVideo() changes.
+</p>
+<p>
+Normally you'll check hasVideo() first and then let this signal
+tell you whether video is available now or not. That way you
+don't have to poll hasVideo().
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>hasVideo</em>&nbsp;</td><td> <b>true</b> The stream contains video and adding a
+VideoWidget will show a video.
+<b>false</b> There is no video data in the stream and
+adding a VideoWidget will show an empty (black)
+VideoWidget.
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("hasVideoChanged(bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj200535308"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isSeekable</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Check whether the current media may be seeked.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> This information cannot be known immediately. It is best
+to also listen to the hasVideoChanged signal.
+</dd></dl> </p>
+<p>
+<pre class="fragment">
+   connect(media, SIGNAL(hasVideoChanged(bool)), hasVideoChanged(bool));
+   media-&gt;setCurrentSource("somevideo.avi");
+   media-&gt;hasVideo(); // returns false;
+ }
+
+ void hasVideoChanged(bool b)
+ {
+   // b == true
+   media-&gt;hasVideo(); // returns true;
+ }
+</pre>
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true when the current media may be seeked. false
+otherwise.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> seekableChanged()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj180319436"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> metaData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>key</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the strings associated with the given <b>key.</b>
+</p>
+<p>
+Backends should use the keys specified in the Ogg Vorbis
+documentation: http://xiph.org/vorbis/doc/v-comment.html
+</p>
+<p>
+Therefore the following should work with every backend:
+</p>
+<p>
+A typical usage looks like this:
+<pre class="fragment">
+ setMetaArtist (media-&gt;metaData("ARTIST"     ));
+ setMetaAlbum  (media-&gt;metaData("ALBUM"      ));
+ setMetaTitle  (media-&gt;metaData("TITLE"      ));
+ setMetaDate   (media-&gt;metaData("DATE"       ));
+ setMetaGenre  (media-&gt;metaData("GENRE"      ));
+ setMetaTrack  (media-&gt;metaData("TRACKNUMBER"));
+ setMetaComment(media-&gt;metaData("DESCRIPTION"));
+</pre>
+</p>
+<p>
+For Audio CDs you can query
+<pre class="fragment">
+ metaData("MUSICBRAINZ_DISCID");
+</pre>
+to get a DiscID hash that you can use with the MusicBrainz
+service:
+http://musicbrainz.org/doc/ClientHOWTO
+</p></div></div><a class="anchor" name="obj201371724"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> metaData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Phonon.MetaData&nbsp;</td>
+<td class="paramname"><em>key</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the strings associated with the given <b>key.</b>
+</p>
+<p>
+Same as above except that the keys are defined in the
+Phonon.MetaData enum.
+</p></div></div><a class="anchor" name="obj180321484"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QMultiMap<QString,QString> metaData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns all meta data.
+</p></div></div><a class="anchor" name="obj164600556"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> metaDataChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>This signal is emitted whenever the audio/video data that is
+being played is associated with new meta data. E.g. for radio
+streams this happens when the next song is played.
+</p>
+<p>
+You can get the new meta data with the metaData methods.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("metaDataChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj191312460"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> pause</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Requests playback to pause. If it was paused before nothing changes.
+</p>
+<p>
+Possible states right after this call:
+<li> PlayingState </li>
+<li> PausedState </li>
+<li> (\ref ErrorState) </li>
+</p></div></div><a class="anchor" name="obj191315500"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> play</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Requests playback of the media data to start. Playback only
+starts when stateChanged() signals that it goes into PlayingState,
+though.
+</p>
+<p>
+Possible states right after this call:
+<li> BufferingState </li>
+<li> PlayingState </li>
+<li> (\ref ErrorState) </li>
+</p></div></div><a class="anchor" name="obj180622380"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int prefinishMark</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj184858508"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> prefinishMarkReached</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>msecToEnd</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted when there are only <b>msecToEnd</b> milliseconds left
+for playback.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>msecToEnd</em>&nbsp;</td><td> The remaining time until the playback queue finishes.
+</td></tr>
+</table></dl>
+<p> <dl class="warning" compact><dt><b>Warning:</b></dt><dd> This signal is not emitted when there is another source in the queue.
+It is only emitted when the queue is empty.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setPrefinishMark
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> prefinishMark
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> aboutToFinish
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> finished
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("prefinishMarkReached(qint32)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj187439500"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a>] queue</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the queued media sources. This does list does not include
+the current source (returned by currentSource).
+</p></div></div><a class="anchor" name="obj180625132"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">long remainingTime</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the remaining time (in milliseconds) of the file currently being played.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The remaining time in milliseconds.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj191315852"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> seek</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>time</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Requests a seek to the time indicated.
+</p>
+<p>
+You can only seek if state() == PlayingState, BufferingState or PausedState.
+</p>
+<p>
+The call is asynchronous, so currentTime can still be the old
+value right after this method was called. If all you need is a
+slider that shows the current position and allows the user to
+seek use the class SeekSlider.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>time</em>&nbsp;</td><td> The time in milliseconds where to continue playing.
+</td></tr>
+</table></dl>
+<p> Possible states right after this call:
+<li> BufferingState </li>
+<li> PlayingState </li>
+<li> (\ref ErrorState) </li>
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> SeekSlider
+</dd></dl>
+</p></div></div><a class="anchor" name="obj164600908"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> seekableChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>isSeekable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted whenever the return value of isSeekable() changes.
+</p>
+<p>
+Normally you'll check isSeekable() first and then let this signal
+tell you whether seeking is possible now or not. That way you
+don't have to poll isSeekable().
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>isSeekable</em>&nbsp;</td><td> <b>true</b> if the stream is seekable (i.e. calling
+seek() works)
+<b>false</b> if the stream is not seekable (i.e.
+all calls to seek() will be ignored)
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("seekableChanged(bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj172847948"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setCurrentSource</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a>&nbsp;</td>
+<td class="paramname"><em>source</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the media source the MediaObject should use.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>source</em>&nbsp;</td><td> The MediaSource object to the media data. You can
+just as well use a QUrl or QString (for a local file) here.
+Setting an empty (invalid) source, will stop and remove the
+current source.
+</td></tr>
+</table></dl>
+<p> <pre class="fragment">
+ QUrl url("http://www.example.com/music.ogg");
+ media-&gt;setCurrentSource(url);
+</pre>
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> currentSource
+</dd></dl>
+</p></div></div><a class="anchor" name="obj180625292"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setPrefinishMark</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>msecToEnd</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj193795756"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setQueue</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="../phonon/Phonon.MediaSource.html">Phonon.MediaSource</a>]&nbsp;</td>
+<td class="paramname"><em>sources</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the MediaSources to play when the current media has finished.
+</p>
+<p>
+This function will overwrite the current queue.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> clearQueue
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> enqueue
+</dd></dl>
+</p></div></div><a class="anchor" name="obj193796940"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setQueue</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qurl.html">QUrl</a>]&nbsp;</td>
+<td class="paramname"><em>urls</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the MediaSources to play when the current media has finished.
+</p>
+<p>
+This function overwrites the current queue.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> clearQueue
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> enqueue
+</dd></dl>
+</p></div></div><a class="anchor" name="obj191177836"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setTickInterval</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>newTickInterval</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj191179308"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setTransitionTime</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>msec</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj200535628"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">State state</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the current state.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The state of the object.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> State
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> stateChanged
+</dd></dl>
+</p></div></div><a class="anchor" name="obj164601100"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> stateChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Phonon.State&nbsp;</td>
+<td class="paramname"><em>newstate</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Phonon.State&nbsp;</td>
+<td class="paramname"><em>oldstate</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted when the state of the MediaObject has changed.
+In case you're not interested in the old state you can also
+connect to a slot that only has one State argument.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>newstate</em>&nbsp;</td><td> The state the Player is in now.
+
+<tr><td></td><td valign="top"><em>oldstate</em>&nbsp;</td><td> The state the Player was in before.
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("stateChanged(State, State)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj191313420"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> stop</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Requests playback to stop. If it was stopped before nothing changes.
+</p>
+<p>
+Possible states right after this call:
+<li> the state it was in before (e.g. PlayingState) </li>
+<li> StoppedState </li>
+<li> (\ref ErrorState) </li>
+</p></div></div><a class="anchor" name="obj164599116"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> tick</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>time</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal gets emitted every tickInterval milliseconds.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>time</em>&nbsp;</td><td> The position of the media file in milliseconds.
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> setTickInterval, tickInterval
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("tick(qint64)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj180321836"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int tickInterval</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj180623532"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">long totalTime</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the total time (in milliseconds) of the file currently being played.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The total time in milliseconds.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> totalTimeChanged
+</dd></dl>
+</p></div></div><a class="anchor" name="obj184860012"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> totalTimeChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>newTotalTime</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted as soon as the total time of the media file is
+known or has changed. For most non-local media data the total
+time of the media can only be known after some time. At that time the
+totalTime function can not return useful information. You have
+to wait for this signal to know the real total time.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>newTotalTime</em>&nbsp;</td><td> The length of the media file in milliseconds.
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> totalTime
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("totalTimeChanged(qint64)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj191179852"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int transitionTime</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

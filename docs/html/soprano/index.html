@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Module soprano</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+<h1>soprano Module</h1>
+<hr><p>* <h2>Soprano (aka QRDF) - A modular RDF storage framework </h2>
+*
+* %Soprano is a QT-based pluggable framework for RDF storage and parsing. It tries to provide a highly usable
+* interface to several RDF storage solutions.
+*
+* <b>Overview </b>
+*
+* %Soprano centers around the Soprano.Model class which represents one storage set. A Soprano.Model is basically a set of
+* RDF quadruples, i.e. Soprano.Statement. The actual storage is done via Soprano.Backend plugins. All
+* query operations return Soprano.Iterator instances. Iterator is a explicitely shared class which is very
+* easy to understand and use.
+*
+* %Soprano makes the distinction between two types of Models: Soprano.StorageModel and Soprano.FilterModel.
+* The former one is intended to be the basic Model which actually stores the data while the latter ones can be
+* stacked on top of a Soprano.StorageModel to perform certain filter operations. Thes filter operations can range
+* from very basic things such as disallowing any write operation (Soprano.Util.ReadOnlyModel) to more complex
+* things such as full text indexing of all literal statements (Soprano.Index.IndexFilterModel) or exporting
+* the Model via D-Bus (Soprano.Server.DBusExportModel).
+*
+* Apart from storage %Soprano provides a system for RDF parser and serializer plugins. For more details on parsing
+* or serializing RDF data see the Soprano.Parser and Soprano.Serializer classes.
+*
+* %Soprano comes with a builtin Server and Client implementations allowing to build remote repositories quickly.
+* Soprano.Client.SparqlModel provides a client to arbitrary <a href="http://www.w3.org/TR/rdf-sparql-protocol/">SPARQL (SPARQL Protocol and RDF Query Language)</a>
+* Http services.
+*
+* <b>Quickstart </b>
+*
+* Create an RDF Model:
+*
+* <pre class="fragment">
+ * Soprano.Model* model = Soprano.createModel();
+ * \endcode
+ *
+ * Fill it with statements:
+ *
+ * \code
+ * model-&gt;addStatement( Soprano.Statement( QUrl( "http://mysite.org/data#A"), Soprano.Vocabulary.RDFS.label(), Soprano.LiteralValue( "A test resource" ) ) );
+ * \endcode
+ *
+ * Read the data back:
+ *
+ * \code
+ * Soprano.StatementIterator it = model-&gt;listStatements();
+ * while( it.next() ) {
+ *    displayStatement( *it );
+ * }
+ * \endcode
+ *
+ * Query the data:
+ *
+ * \code
+ * Soprano.QueryResultIterator it = model-&gt;executeQuery( "select ?r where { ?r ?p ?o . }", Soprano.Query.QueryLanguageSparql );
+ * while( it.next() ) {
+ *    displayResult( it.binding( "r" ) );
+ * }
+ * \endcode
+ *
+ * \section contents Contents
+ *
+ * The following sections contain further information on the usage of %Soprano.
+ *
+ * \li \ref soprano_storage
+ * \li \ref soprano_misc
+ * \li \ref soprano_error_handling
+ * \li \ref soprano_writing_plugins
+ * \li \ref Soprano.Server
+ * \li \ref Soprano.Client
+ * \li \ref soprano_devel_tools
+</p><h2>Namespaces</h2>
+<table width="95%" align="center" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td><a name="letter_G">&nbsp;&nbsp;G&nbsp;&nbsp;</a></td><td><a class="el" href="Soprano.Query.html">Soprano.Query</a>&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano::Vocabulary.RDF.html">Soprano::Vocabulary.RDF</a>&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="global.html"><i>global</i></a>&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Server.html">Soprano.Server</a>&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano::Vocabulary.RDFS.html">Soprano::Vocabulary.RDFS</a>&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a name="letter_S">&nbsp;&nbsp;S&nbsp;&nbsp;</a></td><td><a class="el" href="Soprano.Util.html">Soprano.Util</a>&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano::Vocabulary.SIL.html">Soprano::Vocabulary.SIL</a>&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.html">Soprano</a>&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Vocabulary.html">Soprano.Vocabulary</a>&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano::Vocabulary.Xesam.html">Soprano::Vocabulary.Xesam</a>&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Client.html">Soprano.Client</a>&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano::Vocabulary.NAO.html">Soprano::Vocabulary.NAO</a>&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano::Vocabulary.XMLSchema.html">Soprano::Vocabulary.XMLSchema</a>&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Error.html">Soprano.Error</a>&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano::Vocabulary.NRL.html">Soprano::Vocabulary.NRL</a>&nbsp;&nbsp;&nbsp;</td><td></td></tr>
+<tr><td><a class="el" href="Soprano.Inference.html">Soprano.Inference</a>&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano::Vocabulary.OWL.html">Soprano::Vocabulary.OWL</a>&nbsp;&nbsp;&nbsp;</td><td></td></tr>
+</table>
+<h2>Class Index</h2>
+<table width="95%" align="center" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td><a name="letter_A">&nbsp;&nbsp;A&nbsp;&nbsp;</a></td><td><a class="el" href="Soprano.Error.Error.html">Error</a>&nbsp;(<a class="el" href="Soprano.Error.html">Soprano.Error</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_Q">&nbsp;&nbsp;Q&nbsp;&nbsp;</a></td></tr>
+<tr><td><a class="el" href="Soprano.Util.AsyncModel.html">AsyncModel</a>&nbsp;(<a class="el" href="Soprano.Util.html">Soprano.Util</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Error.ErrorCache.html">ErrorCache</a>&nbsp;(<a class="el" href="Soprano.Error.html">Soprano.Error</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.QueryResultIterator.html">QueryResultIterator</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Util.AsyncResult.html">AsyncResult</a>&nbsp;(<a class="el" href="Soprano.Util.html">Soprano.Util</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_F">&nbsp;&nbsp;F&nbsp;&nbsp;</a></td><td><a class="el" href="Soprano.QueryResultIterator.html">QueryResultIterator</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a name="letter_B">&nbsp;&nbsp;B&nbsp;&nbsp;</a></td><td><a class="el" href="Soprano.FilterModel.html">FilterModel</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_R">&nbsp;&nbsp;R&nbsp;&nbsp;</a></td></tr>
+<tr><td><a class="el" href="Soprano.Backend.html">Backend</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_I">&nbsp;&nbsp;I&nbsp;&nbsp;</a></td><td><a class="el" href="Soprano.RdfSchemaModel.html">RdfSchemaModel</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.BackendSetting.html">BackendSetting</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Inference.InferenceModel.html">InferenceModel</a>&nbsp;(<a class="el" href="Soprano.Inference.html">Soprano.Inference</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Util.ReadOnlyModel.html">ReadOnlyModel</a>&nbsp;(<a class="el" href="Soprano.Util.html">Soprano.Util</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.BindingSet.html">BindingSet</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.IteratorBackend.html">IteratorBackend</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Inference.Rule.html">Rule</a>&nbsp;(<a class="el" href="Soprano.Inference.html">Soprano.Inference</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a name="letter_D">&nbsp;&nbsp;D&nbsp;&nbsp;</a></td><td><a name="letter_L">&nbsp;&nbsp;L&nbsp;&nbsp;</a></td><td><a class="el" href="Soprano.Inference.RuleParser.html">RuleParser</a>&nbsp;(<a class="el" href="Soprano.Inference.html">Soprano.Inference</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Client.DBusClient.html">DBusClient</a>&nbsp;(<a class="el" href="Soprano.Client.html">Soprano.Client</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.LiteralValue.html">LiteralValue</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Inference.RuleSet.html">RuleSet</a>&nbsp;(<a class="el" href="Soprano.Inference.html">Soprano.Inference</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Client.DBusClient.html">DBusClient</a>&nbsp;(<a class="el" href="Soprano.Client.html">Soprano.Client</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Client.LocalSocketClient.html">LocalSocketClient</a>&nbsp;(<a class="el" href="Soprano.Client.html">Soprano.Client</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_S">&nbsp;&nbsp;S&nbsp;&nbsp;</a></td></tr>
+<tr><td><a class="el" href="Soprano.Server.DBusExportIterator.html">DBusExportIterator</a>&nbsp;(<a class="el" href="Soprano.Server.html">Soprano.Server</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Error.Locator.html">Locator</a>&nbsp;(<a class="el" href="Soprano.Error.html">Soprano.Error</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Serializer.html">Serializer</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Server.DBusExportIterator.html">DBusExportIterator</a>&nbsp;(<a class="el" href="Soprano.Server.html">Soprano.Server</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_M">&nbsp;&nbsp;M&nbsp;&nbsp;</a></td><td><a class="el" href="Soprano.Server.ServerCore.html">ServerCore</a>&nbsp;(<a class="el" href="Soprano.Server.html">Soprano.Server</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Server.DBusExportModel.html">DBusExportModel</a>&nbsp;(<a class="el" href="Soprano.Server.html">Soprano.Server</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Model.html">Model</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Util.SignalCacheModel.html">SignalCacheModel</a>&nbsp;(<a class="el" href="Soprano.Util.html">Soprano.Util</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Server.DBusExportModel.html">DBusExportModel</a>&nbsp;(<a class="el" href="Soprano.Server.html">Soprano.Server</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Util.MutexModel.html">MutexModel</a>&nbsp;(<a class="el" href="Soprano.Util.html">Soprano.Util</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Util.SimpleNodeIterator.html">SimpleNodeIterator</a>&nbsp;(<a class="el" href="Soprano.Util.html">Soprano.Util</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Client.DBusModel.html">DBusModel</a>&nbsp;(<a class="el" href="Soprano.Client.html">Soprano.Client</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_N">&nbsp;&nbsp;N&nbsp;&nbsp;</a></td><td><a class="el" href="Soprano.Util.SimpleStatementIterator.html">SimpleStatementIterator</a>&nbsp;(<a class="el" href="Soprano.Util.html">Soprano.Util</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Client.DBusModel.html">DBusModel</a>&nbsp;(<a class="el" href="Soprano.Client.html">Soprano.Client</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Node.html">Node</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Client.SparqlModel.html">SparqlModel</a>&nbsp;(<a class="el" href="Soprano.Client.html">Soprano.Client</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Client.DBusNodeIterator.html">DBusNodeIterator</a>&nbsp;(<a class="el" href="Soprano.Client.html">Soprano.Client</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.NodeIterator.html">NodeIterator</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Statement.html">Statement</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Client.DBusNodeIterator.html">DBusNodeIterator</a>&nbsp;(<a class="el" href="Soprano.Client.html">Soprano.Client</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.NodeIterator.html">NodeIterator</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.StatementIterator.html">StatementIterator</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Client.DBusQueryResultIterator.html">DBusQueryResultIterator</a>&nbsp;(<a class="el" href="Soprano.Client.html">Soprano.Client</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Inference.NodePattern.html">NodePattern</a>&nbsp;(<a class="el" href="Soprano.Inference.html">Soprano.Inference</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.StatementIterator.html">StatementIterator</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Client.DBusQueryResultIterator.html">DBusQueryResultIterator</a>&nbsp;(<a class="el" href="Soprano.Client.html">Soprano.Client</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_P">&nbsp;&nbsp;P&nbsp;&nbsp;</a></td><td><a class="el" href="Soprano.Inference.StatementPattern.html">StatementPattern</a>&nbsp;(<a class="el" href="Soprano.Inference.html">Soprano.Inference</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Client.DBusStatementIterator.html">DBusStatementIterator</a>&nbsp;(<a class="el" href="Soprano.Client.html">Soprano.Client</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Parser.html">Parser</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.StorageModel.html">StorageModel</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Soprano.Client.DBusStatementIterator.html">DBusStatementIterator</a>&nbsp;(<a class="el" href="Soprano.Client.html">Soprano.Client</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Error.ParserError.html">ParserError</a>&nbsp;(<a class="el" href="Soprano.Error.html">Soprano.Error</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_T">&nbsp;&nbsp;T&nbsp;&nbsp;</a></td></tr>
+<tr><td><a class="el" href="Soprano.Util.DummyModel.html">DummyModel</a>&nbsp;(<a class="el" href="Soprano.Util.html">Soprano.Util</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Plugin.html">Plugin</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Soprano.Client.TcpClient.html">TcpClient</a>&nbsp;(<a class="el" href="Soprano.Client.html">Soprano.Client</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a name="letter_E">&nbsp;&nbsp;E&nbsp;&nbsp;</a></td><td><a class="el" href="Soprano.PluginManager.html">PluginManager</a>&nbsp;(<a class="el" href="Soprano.html">Soprano</a>)&nbsp;&nbsp;&nbsp;</td><td></td></tr>
+</table>
+
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

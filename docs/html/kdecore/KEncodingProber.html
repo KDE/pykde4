@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KEncodingProber</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>KEncodingProber Class Reference</h1>
+<code>from PyKDE4.kdecore import *</code>
+<p>
+
+
+
+<h2>Detailed Description</h2>
+
+<p>Provides encoding detection(probe) capabilities.
+</p>
+<p>
+Probe the encoding of raw data only.
+In the case it can't find it, return the most possible encoding it guessed.
+</p>
+<p>
+Always do Unicode probe regardless the ProberType
+</p>
+<p>
+Feed data to it several times until ProberState changed to FoundIt/NotMe,
+or the Confidence reach a value you think acceptable.
+</p>
+<p>
+Intended lifetime of the object: one instance per ProberType.
+</p>
+<p>
+Typical use:
+<pre class="fragment">
+ QByteArray data, moredata;
+ ...
+ KEncodingProber prober(KEncodingProber.Chinese);
+ prober.feed(data);
+ prober.feed(moredata);
+ if (prober.confidence() &gt; 0.6)
+    QString out = QTextCodec.codeForName(prober.encodingName())-&gt;toUnicode(data);
+</pre>
+</p>
+<p>
+at least 256 characters are needed to change the ProberState from Probing to FoundIt.
+if you don't have so many characters to probe,
+decide whether to accept the encoding it guessed so far according to the Confidence by yourself.
+</p>
+<p>
+Guess encoding of char array
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj189136684">ProberState</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;FoundIt, NotMe, Probing&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj189135980">ProberType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;None, Universal, Arabic, Baltic, CentralEuropean, ChineseSimplified, ChineseTraditional, Cyrillic, Greek, Hebrew, Japanese, Korean, NorthernSaami, Other, SouthEasternEurope, Thai, Turkish, Unicode, WesternEuropean&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189752524">__init__</a> (self, KEncodingProber.ProberType proberType=KEncodingProber.Universal)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189753036">confidence</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189754924">encodingName</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">KEncodingProber.ProberState&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189753740">feed</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> data)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">KEncodingProber.ProberState&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189752812">feed</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> data, int len)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">KEncodingProber.ProberType&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189754220">proberType</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189753388">reset</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189769132">setProberType</a> (self, KEncodingProber.ProberType proberType)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">KEncodingProber.ProberState&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189754988">state</a> (self)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189770124">nameForProberType</a> (KEncodingProber.ProberType proberType)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">KEncodingProber.ProberType&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189769740">proberTypeForName</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> lang)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj189752524"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KEncodingProber.ProberType&nbsp;</td>
+<td class="paramname"><em>proberType=KEncodingProber.Universal</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Default ProberType is Universal(detect all possibe encodings)
+</p></div></div><a class="anchor" name="obj189753036"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float confidence</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the confidence(sureness) of encoding it guessed so far (0.0 ~ 0.99), not very reliable for single byte encodings
+</dd></dl>
+</p></div></div><a class="anchor" name="obj189754924"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> encodingName</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the name of the best encoding it guessed so far
+</dd></dl>
+</p></div></div><a class="anchor" name="obj189753740"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">KEncodingProber.ProberState feed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td>
+<td class="paramname"><em>data</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>The main class method
+</p>
+<p>
+feed data to the prober
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the ProberState after probe the feedded data
+</dd></dl>
+</p></div></div><a class="anchor" name="obj189752812"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">KEncodingProber.ProberState feed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>data</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>len</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj189770124"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> nameForProberType</td>
+<td>(</td>
+<td class="paramtype">KEncodingProber.ProberType&nbsp;</td>
+<td class="paramname"><em>proberType</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>map ProberType to language string
+</p></div></div><a class="anchor" name="obj189754220"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">KEncodingProber.ProberType proberType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj189769740"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">KEncodingProber.ProberType proberTypeForName</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>lang</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the ProberType for lang (eg. proberTypeForName("Chinese Simplified") will return KEncodingProber.ChineseSimplified
+</dd></dl>
+</p></div></div><a class="anchor" name="obj189753388"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> reset</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>reset the prober's internal state and data.
+</p></div></div><a class="anchor" name="obj189769132"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setProberType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KEncodingProber.ProberType&nbsp;</td>
+<td class="paramname"><em>proberType</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>change current prober's ProberType and reset the prober
+</p></div></div><a class="anchor" name="obj189754988"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">KEncodingProber.ProberState state</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the prober's current ProberState
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj189136684"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">ProberState</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>FoundIt</em>&nbsp;</td><td><tr><td valign="top"><em>NotMe</em>&nbsp;</td><td><tr><td valign="top"><em>Probing</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p><a class="anchor" name="obj189135980"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">ProberType</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Need more data to make a decision
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>None</em>&nbsp;</td><td><tr><td valign="top"><em>Universal</em>&nbsp;</td><td><tr><td valign="top"><em>Arabic</em>&nbsp;</td><td><tr><td valign="top"><em>Baltic</em>&nbsp;</td><td><tr><td valign="top"><em>CentralEuropean</em>&nbsp;</td><td><tr><td valign="top"><em>ChineseSimplified</em>&nbsp;</td><td><tr><td valign="top"><em>ChineseTraditional</em>&nbsp;</td><td><tr><td valign="top"><em>Cyrillic</em>&nbsp;</td><td><tr><td valign="top"><em>Greek</em>&nbsp;</td><td><tr><td valign="top"><em>Hebrew</em>&nbsp;</td><td><tr><td valign="top"><em>Japanese</em>&nbsp;</td><td><tr><td valign="top"><em>Korean</em>&nbsp;</td><td><tr><td valign="top"><em>NorthernSaami</em>&nbsp;</td><td><tr><td valign="top"><em>Other</em>&nbsp;</td><td><tr><td valign="top"><em>SouthEasternEurope</em>&nbsp;</td><td><tr><td valign="top"><em>Thai</em>&nbsp;</td><td><tr><td valign="top"><em>Turkish</em>&nbsp;</td><td><tr><td valign="top"><em>Unicode</em>&nbsp;</td><td><tr><td valign="top"><em>WesternEuropean</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

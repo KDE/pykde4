@@ -1,0 +1,1533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KComboBox</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>KComboBox Class Reference</h1>
+<code>from PyKDE4.kdeui import *</code>
+<p>
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qcombobox.html">QComboBox</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,<a href="../kdeui/KCompletionBase.html">KCompletionBase</a><br />
+Subclasses: <a href="../kdeui/KFontComboBox.html">KFontComboBox</a>, <a href="../kdeui/KHistoryComboBox.html">KHistoryComboBox</a>, <a href="../kdeui/Sonnet.DictionaryComboBox.html">Sonnet.DictionaryComboBox</a><br />
+
+<h2>Detailed Description</h2>
+
+<p>An enhanced combo box.
+</p>
+<p>
+A combined button, line-edit and a popup list widget.
+</p>
+<p>
+<b>Detail</b>
+</p>
+<p>
+This widget inherits from QComboBox and implements the following
+additional functionalities: a completion object that provides both automatic
+and manual text completion as well as text rotation features, configurable
+key-bindings to activate these features, and a popup-menu item that can be
+used to allow the user to change the text completion mode on the fly.
+</p>
+<p>
+To support these new features KComboBox emits a few additional signals
+such as completion( const QString&amp; ) and textRotation( KeyBindingType ).
+The completion signal can be connected to a slot that will assist the user in
+filling out the remaining text while the rotation signal can be used to traverse
+through all possible matches whenever text completion results in multiple matches.
+Additionally, a returnPressed() and a returnPressed( const QString&amp; )
+signals are emitted when the user presses the Enter/Return key.
+</p>
+<p>
+KCombobox by default creates a completion object when you invoke the
+completionObject( bool ) member function for the first time or
+explicitly use setCompletionObject( KCompletion*, bool ) to assign your
+own completion object. Additionally, to make this widget more functional,
+KComboBox will by default handle text rotation and completion events
+internally whenever a completion object is created through either one of the
+methods mentioned above. If you do not need this functionality, simply use
+KCompletionBase.setHandleSignals(bool) or alternatively set the boolean
+parameter in the <b>setCompletionObject</b> call to false.
+</p>
+<p>
+Beware: The completion object can be deleted on you, especially if a call
+such as setEditable(false) is made. Store the pointer at your own risk,
+and consider using QGuardedPtr&lt;KCompletion&gt;.
+</p>
+<p>
+The default key-bindings for completion and rotation is determined from the
+global settings in KStandardShortcut. These values, however, can be overridden
+locally by invoking KCompletionBase.setKeyBinding(). The values can
+easily be reverted back to the default setting, by simply calling
+useGlobalSettings(). An alternate method would be to default individual
+key-bindings by usning setKeyBinding() with the default second argument.
+</p>
+<p>
+A non-editable combobox only has one completion mode, <b>CompletionAuto.</b>
+Unlike an editable combobox the CompletionAuto mode, works by matching
+any typed key with the first letter of entries in the combobox. Please note
+that if you call setEditable( false ) to change an editable combobox to a
+non-editable one, the text completion object associated with the combobox will
+no longer exist unless you created the completion object yourself and assigned
+it to this widget or you called setAutoDeleteCompletionObject( false ). In other
+words do not do the following:
+</p>
+<p>
+<pre class="fragment">
+ KComboBox* combo = new KComboBox(true, this);
+ KCompletion* comp = combo-&gt;completionObject();
+ combo-&gt;setEditable( false );
+ comp-&gt;clear(); // CRASH: completion object does not exist anymore.
+</pre>
+</p>
+<p>
+A read-only KComboBox will have the same background color as a
+disabled KComboBox, but its foreground color will be the one used for
+the read-write mode. This differs from QComboBox's implementation
+and is done to give visual distinction between the three different modes:
+disabled, read-only, and read-write.
+</p>
+<p>
+<b>Usage</b>
+</p>
+<p>
+To enable the basic completion feature:
+</p>
+<p>
+<pre class="fragment">
+ KComboBox *combo = new KComboBox( true, this );
+ KCompletion *comp = combo-&gt;completionObject();
+ // Connect to the return pressed signal - optional
+ connect(combo,SIGNAL(returnPressed(const QString&amp;)),comp,SLOT(addItem(const QString&amp;)));
+
+ // Provide the to be completed strings. Note that those are separate from the combo's
+ // contents.
+ comp-&gt;insertItems( someQStringList );
+</pre>
+</p>
+<p>
+To use your own completion object:
+</p>
+<p>
+<pre class="fragment">
+ KComboBox *combo = new KComboBox( this );
+ KUrlCompletion *comp = new KUrlCompletion();
+ combo-&gt;setCompletionObject( comp );
+ // Connect to the return pressed signal - optional
+ connect(combo,SIGNAL(returnPressed(const QString&amp;)),comp,SLOT(addItem(const QString&amp;)));
+</pre>
+</p>
+<p>
+Note that you have to either delete the allocated completion object
+when you don't need it anymore, or call
+setAutoDeleteCompletionObject( true );
+</p>
+<p>
+Miscellaneous function calls:
+</p>
+<p>
+<pre class="fragment">
+ // Tell the widget not to handle completion and rotation
+ combo-&gt;setHandleSignals( false );
+ // Set your own completion key for manual completions.
+ combo-&gt;setKeyBinding( KCompletionBase.TextCompletion, Qt.End );
+</pre>
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Dawit Alemayehu &lt;adawit@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196143756">aboutToShowContextMenu</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmenu.html">QMenu</a> p)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196141644">completion</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196143244">completionModeChanged</a> (KGlobalSettings.Completion a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196132300">returnPressed</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196131404">returnPressed</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196142188">substringCompletion</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196142732">textRotation</a> (KCompletionBase.KeyBindingType a0)</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196086092">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196085900">__init__</a> (self, bool rw, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196143756">aboutToShowContextMenu</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmenu.html">QMenu</a> p)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196099308">addUrl</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196109068">addUrl</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a> icon, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196122316">autoCompletion</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196097804">changeURL</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url, int index)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196098572">changeURL</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a> pixmap, <a href="../kdecore/KUrl.html">KUrl</a> url, int index)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196111404">changeUrl</a> (self, int index, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196112140">changeUrl</a> (self, int index, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a> icon, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196141644">completion</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KCompletionBox.html">KCompletionBox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196130764">completionBox</a> (self, bool create=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196143244">completionModeChanged</a> (self, KGlobalSettings.Completion a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196124332">contains</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196155916">create</a> (self, WId a0=0, bool initializeWindow=1, bool destroyOldWindow=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196121260">cursorPosition</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196129548">eventFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> a0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a> a1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196087692">insertURL</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url, int index=-1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196096268">insertURL</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a> pixmap, <a href="../kdecore/KUrl.html">KUrl</a> url, int index=-1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196109772">insertUrl</a> (self, int index, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196110508">insertUrl</a> (self, int index, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a> icon, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196155212">makeCompletion</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsize.html">QSize</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196161964">minimumSizeHint</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196132300">returnPressed</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196131404">returnPressed</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196144332">rotateText</a> (self, KCompletionBase.KeyBindingType type)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196112044">setAutoCompletion</a> (self, bool autocomplete)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196144780">setCompletedItems</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> items, bool autosubject=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196144716">setCompletedText</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196154860">setCompletedText</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0, bool a1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196122220">setContextMenuEnabled</a> (self, bool showMenu)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196144972">setCurrentItem</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> item, bool insert=0, int index=-1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196099212">setEditUrl</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196131916">setEditable</a> (self, bool editable)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196131276">setLineEdit</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qlineedit.html">QLineEdit</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196124172">setTrapReturnKey</a> (self, bool trap)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196123340">setUrlDropsEnabled</a> (self, bool enable)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196142188">substringCompletion</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196142732">textRotation</a> (self, KCompletionBase.KeyBindingType a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196129644">trapReturnKey</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196123852">urlDropsEnabled</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196156620">wheelEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwheelevent.html">QWheelEvent</a> ev)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj196086092"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Constructs a read-only or rather select-only combo box with a
+parent object and a name.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent object of this widget
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj196085900"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>rw</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Constructs a "read-write" or "read-only" combo box depending on
+the value of the first argument( <b>rw</b> ) with a parent, a
+name.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>rw</em>&nbsp;</td><td> When <b>true,</b> widget will be editable.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent object of this widget.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj196143756"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> aboutToShowContextMenu</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmenu.html">QMenu</a>&nbsp;</td>
+<td class="paramname"><em>p</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted before the context menu is displayed.
+</p>
+<p>
+The signal allows you to add your own entries into the context menu.
+Note that you MUST NOT store the pointer to the QPopupMenu since it is
+created and deleted on demand. Otherwise, you can crash your app.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>p</em>&nbsp;</td><td> the context menu about to be displayed
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("aboutToShowContextMenu(QMenu*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj196099308"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Appends <b>url</b> to the combobox.
+KUrl.prettyUrl() is used so that the url is properly decoded
+for displaying.
+</p></div></div><a class="anchor" name="obj196109068"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a>&nbsp;</td>
+<td class="paramname"><em>icon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Appends <b>url</b> with the icon &amp;p icon to the combobox.
+KUrl.prettyUrl() is used so that the url is properly decoded
+for displaying.
+</p></div></div><a class="anchor" name="obj196122316"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool autoCompletion</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Re-implemented from QComboBox.
+</p>
+<p>
+Returns <b>true</b> if the current completion mode is set
+to automatic. See its more comprehensive replacement
+completionMode().
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> <b>true</b> when completion mode is automatic.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj196097804"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> changeURL</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj196098572"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> changeURL</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a>&nbsp;</td>
+<td class="paramname"><em>pixmap</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj196111404"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> changeUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Replaces the item at position <b>index</b> with <b>url.</b>
+KUrl.prettyUrl() is used so that the url is properly decoded
+for displaying.
+</p></div></div><a class="anchor" name="obj196112140"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> changeUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a>&nbsp;</td>
+<td class="paramname"><em>icon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Replaces the item at position <b>index</b> with <b>url</b> and icon <b>icon.</b>
+KUrl.prettyUrl() is used so that the url is properly decoded
+for displaying.
+</p></div></div><a class="anchor" name="obj196141644"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> completion</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted when the completion key is pressed.
+</p>
+<p>
+The argument is the current text being edited.
+</p>
+<p>
+Note that this signal is <b>not</b> available when the widget is non-editable
+or the completion mode is set to <b>KGlobalSettings.CompletionNone.</b>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("completion(const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj196130764"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KCompletionBox.html">KCompletionBox</a> completionBox</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>create=1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the completion-box, that is used in completion mode
+KGlobalSettings.CompletionPopup and KGlobalSettings.CompletionPopupAuto.
+This method will create a completion-box by calling
+KLineEdit.completionBox, if none is there, yet.
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>create</em>&nbsp;</td><td> Set this to false if you don't want the box to be created
+i.e. to test if it is available.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj196143244"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> completionModeChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KGlobalSettings.Completion&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted whenever the completion mode is changed by the user
+through the context menu.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("completionModeChanged(Completion)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj196124332"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool contains</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convenience method which iterates over all items and checks if
+any of them is equal to <b>text.</b>
+</p>
+<p>
+If <b>text</b> is an empty string, <b>false</b>
+is returned.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> <b>true</b> if an item with the string <b>text</b> is in the combobox.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj196155916"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> create</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">WId&nbsp;</td>
+<td class="paramname"><em>a0=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>initializeWindow=1</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>destroyOldWindow=1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Reimplemented for internal reasons, the API is not affected.
+</p></div></div><a class="anchor" name="obj196121260"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int cursorPosition</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the current cursor position.
+</p>
+<p>
+This method always returns a -1 if the combo-box is <b>not</b>
+editable (read-write).
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> Current cursor position.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj196129548"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool eventFilter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>a0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a>&nbsp;</td>
+<td class="paramname"><em>a1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Re-implemented for internal reasons. API not affected.
+</p></div></div><a class="anchor" name="obj196087692"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> insertURL</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index=-1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Deprecated to reflect Qt api changes
+<dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd>
+</dd></dl>
+</p></div></div><a class="anchor" name="obj196096268"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> insertURL</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a>&nbsp;</td>
+<td class="paramname"><em>pixmap</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index=-1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj196109772"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> insertUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Inserts <b>url</b> at position <b>index</b> into the combobox.
+KUrl.prettyUrl() is used so that the url is properly decoded
+for displaying.
+</p></div></div><a class="anchor" name="obj196110508"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> insertUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a>&nbsp;</td>
+<td class="paramname"><em>icon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Inserts <b>url</b> with the pixmap &amp;p pixmap at position <b>index</b> into
+the combobox. KUrl.prettyUrl() is used so that the url is
+properly decoded for displaying.
+</p></div></div><a class="anchor" name="obj196155212"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> makeCompletion</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Completes text according to the completion mode.
+</p>
+<p>
+Note: this method is <b>not</b> invoked if the completion mode is
+set to CompletionNone. Also if the mode is set to <b>CompletionShell</b>
+and multiple matches are found, this method will complete the
+text to the first match with a beep to inidicate that there are
+more matches. Then any successive completion key event iterates
+through the remaining matches. This way the rotation functionality
+is left to iterate through the list as usual.
+</p></div></div><a class="anchor" name="obj196161964"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsize.html">QSize</a> minimumSizeHint</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj196132300"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> returnPressed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emitted when the user presses the Enter key.
+</p>
+<p>
+Note that this signal is only emitted when the widget is editable.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("returnPressed()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj196131404"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> returnPressed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted when the user presses the Enter key.
+</p>
+<p>
+The argument is the current text being edited. This signal is just like
+returnPressed() except it contains the current text as its argument.
+</p>
+<p>
+Note that this signal is only emitted when the
+widget is editable.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("returnPressed(const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj196144332"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> rotateText</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KCompletionBase.KeyBindingType&nbsp;</td>
+<td class="paramname"><em>type</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Iterates through all possible matches of the completed text
+or the history list.
+</p>
+<p>
+Depending on the value of the argument, this function either
+iterates through the history list of this widget or the all
+possible matches in whenever multiple matches result from a
+text completion request. Note that the all-possible-match
+iteration will not work if there are no previous matches, i.e.
+no text has been completed and the *nix shell history list
+rotation is only available if the insertion policy for this
+widget is set either <b>QComobBox.AtTop</b> or <b>QComboBox.AtBottom.</b>
+For other insertion modes whatever has been typed by the user
+when the rotation event was initiated will be lost.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The key-binding invoked.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj196112044"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setAutoCompletion</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>autocomplete</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Re-implemented from QComboBox.
+</p>
+<p>
+If <b>true,</b> the completion mode will be set to automatic.
+Otherwise, it is defaulted to the global setting. This
+method has been replaced by the more comprehensive
+setCompletionMode().
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>autocomplete</em>&nbsp;</td><td> Flag to enable/disable automatic completion mode.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj196144780"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setCompletedItems</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramname"><em>items</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>autosubject=1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets <b>items</b> into the completion-box if completionMode() is
+CompletionPopup. The popup will be shown immediately.
+</p></div></div><a class="anchor" name="obj196144716"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setCompletedText</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the completed text in the line-edit appropriately.
+</p>
+<p>
+This function is an implementation for
+KCompletionBase.setCompletedText.
+</p></div></div><a class="anchor" name="obj196154860"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setCompletedText</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>a0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>a1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj196122220"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setContextMenuEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>showMenu</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Enables or disable the popup (context) menu.
+</p>
+<p>
+This method only works if this widget is editable, i.e.
+read-write and allows you to enable/disable the context
+menu. It does nothing if invoked for a none-editable
+combo-box. Note that by default the mode changer item
+is made visiable whenever the context menu is enabled.
+Use hideModechanger() if you want to hide this
+item. Also by default, the context menu is created if
+this widget is editable. Call this function with the
+argument set to false to disable the popup menu.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>showMenu</em>&nbsp;</td><td> If <b>true,</b> show the context menu.
+</td></tr> </table></dl>
+<p> <dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> use setContextMenuPolicy
+</dd></dl>
+</p></div></div><a class="anchor" name="obj196144972"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setCurrentItem</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>item</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>insert=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index=-1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Selects the first item that matches <b>item.</b> If there is no such item,
+it is inserted at position <b>index</b> if <b>insert</b> is true. Otherwise,
+no item is selected.
+</p></div></div><a class="anchor" name="obj196099212"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setEditUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets <b>url</b> into the edit field of the combobox. It uses
+KUrl.prettyUrl() so that the url is properly decoded for
+displaying.
+</p></div></div><a class="anchor" name="obj196131916"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setEditable</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>editable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>"Re-implemented" so that setEditable(true) creates a KLineEdit
+instead of QLineEdit.
+</p>
+<p>
+Note that QComboBox.setEditable is not virtual, so do not
+use a KComboBox in a QComboBox pointer.
+</p></div></div><a class="anchor" name="obj196131276"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setLineEdit</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qlineedit.html">QLineEdit</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Re-implemented for internal reasons. API remains unaffected.
+Note that QComboBox.setLineEdit is not virtual in Qt4, do not
+use a KComboBox in a QComboBox pointer.
+</p>
+<p>
+NOTE: Only editable comboboxes can have a line editor. As such
+any attempt to assign a line-edit to a non-editable combobox will
+simply be ignored.
+</p></div></div><a class="anchor" name="obj196124172"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setTrapReturnKey</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>trap</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>By default, KComboBox recognizes Key_Return and Key_Enter
+and emits the returnPressed() signals, but it also lets the
+event pass, for example causing a dialog's default-button to
+be called.
+</p>
+<p>
+Call this method with <b>trap</b> equal to true to make KComboBox
+stop these events. The signals will still be emitted of course.
+</p>
+<p>
+Only affects read-writable comboboxes.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setTrapReturnKey()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj196123340"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setUrlDropsEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>enable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Enables/Disables handling of URL drops. If enabled and the user
+drops an URL, the decoded URL will be inserted. Otherwise the default
+behavior of QComboBox is used, which inserts the encoded URL.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>enable</em>&nbsp;</td><td> If <b>true,</b> insert decoded URLs
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj196142188"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> substringCompletion</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted when the shortcut for substring completion is pressed.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("substringCompletion(const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj196142732"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> textRotation</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KCompletionBase.KeyBindingType&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted when the text rotation key-bindings are pressed.
+</p>
+<p>
+The argument indicates which key-binding was pressed. In this case this
+can be either one of four values: <b>PrevCompletionMatch,</b>
+<b>NextCompletionMatch,</b> <b>RotateUp</b> or <b>RotateDown.</b> See
+KCompletionBase.setKeyBinding() for details.
+</p>
+<p>
+Note that this signal is <b>NOT</b> emitted if the completion
+mode is set to CompletionNone.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("textRotation(KeyBindingType)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj196129644"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool trapReturnKey</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> <b>true</b> if keyevents of Key_Return or Key_Enter will
+be stopped or if they will be propagated.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setTrapReturnKey ()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj196123852"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool urlDropsEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns <b>true</b> when decoded URL drops are enabled
+</p></div></div><a class="anchor" name="obj196156620"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> wheelEvent</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwheelevent.html">QWheelEvent</a>&nbsp;</td>
+<td class="paramname"><em>ev</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

@@ -1,0 +1,2457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KStandardAction</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>KStandardAction Namespace Reference</h1>
+<code>from PyKDE4.kdeui.KStandardAction import *</code>
+<p>
+<h2>Detailed Description</h2>
+<p>Convenience methods to access all standard KDE actions.
+</p>
+<p>
+These actions should be used instead of hardcoding menubar and
+toolbar items. Using these actions helps your application easily
+conform to the KDE UI Style Guide
+<dl class="see" compact><dt><b>See also:</b></dt><dd> http://developer.kde.org/documentation/standards/kde/style/basics/index.html .
+</dd></dl> </p>
+<p>
+All of the documentation for KAction holds for KStandardAction
+also. When in doubt on how things work, check the KAction
+documention first.
+Please note that calling any of these methods automatically adds the action
+to the actionCollection() of the QObject given by the 'parent' parameter.
+</p>
+<p>
+<b>Simple Example:</b>\n
+</p>
+<p>
+In general, using standard actions should be a drop in replacement
+for regular actions. For example, if you previously had:
+</p>
+<p>
+<pre class="fragment">
+ KAction *newAct = new KAction(i18n("&amp;New"), KIcon("document-new"),
+                               KStandardShortcut.shortcut(KStandardShortcut.New), this,
+                               SLOT(fileNew()), actionCollection());
+</pre>
+</p>
+<p>
+You could drop that and replace it with:
+</p>
+<p>
+<pre class="fragment">
+ KAction *newAct = KStandardAction.openNew(this, SLOT(fileNew()),
+                                       actionCollection());
+</pre>
+</p>
+<p>
+<b>Non-standard Usages</b>\n
+</p>
+<p>
+It is possible to use the standard actions in various
+non-recommended ways. Say, for instance, you wanted to have a
+standard action (with the associated correct text and icon and
+accelerator, etc) but you didn't want it to go in the standard
+place (this is not recommended, by the way). One way to do this is
+to simply not use the XML UI framework and plug it into wherever
+you want. If you do want to use the XML UI framework (good!), then
+it is still possible.
+</p>
+<p>
+Basically, the XML building code matches names in the XML code with
+the internal names of the actions. You can find out the internal
+names of each of the standard actions by using the name
+method like so: KStandardAction.name(KStandardAction.Cut) would return
+'edit_cut'. The XML building code will match 'edit_cut' to the
+attribute in the global XML file and place your action there.
+</p>
+<p>
+However, you can change the internal name. In this example, just
+do something like:
+</p>
+<p>
+<pre class="fragment">
+ (void)KStandardAction.cut(this, SLOT(editCut()), actionCollection(), "my_cut");
+</pre>
+</p>
+<p>
+Now, in your local XML resource file (e.g., yourappui.rc), simply
+put 'my_cut' where you want it to go.
+</p>
+<p>
+Another non-standard usage concerns getting a pointer to an
+existing action if, say, you want to enable or disable the action.
+You could do it the recommended way and just grab a pointer when
+you instantiate it as in the 'openNew' example above... or you
+could do it the hard way:
+</p>
+<p>
+<pre class="fragment">
+ KAction *cut = actionCollection()-&gt;action(KStandardAction.name(KStandardAction.Cut));
+</pre>
+</p>
+<p>
+Another non-standard usage concerns instantiating the action in the
+first place. Usually, you would use the member functions as
+shown above (e.g., KStandardAction.cut(this, SLOT, parent)). You
+may, however, do this using the enums provided. This author can't
+think of a reason why you would want to, but, hey, if you do,
+here's how:
+</p>
+<p>
+<pre class="fragment">
+ (void)KStandardAction.action(KStandardAction.New, this, SLOT(fileNew()), actionCollection());
+ (void)KStandardAction.action(KStandardAction.Cut, this, SLOT(editCut()), actionCollection());
+</pre>
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Kurt Granroth &lt;granroth@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj181933420">StandardAction</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ActionNone, New, Open, OpenRecent, Save, SaveAs, Revert, Close, Print, PrintPreview, Mail, Quit, Undo, Redo, Cut, Copy, Paste, SelectAll, Deselect, Find, FindNext, FindPrev, Replace, ActualSize, FitToPage, FitToWidth, FitToHeight, ZoomIn, ZoomOut, Zoom, Redisplay, Up, Back, Forward, Home, Prior, Next, Goto, GotoPage, GotoLine, FirstPage, LastPage, DocumentBack, DocumentForward, AddBookmark, EditBookmarks, Spelling, ShowMenubar, ShowToolbar, ShowStatusbar, SaveOptions, KeyBindings, Preferences, ConfigureToolbars, Help, HelpContents, WhatsThis, ReportBug, AboutApp, AboutKDE, TipofDay, ConfigureNotifications, FullScreen, Clear, PasteText, SwitchApplicationLanguage&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Functions</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189727948">aboutApp</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189729164">aboutKDE</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[KStandardAction::StandardAction]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181946764">actionIds</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj168357388">actualSize</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170718572">addBookmark</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj173425580">back</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186414860">clear</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170772908">clear</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj177156172">close</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184113452">configureNotifications</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184111852">configureToolbars</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163108172">copy</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186414316">copy</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181944940">create</a> (KStandardAction.StandardAction id, SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj161758540">cut</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186416076">cut</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj167846188">deselect</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178878956">documentBack</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj173956972">documentForward</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj182399468">editBookmarks</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj174769708">find</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj173468204">findNext</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj173468108">findPrev</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186429068">firstPage</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187272300">fitToHeight</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181313484">fitToPage</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181311180">fitToWidth</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180237836">forward</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KToggleFullScreenAction.html">KToggleFullScreenAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188962188">fullScreen</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> window, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181403084">goTo</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186425740">gotoLine</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186425516">gotoPage</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184115180">help</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184114188">helpContents</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180240268">home</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188964364">keyBindings</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178878252">lastPage</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj161735276">mail</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181946124">name</a> (KStandardAction.StandardAction id)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181400300">next</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176407532">open</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176469228">openNew</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KRecentFilesAction.html">KRecentFilesAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176471692">openRecent</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163109900">paste</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj168441004">paste</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186413676">pasteText</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188961164">preferences</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj179895852">print_</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj179896204">printPreview</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181299084">prior</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178005100">quit</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187273132">redisplay</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj161758572">redo</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj173496748">replace</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171859916">reportBug</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj177157580">revert</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176398988">save</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176400108">saveAs</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188962636">saveOptions</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186415724">selectAll</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170772524">selectAll</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">KStandardShortcut.StandardShortcut&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176469388">shortcutForActionId</a> (KStandardAction.StandardAction id)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KToggleAction.html">KToggleAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170718316">showMenubar</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KToggleAction.html">KToggleAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj174163660">showStatusbar</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj174165100">spelling</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181945452">stdName</a> (KStandardAction.StandardAction act_enum)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176469068">stdNames</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171856012">tipOfDay</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178007692">undo</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj173426700">up</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171856492">whatsThis</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187272844">zoom</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187270316">zoomIn</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187272140">zoomOut</a> (SIP_RXOBJ_CON a0=, SIP_SLOT_CON () a1=, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent)</td></tr>
+</table>
+<hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj181933420"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">StandardAction</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The standard menubar and toolbar actions.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>ActionNone</em>&nbsp;</td><td><tr><td valign="top"><em>New</em>&nbsp;</td><td><tr><td valign="top"><em>Open</em>&nbsp;</td><td><tr><td valign="top"><em>OpenRecent</em>&nbsp;</td><td><tr><td valign="top"><em>Save</em>&nbsp;</td><td><tr><td valign="top"><em>SaveAs</em>&nbsp;</td><td><tr><td valign="top"><em>Revert</em>&nbsp;</td><td><tr><td valign="top"><em>Close</em>&nbsp;</td><td><tr><td valign="top"><em>Print</em>&nbsp;</td><td><tr><td valign="top"><em>PrintPreview</em>&nbsp;</td><td><tr><td valign="top"><em>Mail</em>&nbsp;</td><td><tr><td valign="top"><em>Quit</em>&nbsp;</td><td><tr><td valign="top"><em>Undo</em>&nbsp;</td><td><tr><td valign="top"><em>Redo</em>&nbsp;</td><td><tr><td valign="top"><em>Cut</em>&nbsp;</td><td><tr><td valign="top"><em>Copy</em>&nbsp;</td><td><tr><td valign="top"><em>Paste</em>&nbsp;</td><td><tr><td valign="top"><em>SelectAll</em>&nbsp;</td><td><tr><td valign="top"><em>Deselect</em>&nbsp;</td><td><tr><td valign="top"><em>Find</em>&nbsp;</td><td><tr><td valign="top"><em>FindNext</em>&nbsp;</td><td><tr><td valign="top"><em>FindPrev</em>&nbsp;</td><td><tr><td valign="top"><em>Replace</em>&nbsp;</td><td><tr><td valign="top"><em>ActualSize</em>&nbsp;</td><td><tr><td valign="top"><em>FitToPage</em>&nbsp;</td><td><tr><td valign="top"><em>FitToWidth</em>&nbsp;</td><td><tr><td valign="top"><em>FitToHeight</em>&nbsp;</td><td><tr><td valign="top"><em>ZoomIn</em>&nbsp;</td><td><tr><td valign="top"><em>ZoomOut</em>&nbsp;</td><td><tr><td valign="top"><em>Zoom</em>&nbsp;</td><td><tr><td valign="top"><em>Redisplay</em>&nbsp;</td><td><tr><td valign="top"><em>Up</em>&nbsp;</td><td><tr><td valign="top"><em>Back</em>&nbsp;</td><td><tr><td valign="top"><em>Forward</em>&nbsp;</td><td><tr><td valign="top"><em>Home</em>&nbsp;</td><td><tr><td valign="top"><em>Prior</em>&nbsp;</td><td><tr><td valign="top"><em>Next</em>&nbsp;</td><td><tr><td valign="top"><em>Goto</em>&nbsp;</td><td><tr><td valign="top"><em>GotoPage</em>&nbsp;</td><td><tr><td valign="top"><em>GotoLine</em>&nbsp;</td><td><tr><td valign="top"><em>FirstPage</em>&nbsp;</td><td><tr><td valign="top"><em>LastPage</em>&nbsp;</td><td><tr><td valign="top"><em>DocumentBack</em>&nbsp;</td><td><tr><td valign="top"><em>DocumentForward</em>&nbsp;</td><td><tr><td valign="top"><em>AddBookmark</em>&nbsp;</td><td><tr><td valign="top"><em>EditBookmarks</em>&nbsp;</td><td><tr><td valign="top"><em>Spelling</em>&nbsp;</td><td><tr><td valign="top"><em>ShowMenubar</em>&nbsp;</td><td><tr><td valign="top"><em>ShowToolbar</em>&nbsp;</td><td><tr><td valign="top"><em>ShowStatusbar</em>&nbsp;</td><td><tr><td valign="top"><em>SaveOptions</em>&nbsp;</td><td><tr><td valign="top"><em>KeyBindings</em>&nbsp;</td><td><tr><td valign="top"><em>Preferences</em>&nbsp;</td><td><tr><td valign="top"><em>ConfigureToolbars</em>&nbsp;</td><td><tr><td valign="top"><em>Help</em>&nbsp;</td><td><tr><td valign="top"><em>HelpContents</em>&nbsp;</td><td><tr><td valign="top"><em>WhatsThis</em>&nbsp;</td><td><tr><td valign="top"><em>ReportBug</em>&nbsp;</td><td><tr><td valign="top"><em>AboutApp</em>&nbsp;</td><td><tr><td valign="top"><em>AboutKDE</em>&nbsp;</td><td><tr><td valign="top"><em>TipofDay</em>&nbsp;</td><td><tr><td valign="top"><em>ConfigureNotifications</em>&nbsp;</td><td><tr><td valign="top"><em>FullScreen</em>&nbsp;</td><td><tr><td valign="top"><em>Clear</em>&nbsp;</td><td><tr><td valign="top"><em>PasteText</em>&nbsp;</td><td><tr><td valign="top"><em>SwitchApplicationLanguage</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p><hr><h2>Function Documentation</h2><a class="anchor" name="obj189727948"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> aboutApp</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Display the application's About box.
+</p></div></div><a class="anchor" name="obj189729164"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> aboutKDE</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Display the About KDE dialog.
+</p></div></div><a class="anchor" name="obj181946764"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[KStandardAction::StandardAction] actionIds</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a list of all actionIds.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
+</dd></dl>
+</p></div></div><a class="anchor" name="obj168357388"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> actualSize</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>View the document at its actual size.
+</p></div></div><a class="anchor" name="obj170718572"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> addBookmark</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add the current page to the bookmarks tree.
+</p></div></div><a class="anchor" name="obj173425580"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> back</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Move back (web style menu).
+</p></div></div><a class="anchor" name="obj186414860"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> clear</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Clear selected area. Calls clear() on the widget with the current focus.
+Note that for some widgets, this may not provide the intended behavior. For
+example if you make use of the code above and a K3ListView has the focus, clear()
+will clear all of the items in the list. If this is not the intened behavior
+and you want to make use of this slot, you can subclass K3ListView and reimplement
+this slot. For example the following code would implement a K3ListView without this
+behavior:
+</p>
+<p>
+<pre class="fragment">
+ class MyListView : public K3ListView {
+   Q_OBJECT
+ public:
+   MyListView( QWidget * parent = 0, const char * name = 0, WFlags f = 0 ) : K3ListView( parent, name, f ) {}
+   virtual ~MyListView() {}
+ public slots:
+   virtual void clear() {}
+ };
+</pre>
+</p></div></div><a class="anchor" name="obj170772908"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> clear</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Clear the content of the focus widget
+</p></div></div><a class="anchor" name="obj177156172"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> close</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Close the current document.
+</p></div></div><a class="anchor" name="obj184113452"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> configureNotifications</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>The Configure Notifications dialog.
+</p></div></div><a class="anchor" name="obj184111852"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> configureToolbars</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>The Customize Toolbar dialog.
+</p></div></div><a class="anchor" name="obj163108172"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> copy</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Copy selected area and store it in the clipboard.
+Calls copy() on the widget with the current focus.
+</p></div></div><a class="anchor" name="obj186414316"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> copy</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Copy the selected area into the clipboard.
+</p></div></div><a class="anchor" name="obj181944940"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> create</td>
+<td>(</td>
+<td class="paramtype">KStandardAction.StandardAction&nbsp;</td>
+<td class="paramname"><em>id</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Creates an action corresponding to the
+KStandardAction.StandardAction enum.
+</p></div></div><a class="anchor" name="obj161758540"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> cut</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Cut selected area and store it in the clipboard.
+Calls cut() on the widget with the current focus.
+</p></div></div><a class="anchor" name="obj186416076"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> cut</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Cut selected area and store it in the clipboard.
+</p></div></div><a class="anchor" name="obj167846188"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> deselect</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Deselect any selected elements in the current document.
+</p></div></div><a class="anchor" name="obj178878956"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> documentBack</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Move back (document style menu).
+</p></div></div><a class="anchor" name="obj173956972"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> documentForward</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Move forward (document style menu).
+</p></div></div><a class="anchor" name="obj182399468"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> editBookmarks</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Edit the application bookmarks.
+</p></div></div><a class="anchor" name="obj174769708"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> find</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Initiate a 'find' request in the current document.
+</p></div></div><a class="anchor" name="obj173468204"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> findNext</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Find the next instance of a stored 'find'.
+</p></div></div><a class="anchor" name="obj173468108"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> findPrev</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Find a previous instance of a stored 'find'.
+</p></div></div><a class="anchor" name="obj186429068"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> firstPage</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Jump to the first page.
+</p></div></div><a class="anchor" name="obj187272300"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> fitToHeight</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Fit the document view to the height of the current window.
+</p></div></div><a class="anchor" name="obj181313484"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> fitToPage</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Fit the document view to the size of the current window.
+</p></div></div><a class="anchor" name="obj181311180"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> fitToWidth</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Fit the document view to the width of the current window.
+</p></div></div><a class="anchor" name="obj180237836"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> forward</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Move forward (web style menu).
+</p></div></div><a class="anchor" name="obj188962188"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KToggleFullScreenAction.html">KToggleFullScreenAction</a> fullScreen</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>window</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Switch to/from full screen mode
+</p></div></div><a class="anchor" name="obj181403084"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> goTo</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Go to somewhere in general.
+</p></div></div><a class="anchor" name="obj186425740"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> gotoLine</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Go to a specific line (dialog).
+</p></div></div><a class="anchor" name="obj186425516"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> gotoPage</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Go to a specific page (dialog).
+</p></div></div><a class="anchor" name="obj184115180"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> help</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Display the help.
+</p></div></div><a class="anchor" name="obj184114188"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> helpContents</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Display the help contents.
+</p></div></div><a class="anchor" name="obj180240268"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> home</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Go to the "Home" position or document.
+</p></div></div><a class="anchor" name="obj188964364"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> keyBindings</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Display the configure key bindings dialog.
+</p>
+<p>
+Note that you might be able to use the pre-built KXMLGUIFactory's function:
+KStandardAction.keyBindings(guiFactory(), SLOT(configureShortcuts()), actionCollection());
+</p></div></div><a class="anchor" name="obj178878252"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> lastPage</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Jump to the last page.
+</p></div></div><a class="anchor" name="obj161735276"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> mail</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Mail this document.
+</p></div></div><a class="anchor" name="obj181946124"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name</td>
+<td>(</td>
+<td class="paramtype">KStandardAction.StandardAction&nbsp;</td>
+<td class="paramname"><em>id</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This will return the internal name of a given standard action.
+</p></div></div><a class="anchor" name="obj181400300"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> next</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Scroll down one page.
+</p></div></div><a class="anchor" name="obj176407532"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> open</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Open an existing file.
+</p></div></div><a class="anchor" name="obj176469228"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> openNew</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Create a new document or window.
+</p></div></div><a class="anchor" name="obj176471692"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KRecentFilesAction.html">KRecentFilesAction</a> openRecent</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Open a recently used document. The signature of the slot being called
+is of the form slotURLSelected( const KUrl &amp; ).
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>recvr</em>&nbsp;</td><td> object to receive slot
+
+<tr><td></td><td valign="top"><em>slot</em>&nbsp;</td><td> The SLOT to invoke when a URL is selected. The slot's
+signature is slotURLSelected( const KUrl &amp; ).
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> parent widget
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj163109900"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> paste</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Paste the contents of clipboard at the current mouse or cursor
+Calls paste() on the widget with the current focus.
+</p></div></div><a class="anchor" name="obj168441004"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> paste</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Paste the contents of clipboard at the current mouse or cursor
+position.
+</p></div></div><a class="anchor" name="obj186413676"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> pasteText</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Paste the contents of clipboard at the current mouse or cursor
+position. Provide a button on the toolbar with the clipboard history
+menu if Klipper is running.
+</p></div></div><a class="anchor" name="obj188961164"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> preferences</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Display the preferences/options dialog.
+</p></div></div><a class="anchor" name="obj179895852"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> print_</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Print the current document.
+</p></div></div><a class="anchor" name="obj179896204"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> printPreview</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Show a print preview of the current document.
+</p></div></div><a class="anchor" name="obj181299084"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> prior</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Scroll up one page.
+</p></div></div><a class="anchor" name="obj178005100"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> quit</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Quit the program.
+</p>
+<p>
+Note that you probably want to connect this action to either QWidget.close()
+or QApplication.closeAllWindows(), but not QApplication.quit(), so that
+KMainWindow.queryClose() is called on any open window (to warn the user
+about unsaved changes for example).
+</p></div></div><a class="anchor" name="obj187273132"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> redisplay</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Redisplay or redraw the document.
+</p></div></div><a class="anchor" name="obj161758572"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> redo</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Redo the last operation.
+</p></div></div><a class="anchor" name="obj173496748"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> replace</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Find and replace matches.
+</p></div></div><a class="anchor" name="obj171859916"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> reportBug</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Open up the Report Bug dialog.
+</p></div></div><a class="anchor" name="obj177157580"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> revert</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Revert the current document to the last saved version
+(essentially will undo all changes).
+</p></div></div><a class="anchor" name="obj176398988"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> save</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Save the current document.
+</p></div></div><a class="anchor" name="obj176400108"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> saveAs</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Save the current document under a different name.
+</p></div></div><a class="anchor" name="obj188962636"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> saveOptions</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Display the save options dialog.
+</p></div></div><a class="anchor" name="obj186415724"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> selectAll</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Calls selectAll() on the widget with the current focus.
+</p></div></div><a class="anchor" name="obj170772524"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> selectAll</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Select all elements in the current document.
+</p></div></div><a class="anchor" name="obj176469388"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">KStandardShortcut.StandardShortcut shortcutForActionId</td>
+<td>(</td>
+<td class="paramtype">KStandardAction.StandardAction&nbsp;</td>
+<td class="paramname"><em>id</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the standardshortcut associated with <b>actionId.</b>
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>actionId</em>&nbsp;</td><td> The actionId whose associated shortcut is wanted.
+</td></tr>
+</table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
+</dd></dl>
+</p></div></div><a class="anchor" name="obj170718316"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KToggleAction.html">KToggleAction</a> showMenubar</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Show/Hide the menubar.
+</p></div></div><a class="anchor" name="obj174163660"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KToggleAction.html">KToggleAction</a> showStatusbar</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Show/Hide the statusbar.
+</p></div></div><a class="anchor" name="obj174165100"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> spelling</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Pop up the spell checker.
+</p></div></div><a class="anchor" name="obj181945452"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> stdName</td>
+<td>(</td>
+<td class="paramtype">KStandardAction.StandardAction&nbsp;</td>
+<td class="paramname"><em>act_enum</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> use name()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj176469068"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> stdNames</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a list of all standard names. Used by KAccelManager
+to give those heigher weight.
+</p></div></div><a class="anchor" name="obj171856012"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> tipOfDay</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Display "Tip of the Day"
+</p></div></div><a class="anchor" name="obj178007692"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> undo</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Undo the last operation.
+</p></div></div><a class="anchor" name="obj173426700"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> up</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Move up (web style menu).
+</p></div></div><a class="anchor" name="obj171856492"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> whatsThis</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Trigger the What's This cursor.
+</p></div></div><a class="anchor" name="obj187272844"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> zoom</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Popup a zoom dialog.
+</p></div></div><a class="anchor" name="obj187270316"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> zoomIn</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Zoom in.
+</p></div></div><a class="anchor" name="obj187272140"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KAction.html">KAction</a> zoomOut</td>
+<td>(</td>
+<td class="paramtype">SIP_RXOBJ_CON&nbsp;</td>
+<td class="paramname"><em>a0=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">SIP_SLOT_CON ()&nbsp;</td>
+<td class="paramname"><em>a1=</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Zoom out.
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

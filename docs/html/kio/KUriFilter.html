@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KUriFilter</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>KUriFilter Class Reference</h1>
+<code>from PyKDE4.kio import *</code>
+<p>
+
+
+
+<h2>Detailed Description</h2>
+
+<p>Manages the filtering of URIs.
+</p>
+<p>
+The intention of this plugin class is to allow people to extend the
+functionality of KUrl without modifying it directly. This way KUrl will
+remain a generic parser capable of parsing any generic URL that adheres
+to specifications.
+</p>
+<p>
+The KUriFilter class applies a number of filters to a URI and returns the
+filtered version whenever possible. The filters are implemented using
+plugins to provide easy extensibility of the filtering mechanism. New
+filters can be added in the future by simply inheriting from
+KUriFilterPlugin and implementing the KUriFilterPlugin.filterUri
+method.
+</p>
+<p>
+Use of this plugin-manager class is straight forward. Since it is a
+singleton object, all you have to do is obtain an instance by doing
+<b>KUriFilter.self()</b> and use any of the public member functions to
+preform the filtering.
+</p>
+<p>
+<b>Example</b>
+</p>
+<p>
+To simply filter a given string:
+</p>
+<p>
+<pre class="fragment">
+ bool filtered = KUriFilter.self()-&gt;filterUri( "kde.org" );
+</pre>
+</p>
+<p>
+You can alternatively use a KUrl:
+</p>
+<p>
+<pre class="fragment">
+ KUrl url = "kde.org";
+ bool filtered = KUriFilter.self()-&gt;filterUri( url );
+</pre>
+</p>
+<p>
+If you have a constant string or a constant URL, simply invoke the
+corresponding function to obtain the filtered string or URL instead
+of a boolean flag:
+</p>
+<p>
+<pre class="fragment">
+ QString u = KUriFilter.self()-&gt;filteredUri( "kde.org" );
+</pre>
+</p>
+<p>
+You can also restrict the filter(s) to be used by supplying
+the name of the filter(s) to use. By defualt all available
+filters will be used. To use specific filters, add the names
+of the filters you want to use to a QStringList and invoke
+the appropriate filtering function. The examples below show
+the use of specific filters. The first one uses a single
+filter called kshorturifilter while the second example uses
+multiple filters:
+</p>
+<p>
+<pre class="fragment">
+ QString text = "kde.org";
+ bool filtered = KUriFilter.self()-&gt;filterUri( text, "kshorturifilter" );
+</pre>
+</p>
+<p>
+<pre class="fragment">
+ QStringList list;
+ list &lt;&lt; "kshorturifilter" &lt;&lt; "localdomainfilter";
+ bool filtered = KUriFilter.self()-&gt;filterUri( text, list );
+</pre>
+</p>
+<p>
+KUriFilter also allows richer data exchange through a simple
+meta-object called <b>KUriFilterData.</b> Using this meta-object
+you can find out more information about the URL you want to
+filter. See KUriFilterData for examples and details.
+</p>
+<p>
+Filters a given URL into its proper format whenever possible.
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186414668">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196965004">__init__</a> (self, <a href="../kio/KUriFilter.html">KUriFilter</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163107596">filterUri</a> (self, <a href="../kio/KUriFilterData.html">KUriFilterData</a> data, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> filters=QStringList())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj175534252">filterUri</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> uri, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> filters=QStringList())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj168443468">filterUri</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> uri, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> filters=QStringList())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186413868">filteredUri</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> uri, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> filters=QStringList())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186413548">filteredUri</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> uri, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> filters=QStringList())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186414636">loadPlugins</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186413228">pluginNames</a> (self)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KUriFilter.html">KUriFilter</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163108332">self</a> ()</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj186414668"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>A protected constructor.
+</p>
+<p>
+This constructor creates a KUriFilter and
+initializes all plugins it can find by invoking
+loadPlugins.
+</p></div></div><a class="anchor" name="obj196965004"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KUriFilter.html">KUriFilter</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj163107596"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool filterUri</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KUriFilterData.html">KUriFilterData</a>&nbsp;</td>
+<td class="paramname"><em>data</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramname"><em>filters=QStringList()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Filters the URI given by the object UriFilterData.
+</p>
+<p>
+The given URL is filtered based on the specified list of filters.
+If the list is empty all available filters would be used.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> object that contains the URI to be filtered.
+
+<tr><td></td><td valign="top"><em>filters</em>&nbsp;</td><td> specify the list of filters to be used.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> a boolean indicating whether the URI has been changed
+</dd></dl>
+</p></div></div><a class="anchor" name="obj175534252"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool filterUri</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>uri</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramname"><em>filters=QStringList()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Filters the URI given by the URL.
+</p>
+<p>
+The given URL is filtered based on the specified list of filters.
+If the list is empty all available filters would be used.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>uri</em>&nbsp;</td><td> the URI to filter.
+
+<tr><td></td><td valign="top"><em>filters</em>&nbsp;</td><td> specify the list of filters to be used.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> a boolean indicating whether the URI has been changed
+</dd></dl>
+</p></div></div><a class="anchor" name="obj168443468"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool filterUri</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>uri</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramname"><em>filters=QStringList()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Filters a string representing a URI.
+</p>
+<p>
+The given URL is filtered based on the specified list of filters.
+If the list is empty all available filters would be used.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>uri</em>&nbsp;</td><td> The URI to filter.
+
+<tr><td></td><td valign="top"><em>filters</em>&nbsp;</td><td> specify the list of filters to be used.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> a boolean indicating whether the URI has been changed
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186413868"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KUrl.html">KUrl</a> filteredUri</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>uri</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramname"><em>filters=QStringList()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the filtered URI.
+</p>
+<p>
+The given URL is filtered based on the specified list of filters.
+If the list is empty all available filters would be used.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>uri</em>&nbsp;</td><td> The URI to filter.
+
+<tr><td></td><td valign="top"><em>filters</em>&nbsp;</td><td> specify the list of filters to be used.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the filtered URI or null if it cannot be filtered
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186413548"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filteredUri</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>uri</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramname"><em>filters=QStringList()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Return a filtered string representation of a URI.
+</p>
+<p>
+The given URL is filtered based on the specified list of filters.
+If the list is empty all available filters would be used.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>uri</em>&nbsp;</td><td> the URI to filter.
+
+<tr><td></td><td valign="top"><em>filters</em>&nbsp;</td><td> specify the list of filters to be used.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the filtered URI or null if it cannot be filtered
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186414636"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> loadPlugins</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Loads all allowed plugins.
+</p>
+<p>
+This function loads all filters that have not
+been disbled.
+</p></div></div><a class="anchor" name="obj186413228"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> pluginNames</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return a list of the names of all loaded plugins.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a QStringList of plugin names
+</dd></dl>
+</p></div></div><a class="anchor" name="obj163108332"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kio/KUriFilter.html">KUriFilter</a> self</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns an instance of KUriFilter.
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

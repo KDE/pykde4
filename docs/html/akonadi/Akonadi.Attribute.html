@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Akonadi.Attribute</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>Attribute Class Reference</h1>
+<code>from PyKDE4.akonadi import *</code>
+<p>
+
+Subclasses: <a href="../akonadi/Akonadi.EntityDisplayAttribute.html">Akonadi.EntityDisplayAttribute</a>, <a href="../akonadi/Akonadi.MessageThreadingAttribute.html">Akonadi.MessageThreadingAttribute</a><br />
+Namespace: Akonadi<br />
+<h2>Detailed Description</h2>
+<dl class="abstract" compact><dt><b>Abstract class:</b></dt>
+<dd>This class can be used as a base class for new classes, but can not be instantiated directly.</dd></dl>
+<p>Provides interface for custom attributes for Entity.
+</p>
+<p>
+This class is an interface for custom attributes, that can be stored
+in an entity. Attributes should be meta data, e.g. ACLs, quotas etc.
+that are not part of the entities' data itself.
+</p>
+<p>
+To provide custom attributes, you have to subclass from this interface
+and reimplement the pure virtual methods.
+</p>
+<p>
+<pre class="fragment">
+
+ class SecrecyAttribute : public Akonadi.Attribute
+ {
+    public:
+      enum Secrecy
+      {
+        Public,
+        Private,
+        Confidential
+      };
+
+      SecrecyAttribute( Secrecy secrecy = Public )
+        : mSecrecy( secrecy )
+      {
+      }
+
+      void setSecrecy( Secrecy secrecy )
+      {
+        mSecrecy = secrecy;
+      }
+
+      Secrecy secrecy() const
+      {
+        return mSecrecy;
+      }
+
+      virtual QByteArray type() const
+      {
+        return "secrecy";
+      }
+
+      virtual Attribute* clone() const
+      {
+        return new SecrecyAttribute( mSecrecy );
+      }
+
+      virtual QByteArray serialized() const
+      {
+        switch ( mSecrecy ) {
+          case Public: return "public"; break;
+          case Private: return "private"; break;
+          case Confidential: return "confidential"; break;
+        }
+      }
+
+      virtual void deserialize( const QByteArray &amp;data )
+      {
+        if ( data == "public" )
+          mSecrecy = Public;
+        else if ( data == "private" )
+          mSecrecy = Private;
+        else if ( data == "confidential" )
+          mSecrecy = Confidential;
+      }
+ }
+
+</pre>
+</p>
+<p>
+Additionally, you need to register your attribute with Akonadi.AttributeFactory
+for automatic deserialization during retrieving of collecitons or items:
+</p>
+<p>
+<pre class="fragment">
+ AttributeFactory.registerAttribute&lt;SecrecyAttribute&gt;();
+</pre>
+</p>
+<p>
+Third party attributes need to be registered once by each application that uses
+them. So the above snippet needs to be in the resource that adds the attribute,
+and each application that uses the resource. This may be simplified in the future.
+</p>
+<p>
+The custom attributes can be used in the following way:
+</p>
+<p>
+<pre class="fragment">
+
+ Akonadi.Item item( "text/directory" );
+ SecrecyAttribute* attr = item.attribute&lt;SecrecyAttribute&gt;( Item.AddIfMissing );
+ attr-&gt;setSecrecy( SecrecyAttribute.Confidential );
+
+</pre>
+</p>
+<p>
+and
+</p>
+<p>
+<pre class="fragment">
+
+ Akonadi.Item item = ...
+
+ if ( item.hasAttribute&lt;SecrecyAttribute&gt;() ) {
+   SecrecyAttribute *attr = item.attribute&lt;SecrecyAttribute&gt;();
+
+   SecrecyAttribute.Secrecy secrecy = attr-&gt;secrecy();
+   ...
+ }
+</pre>
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Volker Krause &lt;vkrause@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.Attribute.html">Akonadi.Attribute</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191898220">clone</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj167848364">deserialize</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> data)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj167848620">serialized</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj167847820">type</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj191898220"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../akonadi/Akonadi.Attribute.html">Akonadi.Attribute</a> clone</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Creates a copy of this attribute.
+</p></div></div><a class="anchor" name="obj167848364"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> deserialize</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td>
+<td class="paramname"><em>data</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Sets the data of this attribute, using the same encoding
+as returned by toByteArray().
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> The encoded attribute data.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj167848620"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> serialized</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns a QByteArray representation of the attribute which will be
+storaged. This can be raw binary data, no encoding needs to be applied.
+</p></div></div><a class="anchor" name="obj167847820"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> type</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns the type of the attribute.
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

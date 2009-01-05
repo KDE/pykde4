@@ -139,7 +139,7 @@ ENDIF(KDEPIMLIBS_FOUND)
 
 PYTHON_INSTALL(__init__.py ${PYTHON_SITE_PACKAGES_DIR}/PyKDE4)
 
-MESSAGE(STATUS "KDEVERSION: ${KDEVERSION}")
+MESSAGE(STATUS "KDE_VERSION: ${KDE_VERSION}")
 MESSAGE(STATUS "KDE4_INCLUDE_DIR: ${KDE4_INCLUDE_DIR}")
 MESSAGE(STATUS "KDE4_LIB_DIR: ${KDE4_LIB_DIR}")
 MESSAGE(STATUS "PYTHON_SITE_PACKAGES_DIR: ${PYTHON_SITE_PACKAGES_DIR}")
@@ -160,14 +160,14 @@ ENDFOREACH (_X ${SIP_DISABLE_FEATURES})
 GET_FILENAME_COMPONENT(LIB_DIR ${KDE4_LIB_DIR} NAME)
 
 SET(SIP_CONFIGURATION "
-kde_version_parts = '${KDEVERSION}'.split('.')
+kde_version_parts = '${KDE_VERSION}'.split('.')
 kde_version_hex = int(kde_version_parts[0])*65536 + int(kde_version_parts[1])*256 + int(kde_version_parts[2])
 _pkg_config = {
     'dist_name':            '',
     'kde_version':          kde_version_hex,
     'kde_version_extra':    '',
     'kde_version_sfx':      '',
-    'kde_version_str':      '${KDEVERSION}',
+    'kde_version_str':      '${KDE_VERSION}',
     'kdebasedir':           '${CMAKE_INSTALL_PREFIX}',
     'kdeincdir':            '${KDE4_INCLUDE_DIR}',
     'kdelibdir':            '${KDE4_LIB_DIR}',
@@ -178,7 +178,7 @@ _pkg_config = {
     'pykde_modules':        '${PYKDE_MODULES}',
     'pykde_sip_dir':        '${SIP_DEFAULT_SIP_DIR}/PyKDE4',
     'pykde_version':        kde_version_hex,
-    'pykde_version_str':    '${KDEVERSION}'
+    'pykde_version_str':    '${KDE_VERSION}'
 }
 
 _default_macros = None")

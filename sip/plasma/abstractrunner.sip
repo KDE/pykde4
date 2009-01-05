@@ -254,8 +254,6 @@ public:
         sipClass = sipClass_Plasma_ToolTipManager;
     else if (dynamic_cast<Plasma::TreeView*>(sipCpp))
         sipClass = sipClass_Plasma_TreeView;
-    else if (dynamic_cast<Plasma::UiLoader*>(sipCpp))
-        sipClass = sipClass_Plasma_UiLoader;
     else if (dynamic_cast<Plasma::View*>(sipCpp))
         sipClass = sipClass_Plasma_View;
     else if (dynamic_cast<Plasma::Wallpaper*>(sipCpp))

@@ -53,7 +53,6 @@
 #include <plasma/runnermanager.h>
 #include <plasma/scripting/runnerscript.h>
 #include <plasma/scripting/scriptengine.h>
-#include <plasma/scripting/uiloader.h>
 #include <plasma/widgets/signalplotter.h>
 #include <plasma/svg.h>
 #include <plasma/widgets/textedit.h>

@@ -32,7 +32,7 @@ public:
     Plasma::DataEngine*     engine (const QString& name) const;
     Plasma::DataEngine*     loadEngine (const QString& name);
     void                    unloadEngine (const QString& name);
-    static QStringList      listAllEngines ();
+    static QStringList      listAllEngines (const QString &parentApp=QString());
 
 private:
                             DataEngineManager ();

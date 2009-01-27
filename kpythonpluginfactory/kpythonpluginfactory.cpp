@@ -149,6 +149,9 @@ QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, 
     }
 
 
+    PyGILState_STATE gstate;
+    gstate = PyGILState_Ensure();
+
     if (!loaded) {
         // Inject a helper function
         QString bridge = QString("def kpythonpluginfactory_bridge(parentWidget,parent,componentData):\n"
@@ -178,6 +181,7 @@ QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, 
     if(!factoryFunction)
     {
         kDebug() << "Failed to find factory function";
+        PyGILState_Release(gstate);
         return 0;
     }
 
@@ -204,12 +208,14 @@ QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, 
         {
             kError() << "Error while running factory function for Python plugin: " << keyword;
             PyErr_Print();
+            PyGILState_Release(gstate);
             return 0;
         }
     }
     else
     {
         kError() << "Failed to create args.";
+        PyGILState_Release(gstate);
         return 0;
     }
     // cleanup a bit
@@ -226,6 +232,7 @@ QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, 
     if(!resultQObject)
     {
         kError() << "Failed sip conversion to C++ pointer";
+        PyGILState_Release(gstate);
         return 0;
     }
     Py_XDECREF(pyResultTuple);
@@ -233,6 +240,7 @@ QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, 
     // take care of any translation info
 //    KGlobal::locale()->insertCatalogue(script);
     kDebug() << "Returning result qobject";
+    PyGILState_Release(gstate);
     return resultQObject;
 }
 
@@ -256,9 +264,15 @@ bool AppendToSysPath (QString newPath)
         return false;
     }
 
+    PyGILState_STATE gstate;
+    gstate = PyGILState_Ensure();
+
     QString line = QString("import sys\nif not '%1' in sys.path:\n\tsys.path.append ('%2')\n")
                            .arg(newPath).arg(newPath);
-    return PyRun_SimpleString (line.toLatin1().data()) == 0;
+    bool rc = PyRun_SimpleString (line.toLatin1().data()) == 0;
+
+    PyGILState_Release(gstate);
+    return rc;
 }
 
 PyObject *ImportModule (QString moduleName)
@@ -268,7 +282,12 @@ PyObject *ImportModule (QString moduleName)
         return 0;
     }
 
+    PyGILState_STATE gstate;
+    gstate = PyGILState_Ensure();
+
     PyObject *module = PyImport_ImportModule (moduleName.toLatin1().data());
+
+    PyGILState_Release(gstate);
     return module;
 }
 
@@ -285,12 +304,17 @@ QLibrary *LoadPythonLibrary()
 
 PyObject *RunFunction(PyObject *object, PyObject *args)
 {
+    PyGILState_STATE gstate;
+    gstate = PyGILState_Ensure();
+
     if (!PyCallable_Check (object))
     {
+        PyGILState_Release(gstate);
         return NULL;
     }
 
     PyObject *res = PyObject_CallObject (object, args ? args : PyTuple_New (0));
+    PyGILState_Release(gstate);
     Py_XINCREF (res);
     return res;
 }

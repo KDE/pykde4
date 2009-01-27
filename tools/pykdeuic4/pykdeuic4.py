@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Copyright (C) 2007 Simon Edwards <simon@simonzone.com>
+# Copyright (C) 2007-9 Simon Edwards <simon@simonzone.com>
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Library General Public
@@ -20,9 +20,9 @@
 #
 import sys
 import time
-from PyQt4 import uic
 from PyQt4.uic.Compiler import indenter, compiler
 from PyQt4.uic.Compiler import qtproxies
+from PyQt4.uic.objcreator import MATCH,NO_MATCH
 
 header = """
 #!/usr/bin/env python
@@ -41,6 +41,23 @@ class kde_i18n_string(qtproxies.i18n_string):
         return "kdecore.i18n(\"%s\")" % (self.escape(self.string),)
 qtproxies.i18n_string = kde_i18n_string
 
+def kdeFilter():
+    import PyKDE4.kdeui
+    import PyKDE4.kio
+
+    # Load in the lists of KDE widgets.
+    kde_widgets = {}
+    for name,mod in [ ('PyKDE4.kdeui',PyKDE4.kdeui), ('PyKDE4.kio',PyKDE4.kio)]:
+        for symbol in dir(mod):
+            kde_widgets[symbol] = name
+
+    def _kdefilter(widgetname, baseclassname, module):
+        if widgetname in kde_widgets:
+            return (MATCH, (widgetname, baseclassname, kde_widgets[widgetname]))
+        else:
+            return (NO_MATCH, None)
+    return _kdefilter
+
 def processUI(uifile, output_filename=None, exe=False, indent=4):
     
     if output_filename is not None:
@@ -51,14 +68,16 @@ def processUI(uifile, output_filename=None, exe=False, indent=4):
     # Write out the header.
     output.write(header % (uifile,time.ctime()))
     indenter.indentwidth = indent
-    winfo = compiler.UICompiler().compileUi(uifile, output)
+    comp = compiler.UICompiler()
+    comp.factory._cwFilters.append(kdeFilter())
+    winfo = comp.compileUi(uifile, output)
 
     if exe:
         output.write("""
 if __name__ == '__main__':
     import sys
     global app
-    class MainWin(kdeui.KMainWindow, Ui_Form):
+    class MainWin(kdeui.KMainWindow, """ + winfo['uiclass'] + """):
         def __init__ (self, *args):
             kdeui.KMainWindow.__init__ (self)
             rootWidget = QtGui.QWidget(self)

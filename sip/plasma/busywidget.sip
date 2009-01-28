@@ -27,8 +27,9 @@ class BusyWidget : QGraphicsWidget
 #include <plasma/widgets/busywidget.h>
 %End
 
+
 public:
-    explicit                BusyWidget (QGraphicsWidget* parent = 0);
+    explicit                BusyWidget (QGraphicsWidget* parent /TransferThis/ = 0);
 
 protected:
     void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);

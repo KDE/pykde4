@@ -39,6 +39,7 @@ public:
     const QString           path () const;
     const Plasma::PackageStructure::Ptr  structure () const;
     static QStringList      listInstalled (const QString& packageRoot);
+    static QStringList      listInstalledPaths (const QString& packageRoot);
     static bool             installPackage (const QString& package, const QString& packageRoot, const QString& servicePrefix);
     static bool             uninstallPackage (const QString& package, const QString& packageRoot, const QString& servicePrefix);
     static bool             registerPackage (const Plasma::PackageMetadata& data, const QString& iconPath);

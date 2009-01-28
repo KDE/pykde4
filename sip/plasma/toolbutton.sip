@@ -26,8 +26,9 @@ class ToolButton : QGraphicsProxyWidget
 #include <plasma/widgets/toolbutton.h>
 %End
 
+
 public:
-    explicit                ToolButton (QGraphicsWidget* parent = 0);
+    explicit                ToolButton (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setAutoRaise (bool raise);
     bool                    autoRaise () const;
     void                    setText (const QString& text);

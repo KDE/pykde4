@@ -27,8 +27,9 @@ class RadioButton : QGraphicsProxyWidget
 #include <plasma/widgets/radiobutton.h>
 %End
 
+
 public:
-    explicit                RadioButton (QGraphicsWidget* parent = 0);
+    explicit                RadioButton (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setText (const QString& text);
     QString                 text () const;
     void                    setImage (const QString& path);

@@ -29,13 +29,15 @@ class Label : QGraphicsProxyWidget
 
 
 public:
-    explicit                Label (QGraphicsWidget* parent = 0);
+    explicit                Label (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setText (const QString& text);
     QString                 text () const;
     void                    setImage (const QString& path);
     QString                 image () const;
     void                    setAlignment (Qt::Alignment alignment);
     Qt::Alignment           alignment () const;
+    void                    setScaledContents (bool scaled);
+    bool                    hasScaledContents () const;
     void                    setStyleSheet (const QString& stylesheet);
     QString                 styleSheet ();
     QLabel*                 nativeWidget () const;

@@ -27,8 +27,9 @@ class TextEdit : QGraphicsProxyWidget
 #include <plasma/widgets/textedit.h>
 %End
 
+
 public:
-    explicit                TextEdit (QGraphicsWidget* parent = 0);
+    explicit                TextEdit (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setText (const QString& text);
     QString                 text () const;
     void                    setStyleSheet (const QString& stylesheet);

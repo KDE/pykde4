@@ -33,6 +33,8 @@ public:
                             ConfigLoader (KSharedConfigPtr config, QIODevice* xml, QObject* parent /TransferThis/ = 0);
                             ConfigLoader (const KConfigGroup* config, QIODevice* xml, QObject* parent /TransferThis/ = 0);
     KConfigSkeletonItem*    findItem (const QString& group, const QString& key);
+    KConfigSkeletonItem*    findItemByName (const QString& name);
+    QVariant                property (const QString& name);
     bool                    hasGroup (const QString& group) const;
     QStringList             groupList () const;
 

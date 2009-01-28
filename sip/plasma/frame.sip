@@ -26,6 +26,7 @@ class Frame : QGraphicsWidget
 #include <plasma/widgets/frame.h>
 %End
 
+
 public:
 
     enum Shadow
@@ -35,7 +36,7 @@ public:
         Sunken
     };
 
-    explicit                Frame (QGraphicsWidget* parent = 0);
+    explicit                Frame (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setFrameShadow (Plasma::Frame::Shadow shadow);
     Plasma::Frame::Shadow   frameShadow () const;
     void                    setText (QString text);

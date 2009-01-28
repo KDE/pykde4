@@ -27,8 +27,9 @@ class GroupBox : QGraphicsProxyWidget
 #include <plasma/widgets/groupbox.h>
 %End
 
+
 public:
-    explicit                GroupBox (QGraphicsWidget* parent = 0);
+    explicit                GroupBox (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setText (const QString& text);
     QString                 text () const;
     void                    setStyleSheet (const QString& stylesheet);

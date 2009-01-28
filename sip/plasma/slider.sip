@@ -26,8 +26,9 @@ class Slider : QGraphicsProxyWidget
 #include <plasma/widgets/slider.h>
 %End
 
+
 public:
-    explicit                Slider (QGraphicsWidget* parent = 0);
+    explicit                Slider (QGraphicsWidget* parent /TransferThis/ = 0);
     int                     maximum () const;
     int                     minimum () const;
     int                     value () const;

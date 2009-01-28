@@ -29,7 +29,7 @@ class PushButton : QGraphicsProxyWidget
 
 
 public:
-    explicit                PushButton (QGraphicsWidget* parent = 0);
+    explicit                PushButton (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setText (const QString& text);
     QString                 text () const;
     void                    setImage (const QString& path);

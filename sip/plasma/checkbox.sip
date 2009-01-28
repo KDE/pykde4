@@ -27,8 +27,9 @@ class CheckBox : QGraphicsProxyWidget
 #include <plasma/widgets/checkbox.h>
 %End
 
+
 public:
-    explicit                CheckBox (QGraphicsWidget* parent = 0);
+    explicit                CheckBox (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setText (const QString& text);
     QString                 text () const;
     void                    setImage (const QString& path);

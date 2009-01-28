@@ -27,8 +27,9 @@ class LineEdit : QGraphicsProxyWidget
 #include <plasma/widgets/lineedit.h>
 %End
 
+
 public:
-    explicit                LineEdit (QGraphicsWidget* parent = 0);
+    explicit                LineEdit (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setText (const QString& text);
     QString                 text () const;
     void                    setStyleSheet (const QString& stylesheet);

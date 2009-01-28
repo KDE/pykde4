@@ -26,8 +26,9 @@ class ScrollBar : QGraphicsProxyWidget
 #include <plasma/widgets/scrollbar.h>
 %End
 
+
 public:
-    explicit                ScrollBar (QGraphicsWidget* parent);
+    explicit                ScrollBar (QGraphicsWidget* parent /TransferThis/);
     void                    setRange (int min, int max);
     void                    setSingleStep (int val);
     int                     singleStep ();

@@ -40,6 +40,7 @@ public:
     void                    setHasConfigurationInterface (bool hasInterface);
     void                    setConfigurationRequired (bool req, const QString& reason = QString());
     void                    setFailedToLaunch (bool failed, const QString& reason = QString());
+    void                    configNeedsSaving () const;
     virtual void            showConfigurationInterface ();
     virtual void            configChanged ();
 

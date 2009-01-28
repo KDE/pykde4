@@ -29,7 +29,7 @@ class ComboBox : QGraphicsProxyWidget
 
 
 public:
-    explicit                ComboBox (QGraphicsWidget* parent = 0);
+    explicit                ComboBox (QGraphicsWidget* parent /TransferThis/ = 0);
     QString                 text () const;
     void                    setStyleSheet (const QString& stylesheet);
     QString                 styleSheet ();

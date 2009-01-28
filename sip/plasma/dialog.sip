@@ -62,6 +62,7 @@ protected:
     void                    mouseMoveEvent (QMouseEvent* event);
     void                    mousePressEvent (QMouseEvent* event);
     void                    mouseReleaseEvent (QMouseEvent* event);
+    void                    keyPressEvent (QKeyEvent* event);
     bool                    inControlArea (const QPoint& point);
 };   // Dialog
 

@@ -26,8 +26,9 @@ class TreeView : QGraphicsProxyWidget
 #include <plasma/widgets/treeview.h>
 %End
 
+
 public:
-    explicit                TreeView (QGraphicsWidget* parent = 0);
+    explicit                TreeView (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setModel (QAbstractItemModel* model);
     QAbstractItemModel*     model ();
     void                    setStyleSheet (const QString& stylesheet);

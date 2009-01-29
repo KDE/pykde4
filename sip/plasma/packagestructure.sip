@@ -33,11 +33,11 @@ public:
     explicit                PackageStructure (QObject* parent /TransferThis/ = 0, const QString& type = i18nc("A non-functional package","Invalid"));
     static Plasma::PackageStructure::Ptr  load (const QString& packageFormat);
     QString                 type () const;
-// FIXME
-//    QList<const char*>      directories () const;
-//    QList<const char*>      requiredDirectories () const;
-//    QList<const char*>      files () const;
-//    QList<const char*>      requiredFiles () const;
+
+    QList<const char*>      directories () const;
+    QList<const char*>      requiredDirectories () const;
+    QList<const char*>      files () const;
+    QList<const char*>      requiredFiles () const;
     void                    addDirectoryDefinition (const char* key, const QString& path, const QString& name);
     void                    addFileDefinition (const char* key, const QString& path, const QString& name);
     QString                 path (const char* key) const;
@@ -74,4 +74,38 @@ protected:
 
 };   // Plasma
 
+%MappedType QList<const char *>
+{
+%TypeHeaderCode
+#include <qlist.h>
+%End
+%ConvertToTypeCode
+    return NULL;
+%End
 
+%ConvertFromTypeCode
+    // Create the list.
+    PyObject *l;
+
+    if ((l = PyList_New(sipCpp->size())) == NULL)
+        return NULL;
+
+    // Set the list elements.
+    for (int i = 0; i < sipCpp->size(); ++i)
+    {
+        PyObject *pobj;
+        int iserr;
+
+        if ((pobj = sipBuildResult(&iserr,"s",sipCpp->value(i))) == NULL)
+        {
+            Py_DECREF(l);
+
+            return NULL;
+        }
+
+        PyList_SET_ITEM(l, i, pobj);
+    }
+
+    return l;
+%End
+};

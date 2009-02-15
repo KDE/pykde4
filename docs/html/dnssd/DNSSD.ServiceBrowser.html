@@ -53,51 +53,61 @@ Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qo
 Namespace: DNSSD<br />
 <h2>Detailed Description</h2>
 
-<p>\class ServiceBrowser servicebrowser.h DNSSD/ServiceBrowser
+<p>ServiceBrowser servicebrowser.h DNSSD/ServiceBrowser
+Browses for network services advertised over DNS-SD
 </p>
 <p>
-Most important class for applications that want to discover specific services on network.
-Suppose that you need list of web servers running. Example:
+This is the central class in the DNSSD library for applications
+that want to discover services on network.
 </p>
 <p>
+Suppose that you need list of web servers running. Then you
+might do something like
 <pre class="fragment">
-DNSSD.ServiceBrowser* browser = new DNSSD.ServiceBrowser("_http._tcp");
-connect(browser,SIGNAL(serviceAdded(RemoteService.Ptr)),this,SLOT(addService(RemoteService.Ptr)));
-connect(browser,SIGNAL(serviceRemoved(RemoteService.Ptr)),this,SLOT(delService(RemoteService.Ptr)));
-browser-&gt;startBrowse();
+ DNSSD.ServiceBrowser* browser = new DNSSD.ServiceBrowser("_http._tcp");
+ connect(browser, SIGNAL(serviceAdded(RemoteService.Ptr)),
+         this,    SLOT(addService(RemoteService.Ptr)));
+ connect(browser, SIGNAL(serviceRemoved(RemoteService.Ptr)),
+         this,    SLOT(delService(RemoteService.Ptr)));
+ browser-&gt;startBrowse();
 </pre>
 </p>
 <p>
-In above example addService will be called for every web server already running or just appearing
-on network and delService will be called when server is stopped. Because no domain was passed
-to constructor, default domain will be searched.
+In above example addService() will be called for every web server
+already running and for every web service that subsequently
+appears on the network and delService() will be called when
+a server previously advertised is stopped.
+</p>
+<p>
+Because no domain was passed to constructor, the default domain
+will be searched. To find other domains to browse for services on,
+use DomainBrowser.
 </p>
 <p>
 
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Jakub Stachowski </dd></dl>
-Browsing for specific type of services or all available service types
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj189114028">State</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Working, Stopped, Unsupported&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj3064381964">State</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Working, Stopped, Unsupported&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193644140">finished</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196881644">serviceAdded</a> (DNSSD.RemoteService.Ptr a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196881452">serviceRemoved</a> (DNSSD.RemoteService.Ptr a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3070795564">finished</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3073165548">serviceAdded</a> (DNSSD.RemoteService.Ptr service)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3073164556">serviceRemoved</a> (DNSSD.RemoteService.Ptr service)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171097068">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, bool autoResolve=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> subtype=QString())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193644140">finished</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj198556140">isAutoResolving</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196881644">serviceAdded</a> (self, DNSSD.RemoteService.Ptr a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196881452">serviceRemoved</a> (self, DNSSD.RemoteService.Ptr a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[DNSSD::RemoteService::Ptr]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196903948">services</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196903116">startBrowse</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196878604">virtual_hook</a> (self, int a0, void a1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3064381548">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, bool autoResolve=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> subtype=QString())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3070795564">finished</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3064382412">isAutoResolving</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3073165548">serviceAdded</a> (self, DNSSD.RemoteService.Ptr service)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3073164556">serviceRemoved</a> (self, DNSSD.RemoteService.Ptr service)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[DNSSD::RemoteService::Ptr]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3064385452">services</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3064383148">startBrowse</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3070792108">virtual_hook</a> (self, int a0, void a1)</td></tr>
 <tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196878796">getLocalHostName</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">DNSSD.ServiceBrowser.State&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj198556684">isAvailable</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qhostaddress.html">QHostAddress</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj198556268">resolveHostName</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> hostname)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3073163788">getLocalHostName</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">DNSSD.ServiceBrowser.State&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3064384012">isAvailable</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qhostaddress.html">QHostAddress</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3064381836">resolveHostName</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> hostname)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="obj171097068"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj3064381548"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -137,24 +147,49 @@ Browsing for specific type of services or all available service types
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>ServiceBrowser constructor.
+<div class="memdoc"><p>Create a ServiceBrowser for a particular service type
 </p>
+<p>
+DomainBrowser can be used to find other domains to browse on.
+If no domain is given, the default domain is used.
+</p>
+<p>
+The service type is the high-level protocol type, followed by a dot,
+followed by the transport protocol type (@c _tcp or _udp).
+The <a href="http://www.dns-sd.org">DNS-SD website</a> maintains
+<a href="http://www.dns-sd.org/ServiceTypes.html">a full list</a>
+of service types.
+</p>
+<p>
+The <b>subtype</b> parameter allows you to do more fine-grained filtering
+on the services you are interested in. So you might request only
+FTP servers that allow anonymous access by passing "_ftp._tcp" as the
+<b>type</b> and "_anon" as the <b>subtype.</b> Subtypes are particularly
+important for types like _soap and _upnp, which are far too generic
+for most applications. In these cases, the subtype can be used to
+specify the particular SOAP or UPnP protocol they want.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd>
+Enabling <b>autoResolve</b> will increase network usage by resolving
+all services, so this feature should be used only when necessary.
+</dd></dl> </p>
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> Service types to browse for (example: "_http._tcp").
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> service types to browse for (example: "_http._tcp")
 
-<tr><td></td><td valign="top"><em>autoResolve</em>&nbsp;</td><td> - after disovering new service it will be resolved and then
-reported with serviceAdded() signal. It raises network usage by resolving all services,
-so use it only when necessary.
+<tr><td></td><td valign="top"><em>autoResolve</em>&nbsp;</td><td> discovered services will be resolved before being
+reported with the serviceAdded() signal
 
-<tr><td></td><td valign="top"><em>domain</em>&nbsp;</td><td> Domain name. Can be left as null string to use default domain
+<tr><td></td><td valign="top"><em>domain</em>&nbsp;</td><td> a domain to search on instead of the default one
 
-<tr><td></td><td valign="top"><em>subtypes</em>&nbsp;</td><td> Set it to browse only for specific subtype
+<tr><td></td><td valign="top"><em>subtype</em>&nbsp;</td><td> only browse for a specific subtype
 </td></tr>
 </table></dl>
-<p>
-</p></div></div><a class="anchor" name="obj193644140"></a>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> startBrowse() and isAvailable()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj3070795564"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -166,14 +201,41 @@ so use it only when necessary.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Emitted when all services has been reported. This signal can be used
-by application that just want to get list of currently available services
-(similar to directory listing) and do not care about dynamic adding/removing
-services later. This signal can be emitted many time: for example if new host
-has been connected to network and is announcing some services interesting to
-this ServiceBrowser, they will be reported by several serviceAdded() signals and
-whole batch will be concluded by finished().
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("finished()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj196878796"></a>
+<div class="memdoc"><p>Emitted when the list of published services has settled
+</p>
+<p>
+This signal is emitted once after startBrowse() is called
+when all the services of the requested type that are
+currently published have been reported (even if none
+are available or the DNS-SD service is not available).
+It is emitted again when a new batch of services become
+available or disappear.
+</p>
+<p>
+For example, if a new host is connected to network and
+announces some services watched for by this ServiceBrowser,
+they will be reported by one or more serviceAdded() signals
+and the whole batch will be concluded by finished().
+</p>
+<p>
+This signal can be used by applications that just want to
+get a list of the currently available services
+(similar to a directory listing) and do not care about
+adding or removing services that appear or disappear later.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd>
+There is no guarantee any RemoteService
+pointers received by serviceAdded() will be valid
+by the time this signal is emitted, so you should either
+do all your work involving them in the slot receiving
+the serviceAdded() signal, or you should listen to
+serviceRemoved() as well.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> serviceAdded() and serviceRemoved()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("finished()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj3073163788"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -185,13 +247,18 @@ whole batch will be concluded by finished().
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>This function simply returns the name of this machine's hostname as announced by mDNS protocol.
-Usually it will be the same as calling QHostInfo.localHostName(), however it may be changed to something different
-in avahi configuration file (if using Avahi backend).
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> A QString representing the hostname. Returns QString() if failed
+<div class="memdoc"><p>The mDNS hostname of the local machine
+</p>
+<p>
+Usually this will return the same as QHostInfo.localHostName(),
+but it may be changed to something different
+in the Avahi configuration file (if using the Avahi backend).
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the hostname, or an empty string on failure
 </dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
 </dd></dl>
-</p></div></div><a class="anchor" name="obj198556140"></a>
+</p></div></div><a class="anchor" name="obj3064382412"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -203,10 +270,15 @@ in avahi configuration file (if using Avahi backend).
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns true if newly discovered services are resolved before being reported with serviceAdded()
+<div class="memdoc"><p>Whether discovered services are resolved before being reported
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the value of the <b>autoResolve</b> parameter passed to the constructor
+</dd></dl> </p>
+<p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.1
 </dd></dl>
-</p></div></div><a class="anchor" name="obj198556684"></a>
+</p></div></div><a class="anchor" name="obj3064384012"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -218,34 +290,49 @@ in avahi configuration file (if using Avahi backend).
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Checks availability of DNS-SD services (this also covers publishing).
+<div class="memdoc"><p>Checks availability of DNS-SD services
 </p>
 <p>
-If you use this function to report an error to the user, below is a suggestion
-on how to word the errors:
+Although this method is part of ServiceBrowser, none of the classes
+in this library will be able to perform their intended function
+if this method does not return Working.
+</p>
+<p>
+If this method does not return Working, it is still safe to call
+any of the methods in this library. However, no services will be
+found or published and no domains will be found.
+</p>
+<p>
+If you use this function to report an error to the user, below
+is a suggestion on how to word the errors when publishing a
+service. The first line of each error message can also be
+used for reporting errors when browsing for services.
 </p>
 <p>
 <pre class="fragment">
-switch(DNSSD.ServiceBrowser.isAvailable()) {	    
-case DNSSD.ServiceBrowser.Working:
-return "";
-case DNSSD.ServiceBrowser.Stopped:
-return i18n("&lt;p&gt;The Zeroconf daemon is not running. See the Service Discovery Handbook"
-" for more information.&lt;br/&gt;"
-"Other users will not see this system when browsing"
-" the network via zeroconf, but normal access will still work.&lt;/p&gt;");
-case DNSSD.ServiceBrowser.Unsupported:
-return i18n("&lt;p&gt;Zeroconf support is not available in this version of KDE."
-" See the Service Discovery Handbook for more information.&lt;br/&gt;"
-"Other users will not see this system when browsing"
-" the network via zeroconf, but normal access will still work.&lt;/p&gt;");
-default:
-return i18n("&lt;p&gt;Unknown error with Zeroconf.&lt;br/&gt;"
-"Other users will not see this system when browsing"
-" the network via zeroconf, but normal access will still work.&lt;/p&gt;");
-}
+ switch(DNSSD.ServiceBrowser.isAvailable()) {
+ case DNSSD.ServiceBrowser.Working:
+     return "";
+ case DNSSD.ServiceBrowser.Stopped:
+     return i18n("&lt;p&gt;The Zeroconf daemon is not running. See the Service"
+                 " Discovery Handbook for more information.&lt;br/&gt;"
+                 "Other users will not see the services provided by this
+                 " system when browsing the network via zeroconf, but "
+                 " normal access will still work.&lt;/p&gt;");
+ case DNSSD.ServiceBrowser.Unsupported:
+     return i18n("&lt;p&gt;Zeroconf support is not available in this version of KDE."
+                 " See the Service Discovery Handbook for more information.&lt;br/&gt;"
+                 "Other users will not see the services provided by this
+                 " application when browsing the network via zeroconf, but "
+                 " normal access will still work.&lt;/p&gt;");
+ default:
+     return i18n("&lt;p&gt;Unknown error with Zeroconf.&lt;br/&gt;"
+                 "Other users will not see the services provided by this
+                 " application when browsing the network via zeroconf, but "
+                 " normal access will still work.&lt;/p&gt;");
+ }
 </pre>
-</p></div></div><a class="anchor" name="obj198556268"></a>
+</p></div></div><a class="anchor" name="obj3064381836"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -262,19 +349,24 @@ return i18n("&lt;p&gt;Unknown error with Zeroconf.&lt;br/&gt;"
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Resolved a hostname using mDNS into IP address.
+<div class="memdoc"><p>Resolves an mDNS hostname into an IP address
 </p>
 <p>
-This function is very rarely useful - properly configured system is able to resolve mDNS-based host name
-using system resolver.
+This function is very rarely useful, since a properly configured
+system is able to resolve an mDNS-based host name using the system
+resolver (ie: you can just pass the mDNS hostname to KIO or other
+library).
+</p>
+<p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>hostname</em>&nbsp;</td><td> The hostname to be resolved
+<tr><td></td><td valign="top"><em>hostname</em>&nbsp;</td><td> the hostname to be resolved
 </td></tr> </table></dl>
-<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A QHostAddress containing the IP address. QHostAddress() returned if failed
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> a QHostAddress containing the IP address, or QHostAddress() if
+resolution failed
 </dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
 </dd></dl>
-</p></div></div><a class="anchor" name="obj196881644"></a>
+</p></div></div><a class="anchor" name="obj3073165548"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -286,7 +378,7 @@ using system resolver.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype">DNSSD.RemoteService.Ptr&nbsp;</td>
-<td class="paramname"><em>a0</em></td>
+<td class="paramname"><em>service</em></td>
 </tr>
 <tr>
 <td></td>
@@ -296,9 +388,21 @@ using system resolver.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Emitted when new service is discovered (or resolved
-if autoresolve is set
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("serviceAdded(Ptr)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj196881452"></a>
+<div class="memdoc"><p>Emitted when new service is discovered
+</p>
+<p>
+If isAutoResolving() returns true, this will not be emitted
+until the service has been resolved.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>service</em>&nbsp;</td><td> a RemoteService object describing the service
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> serviceRemoved() and finished()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("serviceAdded(Ptr)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj3073164556"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -310,7 +414,7 @@ if autoresolve is set
 <td class="memname"></td>
 <td></td>
 <td class="paramtype">DNSSD.RemoteService.Ptr&nbsp;</td>
-<td class="paramname"><em>a0</em></td>
+<td class="paramname"><em>service</em></td>
 </tr>
 <tr>
 <td></td>
@@ -320,10 +424,25 @@ if autoresolve is set
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Emitted when service is no longer announced. RemoteService object
-is deleted from services list and destroyed immediately after this
-signal returns.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("serviceRemoved(Ptr)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj196903948"></a>
+<div class="memdoc"><p>Emitted when a service is no longer published over DNS-SD
+</p>
+<p>
+The RemoteService object is removed from the services() list
+and deleted immediately after this signal returns.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd>
+Do <b>not</b> use a delayed connection with this signal
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>service</em>&nbsp;</td><td> a RemoteService object describing the service
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> serviceAdded() and finished()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("serviceRemoved(Ptr)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj3064385452"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -335,8 +454,15 @@ signal returns.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns list of services
-</p></div></div><a class="anchor" name="obj196903116"></a>
+<div class="memdoc"><p>The currently known services of the specified type
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a list of RemoteService pointers
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> serviceAdded() and serviceRemoved()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj3064383148"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -348,9 +474,22 @@ signal returns.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Starts browsing for services.
-To stop it just destroy the object.
-</p></div></div><a class="anchor" name="obj196878604"></a>
+<div class="memdoc"><p>Starts browsing for services
+</p>
+<p>
+Only the first call to this function will have any effect.
+</p>
+<p>
+Browsing stops when the ServiceBrowser object is destroyed.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> The serviceAdded() signal may be emitted before this
+function returns.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> serviceAdded(), serviceRemoved() and finished()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj3070792108"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -378,7 +517,7 @@ To stop it just destroy the object.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj189114028"></a>
+<div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj3064381964"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -386,10 +525,7 @@ To stop it just destroy the object.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Availability of DNS-SD services.
-<li> Working - available </li>
-<li> Stopped - not available because mdnsd daemon is not running. This flag is currently unused </li>
-<li> Unsupported - not available because KDE was compiled without DNS-SD support </li>
+<div class="memdoc"><p>the service is available
 </p><dl compact><dt><b>Enumerator: </b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Working</em>&nbsp;</td><td><tr><td valign="top"><em>Stopped</em>&nbsp;</td><td><tr><td valign="top"><em>Unsupported</em>&nbsp;</td><td></table>
 </dl>
@@ -422,7 +558,8 @@ To stop it just destroy the object.
 <li><a href="../kparts/index.html">kparts</a></li>
 <li><a href="../kutils/index.html">kutils</a></li>
 <li><a href="../nepomuk/index.html">nepomuk</a></li>
-<li><a href="../phonon/index.html">phonon</a></li><li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
 <li><a href="../solid/index.html">solid</a></li>
 <li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>

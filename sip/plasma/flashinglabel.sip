@@ -34,12 +34,7 @@ public:
     void                    setFont (const QFont&);
     void                    setColor (const QColor&);
     void                    setDuration (int duration);
-
-
-//mt undefined symbol: QTextOption& option -- need mapped type?
-//mt     void               flash (const QString& text, int duration = 0, const QTextOption& option = QTextOption(Qt::AlignCenter));
-
-
+    void                    flash (const QString& text, int duration = 0, const QTextOption& option = QTextOption(Qt::AlignCenter));
     void                    flash (const QPixmap& pixmap, int duration = 0, Qt::Alignment align = Qt::AlignCenter);
     void                    setAutohide (bool autohide);
     bool                    autohide () const;

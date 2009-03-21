@@ -59,10 +59,10 @@ public:
     void                    setCustomLocation (const QString& location);
     void                    setIconSize (int size);
     int                     iconSize () const;
-//ig     void               setup (KIconLoader::Group group, KIconLoader::Context context = KIconLoader::Application, bool strictIconSize = 0, int iconSize = 0, bool user = 0, bool lockUser = 0, bool lockCustomDir = 0);
+    void                    setup (KIconLoader::Group group, KIconLoader::Context context = KIconLoader::Application, bool strictIconSize = 0, int iconSize = 0, bool user = 0, bool lockUser = 0, bool lockCustomDir = 0);
     QString                 openDialog ();
     void                    showDialog ();
-//ig     static QString     getIcon (KIconLoader::Group group = KIconLoader::Desktop, KIconLoader::Context context = KIconLoader::Application, bool strictIconSize = 0, int iconSize = 0, bool user = 0, QWidget* parent /Transfer/ = 0, const QString& caption = QString());
+    static QString     getIcon (KIconLoader::Group group = KIconLoader::Desktop, KIconLoader::Context context = KIconLoader::Application, bool strictIconSize = 0, int iconSize = 0, bool user = 0, QWidget* parent /Transfer/ = 0, const QString& caption = QString());
 
 signals:
     void                    newIconName (const QString&);
@@ -87,7 +87,7 @@ public:
                             KIconButton (KIconLoader* loader, QWidget* parent /TransferThis/);
     void                    setStrictIconSize (bool b);
     bool                    strictIconSize () const;
-//ig     void               setIconType (KIconLoader::Group group, KIconLoader::Context context, bool user = 0);
+    void                    setIconType (KIconLoader::Group group, KIconLoader::Context context, bool user = 0);
     void                    setIcon (const QString& icon);
     void                    setIcon (const QIcon& icon);
     void                    resetIcon ();

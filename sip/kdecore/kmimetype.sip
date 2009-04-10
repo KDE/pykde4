@@ -69,11 +69,6 @@ protected:
                             KMimeType (const QString& fullpath, const QString& name, const QString& comment);
 //ig                        KMimeType (KMimeTypePrivate& dd);
 //ig                        KMimeType (KMimeTypePrivate& dd, const QString& name, const QString& comment);
-
-private:
-    void                    setPatterns (const QStringList& patterns);
-    void                    setParentMimeType (const QString& parent /Transfer/);
-    void                    internalClearData ();
 };   // KMimeType
 
 

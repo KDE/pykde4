@@ -54,7 +54,6 @@ protected:
     void                    yearBackwardClicked ();
     void                    selectMonthClicked ();
     void                    selectYearClicked ();
-    void                    uncheckYearSelector ();
     void                    lineEnterPressed ();
     void                    todayButtonClicked ();
     void                    weekSelected (int);

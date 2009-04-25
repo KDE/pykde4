@@ -144,8 +144,7 @@ typedef ACLUserPermissionsList ACLGroupPermissionsList;
     {
         PyObject *elem = PyList_GET_ITEM (sipPy, i);
         PyObject *pyp1 = PyTuple_GET_ITEM (elem, 0);
-        p1 = *(QString *)sipForceConvertTo_QString (pyp1, &iserr);
-
+        p1 = *(QString *)sipForceConvertToInstance(pyp1, sipClass_QString, NULL, 0, NULL, &iserr);
         if (iserr)
         {
             *sipIsErr = 1;

@@ -46,8 +46,8 @@ signals:
     void                 readEof ();
 
 protected:
-    virtual qint64       readData (char*, qint64);
-    virtual qint64       readLineData (char*, qint64);
+//ig    virtual qint64       readData (char*, qint64);
+//ig    virtual qint64       readLineData (char*, qint64);
     virtual qint64       writeData (const char*, qint64);
 
 };  // class KPtyDevice

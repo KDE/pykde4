@@ -30,7 +30,7 @@ class MessageThreadingAttribute : Akonadi::Attribute /NoDefaultCtors/
 
 public:
                             MessageThreadingAttribute ();
-                            MessageThreadingAttribute (const Akonadi::MessageThreadingAttribute& other);
+//ig                            MessageThreadingAttribute (const Akonadi::MessageThreadingAttribute& other);
     QList<Akonadi::Entity::Id>         perfectParents () const;
     void                    setPerfectParents (const QList<Akonadi::Entity::Id>& parents);
     QList<Akonadi::Entity::Id>         unperfectParents () const;

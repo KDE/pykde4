@@ -243,8 +243,8 @@ KJobTrackerInterface*   getJobTracker ();
     {
         int iserr = 0;
 
-        acpp = (QString *)sipForceConvertTo_QString (aelem, &iserr);
-        bcpp = (QString *)sipForceConvertTo_QString (belem, &iserr);
+        acpp = (QString *)sipForceConvertToInstance(aelem, sipClass_QString, NULL, 0, NULL, &iserr);
+        bcpp = (QString *)sipForceConvertToInstance(belem, sipClass_QString, NULL, 0, NULL, &iserr);
 
         if (iserr)
         {

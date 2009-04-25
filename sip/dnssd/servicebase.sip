@@ -27,7 +27,7 @@ class ServiceBase : KShared
 %End
 
 public:
-    typedef KSharedPtr<DNSSD::ServiceBase> Ptr;
+//    typedef KSharedPtr<DNSSD::ServiceBase> Ptr;
 
     explicit                ServiceBase (const QString& name = QString(), const QString& type = QString(), const QString& domain = QString(), const QString& host = QString(), unsigned short port = 0);
     QString                 serviceName () const;

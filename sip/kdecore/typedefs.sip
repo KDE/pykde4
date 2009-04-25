@@ -244,7 +244,7 @@ template <TYPE>
         return PyInstance_Check(sipPy);
 
     int iserr = 0;
-    TYPE *cpp = (TYPE *)sipForceConvertTo_TYPE (sipPy, &iserr);
+    TYPE *cpp = (TYPE *)sipForceConvertToInstance(sipPy, sipClass_TYPE, NULL, 0, NULL, &iserr);
 
     if (iserr)
     {

@@ -26,7 +26,7 @@ namespace Phonon
 {
 namespace BackendCapabilities
 {
-class Notifier : QObject /NoDefaultCtors,NoQMetaObject/
+class Notifier : QObject /NoDefaultCtors,PyQt4NoQMetaObject/
 {
 
 signals:

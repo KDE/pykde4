@@ -27,6 +27,7 @@ class Monitor : QObject
 #include <akonadi/monitor.h>
 %End
 
+
 public:
     explicit                Monitor (QObject* parent /TransferThis/ = 0);
     void                    setCollectionMonitored (const Akonadi::Collection& collection, bool monitored = 1);
@@ -39,6 +40,11 @@ public:
     void                    fetchCollectionStatistics (bool enable);
     void                    setItemFetchScope (const Akonadi::ItemFetchScope& fetchScope);
     Akonadi::ItemFetchScope&  itemFetchScope ();
+    Akonadi::Collection::List  collectionsMonitored () const;
+//FIXME    QList<Item::Id>         itemsMonitored () const;
+    QStringList             mimeTypesMonitored () const;
+    QList<QByteArray>       resourcesMonitored () const;
+    bool                    isAllMonitored () const;
 
 signals:
     void                    itemChanged (const Akonadi::Item& item, const QSet<QByteArray>& partIdentifiers);
@@ -51,11 +57,14 @@ signals:
     void                    collectionChanged (const Akonadi::Collection& collection);
     void                    collectionRemoved (const Akonadi::Collection& collection);
     void                    collectionStatisticsChanged (Akonadi::Entity::Id id, const Akonadi::CollectionStatistics& statistics);
+    void                    collectionMonitored (const Akonadi::Collection& collection, bool monitored);
+    void                    itemMonitored (const Akonadi::Item& item, bool monitored);
+    void                    resourceMonitored (const QByteArray& identifier, bool monitored);
+    void                    mimeTypeMonitored (const QString& mimeType, bool monitored);
+    void                    allMonitored (bool monitored);
 
 protected:
-
 //ig     explicit           Monitor (MonitorPrivate* d, QObject* parent /TransferThis/ = 0);
-
 };   // Monitor
 
 };   // Akonadi

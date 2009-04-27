@@ -33,6 +33,7 @@ public:
 
 signals:
     void                    nameChanged (const QString& name);
+    void                    synchronized ();
 
 protected:
     virtual void            retrieveCollections () = 0;
@@ -50,6 +51,7 @@ protected:
     void                    setItemStreamingEnabled (bool enable);
     void                    itemsRetrievedIncremental (const Akonadi::Item::List& changedItems, const Akonadi::Item::List& removedItems);
     void                    itemsRetrievalDone ();
+    void                    clearCache ();
     Akonadi::Collection     currentCollection () const;
     Akonadi::Item           currentItem () const;
     void                    synchronize ();

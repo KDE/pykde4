@@ -30,20 +30,17 @@ class MessageThreadingAttribute : Akonadi::Attribute /NoDefaultCtors/
 
 public:
                             MessageThreadingAttribute ();
-//ig                            MessageThreadingAttribute (const Akonadi::MessageThreadingAttribute& other);
-    QList<Akonadi::Entity::Id>         perfectParents () const;
-    void                    setPerfectParents (const QList<Akonadi::Entity::Id>& parents);
-    QList<Akonadi::Entity::Id>         unperfectParents () const;
-    void                    setUnperfectParents (const QList<Akonadi::Entity::Id>& parents);
-    QList<Akonadi::Entity::Id>         subjectParents () const;
-    void                    setSubjectParents (const QList<Akonadi::Entity::Id>& parents);
+//ig                        MessageThreadingAttribute (const Akonadi::MessageThreadingAttribute& other);
     QByteArray              type () const;
     Akonadi::MessageThreadingAttribute*  clone () const;
     QByteArray              serialized () const;
     void                    deserialize (const QByteArray& data);
-//private:
-//    Akonadi::MessageThreadingAttribute& operator = (const Akonadi::MessageThreadingAttribute& other);
-
+    QList<Akonadi::Entity::Id>  perfectParents () const;
+    void                    setPerfectParents (const QList<Akonadi::Entity::Id>& parents);
+    QList<Akonadi::Entity::Id>  unperfectParents () const;
+    void                    setUnperfectParents (const QList<Akonadi::Entity::Id>& parents);
+    QList<Akonadi::Entity::Id>  subjectParents () const;
+    void                    setSubjectParents (const QList<Akonadi::Entity::Id>& parents);
 };   // MessageThreadingAttribute
 
 };   // Akonadi

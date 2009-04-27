@@ -27,6 +27,7 @@ class AgentInstance
 #include <akonadi/agentinstance.h>
 %End
 
+
 public:
     typedef QList<Akonadi::AgentInstance> List;
 
@@ -55,6 +56,7 @@ public:
     void                    synchronizeCollectionTree ();
     bool                    operator == (const Akonadi::AgentInstance& other) const;
     void                    reconfigure () const;
+    void                    restart () const;
 
 };   // AgentInstance
 

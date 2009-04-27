@@ -27,15 +27,18 @@ class ItemView : QTreeView
 #include <akonadi/itemview.h>
 %End
 
+
 public:
     explicit                ItemView (QWidget* parent /TransferThis/ = 0);
     explicit                ItemView (KXmlGuiWindow* xmlGuiWindow, QWidget* parent /TransferThis/ = 0);
-    virtual void            setModel (QAbstractItemModel* model);
     void                    setXmlGuiWindow (KXmlGuiWindow* xmlGuiWindow);
+    virtual void            setModel (QAbstractItemModel* model);
 
 signals:
     void                    activated (const Akonadi::Item& item);
     void                    currentChanged (const Akonadi::Item& item);
+    void                    clicked (const Akonadi::Item& item);
+    void                    doubleClicked (const Akonadi::Item& item);
 
 protected:
     void                    contextMenuEvent (QContextMenuEvent* event);

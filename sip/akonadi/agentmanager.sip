@@ -27,12 +27,13 @@ class AgentManager : QObject
 #include <akonadi/agentmanager.h>
 %End
 
+
 public:
     static Akonadi::AgentManager*  self ();
     Akonadi::AgentType::List  types () const;
     Akonadi::AgentType      type (const QString& identififer) const;
     Akonadi::AgentInstance::List  instances () const;
-    Akonadi::AgentInstance  instance (const QString& identififer) const;
+    Akonadi::AgentInstance  instance (const QString& identifier) const;
     void                    removeInstance (const Akonadi::AgentInstance& instance);
     void                    synchronizeCollection (const Akonadi::Collection& collection);
 

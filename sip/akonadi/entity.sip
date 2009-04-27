@@ -18,6 +18,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+#include <akonadi/entity.h>
+%End
+
+
 uint                    qHash (const Akonadi::Entity&);
 namespace Akonadi
 {
@@ -27,6 +32,7 @@ class Entity
 %TypeHeaderCode
 #include <akonadi/entity.h>
 %End
+
 
 public:
     typedef qint64 Id;
@@ -54,9 +60,11 @@ public:
 protected:
                             Entity (const Akonadi::Entity& other);
 //ig                        Entity (EntityPrivate* dd);
-
 };   // Entity
+
 };   // Akonadi
+
+
 
 %MappedType QList<Akonadi::Entity::Id>
 {
@@ -104,6 +112,4 @@ protected:
     return sipGetState(sipTransferObj);
 %End
 };
-
-
 

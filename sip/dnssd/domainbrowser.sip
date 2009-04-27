@@ -19,6 +19,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 %ModuleHeaderCode
 //ctscc
 #include <domainbrowser.h>
@@ -39,6 +40,7 @@ class DomainBrowser : QObject
 #include <dnssd/domainbrowser.h>
 %End
 
+
 public:
 
     enum DomainType
@@ -53,8 +55,8 @@ public:
     bool                    isRunning () const;
 
 signals:
-    void                    domainRemoved (const QString&);
-    void                    domainAdded (const QString&);
+    void                    domainRemoved (const QString& domain);
+    void                    domainAdded (const QString& domain);
 
 public:
 
@@ -83,5 +85,7 @@ public:
 };   // DomainBrowser
 
 };   // DNSSD
+
+
 
 

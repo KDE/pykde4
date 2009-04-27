@@ -37,7 +37,7 @@ public:
     bool                    isResolved () const;
 
 signals:
-    void                    resolved (bool);
+    void                    resolved (bool successful);
 };   // RemoteService
 };   // DNSSD
 

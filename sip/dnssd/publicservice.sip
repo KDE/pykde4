@@ -27,6 +27,7 @@ class PublicService : QObject, DNSSD::ServiceBase
 #include <dnssd/publicservice.h>
 %End
 
+
 public:
     explicit                PublicService (const QString& name = QString(), const QString& type = QString(), unsigned int port = 0, const QString& domain = QString(), const QStringList& subtypes = QStringList());
     void                    stop ();
@@ -42,7 +43,7 @@ public:
     QStringList             subtypes () const;
 
 signals:
-    void                    published (bool);
+    void                    published (bool successful);
 
 };   // PublicService
 

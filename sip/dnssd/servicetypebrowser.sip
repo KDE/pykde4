@@ -27,6 +27,7 @@ class ServiceTypeBrowser : QObject
 #include <dnssd/servicetypebrowser.h>
 %End
 
+
 public:
     explicit                ServiceTypeBrowser (const QString& domain = QString(), QObject* parent /TransferThis/ = 0);
     QStringList             serviceTypes () const;
@@ -34,8 +35,8 @@ public:
     bool                    isRunning () const;
 
 signals:
-    void                    serviceTypeRemoved (const QString&);
-    void                    serviceTypeAdded (const QString&);
+    void                    serviceTypeRemoved (const QString& type);
+    void                    serviceTypeAdded (const QString& type);
     void                    finished ();
 };   // ServiceTypeBrowser
 

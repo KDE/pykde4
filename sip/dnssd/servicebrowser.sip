@@ -27,6 +27,7 @@ class ServiceBrowser : QObject
 #include <dnssd/servicebrowser.h>
 %End
 
+
 public:
 
     enum State
@@ -43,11 +44,15 @@ public:
     virtual void            startBrowse ();
     static DNSSD::ServiceBrowser::State  isAvailable ();
     bool                    isAutoResolving () const;
+    static QHostAddress     resolveHostName (const QString& hostname);
+    static QString          getLocalHostName ();
 
 signals:
-    void                    serviceAdded (DNSSD::RemoteService::Ptr);
-    void                    serviceRemoved (DNSSD::RemoteService::Ptr);
+    void                    serviceAdded (DNSSD::RemoteService::Ptr service);
+    void                    serviceRemoved (DNSSD::RemoteService::Ptr service);
     void                    finished ();
 };   // ServiceBrowser
+
 };   // DNSSD
+
 

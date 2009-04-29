@@ -52,18 +52,16 @@ public:
 //ig     const KConfig*     config () const;
     void                    changeGroup (const QString& group);
     void                    changeGroup (const char* group);
-
     void                    copyTo (KConfigBase* other, KConfigBase::WriteConfigFlags pFlags = KConfigBase::Normal) const;
     void                    reparent (KConfigBase* parent, KConfigBase::WriteConfigFlags pFlags = KConfigBase::Normal);
     KConfigGroup            parent () const;
-
     QStringList             groupList () const;
     QStringList             keyList () const;
     void                    deleteGroup (KConfigBase::WriteConfigFlags pFlags = KConfigBase::Normal);
     QVariant                readEntry (const QString& key, const QVariant& aDefault) const;
     QVariant                readEntry (const char* key, const QVariant& aDefault) const;
-    QString                 readEntry (const char* key, const QString& aDefault) const;
     QString                 readEntry (const QString& key, const QString& aDefault) const;
+    QString                 readEntry (const char* key, const QString& aDefault) const;
     QString                 readEntry (const QString& key, const char* aDefault = 0) const;
     QString                 readEntry (const char* key, const char* aDefault = 0) const;
     QVariantList            readEntry (const QString& key, const QVariantList& aDefault) const;

@@ -22,6 +22,8 @@
 
 
 
+
+
 %ModuleHeaderCode
 //ctscc
 #include <sonnet/backgroundchecker.h>
@@ -42,6 +44,7 @@
 #include <kprocess.h>
 #include <ksavefile.h>
 #include <ksycoca.h>
+#include <ktcpsocket.h>
 #include <ktemporaryfile.h>
 #include <ktoolinvocation.h>
 %End
@@ -112,6 +115,8 @@ public:
         sipClass = sipClass_KSaveFile;
     else if (dynamic_cast<KSycoca*>(sipCpp))
         sipClass = sipClass_KSycoca;
+    else if (dynamic_cast<KTcpSocket*>(sipCpp))
+        sipClass = sipClass_KTcpSocket;
     else if (dynamic_cast<KTemporaryFile*>(sipCpp))
         sipClass = sipClass_KTemporaryFile;
     else if (dynamic_cast<KToolInvocation*>(sipCpp))
@@ -121,5 +126,7 @@ public:
 %End
 
 };   // KAutoSaveFile
+
+
 
 

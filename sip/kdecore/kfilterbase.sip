@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KFilterBase
 {
 %TypeHeaderCode
@@ -53,6 +54,15 @@ public:
 
     virtual KFilterBase::Result  uncompress () = 0;
     virtual KFilterBase::Result  compress (bool finish) = 0;
+
+    enum FilterFlags
+    {
+        NoHeaders,
+        WithHeaders
+    };
+
+    void                    setFilterFlags (KFilterBase::FilterFlags flags);
+    KFilterBase::FilterFlags  filterFlags () const;
     static KFilterBase*     findFilterByFileName (const QString& fileName);
     static KFilterBase*     findFilterByMimeType (const QString& mimeType);
 

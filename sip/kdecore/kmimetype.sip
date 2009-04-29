@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KMimeType : KServiceType
 {
 %TypeHeaderCode
@@ -57,12 +58,13 @@ public:
     static KMimeType::Ptr   defaultMimeTypePtr ();
     bool                    isDefault () const;
     QString                 parentMimeType () const;
-
     QStringList             parentMimeTypes () const;
     QStringList             allParentMimeTypes () const;
-
     bool                    is (const QString& mimeTypeName) const /PyName=is_/;
+    QString                 userSpecifiedIconName () const;
+    QString                 mainExtension () const;
     static QString          extractKnownExtension (const QString& fileName);
+    static int              sharedMimeInfoVersion ();
 
 protected:
                             KMimeType (QDataStream& str, int offset);

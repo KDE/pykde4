@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KAutostart : QObject
 {
 %TypeHeaderCode
@@ -33,7 +34,9 @@ public:
     enum Condition
     {
         NoConditions,
-        CheckCommand
+        CheckCommand,
+        CheckCondition,
+        CheckAll
     };
 
     typedef QFlags<KAutostart::Condition> Conditions;
@@ -65,6 +68,8 @@ public:
     void                    setExcludedEnvironments (const QStringList& environments);
     void                    addToExcludedEnvironments (const QString& environment);
     void                    removeFromExcludedEnvironments (const QString& environment);
+    QString                 startAfter () const;
+    bool                    checkAllowedEnvironment (const QString& environment) const;
 };   // KAutostart
 
 

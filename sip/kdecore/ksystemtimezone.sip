@@ -24,7 +24,7 @@
 // 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 
-class KSystemTimeZones : QObject
+class KSystemTimeZones : QObject /Abstract/
 {
 %TypeHeaderCode
 #include <ksystemtimezone.h>

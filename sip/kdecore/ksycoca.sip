@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KSycoca : QObject
 {
 %TypeHeaderCode
@@ -38,7 +39,6 @@ public:
         GlobalDatabase
     };
 
-
                             KSycoca ();
     static KSycoca*         self ();
     static int              version ();
@@ -46,22 +46,21 @@ public:
     QDataStream*            findEntry (int offset, KSycocaType& type);
     QDataStream*            findFactory (KSycocaFactoryId id);
     QString                 kfsstnd_prefixes ();
-
     static QString          absoluteFilePath (KSycoca::DatabaseType type = KSycoca::LocalDatabase);
-
     QString                 language ();
     quint32                 timeStamp ();
     quint32                 updateSignature ();
     QStringList             allResourceDirs ();
 //    void                    addFactory (KSycocaFactory*);
     virtual bool            isBuilding ();
-    void                    disableAutoRebuild ();
+    static void             disableAutoRebuild ();
     static bool             isChanged (const char* type);
     static void             flagError ();
 //    static bool             readError ();
 
 signals:
     void                    databaseChanged ();
+    void                    databaseChanged (const QStringList& changedResources);
 
 protected:
 //ig     KSycocaFactoryList*  factories ();
@@ -69,7 +68,8 @@ protected:
 private:
                             KSycoca (const KSycoca&);
 
-
+public:
+//ig    void                    disableAutoRebuild ();
 };   // KSycoca
 
 

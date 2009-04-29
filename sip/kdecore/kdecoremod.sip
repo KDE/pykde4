@@ -51,10 +51,12 @@
 %Include ktoolinvocation.sip
 %Include kcharsets.sip
 %Include kencodingdetector.sip
+%Include kencodingprober.sip
 %Include klocale.sip
 %Include klocalizedstring.sip
 %Include klocalsocket.sip
 %Include ksocketfactory.sip
+%Include ktcpsocket.sip
 %Include kmimetype.sip
 %Include kmimetypetrader.sip
 %Include kplugininfo.sip

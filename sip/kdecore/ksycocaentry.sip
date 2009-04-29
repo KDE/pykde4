@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KSycocaEntry
 {
 %TypeHeaderCode
@@ -39,6 +40,7 @@ public:
     static void             read (QDataStream& s, QStringList& list);
     QString                 name () const;
     QString                 entryPath () const;
+    QString                 storageId () const;
     bool                    isValid () const;
     bool                    isDeleted () const;
     QVariant                property (const QString& name) const;

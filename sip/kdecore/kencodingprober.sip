@@ -18,11 +18,13 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
+
 class KEncodingProber
 {
 %TypeHeaderCode
-#include <kdecore/kencodingprober.h>
+#include <kencodingprober.h>
 %End
+
 
 public:
 
@@ -63,6 +65,7 @@ public:
     KEncodingProber::ProberState  feed (const char* data, int len);
     KEncodingProber::ProberState  state () const;
     const char*             encodingName () const;
+    QByteArray              encoding () const;
     float                   confidence () const;
     KEncodingProber::ProberType  proberType () const;
     void                    setProberType (KEncodingProber::ProberType proberType);

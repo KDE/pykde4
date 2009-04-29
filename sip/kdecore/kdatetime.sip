@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KDateTime
 {
 %TypeHeaderCode
@@ -141,6 +142,8 @@ public:
     static KDateTime        currentLocalDateTime ();
     static KDateTime        currentUtcDateTime ();
     static KDateTime        currentDateTime (const KDateTime::Spec& spec);
+    static QDate            currentLocalDate ();
+    static QTime            currentLocalTime ();
     QString                 toString (const QString& format) const;
     QString                 toString (KDateTime::TimeFormat format = KDateTime::ISODate) const;
     static KDateTime        fromString (const QString& string, KDateTime::TimeFormat format = KDateTime::ISODate, bool* negZero /Out/ = 0);
@@ -155,6 +158,22 @@ public:
     bool                    operator > (const KDateTime& other) const;
     bool                    operator >= (const KDateTime& other) const;
     void                    detach ();
+    static void             setSimulatedSystemTime (const KDateTime& newTime);
+    static KDateTime        realCurrentLocalDateTime ();
 };   // KDateTime
+
+
+class KSystemTimeZones_Simulated : KSystemTimeZones /Abstract/
+{
+%TypeHeaderCode
+#include <kdatetime.h>
+%End
+
+public:
+    static KTimeZone        realLocalZone ();
+    static KTimeZone        local ();
+    static void             setLocalZone (const KTimeZone& tz);
+    static bool             isSimulated ();
+};   // KSystemTimeZones_Simulated
 
 

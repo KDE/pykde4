@@ -247,16 +247,16 @@ public:
 };   // KTcpSocket
 
 
-class SslErrorUiData
+class KSslErrorUiData
 {
 %TypeHeaderCode
 #include <ktcpsocket.h>
 %End
 
 public:
-                            SslErrorUiData ();
-                            SslErrorUiData (const KTcpSocket* socket);
-                            SslErrorUiData (const SslErrorUiData& other);
-};   // SslErrorUiData
+                            KSslErrorUiData ();
+                            KSslErrorUiData (const KTcpSocket* socket);
+                            KSslErrorUiData (const KSslErrorUiData& other);
+};   // KSslErrorUiData
 
 

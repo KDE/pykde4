@@ -60,7 +60,6 @@
 #include <akonadi/kmime/messagemodel.h>
 #include <akonadi/kmime/messagethreaderproxymodel.h>
 #include <akonadi/monitor.h>
-#include <akonadi/resourceselectjob.h>
 #include <akonadi/searchcreatejob.h>
 #include <akonadi/servermanager.h>
 #include <akonadi/session.h>

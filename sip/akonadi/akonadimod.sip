@@ -74,7 +74,6 @@
 %Include mimetypechecker.sip
 %Include monitor.sip
 //%Include resourcebase.sip
-%Include resourceselectjob.sip
 %Include searchcreatejob.sip
 %Include servermanager.sip
 %Include session.sip

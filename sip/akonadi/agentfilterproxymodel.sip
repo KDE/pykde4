@@ -173,8 +173,6 @@ public:
                 sipClass = sipClass_Akonadi_ItemSync;
             else if (dynamic_cast<Akonadi::LinkJob*>(sipCpp))
                 sipClass = sipClass_Akonadi_LinkJob;
-            else if (dynamic_cast<Akonadi::ResourceSelectJob*>(sipCpp))
-                sipClass = sipClass_Akonadi_ResourceSelectJob;
             else if (dynamic_cast<Akonadi::SearchCreateJob*>(sipCpp))
                 sipClass = sipClass_Akonadi_SearchCreateJob;
             else if (dynamic_cast<Akonadi::TransactionBeginJob*>(sipCpp))

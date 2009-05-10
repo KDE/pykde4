@@ -163,17 +163,3 @@ public:
 };   // KDateTime
 
 
-class KSystemTimeZones_Simulated : KSystemTimeZones /Abstract/
-{
-%TypeHeaderCode
-#include <kdatetime.h>
-%End
-
-public:
-    static KTimeZone        realLocalZone ();
-    static KTimeZone        local ();
-    static void             setLocalZone (const KTimeZone& tz);
-    static bool             isSimulated ();
-};   // KSystemTimeZones_Simulated
-
-

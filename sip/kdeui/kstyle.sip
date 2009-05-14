@@ -115,6 +115,7 @@ public:
 
 protected:
     int                     layoutSpacingImplementation (QSizePolicy::ControlType control1, QSizePolicy::ControlType control2, Qt::Orientation orientation, const QStyleOption* option, const QWidget* widget) const;
+    QIcon                   standardIconImplementation (QStyle::StandardPixmap standardIcon, const QStyleOption* option = 0, const QWidget* widget = 0) const;
 };   // KStyle
 
 

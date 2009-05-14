@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KRecentFilesAction : KSelectAction
 {
 %TypeHeaderCode
@@ -44,6 +45,7 @@ public:
 
 signals:
     void                    urlSelected (const KUrl& url);
+    void                    recentListCleared ();
 };   // KRecentFilesAction
 
 

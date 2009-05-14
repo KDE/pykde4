@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KConfigDialogManager : QObject
 {
 %TypeHeaderCode
@@ -47,6 +48,7 @@ protected:
     void                    init (bool trackChanges);
     bool                    parseChildren (const QWidget* widget, bool trackChanges);
     QByteArray              getUserProperty (const QWidget* widget) const;
+    QByteArray              getCustomProperty (const QWidget* widget) const;
     void                    setProperty (QWidget* w, const QVariant& v);
     QVariant                property (QWidget* w) const;
     void                    setupWidget (QWidget* widget, KConfigSkeletonItem* item);

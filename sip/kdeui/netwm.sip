@@ -221,7 +221,13 @@ int count   = PyList_Size (a3);
     void                    setPid (int pid);
     void                    setHandledIcons (Bool handled);
     void                    setFrameExtents (NETStrut strut);
+//ig    NETStrut                frameExtents () const;
 //ig     NETIcon            icon (int width = -1, int height = -1) const;
+
+
+//io     const int*         iconSizes () const;
+
+
     void                    setUserTime (Time time);
     Time                    userTime () const;
     void                    setStartupId (const char* startup_id);

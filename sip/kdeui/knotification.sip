@@ -58,6 +58,8 @@ public:
     QWidget*                widget () const;
     void                    setWidget (QWidget* widget);
     QString                 eventId () const;
+    QString                 title () const;
+    void                    setTitle (const QString& title);
     QString                 text () const;
     void                    setText (const QString& text);
     QPixmap                 pixmap () const;

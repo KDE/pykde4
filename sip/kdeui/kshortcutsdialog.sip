@@ -21,6 +21,7 @@
 
 
 
+
 class KShortcutsDialog : KDialog
 {
 %TypeHeaderCode
@@ -35,6 +36,9 @@ public:
     bool                    configure (bool saveSettings = 1);
     virtual QSize           sizeHint () const;
     static int              configure (KActionCollection* collection, KShortcutsEditor::LetterShortcuts allowLetterShortcuts = KShortcutsEditor::LetterShortcutsAllowed, QWidget* parent /Transfer/ = 0, bool bSaveSettings = 1);
+
+signals:
+    void                    saved ();
 
 private:
                             KShortcutsDialog (const KShortcutsDialog&);

@@ -48,6 +48,7 @@ public:
     explicit                KAction (QObject* parent /TransferThis/);
                             KAction (const QString& text, QObject* parent /TransferThis/);
                             KAction (const KIcon& icon, const QString& text, QObject* parent /TransferThis/);
+    void                    setHelpText (const QString& text);
     KShortcut               shortcut (KAction::ShortcutTypes types = KAction::ActiveShortcut) const;
     void                    setShortcut (const KShortcut& shortcut, KAction::ShortcutTypes type = KAction::ShortcutTypes(KAction::ActiveShortcut|KAction::DefaultShortcut));
     void                    setShortcut (const QKeySequence& shortcut, KAction::ShortcutTypes type = KAction::ShortcutTypes(KAction::ActiveShortcut|KAction::DefaultShortcut));

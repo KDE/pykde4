@@ -21,6 +21,7 @@
 
 
 
+
 class KGlobalAccel : QObject
 {
 %TypeHeaderCode
@@ -41,6 +42,8 @@ public:
     static KGlobalAccel*    self ();
     static void             stealShortcutSystemwide (const QKeySequence& seq);
     static void             activateGlobalShortcutContext (const QString& contextUnique, const QString& contextFriendly, const KComponentData& component = KGlobal::mainComponent());
+    static bool             cleanComponent (const QString& componentUnique);
+    static bool             isComponentActive (const QString& componentName);
     static QList<KGlobalShortcutInfo>  getGlobalShortcutsByKey (const QKeySequence& seq);
     static bool             isGlobalShortcutAvailable (const QKeySequence& seq, const QString& component = QString());
     static bool             promptStealShortcutSystemwide (QWidget* parent /Transfer/, const QList<KGlobalShortcutInfo>& shortcuts, const QKeySequence& seq);

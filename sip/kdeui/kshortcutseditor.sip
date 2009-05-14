@@ -21,6 +21,7 @@
 
 
 
+
 class KShortcutsEditor : QWidget
 {
 %TypeHeaderCode
@@ -56,9 +57,12 @@ public:
     void                    undoChanges ();
     void                    save ();
     void                    commit ();
+    void                    clearConfiguration ();
     void                    writeConfiguration (KConfigGroup* config = 0) const;
     void                    exportConfiguration (KConfig* config) const;
+    void                    exportConfiguration (KConfigBase* config) const;
     void                    importConfiguration (KConfig* config);
+    void                    importConfiguration (KConfigBase* config);
 
 signals:
     void                    keyChange ();

@@ -65,7 +65,9 @@ enum StandardItem
     Remove,
     Test,
     Properties,
-    Overwrite
+    Overwrite,
+    CloseWindow,
+    CloseDocument
 };
 
 KGuiItem                guiItem (KStandardGuiItem::StandardItem id);
@@ -84,6 +86,8 @@ KGuiItem                apply ();
 KGuiItem                clear ();
 KGuiItem                defaults ();
 KGuiItem                close ();
+KGuiItem                closeWindow ();
+KGuiItem                closeDocument ();
 KGuiItem                print () /PyName=print_/;
 KGuiItem                properties ();
 KGuiItem                reset ();

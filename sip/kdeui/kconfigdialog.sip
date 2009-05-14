@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
 class KConfigDialog : KPageDialog
 {
 %TypeHeaderCode
@@ -42,6 +43,8 @@ protected:
     virtual void            updateSettings ();
     virtual void            updateWidgets ();
     virtual void            updateWidgetsDefault ();
+    void                    updateButtons ();
+    void                    settingsChangedSlot ();
     virtual bool            hasChanged ();
     virtual bool            isDefault ();
     virtual void            showEvent (QShowEvent* e);

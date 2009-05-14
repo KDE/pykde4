@@ -21,6 +21,7 @@
 
 
 
+
 class KCharSelect : QWidget
 {
 %TypeHeaderCode
@@ -54,11 +55,10 @@ public:
     void                    setCurrentFont (const QFont& font);
 
 signals:
-    void                    currentFontChanged (const QFont& _font);
+    void                    currentFontChanged (const QFont& font);
     void                    currentCharChanged (const QChar& c);
     void                    displayedCharsChanged ();
     void                    charSelected (const QChar& c);
-
 };   // KCharSelect
 
 

@@ -75,6 +75,7 @@ protected:
     void                    slotFind ();
     void                    slotFindNext ();
     void                    slotReplace ();
+    void                    slotSpeakText ();
     virtual bool            event (QEvent*);
     virtual void            keyPressEvent (QKeyEvent*);
     virtual void            focusInEvent (QFocusEvent*);

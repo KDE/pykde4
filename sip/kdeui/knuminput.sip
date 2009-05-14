@@ -63,13 +63,15 @@ public:
     QString                 suffix () const;
     QString                 prefix () const;
     QString                 specialValueText () const;
-    void                    setRange (int min, int max, int step = 1);
-    void                    setRange (int min, int max, int step, bool slider);
+    void                    setRange (int min, int max, int singleStep = 1);
+    void                    setRange (int min, int max, int singleStep, bool slider);
     void                    setSliderEnabled (bool enabled = 1);
     void                    setMinimum (int min);
     int                     minimum () const;
     void                    setMaximum (int max);
     int                     maximum () const;
+    int                     singleStep () const;
+    void                    setSingleStep (int step);
     void                    setSpecialValueText (const QString& text);
     virtual void            setLabel (const QString& label, Qt::Alignment a = Qt::AlignLeft|Qt::AlignTop);
     virtual QSize           minimumSizeHint () const;
@@ -77,6 +79,7 @@ public:
     void                    setRelativeValue (double);
     void                    setReferencePoint (int);
     void                    setSuffix (const QString& suffix);
+    void                    setSuffix (const KLocalizedString& suffix);
     void                    setPrefix (const QString& prefix);
     void                    setEditFocus (bool mark = 1);
 
@@ -103,18 +106,21 @@ class KDoubleNumInput : KNumInput
 
 public:
     explicit                KDoubleNumInput (QWidget* parent /TransferThis/ = 0);
-                            KDoubleNumInput (double lower, double upper, double value, QWidget* parent /TransferThis/ = 0, double step = 0.01, int precision = 2);
-                            KDoubleNumInput (KNumInput* below, double lower, double upper, double value, QWidget* parent /TransferThis/ = 0, double step = 0.02, int precision = 2);
+                            KDoubleNumInput (double lower, double upper, double value, QWidget* parent /TransferThis/ = 0, double singleStep = 0.01, int precision = 2);
+                            KDoubleNumInput (KNumInput* below, double lower, double upper, double value, QWidget* parent /TransferThis/ = 0, double singleStep = 0.02, int precision = 2);
     double                  value () const;
     QString                 suffix () const;
     QString                 prefix () const;
     int                     decimals () const;
     QString                 specialValueText () const;
-    void                    setRange (double min, double max, double step = 1, bool slider = 1);
+    void                    setRange (double min, double max, double singleStep = 1, bool slider = 1);
+    void                    setSliderEnabled (bool enabled);
     void                    setMinimum (double min);
     double                  minimum () const;
     void                    setMaximum (double max);
     double                  maximum () const;
+    double                  singleStep () const;
+    void                    setSingleStep (double singleStep);
     void                    setDecimals (int decimals);
     void                    setPrecision (int precision);
     double                  referencePoint () const;
@@ -122,6 +128,8 @@ public:
     void                    setSpecialValueText (const QString& text);
     virtual void            setLabel (const QString& label, Qt::Alignment a = Qt::AlignLeft|Qt::AlignTop);
     virtual QSize           minimumSizeHint () const;
+    double                  exponentRatio () const;
+    void                    setExponentRatio (double dbl);
     void                    setValue (double);
     void                    setRelativeValue (double);
     void                    setReferencePoint (double ref);
@@ -150,10 +158,11 @@ class KIntSpinBox : QSpinBox
 
 public:
     explicit                KIntSpinBox (QWidget* parent /TransferThis/ = 0);
-                            KIntSpinBox (int lower, int upper, int step, int value, QWidget* parent /TransferThis/, int base = 10);
+                            KIntSpinBox (int lower, int upper, int singleStep, int value, QWidget* parent /TransferThis/, int base = 10);
     void                    setBase (int base);
     int                     base () const;
     void                    setEditFocus (bool mark);
+    void                    setSuffix (const KLocalizedString& suffix);
 
 protected:
     virtual QString         textFromValue (int) const;

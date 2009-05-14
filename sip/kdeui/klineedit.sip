@@ -45,18 +45,21 @@ public:
     void                    setSqueezedTextEnabled (bool enable);
     bool                    isSqueezedTextEnabled () const;
     QString                 originalText () const;
+    QString                 userText () const;
     void                    setCompletionBox (KCompletionBox* box);
     void                    setClickMessage (const QString& msg);
     QString                 clickMessage () const;
     void                    setClearButtonShown (bool show);
     bool                    isClearButtonShown () const;
-    QSize                   clearButtonUsedSize() const;
+    QSize                   clearButtonUsedSize () const;
+    void                    doCompletion (const QString& txt);
 
 signals:
     void                    completionBoxActivated (const QString&);
     void                    returnPressed (const QString&);
     void                    completion (const QString&);
     void                    substringCompletion (const QString&);
+    void                    userTextChanged (const QString&);
     void                    textRotation (KCompletionBase::KeyBindingType);
     void                    completionModeChanged (KGlobalSettings::Completion);
     void                    aboutToShowContextMenu (QMenu* p);

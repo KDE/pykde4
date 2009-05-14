@@ -97,6 +97,7 @@
 #include <kmenu.h>
 #include <kmenubar.h>
 #include <kmessageboxmessagehandler.h>
+#include <kmodifierkeyinfo.h>
 #include <kmultitabbar.h>
 #include <knewpassworddialog.h>
 #include <knotification.h>
@@ -436,6 +437,8 @@ public:
         sipClass = sipClass_KMessageBoxMessageHandler;
     else if (dynamic_cast<KMimeTypeValidator*>(sipCpp))
         sipClass = sipClass_KMimeTypeValidator;
+    else if (dynamic_cast<KModifierKeyInfo*>(sipCpp))
+        sipClass = sipClass_KModifierKeyInfo;
     else if (dynamic_cast<KMultiTabBar*>(sipCpp))
         sipClass = sipClass_KMultiTabBar;
     else if (dynamic_cast<KMultiTabBarButton*>(sipCpp))

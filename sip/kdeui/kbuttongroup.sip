@@ -30,6 +30,7 @@ class KButtonGroup : QGroupBox
 public:
     explicit                KButtonGroup (QWidget* parent /TransferThis/ = 0);
     int                     selected () const;
+    int                     id (QAbstractButton* button) const;
     void                    setSelected (int id);
 
 signals:

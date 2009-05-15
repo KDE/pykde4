@@ -42,6 +42,7 @@ public:
     void                    load ();
     void                    save ();
     void                    defaults ();
+    bool                    isDefault () const;
     void                    updatePluginsState ();
 
 signals:

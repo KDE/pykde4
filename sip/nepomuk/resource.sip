@@ -47,11 +47,15 @@ class Resource
 
 public:
                             Resource ();
+                            Resource (Nepomuk::ResourceManager* manager);
                             Resource (const Nepomuk::Resource&);
                             Resource (const QString& uriOrIdentifier, const QUrl& type = QUrl());
+                            Resource (const QString& uriOrIdentifier, const QUrl& type, Nepomuk::ResourceManager* manager);
                             Resource (const QString& uriOrIdentifier, const QString& type);
                             Resource (const QUrl& uri, const QUrl& type = QUrl());
+                            Resource (const QUrl& uri, const QUrl& type, Nepomuk::ResourceManager* manager);
 //ig                        Resource (ResourceData*);
+    Nepomuk::ResourceManager*  manager () const;
     QString                 uri () const;
     QUrl                    resourceUri () const;
     QString                 type () const;
@@ -68,8 +72,10 @@ public:
     Nepomuk::Variant        property (const QUrl& uri) const;
     Nepomuk::Variant        property (const QString& uri) const;
     void                    setProperty (const QUrl& uri, const Nepomuk::Variant& value);
+    void                    addProperty (const QUrl& uri, const Nepomuk::Variant& value);
     void                    setProperty (const QString& uri, const Nepomuk::Variant& value);
     void                    removeProperty (const QUrl& uri);
+    void                    removeProperty (const QUrl& uri, const Nepomuk::Variant& value);
     void                    removeProperty (const QString& uri);
     void                    remove ();
     bool                    exists () const;

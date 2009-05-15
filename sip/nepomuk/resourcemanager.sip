@@ -31,6 +31,7 @@ class ResourceManager : QObject
 
 public:
     static Nepomuk::ResourceManager*  instance ();
+    void                    deleteInstance ();
     int                     init ();
     bool                    initialized () const;
 
@@ -47,6 +48,10 @@ public:
 
     Nepomuk::Resource       createResourceFromUri (const QString& uri);
     void                    removeResource (const QString& uri);
+
+//Missing implementation.
+//ig    QList<Nepomuk::Resource>  allResources ();
+
     QList<Nepomuk::Resource>  allResourcesOfType (const QUrl& type);
     QList<Nepomuk::Resource>  allResourcesOfType (const QString& type);
     QList<Nepomuk::Resource>  allResourcesWithProperty (const QUrl& uri, const Nepomuk::Variant& v);

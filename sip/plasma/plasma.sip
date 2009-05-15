@@ -170,8 +170,21 @@ enum MarginEdge
     RightMargin
 };
 
+
+enum MessageButton
+{
+    ButtonNone,
+    ButtonOk,
+    ButtonYes,
+    ButtonNo,
+    ButtonCancel
+};
+
+typedef QFlags<Plasma::MessageButton> MessageButtons;
+
 qreal                   scalingFactor (Plasma::ZoomLevel level);
 Plasma::Direction       locationToDirection (Plasma::Location location);
+Plasma::Direction       locationToInverseDirection (Plasma::Location location);
 QGraphicsView*          viewFor (const QGraphicsItem* item);
 
 };   // Plasma

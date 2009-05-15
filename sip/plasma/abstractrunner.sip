@@ -63,9 +63,11 @@
 #include <plasma/context.h>
 #include <plasma/extender.h>
 #include <plasma/extenderitem.h>
+#include <plasma/extendergroup.h>
 #include <plasma/widgets/frame.h>
 #include <plasma/popupapplet.h>
 #include <plasma/widgets/scrollbar.h>
+#include <plasma/widgets/scrollwidget.h>
 #include <plasma/service.h>
 #include <plasma/widgets/slider.h>
 #include <plasma/widgets/svgwidget.h>
@@ -74,6 +76,8 @@
 #include <plasma/tooltipmanager.h>
 #include <plasma/widgets/treeview.h>
 #include <plasma/wallpaper.h>
+#include <plasma/widgets/spinbox.h>
+#include <plasma/widgets/textbrowser.h>
 %End
 
 namespace Plasma
@@ -118,6 +122,7 @@ public:
     QString                 name () const;
     QString                 id () const;
     QString                 description () const;
+    QIcon                   icon () const;
     const Plasma::Package*  package () const;
     virtual void            reloadConfiguration ();
     static QMutex*          bigLock ();
@@ -137,6 +142,8 @@ protected:
     QAction*                action (const QString& id) const;
     QHash<QString,QAction*>  actions () const;
     void                    clearActions ();
+    void                    addSyntax (const Plasma::RunnerSyntax& syntax);
+    void                    setSyntaxes (const QList<Plasma::RunnerSyntax>& syns);
     void                    init ();
 
 public:
@@ -188,7 +195,11 @@ public:
     else if (dynamic_cast<Plasma::Extender*>(sipCpp))
         sipClass = sipClass_Plasma_Extender;
     else if (dynamic_cast<Plasma::ExtenderItem*>(sipCpp))
-        sipClass = sipClass_Plasma_ExtenderItem;
+        {
+            sipClass = sipClass_Plasma_ExtenderItem;
+            if (dynamic_cast<Plasma::ExtenderGroup*>(sipCpp))
+                sipClass = sipClass_Plasma_ExtenderGroup;
+        }
     else if (dynamic_cast<Plasma::FlashingLabel*>(sipCpp))
         sipClass = sipClass_Plasma_FlashingLabel;
     else if (dynamic_cast<Plasma::Frame*>(sipCpp))
@@ -225,12 +236,16 @@ public:
         }
     else if (dynamic_cast<Plasma::ScrollBar*>(sipCpp))
         sipClass = sipClass_Plasma_ScrollBar;
+    else if (dynamic_cast<Plasma::ScrollWidget*>(sipCpp))
+        sipClass = sipClass_Plasma_ScrollWidget;
     else if (dynamic_cast<Plasma::Service*>(sipCpp))
         sipClass = sipClass_Plasma_Service;
     else if (dynamic_cast<Plasma::SignalPlotter*>(sipCpp))
         sipClass = sipClass_Plasma_SignalPlotter;
     else if (dynamic_cast<Plasma::Slider*>(sipCpp))
         sipClass = sipClass_Plasma_Slider;
+    else if (dynamic_cast<Plasma::SpinBox*>(sipCpp))
+        sipClass = sipClass_Plasma_SpinBox;
     else if (dynamic_cast<Plasma::Svg*>(sipCpp))
         {
             sipClass = sipClass_Plasma_Svg;
@@ -241,6 +256,8 @@ public:
         sipClass = sipClass_Plasma_SvgWidget;
     else if (dynamic_cast<Plasma::TabBar*>(sipCpp))
         sipClass = sipClass_Plasma_TabBar;
+    else if (dynamic_cast<Plasma::TextBrowser*>(sipCpp))
+        sipClass = sipClass_Plasma_TextBrowser;
     else if (dynamic_cast<Plasma::TextEdit*>(sipCpp))
         sipClass = sipClass_Plasma_TextEdit;
     else if (dynamic_cast<Plasma::Theme*>(sipCpp))
@@ -253,6 +270,8 @@ public:
         sipClass = sipClass_Plasma_ToolTipManager;
     else if (dynamic_cast<Plasma::TreeView*>(sipCpp))
         sipClass = sipClass_Plasma_TreeView;
+    else if (dynamic_cast<Plasma::VideoWidget*>(sipCpp))
+        sipClass = sipClass_Plasma_VideoWidget;
     else if (dynamic_cast<Plasma::View*>(sipCpp))
         sipClass = sipClass_Plasma_View;
     else if (dynamic_cast<Plasma::Wallpaper*>(sipCpp))

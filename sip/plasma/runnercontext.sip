@@ -51,6 +51,7 @@ public:
     QString                 query () const;
     Plasma::RunnerContext::Type  type () const;
     QString                 mimeType () const;
+    bool                    isValid () const;
     bool                    addMatches (const QString& term, const QList<Plasma::QueryMatch>& matches);
     bool                    addMatch (const QString& term, const Plasma::QueryMatch& match);
     QList<Plasma::QueryMatch>  matches () const;

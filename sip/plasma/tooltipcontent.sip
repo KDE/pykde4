@@ -49,6 +49,8 @@ public:
     QPixmap                 image () const;
     void                    setWindowToPreview (WId id);
     WId                     windowToPreview () const;
+    void                    setWindowsToPreview (const QList<WId>& ids);
+    QList<WId>              windowsToPreview () const;
     void                    setAutohide (bool autohide);
     bool                    autohide () const;
     void                    addResource (Plasma::ToolTipContent::ResourceType type, const QUrl& path, const QVariant& resource);

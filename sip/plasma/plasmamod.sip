@@ -46,6 +46,7 @@
 %Include delegate.sip
 %Include dialog.sip
 %Include extender.sip
+%Include extendergroup.sip
 %Include extenderitem.sip
 %Include framesvg.sip
 %Include glapplet.sip
@@ -58,6 +59,7 @@
 %Include querymatch.sip
 %Include runnercontext.sip
 %Include runnermanager.sip
+%Include runnersyntax.sip
 %Include appletscript.sip
 %Include dataenginescript.sip
 %Include runnerscript.sip
@@ -84,12 +86,16 @@
 %Include pushbutton.sip
 %Include radiobutton.sip
 %Include scrollbar.sip
+%Include scrollwidget.sip
 %Include signalplotter.sip
 %Include slider.sip
+%Include spinbox.sip
 %Include svgwidget.sip
 %Include tabbar.sip
+%Include textbrowser.sip
 %Include textedit.sip
 %Include toolbutton.sip
 %Include treeview.sip
+%Include videowidget.sip
 %Include webview.sip
 

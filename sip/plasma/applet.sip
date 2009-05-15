@@ -94,6 +94,7 @@ public:
     static KPluginInfo::List  listAppletInfo (const QString& category = QString(), const QString& parentApp = QString());
     static KPluginInfo::List  listAppletInfoForMimetype (const QString& mimetype);
     static QStringList      listCategories (const QString& parentApp = QString(), bool visibleOnly = 1);
+    static Plasma::Applet*  loadPlasmoid (const QString& path, uint appletId = 0, const QVariantList& args = QVariantList());
     static Plasma::Applet*  load (const QString& name, uint appletId = 0, const QVariantList& args = QVariantList());
     static Plasma::Applet*  load (const KPluginInfo& info, uint appletId = 0, const QVariantList& args = QVariantList());
     static QString          category (const KPluginInfo& applet);
@@ -133,14 +134,21 @@ public:
     virtual void            removeAssociatedWidget (QWidget* widget);
     virtual void            initExtenderItem (Plasma::ExtenderItem* item);
     explicit                Applet (QGraphicsItem* parent = 0, const QString& serviceId = QString(), uint appletId = 0);
+    explicit                Applet (QGraphicsItem* parent, const QString& serviceId, uint appletId, const QVariantList& args);
     bool                    destroyed () const;
+    virtual void            createConfigurationInterface (KConfigDialog* parent);
+    bool                    isAllowed (const QString& constraint);
 
 signals:
     void                    releaseVisualFocus ();
     void                    geometryChanged ();
+    void                    appletTransformedByUser ();
+    void                    appletTransformedItself ();
     void                    sizeHintChanged (Qt::SizeHint which);
     void                    configNeedsSaving ();
     void                    activate ();
+    void                    messageButtonPressed (const Plasma::MessageButton button);
+    void                    appletDestroyed (Plasma::Applet* applet);
 
 public:
     void                    setImmutability (const Plasma::ImmutabilityType immutable);
@@ -152,6 +160,7 @@ public:
     virtual void            init ();
     virtual void            configChanged ();
     void                    setBusy (bool busy);
+    QVariantList            startupArguments () const;
 
 protected:
                             Applet (QObject* parent /TransferThis/, const QVariantList& args);
@@ -159,7 +168,7 @@ protected:
     virtual void            saveState (KConfigGroup& config) const;
     void                    setHasConfigurationInterface (bool hasInterface);
     void                    setConfigurationRequired (bool needsConfiguring, const QString& reason = QString());
-    virtual void            createConfigurationInterface (KConfigDialog* parent);
+    void                    showMessage (const QIcon& icon, const QString& message, const Plasma::MessageButtons buttons);
     virtual void            constraintsEvent (Plasma::Constraints constraints);
     void                    registerAsDragHandle (QGraphicsItem* item);
     void                    unregisterAsDragHandle (QGraphicsItem* item);
@@ -177,6 +186,9 @@ protected:
     void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
     void                    timerEvent (QTimerEvent* event);
 
+private:
+                            Applet (const QString& packagePath, uint appletId, const QVariantList& args);
+
 protected:
     void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
 };   // Applet
@@ -188,10 +200,11 @@ class AppletProtectedThunk : Plasma::Applet
 #include <plasma/applet.h>
 %End
 
+
 public:
     static void             static_public_setHasConfigurationInterface (Plasma::Applet* applet, bool hasInterface);
-    static void static_public_setConfigurationRequired (Plasma::Applet *applet, bool needsConfiguring, const QString& reason = QString());
-};
+    static void             static_public_setConfigurationRequired (Plasma::Applet* applet, bool needsConfiguring, const QString& reason = QString());
+};   // AppletProtectedThunk
 
 };   // Plasma
 

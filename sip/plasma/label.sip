@@ -44,6 +44,7 @@ public:
 
 signals:
     void                    linkActivated (const QString& link);
+    void                    linkHovered (const QString& link);
 
 public:
     void                    dataUpdated (const QString& sourceName, const Plasma::DataEngine::Data& data);

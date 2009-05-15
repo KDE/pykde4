@@ -18,6 +18,11 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
+%ModuleHeaderCode
+#include <plasma/version.h>
+%End
+
+
 namespace Plasma
 {
 unsigned int            version ();

@@ -31,12 +31,16 @@ class WebView : QGraphicsWidget
 public:
     explicit                WebView (QGraphicsItem* parent = 0);
     void                    setUrl (const KUrl& url);
-//ig    void                    setHtml (const QByteArray& html, const KUrl& baseUrl = KUrl());
+    KUrl                    url () const;
+//ig     void               setHtml (const QByteArray& html, const KUrl& baseUrl = KUrl());
+    QString                 html () const;
     void                    setHtml (const QString& html, const KUrl& baseUrl = KUrl());
     QRectF                  geometry () const;
     void                    setPage (QWebPage* page);
     QWebPage*               page () const;
     QWebFrame*              mainFrame () const;
+    void                    setDragToScroll (bool drag);
+    bool                    dragToScroll ();
     void                    setGeometry (const QRectF& geometry);
 
 signals:
@@ -60,7 +64,6 @@ protected:
     void                    dragLeaveEvent (QGraphicsSceneDragDropEvent* event);
     void                    dragMoveEvent (QGraphicsSceneDragDropEvent* event);
     void                    dropEvent (QGraphicsSceneDragDropEvent* event);
-
 };   // WebView
 
 };   // Plasma

@@ -62,7 +62,9 @@ public:
     bool                    windowTranslucencyEnabled () const;
     void                    setUseGlobalSettings (bool useGlobal);
     bool                    useGlobalSettings () const;
+    bool                    useNativeWidgetStyle () const;
     bool                    findInCache (const QString& key, QPixmap& pix);
+    bool                    findInCache (const QString& key, QPixmap& pix, unsigned int lastModified);
     void                    insertIntoCache (const QString& key, const QPixmap& pix);
     void                    setCacheLimit (int kbytes);
     bool                    findInRectsCache (const QString& image, const QString& element, QRectF& rect) const;
@@ -75,7 +77,6 @@ signals:
 
 public:
     void                    settingsChanged ();
-
 };   // Theme
 
 };   // Plasma

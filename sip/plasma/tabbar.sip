@@ -27,7 +27,7 @@ class TabBar : QGraphicsWidget
 %End
 
 public:
-    explicit                TabBar (QGraphicsWidget* parent = 0);
+    explicit                TabBar (QGraphicsWidget* parent /TransferThis/ = 0);
     int                     insertTab (int index, const QIcon& icon, const QString& label, QGraphicsLayoutItem* content = 0);
     int                     insertTab (int index, const QString& label, QGraphicsLayoutItem* content = 0);
     int                     addTab (const QIcon& icon, const QString& label, QGraphicsLayoutItem* content = 0);
@@ -39,6 +39,8 @@ public:
     QString                 tabText (int index) const;
     void                    setTabIcon (int index, const QIcon& icon);
     QIcon                   tabIcon (int index) const;
+    void                    setTabBarShown (bool show);
+    bool                    isTabBarShown () const;
     void                    setStyleSheet (const QString& stylesheet);
     QString                 styleSheet () const;
     KTabBar*                nativeWidget () const;

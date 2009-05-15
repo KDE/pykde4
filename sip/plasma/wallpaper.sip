@@ -28,9 +28,22 @@ class Wallpaper : QObject
 %End
 
 public:
+
+    enum ResizeMethod
+    {
+        ScaledResize,
+        CenteredResize,
+        ScaledAndCroppedResize,
+        TiledResize,
+        CenterTiledResize,
+        MaxpectResize
+    };
+
+    explicit                Wallpaper (QObject* parent /TransferThis/ = 0);
     static KPluginInfo::List  listWallpaperInfo (const QString& formFactor = QString());
     static Plasma::Wallpaper*  load (const QString& name, const QVariantList& args = QVariantList());
     static Plasma::Wallpaper*  load (const KPluginInfo& info, const QVariantList& args = QVariantList());
+    static Plasma::PackageStructure::Ptr  packageStructure (Plasma::Wallpaper* paper = 0);
     QString                 name () const;
     QString                 pluginName () const;
     QString                 icon () const;
@@ -48,13 +61,28 @@ public:
     virtual void            mousePressEvent (QGraphicsSceneMouseEvent* event);
     virtual void            mouseReleaseEvent (QGraphicsSceneMouseEvent* event);
     virtual void            wheelEvent (QGraphicsSceneWheelEvent* event);
+    Plasma::DataEngine*     dataEngine (const QString& name) const;
+    bool                    configurationRequired () const;
+    bool                    isUsingDiskCache () const;
+    void                    setResizeMethodHint (Plasma::Wallpaper::ResizeMethod resizeMethod);
+    void                    setTargetSizeHint (const QSizeF& targetSize);
 
 signals:
     void                    update (const QRectF& exposedArea);
+    void                    configureRequested ();
+    void                    configurationRequired (bool needsConfig);
+    void                    configNeedsSaving ();
+    void                    renderCompleted (const QImage& image);
+    void                    renderHintsChanged ();
 
 protected:
                             Wallpaper (QObject* parent /TransferThis/, const QVariantList& args);
     virtual void            init (const KConfigGroup& config);
+    void                    setConfigurationRequired (bool needsConfiguring, const QString& reason = QString());
+    void                    render (const QString& sourceImagePath, const QSize& size, Plasma::Wallpaper::ResizeMethod resizeMethod = Plasma::Wallpaper::ScaledResize, const QColor& color = QColor(0,0,0));
+    void                    setUsingDiskCache (bool useCache);
+    bool                    findInCache (const QString& key, QImage& image, unsigned int lastModified = 0);
+    void                    insertIntoCache (const QString& key, const QImage& image);
 };   // Wallpaper
 
 };   // Plasma

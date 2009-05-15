@@ -57,6 +57,7 @@ public:
     bool                    hasElementPrefix (Plasma::Location location) const;
     QString                 prefix ();
     QRegion                 mask () const;
+    QPixmap                 alphaMask () const;
     void                    setCacheAllRenderedFrames (bool cache);
     bool                    cacheAllRenderedFrames () const;
     void                    clearCache ();

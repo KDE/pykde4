@@ -36,6 +36,10 @@ public:
     QString                 image () const;
     void                    setStyleSheet (const QString& stylesheet);
     QString                 styleSheet ();
+    void                    setAction (QAction* action);
+    QAction*                action () const;
+    void                    setIcon (const QIcon& icon);
+    QIcon                   icon () const;
     KPushButton*            nativeWidget () const;
 
 signals:

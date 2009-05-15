@@ -30,6 +30,13 @@ void                    shadowBlur (QImage& image, int radius, const QColor& col
 
 //mt undefined symbol: QColor textColor -- need mapped type?
 //mt undefined symbol: QColor shadowColor -- need mapped type?
+//mt QPixmap            shadowText (QString text, const QFont& font, QColor textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor), QColor shadowColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor), QPoint offset = QPoint(1,1), int radius = 2);
+
+
+
+
+//mt undefined symbol: QColor textColor -- need mapped type?
+//mt undefined symbol: QColor shadowColor -- need mapped type?
 //mt QPixmap            shadowText (QString text, QColor textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor), QColor shadowColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor), QPoint offset = QPoint(1,1), int radius = 2);
 
 

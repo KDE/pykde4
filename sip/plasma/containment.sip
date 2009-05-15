@@ -70,6 +70,8 @@ public:
     Plasma::Containment::Type  containmentType () const;
     Plasma::Corona*         corona () const;
     static KPluginInfo::List  listContainments (const QString& category = QString(), const QString& parentApp = QString());
+    static KPluginInfo::List  listContainmentsOfType (const QString& type, const QString& category = QString(), const QString& parentApp = QString());
+    static QStringList      listContainmentTypes ();
     static KPluginInfo::List  listContainmentsForMimetype (const QString& mimetype);
     Plasma::Applet*         addApplet (const QString& name, const QVariantList& args = QVariantList(), const QRectF& geometry = QRectF(-1,-1,-1,-1));
     void                    addApplet (Plasma::Applet* applet, const QPointF& pos = QPointF(-1,-1), bool dontInit = 1);
@@ -101,6 +103,7 @@ signals:
     void                    appletRemoved (Plasma::Applet* applet);
     void                    zoomRequested (Plasma::Containment* containment, Plasma::ZoomDirection direction);
     void                    toolBoxToggled ();
+    void                    toolBoxVisibilityChanged (bool);
     void                    addSiblingContainment (Plasma::Containment*);
     void                    showAddWidgetsInterface (const QPointF& pos);
     void                    screenChanged (int wasScreen, int isScreen, Plasma::Containment* containment);

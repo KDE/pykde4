@@ -27,6 +27,7 @@ class IconWidget : QGraphicsWidget
 #include <plasma/widgets/iconwidget.h>
 %End
 
+
 public:
     explicit                IconWidget (QGraphicsItem* parent = 0);
     explicit                IconWidget (const QString& text, QGraphicsItem* parent = 0);
@@ -34,16 +35,21 @@ public:
     QString                 text () const;
     void                    setText (const QString& text);
     void                    setSvg (const QString& svgFilePath, const QString& svgIconElement = QString());
+    QString                 svg () const;
     QString                 infoText () const;
     void                    setInfoText (const QString& text);
     QIcon                   icon () const;
     void                    setIcon (const QIcon& icon);
+    QColor                  textBackgroundColor () const;
+    void                    setTextBackgroundColor (const QColor& color);
     void                    setIcon (const QString& icon);
     QSizeF                  iconSize () const;
     void                    addIconAction (QAction* action);
+    void                    removeIconAction (QAction* action);
     void                    setAction (QAction* action);
     QAction*                action () const;
     void                    setOrientation (Qt::Orientation orientation);
+    Qt::Orientation         orientation () const;
     void                    invertLayout (bool invert);
     bool                    invertedLayout () const;
     QSizeF                  sizeFromIconSize (const qreal iconWidth) const;
@@ -73,6 +79,7 @@ protected:
     void                    mouseDoubleClickEvent (QGraphicsSceneMouseEvent* event);
     void                    hoverEnterEvent (QGraphicsSceneHoverEvent* event);
     void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
+    bool                    sceneEventFilter (QGraphicsItem* watched, QEvent* event);
 
 public:
     void                    drawActionButtonBase (QPainter* painter, const QSize& size, int element);

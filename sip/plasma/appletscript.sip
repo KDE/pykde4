@@ -48,6 +48,7 @@ protected:
     Plasma::DataEngine*     dataEngine (const QString& engine) const;
     QString                 mainScript () const;
     const Plasma::Package*  package () const;
+    KConfigDialog*          standardConfigurationDialog ();
 };   // AppletScript
 
 };   // Plasma

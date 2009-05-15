@@ -41,6 +41,7 @@ public:
     void                    addDirectoryDefinition (const char* key, const QString& path, const QString& name);
     void                    addFileDefinition (const char* key, const QString& path, const QString& name);
     QString                 path (const char* key) const;
+    QStringList             entryList (const char* key);
     QString                 name (const char* key) const;
     void                    setRequired (const char* key, bool required);
     bool                    isRequired (const char* key) const;
@@ -61,11 +62,13 @@ public:
 
 //FIXME PackageMetadata needs a custom = operator for this to work.
 //    virtual Plasma::PackageMetadata  metadata ();
+    bool                    allowExternalPaths () const;
 
 signals:
     void                    newWidgetBrowserFinished ();
 
 protected:
+    void                    setAllowExternalPaths (bool allow);
     void                    setContentsPrefix (const QString& prefix);
     void                    setDefaultPackageRoot (const QString& packageRoot);
     virtual void            pathChanged ();

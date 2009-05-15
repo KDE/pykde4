@@ -30,12 +30,20 @@ class BusyWidget : QGraphicsWidget
 
 public:
     explicit                BusyWidget (QGraphicsWidget* parent /TransferThis/ = 0);
+    void                    setRunning (bool running);
+    bool                    isRunning () const;
+    void                    setLabel (const QString& label);
+    QString                 label () const;
+
+signals:
+    void                    clicked ();
 
 protected:
     void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
     void                    showEvent (QShowEvent* event);
     void                    hideEvent (QHideEvent* event);
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
+    void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
     void                    timerEvent (QTimerEvent* event);
 };   // BusyWidget
 

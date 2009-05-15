@@ -47,6 +47,8 @@ public:
     QGraphicsWidget*        graphicsWidget ();
     void                    setResizeHandleCorners (Plasma::Dialog::ResizeCorners corners);
     Plasma::Dialog::ResizeCorners  resizeCorners () const;
+    void                    animatedHide (Plasma::Direction direction);
+    void                    animatedShow (Plasma::Direction direction);
 
 signals:
     void                    dialogResized ();
@@ -63,6 +65,7 @@ protected:
     void                    mousePressEvent (QMouseEvent* event);
     void                    mouseReleaseEvent (QMouseEvent* event);
     void                    keyPressEvent (QKeyEvent* event);
+    void                    moveEvent (QMoveEvent* event);
     bool                    inControlArea (const QPoint& point);
 };   // Dialog
 

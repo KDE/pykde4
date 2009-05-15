@@ -54,7 +54,7 @@ public:
 
 protected:
     KConfigGroup            config () const;
-
+    void                    configNeedsSaving () const;
 };   // View
 
 };   // Plasma

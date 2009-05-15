@@ -42,28 +42,30 @@ public:
 
     explicit                QueryMatch (Plasma::AbstractRunner* runner);
                             QueryMatch (const Plasma::QueryMatch& other);
+    bool                    operator < (const Plasma::QueryMatch& other) const;
+    Plasma::AbstractRunner*  runner () const;
     bool                    isValid () const;
     void                    setType (Plasma::QueryMatch::Type type);
     Plasma::QueryMatch::Type  type () const;
     void                    setRelevance (qreal relevance);
     qreal                   relevance () const;
-    Plasma::AbstractRunner*  runner () const;
-    QString                 id () const;
-    QString                 text () const;
-    QString                 subtext () const;
-    QVariant                data () const;
-    QIcon                   icon () const;
-    bool                    isEnabled () const;
-    bool                    operator < (const Plasma::QueryMatch& other) const;
     void                    run (const Plasma::RunnerContext& context) const;
     void                    setData (const QVariant& data);
+    QVariant                data () const;
     void                    setId (const QString& id);
+    QString                 id () const;
     void                    setText (const QString& text);
+    QString                 text () const;
     void                    setSubtext (const QString& text);
+    QString                 subtext () const;
     void                    setIcon (const QIcon& icon);
+    QIcon                   icon () const;
     void                    setEnabled (bool enable);
+    bool                    isEnabled () const;
     QAction*                selectedAction () const;
     void                    setSelectedAction (QAction* action);
+    bool                    hasConfigurationInterface () const;
+    void                    createConfigurationInterface (QWidget* parent /Transfer/);
 };   // QueryMatch
 
 };   // Plasma

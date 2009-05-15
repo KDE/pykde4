@@ -39,11 +39,19 @@ public:
     Plasma::Containment*    containmentForScreen (int screen, int desktop = -1) const;
     void                    addOffscreenWidget (QGraphicsWidget* widget);
     void                    removeOffscreenWidget (QGraphicsWidget* widget);
+    QList<QGraphicsWidget*>  offscreenWidgets () const;
     virtual int             numScreens () const;
     virtual QRect           screenGeometry (int id) const;
     virtual QRegion         availableScreenRegion (int id) const;
-    QPoint                  popupPosition (const QGraphicsItem* item, const QSize& s);
-//FIXME    QList<Plasma::Location>  freeEdges (int screen) const;
+    QPoint                  popupPosition (const QGraphicsItem* item, const QSize& size);
+    QList<Plasma::Location>  freeEdges (int screen) const;
+    QAction*                action (QString name) const;
+    void                    addAction (QString name, QAction* action);
+    QList<QAction*>         actions () const;
+    void                    enableAction (const QString& name, bool enable);
+    void                    updateShortcuts ();
+    void                    addShortcuts (KActionCollection* newShortcuts);
+    KAction*                addAction (QString name);
     void                    initializeLayout (const QString& config = QString());
     void                    loadLayout (const QString& config = QString());
     void                    saveLayout (const QString& config = QString()) const;
@@ -58,6 +66,8 @@ signals:
     void                    releaseVisualFocus ();
     void                    configSynced ();
     void                    availableScreenRegionChanged ();
+    void                    immutabilityChanged (Plasma::ImmutabilityType immutability);
+    void                    shortcutsChanged ();
 
 protected:
     virtual void            loadDefaultLayout ();

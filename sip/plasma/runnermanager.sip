@@ -32,6 +32,7 @@ public:
     explicit                RunnerManager (QObject* parent /TransferThis/ = 0);
     explicit                RunnerManager (KConfigGroup& config, QObject* parent /TransferThis/ = 0);
     Plasma::AbstractRunner*  runner (const QString& name) const;
+    QList<Plasma::AbstractRunner*>  runners () const;
     Plasma::RunnerContext*  searchContext () const;
     QList<Plasma::QueryMatch>  matches () const;
     void                    run (const Plasma::QueryMatch& match);

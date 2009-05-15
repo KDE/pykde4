@@ -40,6 +40,9 @@ public:
     QIcon                   icon () const;
     void                    setExtender (Plasma::Extender* extender, const QPointF& pos = QPointF(-1,-1));
     Plasma::Extender*       extender () const;
+    void                    setGroup (Plasma::ExtenderGroup* group);
+    Plasma::ExtenderGroup*  group () const;
+    bool                    isGroup () const;
     void                    setAutoExpireDelay (uint time);
     uint                    autoExpireDelay () const;
     bool                    isDetached () const;
@@ -62,6 +65,7 @@ protected:
     void                    mouseReleaseEvent (QGraphicsSceneMouseEvent* event);
     void                    hoverMoveEvent (QGraphicsSceneHoverEvent* event);
     void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
+    bool                    sceneEventFilter (QGraphicsItem* watched, QEvent* event);
 };   // ExtenderItem
 
 };   // Plasma

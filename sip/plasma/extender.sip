@@ -42,11 +42,15 @@ public:
     QList<Plasma::ExtenderItem*>  attachedItems () const;
     QList<Plasma::ExtenderItem*>  detachedItems () const;
     Plasma::ExtenderItem*   item (const QString& name) const;
+    Plasma::ExtenderGroup*  group (const QString& name) const;
+    bool                    hasItem (const QString& name) const;
+    bool                    isEmpty () const;
     void                    setAppearance (Plasma::Extender::Appearance appearance);
     Plasma::Extender::Appearance  appearance () const;
+    QList<Plasma::ExtenderGroup*>  groups () const;
 
 protected:
-    virtual void            itemAddedEvent (Plasma::ExtenderItem* item, const QPointF& pos);
+    virtual void            itemAddedEvent (Plasma::ExtenderItem* item, const QPointF& pos = QPointF(-1,-1));
     virtual void            itemRemovedEvent (Plasma::ExtenderItem* item);
     virtual void            itemHoverEnterEvent (Plasma::ExtenderItem* item);
     virtual void            itemHoverMoveEvent (Plasma::ExtenderItem* item, const QPointF& pos);
@@ -56,6 +60,10 @@ protected:
     QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
     void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
+    void                    dragEnterEvent (QGraphicsSceneDragDropEvent* event);
+    void                    dragMoveEvent (QGraphicsSceneDragDropEvent* event);
+    void                    dragLeaveEvent (QGraphicsSceneDragDropEvent* event);
+    void                    dropEvent (QGraphicsSceneDragDropEvent* event);
 
 signals:
     void                    itemAttached (Plasma::ExtenderItem*);

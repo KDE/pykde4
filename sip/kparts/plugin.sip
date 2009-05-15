@@ -54,6 +54,8 @@ public:
 protected:
     static QList<KParts::Plugin::PluginInfo>  pluginInfos (const KComponentData& instance);
     static KParts::Plugin*  loadPlugin (QObject* parent /Transfer/, const char* libname);
+    static KParts::Plugin*  loadPlugin (QObject* parent /Transfer/, const QByteArray& libname);
+    static KParts::Plugin*  loadPlugin (QObject* parent /Transfer/, const QString& libname);
     virtual void            setComponentData (const KComponentData& instance);
 };   // Plugin
 

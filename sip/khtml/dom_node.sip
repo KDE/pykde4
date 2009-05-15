@@ -112,6 +112,18 @@ public:
     bool                    dispatchEvent (const DOM::Event& evt);
     DOM::DOMString          textContent () const;
     void                    setTextContent (const DOM::DOMString& text);
+
+    enum DocumentPosition
+    {
+        DOCUMENT_POSITION_DISCONNECTED,
+        DOCUMENT_POSITION_PRECEDING,
+        DOCUMENT_POSITION_FOLLOWING,
+        DOCUMENT_POSITION_CONTAINS,
+        DOCUMENT_POSITION_CONTAINED_BY,
+        DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
+    };
+
+    unsigned                compareDocumentPosition (const DOM::Node& other);
     quint32                 elementId () const;
     bool                    isNull () const;
 //ig     NodeImpl*          handle () const;

@@ -37,6 +37,7 @@
 #include <opticaldrive.h>
 #include <portablemediaplayer.h>
 #include <processor.h>
+#include <serialinterface.h>
 #include <storageaccess.h>
 #include <storagedrive.h>
 #include <storagevolume.h>
@@ -75,6 +76,8 @@ public:
         AudioInterface,
         DvbInterface,
         Video,
+        SerialInterface,
+        SmartCardReader,
         Last
     };
 
@@ -125,21 +128,22 @@ public:
                 sipClass = sipClass_Solid_PortableMediaPlayer;
             else if (dynamic_cast<Solid::Processor*>(sipCpp))
                 sipClass = sipClass_Solid_Processor;
+            else if (dynamic_cast<Solid::SerialInterface*>(sipCpp))
+                sipClass = sipClass_Solid_SerialInterface;
             else if (dynamic_cast<Solid::StorageAccess*>(sipCpp))
                 sipClass = sipClass_Solid_StorageAccess;
             else if (dynamic_cast<Solid::StorageDrive*>(sipCpp))
-            {
-                sipClass = sipClass_Solid_StorageDrive;
-                if (dynamic_cast<Solid::OpticalDrive*>(sipCpp))
-                    sipClass = sipClass_Solid_OpticalDrive;
-
-            }
+                {
+                    sipClass = sipClass_Solid_StorageDrive;
+                    if (dynamic_cast<Solid::OpticalDrive*>(sipCpp))
+                        sipClass = sipClass_Solid_OpticalDrive;
+                }
             else if (dynamic_cast<Solid::StorageVolume*>(sipCpp))
-            {
-                sipClass = sipClass_Solid_StorageVolume;
-                if (dynamic_cast<Solid::OpticalDisc*>(sipCpp))
-                    sipClass = sipClass_Solid_OpticalDisc;
-            }
+                {
+                    sipClass = sipClass_Solid_StorageVolume;
+                    if (dynamic_cast<Solid::OpticalDisc*>(sipCpp))
+                        sipClass = sipClass_Solid_OpticalDisc;
+                }
             else if (dynamic_cast<Solid::Video*>(sipCpp))
                 sipClass = sipClass_Solid_Video;
         }

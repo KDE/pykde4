@@ -21,7 +21,7 @@
 namespace Phonon
 {
 
-class VideoWidgetInterface
+class VideoWidgetInterface43
 {
 %TypeHeaderCode
 #include <phonon/videowidgetinterface.h>
@@ -41,8 +41,23 @@ public:
     virtual qreal           saturation () const = 0;
     virtual void            setSaturation (qreal) = 0;
     virtual QWidget*        widget () = 0;
-};   // VideoWidgetInterface
+};   // VideoWidgetInterface43
+
+
+class VideoWidgetInterface44 : Phonon::VideoWidgetInterface43
+{
+%TypeHeaderCode
+#include <phonon/videowidgetinterface.h>
+%End
+
+public:
+    virtual QImage          snapshot () const = 0;
+};   // VideoWidgetInterface44
 
 };   // Phonon
 
+namespace Phonon
+{
+typedef Phonon::VideoWidgetInterface43 VideoWidgetInterface;
 
+};   // Phonon

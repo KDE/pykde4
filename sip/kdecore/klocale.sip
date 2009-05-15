@@ -21,6 +21,7 @@
 
 
 
+
 class KLocale
 {
 %TypeHeaderCode
@@ -47,8 +48,20 @@ public:
         AfterMoney
     };
 
+
+    enum DigitSet
+    {
+        ArabicDigits,
+        ArabicIndicDigits,
+        EasternArabicIndicDigits,
+        DevenagariDigits
+    };
+
+    QString                 digitSetToName (KLocale::DigitSet digitSet, bool withDigits = 0) const;
+    QList<KLocale::DigitSet>  allDigitSetsList () const;
     QString                 decimalSymbol () const;
     QString                 thousandsSeparator () const;
+    KLocale::DigitSet       digitSet () const;
     QString                 currencySymbol () const;
     QString                 monetaryDecimalSymbol () const;
     QString                 monetaryThousandsSeparator () const;
@@ -59,6 +72,7 @@ public:
     bool                    negativePrefixCurrencySymbol () const;
     KLocale::SignPosition   positiveMonetarySignPosition () const;
     KLocale::SignPosition   negativeMonetarySignPosition () const;
+    KLocale::DigitSet       monetaryDigitSet () const;
     QString                 formatMoney (double num, const QString& currency = QString(), int digits = -1) const;
     QString                 formatNumber (double num, int precision = -1) const;
     QString                 formatNumber (const QString& numStr, bool round = 1, int precision = 2) const;
@@ -141,6 +155,7 @@ public:
     void                    setThousandsSeparator (const QString& separator);
     void                    setPositiveSign (const QString& sign);
     void                    setNegativeSign (const QString& sign);
+    void                    setDigitSet (KLocale::DigitSet digitSet);
     void                    setPositiveMonetarySignPosition (KLocale::SignPosition signpos);
     void                    setNegativeMonetarySignPosition (KLocale::SignPosition signpos);
     void                    setPositivePrefixCurrencySymbol (bool prefix);
@@ -149,6 +164,7 @@ public:
     void                    setMonetaryThousandsSeparator (const QString& separator);
     void                    setMonetaryDecimalSymbol (const QString& symbol);
     void                    setCurrencySymbol (const QString& symbol);
+    void                    setMonetaryDigitSet (KLocale::DigitSet digitSet);
     int                     pageSize () const;
     void                    setPageSize (int paperFormat);
 

@@ -59,6 +59,14 @@ public:
         static QStringList      mimeDataTypes ();
         static KUrl::List       fromMimeData (const QMimeData* mimeData, KUrl::MetaDataMap* metaData = 0);
 
+        enum DecodeOptions
+        {
+            PreferLocalUrls,
+            PreferKdeUrls
+        };
+
+        static KUrl::List       fromMimeData (const QMimeData* mimeData, KUrl::List::DecodeOptions decodeOptions, KUrl::MetaDataMap* metaData = 0);
+
 //force
         int                     __len__ ();
 %MethodCode
@@ -366,7 +374,6 @@ public:
 
 bool                    urlcmp (const QString& _url1, const QString& _url2);
 bool                    urlcmp (const QString& _url1, const QString& _url2, const KUrl::EqualsOptions& options);
-uint                    qHash (const QString& key);
 uint                    qHash (const KUrl& kurl);
 %ModuleHeaderCode
 #include <kurl.h>
@@ -378,4 +385,5 @@ uint                    qHash (const KUrl& kurl);
 
 
 
+uint                    qHash (const QString& key);
 

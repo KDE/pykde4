@@ -33,6 +33,7 @@ public:
     QStringList             wantedMimeTypes () const;
     void                    setWantedMimeTypes (const QStringList& mimeTypes);
     void                    addWantedMimeType (const QString& mimeType);
+    void                    removeWantedMimeType (const QString& mimeType);
     bool                    isWantedItem (const Akonadi::Item& item) const;
     bool                    isWantedCollection (const Akonadi::Collection& collection) const;
     static bool             isWantedItem (const Akonadi::Item& item, const QString& wantedMimeType);

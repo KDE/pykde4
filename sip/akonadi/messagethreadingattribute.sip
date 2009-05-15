@@ -31,6 +31,12 @@ class MessageThreadingAttribute : Akonadi::Attribute /NoDefaultCtors/
 public:
                             MessageThreadingAttribute ();
 //ig                        MessageThreadingAttribute (const Akonadi::MessageThreadingAttribute& other);
+//ig    QList<Akonadi::Item::Id>         perfectParents () const;
+//ig    void                    setPerfectParents (const QList<Akonadi::Item::Id>& parents);
+//ig    QList<Akonadi::Item::Id>         unperfectParents () const;
+//ig    void                    setUnperfectParents (const QList<Akonadi::Item::Id>& parents);
+//ig    QList<Akonadi::Item::Id>         subjectParents () const;
+//ig    void                    setSubjectParents (const QList<Akonadi::Item::Id>& parents);
     QByteArray              type () const;
     Akonadi::MessageThreadingAttribute*  clone () const;
     QByteArray              serialized () const;

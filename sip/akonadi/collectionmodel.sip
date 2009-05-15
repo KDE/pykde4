@@ -32,6 +32,8 @@ public:
 
     enum Roles
     {
+        OldCollectionIdRole,
+        OldCollectionRole,
         CollectionIdRole,
         CollectionRole,
         UserRole

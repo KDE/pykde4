@@ -31,7 +31,9 @@ class ItemView : QTreeView
 public:
     explicit                ItemView (QWidget* parent /TransferThis/ = 0);
     explicit                ItemView (KXmlGuiWindow* xmlGuiWindow, QWidget* parent /TransferThis/ = 0);
+    explicit                ItemView (KXMLGUIClient* xmlGuiClient, QWidget* parent /TransferThis/ = 0);
     void                    setXmlGuiWindow (KXmlGuiWindow* xmlGuiWindow);
+    void                    setXmlGuiClient (KXMLGUIClient* xmlGuiClient);
     virtual void            setModel (QAbstractItemModel* model);
 
 signals:

@@ -30,7 +30,9 @@ class CollectionView : QTreeView
 public:
     explicit                CollectionView (QWidget* parent /TransferThis/ = 0);
     explicit                CollectionView (KXmlGuiWindow* xmlGuiWindow, QWidget* parent /TransferThis/ = 0);
+    explicit                CollectionView (KXMLGUIClient* xmlGuiClient, QWidget* parent /TransferThis/ = 0);
     void                    setXmlGuiWindow (KXmlGuiWindow* xmlGuiWindow);
+    void                    setXmlGuiClient (KXMLGUIClient* xmlGuiClient);
     virtual void            setModel (QAbstractItemModel* model);
 
 signals:

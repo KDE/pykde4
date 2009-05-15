@@ -29,6 +29,8 @@ class ItemDeleteJob : Akonadi::Job
 
 public:
     explicit                ItemDeleteJob (const Akonadi::Item& item, QObject* parent /TransferThis/ = 0);
+    explicit                ItemDeleteJob (const Akonadi::Item::List& items, QObject* parent /TransferThis/ = 0);
+    explicit                ItemDeleteJob (const Akonadi::Collection& collection, QObject* parent /TransferThis/ = 0);
 
 protected:
     virtual void            doStart ();

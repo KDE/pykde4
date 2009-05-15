@@ -58,6 +58,7 @@ public:
     KFileFilterCombo*       filterWidget () const;
     KActionCollection*      actionCollection () const;
     static KUrl             getStartUrl (const KUrl& startDir, QString& recentDirClass);
+    static KUrl             getStartUrl (const KUrl& startDir, QString& recentDirClass, QString& fileName);
     static void             setStartDir (const KUrl& directory);
     virtual void            setCustomWidget (QWidget* widget);
     virtual void            setCustomWidget (const QString& text, QWidget* widget);
@@ -77,6 +78,9 @@ signals:
     void                    selectionChanged ();
     void                    filterChanged (const QString& filter);
     void                    accepted ();
+
+public:
+    KDirOperator*           dirOperator ();
 };   // KFileWidget
 
 

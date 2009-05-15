@@ -37,6 +37,8 @@ public:
                             PreviewJob (const KFileItemList& items, int width, int height, int iconSize, int iconAlpha, bool scale, bool save, const QStringList* enabledPlugins);
     void                    removeItem (const KUrl& url);
     void                    setIgnoreMaximumSize (bool ignoreSize = 1);
+    void                    setSequenceIndex (int index);
+    int                     sequenceIndex () const;
     static QStringList      availablePlugins ();
     static QStringList      supportedMimeTypes ();
 

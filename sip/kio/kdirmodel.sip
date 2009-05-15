@@ -95,9 +95,11 @@ public:
     virtual bool            setData (const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
     virtual void            sort (int column, Qt::SortOrder order = Qt::AscendingOrder);
     static KUrl::List       simplifiedUrlList (const KUrl::List& urls);
+    void                    requestSequenceIcon (const QModelIndex& index, int sequenceIndex);
 
 signals:
     void                    expand (const QModelIndex& index);
+    void                    needSequenceIcon (const QModelIndex& index, int sequenceIndex);
 };   // KDirModel
 
 

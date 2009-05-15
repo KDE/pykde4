@@ -169,6 +169,7 @@ public:
     void                    setReportDataSent (bool enabled);
     bool                    reportDataSent () const;
     QString                 mimetype () const;
+    void                    setTotalSize (KIO::filesize_t bytes);
 
 protected:
     virtual void            slotResult (KJob* job);

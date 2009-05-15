@@ -33,6 +33,7 @@ public:
     explicit                KUrlRequester (const KUrl& url, QWidget* parent /TransferThis/ = 0);
                             KUrlRequester (QWidget* editWidget, QWidget* parent /TransferThis/);
     KUrl                    url () const;
+    KUrl                    startDir () const;
     QString                 text () const;
     void                    setMode (KFile::Modes m);
     KFile::Modes            mode () const;
@@ -47,7 +48,9 @@ public:
     QString                 clickMessage () const;
     void                    setClickMessage (const QString& msg);
     void                    setUrl (const KUrl& url);
+    void                    setStartDir (const KUrl& startDir);
     void                    setPath (const QString& path);
+    void                    setText (const QString& text);
     void                    clear ();
 
 signals:

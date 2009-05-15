@@ -32,6 +32,8 @@ public:
     virtual bool            hasChildren (const QModelIndex& parent = QModelIndex()) const;
     virtual bool            canFetchMore (const QModelIndex& parent) const;
     static int              pointsForPermissions (const QFileInfo& info);
+    void                    setSortFoldersFirst (bool foldersFirst);
+    bool                    sortFoldersFirst () const;
 
 protected:
     virtual bool            subSortLessThan (const QModelIndex& left, const QModelIndex& right) const;

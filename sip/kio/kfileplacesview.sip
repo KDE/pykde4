@@ -32,33 +32,30 @@ public:
 
     void                    setDropOnPlaceEnabled (bool enabled);
     bool                    isDropOnPlaceEnabled () const;
-    void                    setAutoResizeItemsEnabled(bool enabled);
-    bool                    isAutoResizeItemsEnabled() const;
+    void                    setAutoResizeItemsEnabled (bool enabled);
+    bool                    isAutoResizeItemsEnabled () const;
     void                    setUrl (const KUrl& url);
     void                    setShowAll (bool showAll);
     virtual QSize           sizeHint () const;
     virtual void            setModel (QAbstractItemModel* model);
 
 protected:
+    virtual void            keyPressEvent (QKeyEvent* event);
     virtual void            contextMenuEvent (QContextMenuEvent* event);
     virtual void            resizeEvent (QResizeEvent* event);
     virtual void            showEvent (QShowEvent* event);
     virtual void            hideEvent (QHideEvent* event);
-
     virtual void            dragEnterEvent (QDragEnterEvent* event);
     virtual void            dragLeaveEvent (QDragLeaveEvent* event);
     virtual void            dragMoveEvent (QDragMoveEvent* event);
     virtual void            dropEvent (QDropEvent* event);
     virtual void            paintEvent (QPaintEvent* event);
-
     void                    rowsInserted (const QModelIndex& parent /Transfer/, int start, int end);
     void                    dataChanged (const QModelIndex& topLeft, const QModelIndex& bottomRight);
 
 signals:
     void                    urlChanged (const KUrl& url);
-
     void                    urlsDropped (const KUrl& dest, QDropEvent* event, QWidget* parent /Transfer/);
-
 };   // KFilePlacesView
 
 

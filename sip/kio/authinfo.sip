@@ -59,7 +59,7 @@ public:
     void                    setExtraFieldFlags (const QString& fieldName, const KIO::AuthInfo::FieldFlags flags);
     QVariant                getExtraField (const QString& fieldName) const;
     KIO::AuthInfo::FieldFlags  getExtraFieldFlags (const QString& fieldName) const;
-
+    static void             registerMetaTypes ();
 };   // AuthInfo
 
 

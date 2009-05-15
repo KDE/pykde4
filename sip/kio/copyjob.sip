@@ -85,6 +85,7 @@ signals:
 protected:
     virtual void            slotResult (KJob* job);
 //ig                        CopyJob (CopyJobPrivate& dd);
+    void                    emitResult ();
 
 //force
 

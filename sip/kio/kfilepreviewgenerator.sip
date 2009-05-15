@@ -35,6 +35,7 @@ public:
     void                    setPreviewShown (bool show);
     bool                    isPreviewShown () const;
     void                    updatePreviews ();
+    void                    updateIcons ();
     void                    cancelPreviews ();
     void                    setEnabledPlugins (const QStringList& list);
     QStringList             enabledPlugins () const;

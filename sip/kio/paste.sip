@@ -29,6 +29,7 @@ KIO::Job*               pasteClipboard (const KUrl& destURL, QWidget* widget, bo
 void                    pasteData (const KUrl& destURL, const QByteArray& data, QWidget* widget);
 KIO::CopyJob*           pasteDataAsync (const KUrl& destURL, const QByteArray& data, QWidget* widget, const QString& dialogText = QString());
 KIO::CopyJob*           pasteMimeSource (const QMimeData* data, const KUrl& destURL, const QString& dialogText, QWidget* widget, bool clipboard = 0);
+bool                    canPasteMimeSource (const QMimeData* data);
 QString                 pasteActionText ();
 };   // KIO
 

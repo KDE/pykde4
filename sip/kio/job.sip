@@ -57,6 +57,7 @@ KIO::MultiGetJob*       multi_get (long id, const KUrl& url, const KIO::MetaData
 KIO::MimetypeJob*       mimetype (const KUrl& url, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::FileCopyJob*       file_copy (const KUrl& src, const KUrl& dest, int permissions = -1, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::FileCopyJob*       file_move (const KUrl& src, const KUrl& dest, int permissions = -1, KIO::JobFlags flags = KIO::DefaultFlags);
+//ig KIO::FileCopyJob*       file_move (const KUrl& src, const KUrl& dest, KIO::JobFlags flags);
 KIO::SimpleJob*         file_delete (const KUrl& src, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::ListJob*           listDir (const KUrl& url, KIO::JobFlags flags = KIO::DefaultFlags, bool includeHidden = 1);
 KIO::ListJob*           listRecursive (const KUrl& url, KIO::JobFlags flags = KIO::DefaultFlags, bool includeHidden = 1);

@@ -14,15 +14,15 @@ FIND_PACKAGE(PythonLibrary REQUIRED)
 INCLUDE(PythonMacros)
 
 FIND_PACKAGE(SIP REQUIRED)
-IF(SIP_VERSION STRLESS "040708")    # These version numbers also appear in ../CMakeLists.txt
-    MESSAGE(FATAL_ERROR "The version of SIP found is too old. 4.7.8 or later is needed.")
-ENDIF(SIP_VERSION STRLESS "040708")
+IF(SIP_VERSION STRLESS "040800")    # These version numbers also appear in ../CMakeLists.txt
+    MESSAGE(FATAL_ERROR "The version of SIP found is too old. 4.8.0 or later is needed.")
+ENDIF(SIP_VERSION STRLESS "040800")
 INCLUDE(SIPMacros)
 
 FIND_PACKAGE(PyQt4 REQUIRED)
-IF(PYQT4_VERSION STRLESS "040404")  # These version numbers also appear in ../CMakeLists.txt
-    MESSAGE(FATAL_ERROR "The version of PyQt found is too old. 4.4.4 or later is required.")
-ENDIF(PYQT4_VERSION STRLESS "040404")
+IF(PYQT4_VERSION STRLESS "040500")  # These version numbers also appear in ../CMakeLists.txt
+    MESSAGE(FATAL_ERROR "The version of PyQt found is too old. 4.5.0 or later is required.")
+ENDIF(PYQT4_VERSION STRLESS "040500")
 
 SET(SOPRANO_MIN_VERSION "2.0")
 MACRO_OPTIONAL_FIND_PACKAGE(Soprano)
@@ -69,7 +69,7 @@ ENDIF (WIN32)
 SET(SIP_DISABLE_FEATURES VendorID PyQt_NoPrintRangeBug)
 SET(SIP_EXTRA_OPTIONS -g)
 
-ADD_DEFINITIONS(-D_REENTRANT -DQT_NO_DEBUG -DQT_CORE_LIB -DQT_GUI_LIB)
+ADD_DEFINITIONS(-D_REENTRANT -DQT_NO_DEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DUSING_SOPRANO_NRLMODEL_UNSTABLE_API)
 
 FILE(GLOB kdecore_files_sip sip/kdecore/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${kdecore_files_sip})

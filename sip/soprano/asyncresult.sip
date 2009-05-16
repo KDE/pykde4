@@ -32,6 +32,7 @@ signals:
     void                    resultReady (Soprano::Util::AsyncResult*);
 
 public:
+    static Soprano::Util::AsyncResult*  createResult ();
     QVariant                value () const;
     Soprano::Error::ErrorCode  errorCode () const;
     Soprano::StatementIterator  statementIterator () const;

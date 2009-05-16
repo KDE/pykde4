@@ -44,6 +44,10 @@ enum BackendOption
     BackendOptionStorageMemory,
     BackendOptionEnableInference,
     BackendOptionStorageDir,
+    BackendOptionHost,
+    BackendOptionPort,
+    BackendOptionUsername,
+    BackendOptionPassword,
     BackendOptionUser
 };
 
@@ -61,6 +65,7 @@ enum BackendFeature
     BackendFeatureInferenceOptional,
     BackendFeatureContext,
     BackendFeatureStorageMemory,
+    BackendFeatureAll,
     BackendFeatureUser
 };
 

@@ -47,6 +47,7 @@ public:
     bool                    operator == (const Soprano::LiteralValue& other) const;
     bool                    operator != (const Soprano::LiteralValue& other) const;
     bool                    isValid () const;
+    bool                    isPlain () const;
     bool                    isInt () const;
     bool                    isInt64 () const;
     bool                    isUnsignedInt () const;
@@ -70,14 +71,17 @@ public:
     QDateTime               toDateTime () const;
     QByteArray              toByteArray () const;
     QUrl                    dataTypeUri () const;
+    Soprano::LanguageTag    language () const;
     QVariant::Type          type () const;
     QVariant                variant () const;
     static Soprano::LiteralValue  fromString (const QString& value, QVariant::Type type);
     static Soprano::LiteralValue  fromString (const QString& value, const QUrl& dataTypeUri);
+    static Soprano::LiteralValue  createPlainLiteral (const QString& value, const Soprano::LanguageTag& lang = Soprano::LanguageTag());
     static QVariant::Type   typeFromDataTypeUri (const QUrl& dataTypeUri);
     static QUrl             dataTypeUriFromType (QVariant::Type type);
 };   // LiteralValue
 
+uint                    qHash (const Soprano::LiteralValue& lit);
 };   // Soprano
 
 

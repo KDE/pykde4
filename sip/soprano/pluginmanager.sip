@@ -28,6 +28,7 @@ class PluginManager : QObject
 %End
 
 public:
+    void                    setPluginSearchPath (const QStringList& path, bool useDefaults = 1);
     const Soprano::Backend*  discoverBackendByName (const QString& name);
     const Soprano::Backend*  discoverBackendByFeatures (Soprano::BackendFeatures features, const QStringList& userFeatures = QStringList());
     QList<const Soprano::Backend*>   allBackends ();

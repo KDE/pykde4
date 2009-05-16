@@ -39,6 +39,8 @@ QUrl                    description ();
 QUrl                    engineeringTool ();
 QUrl                    hasDefaultNamespace ();
 QUrl                    hasDefaultNamespaceAbbreviation ();
+QUrl                    hasSubResource ();
+QUrl                    hasSuperResource ();
 QUrl                    hasSymbol ();
 QUrl                    hasTag ();
 QUrl                    hasTopic ();

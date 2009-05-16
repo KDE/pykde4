@@ -30,6 +30,7 @@
 %Include dbusstatementiterator.sip
 %Include filtermodel.sip
 %Include global.sip
+%Include graph.sip
 %Include inferencemodel.sip
 %Include inferencerule.sip
 %Include inferenceruleparser.sip
@@ -38,6 +39,7 @@
 %Include sil.sip
 %Include statementpattern.sip
 %Include iteratorbackend.sip
+%Include languagetag.sip
 %Include literalvalue.sip
 %Include localsocketclient.sip
 %Include locator.sip
@@ -45,6 +47,7 @@
 %Include model.sip
 %Include node.sip
 %Include nodeiterator.sip
+%Include nrlmodel.sip
 %Include parser.sip
 %Include plugin.sip
 %Include pluginmanager.sip
@@ -53,11 +56,13 @@
 %Include serializer.sip
 %Include servercore.sip
 %Include sopranotypes.sip
+%Include sparqlmodel.sip
 %Include statement.sip
 %Include statementiterator.sip
 %Include storagemodel.sip
 %Include tcpclient.sip
 %Include asyncmodel.sip
+%Include asyncresult.sip
 %Include dummymodel.sip
 %Include mutexmodel.sip
 %Include readonlymodel.sip

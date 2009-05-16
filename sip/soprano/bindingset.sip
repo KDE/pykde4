@@ -38,6 +38,8 @@ public:
     bool                    contains (const QString& name) const;
     int                     count () const;
     void                    insert (const QString& name, const Soprano::Node& value);
+    void                    replace (int offset, const Soprano::Node& value);
+    void                    replace (const QString& name, const Soprano::Node& value);
 };   // BindingSet
 
 };   // Soprano

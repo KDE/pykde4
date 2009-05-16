@@ -40,11 +40,13 @@ public:
                             Node ();
                             Node (const QUrl& uri);
     explicit                Node (const QString& id);
-                            Node (const Soprano::LiteralValue& value, const QString& language = QString());
+                            Node (const Soprano::LiteralValue& value);
+                            Node (const Soprano::LiteralValue& value, const QString& language);
+
                             Node (const Soprano::Node& other);
     bool                    operator == (const Soprano::Node& other) const;
     bool                    operator != (const Soprano::Node& other) const;
-    bool                    operator == (const QUrl& other) const;
+    bool                    operator == (const QUrl& uri) const;
     bool                    operator == (const Soprano::LiteralValue& other) const;
     bool                    matches (const Soprano::Node& other) const;
     Soprano::Node::Type     type () const;
@@ -63,9 +65,15 @@ public:
     static Soprano::Node    createEmptyNode ();
     static Soprano::Node    createResourceNode (const QUrl& uri);
     static Soprano::Node    createBlankNode (const QString& id);
+    static Soprano::Node    createLiteralNode (const Soprano::LiteralValue& value);
     static Soprano::Node    createLiteralNode (const Soprano::LiteralValue& value, const QString& language);
+    static QString          resourceToN3 (const QUrl& resource);
+    static QString          blankToN3 (const QString& blank);
+    static QString          literalToN3 (const Soprano::LiteralValue& literal);
 };   // Node
 
+uint                    qHash (const Soprano::Node& node);
 };   // Soprano
 
+uint                    qHash (const QUrl& url);
 

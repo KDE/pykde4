@@ -23,6 +23,7 @@
 //ctscc
 #include <soprano/filtermodel.h>
 #include <soprano/model.h>
+#include <soprano/nrlmodel.h>
 #include <soprano/pluginmanager.h>
 #include <soprano/rdfschemamodel.h>
 #include <soprano/storagemodel.h>
@@ -91,7 +92,9 @@ public:
             if (dynamic_cast<Soprano::FilterModel*>(sipCpp))
                 {
                     sipClass = sipClass_Soprano_FilterModel;
-//                    if (dynamic_cast<Soprano::RdfSchemaModel*>(sipCpp))
+                    if (dynamic_cast<Soprano::NRLModel*>(sipCpp))
+                        sipClass = sipClass_Soprano_NRLModel;
+//                    else if (dynamic_cast<Soprano::RdfSchemaModel*>(sipCpp))
 //                        sipClass = sipClass_Soprano_RdfSchemaModel;
                 }
             else if (dynamic_cast<Soprano::StorageModel*>(sipCpp))

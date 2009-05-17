@@ -32,12 +32,7 @@ public:
     QString                 destination () const;
     QStringList             operationNames () const;
     KConfigGroup            operationDescription (const QString& operationName);
-
-
-//mt undefined symbol: ServiceJob* None -- need mapped type?
-//mt     ServiceJob*        startOperationCall (const KConfigGroup& description, QObject* parent /Transfer/ = 0);
-
-
+    Plasma::ServiceJob*     startOperationCall (const KConfigGroup& description, QObject* parent /Transfer/ = 0);
     bool                    isOperationEnabled (const QString& operation) const;
     QString                 name () const;
     void                    associateWidget (QWidget* widget, const QString& operation);
@@ -46,23 +41,13 @@ public:
     void                    disassociateWidget (QGraphicsWidget* widget);
 
 signals:
-
-
-//mt undefined symbol: ServiceJob* job -- need mapped type?
-//mt     void               finished (Plasma::ServiceJob* job);
-
-
+    void                    finished (Plasma::ServiceJob* job);
     void                    operationsChanged ();
 
 protected:
     explicit                Service (QObject* parent /TransferThis/ = 0);
                             Service (QObject* parent /TransferThis/, const QVariantList& args);
-
-
-//mt undefined symbol: ServiceJob* None -- need mapped type?
-//mt     virtual ServiceJob*  createJob (const QString& operation, QMap<QString,QVariant>& parameters) = 0;
-
-
+    virtual Plasma::ServiceJob* createJob (const QString& operation, QMap<QString,QVariant>& parameters) = 0;
     virtual void            registerOperationsScheme ();
     void                    setOperationsScheme (QIODevice* xml);
     void                    setName (const QString& name);

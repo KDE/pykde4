@@ -42,7 +42,7 @@ public:
                             DataEngine (QObject* parent /TransferThis/, const QVariantList& args);
     virtual void            init ();
     virtual QStringList     sources () const;
-//ig    virtual Plasma::Service*  serviceForSource (const QString& source);
+    virtual Plasma::Service*  serviceForSource (const QString& source);
     QString                 name () const;
     void                    connectSource (const QString& source, QObject* visualization, uint pollingInterval = 0, Plasma::IntervalAlignment intervalAlignment = Plasma::NoAlignment) const;
     void                    connectAllSources (QObject* visualization, uint pollingInterval = 0, Plasma::IntervalAlignment intervalAlignment = Plasma::NoAlignment) const;

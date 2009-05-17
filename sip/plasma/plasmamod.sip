@@ -64,6 +64,7 @@
 %Include dataenginescript.sip
 %Include runnerscript.sip
 %Include scriptengine.sip
+%Include servicejob.sip
 %Include service.sip
 %Include svg.sip
 %Include theme.sip

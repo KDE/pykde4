@@ -64,7 +64,6 @@ public:
     QString                 toString () const;
     QString                 toPrettyString () const;
     QLocale                 toLocale () const;
-//ig    QString                 operator QString () const;
     static int              lookup (const QList<Soprano::LanguageTag>& choices, const QList<Soprano::LanguageTag>& priority, Soprano::LanguageTag::LookupFlags flags = Soprano::LanguageTag::LookupFlagNone, Soprano::LanguageTag::MatchFilter scheme = Soprano::LanguageTag::MatchFilterBasic);
     static int              lookup (const QList<Soprano::LanguageTag>& choices, const Soprano::LanguageTag& priority, Soprano::LanguageTag::LookupFlags flags = Soprano::LanguageTag::LookupFlagNone, Soprano::LanguageTag::MatchFilter scheme = Soprano::LanguageTag::MatchFilterBasic);
 };   // LanguageTag

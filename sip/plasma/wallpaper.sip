@@ -63,7 +63,7 @@ public:
     virtual void            wheelEvent (QGraphicsSceneWheelEvent* event);
     Plasma::DataEngine*     dataEngine (const QString& name) const;
     bool                    configurationRequired () const;
-    bool                    isUsingDiskCache () const;
+    bool                    isUsingRenderingCache () const;
     void                    setResizeMethodHint (Plasma::Wallpaper::ResizeMethod resizeMethod);
     void                    setTargetSizeHint (const QSizeF& targetSize);
 
@@ -80,7 +80,7 @@ protected:
     virtual void            init (const KConfigGroup& config);
     void                    setConfigurationRequired (bool needsConfiguring, const QString& reason = QString());
     void                    render (const QString& sourceImagePath, const QSize& size, Plasma::Wallpaper::ResizeMethod resizeMethod = Plasma::Wallpaper::ScaledResize, const QColor& color = QColor(0,0,0));
-    void                    setUsingDiskCache (bool useCache);
+    void                    setUsingRenderingCache (bool useCache);
     bool                    findInCache (const QString& key, QImage& image, unsigned int lastModified = 0);
     void                    insertIntoCache (const QString& key, const QImage& image);
 };   // Wallpaper

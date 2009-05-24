@@ -24,6 +24,7 @@ IF(PYQT4_VERSION STRLESS "040500")  # These version numbers also appear in ../CM
     MESSAGE(FATAL_ERROR "The version of PyQt found is too old. 4.5.0 or later is required.")
 ENDIF(PYQT4_VERSION STRLESS "040500")
 
+
 SET(SOPRANO_MIN_VERSION "2.0")
 MACRO_OPTIONAL_FIND_PACKAGE(Soprano)
 MACRO_LOG_FEATURE(Soprano_FOUND "Soprano" "Soprano Libraries" "kdesupport" FALSE "" "Required for Soprano Python bindings.")
@@ -33,6 +34,9 @@ MACRO_LOG_FEATURE(Nepomuk_FOUND "Nepomuk" "Nepomuk Libraries" "kdesupport" FALSE
 
 MACRO_OPTIONAL_FIND_PACKAGE(KdepimLibs)
 MACRO_LOG_FEATURE(KDEPIMLIBS_FOUND "Kdepimlibs" "KDE pim Libraries" "kdepimlibs" FALSE "" "Required for Akonadi Python bindings.")
+
+MACRO_OPTIONAL_FIND_PACKAGE(PolkitQt)
+MACRO_LOG_FEATURE(POLKITQT_FOUND "Polkit-Qt" "Qt Wrapper around PolicyKit" "kdesupport" FALSE "" "Required to build PolicyKit-Qt support")
 
 INCLUDE_DIRECTORIES(
     ${PYTHON_INCLUDE_PATH}
@@ -141,6 +145,19 @@ IF(KDEPIMLIBS_FOUND)
     ADD_SIP_PYTHON_MODULE(PyKDE4.akonadi sip/akonadi/akonadimod.sip ${KDE4_AKONADI_LIBS} ${KDE4_AKONADI_KMIME_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
     SET(PYKDE_MODULES "${PYKDE_MODULES} akonadi")
 ENDIF(KDEPIMLIBS_FOUND)
+
+IF(POLKITQT_FOUND)
+    INCLUDE_DIRECTORIES(${POLKITQT_INCLUDE_DIR})
+
+    FILE(GLOB pollkitqt_files_sip sip/polkitqt/*.sip)
+
+    # ${POLKITQT_INCLUDE_DIR} -- We don't use this directly, because we need the #includes
+    # in the .sip file to be more specific otherwise they pick up the wrong action.h etc.
+
+    set(SIP_EXTRA_FILES_DEPEND ${pollkitqt_files_sip})
+    ADD_SIP_PYTHON_MODULE(PyKDE4.polkitqt sip/polkitqt/polkitqtmod.sip ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${POLKITQT_LIBRARIES})
+    SET(PYKDE_MODULES "${PYKDE_MODULES} polkitqt")
+ENDIF(POLKITQT_FOUND)
 
 PYTHON_INSTALL(__init__.py ${PYTHON_SITE_PACKAGES_DIR}/PyKDE4)
 

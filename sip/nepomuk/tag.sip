@@ -29,10 +29,13 @@ class Tag : Nepomuk::Resource
 
 public:
                             Tag ();
+                            Tag (Nepomuk::ResourceManager* manager);
                             Tag (const Nepomuk::Tag&);
                             Tag (const Nepomuk::Resource&);
                             Tag (const QString& uriOrIdentifier);
+                            Tag (const QString& uriOrIdentifier, Nepomuk::ResourceManager* manager);
                             Tag (const QUrl& uri);
+                            Tag (const QUrl& uri, Nepomuk::ResourceManager* manager);
     QList<Nepomuk::Resource>  tagOf () const;
     static QList<Nepomuk::Tag>  allTags ();
     static QString          resourceTypeUri ();
@@ -40,6 +43,8 @@ public:
 protected:
                             Tag (const QString& uri, const QUrl& type);
                             Tag (const QUrl& uri, const QUrl& type);
+                            Tag (const QString& uri, const QUrl& type, Nepomuk::ResourceManager* manager);
+                            Tag (const QUrl& uri, const QUrl& type, Nepomuk::ResourceManager* manager);
 };   // Tag
 
 };   // Nepomuk

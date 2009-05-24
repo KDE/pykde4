@@ -31,7 +31,7 @@ public:
                             Variant ();
                             Variant (const Nepomuk::Variant& other);
     explicit                Variant (const QVariant& other);
-//ig                            Variant (int i);
+//ig                        Variant (int i);
                             Variant (qlonglong i);
 //ig                            Variant (uint i);
 //ig                            Variant (qulonglong i);
@@ -61,6 +61,7 @@ public:
                             Variant (const QList<QDateTime>& datetime);
                             Variant (const QList<QUrl>& url);
                             Variant (const QList<Nepomuk::Resource>& r);
+                            Variant (const QList<Nepomuk::Variant>& vl);
 //ig    void                    append (int i);
     void                    append (qlonglong i);
 //ig    void                    append (uint i);
@@ -134,6 +135,7 @@ public:
     QList<QDateTime>        toDateTimeList () const;
     QList<QUrl>             toUrlList () const;
     QList<Nepomuk::Resource>  toResourceList () const;
+    QList<Nepomuk::Variant>  toVariantList () const;
     static Nepomuk::Variant  fromString (const QString& value, int type);
 };   // Variant
 

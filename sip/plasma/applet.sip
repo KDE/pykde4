@@ -94,6 +94,8 @@ public:
     static KPluginInfo::List  listAppletInfo (const QString& category = QString(), const QString& parentApp = QString());
     static KPluginInfo::List  listAppletInfoForMimetype (const QString& mimetype);
     static QStringList      listCategories (const QString& parentApp = QString(), bool visibleOnly = 1);
+    void                    setCustomCategories (const QStringList& categories);
+    QStringList             customCategories ();
     static Plasma::Applet*  loadPlasmoid (const QString& path, uint appletId = 0, const QVariantList& args = QVariantList());
     static Plasma::Applet*  load (const QString& name, uint appletId = 0, const QVariantList& args = QVariantList());
     static Plasma::Applet*  load (const KPluginInfo& info, uint appletId = 0, const QVariantList& args = QVariantList());

@@ -24,6 +24,7 @@
 
 %ModuleHeaderCode
 //ctscc
+#include <accessmanager.h>
 #include <chmodjob.h>
 #include <connection.h>
 #include <copyjob.h>
@@ -59,6 +60,7 @@
 #include <kencodingfiledialog.h>
 #include <kfiledialog.h>
 #include <kfilefiltercombo.h>
+#include <kfileitemactions.h>
 #include <kfileitemdelegate.h>
 #include <kfileplacesmodel.h>
 #include <kfileplacesview.h>
@@ -195,6 +197,8 @@ public:
         }
     else if (dynamic_cast<KFileFilterCombo*>(sipCpp))
         sipClass = sipClass_KFileFilterCombo;
+    else if (dynamic_cast<KFileItemActions*>(sipCpp))
+        sipClass = sipClass_KFileItemActions;
     else if (dynamic_cast<KFileItemDelegate*>(sipCpp))
         sipClass = sipClass_KFileItemDelegate;
     else if (dynamic_cast<KFilePlacesModel*>(sipCpp))
@@ -207,6 +211,8 @@ public:
         sipClass = sipClass_KFileWidget;
     else if (dynamic_cast<KFileWritePlugin*>(sipCpp))
         sipClass = sipClass_KFileWritePlugin;
+    else if (dynamic_cast<KIO::AccessManager*>(sipCpp))
+        sipClass = sipClass_KIO_AccessManager;
     else if (dynamic_cast<KIO::Connection*>(sipCpp))
         sipClass = sipClass_KIO_Connection;
     else if (dynamic_cast<KIO::ConnectionServer*>(sipCpp))

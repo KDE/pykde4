@@ -59,9 +59,53 @@ protected:
     void                    synchronizeCollectionTree ();
     void                    cancelTask ();
     void                    cancelTask (const QString& error);
+    void                    deferTask ();
     void                    doSetOnline (bool online);
 };   // ResourceBase
 
 };   // Akonadi
+
+
+class ResourceBase : Akonadi::AgentBase
+{
+%TypeHeaderCode
+#include <akonadi/resourcebase.h>
+%End
+
+
+public:
+    void                    setName (const QString& name);
+    QString                 name () const;
+
+signals:
+    void                    nameChanged (const QString& name);
+    void                    synchronized ();
+
+protected:
+    virtual void            retrieveCollections () = 0;
+    virtual void            retrieveItems (const Akonadi::Collection& collection) = 0;
+    virtual bool            retrieveItem (const Akonadi::Item& item, const QSet<QByteArray>& parts) = 0;
+                            ResourceBase (const QString& id);
+                            ~ResourceBase ();
+    void                    itemRetrieved (const Akonadi::Item& item);
+    void                    changeCommitted (const Akonadi::Item& item);
+    void                    changeCommitted (const Akonadi::Collection& collection);
+    void                    collectionsRetrieved (const Akonadi::Collection::List& collections);
+    void                    collectionsRetrievedIncremental (const Akonadi::Collection::List& changedCollections, const Akonadi::Collection::List& removedCollections);
+    void                    itemsRetrieved (const Akonadi::Item::List& items);
+    void                    setTotalItems (int amount);
+    void                    setItemStreamingEnabled (bool enable);
+    void                    itemsRetrievedIncremental (const Akonadi::Item::List& changedItems, const Akonadi::Item::List& removedItems);
+    void                    itemsRetrievalDone ();
+    void                    clearCache ();
+    Akonadi::Collection     currentCollection () const;
+    Akonadi::Item           currentItem () const;
+    void                    synchronize ();
+    void                    synchronizeCollection (qint64 id);
+    void                    synchronizeCollectionTree ();
+    void                    cancelTask ();
+    void                    cancelTask (const QString& error);
+    void                    doSetOnline (bool online);
+};   // ResourceBase
 
 

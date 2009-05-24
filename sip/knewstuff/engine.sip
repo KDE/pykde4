@@ -34,6 +34,7 @@ public:
     KNS::Entry*             uploadDialogModal (const QString& file);
     static KNS::Entry*      upload (const QString& file);
     void                    downloadDialog ();
+    void                    downloadDialog (QObject* receiver, const char* slot);
     void                    uploadDialog (const QString& file);
     bool                    init (const QString& config);
 

@@ -48,7 +48,9 @@ public:
 
     static Plasma::Theme*   defaultTheme ();
     explicit                Theme (QObject* parent /TransferThis/ = 0);
+    explicit                Theme (const QString& themeName, QObject* parent /TransferThis/ = 0);
     static Plasma::PackageStructure::Ptr  packageStructure ();
+    static KPluginInfo::List  listThemeInfo ();
     void                    setThemeName (const QString& themeName);
     QString                 themeName () const;
     QString                 imagePath (const QString& name) const;

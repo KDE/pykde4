@@ -36,6 +36,7 @@ public:
     void                    read (const QString& filename);
     QString                 name () const;
     QString                 description () const;
+    QStringList             keywords () const;
     QString                 serviceType () const;
     QString                 author () const;
     QString                 email () const;
@@ -50,6 +51,7 @@ public:
     QString                 type () const;
     void                    setName (const QString&);
     void                    setDescription (const QString&);
+    void                    setKeywords (const QStringList& keywords);
     void                    setServiceType (const QString&);
     void                    setAuthor (const QString&);
     void                    setEmail (const QString&);

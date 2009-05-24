@@ -56,6 +56,9 @@ public:
     bool                    addMatch (const QString& term, const Plasma::QueryMatch& match);
     QList<Plasma::QueryMatch>  matches () const;
     Plasma::QueryMatch      match (const QString& id) const;
+    void                    restore (const KConfigGroup& config);
+    void                    save (KConfigGroup& config);
+    void                    run (const Plasma::QueryMatch& match);
 
 signals:
     void                    matchesChanged ();

@@ -69,6 +69,7 @@
 %Include deletejob.sip
 %Include directorysizejob.sip
 %Include filejob.sip
+%Include fileundomanager.sip
 %Include forwardingslavebase.sip
 %Include global.sip
 %Include job.sip
@@ -129,9 +130,6 @@
 %Include thumbcreator.sip
 %Include thumbsequencecreator.sip
 %Include udsentry.sip
-%Include ksslcertificatemanager.sip
+%Include sslui.sip
 %Include kurlnavigator.sip
-%Include fileundomanager.sip
-//%Include kservicegroup.sip
 
-//%Include kdirnotify.sip

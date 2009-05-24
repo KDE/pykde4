@@ -28,7 +28,9 @@ class Thing : Nepomuk::Resource
 
 public:
                             Thing (const QUrl& uri = QUrl(), const QUrl& pimoType = QUrl());
+                            Thing (const QUrl& uri, const QUrl& pimoType, Nepomuk::ResourceManager* manager);
                             Thing (const QString& uriOrName, const QUrl& pimoType = QUrl());
+                            Thing (const QString& uriOrName, const QUrl& pimoType, Nepomuk::ResourceManager* manager);
                             Thing (const Nepomuk::Thing& other);
                             Thing (const Nepomuk::Resource& other);
 

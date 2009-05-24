@@ -48,6 +48,10 @@ public:
     bool                    containsMultipleImages () const;
     void                    setImagePath (const QString& svgFilePath);
     QString                 imagePath () const;
+    void                    setUsingRenderingCache (bool useCache);
+    bool                    isUsingRenderingCache () const;
+    void                    setTheme (Plasma::Theme* theme);
+    Plasma::Theme*          theme () const;
 
 signals:
     void                    repaintNeeded ();

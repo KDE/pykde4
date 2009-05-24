@@ -125,6 +125,7 @@ public:
     QIcon                   icon () const;
     const Plasma::Package*  package () const;
     virtual void            reloadConfiguration ();
+    QList<Plasma::RunnerSyntax>  syntaxes () const;
     static QMutex*          bigLock ();
 
 protected:
@@ -240,6 +241,8 @@ public:
         sipClass = sipClass_Plasma_ScrollWidget;
     else if (dynamic_cast<Plasma::Service*>(sipCpp))
         sipClass = sipClass_Plasma_Service;
+    else if (dynamic_cast<Plasma::ServiceJob*>(sipCpp))
+        sipClass = sipClass_Plasma_ServiceJob;
     else if (dynamic_cast<Plasma::SignalPlotter*>(sipCpp))
         sipClass = sipClass_Plasma_SignalPlotter;
     else if (dynamic_cast<Plasma::Slider*>(sipCpp))

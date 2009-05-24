@@ -49,11 +49,14 @@ public:
     QIcon                   icon () const;
 
 signals:
+//ig    void                    ratingChanged (unsigned int rating);
     void                    ratingChanged (int rating);
 
 public:
     void                    setRating (int rating);
+//ig    void                    setRating (unsigned int rating);
     void                    setMaxRating (int max);
+//ig    void                    setMaxRating (unsigned int max);
     void                    setHalfStepsEnabled (bool enabled);
     void                    setOnlyPaintFullSteps (bool);
     void                    setSpacing (int);

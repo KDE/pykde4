@@ -31,6 +31,8 @@ public:
     explicit                TextBrowser (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setText (const QString& text);
     QString                 text () const;
+    void                    setHorizontalScrollBarPolicy (Qt::ScrollBarPolicy policy);
+    void                    setVerticalScrollBarPolicy (Qt::ScrollBarPolicy policy);
     void                    setStyleSheet (const QString& stylesheet);
     QString                 styleSheet ();
     KTextBrowser*           nativeWidget () const;

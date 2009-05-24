@@ -91,6 +91,8 @@ public:
     virtual KIO::CopyJob*   trash (const KFileItemList& items, QWidget* parent /Transfer/, bool ask = 1, bool showProgress = 1);
     KFilePreviewGenerator*  previewGenerator () const;
     void                    setInlinePreviewShown (bool show);
+    QStyleOptionViewItem::Position  decorationPosition () const;
+    void                    setDecorationPosition (QStyleOptionViewItem::Position position);
     bool                    isInlinePreviewShown () const;
     int                     iconsZoom () const;
     void                    setIsSaving (bool isSaving);

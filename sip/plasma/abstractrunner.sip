@@ -135,7 +135,7 @@ protected:
     void                    setHasRunOptions (bool hasRunOptions);
     void                    setSpeed (Plasma::AbstractRunner::Speed newSpeed);
     void                    setPriority (Plasma::AbstractRunner::Priority newPriority);
-//FIXME    KService::List          serviceQuery (const QString& serviceType, const QString& constraint = QString()) const;
+    KService::List          serviceQuery (const QString& serviceType, const QString& constraint = QString()) const;
     virtual QList<QAction*>  actionsForMatch (const Plasma::QueryMatch& match);
     QAction*                addAction (const QString& id, const QIcon& icon, const QString& text);
     void                    addAction (const QString& id, QAction* action);

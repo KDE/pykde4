@@ -21,6 +21,10 @@
 
 %Module PyKDE4.polkitqt
 
+%ModuleHeaderCode
+#pragma GCC visibility push(default)
+%End
+
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
 

@@ -51,7 +51,6 @@ public:
     qreal                   contrast () const;
     qreal                   hue () const;
     qreal                   saturation () const;
-    QImage                  snapshot () const;
     void                    setFullScreen (bool fullscreen);
     void                    exitFullScreen ();
     void                    enterFullScreen ();

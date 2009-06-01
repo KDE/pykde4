@@ -50,7 +50,7 @@ protected:
 
 
 public:
-    typedef QFlags<KIO::TCPSlaveBase::SslResultDetail> SslResult;
+//FIXME    typedef QFlags<KIO::TCPSlaveBase::SslResultDetail> SslResult;
 
 
 protected:

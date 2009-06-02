@@ -21,7 +21,7 @@ class MainWindow (KMainWindow):
 #--------------- main ------------------
 if __name__ == '__main__':
 
-    appName     = "katepart-example"
+    appName     = "katepart_example"
     catalog     = ""
     programName = ki18n("Kate Part Example")
     version     = "1.0"

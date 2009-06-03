@@ -139,7 +139,7 @@ public:
     explicit                Applet (QGraphicsItem* parent, const QString& serviceId, uint appletId, const QVariantList& args);
     bool                    destroyed () const;
     virtual void            createConfigurationInterface (KConfigDialog* parent);
-    bool                    isAllowed (const QString& constraint);
+    bool                    hasAuthorization (const QString& constraint);
 
 signals:
     void                    releaseVisualFocus ();

@@ -56,7 +56,7 @@ public:
     static void             disableAutoRebuild ();
     static bool             isChanged (const char* type);
     static void             flagError ();
-//    static bool             readError ();
+    static bool             readError ();
 
 signals:
     void                    databaseChanged ();

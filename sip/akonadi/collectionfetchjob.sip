@@ -41,6 +41,7 @@ public:
     Akonadi::Collection::List  collections () const;
     void                    setResource (const QString& resource);
     void                    includeUnsubscribed (bool include = 1);
+    void                    includeStatistics (bool include = 1);
 
 signals:
     void                    collectionsReceived (const Akonadi::Collection::List& collections);

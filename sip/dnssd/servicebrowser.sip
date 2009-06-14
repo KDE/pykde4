@@ -39,7 +39,7 @@ public:
 
     explicit                ServiceBrowser (const QString& type, bool autoResolve = 0, const QString& domain = QString(), const QString& subtype = QString());
     
-    //QList<DNSSD::RemoteService::Ptr> services () const;
+    QList<DNSSD::RemoteService::Ptr> services () const;
 
     virtual void            startBrowse ();
     static DNSSD::ServiceBrowser::State  isAvailable ();

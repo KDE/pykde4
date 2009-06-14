@@ -365,8 +365,8 @@ public:
         sipClass = sipClass_KEditListBox;
     else if (dynamic_cast<KExtendableItemDelegate*>(sipCpp))
         sipClass = sipClass_KExtendableItemDelegate;
-//    else if (dynamic_cast<KFadeWidgetEffect*>(sipCpp))
-//        sipClass = sipClass_KFadeWidgetEffect;
+    else if (dynamic_cast<KFadeWidgetEffect*>(sipCpp))
+        sipClass = sipClass_KFadeWidgetEffect;
     else if (dynamic_cast<KFilterProxySearchLine*>(sipCpp))
         sipClass = sipClass_KFilterProxySearchLine;
     else if (dynamic_cast<KFind*>(sipCpp))

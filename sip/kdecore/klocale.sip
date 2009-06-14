@@ -104,6 +104,7 @@ public:
     QString                 formatDateTime (const KDateTime& dateTime, KLocale::DateFormat format = KLocale::ShortDate, KLocale::DateTimeFormatOptions options = 0) const;
     bool                    dateMonthNamePossessive () const;
     QString                 formatTime (const QTime& pTime, bool includeSecs = 0, bool isDuration = 0) const;
+    KLocale::DigitSet       dateTimeDigitSet () const;
     bool                    use12Clock () const;
     int                     weekStartDay () const;
     int                     workingWeekStartDay () const;
@@ -144,6 +145,7 @@ public:
     void                    setDateFormatShort (const QString& format);
     void                    setDateMonthNamePossessive (bool possessive);
     void                    setTimeFormat (const QString& format);
+    void                    setDateTimeDigitSet (KLocale::DigitSet digitSet);
     void                    setWeekStartDay (int day);
     void                    setWorkingWeekStartDay (int day);
     void                    setWorkingWeekEndDay (int day);

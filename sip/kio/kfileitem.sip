@@ -95,6 +95,7 @@ public:
     bool                    isMarked () const;
     void                    mark ();
     void                    unmark ();
+    bool                    isRegularFile () const;
     bool                    cmp (const KFileItem& item) const;
     bool                    operator == (const KFileItem& other) const;
     bool                    operator != (const KFileItem& other) const;

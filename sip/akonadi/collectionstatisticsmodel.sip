@@ -37,6 +37,8 @@ public:
         RecursiveUnreadRole,
         RecursiveTotalRole,
         RecursiveStatisticsRole,
+        SizeRole,
+        RecursiveSizeRole,
         UserRole
     };
 

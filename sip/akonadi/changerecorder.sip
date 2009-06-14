@@ -37,6 +37,7 @@ public:
 
 signals:
     void                    changesAdded ();
+    void                    nothingToReplay ();
 };   // ChangeRecorder
 
 };   // Akonadi

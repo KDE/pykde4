@@ -74,6 +74,8 @@ public:
     QString                 decode (const char* data, int len);
     QString                 decode (const QByteArray& data);
     QString                 decodeWithBuffering (const char* data, int len);
+    bool                    decodedInvalidCharacters () const;
+    void                    resetDecoder ();
     QString                 flush ();
     static KEncodingDetector::AutoDetectScript  scriptForName (const QString& lang);
     static QString          nameForScript (KEncodingDetector::AutoDetectScript);

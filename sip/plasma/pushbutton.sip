@@ -40,10 +40,14 @@ public:
     QAction*                action () const;
     void                    setIcon (const QIcon& icon);
     QIcon                   icon () const;
+    void                    setCheckable (bool checkable);
+    void                    setChecked (bool checked);
+    bool                    isChecked () const;
     KPushButton*            nativeWidget () const;
 
 signals:
     void                    clicked ();
+    void                    toggled (bool);
 
 protected:
     void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);

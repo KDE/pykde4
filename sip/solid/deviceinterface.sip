@@ -38,6 +38,7 @@
 #include <portablemediaplayer.h>
 #include <processor.h>
 #include <serialinterface.h>
+#include <smartcardreader.h>
 #include <storageaccess.h>
 #include <storagedrive.h>
 #include <storagevolume.h>
@@ -130,6 +131,8 @@ public:
                 sipClass = sipClass_Solid_Processor;
             else if (dynamic_cast<Solid::SerialInterface*>(sipCpp))
                 sipClass = sipClass_Solid_SerialInterface;
+            else if (dynamic_cast<Solid::SmartCardReader*>(sipCpp))
+                sipClass = sipClass_Solid_SmartCardReader;
             else if (dynamic_cast<Solid::StorageAccess*>(sipCpp))
                 sipClass = sipClass_Solid_StorageAccess;
             else if (dynamic_cast<Solid::StorageDrive*>(sipCpp))

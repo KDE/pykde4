@@ -46,6 +46,8 @@ protected:
     void                    changeCommitted (const Akonadi::Collection& collection);
     void                    collectionsRetrieved (const Akonadi::Collection::List& collections);
     void                    collectionsRetrievedIncremental (const Akonadi::Collection::List& changedCollections, const Akonadi::Collection::List& removedCollections);
+    void                    setCollectionStreamingEnabled (bool enable);
+    void                    collectionsRetrievalDone ();
     void                    itemsRetrieved (const Akonadi::Item::List& items);
     void                    setTotalItems (int amount);
     void                    setItemStreamingEnabled (bool enable);

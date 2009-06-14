@@ -41,6 +41,7 @@ public:
     void                    setConfigurationRequired (bool req, const QString& reason = QString());
     void                    setFailedToLaunch (bool failed, const QString& reason = QString());
     void                    configNeedsSaving () const;
+    Plasma::Extender*       extender () const;
     virtual void            showConfigurationInterface ();
     virtual void            configChanged ();
 

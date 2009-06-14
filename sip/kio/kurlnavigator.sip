@@ -48,6 +48,7 @@ public:
     bool                    isPlacesSelectorVisible () const;
     int                     historySize () const;
     int                     historyIndex () const;
+    KUrl                    historyUrl (int historyIndex) const;
     const KUrl&             savedRootUrl () const;
     QPoint                  savedPosition () const;
     KUrlComboBox*           editor () const;

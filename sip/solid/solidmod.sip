@@ -36,6 +36,7 @@
 %Include predicate.sip
 %Include processor.sip
 %Include serialinterface.sip
+%Include smartcardreader.sip
 %Include solidnamespace.sip
 %Include storageaccess.sip
 %Include storagedrive.sip

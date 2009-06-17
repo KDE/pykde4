@@ -53,7 +53,7 @@ public:
     QSet<QByteArray>        loadedPayloadParts () const;
     void                    setRevision (int revision);
     int                     revision () const;
-    Akonadi::Entity::Id     collectionId () const;
+    Akonadi::Entity::Id     storageCollectionId () const;
     void                    setSize (qint64 size);
     qint64                  size () const;
     void                    setMimeType (const QString& mimeType);

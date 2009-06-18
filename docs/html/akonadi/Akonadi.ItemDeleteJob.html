@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.2 PyKDE API Reference
+        KDE 4.3 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -53,10 +53,10 @@ Inherits: <a href="../akonadi/Akonadi.Job.html">Akonadi.Job</a> &#x2192; <a href
 Namespace: Akonadi<br />
 <h2>Detailed Description</h2>
 
-<p>Job that deletes an item from the Akonadi storage.
+<p>Job that deletes items from the Akonadi storage.
 </p>
 <p>
-This job removes the given item from the Akonadi storage.
+This job removes the given items from the Akonadi storage.
 </p>
 <p>
 Example:
@@ -64,14 +64,23 @@ Example:
 <p>
 <pre class="fragment">
 
- Akonadi.Item item = ...
+ const Akonadi.Item item = ...
 
  ItemDeleteJob *job = new ItemDeleteJob( item );
+ connect( job, SIGNAL( result( KJob* ) ), this, SLOT( deletionResult( KJob* ) ) );
 
- if ( job-&gt;exec() )
-   qDebug() &lt;&lt; "Item deleted successfully";
- else
-   qDebug() &lt;&lt; "Error occurred";
+</pre>
+</p>
+<p>
+Example:
+</p>
+<p>
+<pre class="fragment">
+
+ const Akonadi.Item.List items = ...
+
+ ItemDeleteJob *job = new ItemDeleteJob( items );
+ connect( job, SIGNAL( result( KJob* ) ), this, SLOT( deletionResult( KJob* ) ) );
 
 </pre>
 </p>
@@ -80,10 +89,12 @@ Example:
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Volker Krause &lt;vkrause@kde.org&gt; </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188989580">__init__</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> item, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188993132">doStart</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178029964">__init__</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> item, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164523276">__init__</a> (self, Akonadi.Item.List items, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj146039052">__init__</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj182969324">doStart</a> (self)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="obj188989580"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj178029964"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -111,7 +122,10 @@ Example:
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Creates a new item delete job.
+<div class="memdoc"><p>Creates a new item delete job that deletes <b>item.</b> The item
+needs to either have a unique identifier or a remote identifier
+set. In the latter case a collection or resource context needs
+to be selected (using CollectionSelectJob or ResourceSelectJob).
 </p>
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
@@ -122,7 +136,92 @@ Example:
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj188993132"></a>
+</p></div></div><a class="anchor" name="obj164523276"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Akonadi.Item.List&nbsp;</td>
+<td class="paramname"><em>items</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Creates a new item delete job that deletes all items in the list
+<b>items.</b> These items can be located in any collection. The same
+restrictions on item identifiers apply as in the constructor above.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>items</em>&nbsp;</td><td> The items to delete.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent object.
+</td></tr>
+</table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="obj146039052"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>&nbsp;</td>
+<td class="paramname"><em>collection</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Creates a new item delete job that deletes all items in the collection
+<b>collection.</b> The collection needs to have either a unique identifier
+or a remote identifier set. In the latter case a resource context
+needs to be selected using ResourceSelectJob.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>collection</em>&nbsp;</td><td> The collection which content should be deleted.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent object.
+</td></tr>
+</table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="obj182969324"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -163,7 +262,9 @@ Example:
 <li><a href="../kparts/index.html">kparts</a></li>
 <li><a href="../kutils/index.html">kutils</a></li>
 <li><a href="../nepomuk/index.html">nepomuk</a></li>
-<li><a href="../phonon/index.html">phonon</a></li><li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
 <li><a href="../solid/index.html">solid</a></li>
 <li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>

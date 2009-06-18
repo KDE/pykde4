@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.2 PyKDE API Reference
+        KDE 4.3 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -75,40 +75,64 @@ are depends on the mimetype of the item and the corresponding serializer plugin.
 This class is implicitly shared.
 </p>
 <p>
+&lt;h4&gt;Payload&lt;/h4&gt;
+</p>
+<p>
+Technically the only restriction on payload objects is that they have to be copyable.
+For safety reasons, pointer payloads are forbidden as well though, as the
+ownership would not be clear. In this case, usage of a shared pointer is
+recommended (such as boost.shared_ptr or QSharedPointer).
+</p>
+<p>
+Using a shared pointer is also recommended in case the payload uses polymorphic
+types. For supported shared pointer types implicit casting is provided when possible.
+</p>
+<p>
+When using a value-based class as payload, it is recommended to use one that does
+support implicit sharing as setting and retrieving a payload as well as copying
+an Akonadi.Item object imply copying of the payload object.
+</p>
+<p>
+The availability of a payload of a specific type can be checked using hasPayload(),
+payloads can be retrieved by using payload() and set by using setPayload(). Refer
+to the documentation of those methods for more details.
+</p>
+<p>
 
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Volker Krause &lt;vkrause@kde.org&gt;, Till Adam &lt;adam@kde.org&gt; </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj179983180">UrlType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;UrlShort, UrlWithMimeType&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj167547340">UrlType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;UrlShort, UrlWithMimeType&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Attributes</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#var189114796">FullPayload</a></td></tr><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189113612">__init__</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj197806700">__init__</a> (self, Id id)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj197807084">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mimeType)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj197806860">__init__</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> other)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj197896908">clearFlag</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> name)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj165653836">clearFlags</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">Akonadi.Item.Flags&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163400140">flags</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj197897516">hasFlag</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> name)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj162956876">hasPayload</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QSet<QByteArray>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj197076524">loadedPayloadParts</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191241196">mimeType</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatetime.html">QDateTime</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj197805804">modificationTime</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj197075916">payloadData</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193774956">revision</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj197897868">setFlag</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> name)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj165653228">setFlags</a> (self, Akonadi.Item.Flags flags)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193776172">setMimeType</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mimeType)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176431916">setModificationTime</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatetime.html">QDateTime</a> datetime)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj165653068">setPayloadFromData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> data)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj200374316">setRevision</a> (self, int revision)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181495084">setSize</a> (self, long size)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181333004">size</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj179982380">url</a> (self, Akonadi.Item.UrlType type=Akonadi.Item.UrlShort)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#var170495052">FullPayload</a></td></tr><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166778316">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164668556">__init__</a> (self, Id id)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166778188">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mimeType)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj179687628">__init__</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj172288140">clearFlag</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178891916">clearFlags</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">Entity.Id&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178890924">collectionId</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">Akonadi.Item.Flags&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178847276">flags</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj169137388">hasFlag</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj179666796">hasPayload</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QSet<QByteArray>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178890092">loadedPayloadParts</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj179663020">mimeType</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatetime.html">QDateTime</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180451916">modificationTime</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178889964">payloadData</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj183095788">revision</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180605708">setFlag</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178890476">setFlags</a> (self, Akonadi.Item.Flags flags)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj183096492">setMimeType</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mimeType)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178186796">setModificationTime</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatetime.html">QDateTime</a> datetime)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178891820">setPayloadFromData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> data)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178890252">setRevision</a> (self, int revision)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj183098732">setSize</a> (self, long size)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj183095948">size</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164649932">url</a> (self, Akonadi.Item.UrlType type=Akonadi.Item.UrlShort)</td></tr>
 <tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163400844">fromUrl</a> (<a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj151224076">fromUrl</a> (<a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="obj189113612"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj166778316"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -120,7 +144,7 @@ This class is implicitly shared.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj197806700"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj164668556"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -143,7 +167,7 @@ This class is implicitly shared.
 </tr></table>
 </div>
 <div class="memdoc"><p>Creates a new item with the given unique <b>id.</b>
-</p></div></div><a class="anchor" name="obj197807084"></a>
+</p></div></div><a class="anchor" name="obj166778188"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -174,7 +198,7 @@ This class is implicitly shared.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj197806860"></a>
+</p></div></div><a class="anchor" name="obj179687628"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -197,7 +221,7 @@ This class is implicitly shared.
 </tr></table>
 </div>
 <div class="memdoc"><p>Creates a new item from an <b>other</b> item.
-</p></div></div><a class="anchor" name="obj197896908"></a>
+</p></div></div><a class="anchor" name="obj172288140"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -220,7 +244,7 @@ This class is implicitly shared.
 </tr></table>
 </div>
 <div class="memdoc"><p>Removes the flag with the given <b>name</b> from the item.
-</p></div></div><a class="anchor" name="obj165653836"></a>
+</p></div></div><a class="anchor" name="obj178891916"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -233,7 +257,23 @@ This class is implicitly shared.
 </table>
 </div>
 <div class="memdoc"><p>Removes all flags from the item.
-</p></div></div><a class="anchor" name="obj163400140"></a>
+</p></div></div><a class="anchor" name="obj178890924"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">Entity.Id collectionId</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the main collection ID of the item. Calling this method makes sense only after running an ItemFetchJob on the item.
+Returns the collection ID if it is know, -1 otherwise.
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="obj178847276"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -246,7 +286,7 @@ This class is implicitly shared.
 </table>
 </div>
 <div class="memdoc"><p>Returns all flags of this item.
-</p></div></div><a class="anchor" name="obj163400844"></a>
+</p></div></div><a class="anchor" name="obj151224076"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -264,7 +304,7 @@ This class is implicitly shared.
 </tr></table>
 </div>
 <div class="memdoc"><p>Creates an item from the given <b>url.</b>
-</p></div></div><a class="anchor" name="obj197897516"></a>
+</p></div></div><a class="anchor" name="obj169137388"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -288,7 +328,7 @@ This class is implicitly shared.
 </div>
 <div class="memdoc"><p>Returns whether the flag with the given <b>name</b> is
 set in the item.
-</p></div></div><a class="anchor" name="obj162956876"></a>
+</p></div></div><a class="anchor" name="obj179666796"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -301,7 +341,7 @@ set in the item.
 </table>
 </div>
 <div class="memdoc"><p>Returns whether the item has a payload object.
-</p></div></div><a class="anchor" name="obj197076524"></a>
+</p></div></div><a class="anchor" name="obj178890092"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -315,7 +355,7 @@ set in the item.
 </div>
 <div class="memdoc"><p>Returns the list of loaded payload parts. This is not necessarily
 identical to all parts in the cache or to all available parts on the backend.
-</p></div></div><a class="anchor" name="obj191241196"></a>
+</p></div></div><a class="anchor" name="obj179663020"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -328,7 +368,7 @@ identical to all parts in the cache or to all available parts on the backend.
 </table>
 </div>
 <div class="memdoc"><p>Returns the mime type of the item.
-</p></div></div><a class="anchor" name="obj197805804"></a>
+</p></div></div><a class="anchor" name="obj180451916"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -343,7 +383,7 @@ identical to all parts in the cache or to all available parts on the backend.
 <div class="memdoc"><p>Returns the timestamp of the last modification of this item.
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
 </dd></dl>
-</p></div></div><a class="anchor" name="obj197075916"></a>
+</p></div></div><a class="anchor" name="obj178889964"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -359,7 +399,7 @@ identical to all parts in the cache or to all available parts on the backend.
 binary or textual format usually used for data with this mime type.
 This is useful when communicating with non-Akonadi application by
 e.g. drag&amp;drop, copy&amp;paste or stored files.
-</p></div></div><a class="anchor" name="obj193774956"></a>
+</p></div></div><a class="anchor" name="obj183095788"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -372,7 +412,7 @@ e.g. drag&amp;drop, copy&amp;paste or stored files.
 </table>
 </div>
 <div class="memdoc"><p>Returns the revision number of the item.
-</p></div></div><a class="anchor" name="obj197897868"></a>
+</p></div></div><a class="anchor" name="obj180605708"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -395,7 +435,7 @@ e.g. drag&amp;drop, copy&amp;paste or stored files.
 </tr></table>
 </div>
 <div class="memdoc"><p>Sets the flag with the given <b>name</b> in the item.
-</p></div></div><a class="anchor" name="obj165653228"></a>
+</p></div></div><a class="anchor" name="obj178890476"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -418,7 +458,7 @@ e.g. drag&amp;drop, copy&amp;paste or stored files.
 </tr></table>
 </div>
 <div class="memdoc"><p>Overwrites all flags of the item by the given <b>flags.</b>
-</p></div></div><a class="anchor" name="obj193776172"></a>
+</p></div></div><a class="anchor" name="obj183096492"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -441,7 +481,7 @@ e.g. drag&amp;drop, copy&amp;paste or stored files.
 </tr></table>
 </div>
 <div class="memdoc"><p>Sets the mime type of the item to <b>mimeType.</b>
-</p></div></div><a class="anchor" name="obj176431916"></a>
+</p></div></div><a class="anchor" name="obj178186796"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -470,7 +510,7 @@ e.g. drag&amp;drop, copy&amp;paste or stored files.
 it is updated automatically by the revision checking functions.
 </dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
 </dd></dl>
-</p></div></div><a class="anchor" name="obj165653068"></a>
+</p></div></div><a class="anchor" name="obj178891820"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -502,7 +542,7 @@ used for data of this mime type.
 </td></tr> </table></dl>
 <p> <dl class="see" compact><dt><b>See also:</b></dt><dd> fullPayloadData
 </dd></dl>
-</p></div></div><a class="anchor" name="obj200374316"></a>
+</p></div></div><a class="anchor" name="obj178890252"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -530,7 +570,7 @@ used for data of this mime type.
 <dl class="note" compact><dt><b>Note:</b></dt><dd> Do not modify this value from within an application,
 it is updated automatically by the revision checking functions.
 </dd></dl>
-</p></div></div><a class="anchor" name="obj181495084"></a>
+</p></div></div><a class="anchor" name="obj183098732"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -557,7 +597,7 @@ it is updated automatically by the revision checking functions.
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
 </dd></dl>
-</p></div></div><a class="anchor" name="obj181333004"></a>
+</p></div></div><a class="anchor" name="obj183095948"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -574,7 +614,7 @@ it is updated automatically by the revision checking functions.
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
 </dd></dl>
-</p></div></div><a class="anchor" name="obj179982380"></a>
+</p></div></div><a class="anchor" name="obj164649932"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -597,7 +637,7 @@ it is updated automatically by the revision checking functions.
 </tr></table>
 </div>
 <div class="memdoc"><p>Returns the url of the item.
-</p></div></div><hr><h2>Attribute Documentation</h2><a class="anchor" name="var189114796"></a>
+</p></div></div><hr><h2>Attribute Documentation</h2><a class="anchor" name="var170495052"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -606,7 +646,7 @@ it is updated automatically by the revision checking functions.
 </table>
 </div>
 <div class="memdoc"><p>Creates a new item.
-</p></div></div><p><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj179983180"></a>
+</p></div></div><p><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj167547340"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -647,7 +687,9 @@ it is updated automatically by the revision checking functions.
 <li><a href="../kparts/index.html">kparts</a></li>
 <li><a href="../kutils/index.html">kutils</a></li>
 <li><a href="../nepomuk/index.html">nepomuk</a></li>
-<li><a href="../phonon/index.html">phonon</a></li><li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
 <li><a href="../solid/index.html">solid</a></li>
 <li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.2 PyKDE API Reference
+        KDE 4.3 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -80,6 +80,15 @@ when the user has read the message (when the message window has received the foc
 Persistent notifications must have the Persistent flag.
 </p>
 <p>
+By default a notification will use the application name as title, but you
+can also provide a brief text in the title and a more precise description in
+the body text. This is especially useful for notifications coming from
+applications which should be considered "part of the system", like a battery
+monitor or a network connection manager.
+For example a battery indicator could use "Low Battery" as a title and "Only
+12 minutes left." as a body text.
+</p>
+<p>
 In order to perform a notification, you need to create a description file, which contains
 default parameters of the notification, and use KNotification.event at the place in the
 application code where the notification occurs.
@@ -106,8 +115,12 @@ The global part looks like that
 [Global]
 IconName=Filename
 Comment=Friendly Name of app
+Name=Name of app
 &lt;/pre&gt;
-The icon filename is just the name, without extension, it's found with the KIconLoader
+The icon filename is just the name, without extension, it's found with the KIconLoader.
+The Comment field will be used in KControl to describe the application.
+The Name field is optional and may be used as the application name for popup,
+if Name is not present, Comment is used instead
 </p>
 <p>
 This part consists of hints for the configuration widget
@@ -201,55 +214,57 @@ notification-&gt;sendEvent();
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Olivier Goffart &lt;ogoffart at kde.org&gt; </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj193586668">NotificationFlag</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;RaiseWidgetOnActivation, CloseOnTimeout, Persistent, CloseWhenWidgetActivated, Persistant, DefaultEvent&nbsp;}<br><i>Typesafe wrapper:</i> NotificationFlags</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj193587820">StandardEvent</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Notification, Warning, Error, Catastrophe&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj178206188">NotificationFlag</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;RaiseWidgetOnActivation, CloseOnTimeout, Persistent, CloseWhenWidgetActivated, Persistant, DefaultEvent&nbsp;}<br><i>Typesafe wrapper:</i> NotificationFlags</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj178207340">StandardEvent</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Notification, Warning, Error, Catastrophe&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193620012">action1Activated</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193619916">action2Activated</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193620332">action3Activated</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193618348">activated</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193618380">activated</a> (long action)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193621260">closed</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193621708">ignored</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178159756">action1Activated</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178160940">action2Activated</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178161836">action3Activated</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178140076">activated</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178140460">activated</a> (long action)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178154412">closed</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178060812">ignored</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193588780">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> eventId, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget=0, KNotification.NotificationFlags flags=KNotification.CloseOnTimeout)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193620012">action1Activated</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193619916">action2Activated</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193620332">action3Activated</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193596684">actions</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193630412">activate</a> (self, long action=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193618348">activated</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193618380">activated</a> (self, long action)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193608012">addContext</a> (self, KNotification.Context context)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193608588">addContext</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> context_key, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> context_value)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193631052">close</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193621260">closed</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">KNotification.ContextList&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193606092">contexts</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193631756">deref</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193642764">eventFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> watched, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a> event)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193594508">eventId</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">KNotification.NotificationFlags&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193609036">flags</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193621708">ignored</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193595532">pixmap</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193630892">raiseWidget</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193631852">ref</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193632236">sendEvent</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193596620">setActions</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> actions)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193618508">setComponentData</a> (self, <a href="../kdecore/KComponentData.html">KComponentData</a> componentData)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193607436">setContexts</a> (self, KNotification.ContextList contexts)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193609708">setFlags</a> (self, KNotification.NotificationFlags flags)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193597196">setPixmap</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a> pix)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193596172">setText</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193594572">setWidget</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193593548">text</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193633164">update</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193594060">widget</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178208300">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> eventId, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget=0, KNotification.NotificationFlags flags=KNotification.CloseOnTimeout)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178159756">action1Activated</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178160940">action2Activated</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178161836">action3Activated</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178229740">actions</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178016972">activate</a> (self, long action=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178140076">activated</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178140460">activated</a> (self, long action)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178140044">addContext</a> (self, KNotification.Context context)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178140876">addContext</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> context_key, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> context_value)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj177501164">close</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178154412">closed</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">KNotification.ContextList&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178126572">contexts</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj177509644">deref</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj177558252">eventFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> watched, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178218124">eventId</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">KNotification.NotificationFlags&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178140844">flags</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178060812">ignored</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178229676">pixmap</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178016908">raiseWidget</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj177443212">ref</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj177552524">sendEvent</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178193484">setActions</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> actions)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178141580">setComponentData</a> (self, <a href="../kdecore/KComponentData.html">KComponentData</a> componentData)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178125420">setContexts</a> (self, KNotification.ContextList contexts)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178141804">setFlags</a> (self, KNotification.NotificationFlags flags)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178220236">setPixmap</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a> pix)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178220876">setText</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178219788">setTitle</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> title)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178218188">setWidget</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178219148">text</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178217164">title</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj177552076">update</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178217676">widget</a> (self)</td></tr>
 <tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193645996">beep</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> reason=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KNotification.html">KNotification</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193643436">event</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> eventId, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a> pixmap=QPixmap(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget=0, KNotification.NotificationFlags flags=KNotification.CloseOnTimeout, <a href="../kdecore/KComponentData.html">KComponentData</a> componentData=KComponentData())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KNotification.html">KNotification</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193645132">event</a> (KNotification.StandardEvent eventId, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a> pixmap=QPixmap(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget=0, KNotification.NotificationFlags flags=KNotification.CloseOnTimeout)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj177570252">beep</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> reason=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KNotification.html">KNotification</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj177559148">event</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> eventId, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a> pixmap=QPixmap(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget=0, KNotification.NotificationFlags flags=KNotification.CloseOnTimeout, <a href="../kdecore/KComponentData.html">KComponentData</a> componentData=KComponentData())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KNotification.html">KNotification</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj177560716">event</a> (KNotification.StandardEvent eventId, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a> pixmap=QPixmap(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget=0, KNotification.NotificationFlags flags=KNotification.CloseOnTimeout)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="obj193588780"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj178208300"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -307,7 +322,7 @@ you have to close the notification yourself.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193620012"></a>
+</p></div></div><a class="anchor" name="obj178159756"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -320,7 +335,7 @@ you have to close the notification yourself.
 </table>
 </div>
 <div class="memdoc"><p>Convenience signal that is emitted when the first action is activated.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("action1Activated()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj193619916"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("action1Activated()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj178160940"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -333,7 +348,7 @@ you have to close the notification yourself.
 </table>
 </div>
 <div class="memdoc"><p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("action2Activated()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj193620332"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("action2Activated()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj178161836"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -346,7 +361,7 @@ you have to close the notification yourself.
 </table>
 </div>
 <div class="memdoc"><p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("action3Activated()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj193596684"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("action3Activated()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj178229740"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -360,7 +375,7 @@ you have to close the notification yourself.
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the list of actions
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193630412"></a>
+</p></div></div><a class="anchor" name="obj178016972"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -384,7 +399,7 @@ you have to close the notification yourself.
 </div>
 <div class="memdoc"><p>Activate the action specified action
 If the action is zero, then the default action is activated
-</p></div></div><a class="anchor" name="obj193618348"></a>
+</p></div></div><a class="anchor" name="obj178140076"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -397,7 +412,7 @@ If the action is zero, then the default action is activated
 </table>
 </div>
 <div class="memdoc"><p>Emit only when the default activation has occurred
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("activated()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj193618380"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("activated()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj178140460"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -426,7 +441,7 @@ If the action is zero, then the default action is activated
 </td></tr>
 </table></dl>
 <p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("activated(unsigned int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj193608012"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("activated(unsigned int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj178140044"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -455,7 +470,7 @@ If the action is zero, then the default action is activated
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193608588"></a>
+</p></div></div><a class="anchor" name="obj178140876"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -492,7 +507,7 @@ If the action is zero, then the default action is activated
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193645996"></a>
+</p></div></div><a class="anchor" name="obj177570252"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -526,7 +541,7 @@ If the action is zero, then the default action is activated
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193631052"></a>
+</p></div></div><a class="anchor" name="obj177501164"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -542,7 +557,7 @@ If the action is zero, then the default action is activated
 </p>
 <p>
 This will delete the notification.
-</p></div></div><a class="anchor" name="obj193621260"></a>
+</p></div></div><a class="anchor" name="obj178154412"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -555,7 +570,7 @@ This will delete the notification.
 </table>
 </div>
 <div class="memdoc"><p>Emitted when the notification is closed. Both when it is activated or if it is just ignored.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("closed()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj193606092"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("closed()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj178126572"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -569,7 +584,7 @@ This will delete the notification.
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the list of contexts, see KNotification.Context
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193631756"></a>
+</p></div></div><a class="anchor" name="obj177509644"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -585,7 +600,7 @@ This will delete the notification.
 the notification may be closed when calling this.
 <dl class="see" compact><dt><b>See also:</b></dt><dd> ref
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193643436"></a>
+</p></div></div><a class="anchor" name="obj177559148"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -669,7 +684,7 @@ you have to close yourself the notification.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193645132"></a>
+</p></div></div><a class="anchor" name="obj177560716"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -731,7 +746,7 @@ This will emit a standard event
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193642764"></a>
+</p></div></div><a class="anchor" name="obj177558252"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -760,7 +775,7 @@ This will emit a standard event
 </tr></table>
 </div>
 <div class="memdoc"><p>reimplemented for internal reasons
-</p></div></div><a class="anchor" name="obj193594508"></a>
+</p></div></div><a class="anchor" name="obj178218124"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -774,7 +789,7 @@ This will emit a standard event
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the name of the event
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193609036"></a>
+</p></div></div><a class="anchor" name="obj178140844"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -788,7 +803,7 @@ This will emit a standard event
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the notification flags.
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193621708"></a>
+</p></div></div><a class="anchor" name="obj178060812"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -801,7 +816,7 @@ This will emit a standard event
 </table>
 </div>
 <div class="memdoc"><p>The notification has been ignored
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("ignored()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj193595532"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("ignored()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj178229676"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -816,7 +831,7 @@ This will emit a standard event
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the pixmap shown in the popup
 </dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setPixmap
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193630892"></a>
+</p></div></div><a class="anchor" name="obj178016908"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -830,7 +845,7 @@ This will emit a standard event
 </div>
 <div class="memdoc"><p>Raise the widget.
 This will change the desktop, activate the window, and the tab if needed.
-</p></div></div><a class="anchor" name="obj193631852"></a>
+</p></div></div><a class="anchor" name="obj177443212"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -850,7 +865,7 @@ function, so it will not be automatically closed when there is nothing to show.
 don't forgot to deref, or the notification may be never closed if there is no timeout.
 <dl class="see" compact><dt><b>See also:</b></dt><dd> ref
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193632236"></a>
+</p></div></div><a class="anchor" name="obj177552524"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -863,7 +878,7 @@ don't forgot to deref, or the notification may be never closed if there is no ti
 </table>
 </div>
 <div class="memdoc"><p>Emit or re-emit the event.
-</p></div></div><a class="anchor" name="obj193596620"></a>
+</p></div></div><a class="anchor" name="obj178193484"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -892,7 +907,7 @@ don't forgot to deref, or the notification may be never closed if there is no ti
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193618508"></a>
+</p></div></div><a class="anchor" name="obj178141580"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -921,7 +936,7 @@ don't forgot to deref, or the notification may be never closed if there is no ti
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193607436"></a>
+</p></div></div><a class="anchor" name="obj178125420"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -947,7 +962,7 @@ don't forgot to deref, or the notification may be never closed if there is no ti
 </p>
 <p>
 The list of contexts must be set before calling sendEvent;
-</p></div></div><a class="anchor" name="obj193609708"></a>
+</p></div></div><a class="anchor" name="obj178141804"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -971,7 +986,7 @@ The list of contexts must be set before calling sendEvent;
 </div>
 <div class="memdoc"><p>Set the notification flags.
 should be called before sendEvent().
-</p></div></div><a class="anchor" name="obj193597196"></a>
+</p></div></div><a class="anchor" name="obj178220236"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -1000,7 +1015,7 @@ should be called before sendEvent().
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193596172"></a>
+</p></div></div><a class="anchor" name="obj178220876"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -1035,7 +1050,39 @@ You can use some of the qt basic html tags.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193594572"></a>
+</p></div></div><a class="anchor" name="obj178219788"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setTitle</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>title</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the title of the notification popup.
+If no title is set, the application name will be used.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>title</em>&nbsp;</td><td> the title
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="obj178218188"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -1066,7 +1113,7 @@ The notification is reparented to the new widget.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193593548"></a>
+</p></div></div><a class="anchor" name="obj178219148"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -1081,7 +1128,23 @@ The notification is reparented to the new widget.
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the notification text
 </dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setText
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193633164"></a>
+</p></div></div><a class="anchor" name="obj178217164"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> title</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the notification title
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setTitle
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="obj177552076"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -1096,7 +1159,7 @@ The notification is reparented to the new widget.
 <div class="memdoc"><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd>
 update the texts, the icon, and the actions of one existing notification
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193594060"></a>
+</p></div></div><a class="anchor" name="obj178217676"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -1117,7 +1180,7 @@ If the widget is activated, the notification will be automatically closed if the
 <p>
 When the notification is activated, the widget might be raised.
 Depending on the configuration, the taskbar entry of the window containing the widget may blink.
-</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj193586668"></a>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj178206188"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -1133,7 +1196,7 @@ To do: doesn't work yet
 </p><dl compact><dt><b>Note:</b></dt><dd>It is necessary to wrap members of this enumeration in a <code>NotificationFlags</code> instance when passing them to a method as group of flags. For example: <code>NotificationFlags( RaiseWidgetOnActivation | CloseOnTimeout)</code></dd></dl><dl compact><dt><b>Enumerator: </b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>RaiseWidgetOnActivation</em>&nbsp;=&nbsp;0x01</td><td><tr><td valign="top"><em>CloseOnTimeout</em>&nbsp;=&nbsp;0x00</td><td><tr><td valign="top"><em>Persistent</em>&nbsp;=&nbsp;0x02</td><td><tr><td valign="top"><em>CloseWhenWidgetActivated</em>&nbsp;=&nbsp;0x04</td><td><tr><td valign="top"><em>Persistant</em>&nbsp;=&nbsp;Persistent</td><td><tr><td valign="top"><em>DefaultEvent</em>&nbsp;=&nbsp;0xF000</td><td></table>
 </dl>
-</div></div><p><a class="anchor" name="obj193587820"></a>
+</div></div><p><a class="anchor" name="obj178207340"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -1174,7 +1237,9 @@ To do: doesn't work yet
 <li><a href="../kparts/index.html">kparts</a></li>
 <li><a href="../kutils/index.html">kutils</a></li>
 <li><a href="../nepomuk/index.html">nepomuk</a></li>
-<li><a href="../phonon/index.html">phonon</a></li><li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
 <li><a href="../solid/index.html">solid</a></li>
 <li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.2 PyKDE API Reference
+        KDE 4.3 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,34 +48,45 @@
 <h1>RemoteService Class Reference</h1>
 <code>from PyKDE4.dnssd import *</code>
 <p>
-Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,<a href="../dnssd/DNSSD.ServiceBase.html">DNSSD.ServiceBase</a> &#x2192; KShared<br />
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,<a href="../dnssd/DNSSD.ServiceBase.html">DNSSD.ServiceBase</a> &#x2192; QSharedData<br />
 
 Namespace: DNSSD<br />
 <h2>Detailed Description</h2>
 
-<p>\class RemoteService remoteservice.h DNSSD/RemoteService
+<p>RemoteService remoteservice.h DNSSD/RemoteService
+Describes a service published over DNS-SD,
+typically on a remote machine
 </p>
 <p>
-RemoteService class allows to resolve service announced on remote machine. In most cases objects
-of this class are created by ServiceBrowser, but it is not required. Only fields valid before
-service is resolved are name, type.and domain.
+This class allows delayed or asynchronous resolution of
+services. As the name suggests, the service is normally
+on a remote machine, but the service could just as easily
+be published on the local machine.
 </p>
 <p>
-class representing service announced on remote machine.
+RemoteService instances are normally provided by ServiceBrowser,
+but can be used to resolve any service if you know the name, type
+and domain for it.
+</p>
+<p>
 
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Jakub Stachowski </dd></dl>
 </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> ServiceBrowser
+</dd></dl>
+</p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj174862828">resolved</a> (bool a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171407724">resolved</a> (bool successful)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj201224268">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj168472972">isResolved</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj201225996">resolve</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj201227980">resolveAsync</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj174862828">resolved</a> (self, bool a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj168474732">virtual_hook</a> (self, int id, void data)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164438636">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164589772">isResolved</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164593036">resolve</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178832268">resolveAsync</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171407724">resolved</a> (self, bool successful)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj3083592684">virtual_hook</a> (self, int id, void data)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="obj201224268"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj164438636"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -109,8 +120,22 @@ class representing service announced on remote machine.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Creates unresolved remote service with given name, type and domain.
-</p></div></div><a class="anchor" name="obj168472972"></a>
+<div class="memdoc"><p>Creates an unresolved RemoteService representing the service with
+the given name, type and domain
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> the name of the service
+
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> the type of the service (see ServiceBrowser.ServiceBrowser())
+
+<tr><td></td><td valign="top"><em>domain</em>&nbsp;</td><td> the domain of the service
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> ServiceBrowser.isAvailable()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj164589772"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -122,8 +147,13 @@ class representing service announced on remote machine.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns true if service has been successfully resolved
-</p></div></div><a class="anchor" name="obj201225996"></a>
+<div class="memdoc"><p>Whether the service has been successfully resolved
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if hostName() and port() will return
+valid values, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="obj164593036"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -135,11 +165,26 @@ class representing service announced on remote machine.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Synchronous version of resolveAsync(). Note that resolved(bool) is emitted
-before this function returns,
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> true is successful
+<div class="memdoc"><p>Resolves the host name and port of service synchronously
+</p>
+<p>
+The host name is not resolved into an IP address - use KResolver
+for that.
+</p>
+<p>
+resolved(bool) is emitted before this function is returned.
+</p>
+<p>
+resolve() will not cause RemoteService to monitor for changes
+in the hostname or port of the service.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if successful, false on failure
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> resolveAsync(), hostName(), port()
 </dd></dl>
-</p></div></div><a class="anchor" name="obj201227980"></a>
+</p></div></div><a class="anchor" name="obj178832268"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -151,10 +196,29 @@ before this function returns,
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Resolves host name and port of service. Host name is not resolved into numeric
-address - use KResolver for that. Signal resolved(bool) will be emitted
-when finished or even before return of this function - in case of immediate failure.
-</p></div></div><a class="anchor" name="obj174862828"></a>
+<div class="memdoc"><p>Resolves the host name and port of service asynchronously
+</p>
+<p>
+The host name is not resolved into an IP address - use KResolver
+for that.
+</p>
+<p>
+The resolved(bool) signal will be emitted when the
+resolution is complete, or when it fails.
+</p>
+<p>
+Note that resolved(bool) may be emitted before this function
+returns in case of immediate failure.
+</p>
+<p>
+RemoteService will keep monitoring the service for
+changes in hostname and port, and re-emit resolved(bool)
+when either changes.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> resolve(), hostName(), port()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj171407724"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -166,7 +230,7 @@ when finished or even before return of this function - in case of immediate fail
 <td class="memname"></td>
 <td></td>
 <td class="paramtype">bool&nbsp;</td>
-<td class="paramname"><em>a0</em></td>
+<td class="paramname"><em>successful</em></td>
 </tr>
 <tr>
 <td></td>
@@ -176,10 +240,22 @@ when finished or even before return of this function - in case of immediate fail
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Emitted when resolving is complete. Parameter is set to true if it was successful.
-If operating in asynchronous mode this signal can be emitted several times (when
-service change)
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("resolved(bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj168474732"></a>
+<div class="memdoc"><p>Emitted when resolving is complete
+</p>
+<p>
+If operating in asynchronous mode this signal can be
+emitted several times (when the hostName or port of
+the service changes).
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>successful</em>&nbsp;</td><td> true if the hostName and port were
+successfully resolved, false otherwise
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("resolved(bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj3083592684"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -236,7 +312,9 @@ service change)
 <li><a href="../kparts/index.html">kparts</a></li>
 <li><a href="../kutils/index.html">kutils</a></li>
 <li><a href="../nepomuk/index.html">nepomuk</a></li>
-<li><a href="../phonon/index.html">phonon</a></li><li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
 <li><a href="../solid/index.html">solid</a></li>
 <li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>

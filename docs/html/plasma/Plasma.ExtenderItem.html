@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.2 PyKDE API Reference
+        KDE 4.3 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
 <code>from PyKDE4.plasma import *</code>
 <p>
 Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicswidget.html">QGraphicsWidget</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
-
+Subclasses: <a href="../plasma/Plasma.ExtenderGroup.html">Plasma.ExtenderGroup</a><br />
 Namespace: Plasma<br />
 <h2>Detailed Description</h2>
 
@@ -68,12 +68,18 @@ Typical usage of ExtenderItems in your applet could look like this:
 </p>
 <p>
 <pre class="fragment">
- ExtenderItem *item = new ExtenderItem(extender());
- //name can be used to later access this item through extender()-&gt;item(name):
- item-&gt;setName("networkmonitoreth0");
- item-&gt;config().writeEntry("device", "eth0");
- initExtenderItem(item);
+ if (!extender()-&gt;hasItem("networkmonitoreth0")) {
+     ExtenderItem *item = new ExtenderItem(extender());
+     //name can be used to later access this item through extender()-&gt;item(name):
+     item-&gt;setName("networkmonitoreth0");
+     item-&gt;config().writeEntry("device", "eth0");
+     initExtenderItem(item);
+ }
 </pre>
+</p>
+<p>
+Note that we first check if the item already exists: ExtenderItems are persistent
+between sessions so we can't blindly add items since they might already exist.
 </p>
 <p>
 You'll then need to implement the initExtenderItem function. Having this function in your applet
@@ -95,41 +101,45 @@ a extenderItem. An example:
 </pre>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj197877900">__init__</a> (self, <a href="../plasma/Plasma.Extender.html">Plasma.Extender</a> hostExtender, long extenderItemId=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj194517868">action</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193798092">addAction</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a> action)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193796716">autoExpireDelay</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KConfigGroup.html">KConfigGroup</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj197881292">config</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj194516748">destroy</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.Extender.html">Plasma.Extender</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193794604">extender</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj194516652">hideCloseButton</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193618700">hoverLeaveEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenehoverevent.html">QGraphicsSceneHoverEvent</a> event)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193621516">hoverMoveEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenehoverevent.html">QGraphicsSceneHoverEvent</a> event)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185737580">icon</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193796556">isCollapsed</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193796428">isDetached</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193621548">mouseDoubleClickEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenemouseevent.html">QGraphicsSceneMouseEvent</a> event)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193619468">mouseMoveEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenemouseevent.html">QGraphicsSceneMouseEvent</a> event)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185662732">mousePressEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenemouseevent.html">QGraphicsSceneMouseEvent</a> event)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193620972">mouseReleaseEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenemouseevent.html">QGraphicsSceneMouseEvent</a> event)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185660460">moveEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenemoveevent.html">QGraphicsSceneMoveEvent</a> event)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185739212">name</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185660492">paint</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpainter.html">QPainter</a> painter, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstyleoptiongraphicsitem.html">QStyleOptionGraphicsItem</a> option, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185662700">resizeEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicssceneresizeevent.html">QGraphicsSceneResizeEvent</a> event)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj194516908">returnToSource</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185737708">setAutoExpireDelay</a> (self, long time)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj194517260">setCollapsed</a> (self, bool collapsed)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185738540">setExtender</a> (self, <a href="../plasma/Plasma.Extender.html">Plasma.Extender</a> extender, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpointf.html">QPointF</a> pos=QPointF(-1,-1))</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185738508">setIcon</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> icon)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185739756">setIcon</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a> icon)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185740204">setName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj162614508">setTitle</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> title)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj197877868">setWidget</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsitem.html">QGraphicsItem</a> widget)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj194517356">showCloseButton</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178653484">title</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsitem.html">QGraphicsItem</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj162615116">widget</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176605740">__init__</a> (self, <a href="../plasma/Plasma.Extender.html">Plasma.Extender</a> hostExtender, long extenderItemId=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170437932">action</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj158091532">addAction</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a> action)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176426380">autoExpireDelay</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KConfigGroup.html">KConfigGroup</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176607180">config</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166700492">destroy</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.Extender.html">Plasma.Extender</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186932716">extender</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.ExtenderGroup.html">Plasma.ExtenderGroup</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj182951724">group</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171386828">hideCloseButton</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166864204">hoverLeaveEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenehoverevent.html">QGraphicsSceneHoverEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170466444">hoverMoveEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenehoverevent.html">QGraphicsSceneHoverEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186931180">icon</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176426636">isCollapsed</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj182948780">isDetached</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj182947980">isGroup</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj157947308">mouseDoubleClickEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenemouseevent.html">QGraphicsSceneMouseEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170465388">mouseMoveEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenemouseevent.html">QGraphicsSceneMouseEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180495564">mousePressEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenemouseevent.html">QGraphicsSceneMouseEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170464620">mouseReleaseEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenemouseevent.html">QGraphicsSceneMouseEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj174557356">moveEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsscenemoveevent.html">QGraphicsSceneMoveEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj165487756">name</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171385548">paint</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpainter.html">QPainter</a> painter, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstyleoptiongraphicsitem.html">QStyleOptionGraphicsItem</a> option, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176120204">resizeEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicssceneresizeevent.html">QGraphicsSceneResizeEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170437676">returnToSource</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166863340">sceneEventFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsitem.html">QGraphicsItem</a> watched, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj182948044">setAutoExpireDelay</a> (self, long time)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj146488396">setCollapsed</a> (self, bool collapsed)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186933196">setExtender</a> (self, <a href="../plasma/Plasma.Extender.html">Plasma.Extender</a> extender, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpointf.html">QPointF</a> pos=QPointF(-1,-1))</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186931020">setGroup</a> (self, <a href="../plasma/Plasma.ExtenderGroup.html">Plasma.ExtenderGroup</a> group)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186931148">setIcon</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> icon)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186931276">setIcon</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a> icon)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj165486636">setName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166035756">setTitle</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> title)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176605548">setWidget</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsitem.html">QGraphicsItem</a> widget)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171385260">showCloseButton</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166039116">title</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsitem.html">QGraphicsItem</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj156786124">widget</a> (self)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="obj197877900"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj176605740"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -167,7 +177,7 @@ unique id to this extender item.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj194517868"></a>
+</p></div></div><a class="anchor" name="obj170437932"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -193,7 +203,7 @@ unique id to this extender item.
 collection contains a "movebacktosource" action which will be only shown when the
 item is detached.
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193798092"></a>
+</p></div></div><a class="anchor" name="obj158091532"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -230,7 +240,7 @@ handle.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193796716"></a>
+</p></div></div><a class="anchor" name="obj176426380"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -244,7 +254,7 @@ handle.
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> whether or not this extender item has an auto expire delay.
 </dd></dl>
-</p></div></div><a class="anchor" name="obj197881292"></a>
+</p></div></div><a class="anchor" name="obj176607180"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -259,7 +269,7 @@ handle.
 <div class="memdoc"><p>fetch the configuration of this widget.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> the configuration of this widget.
 </dd></dl>
-</p></div></div><a class="anchor" name="obj194516748"></a>
+</p></div></div><a class="anchor" name="obj166700492"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -273,7 +283,7 @@ handle.
 </div>
 <div class="memdoc"><p>Destroys the extender item. As opposed to calling delete on this class, destroy also
 removes the config group associated with this item.
-</p></div></div><a class="anchor" name="obj193794604"></a>
+</p></div></div><a class="anchor" name="obj186932716"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -287,7 +297,22 @@ removes the config group associated with this item.
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the extender this items belongs to.
 </dd></dl>
-</p></div></div><a class="anchor" name="obj194516652"></a>
+</p></div></div><a class="anchor" name="obj182951724"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../plasma/Plasma.ExtenderGroup.html">Plasma.ExtenderGroup</a> group</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the group this item belongs to.
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="obj171386828"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -300,7 +325,7 @@ removes the config group associated with this item.
 </table>
 </div>
 <div class="memdoc"><p>Hides the close button in this item's drag handle.
-</p></div></div><a class="anchor" name="obj193618700"></a>
+</p></div></div><a class="anchor" name="obj166864204"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -322,7 +347,7 @@ removes the config group associated with this item.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj193621516"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj170466444"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -344,7 +369,7 @@ removes the config group associated with this item.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj185737580"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj186931180"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -358,7 +383,7 @@ removes the config group associated with this item.
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the icon being displayed in the extender item's drag handle.
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193796556"></a>
+</p></div></div><a class="anchor" name="obj176426636"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -372,7 +397,7 @@ removes the config group associated with this item.
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> whether or not the extender item is collapsed.
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193796428"></a>
+</p></div></div><a class="anchor" name="obj182948780"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -386,7 +411,22 @@ removes the config group associated with this item.
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> whether or not this item is detached from it's original source.
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193621548"></a>
+</p></div></div><a class="anchor" name="obj182947980"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isGroup</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> whether or not this is an ExtenderGroup.
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="obj157947308"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -408,7 +448,7 @@ removes the config group associated with this item.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj193619468"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj170465388"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -430,7 +470,7 @@ removes the config group associated with this item.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj185662732"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj180495564"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -452,7 +492,7 @@ removes the config group associated with this item.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj193620972"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj170464620"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -474,7 +514,7 @@ removes the config group associated with this item.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj185660460"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj174557356"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -496,7 +536,7 @@ removes the config group associated with this item.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj185739212"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj165487756"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -510,7 +550,7 @@ removes the config group associated with this item.
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the name of the item.
 </dd></dl>
-</p></div></div><a class="anchor" name="obj185660492"></a>
+</p></div></div><a class="anchor" name="obj171385548"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -544,7 +584,7 @@ removes the config group associated with this item.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj185662700"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj176120204"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -566,7 +606,7 @@ removes the config group associated with this item.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj194516908"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj170437676"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -579,7 +619,35 @@ removes the config group associated with this item.
 </table>
 </div>
 <div class="memdoc"><p>Returns the extender item to its source applet.
-</p></div></div><a class="anchor" name="obj185737708"></a>
+</p></div></div><a class="anchor" name="obj166863340"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool sceneEventFilter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qgraphicsitem.html">QGraphicsItem</a>&nbsp;</td>
+<td class="paramname"><em>watched</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a>&nbsp;</td>
+<td class="paramname"><em>event</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj182948044"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -608,7 +676,7 @@ in which case this extender stays around. 0 means forever and is the default.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj194517260"></a>
+</p></div></div><a class="anchor" name="obj146488396"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -631,7 +699,7 @@ in which case this extender stays around. 0 means forever and is the default.
 </tr></table>
 </div>
 <div class="memdoc"><p>Collapse or expand the extender item. Defaults to false.
-</p></div></div><a class="anchor" name="obj185738540"></a>
+</p></div></div><a class="anchor" name="obj186933196"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -668,7 +736,36 @@ append'.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj185738508"></a>
+</p></div></div><a class="anchor" name="obj186931020"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setGroup</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../plasma/Plasma.ExtenderGroup.html">Plasma.ExtenderGroup</a>&nbsp;</td>
+<td class="paramname"><em>group</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p></p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>group</em>&nbsp;</td><td> the group you want this item to belong to. Note that you can't nest
+ExtenderGroups.
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186931148"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -699,7 +796,7 @@ information.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj185739756"></a>
+</p></div></div><a class="anchor" name="obj186931276"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -728,7 +825,7 @@ source applet's icon.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj185740204"></a>
+</p></div></div><a class="anchor" name="obj165486636"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -759,7 +856,7 @@ configuration.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj162614508"></a>
+</p></div></div><a class="anchor" name="obj166035756"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -789,7 +886,7 @@ to manually store/restore this information for your extender items.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj197877868"></a>
+</p></div></div><a class="anchor" name="obj176605548"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -817,7 +914,7 @@ to manually store/restore this information for your extender items.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj194517356"></a>
+</p></div></div><a class="anchor" name="obj171385260"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -831,7 +928,7 @@ to manually store/restore this information for your extender items.
 </div>
 <div class="memdoc"><p>Shows a close button in this item's drag handle. By default a close button will not be
 shown.
-</p></div></div><a class="anchor" name="obj178653484"></a>
+</p></div></div><a class="anchor" name="obj166039116"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -845,7 +942,7 @@ shown.
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the title shown in the extender item's dragger.
 </dd></dl>
-</p></div></div><a class="anchor" name="obj162615116"></a>
+</p></div></div><a class="anchor" name="obj156786124"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -888,7 +985,9 @@ shown.
 <li><a href="../kparts/index.html">kparts</a></li>
 <li><a href="../kutils/index.html">kutils</a></li>
 <li><a href="../nepomuk/index.html">nepomuk</a></li>
-<li><a href="../phonon/index.html">phonon</a></li><li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
 <li><a href="../solid/index.html">solid</a></li>
 <li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>

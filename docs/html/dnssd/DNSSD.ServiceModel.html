@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.2 PyKDE API Reference
+        KDE 4.3 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -53,48 +53,53 @@ Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qa
 Namespace: DNSSD<br />
 <h2>Detailed Description</h2>
 
-<p>\class ServiceModel servicemodel.h DNSSD/ServiceModel
+<p>ServiceModel servicemodel.h DNSSD/ServiceModel
+Model for list of Zeroconf services
 </p>
 <p>
-ServiceModel implements Qt Model interface around ServiceBrowser to allow easy integration
-of service discovery into GUI.
-Example of combo box showing list of HTTP servers on local network:
+This class provides a Qt Model for ServiceBrowser to allow easy
+integration of service discovery into a GUI. For example, to
+show the HTTP servers published on the local network, you can do:
 <pre class="fragment">
-DNSSD.ServiceModel* m=new ServiceModel(new DNSSD.ServiceBrowser("_http._tcp"));
-QComboBox *c=new QComboBox();
-c-&gt;setModel(m);
+ DNSSD.ServiceModel *serviceModel = new ServiceModel(
+     new DNSSD.ServiceBrowser("_http._tcp")
+     );
+ QComboBox *serviceCombo = new QComboBox();
+ serviceCombo-&gt;setModel(serviceModel);
 </pre>
 </p>
 <p>
-After user makes the selection, application typically needs pointer to selected service
-in order to get host name and port. RemoteService.Ptr can be obtained from QModelIndex
-using:
+After the user makes a selection, the application typically needs
+to get a pointer to the selected service in order to get the host
+name and port. A RemoteService.Ptr can be obtained from
+a QModelIndex using:
 <pre class="fragment">
-void onSelected(const QModelIndex&amp; selection) {
-DNSSD.RemoteService.Ptr service=selection.data(DNSSD.ServiceModel.ServicePtrRole).
-value&lt;DNSSD.RemoteService.Ptr&gt;();
+ void onSelected(const QModelIndex &amp;selection) {
+     DNSSD.RemoteService.Ptr service =
+         selection.data(DNSSD.ServiceModel.ServicePtrRole)
+                  .value&lt;DNSSD.RemoteService.Ptr&gt;();
+ }
 </pre>
 </p>
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.1
-</dd></dl> Model for list of Zeroconf services
-
+</dd></dl> 
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Jakub Stachowski </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj189115564">AdditionalRoles</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ServicePtrRole&nbsp;}</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj177138508">ModelColumns</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ServiceName, Host, Port&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj176369100">AdditionalRoles</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ServicePtrRole&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj176366700">ModelColumns</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ServiceName, Host, Port&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184113260">__init__</a> (self, <a href="../dnssd/DNSSD.ServiceBrowser.html">DNSSD.ServiceBrowser</a> browser, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184114956">columnCount</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent=QModelIndex())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192964876">data</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> index, int role=Qt.DisplayRole)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj201250220">hasIndex</a> (self, int row, int column, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj201251404">headerData</a> (self, int section, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt.Orientation</a> orientation, int role=Qt.DisplayRole)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192966348">index</a> (self, int row, int column, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent=QModelIndex())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192965708">parent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> index)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192962860">rowCount</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent=QModelIndex())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj182925740">__init__</a> (self, <a href="../dnssd/DNSSD.ServiceBrowser.html">DNSSD.ServiceBrowser</a> browser, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj183121292">columnCount</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent=QModelIndex())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj169811692">data</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> index, int role=Qt.DisplayRole)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj172327596">hasIndex</a> (self, int row, int column, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj169809356">headerData</a> (self, int section, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt.Orientation</a> orientation, int role=Qt.DisplayRole)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj146538860">index</a> (self, int row, int column, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent=QModelIndex())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj146539084">parent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> index)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj146539788">rowCount</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent=QModelIndex())</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="obj184113260"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj182925740"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -122,9 +127,17 @@ value&lt;DNSSD.RemoteService.Ptr&gt;();
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Creates model for given service browses and starts browsing for services. The model becomes parent of the
-browser so there is no need to delete it afterwards.
-</p></div></div><a class="anchor" name="obj184114956"></a>
+<div class="memdoc"><p>Creates a model for the given service browser and starts browsing
+for services.
+</p>
+<p>
+The model takes ownership of the browser,
+so there is no need to delete it afterwards.
+</p>
+<p>
+You should <b>not</b> call ServiceBrowser.startBrowse() on <b>browser</b>
+before passing it to ServiceModel.
+</p></div></div><a class="anchor" name="obj183121292"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -146,7 +159,8 @@ browser so there is no need to delete it afterwards.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192964876"></a>
+<div class="memdoc"><p>
+</p></div></div><a class="anchor" name="obj169811692"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -174,7 +188,8 @@ browser so there is no need to delete it afterwards.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj201250220"></a>
+<div class="memdoc"><p>
+</p></div></div><a class="anchor" name="obj172327596"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -208,7 +223,8 @@ browser so there is no need to delete it afterwards.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj201251404"></a>
+<div class="memdoc"><p>
+</p></div></div><a class="anchor" name="obj169809356"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -242,7 +258,8 @@ browser so there is no need to delete it afterwards.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192966348"></a>
+<div class="memdoc"><p>
+</p></div></div><a class="anchor" name="obj146538860"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -276,7 +293,8 @@ browser so there is no need to delete it afterwards.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192965708"></a>
+<div class="memdoc"><p>
+</p></div></div><a class="anchor" name="obj146539084"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -298,7 +316,8 @@ browser so there is no need to delete it afterwards.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192962860"></a>
+<div class="memdoc"><p>
+</p></div></div><a class="anchor" name="obj146539788"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -320,7 +339,8 @@ browser so there is no need to delete it afterwards.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj189115564"></a>
+<div class="memdoc"><p>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj176369100"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -328,10 +348,11 @@ browser so there is no need to delete it afterwards.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<div class="memdoc"><p>The additional data roles provided by this model
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>ServicePtrRole</em>&nbsp;=&nbsp;0xA06519DE</td><td></table>
 </dl>
-</div></div><p><a class="anchor" name="obj177138508"></a>
+</div></div><p><a class="anchor" name="obj176366700"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -339,8 +360,11 @@ browser so there is no need to delete it afterwards.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Default columns for this model. If service browser is not set to resolve automatically, then the model
-has only one column (service name).
+<div class="memdoc"><p>The default columns for this model.
+</p>
+<p>
+If service browser is not set to resolve automatically,
+then the model will only ever have one column (the service name).
 </p><dl compact><dt><b>Enumerator: </b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>ServiceName</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>Host</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>Port</em>&nbsp;=&nbsp;2</td><td></table>
 </dl>
@@ -373,7 +397,9 @@ has only one column (service name).
 <li><a href="../kparts/index.html">kparts</a></li>
 <li><a href="../kutils/index.html">kutils</a></li>
 <li><a href="../nepomuk/index.html">nepomuk</a></li>
-<li><a href="../phonon/index.html">phonon</a></li><li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
 <li><a href="../solid/index.html">solid</a></li>
 <li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.2 PyKDE API Reference
+        KDE 4.3 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -53,27 +53,45 @@ Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qo
 Namespace: DNSSD<br />
 <h2>Detailed Description</h2>
 
-<p>\class DomainBrowser domainbrowser.h DNSSD/DomainBrowser
+<p>DomainBrowser domainbrowser.h DNSSD/DomainBrowser
+Browses recommended domains for browsing or publishing to.
 </p>
 <p>
-Class used to provide list of additional domains for browsing or publishing.
+Usage of this class is very simple. If you are interested in
+browsing for services, simple do
+<pre class="fragment">
+ DNSSD.DomainBrowser *browser =
+     new DNSSD.DomainBrowser(DNSSD.DomainBrowser.Browsing, this);
+ connect(browser, SIGNAL(domainAdded(QString)),
+         this, SLOT(browsingDomainAdded(QString));
+ connect(browser, SIGNAL(domainRemoved(QString)),
+         this, SLOT(browsingDomainRemove(QString));
+ browser-&gt;startBrowse();
+</pre>
+</p>
+<p>
+If you are interested in domains where you can register services,
+usage is identical except that you should pass
+&lt;tt&gt;DNSSD.DomainBrowser.Registering&lt;/tt&gt; to the constructor.
+</p>
+<p>
 
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Jakub Stachowski </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj193741964">DomainType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Browsing, Publishing&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj162795084">DomainType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Browsing, Publishing&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184784076">domainAdded</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184786124">domainRemoved</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176009868">domainAdded</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj183047116">domainRemoved</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193741452">__init__</a> (self, DNSSD.DomainBrowser.DomainType type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184784076">domainAdded</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184786124">domainRemoved</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193741612">domains</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj177035180">isRunning</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj163494636">startBrowse</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj155610252">__init__</a> (self, DNSSD.DomainBrowser.DomainType type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176009868">domainAdded</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj183047116">domainRemoved</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj182127052">domains</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176187532">isRunning</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176288268">startBrowse</a> (self)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="obj193741452"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj155610252"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -101,15 +119,23 @@ Class used to provide list of additional domains for browsing or publishing.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Standard constructor. It takes all parameters from global configuration.
-All changes in configuration are applied immediately.
+<div class="memdoc"><p>Standard constructor
+</p>
+<p>
+The global DNS-SD configuration (for example, the global Avahi
+configuration for the Avahi backend) will be used.
+</p>
+<p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> Parent object.
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> the type of domain to search for
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> parent object (see QObject documentation)
 </td></tr>
 </table></dl>
-<p>
-</p></div></div><a class="anchor" name="obj184784076"></a>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> startBrowse() and ServiceBrowser.isAvailable()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj176009868"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -121,7 +147,7 @@ All changes in configuration are applied immediately.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>a0</em></td>
+<td class="paramname"><em>domain</em></td>
 </tr>
 <tr>
 <td></td>
@@ -131,9 +157,22 @@ All changes in configuration are applied immediately.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>New domain has been discovered. Also emitted for domain specified in constructor
-and in global configuration
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("domainAdded(const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj184786124"></a>
+<div class="memdoc"><p>A new domain has been discovered
+</p>
+<p>
+If the requested DomainType is Browsing, this will
+also be emitted for the domains specified in the
+global configuration.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>domain</em>&nbsp;</td><td> the name of the domain
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> domainRemoved()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("domainAdded(const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj183047116"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -145,7 +184,7 @@ and in global configuration
 <td class="memname"></td>
 <td></td>
 <td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>a0</em></td>
+<td class="paramname"><em>domain</em></td>
 </tr>
 <tr>
 <td></td>
@@ -155,8 +194,22 @@ and in global configuration
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Emitted when domain has been removed from browsing list
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("domainRemoved(const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj193741612"></a>
+<div class="memdoc"><p>A domain has disappeared from the browsed list
+</p>
+<p>
+Emitted when domain has been removed from browsing list
+or the publishing list (depending on which list was
+requested in the constructor).
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>domain</em>&nbsp;</td><td> the name of the domain
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> domainAdded()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("domainRemoved(const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj182127052"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -168,8 +221,12 @@ and in global configuration
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Current list of domains to browse.
-</p></div></div><a class="anchor" name="obj177035180"></a>
+<div class="memdoc"><p>The current known list of domains of the requested DomainType
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a list of currently known domain names
+</dd></dl>
+</p></div></div><a class="anchor" name="obj176187532"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -181,8 +238,12 @@ and in global configuration
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns true when browse has already started
-</p></div></div><a class="anchor" name="obj163494636"></a>
+<div class="memdoc"><p>Whether the browsing has been started
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if startBrowse() has been called, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="obj176288268"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -194,8 +255,22 @@ and in global configuration
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Starts browsing. To stop destroy this object. domainAdded signals may be emitted before this function returns.
-</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj193741964"></a>
+<div class="memdoc"><p>Starts browsing
+</p>
+<p>
+Only the first call to this function will have any effect.
+</p>
+<p>
+Browsing stops when the DomainBrowser object is destroyed.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> The domainAdded() signal may be emitted before this
+function returns.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> domainAdded() and domainRemoved()
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj162795084"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -203,7 +278,8 @@ and in global configuration
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<div class="memdoc"><p>Domains recommended for browsing for services on (using ServiceBrowser)
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Browsing</em>&nbsp;</td><td><tr><td valign="top"><em>Publishing</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
@@ -235,7 +311,9 @@ and in global configuration
 <li><a href="../kparts/index.html">kparts</a></li>
 <li><a href="../kutils/index.html">kutils</a></li>
 <li><a href="../nepomuk/index.html">nepomuk</a></li>
-<li><a href="../phonon/index.html">phonon</a></li><li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
 <li><a href="../solid/index.html">solid</a></li>
 <li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.2 PyKDE API Reference
+        KDE 4.3 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,59 +48,60 @@
 <h1>PublicService Class Reference</h1>
 <code>from PyKDE4.dnssd import *</code>
 <p>
-Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,<a href="../dnssd/DNSSD.ServiceBase.html">DNSSD.ServiceBase</a> &#x2192; KShared<br />
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,<a href="../dnssd/DNSSD.ServiceBase.html">DNSSD.ServiceBase</a> &#x2192; QSharedData<br />
 
 Namespace: DNSSD<br />
 <h2>Detailed Description</h2>
 
-<p>\class PublicService publicservice.h DNSSD/PublicService
+<p>PublicService publicservice.h DNSSD/PublicService
+Represents a service to be published
 </p>
 <p>
-This class is most important for application that wants to announce its service on network.
-Suppose that you want to make your web server public - this is simplest way:
+This class allows you to publish the existance of a network
+service provided by your application.
 </p>
 <p>
+If you are providing a web server and want to advertise it
+on the local network, you might do
 <pre class="fragment">
-DNSSD.PublicService *service = new DNSSD.PublicService("My files","_http._tcp",80);
-bool isOK = service-&gt;publish();
+ DNSSD.PublicService *service = new DNSSD.PublicService("My files", "_http._tcp", 80);
+ bool isOK = service-&gt;publish();
 </pre>
 </p>
 <p>
-In this example publish() is synchronous - it will not return until publishing is complete.
-This is usually not too long but it can freeze application's GUI for a moment.
-Asynchronous publishing is better for responsiveness. Example:
-</p>
-<p>
+In this example publish() is synchronous: it will not return
+until publishing is complete. This is usually not too long
+but it can freeze an application's GUI for a moment.
+To publish asynchronously instead, do:
 <pre class="fragment">
-DNSSD.PublicService *service = new DNSSD.PublicService("My files","_http._tcp",80);
-connect(service,SIGNAL(published(bool)),this,SLOT(wasPublished(bool)));
-service-&gt;publishAsync();
+ DNSSD.PublicService *service = new DNSSD.PublicService("My files", "_http._tcp", 80);
+ connect(service, SIGNAL(published(bool)), this, SLOT(wasPublished(bool)));
+ service-&gt;publishAsync();
 </pre>
 </p>
 <p>
-This class represents local service being published
 
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Jakub Stachowski </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193741836">published</a> (bool a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176291212">published</a> (bool successful)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181360908">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type=QString(), long port=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> subtypes=QStringList())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196032940">isPublished</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196031372">publish</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196033996">publishAsync</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193741836">published</a> (self, bool a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj201259500">setDomain</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178047084">setPort</a> (self, long port)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj202155308">setServiceName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> serviceName)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171857804">setSubTypes</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> subtypes)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196034252">setTextData</a> (self, QMap<QString,QByteArray> textData)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj202154092">setType</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj196032268">stop</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj183909484">subtypes</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj202157932">virtual_hook</a> (self, int a0, void a1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166792748">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type=QString(), long port=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> subtypes=QStringList())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178983404">isPublished</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178986956">publish</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178986348">publishAsync</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176291212">published</a> (self, bool successful)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj167504300">setDomain</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166669548">setPort</a> (self, long port)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186814636">setServiceName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> serviceName)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj159707276">setSubTypes</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> subtypes)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178984908">setTextData</a> (self, QMap<QString,QByteArray> textData)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186816748">setType</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178985644">stop</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj176291404">subtypes</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj174574348">virtual_hook</a> (self, int a0, void a1)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="obj181360908"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj166792748"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -146,24 +147,45 @@ This class represents local service being published
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p></p><dl compact><dt><b>Parameters:</b></dt><dd>
+<div class="memdoc"><p>Creates a service description that can be published
+</p>
+<p>
+If no <b>name</b> is given, the computer name is used instead. If there
+is already a service with the same name, type and domain a number will
+be appended to the name to make it unique.
+</p>
+<p>
+If no <b>domain</b> is specified, the service is published on the link-local
+domain (.local).
+</p>
+<p>
+The subtypes can be used to specify server attributes, such
+as "_anon" for anonymous FTP servers, or can specify a specific protocol
+(such as a web service interface) on top of a generic protocol like SOAP.
+</p>
+<p>
+There is
+<a href="http://www.dns-sd.org/ServiceTypes.html">a comprehensive list
+of possible types</a> available, but you are largely on your own for
+subtypes.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> Service name. If set to QString(), computer name will be used and will be
-available via serviceName() after successful registration
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> a service name to use instead of the computer name
 
-<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> Service type. Has to be in form _sometype._udp or _sometype._tcp
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> service type, in the form _sometype._udp or _sometype._tcp
 
-<tr><td></td><td valign="top"><em>port</em>&nbsp;</td><td> Port number. Set to 0 to "reserve" service name.
+<tr><td></td><td valign="top"><em>port</em>&nbsp;</td><td> port number, or 0 to "reserve" the service name
 
-<tr><td></td><td valign="top"><em>domain</em>&nbsp;</td><td> Domain name. If left as QString:null, user configuration will be used. "local."
-means local LAN
+<tr><td></td><td valign="top"><em>domain</em>&nbsp;</td><td> the domain to publish the service on (see DomainBrowser)
 
-<tr><td></td><td valign="top"><em>subtypes</em>&nbsp;</td><td> Optional list of subtypes. Each subtype name must have leading underscore. Example:
-service of type _ftp._tcp may have subtype _anon meaning that it is anonymous FTP server.
+<tr><td></td><td valign="top"><em>subtypes</em>&nbsp;</td><td> optional list of subtypes, each with a leading underscore
 </td></tr>
 </table></dl>
-<p>
-</p></div></div><a class="anchor" name="obj196032940"></a>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> ServiceBrowser.ServiceBrowser()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj178983404"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -175,8 +197,12 @@ service of type _ftp._tcp may have subtype _anon meaning that it is anonymous FT
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns true is currently published
-</p></div></div><a class="anchor" name="obj196031372"></a>
+<div class="memdoc"><p>Whether the service is currently published
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the service is being published to the domain,
+</dd></dl> false otherwise
+</p></div></div><a class="anchor" name="obj178986956"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -188,10 +214,20 @@ service of type _ftp._tcp may have subtype _anon meaning that it is anonymous FT
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Synchrounous publish. Application will be freezed until publishing is complete.
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if successful.
+<div class="memdoc"><p>Publish the service synchronously
+</p>
+<p>
+The method will not return (and hence the application interface will
+freeze, since KDElibs code should be executed in the main thread)
+until either the service is published or publishing fails.
+</p>
+<p>
+published(bool) is emitted before this method returns.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the service was successfully published, false otherwise
 </dd></dl>
-</p></div></div><a class="anchor" name="obj196033996"></a>
+</p></div></div><a class="anchor" name="obj178986348"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -203,10 +239,13 @@ service of type _ftp._tcp may have subtype _anon meaning that it is anonymous FT
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Asynchronous version of publish(). It return immediately and emits signal published(bool)
-when completed. Note that in case of early detected error (like bad service type) signal may be
-emitted before return of this function.
-</p></div></div><a class="anchor" name="obj193741836"></a>
+<div class="memdoc"><p>Publish the service asynchronously
+</p>
+<p>
+Returns immediately and emits published(bool) when completed.
+Note that published(bool) may be emitted before this method
+returns when an error is detected immediately.
+</p></div></div><a class="anchor" name="obj176291212"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -218,7 +257,7 @@ emitted before return of this function.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype">bool&nbsp;</td>
-<td class="paramname"><em>a0</em></td>
+<td class="paramname"><em>successful</em></td>
 </tr>
 <tr>
 <td></td>
@@ -228,9 +267,13 @@ emitted before return of this function.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Emitted when publishing is complete - parameter is set to true if it was successful. It will also
-emitted when name, port or type of already published service is changed.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("published(bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj201259500"></a>
+<div class="memdoc"><p>Emitted when publishing is complete
+</p>
+<p>
+It will also emitted when an already-published service is
+republished after a property of the service (such as the
+name or port) is changed.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("published(bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj167504300"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -252,9 +295,24 @@ emitted when name, port or type of already published service is changed.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets domain where service is published. "local." means local LAN. If service is currently
-published, it will be re-announced with new data.
-</p></div></div><a class="anchor" name="obj178047084"></a>
+<div class="memdoc"><p>Sets the domain where the service is published
+</p>
+<p>
+"local." means link-local, ie: the IP subnet on the LAN containing
+this computer.
+</p>
+<p>
+If service is already published, it will be removed from the current
+domain and published on <b>domain</b> instead.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>domain</em>&nbsp;</td><td> the new domain to publish the service on
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj166669548"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -276,8 +334,20 @@ published, it will be re-announced with new data.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets port. If service is currently published, it will be re-announced with new data.
-</p></div></div><a class="anchor" name="obj202155308"></a>
+<div class="memdoc"><p>Sets the port
+</p>
+<p>
+If the service is already published, it will be re-announced with
+the new port.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>port</em>&nbsp;</td><td> the port of the service, or 0 to simply "reserve" the name
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186814636"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -299,8 +369,20 @@ published, it will be re-announced with new data.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets name of the service. If service is currently published, it will be re-announced with new data.
-</p></div></div><a class="anchor" name="obj171857804"></a>
+<div class="memdoc"><p>Sets the name of the service
+</p>
+<p>
+If the service is already published, it will be re-announced with
+the new name.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>serviceName</em>&nbsp;</td><td> the new name of the service
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj159707276"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -322,9 +404,24 @@ published, it will be re-announced with new data.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets subtypetypes of service. Pass empty list to remove subtype. If service is
-currently published, it will be re-announced with new data.
-</p></div></div><a class="anchor" name="obj196034252"></a>
+<div class="memdoc"><p>Sets the subtypetypes of the service
+</p>
+<p>
+If the service is already published, it will be re-announced with
+the new subtypes.
+</p>
+<p>
+The existing list of substypes is replaced, so an empty list will
+cause all existing subtypes to be removed.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>subtypes</em>&nbsp;</td><td> the new list of subtypes
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj178984908"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -346,8 +443,21 @@ currently published, it will be re-announced with new data.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets new text properties. If services is already published, it will be re-announced with new data.
-</p></div></div><a class="anchor" name="obj202154092"></a>
+<div class="memdoc"><p>Sets new text properties
+</p>
+<p>
+If the service is already published, it will be re-announced with
+the new data.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>textData</em>&nbsp;</td><td> the new text properties for the service
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> ServiceBase.textData()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186816748"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -369,9 +479,20 @@ currently published, it will be re-announced with new data.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets type of service. It has to in form of _type._udp or _type._tcp. If service is
-currently published, it will be re-announced with new data.
-</p></div></div><a class="anchor" name="obj196032268"></a>
+<div class="memdoc"><p>Sets the service type
+</p>
+<p>
+If the service is already published, it will be re-announced with
+the new type.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> the new type of the service
+</td></tr>
+</table></dl>
+<p> See PublicService() for details on the format of <b>type</b>
+</p></div></div><a class="anchor" name="obj178985644"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -383,9 +504,15 @@ currently published, it will be re-announced with new data.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Stops publishing or abort incomplete publish request. Useful when you want to disable service
-for some time.
-</p></div></div><a class="anchor" name="obj183909484"></a>
+<div class="memdoc"><p>Stops publishing or aborts an incomplete publish request.
+</p>
+<p>
+Useful when you want to disable the service for some time.
+</p>
+<p>
+Note that if you stop providing a service (without exiting the
+application), you should stop publishing it.
+</p></div></div><a class="anchor" name="obj176291404"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -397,8 +524,12 @@ for some time.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns otpional subtype of service. It is always empty for domains and in most cases empty for normal services.
-</p></div></div><a class="anchor" name="obj202157932"></a>
+<div class="memdoc"><p>The subtypes of service.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setSubTypes()
+</dd></dl>
+</p></div></div><a class="anchor" name="obj174574348"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -455,7 +586,9 @@ for some time.
 <li><a href="../kparts/index.html">kparts</a></li>
 <li><a href="../kutils/index.html">kutils</a></li>
 <li><a href="../nepomuk/index.html">nepomuk</a></li>
-<li><a href="../phonon/index.html">phonon</a></li><li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
 <li><a href="../solid/index.html">solid</a></li>
 <li><a href="../soprano/index.html">soprano</a></li>
 </ul></div></div>

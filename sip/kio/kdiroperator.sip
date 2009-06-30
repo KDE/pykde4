@@ -126,7 +126,6 @@ public:
     QString                 makeDirCompletion (const QString&);
     virtual void            trashSelected ();
     void                    setIconsZoom (int value);
-    KFile::FileView         viewKind () const;
 
 protected:
     void                    resetCursor ();

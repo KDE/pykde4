@@ -32,6 +32,8 @@ public:
     explicit                LineEdit (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setText (const QString& text);
     QString                 text () const;
+    void                    setClearButtonShown (bool show);
+    bool                    isClearButtonShown () const;
     void                    setStyleSheet (const QString& stylesheet);
     QString                 styleSheet ();
     KLineEdit*              nativeWidget () const;

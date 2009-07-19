@@ -199,6 +199,7 @@ public:
     bool                    setLanguage (const QStringList& languages);
     QString                 localizedFilePath (const QString& filePath) const;
     QString                 removeAcceleratorMarker (const QString& label) const;
+    QString                 convertDigits (const QString& str, KLocale::DigitSet digitSet, bool ignoreContext = 0) const;
 };   // KLocale
 
 

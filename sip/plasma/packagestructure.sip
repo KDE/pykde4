@@ -62,6 +62,7 @@ public:
 
 //FIXME PackageMetadata needs a custom = operator for this to work.
 //    virtual Plasma::PackageMetadata  metadata ();
+
     bool                    allowExternalPaths () const;
 
 signals:

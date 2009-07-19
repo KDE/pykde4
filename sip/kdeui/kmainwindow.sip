@@ -48,8 +48,7 @@ public:
     bool                    autoSaveSettings () const;
     QString                 autoSaveGroup () const;
     KConfigGroup            autoSaveConfigGroup() const;
-
-    virtual void            applyMainWindowSettings (const KConfigGroup& config, bool force = 0);
+    virtual void            applyMainWindowSettings (const KConfigGroup& config, bool forceGlobal = 0);
     void                    saveMainWindowSettings (const KConfigGroup& config);
     bool                    initialGeometrySet () const;
     void                    ignoreInitialGeometry ();

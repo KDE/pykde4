@@ -28,15 +28,16 @@ class KToolBar : QToolBar
 
 
 public:
-    explicit                KToolBar (QWidget* parent /TransferThis/, bool honorStyle = 0, bool readConfig = 1);
-                            KToolBar (const QString& objectName, QMainWindow* parentWindow, Qt::ToolBarArea area, bool newLine = 0, bool honorStyle = 0, bool readConfig = 1);
+    explicit                KToolBar (QWidget* parent /TransferThis/, bool isMainToolBar = 0, bool readConfig = 1);
+    explicit                KToolBar (const QString& objectName, QWidget* parent /TransferThis/, bool readConfig = 1);
+                            KToolBar (const QString& objectName, QMainWindow* parentWindow, Qt::ToolBarArea area, bool newLine = 0, bool isMainToolBar = 0, bool readConfig = 1);
     KMainWindow*            mainWindow () const;
     void                    setIconDimensions (int size);
     int                     iconSizeDefault () const;
     void                    setContextMenuEnabled (bool enable = 1);
     bool                    contextMenuEnabled () const;
     void                    saveSettings (KConfigGroup& cg);
-    void                    applySettings (const KConfigGroup& cg, bool force = 0);
+    void                    applySettings (const KConfigGroup& cg, bool forceGlobal = 0);
     void                    setXMLGUIClient (KXMLGUIClient* client);
     void                    loadState (const QDomElement& element);
     void                    saveState (QDomElement& element) const;

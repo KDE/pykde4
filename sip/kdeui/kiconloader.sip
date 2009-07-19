@@ -120,6 +120,9 @@ public:
     void                    addExtraDesktopThemes ();
     bool                    extraDesktopThemesAdded () const;
     void                    newIconLoader ();
+
+signals:
+    void                    iconLoaderSettingsChanged ();
 };   // KIconLoader
 
 QPixmap                 DesktopIcon (const QString& name, int size = 0, int state = KIconLoader::DefaultState, const QStringList& overlays = QStringList());

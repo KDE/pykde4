@@ -32,7 +32,9 @@ public:
     void                    setPopupIcon (const QString& iconName);
     QIcon                   popupIcon () const;
     virtual QWidget*        widget ();
+    void                    setWidget (QWidget* widget);
     virtual QGraphicsWidget*  graphicsWidget ();
+    void                    setGraphicsWidget (QGraphicsWidget* widget);
     Plasma::PopupPlacement  popupPlacement () const;
     void                    setPassivePopup (bool passive);
     bool                    isPassivePopup () const;

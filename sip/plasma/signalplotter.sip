@@ -88,6 +88,7 @@ public:
     double                  lastValue (uint i) const;
     QString                 lastValueAsString (uint i) const;
     void                    setThinFrame (bool set);
+    bool                    thinFrame () const;
     void                    setStackPlots (bool stack);
     bool                    stackPlots () const;
     QPixmap                 getSnapshotImage (uint width, uint height);

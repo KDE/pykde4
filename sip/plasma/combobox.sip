@@ -39,6 +39,7 @@ public:
 
 signals:
     void                    activated (const QString& text);
+    void                    textChanged (const QString& text);
 
 protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);

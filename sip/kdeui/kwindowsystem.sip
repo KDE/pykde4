@@ -77,6 +77,7 @@ public:
     static bool             allowedActionsSupported ();
     static QString          readNameProperty (WId window, unsigned long atom);
     static void             doNotManage (const QString& title);
+    static void             allowExternalProcessWindowActivation (int pid = -1);
     static bool             mapViewport ();
     static int              viewportToDesktop (const QPoint& pos);
     static int              viewportWindowToDesktop (const QRect& r);

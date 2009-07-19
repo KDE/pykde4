@@ -154,6 +154,9 @@ signals:
     void                    dropped (const KFileItem& item, QDropEvent* event, const KUrl::List& urls);
     void                    contextMenuAboutToShow (const KFileItem& item, QMenu* menu);
     void                    currentIconSizeChanged (int size);
+
+public:
+//ig    KFile::FileView         viewKind () const;
 };   // KDirOperator
 
 

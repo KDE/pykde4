@@ -45,48 +45,105 @@
 <div id="main">
 <div class="clearer">&nbsp;</div>
 <h1>plasma Module</h1>
-<hr><p><h2>Framework for KDE Graphical Components </h2>
+<hr><p><h2>Plasma libraries </h2>
 </p>
 <p>
-This library implements the framework for KDE parts, which are
-elaborate widgets with a user-interface defined in terms of actions
-(menu items, toolbar icons). See KParts.Part.
+libplasma is the core of the Plasma desktop. It provides a framework of graphical
+widgets (Plasma.Applet) that can be organised into managed groupings
+(Plasma.Containment), such as a desktop or panel. It also provides a data
+abstraction layer (Plasma.DataEngine) and a corresponding service interaction
+layer (Plasma.Service) to make implementing widgets easier and a
+system of callouts (Plasma.AbstractRunner) that provide responses to queries,
+from running an application to performing a quick calculation.
 </p>
 <p>
-The library also provides a framework for applications that want to
-use parts. Such applications need to inherit their main window
-from KParts.MainWindow and provide a so-called shell GUI,
-which provides a basic skeleton GUI with part-independent functionality/actions.
+The <a href="http://doc.trolltech.com/latest/graphicsview.html">Qt Graphics View
+framework</a> and the <a href="http://api.kde.org/4.x-api/kdelibs-apidocs/">KDE
+libraries</a> provide the underpinning for libplasma. As a result, it should
+work anywhere that Qt and KDE do.
 </p>
 <p>
-Some KParts applications won't be specific to a given part, but expect
-to be able to embed, for instance, all types of viewers out there. For this
-the basic functionality of any viewer has been implemented in
-KParts.ReadOnlyPart, which viewer-like parts should inherit from.
-The same applies to KParts.ReadWritePart, which is for editor-like parts.
+Although libplasma is developed for the use of the Plasma desktop shell in
+KDE 4, it is general enough to be useful in other applications.
+<a href="http://amarok.kde.org">Amarok</a> is using it for its context
+view, allowing for pluggable widgets to display and interact with the music
+collection, such as "current track" and "tag cloud" widgets.
 </p>
 <p>
-You can add actions to an existing KParts app from "outside", defining
-the code for those actions in a shared library. This mechanism is
-obviously called plugins, and implemented by KParts.Plugin.
+libplasma itself only provides a framework, and the widgets, containments,
+data engines and runners are all implemented as plugins. However, the framework
+is designed to make implementing these plugins as easy as possible, including
+providing scripting support.
 </p>
 <p>
-For a complete, and very simple, example of how to use KParts to display
-any kind of file (i.e. making a generic viewer), see the documentation for
-KParts.ComponentFactory.createPartInstanceFromQuery.
+Other important classes are:
+</p>
+<p>
+- Plasma.Corona: the canvas that containments are placed on
+- Plasma.View: a QWidget for displaying a containment
+- Plasma.Theme: provides theming support
+- Plasma.Animator: provides animations for things like elements appearing
+and disappearing
+- Plasma.Delegate: provides an item delegate for Qt's
+<a href="http://doc.trolltech.com/latest/model-view-programming.html">Model /
+View framework</a> for menu items.
+- Plasma.ToolTipManager: allows widgets have (themed) tooltips displayed when the
+mouse is hovered over them
+- Plasma.Dialog: displays a themed application dialog
+- Plasma.Extender: provides detachable sections to Plasma.Applet
+- Plasma.GLApplet: provides an OpenGL-rendered Plasma.Applet
+- Plasma.PackageStructure: provides descriptions of packages containing plugins
+for libplasma
+- Plasma.PopupApplet: provides a simple way of implementing a Plasma.Applet
+consisting of an icon that shows a popup when clicked
+- Plasma.Svg and Plasma.FrameSvg: provides themable, cached SVGs
+- Plasma.Wallpaper: provides pluggable backgrounds for containments
+- Plasma.AppletScript, Plasma.DataEngineScript, Plasma.RunnerScript and
+Plasma.ScriptEngine: provide scripting interfaces for plugins
+- Various themed QGraphicsWidgets for use in creating a Plasma.Applet
+</p>
+<p>
+The
+<a href="http://techbase.kde.org/Development/Tutorials/Plasma">Plasma tutorials</a>
+on TechBase provide a good introduction to writing plugins, such as widgets and
+data engines, for libplasma-based applications.
 </p>
 <p>
 
 <dl compact><dt><b>Author(s):</b></dt><dd>
-Simon Hausmann &lt;hausmann@kde.org&gt;<br>
-David Faure &lt;faure@kde.org&gt;<br>
-Kurt Granroth &lt;granroth@kde.org&gt;<br>
-Michael Koch &lt;koch@kde.org&gt;
+Aaron Seigo &lt;aseigo@kde.org&gt;<br>
+Alessandro Diaferia &lt;alediaferia@gmail.com&gt;<br>
+Alex Merry &lt;kde@randomguy3.me.uk&gt;<br>
+Alexander Wiedenbruch &lt;wirr01@gmail.com&gt;<br>
+Alexis Ménard &lt;darktears31@gmail.com&gt;<br>
+André Duffeck &lt;andre@duffeck.de&gt;<br>
+Andrew Lake &lt;jamboarder@yahoo.com&gt;<br>
+Bertjan Broeksema &lt;b.broeksema@kdemail.net&gt;<br>
+Chani Armitage &lt;chanika@gmail.com&gt;<br>
+Davide Bettio &lt;davide.bettio@kdemail.net&gt;<br>
+Dan Meltzer &lt;hydrogen@notyetimplemented.com&gt;<br>
+Fredrik Höglund &lt;fredrik@kde.org&gt;<br>
+Ivan Cukic &lt;ivan.cukic+kde@gmail.com&gt;<br>
+John Tapsell &lt;tapsell@kde.org&gt;<br>
+Jordi Polo &lt;mumismo@gmail.com&gt;<br>
+Kevin Ottens &lt;ervin@kde.org&gt;<br>
+Montel Laurent &lt;montel@kde.org&gt;<br>
+Marco Martin &lt;notmart@gmail.com&gt;<br>
+Matt Broadstone &lt;mbroadst@gmail.com&gt;<br>
+Petri Damsten &lt;damu@iki.fi&gt;<br>
+Rafael Fernández López &lt;ereslibre@kde.org&gt;<br>
+Riccardo Iaconelli &lt;riccardo@kde.org&gt;<br>
+Richard J. Moore &lt;rich@kde.org&gt;<br>
+Rob Scheepmaker &lt;r.scheepmaker@student.utwente.nl&gt;<br>
+Robert Knight &lt;robertknight@gmail.com&gt;<br>
+Sebastian Kuegler &lt;sebas@kde.org&gt;<br>
+Siraj Razick &lt;siraj@kde.net&gt;<br>
+Zack Rusin &lt;zack@kde.org&gt;
 </dd></dl> </p>
 <p>
 
 <dl compact><dt><b>Maintainer(s):</b></dt><dd>
-[Unknown/None]
+Aaron Seigo &lt;aseigo@kde.org&gt;
 </dd></dl> </p>
 <p>
 
@@ -147,8 +204,7 @@ Michael Koch &lt;koch@kde.org&gt;
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul>
-<li><a href="../akonadi/index.html">akonadi</a></li>
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
 <li><a href="../dnssd/index.html">dnssd</a></li>
 <li><a href="../kdecore/index.html">kdecore</a></li>
 <li><a href="../kdeui/index.html">kdeui</a></li>

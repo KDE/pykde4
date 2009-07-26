@@ -151,7 +151,7 @@ signals:
     void                    activate ();
     void                    messageButtonPressed (const Plasma::MessageButton button);
     void                    appletDestroyed (Plasma::Applet* applet);
-    void                    initScriptExtenderItem (Plasma::ExtenderItem* item);
+    void                    extenderItemRestored (Plasma::ExtenderItem* item);
 
 public:
     void                    setImmutability (const Plasma::ImmutabilityType immutable);

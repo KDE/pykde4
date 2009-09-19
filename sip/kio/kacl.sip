@@ -116,7 +116,7 @@ typedef ACLUserPermissionsList ACLGroupPermissionsList;
     {
         QString s = (*it).first;
         ushort  u = (*it).second;
-        PyObject *pys = sipBuildResult (NULL, "N", new QString (s), sipClass_QString);
+        PyObject *pys = sipBuildResult (NULL, "N", new QString (s), sipType_QString);
         if ((pys == NULL) || ((inst = Py_BuildValue ("Ni", pys, u)) == NULL)
             || PyList_Append (pylist, inst) < 0)
         {
@@ -144,7 +144,7 @@ typedef ACLUserPermissionsList ACLGroupPermissionsList;
     {
         PyObject *elem = PyList_GET_ITEM (sipPy, i);
         PyObject *pyp1 = PyTuple_GET_ITEM (elem, 0);
-        p1 = *(QString *)sipForceConvertToInstance(pyp1, sipClass_QString, NULL, 0, NULL, &iserr);
+        p1 = *(QString *)sipForceConvertToType(pyp1, sipType_QString, NULL, 0, NULL, &iserr);
         if (iserr)
         {
             *sipIsErr = 1;

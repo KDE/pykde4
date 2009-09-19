@@ -74,7 +74,7 @@ protected:
         KServiceType::Ptr *t = new KServiceType::Ptr (sipCpp->at(i));
         PyObject *tobj;
 
-        if ((tobj = sipConvertFromNewInstance(t->data(), sipClass_KServiceType, sipTransferObj)) == NULL)
+        if ((tobj = sipConvertFromNewType(t->data(), sipType_KServiceType, sipTransferObj)) == NULL)
         {
             Py_DECREF(l);
             delete t;
@@ -96,7 +96,7 @@ protected:
             return 0;
 
         for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
-            if (!sipCanConvertToInstance(PyList_GET_ITEM(sipPy, i), sipClass_KServiceType, SIP_NOT_NONE))
+            if (!sipCanConvertToType(PyList_GET_ITEM(sipPy, i), sipType_KServiceType, SIP_NOT_NONE))
                 return 0;
 
         return 1;
@@ -107,11 +107,11 @@ protected:
     for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
     {
         int state;
-        KServiceType *t = reinterpret_cast<KServiceType *>(sipConvertToInstance(PyList_GET_ITEM(sipPy, i), sipClass_KServiceType, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
+        KServiceType *t = reinterpret_cast<KServiceType *>(sipConvertToType(PyList_GET_ITEM(sipPy, i), sipType_KServiceType, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
  
         if (*sipIsErr)
         {
-            sipReleaseInstance(t, sipClass_KServiceType, state);
+            sipReleaseType(t, sipType_KServiceType, state);
 
             delete ql;
             return 0;
@@ -121,7 +121,7 @@ protected:
 
         ql->append(*tptr);
 
-        sipReleaseInstance(t, sipClass_KServiceType, state);
+        sipReleaseType(t, sipType_KServiceType, state);
     }
  
     *sipCppPtr = ql;
@@ -152,7 +152,7 @@ protected:
         QString *t1 = new QString (i.key());
         QVariant::Type t2 =  (QVariant::Type) (i.value());
 
-        PyObject *t1obj = sipConvertFromNewInstance(t1, sipClass_QString, sipTransferObj);
+        PyObject *t1obj = sipConvertFromNewType(t1, sipType_QString, sipTransferObj);
         PyObject *t2obj = PyInt_FromLong ((long) t2);
 
         if (t1obj == NULL || t2obj == NULL || PyDict_SetItem(d, t1obj, t2obj) < 0)
@@ -191,7 +191,7 @@ protected:
 
         while (PyDict_Next(sipPy, &i, &t1obj, &t2obj))
         {
-            if (!sipCanConvertToInstance(t1obj, sipClass_QString, SIP_NOT_NONE))
+            if (!sipCanConvertToType(t1obj, sipType_QString, SIP_NOT_NONE))
                 return 0;
 
             if (!PyInt_Check (t2obj))
@@ -207,12 +207,12 @@ protected:
     {
         int state1;
 
-        QString *t1 = reinterpret_cast<QString *>(sipConvertToInstance(t1obj, sipClass_QString, sipTransferObj, SIP_NOT_NONE, &state1, sipIsErr));
+        QString *t1 = reinterpret_cast<QString *>(sipConvertToType(t1obj, sipType_QString, sipTransferObj, SIP_NOT_NONE, &state1, sipIsErr));
         QVariant::Type t2 = (QVariant::Type)PyInt_AS_LONG (t2obj);
  
         if (*sipIsErr)
         {
-            sipReleaseInstance(t1, sipClass_QString, state1);
+            sipReleaseType(t1, sipType_QString, state1);
 
             delete qm;
             return 0;
@@ -220,7 +220,7 @@ protected:
 
         qm->insert(*t1, t2);
 
-        sipReleaseInstance(t1, sipClass_QString, state1);
+        sipReleaseType(t1, sipType_QString, state1);
     }
  
     *sipCppPtr = qm;

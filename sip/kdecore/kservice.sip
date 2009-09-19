@@ -115,7 +115,7 @@ protected:
         KService::Ptr *t = new KService::Ptr (sipCpp->at(i));
         PyObject *tobj;
 
-        if ((tobj = sipConvertFromNewInstance(t->data(), sipClass_KService, sipTransferObj)) == NULL)
+        if ((tobj = sipConvertFromNewType(t->data(), sipType_KService, sipTransferObj)) == NULL)
         {
             Py_DECREF(l);
             delete t;
@@ -137,7 +137,7 @@ protected:
             return 0;
 
         for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
-            if (!sipCanConvertToInstance(PyList_GET_ITEM(sipPy, i), sipClass_KService, SIP_NOT_NONE))
+            if (!sipCanConvertToType(PyList_GET_ITEM(sipPy, i), sipType_KService, SIP_NOT_NONE))
                 return 0;
 
         return 1;
@@ -148,11 +148,11 @@ protected:
     for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
     {
         int state;
-        KService *t = reinterpret_cast<KService *>(sipConvertToInstance(PyList_GET_ITEM(sipPy, i), sipClass_KService, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
+        KService *t = reinterpret_cast<KService *>(sipConvertToType(PyList_GET_ITEM(sipPy, i), sipType_KService, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
  
         if (*sipIsErr)
         {
-            sipReleaseInstance(t, sipClass_KService, state);
+            sipReleaseType(t, sipType_KService, state);
 
             delete ql;
             return 0;
@@ -162,7 +162,7 @@ protected:
 
         ql->append(*tptr);
 
-        sipReleaseInstance(t, sipClass_KService, state);
+        sipReleaseType(t, sipType_KService, state);
     }
  
     *sipCppPtr = ql;

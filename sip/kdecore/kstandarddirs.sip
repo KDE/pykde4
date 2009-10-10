@@ -81,6 +81,9 @@ public:
 
 private:
                             KStandardDirs (const KStandardDirs&);
-};   // KStandardDirs
+public:
+    ~KStandardDirs ();
+};
+// KStandardDirs
 
 

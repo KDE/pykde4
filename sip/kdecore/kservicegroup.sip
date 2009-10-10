@@ -30,9 +30,9 @@ class KServiceGroup : KSycocaEntry
 public:
     typedef KSharedPtr<KServiceGroup> Ptr;
 
-//ig     typedef KSharedPtr<KSycocaEntry> SPtr;
+//ig    typedef KSharedPtr<KSycocaEntry> SPtr;
 
-//ig     typedef QList<KServiceGroup::SPtr> List;
+//ig    typedef QList<KServiceGroup::SPtr> List;
 
                             KServiceGroup (const QString& name);
                             KServiceGroup (const QString& _fullpath, const QString& _relpath);
@@ -71,7 +71,7 @@ public:
 
     typedef QFlags<KServiceGroup::EntriesOption> EntriesOptions;
 
-//ig     QList<KServiceGroup::Ptr>  groupEntries (KServiceGroup::EntriesOptions options = KServiceGroup::ExcludeNoDisplay);
+//ig    QList<KServiceGroup::Ptr>  groupEntries (KServiceGroup::EntriesOptions options = KServiceGroup::ExcludeNoDisplay);
     KService::List          serviceEntries (KServiceGroup::EntriesOptions options = KServiceGroup::ExcludeNoDisplay);
     QString                 baseGroupName () const;
     QString                 directoryEntryPath () const;
@@ -82,6 +82,9 @@ public:
 
 protected:
     void                    addEntry (const KSycocaEntry::Ptr& entry);
-};   // KServiceGroup
+public:
+    ~KServiceGroup ();
+};
+// KServiceGroup
 
 

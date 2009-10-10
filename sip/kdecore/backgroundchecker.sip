@@ -55,9 +55,13 @@ protected:
     virtual QString         fetchMoreText ();
     virtual void            finishedCurrentFeed ();
     void                    slotEngineDone ();
-};   // BackgroundChecker
+public:
+    ~BackgroundChecker ();
+};
+// BackgroundChecker
 
-};   // Sonnet
+};
+// Sonnet
 
 
 

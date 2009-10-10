@@ -70,6 +70,8 @@ public:
     void                    removeFromExcludedEnvironments (const QString& environment);
     QString                 startAfter () const;
     bool                    checkAllowedEnvironment (const QString& environment) const;
-};   // KAutostart
+    ~KAutostart ();
+};
+// KAutostart
 
 

@@ -39,6 +39,10 @@ public:
     QString                 exec () const /PyName=exec_/;
     bool                    noDisplay () const;
     bool                    isSeparator () const;
-};   // KServiceAction
+    ~KServiceAction ();
+};
+// KServiceAction
 
 
+QDataStream&            operator >> (QDataStream& str, KServiceAction& act);
+QDataStream&            operator << (QDataStream& str, const KServiceAction& act);

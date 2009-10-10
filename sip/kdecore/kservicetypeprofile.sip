@@ -30,8 +30,9 @@ void                    deleteServiceTypeProfile (const QString& serviceType);
 void                    setConfigurationMode ();
 bool                    configurationMode ();
 bool                    hasProfile (const QString& serviceType);
-//ig void               clearCache ();
-};   // KServiceTypeProfile
+//ig void                    clearCache ();
+};
+// KServiceTypeProfile
 
 
 

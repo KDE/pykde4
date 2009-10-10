@@ -69,7 +69,9 @@ public:
     bool                    operator != (const KPluginInfo& rhs) const;
     bool                    operator < (const KPluginInfo& rhs) const;
     bool                    operator > (const KPluginInfo& rhs) const;
-};   // KPluginInfo
+    ~KPluginInfo ();
+};
+// KPluginInfo
 
 uint                    qHash (const KPluginInfo&);
 %ModuleHeaderCode

@@ -31,6 +31,8 @@ public:
     explicit                KTemporaryFile (const KComponentData& componentData = KGlobal::mainComponent());
     void                    setPrefix (const QString& prefix);
     void                    setSuffix (const QString& suffix);
-};   // KTemporaryFile
+    ~KTemporaryFile ();
+};
+// KTemporaryFile
 
 

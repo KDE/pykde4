@@ -43,6 +43,9 @@ protected:
 
 private:
     explicit                KFilterDev (KFilterBase* filter, bool autoDeleteFilterBase = 0);
-};   // KFilterDev
+public:
+    ~KFilterDev ();
+};
+// KFilterDev
 
 

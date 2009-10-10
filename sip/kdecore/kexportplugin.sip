@@ -27,9 +27,9 @@ class KDEPluginVerificationData
 %End
 
 
-public:
 
-    enum 
+public:
+    enum
     {
         PluginVerificationDataVersion
     };
@@ -37,6 +37,7 @@ public:
     quint8 dataVersion;
     quint32 KDEVersion;
     const char* KDEVersionString;
-};   // KDEPluginVerificationData
+};
+// KDEPluginVerificationData
 
 

@@ -25,8 +25,8 @@ class KSslKey
 #include <ktcpsocket.h>
 %End
 
-public:
 
+public:
     enum Algorithm
     {
         Rsa,
@@ -48,7 +48,9 @@ public:
     bool                    isExportable () const;
     KSslKey::KeySecrecy     secrecy () const;
     QByteArray              toDer () const;
-};   // KSslKey
+    ~KSslKey ();
+};
+// KSslKey
 
 
 class KSslCipher
@@ -70,7 +72,9 @@ public:
     int                     supportedBits () const;
     int                     usedBits () const;
     static QList<KSslCipher>  supportedCiphers ();
-};   // KSslCipher
+    ~KSslCipher ();
+};
+// KSslCipher
 
 
 class KSslError
@@ -79,8 +83,8 @@ class KSslError
 #include <ktcpsocket.h>
 %End
 
-public:
 
+public:
     enum Error
     {
         NoError,
@@ -105,7 +109,9 @@ public:
     KSslError::Error        error () const;
     QString                 errorString () const;
     QSslCertificate         certificate () const;
-};   // KSslError
+    ~KSslError ();
+};
+// KSslError
 
 
 class KTcpSocket : QIODevice
@@ -114,8 +120,8 @@ class KTcpSocket : QIODevice
 #include <ktcpsocket.h>
 %End
 
-public:
 
+public:
     enum State
     {
         UnconnectedState,
@@ -244,7 +250,9 @@ signals:
 public:
     void                    ignoreSslErrors ();
     void                    startClientEncryption ();
-};   // KTcpSocket
+    ~KTcpSocket ();
+};
+// KTcpSocket
 
 
 class KSslErrorUiData
@@ -257,6 +265,7 @@ public:
                             KSslErrorUiData ();
                             KSslErrorUiData (const KTcpSocket* socket);
                             KSslErrorUiData (const KSslErrorUiData& other);
-};   // KSslErrorUiData
+};
+// KSslErrorUiData
 
 

@@ -30,25 +30,26 @@ class KPtyDevice : QIODevice, KPty
 
 
 public:
-                         KPtyDevice (QObject* /TransferThis/ = 0);
-    virtual bool         open (QIODevice::OpenMode);
-    virtual void         close ();
-    virtual bool         isSequential () const;
-    bool                 canReadLine () const;
-    bool                 atEnd () const;
-    qint64               bytesAvailable () const;
-    qint64               bytesToWrite () const;
-    bool                 waitForBytesWritten (int = -1);
-    bool                 waitForReadyRead (int = -1);
+                            KPtyDevice (QObject* /TransferThis/ = 0);
+    virtual bool            open (QIODevice::OpenMode);
+    virtual void            close ();
+    virtual bool            isSequential () const;
+    bool                    canReadLine () const;
+    bool                    atEnd () const;
+    qint64                  bytesAvailable () const;
+    qint64                  bytesToWrite () const;
+    bool                    waitForBytesWritten (int = -1);
+    bool                    waitForReadyRead (int = -1);
 
 signals:
-    void                 readyRead ();
-    void                 readEof ();
+    void                    readyRead ();
+    void                    readEof ();
 
 protected:
-//ig    virtual qint64       readData (char*, qint64);
-//ig    virtual qint64       readLineData (char*, qint64);
-//ig    virtual qint64       writeData (const char*, qint64);
+//ig    virtual qint64          readData (char*, qint64);
+//ig    virtual qint64          readLineData (char*, qint64);
+//ig    virtual qint64          writeData (const char*, qint64);
 
-};  // class KPtyDevice
+};
+// class KPtyDevice
 

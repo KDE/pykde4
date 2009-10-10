@@ -37,7 +37,8 @@ enum MessageType
 
 void                    message (KMessage::MessageType messageType, const QString& text, const QString& caption = QString());
 void                    setMessageHandler (KMessageHandler* handler);
-};   // KMessage
+};
+// KMessage
 
 %ModuleHeaderCode
 #include <kmessage.h>
@@ -52,7 +53,9 @@ class KMessageHandler
 
 
 public:
-    virtual void            message (KMessage::MessageType type, const QString& text, const QString& caption) = 0;
-};   // KMessageHandler
+    virtual void            message (KMessage::MessageType type, const QString& text, const QString& caption)=0;
+    ~KMessageHandler ();
+};
+// KMessageHandler
 
 

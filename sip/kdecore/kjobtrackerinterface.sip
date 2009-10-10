@@ -43,6 +43,9 @@ protected:
     virtual void            processedAmount (KJob* job, KJob::Unit unit, qulonglong amount);
     virtual void            percent (KJob* job, unsigned long percent);
     virtual void            speed (KJob* job, unsigned long value);
-};   // KJobTrackerInterface
+public:
+    ~KJobTrackerInterface ();
+};
+// KJobTrackerInterface
 
 

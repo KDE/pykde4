@@ -30,25 +30,26 @@ class KPty
 
 
 public:
-                         KPty ();
-    bool                 open ();
-    void                 close ();
-    void                 closeSlave ();
-    void                 setCTty ();
-    void                 login (const char* = 0, const char* = 0);
-    void                 logout ();
-//ig     bool                 tcGetAttr (termios*) const;
-//ig     bool                 tcSetAttr (termios*);
-    bool                 setWinSize (int, int);
-    bool                 setEcho (bool);
-    const char*          ttyName () const;
-    int                  masterFd () const;
-    int                  slaveFd () const;
+                            KPty ();
+    bool                    open ();
+    void                    close ();
+    void                    closeSlave ();
+    void                    setCTty ();
+    void                    login (const char* = 0, const char* = 0);
+    void                    logout ();
+//ig    bool                    tcGetAttr (termios*) const;
+//ig    bool                    tcSetAttr (termios*);
+    bool                    setWinSize (int, int);
+    bool                    setEcho (bool);
+    const char*             ttyName () const;
+    int                     masterFd () const;
+    int                     slaveFd () const;
 
 protected:
-//ig                          KPty (KPtyPrivate*);
+//ig                            KPty (KPtyPrivate*);
 private:
-                         KPty(const KPty &other);
+                            KPty (const KPty& other);
 
-};  // class KPty
+};
+// class KPty
 

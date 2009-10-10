@@ -61,8 +61,11 @@ public:
     QString                 defaultClient () const;
     void                    setAttribute (Sonnet::Speller::Attribute attr, bool b = 1);
     bool                    testAttribute (Sonnet::Speller::Attribute attr) const;
-};   // Speller
+    ~Speller ();
+};
+// Speller
 
-};   // Sonnet
+};
+// Sonnet
 
 

@@ -29,28 +29,29 @@ class KPtyProcess : KProcess
 %End
 
 
-public:
 
+public:
     enum PtyChannelFlag
     {
-        NoChannels, 
-        StdinChannel, 
-        StdoutChannel, 
-        StderrChannel, 
-        AllOutputChannels, 
+        NoChannels,
+        StdinChannel,
+        StdoutChannel,
+        StderrChannel,
+        AllOutputChannels,
         AllChannels
     };
 
     typedef QFlags<KPtyProcess::PtyChannelFlag> PtyChannels;
-                         KPtyProcess (QObject* /TransferThis/ = 0);
-    void                 setPtyChannels (KPtyProcess::PtyChannels);
-    KPtyProcess::PtyChannels ptyChannels () const;
-    void                 setUseUtmp (bool);
-    bool                 isUseUtmp () const;
-    KPtyDevice*          pty () const;
+                            KPtyProcess (QObject* /TransferThis/ = 0);
+    void                    setPtyChannels (KPtyProcess::PtyChannels);
+    KPtyProcess::PtyChannels  ptyChannels () const;
+    void                    setUseUtmp (bool);
+    bool                    isUseUtmp () const;
+    KPtyDevice*             pty () const;
 
 protected:
-    virtual void         setupChildProcess ();
+    virtual void            setupChildProcess ();
 
-};  // class KPtyProcess
+};
+// class KPtyProcess
 

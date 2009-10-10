@@ -49,9 +49,12 @@ public:
     static KServiceType::List  allServiceTypes ();
 
 protected:
-//ig                        KServiceType (KServiceTypePrivate& dd);
-//ig                        KServiceType (KServiceTypePrivate& dd, const QString& _name, const QString& _comment);
-};   // KServiceType
+//ig                            KServiceType (KServiceTypePrivate& dd);
+//ig                            KServiceType (KServiceTypePrivate& dd, const QString& _name, const QString& _comment);
+public:
+    ~KServiceType ();
+};
+// KServiceType
 
 
 

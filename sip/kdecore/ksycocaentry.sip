@@ -51,11 +51,12 @@ public:
     void                    save (QDataStream& s);
 
 protected:
-//ig                        KSycocaEntry (KSycocaEntryPrivate& d);
+//ig                            KSycocaEntry (KSycocaEntryPrivate& d);
 
-private:
-                            KSycocaEntry (const KSycocaEntry&);
-};   // KSycocaEntry
+public:
+    ~KSycocaEntry ();
+};
+// KSycocaEntry
 
 
 

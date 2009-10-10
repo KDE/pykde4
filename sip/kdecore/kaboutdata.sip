@@ -42,7 +42,10 @@ private:
     explicit                KAboutPerson (const QString& name, const QString& email);
 
 
-};   // KAboutPerson
+public:
+    ~KAboutPerson ();
+};
+// KAboutPerson
 
 
 class KAboutData
@@ -53,8 +56,8 @@ class KAboutData
 
 
 
-public:
 
+public:
     enum LicenseKey
     {
         License_Custom,
@@ -144,7 +147,9 @@ public:
     bool                    customAuthorTextEnabled () const;
     KAboutData&             setCustomAuthorText (const KLocalizedString& plainText, const KLocalizedString& richText);
     KAboutData&             unsetCustomAuthorText ();
-};   // KAboutData
+    ~KAboutData ();
+};
+// KAboutData
 
 
 
@@ -161,7 +166,10 @@ private:
     explicit                KAboutLicense (KAboutData::LicenseKey licenseType, const KAboutData* aboutData);
     explicit                KAboutLicense (const QString& pathToFile, const KAboutData* aboutData);
     explicit                KAboutLicense (const KLocalizedString& licenseText, const KAboutData* aboutData);
-};   // KAboutLicense
+public:
+    ~KAboutLicense ();
+};
+// KAboutLicense
 
 
 

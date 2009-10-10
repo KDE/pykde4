@@ -31,7 +31,8 @@ bool                    authorizeUrlAction (const QString& action, const KUrl& b
 void                    allowUrlAction (const QString& action, const KUrl& baseUrl, const KUrl& _destUrl);
 bool                    authorizeControlModule (const QString& menuId);
 QStringList             authorizeControlModules (const QStringList& menuIds);
-};   // KAuthorized
+};
+// KAuthorized
 
 
 

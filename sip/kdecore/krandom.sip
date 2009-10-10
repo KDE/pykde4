@@ -27,7 +27,8 @@ namespace KRandom
 {
 int                     random ();
 QString                 randomString (int length);
-};   // KRandom
+};
+// KRandom
 
 
 

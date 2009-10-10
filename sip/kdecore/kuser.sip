@@ -35,8 +35,8 @@ class KUser
 %End
 
 
-public:
 
+public:
     enum UIDMode
     {
         UseEffectiveUID,
@@ -47,7 +47,7 @@ public:
     explicit                KUser (K_UID uid);
     explicit                KUser (const QString& name);
     explicit                KUser (const char* name);
-//ig     explicit           KUser (const passwd* p);
+//ig    explicit                KUser (const passwd* p);
                             KUser (const KUser& user);
     bool                    operator == (const KUser& user) const;
     bool                    operator != (const KUser& user) const;
@@ -74,7 +74,9 @@ public:
     QVariant                property (KUser::UserProperty which) const;
     static QList<KUser>     allUsers ();
     static QStringList      allUserNames ();
-};   // KUser
+    ~KUser ();
+};
+// KUser
 
 
 class KUserGroup
@@ -89,7 +91,7 @@ public:
     explicit                KUserGroup (const char* name);
     explicit                KUserGroup (KUser::UIDMode mode = KUser::UseEffectiveUID);
     explicit                KUserGroup (K_GID gid);
-//ig     explicit           KUserGroup (const group* g);
+//ig    explicit                KUserGroup (const group* g);
                             KUserGroup (const KUserGroup& group);
     bool                    operator == (const KUserGroup& group) const;
     bool                    operator != (const KUserGroup& group) const;
@@ -100,6 +102,8 @@ public:
     QStringList             userNames () const;
     static QList<KUserGroup>  allGroups ();
     static QStringList      allGroupNames ();
-};   // KUserGroup
+    ~KUserGroup ();
+};
+// KUserGroup
 
 

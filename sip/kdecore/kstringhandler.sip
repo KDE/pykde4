@@ -40,7 +40,8 @@ QString                 from8Bit (const char* str);
 
 int                     naturalCompare (const QString& a, const QString& b, Qt::CaseSensitivity caseSensitivity = Qt::CaseSensitive);
 
-};   // KStringHandler
+};
+// KStringHandler
 
 
 

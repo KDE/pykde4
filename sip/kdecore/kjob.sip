@@ -27,8 +27,8 @@ class KJob : QObject
 %End
 
 
-public:
 
+public:
     enum Unit
     {
         Bytes,
@@ -51,7 +51,7 @@ public:
     KJobUiDelegate*         uiDelegate () const;
     KJob::Capabilities      capabilities () const;
     bool                    isSuspended () const;
-    virtual void            start () = 0;
+    virtual void            start ()=0;
 
     enum KillVerbosity
     {
@@ -72,7 +72,7 @@ protected:
 public:
     bool                    exec () /PyName=exec_/;
 
-    enum 
+    enum
     {
         NoError,
         KilledJobError,
@@ -104,7 +104,10 @@ protected:
     void                    emitResult ();
     void                    emitPercent (qulonglong processedAmount, qulonglong totalAmount);
     void                    emitSpeed (unsigned long speed);
-//ig                        KJob (KJobPrivate& dd, QObject* parent /TransferThis/);
-};   // KJob
+//ig                            KJob (KJobPrivate& dd, QObject* parent /TransferThis/);
+public:
+    ~KJob ();
+};
+// KJob
 
 

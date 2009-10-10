@@ -69,9 +69,12 @@ public:
 protected:
                             KMimeType (QDataStream& str, int offset);
                             KMimeType (const QString& fullpath, const QString& name, const QString& comment);
-//ig                        KMimeType (KMimeTypePrivate& dd);
-//ig                        KMimeType (KMimeTypePrivate& dd, const QString& name, const QString& comment);
-};   // KMimeType
+//ig                            KMimeType (KMimeTypePrivate& dd);
+//ig                            KMimeType (KMimeTypePrivate& dd, const QString& name, const QString& comment);
+public:
+    ~KMimeType ();
+};
+// KMimeType
 
 
 

@@ -38,7 +38,8 @@ QUdpSocket*             datagramSocket (const QString& protocol, const QString& 
 QNetworkProxy           proxyForConnection (const QString& protocol, const QString& host);
 QNetworkProxy           proxyForListening (const QString& protocol);
 QNetworkProxy           proxyForDatagram (const QString& protocol, const QString& host);
-};   // KSocketFactory
+};
+// KSocketFactory
 
 
 

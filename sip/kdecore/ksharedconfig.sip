@@ -35,7 +35,10 @@ public:
 
 private:
                             KSharedConfig (const KComponentData& componentData, const QString& file, KConfig::OpenFlags mode, const char* resourceType);
-};   // KSharedConfig
+public:
+    ~KSharedConfig ();
+};
+// KSharedConfig
 
 typedef KSharedConfig::Ptr KSharedConfigPtr;
 

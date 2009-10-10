@@ -48,7 +48,8 @@ QStringList             splitArgs (const QString& cmd, KShell::Options flags = K
 QString                 joinArgs (const QStringList& args);
 QString                 quoteArg (const QString& arg);
 QString                 tildeExpand (const QString& path);
-};   // KShell
+};
+// KShell
 
 
 

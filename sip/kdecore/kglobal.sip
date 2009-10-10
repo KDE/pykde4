@@ -25,7 +25,7 @@
 #include <kglobal.h>
 %End
 
-//ig typedef void (* KdeCleanUpFunction)();
+//ig typedef void (*KdeCleanUpFunction)();
 
 
 //ig class KCleanUpGlobalStatic;
@@ -38,7 +38,7 @@ KStandardDirs*          dirs ();
 KSharedConfigPtr        config ();
 KLocale*                locale ();
 bool                    hasLocale ();
-//ig KCharsets*         charsets ();
+//ig KCharsets*              charsets ();
 
 mode_t                  umask ();
 
@@ -58,6 +58,7 @@ enum CopyCatalogs
 };
 
 void                    setLocale (KLocale*, KGlobal::CopyCatalogs copy = KGlobal::DoCopyCatalogs);
-};   // KGlobal
+};
+// KGlobal
 
 

@@ -27,8 +27,8 @@ class KProcess : QProcess
 %End
 
 
-public:
 
+public:
     enum OutputChannelMode
     {
         SeparateChannels,
@@ -62,7 +62,10 @@ public:
     int                     pid () const;
 
 protected:
-//ig                        KProcess (KProcessPrivate* d, QObject* parent /TransferThis/);
-};   // KProcess
+//ig                            KProcess (KProcessPrivate* d, QObject* parent /TransferThis/);
+public:
+    ~KProcess ();
+};
+// KProcess
 
 

@@ -38,7 +38,10 @@ protected:
     void                    clearSubjobs ();
     virtual void            slotResult (KJob* job);
     virtual void            slotInfoMessage (KJob* job, const QString& plain, const QString& rich);
-//ig                        KCompositeJob (KCompositeJobPrivate& dd, QObject* parent /TransferThis/);
-};   // KCompositeJob
+//ig                            KCompositeJob (KCompositeJobPrivate& dd, QObject* parent /TransferThis/);
+public:
+    ~KCompositeJob ();
+};
+// KCompositeJob
 
 

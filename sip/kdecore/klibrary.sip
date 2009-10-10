@@ -28,16 +28,18 @@ class KLibrary : QLibrary
 
 
 public:
-//ig     typedef void (* void_function_ptr)();
+//ig    typedef void (*void_function_ptr)();
 
     explicit                KLibrary (QObject* parent /TransferThis/ = 0);
     explicit                KLibrary (const QString& name, const KComponentData& cData = KGlobal::mainComponent(), QObject* parent /TransferThis/ = 0);
                             KLibrary (const QString& name, int verNum, const KComponentData& cData = KGlobal::mainComponent(), QObject* parent /TransferThis/ = 0);
     KPluginFactory*         factory (const char* factoryname = 0);
-//ig     void*              resolveSymbol (const char* name);
-//ig     KLibrary::void_function_ptr  resolveFunction (const char* name);
+//ig    void*                   resolveSymbol (const char* name);
+//ig    KLibrary::void_function_ptr  resolveFunction (const char* name);
     void                    setFileName (const QString& name, const KComponentData& data = KGlobal::mainComponent());
     bool                    unload ();
-};   // KLibrary
+    ~KLibrary ();
+};
+// KLibrary
 
 

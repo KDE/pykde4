@@ -49,7 +49,9 @@ protected:
     void                    disconnectFromHostImplementation ();
 
 private:
+//force
                             KLocalSocket (const KLocalSocket&);
+//end
 };   // KLocalSocket
 
 
@@ -82,7 +84,9 @@ signals:
     void                    newConnection ();
 
 private:
+//force
                             KLocalSocketServer (const KLocalSocketServer&);
+//end
 };   // KLocalSocketServer
 
 

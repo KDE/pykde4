@@ -67,8 +67,9 @@ public:
     static QList<KAutoSaveFile*>  allStaleFiles (const QString& applicationName = QString());
 
 private:
+//force
                             KAutoSaveFile (const KAutoSaveFile&);
-
+//end
 public:
 
 //  Subclasses of QObject

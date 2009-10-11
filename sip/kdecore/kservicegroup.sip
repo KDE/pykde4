@@ -85,8 +85,9 @@ protected:
 public:
     ~KServiceGroup ();
 private:
+//force
                             KServiceGroup (const KServiceGroup& other);
-
+//end
 };
 // KServiceGroup
 

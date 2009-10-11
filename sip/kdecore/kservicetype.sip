@@ -54,7 +54,9 @@ protected:
 public:
     ~KServiceType ();
 private:
+//force
                             KServiceType (const KServiceType& other);
+//end
 };
 // KServiceType
 

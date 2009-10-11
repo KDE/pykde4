@@ -140,7 +140,9 @@ protected:
                             ~KCmdLineArgs ();
 
 private:
+//force
                             KCmdLineArgs (const KCmdLineArgs  &other);
+//end
 };   // KCmdLineArgs
 
 

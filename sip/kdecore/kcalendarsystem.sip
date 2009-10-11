@@ -107,7 +107,9 @@ protected:
     const KLocale*          locale () const;
 
 private:
+//force
                             KCalendarSystem (const KCalendarSystem&);
+//end
 };   // KCalendarSystem
 
 

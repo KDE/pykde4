@@ -137,7 +137,9 @@ class KConfigSkeletonItem
 %End
 
 private:
+//force
                             KConfigSkeletonItem (const KConfigSkeletonItem &other);
+//end
 public:
     typedef QList<KConfigSkeletonItem*> List;
 

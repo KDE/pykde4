@@ -61,7 +61,9 @@ public:
     const char*             resource () const;
 
 private:
+//force
                             KDesktopFile (const KDesktopFile&);
+//end
 };   // KDesktopFile
 
 

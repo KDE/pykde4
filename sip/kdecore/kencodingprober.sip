@@ -73,8 +73,9 @@ public:
     static QString          nameForProberType (KEncodingProber::ProberType proberType);
 
 private:
+//force
     KEncodingProber(const KEncodingProber & other);
-
+//end
 };   // KEncodingProber
 
 

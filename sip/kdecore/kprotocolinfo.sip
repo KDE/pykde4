@@ -116,7 +116,9 @@ protected:
 
 private:
                             KProtocolInfo (const QString& path);
+//force
                             KProtocolInfo (const KProtocolInfo& other); 
+//end
 public:
 
 //  Subclasses of KSycocaEntry

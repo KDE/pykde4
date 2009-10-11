@@ -84,7 +84,9 @@ protected:
 //ig                        KConfig (KConfigPrivate& d);
 
 private:
+//force
                             KConfig (const KConfig&);
+//end
 
 public:
 

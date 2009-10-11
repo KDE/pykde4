@@ -54,7 +54,9 @@ public:
     QString                 encodingForName (const QString& descriptiveName) const;
 
 private:
+//force
                             KCharsets(const KCharsets &other);
+//end
 };   // KCharsets
 
 

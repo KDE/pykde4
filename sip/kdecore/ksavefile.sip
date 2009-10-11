@@ -43,7 +43,9 @@ public:
     static bool             rcsBackupFile (const QString& filename, const QString& backupDir = QString(), const QString& backupMessage = QString());
 
 private:
+//force
                             KSaveFile (const KSaveFile&);
+//end
 };   // KSaveFile
 
 

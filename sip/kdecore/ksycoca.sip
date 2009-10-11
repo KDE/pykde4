@@ -66,7 +66,9 @@ protected:
 //ig     KSycocaFactoryList*  factories ();
 
 private:
+//force
                             KSycoca (const KSycoca&);
+//end
 
 public:
 //ig    void                    disableAutoRebuild ();

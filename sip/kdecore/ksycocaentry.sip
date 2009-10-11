@@ -56,7 +56,9 @@ protected:
 public:
     ~KSycocaEntry ();
 private:
+//force
                             KSycocaEntry (const KSycocaEntry& other);
+//end
 };
 // KSycocaEntry
 

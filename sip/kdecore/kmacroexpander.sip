@@ -33,7 +33,9 @@ class KMacroExpanderBase
 %End
 
 private:
+//force
                             KMacroExpanderBase (const KMacroExpanderBase &other);
+//end
 
 public:
     explicit                KMacroExpanderBase (QChar c = QLatin1Char('%'));
@@ -69,7 +71,9 @@ protected:
     virtual int             expandEscapedMacro (const QString& str, int pos, QStringList& ret);
     virtual bool            expandMacro (const QString& str, QStringList& ret) = 0;
 private:
+//force
                             KWordMacroExpander (const KWordMacroExpander &other);
+//end
 
 };   // KWordMacroExpander
 
@@ -89,7 +93,9 @@ public:
     explicit                KCharMacroExpander (QChar c = QLatin1Char('%'));
 
 private:
+//force
                             KCharMacroExpander (const KCharMacroExpander &other);
+//end
 
 protected:
     virtual int             expandPlainMacro (const QString& str, int pos, QStringList& ret);

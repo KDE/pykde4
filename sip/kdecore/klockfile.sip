@@ -57,7 +57,9 @@ public:
     bool                    getLockInfo (int& pid /Out/, QString& hostname /Out/, QString& appname /Out/);
 
 private:
+//force
                             KLockFile (const KLockFile &other);
+//end
 };   // KLockFile
 
 

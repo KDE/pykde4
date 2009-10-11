@@ -93,7 +93,9 @@ public:
 protected:
 //ig     QVector<ServiceTypeAndPreference>&  _k_accessServiceTypes ();
 private:
+//force
                             KService (const KService& other);
+//end
 };   // KService
 
 

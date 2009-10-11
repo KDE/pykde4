@@ -40,7 +40,9 @@ protected:
     bool                    load ();
 
 private:
+//force
                             KPluginLoader (const KPluginLoader&);
+//end
 };   // KPluginLoader
 
 

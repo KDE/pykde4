@@ -70,7 +70,9 @@ protected:
 //ig     virtual void       virtual_hook (int id, void* data);
 
 private:
+//force
                             KFilterBase (const KFilterBase&);
+//end
 };   // KFilterBase
 
 

@@ -87,7 +87,9 @@ protected:
     bool                    analyze (const char* data, int len);
     QTextDecoder*           decoder ();
 private:
+//force
                             KEncodingDetector (const KEncodingDetector &other);
+//end
 };   // KEncodingDetector
 
 

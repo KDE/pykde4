@@ -33,21 +33,24 @@ public:
     QString                 toString () const;
     QString                 toString (const KLocale* locale) const;
     bool                    isEmpty () const;
-//ig     KLocalizedString   subs (int a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
-//ig     KLocalizedString   subs (uint a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
-//ig     KLocalizedString   subs (long a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
-//ig     KLocalizedString   subs (ulong a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
-     KLocalizedString   subs (qlonglong a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
+//ig    KLocalizedString        subs (int a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
+//ig    KLocalizedString        subs (uint a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
+//ig    KLocalizedString        subs (long a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
+//ig    KLocalizedString        subs (ulong a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
+    KLocalizedString        subs (qlonglong a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
 //ig    KLocalizedString        subs (qulonglong a, int fieldWidth = 0, int base = 10, const QChar& fillChar = QLatin1Char(' ')) const;
-//ig     KLocalizedString   subs (double a, int fieldWidth = 0, char format = 'g', int precision = -1, const QChar& fillChar = QLatin1Char(' ')) const;
+//ig    KLocalizedString        subs (double a, int fieldWidth = 0, char format = 'g', int precision = -1, const QChar& fillChar = QLatin1Char(' ')) const;
     KLocalizedString        subs (QChar a, int fieldWidth = 0, const QChar& fillChar = QLatin1Char(' ')) const;
     KLocalizedString        subs (const QString& a, int fieldWidth = 0, const QChar& fillChar = QLatin1Char(' ')) const;
     KLocalizedString        inContext (const QString& key, const QString& text) const;
-//ig     static void        notifyCatalogsUpdated (const QStringList& languages, const QList<KCatalogName>& catalogs);
+//ig    static void             notifyCatalogsUpdated (const QStringList& languages, const QList<KCatalogName>& catalogs);
 
 private:
                             KLocalizedString (const char* ctxt, const char* msg, const char* plural);
-};   // KLocalizedString
+public:
+    ~KLocalizedString ();
+};
+// KLocalizedString
 
 KLocalizedString        ki18n (const char* msg);
 KLocalizedString        ki18nc (const char* ctxt, const char* msg);
@@ -107,7 +110,8 @@ QString klocalizedstring_i18n_template(KLocalizedString base, PyObject *list,int
 
 //ig class I18nTypeCheck;
 
-QString                 i18n (const char* text,...);
+//force
+QString                 i18n (const char* text, ...);
 %MethodCode
     QString result = klocalizedstring_i18n_template(ki18n(a0),a1,&sipIsErr);
     if (!sipIsErr) {
@@ -115,7 +119,7 @@ QString                 i18n (const char* text,...);
     }
 %End
 
-QString                 i18nc (const char* ctxt, const char* text,...);
+QString                 i18nc (const char* ctxt, const char* text, ...);
 %MethodCode
     QString result = klocalizedstring_i18n_template(ki18nc(a0,a1),a2,&sipIsErr);
     if (!sipIsErr) {
@@ -123,7 +127,7 @@ QString                 i18nc (const char* ctxt, const char* text,...);
     }
 %End
 
-QString                 i18np (const char*sing, const char*plur,...);
+QString                 i18np (const char* sing, const char* plur, ...);
 %MethodCode
     QString result = klocalizedstring_i18n_template(ki18np(a0,a1),a2,&sipIsErr);
     if (!sipIsErr) {
@@ -131,16 +135,54 @@ QString                 i18np (const char*sing, const char*plur,...);
     }
 %End
 
-QString                 i18ncp (const char *ctxt, const char*sing, const char*plur,...);
+QString                 i18ncp (const char* ctxt, const char* sing, const char* plur, ...);
 %MethodCode
     QString result = klocalizedstring_i18n_template(ki18ncp(a0,a1,a2),a3,&sipIsErr);
     if (!sipIsErr) {
         sipRes = new QString(result);
     }
 %End
-
+//end
 %ModuleHeaderCode
 #include <klocalizedstring.h>
 %End
 
 
+//ig QString                 i18n (const char* text);
+//ig QString                 i18n (const char* text, const A1& a1);
+//ig QString                 i18n (const char* text, const A1& a1, const A2& a2);
+//ig QString                 i18n (const char* text, const A1& a1, const A2& a2, const A3& a3);
+//ig QString                 i18n (const char* text, const A1& a1, const A2& a2, const A3& a3, const A4& a4);
+//ig QString                 i18n (const char* text, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5);
+//ig QString                 i18n (const char* text, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6);
+//ig QString                 i18n (const char* text, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7);
+//ig QString                 i18n (const char* text, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7, const A8& a8);
+//ig QString                 i18n (const char* text, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7, const A8& a8, const A9& a9);
+//ig QString                 i18nc (const char* ctxt, const char* text);
+//ig QString                 i18nc (const char* ctxt, const char* text, const A1& a1);
+//ig QString                 i18nc (const char* ctxt, const char* text, const A1& a1, const A2& a2);
+//ig QString                 i18nc (const char* ctxt, const char* text, const A1& a1, const A2& a2, const A3& a3);
+//ig QString                 i18nc (const char* ctxt, const char* text, const A1& a1, const A2& a2, const A3& a3, const A4& a4);
+//ig QString                 i18nc (const char* ctxt, const char* text, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5);
+//ig QString                 i18nc (const char* ctxt, const char* text, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6);
+//ig QString                 i18nc (const char* ctxt, const char* text, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7);
+//ig QString                 i18nc (const char* ctxt, const char* text, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7, const A8& a8);
+//ig QString                 i18nc (const char* ctxt, const char* text, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7, const A8& a8, const A9& a9);
+//ig QString                 i18np (const char* sing, const char* plur, const A1& a1);
+//ig QString                 i18np (const char* sing, const char* plur, const A1& a1, const A2& a2);
+//ig QString                 i18np (const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3);
+//ig QString                 i18np (const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3, const A4& a4);
+//ig QString                 i18np (const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5);
+//ig QString                 i18np (const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6);
+//ig QString                 i18np (const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7);
+//ig QString                 i18np (const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7, const A8& a8);
+//ig QString                 i18np (const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7, const A8& a8, const A9& a9);
+//ig QString                 i18ncp (const char* ctxt, const char* sing, const char* plur, const A1& a1);
+//ig QString                 i18ncp (const char* ctxt, const char* sing, const char* plur, const A1& a1, const A2& a2);
+//ig QString                 i18ncp (const char* ctxt, const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3);
+//ig QString                 i18ncp (const char* ctxt, const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3, const A4& a4);
+//ig QString                 i18ncp (const char* ctxt, const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5);
+//ig QString                 i18ncp (const char* ctxt, const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6);
+//ig QString                 i18ncp (const char* ctxt, const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7);
+//ig QString                 i18ncp (const char* ctxt, const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7, const A8& a8);
+//ig QString                 i18ncp (const char* ctxt, const char* sing, const char* plur, const A1& a1, const A2& a2, const A3& a3, const A4& a4, const A5& a5, const A6& a6, const A7& a7, const A8& a8, const A9& a9);

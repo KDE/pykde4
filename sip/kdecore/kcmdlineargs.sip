@@ -34,7 +34,9 @@ public:
                             KCmdLineOptions (const KCmdLineOptions& options);
     KCmdLineOptions&        add (const QByteArray& name, const KLocalizedString& description = KLocalizedString(), const QByteArray& defaultValue = QByteArray());
     KCmdLineOptions&        add (const KCmdLineOptions& options);
-};   // KCmdLineOptions
+    ~KCmdLineOptions ();
+};
+// KCmdLineOptions
 
 
 class KCmdLineArgs
@@ -47,8 +49,8 @@ extern void updatePyArgv(PyObject *argvlist,int argc,char **argv);
 %End
 
 
-public:
 
+public:
     enum StdCmdLineArg
     {
         CmdLineArgQt,
@@ -60,6 +62,7 @@ public:
 
     typedef QFlags<KCmdLineArgs::StdCmdLineArg> StdCmdLineArgs;
 
+//force
     static void             init (SIP_PYLIST argv, const QByteArray& appname, const QByteArray& catalog, const KLocalizedString& programName, const QByteArray& version, const KLocalizedString& description = KLocalizedString(), int stdargs = 3) [void (int, char**, const QByteArray&, const QByteArray&, const KLocalizedString&, const QByteArray&, const KLocalizedString& = KLocalizedString(), KCmdLineArgs::StdCmdLineArgs = 3)];
 %MethodCode
 KCmdLineArgs::StdCmdLineArgs cmdLineArgs = (KCmdLineArgs::StdCmdLineArgs) a6;
@@ -105,7 +108,7 @@ KCmdLineArgs::StdCmdLineArgs cmdLineArgs = (KCmdLineArgs::StdCmdLineArgs) a2;
 
     updatePyArgv (a0, argc, argv);
 %End
-
+//end
     static void             init (const KAboutData* about);
     static void             addStdCmdLineOptions (KCmdLineArgs::StdCmdLineArgs stdargs = KCmdLineArgs::StdCmdLineArgs(KCmdLineArgs::CmdLineArgQt|KCmdLineArgs::CmdLineArgKDE));
     static void             addCmdLineOptions (const KCmdLineOptions& options, const KLocalizedString& name = KLocalizedString(), const QByteArray& id = QByteArray(), const QByteArray& afterId = QByteArray());
@@ -131,19 +134,23 @@ KCmdLineArgs::StdCmdLineArgs cmdLineArgs = (KCmdLineArgs::StdCmdLineArgs) a2;
 
     static void             addTempFileOption ();
     static bool             isTempFileSet ();
-//ig     static int&        qtArgc ();
-//ig     static char**      qtArgv ();
+//ig    static int&             qtArgc ();
+//ig    static char**           qtArgv ();
     static const KAboutData*  aboutData ();
 
 protected:
                             KCmdLineArgs (const KCmdLineOptions& _options, const KLocalizedString& _name, const QByteArray& _id);
-                            ~KCmdLineArgs ();
+    ~KCmdLineArgs ();
 
 private:
 //force
-                            KCmdLineArgs (const KCmdLineArgs  &other);
+                            KCmdLineArgs (const KCmdLineArgs& other);
+public:
 //end
-};   // KCmdLineArgs
+//ig    static void             init (int argc, char** argv, const QByteArray& appname, const QByteArray& catalog, const KLocalizedString& programName, const QByteArray& version, const KLocalizedString& description = KLocalizedString(), KCmdLineArgs::StdCmdLineArgs stdargs = StdCmdLineArgs(CmdLineArgQt|CmdLineArgKDE));
+//ig    static void             init (int _argc, char** _argv, const KAboutData* about, KCmdLineArgs::StdCmdLineArgs stdargs = StdCmdLineArgs(CmdLineArgQt|CmdLineArgKDE));
+};
+// KCmdLineArgs
 
 
 

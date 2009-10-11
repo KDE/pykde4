@@ -316,6 +316,7 @@ public:
     {
 
     public:
+//force
                                 ItemBool (const QString& _group, const QString& _key, bool reference, bool defaultValue = 1) [(const QString& _group, const QString& _key, bool& reference, bool defaultValue = 1)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
@@ -324,6 +325,7 @@ public:
     Py_END_ALLOW_THREADS
 
 %End
+//end
 
         void                    readConfig (KConfig* config);
         void                    setProperty (const QVariant& p);
@@ -406,6 +408,7 @@ public:
     {
 
     public:
+//force
                                 ItemInt (const QString& _group, const QString& _key, qint32 reference, qint32 defaultValue = 0) [(const QString& _group, const QString& _key, qint32& reference, qint32 defaultValue = 0)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
@@ -414,6 +417,7 @@ public:
     Py_END_ALLOW_THREADS
 
 %End
+//end
 
         void                    readConfig (KConfig* config);
         void                    setProperty (const QVariant& p);
@@ -443,6 +447,7 @@ public:
     {
 
     public:
+//force
                                 ItemLongLong (const QString& _group, const QString& _key, qint64 reference, qint64 defaultValue = 0) [(const QString& _group, const QString& _key, qint64& reference, qint64 defaultValue = 0)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
@@ -450,6 +455,7 @@ public:
     sipCpp = new sipKCoreConfigSkeleton_ItemLongLong (*a0, *a1, a2, a3);
     Py_END_ALLOW_THREADS
 %End
+//end
 
         void                    readConfig (KConfig* config);
         void                    setProperty (const QVariant& p);
@@ -506,6 +512,7 @@ public:
 
 
     public:
+//force
                                 ItemEnum (const QString& _group, const QString& _key, qint32 reference, const QList<KCoreConfigSkeleton::ItemEnum::Choice> choices, qint32 defaultValue = 0) [(const QString& _group, const QString& _key, qint32& reference, const QList<KCoreConfigSkeleton::ItemEnum::Choice>& choices, qint32 defaultValue = 0)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
@@ -513,6 +520,7 @@ public:
 //    sipCpp = new sipKCoreConfigSkeleton_ItemEnum (PyItemEnum (*a0, *a1, a2, *a3, a4));
     Py_END_ALLOW_THREADS
 %End
+//end
 
         QList<KCoreConfigSkeleton::ItemEnum::Choice>  choices () const;
         QList<KCoreConfigSkeleton::ItemEnum::Choice2>  choices2 () const;
@@ -536,6 +544,7 @@ public:
     {
 
     public:
+//force
                                 ItemUInt (const QString& _group, const QString& _key, quint32 reference, quint32 defaultValue = 0) [(const QString& _group, const QString& _key, quint32& reference, quint32 defaultValue = 0)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
@@ -543,7 +552,7 @@ public:
     sipCpp = new sipKCoreConfigSkeleton_ItemUInt (*a0, *a1, a2, a3);
     Py_END_ALLOW_THREADS
 %End
-
+//end
         void                    readConfig (KConfig* config);
         void                    setProperty (const QVariant& p);
         bool                    isEqual (const QVariant& p) const;
@@ -572,6 +581,7 @@ public:
     {
 
     public:
+//force
                                 ItemULongLong (const QString& _group, const QString& _key, quint64 reference, quint64 defaultValue = 0) [(const QString& _group, const QString& _key, quint64& reference, quint64 defaultValue = 0)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
@@ -579,7 +589,7 @@ public:
     sipCpp = new sipKCoreConfigSkeleton_ItemULongLong (*a0, *a1, a2, a3);
     Py_END_ALLOW_THREADS
 %End
-
+//end
         void                    readConfig (KConfig* config);
         void                    setProperty (const QVariant& p);
         bool                    isEqual (const QVariant& p) const;
@@ -610,6 +620,7 @@ public:
     {
 
     public:
+//force
                                 ItemDouble (const QString& _group, const QString& _key, double reference, double defaultValue = 0) [(const QString& _group, const QString& _key, double& reference, double defaultValue = 0)];
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
@@ -617,7 +628,7 @@ public:
     sipCpp = new sipKCoreConfigSkeleton_ItemDouble (*a0, *a1, a2, a3);
     Py_END_ALLOW_THREADS
 %End
-
+//end
         void                    readConfig (KConfig* config);
         void                    setProperty (const QVariant& p);
         bool                    isEqual (const QVariant& p) const;

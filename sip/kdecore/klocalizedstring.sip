@@ -89,14 +89,14 @@ QString klocalizedstring_i18n_template(KLocalizedString base, PyObject *list,int
 
         } else {
           int state = 0;
-          arg = (QString *)sipForceConvertToInstance(pyarg, sipClass_QString, NULL, SIP_NOT_NONE, &state, &iserr);
+          arg = (QString *)sipForceConvertToType(pyarg, sipType_QString, NULL, SIP_NOT_NONE, &state, &iserr);
           if (iserr) {
               *sipIsErr = 1;
               return QString();
           }
   
           result = result.subs(*arg);
-          sipReleaseInstance(arg,sipClass_QString,state);
+          sipReleaseType(arg,sipType_QString,state);
           arg = 0;
           }
     }

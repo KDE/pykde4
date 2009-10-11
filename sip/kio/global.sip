@@ -210,8 +210,8 @@ KJobTrackerInterface*   getJobTracker ();
         QString bcpp = it.value ();
         PyObject *ainst = 0;
         PyObject *binst = 0;
-        if (((ainst = sipBuildResult (NULL, "N", new QString (acpp), sipClass_QString)) == NULL)
-            || ((binst = sipBuildResult (NULL, "N", new QString (bcpp), sipClass_QString)) == NULL)
+        if (((ainst = sipBuildResult (NULL, "N", new QString (acpp), sipType_QString)) == NULL)
+            || ((binst = sipBuildResult (NULL, "N", new QString (bcpp), sipType_QString)) == NULL)
             || (PyDict_SetItem (dict, ainst, binst) < 0))
         {
             Py_XDECREF (ainst);
@@ -243,8 +243,8 @@ KJobTrackerInterface*   getJobTracker ();
     {
         int iserr = 0;
 
-        acpp = (QString *)sipForceConvertToInstance(aelem, sipClass_QString, NULL, 0, NULL, &iserr);
-        bcpp = (QString *)sipForceConvertToInstance(belem, sipClass_QString, NULL, 0, NULL, &iserr);
+        acpp = (QString *)sipForceConvertToType(aelem, sipType_QString, NULL, 0, NULL, &iserr);
+        bcpp = (QString *)sipForceConvertToType(belem, sipType_QString, NULL, 0, NULL, &iserr);
 
         if (iserr)
         {

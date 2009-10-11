@@ -53,6 +53,8 @@ protected:
 //ig                            KServiceType (KServiceTypePrivate& dd, const QString& _name, const QString& _comment);
 public:
     ~KServiceType ();
+private:
+                            KServiceType (const KServiceType& other);
 };
 // KServiceType
 

@@ -84,6 +84,9 @@ protected:
     void                    addEntry (const KSycocaEntry::Ptr& entry);
 public:
     ~KServiceGroup ();
+private:
+                            KServiceGroup (const KServiceGroup& other);
+
 };
 // KServiceGroup
 

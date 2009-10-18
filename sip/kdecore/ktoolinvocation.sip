@@ -37,7 +37,7 @@ public:
     static void             invokeMailer (const QString& to, const QString& cc, const QString& bcc, const QString& subject, const QString& body, const QString& messageFile = QString(), const QStringList& attachURLs = QStringList(), const QByteArray& startup_id = QByteArray());
     static void             invokeBrowser (const QString& url, const QByteArray& startup_id = QByteArray());
     static void             invokeTerminal (const QString& command, const QString& workdir = QString(), const QByteArray& startup_id = "");
-//ig     static OrgKdeKLauncherInterface*  klauncher ();
+//ig    static OrgKdeKLauncherInterface*  klauncher ();
     static int              startServiceByName (const QString& _name, const QString& URL, QString* error = 0, QString* serviceName = 0, int* pid /Out/ = 0, const QByteArray& startup_id = QByteArray(), bool noWait = 0);
     static int              startServiceByName (const QString& _name, const QStringList& URLs = QStringList(), QString* error = 0, QString* serviceName = 0, int* pid /Out/ = 0, const QByteArray& startup_id = QByteArray(), bool noWait = 0);
     static int              startServiceByDesktopPath (const QString& _name, const QString& URL, QString* error = 0, QString* serviceName = 0, int* pid /Out/ = 0, const QByteArray& startup_id = QByteArray(), bool noWait = 0);
@@ -51,7 +51,9 @@ signals:
     void                    kapplication_hook (QStringList& env, QByteArray& startup_id);
 
 public:
-//ig    static void             invokeTerminal (const QString& command, const QByteArray& startup_id = "");
-};   // KToolInvocation
+//ig    static void             invokeTerminal (const QString& command, const QString& workdir = QString(), const QByteArray& startup_id = "");
+    ~KToolInvocation ();
+};
+// KToolInvocation
 
 

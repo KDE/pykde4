@@ -58,8 +58,11 @@ public:
 
 private:
 //force
-                            KLockFile (const KLockFile &other);
+                            KLockFile (const KLockFile& other);
 //end
-};   // KLockFile
+public:
+    ~KLockFile ();
+};
+// KLockFile
 
 

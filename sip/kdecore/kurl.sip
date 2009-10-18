@@ -24,6 +24,7 @@
 %ModuleHeaderCode
 //ctscc
 #include <kurl.h>
+#include <qurl.h>
 %End
 
 class KUrl : QUrl
@@ -227,11 +228,11 @@ sipRes = new KUrl::List();
 %End
 
 //end
+//ig        QVariant                operator QVariant () const;
+    };
+// List
 
-    };   // List
 
-
-public:
                             KUrl ();
                             KUrl (const QString& urlOrPath);
     explicit                KUrl (const char* urlOrPath);
@@ -358,19 +359,21 @@ public:
     static QString          relativeUrl (const KUrl& base_url, const KUrl& url);
     static QString          relativePath (const QString& base_dir, const QString& path, bool* isParent /Out/ = 0);
 
-public:
 
 //  Subclasses of QUrl
 
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'QUrl'
     sipClass = NULL;
 
     if (dynamic_cast<KUrl*>(sipCpp))
         sipClass = sipClass_KUrl;
 %End
 
-};   // KUrl
+//ig    QVariant                operator QVariant () const;
+    ~KUrl ();
+};
+// KUrl
 
 bool                    urlcmp (const QString& _url1, const QString& _url2);
 bool                    urlcmp (const QString& _url1, const QString& _url2, const KUrl::EqualsOptions& options);
@@ -385,5 +388,4 @@ uint                    qHash (const KUrl& kurl);
 
 
 
-uint                    qHash (const QString& key);
 

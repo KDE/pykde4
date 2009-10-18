@@ -32,13 +32,14 @@ class KTzfileTimeZone : KTimeZone
 
 
 public:
-                         KTzfileTimeZone (KTzfileTimeZoneSource*, const QString&, const QString& = QString (), float = KTimeZone::UNKNOWN , float = KTimeZone::UNKNOWN , const QString& = QString ());
-
-public:
+                            KTzfileTimeZone (KTzfileTimeZoneSource* source, const QString& name, const QString& countryCode = QString(), float latitude = KTimeZone::UNKNOWN, float longitude = KTimeZone::UNKNOWN, const QString& comment = QString());
 
 
 
-};  // class KTzfileTimeZone
+
+    ~KTzfileTimeZone ();
+};
+// class KTzfileTimeZone
 
 
 
@@ -49,11 +50,14 @@ class KTzfileTimeZoneBackend : KTimeZoneBackend
 %End
 
 public:
-                         KTzfileTimeZoneBackend (KTzfileTimeZoneSource*, const QString&, const QString&, float, float, const QString&);
-    virtual KTimeZoneBackend* clone () const;
-    virtual bool         hasTransitions (const KTimeZone*) const;
+                            KTzfileTimeZoneBackend (KTzfileTimeZoneSource* source, const QString& name, const QString& countryCode, float latitude, float longitude, const QString& comment);
+    virtual KTimeZoneBackend*  clone () const;
+    virtual bool            hasTransitions (const KTimeZone* caller) const;
 
-};  // class KTzfileTimeZoneBackend
+    ~KTzfileTimeZoneBackend ();
+    virtual QByteArray      type () const;
+};
+// class KTzfileTimeZoneBackend
 
 
 
@@ -65,17 +69,18 @@ class KTzfileTimeZoneSource : KTimeZoneSource
 
 
 public:
-                         KTzfileTimeZoneSource (const QString&);
-//ig    QString              location ();
+                            KTzfileTimeZoneSource (const QString& location);
 
-    virtual KTimeZoneData* parse (const KTimeZone&) const;
-
-
-public:
+    virtual KTimeZoneData*  parse (const KTimeZone& zone) const;
 
 
 
-};  // class KTzfileTimeZoneSource
+
+
+    ~KTzfileTimeZoneSource ();
+    QString                 location () const;
+};
+// class KTzfileTimeZoneSource
 
 
 //class KTzfileTimeZoneData : KTimeZoneData
@@ -87,7 +92,6 @@ public:
 //public:
 //                         KTzfileTimeZoneData ();
 //                         KTzfileTimeZoneData (const KTzfileTimeZoneData&);
-////igL    virtual KTimeZoneData* clone ();
 //    virtual bool         hasTransitions () const;
 
 //};  // class KTzfileTimeZoneData

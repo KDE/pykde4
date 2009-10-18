@@ -32,7 +32,7 @@ class KLocale
 public:
     explicit                KLocale (const QString& catalog, KSharedConfig::Ptr config = KSharedConfig::Ptr());
                             KLocale (const QString& catalog, const QString& language, const QString& country = QString(), KConfig* config = 0);
-//ig                        KLocale (const KLocale& rhs);
+//ig                            KLocale (const KLocale& rhs);
     void                    translateRaw (const char* msg, QString* lang, QString* trans) const;
     void                    translateRaw (const char* ctxt, const char* msg, QString* lang, QString* trans) const;
     void                    translateRaw (const char* singular, const char* plural, unsigned long n, QString* lang, QString* trans) const;
@@ -199,6 +199,9 @@ public:
     bool                    setLanguage (const QStringList& languages);
     QString                 localizedFilePath (const QString& filePath) const;
     QString                 removeAcceleratorMarker (const QString& label) const;
-};   // KLocale
+    ~KLocale ();
+    QString                 convertDigits (const QString& str, KLocale::DigitSet digitSet, bool ignoreContext = 0) const;
+};
+// KLocale
 
 

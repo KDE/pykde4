@@ -28,6 +28,7 @@
 #include <kservice.h>
 #include <kservicegroup.h>
 #include <kservicetype.h>
+#include <ksycocaentry.h>
 %End
 
 class KProtocolInfo : KSycocaEntry
@@ -61,8 +62,8 @@ public:
     class ExtraField
     {
 
-    public:
 
+    public:
         enum Type
         {
             String,
@@ -74,10 +75,10 @@ public:
                                 ExtraField (const QString& _name, KProtocolInfo::ExtraField::Type _type);
         QString name;
         KProtocolInfo::ExtraField::Type type;
-    };   // ExtraField
+    };
+// ExtraField
 
 
-public:
     typedef QList<KProtocolInfo::ExtraField> ExtraFieldList;
 
     static KProtocolInfo::ExtraFieldList  extraFields (const KUrl& url);
@@ -117,14 +118,13 @@ protected:
 private:
                             KProtocolInfo (const QString& path);
 //force
-                            KProtocolInfo (const KProtocolInfo& other); 
-//end
-public:
+                            KProtocolInfo (const KProtocolInfo& other);
 
 //  Subclasses of KSycocaEntry
 
+//end
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'KSycocaEntry'
     sipClass = NULL;
 
     if (dynamic_cast<KProtocolInfo*>(sipCpp))
@@ -135,14 +135,19 @@ public:
         sipClass = sipClass_KServiceGroup;
     else if (dynamic_cast<KServiceType*>(sipCpp))
         {
-            sipClass = sipClass_KServiceType;
-            if (dynamic_cast<KMimeType*>(sipCpp))
-                sipClass = sipClass_KMimeType;
+        sipClass = sipClass_KServiceType;
+        if (dynamic_cast<KMimeType*>(sipCpp))
+            sipClass = sipClass_KMimeType;
         }
 %End
 
-};   // KProtocolInfo
+public:
+    ~KProtocolInfo ();
+};
+// KProtocolInfo
 
 
 
 
+QDataStream&            operator >> (QDataStream& s, KProtocolInfo::ExtraField& field);
+QDataStream&            operator << (QDataStream& s, const KProtocolInfo::ExtraField& field);

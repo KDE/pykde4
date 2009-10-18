@@ -46,6 +46,9 @@ private:
 //force
                             KSaveFile (const KSaveFile&);
 //end
-};   // KSaveFile
+public:
+    ~KSaveFile ();
+};
+// KSaveFile
 
 

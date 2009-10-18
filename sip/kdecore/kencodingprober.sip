@@ -26,8 +26,8 @@ class KEncodingProber
 %End
 
 
-public:
 
+public:
     enum ProberState
     {
         FoundIt,
@@ -74,8 +74,11 @@ public:
 
 private:
 //force
-    KEncodingProber(const KEncodingProber & other);
+                            KEncodingProber (const KEncodingProber& other);
 //end
-};   // KEncodingProber
+public:
+    ~KEncodingProber ();
+};
+// KEncodingProber
 
 

@@ -26,7 +26,8 @@
 namespace KGlobal
 {
 KCharsets*              charsets ();
-};   // KGlobal
+};
+// KGlobal
 
 
 class KCharsets
@@ -55,9 +56,12 @@ public:
 
 private:
 //force
-                            KCharsets(const KCharsets &other);
+                            KCharsets (const KCharsets& other);
 //end
-};   // KCharsets
+public:
+    ~KCharsets ();
+};
+// KCharsets
 
 
 

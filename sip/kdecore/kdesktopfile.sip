@@ -44,7 +44,7 @@ public:
     QString                 readUrl () const;
     QStringList             readActions () const;
     KConfigGroup            actionGroup (const QString& group);
-//ig     const KConfigGroup  actionGroup (const QString& group) const;
+//ig    const KConfigGroup      actionGroup (const QString& group) const;
     bool                    hasActionGroup (const QString& group) const;
     bool                    hasLinkType () const;
     bool                    hasApplicationType () const;
@@ -64,6 +64,9 @@ private:
 //force
                             KDesktopFile (const KDesktopFile&);
 //end
-};   // KDesktopFile
+public:
+    ~KDesktopFile ();
+};
+// KDesktopFile
 
 

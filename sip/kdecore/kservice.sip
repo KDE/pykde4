@@ -91,12 +91,17 @@ public:
     static QString          newServicePath (bool showInMenu, const QString& suggestedName, QString* menuId = 0, const QStringList* reservedMenuIds = 0);
 
 protected:
-//ig     QVector<ServiceTypeAndPreference>&  _k_accessServiceTypes ();
+//ig    QVector<ServiceTypeAndPreference>&  _k_accessServiceTypes ();
 private:
 //force
                             KService (const KService& other);
 //end
-};   // KService
+//ig    QDataStream&            operator >> (QDataStream&, ServiceTypeAndPreference&);
+//ig    QDataStream&            operator << (QDataStream&, const ServiceTypeAndPreference&);
+public:
+    ~KService ();
+};
+// KService
 
 
 
@@ -173,5 +178,6 @@ private:
  
     return sipGetState(sipTransferObj);
 %End
+
 };
 

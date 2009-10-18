@@ -28,8 +28,8 @@ class KDateTime
 %End
 
 
-public:
 
+public:
     enum SpecType
     {
         Invalid,
@@ -66,10 +66,11 @@ public:
         static KDateTime::Spec  ClockTime ();
         static KDateTime::Spec  OffsetFromUTC (int utcOffset);
         static KDateTime::Spec  LocalZone ();
-    };   // Spec
+        ~Spec ();
+    };
+// Spec
 
 
-public:
 
     enum TimeFormat
     {
@@ -160,6 +161,12 @@ public:
     void                    detach ();
     static void             setSimulatedSystemTime (const KDateTime& newTime);
     static KDateTime        realCurrentLocalDateTime ();
-};   // KDateTime
-
-
+//ig    QDataStream&            operator << (QDataStream& out, const KDateTime& dateTime);
+//ig    QDataStream&            operator >> (QDataStream& in, KDateTime& dateTime);
+    ~KDateTime ();
+};
+// KDateTime
+//ig QDataStream&            operator << (QDataStream& out, const KDateTime::Spec& spec);
+//ig QDataStream&            operator >> (QDataStream& in, KDateTime::Spec& spec);
+//ig QDataStream&            operator << (QDataStream& out, const KDateTime& dateTime);
+//ig QDataStream&            operator >> (QDataStream& in, KDateTime& dateTime);

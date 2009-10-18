@@ -40,7 +40,10 @@ public:
 
 private:
                             KTimeZones (const KTimeZones&);
-};   // KTimeZones
+public:
+    ~KTimeZones ();
+};
+// KTimeZones
 
 
 class KTimeZone
@@ -50,8 +53,8 @@ class KTimeZone
 %End
 
 
-public:
 
+public:
     class Phase
     {
 
@@ -66,10 +69,11 @@ public:
         QList<QByteArray>       abbreviations () const;
         bool                    isDst () const;
         QString                 comment () const;
-    };   // Phase
+        ~Phase ();
+    };
+// Phase
 
 
-public:
 
     class Transition
     {
@@ -81,10 +85,11 @@ public:
         QDateTime               time () const;
         KTimeZone::Phase        phase () const;
         bool                    operator < (const KTimeZone::Transition& rhs) const;
-    };   // Transition
+        ~Transition ();
+    };
+// Transition
 
 
-public:
 
     class LeapSeconds
     {
@@ -98,11 +103,12 @@ public:
         QDateTime               dateTime () const;
         int                     leapSeconds () const;
         QString                 comment () const;
-    };   // LeapSeconds
+        ~LeapSeconds ();
+    };
+// LeapSeconds
 
 
-public:
-//ig                        KTimeZone ();
+//ig                            KTimeZone ();
     explicit                KTimeZone (const QString& name);
                             KTimeZone (const KTimeZone& tz);
     bool                    operator == (const KTimeZone& rhs) const;
@@ -129,7 +135,7 @@ public:
     QList<KTimeZone::Phase>  phases () const;
     virtual bool            hasTransitions () const;
     QList<KTimeZone::Transition>  transitions (const QDateTime& start = QDateTime(), const QDateTime& end = QDateTime()) const;
-//ig     const KTimeZone::Transition*  transition (const QDateTime& dt, const KTimeZone::Transition** secondTransition = 0, bool* validTime = 0) const;
+//ig    const KTimeZone::Transition*  transition (const QDateTime& dt, const KTimeZone::Transition** secondTransition = 0, bool* validTime = 0) const;
     int                     transitionIndex (const QDateTime& dt, int* secondIndex /Out/ = 0, bool* validTime /Out/ = 0) const;
     QList<QDateTime>        transitionTimes (const KTimeZone::Phase& phase, const QDateTime& start = QDateTime(), const QDateTime& end = QDateTime()) const;
     QList<KTimeZone::LeapSeconds>  leapSecondChanges () const;
@@ -148,15 +154,26 @@ protected:
                             KTimeZone (KTimeZoneBackend* impl);
     void                    setData (KTimeZoneData* data, KTimeZoneSource* source = 0);
 
-//force
 
 public:
+//force
     static const int InvalidOffset;
     static const time_t InvalidTime_t;
     static const float UNKNOWN;
-//end
 
-};   // KTimeZone
+//end
+    ~KTimeZone ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'KTimeZone'
+    sipClass = NULL;
+
+    if (dynamic_cast<KSystemTimeZone*>(sipCpp))
+        sipClass = sipClass_KSystemTimeZone;
+    else if (dynamic_cast<KTzfileTimeZone*>(sipCpp))
+        sipClass = sipClass_KTzfileTimeZone;
+%End
+};
+// KTimeZone
 
 
 class KTimeZoneBackend
@@ -181,7 +198,19 @@ public:
 
 protected:
                             KTimeZoneBackend (KTimeZoneSource* source, const QString& name, const QString& countryCode = QString(), float latitude = KTimeZone::UNKNOWN, float longitude = KTimeZone::UNKNOWN, const QString& comment = QString());
-};   // KTimeZoneBackend
+public:
+    ~KTimeZoneBackend ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'KTimeZoneBackend'
+    sipClass = NULL;
+
+    if (dynamic_cast<KSystemTimeZoneBackend*>(sipCpp))
+        sipClass = sipClass_KSystemTimeZoneBackend;
+    else if (dynamic_cast<KTzfileTimeZoneBackend*>(sipCpp))
+        sipClass = sipClass_KTzfileTimeZoneBackend;
+%End
+};
+// KTimeZoneBackend
 
 
 class KTimeZoneSource
@@ -200,9 +229,21 @@ protected:
     explicit                KTimeZoneSource (bool useZoneParse);
 private:
 //force
-                            KTimeZoneSource (const KTimeZoneSource &other);
+                            KTimeZoneSource (const KTimeZoneSource& other);
 //end
-};   // KTimeZoneSource
+public:
+    ~KTimeZoneSource ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'KTimeZoneSource'
+    sipClass = NULL;
+
+    if (dynamic_cast<KSystemTimeZoneSource*>(sipCpp))
+        sipClass = sipClass_KSystemTimeZoneSource;
+    else if (dynamic_cast<KTzfileTimeZoneSource*>(sipCpp))
+        sipClass = sipClass_KTzfileTimeZoneSource;
+%End
+};
+// KTimeZoneSource
 
 
 class KTimeZoneData
@@ -223,7 +264,7 @@ public:
     QList<KTimeZone::Phase>  phases () const;
     virtual bool            hasTransitions () const;
     QList<KTimeZone::Transition>  transitions (const QDateTime& start = QDateTime(), const QDateTime& end = QDateTime()) const;
-//ig     const KTimeZone::Transition*  transition (const QDateTime& dt, const KTimeZone::Transition** secondTransition = 0, bool* validTime = 0) const;
+//ig    const KTimeZone::Transition*  transition (const QDateTime& dt, const KTimeZone::Transition** secondTransition = 0, bool* validTime = 0) const;
     int                     transitionIndex (const QDateTime& dt, int* secondIndex /Out/ = 0, bool* validTime /Out/ = 0) const;
     QList<QDateTime>        transitionTimes (const KTimeZone::Phase& phase, const QDateTime& start = QDateTime(), const QDateTime& end = QDateTime()) const;
     QList<KTimeZone::LeapSeconds>  leapSecondChanges () const;
@@ -233,6 +274,15 @@ protected:
     void                    setPhases (const QList<KTimeZone::Phase>& phases, int previousUtcOffset);
     void                    setTransitions (const QList<KTimeZone::Transition>& transitions);
     void                    setLeapSecondChanges (const QList<KTimeZone::LeapSeconds>& adjusts);
-};   // KTimeZoneData
+public:
+    ~KTimeZoneData ();
+};
+// KTimeZoneData
 
 
+%ModuleHeaderCode
+//ctscc
+#include <ksystemtimezone.h>
+#include <ktimezone.h>
+#include <ktzfiletimezone.h>
+%End

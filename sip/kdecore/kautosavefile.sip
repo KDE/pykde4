@@ -42,11 +42,15 @@
 #include <kpluginfactory.h>
 #include <kpluginloader.h>
 #include <kprocess.h>
+#include <kptydevice.h>
+#include <kptyprocess.h>
 #include <ksavefile.h>
 #include <ksycoca.h>
+#include <ksystemtimezone.h>
 #include <ktcpsocket.h>
 #include <ktemporaryfile.h>
 #include <ktoolinvocation.h>
+#include <qobject.h>
 %End
 
 class KAutoSaveFile : QFile
@@ -69,30 +73,25 @@ public:
 private:
 //force
                             KAutoSaveFile (const KAutoSaveFile&);
-//end
-public:
 
 //  Subclasses of QObject
 
+//end
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'QObject'
     sipClass = NULL;
 
-    if (dynamic_cast<KAutoSaveFile*>(sipCpp))
-        sipClass = sipClass_KAutoSaveFile;
-    else if (dynamic_cast<KAutostart*>(sipCpp))
+    if (dynamic_cast<KAutostart*>(sipCpp))
         sipClass = sipClass_KAutostart;
     else if (dynamic_cast<KCoreConfigSkeleton*>(sipCpp))
         sipClass = sipClass_KCoreConfigSkeleton;
     else if (dynamic_cast<KDEDModule*>(sipCpp))
         sipClass = sipClass_KDEDModule;
-    else if (dynamic_cast<KFilterDev*>(sipCpp))
-        sipClass = sipClass_KFilterDev;
     else if (dynamic_cast<KJob*>(sipCpp))
         {
-            sipClass = sipClass_KJob;
-            if (dynamic_cast<KCompositeJob*>(sipCpp))
-                sipClass = sipClass_KCompositeJob;
+        sipClass = sipClass_KJob;
+        if (dynamic_cast<KCompositeJob*>(sipCpp))
+            sipClass = sipClass_KCompositeJob;
         }
     else if (dynamic_cast<KJobTrackerInterface*>(sipCpp))
         sipClass = sipClass_KJobTrackerInterface;
@@ -100,33 +99,48 @@ public:
         sipClass = sipClass_KJobUiDelegate;
     else if (dynamic_cast<KLibLoader*>(sipCpp))
         sipClass = sipClass_KLibLoader;
-    else if (dynamic_cast<KLibrary*>(sipCpp))
-        sipClass = sipClass_KLibrary;
-    else if (dynamic_cast<KLocalSocket*>(sipCpp))
-        sipClass = sipClass_KLocalSocket;
     else if (dynamic_cast<KLocalSocketServer*>(sipCpp))
         sipClass = sipClass_KLocalSocketServer;
     else if (dynamic_cast<KPluginFactory*>(sipCpp))
         sipClass = sipClass_KPluginFactory;
-    else if (dynamic_cast<KPluginLoader*>(sipCpp))
-        sipClass = sipClass_KPluginLoader;
-    else if (dynamic_cast<KProcess*>(sipCpp))
-        sipClass = sipClass_KProcess;
-    else if (dynamic_cast<KSaveFile*>(sipCpp))
-        sipClass = sipClass_KSaveFile;
     else if (dynamic_cast<KSycoca*>(sipCpp))
         sipClass = sipClass_KSycoca;
-    else if (dynamic_cast<KTcpSocket*>(sipCpp))
-        sipClass = sipClass_KTcpSocket;
-    else if (dynamic_cast<KTemporaryFile*>(sipCpp))
-        sipClass = sipClass_KTemporaryFile;
+    else if (dynamic_cast<KSystemTimeZones*>(sipCpp))
+        sipClass = sipClass_KSystemTimeZones;
     else if (dynamic_cast<KToolInvocation*>(sipCpp))
         sipClass = sipClass_KToolInvocation;
+    else if (dynamic_cast<KFilterDev*>(sipCpp))
+        sipClass = sipClass_KFilterDev;
+    else if (dynamic_cast<KPtyDevice*>(sipCpp))
+        sipClass = sipClass_KPtyDevice;
+    else if (dynamic_cast<KTcpSocket*>(sipCpp))
+        sipClass = sipClass_KTcpSocket;
+    else if (dynamic_cast<KLocalSocket*>(sipCpp))
+        sipClass = sipClass_KLocalSocket;
+    else if (dynamic_cast<KAutoSaveFile*>(sipCpp))
+        sipClass = sipClass_KAutoSaveFile;
+    else if (dynamic_cast<KSaveFile*>(sipCpp))
+        sipClass = sipClass_KSaveFile;
+    else if (dynamic_cast<KTemporaryFile*>(sipCpp))
+        sipClass = sipClass_KTemporaryFile;
+    else if (dynamic_cast<KProcess*>(sipCpp))
+        {
+        sipClass = sipClass_KProcess;
+        if (dynamic_cast<KPtyProcess*>(sipCpp))
+            sipClass = sipClass_KPtyProcess;
+        }
+    else if (dynamic_cast<KLibrary*>(sipCpp))
+        sipClass = sipClass_KLibrary;
+    else if (dynamic_cast<KPluginLoader*>(sipCpp))
+        sipClass = sipClass_KPluginLoader;
     else if (dynamic_cast<Sonnet::BackgroundChecker*>(sipCpp))
         sipClass = sipClass_Sonnet_BackgroundChecker;
 %End
 
-};   // KAutoSaveFile
+public:
+    ~KAutoSaveFile ();
+};
+// KAutoSaveFile
 
 
 

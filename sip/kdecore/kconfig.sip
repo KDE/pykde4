@@ -24,6 +24,7 @@
 %ModuleHeaderCode
 //ctscc
 #include <kconfig.h>
+#include <kconfigbase.h>
 #include <kconfiggroup.h>
 #include <kdesktopfile.h>
 #include <ksharedconfig.h>
@@ -36,8 +37,8 @@ class KConfig : KConfigBase
 %End
 
 
-public:
 
+public:
     enum OpenFlag
     {
         IncludeGlobals,
@@ -77,38 +78,40 @@ public:
 protected:
     virtual bool            hasGroupImpl (const QByteArray& group) const;
     virtual KConfigGroup    groupImpl (const QByteArray& b);
-//ig     virtual const KConfigGroup  groupImpl (const QByteArray& b) const;
+//ig    virtual const KConfigGroup  groupImpl (const QByteArray& b) const;
     virtual void            deleteGroupImpl (const QByteArray& group, KConfigBase::WriteConfigFlags flags = KConfigBase::Normal);
     virtual bool            isGroupImmutableImpl (const QByteArray& aGroup) const;
-//ig     virtual void       virtual_hook (int id, void* data);
-//ig                        KConfig (KConfigPrivate& d);
+//ig    virtual void            virtual_hook (int id, void* data);
+//ig                            KConfig (KConfigPrivate& d);
 
 private:
 //force
                             KConfig (const KConfig&);
-//end
 
-public:
 
 //  Subclasses of KConfigBase
 
+//end
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'KConfigBase'
     sipClass = NULL;
 
     if (dynamic_cast<KConfig*>(sipCpp))
         {
-            sipClass = sipClass_KConfig;
-            if (dynamic_cast<KDesktopFile*>(sipCpp))
-                sipClass = sipClass_KDesktopFile;
-            else if (dynamic_cast<KSharedConfig*>(sipCpp))
-                sipClass = sipClass_KSharedConfig;
+        sipClass = sipClass_KConfig;
+        if (dynamic_cast<KDesktopFile*>(sipCpp))
+            sipClass = sipClass_KDesktopFile;
+        else if (dynamic_cast<KSharedConfig*>(sipCpp))
+            sipClass = sipClass_KSharedConfig;
         }
     else if (dynamic_cast<KConfigGroup*>(sipCpp))
         sipClass = sipClass_KConfigGroup;
 %End
 
-};   // KConfig
+public:
+    ~KConfig ();
+};
+// KConfig
 
 
 

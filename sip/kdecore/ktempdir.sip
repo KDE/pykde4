@@ -23,8 +23,8 @@
 class KTempDir
 {
 %TypeHeaderCode
-#include <fixx11h.h>
 #include <ktempdir.h>
+#include <fixx11h.h>
 %End
 
 
@@ -42,7 +42,12 @@ protected:
     bool                    create (const QString& directoryPrefix, int mode);
 
 private:
+//force
                             KTempDir (const KTempDir&);
-};   // KTempDir
+//end
+public:
+    ~KTempDir ();
+};
+// KTempDir
 
 

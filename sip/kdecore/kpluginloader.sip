@@ -43,6 +43,9 @@ private:
 //force
                             KPluginLoader (const KPluginLoader&);
 //end
-};   // KPluginLoader
+public:
+    ~KPluginLoader ();
+};
+// KPluginLoader
 
 

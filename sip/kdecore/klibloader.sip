@@ -47,8 +47,9 @@ public:
     static QString          errorString (int componentLoadingError);
 
 private:
-                            ~KLibLoader ();
+    ~KLibLoader ();
                             KLibLoader ();
-};   // KLibLoader
+};
+// KLibLoader
 
 

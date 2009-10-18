@@ -37,6 +37,9 @@ public:
 private:
                             KServiceTypeTrader ();
                             KServiceTypeTrader (const KServiceTypeTrader& other);
-};   // KServiceTypeTrader
+public:
+    ~KServiceTypeTrader ();
+};
+// KServiceTypeTrader
 
 

@@ -32,16 +32,15 @@ class KMacroExpanderBase
 #include <kmacroexpander.h>
 %End
 
-private:
 //force
-                            KMacroExpanderBase (const KMacroExpanderBase &other);
-//end
+                            KMacroExpanderBase (const KMacroExpanderBase& other);
 
+//end
 public:
     explicit                KMacroExpanderBase (QChar c = QLatin1Char('%'));
     void                    expandMacros (QString& str);
     bool                    expandMacrosShellQuote (QString& str, int& pos /Out/);
-//ig     bool               expandMacrosShellQuote (QString& str);
+//ig    bool                    expandMacrosShellQuote (QString& str);
     void                    setEscapeChar (QChar c);
     QChar                   escapeChar () const;
 
@@ -49,7 +48,10 @@ protected:
     virtual int             expandPlainMacro (const QString& str, int pos, QStringList& ret);
     virtual int             expandEscapedMacro (const QString& str, int pos, QStringList& ret);
 
-};   // KMacroExpanderBase
+public:
+    ~KMacroExpanderBase ();
+};
+// KMacroExpanderBase
 
 %ModuleHeaderCode
 #include <kmacroexpander.h>
@@ -69,13 +71,14 @@ public:
 protected:
     virtual int             expandPlainMacro (const QString& str, int pos, QStringList& ret);
     virtual int             expandEscapedMacro (const QString& str, int pos, QStringList& ret);
-    virtual bool            expandMacro (const QString& str, QStringList& ret) = 0;
+    virtual bool            expandMacro (const QString& str, QStringList& ret)=0;
 private:
 //force
-                            KWordMacroExpander (const KWordMacroExpander &other);
-//end
+                            KWordMacroExpander (const KWordMacroExpander& other);
 
-};   // KWordMacroExpander
+//end
+};
+// KWordMacroExpander
 
 %ModuleHeaderCode
 #include <kmacroexpander.h>
@@ -94,20 +97,19 @@ public:
 
 private:
 //force
-                            KCharMacroExpander (const KCharMacroExpander &other);
-//end
+                            KCharMacroExpander (const KCharMacroExpander& other);
 
+//end
 protected:
     virtual int             expandPlainMacro (const QString& str, int pos, QStringList& ret);
     virtual int             expandEscapedMacro (const QString& str, int pos, QStringList& ret);
-    virtual bool            expandMacro (QChar chr, QStringList& ret) = 0;
+    virtual bool            expandMacro (QChar chr, QStringList& ret)=0;
 
-public:
 
 //  Subclasses of KMacroExpanderBase
 
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'KMacroExpanderBase'
     sipClass = NULL;
 
     if (dynamic_cast<KCharMacroExpander*>(sipCpp))
@@ -116,7 +118,8 @@ public:
         sipClass = sipClass_KWordMacroExpander;
 %End
 
-};   // KCharMacroExpander
+};
+// KCharMacroExpander
 
 namespace KMacroExpander
 {
@@ -128,7 +131,8 @@ QString                 expandMacros (const QString& str, const QHash<QChar,QStr
 QString                 expandMacros (const QString& str, const QHash<QString,QStringList>& map, QChar c = QLatin1Char('%'));
 QString                 expandMacrosShellQuote (const QString& str, const QHash<QChar,QStringList>& map, QChar c = QLatin1Char('%'));
 QString                 expandMacrosShellQuote (const QString& str, const QHash<QString,QStringList>& map, QChar c = QLatin1Char('%'));
-};   // KMacroExpander
+};
+// KMacroExpander
 
 
 

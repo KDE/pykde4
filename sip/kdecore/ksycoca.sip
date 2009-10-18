@@ -31,8 +31,8 @@ class KSycoca : QObject
 protected:
     explicit                KSycoca (bool);
 
-public:
 
+public:
     enum DatabaseType
     {
         LocalDatabase,
@@ -63,15 +63,18 @@ signals:
     void                    databaseChanged (const QStringList& changedResources);
 
 protected:
-//ig     KSycocaFactoryList*  factories ();
-
+//ig    KSycocaFactoryList*     factories ();
+//ig    QDataStream*&           stream ();
 private:
 //force
                             KSycoca (const KSycoca&);
-//end
 
+//end
 public:
 //ig    void                    disableAutoRebuild ();
-};   // KSycoca
+//ig    void                    addFactory (KSycocaFactory*);
+    ~KSycoca ();
+};
+// KSycoca
 
 

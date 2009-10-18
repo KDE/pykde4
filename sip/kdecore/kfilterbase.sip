@@ -32,18 +32,18 @@ public:
                             KFilterBase ();
     void                    setDevice (QIODevice* dev, bool autodelete = 0);
     QIODevice*              device ();
-    virtual void            init (int mode) = 0;
-    virtual int             mode () const = 0;
+    virtual void            init (int mode)=0;
+    virtual int             mode () const=0;
     virtual void            terminate ();
     virtual void            reset ();
-    virtual bool            readHeader () = 0;
-    virtual bool            writeHeader (const QByteArray& filename) = 0;
-    virtual void            setOutBuffer (char* data, uint maxlen) = 0;
-    virtual void            setInBuffer (const char* data, uint size) = 0;
+    virtual bool            readHeader ()=0;
+    virtual bool            writeHeader (const QByteArray& filename)=0;
+    virtual void            setOutBuffer (char* data, uint maxlen)=0;
+    virtual void            setInBuffer (const char* data, uint size)=0;
     virtual bool            inBufferEmpty () const;
-    virtual int             inBufferAvailable () const = 0;
+    virtual int             inBufferAvailable () const=0;
     virtual bool            outBufferFull () const;
-    virtual int             outBufferAvailable () const = 0;
+    virtual int             outBufferAvailable () const=0;
 
     enum Result
     {
@@ -52,8 +52,8 @@ public:
         Error
     };
 
-    virtual KFilterBase::Result  uncompress () = 0;
-    virtual KFilterBase::Result  compress (bool finish) = 0;
+    virtual KFilterBase::Result  uncompress ()=0;
+    virtual KFilterBase::Result  compress (bool finish)=0;
 
     enum FilterFlags
     {
@@ -67,12 +67,15 @@ public:
     static KFilterBase*     findFilterByMimeType (const QString& mimeType);
 
 protected:
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 
 private:
 //force
                             KFilterBase (const KFilterBase&);
 //end
-};   // KFilterBase
+public:
+    ~KFilterBase ();
+};
+// KFilterBase
 
 

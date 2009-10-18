@@ -136,16 +136,15 @@ class KConfigSkeletonItem
 #include <kcoreconfigskeleton.h>
 %End
 
-private:
 //force
-                            KConfigSkeletonItem (const KConfigSkeletonItem &other);
+                            KConfigSkeletonItem (const KConfigSkeletonItem& other);
 //end
 public:
     typedef QList<KConfigSkeletonItem*> List;
 
     typedef QHash<QString,KConfigSkeletonItem*> Dict;
 
-//ig     typedef QHash<QString,KConfigSkeletonItem*>::Iterator DictIterator;
+//ig    typedef QHash<QString,KConfigSkeletonItem*>::Iterator DictIterator;
 
                             KConfigSkeletonItem (const QString& _group, const QString& _key);
     void                    setGroup (const QString& _group);
@@ -160,21 +159,24 @@ public:
     QString                 toolTip () const;
     void                    setWhatsThis (const QString& w);
     QString                 whatsThis () const;
-    virtual void            readConfig (KConfig*) = 0;
-    virtual void            writeConfig (KConfig*) = 0;
-    virtual void            readDefault (KConfig*) = 0;
-    virtual void            setProperty (const QVariant& p) = 0;
-    virtual bool            isEqual (const QVariant& p) const = 0;
-    virtual QVariant        property () const = 0;
+    virtual void            readConfig (KConfig*)=0;
+    virtual void            writeConfig (KConfig*)=0;
+    virtual void            readDefault (KConfig*)=0;
+    virtual void            setProperty (const QVariant& p)=0;
+    virtual bool            isEqual (const QVariant& p) const=0;
+    virtual QVariant        property () const=0;
     virtual QVariant        minValue () const;
     virtual QVariant        maxValue () const;
-    virtual void            setDefault () = 0;
-    virtual void            swapDefault () = 0;
+    virtual void            setDefault ()=0;
+    virtual void            swapDefault ()=0;
     bool                    isImmutable () const;
 
 protected:
     void                    readImmutability (const KConfigGroup& group);
-};   // KConfigSkeletonItem
+public:
+    ~KConfigSkeletonItem ();
+};
+// KConfigSkeletonItem
 
 
 //ig class KConfigSkeletonGenericItem;
@@ -187,13 +189,13 @@ class KCoreConfigSkeleton : QObject
 %End
 
 
-public:
 
+public:
     class ItemString : KConfigSkeletonItem
     {
 
-    public:
 
+    public:
         enum Type
         {
             Normal,
@@ -215,12 +217,12 @@ public:
         virtual void            setDefault ();
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
+
 //end
+    };
+// ItemString
 
-    };   // ItemString
 
-
-public:
 
     class ItemPassword : KCoreConfigSkeleton::ItemString
     {
@@ -235,12 +237,12 @@ public:
         virtual void            setDefault ();
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
+
 //end
+    };
+// ItemPassword
 
-    };   // ItemPassword
 
-
-public:
 
     class ItemPath : KCoreConfigSkeleton::ItemString
     {
@@ -255,12 +257,12 @@ public:
         virtual void            setDefault ();
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
+
 //end
+    };
+// ItemPath
 
-    };   // ItemPath
 
-
-public:
 
     class ItemUrl : KConfigSkeletonItem
     {
@@ -280,12 +282,12 @@ public:
         virtual void            setDefault ();
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
+
 //end
+    };
+// ItemUrl
 
-    };   // ItemUrl
 
-
-public:
 
     class ItemProperty : KConfigSkeletonItem
     {
@@ -305,12 +307,12 @@ public:
         virtual void            writeConfig (KConfig* config);
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
+
 //end
+    };
+// ItemProperty
 
-    };   // ItemProperty
 
-
-public:
 
     class ItemBool : KConfigSkeletonItem
     {
@@ -325,8 +327,8 @@ public:
     Py_END_ALLOW_THREADS
 
 %End
-//end
 
+//end
         void                    readConfig (KConfig* config);
         void                    setProperty (const QVariant& p);
         bool                    isEqual (const QVariant& p) const;
@@ -340,15 +342,14 @@ public:
         virtual void            writeConfig (KConfig* config);
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
-//end
 
 
-public:
 
 //  Subclasses of KConfigSkeletonItem
 
+//end
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'KConfigSkeletonItem'
     sipClass = NULL;
 
     if (dynamic_cast<KCoreConfigSkeleton::ItemBool*>(sipCpp))
@@ -359,9 +360,9 @@ public:
         sipClass = sipClass_KCoreConfigSkeleton_ItemDouble;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemInt*>(sipCpp))
         {
-            sipClass = sipClass_KCoreConfigSkeleton_ItemInt;
-            if (dynamic_cast<KCoreConfigSkeleton::ItemEnum*>(sipCpp))
-                sipClass = sipClass_KCoreConfigSkeleton_ItemEnum;
+        sipClass = sipClass_KCoreConfigSkeleton_ItemInt;
+        if (dynamic_cast<KCoreConfigSkeleton::ItemEnum*>(sipCpp))
+            sipClass = sipClass_KCoreConfigSkeleton_ItemEnum;
         }
     else if (dynamic_cast<KCoreConfigSkeleton::ItemIntList*>(sipCpp))
         sipClass = sipClass_KCoreConfigSkeleton_ItemIntList;
@@ -377,17 +378,17 @@ public:
         sipClass = sipClass_KCoreConfigSkeleton_ItemSize;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemString*>(sipCpp))
         {
-            sipClass = sipClass_KCoreConfigSkeleton_ItemString;
-            if (dynamic_cast<KCoreConfigSkeleton::ItemPassword*>(sipCpp))
-                sipClass = sipClass_KCoreConfigSkeleton_ItemPassword;
-            else if (dynamic_cast<KCoreConfigSkeleton::ItemPath*>(sipCpp))
-                sipClass = sipClass_KCoreConfigSkeleton_ItemPath;
+        sipClass = sipClass_KCoreConfigSkeleton_ItemString;
+        if (dynamic_cast<KCoreConfigSkeleton::ItemPassword*>(sipCpp))
+            sipClass = sipClass_KCoreConfigSkeleton_ItemPassword;
+        else if (dynamic_cast<KCoreConfigSkeleton::ItemPath*>(sipCpp))
+            sipClass = sipClass_KCoreConfigSkeleton_ItemPath;
         }
     else if (dynamic_cast<KCoreConfigSkeleton::ItemStringList*>(sipCpp))
         {
-            sipClass = sipClass_KCoreConfigSkeleton_ItemStringList;
-            if (dynamic_cast<KCoreConfigSkeleton::ItemPathList*>(sipCpp))
-                sipClass = sipClass_KCoreConfigSkeleton_ItemPathList;
+        sipClass = sipClass_KCoreConfigSkeleton_ItemStringList;
+        if (dynamic_cast<KCoreConfigSkeleton::ItemPathList*>(sipCpp))
+            sipClass = sipClass_KCoreConfigSkeleton_ItemPathList;
         }
     else if (dynamic_cast<KCoreConfigSkeleton::ItemUInt*>(sipCpp))
         sipClass = sipClass_KCoreConfigSkeleton_ItemUInt;
@@ -398,11 +399,11 @@ public:
     else if (dynamic_cast<KCoreConfigSkeleton::ItemUrlList*>(sipCpp))
         sipClass = sipClass_KCoreConfigSkeleton_ItemUrlList;
 %End
+//ig                                ItemBool (const QString& _group, const QString& _key, bool& reference, bool defaultValue = 1);
+    };
+// ItemBool
 
-    };   // ItemBool
 
-
-public:
 
     class ItemInt : KConfigSkeletonItem
     {
@@ -417,8 +418,8 @@ public:
     Py_END_ALLOW_THREADS
 
 %End
-//end
 
+//end
         void                    readConfig (KConfig* config);
         void                    setProperty (const QVariant& p);
         bool                    isEqual (const QVariant& p) const;
@@ -437,11 +438,11 @@ public:
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
 //end
+//ig                                ItemInt (const QString& _group, const QString& _key, qint32& reference, qint32 defaultValue = 0);
+    };
+// ItemInt
 
-    };   // ItemInt
 
-
-public:
 
     class ItemLongLong : KConfigSkeletonItem
     {
@@ -455,8 +456,8 @@ public:
     sipCpp = new sipKCoreConfigSkeleton_ItemLongLong (*a0, *a1, a2, a3);
     Py_END_ALLOW_THREADS
 %End
-//end
 
+//end
         void                    readConfig (KConfig* config);
         void                    setProperty (const QVariant& p);
         bool                    isEqual (const QVariant& p) const;
@@ -475,19 +476,19 @@ public:
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
 //end
+//ig                                ItemLongLong (const QString& _group, const QString& _key, qint64& reference, qint64 defaultValue = 0);
+    };
+// ItemLongLong
 
-    };   // ItemLongLong
 
-
-public:
     typedef KCoreConfigSkeleton::ItemLongLong ItemInt64;
 
 
     class ItemEnum : KCoreConfigSkeleton::ItemInt
     {
 
-    public:
 
+    public:
         class Choice
         {
 
@@ -495,10 +496,10 @@ public:
             QString name;
             QString label;
             QString whatsThis;
-        };   // Choice
+        };
+// Choice
 
 
-    public:
 
         class Choice2
         {
@@ -508,10 +509,10 @@ public:
             QString label;
             QString toolTip;
             QString whatsThis;
-        };   // Choice2
+        };
+// Choice2
 
 
-    public:
 //force
                                 ItemEnum (const QString& _group, const QString& _key, qint32 reference, const QList<KCoreConfigSkeleton::ItemEnum::Choice> choices, qint32 defaultValue = 0) [(const QString& _group, const QString& _key, qint32& reference, const QList<KCoreConfigSkeleton::ItemEnum::Choice>& choices, qint32 defaultValue = 0)];
 %MethodCode
@@ -520,8 +521,8 @@ public:
 //    sipCpp = new sipKCoreConfigSkeleton_ItemEnum (PyItemEnum (*a0, *a1, a2, *a3, a4));
     Py_END_ALLOW_THREADS
 %End
-//end
 
+//end
         QList<KCoreConfigSkeleton::ItemEnum::Choice>  choices () const;
         QList<KCoreConfigSkeleton::ItemEnum::Choice2>  choices2 () const;
         void                    readConfig (KConfig* config);
@@ -535,10 +536,12 @@ public:
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
 //end
-    };   // ItemEnum
+//ig                                ItemEnum (const QString& _group, const QString& _key, qint32& reference, const QList<Choice>& choices, qint32 defaultValue = 0);
+//ig                                ItemEnum (const QString& _group, const QString& _key, qint32& reference, const QList<Choice2>& choices, qint32 defaultValue = 0);
+    };
+// ItemEnum
 
 
-public:
 
     class ItemUInt : KConfigSkeletonItem
     {
@@ -571,11 +574,11 @@ public:
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
 //end
+//ig                                ItemUInt (const QString& _group, const QString& _key, quint32& reference, quint32 defaultValue = 0);
+    };
+// ItemUInt
 
-    };   // ItemUInt
 
-
-public:
 
     class ItemULongLong : KConfigSkeletonItem
     {
@@ -608,11 +611,11 @@ public:
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
 //end
+//ig                                ItemULongLong (const QString& _group, const QString& _key, quint64& reference, quint64 defaultValue = 0);
+    };
+// ItemULongLong
 
-    };   // ItemULongLong
 
-
-public:
     typedef KCoreConfigSkeleton::ItemULongLong ItemUInt64;
 
 
@@ -647,11 +650,11 @@ public:
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
 //end
+//ig                                ItemDouble (const QString& _group, const QString& _key, double& reference, double defaultValue = 0);
+    };
+// ItemDouble
 
-    };   // ItemDouble
 
-
-public:
 
     class ItemRect : KConfigSkeletonItem
     {
@@ -671,12 +674,12 @@ public:
         virtual void            writeConfig (KConfig* config);
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
+
 //end
+    };
+// ItemRect
 
-    };   // ItemRect
 
-
-public:
 
     class ItemPoint : KConfigSkeletonItem
     {
@@ -696,12 +699,12 @@ public:
         virtual void            writeConfig (KConfig* config);
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
+
 //end
+    };
+// ItemPoint
 
-    };   // ItemPoint
 
-
-public:
 
     class ItemSize : KConfigSkeletonItem
     {
@@ -721,12 +724,12 @@ public:
         virtual void            writeConfig (KConfig* config);
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
+
 //end
+    };
+// ItemSize
 
-    };   // ItemSize
 
-
-public:
 
     class ItemDateTime : KConfigSkeletonItem
     {
@@ -746,12 +749,12 @@ public:
         virtual void            writeConfig (KConfig* config);
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
+
 //end
+    };
+// ItemDateTime
 
-    };   // ItemDateTime
 
-
-public:
 
     class ItemStringList : KConfigSkeletonItem
     {
@@ -771,12 +774,12 @@ public:
         virtual void            writeConfig (KConfig* config);
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
+
 //end
+    };
+// ItemStringList
 
-    };   // ItemStringList
 
-
-public:
 
     class ItemPathList : KCoreConfigSkeleton::ItemStringList
     {
@@ -785,10 +788,10 @@ public:
                                 ItemPathList (const QString& _group, const QString& _key, QStringList& reference, const QStringList& defaultValue = QStringList());
         void                    readConfig (KConfig* config);
         void                    writeConfig (KConfig* config);
-    };   // ItemPathList
+    };
+// ItemPathList
 
 
-public:
 
     class ItemUrlList : KConfigSkeletonItem
     {
@@ -808,12 +811,12 @@ public:
         virtual void            setDefault ();
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
+
 //end
+    };
+// ItemUrlList
 
-    };   // ItemUrlList
 
-
-public:
 
     class ItemIntList : KConfigSkeletonItem
     {
@@ -833,12 +836,12 @@ public:
         virtual void            writeConfig (KConfig* config);
         void                    readDefault (KConfig* config);
         void                    swapDefault ();
+
 //end
+    };
+// ItemIntList
 
-    };   // ItemIntList
 
-
-public:
     explicit                KCoreConfigSkeleton (const QString& configname = QString(), QObject* parent /TransferThis/ = 0);
     explicit                KCoreConfigSkeleton (KSharedConfig::Ptr config, QObject* parent /TransferThis/ = 0);
     virtual void            setDefaults ();
@@ -922,7 +925,7 @@ public:
     KCoreConfigSkeleton::ItemStringList*  addItemStringList (const QString& name, QStringList& reference, const QStringList& defaultValue = QStringList(), const QString& key = QString());
     KCoreConfigSkeleton::ItemIntList*  addItemIntList (const QString& name, QList<int>& reference, const QList<int>& defaultValue = QList<int>(), const QString& key = QString());
     KConfig*                config ();
-//ig     const KConfig*     config () const;
+//ig    const KConfig*          config () const;
     void                    setSharedConfig (KSharedConfig::Ptr pConfig);
     KConfigSkeletonItem::List  items () const;
     bool                    isImmutable (const QString& name);
@@ -937,7 +940,10 @@ protected:
     virtual void            usrSetDefaults ();
     virtual void            usrReadConfig ();
     virtual void            usrWriteConfig ();
-};   // KCoreConfigSkeleton
+public:
+    ~KCoreConfigSkeleton ();
+};
+// KCoreConfigSkeleton
 
 
 

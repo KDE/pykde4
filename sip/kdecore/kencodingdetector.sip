@@ -27,8 +27,8 @@ class KEncodingDetector
 %End
 
 
-public:
 
+public:
     enum EncodingChoiceSource
     {
         DefaultEncoding,
@@ -88,8 +88,11 @@ protected:
     QTextDecoder*           decoder ();
 private:
 //force
-                            KEncodingDetector (const KEncodingDetector &other);
+                            KEncodingDetector (const KEncodingDetector& other);
 //end
-};   // KEncodingDetector
+public:
+    ~KEncodingDetector ();
+};
+// KEncodingDetector
 
 

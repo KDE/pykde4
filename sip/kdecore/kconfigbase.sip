@@ -27,8 +27,8 @@ class KConfigBase /Abstract/
 %End
 
 
-public:
 
+public:
     enum WriteConfigFlag
     {
         Persistent,
@@ -39,21 +39,21 @@ public:
 
     typedef QFlags<KConfigBase::WriteConfigFlag> WriteConfigFlags;
 
-    virtual QStringList     groupList () const = 0;
+    virtual QStringList     groupList () const=0;
     bool                    hasGroup (const QString& group) const;
     bool                    hasGroup (const char* group) const;
     bool                    hasGroup (const QByteArray& group) const;
     KConfigGroup            group (const QByteArray& group);
     KConfigGroup            group (const QString& group);
     KConfigGroup            group (const char* group);
-//ig     const KConfigGroup  group (const QByteArray& group) const;
-//ig     const KConfigGroup  group (const QString& group) const;
-//ig     const KConfigGroup  group (const char* group) const;
+//ig    const KConfigGroup      group (const QByteArray& group) const;
+//ig    const KConfigGroup      group (const QString& group) const;
+//ig    const KConfigGroup      group (const char* group) const;
     void                    deleteGroup (const QByteArray& group, KConfigBase::WriteConfigFlags flags = KConfigBase::Normal);
     void                    deleteGroup (const QString& group, KConfigBase::WriteConfigFlags flags = KConfigBase::Normal);
     void                    deleteGroup (const char* group, KConfigBase::WriteConfigFlags flags = KConfigBase::Normal);
-    virtual void            sync () = 0;
-    virtual void            markAsClean () = 0;
+    virtual void            sync ()=0;
+    virtual void            markAsClean ()=0;
 
     enum AccessMode
     {
@@ -62,20 +62,23 @@ public:
         ReadWrite
     };
 
-    virtual KConfigBase::AccessMode  accessMode () const = 0;
-    virtual bool            isImmutable () const = 0;
+    virtual KConfigBase::AccessMode  accessMode () const=0;
+    virtual bool            isImmutable () const=0;
     bool                    isGroupImmutable (const QByteArray& aGroup) const;
     bool                    isGroupImmutable (const QString& aGroup) const;
     bool                    isGroupImmutable (const char* aGroup) const;
 
 protected:
                             KConfigBase ();
-    virtual bool            hasGroupImpl (const QByteArray& group) const = 0;
-    virtual KConfigGroup    groupImpl (const QByteArray& b) = 0;
-//ig     virtual const KConfigGroup  groupImpl (const QByteArray& b) const = 0;
-    virtual void            deleteGroupImpl (const QByteArray& group, KConfigBase::WriteConfigFlags flags = KConfigBase::Normal) = 0;
-    virtual bool            isGroupImmutableImpl (const QByteArray& aGroup) const = 0;
-//ig     virtual void       virtual_hook (int id, void* data);
-};   // KConfigBase
+    virtual bool            hasGroupImpl (const QByteArray& group) const=0;
+    virtual KConfigGroup    groupImpl (const QByteArray& b)=0;
+//ig    virtual const KConfigGroup  groupImpl (const QByteArray& b) const=0;
+    virtual void            deleteGroupImpl (const QByteArray& group, KConfigBase::WriteConfigFlags flags = KConfigBase::Normal)=0;
+    virtual bool            isGroupImmutableImpl (const QByteArray& aGroup) const=0;
+//ig    virtual void            virtual_hook (int id, void* data);
+public:
+    ~KConfigBase ();
+};
+// KConfigBase
 
 

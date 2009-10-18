@@ -23,8 +23,9 @@
 
 namespace Sonnet
 {
-QString          detectLanguage (const QString& sentence);
-QString          defaultLanguageName ();
-};   // Sonnet
+QString                 detectLanguage (const QString& sentence);
+QString                 defaultLanguageName ();
+};
+// Sonnet
 
 

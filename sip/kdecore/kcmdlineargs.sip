@@ -145,8 +145,8 @@ protected:
 private:
 //force
                             KCmdLineArgs (const KCmdLineArgs& other);
-public:
 //end
+public:
 //ig    static void             init (int argc, char** argv, const QByteArray& appname, const QByteArray& catalog, const KLocalizedString& programName, const QByteArray& version, const KLocalizedString& description = KLocalizedString(), KCmdLineArgs::StdCmdLineArgs stdargs = StdCmdLineArgs(CmdLineArgQt|CmdLineArgKDE));
 //ig    static void             init (int _argc, char** _argv, const KAboutData* about, KCmdLineArgs::StdCmdLineArgs stdargs = StdCmdLineArgs(CmdLineArgQt|CmdLineArgKDE));
 };

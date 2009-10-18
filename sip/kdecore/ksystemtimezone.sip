@@ -32,18 +32,23 @@ class KSystemTimeZones : QObject /Abstract/
 
 
 public:
-    static KTimeZones*   timeZones ();
-    static const KTimeZones::ZoneMap zones ();
-    static KTimeZone     zone (const QString&);
-    static KTimeZone     readZone (const QString&);
-    static KTimeZone     local ();
-    static QString       zoneinfoDir ();
+    static KTimeZones*      timeZones ();
+    static const KTimeZones::ZoneMap  zones ();
+    static KTimeZone        zone (const QString& name);
+    static KTimeZone        readZone (const QString& name);
+    static KTimeZone        local ();
+    static QString          zoneinfoDir ();
 
 private:
-                         KSystemTimeZones ();
-const KSystemTimeZones &KSystemTimeZones (const KSystemTimeZones &other);
+                            KSystemTimeZones ();
 
-};  // class KSystemTimeZones
+public:
+    ~KSystemTimeZones ();
+    static KTimeZone        realLocalZone ();
+    static void             setLocalZone (const KTimeZone& tz);
+    static bool             isSimulated ();
+};
+// class KSystemTimeZones
 
 
 class KSystemTimeZone : KTimeZone
@@ -54,9 +59,11 @@ class KSystemTimeZone : KTimeZone
 
 
 public:
-                         KSystemTimeZone (KSystemTimeZoneSource*, const QString&, const QString& = QString (), float = KTimeZone::UNKNOWN , float = KTimeZone::UNKNOWN , const QString& = QString ());
+                            KSystemTimeZone (KSystemTimeZoneSource* source, const QString& name, const QString& countryCode = QString(), float latitude = KTimeZone::UNKNOWN, float longitude = KTimeZone::UNKNOWN, const QString& comment = QString());
 
-};  // class KSystemTimeZone
+    ~KSystemTimeZone ();
+};
+// class KSystemTimeZone
 
 
 class KSystemTimeZoneBackend : KTimeZoneBackend
@@ -67,15 +74,18 @@ class KSystemTimeZoneBackend : KTimeZoneBackend
 
 
 public:
-                         KSystemTimeZoneBackend (KSystemTimeZoneSource*, const QString&, const QString&, float, float, const QString&);
-    virtual KTimeZoneBackend* clone () const;
-    virtual int          offsetAtZoneTime (const KTimeZone*, const QDateTime&, int* /Out/) const;
-    virtual int          offsetAtUtc (const KTimeZone*, const QDateTime&) const;
-    virtual int          offset (const KTimeZone*, time_t) const;
-    virtual bool         isDstAtUtc (const KTimeZone*, const QDateTime&) const;
-    virtual bool         isDst (const KTimeZone*, time_t) const;
+                            KSystemTimeZoneBackend (KSystemTimeZoneSource* source, const QString& name, const QString& countryCode, float latitude, float longitude, const QString& comment);
+    virtual KTimeZoneBackend*  clone () const;
+    virtual int             offsetAtZoneTime (const KTimeZone* caller, const QDateTime& zoneDateTime, int* secondOffset) const;
+    virtual int             offsetAtUtc (const KTimeZone* caller, const QDateTime& utcDateTime) const;
+    virtual int             offset (const KTimeZone* caller, time_t t) const;
+    virtual bool            isDstAtUtc (const KTimeZone* caller, const QDateTime& utcDateTime) const;
+    virtual bool            isDst (const KTimeZone* caller, time_t t) const;
 
-};  // class KSystemTimeZoneBackend
+    ~KSystemTimeZoneBackend ();
+    virtual QByteArray      type () const;
+};
+// class KSystemTimeZoneBackend
 
 
 class KSystemTimeZoneSource : KTimeZoneSource
@@ -86,9 +96,11 @@ class KSystemTimeZoneSource : KTimeZoneSource
 
 
 public:
-                         KSystemTimeZoneSource ();
-    virtual KTimeZoneData* parse (const KTimeZone&) const;
-    static void          startParseBlock ();
-    static void          endParseBlock ();
+                            KSystemTimeZoneSource ();
+    virtual KTimeZoneData*  parse (const KTimeZone& zone) const;
+    static void             startParseBlock ();
+    static void             endParseBlock ();
 
-};  // class KSystemTimeZoneSource
+    ~KSystemTimeZoneSource ();
+};
+// class KSystemTimeZoneSource

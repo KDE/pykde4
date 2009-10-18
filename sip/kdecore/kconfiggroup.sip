@@ -37,8 +37,8 @@ public:
                             KConfigGroup ();
                             KConfigGroup (KConfigBase* master, const QString& group);
                             KConfigGroup (KConfigBase* master, const char* group);
-//ig                        KConfigGroup (const KConfigBase* master, const QString& group);
-//ig                        KConfigGroup (const KConfigBase* master, const char* group);
+//ig                            KConfigGroup (const KConfigBase* master, const QString& group);
+//ig                            KConfigGroup (const KConfigBase* master, const char* group);
                             KConfigGroup (const KSharedConfigPtr& master, const QString& group);
                             KConfigGroup (const KSharedConfigPtr& master, const char* group);
                             KConfigGroup (const KConfigGroup&);
@@ -49,7 +49,7 @@ public:
     void                    markAsClean ();
     KConfigBase::AccessMode  accessMode () const;
     KConfig*                config ();
-//ig     const KConfig*     config () const;
+//ig    const KConfig*          config () const;
     void                    changeGroup (const QString& group);
     void                    changeGroup (const char* group);
     void                    copyTo (KConfigBase* other, KConfigBase::WriteConfigFlags pFlags = KConfigBase::Normal) const;
@@ -110,9 +110,12 @@ public:
 protected:
     bool                    hasGroupImpl (const QByteArray& group) const;
     KConfigGroup            groupImpl (const QByteArray& b);
-//ig     const KConfigGroup  groupImpl (const QByteArray& b) const;
+//ig    const KConfigGroup      groupImpl (const QByteArray& b) const;
     void                    deleteGroupImpl (const QByteArray& group, KConfigBase::WriteConfigFlags flags);
     bool                    isGroupImmutableImpl (const QByteArray& aGroup) const;
-};   // KConfigGroup
+public:
+    ~KConfigGroup ();
+};
+// KConfigGroup
 
 

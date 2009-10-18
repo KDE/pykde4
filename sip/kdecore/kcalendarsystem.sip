@@ -27,8 +27,8 @@ class KCalendarSystem
 %End
 
 
-public:
 
+public:
     enum StringFormat
     {
         ShortFormat,
@@ -55,11 +55,11 @@ public:
     static QStringList      calendarSystems ();
     static QString          calendarLabel (const QString& calendarType);
     explicit                KCalendarSystem (const KLocale* locale = 0);
-    virtual QString         calendarType () const = 0;
+    virtual QString         calendarType () const=0;
     virtual QDate           epoch () const;
     virtual QDate           earliestValidDate () const;
     virtual QDate           latestValidDate () const;
-    virtual bool            isValid (int year, int month, int day) const = 0;
+    virtual bool            isValid (int year, int month, int day) const=0;
     virtual bool            isValid (const QDate& date) const;
     virtual bool            setDate (QDate& date, int year, int month, int day) const;
     virtual bool            setYMD (QDate& date, int y, int m, int d) const;
@@ -77,12 +77,12 @@ public:
     virtual int             daysInWeek (const QDate& date) const;
     virtual int             dayOfYear (const QDate& date) const;
     virtual int             dayOfWeek (const QDate& date) const;
-    virtual int             weekNumber (const QDate& date, int* yearNum /In, Out/ = 0) const;
-    virtual bool            isLeapYear (int year) const = 0;
+    virtual int             weekNumber (const QDate& date, int* yearNum /In,Out/ = 0) const;
+    virtual bool            isLeapYear (int year) const=0;
     virtual bool            isLeapYear (const QDate& date) const;
-    virtual QString         monthName (int month, int year, KCalendarSystem::MonthNameFormat format = KCalendarSystem::LongName) const = 0;
+    virtual QString         monthName (int month, int year, KCalendarSystem::MonthNameFormat format = KCalendarSystem::LongName) const=0;
     virtual QString         monthName (const QDate& date, KCalendarSystem::MonthNameFormat format = KCalendarSystem::LongName) const;
-    virtual QString         weekDayName (int weekDay, KCalendarSystem::WeekDayNameFormat format = KCalendarSystem::LongDayName) const = 0;
+    virtual QString         weekDayName (int weekDay, KCalendarSystem::WeekDayNameFormat format = KCalendarSystem::LongDayName) const=0;
     virtual QString         weekDayName (const QDate& date, KCalendarSystem::WeekDayNameFormat format = KCalendarSystem::LongDayName) const;
     virtual QString         yearString (const QDate& date, KCalendarSystem::StringFormat format = KCalendarSystem::LongFormat) const;
     virtual QString         monthString (const QDate& pDate, KCalendarSystem::StringFormat format = KCalendarSystem::LongFormat) const;
@@ -95,21 +95,24 @@ public:
     virtual QDate           readDate (const QString& intstr, const QString& format, bool* ok /Out/ = 0) const;
     virtual QDate           readDate (const QString& str, KLocale::ReadDateFlags flags, bool* ok /Out/ = 0) const;
     virtual int             weekStartDay () const;
-    virtual int             weekDayOfPray () const = 0;
-    virtual bool            isLunar () const = 0;
-    virtual bool            isLunisolar () const = 0;
-    virtual bool            isSolar () const = 0;
-    virtual bool            isProleptic () const = 0;
+    virtual int             weekDayOfPray () const=0;
+    virtual bool            isLunar () const=0;
+    virtual bool            isLunisolar () const=0;
+    virtual bool            isSolar () const=0;
+    virtual bool            isProleptic () const=0;
 
 protected:
-    virtual bool            julianDayToDate (int jd, int& year /Out/, int& month /Out/, int& day /Out/) const = 0;
-    virtual bool            dateToJulianDay (int year, int month, int day, int& jd /Out/) const = 0;
+    virtual bool            julianDayToDate (int jd, int& year /Out/, int& month /Out/, int& day /Out/) const=0;
+    virtual bool            dateToJulianDay (int year, int month, int day, int& jd /Out/) const=0;
     const KLocale*          locale () const;
 
 private:
 //force
                             KCalendarSystem (const KCalendarSystem&);
 //end
-};   // KCalendarSystem
+public:
+    ~KCalendarSystem ();
+};
+// KCalendarSystem
 
 

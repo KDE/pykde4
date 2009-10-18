@@ -35,6 +35,8 @@ public:
     unsigned long           getLong (unsigned long max);
     bool                    getBool ();
     void                    modulate (int i);
-};   // KRandomSequence
+    ~KRandomSequence ();
+};
+// KRandomSequence
 
 

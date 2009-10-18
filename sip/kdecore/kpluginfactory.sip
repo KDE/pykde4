@@ -39,17 +39,20 @@ signals:
     void                    objectCreated (QObject* object);
 
 protected:
-//ig     typedef QObject* (* CreateInstanceFunction)(QWidget*, QObject*, const QVariantList&);
+//ig    typedef QObject* (*CreateInstanceFunction)(QWidget*,QObject*,const QVariantList&);
 
-//ig     explicit           KPluginFactory (KPluginFactoryPrivate& dd, QObject* parent /TransferThis/ = 0);
+//ig    explicit                KPluginFactory (KPluginFactoryPrivate& dd, QObject* parent /TransferThis/ = 0);
     QVariantList            stringListToVariantList (const QStringList& list);
     QStringList             variantListToStringList (const QVariantList& list);
     virtual void            setupTranslations ();
     virtual QObject*        createObject (QObject* parent /Transfer/, const char* className, const QStringList& args);
-//ig     virtual KParts::Part*  createPartObject (QWidget* parentWidget, QObject* parent /Transfer/, const char* classname, const QStringList& args);
+//ig    virtual KParts::Part*   createPartObject (QWidget* parentWidget, QObject* parent /Transfer/, const char* classname, const QStringList& args);
     void                    setComponentData (const KComponentData& componentData);
     virtual QObject*        create (const char* iface, QWidget* parentWidget, QObject* parent /Transfer/, const QVariantList& args, const QString& keyword);
-};   // KPluginFactory
+public:
+    ~KPluginFactory ();
+};
+// KPluginFactory
 
 typedef KPluginFactory KLibFactory;
 

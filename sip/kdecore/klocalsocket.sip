@@ -27,8 +27,8 @@ class KLocalSocket : QTcpSocket
 %End
 
 
-public:
 
+public:
     enum LocalSocketType
     {
         UnixSocket,
@@ -52,7 +52,10 @@ private:
 //force
                             KLocalSocket (const KLocalSocket&);
 //end
-};   // KLocalSocket
+public:
+    ~KLocalSocket ();
+};
+// KLocalSocket
 
 
 class KLocalSocketServer : QObject
@@ -87,6 +90,9 @@ private:
 //force
                             KLocalSocketServer (const KLocalSocketServer&);
 //end
-};   // KLocalSocketServer
+public:
+    ~KLocalSocketServer ();
+};
+// KLocalSocketServer
 
 

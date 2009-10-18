@@ -36,6 +36,10 @@ signals:
     void                    moduleDeleted (KDEDModule*);
     void                    windowRegistered (qlonglong windowId);
     void                    windowUnregistered (qlonglong windowId);
-};   // KDEDModule
+//ig    void                    moduleRegistered (const QDBusObjectPath& path);
+public:
+    ~KDEDModule ();
+};
+// KDEDModule
 
 

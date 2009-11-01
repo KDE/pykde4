@@ -29,8 +29,8 @@ class AudioInterface : Solid::DeviceInterface
 %End
 
 
-public:
 
+public:
     enum AudioDriver
     {
         Alsa,
@@ -70,8 +70,11 @@ public:
     QString                 name () const;
     Solid::AudioInterface::AudioInterfaceTypes  deviceType () const;
     Solid::AudioInterface::SoundcardType  soundcardType () const;
-};   // AudioInterface
+    ~AudioInterface ();
+};
+// AudioInterface
 
-};   // Solid
+};
+// Solid
 
 

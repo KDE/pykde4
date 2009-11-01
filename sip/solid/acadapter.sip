@@ -36,8 +36,12 @@ public:
 
 signals:
     void                    plugStateChanged (bool newState, const QString& udi);
-};   // AcAdapter
+public:
+    ~AcAdapter ();
+};
+// AcAdapter
 
-};   // Solid
+};
+// Solid
 
 

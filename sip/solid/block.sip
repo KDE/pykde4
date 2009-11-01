@@ -35,8 +35,11 @@ public:
     int                     deviceMajor () const;
     int                     deviceMinor () const;
     QString                 device () const;
-};   // Block
+    ~Block ();
+};
+// Block
 
-};   // Solid
+};
+// Solid
 
 

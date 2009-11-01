@@ -43,9 +43,13 @@ signals:
     void                    teardownDone (Solid::ErrorType error, QVariant errorData, const QString& udi);
 
 protected:
-//ig                        StorageAccess (StorageAccessPrivate& dd, QObject* backendObject);
-};   // StorageAccess
+//ig                            StorageAccess (StorageAccessPrivate& dd, QObject* backendObject);
+public:
+    ~StorageAccess ();
+};
+// StorageAccess
 
-};   // Solid
+};
+// Solid
 
 

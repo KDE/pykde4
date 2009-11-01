@@ -29,8 +29,8 @@ class Predicate
 %End
 
 
-public:
 
+public:
     enum ComparisonOperator
     {
         Equals,
@@ -39,8 +39,10 @@ public:
 
                             Predicate ();
                             Predicate (const Solid::Predicate& other);
-//ig                        Predicate (const Solid::DeviceInterface::Type& ifaceType, const QString& property, const QVariant& value, Solid::Predicate::ComparisonOperator compOperator = Solid::Predicate::Equals);
+//ig                            Predicate (const Solid::DeviceInterface::Type& ifaceType, const QString& property, const QVariant& value, Solid::Predicate::ComparisonOperator compOperator = Solid::Predicate::Equals);
                             Predicate (const QString& ifaceName, const QString& property, const QVariant& value, Solid::Predicate::ComparisonOperator compOperator = Solid::Predicate::Equals);
+//ig    explicit                Predicate (const Solid::DeviceInterface::Type& ifaceType);
+//force
     explicit                Predicate (const Solid::DeviceInterface::Type ifaceType) [(const Solid::DeviceInterface::Type&)];
 %MethodCode
 Py_BEGIN_ALLOW_THREADS
@@ -48,6 +50,7 @@ Py_BEGIN_ALLOW_THREADS
     Py_END_ALLOW_THREADS
 %End
 
+//end
     explicit                Predicate (const QString& ifaceName);
     Solid::Predicate        operator & (const Solid::Predicate& other);
 
@@ -62,9 +65,12 @@ Py_BEGIN_ALLOW_THREADS
     QSet<Solid::DeviceInterface::Type>  usedTypes () const;
     QString                 toString () const;
     static Solid::Predicate  fromString (const QString& predicate);
-};   // Predicate
+    ~Predicate ();
+};
+// Predicate
 
-};   // Solid
+};
+// Solid
 
 
 

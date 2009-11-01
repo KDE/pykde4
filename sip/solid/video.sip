@@ -35,8 +35,11 @@ public:
     QStringList             supportedProtocols () const;
     QStringList             supportedDrivers (QString protocol = QString()) const;
     QVariant                driverHandle (const QString& driver) const;
-};   // Video
+    ~Video ();
+};
+// Video
 
-};   // Solid
+};
+// Solid
 
 

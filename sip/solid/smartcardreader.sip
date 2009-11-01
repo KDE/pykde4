@@ -24,8 +24,8 @@ class SmartCardReader : Solid::DeviceInterface
 #include <solid/smartcardreader.h>
 %End
 
-public:
 
+public:
     enum ReaderType
     {
         UnknownReaderType,
@@ -40,8 +40,11 @@ private:
 public:
     static Solid::DeviceInterface::Type  deviceInterfaceType ();
     Solid::SmartCardReader::ReaderType  readerType () const;
-};   // SmartCardReader
+    ~SmartCardReader ();
+};
+// SmartCardReader
 
-};   // Solid
+};
+// Solid
 
 

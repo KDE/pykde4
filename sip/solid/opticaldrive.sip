@@ -29,8 +29,8 @@ class OpticalDrive : Solid::StorageDrive
 %End
 
 
-public:
 
+public:
     enum MediumType
     {
         Cdr,
@@ -68,8 +68,12 @@ public:
 signals:
     void                    ejectPressed (const QString& udi);
     void                    ejectDone (Solid::ErrorType error, QVariant errorData, const QString& udi);
-};   // OpticalDrive
+public:
+    ~OpticalDrive ();
+};
+// OpticalDrive
 
-};   // Solid
+};
+// Solid
 
 

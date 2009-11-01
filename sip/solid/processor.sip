@@ -32,8 +32,8 @@ class Processor : Solid::DeviceInterface
     explicit                Processor (QObject* backendObject);
 
 
-public:
 
+public:
     enum InstructionSet
     {
         NoExtensions,
@@ -55,8 +55,11 @@ public:
     Solid::Processor::InstructionSets  instructionSets () const;
 
 
-};   // Processor
+    ~Processor ();
+};
+// Processor
 
-};   // Solid
+};
+// Solid
 
 

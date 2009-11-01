@@ -46,17 +46,19 @@ enum ManagementPolicy
 };
 
 Solid::Networking::Status  status ();
-//ig void               setConnectPolicy (Solid::Networking::ManagementPolicy policy);
+//ig void                    setConnectPolicy (Solid::Networking::ManagementPolicy policy);
 //ig Solid::Networking::ManagementPolicy  connectPolicy ();
-//ig void               setDisconnectPolicy (Solid::Networking::ManagementPolicy policy);
+//ig void                    setDisconnectPolicy (Solid::Networking::ManagementPolicy policy);
 //ig Solid::Networking::ManagementPolicy  disconnectPolicy ();
 
 //ig class Notifier;
 
 //ig Solid::Networking::Notifier*  notifier ();
-};   // Networking
+};
+// Networking
 
-};   // Solid
+};
+// Solid
 
 
 

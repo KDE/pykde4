@@ -37,8 +37,9 @@
 #include <opticaldrive.h>
 #include <portablemediaplayer.h>
 #include <processor.h>
-#include <serialinterface.h>
-#include <smartcardreader.h>
+#include <qobject.h>
+#include <solid/serialinterface.h>
+#include <solid/smartcardreader.h>
 #include <storageaccess.h>
 #include <storagedrive.h>
 #include <storagevolume.h>
@@ -55,8 +56,8 @@ class DeviceInterface : QObject
 %End
 
 
-public:
 
+public:
     enum Type
     {
         Unknown,
@@ -87,76 +88,79 @@ public:
     static Solid::DeviceInterface::Type  stringToType (const QString& type);
 
 protected:
-//ig                        DeviceInterface (DeviceInterfacePrivate& dd, QObject* backendObject);
+//ig                            DeviceInterface (DeviceInterfacePrivate& dd, QObject* backendObject);
 
-//force
 
 private:
+//force
                             DeviceInterface ();
-//end
 
 
-public:
 
 //  Subclasses of QObject
 
+//end
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'QObject'
     sipClass = NULL;
 
     if (dynamic_cast<Solid::DeviceInterface*>(sipCpp))
         {
-            sipClass = sipClass_Solid_DeviceInterface;
-            if (dynamic_cast<Solid::AcAdapter*>(sipCpp))
-                sipClass = sipClass_Solid_AcAdapter;
-            else if (dynamic_cast<Solid::AudioInterface*>(sipCpp))
-                sipClass = sipClass_Solid_AudioInterface;
-            else if (dynamic_cast<Solid::Battery*>(sipCpp))
-                sipClass = sipClass_Solid_Battery;
-            else if (dynamic_cast<Solid::Block*>(sipCpp))
-                sipClass = sipClass_Solid_Block;
-            else if (dynamic_cast<Solid::Button*>(sipCpp))
-                sipClass = sipClass_Solid_Button;
-            else if (dynamic_cast<Solid::Camera*>(sipCpp))
-                sipClass = sipClass_Solid_Camera;
-            else if (dynamic_cast<Solid::DvbInterface*>(sipCpp))
-                sipClass = sipClass_Solid_DvbInterface;
-            else if (dynamic_cast<Solid::GenericInterface*>(sipCpp))
-                sipClass = sipClass_Solid_GenericInterface;
-            else if (dynamic_cast<Solid::NetworkInterface*>(sipCpp))
-                sipClass = sipClass_Solid_NetworkInterface;
-            else if (dynamic_cast<Solid::PortableMediaPlayer*>(sipCpp))
-                sipClass = sipClass_Solid_PortableMediaPlayer;
-            else if (dynamic_cast<Solid::Processor*>(sipCpp))
-                sipClass = sipClass_Solid_Processor;
-            else if (dynamic_cast<Solid::SerialInterface*>(sipCpp))
-                sipClass = sipClass_Solid_SerialInterface;
-            else if (dynamic_cast<Solid::SmartCardReader*>(sipCpp))
-                sipClass = sipClass_Solid_SmartCardReader;
-            else if (dynamic_cast<Solid::StorageAccess*>(sipCpp))
-                sipClass = sipClass_Solid_StorageAccess;
-            else if (dynamic_cast<Solid::StorageDrive*>(sipCpp))
-                {
-                    sipClass = sipClass_Solid_StorageDrive;
-                    if (dynamic_cast<Solid::OpticalDrive*>(sipCpp))
-                        sipClass = sipClass_Solid_OpticalDrive;
-                }
-            else if (dynamic_cast<Solid::StorageVolume*>(sipCpp))
-                {
-                    sipClass = sipClass_Solid_StorageVolume;
-                    if (dynamic_cast<Solid::OpticalDisc*>(sipCpp))
-                        sipClass = sipClass_Solid_OpticalDisc;
-                }
-            else if (dynamic_cast<Solid::Video*>(sipCpp))
-                sipClass = sipClass_Solid_Video;
+        sipClass = sipClass_Solid_DeviceInterface;
+        if (dynamic_cast<Solid::AcAdapter*>(sipCpp))
+            sipClass = sipClass_Solid_AcAdapter;
+        else if (dynamic_cast<Solid::AudioInterface*>(sipCpp))
+            sipClass = sipClass_Solid_AudioInterface;
+        else if (dynamic_cast<Solid::Battery*>(sipCpp))
+            sipClass = sipClass_Solid_Battery;
+        else if (dynamic_cast<Solid::Block*>(sipCpp))
+            sipClass = sipClass_Solid_Block;
+        else if (dynamic_cast<Solid::Button*>(sipCpp))
+            sipClass = sipClass_Solid_Button;
+        else if (dynamic_cast<Solid::Camera*>(sipCpp))
+            sipClass = sipClass_Solid_Camera;
+        else if (dynamic_cast<Solid::DvbInterface*>(sipCpp))
+            sipClass = sipClass_Solid_DvbInterface;
+        else if (dynamic_cast<Solid::GenericInterface*>(sipCpp))
+            sipClass = sipClass_Solid_GenericInterface;
+        else if (dynamic_cast<Solid::NetworkInterface*>(sipCpp))
+            sipClass = sipClass_Solid_NetworkInterface;
+        else if (dynamic_cast<Solid::PortableMediaPlayer*>(sipCpp))
+            sipClass = sipClass_Solid_PortableMediaPlayer;
+        else if (dynamic_cast<Solid::Processor*>(sipCpp))
+            sipClass = sipClass_Solid_Processor;
+        else if (dynamic_cast<Solid::SerialInterface*>(sipCpp))
+            sipClass = sipClass_Solid_SerialInterface;
+        else if (dynamic_cast<Solid::SmartCardReader*>(sipCpp))
+            sipClass = sipClass_Solid_SmartCardReader;
+        else if (dynamic_cast<Solid::StorageAccess*>(sipCpp))
+            sipClass = sipClass_Solid_StorageAccess;
+        else if (dynamic_cast<Solid::StorageDrive*>(sipCpp))
+            {
+            sipClass = sipClass_Solid_StorageDrive;
+            if (dynamic_cast<Solid::OpticalDrive*>(sipCpp))
+                sipClass = sipClass_Solid_OpticalDrive;
+            }
+        else if (dynamic_cast<Solid::StorageVolume*>(sipCpp))
+            {
+            sipClass = sipClass_Solid_StorageVolume;
+            if (dynamic_cast<Solid::OpticalDisc*>(sipCpp))
+                sipClass = sipClass_Solid_OpticalDisc;
+            }
+        else if (dynamic_cast<Solid::Video*>(sipCpp))
+            sipClass = sipClass_Solid_Video;
         }
     else if (dynamic_cast<Solid::DeviceNotifier*>(sipCpp))
         sipClass = sipClass_Solid_DeviceNotifier;
 %End
 
-};   // DeviceInterface
+public:
+    ~DeviceInterface ();
+};
+// DeviceInterface
 
-};   // Solid
+};
+// Solid
 
 
 

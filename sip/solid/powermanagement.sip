@@ -44,9 +44,11 @@ bool                    stopSuppressingSleep (int cookie);
 //ig class Notifier;
 
 //ig Solid::PowerManagement::Notifier*  notifier ();
-};   // PowerManagement
+};
+// PowerManagement
 
-};   // Solid
+};
+// Solid
 
 
 

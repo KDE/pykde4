@@ -41,8 +41,11 @@ public:
 
     virtual Solid::SerialInterface::SerialType  serialType () const;
     virtual int             port () const;
-};   // SerialInterface
+    ~SerialInterface ();
+};
+// SerialInterface
 
-};   // Solid
+};
+// Solid
 
 

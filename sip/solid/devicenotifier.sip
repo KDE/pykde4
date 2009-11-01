@@ -35,8 +35,10 @@ public:
 signals:
     void                    deviceAdded (const QString& udi);
     void                    deviceRemoved (const QString& udi);
-};   // DeviceNotifier
+};
+// DeviceNotifier
 
-};   // Solid
+};
+// Solid
 
 

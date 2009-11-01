@@ -32,7 +32,8 @@ enum ErrorType
     UnauthorizedOperation
 };
 
-};   // Solid
+};
+// Solid
 
 
 

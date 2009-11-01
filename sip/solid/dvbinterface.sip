@@ -29,8 +29,8 @@ class DvbInterface : Solid::DeviceInterface
 %End
 
 
-public:
 
+public:
     enum DeviceType
     {
         DvbUnknown,
@@ -55,8 +55,11 @@ public:
     int                     deviceAdapter () const;
     Solid::DvbInterface::DeviceType  deviceType () const;
     int                     deviceIndex () const;
-};   // DvbInterface
+    ~DvbInterface ();
+};
+// DvbInterface
 
-};   // Solid
+};
+// Solid
 
 

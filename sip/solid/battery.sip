@@ -29,8 +29,8 @@ class Battery : Solid::DeviceInterface
 %End
 
 
-public:
 
+public:
     enum BatteryType
     {
         UnknownBattery,
@@ -67,8 +67,12 @@ signals:
     void                    chargePercentChanged (int value, const QString& udi);
     void                    chargeStateChanged (int newState, const QString& udi);
     void                    plugStateChanged (bool newState, const QString& udi);
-};   // Battery
+public:
+    ~Battery ();
+};
+// Battery
 
-};   // Solid
+};
+// Solid
 
 

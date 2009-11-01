@@ -29,8 +29,8 @@ class GenericInterface : Solid::DeviceInterface
 %End
 
 
-public:
 
+public:
     enum PropertyChange
     {
         PropertyModified,
@@ -49,10 +49,14 @@ public:
     bool                    propertyExists (const QString& key) const;
 
 signals:
-//ig     void               propertyChanged (const QMap<QString,int>& changes);
+//ig    void                    propertyChanged (const QMap<QString,int>& changes);
     void                    conditionRaised (const QString& condition, const QString& reason);
-};   // GenericInterface
+public:
+    ~GenericInterface ();
+};
+// GenericInterface
 
-};   // Solid
+};
+// Solid
 
 

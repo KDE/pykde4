@@ -36,8 +36,11 @@ public:
     bool                    isWireless () const;
     QString                 hwAddress () const;
     qulonglong              macAddress () const;
-};   // NetworkInterface
+    ~NetworkInterface ();
+};
+// NetworkInterface
 
-};   // Solid
+};
+// Solid
 
 

@@ -29,8 +29,8 @@ class OpticalDisc : Solid::StorageVolume
 %End
 
 
-public:
 
+public:
     enum ContentType
     {
         Audio,
@@ -77,8 +77,11 @@ public:
     bool                    isBlank () const;
     bool                    isRewritable () const;
     qulonglong              capacity () const;
-};   // OpticalDisc
+    ~OpticalDisc ();
+};
+// OpticalDisc
 
-};   // Solid
+};
+// Solid
 
 

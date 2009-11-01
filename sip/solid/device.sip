@@ -45,9 +45,12 @@ public:
     QString                 icon () const;
     bool                    isDeviceInterface (const Solid::DeviceInterface::Type& type) const;
     Solid::DeviceInterface*  asDeviceInterface (const Solid::DeviceInterface::Type& type);
-//ig     const Solid::DeviceInterface*  asDeviceInterface (const Solid::DeviceInterface::Type& type) const;
-};   // Device
+//ig    const Solid::DeviceInterface*  asDeviceInterface (const Solid::DeviceInterface::Type& type) const;
+    ~Device ();
+};
+// Device
 
-};   // Solid
+};
+// Solid
 
 

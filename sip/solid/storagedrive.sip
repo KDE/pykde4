@@ -29,8 +29,8 @@ class StorageDrive : Solid::DeviceInterface
 %End
 
 
-public:
 
+public:
     enum Bus
     {
         Ide,
@@ -67,9 +67,13 @@ public:
     bool                    isHotpluggable () const;
 
 protected:
-//ig                        StorageDrive (StorageDrivePrivate& dd, QObject* backendObject);
-};   // StorageDrive
+//ig                            StorageDrive (StorageDrivePrivate& dd, QObject* backendObject);
+public:
+    ~StorageDrive ();
+};
+// StorageDrive
 
-};   // Solid
+};
+// Solid
 
 

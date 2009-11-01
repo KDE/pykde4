@@ -29,14 +29,15 @@ class Button : Solid::DeviceInterface
 %End
 
 
-public:
 
+public:
     enum ButtonType
     {
         LidButton,
         PowerButton,
         SleepButton,
-        UnknownButtonType
+        UnknownButtonType,
+        TabletButton
     };
 
 
@@ -51,8 +52,12 @@ public:
 
 signals:
     void                    pressed (Solid::Button::ButtonType type, const QString& udi);
-};   // Button
+public:
+    ~Button ();
+};
+// Button
 
-};   // Solid
+};
+// Solid
 
 

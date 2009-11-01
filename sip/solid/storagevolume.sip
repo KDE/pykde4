@@ -29,8 +29,8 @@ class StorageVolume : Solid::DeviceInterface
 %End
 
 
-public:
 
+public:
     enum UsageType
     {
         Other,
@@ -56,9 +56,13 @@ public:
     Solid::Device           encryptedContainer () const;
 
 protected:
-//ig                        StorageVolume (StorageVolumePrivate& dd, QObject* backendObject);
-};   // StorageVolume
+//ig                            StorageVolume (StorageVolumePrivate& dd, QObject* backendObject);
+public:
+    ~StorageVolume ();
+};
+// StorageVolume
 
-};   // Solid
+};
+// Solid
 
 

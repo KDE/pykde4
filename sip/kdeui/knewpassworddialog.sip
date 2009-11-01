@@ -53,6 +53,9 @@ protected:
 
 signals:
     void                    newPassword (const QString& password);
-};   // KNewPasswordDialog
+public:
+    ~KNewPasswordDialog ();
+};
+// KNewPasswordDialog
 
 

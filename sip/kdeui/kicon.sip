@@ -24,6 +24,7 @@
 %ModuleHeaderCode
 //ctscc
 #include <kicon.h>
+#include <qicon.h>
 %End
 
 class KIcon : QIcon
@@ -40,19 +41,20 @@ public:
     explicit                KIcon (const QIcon& copy);
                             KIcon ();
 
-public:
 
 //  Subclasses of QIcon
 
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'QIcon'
     sipClass = NULL;
 
     if (dynamic_cast<KIcon*>(sipCpp))
         sipClass = sipClass_KIcon;
 %End
 
-};   // KIcon
+    ~KIcon ();
+};
+// KIcon
 
 
 

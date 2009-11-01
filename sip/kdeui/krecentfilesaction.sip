@@ -46,6 +46,9 @@ public:
 signals:
     void                    urlSelected (const KUrl& url);
     void                    recentListCleared ();
-};   // KRecentFilesAction
+public:
+    ~KRecentFilesAction ();
+};
+// KRecentFilesAction
 
 

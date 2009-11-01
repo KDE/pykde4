@@ -75,7 +75,10 @@ protected:
     virtual void            setCompletedText (const QString&, bool);
     virtual void            create (WId = 0, bool initializeWindow = 1, bool destroyOldWindow = 1);
     virtual void            wheelEvent (QWheelEvent* ev);
-    virtual QSize           minimumSizeHint() const;
-};   // KComboBox
+    virtual QSize           minimumSizeHint () const;
+public:
+    ~KComboBox ();
+};
+// KComboBox
 
 

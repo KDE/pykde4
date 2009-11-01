@@ -24,8 +24,8 @@ class KCapacityBar : QWidget
 #include <kcapacitybar.h>
 %End
 
-public:
 
+public:
     enum DrawTextMode
     {
         DrawTextInline,
@@ -51,6 +51,9 @@ public:
 protected:
     virtual void            paintEvent (QPaintEvent* event);
     virtual void            changeEvent (QEvent* event);
-};   // KCapacityBar
+public:
+    ~KCapacityBar ();
+};
+// KCapacityBar
 
 

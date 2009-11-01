@@ -32,7 +32,7 @@ public:
     void                    setModifierlessAllowed (bool allow);
     bool                    isModifierlessAllowed ();
     void                    setClearButtonsShown (bool show);
-//ig     KShortcut          shortcut () const;
+//ig    KShortcut               shortcut () const;
 
     void                    setCheckActionCollections (const QList<KActionCollection*>& actionCollections);
 
@@ -45,6 +45,8 @@ public:
     void                    setShortcut (const KShortcut& cut);
     void                    clearShortcut ();
     void                    applyStealShortcut ();
-};   // KShortcutWidget
+    ~KShortcutWidget ();
+};
+// KShortcutWidget
 
 

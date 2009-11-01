@@ -28,8 +28,8 @@ class KAction : QWidgetAction
 %End
 
 
-public:
 
+public:
     enum ShortcutType
     {
         ActiveShortcut,
@@ -70,6 +70,9 @@ public:
 signals:
     void                    triggered (Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers);
     void                    globalShortcutChanged (const QKeySequence&);
-};   // KAction
+public:
+    ~KAction ();
+};
+// KAction
 
 

@@ -28,8 +28,8 @@ class KDialog : QDialog
 %End
 
 
-public:
 
+public:
     enum ButtonCode
     {
         None,
@@ -151,10 +151,15 @@ protected:
     virtual void            keyPressEvent (QKeyEvent*);
     virtual void            slotButtonClicked (int button);
     void                    updateGeometry ();
-//ig                        KDialog (KDialogPrivate& dd, QWidget* parent /TransferThis/, Qt::WFlags flags = 0);
+//ig                            KDialog (KDialogPrivate& dd, QWidget* parent /TransferThis/, Qt::WFlags flags = 0);
 
 private:
+//force
                             KDialog (const KDialog&);
-};   // KDialog
+//end
+public:
+    ~KDialog ();
+};
+// KDialog
 
 

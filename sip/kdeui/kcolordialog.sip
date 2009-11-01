@@ -55,8 +55,13 @@ protected:
     int                     positionToCell (const QPoint& pos, bool ignoreBorders = 0) const;
 
 private:
+//force
                             KColorCells (const KColorCells&);
-};   // KColorCells
+//end
+public:
+    ~KColorCells ();
+};
+// KColorCells
 
 
 class KColorPatch : QFrame
@@ -80,8 +85,13 @@ protected:
     virtual void            dropEvent (QDropEvent*);
 
 private:
+//force
                             KColorPatch (const KColorPatch&);
-};   // KColorPatch
+//end
+public:
+    ~KColorPatch ();
+};
+// KColorPatch
 
 
 class KColorDialog : KDialog
@@ -111,7 +121,12 @@ protected:
     virtual bool            eventFilter (QObject* obj, QEvent* ev);
 
 private:
+//force
                             KColorDialog (const KColorDialog&);
-};   // KColorDialog
+//end
+public:
+    ~KColorDialog ();
+};
+// KColorDialog
 
 

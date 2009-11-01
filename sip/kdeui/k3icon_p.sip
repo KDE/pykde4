@@ -35,6 +35,8 @@ public:
     KIconLoader::Type type;
     int threshold;
     QString path;
-};   // K3Icon
+    ~K3Icon ();
+};
+// K3Icon
 
 

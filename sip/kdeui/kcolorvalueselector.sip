@@ -46,7 +46,12 @@ protected:
     virtual void            drawContents (QPainter* painter);
 
 private:
+//force
                             KColorValueSelector (const KColorValueSelector&);
-};   // KColorValueSelector
+//end
+public:
+    ~KColorValueSelector ();
+};
+// KColorValueSelector
 
 

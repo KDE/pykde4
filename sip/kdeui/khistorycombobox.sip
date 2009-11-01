@@ -50,7 +50,12 @@ protected:
     bool                    useCompletion () const;
 
 private:
+//force
                             KHistoryComboBox (const KHistoryComboBox&);
-};   // KHistoryComboBox
+//end
+public:
+    ~KHistoryComboBox ();
+};
+// KHistoryComboBox
 
 

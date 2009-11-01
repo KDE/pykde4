@@ -24,6 +24,7 @@
 %ModuleHeaderCode
 //ctscc
 #include <kconfigskeleton.h>
+#include <kcoreconfigskeleton.h>
 %End
 
 class KConfigSkeleton : KCoreConfigSkeleton
@@ -33,8 +34,8 @@ class KConfigSkeleton : KCoreConfigSkeleton
 %End
 
 
-public:
 
+public:
     class ItemColor : KConfigSkeletonItem
     {
 
@@ -45,12 +46,11 @@ public:
         bool                    isEqual (const QVariant& p) const;
         QVariant                property () const;
 
-public:
 
 //  Subclasses of KConfigSkeletonItem
 
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'KConfigSkeletonItem'
     sipClass = NULL;
 
     if (dynamic_cast<KConfigSkeleton::ItemColor*>(sipCpp))
@@ -59,10 +59,10 @@ public:
         sipClass = sipClass_KConfigSkeleton_ItemFont;
 %End
 
-    };   // ItemColor
+    };
+// ItemColor
 
 
-public:
 
     class ItemFont : KConfigSkeletonItem
     {
@@ -73,15 +73,16 @@ public:
         void                    setProperty (const QVariant& p);
         bool                    isEqual (const QVariant& p) const;
         QVariant                property () const;
-    };   // ItemFont
+    };
+// ItemFont
 
 
-public:
     explicit                KConfigSkeleton (const QString& configname = QString(), QObject* parent /TransferThis/ = 0);
     explicit                KConfigSkeleton (KSharedConfig::Ptr config, QObject* parent /TransferThis/ = 0);
     KConfigSkeleton::ItemColor*  addItemColor (const QString& name, QColor& reference, const QColor& defaultValue = QColor(128,128,128), const QString& key = QString());
     KConfigSkeleton::ItemFont*  addItemFont (const QString& name, QFont& reference, const QFont& defaultValue = QFont(), const QString& key = QString());
-};   // KConfigSkeleton
+};
+// KConfigSkeleton
 
 
 

@@ -42,9 +42,11 @@ public:
     bool                    operator == (const KShapeGesture& other) const;
     bool                    operator != (const KShapeGesture& other) const;
     uint                    hashable () const;
-};   // KShapeGesture
+    ~KShapeGesture ();
+};
+// KShapeGesture
 
-//ig uint               qHash (int);
+//ig uint                    qHash (int);
 uint                    qHash (const KShapeGesture& key);
 
 class KRockerGesture
@@ -68,7 +70,9 @@ public:
     bool                    operator == (const KRockerGesture& other) const;
     bool                    operator != (const KRockerGesture& other) const;
     uint                    hashable () const;
-};   // KRockerGesture
+    ~KRockerGesture ();
+};
+// KRockerGesture
 
 uint                    qHash (const KRockerGesture& key);
 %ModuleHeaderCode

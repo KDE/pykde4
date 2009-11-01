@@ -27,8 +27,8 @@ class KTitleWidget : QWidget
 %End
 
 
-public:
 
+public:
     enum ImageAlignment
     {
         ImageLeft,
@@ -66,7 +66,12 @@ protected:
     bool                    eventFilter (QObject* object, QEvent* event);
 
 private:
+//force
                             KTitleWidget (const KTitleWidget&);
-};   // KTitleWidget
+//end
+public:
+    ~KTitleWidget ();
+};
+// KTitleWidget
 
 

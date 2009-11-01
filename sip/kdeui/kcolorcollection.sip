@@ -54,6 +54,8 @@ public:
     int                     addColor (const QColor& newColor, const QString& newColorName = QString());
     int                     changeColor (int index, const QColor& newColor, const QString& newColorName = QString());
     int                     changeColor (const QColor& oldColor, const QColor& newColor, const QString& newColorName = QString());
-};   // KColorCollection
+    ~KColorCollection ();
+};
+// KColorCollection
 
 

@@ -32,8 +32,8 @@ class KCompletion : QObject
 %End
 
 
-public:
 
+public:
     enum CompOrder
     {
         Sorted,
@@ -57,8 +57,8 @@ public:
     bool                    ignoreCase () const;
     QStringList             allMatches ();
     QStringList             allMatches (const QString& string);
-//ig     KCompletionMatches  allWeightedMatches ();
-//ig     KCompletionMatches  allWeightedMatches (const QString& string);
+//ig    KCompletionMatches      allWeightedMatches ();
+//ig    KCompletionMatches      allWeightedMatches (const QString& string);
     virtual void            setSoundsEnabled (bool enable);
     bool                    soundsEnabled () const;
     bool                    hasMultipleMatches () const;
@@ -80,11 +80,16 @@ signals:
 protected:
     virtual void            postProcessMatch (QString* pMatch) const;
     virtual void            postProcessMatches (QStringList* pMatches) const;
-//ig     virtual void       postProcessMatches (KCompletionMatches* pMatches) const;
+//ig    virtual void            postProcessMatches (KCompletionMatches* pMatches) const;
 
 private:
+//force
                             KCompletion (const KCompletion&);
-};   // KCompletion
+//end
+public:
+    ~KCompletion ();
+};
+// KCompletion
 
 //ig typedef KSortableList<QString> KCompletionMatchesList;
 
@@ -99,8 +104,8 @@ class KCompletionBase
 %End
 
 
-public:
 
+public:
     enum KeyBindingType
     {
         TextCompletion,
@@ -125,19 +130,24 @@ public:
     bool                    setKeyBinding (KCompletionBase::KeyBindingType item, const KShortcut& key);
     KShortcut               getKeyBinding (KCompletionBase::KeyBindingType item) const;
     void                    useGlobalKeyBindings ();
-    virtual void            setCompletedText (const QString& text) = 0;
-    virtual void            setCompletedItems (const QStringList& items, bool autoSuggest = 1) = 0;
+    virtual void            setCompletedText (const QString& text)=0;
+    virtual void            setCompletedItems (const QStringList& items, bool autoSuggest = 1)=0;
     KCompletion*            compObj () const;
 
 protected:
     KCompletionBase::KeyBindingMap  getKeyBindings () const;
     void                    setDelegate (KCompletionBase* delegate);
     KCompletionBase*        delegate () const;
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 
 private:
+//force
                             KCompletionBase (const KCompletionBase&);
-};   // KCompletionBase
+//end
+public:
+    ~KCompletionBase ();
+};
+// KCompletionBase
 
 
 

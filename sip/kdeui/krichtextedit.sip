@@ -27,8 +27,8 @@ class KRichTextEdit : KTextEdit
 %End
 
 
-public:
 
+public:
     enum Mode
     {
         Plain,
@@ -76,6 +76,9 @@ signals:
 
 protected:
     virtual void            keyPressEvent (QKeyEvent* event);
-};   // KRichTextEdit
+public:
+    ~KRichTextEdit ();
+};
+// KRichTextEdit
 
 

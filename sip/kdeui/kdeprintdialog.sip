@@ -27,7 +27,8 @@ namespace KdePrint
 {
 QPrintDialog*           createPrintDialog (QPrinter* printer, const QList<QWidget*>& customTabs, QWidget* parent /Transfer/ = 0);
 QPrintDialog*           createPrintDialog (QPrinter* printer, QWidget* parent /Transfer/ = 0);
-};   // KdePrint
+};
+// KdePrint
 
 
 

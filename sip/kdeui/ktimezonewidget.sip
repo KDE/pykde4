@@ -32,6 +32,8 @@ public:
     QStringList             selection () const;
     void                    setSelected (const QString& zone, bool selected);
     static QString          displayName (const KTimeZone& zone);
-};   // KTimeZoneWidget
+    ~KTimeZoneWidget ();
+};
+// KTimeZoneWidget
 
 

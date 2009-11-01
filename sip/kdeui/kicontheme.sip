@@ -25,9 +25,10 @@ class KIconTheme
 %TypeHeaderCode
 #include <kicontheme.h>
 %End
-private:
-                            KIconTheme (const KIconTheme &other);
+//force
+                            KIconTheme (const KIconTheme& other);
 
+//end
 public:
     explicit                KIconTheme (const QString& name, const QString& appName = QString());
     QString                 name () const;
@@ -40,12 +41,12 @@ public:
     bool                    isValid () const;
     bool                    isHidden () const;
     int                     depth () const;
-//ig     int                defaultSize (KIconLoader::Group group) const;
-//ig     QList<int>         querySizes (KIconLoader::Group group) const;
-//ig     QStringList        queryIcons (int size, KIconLoader::Context context = KIconLoader::Any) const;
-//ig     QStringList        queryIconsByContext (int size, KIconLoader::Context context = KIconLoader::Any) const;
-//ig     K3Icon             iconPath (const QString& name, int size, KIconLoader::MatchType match) const;
-//ig     bool               hasContext (KIconLoader::Context context) const;
+//ig    int                     defaultSize (KIconLoader::Group group) const;
+//ig    QList<int>              querySizes (KIconLoader::Group group) const;
+//ig    QStringList             queryIcons (int size, KIconLoader::Context context = KIconLoader::Any) const;
+//ig    QStringList             queryIconsByContext (int size, KIconLoader::Context context = KIconLoader::Any) const;
+//ig    K3Icon                  iconPath (const QString& name, int size, KIconLoader::MatchType match) const;
+//ig    bool                    hasContext (KIconLoader::Context context) const;
     static QStringList      list ();
     static QString          current ();
     static void             reconfigure ();
@@ -58,6 +59,8 @@ public:
     };
 
     static void             assignIconsToContextMenu (KIconTheme::ContextMenus type, QList<QAction*> actions);
-};   // KIconTheme
+    ~KIconTheme ();
+};
+// KIconTheme
 
 

@@ -44,7 +44,12 @@ protected:
     virtual void            paintEvent (QPaintEvent* event);
 
 private:
+//force
                             KColorCombo (const KColorCombo&);
-};   // KColorCombo
+//end
+public:
+    ~KColorCombo ();
+};
+// KColorCombo
 
 

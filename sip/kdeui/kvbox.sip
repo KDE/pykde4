@@ -31,7 +31,12 @@ public:
     explicit                KVBox (QWidget* parent /TransferThis/ = 0);
 
 private:
+//force
                             KVBox (const KVBox&);
-};   // KVBox
+//end
+public:
+    ~KVBox ();
+};
+// KVBox
 
 

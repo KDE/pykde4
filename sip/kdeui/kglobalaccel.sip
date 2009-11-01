@@ -29,8 +29,8 @@ class KGlobalAccel : QObject
 %End
 
 
-public:
 
+public:
     enum actionIdFields
     {
         ComponentUnique,
@@ -57,7 +57,8 @@ public:
 
 private:
                             KGlobalAccel ();
-                            ~KGlobalAccel ();
-};   // KGlobalAccel
+    ~KGlobalAccel ();
+};
+// KGlobalAccel
 
 

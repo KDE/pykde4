@@ -39,7 +39,12 @@ protected:
     bool                    event (QEvent* e);
 
 private:
+//force
                             KFontComboBox (const KFontComboBox&);
-};   // KFontComboBox
+//end
+public:
+    ~KFontComboBox ();
+};
+// KFontComboBox
 
 

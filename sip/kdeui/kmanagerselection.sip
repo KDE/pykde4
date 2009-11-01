@@ -33,18 +33,21 @@ public:
     bool                    claim (bool force, bool force_kill = 1);
     void                    release ();
     Window                  ownerWindow () const;
-//ig     bool               filterEvent (XEvent* ev_P);
+//ig    bool                    filterEvent (XEvent* ev_P);
 
 signals:
     void                    lostOwnership ();
 
 protected:
-//ig     virtual bool       handleMessage (XEvent* ev);
+//ig    virtual bool            handleMessage (XEvent* ev);
     virtual bool            genericReply (Atom target, Atom property, Window requestor);
     virtual void            replyTargets (Atom property, Window requestor);
     virtual void            getAtoms ();
     void                    setData (long extra1, long extra2);
-};   // KSelectionOwner
+public:
+    ~KSelectionOwner ();
+};
+// KSelectionOwner
 
 
 class KSelectionWatcher : QObject
@@ -58,11 +61,14 @@ public:
     explicit                KSelectionWatcher (Atom selection, int screen = -1, QObject* parent /TransferThis/ = NULL);
     explicit                KSelectionWatcher (const char* selection, int screen = -1, QObject* parent /TransferThis/ = NULL);
     Window                  owner ();
-//ig     void               filterEvent (XEvent* ev_P);
+//ig    void                    filterEvent (XEvent* ev_P);
 
 signals:
     void                    newOwner (Window owner);
     void                    lostOwner ();
-};   // KSelectionWatcher
+public:
+    ~KSelectionWatcher ();
+};
+// KSelectionWatcher
 
 

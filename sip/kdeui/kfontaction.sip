@@ -35,6 +35,8 @@ public:
     QString                 font () const;
     void                    setFont (const QString& family);
     virtual QWidget*        createWidget (QWidget* parent /Transfer/);
-};   // KFontAction
+    ~KFontAction ();
+};
+// KFontAction
 
 

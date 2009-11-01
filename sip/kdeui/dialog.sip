@@ -50,9 +50,15 @@ signals:
 
 
 private:
+//force
                             Dialog (const Sonnet::Dialog&);
-};   // Dialog
+//end
+public:
+    ~Dialog ();
+};
+// Dialog
 
-};   // Sonnet
+};
+// Sonnet
 
 

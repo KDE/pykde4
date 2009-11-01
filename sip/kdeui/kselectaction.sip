@@ -80,7 +80,10 @@ protected:
     virtual QWidget*        createWidget (QWidget* parent /Transfer/);
     virtual void            deleteWidget (QWidget* widget);
     virtual bool            eventFilter (QObject* watched, QEvent* event);
-//ig                        KSelectAction (KSelectActionPrivate& dd, QObject* parent /TransferThis/);
-};   // KSelectAction
+//ig                            KSelectAction (KSelectActionPrivate& dd, QObject* parent /TransferThis/);
+public:
+    ~KSelectAction ();
+};
+// KSelectAction
 
 

@@ -39,11 +39,16 @@ public:
 protected:
     QSlider*                slider () const;
     void                    layout (bool deep);
-    virtual void            doLayout () = 0;
+    virtual void            doLayout ()=0;
 
 private:
+//force
                             KNumInput (const KNumInput&);
-};   // KNumInput
+//end
+public:
+    ~KNumInput ();
+};
+// KNumInput
 
 
 class KIntNumInput : KNumInput
@@ -93,8 +98,13 @@ protected:
     void                    resizeEvent (QResizeEvent*);
 
 private:
+//force
                             KIntNumInput (const KIntNumInput&);
-};   // KIntNumInput
+//end
+public:
+    ~KIntNumInput ();
+};
+// KIntNumInput
 
 
 class KDoubleNumInput : KNumInput
@@ -145,8 +155,13 @@ protected:
     void                    resizeEvent (QResizeEvent*);
 
 private:
+//force
                             KDoubleNumInput (const KDoubleNumInput&);
-};   // KDoubleNumInput
+//end
+public:
+    ~KDoubleNumInput ();
+};
+// KDoubleNumInput
 
 
 class KIntSpinBox : QSpinBox
@@ -169,7 +184,12 @@ protected:
     virtual int             valueFromText (const QString& text) const;
 
 private:
+//force
                             KIntSpinBox (const KIntSpinBox&);
-};   // KIntSpinBox
+//end
+public:
+    ~KIntSpinBox ();
+};
+// KIntSpinBox
 
 

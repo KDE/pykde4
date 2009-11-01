@@ -27,9 +27,9 @@ class KWordWrap
 %End
 
 
-public:
 
-    enum 
+public:
+    enum
     {
         FadeOut,
         Truncate
@@ -44,8 +44,13 @@ public:
     static void             drawTruncateText (QPainter* p, int x, int y, int maxW, const QString& t);
 
 private:
+//force
                             KWordWrap (const KWordWrap&);
                             KWordWrap (const QRect& r);
-};   // KWordWrap
+//end
+public:
+    ~KWordWrap ();
+};
+// KWordWrap
 
 

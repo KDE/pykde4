@@ -37,6 +37,9 @@ signals:
 
 protected:
     void                    keyPressEvent (QKeyEvent* e);
-};   // KRestrictedLine
+public:
+    ~KRestrictedLine ();
+};
+// KRestrictedLine
 
 

@@ -45,7 +45,12 @@ protected:
     virtual void            drawContents (QPainter* painter);
 
 private:
+//force
                             KHueSaturationSelector (const KHueSaturationSelector&);
-};   // KHueSaturationSelector
+//end
+public:
+    ~KHueSaturationSelector ();
+};
+// KHueSaturationSelector
 
 

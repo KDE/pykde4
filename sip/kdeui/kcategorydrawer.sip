@@ -29,6 +29,8 @@ public:
                             KCategoryDrawer ();
     virtual void            drawCategory (const QModelIndex& index, int sortRole, const QStyleOption& option, QPainter* painter) const;
     virtual int             categoryHeight (const QModelIndex& index, const QStyleOption& option) const;
-};   // KCategoryDrawer
+    ~KCategoryDrawer ();
+};
+// KCategoryDrawer
 
 

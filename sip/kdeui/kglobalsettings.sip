@@ -61,19 +61,19 @@ public:
     class KMouseSettings
     {
 
-    public:
 
-        enum 
+    public:
+        enum
         {
             RightHanded,
             LeftHanded
         };
 
         int handed;
-    };   // KMouseSettings
+    };
+// KMouseSettings
 
 
-public:
     static KGlobalSettings::KMouseSettings&  mouseSettings ();
     static QString          desktopPath ();
     static QString          autostartPath ();
@@ -162,6 +162,10 @@ signals:
 
 private:
                             KGlobalSettings ();
-};   // KGlobalSettings
+public:
+    ~KGlobalSettings ();
+    void                    activate ();
+};
+// KGlobalSettings
 
 

@@ -37,6 +37,9 @@ public:
 
 protected:
     virtual void            slotWarning (KJob* job, const QString& plain, const QString& rich);
-};   // KDialogJobUiDelegate
+public:
+    ~KDialogJobUiDelegate ();
+};
+// KDialogJobUiDelegate
 
 

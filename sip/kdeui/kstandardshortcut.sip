@@ -139,7 +139,7 @@ const KShortcut&        findPrev ();
 const KShortcut&        replace ();
 const KShortcut&        zoomIn ();
 const KShortcut&        zoomOut ();
-//ig const KShortcut&   insert ();
+//ig const KShortcut&        insert ();
 const KShortcut&        home ();
 const KShortcut&        begin ();
 const KShortcut&        end ();
@@ -168,4 +168,5 @@ const KShortcut&        backwardWord ();
 const KShortcut&        forwardWord ();
 const KShortcut&        showMenubar ();
 
-};   // KStandardShortcut
+};
+// KStandardShortcut

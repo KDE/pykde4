@@ -27,8 +27,8 @@ class KColorScheme
 %End
 
 
-public:
 
+public:
     enum ColorSet
     {
         View,
@@ -91,7 +91,9 @@ public:
     static QColor           shade (const QColor&, KColorScheme::ShadeRole, qreal contrast, qreal chromaAdjust = 0.0);
     static void             adjustBackground (QPalette&, KColorScheme::BackgroundRole newRole = KColorScheme::NormalBackground, QPalette::ColorRole color = QPalette::Base, KColorScheme::ColorSet set = KColorScheme::View, KSharedConfigPtr = KSharedConfigPtr());
     static void             adjustForeground (QPalette&, KColorScheme::ForegroundRole newRole = KColorScheme::NormalText, QPalette::ColorRole color = QPalette::Text, KColorScheme::ColorSet set = KColorScheme::View, KSharedConfigPtr = KSharedConfigPtr());
-};   // KColorScheme
+    ~KColorScheme ();
+};
+// KColorScheme
 
 
 class KStatefulBrush
@@ -112,6 +114,8 @@ public:
     QBrush                  brush (QPalette::ColorGroup) const;
     QBrush                  brush (const QPalette&) const;
     QBrush                  brush (const QWidget*) const;
-};   // KStatefulBrush
+    ~KStatefulBrush ();
+};
+// KStatefulBrush
 
 

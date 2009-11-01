@@ -55,7 +55,12 @@ protected:
     static void             initMaps ();
 
 private:
+//force
                             KConfigDialogManager (const KConfigDialogManager&);
-};   // KConfigDialogManager
+//end
+public:
+    ~KConfigDialogManager ();
+};
+// KConfigDialogManager
 
 

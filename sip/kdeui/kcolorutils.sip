@@ -33,7 +33,8 @@ QColor                  shade (const QColor&, qreal lumaAmount, qreal chromaAmou
 QColor                  tint (const QColor& base, const QColor& color, qreal amount = 0.3);
 QColor                  mix (const QColor& c1, const QColor& c2, qreal bias = 0.5);
 QColor                  overlayColors (const QColor& base, const QColor& paint, QPainter::CompositionMode comp = QPainter::CompositionMode_SourceOver);
-};   // KColorUtils
+};
+// KColorUtils
 
 
 

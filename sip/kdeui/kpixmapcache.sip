@@ -26,9 +26,10 @@ class KPixmapCache
 #include <kpixmapcache.h>
 %End
 
-private:
+//force
                             KPixmapCache (const KPixmapCache& other);
 
+//end
 public:
     explicit                KPixmapCache (const QString& name);
     virtual bool            find (const QString& key, QPixmap& pix);
@@ -66,6 +67,21 @@ protected:
     virtual void            writeCustomIndexHeader (QDataStream& stream);
     void                    setValid (bool valid);
     bool                    recreateCacheFiles ();
-};   // KPixmapCache
+public:
+    ~KPixmapCache ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'KPixmapCache'
+    sipClass = NULL;
+
+    if (dynamic_cast<KIconCache*>(sipCpp))
+        sipClass = sipClass_KIconCache;
+%End
+};
+// KPixmapCache
 
 
+%ModuleHeaderCode
+//ctscc
+#include <kiconcache.h>
+#include <kpixmapcache.h>
+%End

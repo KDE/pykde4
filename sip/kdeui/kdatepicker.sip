@@ -64,6 +64,9 @@ signals:
     void                    dateSelected (const QDate& date);
     void                    dateEntered (const QDate& date);
     void                    tableClicked ();
-};   // KDatePicker
+public:
+    ~KDatePicker ();
+};
+// KDatePicker
 
 

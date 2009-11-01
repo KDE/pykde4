@@ -41,8 +41,9 @@ bool                    keyQtToCodeX (int keyQt, int* keyCode /Out/);
 bool                    keyQtToModX (int keyQt, uint* mod /Out/);
 bool                    symXToKeyQt (uint sym, int* keyQt /Out/);
 bool                    modXToQt (uint modX, int* modQt /Out/);
-//ig bool               xEventToQt (XEvent* e, int* keyModQt);
-};   // KKeyServer
+//ig bool                    xEventToQt (XEvent* e, int* keyModQt);
+};
+// KKeyServer
 
 
 

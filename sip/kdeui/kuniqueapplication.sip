@@ -46,6 +46,8 @@ public:
     virtual int             newInstance ();
     bool                    restoringSession ();
     static void             setHandleAutoStarted ();
-};   // KUniqueApplication
+    ~KUniqueApplication ();
+};
+// KUniqueApplication
 
 

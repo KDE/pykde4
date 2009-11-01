@@ -31,12 +31,15 @@ public:
     QPersistentModelIndex   focusedIndex () const;
 
 protected:
-    virtual QList<QWidget*>  createItemWidgets () const = 0;
-    virtual void            updateItemWidgets (const QList<QWidget*> widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const = 0;
+    virtual QList<QWidget*>  createItemWidgets () const=0;
+    virtual void            updateItemWidgets (const QList<QWidget*> widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const=0;
     void                    paintWidgets (QPainter* painter, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const;
     void                    setBlockedEventTypes (QWidget* widget, QList<QEvent::Type> types) const;
     QList<QEvent::Type>     blockedEventTypes (QWidget* widget) const;
-};   // KWidgetItemDelegate
+public:
+    ~KWidgetItemDelegate ();
+};
+// KWidgetItemDelegate
 
 %MappedType QList<QEvent::Type>
 {

@@ -41,6 +41,9 @@ protected:
     virtual void            leaveEvent (QEvent* e);
     virtual void            mousePressEvent (QMouseEvent* e);
     virtual void            mouseDoubleClickEvent (QMouseEvent* e);
-};   // KListWidget
+public:
+    ~KListWidget ();
+};
+// KListWidget
 
 

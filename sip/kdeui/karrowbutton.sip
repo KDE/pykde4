@@ -37,6 +37,9 @@ public:
 
 protected:
     virtual void            paintEvent (QPaintEvent*);
-};   // KArrowButton
+public:
+    ~KArrowButton ();
+};
+// KArrowButton
 
 

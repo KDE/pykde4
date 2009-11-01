@@ -45,6 +45,9 @@ public:
 signals:
     void                    activated (const QString& languageCode);
     void                    highlighted (const QString& languageCode);
-};   // KLanguageButton
+public:
+    ~KLanguageButton ();
+};
+// KLanguageButton
 
 

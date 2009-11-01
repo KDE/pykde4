@@ -51,6 +51,9 @@ signals:
     void                    clientAdded (KXMLGUIClient* client);
     void                    clientRemoved (KXMLGUIClient* client);
     void                    makingChanges (bool);
-};   // KXMLGUIFactory
+public:
+    ~KXMLGUIFactory ();
+};
+// KXMLGUIFactory
 
 

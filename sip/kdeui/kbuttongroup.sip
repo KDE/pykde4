@@ -41,6 +41,9 @@ signals:
 
 protected:
     virtual void            childEvent (QChildEvent* event);
-};   // KButtonGroup
+public:
+    ~KButtonGroup ();
+};
+// KButtonGroup
 
 

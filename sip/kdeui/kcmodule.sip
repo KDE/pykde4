@@ -27,8 +27,8 @@ class KCModule : QWidget
 %End
 
 
-public:
 
+public:
     enum Button
     {
         NoAdditionalButton,
@@ -69,6 +69,9 @@ protected:
     void                    setUseRootOnlyMessage (bool on);
     bool                    managedWidgetChangeState () const;
     void                    unmanagedWidgetChangeState (bool);
-};   // KCModule
+public:
+    ~KCModule ();
+};
+// KCModule
 
 

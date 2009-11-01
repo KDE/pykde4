@@ -29,8 +29,8 @@ class KCharSelect : QWidget
 %End
 
 
-public:
 
+public:
     enum Control
     {
         SearchLine,
@@ -59,6 +59,9 @@ signals:
     void                    currentCharChanged (const QChar& c);
     void                    displayedCharsChanged ();
     void                    charSelected (const QChar& c);
-};   // KCharSelect
+public:
+    ~KCharSelect ();
+};
+// KCharSelect
 
 

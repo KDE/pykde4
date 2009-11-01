@@ -32,6 +32,7 @@ public:
     explicit                KSeparator (Qt::Orientation orientation, QWidget* parent /TransferThis/ = 0, Qt::WFlags f = 0);
     Qt::Orientation         orientation () const;
     void                    setOrientation (Qt::Orientation orientation);
-};   // KSeparator
+};
+// KSeparator
 
 

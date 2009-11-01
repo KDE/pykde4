@@ -24,6 +24,7 @@
 %ModuleHeaderCode
 //ctscc
 #include <kcursor.h>
+#include <qcursor.h>
 %End
 
 class KCursor : QCursor
@@ -41,19 +42,19 @@ public:
     static int              hideCursorDelay ();
     static void             autoHideEventFilter (QObject*, QEvent*);
 
-public:
 
 //  Subclasses of QCursor
 
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'QCursor'
     sipClass = NULL;
 
     if (dynamic_cast<KCursor*>(sipCpp))
         sipClass = sipClass_KCursor;
 %End
 
-};   // KCursor
+};
+// KCursor
 
 
 

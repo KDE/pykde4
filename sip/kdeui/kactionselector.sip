@@ -83,7 +83,12 @@ protected:
     bool                    eventFilter (QObject*, QEvent*);
 
 private:
+//force
                             KActionSelector (const KActionSelector&);
-};   // KActionSelector
+//end
+public:
+    ~KActionSelector ();
+};
+// KActionSelector
 
 

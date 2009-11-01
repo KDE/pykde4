@@ -50,6 +50,9 @@ signals:
 
 protected:
     virtual void            actionTriggered (QAction*);
-};   // KCodecAction
+public:
+    ~KCodecAction ();
+};
+// KCodecAction
 
 

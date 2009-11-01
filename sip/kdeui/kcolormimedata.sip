@@ -29,7 +29,8 @@ void                    populateMimeData (QMimeData* mimeData, const QColor& col
 bool                    canDecode (const QMimeData* mimeData);
 QColor                  fromMimeData (const QMimeData* mimeData);
 QDrag*                  createDrag (const QColor& color, QWidget* dragsource);
-};   // KColorMimeData
+};
+// KColorMimeData
 
 
 

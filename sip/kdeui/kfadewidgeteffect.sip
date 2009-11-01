@@ -31,6 +31,9 @@ public:
 
 protected:
     void                    paintEvent (QPaintEvent*);
-};   // KFadeWidgetEffect
+public:
+    ~KFadeWidgetEffect ();
+};
+// KFadeWidgetEffect
 
 

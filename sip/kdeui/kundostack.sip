@@ -31,6 +31,7 @@ public:
                             KUndoStack (QObject* parent /TransferThis/ = 0);
     QAction*                createRedoAction (KActionCollection* actionCollection, const QString& actionName = QString());
     QAction*                createUndoAction (KActionCollection* actionCollection, const QString& actionName = QString());
-};   // KUndoStack
+};
+// KUndoStack
 
 

@@ -40,7 +40,12 @@ protected:
     virtual void            childEvent (QChildEvent* ev);
 
 private:
+//force
                             KHBox (const KHBox&);
-};   // KHBox
+//end
+public:
+    ~KHBox ();
+};
+// KHBox
 
 

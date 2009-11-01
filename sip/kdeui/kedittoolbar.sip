@@ -43,7 +43,12 @@ protected:
     virtual void            hideEvent (QHideEvent* event);
 
 private:
+//force
                             KEditToolBar (const KEditToolBar&);
-};   // KEditToolBar
+//end
+public:
+    ~KEditToolBar ();
+};
+// KEditToolBar
 
 

@@ -45,9 +45,15 @@ signals:
 
 
 private:
+//force
                             ConfigDialog (const Sonnet::ConfigDialog&);
-};   // ConfigDialog
+//end
+public:
+    ~ConfigDialog ();
+};
+// ConfigDialog
 
-};   // Sonnet
+};
+// Sonnet
 
 

@@ -28,8 +28,8 @@ class KShortcut
 %End
 
 
-public:
 
+public:
     enum EmptyHandling
     {
         KeepEmpty,
@@ -56,7 +56,11 @@ public:
     void                    setPrimary (const QKeySequence& keySeq);
     void                    setAlternate (const QKeySequence& keySeq);
     void                    remove (const QKeySequence& keySeq, KShortcut::EmptyHandling handleEmpty = KShortcut::RemoveEmpty);
-};   // KShortcut
+//ig    QVariant                operator QVariant () const;
+    ~KShortcut ();
+//ig    QList<QKeySequence>     operator QList<QKeySequence> () const;
+};
+// KShortcut
 
 uint                    qHash (int);
 uint                    qHash (const KShortcut& key);

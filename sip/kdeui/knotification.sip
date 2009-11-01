@@ -30,7 +30,7 @@ class KNotification : QObject
 public:
     typedef QPair<QString,QString> Context;
 
-//ig     typedef QList<KNotification::Context> ContextList;
+//ig    typedef QList<KNotification::Context> ContextList;
 
 
     enum NotificationFlag
@@ -103,8 +103,10 @@ public:
 //force
     typedef QList<QPair<QString,QString>> ContextList;
 
-//end
 
-};   // KNotification
+//end
+    ~KNotification ();
+};
+// KNotification
 
 

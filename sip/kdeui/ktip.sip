@@ -35,8 +35,13 @@ public:
     void                    prevTip ();
 
 private:
+//force
                             KTipDatabase (const KTipDatabase&);
-};   // KTipDatabase
+//end
+public:
+    ~KTipDatabase ();
+};
+// KTipDatabase
 
 
 class KTipDialog : KDialog
@@ -57,7 +62,12 @@ protected:
     bool                    eventFilter (QObject*, QEvent*);
 
 private:
+//force
                             KTipDialog (const KTipDialog&);
-};   // KTipDialog
+//end
+public:
+    ~KTipDialog ();
+};
+// KTipDialog
 
 

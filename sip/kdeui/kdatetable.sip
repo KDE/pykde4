@@ -43,8 +43,13 @@ signals:
     void                    leaveModality ();
 
 private:
+//force
                             KPopupFrame (const KPopupFrame&);
-};   // KPopupFrame
+//end
+public:
+    ~KPopupFrame ();
+};
+// KPopupFrame
 
 
 class KDateValidator : QValidator
@@ -59,7 +64,8 @@ public:
     virtual QValidator::State  validate (QString& text, int& e /In/) const;
     virtual void            fixup (QString& input) const;
     QValidator::State       date (const QString& text, QDate& date) const;
-};   // KDateValidator
+};
+// KDateValidator
 
 
 class KDateTable : QWidget
@@ -109,7 +115,12 @@ signals:
     void                    aboutToShowContextMenu (KMenu* menu, const QDate& date);
 
 private:
+//force
                             KDateTable (const KDateTable&);
-};   // KDateTable
+//end
+public:
+    ~KDateTable ();
+};
+// KDateTable
 
 

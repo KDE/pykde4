@@ -27,8 +27,8 @@ class KLed : QWidget
 %End
 
 
-public:
 
+public:
     enum State
     {
         Off,
@@ -78,6 +78,9 @@ protected:
     virtual void            paintRectFrame (bool raised);
     void                    paintEvent (QPaintEvent*);
     bool                    paintCachedPixmap ();
-};   // KLed
+public:
+    ~KLed ();
+};
+// KLed
 
 

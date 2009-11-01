@@ -27,8 +27,8 @@ class KPasswordDialog : KDialog
 %End
 
 
-public:
 
+public:
     enum KPasswordDialogFlag
     {
         NoFlags,
@@ -83,7 +83,12 @@ protected:
     virtual bool            checkPassword ();
 
 private:
+//force
                             KPasswordDialog (const KPasswordDialog&);
-};   // KPasswordDialog
+//end
+public:
+    ~KPasswordDialog ();
+};
+// KPasswordDialog
 
 

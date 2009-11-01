@@ -30,6 +30,7 @@ class KPassivePopupMessageHandler : QObject, KMessageHandler
 public:
     explicit                KPassivePopupMessageHandler (QWidget* parent /TransferThis/ = 0);
     virtual void            message (KMessage::MessageType messageType, const QString& text, const QString& caption);
-};   // KPassivePopupMessageHandler
+};
+// KPassivePopupMessageHandler
 
 

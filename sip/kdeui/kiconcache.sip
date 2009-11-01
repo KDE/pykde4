@@ -44,6 +44,9 @@ protected:
     virtual bool            writeCustomData (QDataStream& stream);
     QSet<QString>           existingIconThemeDirs (const QStringList& themeNames) const;
     unsigned int            mostRecentMTime (const QSet<QString>& dirNames) const;
-};   // KIconCache
+public:
+    ~KIconCache ();
+};
+// KIconCache
 
 

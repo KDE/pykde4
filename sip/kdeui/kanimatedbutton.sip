@@ -43,7 +43,12 @@ protected:
     void                    slotTimerUpdate ();
 
 private:
+//force
                             KAnimatedButton (const KAnimatedButton&);
-};   // KAnimatedButton
+//end
+public:
+    ~KAnimatedButton ();
+};
+// KAnimatedButton
 
 

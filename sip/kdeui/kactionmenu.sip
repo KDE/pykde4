@@ -45,6 +45,8 @@ public:
     bool                    stickyMenu () const;
     void                    setStickyMenu (bool sticky);
     virtual QWidget*        createWidget (QWidget* parent /Transfer/);
-};   // KActionMenu
+    ~KActionMenu ();
+};
+// KActionMenu
 
 

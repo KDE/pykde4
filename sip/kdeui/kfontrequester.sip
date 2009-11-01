@@ -43,7 +43,12 @@ signals:
     void                    fontSelected (const QFont& font);
 
 private:
+//force
                             KFontRequester (const KFontRequester&);
-};   // KFontRequester
+//end
+public:
+    ~KFontRequester ();
+};
+// KFontRequester
 
 

@@ -36,7 +36,12 @@ public:
     static QImage           getSelectedImage (const QPixmap& pixmap, int aspectRatioWidth, int aspectRatioHeight, QWidget* parent /Transfer/ = 0);
 
 private:
+//force
                             KPixmapRegionSelectorDialog (const KPixmapRegionSelectorDialog&);
-};   // KPixmapRegionSelectorDialog
+//end
+public:
+    ~KPixmapRegionSelectorDialog ();
+};
+// KPixmapRegionSelectorDialog
 
 

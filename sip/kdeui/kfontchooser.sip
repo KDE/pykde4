@@ -27,8 +27,8 @@ class KFontChooser : QWidget
 %End
 
 
-public:
 
+public:
     enum FontColumn
     {
         FamilyList,
@@ -59,7 +59,7 @@ public:
 
     typedef QFlags<KFontChooser::DisplayFlag> DisplayFlags;
 
-    explicit                KFontChooser (QWidget* parent /TransferThis/ = 0, const KFontChooser::DisplayFlags& flags = KFontChooser::DisplayFrame, const QStringList& fontList = QStringList(), int visibleListSize = 8, Qt::CheckState = Qt::Unchecked) [(QWidget* = 0, const KFontChooser::DisplayFlags& = KFontChooser::DisplayFrame, const QStringList& = QStringList(), int = 8, Qt::CheckState* = 0)];
+    explicit                KFontChooser (QWidget* parent /TransferThis/ = 0, const KFontChooser::DisplayFlags& flags = KFontChooser::DisplayFrame, const QStringList& fontList = QStringList(), int visibleListSize = 8, Qt::CheckState* sizeIsRelativeState = 0) [(QWidget* = 0, const KFontChooser::DisplayFlags& = KFontChooser::DisplayFrame, const QStringList& = QStringList(), int = 8, Qt::CheckState* = 0)];
 %MethodCode
 Py_BEGIN_ALLOW_THREADS
     sipCpp = new sipKFontChooser (a0, *a1, *a2, a3, &a4);
@@ -94,7 +94,12 @@ signals:
     void                    fontSelected (const QFont& font);
 
 private:
+//force
                             KFontChooser (const KFontChooser&);
-};   // KFontChooser
+//end
+public:
+    ~KFontChooser ();
+};
+// KFontChooser
 
 

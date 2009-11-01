@@ -27,8 +27,8 @@ class KMultiTabBar : QWidget
 %End
 
 
-public:
 
+public:
     enum KMultiTabBarPosition
     {
         Left,
@@ -62,7 +62,10 @@ public:
 protected:
     virtual void            fontChange (const QFont&);
     void                    updateSeparator ();
-};   // KMultiTabBar
+public:
+    ~KMultiTabBar ();
+};
+// KMultiTabBar
 
 
 class KMultiTabBarButton : QPushButton
@@ -84,7 +87,10 @@ protected:
     virtual void            hideEvent (QHideEvent*);
     virtual void            showEvent (QShowEvent*);
                             KMultiTabBarButton (const QPixmap& pic, const QString&, int id, QWidget* parent /TransferThis/);
-};   // KMultiTabBarButton
+public:
+    ~KMultiTabBarButton ();
+};
+// KMultiTabBarButton
 
 
 class KMultiTabBarTab : KMultiTabBarButton
@@ -108,6 +114,9 @@ protected:
 
 private:
                             KMultiTabBarTab (const QPixmap& pic, const QString&, int id, QWidget* parent /TransferThis/, KMultiTabBar::KMultiTabBarPosition pos, KMultiTabBar::KMultiTabBarStyle style);
-};   // KMultiTabBarTab
+public:
+    ~KMultiTabBarTab ();
+};
+// KMultiTabBarTab
 
 

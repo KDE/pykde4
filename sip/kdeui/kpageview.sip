@@ -27,8 +27,8 @@ class KPageView : QWidget
 %End
 
 
-public:
 
+public:
     enum FaceType
     {
         Auto,
@@ -56,7 +56,10 @@ protected:
     virtual QAbstractItemView*  createView ();
     virtual bool            showPageHeader () const;
     virtual Qt::Alignment   viewPosition () const;
-//ig                        KPageView (KPageViewPrivate& dd, QWidget* parent /TransferThis/);
-};   // KPageView
+//ig                            KPageView (KPageViewPrivate& dd, QWidget* parent /TransferThis/);
+public:
+    ~KPageView ();
+};
+// KPageView
 
 

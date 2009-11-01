@@ -31,6 +31,7 @@ public:
     static void             manage (QWidget* widget, bool programmers_mode = 0);
     static void             last_manage (QString& added, QString& changed, QString& removed);
     static void             setNoAccel (QWidget* widget);
-};   // KAcceleratorManager
+};
+// KAcceleratorManager
 
 

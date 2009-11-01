@@ -26,9 +26,10 @@ class KIconEffect
 #include <kiconeffect.h>
 %End
 
-private:
-                            KIconEffect (const KIconEffect &other);
+//force
+                            KIconEffect (const KIconEffect& other);
 
+//end
 public:
                             KIconEffect ();
 
@@ -61,6 +62,8 @@ public:
     static void             semiTransparent (QImage& image);
     static void             semiTransparent (QPixmap& pixmap);
     static void             overlay (QImage& src, QImage& overlay);
-};   // KIconEffect
+    ~KIconEffect ();
+};
+// KIconEffect
 
 

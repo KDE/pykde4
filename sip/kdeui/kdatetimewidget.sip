@@ -35,6 +35,9 @@ public:
 
 signals:
     void                    valueChanged (const QDateTime& datetime);
-};   // KDateTimeWidget
+public:
+    ~KDateTimeWidget ();
+};
+// KDateTimeWidget
 
 

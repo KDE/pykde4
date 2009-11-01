@@ -27,8 +27,8 @@ class KRuler : QAbstractSlider
 %End
 
 
-public:
 
+public:
     enum MetricStyle
     {
         Custom,
@@ -89,6 +89,9 @@ public:
 
 protected:
     virtual void            paintEvent (QPaintEvent*);
-};   // KRuler
+public:
+    ~KRuler ();
+};
+// KRuler
 
 

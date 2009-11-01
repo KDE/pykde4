@@ -27,8 +27,8 @@ class KStatusBarJobTracker : KAbstractWidgetJobTracker
 %End
 
 
-public:
 
+public:
     enum StatusBarMode
     {
         NoInformation,
@@ -50,6 +50,8 @@ public:
     virtual void            percent (KJob* job, unsigned long percent);
     virtual void            speed (KJob* job, unsigned long value);
     virtual void            slotClean (KJob* job);
-};   // KStatusBarJobTracker
+    ~KStatusBarJobTracker ();
+};
+// KStatusBarJobTracker
 
 

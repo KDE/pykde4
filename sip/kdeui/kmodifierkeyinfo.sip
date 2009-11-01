@@ -45,7 +45,12 @@ signals:
     void                    keyRemoved (Qt::Key key);
 
 private:
+//force
                             KModifierKeyInfo (const KModifierKeyInfo&);
-};   // KModifierKeyInfo
+//end
+public:
+    ~KModifierKeyInfo ();
+};
+// KModifierKeyInfo
 
 

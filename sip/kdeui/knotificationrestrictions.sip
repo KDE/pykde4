@@ -27,8 +27,8 @@ class KNotificationRestrictions : QObject
 %End
 
 
-public:
 
+public:
     enum Service
     {
         NoServices,
@@ -43,6 +43,8 @@ public:
     typedef QFlags<KNotificationRestrictions::Service> Services;
 
     explicit                KNotificationRestrictions (KNotificationRestrictions::Services control = KNotificationRestrictions::NonCriticalServices, QObject* parent /TransferThis/ = 0);
-};   // KNotificationRestrictions
+    ~KNotificationRestrictions ();
+};
+// KNotificationRestrictions
 
 

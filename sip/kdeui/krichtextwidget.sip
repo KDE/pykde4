@@ -27,8 +27,8 @@ class KRichTextWidget : KRichTextEdit
 %End
 
 
-public:
 
+public:
     enum RichTextSupportValues
     {
         DisableRichText,
@@ -67,6 +67,9 @@ public:
 protected:
     virtual void            mouseReleaseEvent (QMouseEvent* event);
 
-};   // KRichTextWidget
+public:
+    ~KRichTextWidget ();
+};
+// KRichTextWidget
 
 

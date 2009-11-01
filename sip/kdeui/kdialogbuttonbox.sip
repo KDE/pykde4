@@ -31,6 +31,8 @@ public:
     explicit                KDialogButtonBox (QWidget* parent /TransferThis/, Qt::Orientation _orientation = Qt::Horizontal);
     QPushButton*            addButton (const QString& text, QDialogButtonBox::ButtonRole role, SIP_RXOBJ_CON, SIP_SLOT_CON ());
     KPushButton*            addButton (const KGuiItem& guiitem, QDialogButtonBox::ButtonRole role, SIP_RXOBJ_CON, SIP_SLOT_CON ());
-};   // KDialogButtonBox
+    ~KDialogButtonBox ();
+};
+// KDialogButtonBox
 
 

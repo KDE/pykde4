@@ -27,8 +27,8 @@ class KIconLoader : QObject
 %End
 
 
-public:
 
+public:
     enum Context
     {
         Any,
@@ -102,25 +102,29 @@ public:
     void                    addAppDir (const QString& appname);
     QPixmap                 loadIcon (const QString& name, KIconLoader::Group group, int size = 0, int state = KIconLoader::DefaultState, const QStringList& overlays = QStringList(), QString* path_store = 0, bool canReturnNull = 0) const;
     QPixmap                 loadMimeTypeIcon (const QString& iconName, KIconLoader::Group group, int size = 0, int state = KIconLoader::DefaultState, const QStringList& overlays = QStringList(), QString* path_store = 0) const;
-//ig     QIcon              loadIconSet (const QString& name, KIconLoader::Group group, int size = 0, bool canReturnNull = 0);
+//ig    QIcon                   loadIconSet (const QString& name, KIconLoader::Group group, int size = 0, bool canReturnNull = 0);
     QString                 iconPath (const QString& name, int group_or_size, bool canReturnNull = 0) const;
-//ig     QMovie*            loadMovie (const QString& name, KIconLoader::Group group, int size = 0, QObject* parent /Transfer/ = 0) const;
-//ig     QString            moviePath (const QString& name, KIconLoader::Group group, int size = 0) const;
-//ig     QStringList        loadAnimated (const QString& name, KIconLoader::Group group, int size = 0) const;
-//ig     QStringList        queryIcons (int group_or_size, KIconLoader::Context context = KIconLoader::Any) const;
-//ig     QStringList        queryIconsByContext (int group_or_size, KIconLoader::Context context = KIconLoader::Any) const;
-//ig     bool               hasContext (KIconLoader::Context context) const;
+//ig    QMovie*                 loadMovie (const QString& name, KIconLoader::Group group, int size = 0, QObject* parent /Transfer/ = 0) const;
+//ig    QString                 moviePath (const QString& name, KIconLoader::Group group, int size = 0) const;
+//ig    QStringList             loadAnimated (const QString& name, KIconLoader::Group group, int size = 0) const;
+//ig    QStringList             queryIcons (int group_or_size, KIconLoader::Context context = KIconLoader::Any) const;
+//ig    QStringList             queryIconsByContext (int group_or_size, KIconLoader::Context context = KIconLoader::Any) const;
+//ig    bool                    hasContext (KIconLoader::Context context) const;
     QStringList             queryIconsByDir (const QString& iconsDir) const;
-//ig     int                currentSize (KIconLoader::Group group) const;
+//ig    int                     currentSize (KIconLoader::Group group) const;
     KIconTheme*             theme () const;
     KIconEffect*            iconEffect () const;
     void                    reconfigure (const QString& _appname, KStandardDirs* _dirs);
     static QPixmap          unknown ();
-//ig     bool               alphaBlending (KIconLoader::Group group) const;
+//ig    bool                    alphaBlending (KIconLoader::Group group) const;
     void                    addExtraDesktopThemes ();
     bool                    extraDesktopThemesAdded () const;
     void                    newIconLoader ();
-};   // KIconLoader
+    ~KIconLoader ();
+signals:
+    void                    iconLoaderSettingsChanged ();
+};
+// KIconLoader
 
 QPixmap                 DesktopIcon (const QString& name, int size = 0, int state = KIconLoader::DefaultState, const QStringList& overlays = QStringList());
 QIcon                   DesktopIconSet (const QString& name, int size = 0);
@@ -132,7 +136,7 @@ QPixmap                 MainBarIcon (const QString& name, int size = 0, int stat
 QIcon                   MainBarIconSet (const QString& name, int size = 0);
 QPixmap                 UserIcon (const QString& name, int state = KIconLoader::DefaultState, const QStringList& overlays = QStringList());
 QIcon                   UserIconSet (const QString& name);
-//ig int                IconSize (KIconLoader::Group group);
+//ig int                     IconSize (KIconLoader::Group group);
 %ModuleHeaderCode
 #include <kiconloader.h>
 %End

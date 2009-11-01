@@ -52,6 +52,9 @@ public:
 
 signals:
     void                    showAboutApplication ();
-};   // KHelpMenu
+public:
+    ~KHelpMenu ();
+};
+// KHelpMenu
 
 

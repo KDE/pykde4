@@ -30,7 +30,7 @@ class KProgressDialog : KDialog
 public:
     explicit                KProgressDialog (QWidget* parent /TransferThis/ = 0, const QString& caption = QString(), const QString& text = QString(), Qt::WFlags flags = 0);
     QProgressBar*           progressBar ();
-//ig     const QProgressBar*  progressBar () const;
+//ig    const QProgressBar*     progressBar () const;
     void                    setLabelText (const QString& text);
     QString                 labelText () const;
     void                    setAllowCancel (bool allowCancel);
@@ -52,7 +52,12 @@ protected:
     virtual void            showEvent (QShowEvent* event);
 
 private:
+//force
                             KProgressDialog (const KProgressDialog&);
-};   // KProgressDialog
+//end
+public:
+    ~KProgressDialog ();
+};
+// KProgressDialog
 
 

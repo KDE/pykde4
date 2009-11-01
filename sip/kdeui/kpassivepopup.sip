@@ -27,8 +27,8 @@ class KPassivePopup : QFrame
 %End
 
 
-public:
 
+public:
     enum PopupStyle
     {
         Boxed,
@@ -81,6 +81,9 @@ protected:
     virtual void            mouseReleaseEvent (QMouseEvent* e);
     void                    updateMask ();
     virtual void            paintEvent (QPaintEvent* pe);
-};   // KPassivePopup
+public:
+    ~KPassivePopup ();
+};
+// KPassivePopup
 
 

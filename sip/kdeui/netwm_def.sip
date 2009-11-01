@@ -19,10 +19,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-//end
 
 
-//end
 
 
 class NETPoint
@@ -36,7 +34,8 @@ public:
                             NETPoint ();
     int x;
     int y;
-};   // NETPoint
+};
+// NETPoint
 
 
 class NETSize
@@ -50,7 +49,8 @@ public:
                             NETSize ();
     int width;
     int height;
-};   // NETSize
+};
+// NETSize
 
 
 class NETRect
@@ -63,7 +63,8 @@ class NETRect
 public:
     NETPoint pos;
     NETSize size;
-};   // NETRect
+};
+// NETRect
 
 
 class NETIcon
@@ -77,7 +78,8 @@ public:
                             NETIcon ();
     NETSize size;
     unsigned char* data;
-};   // NETIcon
+};
+// NETIcon
 
 
 class NETExtendedStrut
@@ -101,7 +103,8 @@ public:
     int bottom_width;
     int bottom_start;
     int bottom_end;
-};   // NETExtendedStrut
+};
+// NETExtendedStrut
 
 
 class NETStrut
@@ -117,7 +120,8 @@ public:
     int right;
     int top;
     int bottom;
-};   // NETStrut
+};
+// NETStrut
 
 
 class NETFullscreenMonitors
@@ -133,7 +137,8 @@ public:
     int left;
     int right;
     bool                    isSet () const;
-};   // NETFullscreenMonitors
+};
+// NETFullscreenMonitors
 
 
 class NET
@@ -143,8 +148,8 @@ class NET
 %End
 
 
-public:
 
+public:
     enum Role
     {
         Client,
@@ -315,7 +320,7 @@ public:
     };
 
 
-    enum 
+    enum
     {
         OnAllDesktops
     };
@@ -346,7 +351,5 @@ public:
 
     static int              timestampCompare (unsigned long time1, unsigned long time2);
     static int              timestampDiff (unsigned long time1, unsigned long time2);
-
-};   // NET
-
-
+};
+// NET

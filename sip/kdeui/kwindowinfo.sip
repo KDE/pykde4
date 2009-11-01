@@ -58,6 +58,8 @@ public:
     QByteArray              clientMachine () const;
     bool                    actionSupported (NET::Action action) const;
                             KWindowInfo (const KWindowInfo&);
-};   // KWindowInfo
+    ~KWindowInfo ();
+};
+// KWindowInfo
 
 

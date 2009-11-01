@@ -93,7 +93,7 @@ signals:
     void                    workAreaChanged ();
     void                    strutChanged ();
     void                    stackingOrderChanged ();
-//ig     void               windowChanged (WId id, const unsigned long* properties /Out/);
+//ig    void                    windowChanged (WId id, const unsigned long* properties /Out/);
     void                    windowChanged (WId id, unsigned int properties);
     void                    windowChanged (WId id);
     void                    showingDesktopChanged (bool showing);
@@ -103,7 +103,10 @@ protected:
 
 private:
                             KWindowSystem ();
-};   // KWindowSystem
+public:
+    static void             allowExternalProcessWindowActivation (int pid = -1);
+};
+// KWindowSystem
 
 
 

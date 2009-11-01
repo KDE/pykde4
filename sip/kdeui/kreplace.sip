@@ -42,6 +42,9 @@ public:
 
 signals:
     void                    replace (const QString& text, int replacementIndex, int replacedLength, int matchedLength);
-};   // KReplace
+public:
+    ~KReplace ();
+};
+// KReplace
 
 

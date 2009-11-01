@@ -44,6 +44,9 @@ protected:
     virtual void            slotClean (KJob* job);
     virtual void            suspended (KJob* job);
     virtual void            resumed (KJob* job);
-};   // KWidgetJobTracker
+public:
+    ~KWidgetJobTracker ();
+};
+// KWidgetJobTracker
 
 

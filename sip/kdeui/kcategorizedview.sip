@@ -55,6 +55,9 @@ protected:
     virtual void            slotLayoutChanged ();
     virtual void            currentChanged (const QModelIndex& current, const QModelIndex& previous);
     virtual void            dataChanged (const QModelIndex& topLeft, const QModelIndex& bottomRight);
-};   // KCategorizedView
+public:
+    ~KCategorizedView ();
+};
+// KCategorizedView
 
 

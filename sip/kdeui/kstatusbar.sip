@@ -46,6 +46,9 @@ signals:
 
 protected:
     bool                    eventFilter (QObject* object, QEvent* event);
-};   // KStatusBar
+public:
+    ~KStatusBar ();
+};
+// KStatusBar
 
 

@@ -27,8 +27,8 @@ class KPlotObject
 %End
 
 
-public:
 
+public:
     enum PlotType
     {
         UnknownType,
@@ -84,7 +84,12 @@ public:
     void                    draw (QPainter* p, KPlotWidget* pw);
 
 private:
+//force
                             KPlotObject (const KPlotObject&);
-};   // KPlotObject
+//end
+public:
+    ~KPlotObject ();
+};
+// KPlotObject
 
 

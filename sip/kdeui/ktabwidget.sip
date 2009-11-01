@@ -53,11 +53,11 @@ public:
     void                    setAutomaticResizeTabs (bool enable);
 
 signals:
-//ig     void               testCanDecode (const QDragMoveEvent* e, bool& accept);
+//ig    void                    testCanDecode (const QDragMoveEvent* e, bool& accept);
     void                    receivedDropEvent (QDropEvent*);
     void                    receivedDropEvent (QWidget*, QDropEvent*);
     void                    initiateDrag (QWidget*);
-//ig     void               contextMenu (const QPoint&);
+//ig    void                    contextMenu (const QPoint&);
     void                    contextMenu (QWidget*, const QPoint&);
     void                    movedTab (int, int);
     void                    mouseDoubleClick ();
@@ -77,14 +77,17 @@ protected:
     virtual void            resizeEvent (QResizeEvent*);
     virtual void            tabInserted (int);
     virtual void            tabRemoved (int);
-//ig     virtual void       receivedDropEvent (int, QDropEvent*);
-//ig     virtual void       initiateDrag (int);
-//ig     virtual void       contextMenu (int, const QPoint&);
-//ig     virtual void       mouseDoubleClick (int);
-//ig     virtual void       mouseMiddleClick (int);
-//ig     virtual void       closeRequest (int);
+//ig    virtual void            receivedDropEvent (int, QDropEvent*);
+//ig    virtual void            initiateDrag (int);
+//ig    virtual void            contextMenu (int, const QPoint&);
+//ig    virtual void            mouseDoubleClick (int);
+//ig    virtual void            mouseMiddleClick (int);
+//ig    virtual void            closeRequest (int);
     void                    currentChanged (int);
     virtual void            wheelDelta (int);
-};   // KTabWidget
+public:
+    ~KTabWidget ();
+};
+// KTabWidget
 
 

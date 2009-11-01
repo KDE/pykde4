@@ -42,6 +42,9 @@ signals:
 protected:
     void                    init (const QDate& date);
     void                    slotDateChanged ();
-};   // KDateWidget
+public:
+    ~KDateWidget ();
+};
+// KDateWidget
 
 

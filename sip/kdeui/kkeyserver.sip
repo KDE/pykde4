@@ -27,7 +27,8 @@ namespace KKeyServer
 {
 QString                 modToStringUser (uint mod);
 uint                    stringUserToMod (const QString& mod);
-};   // KKeyServer
+};
+// KKeyServer
 
 
 

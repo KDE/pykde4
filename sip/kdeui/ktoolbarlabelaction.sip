@@ -42,6 +42,9 @@ protected:
 
     virtual bool            eventFilter (QObject* watched, QEvent* event);
 
-};   // KToolBarLabelAction
+public:
+    ~KToolBarLabelAction ();
+};
+// KToolBarLabelAction
 
 

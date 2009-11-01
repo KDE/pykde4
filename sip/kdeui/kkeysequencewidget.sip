@@ -28,8 +28,8 @@ class KKeySequenceWidget : QWidget
 %End
 
 
-public:
 
+public:
     enum Validation
     {
         Validate,
@@ -72,7 +72,12 @@ public:
     void                    applyStealShortcut ();
 
 private:
+//force
                             KKeySequenceWidget (const KKeySequenceWidget&);
-};   // KKeySequenceWidget
+//end
+public:
+    ~KKeySequenceWidget ();
+};
+// KKeySequenceWidget
 
 

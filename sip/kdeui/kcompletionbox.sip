@@ -58,6 +58,9 @@ protected:
     virtual bool            eventFilter (QObject*, QEvent*);
     virtual QPoint          globalPositionHint () const;
     virtual void            slotActivated (QListWidgetItem*);
-};   // KCompletionBox
+public:
+    ~KCompletionBox ();
+};
+// KCompletionBox
 
 

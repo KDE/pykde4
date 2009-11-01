@@ -27,8 +27,8 @@ class KEditListBox : QGroupBox
 %End
 
 
-public:
 
+public:
     class CustomEditor
     {
 
@@ -42,13 +42,15 @@ public:
         virtual KLineEdit*      lineEdit () const;
 
     private:
+//force
                                 CustomEditor (const KEditListBox::CustomEditor&);
-
+//end
     public:
-    };   // CustomEditor
+        ~CustomEditor ();
+    };
+// CustomEditor
 
 
-public:
 
     enum Button
     {
@@ -103,7 +105,12 @@ protected:
     void                    typedSomething (const QString& text);
 
 private:
+//force
                             KEditListBox (const KEditListBox&);
-};   // KEditListBox
+//end
+public:
+    ~KEditListBox ();
+};
+// KEditListBox
 
 

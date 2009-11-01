@@ -36,7 +36,8 @@ class Deref
 
 public:
     static QString          deref (Iter i);
-};   // Deref
+};
+// Deref
 
 
 template <Iter>
@@ -49,11 +50,13 @@ class Deref_Key
 
 public:
     static QString          deref (Iter i);
-};   // Deref_Key
+};
+// Deref_Key
 
 bool                    isLegalAccelerator (const QString& str, int index);
 void                    generate (const QStringList& source, QStringList& target);
-};   // KAccelGen
+};
+// KAccelGen
 
 
 

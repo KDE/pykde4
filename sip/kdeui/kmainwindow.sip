@@ -47,9 +47,9 @@ public:
     void                    resetAutoSaveSettings ();
     bool                    autoSaveSettings () const;
     QString                 autoSaveGroup () const;
-    KConfigGroup            autoSaveConfigGroup() const;
+    KConfigGroup            autoSaveConfigGroup () const;
 
-    virtual void            applyMainWindowSettings (const KConfigGroup& config, bool force = 0);
+    virtual void            applyMainWindowSettings (const KConfigGroup& config, bool forceGlobal = 0);
     void                    saveMainWindowSettings (const KConfigGroup& config);
     bool                    initialGeometrySet () const;
     void                    ignoreInitialGeometry ();
@@ -77,7 +77,10 @@ protected:
     void                    parseGeometry (bool parsewidth);
     virtual void            showAboutApplication ();
     void                    saveAutoSaveSettings ();
-//ig                        KMainWindow (KMainWindowPrivate& dd, QWidget* parent /TransferThis/, Qt::WFlags f);
-};   // KMainWindow
+//ig                            KMainWindow (KMainWindowPrivate& dd, QWidget* parent /TransferThis/, Qt::WFlags f);
+public:
+    ~KMainWindow ();
+};
+// KMainWindow
 
 

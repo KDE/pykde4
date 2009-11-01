@@ -46,8 +46,13 @@ protected:
     virtual void            wheelEvent (QWheelEvent*);
 
 private:
+//force
                             KSelector (const KSelector&);
-};   // KSelector
+//end
+public:
+    ~KSelector ();
+};
+// KSelector
 
 
 class KGradientSelector : KSelector
@@ -76,7 +81,12 @@ protected:
     virtual QSize           minimumSize () const;
 
 private:
+//force
                             KGradientSelector (const KGradientSelector&);
-};   // KGradientSelector
+//end
+public:
+    ~KGradientSelector ();
+};
+// KGradientSelector
 
 

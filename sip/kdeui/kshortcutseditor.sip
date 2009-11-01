@@ -29,8 +29,8 @@ class KShortcutsEditor : QWidget
 %End
 
 
-public:
 
+public:
     enum ActionType
     {
         WidgetAction,
@@ -73,11 +73,13 @@ public:
     void                    printShortcuts () const;
 
 private:
+//force
                             KShortcutsEditor (const KShortcutsEditor&);
 
+//end
 public:
-//ig     static bool        checkGlobalShortcutsConflict (const KShortcut& cut, bool warnUser, QWidget* parent /Transfer/);
-//ig     static bool        checkStandardShortcutsConflict (const KShortcut& cut, bool warnUser, QWidget* parent /Transfer/);
-};   // KShortcutsEditor
+    ~KShortcutsEditor ();
+};
+// KShortcutsEditor
 
 

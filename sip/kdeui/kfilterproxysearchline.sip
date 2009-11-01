@@ -31,7 +31,12 @@ public:
     KLineEdit*              lineEdit () const;
 
 private:
+//force
                             KFilterProxySearchLine (const KFilterProxySearchLine&);
-};   // KFilterProxySearchLine
+//end
+public:
+    ~KFilterProxySearchLine ();
+};
+// KFilterProxySearchLine
 
 

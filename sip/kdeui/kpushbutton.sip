@@ -48,6 +48,9 @@ protected:
     virtual void            mousePressEvent (QMouseEvent*);
     virtual void            mouseMoveEvent (QMouseEvent*);
     virtual void            startDrag ();
-};   // KPushButton
+public:
+    ~KPushButton ();
+};
+// KPushButton
 
 

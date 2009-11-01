@@ -28,10 +28,13 @@ class KPixmapProvider
 
 
 public:
-    virtual QPixmap         pixmapFor (const QString& text, int size = 0) = 0;
+    virtual QPixmap         pixmapFor (const QString& text, int size = 0)=0;
 
 protected:
-//ig     virtual void       virtual_hook (int id, void* data);
-};   // KPixmapProvider
+//ig    virtual void            virtual_hook (int id, void* data);
+public:
+    ~KPixmapProvider ();
+};
+// KPixmapProvider
 
 

@@ -45,7 +45,12 @@ public:
     QList<double>           minorTickMarks () const;
 
 private:
+//force
                             KPlotAxis (const KPlotAxis&);
-};   // KPlotAxis
+//end
+public:
+    ~KPlotAxis ();
+};
+// KPlotAxis
 
 

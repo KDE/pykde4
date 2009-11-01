@@ -37,7 +37,9 @@ public:
     virtual int             bottom () const;
     virtual int             top () const;
     virtual int             base () const;
-};   // KIntValidator
+    ~KIntValidator ();
+};
+// KIntValidator
 
 
 class KFloatValidator : QValidator
@@ -58,7 +60,9 @@ public:
     virtual double          top () const;
     void                    setAcceptLocalizedNumbers (bool b);
     bool                    acceptLocalizedNumbers () const;
-};   // KFloatValidator
+    ~KFloatValidator ();
+};
+// KFloatValidator
 
 
 class KDoubleValidator : QDoubleValidator
@@ -74,6 +78,8 @@ public:
     virtual QValidator::State  validate (QString& input, int& pos /In/) const;
     bool                    acceptLocalizedNumbers () const;
     void                    setAcceptLocalizedNumbers (bool accept);
-};   // KDoubleValidator
+    ~KDoubleValidator ();
+};
+// KDoubleValidator
 
 

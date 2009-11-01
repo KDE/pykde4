@@ -95,6 +95,9 @@ protected:
     virtual void            paintEvent (QPaintEvent* ev);
     virtual void            focusInEvent (QFocusEvent* ev);
     virtual void            focusOutEvent (QFocusEvent* ev);
-};   // KLineEdit
+public:
+    ~KLineEdit ();
+};
+// KLineEdit
 
 

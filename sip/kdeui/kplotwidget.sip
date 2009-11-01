@@ -77,7 +77,7 @@ public:
     void                    maskAlongLine (const QPointF& p1, const QPointF& p2, float value = 1.0);
     void                    placeLabel (QPainter* painter, KPlotPoint* pp);
     KPlotAxis*              axis (KPlotWidget::Axis type);
-//ig     const KPlotAxis*   axis (KPlotWidget::Axis type) const;
+//ig    const KPlotAxis*        axis (KPlotWidget::Axis type) const;
     void                    setShowGrid (bool show);
     void                    setObjectToolTipShown (bool show);
 
@@ -90,7 +90,12 @@ protected:
     QList<KPlotPoint*>      pointsUnderPoint (const QPoint& p) const;
 
 private:
+//force
                             KPlotWidget (const KPlotWidget&);
-};   // KPlotWidget
+//end
+public:
+    ~KPlotWidget ();
+};
+// KPlotWidget
 
 

@@ -27,8 +27,8 @@ class KCategorizedSortFilterProxyModel : QSortFilterProxyModel
 %End
 
 
-public:
 
+public:
     enum AdditionalRoles
     {
         CategoryDisplayRole,
@@ -49,6 +49,9 @@ protected:
     virtual bool            lessThan (const QModelIndex& left, const QModelIndex& right) const;
     virtual bool            subSortLessThan (const QModelIndex& left, const QModelIndex& right) const;
     virtual int             compareCategories (const QModelIndex& left, const QModelIndex& right) const;
-};   // KCategorizedSortFilterProxyModel
+public:
+    ~KCategorizedSortFilterProxyModel ();
+};
+// KCategorizedSortFilterProxyModel
 
 

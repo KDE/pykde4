@@ -39,7 +39,12 @@ protected:
     virtual void            closeEvent (QCloseEvent* e);
 
 private:
+//force
                             KBugReport (const KBugReport&);
-};   // KBugReport
+//end
+public:
+    ~KBugReport ();
+};
+// KBugReport
 
 

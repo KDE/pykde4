@@ -41,7 +41,12 @@ protected:
     virtual void            showEvent (QShowEvent* event);
 
 private:
+//force
                             KAssistantDialog (const KAssistantDialog&);
-};   // KAssistantDialog
+//end
+public:
+    ~KAssistantDialog ();
+};
+// KAssistantDialog
 
 

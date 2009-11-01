@@ -44,9 +44,12 @@ protected:
     void                    slotReadConfig ();
     virtual void            resizeEvent (QResizeEvent*);
     virtual bool            eventFilter (QObject*, QEvent*);
-//ig     virtual bool       x11Event (XEvent*);
+//ig    virtual bool            x11Event (XEvent*);
     virtual void            closeEvent (QCloseEvent*);
     virtual void            paintEvent (QPaintEvent*);
-};   // KMenuBar
+public:
+    ~KMenuBar ();
+};
+// KMenuBar
 
 

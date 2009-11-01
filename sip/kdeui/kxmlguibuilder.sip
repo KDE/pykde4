@@ -25,9 +25,10 @@ class KXMLGUIBuilder
 %TypeHeaderCode
 #include <kxmlguibuilder.h>
 %End
-private:
-                            KXMLGUIBuilder (const KXMLGUIBuilder &other);
+//force
+                            KXMLGUIBuilder (const KXMLGUIBuilder& other);
 
+//end
 public:
     explicit                KXMLGUIBuilder (QWidget* widget);
     KXMLGUIClient*          builderClient () const;
@@ -36,6 +37,7 @@ public:
     void                    setBuilderComponentData (const KComponentData& componentData);
     QWidget*                widget ();
     virtual QStringList     containerTags () const;
+//force
     virtual SIP_PYTUPLE     createContainer (QWidget* parent /Transfer/, int index, const QDomElement& element) [QWidget* (QWidget* parent /Transfer/, int index, const QDomElement& element, QAction*& containerAction)];
 %MethodCode
 QAction *containerAction;
@@ -55,7 +57,7 @@ QAction *containerAction;
 
     sipRes = Py_BuildValue ("NN", pyWidget, pyContainerAction);
 %End
-
+//end
     virtual void            removeContainer (QWidget* container, QWidget* parent /Transfer/, QDomElement& element, QAction* containerAction);
     virtual QStringList     customTags () const;
     virtual QAction*        createCustomElement (QWidget* parent /Transfer/, int index, const QDomElement& element);
@@ -63,7 +65,11 @@ QAction *containerAction;
     virtual void            finalizeGUI (KXMLGUIClient* client);
 
 protected:
-//ig     virtual void       virtual_hook (int id, void* data);
-};   // KXMLGUIBuilder
+//ig    virtual void            virtual_hook (int id, void* data);
+public:
+    ~KXMLGUIBuilder ();
+//ig    virtual QWidget*        createContainer (QWidget* parent /Transfer/, int index, const QDomElement& element, QAction*& containerAction);
+};
+// KXMLGUIBuilder
 
 

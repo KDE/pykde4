@@ -32,6 +32,8 @@ public:
                             KPasteTextAction (const QString& text, QObject* parent /TransferThis/);
                             KPasteTextAction (const KIcon& icon, const QString& text, QObject* parent /TransferThis/);
     void                    setMixedMode (bool mode);
-};   // KPasteTextAction
+    ~KPasteTextAction ();
+};
+// KPasteTextAction
 
 

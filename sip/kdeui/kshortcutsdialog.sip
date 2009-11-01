@@ -41,7 +41,12 @@ signals:
     void                    saved ();
 
 private:
+//force
                             KShortcutsDialog (const KShortcutsDialog&);
-};   // KShortcutsDialog
+//end
+public:
+    ~KShortcutsDialog ();
+};
+// KShortcutsDialog
 
 

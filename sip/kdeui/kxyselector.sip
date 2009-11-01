@@ -52,7 +52,12 @@ protected:
     void                    valuesFromPosition (int x, int y, int& xVal /Out/, int& yVal /Out/) const;
 
 private:
+//force
                             KXYSelector (const KXYSelector&);
-};   // KXYSelector
+//end
+public:
+    ~KXYSelector ();
+};
+// KXYSelector
 
 

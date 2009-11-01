@@ -27,8 +27,8 @@ class KPageModel : QAbstractItemModel
 %End
 
 
-public:
 
+public:
     enum Role
     {
         HeaderRole,
@@ -38,7 +38,10 @@ public:
     explicit                KPageModel (QObject* parent /TransferThis/ = 0);
 
 protected:
-//ig                        KPageModel (KPageModelPrivate& dd, QObject* parent /TransferThis/);
-};   // KPageModel
+//ig                            KPageModel (KPageModelPrivate& dd, QObject* parent /TransferThis/);
+public:
+    ~KPageModel ();
+};
+// KPageModel
 
 

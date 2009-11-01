@@ -37,7 +37,9 @@ public:
     QStringList             stringList () const;
     virtual QValidator::State  validate (QString& input, int& pos /Out/) const;
     virtual void            fixup (QString& input) const;
-};   // KStringListValidator
+    ~KStringListValidator ();
+};
+// KStringListValidator
 
 
 class KMimeTypeValidator : QValidator
@@ -51,6 +53,8 @@ public:
     explicit                KMimeTypeValidator (QObject* parent /TransferThis/ = 0);
     virtual QValidator::State  validate (QString& input, int& pos /Out/) const;
     virtual void            fixup (QString& input) const;
-};   // KMimeTypeValidator
+    ~KMimeTypeValidator ();
+};
+// KMimeTypeValidator
 
 

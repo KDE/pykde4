@@ -31,7 +31,12 @@ public:
     explicit                KAboutApplicationDialog (const KAboutData* aboutData, QWidget* parent /TransferThis/ = 0);
 
 private:
+//force
                             KAboutApplicationDialog (const KAboutApplicationDialog&);
-};   // KAboutApplicationDialog
+//end
+public:
+    ~KAboutApplicationDialog ();
+};
+// KAboutApplicationDialog
 
 

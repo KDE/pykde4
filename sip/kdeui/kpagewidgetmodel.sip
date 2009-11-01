@@ -47,7 +47,10 @@ public:
 signals:
     void                    changed ();
     void                    toggled (bool checked);
-};   // KPageWidgetItem
+public:
+    ~KPageWidgetItem ();
+};
+// KPageWidgetItem
 
 
 class KPageWidgetModel : KPageModel
@@ -78,6 +81,9 @@ public:
 
 signals:
     void                    toggled (KPageWidgetItem* page, bool checked);
-};   // KPageWidgetModel
+public:
+    ~KPageWidgetModel ();
+};
+// KPageWidgetModel
 
 

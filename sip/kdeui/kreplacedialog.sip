@@ -27,8 +27,8 @@ class KReplaceDialog : KFindDialog
 %End
 
 
-public:
 
+public:
     enum Options
     {
         PromptOnReplace,
@@ -45,6 +45,9 @@ public:
 
 protected:
     virtual void            showEvent (QShowEvent*);
-};   // KReplaceDialog
+public:
+    ~KReplaceDialog ();
+};
+// KReplaceDialog
 
 

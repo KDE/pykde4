@@ -44,9 +44,13 @@ protected:
 
 signals:
     void                    configChanged ();
-};   // ConfigWidget
+public:
+    ~ConfigWidget ();
+};
+// ConfigWidget
 
-};   // Sonnet
+};
+// Sonnet
 
 
 

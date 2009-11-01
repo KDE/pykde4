@@ -28,10 +28,11 @@ class KTextEditSpellInterface
 %End
 
 public:
-    virtual bool            isSpellCheckingEnabled () const = 0;
-    virtual void            setSpellCheckingEnabled (bool enable) = 0;
-    virtual bool            shouldBlockBeSpellChecked (const QString& block) const = 0;
-};   // KTextEditSpellInterface
+    virtual bool            isSpellCheckingEnabled () const=0;
+    virtual void            setSpellCheckingEnabled (bool enable)=0;
+    virtual bool            shouldBlockBeSpellChecked (const QString& block) const=0;
+};
+// KTextEditSpellInterface
 
 
 class KTextEdit : QTextEdit
@@ -85,6 +86,9 @@ protected:
     virtual void            contextMenuEvent (QContextMenuEvent*);
     void                    setCheckSpellingEnabledInternal (bool check);
     bool                    checkSpellingEnabledInternal () const;
-};   // KTextEdit
+public:
+    ~KTextEdit ();
+};
+// KTextEdit
 
 

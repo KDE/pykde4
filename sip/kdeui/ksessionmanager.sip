@@ -34,10 +34,15 @@ public:
     static QList<KSessionManager*>&  sessionClients ();
 
 protected:
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 
 private:
+//force
                             KSessionManager (const KSessionManager&);
-};   // KSessionManager
+//end
+public:
+    ~KSessionManager ();
+};
+// KSessionManager
 
 

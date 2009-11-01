@@ -43,7 +43,12 @@ public:
     void                    setBarWidth (double w);
 
 private:
+//force
                             KPlotPoint (const KPlotPoint&);
-};   // KPlotPoint
+//end
+public:
+    ~KPlotPoint ();
+};
+// KPlotPoint
 
 

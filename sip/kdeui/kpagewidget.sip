@@ -45,7 +45,10 @@ signals:
     void                    pageRemoved (KPageWidgetItem* page);
 
 protected:
-//ig                        KPageWidget (KPageWidgetPrivate& dd, QWidget* parent /TransferThis/);
-};   // KPageWidget
+//ig                            KPageWidget (KPageWidgetPrivate& dd, QWidget* parent /TransferThis/);
+public:
+    ~KPageWidget ();
+};
+// KPageWidget
 
 

@@ -51,7 +51,7 @@ signals:
     void                    newTabRequest ();
     void                    mouseMiddleClick (int);
     void                    initiateDrag (int);
-//ig     void               testCanDecode (const QDragMoveEvent*, bool&);
+//ig    void                    testCanDecode (const QDragMoveEvent*, bool&);
     void                    receivedDropEvent (int, QDropEvent*);
     void                    moveTab (int, int);
     void                    closeRequest (int);
@@ -75,6 +75,9 @@ protected:
     void                    enableCloseButton ();
     virtual void            activateDragSwitchTab ();
     virtual void            tabLayoutChange ();
-};   // KTabBar
+public:
+    ~KTabBar ();
+};
+// KTabBar
 
 

@@ -63,6 +63,9 @@ public:
 protected:
     virtual bool            event (QEvent* event);
     virtual void            saveNewToolbarConfig ();
-};   // KXmlGuiWindow
+public:
+    ~KXmlGuiWindow ();
+};
+// KXmlGuiWindow
 
 

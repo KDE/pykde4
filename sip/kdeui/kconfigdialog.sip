@@ -50,7 +50,12 @@ protected:
     virtual void            showEvent (QShowEvent* e);
 
 private:
+//force
                             KConfigDialog (const KConfigDialog&);
-};   // KConfigDialog
+//end
+public:
+    ~KConfigDialog ();
+};
+// KConfigDialog
 
 

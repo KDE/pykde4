@@ -25,9 +25,10 @@ class KXMLGUIClient
 %TypeHeaderCode
 #include <kxmlguiclient.h>
 %End
-private:
-                            KXMLGUIClient (const KXMLGUIClient &other);
+//force
+                            KXMLGUIClient (const KXMLGUIClient& other);
 
+//end
 public:
                             KXMLGUIClient ();
     explicit                KXMLGUIClient (KXMLGUIClient* parent);
@@ -68,10 +69,10 @@ public:
     public:
         QStringList actionsToEnable;
         QStringList actionsToDisable;
-    };   // StateChange
+    };
+// StateChange
 
 
-public:
     KXMLGUIClient::StateChange  getActionsToChangeForState (const QString& state);
     void                    beginXMLPlug (QWidget*);
     void                    endXMLPlug ();
@@ -84,7 +85,10 @@ protected:
     virtual void            setXML (const QString& document, bool merge = 0);
     virtual void            setDOMDocument (const QDomDocument& document, bool merge = 0);
     virtual void            stateChanged (const QString& newstate, KXMLGUIClient::ReverseStateChange reverse = KXMLGUIClient::StateNoReverse);
-//ig     virtual void       virtual_hook (int id, void* data);
-};   // KXMLGUIClient
+//ig    virtual void            virtual_hook (int id, void* data);
+public:
+    ~KXMLGUIClient ();
+};
+// KXMLGUIClient
 
 

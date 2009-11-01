@@ -31,9 +31,9 @@ class NETRootInfo : NET
 %End
 
 
-public:
 
-    enum 
+public:
+    enum
     {
         PROTOCOLS,
         WINDOW_TYPES,
@@ -42,7 +42,7 @@ public:
         ACTIONS,
         PROPERTIES_SIZE
     };
-
+//force
                             NETRootInfo (Display* display, Window supportWindow, const char* wmName, SIP_PYLIST properties, int screen = -1, bool doACtivate = 1) [(Display*, Window, const char*, const unsigned long*, int, int = -1, bool = 1)];
 %MethodCode
 int count   = PyList_Size (a3);
@@ -72,7 +72,7 @@ int count   = PyList_Size (a1);
 
     delete list;
 %End
-
+//end
                             NETRootInfo (Display* display, unsigned long properties, int screen = -1, bool doActivate = 1);
                             NETRootInfo (const NETRootInfo& rootinfo);
     Display*                x11Display () const;
@@ -86,24 +86,17 @@ int count   = PyList_Size (a1);
     bool                    isSupported (NET::State state) const;
     bool                    isSupported (NET::Action action) const;
 
-
-//io     const unsigned long*  supportedProperties () const;
-
-
-
-
-//io     const unsigned long*  passedProperties () const;
-
-
-//ig     const Window*      clientList () const;
+//ig    const unsigned long*    supportedProperties () const;
+//ig    const unsigned long*    passedProperties () const;
+//ig    const Window*           clientList () const;
     int                     clientListCount () const;
-//ig     const Window*      clientListStacking () const;
+//ig    const Window*           clientListStacking () const;
     int                     clientListStackingCount () const;
     NETSize                 desktopGeometry (int desktop) const;
     NETPoint                desktopViewport (int desktop) const;
     NETRect                 workArea (int desktop) const;
     const char*             desktopName (int desktop) const;
-//ig     const Window*      virtualRoots () const;
+//ig    const Window*           virtualRoots () const;
     int                     virtualRootsCount () const;
     NET::Orientation        desktopLayoutOrientation () const;
     QSize                   desktopLayoutColumnsRows () const;
@@ -132,8 +125,8 @@ int count   = PyList_Size (a1);
     void                    restackRequest (Window window, NET::RequestSource source, Window above, int detail, Time timestamp);
     void                    sendPing (Window window, Time timestamp);
     void                    takeActivity (Window window, Time timestamp, long flags);
-//ig     void               event (XEvent* event, unsigned long* properties, int properties_size);
-//ig     unsigned long      event (XEvent* event);
+//ig    void                    event (XEvent* event, unsigned long* properties, int properties_size);
+//ig    unsigned long           event (XEvent* event);
 
 protected:
     virtual void            addClient (Window window);
@@ -150,8 +143,13 @@ protected:
     virtual void            restackWindow (Window window, NET::RequestSource source, Window above, int detail, Time timestamp);
     virtual void            gotTakeActivity (Window window, Time timestamp, long flags);
     virtual void            changeShowingDesktop (bool showing);
-//ig     virtual void       virtual_hook (int id, void* data);
-};   // NETRootInfo
+//ig    virtual void            virtual_hook (int id, void* data);
+public:
+//ig                            NETRootInfo (Display* display, Window supportWindow, const char* wmName, const unsigned long properties [], int properties_size, int screen = -1, bool doActivate = 1);
+//ig                            NETRootInfo (Display* display, const unsigned long properties [], int properties_size, int screen = -1, bool doActivate = 1);
+    ~NETRootInfo ();
+};
+// NETRootInfo
 
 
 class NETWinInfo : NET
@@ -161,15 +159,15 @@ class NETWinInfo : NET
 %End
 
 
-public:
 
-    enum 
+public:
+    enum
     {
         PROTOCOLS,
         PROTOCOLS2,
         PROPERTIES_SIZE
     };
-
+//force
                             NETWinInfo (Display* display, Window window, Window rootWindow, SIP_PYLIST properties, NET::Role role = NET::Client) [(Display*, Window, Window, const unsigned long*, int, Role = Client)];
 %MethodCode
 int count   = PyList_Size (a3);
@@ -184,13 +182,13 @@ int count   = PyList_Size (a3);
 
     delete list;
 %End
-
+//end
                             NETWinInfo (Display* display, Window window, Window rootWindow, unsigned long properties, NET::Role role = NET::Client);
                             NETWinInfo (const NETWinInfo& wininfo);
     bool                    hasNETSupport () const;
 
 
-//io     const unsigned long*  passedProperties () const;
+//ig    const unsigned long*    passedProperties () const;
 
 
     NETRect                 iconGeometry () const;
@@ -207,7 +205,7 @@ int count   = PyList_Size (a3);
     int                     pid () const;
     Bool                    handledIcons () const;
     NET::MappingState       mappingState () const;
-//ig     void               setIcon (NETIcon icon, Bool replace = True);
+//ig    void                    setIcon (NETIcon icon, Bool replace = True);
     void                    setIconGeometry (NETRect geometry);
     void                    setExtendedStrut (const NETExtendedStrut& extended_strut);
     void                    setStrut (NETStrut strut);
@@ -222,11 +220,8 @@ int count   = PyList_Size (a3);
     void                    setHandledIcons (Bool handled);
     void                    setFrameExtents (NETStrut strut);
 //ig    NETStrut                frameExtents () const;
-//ig     NETIcon            icon (int width = -1, int height = -1) const;
-
-
-//io     const int*         iconSizes () const;
-
+//ig    NETIcon                 icon (int width = -1, int height = -1) const;
+//ig    const int*              iconSizes () const;
 
     void                    setUserTime (Time time);
     Time                    userTime () const;
@@ -243,56 +238,26 @@ int count   = PyList_Size (a3);
     const char*             windowRole () const;
     const char*             clientMachine () const;
     void                    kdeGeometry (NETRect& frame, NETRect& window);
-//ig     void               event (XEvent* event, unsigned long* properties, int properties_size);
-//ig     unsigned long      event (XEvent* event);
+//ig    void                    event (XEvent* event, unsigned long* properties, int properties_size);
+//ig    unsigned long           event (XEvent* event);
 //ig    const int OnAllDesktops;
 
 protected:
     virtual void            changeDesktop (int desktop);
     virtual void            changeState (unsigned long state, unsigned long mask);
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 
+public:
 //force
-
-public:
     static const int OnAllDesktops;
+
 //end
+//ig                            NETWinInfo (Display* display, Window window, Window rootWindow, const unsigned long properties [], int properties_size, NET::Role role = NET::Role::Client);
+    ~NETWinInfo ();
+};
+// NETWinInfo
 
-};   // NETWinInfo
-
-/*
-class NETWinInfo2 : NETWinInfo
-{
-%TypeHeaderCode
-#include <netwm.h>
-%End
-
-public:
-
-
-//mt undefined symbol: Display* display -- need mapped type?
-//io ambiguous symbol: unsigned long* properties -- specify In, Out or both
-//mt io                     NETWinInfo2 (Display* display, Window window, Window rootWindow, const unsigned long* properties, int properties_size, NET::Role role = NET::Client);
-
-
-
-
-//mt undefined symbol: Display* display -- need mapped type?
-//mt                        NETWinInfo2 (Display* display, Window window, Window rootWindow, unsigned long properties, NET::Role role = NET::Client);
-
-
-    void                    setFullscreenMonitors (NETFullscreenMonitors topology);
-    NETFullscreenMonitors   fullscreenMonitors () const;
-
-protected:
-    virtual void            changeFullscreenMonitors (NETFullscreenMonitors topology);
-};   // NETWinInfo2
-*/
-
-
-%ModuleHeaderCode
-#include <netwm.h>
-%End
+//ig class NETWinInfo2;
 
 //force
 typedef ulong Time;

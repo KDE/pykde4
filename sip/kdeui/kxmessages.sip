@@ -43,7 +43,10 @@ signals:
     void                    gotMessage (const QString& message);
 
 protected:
-//ig     virtual bool       x11Event (XEvent* ev);
-};   // KXMessages
+//ig    virtual bool            x11Event (XEvent* ev);
+public:
+    ~KXMessages ();
+};
+// KXMessages
 
 

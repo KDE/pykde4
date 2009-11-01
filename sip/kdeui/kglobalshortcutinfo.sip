@@ -35,6 +35,8 @@ public:
     QString                 friendlyName () const;
     QList<QKeySequence>     keys () const;
     QString                 uniqueName () const;
-};   // KGlobalShortcutInfo
+    ~KGlobalShortcutInfo ();
+};
+// KGlobalShortcutInfo
 
 

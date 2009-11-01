@@ -68,6 +68,9 @@ protected:
     virtual void            enterEvent (QEvent*);
     virtual void            leaveEvent (QEvent*);
     virtual bool            event (QEvent*);
-};   // KUrlLabel
+public:
+    ~KUrlLabel ();
+};
+// KUrlLabel
 
 

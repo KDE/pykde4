@@ -27,8 +27,8 @@ class KFind : QObject
 %End
 
 
-public:
 
+public:
     enum Options
     {
         WholeWordsOnly,
@@ -79,6 +79,9 @@ signals:
 protected:
     QWidget*                parentWidget () const;
     QWidget*                dialogsParent () const;
-};   // KFind
+public:
+    ~KFind ();
+};
+// KFind
 
 

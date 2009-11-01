@@ -31,7 +31,12 @@ public:
     explicit                KSplashScreen (const QPixmap& pixmap, Qt::WFlags f = 0);
 
 private:
+//force
                             KSplashScreen (const KSplashScreen&);
-};   // KSplashScreen
+//end
+public:
+    ~KSplashScreen ();
+};
+// KSplashScreen
 
 

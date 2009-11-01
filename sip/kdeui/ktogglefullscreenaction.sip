@@ -35,6 +35,9 @@ public:
 
 protected:
     bool                    eventFilter (QObject* object, QEvent* event);
-};   // KToggleFullScreenAction
+public:
+    ~KToggleFullScreenAction ();
+};
+// KToggleFullScreenAction
 
 

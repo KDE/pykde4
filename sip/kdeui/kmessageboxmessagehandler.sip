@@ -30,6 +30,8 @@ class KMessageBoxMessageHandler : QObject, KMessageHandler
 public:
     explicit                KMessageBoxMessageHandler (QWidget* parent /TransferThis/ = 0);
     virtual void            message (KMessage::MessageType messageType, const QString& text, const QString& caption);
-};   // KMessageBoxMessageHandler
+    ~KMessageBoxMessageHandler ();
+};
+// KMessageBoxMessageHandler
 
 

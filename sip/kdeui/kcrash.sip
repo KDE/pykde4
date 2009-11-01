@@ -26,12 +26,12 @@
 namespace KCrash
 {
 void                    defaultCrashHandler (int signal);
-//ig typedef void (* HandlerType)(int);
+//ig typedef void (*HandlerType)(int);
 
-//ig void               setCrashHandler (KCrash::HandlerType handler = defaultCrashHandler);
-//ig KCrash::HandlerType  crashHandler ();
-//ig void               setEmergencySaveFunction (KCrash::HandlerType saveFunction = 0);
-//ig KCrash::HandlerType  emergencySaveFunction ();
+//ig void                    setCrashHandler (KCrash::HandlerType handler = defaultCrashHandler);
+//ig KCrash::HandlerType     crashHandler ();
+//ig void                    setEmergencySaveFunction (KCrash::HandlerType saveFunction = 0);
+//ig KCrash::HandlerType     emergencySaveFunction ();
 
 enum CrashFlag
 {
@@ -46,7 +46,8 @@ typedef QFlags<KCrash::CrashFlag> CrashFlags;
 void                    setFlags (KCrash::CrashFlags flags);
 void                    setApplicationPath (const QString& path);
 void                    setApplicationName (const QString& name);
-};   // KCrash
+};
+// KCrash
 
 
 

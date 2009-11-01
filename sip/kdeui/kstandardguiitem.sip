@@ -106,7 +106,8 @@ KGuiItem                stop ();
 KGuiItem                add ();
 KGuiItem                remove ();
 KGuiItem                test ();
-};   // KStandardGuiItem
+};
+// KStandardGuiItem
 
 
 

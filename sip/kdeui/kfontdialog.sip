@@ -28,7 +28,7 @@ class KFontDialog : KDialog
 
 
 public:
-    explicit                KFontDialog (QWidget* parent /TransferThis/ = 0, const KFontChooser::DisplayFlags& flags = KFontChooser::NoDisplayFlags, const QStringList& fontlist = QStringList(), Qt::CheckState = Qt::Unchecked) [(QWidget* = 0, const KFontChooser::DisplayFlags& = KFontChooser::NoDisplayFlags, const QStringList& = QStringList(), Qt::CheckState* = 0)];
+    explicit                KFontDialog (QWidget* parent /TransferThis/ = 0, const KFontChooser::DisplayFlags& flags = KFontChooser::NoDisplayFlags, const QStringList& fontlist = QStringList(), Qt::CheckState* sizeIsRelativeState = 0) [(QWidget* = 0, const KFontChooser::DisplayFlags& = KFontChooser::NoDisplayFlags, const QStringList& = QStringList(), Qt::CheckState* = 0)];
 %MethodCode
 Py_BEGIN_ALLOW_THREADS
     sipCpp= new sipKFontDialog (a0, *a1, *a2, &a3);
@@ -74,7 +74,12 @@ signals:
     void                    fontSelected (const QFont& font);
 
 private:
+//force
                             KFontDialog (const KFontDialog&);
-};   // KFontDialog
+//end
+public:
+    ~KFontDialog ();
+};
+// KFontDialog
 
 

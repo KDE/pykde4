@@ -41,6 +41,9 @@ protected:
 signals:
     void                    mailClick (const QString& name, const QString& address);
     void                    urlClick (const QString& url);
-};   // KTextBrowser
+public:
+    ~KTextBrowser ();
+};
+// KTextBrowser
 
 

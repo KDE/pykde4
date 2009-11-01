@@ -33,6 +33,7 @@ public:
     explicit                KSvgRenderer (const QByteArray& contents, QObject* parent /TransferThis/ = 0);
     bool                    load (const QString& filename);
     bool                    load (const QByteArray& contents);
-};   // KSvgRenderer
+};
+// KSvgRenderer
 
 

@@ -31,10 +31,10 @@ class Wallet : QObject
 
 protected:
                             Wallet (int handle, const QString& name);
-//ig                        Wallet (const KWallet::Wallet&);
+//ig                            Wallet (const KWallet::Wallet&);
+
 
 public:
-
     enum EntryType
     {
         Unknown,
@@ -83,7 +83,7 @@ public:
     virtual int             readMap (const QString& key, QMap<QString,QString>& value);
     virtual int             readPassword (const QString& key, QString& value);
     int                     readEntryList (const QString& key, QMap<QString,QByteArray>& value);
-//ig     int                readMapList (const QString& key, QMap<QString,QMap<QString,QString>>& value);
+//ig    int                     readMapList (const QString& key, QMap<QString,QMap<QString,QString>>& value);
     int                     readPasswordList (const QString& key, QMap<QString,QString>& value);
     virtual int             writeEntry (const QString& key, const QByteArray& value, KWallet::Wallet::EntryType entryType);
     virtual int             writeEntry (const QString& key, const QByteArray& value);
@@ -103,9 +103,13 @@ signals:
     void                    walletOpened (bool success);
 
 protected:
-//ig     virtual void       virtual_hook (int id, void* data);
-};   // Wallet
+//ig    virtual void            virtual_hook (int id, void* data);
+public:
+    ~Wallet ();
+};
+// Wallet
 
-};   // KWallet
+};
+// KWallet
 
 

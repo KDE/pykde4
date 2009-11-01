@@ -27,8 +27,8 @@ class KMessageBox
 %End
 
 
-public:
 
+public:
     enum ButtonCode
     {
         Ok,
@@ -111,8 +111,9 @@ public:
     static void             saveDontShowAgainYesNo (const QString& dontShowAgainName, KMessageBox::ButtonCode result);
     static void             saveDontShowAgainContinue (const QString& dontShowAgainName);
     static void             setDontShowAskAgainConfig (KConfig* cfg);
-    static int              createKMessageBox (KDialog* dialog, QMessageBox::Icon icon, const QString& text, const QStringList& strlist, const QString& ask, bool* checkboxReturn /In, Out/, KMessageBox::Options options, const QString& details = QString());
+    static int              createKMessageBox (KDialog* dialog, QMessageBox::Icon icon, const QString& text, const QStringList& strlist, const QString& ask, bool* checkboxReturn /In,Out/, KMessageBox::Options options, const QString& details = QString());
     static int              createKMessageBox (KDialog* dialog, const QIcon& icon, const QString& text, const QStringList& strlist, const QString& ask, bool* checkboxReturn /Out/, KMessageBox::Options options, const QString& details = QString(), QMessageBox::Icon notifyType = QMessageBox::Information);
-};   // KMessageBox
+};
+// KMessageBox
 
 

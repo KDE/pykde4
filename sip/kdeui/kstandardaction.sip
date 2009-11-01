@@ -170,7 +170,8 @@ KAction*                tipOfDay (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject* paren
 KAction*                reportBug (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject* parent /Transfer/);
 KAction*                aboutApp (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject* parent /Transfer/);
 KAction*                aboutKDE (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject* parent /Transfer/);
-};   // KStandardAction
+};
+// KStandardAction
 
 
 

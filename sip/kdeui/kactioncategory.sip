@@ -37,6 +37,8 @@ public:
     KActionCollection*      collection () const;
     QString                 text () const;
     void                    setText (const QString& text);
-};   // KActionCategory
+    ~KActionCategory ();
+};
+// KActionCategory
 
 

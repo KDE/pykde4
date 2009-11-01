@@ -57,7 +57,10 @@ protected:
     virtual void            disconnectTreeWidget (QTreeWidget*);
     virtual bool            canChooseColumnsCheck ();
     virtual bool            event (QEvent* event);
-};   // KTreeWidgetSearchLine
+public:
+    ~KTreeWidgetSearchLine ();
+};
+// KTreeWidgetSearchLine
 
 
 class KTreeWidgetSearchLineWidget : QWidget
@@ -74,6 +77,9 @@ public:
 protected:
     virtual void            createWidgets ();
     virtual KTreeWidgetSearchLine*  createSearchLine (QTreeWidget* treeWidget) const;
-};   // KTreeWidgetSearchLineWidget
+public:
+    ~KTreeWidgetSearchLineWidget ();
+};
+// KTreeWidgetSearchLineWidget
 
 

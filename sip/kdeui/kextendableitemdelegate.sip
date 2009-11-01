@@ -25,8 +25,8 @@ class KExtendableItemDelegate : QStyledItemDelegate
 #include <kextendableitemdelegate.h>
 %End
 
-public:
 
+public:
     enum auxDataRoles
     {
         ShowExtensionIndicatorRole
@@ -51,6 +51,9 @@ protected:
     void                    setContractPixmap (const QPixmap& pixmap);
     QPixmap                 extendPixmap ();
     QPixmap                 contractPixmap ();
-};   // KExtendableItemDelegate
+public:
+    ~KExtendableItemDelegate ();
+};
+// KExtendableItemDelegate
 
 

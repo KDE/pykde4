@@ -37,6 +37,8 @@ public:
     void                    setMaximumWidth (int width);
     virtual QWidget*        createWidget (QWidget* parent /Transfer/);
     virtual void            deleteWidget (QWidget* widget);
-};   // KToolBarSpacerAction
+    ~KToolBarSpacerAction ();
+};
+// KToolBarSpacerAction
 
 

@@ -37,8 +37,12 @@ public:
 signals:
     void                    dictionaryChanged (const QString& dictionary);
     void                    dictionaryNameChanged (const QString& dictionaryName);
-};   // DictionaryComboBox
+public:
+    ~DictionaryComboBox ();
+};
+// DictionaryComboBox
 
-};   // Sonnet
+};
+// Sonnet
 
 

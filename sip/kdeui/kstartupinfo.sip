@@ -35,7 +35,7 @@ public:
     static void             silenceStartup (bool silence);
     static QByteArray       createNewStartupId ();
 
-    enum 
+    enum
     {
         CleanOnCantDetect,
         DisableKWinModule,
@@ -43,15 +43,15 @@ public:
     };
 
     explicit                KStartupInfo (int flags, QObject* parent /TransferThis/ = 0);
-//ig     explicit           KStartupInfo (bool clean_on_cantdetect, QObject* parent /TransferThis/ = 0);
+//ig    explicit                KStartupInfo (bool clean_on_cantdetect, QObject* parent /TransferThis/ = 0);
     static bool             sendStartup (const KStartupInfoId& id, const KStartupInfoData& data);
-//ig     static bool        sendStartupX (Display* dpy, const KStartupInfoId& id, const KStartupInfoData& data);
+//ig    static bool             sendStartupX (Display* dpy, const KStartupInfoId& id, const KStartupInfoData& data);
     static bool             sendChange (const KStartupInfoId& id, const KStartupInfoData& data);
-//ig     static bool        sendChangeX (Display* dpy, const KStartupInfoId& id, const KStartupInfoData& data);
+//ig    static bool             sendChangeX (Display* dpy, const KStartupInfoId& id, const KStartupInfoData& data);
     static bool             sendFinish (const KStartupInfoId& id);
-//ig     static bool        sendFinishX (Display* dpy, const KStartupInfoId& id);
+//ig    static bool             sendFinishX (Display* dpy, const KStartupInfoId& id);
     static bool             sendFinish (const KStartupInfoId& id, const KStartupInfoData& data);
-//ig     static bool        sendFinishX (Display* dpy, const KStartupInfoId& id, const KStartupInfoData& data);
+//ig    static bool             sendFinishX (Display* dpy, const KStartupInfoId& id, const KStartupInfoData& data);
     static KStartupInfoId   currentStartupIdEnv ();
     static void             resetStartupEnv ();
 
@@ -80,8 +80,13 @@ protected:
     virtual void            customEvent (QEvent* e_P);
 
 private:
+//force
                             KStartupInfo (const KStartupInfo&);
-};   // KStartupInfo
+//end
+public:
+    ~KStartupInfo ();
+};
+// KStartupInfo
 
 
 class KStartupInfoId
@@ -106,14 +111,16 @@ public:
 private:
     explicit                KStartupInfoId (const QString& txt);
 
-//force
 
 public:
+//force
     typedef int pid_t;
 
-//end
 
-};   // KStartupInfoId
+//end
+    ~KStartupInfoId ();
+};
+// KStartupInfoId
 
 
 class KStartupInfoData
@@ -141,7 +148,7 @@ public:
     const QByteArray        findWMClass () const;
     QByteArray              WMClass () const;
     void                    addPid (pid_t pid);
-//ig     QList<pid_t>       pids () const;
+//ig    QList<pid_t>            pids () const;
     bool                    is_pid (pid_t pid) const;
     void                    setHostname (const QByteArray& hostname = QByteArray());
     QByteArray              hostname () const;
@@ -170,12 +177,14 @@ public:
 private:
     explicit                KStartupInfoData (const QString& txt);
 
-//force
 
 public:
+//force
     QList<int>              pids () const;
-//end
 
-};   // KStartupInfoData
+//end
+    ~KStartupInfoData ();
+};
+// KStartupInfoData
 
 

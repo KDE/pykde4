@@ -28,12 +28,13 @@ namespace KInputDialog
 QString                 getText (const QString& caption, const QString& label, const QString& value = QString(), bool* ok /Out/ = 0, QWidget* parent /Transfer/ = 0, QValidator* validator = 0, const QString& mask = QString(), const QString& whatsThis = QString(), const QStringList& completionList = QStringList());
 QString                 getMultiLineText (const QString& caption, const QString& label, const QString& value = QString(), bool* ok /Out/ = 0, QWidget* parent /Transfer/ = 0);
 int                     getInteger (const QString& caption, const QString& label, int value = 0, int minValue = INT_MIN, int maxValue = INT_MAX, int step = 1, int base = 10, bool* ok /Out/ = 0, QWidget* parent /Transfer/ = 0);
-//ig int                getInteger (const QString& caption, const QString& label, int value = 0, int minValue = INT_MIN, int maxValue = INT_MAX, int step = 1, bool* ok /Out/ = 0, QWidget* parent /Transfer/ = 0);
-//ig double             getDouble (const QString& caption, const QString& label, double value = 0, double minValue = -DBL_MAX, double maxValue = DBL_MAX, double step = 0.1, int decimals = 1, bool* ok /Out/ = 0, QWidget* parent /Transfer/ = 0);
-double                  getDouble (const QString& caption, const QString& label, double value = 0, double minValue = -DBL_MAX, double maxValue = DBL_MAX, int decimals = 1, bool* ok /Out/ = 0, QWidget* parent /Transfer/ = 0);
+//ig int                     getInteger (const QString& caption, const QString& label, int value = 0, int minValue = INT_MIN, int maxValue = INT_MAX, int step = 1, int base = 10, bool* ok = 0, QWidget* parent /Transfer/ = 0);
+//ig double                  getDouble (const QString& caption, const QString& label, double value = 0, double minValue = -DBL_MAX, double maxValue = DBL_MAX, double step = 0.1, int decimals = 1, bool* ok /Out/ = 0, QWidget* parent /Transfer/ = 0);
 QString                 getItem (const QString& caption, const QString& label, const QStringList& list, int current = 0, bool editable = 0, bool* ok /Out/ = 0, QWidget* parent /Transfer/ = 0);
 QStringList             getItemList (const QString& caption, const QString& label, const QStringList& list = QStringList(), const QStringList& select = QStringList(), bool multiple = 0, bool* ok /Out/ = 0, QWidget* parent /Transfer/ = 0);
-};   // KInputDialog
+double                  getDouble (const QString& caption, const QString& label, double value = 0, double minValue = -DBL_MAX, double maxValue = DBL_MAX, double step = 0.1, int decimals = 1, bool* ok = 0, QWidget* parent /Transfer/ = 0);
+};
+// KInputDialog
 
 
 

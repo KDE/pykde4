@@ -32,6 +32,8 @@ public:
                             KToggleToolBarAction (KToolBar* toolBar, const QString& text, QObject* parent /TransferThis/);
     KToolBar*               toolBar ();
     virtual bool            eventFilter (QObject* watched, QEvent* event);
-};   // KToggleToolBarAction
+    ~KToggleToolBarAction ();
+};
+// KToggleToolBarAction
 
 

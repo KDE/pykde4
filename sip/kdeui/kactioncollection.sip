@@ -67,7 +67,7 @@ signals:
     void                    actionTriggered (QAction* action);
 
 protected:
-//ig     virtual void       connectNotify (const char* signal);
+//ig    virtual void            connectNotify (const char* signal);
     virtual void            slotActionTriggered ();
     virtual void            slotActionHighlighted ();
 
@@ -82,6 +82,9 @@ public:
 
 private:
                             KActionCollection (const KXMLGUIClient* parent /TransferThis/);
-};   // KActionCollection
+public:
+    ~KActionCollection ();
+};
+// KActionCollection
 
 

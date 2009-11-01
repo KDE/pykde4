@@ -85,6 +85,7 @@ static void kdeui_UpdatePyArgv(PyObject *argvlist, int argc, char **argv)
 public:
     explicit                KApplication (bool GUIenabled = 1);
     explicit                KApplication (Display* display, Qt::HANDLE visual = 0, Qt::HANDLE colormap = 0);
+//force
                             KApplication (Display* display, SIP_PYLIST list, const QByteArray& rAppName, bool GUIenabled = 1) [(Display*, int&, char**, const QByteArray&, bool = 1)];
 %MethodCode
 // The Python interface is a list of argument strings that is modified.
@@ -109,6 +110,8 @@ public:
             kdeui_UpdatePyArgv(a1, argc, argv);
         }
 %End
+//end
+//ig                            KApplication (Display* display, int& argc, char** argv, const QByteArray& rAppName, bool GUIenabled = 1);
 
     static KApplication*    kApplication ();
     KConfig*                sessionConfig ();
@@ -120,7 +123,7 @@ public:
     void                    setTopWidget (QWidget* topWidget);
     static QString          tempSaveName (const QString& pFilename);
     static QString          checkRecoverFile (const QString& pFilename, bool& bRecover /Out/);
-//ig     static Display*    getDisplay ();
+//ig    static Display*         getDisplay ();
     void                    installX11EventFilter (QWidget* filter);
     void                    removeX11EventFilter (const QWidget* filter);
     QByteArray              startupId () const;
@@ -130,9 +133,9 @@ public:
     unsigned long           userTimestamp () const;
     void                    updateRemoteUserTimestamp (const QString& service, int time = 0);
     bool                    notify (QObject* receiver, QEvent* event);
-//ig     int                xErrhandler (Display*, void*);
+//ig    int                     xErrhandler (Display*, void*);
     int                     xioErrhandler (Display*);
-//ig     void               iceIOErrorHandler (_IceConn* conn);
+//ig    void                    iceIOErrorHandler (_IceConn* conn);
     bool loadedByKdeinit;
     void                    updateUserTimestamp (int time = 0);
     void                    reparseConfiguration ();
@@ -144,12 +147,15 @@ signals:
 protected:
                             KApplication (bool GUIenabled, const KComponentData& cData);
                             KApplication (Display* display, Qt::HANDLE visual, Qt::HANDLE colormap, const KComponentData& cData);
-//ig     bool               x11EventFilter (XEvent*);
+//ig    bool                    x11EventFilter (XEvent*);
 
 private:
                             KApplication (const KApplication&);
                             KApplication (bool, bool);
 
-};   // KApplication
+public:
+    ~KApplication ();
+};
+// KApplication
 
 

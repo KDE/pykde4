@@ -35,6 +35,9 @@ public:
 
 protected:
     virtual void            slotToggled (bool checked);
-};   // KToggleAction
+public:
+    ~KToggleAction ();
+};
+// KToggleAction
 
 

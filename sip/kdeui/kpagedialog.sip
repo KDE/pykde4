@@ -27,8 +27,8 @@ class KPageDialog : KDialog
 %End
 
 
-public:
 
+public:
     enum FaceType
     {
         Auto,
@@ -56,9 +56,12 @@ signals:
 
 protected:
                             KPageDialog (KPageWidget* widget, QWidget* parent /TransferThis/, Qt::WFlags flags = 0);
-//ig                        KPageDialog (KPageDialogPrivate& dd, KPageWidget* widget, QWidget* parent /TransferThis/, Qt::WFlags flags = 0);
+//ig                            KPageDialog (KPageDialogPrivate& dd, KPageWidget* widget, QWidget* parent /TransferThis/, Qt::WFlags flags = 0);
     KPageWidget*            pageWidget ();
-//ig     const KPageWidget*  pageWidget () const;
-};   // KPageDialog
+//ig    const KPageWidget*      pageWidget () const;
+public:
+    ~KPageDialog ();
+};
+// KPageDialog
 
 

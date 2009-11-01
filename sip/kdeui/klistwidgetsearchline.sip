@@ -39,6 +39,9 @@ public:
 protected:
     virtual bool            itemMatches (const QListWidgetItem* item, const QString& s) const;
     virtual bool            event (QEvent* event);
-};   // KListWidgetSearchLine
+public:
+    ~KListWidgetSearchLine ();
+};
+// KListWidgetSearchLine
 
 

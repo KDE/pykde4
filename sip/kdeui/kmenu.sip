@@ -35,7 +35,7 @@ public:
     void                    setKeyboardShortcutsEnabled (bool enable);
     void                    setKeyboardShortcutsExecute (bool enable);
     QMenu*                  contextMenu ();
-//ig     const QMenu*       contextMenu () const;
+//ig    const QMenu*            contextMenu () const;
     void                    hideContextMenu ();
     static KMenu*           contextMenuFocus ();
     static QAction*         contextMenuFocusAction ();
@@ -53,6 +53,9 @@ protected:
     virtual bool            focusNextPrevChild (bool next);
     virtual void            contextMenuEvent (QContextMenuEvent* e);
     virtual void            hideEvent (QHideEvent*);
-};   // KMenu
+public:
+    ~KMenu ();
+};
+// KMenu
 
 

@@ -39,6 +39,9 @@ signals:
 
 protected:
     virtual void            actionTriggered (QAction* action);
-};   // KFontSizeAction
+public:
+    ~KFontSizeAction ();
+};
+// KFontSizeAction
 
 

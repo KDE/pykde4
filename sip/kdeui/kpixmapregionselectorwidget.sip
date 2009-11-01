@@ -27,8 +27,8 @@ class KPixmapRegionSelectorWidget : QWidget
 %End
 
 
-public:
 
+public:
     enum RotateDirection
     {
         Rotate90,
@@ -55,7 +55,12 @@ protected:
     virtual KMenu*          createPopupMenu ();
 
 private:
+//force
                             KPixmapRegionSelectorWidget (const KPixmapRegionSelectorWidget&);
-};   // KPixmapRegionSelectorWidget
+//end
+public:
+    ~KPixmapRegionSelectorWidget ();
+};
+// KPixmapRegionSelectorWidget
 
 

@@ -34,7 +34,7 @@ public:
                             KGuiItem (const KGuiItem& rhs);
     QString                 text () const;
     QString                 plainText () const;
-//ig     QIcon              iconSet (KIconLoader::Group = KIconLoader::Small, int size = 0) const;
+//ig    QIcon                   iconSet (KIconLoader::Group = KIconLoader::Small, int size = 0) const;
     KIcon                   icon () const;
     QString                 iconName () const;
     QString                 toolTip () const;
@@ -48,6 +48,8 @@ public:
     void                    setToolTip (const QString& tooltip);
     void                    setWhatsThis (const QString& whatsThis);
     void                    setEnabled (bool enable);
-};   // KGuiItem
+    ~KGuiItem ();
+};
+// KGuiItem
 
 

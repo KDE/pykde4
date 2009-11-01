@@ -47,6 +47,8 @@ signals:
 
 public:
     void                    toggleActive ();
-};   // KSystemTrayIcon
+    ~KSystemTrayIcon ();
+};
+// KSystemTrayIcon
 
 

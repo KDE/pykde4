@@ -64,9 +64,15 @@ public:
     void                    slotRehighlight ();
 
 private:
+//force
                             Highlighter (const Sonnet::Highlighter&);
-};   // Highlighter
+//end
+public:
+    ~Highlighter ();
+};
+// Highlighter
 
-};   // Sonnet
+};
+// Sonnet
 
 

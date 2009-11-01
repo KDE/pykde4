@@ -26,6 +26,7 @@ namespace KXUtils
 QPixmap                 createPixmapFromHandle (WId pixmap, WId mask = 0);
 int                     timestampCompare (unsigned long time1, unsigned long time2);
 int                     timestampDiff (unsigned long time1, unsigned long time2);
-};   // KXUtils
+};
+// KXUtils
 
 

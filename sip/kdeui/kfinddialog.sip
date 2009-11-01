@@ -48,6 +48,9 @@ signals:
 
 protected:
     virtual void            showEvent (QShowEvent*);
-};   // KFindDialog
+public:
+    ~KFindDialog ();
+};
+// KFindDialog
 
 

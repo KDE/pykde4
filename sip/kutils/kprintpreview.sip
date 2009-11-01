@@ -32,6 +32,9 @@ public:
 
 protected:
     void                    showEvent (QShowEvent* event);
-};   // KPrintPreview
+public:
+    ~KPrintPreview ();
+};
+// KPrintPreview
 
 

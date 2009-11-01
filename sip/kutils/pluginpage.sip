@@ -35,8 +35,11 @@ public:
     virtual void            load ();
     virtual void            save ();
     virtual void            defaults ();
-};   // PluginPage
+    ~PluginPage ();
+};
+// PluginPage
 
-};   // KSettings
+};
+// KSettings
 
 

@@ -27,8 +27,8 @@ class KPluginSelector : QWidget
 %End
 
 
-public:
 
+public:
     enum PluginLoadMethod
     {
         ReadConfigFile,
@@ -48,6 +48,9 @@ public:
 signals:
     void                    changed (bool hasChanged);
     void                    configCommitted (const QByteArray& componentName);
-};   // KPluginSelector
+public:
+    ~KPluginSelector ();
+};
+// KPluginSelector
 
 

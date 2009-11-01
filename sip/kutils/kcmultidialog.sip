@@ -39,12 +39,15 @@ signals:
 
 protected:
                             KCMultiDialog (KPageWidget* pageWidget, QWidget* parent /TransferThis/, Qt::WFlags flags = 0);
-//ig                        KCMultiDialog (KCMultiDialogPrivate& dd, KPageWidget* pageWidget, QWidget* parent /TransferThis/, Qt::WFlags flags = 0);
+//ig                            KCMultiDialog (KCMultiDialogPrivate& dd, KPageWidget* pageWidget, QWidget* parent /TransferThis/, Qt::WFlags flags = 0);
     void                    slotDefaultClicked ();
     void                    slotUser1Clicked ();
     void                    slotApplyClicked ();
     void                    slotOkClicked ();
     void                    slotHelpClicked ();
-};   // KCMultiDialog
+public:
+    ~KCMultiDialog ();
+};
+// KCMultiDialog
 
 

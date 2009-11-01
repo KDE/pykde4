@@ -33,6 +33,7 @@
 #include <kpluginselector.h>
 #include <kprintpreview.h>
 #include <pluginpage.h>
+#include <qobject.h>
 %End
 
 class KCModuleProxy : QWidget
@@ -72,35 +73,37 @@ signals:
 protected:
     void                    showEvent (QShowEvent*);
 
-public:
 
 //  Subclasses of QObject
 
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'QObject'
     sipClass = NULL;
 
-    if (dynamic_cast<KCModuleProxy*>(sipCpp))
-        sipClass = sipClass_KCModuleProxy;
-    else if (dynamic_cast<KCMultiDialog*>(sipCpp))
-        {
-            sipClass = sipClass_KCMultiDialog;
-            if (dynamic_cast<KSettings::Dialog*>(sipCpp))
-                sipClass = sipClass_KSettings_Dialog;
-        }
-    else if (dynamic_cast<KEmoticons*>(sipCpp))
+    if (dynamic_cast<KEmoticons*>(sipCpp))
         sipClass = sipClass_KEmoticons;
     else if (dynamic_cast<KEmoticonsProvider*>(sipCpp))
         sipClass = sipClass_KEmoticonsProvider;
-    else if (dynamic_cast<KPluginSelector*>(sipCpp))
-        sipClass = sipClass_KPluginSelector;
-    else if (dynamic_cast<KPrintPreview*>(sipCpp))
-        sipClass = sipClass_KPrintPreview;
     else if (dynamic_cast<KSettings::PluginPage*>(sipCpp))
         sipClass = sipClass_KSettings_PluginPage;
+    else if (dynamic_cast<KCModuleProxy*>(sipCpp))
+        sipClass = sipClass_KCModuleProxy;
+    else if (dynamic_cast<KPluginSelector*>(sipCpp))
+        sipClass = sipClass_KPluginSelector;
+    else if (dynamic_cast<KCMultiDialog*>(sipCpp))
+        {
+        sipClass = sipClass_KCMultiDialog;
+        if (dynamic_cast<KSettings::Dialog*>(sipCpp))
+            sipClass = sipClass_KSettings_Dialog;
+        }
+    else if (dynamic_cast<KPrintPreview*>(sipCpp))
+        sipClass = sipClass_KPrintPreview;
 %End
 
-};   // KCModuleProxy
+public:
+    ~KCModuleProxy ();
+};
+// KCModuleProxy
 
 
 

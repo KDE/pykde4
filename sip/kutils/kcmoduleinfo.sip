@@ -44,6 +44,8 @@ public:
     QString                 library () const;
     QString                 handle () const;
     int                     weight () const;
-};   // KCModuleInfo
+    ~KCModuleInfo ();
+};
+// KCModuleInfo
 
 

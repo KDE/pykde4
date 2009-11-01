@@ -25,8 +25,8 @@ class KEmoticonsProvider : QObject
 #include <kemoticonsprovider.h>
 %End
 
-public:
 
+public:
     class Emoticon
     {
 
@@ -37,10 +37,10 @@ public:
         QString matchTextEscaped;
         QString picPath;
         QString picHTMLCode;
-    };   // Emoticon
+    };
+// Emoticon
 
 
-public:
 
     enum AddEmoticonOption
     {
@@ -68,6 +68,11 @@ protected:
     void                    removeEmoticonsMap (QString key);
     void                    addEmoticonIndex (const QString& path, const QStringList& emoList);
     void                    removeEmoticonIndex (const QString& path, const QStringList& emoList);
-};   // KEmoticonsProvider
+public:
+    ~KEmoticonsProvider ();
+//FIXME
+//ig    QHash<QChar,QList<Emoticon>>  emoticonsIndex () const;
+};
+// KEmoticonsProvider
 
 

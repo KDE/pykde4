@@ -39,7 +39,8 @@ KCModule*               loadModule (const QString& module, KCModuleLoader::Error
 void                    unloadModule (const KCModuleInfo& mod);
 void                    showLastLoaderError (QWidget* parent /Transfer/);
 KCModule*               reportError (KCModuleLoader::ErrorReporting report, const QString& text, const QString& details, QWidget* parent /Transfer/);
-};   // KCModuleLoader
+};
+// KCModuleLoader
 
 
 

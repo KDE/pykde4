@@ -25,8 +25,8 @@ class KEmoticonsTheme
 #include <kemoticonstheme.h>
 %End
 
-public:
 
+public:
     enum ParseModeEnum
     {
         DefaultParse,
@@ -57,10 +57,10 @@ public:
         QString text;
         QString picPath;
         QString picHTMLCode;
-    };   // Token
+    };
+// Token
 
 
-public:
                             KEmoticonsTheme ();
                             KEmoticonsTheme (const KEmoticonsTheme& ket);
                             KEmoticonsTheme (KEmoticonsProvider* p);
@@ -77,6 +77,8 @@ public:
     QHash<QString,QStringList>  emoticonsMap () const;
     void                    createNew ();
     bool                    isNull () const;
-};   // KEmoticonsTheme
+    ~KEmoticonsTheme ();
+};
+// KEmoticonsTheme
 
 

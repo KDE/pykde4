@@ -37,6 +37,8 @@ public:
     QStringList             installTheme (const QString& archiveName);
     static void             setParseMode (KEmoticonsTheme::ParseMode mode);
     static KEmoticonsTheme::ParseMode  parseMode ();
-};   // KEmoticons
+    ~KEmoticons ();
+};
+// KEmoticons
 
 

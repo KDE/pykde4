@@ -32,9 +32,11 @@ KSharedConfig::Ptr      configForComponentName (const QString& componentName);
 QList<QString>          componentNames ();
 void                    reparseConfiguration (const QString& componentName);
 void                    syncConfiguration ();
-};   // Dispatcher
+};
+// Dispatcher
 
-};   // KSettings
+};
+// KSettings
 
 
 

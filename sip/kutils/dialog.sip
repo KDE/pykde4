@@ -25,8 +25,8 @@ namespace KSettings
 class Dialog : KCMultiDialog
 {
 %TypeHeaderCode
-#include <kcmultidialog.h>
 #include <dialog.h>
+#include <kcmultidialog.h>
 %End
 
 
@@ -45,8 +45,12 @@ protected:
 
 signals:
     void                    pluginSelectionChanged ();
-};   // Dialog
+public:
+    ~Dialog ();
+};
+// Dialog
 
-};   // KSettings
+};
+// KSettings
 
 

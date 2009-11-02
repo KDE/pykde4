@@ -72,13 +72,17 @@ protected:
         Delayed
     };
 
-//ig     KParts::BrowserRun::NonEmbeddableResult  handleNonEmbeddable (const QString& mimeType);
+//ig    KParts::BrowserRun::NonEmbeddableResult  handleNonEmbeddable (const QString& mimeType);
     void                    slotBrowserScanFinished (KJob* job);
     void                    slotBrowserMimetype (KIO::Job* job, const QString& type);
     void                    slotCopyToTempFileResult (KJob* job);
     virtual void            slotStatResult (KJob* job);
-};   // BrowserRun
+public:
+    ~BrowserRun ();
+};
+// BrowserRun
 
-};   // KParts
+};
+// KParts
 
 

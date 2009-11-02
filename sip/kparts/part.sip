@@ -46,13 +46,18 @@ protected:
     };
 
     void                    loadPlugins (QObject* parent /Transfer/, KXMLGUIClient* parentGUIClient, const KComponentData& componentData);
-//ig     void               setPluginLoadingMode (KParts::PartBase::PluginLoadingMode loadingMode);
+//ig    void                    setPluginLoadingMode (KParts::PartBase::PluginLoadingMode loadingMode);
     void                    setPluginInterfaceVersion (int version);
-//ig                        PartBase (PartBasePrivate& dd);
+//ig                            PartBase (PartBasePrivate& dd);
 
 private:
+//force
                             PartBase (const KParts::PartBase&);
-};   // PartBase
+//end
+public:
+    ~PartBase ();
+};
+// PartBase
 
 
 class Part : QObject, KParts::PartBase
@@ -90,11 +95,16 @@ protected:
     void                    loadPlugins ();
 
     void                    slotWidgetDestroyed ();
-//ig                        Part (PartPrivate& dd, QObject* parent /TransferThis/);
+//ig                            Part (PartPrivate& dd, QObject* parent /TransferThis/);
 
 private:
+//force
                             Part (const KParts::Part&);
-};   // Part
+//end
+public:
+    ~Part ();
+};
+// Part
 
 
 class OpenUrlArguments
@@ -120,8 +130,10 @@ public:
     void                    setActionRequestedByUser (bool userRequested);
 
     QMap<QString,QString>&  metaData ();
-//ig     const QMap<QString,QString>&  metaData () const;
-};   // OpenUrlArguments
+//ig    const QMap<QString,QString>&  metaData () const;
+    ~OpenUrlArguments ();
+};
+// OpenUrlArguments
 
 
 class ReadOnlyPart : KParts::Part
@@ -153,7 +165,7 @@ signals:
     void                    canceled (const QString& errMsg);
 
 protected:
-    virtual bool            openFile () = 0;
+    virtual bool            openFile ()=0;
     void                    abortLoad ();
     virtual void            guiActivateEvent (KParts::GUIActivateEvent* event);
     bool                    isLocalFileTemporary () const;
@@ -161,11 +173,16 @@ protected:
     void                    setUrl (const KUrl& url);
     QString                 localFilePath () const;
     void                    setLocalFilePath (const QString& localFilePath);
-//ig                        ReadOnlyPart (ReadOnlyPartPrivate& dd, QObject* parent /TransferThis/);
+//ig                            ReadOnlyPart (ReadOnlyPartPrivate& dd, QObject* parent /TransferThis/);
 
 private:
+//force
                             ReadOnlyPart (const KParts::ReadOnlyPart&);
-};   // ReadOnlyPart
+//end
+public:
+    ~ReadOnlyPart ();
+};
+// ReadOnlyPart
 
 
 class ReadWritePart : KParts::ReadOnlyPart
@@ -187,7 +204,7 @@ public:
     virtual void            setModified (bool modified);
 
 signals:
-//ig     void               sigQueryClose (bool* handled, bool* abortClosing);
+//ig    void                    sigQueryClose (bool* handled, bool* abortClosing);
 
 public:
     void                    setModified ();
@@ -195,13 +212,19 @@ public:
     bool                    waitSaveComplete ();
 
 protected:
-    virtual bool            saveFile () = 0;
+    virtual bool            saveFile ()=0;
     virtual bool            saveToUrl ();
 
 private:
+//force
                             ReadWritePart (const KParts::ReadWritePart&);
-};   // ReadWritePart
+//end
+public:
+    ~ReadWritePart ();
+};
+// ReadWritePart
 
-};   // KParts
+};
+// KParts
 
 

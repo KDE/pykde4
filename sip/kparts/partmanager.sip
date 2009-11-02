@@ -29,8 +29,8 @@ class PartManager : QObject
 %End
 
 
-public:
 
+public:
     enum SelectionPolicy
     {
         Direct,
@@ -81,8 +81,12 @@ protected:
     void                    slotObjectDestroyed ();
     void                    slotWidgetDestroyed ();
     void                    slotManagedTopLevelWidgetDestroyed ();
-};   // PartManager
+public:
+    ~PartManager ();
+};
+// PartManager
 
-};   // KParts
+};
+// KParts
 
 

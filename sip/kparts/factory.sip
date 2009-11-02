@@ -36,10 +36,25 @@ public:
     static KComponentData   partComponentDataFromLibrary (const QString& libraryName);
 
 protected:
-    virtual KParts::Part*   createPartObject (QWidget* parentWidget = 0, QObject* parent /Transfer/ = 0, const char* classname = "KParts::Part", const QStringList& args = QStringList()) = 0;
+    virtual KParts::Part*   createPartObject (QWidget* parentWidget = 0, QObject* parent /Transfer/ = 0, const char* classname = "KParts::Part", const QStringList& args = QStringList())=0;
 //ig    virtual QObject*        createObject (QObject* parent /Transfer/ = 0, const char* classname = "QObject", const QStringList& args = QStringList());
-};   // Factory
+public:
+    ~Factory ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'Factory'
+    sipClass = NULL;
 
-};   // KParts
+    if (dynamic_cast<KParts::Factory*>(sipCpp))
+        sipClass = sipClass_KParts_Factory;
+%End
+};
+// Factory
+
+};
+// KParts
 
 
+%ModuleHeaderCode
+//ctscc
+#include <kparts/factory.h>
+%End

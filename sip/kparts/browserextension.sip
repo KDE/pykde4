@@ -30,6 +30,7 @@
 #include <kparts/part.h>
 #include <kparts/partmanager.h>
 #include <kparts/plugin.h>
+#include <qobject.h>
 #include <kparts/statusbarextension.h>
 %End
 
@@ -49,21 +50,12 @@ public:
     QStringList docState;
     bool softReload;
     QByteArray postData;
-    void                    setContentType (const QString& contentType);
-    QString                 contentType () const;
-    void                    setDoPost (bool enable);
-    bool                    doPost () const;
-    void                    setLockHistory (bool lock);
-    bool                    lockHistory () const;
-    void                    setNewTab (bool newTab);
-    bool                    newTab () const;
     QString frameName;
     bool trustedSource;
-    bool                    redirectedRequest () const;
-    void                    setRedirectedRequest (bool redirected);
-    void                    setForcesNewWindow (bool forcesNewWindow);
-    bool                    forcesNewWindow () const;
-};   // BrowserArguments
+private:
+    ~BrowserArguments ();
+};
+// BrowserArguments
 
 
 class WindowArgs
@@ -100,7 +92,9 @@ public:
     bool                    lowerWindow () const;
     void                    setScrollBarsVisible (bool visible);
     bool                    scrollBarsVisible () const;
-};   // WindowArgs
+    ~WindowArgs ();
+};
+// WindowArgs
 
 
 class OpenUrlEvent : KParts::Event
@@ -117,7 +111,9 @@ public:
     KParts::OpenUrlArguments  arguments () const;
     KParts::BrowserArguments  browserArguments () const;
     static bool             test (const QEvent* event);
-};   // OpenUrlEvent
+    ~OpenUrlEvent ();
+};
+// OpenUrlEvent
 
 
 class BrowserExtension : QObject
@@ -165,7 +161,7 @@ public:
     static KParts::BrowserExtension::ActionSlotMap*  actionSlotMapPtr ();
     static KParts::BrowserExtension*  childObject (QObject* obj);
     void                    pasteRequest ();
-//ig     typedef QMap<QString,QList<QAction*>> ActionGroupMap;
+//ig    typedef QMap<QString,QList<QAction*>> ActionGroupMap;
 
     void                    enableAction (const char* name, bool enabled);
     void                    setActionText (const char* name, const QString& text);
@@ -174,7 +170,7 @@ public:
     void                    openUrlNotify ();
     void                    setLocationBarUrl (const QString& url);
     void                    setIconUrl (const KUrl& url);
-    void                    createNewWindow (const KUrl&, const KParts::OpenUrlArguments& = KParts::OpenUrlArguments(), const KParts::BrowserArguments& = KParts::BrowserArguments(), const KParts::WindowArgs& = KParts::WindowArgs(), KParts::ReadOnlyPart* = 0) [void (const KUrl&, const KParts::OpenUrlArguments& = KParts::OpenUrlArguments(), const KParts::BrowserArguments& = KParts::BrowserArguments(), const KParts::WindowArgs& = KParts::WindowArgs(), KParts::ReadOnlyPart** = 0)];
+    void                    createNewWindow (const KUrl& url, const KParts::OpenUrlArguments& arguments = KParts::OpenUrlArguments(), const KParts::BrowserArguments& browserArguments = KParts::BrowserArguments(), const KParts::WindowArgs& windowArgs = KParts::WindowArgs(), KParts::ReadOnlyPart** part = 0) [void (const KUrl&, const KParts::OpenUrlArguments& = KParts::OpenUrlArguments(), const KParts::BrowserArguments& = KParts::BrowserArguments(), const KParts::WindowArgs& = KParts::WindowArgs(), KParts::ReadOnlyPart** = 0)];
 %MethodCode
 Py_BEGIN_ALLOW_THREADS
     sipCpp->KParts::BrowserExtension::createNewWindow (*a0, *a1, *a2, *a3, &a4);
@@ -184,8 +180,8 @@ Py_BEGIN_ALLOW_THREADS
     void                    loadingProgress (int percent);
     void                    speedProgress (int bytesPerSecond);
     void                    infoMessage (const QString&);
-//ig     void               popupMenu (const QPoint& global, const KFileItemList& items, const KParts::OpenUrlArguments& args = KParts::OpenUrlArguments(), const KParts::BrowserArguments& browserArgs = KParts::BrowserArguments(), KParts::BrowserExtension::PopupFlags flags = KParts::BrowserExtension::DefaultPopupItems, const KParts::BrowserExtension::ActionGroupMap& actionGroups = KParts::BrowserExtension::ActionGroupMap());
-//ig     void               popupMenu (const QPoint& global, const KUrl& url, mode_t mode = -1, const KParts::OpenUrlArguments& args = KParts::OpenUrlArguments(), const KParts::BrowserArguments& browserArgs = KParts::BrowserArguments(), KParts::BrowserExtension::PopupFlags flags = KParts::BrowserExtension::DefaultPopupItems, const KParts::BrowserExtension::ActionGroupMap& actionGroups = KParts::BrowserExtension::ActionGroupMap());
+//ig    void                    popupMenu (const QPoint& global, const KFileItemList& items, const KParts::OpenUrlArguments& args = KParts::OpenUrlArguments(), const KParts::BrowserArguments& browserArgs = KParts::BrowserArguments(), KParts::BrowserExtension::PopupFlags flags = KParts::BrowserExtension::DefaultPopupItems, const KParts::BrowserExtension::ActionGroupMap& actionGroups = KParts::BrowserExtension::ActionGroupMap());
+//ig    void                    popupMenu (const QPoint& global, const KUrl& url, mode_t mode = -1, const KParts::OpenUrlArguments& args = KParts::OpenUrlArguments(), const KParts::BrowserArguments& browserArgs = KParts::BrowserArguments(), KParts::BrowserExtension::PopupFlags flags = KParts::BrowserExtension::DefaultPopupItems, const KParts::BrowserExtension::ActionGroupMap& actionGroups = KParts::BrowserExtension::ActionGroupMap());
     void                    selectionInfo (const KFileItemList& items);
     void                    selectionInfo (const QString& text);
     void                    selectionInfo (const KUrl::List& urls);
@@ -199,12 +195,11 @@ Py_BEGIN_ALLOW_THREADS
     typedef QMap<QByteArray,int> ActionNumberMap;
 
 
-public:
 
 //  Subclasses of QObject
 
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'QObject'
     sipClass = NULL;
 
     if (dynamic_cast<KParts::BrowserExtension*>(sipCpp))
@@ -213,23 +208,19 @@ public:
         sipClass = sipClass_KParts_BrowserHostExtension;
     else if (dynamic_cast<KParts::BrowserInterface*>(sipCpp))
         sipClass = sipClass_KParts_BrowserInterface;
-    else if (dynamic_cast<KParts::BrowserRun*>(sipCpp))
-        sipClass = sipClass_KParts_BrowserRun;
     else if (dynamic_cast<KParts::HistoryProvider*>(sipCpp))
         sipClass = sipClass_KParts_HistoryProvider;
     else if (dynamic_cast<KParts::LiveConnectExtension*>(sipCpp))
         sipClass = sipClass_KParts_LiveConnectExtension;
-    else if (dynamic_cast<KParts::MainWindow*>(sipCpp))
-        sipClass = sipClass_KParts_MainWindow;
     else if (dynamic_cast<KParts::Part*>(sipCpp))
         {
-            sipClass = sipClass_KParts_Part;
-            if (dynamic_cast<KParts::ReadOnlyPart*>(sipCpp))
-                {
-                    sipClass = sipClass_KParts_ReadOnlyPart;
-                    if (dynamic_cast<KParts::ReadWritePart*>(sipCpp))
-                        sipClass = sipClass_KParts_ReadWritePart;
-                }
+        sipClass = sipClass_KParts_Part;
+        if (dynamic_cast<KParts::ReadOnlyPart*>(sipCpp))
+            {
+            sipClass = sipClass_KParts_ReadOnlyPart;
+            if (dynamic_cast<KParts::ReadWritePart*>(sipCpp))
+                sipClass = sipClass_KParts_ReadWritePart;
+            }
         }
     else if (dynamic_cast<KParts::PartManager*>(sipCpp))
         sipClass = sipClass_KParts_PartManager;
@@ -237,9 +228,15 @@ public:
         sipClass = sipClass_KParts_Plugin;
     else if (dynamic_cast<KParts::StatusBarExtension*>(sipCpp))
         sipClass = sipClass_KParts_StatusBarExtension;
+    else if (dynamic_cast<KParts::BrowserRun*>(sipCpp))
+        sipClass = sipClass_KParts_BrowserRun;
+    else if (dynamic_cast<KParts::MainWindow*>(sipCpp))
+        sipClass = sipClass_KParts_MainWindow;
 %End
 
-};   // BrowserExtension
+    ~BrowserExtension ();
+};
+// BrowserExtension
 
 
 class BrowserHostExtension : QObject
@@ -256,7 +253,9 @@ public:
     virtual KParts::BrowserHostExtension*  findFrameParent (KParts::ReadOnlyPart* callingPart, const QString& frame);
     virtual bool            openUrlInFrame (const KUrl& url, const KParts::OpenUrlArguments& arguments, const KParts::BrowserArguments& browserArguments);
     static KParts::BrowserHostExtension*  childObject (QObject* obj);
-};   // BrowserHostExtension
+    ~BrowserHostExtension ();
+};
+// BrowserHostExtension
 
 
 class LiveConnectExtension : QObject
@@ -266,8 +265,8 @@ class LiveConnectExtension : QObject
 %End
 
 
-public:
 
+public:
     enum Type
     {
         TypeVoid,
@@ -278,7 +277,7 @@ public:
         TypeString
     };
 
-//ig     typedef QList<QPair<KParts::LiveConnectExtension::Type,QString>> ArgList;
+//ig    typedef QList<QPair<KParts::LiveConnectExtension::Type,QString>> ArgList;
 
                             LiveConnectExtension (KParts::ReadOnlyPart* parent /TransferThis/);
     virtual bool            get (const unsigned long objid, const QString& field, KParts::LiveConnectExtension::Type& type /In/, unsigned long& retobjid, QString& value);
@@ -286,10 +285,13 @@ public:
     virtual bool            call (const unsigned long objid, const QString& func, const QStringList& args, KParts::LiveConnectExtension::Type& type /In/, unsigned long& retobjid, QString& value);
     virtual void            unregister (const unsigned long objid);
     static KParts::LiveConnectExtension*  childObject (QObject* obj);
-//ig     void               partEvent (const unsigned long objid, const QString& event, const KParts::LiveConnectExtension::ArgList& args);
-};   // LiveConnectExtension
+//ig    void                    partEvent (const unsigned long objid, const QString& event, const KParts::LiveConnectExtension::ArgList& args);
+    ~LiveConnectExtension ();
+};
+// LiveConnectExtension
 
-};   // KParts
+};
+// KParts
 
 
 

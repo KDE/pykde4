@@ -24,7 +24,7 @@
 namespace KParts
 {
 
-template<TYPE>
+template <TYPE>
 class GenericFactoryBase : KParts::Factory
 {
 %TypeHeaderCode
@@ -33,15 +33,17 @@ class GenericFactoryBase : KParts::Factory
 
 
 public:
-                         GenericFactoryBase ();
-    static const KComponentData& componentData ();
-    static KAboutData*   aboutData ();
-    virtual KComponentData partComponentData ();
+                            GenericFactoryBase ();
+    static const KComponentData&  componentData ();
+    static KAboutData*      aboutData ();
+    virtual KComponentData  partComponentData ();
 
 protected:
-    virtual KComponentData* createComponentData ();
+    virtual KComponentData*  createComponentData ();
 
-};  // class GenericFactoryBase
+};
+// class GenericFactoryBase
 
-};  // namespace KParts
+};
+// namespace KParts
 

@@ -29,8 +29,8 @@ class Plugin : QObject, KXMLGUIClient
 %End
 
 
-public:
 
+public:
     class PluginInfo
     {
 
@@ -38,27 +38,37 @@ public:
         QString m_relXMLFileName;
         QString m_absXMLFileName;
         QDomDocument m_document;
-    };   // PluginInfo
+    };
+// PluginInfo
 
 
-public:
                             Plugin (QObject* parent /TransferThis/ = 0);
     virtual QString         xmlFile () const;
     virtual QString         localXMLFile () const;
     static void             loadPlugins (QObject* parent /Transfer/, const KComponentData& instance);
+//force
     static void             loadPlugins (QObject* parent /Transfer/, const QList<KParts::Plugin::PluginInfo>& pluginInfos);
     static void             loadPlugins (QObject* parent /Transfer/, const QList<KParts::Plugin::PluginInfo>& pluginInfos, const KComponentData& instance);
+//end
     static void             loadPlugins (QObject* parent /Transfer/, KXMLGUIClient* parentGUIClient, const KComponentData& instance, bool enableNewPluginsByDefault = 1, int interfaceVersionRequired = 0);
     static QList<KParts::Plugin*>  pluginObjects (QObject* parent /Transfer/);
 
 protected:
+//force
     static QList<KParts::Plugin::PluginInfo>  pluginInfos (const KComponentData& instance);
+//end
     static KParts::Plugin*  loadPlugin (QObject* parent /Transfer/, const char* libname);
     static KParts::Plugin*  loadPlugin (QObject* parent /Transfer/, const QByteArray& libname);
     static KParts::Plugin*  loadPlugin (QObject* parent /Transfer/, const QString& libname);
     virtual void            setComponentData (const KComponentData& instance);
-};   // Plugin
+public:
+    ~Plugin ();
+//ig    static void             loadPlugins (QObject* parent /Transfer/, const QList<PluginInfo>& pluginInfos);
+//ig    static void             loadPlugins (QObject* parent /Transfer/, const QList<PluginInfo>& pluginInfos, const KComponentData& instance);
+};
+// Plugin
 
-};   // KParts
+};
+// KParts
 
 

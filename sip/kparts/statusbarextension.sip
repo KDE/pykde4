@@ -37,8 +37,11 @@ public:
     void                    setStatusBar (KStatusBar* status);
     static KParts::StatusBarExtension*  childObject (QObject* obj);
     virtual bool            eventFilter (QObject* watched, QEvent* ev);
-};   // StatusBarExtension
+    ~StatusBarExtension ();
+};
+// StatusBarExtension
 
-};   // KParts
+};
+// KParts
 
 

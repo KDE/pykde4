@@ -24,6 +24,7 @@
 //ctscc
 #include <kparts/browserextension.h>
 #include <kparts/event.h>
+#include <qcoreevent.h>
 %End
 
 namespace KParts
@@ -43,31 +44,35 @@ public:
     static bool             test (const QEvent* event, const char* name);
 
 private:
+//force
                             Event (const KParts::Event& other);
 
-public:
 
 //  Subclasses of QEvent
 
+//end
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'QEvent'
     sipClass = NULL;
 
     if (dynamic_cast<KParts::Event*>(sipCpp))
         {
-            sipClass = sipClass_KParts_Event;
-            if (dynamic_cast<KParts::GUIActivateEvent*>(sipCpp))
-                sipClass = sipClass_KParts_GUIActivateEvent;
-            else if (dynamic_cast<KParts::OpenUrlEvent*>(sipCpp))
-                sipClass = sipClass_KParts_OpenUrlEvent;
-            else if (dynamic_cast<KParts::PartActivateEvent*>(sipCpp))
-                sipClass = sipClass_KParts_PartActivateEvent;
-            else if (dynamic_cast<KParts::PartSelectEvent*>(sipCpp))
-                sipClass = sipClass_KParts_PartSelectEvent;
+        sipClass = sipClass_KParts_Event;
+        if (dynamic_cast<KParts::GUIActivateEvent*>(sipCpp))
+            sipClass = sipClass_KParts_GUIActivateEvent;
+        else if (dynamic_cast<KParts::OpenUrlEvent*>(sipCpp))
+            sipClass = sipClass_KParts_OpenUrlEvent;
+        else if (dynamic_cast<KParts::PartActivateEvent*>(sipCpp))
+            sipClass = sipClass_KParts_PartActivateEvent;
+        else if (dynamic_cast<KParts::PartSelectEvent*>(sipCpp))
+            sipClass = sipClass_KParts_PartSelectEvent;
         }
 %End
 
-};   // Event
+public:
+    ~Event ();
+};
+// Event
 
 
 class GUIActivateEvent : KParts::Event
@@ -83,8 +88,13 @@ public:
     static bool             test (const QEvent* event);
 
 private:
+//force
                             GUIActivateEvent (const KParts::GUIActivateEvent& other);
-};   // GUIActivateEvent
+//end
+public:
+    ~GUIActivateEvent ();
+};
+// GUIActivateEvent
 
 
 class PartActivateEvent : KParts::Event
@@ -102,8 +112,13 @@ public:
     static bool             test (const QEvent* event);
 
 private:
+//force
                             PartActivateEvent (const KParts::PartActivateEvent& other);
-};   // PartActivateEvent
+//end
+public:
+    ~PartActivateEvent ();
+};
+// PartActivateEvent
 
 
 class PartSelectEvent : KParts::Event
@@ -121,10 +136,16 @@ public:
     static bool             test (const QEvent* event);
 
 private:
+//force
                             PartSelectEvent (const KParts::PartSelectEvent& other);
-};   // PartSelectEvent
+//end
+public:
+    ~PartSelectEvent ();
+};
+// PartSelectEvent
 
-};   // KParts
+};
+// KParts
 
 
 

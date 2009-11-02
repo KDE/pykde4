@@ -39,8 +39,12 @@ protected:
     virtual void            slotSetStatusBarText (const QString&);
     void                    saveNewToolbarConfig ();
     virtual void            createShellGUI (bool create = 1);
-};   // MainWindow
+public:
+    ~MainWindow ();
+};
+// MainWindow
 
-};   // KParts
+};
+// KParts
 
 

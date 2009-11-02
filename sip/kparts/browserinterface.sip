@@ -32,8 +32,11 @@ class BrowserInterface : QObject
 public:
     explicit                BrowserInterface (QObject* parent /TransferThis/);
     void                    callMethod (const char* name, const QVariant& argument);
-};   // BrowserInterface
+    ~BrowserInterface ();
+};
+// BrowserInterface
 
-};   // KParts
+};
+// KParts
 
 

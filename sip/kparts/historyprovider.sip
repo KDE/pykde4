@@ -43,9 +43,11 @@ signals:
 
 protected:
                             HistoryProvider (QObject* parent /TransferThis/ = 0);
-    virtual                 ~HistoryProvider ();
-};   // HistoryProvider
+    ~HistoryProvider ();
+};
+// HistoryProvider
 
-};   // KParts
+};
+// KParts
 
 

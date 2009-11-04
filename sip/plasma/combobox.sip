@@ -45,8 +45,14 @@ protected:
     void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
     void                    hoverEnterEvent (QGraphicsSceneHoverEvent* event);
     void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
-};   // ComboBox
+public:
+    ~ComboBox ();
+signals:
+    void                    textChanged (const QString& text);
+};
+// ComboBox
 
-};   // Plasma
+};
+// Plasma
 
 

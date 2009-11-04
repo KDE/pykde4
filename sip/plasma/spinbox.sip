@@ -44,8 +44,12 @@ signals:
     void                    sliderMoved (int value);
     void                    valueChanged (int value);
     void                    editingFinished ();
-};   // SpinBox
+public:
+    ~SpinBox ();
+};
+// SpinBox
 
-};   // Plasma
+};
+// Plasma
 
 

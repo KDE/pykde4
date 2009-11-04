@@ -43,8 +43,12 @@ public:
 protected:
     void                    fadeIn ();
     void                    fadeOut ();
-};   // FlashingLabel
+public:
+    ~FlashingLabel ();
+};
+// FlashingLabel
 
-};   // Plasma
+};
+// Plasma
 
 

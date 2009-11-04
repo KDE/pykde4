@@ -21,7 +21,7 @@
 namespace Plasma
 {
 
-class PackageMetadata /* NoDefaultCtors */
+class PackageMetadata /NoDefaultCtors/
 {
 %TypeHeaderCode
 #include <plasma/packagemetadata.h>
@@ -30,7 +30,6 @@ class PackageMetadata /* NoDefaultCtors */
 
 public:
     explicit                PackageMetadata (const QString& path = QString());
-//                            PackageMetadata (const Plasma::PackageMetadata& other);
     bool                    isValid () const;
     void                    write (const QString& filename) const;
     void                    read (const QString& filename);
@@ -65,8 +64,15 @@ public:
     void                    setPluginName (const QString& name);
     void                    setImplementationApi (const QString& api);
 
-};   // PackageMetadata
+    ~PackageMetadata ();
+private:
+//force
+                            PackageMetadata (const Plasma::PackageMetadata& other);
+//end
+};
+// PackageMetadata
 
-};   // Plasma
+};
+// Plasma
 
 

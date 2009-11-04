@@ -45,8 +45,12 @@ public:
 
 signals:
     void                    valueChanged (int value);
-};   // ScrollBar
+public:
+    ~ScrollBar ();
+};
+// ScrollBar
 
-};   // Plasma
+};
+// Plasma
 
 

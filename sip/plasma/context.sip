@@ -37,8 +37,12 @@ signals:
     void                    changed (Plasma::Context* context);
     void                    activityChanged (Plasma::Context* context);
     void                    locationChanged (Plasma::Context* context);
-};   // Context
+public:
+    ~Context ();
+};
+// Context
 
-};   // Plasma
+};
+// Plasma
 
 

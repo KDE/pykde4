@@ -37,8 +37,11 @@ public:
     QString                 description () const;
     void                    setSearchTermDescription (const QString& description);
     QString                 searchTermDescription () const;
-};   // RunnerSyntax
+    ~RunnerSyntax ();
+};
+// RunnerSyntax
 
-};   // Plasma
+};
+// Plasma
 
 

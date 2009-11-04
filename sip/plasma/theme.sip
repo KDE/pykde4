@@ -28,8 +28,8 @@ class Theme : QObject
 %End
 
 
-public:
 
+public:
     enum ColorRole
     {
         TextColor,
@@ -79,8 +79,12 @@ signals:
 
 public:
     void                    settingsChanged ();
-};   // Theme
+    ~Theme ();
+    void                    insertIntoCache (const QString& key, const QPixmap& pix, const QString& id);
+};
+// Theme
 
-};   // Plasma
+};
+// Plasma
 
 

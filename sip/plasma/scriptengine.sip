@@ -34,13 +34,17 @@ protected:
     explicit                ScriptEngine (QObject* parent /TransferThis/ = 0);
     virtual QString         mainScript () const;
     virtual const Plasma::Package*  package () const;
-};   // ScriptEngine
+public:
+    ~ScriptEngine ();
+};
+// ScriptEngine
 
 QStringList             knownLanguages (Plasma::ComponentTypes types);
 Plasma::AppletScript*   loadScriptEngine (const QString& language, Plasma::Applet* applet);
 Plasma::DataEngineScript*  loadScriptEngine (const QString& language, Plasma::DataEngine* dataEngine);
 Plasma::RunnerScript*   loadScriptEngine (const QString& language, Plasma::AbstractRunner* runner);
 Plasma::PackageStructure::Ptr  packageStructure (const QString& language, Plasma::ComponentType type);
-};   // Plasma
+};
+// Plasma
 
 

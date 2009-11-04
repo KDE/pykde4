@@ -83,8 +83,11 @@ protected:
 
 public:
     void                    drawActionButtonBase (QPainter* painter, const QSize& size, int element);
-};   // IconWidget
+    ~IconWidget ();
+};
+// IconWidget
 
-};   // Plasma
+};
+// Plasma
 
 

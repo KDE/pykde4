@@ -17,16 +17,20 @@
 // Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+//force
+typedef unsigned int GLuint;
+typedef unsigned int GLenum;
 
 namespace Plasma
 {
 
+//force
 class GLApplet : Plasma::Applet
 {
+//force
 %TypeHeaderCode
 #include <plasma/glapplet.h>
 %End
-
 public:
                             GLApplet (QGraphicsItem* parent, const QString& serviceId, int appletId);
                             GLApplet (QObject* parent /TransferThis/, const QVariantList& args);
@@ -45,8 +49,16 @@ public:
 
     virtual void            paintGLInterface (QPainter* painter, const QStyleOptionGraphicsItem* option);
     void                    makeCurrent ();
-};   // GLApplet
+    ~GLApplet ();
+    GLuint                  bindTexture (const QImage& image, GLenum target = GL_TEXTURE_2D);
+    void                    deleteTexture (GLuint texture_id);
+//end
+};
+// GLApplet
 
-};   // Plasma
+//end
+};
+// Plasma
 
 
+//end

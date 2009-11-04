@@ -123,7 +123,7 @@ public:
     QRect                   screenRect () const;
     int                     type () const;
 
-    enum 
+    enum
     {
         Type
     };
@@ -139,7 +139,6 @@ public:
     explicit                Applet (QGraphicsItem* parent, const QString& serviceId, uint appletId, const QVariantList& args);
     bool                    destroyed () const;
     virtual void            createConfigurationInterface (KConfigDialog* parent);
-    bool                    hasAuthorization (const QString& constraint);
 
 signals:
     void                    releaseVisualFocus ();
@@ -181,7 +180,6 @@ protected:
     void                    mouseMoveEvent (QGraphicsSceneMouseEvent* event);
     void                    focusInEvent (QFocusEvent* event);
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
-    QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
     QPainterPath            shape () const;
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
     void                    hoverEnterEvent (QGraphicsSceneHoverEvent* event);
@@ -191,9 +189,15 @@ protected:
 private:
                             Applet (const QString& packagePath, uint appletId, const QVariantList& args);
 
+public:
+    ~Applet ();
+    bool                    hasAuthorization (const QString& constraint) const;
+signals:
+    void                    extenderItemRestored (Plasma::ExtenderItem* item);
 protected:
-    void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
-};   // Applet
+    QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
+};
+// Applet
 
 
 class AppletProtectedThunk : Plasma::Applet
@@ -206,8 +210,10 @@ class AppletProtectedThunk : Plasma::Applet
 public:
     static void             static_public_setHasConfigurationInterface (Plasma::Applet* applet, bool hasInterface);
     static void             static_public_setConfigurationRequired (Plasma::Applet* applet, bool needsConfiguring, const QString& reason = QString());
-};   // AppletProtectedThunk
+};
+// AppletProtectedThunk
 
-};   // Plasma
+};
+// Plasma
 
 

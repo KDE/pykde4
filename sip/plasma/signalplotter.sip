@@ -30,7 +30,8 @@ class PlotColor
 public:
     QColor color;
     QColor darkColor;
-};   // PlotColor
+};
+// PlotColor
 
 
 class SignalPlotter : QGraphicsWidget
@@ -106,8 +107,13 @@ protected:
     void                    drawPlots (QPainter* p, int top, int w, int h, int horizontalScale);
     void                    drawAxisText (QPainter* p, int top, int h);
     void                    drawHorizontalLines (QPainter* p, int top, int w, int h);
-};   // SignalPlotter
+public:
+    ~SignalPlotter ();
+    bool                    thinFrame () const;
+};
+// SignalPlotter
 
-};   // Plasma
+};
+// Plasma
 
 

@@ -45,8 +45,12 @@ signals:
 
 protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
-};   // CheckBox
+public:
+    ~CheckBox ();
+};
+// CheckBox
 
-};   // Plasma
+};
+// Plasma
 
 

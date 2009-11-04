@@ -27,8 +27,8 @@ class Frame : QGraphicsWidget
 %End
 
 
-public:
 
+public:
     enum Shadow
     {
         Plain,
@@ -51,8 +51,12 @@ protected:
     void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
-};   // Frame
+public:
+    ~Frame ();
+};
+// Frame
 
-};   // Plasma
+};
+// Plasma
 
 

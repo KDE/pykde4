@@ -28,8 +28,8 @@ class Containment : Plasma::Applet
 %End
 
 
-public:
 
+public:
     class StyleOption : QStyleOptionGraphicsItem
     {
 
@@ -50,10 +50,10 @@ public:
         };
 
         Plasma::View* view;
-    };   // StyleOption
+    };
+// StyleOption
 
 
-public:
 
     enum Type
     {
@@ -132,21 +132,21 @@ protected:
     void                    keyPressEvent (QKeyEvent* event);
     void                    wheelEvent (QGraphicsSceneWheelEvent* event);
     bool                    sceneEventFilter (QGraphicsItem* watched, QEvent* event);
-    QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
     void                    dragEnterEvent (QGraphicsSceneDragDropEvent* event);
     void                    dragMoveEvent (QGraphicsSceneDragDropEvent* event);
     void                    dropEvent (QGraphicsSceneDragDropEvent* event);
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
     const QGraphicsItem*    toolBoxItem () const;
 
-signals:
-    void                    focusRequested (Plasma::Containment* containment);
 
+public:
+    ~Containment ();
 protected:
-    void                    hoverEnterEvent (QGraphicsSceneHoverEvent* event);
-    void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
-};   // Containment
+    QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
+};
+// Containment
 
-};   // Plasma
+};
+// Plasma
 
 

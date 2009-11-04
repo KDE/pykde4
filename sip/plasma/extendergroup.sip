@@ -34,8 +34,11 @@ public:
     void                    setAutoHide (bool autoHide);
     void                    expandGroup ();
     void                    collapseGroup ();
-};   // ExtenderGroup
+    ~ExtenderGroup ();
+};
+// ExtenderGroup
 
-};   // Plasma
+};
+// Plasma
 
 

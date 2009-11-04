@@ -27,8 +27,8 @@ class ToolTipManager : QObject
 #include <plasma/tooltipmanager.h>
 %End
 
-public:
 
+public:
     enum State
     {
         Activated,
@@ -49,9 +49,11 @@ public:
 
 private:
     explicit                ToolTipManager (QObject* parent /TransferThis/ = 0);
-                            ~ToolTipManager ();
-};   // ToolTipManager
+    ~ToolTipManager ();
+};
+// ToolTipManager
 
-};   // Plasma
+};
+// Plasma
 
 

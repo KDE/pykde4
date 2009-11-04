@@ -38,8 +38,12 @@ public:
 
 protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
-};   // GroupBox
+public:
+    ~GroupBox ();
+};
+// GroupBox
 
-};   // Plasma
+};
+// Plasma
 
 

@@ -48,8 +48,12 @@ public:
 
 signals:
     void                    matchesChanged (const QList<Plasma::QueryMatch>& matches);
-};   // RunnerManager
+public:
+    ~RunnerManager ();
+};
+// RunnerManager
 
-};   // Plasma
+};
+// Plasma
 
 

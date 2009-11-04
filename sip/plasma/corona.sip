@@ -75,8 +75,12 @@ protected:
     void                    dragEnterEvent (QGraphicsSceneDragDropEvent* event);
     void                    dragLeaveEvent (QGraphicsSceneDragDropEvent* event);
     void                    dragMoveEvent (QGraphicsSceneDragDropEvent* event);
-};   // Corona
+public:
+    ~Corona ();
+};
+// Corona
 
-};   // Plasma
+};
+// Plasma
 
 

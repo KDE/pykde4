@@ -26,8 +26,8 @@ class ToolTipContent
 #include <plasma/tooltipcontent.h>
 %End
 
-public:
 
+public:
     enum ResourceType
     {
         ImageResource,
@@ -55,8 +55,11 @@ public:
     bool                    autohide () const;
     void                    addResource (Plasma::ToolTipContent::ResourceType type, const QUrl& path, const QVariant& resource);
     void                    registerResources (QTextDocument* document) const;
-};   // ToolTipContent
+    ~ToolTipContent ();
+};
+// ToolTipContent
 
-};   // Plasma
+};
+// Plasma
 
 

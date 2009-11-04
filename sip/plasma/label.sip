@@ -51,8 +51,12 @@ public:
 
 protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
-};   // Label
+public:
+    ~Label ();
+};
+// Label
 
-};   // Plasma
+};
+// Plasma
 
 

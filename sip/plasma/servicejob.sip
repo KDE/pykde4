@@ -37,8 +37,12 @@ public:
 
 protected:
     void                    setResult (const QVariant& result);
-};   // ServiceJob
+public:
+    ~ServiceJob ();
+};
+// ServiceJob
 
-};   // Plasma
+};
+// Plasma
 
 

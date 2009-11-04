@@ -55,8 +55,12 @@ public:
 
 signals:
     void                    repaintNeeded ();
-};   // Svg
+public:
+    ~Svg ();
+};
+// Svg
 
-};   // Plasma
+};
+// Plasma
 
 

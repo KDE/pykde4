@@ -47,13 +47,17 @@ signals:
 protected:
     explicit                Service (QObject* parent /TransferThis/ = 0);
                             Service (QObject* parent /TransferThis/, const QVariantList& args);
-    virtual Plasma::ServiceJob* createJob (const QString& operation, QMap<QString,QVariant>& parameters) = 0;
+    virtual Plasma::ServiceJob*  createJob (const QString& operation, QMap<QString,QVariant>& parameters)=0;
     virtual void            registerOperationsScheme ();
     void                    setOperationsScheme (QIODevice* xml);
     void                    setName (const QString& name);
     void                    setOperationEnabled (const QString& operation, bool enable);
-};   // Service
+public:
+    ~Service ();
+};
+// Service
 
-};   // Plasma
+};
+// Plasma
 
 

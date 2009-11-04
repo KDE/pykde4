@@ -38,9 +38,11 @@ public:
 
 private:
                             DataEngineManager ();
-                            ~DataEngineManager ();
-};   // DataEngineManager
+    ~DataEngineManager ();
+};
+// DataEngineManager
 
-};   // Plasma
+};
+// Plasma
 
 

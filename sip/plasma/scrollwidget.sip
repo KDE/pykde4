@@ -45,8 +45,12 @@ protected:
     void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
     void                    wheelEvent (QGraphicsSceneWheelEvent* event);
     bool                    eventFilter (QObject* watched, QEvent* event);
-};   // ScrollWidget
+public:
+    ~ScrollWidget ();
+};
+// ScrollWidget
 
-};   // Plasma
+};
+// Plasma
 
 

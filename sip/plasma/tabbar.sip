@@ -52,8 +52,12 @@ signals:
 protected:
     void                    wheelEvent (QGraphicsSceneWheelEvent* event);
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
-};   // TabBar
+public:
+    ~TabBar ();
+};
+// TabBar
 
-};   // Plasma
+};
+// Plasma
 
 

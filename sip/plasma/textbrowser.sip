@@ -43,8 +43,14 @@ signals:
 
 protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
-};   // TextBrowser
+public:
+    ~TextBrowser ();
+protected:
+    void                    wheelEvent (QGraphicsSceneWheelEvent* event);
+};
+// TextBrowser
 
-};   // Plasma
+};
+// Plasma
 
 

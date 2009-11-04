@@ -51,8 +51,12 @@ public:
 signals:
     void                    sliderMoved (int value);
     void                    valueChanged (int value);
-};   // Slider
+public:
+    ~Slider ();
+};
+// Slider
 
-};   // Plasma
+};
+// Plasma
 
 

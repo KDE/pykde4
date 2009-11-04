@@ -26,24 +26,18 @@ namespace Plasma
 namespace PaintUtils
 {
 void                    shadowBlur (QImage& image, int radius, const QColor& color);
-
-
-//mt undefined symbol: QColor textColor -- need mapped type?
-//mt undefined symbol: QColor shadowColor -- need mapped type?
-//mt QPixmap            shadowText (QString text, const QFont& font, QColor textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor), QColor shadowColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor), QPoint offset = QPoint(1,1), int radius = 2);
-
-
-
-
-//mt undefined symbol: QColor textColor -- need mapped type?
-//mt undefined symbol: QColor shadowColor -- need mapped type?
-//mt QPixmap            shadowText (QString text, QColor textColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::TextColor), QColor shadowColor = Plasma::Theme::defaultTheme()->color(Plasma::Theme::BackgroundColor), QPoint offset = QPoint(1,1), int radius = 2);
-
-
 QPainterPath            roundedRectangle (const QRectF& rect, qreal radius);
 QPixmap                 transition (const QPixmap& from, const QPixmap& to, qreal amount);
-};   // PaintUtils
+//force
+QPixmap                 shadowText (QString text, const QFont& font, QColor textColor, QColor shadowColor, QPoint offset = QPoint(1,1), int radius = 2);
+QPixmap                 shadowText (QString text, QColor textColor, QColor shadowColor, QPoint offset = QPoint(1,1), int radius = 2);
+//end
+//ig QPixmap                 shadowText (QString text, const QFont& font, QColor textColor = 0, QColor shadowColor = 0, QPoint offset = QPoint(1,1), int radius = 2);
+//ig QPixmap                 shadowText (QString text, QColor textColor = 0, QColor shadowColor = 0, QPoint offset = QPoint(1,1), int radius = 2);
+};
+// PaintUtils
 
-};   // Plasma
+};
+// Plasma
 
 

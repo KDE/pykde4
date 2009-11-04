@@ -50,8 +50,14 @@ protected:
     QString                 mainScript () const;
     const Plasma::Package*  package () const;
     KConfigDialog*          standardConfigurationDialog ();
-};   // AppletScript
+public:
+    ~AppletScript ();
+protected:
+    void                    addStandardConfigurationPages (KConfigDialog* dialog);
+};
+// AppletScript
 
-};   // Plasma
+};
+// Plasma
 
 

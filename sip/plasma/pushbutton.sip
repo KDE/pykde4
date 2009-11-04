@@ -54,8 +54,12 @@ protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
     void                    hoverEnterEvent (QGraphicsSceneHoverEvent* event);
     void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
-};   // PushButton
+public:
+    ~PushButton ();
+};
+// PushButton
 
-};   // Plasma
+};
+// Plasma
 
 

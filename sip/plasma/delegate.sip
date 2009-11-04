@@ -27,8 +27,8 @@ class Delegate : QAbstractItemDelegate
 #include <plasma/delegate.h>
 %End
 
-public:
 
+public:
     enum SpecificRoles
     {
         SubTitleRole,
@@ -54,8 +54,12 @@ protected:
     QRect                   rectAfterSubTitle (const QStyleOptionViewItem& option, const QModelIndex& index) const;
     QRect                   emptyRect (const QStyleOptionViewItem& option, const QModelIndex& index) const;
     virtual QSize           sizeHint (const QStyleOptionViewItem& option, const QModelIndex& index) const;
-};   // Delegate
+public:
+    ~Delegate ();
+};
+// Delegate
 
-};   // Plasma
+};
+// Plasma
 
 

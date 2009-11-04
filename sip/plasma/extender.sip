@@ -26,8 +26,8 @@ class Extender : QGraphicsWidget
 #include <plasma/extender.h>
 %End
 
-public:
 
+public:
     enum Appearance
     {
         NoBorders,
@@ -57,7 +57,6 @@ protected:
     virtual void            itemHoverLeaveEvent (Plasma::ExtenderItem* item);
     virtual void            saveState ();
     virtual Plasma::FrameSvg::EnabledBorders  enabledBordersForItem (Plasma::ExtenderItem* item) const;
-    QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
     void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
     void                    dragEnterEvent (QGraphicsSceneDragDropEvent* event);
@@ -69,8 +68,14 @@ signals:
     void                    itemAttached (Plasma::ExtenderItem*);
     void                    itemDetached (Plasma::ExtenderItem*);
     void                    geometryChanged ();
-};   // Extender
+public:
+    ~Extender ();
+protected:
+    QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
+};
+// Extender
 
-};   // Plasma
+};
+// Plasma
 
 

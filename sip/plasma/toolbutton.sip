@@ -51,8 +51,12 @@ protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
     void                    hoverEnterEvent (QGraphicsSceneHoverEvent* event);
     void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
-};   // ToolButton
+public:
+    ~ToolButton ();
+};
+// ToolButton
 
-};   // Plasma
+};
+// Plasma
 
 

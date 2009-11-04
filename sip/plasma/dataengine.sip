@@ -83,8 +83,12 @@ protected:
     void                    removeSource (const QString& source);
     void                    updateAllSources ();
 
-};   // DataEngine
+public:
+    ~DataEngine ();
+};
+// DataEngine
 
-};   // Plasma
+};
+// Plasma
 
 

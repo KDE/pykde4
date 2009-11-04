@@ -27,8 +27,8 @@ class Animator : QObject
 #include <plasma/animator.h>
 %End
 
-public:
 
+public:
     enum Animation
     {
         AppearAnimation,
@@ -78,9 +78,11 @@ protected:
 
 private:
     explicit                Animator (QObject* parent /TransferThis/ = 0);
-                            ~Animator ();
-};   // Animator
+    ~Animator ();
+};
+// Animator
 
-};   // Plasma
+};
+// Plasma
 
 

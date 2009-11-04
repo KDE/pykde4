@@ -187,4 +187,5 @@ Plasma::Direction       locationToDirection (Plasma::Location location);
 Plasma::Direction       locationToInverseDirection (Plasma::Location location);
 QGraphicsView*          viewFor (const QGraphicsItem* item);
 
-};   // Plasma
+};
+// Plasma

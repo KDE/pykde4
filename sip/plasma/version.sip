@@ -31,6 +31,7 @@ unsigned int            versionMinor ();
 unsigned int            versionRelease ();
 const char*             versionString ();
 bool                    isPluginVersionCompatible (unsigned int version);
-};   // Plasma
+};
+// Plasma
 
 

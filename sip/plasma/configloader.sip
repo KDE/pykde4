@@ -40,8 +40,12 @@ public:
 
 protected:
     void                    usrWriteConfig ();
-};   // ConfigLoader
+public:
+    ~ConfigLoader ();
+};
+// ConfigLoader
 
-};   // Plasma
+};
+// Plasma
 
 

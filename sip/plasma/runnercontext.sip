@@ -27,8 +27,8 @@ class RunnerContext : QObject
 #include <plasma/runnercontext.h>
 %End
 
-public:
 
+public:
     enum Type
     {
         None,
@@ -52,7 +52,6 @@ public:
     Plasma::RunnerContext::Type  type () const;
     QString                 mimeType () const;
     bool                    isValid () const;
-    bool                    addMatches (const QString& term, const QList<Plasma::QueryMatch>& matches);
     bool                    addMatch (const QString& term, const Plasma::QueryMatch& match);
     QList<Plasma::QueryMatch>  matches () const;
     Plasma::QueryMatch      match (const QString& id) const;
@@ -62,8 +61,13 @@ public:
 
 signals:
     void                    matchesChanged ();
-};   // RunnerContext
+public:
+    ~RunnerContext ();
+    bool                    addMatches (const QString& term, const QList<Plasma::QueryMatch>& matches);
+};
+// RunnerContext
 
-};   // Plasma
+};
+// Plasma
 
 

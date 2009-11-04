@@ -45,8 +45,11 @@ public:
     virtual void            itemActivated (qreal progress, QGraphicsItem* item);
     virtual void            itemSlideIn (qreal progress, QGraphicsItem* item, const QPoint& start, const QPoint& destination);
     virtual void            itemSlideOut (qreal progress, QGraphicsItem* item, const QPoint& start, const QPoint& destination);
-};   // AnimationDriver
+    ~AnimationDriver ();
+};
+// AnimationDriver
 
-};   // Plasma
+};
+// Plasma
 
 

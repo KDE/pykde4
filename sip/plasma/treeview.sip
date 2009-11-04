@@ -34,8 +34,11 @@ public:
     void                    setStyleSheet (const QString& stylesheet);
     QString                 styleSheet ();
     QTreeView*              nativeWidget () const;
-};   // TreeView
+    ~TreeView ();
+};
+// TreeView
 
-};   // Plasma
+};
+// Plasma
 
 

@@ -28,8 +28,8 @@ class Meter : QGraphicsWidget
 %End
 
 
-public:
 
+public:
     enum MeterType
     {
         BarMeterHorizontal,
@@ -61,8 +61,12 @@ public:
 
 protected:
     virtual void            paint (QPainter* p, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
-};   // Meter
+public:
+    ~Meter ();
+};
+// Meter
 
-};   // Plasma
+};
+// Plasma
 
 

@@ -28,8 +28,8 @@ class QueryMatch
 %End
 
 
-public:
 
+public:
     enum Type
     {
         NoMatch,
@@ -66,8 +66,11 @@ public:
     void                    setSelectedAction (QAction* action);
     bool                    hasConfigurationInterface () const;
     void                    createConfigurationInterface (QWidget* parent /Transfer/);
-};   // QueryMatch
+    ~QueryMatch ();
+};
+// QueryMatch
 
-};   // Plasma
+};
+// Plasma
 
 

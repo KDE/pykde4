@@ -46,8 +46,12 @@ protected:
     uint                    timeSinceLastUpdate () const;
     void                    setNeedsUpdate (bool update = 1);
     void                    checkUsage ();
-};   // DataContainer
+public:
+    ~DataContainer ();
+};
+// DataContainer
 
-};   // Plasma
+};
+// Plasma
 
 

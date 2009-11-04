@@ -28,8 +28,8 @@ class Dialog : QWidget
 %End
 
 
-public:
 
+public:
     enum ResizeCorner
     {
         NoCorner,
@@ -67,8 +67,12 @@ protected:
     void                    keyPressEvent (QKeyEvent* event);
     void                    moveEvent (QMoveEvent* event);
     bool                    inControlArea (const QPoint& point);
-};   // Dialog
+public:
+    ~Dialog ();
+};
+// Dialog
 
-};   // Plasma
+};
+// Plasma
 
 

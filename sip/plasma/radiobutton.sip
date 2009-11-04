@@ -45,8 +45,12 @@ signals:
 
 protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
-};   // RadioButton
+public:
+    ~RadioButton ();
+};
+// RadioButton
 
-};   // Plasma
+};
+// Plasma
 
 

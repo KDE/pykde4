@@ -61,7 +61,7 @@ public:
     void                    setServicePrefix (const QString& servicePrefix);
 
 //FIXME PackageMetadata needs a custom = operator for this to work.
-//    virtual Plasma::PackageMetadata  metadata ();
+//ig    virtual Plasma::PackageMetadata  metadata ();
     bool                    allowExternalPaths () const;
 
 signals:
@@ -73,11 +73,15 @@ protected:
     void                    setDefaultPackageRoot (const QString& packageRoot);
     virtual void            pathChanged ();
 
-};   // PackageStructure
+public:
+    ~PackageStructure ();
+};
+// PackageStructure
 
-};   // Plasma
+};
+// Plasma
 
-%MappedType QList<const char *>
+%MappedType QList<const char*>
 {
 %TypeHeaderCode
 #include <qlist.h>

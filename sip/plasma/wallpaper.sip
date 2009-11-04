@@ -27,8 +27,8 @@ class Wallpaper : QObject
 #include <plasma/wallpaper.h>
 %End
 
-public:
 
+public:
     enum ResizeMethod
     {
         ScaledResize,
@@ -53,7 +53,7 @@ public:
     bool                    isInitialized () const;
     QRectF                  boundingRect () const;
     void                    setBoundingRect (const QRectF& boundingRect);
-    virtual void            paint (QPainter* painter, const QRectF& exposedRect) = 0;
+    virtual void            paint (QPainter* painter, const QRectF& exposedRect)=0;
     void                    restore (const KConfigGroup& config);
     virtual void            save (KConfigGroup& config);
     virtual QWidget*        createConfigurationInterface (QWidget* parent /Transfer/);
@@ -83,8 +83,12 @@ protected:
     void                    setUsingRenderingCache (bool useCache);
     bool                    findInCache (const QString& key, QImage& image, unsigned int lastModified = 0);
     void                    insertIntoCache (const QString& key, const QImage& image);
-};   // Wallpaper
+public:
+    ~Wallpaper ();
+};
+// Wallpaper
 
-};   // Plasma
+};
+// Plasma
 
 

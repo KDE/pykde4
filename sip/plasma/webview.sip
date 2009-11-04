@@ -32,7 +32,7 @@ public:
     explicit                WebView (QGraphicsItem* parent = 0);
     void                    setUrl (const KUrl& url);
     KUrl                    url () const;
-//ig     void               setHtml (const QByteArray& html, const KUrl& baseUrl = KUrl());
+//ig    void                    setHtml (const QByteArray& html, const KUrl& baseUrl = KUrl());
     QString                 html () const;
     void                    setHtml (const QString& html, const KUrl& baseUrl = KUrl());
     QRectF                  geometry () const;
@@ -64,8 +64,12 @@ protected:
     void                    dragLeaveEvent (QGraphicsSceneDragDropEvent* event);
     void                    dragMoveEvent (QGraphicsSceneDragDropEvent* event);
     void                    dropEvent (QGraphicsSceneDragDropEvent* event);
-};   // WebView
+public:
+    ~WebView ();
+};
+// WebView
 
-};   // Plasma
+};
+// Plasma
 
 

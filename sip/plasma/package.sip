@@ -46,10 +46,15 @@ public:
     static bool             registerPackage (const Plasma::PackageMetadata& data, const QString& iconPath);
     static bool             createPackage (const Plasma::PackageMetadata& metadata, const QString& source, const QString& destination, const QString& icon = QString());
 
+    ~Package ();
 private:
-                            Package (const Plasma::Package&);
-};   // Package
+//force
+                            Package (const Plasma::Package& other);
+//end
+};
+// Package
 
-};   // Plasma
+};
+// Plasma
 
 

@@ -66,8 +66,12 @@ protected:
     void                    hoverMoveEvent (QGraphicsSceneHoverEvent* event);
     void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
     bool                    sceneEventFilter (QGraphicsItem* watched, QEvent* event);
-};   // ExtenderItem
+public:
+    ~ExtenderItem ();
+};
+// ExtenderItem
 
-};   // Plasma
+};
+// Plasma
 
 

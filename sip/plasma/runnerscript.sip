@@ -37,8 +37,12 @@ public:
 protected:
     QString                 mainScript () const;
     const Plasma::Package*  package () const;
-};   // RunnerScript
+public:
+    ~RunnerScript ();
+};
+// RunnerScript
 
-};   // Plasma
+};
+// Plasma
 
 

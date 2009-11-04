@@ -40,8 +40,14 @@ signals:
     void                    editingFinished ();
     void                    returnPressed ();
     void                    textEdited (const QString& text);
-};   // LineEdit
+public:
+    ~LineEdit ();
+    void                    setClearButtonShown (bool show);
+    bool                    isClearButtonShown () const;
+};
+// LineEdit
 
-};   // Plasma
+};
+// Plasma
 
 

@@ -27,10 +27,12 @@
 #include <plasma/animator.h>
 #include <plasma/applet.h>
 #include <plasma/scripting/appletscript.h>
+#include <plasma/widgets/busywidget.h>
 #include <plasma/widgets/checkbox.h>
 #include <plasma/widgets/combobox.h>
 #include <plasma/configloader.h>
 #include <plasma/containment.h>
+#include <plasma/context.h>
 #include <plasma/corona.h>
 #include <plasma/datacontainer.h>
 #include <plasma/dataengine.h>
@@ -38,7 +40,12 @@
 #include <plasma/scripting/dataenginescript.h>
 #include <plasma/delegate.h>
 #include <plasma/dialog.h>
+#include <plasma/extender.h>
+#include <plasma/extendergroup.h>
+#include <plasma/extenderitem.h>
 #include <plasma/widgets/flashinglabel.h>
+#include <plasma/widgets/frame.h>
+#include <plasma/framesvg.h>
 #include <plasma/glapplet.h>
 #include <plasma/widgets/groupbox.h>
 #include <plasma/widgets/iconwidget.h>
@@ -46,38 +53,34 @@
 #include <plasma/widgets/lineedit.h>
 #include <plasma/widgets/meter.h>
 #include <plasma/packagestructure.h>
-#include <plasma/framesvg.h>
+#include <plasma/popupapplet.h>
 #include <plasma/widgets/pushbutton.h>
+#include <qobject.h>
 #include <plasma/widgets/radiobutton.h>
 #include <plasma/runnercontext.h>
 #include <plasma/runnermanager.h>
 #include <plasma/scripting/runnerscript.h>
 #include <plasma/scripting/scriptengine.h>
-#include <plasma/widgets/signalplotter.h>
-#include <plasma/svg.h>
-#include <plasma/widgets/textedit.h>
-#include <plasma/theme.h>
-#include <plasma/view.h>
-#include <plasma/widgets/webview.h>
-#include <plasma/widgets/busywidget.h>
-#include <plasma/context.h>
-#include <plasma/extender.h>
-#include <plasma/extenderitem.h>
-#include <plasma/extendergroup.h>
-#include <plasma/widgets/frame.h>
-#include <plasma/popupapplet.h>
 #include <plasma/widgets/scrollbar.h>
 #include <plasma/widgets/scrollwidget.h>
 #include <plasma/service.h>
+#include <plasma/servicejob.h>
+#include <plasma/widgets/signalplotter.h>
 #include <plasma/widgets/slider.h>
+#include <plasma/widgets/spinbox.h>
+#include <plasma/svg.h>
 #include <plasma/widgets/svgwidget.h>
 #include <plasma/widgets/tabbar.h>
+#include <plasma/widgets/textbrowser.h>
+#include <plasma/widgets/textedit.h>
+#include <plasma/theme.h>
 #include <plasma/widgets/toolbutton.h>
 #include <plasma/tooltipmanager.h>
 #include <plasma/widgets/treeview.h>
+#include <plasma/widgets/videowidget.h>
+#include <plasma/view.h>
 #include <plasma/wallpaper.h>
-#include <plasma/widgets/spinbox.h>
-#include <plasma/widgets/textbrowser.h>
+#include <plasma/widgets/webview.h>
 %End
 
 namespace Plasma
@@ -90,8 +93,8 @@ class AbstractRunner : QObject
 %End
 
 
-public:
 
+public:
     enum Speed
     {
         SlowSpeed,
@@ -144,148 +147,152 @@ protected:
     QHash<QString,QAction*>  actions () const;
     void                    clearActions ();
     void                    addSyntax (const Plasma::RunnerSyntax& syntax);
-    void                    setSyntaxes (const QList<Plasma::RunnerSyntax>& syns);
     void                    init ();
 
-public:
 
 //  Subclasses of QObject
 
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'QObject'
     sipClass = NULL;
 
-    if (dynamic_cast<Plasma::AbstractRunner*>(sipCpp))
+    if (dynamic_cast<Plasma::ConfigLoader*>(sipCpp))
+        sipClass = sipClass_Plasma_ConfigLoader;
+    else if (dynamic_cast<Plasma::ServiceJob*>(sipCpp))
+        sipClass = sipClass_Plasma_ServiceJob;
+    else if (dynamic_cast<Plasma::AbstractRunner*>(sipCpp))
         sipClass = sipClass_Plasma_AbstractRunner;
     else if (dynamic_cast<Plasma::AnimationDriver*>(sipCpp))
         sipClass = sipClass_Plasma_AnimationDriver;
     else if (dynamic_cast<Plasma::Animator*>(sipCpp))
         sipClass = sipClass_Plasma_Animator;
-    else if (dynamic_cast<Plasma::Applet*>(sipCpp))
-        {
-            sipClass = sipClass_Plasma_Applet;
-            if (dynamic_cast<Plasma::Containment*>(sipCpp))
-                sipClass = sipClass_Plasma_Containment;
-            else if (dynamic_cast<Plasma::GLApplet*>(sipCpp))
-                sipClass = sipClass_Plasma_GLApplet;
-            else if (dynamic_cast<Plasma::PopupApplet*>(sipCpp))
-                sipClass = sipClass_Plasma_PopupApplet;
-        }
-    else if (dynamic_cast<Plasma::BusyWidget*>(sipCpp))
-        sipClass = sipClass_Plasma_BusyWidget;
-    else if (dynamic_cast<Plasma::CheckBox*>(sipCpp))
-        sipClass = sipClass_Plasma_CheckBox;
-    else if (dynamic_cast<Plasma::ComboBox*>(sipCpp))
-        sipClass = sipClass_Plasma_ComboBox;
-    else if (dynamic_cast<Plasma::ConfigLoader*>(sipCpp))
-        sipClass = sipClass_Plasma_ConfigLoader;
     else if (dynamic_cast<Plasma::Context*>(sipCpp))
         sipClass = sipClass_Plasma_Context;
-    else if (dynamic_cast<Plasma::Corona*>(sipCpp))
-        sipClass = sipClass_Plasma_Corona;
     else if (dynamic_cast<Plasma::DataContainer*>(sipCpp))
         sipClass = sipClass_Plasma_DataContainer;
     else if (dynamic_cast<Plasma::DataEngine*>(sipCpp))
         sipClass = sipClass_Plasma_DataEngine;
     else if (dynamic_cast<Plasma::DataEngineManager*>(sipCpp))
         sipClass = sipClass_Plasma_DataEngineManager;
-    else if (dynamic_cast<Plasma::Delegate*>(sipCpp))
-        sipClass = sipClass_Plasma_Delegate;
-    else if (dynamic_cast<Plasma::Dialog*>(sipCpp))
-        sipClass = sipClass_Plasma_Dialog;
-    else if (dynamic_cast<Plasma::Extender*>(sipCpp))
-        sipClass = sipClass_Plasma_Extender;
-    else if (dynamic_cast<Plasma::ExtenderItem*>(sipCpp))
-        {
-            sipClass = sipClass_Plasma_ExtenderItem;
-            if (dynamic_cast<Plasma::ExtenderGroup*>(sipCpp))
-                sipClass = sipClass_Plasma_ExtenderGroup;
-        }
-    else if (dynamic_cast<Plasma::FlashingLabel*>(sipCpp))
-        sipClass = sipClass_Plasma_FlashingLabel;
-    else if (dynamic_cast<Plasma::Frame*>(sipCpp))
-        sipClass = sipClass_Plasma_Frame;
-    else if (dynamic_cast<Plasma::GroupBox*>(sipCpp))
-        sipClass = sipClass_Plasma_GroupBox;
-    else if (dynamic_cast<Plasma::IconWidget*>(sipCpp))
-        sipClass = sipClass_Plasma_IconWidget;
-    else if (dynamic_cast<Plasma::Label*>(sipCpp))
-        sipClass = sipClass_Plasma_Label;
-    else if (dynamic_cast<Plasma::LineEdit*>(sipCpp))
-        sipClass = sipClass_Plasma_LineEdit;
-    else if (dynamic_cast<Plasma::Meter*>(sipCpp))
-        sipClass = sipClass_Plasma_Meter;
     else if (dynamic_cast<Plasma::PackageStructure*>(sipCpp))
         sipClass = sipClass_Plasma_PackageStructure;
-    else if (dynamic_cast<Plasma::PushButton*>(sipCpp))
-        sipClass = sipClass_Plasma_PushButton;
-    else if (dynamic_cast<Plasma::RadioButton*>(sipCpp))
-        sipClass = sipClass_Plasma_RadioButton;
     else if (dynamic_cast<Plasma::RunnerContext*>(sipCpp))
         sipClass = sipClass_Plasma_RunnerContext;
     else if (dynamic_cast<Plasma::RunnerManager*>(sipCpp))
         sipClass = sipClass_Plasma_RunnerManager;
     else if (dynamic_cast<Plasma::ScriptEngine*>(sipCpp))
         {
-            sipClass = sipClass_Plasma_ScriptEngine;
-            if (dynamic_cast<Plasma::AppletScript*>(sipCpp))
-                sipClass = sipClass_Plasma_AppletScript;
-            else if (dynamic_cast<Plasma::DataEngineScript*>(sipCpp))
-                sipClass = sipClass_Plasma_DataEngineScript;
-            else if (dynamic_cast<Plasma::RunnerScript*>(sipCpp))
-                sipClass = sipClass_Plasma_RunnerScript;
+        sipClass = sipClass_Plasma_ScriptEngine;
+        if (dynamic_cast<Plasma::AppletScript*>(sipCpp))
+            sipClass = sipClass_Plasma_AppletScript;
+        else if (dynamic_cast<Plasma::DataEngineScript*>(sipCpp))
+            sipClass = sipClass_Plasma_DataEngineScript;
+        else if (dynamic_cast<Plasma::RunnerScript*>(sipCpp))
+            sipClass = sipClass_Plasma_RunnerScript;
         }
-    else if (dynamic_cast<Plasma::ScrollBar*>(sipCpp))
-        sipClass = sipClass_Plasma_ScrollBar;
-    else if (dynamic_cast<Plasma::ScrollWidget*>(sipCpp))
-        sipClass = sipClass_Plasma_ScrollWidget;
     else if (dynamic_cast<Plasma::Service*>(sipCpp))
         sipClass = sipClass_Plasma_Service;
-    else if (dynamic_cast<Plasma::ServiceJob*>(sipCpp))
-        sipClass = sipClass_Plasma_ServiceJob;
-    else if (dynamic_cast<Plasma::SignalPlotter*>(sipCpp))
-        sipClass = sipClass_Plasma_SignalPlotter;
-    else if (dynamic_cast<Plasma::Slider*>(sipCpp))
-        sipClass = sipClass_Plasma_Slider;
-    else if (dynamic_cast<Plasma::SpinBox*>(sipCpp))
-        sipClass = sipClass_Plasma_SpinBox;
     else if (dynamic_cast<Plasma::Svg*>(sipCpp))
         {
-            sipClass = sipClass_Plasma_Svg;
-            if (dynamic_cast<Plasma::FrameSvg*>(sipCpp))
-                sipClass = sipClass_Plasma_FrameSvg;
+        sipClass = sipClass_Plasma_Svg;
+        if (dynamic_cast<Plasma::FrameSvg*>(sipCpp))
+            sipClass = sipClass_Plasma_FrameSvg;
         }
+    else if (dynamic_cast<Plasma::Theme*>(sipCpp))
+        sipClass = sipClass_Plasma_Theme;
+    else if (dynamic_cast<Plasma::ToolTipManager*>(sipCpp))
+        sipClass = sipClass_Plasma_ToolTipManager;
+    else if (dynamic_cast<Plasma::Wallpaper*>(sipCpp))
+        sipClass = sipClass_Plasma_Wallpaper;
+    else if (dynamic_cast<Plasma::Delegate*>(sipCpp))
+        sipClass = sipClass_Plasma_Delegate;
+    else if (dynamic_cast<Plasma::Corona*>(sipCpp))
+        sipClass = sipClass_Plasma_Corona;
+    else if (dynamic_cast<Plasma::Applet*>(sipCpp))
+        {
+        sipClass = sipClass_Plasma_Applet;
+        if (dynamic_cast<Plasma::AppletProtectedThunk*>(sipCpp))
+            sipClass = sipClass_Plasma_AppletProtectedThunk;
+        else if (dynamic_cast<Plasma::Containment*>(sipCpp))
+            sipClass = sipClass_Plasma_Containment;
+        else if (dynamic_cast<Plasma::GLApplet*>(sipCpp))
+            sipClass = sipClass_Plasma_GLApplet;
+        else if (dynamic_cast<Plasma::PopupApplet*>(sipCpp))
+            sipClass = sipClass_Plasma_PopupApplet;
+        }
+    else if (dynamic_cast<Plasma::BusyWidget*>(sipCpp))
+        sipClass = sipClass_Plasma_BusyWidget;
+    else if (dynamic_cast<Plasma::Extender*>(sipCpp))
+        sipClass = sipClass_Plasma_Extender;
+    else if (dynamic_cast<Plasma::ExtenderItem*>(sipCpp))
+        {
+        sipClass = sipClass_Plasma_ExtenderItem;
+        if (dynamic_cast<Plasma::ExtenderGroup*>(sipCpp))
+            sipClass = sipClass_Plasma_ExtenderGroup;
+        }
+    else if (dynamic_cast<Plasma::FlashingLabel*>(sipCpp))
+        sipClass = sipClass_Plasma_FlashingLabel;
+    else if (dynamic_cast<Plasma::Frame*>(sipCpp))
+        sipClass = sipClass_Plasma_Frame;
+    else if (dynamic_cast<Plasma::IconWidget*>(sipCpp))
+        sipClass = sipClass_Plasma_IconWidget;
+    else if (dynamic_cast<Plasma::Meter*>(sipCpp))
+        sipClass = sipClass_Plasma_Meter;
+    else if (dynamic_cast<Plasma::ScrollWidget*>(sipCpp))
+        sipClass = sipClass_Plasma_ScrollWidget;
+    else if (dynamic_cast<Plasma::SignalPlotter*>(sipCpp))
+        sipClass = sipClass_Plasma_SignalPlotter;
     else if (dynamic_cast<Plasma::SvgWidget*>(sipCpp))
         sipClass = sipClass_Plasma_SvgWidget;
     else if (dynamic_cast<Plasma::TabBar*>(sipCpp))
         sipClass = sipClass_Plasma_TabBar;
+    else if (dynamic_cast<Plasma::WebView*>(sipCpp))
+        sipClass = sipClass_Plasma_WebView;
+    else if (dynamic_cast<Plasma::CheckBox*>(sipCpp))
+        sipClass = sipClass_Plasma_CheckBox;
+    else if (dynamic_cast<Plasma::ComboBox*>(sipCpp))
+        sipClass = sipClass_Plasma_ComboBox;
+    else if (dynamic_cast<Plasma::GroupBox*>(sipCpp))
+        sipClass = sipClass_Plasma_GroupBox;
+    else if (dynamic_cast<Plasma::Label*>(sipCpp))
+        sipClass = sipClass_Plasma_Label;
+    else if (dynamic_cast<Plasma::LineEdit*>(sipCpp))
+        sipClass = sipClass_Plasma_LineEdit;
+    else if (dynamic_cast<Plasma::PushButton*>(sipCpp))
+        sipClass = sipClass_Plasma_PushButton;
+    else if (dynamic_cast<Plasma::RadioButton*>(sipCpp))
+        sipClass = sipClass_Plasma_RadioButton;
+    else if (dynamic_cast<Plasma::ScrollBar*>(sipCpp))
+        sipClass = sipClass_Plasma_ScrollBar;
+    else if (dynamic_cast<Plasma::Slider*>(sipCpp))
+        sipClass = sipClass_Plasma_Slider;
+    else if (dynamic_cast<Plasma::SpinBox*>(sipCpp))
+        sipClass = sipClass_Plasma_SpinBox;
     else if (dynamic_cast<Plasma::TextBrowser*>(sipCpp))
         sipClass = sipClass_Plasma_TextBrowser;
     else if (dynamic_cast<Plasma::TextEdit*>(sipCpp))
         sipClass = sipClass_Plasma_TextEdit;
-    else if (dynamic_cast<Plasma::Theme*>(sipCpp))
-        sipClass = sipClass_Plasma_Theme;
     else if (dynamic_cast<Plasma::ToolButton*>(sipCpp))
         sipClass = sipClass_Plasma_ToolButton;
-    else if (dynamic_cast<Plasma::ToolTipManager*>(sipCpp))
-        sipClass = sipClass_Plasma_ToolTipManager;
-    else if (dynamic_cast<Plasma::ToolTipManager*>(sipCpp))
-        sipClass = sipClass_Plasma_ToolTipManager;
     else if (dynamic_cast<Plasma::TreeView*>(sipCpp))
         sipClass = sipClass_Plasma_TreeView;
     else if (dynamic_cast<Plasma::VideoWidget*>(sipCpp))
         sipClass = sipClass_Plasma_VideoWidget;
+    else if (dynamic_cast<Plasma::Dialog*>(sipCpp))
+        sipClass = sipClass_Plasma_Dialog;
     else if (dynamic_cast<Plasma::View*>(sipCpp))
         sipClass = sipClass_Plasma_View;
-    else if (dynamic_cast<Plasma::Wallpaper*>(sipCpp))
-        sipClass = sipClass_Plasma_Wallpaper;
-    else if (dynamic_cast<Plasma::WebView*>(sipCpp))
-        sipClass = sipClass_Plasma_WebView;
 %End
 
-};   // AbstractRunner
+public:
+    ~AbstractRunner ();
+protected:
+    void                    setSyntaxes (const QList<Plasma::RunnerSyntax>& syns);
+};
+// AbstractRunner
 
-};   // Plasma
+};
+// Plasma
 
 
 

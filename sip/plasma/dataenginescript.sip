@@ -35,7 +35,7 @@ public:
     virtual QStringList     sources () const;
     virtual bool            sourceRequestEvent (const QString& name);
     virtual bool            updateSourceEvent (const QString& source);
-    Plasma::Service*        serviceForSource(const QString &source);
+    Plasma::Service*        serviceForSource (const QString& source);
 
 protected:
     QString                 mainScript () const;
@@ -49,8 +49,12 @@ protected:
     int                     minimumPollingInterval () const;
     void                    setPollingInterval (uint frequency);
     void                    removeAllSources ();
-};   // DataEngineScript
+public:
+    ~DataEngineScript ();
+};
+// DataEngineScript
 
-};   // Plasma
+};
+// Plasma
 
 

@@ -45,8 +45,12 @@ protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
     void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
     void                    timerEvent (QTimerEvent* event);
-};   // BusyWidget
+public:
+    ~BusyWidget ();
+};
+// BusyWidget
 
-};   // Plasma
+};
+// Plasma
 
 

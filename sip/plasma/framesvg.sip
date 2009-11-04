@@ -28,8 +28,8 @@ class FrameSvg : Plasma::Svg
 %End
 
 
-public:
 
+public:
     enum EnabledBorder
     {
         NoBorder,
@@ -64,8 +64,11 @@ public:
     QPixmap                 framePixmap ();
     void                    paintFrame (QPainter* painter, const QRectF& target, const QRectF& source = QRectF());
     void                    paintFrame (QPainter* painter, const QPointF& pos = QPointF(0,0));
-};   // FrameSvg
+    ~FrameSvg ();
+};
+// FrameSvg
 
-};   // Plasma
+};
+// Plasma
 
 

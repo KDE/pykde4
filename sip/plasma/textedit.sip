@@ -42,8 +42,12 @@ signals:
 
 protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
-};   // TextEdit
+public:
+    ~TextEdit ();
+};
+// TextEdit
 
-};   // Plasma
+};
+// Plasma
 
 

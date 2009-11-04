@@ -49,8 +49,14 @@ protected:
     void                    dragEnterEvent (QGraphicsSceneDragDropEvent* event);
     void                    dragLeaveEvent (QGraphicsSceneDragDropEvent* event);
     void                    dropEvent (QGraphicsSceneDragDropEvent* event);
-};   // PopupApplet
+public:
+    ~PopupApplet ();
+    void                    setWidget (QWidget* widget);
+    void                    setGraphicsWidget (QGraphicsWidget* widget);
+};
+// PopupApplet
 
-};   // Plasma
+};
+// Plasma
 
 

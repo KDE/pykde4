@@ -40,8 +40,12 @@ signals:
 
 protected:
     void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
-};   // SvgWidget
+public:
+    ~SvgWidget ();
+};
+// SvgWidget
 
-};   // Plasma
+};
+// Plasma
 
 

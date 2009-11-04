@@ -27,8 +27,8 @@ class VideoWidget : QGraphicsProxyWidget
 #include <plasma/widgets/videowidget.h>
 %End
 
-public:
 
+public:
     enum Control
     {
         NoControls,
@@ -49,18 +49,6 @@ public:
     explicit                VideoWidget (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setUrl (const QString& url);
     QString                 url () const;
-
-
-//mt undefined symbol: MediaObject* None -- need mapped type?
-//mt     Phonon::MediaObject*  mediaObject () const;
-
-
-
-
-//mt undefined symbol: AudioOutput* None -- need mapped type?
-//mt     Phonon::AudioOutput*  audioOutput () const;
-
-
     qint64                  currentTime () const;
     qint64                  totalTime () const;
     qint64                  remainingTime () const;
@@ -70,12 +58,6 @@ public:
     bool                    controlsVisible () const;
     void                    setStyleSheet (const QString& stylesheet);
     QString                 styleSheet ();
-
-
-//mt undefined symbol: VideoWidget* None -- need mapped type?
-//mt     Phonon::VideoWidget*  nativeWidget () const;
-
-
     void                    play ();
     void                    pause ();
     void                    stop ();
@@ -92,8 +74,16 @@ protected:
     void                    hoverEnterEvent (QGraphicsSceneHoverEvent* event);
     void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
     void                    hoverMoveEvent (QGraphicsSceneHoverEvent* event);
-};   // VideoWidget
+public:
+    ~VideoWidget ();
+//FIXME
+//ig    Phonon::MediaObject*    mediaObject () const;
+//ig    Phonon::AudioOutput*    audioOutput () const;
+//ig    Phonon::VideoWidget*    nativeWidget () const;
+};
+// VideoWidget
 
-};   // Plasma
+};
+// Plasma
 
 

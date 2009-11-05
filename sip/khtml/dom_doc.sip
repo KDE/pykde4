@@ -38,12 +38,15 @@ public:
     DOM::DOMImplementation  getInterface (const DOM::DOMString& feature) const;
     DOM::CSSStyleSheet      createCSSStyleSheet (const DOM::DOMString& title, const DOM::DOMString& media);
     DOM::HTMLDocument       createHTMLDocument (const DOM::DOMString& title);
-//ig     DOMImplementationImpl*  handle () const;
+//ig    DOMImplementationImpl*  handle () const;
     bool                    isNull () const;
 
 protected:
-//ig                        DOMImplementation (DOMImplementationImpl* i);
-};   // DOMImplementation
+//ig                            DOMImplementation (DOMImplementationImpl* i);
+public:
+    ~DOMImplementation ();
+};
+// DOMImplementation
 
 
 class Document : DOM::Node
@@ -110,8 +113,10 @@ public:
     DOM::DOMString          queryCommandValue (const DOM::DOMString& command);
 
     void                    updateRendering ();
-//ig                        Document (DocumentImpl* i);
-};   // Document
+//ig                            Document (DocumentImpl* i);
+    ~Document ();
+};
+// Document
 
 
 class DocumentFragment : DOM::Node
@@ -127,8 +132,11 @@ public:
                             DocumentFragment (const DOM::Node& other);
 
 protected:
-//ig                        DocumentFragment (DocumentFragmentImpl* i);
-};   // DocumentFragment
+//ig                            DocumentFragment (DocumentFragmentImpl* i);
+public:
+    ~DocumentFragment ();
+};
+// DocumentFragment
 
 
 class DocumentType : DOM::Node
@@ -150,9 +158,13 @@ public:
     DOM::DOMString          internalSubset () const;
 
 protected:
-//ig                        DocumentType (DocumentTypeImpl* impl);
-};   // DocumentType
+//ig                            DocumentType (DocumentTypeImpl* impl);
+public:
+    ~DocumentType ();
+};
+// DocumentType
 
-};   // DOM
+};
+// DOM
 
 

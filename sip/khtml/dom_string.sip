@@ -39,7 +39,7 @@ public:
                             DOMString (const QString&);
                             DOMString (const char* str);
                             DOMString (const char* str, uint len);
-//ig                        DOMString (DOMStringImpl* i);
+//ig                            DOMString (DOMStringImpl* i);
                             DOMString (const DOM::DOMString& str);
     DOM::DOMString&         operator += (const DOM::DOMString& str);
     DOM::DOMString          operator + (const DOM::DOMString& str);
@@ -68,19 +68,30 @@ public:
     bool                    isEmpty () const;
     bool                    endsWith (const DOM::DOMString& str) const;
     bool                    startsWith (const DOM::DOMString& str) const;
-//ig     DOMStringImpl*     implementation () const;
+//ig    DOMStringImpl*          implementation () const;
 
 
 //mt undefined symbol: ... None -- need mapped type?
 //mt     static DOM::DOMString  format (const char* format, ...);
 
 
-};   // DOMString
+    ~DOMString ();
+    static DOM::DOMString   format (const char* format, ...);
+};
+// DOMString
 
 bool                    strcmp (const DOM::DOMString& a, const DOM::DOMString& b);
 bool                    strcasecmp (const DOM::DOMString& a, const DOM::DOMString& b);
 bool                    strcasecmp (const DOM::DOMString& a, const char* b);
-};   // DOM
+//ig QDebug                  operator << (QDebug stream, const DOM::DOMString& string);
+//ig bool                    operator == (const DOM::DOMString& a, const DOM::DOMString& b);
+//ig bool                    operator == (const DOM::DOMString& a, const QString& b);
+//ig bool                    operator == (const DOM::DOMString& a, const char* b);
+//ig bool                    operator != (const DOM::DOMString& a, const DOM::DOMString& b);
+//ig bool                    operator != (const DOM::DOMString& a, const QString& b);
+//ig bool                    operator != (const DOM::DOMString& a, const char* b);
+};
+// DOM
 
 
 

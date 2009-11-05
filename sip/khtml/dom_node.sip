@@ -44,12 +44,15 @@ public:
     DOM::Node               getNamedItemNS (const DOM::DOMString& namespaceURI, const DOM::DOMString& localName) const;
     DOM::Node               setNamedItemNS (const DOM::Node& arg);
     DOM::Node               removeNamedItemNS (const DOM::DOMString& namespaceURI, const DOM::DOMString& localName);
-//ig     NamedNodeMapImpl*  handle () const;
+//ig    NamedNodeMapImpl*       handle () const;
     bool                    isNull () const;
 
 protected:
-//ig                        NamedNodeMap (NamedNodeMapImpl* i);
-};   // NamedNodeMap
+//ig                            NamedNodeMap (NamedNodeMapImpl* i);
+public:
+    ~NamedNodeMap ();
+};
+// NamedNodeMap
 
 
 class Node
@@ -62,7 +65,7 @@ class Node
 public:
                             Node ();
                             Node (const DOM::Node& other);
-//ig                        Node (NodeImpl* _impl);
+//ig                            Node (NodeImpl* _impl);
     bool                    operator == (const DOM::Node& other) const;
     bool                    operator != (const DOM::Node& other) const;
 
@@ -126,13 +129,15 @@ public:
     unsigned                compareDocumentPosition (const DOM::Node& other);
     quint32                 elementId () const;
     bool                    isNull () const;
-//ig     NodeImpl*          handle () const;
+//ig    NodeImpl*               handle () const;
     unsigned long           index () const;
     QString                 toHTML ();
     void                    applyChanges ();
     void                    getCursor (int offset, int& _x /Out/, int& _y /Out/, int& height /Out/);
     QRect                   getRect ();
-};   // Node
+    ~Node ();
+};
+// Node
 
 
 class NodeList
@@ -147,16 +152,20 @@ public:
                             NodeList (const DOM::NodeList& other);
     unsigned long           length () const;
     DOM::Node               item (unsigned long index) const;
-//ig     NodeListImpl*      handle () const;
+//ig    NodeListImpl*           handle () const;
     bool                    isNull () const;
 
 protected:
-//ig                        NodeList (const NodeListImpl* i);
-};   // NodeList
+//ig                            NodeList (const NodeListImpl* i);
+public:
+    ~NodeList ();
+};
+// NodeList
 
 typedef unsigned long long DOMTimeStamp;
 
-};   // DOM
+};
+// DOM
 
 
 

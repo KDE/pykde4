@@ -51,12 +51,16 @@ public:
         NAMESPACE_ERR,
         INVALID_ACCESS_ERR,
         VALIDATION_ERR,
-        TYPE_MISMATCH_ERR
+        TYPE_MISMATCH_ERR,
+        SECURITY_ERR
     };
 
     unsigned short code;
-};   // DOMException
+    ~DOMException ();
+};
+// DOMException
 
-};   // DOM
+};
+// DOM
 
 

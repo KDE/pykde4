@@ -35,8 +35,11 @@ public:
                             CDATASection (const DOM::Node& other);
 
 protected:
-//ig                        CDATASection (CDATASectionImpl* i);
-};   // CDATASection
+//ig                            CDATASection (CDATASectionImpl* i);
+public:
+    ~CDATASection ();
+};
+// CDATASection
 
 
 class Entity : DOM::Node
@@ -55,8 +58,11 @@ public:
     DOM::DOMString          notationName () const;
 
 protected:
-//ig                        Entity (EntityImpl* i);
-};   // Entity
+//ig                            Entity (EntityImpl* i);
+public:
+    ~Entity ();
+};
+// Entity
 
 
 class EntityReference : DOM::Node
@@ -72,8 +78,11 @@ public:
                             EntityReference (const DOM::Node& other);
 
 protected:
-//ig                        EntityReference (EntityReferenceImpl* i);
-};   // EntityReference
+//ig                            EntityReference (EntityReferenceImpl* i);
+public:
+    ~EntityReference ();
+};
+// EntityReference
 
 
 class Notation : DOM::Node
@@ -91,8 +100,11 @@ public:
     DOM::DOMString          systemId () const;
 
 protected:
-//ig                        Notation (NotationImpl* i);
-};   // Notation
+//ig                            Notation (NotationImpl* i);
+public:
+    ~Notation ();
+};
+// Notation
 
 
 class ProcessingInstruction : DOM::Node
@@ -112,9 +124,13 @@ public:
     DOM::StyleSheet         sheet () const;
 
 protected:
-//ig                        ProcessingInstruction (ProcessingInstructionImpl* i);
-};   // ProcessingInstruction
+//ig                            ProcessingInstruction (ProcessingInstructionImpl* i);
+public:
+    ~ProcessingInstruction ();
+};
+// ProcessingInstruction
 
-};   // DOM
+};
+// DOM
 
 

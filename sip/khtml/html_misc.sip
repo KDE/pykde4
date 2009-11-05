@@ -35,7 +35,7 @@ public:
                             HTMLBaseFontElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLBaseFontElement (HTMLBaseFontElementImpl* impl);
+//ig                            HTMLBaseFontElement (HTMLBaseFontElementImpl* impl);
 
 public:
     DOM::DOMString          color () const;
@@ -46,7 +46,9 @@ public:
     void                    setSize (long);
     DOM::DOMString          size () const;
     void                    setSize (const DOM::DOMString&);
-};   // HTMLBaseFontElement
+    ~HTMLBaseFontElement ();
+};
+// HTMLBaseFontElement
 
 
 class HTMLCollection
@@ -61,24 +63,27 @@ public:
                             HTMLCollection (const DOM::HTMLCollection& other);
 
 protected:
-//ig                        HTMLCollection (HTMLCollectionImpl* impl);
-//ig                        HTMLCollection (NodeImpl* base, int type);
+//ig                            HTMLCollection (HTMLCollectionImpl* impl);
+//ig                            HTMLCollection (NodeImpl* base, int type);
 
 public:
     unsigned long           length () const;
     DOM::Node               item (unsigned long index) const;
     DOM::Node               namedItem (const DOM::DOMString& name) const;
     DOM::Node               base () const;
-//ig     HTMLCollectionImpl*  handle () const;
+//ig    HTMLCollectionImpl*     handle () const;
     bool                    isNull () const;
     DOM::Node               firstItem () const;
     DOM::Node               nextItem () const;
     DOM::Node               nextNamedItem (const DOM::DOMString& name) const;
-};   // HTMLCollection
+    ~HTMLCollection ();
+};
+// HTMLCollection
 
 
 //ig class HTMLFormCollection;
 
-};   // DOM
+};
+// DOM
 
 

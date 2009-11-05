@@ -35,12 +35,14 @@ public:
                             HTMLBlockquoteElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLBlockquoteElement (HTMLElementImpl* impl);
+//ig                            HTMLBlockquoteElement (HTMLElementImpl* impl);
 
 public:
     DOM::DOMString          cite () const;
     void                    setCite (const DOM::DOMString&);
-};   // HTMLBlockquoteElement
+    ~HTMLBlockquoteElement ();
+};
+// HTMLBlockquoteElement
 
 
 class HTMLDivElement : DOM::HTMLElement
@@ -56,12 +58,14 @@ public:
                             HTMLDivElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLDivElement (HTMLDivElementImpl* impl);
+//ig                            HTMLDivElement (HTMLDivElementImpl* impl);
 
 public:
     DOM::DOMString          align () const;
     void                    setAlign (const DOM::DOMString&);
-};   // HTMLDivElement
+    ~HTMLDivElement ();
+};
+// HTMLDivElement
 
 
 class HTMLHRElement : DOM::HTMLElement
@@ -77,7 +81,7 @@ public:
                             HTMLHRElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLHRElement (HTMLHRElementImpl* impl);
+//ig                            HTMLHRElement (HTMLHRElementImpl* impl);
 
 public:
     DOM::DOMString          align () const;
@@ -88,7 +92,9 @@ public:
     void                    setSize (const DOM::DOMString&);
     DOM::DOMString          width () const;
     void                    setWidth (const DOM::DOMString&);
-};   // HTMLHRElement
+    ~HTMLHRElement ();
+};
+// HTMLHRElement
 
 
 class HTMLHeadingElement : DOM::HTMLElement
@@ -104,12 +110,14 @@ public:
                             HTMLHeadingElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLHeadingElement (HTMLElementImpl* impl);
+//ig                            HTMLHeadingElement (HTMLElementImpl* impl);
 
 public:
     DOM::DOMString          align () const;
     void                    setAlign (const DOM::DOMString&);
-};   // HTMLHeadingElement
+    ~HTMLHeadingElement ();
+};
+// HTMLHeadingElement
 
 
 class HTMLParagraphElement : DOM::HTMLElement
@@ -125,12 +133,14 @@ public:
                             HTMLParagraphElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLParagraphElement (HTMLElementImpl* impl);
+//ig                            HTMLParagraphElement (HTMLElementImpl* impl);
 
 public:
     DOM::DOMString          align () const;
     void                    setAlign (const DOM::DOMString&);
-};   // HTMLParagraphElement
+    ~HTMLParagraphElement ();
+};
+// HTMLParagraphElement
 
 
 class HTMLPreElement : DOM::HTMLElement
@@ -146,12 +156,14 @@ public:
                             HTMLPreElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLPreElement (HTMLPreElementImpl* impl);
+//ig                            HTMLPreElement (HTMLPreElementImpl* impl);
 
 public:
     long                    width () const;
     void                    setWidth (long);
-};   // HTMLPreElement
+    ~HTMLPreElement ();
+};
+// HTMLPreElement
 
 
 class HTMLLayerElement : DOM::HTMLElement
@@ -167,7 +179,7 @@ public:
                             HTMLLayerElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLLayerElement (HTMLLayerElementImpl* impl);
+//ig                            HTMLLayerElement (HTMLLayerElementImpl* impl);
 
 public:
     long                    top () const;
@@ -179,8 +191,11 @@ public:
     DOM::DOMString          bgColor () const;
     void                    setBgColor (const DOM::DOMString&);
     DOM::HTMLCollection     layers () const;
-};   // HTMLLayerElement
+    ~HTMLLayerElement ();
+};
+// HTMLLayerElement
 
-};   // DOM
+};
+// DOM
 
 

@@ -35,7 +35,7 @@ public:
                             HTMLAreaElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLAreaElement (HTMLAreaElementImpl* impl);
+//ig                            HTMLAreaElement (HTMLAreaElementImpl* impl);
 
 public:
     DOM::DOMString          accessKey () const;
@@ -54,7 +54,9 @@ public:
     void                    setTabIndex (long);
     DOM::DOMString          target () const;
     void                    setTarget (const DOM::DOMString&);
-};   // HTMLAreaElement
+    ~HTMLAreaElement ();
+};
+// HTMLAreaElement
 
 
 class HTMLImageElement : DOM::HTMLElement
@@ -70,7 +72,7 @@ public:
                             HTMLImageElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLImageElement (HTMLImageElementImpl* impl);
+//ig                            HTMLImageElement (HTMLImageElementImpl* impl);
 
 public:
     DOM::DOMString          name () const;
@@ -101,7 +103,9 @@ public:
     void                    setWidth (long);
     long                    x () const;
     long                    y () const;
-};   // HTMLImageElement
+    ~HTMLImageElement ();
+};
+// HTMLImageElement
 
 
 class HTMLMapElement : DOM::HTMLElement
@@ -117,14 +121,17 @@ public:
                             HTMLMapElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLMapElement (HTMLMapElementImpl* impl);
+//ig                            HTMLMapElement (HTMLMapElementImpl* impl);
 
 public:
     DOM::HTMLCollection     areas () const;
     DOM::DOMString          name () const;
     void                    setName (const DOM::DOMString&);
-};   // HTMLMapElement
+    ~HTMLMapElement ();
+};
+// HTMLMapElement
 
-};   // DOM
+};
+// DOM
 
 

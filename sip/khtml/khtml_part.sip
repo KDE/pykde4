@@ -26,6 +26,7 @@
 //ctscc
 #include <khtml_part.h>
 #include <khtmlview.h>
+#include <qobject.h>
 %End
 
 class KHTMLPart : KParts::ReadOnlyPart
@@ -35,8 +36,8 @@ class KHTMLPart : KParts::ReadOnlyPart
 %End
 
 
-public:
 
+public:
     enum GUIProfile
     {
         DefaultGUI,
@@ -65,7 +66,7 @@ public:
     KHTMLView*              view () const;
     void                    setJScriptEnabled (bool enable);
     bool                    jScriptEnabled () const;
-//ig     KJS::Interpreter*  jScriptInterpreter ();
+//ig    KJS::Interpreter*       jScriptInterpreter ();
     void                    setStatusMessagesEnabled (bool enable);
     bool                    statusMessagesEnabled () const;
     void                    setMetaRefreshEnabled (bool enable);
@@ -136,12 +137,6 @@ public:
     void                    selection (DOM::Node& startNode, long& startOffset /Out/, DOM::Node& endNode, long& endOffset /Out/) const;
     void                    setSelection (const DOM::Range&);
     bool                    hasSelection () const;
-
-
-//mt undefined symbol: Editor* None -- need mapped type?
-//mt     DOM::Editor*       editor () const;
-
-
     void                    selectAll ();
     void                    show ();
     void                    hide ();
@@ -155,10 +150,10 @@ public:
     QStringList             frameNames () const;
     QList<KParts::ReadOnlyPart*>  frames () const;
     KHTMLPart*              findFrame (const QString& f);
-//ig     KHTMLPart*         findFrameParent (KParts::ReadOnlyPart* callingPart, const QString& f, khtml::ChildFrame** childFrame = 0);
+//ig    KHTMLPart*              findFrameParent (KParts::ReadOnlyPart* callingPart, const QString& f, khtml::ChildFrame** childFrame = 0);
     KParts::ReadOnlyPart*   currentFrame () const;
     bool                    frameExists (const QString& frameName);
-//ig     KJSProxy*          framejScript (KParts::ReadOnlyPart* framePart);
+//ig    KJSProxy*               framejScript (KParts::ReadOnlyPart* framePart);
     KParts::ReadOnlyPart*   findFramePart (const QString& f);
     void                    setJSStatusBarText (const QString& text);
     void                    setJSDefaultStatusBarText (const QString& text);
@@ -202,11 +197,11 @@ protected:
     KUrl                    completeURL (const QString& url);
     void                    htmlError (int errorCode, const QString& text, const KUrl& reqUrl);
     virtual void            customEvent (QEvent* event);
-//ig     virtual void       khtmlMousePressEvent (khtml::MousePressEvent* event);
-//ig     virtual void       khtmlMouseDoubleClickEvent (khtml::MouseDoubleClickEvent*);
-//ig     virtual void       khtmlMouseMoveEvent (khtml::MouseMoveEvent* event);
-//ig     virtual void       khtmlMouseReleaseEvent (khtml::MouseReleaseEvent* event);
-//ig     virtual void       khtmlDrawContentsEvent (khtml::DrawContentsEvent*);
+//ig    virtual void            khtmlMousePressEvent (khtml::MousePressEvent* event);
+//ig    virtual void            khtmlMouseDoubleClickEvent (khtml::MouseDoubleClickEvent*);
+//ig    virtual void            khtmlMouseMoveEvent (khtml::MouseMoveEvent* event);
+//ig    virtual void            khtmlMouseReleaseEvent (khtml::MouseReleaseEvent* event);
+//ig    virtual void            khtmlDrawContentsEvent (khtml::DrawContentsEvent*);
     virtual void            guiActivateEvent (KParts::GUIActivateEvent* event);
     virtual bool            openFile ();
     virtual bool            urlSelected (const QString& url, int button, int state, const QString& _target, const KParts::OpenUrlArguments& args = KParts::OpenUrlArguments(), const KParts::BrowserArguments& browserArgs = KParts::BrowserArguments());
@@ -221,7 +216,7 @@ protected:
         Mixed
     };
 
-//ig     void               setPageSecurity (KHTMLPart::PageSecurity sec);
+//ig    void                    setPageSecurity (KHTMLPart::PageSecurity sec);
     virtual bool            doOpenStream (const QString& mimeType);
     virtual bool            doWriteStream (const QByteArray& data);
     virtual bool            doCloseStream ();
@@ -241,19 +236,18 @@ protected:
     virtual void            slotFinished (KJob*);
     virtual void            startingJob (KIO::Job*);
 
-//force
 
 private:
+//force
     void                    setStatusBarText (const QString&, int);
-//end
 
 
-public:
 
 //  Subclasses of QObject
 
+//end
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'QObject'
     sipClass = NULL;
 
     if (dynamic_cast<KHTMLPart*>(sipCpp))
@@ -262,6 +256,10 @@ public:
         sipClass = sipClass_KHTMLView;
 %End
 
-};   // KHTMLPart
+public:
+    ~KHTMLPart ();
+//ig    DOM::Editor*            editor () const;
+};
+// KHTMLPart
 
 

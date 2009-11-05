@@ -35,7 +35,7 @@ public:
                             HTMLAppletElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLAppletElement (HTMLAppletElementImpl* impl);
+//ig                            HTMLAppletElement (HTMLAppletElementImpl* impl);
 
 public:
     DOM::DOMString          align () const;
@@ -64,7 +64,9 @@ public:
     void                    setVspace (const DOM::DOMString&);
     DOM::DOMString          width () const;
     void                    setWidth (const DOM::DOMString&);
-};   // HTMLAppletElement
+    ~HTMLAppletElement ();
+};
+// HTMLAppletElement
 
 
 class HTMLObjectElement : DOM::HTMLElement
@@ -80,7 +82,7 @@ public:
                             HTMLObjectElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLObjectElement (HTMLObjectElementImpl* impl);
+//ig                            HTMLObjectElement (HTMLObjectElementImpl* impl);
 
 public:
     DOM::HTMLFormElement    form () const;
@@ -123,7 +125,9 @@ public:
     DOM::DOMString          width () const;
     void                    setWidth (const DOM::DOMString&);
     DOM::Document           contentDocument () const;
-};   // HTMLObjectElement
+    ~HTMLObjectElement ();
+};
+// HTMLObjectElement
 
 
 class HTMLParamElement : DOM::HTMLElement
@@ -139,7 +143,7 @@ public:
                             HTMLParamElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLParamElement (HTMLParamElementImpl* impl);
+//ig                            HTMLParamElement (HTMLParamElementImpl* impl);
 
 public:
     DOM::DOMString          name () const;
@@ -150,8 +154,11 @@ public:
     void                    setValue (const DOM::DOMString&);
     DOM::DOMString          valueType () const;
     void                    setValueType (const DOM::DOMString&);
-};   // HTMLParamElement
+    ~HTMLParamElement ();
+};
+// HTMLParamElement
 
-};   // DOM
+};
+// DOM
 
 

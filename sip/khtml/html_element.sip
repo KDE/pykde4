@@ -35,7 +35,7 @@ public:
                             HTMLElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLElement (HTMLElementImpl* impl);
+//ig                            HTMLElement (HTMLElementImpl* impl);
 
 public:
     DOM::DOMString          id () const;
@@ -64,8 +64,12 @@ public:
 
 protected:
     void                    assignOther (const DOM::Node& other, int elementId);
-};   // HTMLElement
+public:
+    ~HTMLElement ();
+};
+// HTMLElement
 
-};   // DOM
+};
+// DOM
 
 

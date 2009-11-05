@@ -36,8 +36,26 @@ public:
     void                    deref ();
     bool                    hasOneRef () const;
     unsigned int            refCount () const;
-};   // DomShared
+    ~DomShared ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'DomShared'
+    sipClass = NULL;
 
-};   // DOM
+    if (dynamic_cast<DOM::CustomNodeFilter*>(sipCpp))
+        sipClass = sipClass_DOM_CustomNodeFilter;
+    else if (dynamic_cast<DOM::EventListener*>(sipCpp))
+        sipClass = sipClass_DOM_EventListener;
+%End
+};
+// DomShared
+
+};
+// DOM
 
 
+%ModuleHeaderCode
+//ctscc
+#include <dom2_events.h>
+#include <dom2_traversal.h>
+#include <dom_misc.h>
+%End

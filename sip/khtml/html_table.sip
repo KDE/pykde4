@@ -35,12 +35,14 @@ public:
                             HTMLTableCaptionElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLTableCaptionElement (HTMLTableCaptionElementImpl* impl);
+//ig                            HTMLTableCaptionElement (HTMLTableCaptionElementImpl* impl);
 
 public:
     DOM::DOMString          align () const;
     void                    setAlign (const DOM::DOMString&);
-};   // HTMLTableCaptionElement
+    ~HTMLTableCaptionElement ();
+};
+// HTMLTableCaptionElement
 
 
 class HTMLTableCellElement : DOM::HTMLElement
@@ -56,7 +58,7 @@ public:
                             HTMLTableCellElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLTableCellElement (HTMLTableCellElementImpl* impl);
+//ig                            HTMLTableCellElement (HTMLTableCellElementImpl* impl);
 
 public:
     long                    cellIndex () const;
@@ -89,7 +91,9 @@ public:
     void                    setVAlign (const DOM::DOMString&);
     DOM::DOMString          width () const;
     void                    setWidth (const DOM::DOMString&);
-};   // HTMLTableCellElement
+    ~HTMLTableCellElement ();
+};
+// HTMLTableCellElement
 
 
 class HTMLTableColElement : DOM::HTMLElement
@@ -105,7 +109,7 @@ public:
                             HTMLTableColElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLTableColElement (HTMLTableColElementImpl* impl);
+//ig                            HTMLTableColElement (HTMLTableColElementImpl* impl);
 
 public:
     DOM::DOMString          align () const;
@@ -120,7 +124,9 @@ public:
     void                    setVAlign (const DOM::DOMString&);
     DOM::DOMString          width () const;
     void                    setWidth (const DOM::DOMString&);
-};   // HTMLTableColElement
+    ~HTMLTableColElement ();
+};
+// HTMLTableColElement
 
 
 class HTMLTableElement : DOM::HTMLElement
@@ -136,7 +142,7 @@ public:
                             HTMLTableElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLTableElement (HTMLTableElementImpl* impl);
+//ig                            HTMLTableElement (HTMLTableElementImpl* impl);
 
 public:
     DOM::HTMLTableCaptionElement  caption () const;
@@ -173,7 +179,9 @@ public:
     void                    deleteCaption ();
     DOM::HTMLElement        insertRow (long index);
     void                    deleteRow (long index);
-};   // HTMLTableElement
+    ~HTMLTableElement ();
+};
+// HTMLTableElement
 
 
 class HTMLTableRowElement : DOM::HTMLElement
@@ -189,7 +197,7 @@ public:
                             HTMLTableRowElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLTableRowElement (HTMLTableRowElementImpl* impl);
+//ig                            HTMLTableRowElement (HTMLTableRowElementImpl* impl);
 
 public:
     long                    rowIndex () const;
@@ -210,7 +218,9 @@ public:
     void                    setVAlign (const DOM::DOMString&);
     DOM::HTMLElement        insertCell (long index);
     void                    deleteCell (long index);
-};   // HTMLTableRowElement
+    ~HTMLTableRowElement ();
+};
+// HTMLTableRowElement
 
 
 class HTMLTableSectionElement : DOM::HTMLElement
@@ -226,7 +236,7 @@ public:
                             HTMLTableSectionElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLTableSectionElement (HTMLTableSectionElementImpl* impl);
+//ig                            HTMLTableSectionElement (HTMLTableSectionElementImpl* impl);
 
 public:
     DOM::DOMString          align () const;
@@ -240,8 +250,11 @@ public:
     DOM::HTMLCollection     rows () const;
     DOM::HTMLElement        insertRow (long index);
     void                    deleteRow (long index);
-};   // HTMLTableSectionElement
+    ~HTMLTableSectionElement ();
+};
+// HTMLTableSectionElement
 
-};   // DOM
+};
+// DOM
 
 

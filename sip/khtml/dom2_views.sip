@@ -34,13 +34,17 @@ public:
                             AbstractView (const DOM::AbstractView& other);
     DOM::Document           document () const;
     DOM::CSSStyleDeclaration  getComputedStyle (const DOM::Element& elt, const DOM::DOMString& pseudoElt);
-//ig     AbstractViewImpl*  handle () const;
+//ig    AbstractViewImpl*       handle () const;
     bool                    isNull () const;
 
 protected:
-//ig                        AbstractView (AbstractViewImpl* i);
-};   // AbstractView
+//ig                            AbstractView (AbstractViewImpl* i);
+public:
+    ~AbstractView ();
+};
+// AbstractView
 
-};   // DOM
+};
+// DOM
 
 

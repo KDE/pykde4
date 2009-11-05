@@ -35,7 +35,7 @@ public:
                             HTMLAnchorElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLAnchorElement (HTMLAnchorElementImpl* impl);
+//ig                            HTMLAnchorElement (HTMLAnchorElementImpl* impl);
 
 public:
     DOM::DOMString          accessKey () const;
@@ -64,7 +64,9 @@ public:
     void                    setType (const DOM::DOMString&);
     void                    blur ();
     void                    focus ();
-};   // HTMLAnchorElement
+    ~HTMLAnchorElement ();
+};
+// HTMLAnchorElement
 
 
 class HTMLBRElement : DOM::HTMLElement
@@ -80,12 +82,14 @@ public:
                             HTMLBRElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLBRElement (HTMLBRElementImpl* impl);
+//ig                            HTMLBRElement (HTMLBRElementImpl* impl);
 
 public:
     DOM::DOMString          clear () const;
     void                    setClear (const DOM::DOMString&);
-};   // HTMLBRElement
+    ~HTMLBRElement ();
+};
+// HTMLBRElement
 
 
 class HTMLFontElement : DOM::HTMLElement
@@ -101,7 +105,7 @@ public:
                             HTMLFontElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLFontElement (HTMLFontElementImpl* impl);
+//ig                            HTMLFontElement (HTMLFontElementImpl* impl);
 
 public:
     DOM::DOMString          color () const;
@@ -110,7 +114,9 @@ public:
     void                    setFace (const DOM::DOMString&);
     DOM::DOMString          size () const;
     void                    setSize (const DOM::DOMString&);
-};   // HTMLFontElement
+    ~HTMLFontElement ();
+};
+// HTMLFontElement
 
 
 class HTMLModElement : DOM::HTMLElement
@@ -126,14 +132,16 @@ public:
                             HTMLModElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLModElement (HTMLElementImpl* impl);
+//ig                            HTMLModElement (HTMLElementImpl* impl);
 
 public:
     DOM::DOMString          cite () const;
     void                    setCite (const DOM::DOMString&);
     DOM::DOMString          dateTime () const;
     void                    setDateTime (const DOM::DOMString&);
-};   // HTMLModElement
+    ~HTMLModElement ();
+};
+// HTMLModElement
 
 
 class HTMLQuoteElement : DOM::HTMLElement
@@ -149,13 +157,16 @@ public:
                             HTMLQuoteElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLQuoteElement (HTMLGenericElementImpl* impl);
+//ig                            HTMLQuoteElement (HTMLGenericElementImpl* impl);
 
 public:
     DOM::DOMString          cite () const;
     void                    setCite (const DOM::DOMString&);
-};   // HTMLQuoteElement
+    ~HTMLQuoteElement ();
+};
+// HTMLQuoteElement
 
-};   // DOM
+};
+// DOM
 
 

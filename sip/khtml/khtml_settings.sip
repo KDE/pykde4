@@ -28,8 +28,8 @@ class KHTMLSettings
 %End
 
 
-public:
 
+public:
     enum KJavaScriptAdvice
     {
         KJavaScriptDunno,
@@ -148,9 +148,9 @@ public:
     KHTMLSettings::KJSWindowStatusPolicy  windowStatusPolicy (const QString& hostname = QString()) const;
     KHTMLSettings::KJSWindowFocusPolicy  windowFocusPolicy (const QString& hostname = QString()) const;
     static KHTMLSettings::KJavaScriptAdvice  strToAdvice (const QString& _str);
-//ig     static void        splitDomainAdvice (const QString& configStr, QString& domain, KHTMLSettings::KJavaScriptAdvice& javaAdvice, KHTMLSettings::KJavaScriptAdvice& javaScriptAdvice);
+//ig    static void             splitDomainAdvice (const QString& configStr, QString& domain, KHTMLSettings::KJavaScriptAdvice& javaAdvice, KHTMLSettings::KJavaScriptAdvice& javaScriptAdvice);
     static const char*      adviceToStr (KHTMLSettings::KJavaScriptAdvice _advice);
-//ig     void               readDomainSettings (const KConfigGroup& config, bool reset, bool global, KPerDomainSettings& pd_settings);
+//ig    void                    readDomainSettings (const KConfigGroup& config, bool reset, bool global, KPerDomainSettings& pd_settings);
     QString                 settingsToCSS () const;
     static const QString&   availableFamilies ();
     QString                 userStyleSheet () const;
@@ -162,7 +162,10 @@ public:
     bool                    jsPopupBlockerPassivePopup () const;
 
 private:
-                            KHTMLSettings (const KHTMLSettings&);
-};   // KHTMLSettings
+                            KHTMLSettings (const KHTMLSettings& other);
+public:
+    ~KHTMLSettings ();
+};
+// KHTMLSettings
 
 

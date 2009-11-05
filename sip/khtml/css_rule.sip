@@ -36,7 +36,7 @@ class CSSRule
 public:
                             CSSRule ();
                             CSSRule (const DOM::CSSRule& other);
-//ig                        CSSRule (CSSRuleImpl* impl);
+//ig                            CSSRule (CSSRuleImpl* impl);
 
     enum RuleType
     {
@@ -55,12 +55,15 @@ public:
     void                    setCssText (const DOM::DOMString&);
     DOM::CSSStyleSheet      parentStyleSheet () const;
     DOM::CSSRule            parentRule () const;
-//ig     CSSRuleImpl*       handle () const;
+//ig    CSSRuleImpl*            handle () const;
     bool                    isNull () const;
 
 protected:
     void                    assignOther (const DOM::CSSRule& other, DOM::CSSRule::RuleType thisType);
-};   // CSSRule
+public:
+    ~CSSRule ();
+};
+// CSSRule
 
 
 class CSSCharsetRule : DOM::CSSRule
@@ -74,10 +77,12 @@ public:
                             CSSCharsetRule ();
                             CSSCharsetRule (const DOM::CSSCharsetRule& other);
                             CSSCharsetRule (const DOM::CSSRule& other);
-//ig                        CSSCharsetRule (CSSCharsetRuleImpl* impl);
+//ig                            CSSCharsetRule (CSSCharsetRuleImpl* impl);
     DOM::DOMString          encoding () const;
     void                    setEncoding (const DOM::DOMString&);
-};   // CSSCharsetRule
+    ~CSSCharsetRule ();
+};
+// CSSCharsetRule
 
 
 class CSSFontFaceRule : DOM::CSSRule
@@ -91,9 +96,11 @@ public:
                             CSSFontFaceRule ();
                             CSSFontFaceRule (const DOM::CSSFontFaceRule& other);
                             CSSFontFaceRule (const DOM::CSSRule& other);
-//ig                        CSSFontFaceRule (CSSFontFaceRuleImpl* impl);
+//ig                            CSSFontFaceRule (CSSFontFaceRuleImpl* impl);
     DOM::CSSStyleDeclaration  style () const;
-};   // CSSFontFaceRule
+    ~CSSFontFaceRule ();
+};
+// CSSFontFaceRule
 
 
 class CSSImportRule : DOM::CSSRule
@@ -107,11 +114,13 @@ public:
                             CSSImportRule ();
                             CSSImportRule (const DOM::CSSImportRule& other);
                             CSSImportRule (const DOM::CSSRule& other);
-//ig                        CSSImportRule (CSSImportRuleImpl* impl);
+//ig                            CSSImportRule (CSSImportRuleImpl* impl);
     DOM::DOMString          href () const;
     DOM::MediaList          media () const;
     DOM::CSSStyleSheet      styleSheet () const;
-};   // CSSImportRule
+    ~CSSImportRule ();
+};
+// CSSImportRule
 
 
 class CSSMediaRule : DOM::CSSRule
@@ -125,12 +134,14 @@ public:
                             CSSMediaRule ();
                             CSSMediaRule (const DOM::CSSMediaRule& other);
                             CSSMediaRule (const DOM::CSSRule& other);
-//ig                        CSSMediaRule (CSSMediaRuleImpl* impl);
+//ig                            CSSMediaRule (CSSMediaRuleImpl* impl);
     DOM::MediaList          media () const;
     DOM::CSSRuleList        cssRules () const;
     unsigned long           insertRule (const DOM::DOMString& rule, unsigned long index);
     void                    deleteRule (unsigned long index);
-};   // CSSMediaRule
+    ~CSSMediaRule ();
+};
+// CSSMediaRule
 
 
 class CSSPageRule : DOM::CSSRule
@@ -144,11 +155,13 @@ public:
                             CSSPageRule ();
                             CSSPageRule (const DOM::CSSPageRule& other);
                             CSSPageRule (const DOM::CSSRule& other);
-//ig                        CSSPageRule (CSSPageRuleImpl* impl);
+//ig                            CSSPageRule (CSSPageRuleImpl* impl);
     DOM::DOMString          selectorText () const;
     void                    setSelectorText (const DOM::DOMString&);
     DOM::CSSStyleDeclaration  style () const;
-};   // CSSPageRule
+    ~CSSPageRule ();
+};
+// CSSPageRule
 
 
 class CSSStyleRule : DOM::CSSRule
@@ -162,11 +175,13 @@ public:
                             CSSStyleRule ();
                             CSSStyleRule (const DOM::CSSStyleRule& other);
                             CSSStyleRule (const DOM::CSSRule& other);
-//ig                        CSSStyleRule (CSSStyleRuleImpl* impl);
+//ig                            CSSStyleRule (CSSStyleRuleImpl* impl);
     DOM::DOMString          selectorText () const;
     void                    setSelectorText (const DOM::DOMString&);
     DOM::CSSStyleDeclaration  style () const;
-};   // CSSStyleRule
+    ~CSSStyleRule ();
+};
+// CSSStyleRule
 
 
 class CSSUnknownRule : DOM::CSSRule
@@ -180,8 +195,10 @@ public:
                             CSSUnknownRule ();
                             CSSUnknownRule (const DOM::CSSUnknownRule& other);
                             CSSUnknownRule (const DOM::CSSRule& other);
-//ig                        CSSUnknownRule (CSSUnknownRuleImpl* impl);
-};   // CSSUnknownRule
+//ig                            CSSUnknownRule (CSSUnknownRuleImpl* impl);
+    ~CSSUnknownRule ();
+};
+// CSSUnknownRule
 
 
 class CSSRuleList
@@ -194,14 +211,17 @@ class CSSRuleList
 public:
                             CSSRuleList ();
                             CSSRuleList (const DOM::CSSRuleList& other);
-//ig                        CSSRuleList (CSSRuleListImpl* i);
-//ig                        CSSRuleList (StyleListImpl* i);
+//ig                            CSSRuleList (CSSRuleListImpl* i);
+//ig                            CSSRuleList (StyleListImpl* i);
     unsigned long           length () const;
     DOM::CSSRule            item (unsigned long index);
-//ig     CSSRuleListImpl*   handle () const;
+//ig    CSSRuleListImpl*        handle () const;
     bool                    isNull () const;
-};   // CSSRuleList
+    ~CSSRuleList ();
+};
+// CSSRuleList
 
-};   // DOM
+};
+// DOM
 
 

@@ -33,7 +33,9 @@ public:
                             EventListener ();
     virtual void            handleEvent (DOM::Event& evt);
     virtual DOM::DOMString  eventListenerType ();
-};   // EventListener
+    ~EventListener ();
+};
+// EventListener
 
 
 class Event
@@ -60,22 +62,25 @@ public:
     unsigned short          eventPhase () const;
     bool                    bubbles () const;
     bool                    cancelable () const;
-    DOM::DOMTimeStamp            timeStamp () const;
+    DOM::DOMTimeStamp       timeStamp () const;
     void                    stopPropagation ();
     void                    preventDefault ();
     void                    initEvent (const DOM::DOMString& eventTypeArg, bool canBubbleArg, bool cancelableArg);
-//ig     EventImpl*         handle () const;
+//ig    EventImpl*              handle () const;
     bool                    isNull () const;
 
 protected:
-//ig                        Event (EventImpl* i);
+//ig                            Event (EventImpl* i);
 
 //force
     typedef qlonglong DOMTimeStamp;
 
-//end
 
-};   // Event
+//end
+public:
+    ~Event ();
+};
+// Event
 
 
 class EventException
@@ -97,7 +102,9 @@ public:
     };
 
     unsigned short code;
-};   // EventException
+    ~EventException ();
+};
+// EventException
 
 
 class UIEvent : DOM::Event
@@ -123,8 +130,11 @@ public:
     void                    initUIEvent (const DOM::DOMString& typeArg, bool canBubbleArg, bool cancelableArg, const DOM::AbstractView& viewArg, long detailArg);
 
 protected:
-//ig                        UIEvent (UIEventImpl* impl);
-};   // UIEvent
+//ig                            UIEvent (UIEventImpl* impl);
+public:
+    ~UIEvent ();
+};
+// UIEvent
 
 
 class MouseEvent : DOM::UIEvent
@@ -151,8 +161,11 @@ public:
     void                    initMouseEvent (const DOM::DOMString& typeArg, bool canBubbleArg, bool cancelableArg, const DOM::AbstractView& viewArg, long detailArg, long screenXArg, long screenYArg, long clientXArg, long clientYArg, bool ctrlKeyArg, bool altKeyArg, bool shiftKeyArg, bool metaKeyArg, unsigned short buttonArg, const DOM::Node& relatedTargetArg);
 
 protected:
-//ig                        MouseEvent (MouseEventImpl* impl);
-};   // MouseEvent
+//ig                            MouseEvent (MouseEventImpl* impl);
+public:
+    ~MouseEvent ();
+};
+// MouseEvent
 
 
 class TextEvent : DOM::UIEvent
@@ -167,8 +180,10 @@ public:
                             TextEvent (const DOM::TextEvent& other);
                             TextEvent (const DOM::Event& other);
     void                    initTextEvent (const DOM::DOMString& typeArg, bool canBubbleArg, bool cancelableArg, const DOM::AbstractView& viewArg, const DOM::DOMString& dataArg);
-//ig     DOM::DOMString     data () const;
-};   // TextEvent
+//ig    DOM::DOMString          data () const;
+    ~TextEvent ();
+};
+// TextEvent
 
 
 class KeyboardEvent : DOM::UIEvent
@@ -199,7 +214,9 @@ public:
     bool                    metaKey () const;
     bool                    getModifierState (DOM::DOMString keyIdentifierArg) const;
     void                    initKeyboardEvent (DOM::DOMString typeArg, bool canBubbleArg, bool cancelableArg, DOM::AbstractView viewArg, DOM::DOMString keyIdentifierArg, unsigned long keyLocationArg, DOM::DOMString modifiersList);
-};   // KeyboardEvent
+    ~KeyboardEvent ();
+};
+// KeyboardEvent
 
 
 class MutationEvent : DOM::Event
@@ -229,32 +246,39 @@ public:
     void                    initMutationEvent (const DOM::DOMString& typeArg, bool canBubbleArg, bool cancelableArg, const DOM::Node& relatedNodeArg, const DOM::DOMString& prevValueArg, const DOM::DOMString& newValueArg, const DOM::DOMString& attrNameArg, unsigned short attrChangeArg);
 
 protected:
-//ig                        MutationEvent (MutationEventImpl* impl);
+//ig                            MutationEvent (MutationEventImpl* impl);
 
-public:
 
 //  Subclasses of DOM::Event
 
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'Event'
     sipClass = NULL;
 
     if (dynamic_cast<DOM::MutationEvent*>(sipCpp))
         sipClass = sipClass_DOM_MutationEvent;
     else if (dynamic_cast<DOM::UIEvent*>(sipCpp))
         {
-            sipClass = sipClass_DOM_UIEvent;
-            if (dynamic_cast<DOM::KeyboardEvent*>(sipCpp))
-                sipClass = sipClass_DOM_KeyboardEvent;
-            else if (dynamic_cast<DOM::MouseEvent*>(sipCpp))
-                sipClass = sipClass_DOM_MouseEvent;
-            else if (dynamic_cast<DOM::TextEvent*>(sipCpp))
-                sipClass = sipClass_DOM_TextEvent;
+        sipClass = sipClass_DOM_UIEvent;
+        if (dynamic_cast<DOM::KeyboardEvent*>(sipCpp))
+            sipClass = sipClass_DOM_KeyboardEvent;
+        else if (dynamic_cast<DOM::MouseEvent*>(sipCpp))
+            sipClass = sipClass_DOM_MouseEvent;
+        else if (dynamic_cast<DOM::TextEvent*>(sipCpp))
+            sipClass = sipClass_DOM_TextEvent;
         }
 %End
 
-};   // MutationEvent
+public:
+    ~MutationEvent ();
+};
+// MutationEvent
 
-};   // DOM
+};
+// DOM
 
 
+%ModuleHeaderCode
+//ctscc
+#include <dom2_events.h>
+%End

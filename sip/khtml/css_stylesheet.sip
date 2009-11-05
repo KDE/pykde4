@@ -36,7 +36,7 @@ class StyleSheet
 public:
                             StyleSheet ();
                             StyleSheet (const DOM::StyleSheet& other);
-//ig                        StyleSheet (StyleSheetImpl* impl);
+//ig                            StyleSheet (StyleSheetImpl* impl);
     DOM::DOMString          type () const;
     bool                    disabled () const;
     void                    setDisabled (bool);
@@ -47,9 +47,11 @@ public:
     DOM::MediaList          media () const;
     KUrl                    baseUrl ();
     bool                    isCSSStyleSheet () const;
-//ig     StyleSheetImpl*    handle () const;
+//ig    StyleSheetImpl*         handle () const;
     bool                    isNull () const;
-};   // StyleSheet
+    ~StyleSheet ();
+};
+// StyleSheet
 
 
 class CSSException
@@ -72,7 +74,9 @@ public:
         _EXCEPTION_MAX
     };
 
-};   // CSSException
+    ~CSSException ();
+};
+// CSSException
 
 
 class CSSStyleSheet : DOM::StyleSheet
@@ -86,13 +90,15 @@ public:
                             CSSStyleSheet ();
                             CSSStyleSheet (const DOM::CSSStyleSheet& other);
                             CSSStyleSheet (const DOM::StyleSheet& other);
-//ig                        CSSStyleSheet (CSSStyleSheetImpl* impl);
+//ig                            CSSStyleSheet (CSSStyleSheetImpl* impl);
     DOM::CSSRule            ownerRule () const;
     DOM::CSSRuleList        cssRules () const;
     unsigned long           insertRule (const DOM::DOMString& rule, unsigned long index);
     void                    deleteRule (unsigned long index);
     DOM::DOMString          charset () const;
-};   // CSSStyleSheet
+    ~CSSStyleSheet ();
+};
+// CSSStyleSheet
 
 
 class StyleSheetList
@@ -105,12 +111,14 @@ class StyleSheetList
 public:
                             StyleSheetList ();
                             StyleSheetList (const DOM::StyleSheetList& other);
-//ig                        StyleSheetList (StyleSheetListImpl* impl);
+//ig                            StyleSheetList (StyleSheetListImpl* impl);
     unsigned long           length () const;
     DOM::StyleSheet         item (unsigned long index);
-//ig     StyleSheetListImpl*  handle () const;
+//ig    StyleSheetListImpl*     handle () const;
     bool                    isNull () const;
-};   // StyleSheetList
+    ~StyleSheetList ();
+};
+// StyleSheetList
 
 
 class MediaList
@@ -123,16 +131,18 @@ class MediaList
 public:
                             MediaList ();
                             MediaList (const DOM::MediaList& other);
-//ig                        MediaList (MediaListImpl* impl);
+//ig                            MediaList (MediaListImpl* impl);
     DOM::DOMString          mediaText () const;
     void                    setMediaText (const DOM::DOMString& value);
     unsigned long           length () const;
     DOM::DOMString          item (unsigned long index) const;
     void                    deleteMedium (const DOM::DOMString& oldMedium);
     void                    appendMedium (const DOM::DOMString& newMedium);
-//ig     MediaListImpl*     handle () const;
+//ig    MediaListImpl*          handle () const;
     bool                    isNull () const;
-};   // MediaList
+    ~MediaList ();
+};
+// MediaList
 
 
 class LinkStyle
@@ -147,7 +157,9 @@ public:
                             LinkStyle (const DOM::LinkStyle& other);
     DOM::StyleSheet         sheet ();
     bool                    isNull () const;
-};   // LinkStyle
+    ~LinkStyle ();
+};
+// LinkStyle
 
 
 class DocumentStyle
@@ -165,8 +177,11 @@ public:
     DOM::DOMString          selectedStylesheetSet () const;
     void                    setSelectedStylesheetSet (const DOM::DOMString& aString);
     bool                    isNull () const;
-};   // DocumentStyle
+    ~DocumentStyle ();
+};
+// DocumentStyle
 
-};   // DOM
+};
+// DOM
 
 

@@ -36,7 +36,7 @@ public:
                             HTMLDocument (const DOM::Node& other);
 
 protected:
-//ig                        HTMLDocument (HTMLDocumentImpl* impl);
+//ig                            HTMLDocument (HTMLDocumentImpl* impl);
 
 public:
     DOM::DOMString          title () const;
@@ -63,8 +63,11 @@ public:
     DOM::DOMString          completeURL (const DOM::DOMString& url) const;
     DOM::DOMString          lastModified () const;
     DOM::HTMLCollection     all () const;
-};   // HTMLDocument
+    ~HTMLDocument ();
+};
+// HTMLDocument
 
-};   // DOM
+};
+// DOM
 
 

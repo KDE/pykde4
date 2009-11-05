@@ -21,11 +21,6 @@
 
 //ig namespace khtml;
 
-
-
-//ig namespace khtml;
-
-
 class KHTMLView : QScrollArea
 {
 %TypeHeaderCode
@@ -113,6 +108,9 @@ protected:
     void                    timerEvent (QTimerEvent*);
     void                    setSmoothScrollingModeDefault (KHTMLView::SmoothScrollingMode m);
     void                    slotPaletteChanged ();
-};   // KHTMLView
+public:
+    ~KHTMLView ();
+};
+// KHTMLView
 
 

@@ -39,12 +39,15 @@ public:
     DOM::Node               nextNode ();
     DOM::Node               previousNode ();
     void                    detach ();
-//ig     NodeIteratorImpl*  handle () const;
+//ig    NodeIteratorImpl*       handle () const;
     bool                    isNull () const;
 
 protected:
-//ig                        NodeIterator (NodeIteratorImpl* i);
-};   // NodeIterator
+//ig                            NodeIterator (NodeIteratorImpl* i);
+public:
+    ~NodeIterator ();
+};
+// NodeIterator
 
 
 class NodeFilter
@@ -57,7 +60,7 @@ class NodeFilter
 public:
                             NodeFilter ();
                             NodeFilter (const DOM::NodeFilter& other);
-//ig                        NodeFilter (NodeFilterImpl* i);
+//ig                            NodeFilter (NodeFilterImpl* i);
 
     enum AcceptCode
     {
@@ -85,12 +88,14 @@ public:
     };
 
     virtual short           acceptNode (const DOM::Node& n);
-//ig     virtual NodeFilterImpl*  handle () const;
+//ig    virtual NodeFilterImpl*  handle () const;
     virtual bool            isNull () const;
     void                    setCustomNodeFilter (DOM::CustomNodeFilter* custom);
     DOM::CustomNodeFilter*  customNodeFilter ();
     static DOM::NodeFilter  createCustom (DOM::CustomNodeFilter* custom);
-};   // NodeFilter
+    ~NodeFilter ();
+};
+// NodeFilter
 
 
 class CustomNodeFilter : DOM::DomShared
@@ -105,7 +110,9 @@ public:
     virtual short           acceptNode (const DOM::Node& n);
     virtual bool            isNull ();
     virtual DOM::DOMString  customNodeFilterType ();
-};   // CustomNodeFilter
+    ~CustomNodeFilter ();
+};
+// CustomNodeFilter
 
 
 class TreeWalker
@@ -131,13 +138,17 @@ public:
     DOM::Node               nextSibling ();
     DOM::Node               previousNode ();
     DOM::Node               nextNode ();
-//ig     TreeWalkerImpl*    handle () const;
+//ig    TreeWalkerImpl*         handle () const;
     bool                    isNull () const;
 
 protected:
-//ig                        TreeWalker (TreeWalkerImpl* i);
-};   // TreeWalker
+//ig                            TreeWalker (TreeWalkerImpl* i);
+public:
+    ~TreeWalker ();
+};
+// TreeWalker
 
-};   // DOM
+};
+// DOM
 
 

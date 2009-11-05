@@ -35,7 +35,7 @@ public:
                             HTMLButtonElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLButtonElement (HTMLButtonElementImpl* impl);
+//ig                            HTMLButtonElement (HTMLButtonElementImpl* impl);
 
 public:
     DOM::HTMLFormElement    form () const;
@@ -52,7 +52,9 @@ public:
     void                    setValue (const DOM::DOMString&);
     void                    blur ();
     void                    focus ();
-};   // HTMLButtonElement
+    ~HTMLButtonElement ();
+};
+// HTMLButtonElement
 
 
 class HTMLFieldSetElement : DOM::HTMLElement
@@ -68,11 +70,13 @@ public:
                             HTMLFieldSetElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLFieldSetElement (HTMLFieldSetElementImpl* impl);
+//ig                            HTMLFieldSetElement (HTMLFieldSetElementImpl* impl);
 
 public:
     DOM::HTMLFormElement    form () const;
-};   // HTMLFieldSetElement
+    ~HTMLFieldSetElement ();
+};
+// HTMLFieldSetElement
 
 
 class HTMLFormElement : DOM::HTMLElement
@@ -88,7 +92,7 @@ public:
                             HTMLFormElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLFormElement (HTMLFormElementImpl* impl);
+//ig                            HTMLFormElement (HTMLFormElementImpl* impl);
 
 public:
     DOM::HTMLCollection     elements () const;
@@ -107,7 +111,9 @@ public:
     void                    setTarget (const DOM::DOMString&);
     void                    submit ();
     void                    reset ();
-};   // HTMLFormElement
+    ~HTMLFormElement ();
+};
+// HTMLFormElement
 
 
 class HTMLInputElement : DOM::HTMLElement
@@ -123,7 +129,7 @@ public:
                             HTMLInputElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLInputElement (HTMLInputElementImpl* impl);
+//ig                            HTMLInputElement (HTMLInputElementImpl* impl);
 
 public:
     DOM::DOMString          defaultValue () const;
@@ -174,7 +180,9 @@ public:
     long                    selectionEnd ();
     void                    setSelectionEnd (long offset);
     void                    setSelectionRange (long start, long end);
-};   // HTMLInputElement
+    ~HTMLInputElement ();
+};
+// HTMLInputElement
 
 
 class HTMLLabelElement : DOM::HTMLElement
@@ -190,14 +198,16 @@ public:
                             HTMLLabelElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLLabelElement (HTMLLabelElementImpl* impl);
+//ig                            HTMLLabelElement (HTMLLabelElementImpl* impl);
 
 public:
     DOM::DOMString          accessKey () const;
     void                    setAccessKey (const DOM::DOMString&);
     DOM::DOMString          htmlFor () const;
     void                    setHtmlFor (const DOM::DOMString&);
-};   // HTMLLabelElement
+    ~HTMLLabelElement ();
+};
+// HTMLLabelElement
 
 
 class HTMLLegendElement : DOM::HTMLElement
@@ -213,7 +223,7 @@ public:
                             HTMLLegendElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLLegendElement (HTMLLegendElementImpl* impl);
+//ig                            HTMLLegendElement (HTMLLegendElementImpl* impl);
 
 public:
     DOM::HTMLFormElement    form () const;
@@ -221,7 +231,9 @@ public:
     void                    setAccessKey (const DOM::DOMString&);
     DOM::DOMString          align () const;
     void                    setAlign (const DOM::DOMString&);
-};   // HTMLLegendElement
+    ~HTMLLegendElement ();
+};
+// HTMLLegendElement
 
 
 class HTMLOptGroupElement : DOM::HTMLElement
@@ -237,14 +249,16 @@ public:
                             HTMLOptGroupElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLOptGroupElement (HTMLOptGroupElementImpl* impl);
+//ig                            HTMLOptGroupElement (HTMLOptGroupElementImpl* impl);
 
 public:
     bool                    disabled () const;
     void                    setDisabled (bool);
     DOM::DOMString          label () const;
     void                    setLabel (const DOM::DOMString&);
-};   // HTMLOptGroupElement
+    ~HTMLOptGroupElement ();
+};
+// HTMLOptGroupElement
 
 
 class HTMLSelectElement : DOM::HTMLElement
@@ -260,7 +274,7 @@ public:
                             HTMLSelectElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLSelectElement (HTMLSelectElementImpl* impl);
+//ig                            HTMLSelectElement (HTMLSelectElementImpl* impl);
 
 public:
     DOM::DOMString          type () const;
@@ -285,7 +299,9 @@ public:
     void                    remove (long index);
     void                    blur ();
     void                    focus ();
-};   // HTMLSelectElement
+    ~HTMLSelectElement ();
+};
+// HTMLSelectElement
 
 
 class HTMLTextAreaElement : DOM::HTMLElement
@@ -301,7 +317,7 @@ public:
                             HTMLTextAreaElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLTextAreaElement (HTMLTextAreaElementImpl* impl);
+//ig                            HTMLTextAreaElement (HTMLTextAreaElementImpl* impl);
 
 public:
     DOM::DOMString          defaultValue () const;
@@ -333,7 +349,9 @@ public:
     void                    setSelectionEnd (long offset);
     void                    setSelectionRange (long start, long end);
     long                    textLength ();
-};   // HTMLTextAreaElement
+    ~HTMLTextAreaElement ();
+};
+// HTMLTextAreaElement
 
 
 class HTMLOptionElement : DOM::HTMLElement
@@ -349,7 +367,7 @@ public:
                             HTMLOptionElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLOptionElement (HTMLOptionElementImpl* impl);
+//ig                            HTMLOptionElement (HTMLOptionElementImpl* impl);
 
 public:
     DOM::HTMLFormElement    form () const;
@@ -366,7 +384,9 @@ public:
     void                    setSelected (bool);
     DOM::DOMString          value () const;
     void                    setValue (const DOM::DOMString&);
-};   // HTMLOptionElement
+    ~HTMLOptionElement ();
+};
+// HTMLOptionElement
 
 
 class HTMLIsIndexElement : DOM::HTMLElement
@@ -382,14 +402,17 @@ public:
                             HTMLIsIndexElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLIsIndexElement (HTMLIsIndexElementImpl* impl);
+//ig                            HTMLIsIndexElement (HTMLIsIndexElementImpl* impl);
 
 public:
     DOM::HTMLFormElement    form () const;
     DOM::DOMString          prompt () const;
     void                    setPrompt (const DOM::DOMString&);
-};   // HTMLIsIndexElement
+    ~HTMLIsIndexElement ();
+};
+// HTMLIsIndexElement
 
-};   // DOM
+};
+// DOM
 
 

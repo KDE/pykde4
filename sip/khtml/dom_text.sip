@@ -43,8 +43,11 @@ public:
     void                    replaceData (const unsigned long offset, const unsigned long count, const DOM::DOMString& arg);
 
 protected:
-//ig                        CharacterData (CharacterDataImpl* i);
-};   // CharacterData
+//ig                            CharacterData (CharacterDataImpl* i);
+public:
+    ~CharacterData ();
+};
+// CharacterData
 
 
 class Comment : DOM::CharacterData
@@ -60,8 +63,11 @@ public:
                             Comment (const DOM::Node& other);
 
 protected:
-//ig                        Comment (CommentImpl* i);
-};   // Comment
+//ig                            Comment (CommentImpl* i);
+public:
+    ~Comment ();
+};
+// Comment
 
 
 class Text : DOM::CharacterData
@@ -78,9 +84,13 @@ public:
     DOM::Text               splitText (const unsigned long offset);
 
 protected:
-//ig                        Text (TextImpl* i);
-};   // Text
+//ig                            Text (TextImpl* i);
+public:
+    ~Text ();
+};
+// Text
 
-};   // DOM
+};
+// DOM
 
 

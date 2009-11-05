@@ -35,12 +35,14 @@ public:
                             HTMLDListElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLDListElement (HTMLDListElementImpl* impl);
+//ig                            HTMLDListElement (HTMLDListElementImpl* impl);
 
 public:
     bool                    compact () const;
     void                    setCompact (bool);
-};   // HTMLDListElement
+    ~HTMLDListElement ();
+};
+// HTMLDListElement
 
 
 class HTMLDirectoryElement : DOM::HTMLElement
@@ -56,12 +58,14 @@ public:
                             HTMLDirectoryElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLDirectoryElement (HTMLDirectoryElementImpl* impl);
+//ig                            HTMLDirectoryElement (HTMLDirectoryElementImpl* impl);
 
 public:
     bool                    compact () const;
     void                    setCompact (bool);
-};   // HTMLDirectoryElement
+    ~HTMLDirectoryElement ();
+};
+// HTMLDirectoryElement
 
 
 class HTMLLIElement : DOM::HTMLElement
@@ -77,14 +81,16 @@ public:
                             HTMLLIElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLLIElement (HTMLLIElementImpl* impl);
+//ig                            HTMLLIElement (HTMLLIElementImpl* impl);
 
 public:
     DOM::DOMString          type () const;
     void                    setType (const DOM::DOMString&);
     long                    value () const;
     void                    setValue (long);
-};   // HTMLLIElement
+    ~HTMLLIElement ();
+};
+// HTMLLIElement
 
 
 class HTMLMenuElement : DOM::HTMLElement
@@ -100,12 +106,14 @@ public:
                             HTMLMenuElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLMenuElement (HTMLMenuElementImpl* impl);
+//ig                            HTMLMenuElement (HTMLMenuElementImpl* impl);
 
 public:
     bool                    compact () const;
     void                    setCompact (bool);
-};   // HTMLMenuElement
+    ~HTMLMenuElement ();
+};
+// HTMLMenuElement
 
 
 class HTMLOListElement : DOM::HTMLElement
@@ -121,7 +129,7 @@ public:
                             HTMLOListElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLOListElement (HTMLOListElementImpl* impl);
+//ig                            HTMLOListElement (HTMLOListElementImpl* impl);
 
 public:
     bool                    compact () const;
@@ -130,7 +138,9 @@ public:
     void                    setStart (long);
     DOM::DOMString          type () const;
     void                    setType (const DOM::DOMString&);
-};   // HTMLOListElement
+    ~HTMLOListElement ();
+};
+// HTMLOListElement
 
 
 class HTMLUListElement : DOM::HTMLElement
@@ -146,15 +156,18 @@ public:
                             HTMLUListElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLUListElement (HTMLUListElementImpl* impl);
+//ig                            HTMLUListElement (HTMLUListElementImpl* impl);
 
 public:
     bool                    compact () const;
     void                    setCompact (bool);
     DOM::DOMString          type () const;
     void                    setType (const DOM::DOMString&);
-};   // HTMLUListElement
+    ~HTMLUListElement ();
+};
+// HTMLUListElement
 
-};   // DOM
+};
+// DOM
 
 

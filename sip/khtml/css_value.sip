@@ -32,7 +32,7 @@ class CSSStyleDeclaration
 public:
                             CSSStyleDeclaration ();
                             CSSStyleDeclaration (const DOM::CSSStyleDeclaration& other);
-//ig                        CSSStyleDeclaration (CSSStyleDeclarationImpl* impl);
+//ig                            CSSStyleDeclaration (CSSStyleDeclarationImpl* impl);
     DOM::DOMString          cssText () const;
     void                    setCssText (const DOM::DOMString&);
     unsigned long           length () const;
@@ -42,11 +42,13 @@ public:
     DOM::DOMString          removeProperty (const DOM::DOMString& propertyName);
     DOM::DOMString          getPropertyPriority (const DOM::DOMString& propertyName) const;
     void                    setProperty (const DOM::DOMString& propertyName, const DOM::DOMString& value, const DOM::DOMString& priority);
-//ig     DOM::DOMString     item (unsigned long index) const;
+//ig    DOM::DOMString          item (unsigned long index) const;
     DOM::DOMString          item (unsigned long index);
-//ig     CSSStyleDeclarationImpl*  handle () const;
+//ig    CSSStyleDeclarationImpl*  handle () const;
     bool                    isNull () const;
-};   // CSSStyleDeclaration
+    ~CSSStyleDeclaration ();
+};
+// CSSStyleDeclaration
 
 
 class CSSValue
@@ -59,7 +61,7 @@ class CSSValue
 public:
                             CSSValue ();
                             CSSValue (const DOM::CSSValue& other);
-//ig                        CSSValue (CSSValueImpl* impl);
+//ig                            CSSValue (CSSValueImpl* impl);
 
     enum UnitTypes
     {
@@ -67,7 +69,8 @@ public:
         CSS_PRIMITIVE_VALUE,
         CSS_VALUE_LIST,
         CSS_CUSTOM,
-        CSS_INITIAL
+        CSS_INITIAL,
+        CSS_SVG_VALUE
     };
 
     DOM::DOMString          cssText () const;
@@ -75,9 +78,11 @@ public:
     unsigned short          cssValueType () const;
     bool                    isCSSValueList () const;
     bool                    isCSSPrimitiveValue () const;
-//ig     CSSValueImpl*      handle () const;
+//ig    CSSValueImpl*           handle () const;
     bool                    isNull () const;
-};   // CSSValue
+    ~CSSValue ();
+};
+// CSSValue
 
 
 class CSSValueList : DOM::CSSValue
@@ -91,10 +96,12 @@ public:
                             CSSValueList ();
                             CSSValueList (const DOM::CSSValueList& other);
                             CSSValueList (const DOM::CSSValue& other);
-//ig                        CSSValueList (CSSValueListImpl* impl);
+//ig                            CSSValueList (CSSValueListImpl* impl);
     unsigned long           length () const;
     DOM::CSSValue           item (unsigned long index);
-};   // CSSValueList
+    ~CSSValueList ();
+};
+// CSSValueList
 
 
 class CSSPrimitiveValue : DOM::CSSValue
@@ -108,7 +115,7 @@ public:
                             CSSPrimitiveValue ();
                             CSSPrimitiveValue (const DOM::CSSPrimitiveValue& other);
                             CSSPrimitiveValue (const DOM::CSSValue& other);
-//ig                        CSSPrimitiveValue (CSSPrimitiveValueImpl* impl);
+//ig                            CSSPrimitiveValue (CSSPrimitiveValueImpl* impl);
 
     enum UnitTypes
     {
@@ -152,7 +159,9 @@ public:
     DOM::Counter            getCounterValue () const;
     DOM::Rect               getRectValue () const;
     DOM::RGBColor           getRGBColorValue () const;
-};   // CSSPrimitiveValue
+    ~CSSPrimitiveValue ();
+};
+// CSSPrimitiveValue
 
 
 class RGBColor
@@ -171,7 +180,9 @@ public:
     DOM::CSSPrimitiveValue  green () const;
     DOM::CSSPrimitiveValue  blue () const;
     QRgb                    color () const;
-};   // RGBColor
+    ~RGBColor ();
+};
+// RGBColor
 
 
 class Rect
@@ -188,12 +199,15 @@ public:
     DOM::CSSPrimitiveValue  right () const;
     DOM::CSSPrimitiveValue  bottom () const;
     DOM::CSSPrimitiveValue  left () const;
-//ig     RectImpl*          handle () const;
+//ig    RectImpl*               handle () const;
     bool                    isNull () const;
 
 protected:
-//ig                        Rect (RectImpl* i);
-};   // Rect
+//ig                            Rect (RectImpl* i);
+public:
+    ~Rect ();
+};
+// Rect
 
 
 class Counter
@@ -209,13 +223,17 @@ public:
     DOM::DOMString          identifier () const;
     DOM::DOMString          listStyle () const;
     DOM::DOMString          separator () const;
-//ig     CounterImpl*       handle () const;
+//ig    CounterImpl*            handle () const;
     bool                    isNull () const;
 
 protected:
-//ig                        Counter (CounterImpl* i);
-};   // Counter
+//ig                            Counter (CounterImpl* i);
+public:
+    ~Counter ();
+};
+// Counter
 
-};   // DOM
+};
+// DOM
 
 

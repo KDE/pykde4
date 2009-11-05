@@ -42,7 +42,9 @@ public:
     };
 
     unsigned short code;
-};   // RangeException
+    ~RangeException ();
+};
+// RangeException
 
 
 class Range
@@ -94,13 +96,17 @@ public:
     DOM::DocumentFragment   createContextualFragment (const DOM::DOMString& html);
     void                    detach ();
     bool                    isDetached () const;
-//ig     RangeImpl*         handle () const;
+//ig    RangeImpl*              handle () const;
     bool                    isNull () const;
 
 protected:
-//ig                        Range (RangeImpl* i);
-};   // Range
+//ig                            Range (RangeImpl* i);
+public:
+    ~Range ();
+};
+// Range
 
-};   // DOM
+};
+// DOM
 
 

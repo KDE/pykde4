@@ -35,14 +35,16 @@ public:
                             HTMLBaseElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLBaseElement (HTMLBaseElementImpl* impl);
+//ig                            HTMLBaseElement (HTMLBaseElementImpl* impl);
 
 public:
     DOM::DOMString          href () const;
     void                    setHref (const DOM::DOMString&);
     DOM::DOMString          target () const;
     void                    setTarget (const DOM::DOMString&);
-};   // HTMLBaseElement
+    ~HTMLBaseElement ();
+};
+// HTMLBaseElement
 
 
 class HTMLLinkElement : DOM::HTMLElement
@@ -58,7 +60,7 @@ public:
                             HTMLLinkElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLLinkElement (HTMLLinkElementImpl* impl);
+//ig                            HTMLLinkElement (HTMLLinkElementImpl* impl);
 
 public:
     bool                    disabled () const;
@@ -80,7 +82,9 @@ public:
     DOM::DOMString          type () const;
     void                    setType (const DOM::DOMString&);
     DOM::StyleSheet         sheet () const;
-};   // HTMLLinkElement
+    ~HTMLLinkElement ();
+};
+// HTMLLinkElement
 
 
 class HTMLMetaElement : DOM::HTMLElement
@@ -96,7 +100,7 @@ public:
                             HTMLMetaElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLMetaElement (HTMLMetaElementImpl* impl);
+//ig                            HTMLMetaElement (HTMLMetaElementImpl* impl);
 
 public:
     DOM::DOMString          content () const;
@@ -107,7 +111,9 @@ public:
     void                    setName (const DOM::DOMString&);
     DOM::DOMString          scheme () const;
     void                    setScheme (const DOM::DOMString&);
-};   // HTMLMetaElement
+    ~HTMLMetaElement ();
+};
+// HTMLMetaElement
 
 
 class HTMLScriptElement : DOM::HTMLElement
@@ -123,7 +129,7 @@ public:
                             HTMLScriptElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLScriptElement (HTMLScriptElementImpl* impl);
+//ig                            HTMLScriptElement (HTMLScriptElementImpl* impl);
 
 public:
     DOM::DOMString          text () const;
@@ -140,7 +146,9 @@ public:
     void                    setSrc (const DOM::DOMString&);
     DOM::DOMString          type () const;
     void                    setType (const DOM::DOMString&);
-};   // HTMLScriptElement
+    ~HTMLScriptElement ();
+};
+// HTMLScriptElement
 
 
 class HTMLStyleElement : DOM::HTMLElement
@@ -156,7 +164,7 @@ public:
                             HTMLStyleElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLStyleElement (HTMLStyleElementImpl* impl);
+//ig                            HTMLStyleElement (HTMLStyleElementImpl* impl);
 
 public:
     bool                    disabled () const;
@@ -166,7 +174,9 @@ public:
     DOM::DOMString          type () const;
     void                    setType (const DOM::DOMString&);
     DOM::StyleSheet         sheet () const;
-};   // HTMLStyleElement
+    ~HTMLStyleElement ();
+};
+// HTMLStyleElement
 
 
 class HTMLTitleElement : DOM::HTMLElement
@@ -182,13 +192,16 @@ public:
                             HTMLTitleElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLTitleElement (HTMLTitleElementImpl* impl);
+//ig                            HTMLTitleElement (HTMLTitleElementImpl* impl);
 
 public:
     DOM::DOMString          text () const;
     void                    setText (const DOM::DOMString&);
-};   // HTMLTitleElement
+    ~HTMLTitleElement ();
+};
+// HTMLTitleElement
 
-};   // DOM
+};
+// DOM
 
 

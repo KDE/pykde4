@@ -35,7 +35,7 @@ public:
                             HTMLBodyElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLBodyElement (HTMLBodyElementImpl* impl);
+//ig                            HTMLBodyElement (HTMLBodyElementImpl* impl);
 
 public:
     DOM::DOMString          aLink () const;
@@ -50,7 +50,9 @@ public:
     void                    setText (const DOM::DOMString&);
     DOM::DOMString          vLink () const;
     void                    setVLink (const DOM::DOMString&);
-};   // HTMLBodyElement
+    ~HTMLBodyElement ();
+};
+// HTMLBodyElement
 
 
 class HTMLFrameElement : DOM::HTMLElement
@@ -66,7 +68,7 @@ public:
                             HTMLFrameElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLFrameElement (HTMLFrameElementImpl* impl);
+//ig                            HTMLFrameElement (HTMLFrameElementImpl* impl);
 
 public:
     DOM::DOMString          frameBorder () const;
@@ -86,7 +88,9 @@ public:
     DOM::DOMString          src () const;
     void                    setSrc (const DOM::DOMString&);
     DOM::Document           contentDocument () const;
-};   // HTMLFrameElement
+    ~HTMLFrameElement ();
+};
+// HTMLFrameElement
 
 
 class HTMLFrameSetElement : DOM::HTMLElement
@@ -102,14 +106,16 @@ public:
                             HTMLFrameSetElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLFrameSetElement (HTMLFrameSetElementImpl* impl);
+//ig                            HTMLFrameSetElement (HTMLFrameSetElementImpl* impl);
 
 public:
     DOM::DOMString          cols () const;
     void                    setCols (const DOM::DOMString&);
     DOM::DOMString          rows () const;
     void                    setRows (const DOM::DOMString&);
-};   // HTMLFrameSetElement
+    ~HTMLFrameSetElement ();
+};
+// HTMLFrameSetElement
 
 
 class HTMLIFrameElement : DOM::HTMLElement
@@ -125,7 +131,7 @@ public:
                             HTMLIFrameElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLIFrameElement (HTMLIFrameElementImpl* impl);
+//ig                            HTMLIFrameElement (HTMLIFrameElementImpl* impl);
 
 public:
     DOM::DOMString          align () const;
@@ -149,7 +155,9 @@ public:
     DOM::DOMString          width () const;
     void                    setWidth (const DOM::DOMString&);
     DOM::Document           contentDocument () const;
-};   // HTMLIFrameElement
+    ~HTMLIFrameElement ();
+};
+// HTMLIFrameElement
 
 
 class HTMLHeadElement : DOM::HTMLElement
@@ -165,12 +173,14 @@ public:
                             HTMLHeadElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLHeadElement (HTMLHeadElementImpl* impl);
+//ig                            HTMLHeadElement (HTMLHeadElementImpl* impl);
 
 public:
     DOM::DOMString          profile () const;
     void                    setProfile (const DOM::DOMString&);
-};   // HTMLHeadElement
+    ~HTMLHeadElement ();
+};
+// HTMLHeadElement
 
 
 class HTMLHtmlElement : DOM::HTMLElement
@@ -186,13 +196,16 @@ public:
                             HTMLHtmlElement (const DOM::Node& other);
 
 protected:
-//ig                        HTMLHtmlElement (HTMLHtmlElementImpl* impl);
+//ig                            HTMLHtmlElement (HTMLHtmlElementImpl* impl);
 
 public:
     DOM::DOMString          version () const;
     void                    setVersion (const DOM::DOMString&);
-};   // HTMLHtmlElement
+    ~HTMLHtmlElement ();
+};
+// HTMLHtmlElement
 
-};   // DOM
+};
+// DOM
 
 

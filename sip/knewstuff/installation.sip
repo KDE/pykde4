@@ -70,9 +70,15 @@ public:
     bool                    customName () const;
 
 private:
+//force
                             Installation (const KNS::Installation&);
-};   // Installation
+//end
+public:
+    ~Installation ();
+};
+// Installation
 
-};   // KNS
+};
+// KNS
 
 

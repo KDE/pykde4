@@ -38,8 +38,11 @@ public:
     QString                 jabber () const;
     void                    setHomepage (const QString& homepage);
     QString                 homepage () const;
-};   // Author
+    ~Author ();
+};
+// Author
 
-};   // KNS
+};
+// KNS
 
 

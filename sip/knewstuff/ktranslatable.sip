@@ -45,8 +45,11 @@ public:
     QMap<QString,QString>   stringmap () const;
     bool                    isTranslated () const;
     bool                    isEmpty () const;
-};   // KTranslatable
+    ~KTranslatable ();
+};
+// KTranslatable
 
-};   // KNS
+};
+// KNS
 
 

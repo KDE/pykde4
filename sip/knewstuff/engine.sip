@@ -24,7 +24,7 @@ namespace KNS
 class Engine
 {
 %TypeHeaderCode
-#include <knewstuff2/engine.h>
+#include <engine.h>
 %End
 
 public:
@@ -39,9 +39,13 @@ public:
     bool                    init (const QString& config);
 
 private:
+//force
                             Engine (const KNS::Engine&);
-};   // Engine
+//end
+};
+// Engine
 
-};   // KNS
+};
+// KNS
 
 

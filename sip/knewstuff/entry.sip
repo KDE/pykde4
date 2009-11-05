@@ -88,8 +88,11 @@ public:
     KNS::Entry::Source      source ();
     void                    setIdNumber (int number);
     int                     idNumber () const;
-};   // Entry
+    ~Entry ();
+};
+// Entry
 
-};   // KNS
+};
+// KNS
 
 

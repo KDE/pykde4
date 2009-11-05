@@ -39,9 +39,15 @@ public:
     KUrl                    icon () const;
 
 private:
+//force
                             Category (const KNS::Category&);
-};   // Category
+//end
+public:
+    ~Category ();
+};
+// Category
 
-};   // KNS
+};
+// KNS
 
 

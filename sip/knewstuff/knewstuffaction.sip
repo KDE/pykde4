@@ -25,6 +25,7 @@
 namespace KNS
 {
 KAction*                standardAction (const QString& what, const QObject* recvr, const char* slot, KActionCollection* parent, const char* name = 0);
-};   // KNS
+};
+// KNS
 
 

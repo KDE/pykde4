@@ -38,8 +38,14 @@ public:
 
 signals:
     void                    resolved (bool successful);
-};   // RemoteService
-};   // DNSSD
+public:
+    ~RemoteService ();
+protected:
+    virtual void            virtual_hook (int id, void* data);
+};
+// RemoteService
+};
+// DNSSD
 
 %MappedType QList<DNSSD::RemoteService::Ptr>
 {

@@ -22,13 +22,14 @@
 
 %ModuleHeaderCode
 //ctscc
-#include <domainbrowser.h>
-#include <domainmodel.h>
-#include <publicservice.h>
-#include <remoteservice.h>
-#include <servicebrowser.h>
-#include <servicemodel.h>
-#include <servicetypebrowser.h>
+#include <dnssd/domainbrowser.h>
+#include <dnssd/domainmodel.h>
+#include <dnssd/publicservice.h>
+#include <qobject.h>
+#include <dnssd/remoteservice.h>
+#include <dnssd/servicebrowser.h>
+#include <dnssd/servicemodel.h>
+#include <dnssd/servicetypebrowser.h>
 %End
 
 namespace DNSSD
@@ -41,8 +42,8 @@ class DomainBrowser : QObject
 %End
 
 
-public:
 
+public:
     enum DomainType
     {
         Browsing,
@@ -58,33 +59,36 @@ signals:
     void                    domainRemoved (const QString& domain);
     void                    domainAdded (const QString& domain);
 
-public:
 
 //  Subclasses of QObject
 
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'QObject'
     sipClass = NULL;
 
     if (dynamic_cast<DNSSD::DomainBrowser*>(sipCpp))
         sipClass = sipClass_DNSSD_DomainBrowser;
-    else if (dynamic_cast<DNSSD::DomainModel*>(sipCpp))
-        sipClass = sipClass_DNSSD_DomainModel;
     else if (dynamic_cast<DNSSD::PublicService*>(sipCpp))
         sipClass = sipClass_DNSSD_PublicService;
     else if (dynamic_cast<DNSSD::RemoteService*>(sipCpp))
         sipClass = sipClass_DNSSD_RemoteService;
     else if (dynamic_cast<DNSSD::ServiceBrowser*>(sipCpp))
         sipClass = sipClass_DNSSD_ServiceBrowser;
-    else if (dynamic_cast<DNSSD::ServiceModel*>(sipCpp))
-        sipClass = sipClass_DNSSD_ServiceModel;
     else if (dynamic_cast<DNSSD::ServiceTypeBrowser*>(sipCpp))
         sipClass = sipClass_DNSSD_ServiceTypeBrowser;
+    else if (dynamic_cast<DNSSD::DomainModel*>(sipCpp))
+        sipClass = sipClass_DNSSD_DomainModel;
+    else if (dynamic_cast<DNSSD::ServiceModel*>(sipCpp))
+        sipClass = sipClass_DNSSD_ServiceModel;
 %End
 
-};   // DomainBrowser
+public:
+    ~DomainBrowser ();
+};
+// DomainBrowser
 
-};   // DNSSD
+};
+// DNSSD
 
 
 

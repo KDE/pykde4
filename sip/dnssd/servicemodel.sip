@@ -27,8 +27,8 @@ class ServiceModel : QAbstractItemModel
 #include <dnssd/servicemodel.h>
 %End
 
-public:
 
+public:
     enum AdditionalRoles
     {
         ServicePtrRole
@@ -50,8 +50,11 @@ public:
     virtual QVariant        data (const QModelIndex& index, int role = Qt::DisplayRole) const;
     virtual QVariant        headerData (int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     virtual bool            hasIndex (int row, int column, const QModelIndex& parent) const;
-};   // ServiceModel
+    ~ServiceModel ();
+};
+// ServiceModel
 
-};   // DNSSD
+};
+// DNSSD
 
 

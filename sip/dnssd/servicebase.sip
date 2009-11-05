@@ -26,9 +26,9 @@ class ServiceBase : KShared
 #include <dnssd/servicebase.h>
 %End
 
-public:
 //    typedef KSharedPtr<DNSSD::ServiceBase> Ptr;
 
+public:
     explicit                ServiceBase (const QString& name = QString(), const QString& type = QString(), const QString& domain = QString(), const QString& host = QString(), unsigned short port = 0);
     QString                 serviceName () const;
     QString                 type () const;
@@ -40,11 +40,39 @@ public:
     bool                    operator != (const DNSSD::ServiceBase& o) const;
 
 private:
-                            ServiceBase(const DNSSD::ServiceBase&other);
-};   // ServiceBase
+//force
+                            ServiceBase (const DNSSD::ServiceBase& other);
+//end
+public:
+    ~ServiceBase ();
+protected:
+//ig    virtual void            virtual_hook (int, void*);
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'ServiceBase'
+    sipClass = NULL;
+
+    if (dynamic_cast<DNSSD::ServiceBase*>(sipCpp))
+        {
+        sipClass = sipClass_DNSSD_ServiceBase;
+        if (dynamic_cast<DNSSD::PublicService*>(sipCpp))
+            sipClass = sipClass_DNSSD_PublicService;
+        else if (dynamic_cast<DNSSD::RemoteService*>(sipCpp))
+            sipClass = sipClass_DNSSD_RemoteService;
+        }
+%End
+//ig                            ServiceBase (ServiceBasePrivate*const d);
+};
+// ServiceBase
 
 // //This should be public but it doesn't appear to be exported by the library.
 //ig bool                    domainIsLocal (const QString& domain);
-};   // DNSSD
+};
+// DNSSD
 
 
+%ModuleHeaderCode
+//ctscc
+#include <dnssd/publicservice.h>
+#include <dnssd/remoteservice.h>
+#include <dnssd/servicebase.h>
+%End

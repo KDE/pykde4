@@ -38,8 +38,12 @@ signals:
     void                    serviceTypeRemoved (const QString& type);
     void                    serviceTypeAdded (const QString& type);
     void                    finished ();
-};   // ServiceTypeBrowser
+public:
+    ~ServiceTypeBrowser ();
+};
+// ServiceTypeBrowser
 
-};   // DNSSD
+};
+// DNSSD
 
 

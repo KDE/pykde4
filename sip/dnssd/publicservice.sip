@@ -45,8 +45,14 @@ public:
 signals:
     void                    published (bool successful);
 
-};   // PublicService
+public:
+    ~PublicService ();
+protected:
+    virtual void            virtual_hook (int, void*);
+};
+// PublicService
 
-};   // DNSSD
+};
+// DNSSD
 
 

@@ -25,6 +25,7 @@
 
 %ModuleHeaderCode
 //ctscc
+#include <kpixmapprovider.h>
 #include <kurlpixmapprovider.h>
 %End
 
@@ -40,24 +41,28 @@ public:
     virtual QPixmap         pixmapFor (const QString& url, int size = 0);
 
 protected:
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 
 private:
+//force
                             KUrlPixmapProvider (const KUrlPixmapProvider& other);
 
-public:
 
 //  Subclasses of KPixmapProvider
 
+//end
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'KPixmapProvider'
     sipClass = NULL;
 
     if (dynamic_cast<KUrlPixmapProvider*>(sipCpp))
         sipClass = sipClass_KUrlPixmapProvider;
 %End
 
-};   // KUrlPixmapProvider
+public:
+    ~KUrlPixmapProvider ();
+};
+// KUrlPixmapProvider
 
 
 

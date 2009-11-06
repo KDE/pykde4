@@ -127,12 +127,18 @@ public:
     int                     waitForHostInfo (QHostInfo& info);
 
 protected:
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 
 private:
+//force
                             SlaveBase (const KIO::SlaveBase& other);
-};   // SlaveBase
+//end
+public:
+    ~SlaveBase ();
+};
+// SlaveBase
 
-};   // KIO
+};
+// KIO
 
 

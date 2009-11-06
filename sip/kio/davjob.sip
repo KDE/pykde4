@@ -39,20 +39,22 @@ public:
 protected:
     virtual void            slotFinished ();
     virtual void            slotData (const QByteArray& data);
-//ig                        DavJob (DavJobPrivate& dd, int, const QString&);
+//ig                            DavJob (DavJobPrivate& dd, int, const QString&);
 
-//force
 
 private:
+//force
                             DavJob ();
-//end
 
-};   // DavJob
+//end
+};
+// DavJob
 
 KIO::DavJob*            davPropFind (const KUrl& url, const QDomDocument& properties, const QString& depth, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::DavJob*            davPropPatch (const KUrl& url, const QDomDocument& properties, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::DavJob*            davSearch (const KUrl& url, const QString& nsURI, const QString& qName, const QString& query, KIO::JobFlags flags = KIO::DefaultFlags);
-};   // KIO
+};
+// KIO
 
 
 

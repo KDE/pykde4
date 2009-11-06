@@ -37,7 +37,12 @@ signals:
     void                    changed ();
 
 private:
+//force
                             KSambaShare ();
-};   // KSambaShare
+//end
+public:
+    ~KSambaShare ();
+};
+// KSambaShare
 
 

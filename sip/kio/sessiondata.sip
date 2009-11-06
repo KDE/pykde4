@@ -33,8 +33,11 @@ public:
                             SessionData ();
     virtual void            configDataFor (KIO::MetaData& configData, const QString& proto, const QString& host);
     virtual void            reset ();
-};   // SessionData
+    ~SessionData ();
+};
+// SessionData
 
-};   // KIO
+};
+// KIO
 
 

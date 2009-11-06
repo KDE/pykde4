@@ -30,5 +30,10 @@ public:
     float                   sequenceIndex () const;
     void                    setSequenceIndex (float index);
 private:
+//force
                             ThumbSequenceCreator (const ThumbSequenceCreator&);
-};   // ThumbSequenceCreator
+//end
+public:
+    ~ThumbSequenceCreator ();
+};
+// ThumbSequenceCreator

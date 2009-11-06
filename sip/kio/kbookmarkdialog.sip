@@ -32,12 +32,11 @@ public:
                             KBookmarkDialog (KBookmarkManager*, QWidget* = 0);
     KBookmark               editBookmark (const KBookmark& bm);
     KBookmark               addBookmark (const QString& title, const KUrl& url, KBookmark parent /Transfer/ = KBookmark());
-    KBookmarkGroup          addBookmarks (const QList<QPair<QString,QString>>& list, const QString& name = QString(), KBookmarkGroup parent = KBookmarkGroup());
     KBookmarkGroup          createNewFolder (const QString& name, KBookmark parent /Transfer/ = KBookmark());
     KBookmarkGroup          selectFolder (KBookmark start = KBookmark());
 
-protected:
 
+protected:
     enum BookmarkDialogMode
     {
         NewFolder,
@@ -56,6 +55,9 @@ protected:
     void                    fillGroup (QTreeWidgetItem* parentItem, const KBookmarkGroup& group);
     void                    initLayoutPrivate ();
     void                    newFolderButton ();
-};   // KBookmarkDialog
+public:
+    KBookmarkGroup          addBookmarks (const QList<QPair<QString,QString>>& list, const QString& name = QString(), KBookmarkGroup parent = KBookmarkGroup());
+};
+// KBookmarkDialog
 
 

@@ -43,6 +43,9 @@ protected:
 
 signals:
     void                    filterChanged ();
-};   // KFileFilterCombo
+public:
+    ~KFileFilterCombo ();
+};
+// KFileFilterCombo
 
 

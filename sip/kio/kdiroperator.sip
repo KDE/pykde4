@@ -28,8 +28,8 @@ class KDirOperator : QWidget
 %End
 
 
-public:
 
+public:
     enum ActionType
     {
         SortActions,
@@ -154,6 +154,9 @@ signals:
     void                    dropped (const KFileItem& item, QDropEvent* event, const KUrl::List& urls);
     void                    contextMenuAboutToShow (const KFileItem& item, QMenu* menu);
     void                    currentIconSizeChanged (int size);
-};   // KDirOperator
+public:
+    ~KDirOperator ();
+};
+// KDirOperator
 
 

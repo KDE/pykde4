@@ -40,8 +40,13 @@ signals:
     void                    finished ();
 
 private:
+//force
                             KIconCanvas (const KIconCanvas&);
-};   // KIconCanvas
+//end
+public:
+    ~KIconCanvas ();
+};
+// KIconCanvas
 
 
 class KIconDialog : KDialog
@@ -62,7 +67,7 @@ public:
     void                    setup (KIconLoader::Group group, KIconLoader::Context context = KIconLoader::Application, bool strictIconSize = 0, int iconSize = 0, bool user = 0, bool lockUser = 0, bool lockCustomDir = 0);
     QString                 openDialog ();
     void                    showDialog ();
-    static QString     getIcon (KIconLoader::Group group = KIconLoader::Desktop, KIconLoader::Context context = KIconLoader::Application, bool strictIconSize = 0, int iconSize = 0, bool user = 0, QWidget* parent /Transfer/ = 0, const QString& caption = QString());
+    static QString          getIcon (KIconLoader::Group group = KIconLoader::Desktop, KIconLoader::Context context = KIconLoader::Application, bool strictIconSize = 0, int iconSize = 0, bool user = 0, QWidget* parent /Transfer/ = 0, const QString& caption = QString());
 
 signals:
     void                    newIconName (const QString&);
@@ -71,8 +76,13 @@ protected:
     void                    slotOk ();
 
 private:
+//force
                             KIconDialog (const KIconDialog&);
-};   // KIconDialog
+//end
+public:
+    ~KIconDialog ();
+};
+// KIconDialog
 
 
 class KIconButton : QPushButton
@@ -103,7 +113,12 @@ signals:
     void                    iconChanged (const QString& icon);
 
 private:
+//force
                             KIconButton (const KIconButton&);
-};   // KIconButton
+//end
+public:
+    ~KIconButton ();
+};
+// KIconButton
 
 

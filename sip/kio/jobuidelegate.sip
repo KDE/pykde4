@@ -51,8 +51,11 @@ public:
 
     bool                    askDeleteConfirmation (const KUrl::List& urls, KIO::JobUiDelegate::DeletionType deletionType, KIO::JobUiDelegate::ConfirmationType confirmationType);
 
-};   // JobUiDelegate
+    ~JobUiDelegate ();
+};
+// JobUiDelegate
 
-};   // KIO
+};
+// KIO
 
 

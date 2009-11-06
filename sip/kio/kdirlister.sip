@@ -28,8 +28,8 @@ class KDirLister : QObject
 %End
 
 
-public:
 
+public:
     enum OpenUrlFlag
     {
         NoFlags,
@@ -97,15 +97,14 @@ signals:
     void                    itemsFilteredByMime (const KFileItemList& items);
     void                    deleteItem (const KFileItem& _fileItem);
     void                    itemsDeleted (const KFileItemList& items);
-    void                    refreshItems (const QList<QPair<KFileItem,KFileItem>>& items);
     void                    infoMessage (const QString& msg);
     void                    percent (int percent);
     void                    totalSize (KIO::filesize_t size);
     void                    processedSize (KIO::filesize_t size);
     void                    speed (int bytes_per_second);
 
-protected:
 
+protected:
     enum Changes
     {
         NONE,
@@ -120,6 +119,11 @@ protected:
     virtual bool            doNameFilter (const QString& name, const QList<QRegExp>& filters) const;
     virtual bool            doMimeFilter (const QString& mime, const QStringList& filters) const;
     virtual void            handleError (KIO::Job*);
-};   // KDirLister
+public:
+    ~KDirLister ();
+signals:
+    void                    refreshItems (const QList<QPair<KFileItem,KFileItem>>& items);
+};
+// KDirLister
 
 

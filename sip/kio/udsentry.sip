@@ -80,11 +80,14 @@ public:
         UDS_EXTRA_END
     };
 
-};   // UDSEntry
+    ~UDSEntry ();
+};
+// UDSEntry
 
 typedef QList<KIO::UDSEntry> UDSEntryList;
 
-};   // KIO
+};
+// KIO
 
 
 
@@ -92,3 +95,5 @@ typedef QList<KIO::UDSEntry> UDSEntryList;
 #include <udsentry.h>
 %End
 
+QDataStream&            operator << (QDataStream& s, const KIO::UDSEntry& a);
+QDataStream&            operator >> (QDataStream& s, KIO::UDSEntry& a);

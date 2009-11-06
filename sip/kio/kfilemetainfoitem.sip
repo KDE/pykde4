@@ -44,7 +44,12 @@ public:
     QString                 prefix () const;
 
 private:
+//force
                             KFileMetaInfoItem (const PredicateProperties& p, const QVariant& v, KFileWritePlugin* w, bool e);
-};   // KFileMetaInfoItem
+//end
+public:
+    ~KFileMetaInfoItem ();
+};
+// KFileMetaInfoItem
 
 

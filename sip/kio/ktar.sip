@@ -40,9 +40,14 @@ protected:
     virtual bool            openArchive (QIODevice::OpenMode mode);
     virtual bool            closeArchive ();
     virtual bool            createDevice (QIODevice::OpenMode mode);
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 private:
-                            KTar(const KTar &other);
-};   // KTar
+//force
+                            KTar (const KTar& other);
+//end
+public:
+    ~KTar ();
+};
+// KTar
 
 

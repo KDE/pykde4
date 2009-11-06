@@ -52,17 +52,21 @@ signals:
 protected:
     virtual void            slotResult (KJob* job);
 
-//force
 
 private:
+//force
                             PreviewJob ();
-//end
 
-};   // PreviewJob
+//end
+public:
+    ~PreviewJob ();
+};
+// PreviewJob
 
 KIO::PreviewJob*        filePreview (const KFileItemList& items, int width, int height = 0, int iconSize = 0, int iconAlpha = 70, bool scale = 1, bool save = 1, const QStringList* enabledPlugins = 0);
 KIO::PreviewJob*        filePreview (const KUrl::List& items, int width, int height = 0, int iconSize = 0, int iconAlpha = 70, bool scale = 1, bool save = 1, const QStringList* enabledPlugins = 0);
-};   // KIO
+};
+// KIO
 
 
 

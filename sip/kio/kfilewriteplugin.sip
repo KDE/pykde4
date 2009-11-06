@@ -29,8 +29,10 @@ class KFileWritePlugin : QObject
 
 public:
                             KFileWritePlugin (QObject* parent /TransferThis/, const QStringList& args);
-    virtual bool            canWrite (const KUrl& file, const QString& key) = 0;
-    virtual bool            write (const KUrl& file, const QVariantMap& data) = 0;
-};   // KFileWritePlugin
+    virtual bool            canWrite (const KUrl& file, const QString& key)=0;
+    virtual bool            write (const KUrl& file, const QVariantMap& data)=0;
+    ~KFileWritePlugin ();
+};
+// KFileWritePlugin
 
 

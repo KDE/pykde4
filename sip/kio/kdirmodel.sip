@@ -55,7 +55,7 @@ public:
     };
 
 
-    enum 
+    enum
     {
         ChildCountUnknown
     };
@@ -100,6 +100,9 @@ public:
 signals:
     void                    expand (const QModelIndex& index);
     void                    needSequenceIcon (const QModelIndex& index, int sequenceIndex);
-};   // KDirModel
+public:
+    ~KDirModel ();
+};
+// KDirModel
 
 

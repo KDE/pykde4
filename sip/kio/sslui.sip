@@ -36,8 +36,10 @@ enum RulesStorage
 
 bool                    askIgnoreSslErrors (const KTcpSocket* socket, KIO::SslUi::RulesStorage storedRules = KIO::SslUi::RecallAndStoreRules);
 bool                    askIgnoreSslErrors (const KSslErrorUiData& uiData, KIO::SslUi::RulesStorage storedRules = KIO::SslUi::RecallAndStoreRules);
-};   // SslUi
+};
+// SslUi
 
-};   // KIO
+};
+// KIO
 
 

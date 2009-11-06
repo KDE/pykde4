@@ -29,8 +29,8 @@ class NetAccess : QObject
 %End
 
 
-public:
 
+public:
     enum StatSide
     {
         SourceSide,
@@ -62,10 +62,14 @@ signals:
     void                    leaveModality ();
 
 private:
+//force
                             NetAccess ();
-                            ~NetAccess ();
-};   // NetAccess
+    ~NetAccess ();
+//end
+};
+// NetAccess
 
-};   // KIO
+};
+// KIO
 
 

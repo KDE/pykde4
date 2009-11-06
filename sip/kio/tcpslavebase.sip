@@ -22,6 +22,8 @@
 
 %ModuleHeaderCode
 //ctscc
+#include <forwardingslavebase.h>
+#include <slavebase.h>
 #include <tcpslavebase.h>
 %End
 
@@ -38,8 +40,8 @@ class TCPSlaveBase : KIO::SlaveBase
 public:
                             TCPSlaveBase (const QByteArray& protocol, const QByteArray& poolSocket, const QByteArray& appSocket, bool autoSsl = 0);
 
-protected:
 
+protected:
     enum SslResultDetail
     {
         ResultOk,
@@ -49,11 +51,9 @@ protected:
     };
 
 
-public:
 //FIXME    typedef QFlags<KIO::TCPSlaveBase::SslResultDetail> SslResult;
 
 
-protected:
     ssize_t                 write (const char* data, ssize_t len);
     ssize_t                 read (char* data, ssize_t len);
     ssize_t                 readLine (char* data, ssize_t len);
@@ -68,25 +68,31 @@ protected:
     bool                    waitForResponse (int t);
     void                    setBlocking (bool b);
     QIODevice*              socket () const;
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 
 private:
+//force
                             TCPSlaveBase (const KIO::TCPSlaveBase& other);
-
-public:
 
 //  Subclasses of KIO::SlaveBase
 
+//end
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'SlaveBase'
     sipClass = NULL;
 
-    if (dynamic_cast<KIO::TCPSlaveBase*>(sipCpp))
+    if (dynamic_cast<KIO::ForwardingSlaveBase*>(sipCpp))
+        sipClass = sipClass_KIO_ForwardingSlaveBase;
+    else if (dynamic_cast<KIO::TCPSlaveBase*>(sipCpp))
         sipClass = sipClass_KIO_TCPSlaveBase;
 %End
 
-};   // TCPSlaveBase
+public:
+    ~TCPSlaveBase ();
+};
+// TCPSlaveBase
 
-};   // KIO
+};
+// KIO
 
 

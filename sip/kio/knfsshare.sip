@@ -37,7 +37,12 @@ signals:
     void                    changed ();
 
 private:
+//force
                             KNFSShare ();
-};   // KNFSShare
+//end
+public:
+    ~KNFSShare ();
+};
+// KNFSShare
 
 

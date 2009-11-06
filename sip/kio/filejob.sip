@@ -46,16 +46,20 @@ signals:
     void                    position (KIO::Job* job, KIO::filesize_t offset);
 
 protected:
-//ig                        FileJob (FileJobPrivate& dd);
+//ig                            FileJob (FileJobPrivate& dd);
 
-//force
 
 private:
+//force
                             FileJob ();
+
 //end
+public:
+    ~FileJob ();
+};
+// FileJob
 
-};   // FileJob
-
-};   // KIO
+};
+// KIO
 
 

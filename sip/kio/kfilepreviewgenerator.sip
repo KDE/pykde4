@@ -26,12 +26,6 @@ class KFilePreviewGenerator : QObject
 
 public:
                             KFilePreviewGenerator (QAbstractItemView* parent);
-
-
-//mt undefined symbol: KAbstractViewAdapter* parent -- need mapped type?
-//mt                        KFilePreviewGenerator (KAbstractViewAdapter* parent, QAbstractProxyModel* model);
-
-
     void                    setPreviewShown (bool show);
     bool                    isPreviewShown () const;
     void                    updatePreviews ();
@@ -41,7 +35,11 @@ public:
     QStringList             enabledPlugins () const;
 
 private:
+//force
                             KFilePreviewGenerator (const KFilePreviewGenerator&);
-};   // KFilePreviewGenerator
-
-
+//end
+public:
+//ig                            KFilePreviewGenerator (KAbstractViewAdapter* parent, QAbstractProxyModel* model);
+    ~KFilePreviewGenerator ();
+};
+// KFilePreviewGenerator

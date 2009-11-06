@@ -29,15 +29,20 @@ class KPreviewWidgetBase : QWidget
 
 public:
                             KPreviewWidgetBase (QWidget* parent /TransferThis/);
-    virtual void            showPreview (const KUrl& url) = 0;
-    virtual void            clearPreview () = 0;
+    virtual void            showPreview (const KUrl& url)=0;
+    virtual void            clearPreview ()=0;
     QStringList             supportedMimeTypes () const;
 
 protected:
     void                    setSupportedMimeTypes (const QStringList& mimeTypes);
 
 private:
+//force
                             KPreviewWidgetBase (const KPreviewWidgetBase&);
-};   // KPreviewWidgetBase
+//end
+public:
+    ~KPreviewWidgetBase ();
+};
+// KPreviewWidgetBase
 
 

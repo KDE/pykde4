@@ -31,7 +31,8 @@ public:
                             KOperaBookmarkImporterImpl ();
     virtual void            parse ();
     virtual QString         findDefaultLocation (bool forSaving = 0) const;
-};   // KOperaBookmarkImporterImpl
+};
+// KOperaBookmarkImporterImpl
 
 
 class KOperaBookmarkExporterImpl : KBookmarkExporterBase
@@ -44,6 +45,8 @@ class KOperaBookmarkExporterImpl : KBookmarkExporterBase
 public:
                             KOperaBookmarkExporterImpl (KBookmarkManager* mgr, const QString& filename);
     virtual void            write (const KBookmarkGroup& parent /Transfer/);
-};   // KOperaBookmarkExporterImpl
+    ~KOperaBookmarkExporterImpl ();
+};
+// KOperaBookmarkExporterImpl
 
 

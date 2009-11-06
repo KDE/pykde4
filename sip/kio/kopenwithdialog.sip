@@ -46,7 +46,12 @@ protected:
     virtual void            accept ();
 
 private:
+//force
                             KOpenWithDialog (const KOpenWithDialog&);
-};   // KOpenWithDialog
+//end
+public:
+    ~KOpenWithDialog ();
+};
+// KOpenWithDialog
 
 

@@ -29,7 +29,27 @@ class KBookmarkExporterBase
 
 public:
                             KBookmarkExporterBase (KBookmarkManager* mgr, const QString& fileName);
-    virtual void            write (const KBookmarkGroup&) = 0;
-};   // KBookmarkExporterBase
+    virtual void            write (const KBookmarkGroup&)=0;
+    ~KBookmarkExporterBase ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'KBookmarkExporterBase'
+    sipClass = NULL;
+
+    if (dynamic_cast<KIEBookmarkExporterImpl*>(sipCpp))
+        sipClass = sipClass_KIEBookmarkExporterImpl;
+    else if (dynamic_cast<KNSBookmarkExporterImpl*>(sipCpp))
+        sipClass = sipClass_KNSBookmarkExporterImpl;
+    else if (dynamic_cast<KOperaBookmarkExporterImpl*>(sipCpp))
+        sipClass = sipClass_KOperaBookmarkExporterImpl;
+%End
+};
+// KBookmarkExporterBase
 
 
+%ModuleHeaderCode
+//ctscc
+#include <kbookmarkexporter.h>
+#include <kbookmarkimporter_ie.h>
+#include <kbookmarkimporter_ns.h>
+#include <kbookmarkimporter_opera.h>
+%End

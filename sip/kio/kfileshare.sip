@@ -52,7 +52,8 @@ QString                 fileShareGroup ();
 KFileShare::ShareMode   shareMode ();
 bool                    sambaEnabled ();
 bool                    nfsEnabled ();
-};   // KFileShare
+};
+// KFileShare
 
 
 

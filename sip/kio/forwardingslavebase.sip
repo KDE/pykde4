@@ -45,12 +45,16 @@ public:
     virtual void            del (const KUrl& url, bool isfile) /PyName=del_/;
 
 protected:
-    virtual bool            rewriteUrl (const KUrl& url, KUrl& newURL) = 0;
+    virtual bool            rewriteUrl (const KUrl& url, KUrl& newURL)=0;
     virtual void            prepareUDSEntry (KIO::UDSEntry& entry, bool listing = 0) const;
     KUrl                    processedUrl () const;
     KUrl                    requestedUrl () const;
-};   // ForwardingSlaveBase
+public:
+    ~ForwardingSlaveBase ();
+};
+// ForwardingSlaveBase
 
-};   // KIO
+};
+// KIO
 
 

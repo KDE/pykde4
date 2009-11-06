@@ -28,9 +28,11 @@ class KonqBookmarkOwner : KBookmarkOwner
 
 
 public:
-    virtual void            openInNewTab (const KBookmark& bm) = 0;
-    virtual void            openInNewWindow (const KBookmark& bm) = 0;
-};   // KonqBookmarkOwner
+    virtual void            openInNewTab (const KBookmark& bm)=0;
+    virtual void            openInNewWindow (const KBookmark& bm)=0;
+    ~KonqBookmarkOwner ();
+};
+// KonqBookmarkOwner
 
 
 class KonqBookmarkMenu : KBookmarkMenu
@@ -45,14 +47,17 @@ public:
                             KonqBookmarkMenu (KBookmarkManager* mgr, KonqBookmarkOwner* owner, KBookmarkActionMenu* parentMenu, QString parentAddress);
 
 protected:
-//ig     static DynMenuInfo  showDynamicBookmarks (const QString& id);
-//ig     static void        setDynamicBookmarks (const QString& id, const DynMenuInfo& info);
+//ig    static DynMenuInfo      showDynamicBookmarks (const QString& id);
+//ig    static void             setDynamicBookmarks (const QString& id, const DynMenuInfo& info);
     static QStringList      dynamicBookmarksList ();
     virtual void            refill ();
     virtual QAction*        actionForBookmark (const KBookmark& bm);
     virtual KMenu*          contextMenu (QAction* act);
     void                    fillDynamicBookmarks ();
-};   // KonqBookmarkMenu
+public:
+    ~KonqBookmarkMenu ();
+};
+// KonqBookmarkMenu
 
 
 class KonqBookmarkContextMenu : KBookmarkContextMenu
@@ -68,6 +73,8 @@ public:
     void                    openInNewTab ();
     void                    openInNewWindow ();
     void                    toggleShowInToolbar ();
-};   // KonqBookmarkContextMenu
+    ~KonqBookmarkContextMenu ();
+};
+// KonqBookmarkContextMenu
 
 

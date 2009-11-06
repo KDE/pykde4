@@ -30,8 +30,8 @@ class KBookmarkImporterBase : QObject
 public:
                             KBookmarkImporterBase ();
     void                    setFilename (const QString& filename);
-    virtual void            parse () = 0;
-    virtual QString         findDefaultLocation (bool forSaving = 0) const = 0;
+    virtual void            parse ()=0;
+    virtual QString         findDefaultLocation (bool forSaving = 0) const=0;
     void                    setupSignalForwards (QObject* src, QObject* dst);
     static KBookmarkImporterBase*  factory (const QString& type);
 
@@ -40,7 +40,10 @@ signals:
     void                    newFolder (const QString& text, bool open, const QString& additionalInfo);
     void                    newSeparator ();
     void                    endFolder ();
-};   // KBookmarkImporterBase
+public:
+    ~KBookmarkImporterBase ();
+};
+// KBookmarkImporterBase
 
 
 class KXBELBookmarkImporterImpl : KBookmarkImporterBase, KBookmarkGroupTraverser
@@ -59,6 +62,7 @@ protected:
     virtual void            visit (const KBookmark&);
     virtual void            visitEnter (const KBookmarkGroup&);
     virtual void            visitLeave (const KBookmarkGroup&);
-};   // KXBELBookmarkImporterImpl
+};
+// KXBELBookmarkImporterImpl
 
 

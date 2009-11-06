@@ -38,8 +38,8 @@ class KFileMetaInfo
 %End
 
 
-public:
 
+public:
     enum What
     {
         Fastest,
@@ -60,15 +60,19 @@ public:
     bool                    applyChanges ();
     const QHash<QString,KFileMetaInfoItem>&  items () const;
     KFileMetaInfoItem&      item (const QString& key);
-//ig     const KFileMetaInfoItem&  item (const QString& key) const;
+//ig    const KFileMetaInfoItem&  item (const QString& key) const;
     bool                    isValid () const;
     QStringList             preferredKeys () const;
     QStringList             supportedKeys () const;
-//ig     KFileMetaInfoGroupList  preferredGroups () const;
-//ig     KFileMetaInfoGroupList  supportedGroups () const;
-//ig     KFileMetaInfoGroupList  groups () const;
+//ig    KFileMetaInfoGroupList  preferredGroups () const;
+//ig    KFileMetaInfoGroupList  supportedGroups () const;
+//ig    KFileMetaInfoGroupList  groups () const;
     QStringList             keys () const;
     const KUrl&             url () const;
-};   // KFileMetaInfo
+    ~KFileMetaInfo ();
+//ig    QDataStream&            operator >> (QDataStream& s, KFileMetaInfo&);
+//ig    QDataStream&            operator << (QDataStream& s, const KFileMetaInfo&);
+};
+// KFileMetaInfo
 
 

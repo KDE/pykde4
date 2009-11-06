@@ -37,6 +37,9 @@ public:
 
 protected:
     virtual bool            subSortLessThan (const QModelIndex& left, const QModelIndex& right) const;
-};   // KDirSortFilterProxyModel
+public:
+    ~KDirSortFilterProxyModel ();
+};
+// KDirSortFilterProxyModel
 
 

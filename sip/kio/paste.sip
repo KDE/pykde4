@@ -31,7 +31,8 @@ KIO::CopyJob*           pasteDataAsync (const KUrl& destURL, const QByteArray& d
 KIO::CopyJob*           pasteMimeSource (const QMimeData* data, const KUrl& destURL, const QString& dialogText, QWidget* widget, bool clipboard = 0);
 bool                    canPasteMimeSource (const QMimeData* data);
 QString                 pasteActionText ();
-};   // KIO
+};
+// KIO
 
 
 

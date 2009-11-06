@@ -35,6 +35,7 @@ public:
     static void             clear ();
     static int              maximumItems ();
     static QString          recentDocumentDirectory ();
-};   // KRecentDocument
+};
+// KRecentDocument
 
 

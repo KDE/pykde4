@@ -38,10 +38,10 @@ public:
                                 List ();
         KMountPoint::Ptr        findByPath (const QString& path) const;
         KMountPoint::Ptr        findByDevice (const QString& device) const;
-    };   // List
+    };
+// List
 
 
-public:
 
     enum DetailsNeededFlag
     {
@@ -73,8 +73,13 @@ public:
     bool                    testFileSystemFlag (KMountPoint::FileSystemFlag flag) const;
 
 private:
+//force
                             KMountPoint ();
-                            KMountPoint (const KMountPoint &other);
-};   // KMountPoint
+                            KMountPoint (const KMountPoint& other);
+//end
+public:
+    ~KMountPoint ();
+};
+// KMountPoint
 
 

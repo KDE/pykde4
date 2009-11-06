@@ -77,8 +77,11 @@ public:
     QString                 asString () const;
 
 protected:
-//ig     virtual void       virtual_hook (int id, void* data);
-};   // KACL
+//ig    virtual void            virtual_hook (int id, void* data);
+public:
+    ~KACL ();
+};
+// KACL
 
 
 //force
@@ -88,7 +91,6 @@ protected:
 
 typedef ACLUserPermissionsList ACLGroupPermissionsList;
 
-//end
 
 
 
@@ -162,3 +164,6 @@ typedef ACLUserPermissionsList ACLGroupPermissionsList;
 %End
 };
 
+//end
+QDataStream&            operator << (QDataStream& s, const KACL& a);
+QDataStream&            operator >> (QDataStream& s, KACL& a);

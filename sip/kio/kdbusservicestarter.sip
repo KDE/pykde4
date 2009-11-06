@@ -34,7 +34,8 @@ public:
 
 protected:
                             KDBusServiceStarter ();
-    virtual                 ~KDBusServiceStarter ();
-};   // KDBusServiceStarter
+    ~KDBusServiceStarter ();
+};
+// KDBusServiceStarter
 
 

@@ -64,8 +64,12 @@ public:
 
 signals:
     void                    slaveDied (KIO::Slave* slave);
-};   // Slave
+public:
+    ~Slave ();
+};
+// Slave
 
-};   // KIO
+};
+// KIO
 
 

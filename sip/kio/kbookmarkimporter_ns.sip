@@ -32,7 +32,8 @@ public:
     void                    setUtf8 (bool utf8);
     virtual void            parse ();
     virtual QString         findDefaultLocation (bool forSaving = 0) const;
-};   // KNSBookmarkImporterImpl
+};
+// KNSBookmarkImporterImpl
 
 
 class KMozillaBookmarkImporterImpl : KNSBookmarkImporterImpl
@@ -44,7 +45,8 @@ class KMozillaBookmarkImporterImpl : KNSBookmarkImporterImpl
 
 public:
                             KMozillaBookmarkImporterImpl ();
-};   // KMozillaBookmarkImporterImpl
+};
+// KMozillaBookmarkImporterImpl
 
 
 class KNSBookmarkExporterImpl : KBookmarkExporterBase
@@ -61,6 +63,9 @@ public:
 
 protected:
     QString                 folderAsString (const KBookmarkGroup& parent /Transfer/) const;
-};   // KNSBookmarkExporterImpl
+public:
+    ~KNSBookmarkExporterImpl ();
+};
+// KNSBookmarkExporterImpl
 
 

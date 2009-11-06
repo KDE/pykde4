@@ -76,7 +76,12 @@ protected:
     virtual bool            eventFilter (QObject* watched, QEvent* event);
 
 private:
+//force
                             KUrlNavigator (const KUrlNavigator&);
-};   // KUrlNavigator
+//end
+public:
+    ~KUrlNavigator ();
+};
+// KUrlNavigator
 
 

@@ -31,7 +31,8 @@ QList<KServiceAction>   userDefinedServices (const QString& path, const KDesktop
 QList<KServiceAction>   userDefinedServices (const KService& service, bool bLocalFiles, const KUrl::List& file_list = KUrl::List());
 void                    executeService (const KUrl::List& urls, const KServiceAction& service);
 bool                    run (const KUrl& _url, bool _is_local);
-};   // KDesktopFileActions
+};
+// KDesktopFileActions
 
 
 

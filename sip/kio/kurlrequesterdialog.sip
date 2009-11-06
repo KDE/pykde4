@@ -36,7 +36,12 @@ public:
     KUrlRequester*          urlRequester ();
 
 private:
+//force
                             KUrlRequesterDialog (const KUrlRequesterDialog&);
-};   // KUrlRequesterDialog
+//end
+public:
+    ~KUrlRequesterDialog ();
+};
+// KUrlRequesterDialog
 
 

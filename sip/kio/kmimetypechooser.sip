@@ -27,8 +27,8 @@ class KMimeTypeChooser : KVBox
 %End
 
 
-public:
 
+public:
     enum Visuals
     {
         Comments,
@@ -39,7 +39,9 @@ public:
     explicit                KMimeTypeChooser (const QString& text = QString(), const QStringList& selectedMimeTypes = QStringList(), const QString& defaultGroup = QString(), const QStringList& groupsToShow = QStringList(), int visuals = Comments|Patterns|EditButton, QWidget* parent /TransferThis/ = 0);
     QStringList             mimeTypes () const;
     QStringList             patterns () const;
-};   // KMimeTypeChooser
+    ~KMimeTypeChooser ();
+};
+// KMimeTypeChooser
 
 
 class KMimeTypeChooserDialog : KDialog
@@ -53,6 +55,8 @@ public:
     explicit                KMimeTypeChooserDialog (const QString& caption = QString(), const QString& text = QString(), const QStringList& selectedMimeTypes = QStringList(), const QString& defaultGroup = QString(), const QStringList& groupsToShow = QStringList(), int visuals = KMimeTypeChooser::Comments|KMimeTypeChooser::Patterns|KMimeTypeChooser::EditButton, QWidget* parent /TransferThis/ = 0);
                             KMimeTypeChooserDialog (const QString& caption, const QString& text, const QStringList& selectedMimeTypes, const QString& defaultGroup, QWidget* parent /TransferThis/ = 0);
     KMimeTypeChooser*       chooser ();
-};   // KMimeTypeChooserDialog
+    ~KMimeTypeChooserDialog ();
+};
+// KMimeTypeChooserDialog
 
 

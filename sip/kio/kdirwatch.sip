@@ -27,8 +27,8 @@ class KDirWatch : QObject
 %End
 
 
-public:
 
+public:
     enum WatchMode
     {
         WatchDirOnly,
@@ -71,6 +71,9 @@ signals:
     void                    dirty (const QString& path);
     void                    created (const QString& path);
     void                    deleted (const QString& path);
-};   // KDirWatch
+public:
+    ~KDirWatch ();
+};
+// KDirWatch
 
 

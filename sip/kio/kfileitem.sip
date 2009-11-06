@@ -28,9 +28,9 @@ class KFileItem
 %End
 
 
-public:
 
-    enum 
+public:
+    enum
     {
         Unknown
     };
@@ -99,16 +99,19 @@ public:
     bool                    cmp (const KFileItem& item) const;
     bool                    operator == (const KFileItem& other) const;
     bool                    operator != (const KFileItem& other) const;
-//ig     void               setExtraData (const void* key, void* value);
-//ig     const void*        extraData (const void* key) const;
-//ig     void               removeExtraData (const void* key);
+//ig    void                    setExtraData (const void* key, void* value);
+//ig    const void*             extraData (const void* key) const;
+//ig    void                    removeExtraData (const void* key);
     void                    setMetaInfo (const KFileMetaInfo& info) const;
     KFileMetaInfo           metaInfo (bool autoget = 1, int what = KFileMetaInfo::Fastest) const;
     void                    assign (const KFileItem& item);
     void                    setUDSEntry (const KIO::UDSEntry& entry, const KUrl& url, bool delayedMimeTypes = 0, bool urlIsDirectory = 0);
     KUrl                    mostLocalUrl (bool& local /Out/) const;
     bool                    isNull () const;
-};   // KFileItem
+    ~KFileItem ();
+//ig    QVariant                operator QVariant () const;
+};
+// KFileItem
 
 uint                    qHash (const QString& key);
 uint                    qHash (const KFileItem& item);
@@ -244,8 +247,11 @@ SIP_SSIZE_T len, start, stop, step, slicelength, i;
         }
 %End
 
+
 //end
+};
+// KFileItemList
 
-};   // KFileItemList
 
-
+QDataStream&            operator << (QDataStream& s, const KFileItem& a);
+QDataStream&            operator >> (QDataStream& s, KFileItem& a);

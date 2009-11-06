@@ -70,9 +70,11 @@ public:
     static bool             askIgnoreSslErrors (const KTcpSocket* socket, KSslCertificateManager::RulesStorage storedRules = KSslCertificateManager::RecallAndStoreRules);
     static bool             askIgnoreSslErrors (const KSslErrorUiData& uiData, KSslCertificateManager::RulesStorage storedRules = KSslCertificateManager::RecallAndStoreRules);
 
+//force
 private:
                             KSslCertificateManager ();
                             ~KSslCertificateManager ();
+//end
 };   // KSslCertificateManager
 
 

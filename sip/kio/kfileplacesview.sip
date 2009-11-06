@@ -56,6 +56,9 @@ protected:
 signals:
     void                    urlChanged (const KUrl& url);
     void                    urlsDropped (const KUrl& dest, QDropEvent* event, QWidget* parent /Transfer/);
-};   // KFilePlacesView
+public:
+    ~KFilePlacesView ();
+};
+// KFilePlacesView
 
 

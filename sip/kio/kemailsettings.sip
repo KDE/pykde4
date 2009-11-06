@@ -27,8 +27,8 @@ class KEMailSettings
 %End
 
 
-public:
 
+public:
     enum Setting
     {
         ClientProgram,
@@ -68,8 +68,12 @@ public:
     QString                 getSetting (KEMailSettings::Setting s) const;
     void                    setSetting (KEMailSettings::Setting s, const QString& v);
 private:
-                            KEMailSettings (const KEMailSettings &other);
-
-};   // KEMailSettings
+//force
+                            KEMailSettings (const KEMailSettings& other);
+//end
+public:
+    ~KEMailSettings ();
+};
+// KEMailSettings
 
 

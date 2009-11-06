@@ -51,7 +51,7 @@ public:
     static QString          binaryName (const QString& execLine, bool removePath);
     static bool             isExecutable (const QString& serviceType);
     static bool             isExecutableFile (const KUrl& url, const QString& mimetype);
-//ig     static bool        checkStartupNotify (const QString& binName, const KService* service, bool* silent_arg, QByteArray* wmclass_arg);
+//ig    static bool             checkStartupNotify (const QString& binName, const KService* service, bool* silent_arg, QByteArray* wmclass_arg);
 
 signals:
     void                    finished ();
@@ -86,6 +86,9 @@ protected:
     bool                    isLocalFile () const;
     void                    setMode (mode_t mode);
     mode_t                  mode () const;
-};   // KRun
+public:
+    ~KRun ();
+};
+// KRun
 
 

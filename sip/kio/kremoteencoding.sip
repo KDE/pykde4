@@ -39,10 +39,15 @@ public:
     void                    setEncoding (const char* name);
 
 protected:
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 
 private:
+//force
                             KRemoteEncoding (const KRemoteEncoding&);
-};   // KRemoteEncoding
+//end
+public:
+    ~KRemoteEncoding ();
+};
+// KRemoteEncoding
 
 

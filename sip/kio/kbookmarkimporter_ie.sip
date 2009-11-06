@@ -31,7 +31,8 @@ public:
                             KIEBookmarkImporterImpl ();
     virtual void            parse ();
     virtual QString         findDefaultLocation (bool forSaving = 0) const;
-};   // KIEBookmarkImporterImpl
+};
+// KIEBookmarkImporterImpl
 
 
 class KIEBookmarkExporterImpl : KBookmarkExporterBase
@@ -44,6 +45,8 @@ class KIEBookmarkExporterImpl : KBookmarkExporterBase
 public:
                             KIEBookmarkExporterImpl (KBookmarkManager* mgr, const QString& path);
     virtual void            write (const KBookmarkGroup&);
-};   // KIEBookmarkExporterImpl
+    ~KIEBookmarkExporterImpl ();
+};
+// KIEBookmarkExporterImpl
 
 

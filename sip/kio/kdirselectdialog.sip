@@ -38,7 +38,10 @@ public:
 
 protected:
     virtual void            accept ();
-    virtual void            hideEvent( QHideEvent *event );
-};   // KDirSelectDialog
+    virtual void            hideEvent (QHideEvent* event);
+public:
+    ~KDirSelectDialog ();
+};
+// KDirSelectDialog
 
 

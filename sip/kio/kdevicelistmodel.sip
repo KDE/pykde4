@@ -42,6 +42,9 @@ public:
 
 signals:
     void                    modelInitialized ();
-};   // KDeviceListModel
+public:
+    ~KDeviceListModel ();
+};
+// KDeviceListModel
 
 

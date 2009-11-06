@@ -27,8 +27,8 @@ class KBookmark
 %End
 
 
-public:
 
+public:
     enum MetaDataOverwriteMode
     {
         OverwriteMetaData,
@@ -45,10 +45,11 @@ public:
         static bool             canDecode (const QMimeData* mimeData);
         static QStringList      mimeDataTypes ();
         static KBookmark::List  fromMimeData (const QMimeData* mimeData);
-    };   // List
+        static KBookmark::List  fromMimeData (const QMimeData* mimeData, QDomDocument& parentDocument);
+    };
+// List
 
 
-public:
                             KBookmark ();
     explicit                KBookmark (const QDomElement& elem);
     static KBookmark        standaloneBookmark (const QString& text, const KUrl& url, const QString& icon = QString());
@@ -87,7 +88,8 @@ public:
     void                    setMetaDataItem (const QString& key, const QString& value, KBookmark::MetaDataOverwriteMode mode = KBookmark::OverwriteMetaData);
     void                    populateMimeData (QMimeData* mimeData) const;
     bool                    operator == (const KBookmark& rhs) const;
-};   // KBookmark
+};
+// KBookmark
 
 
 class KBookmarkGroup : KBookmark
@@ -118,7 +120,8 @@ public:
 
 protected:
     QDomElement             nextKnownTag (const QDomElement& start, bool goNext) const;
-};   // KBookmarkGroup
+};
+// KBookmarkGroup
 
 
 class KBookmarkGroupTraverser
@@ -129,11 +132,12 @@ class KBookmarkGroupTraverser
 
 
 protected:
-    virtual                 ~KBookmarkGroupTraverser ();
+    ~KBookmarkGroupTraverser ();
     void                    traverse (const KBookmarkGroup&);
     virtual void            visit (const KBookmark&);
     virtual void            visitEnter (const KBookmarkGroup&);
     virtual void            visitLeave (const KBookmarkGroup&);
-};   // KBookmarkGroupTraverser
+};
+// KBookmarkGroupTraverser
 
 

@@ -151,7 +151,7 @@ enum Error
 };
 
 QString                 buildErrorString (int errorCode, const QString& errorText);
-//ig QString            buildHTMLErrorString (int errorCode, const QString& errorText, const KUrl* reqUrl = 0, int method = -1);
+//ig QString                 buildHTMLErrorString (int errorCode, const QString& errorText, const KUrl* reqUrl = 0, int method = -1);
 QByteArray              rawErrorDetail (int errorCode, const QString& errorText, const KUrl* reqUrl = 0, int method = -1);
 QString                 unsupportedActionErrorString (const QString& protocol, int cmd);
 
@@ -166,12 +166,13 @@ enum CacheControl
 
 KIO::CacheControl       parseCacheControl (const QString& cacheControl);
 QString                 getCacheControlString (KIO::CacheControl cacheControl);
-//ig QPixmap            pixmapForUrl (const KUrl& _url, mode_t _mode = 0, KIconLoader::Group _group = KIconLoader::Desktop, int _force_size = 0, int _state = 0, QString* _path = 0);
+//ig QPixmap                 pixmapForUrl (const KUrl& _url, mode_t _mode = 0, KIconLoader::Group _group = KIconLoader::Desktop, int _force_size = 0, int _state = 0, QString* _path = 0);
 KJobTrackerInterface*   getJobTracker ();
 
 //ig class MetaData;
 
-};   // KIO
+};
+// KIO
 
 
 

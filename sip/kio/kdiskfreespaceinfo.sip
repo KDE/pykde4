@@ -34,7 +34,12 @@ public:
     static KDiskFreeSpaceInfo  freeSpaceInfo (const QString& path);
 
 private:
+//force
                             KDiskFreeSpaceInfo ();
-};   // KDiskFreeSpaceInfo
+//end
+public:
+    ~KDiskFreeSpaceInfo ();
+};
+// KDiskFreeSpaceInfo
 
 

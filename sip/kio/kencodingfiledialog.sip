@@ -27,8 +27,8 @@ class KEncodingFileDialog : KFileDialog
 %End
 
 
-public:
 
+public:
     class Result
     {
 
@@ -36,10 +36,10 @@ public:
         QStringList fileNames;
         KUrl::List URLs;
         QString encoding;
-    };   // Result
+    };
+// Result
 
 
-public:
                             KEncodingFileDialog (const QString& startDir = QString(), const QString& encoding = QString(), const QString& filter = QString(), const QString& caption = QString(), KFileDialog::OperationMode type = KFileDialog::Opening, QWidget* parent /TransferThis/ = 0);
     QString                 selectedEncoding () const;
     static KEncodingFileDialog::Result  getOpenFileNameAndEncoding (const QString& encoding = QString(), const QString& startDir = QString(), const QString& filter = QString(), QWidget* parent /Transfer/ = 0, const QString& caption = QString());
@@ -48,6 +48,8 @@ public:
     static KEncodingFileDialog::Result  getOpenUrlsAndEncoding (const QString& encoding = QString(), const QString& startDir = QString(), const QString& filter = QString(), QWidget* parent /Transfer/ = 0, const QString& caption = QString());
     static KEncodingFileDialog::Result  getSaveFileNameAndEncoding (const QString& encoding = QString(), const QString& startDir = QString(), const QString& filter = QString(), QWidget* parent /Transfer/ = 0, const QString& caption = QString());
     static KEncodingFileDialog::Result  getSaveUrlAndEncoding (const QString& encoding = QString(), const QString& startDir = QString(), const QString& filter = QString(), QWidget* parent /Transfer/ = 0, const QString& caption = QString());
-};   // KEncodingFileDialog
+    ~KEncodingFileDialog ();
+};
+// KEncodingFileDialog
 
 

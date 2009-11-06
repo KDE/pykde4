@@ -60,7 +60,9 @@ public:
     QVariant                getExtraField (const QString& fieldName) const;
     KIO::AuthInfo::FieldFlags  getExtraFieldFlags (const QString& fieldName) const;
     static void             registerMetaTypes ();
-};   // AuthInfo
+    ~AuthInfo ();
+};
+// AuthInfo
 
 
 class NetRC
@@ -70,8 +72,8 @@ class NetRC
 %End
 
 
-public:
 
+public:
     enum LookUpModeFlag
     {
         exactOnly,
@@ -91,25 +93,34 @@ public:
         QString login;
         QString password;
         QMap<QString,QStringList> macdef;
-    };   // AutoLogin
+    };
+// AutoLogin
 
 
-public:
     static KIO::NetRC*      self ();
-    bool                    lookup (const KUrl& url, KIO::NetRC::AutoLogin& login, bool userealnetrc = 0, const QString& type = QString(), KIO::NetRC::LookUpMode mode = KIO::NetRC::LookUpMode(KIO::NetRC::exactOnly)|KIO::NetRC::defaultOnly);
     void                    reload ();
 
 protected:
-//ig     QString            extract (const char*, const char*, int&);
+//ig    QString                 extract (const char*, const char*, int&);
     int                     openf (const QString&);
     bool                    parse (int);
 
 private:
+//force
                             NetRC ();
-                            ~NetRC ();
-                            NetRC (const KIO::NetRC &other);
-};   // NetRC
+    ~NetRC ();
+                            NetRC (const KIO::NetRC& other);
+//end
+public:
+    bool                    lookup (const KUrl& url, AutoLogin& login, bool userealnetrc, const QString& type, KIO::NetRC::LookUpMode mode);
+};
+// NetRC
 
-};   // KIO
+//ig QDataStream&            operator << (QDataStream& s, const KIO::AuthInfo& a);
+//ig QDataStream&            operator >> (QDataStream& s, KIO::AuthInfo& a);
+//ig QDBusArgument&          operator << (QDBusArgument& argument, const KIO::AuthInfo& a);
+//ig const QDBusArgument&    operator >> (const QDBusArgument& argument, KIO::AuthInfo& a);
+};
+// KIO
 
 

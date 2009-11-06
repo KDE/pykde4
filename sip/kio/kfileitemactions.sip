@@ -32,6 +32,8 @@ public:
     void                    addOpenWithActionsTo (QMenu* menu, const QString& traderConstraint);
     KAction*                preferredOpenWithAction (const QString& traderConstraint);
     int                     addServiceActionsTo (QMenu* menu);
-};   // KFileItemActions
+    ~KFileItemActions ();
+};
+// KFileItemActions
 
 

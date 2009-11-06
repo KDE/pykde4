@@ -28,8 +28,8 @@ class KAbstractFileWidget
 %End
 
 
-public:
 
+public:
     enum OperationMode
     {
         Other,
@@ -37,41 +37,43 @@ public:
         Saving
     };
 
-    virtual KUrl            selectedUrl () const = 0;
-    virtual KUrl::List      selectedUrls () const = 0;
-    virtual KUrl            baseUrl () const = 0;
-    virtual QString         selectedFile () const = 0;
-    virtual QStringList     selectedFiles () const = 0;
-    virtual void            setUrl (const KUrl& url, bool clearforward = 1) = 0;
-    virtual void            setSelection (const QString& name) = 0;
-    virtual void            setOperationMode (KAbstractFileWidget::OperationMode) = 0;
-    virtual KAbstractFileWidget::OperationMode  operationMode () const = 0;
-    virtual void            setKeepLocation (bool keep) = 0;
-    virtual bool            keepsLocation () const = 0;
-    virtual void            setFilter (const QString& filter) = 0;
-    virtual QString         currentFilter () const = 0;
-    virtual KMimeType::Ptr  currentFilterMimeType () = 0;
-    virtual void            setMimeFilter (const QStringList& types, const QString& defaultType = QString()) = 0;
-    virtual QString         currentMimeFilter () const = 0;
-    virtual void            clearFilter () = 0;
-    virtual void            setPreviewWidget (KPreviewWidgetBase* w) = 0;
-    virtual void            setMode (KFile::Modes m) = 0;
-    virtual KFile::Modes    mode () const = 0;
-    virtual void            setLocationLabel (const QString& text) = 0;
-    virtual KToolBar*       toolBar () const = 0;
-    virtual KPushButton*    okButton () const = 0;
-    virtual KPushButton*    cancelButton () const = 0;
-    virtual KUrlComboBox*   locationEdit () const = 0;
-    virtual KFileFilterCombo*  filterWidget () const = 0;
-    virtual KActionCollection*  actionCollection () const = 0;
-    virtual void            setCustomWidget (QWidget* widget) = 0;
-    virtual void            setCustomWidget (const QString& text, QWidget* widget) = 0;
-    virtual void            slotOk () = 0;
-    virtual void            accept () = 0;
-    virtual void            slotCancel () = 0;
-    virtual void            virtual_hook (int id, void* data /In/) = 0;
+    virtual KUrl            selectedUrl () const=0;
+    virtual KUrl::List      selectedUrls () const=0;
+    virtual KUrl            baseUrl () const=0;
+    virtual QString         selectedFile () const=0;
+    virtual QStringList     selectedFiles () const=0;
+    virtual void            setUrl (const KUrl& url, bool clearforward = 1)=0;
+    virtual void            setSelection (const QString& name)=0;
+    virtual void            setOperationMode (KAbstractFileWidget::OperationMode)=0;
+    virtual KAbstractFileWidget::OperationMode  operationMode () const=0;
+    virtual void            setKeepLocation (bool keep)=0;
+    virtual bool            keepsLocation () const=0;
+    virtual void            setFilter (const QString& filter)=0;
+    virtual QString         currentFilter () const=0;
+    virtual KMimeType::Ptr  currentFilterMimeType ()=0;
+    virtual void            setMimeFilter (const QStringList& types, const QString& defaultType = QString())=0;
+    virtual QString         currentMimeFilter () const=0;
+    virtual void            clearFilter ()=0;
+    virtual void            setPreviewWidget (KPreviewWidgetBase* w)=0;
+    virtual void            setMode (KFile::Modes m)=0;
+    virtual KFile::Modes    mode () const=0;
+    virtual void            setLocationLabel (const QString& text)=0;
+    virtual KToolBar*       toolBar () const=0;
+    virtual KPushButton*    okButton () const=0;
+    virtual KPushButton*    cancelButton () const=0;
+    virtual KUrlComboBox*   locationEdit () const=0;
+    virtual KFileFilterCombo*  filterWidget () const=0;
+    virtual KActionCollection*  actionCollection () const=0;
+    virtual void            setCustomWidget (QWidget* widget)=0;
+    virtual void            setCustomWidget (const QString& text, QWidget* widget)=0;
+    virtual void            slotOk ()=0;
+    virtual void            accept ()=0;
+    virtual void            slotCancel ()=0;
+    virtual void            virtual_hook (int id, void* data /In/)=0;
     void                    setConfirmOverwrite (bool enable);
     void                    setInlinePreviewShown (bool show);
-};   // KAbstractFileWidget
+    ~KAbstractFileWidget ();
+};
+// KAbstractFileWidget
 
 

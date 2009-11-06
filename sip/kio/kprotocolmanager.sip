@@ -108,6 +108,7 @@ public:
     static void             reparseConfiguration ();
     static QString          slaveProtocol (const KUrl& url, QString& proxy);
     static QString          acceptLanguagesHeader ();
-};   // KProtocolManager
+};
+// KProtocolManager
 
 

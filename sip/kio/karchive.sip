@@ -51,7 +51,7 @@ public:
     bool                    addLocalFile (const QString& fileName, const QString& destName);
     bool                    addLocalDirectory (const QString& path, const QString& destName);
 
-    enum 
+    enum
     {
         UnknownTime
     };
@@ -64,22 +64,27 @@ public:
     virtual bool            finishWriting (qint64 size);
 
 protected:
-    virtual bool            openArchive (QIODevice::OpenMode mode) = 0;
-    virtual bool            closeArchive () = 0;
+    virtual bool            openArchive (QIODevice::OpenMode mode)=0;
+    virtual bool            closeArchive ()=0;
     virtual KArchiveDirectory*  rootDir ();
-    virtual bool            doWriteDir (const QString& name, const QString& user, const QString& group, mode_t perm, time_t atime, time_t mtime, time_t ctime) = 0;
-    virtual bool            doWriteSymLink (const QString& name, const QString& target, const QString& user, const QString& group, mode_t perm, time_t atime, time_t mtime, time_t ctime) = 0;
-    virtual bool            doPrepareWriting (const QString& name, const QString& user, const QString& group, qint64 size, mode_t perm, time_t atime, time_t mtime, time_t ctime) = 0;
-    virtual bool            doFinishWriting (qint64 size) = 0;
+    virtual bool            doWriteDir (const QString& name, const QString& user, const QString& group, mode_t perm, time_t atime, time_t mtime, time_t ctime)=0;
+    virtual bool            doWriteSymLink (const QString& name, const QString& target, const QString& user, const QString& group, mode_t perm, time_t atime, time_t mtime, time_t ctime)=0;
+    virtual bool            doPrepareWriting (const QString& name, const QString& user, const QString& group, qint64 size, mode_t perm, time_t atime, time_t mtime, time_t ctime)=0;
+    virtual bool            doFinishWriting (qint64 size)=0;
     KArchiveDirectory*      findOrCreate (const QString& path);
     virtual bool            createDevice (QIODevice::OpenMode mode);
     void                    setDevice (QIODevice* dev);
     void                    setRootDir (KArchiveDirectory* rootDir);
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 
 private:
+//force
                             KArchive (const KArchive& other);
-};   // KArchive
+//end
+public:
+    ~KArchive ();
+};
+// KArchive
 
 
 class KArchiveEntry
@@ -103,11 +108,16 @@ public:
 
 protected:
     KArchive*               archive () const;
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 
 private:
+//force
                             KArchiveEntry (const KArchiveEntry& other);
-};   // KArchiveEntry
+//end
+public:
+    ~KArchiveEntry ();
+};
+// KArchiveEntry
 
 
 class KArchiveFile : KArchiveEntry
@@ -128,11 +138,16 @@ public:
     void                    copyTo (const QString& dest) const;
 
 protected:
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 
 private:
+//force
                             KArchiveFile (const KArchiveFile& other);
-};   // KArchiveFile
+//end
+public:
+    ~KArchiveFile ();
+};
+// KArchiveFile
 
 
 class KArchiveDirectory : KArchiveEntry
@@ -151,30 +166,33 @@ public:
     void                    copyTo (const QString& dest, bool recursive = 1) const;
 
 protected:
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 
 private:
+//force
                             KArchiveDirectory (const KArchiveDirectory& other);
-
-public:
 
 //  Subclasses of KArchiveEntry
 
+//end
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'KArchiveEntry'
     sipClass = NULL;
 
     if (dynamic_cast<KArchiveDirectory*>(sipCpp))
         sipClass = sipClass_KArchiveDirectory;
     else if (dynamic_cast<KArchiveFile*>(sipCpp))
         {
-            sipClass = sipClass_KArchiveFile;
-            if (dynamic_cast<KZipFileEntry*>(sipCpp))
-                sipClass = sipClass_KZipFileEntry;
+        sipClass = sipClass_KArchiveFile;
+        if (dynamic_cast<KZipFileEntry*>(sipCpp))
+            sipClass = sipClass_KZipFileEntry;
         }
 %End
 
-};   // KArchiveDirectory
+public:
+    ~KArchiveDirectory ();
+};
+// KArchiveDirectory
 
 
 

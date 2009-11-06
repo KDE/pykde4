@@ -28,8 +28,8 @@ class KFileItemDelegate : QAbstractItemDelegate
 %End
 
 
-public:
 
+public:
     enum Information
     {
         NoInformation,
@@ -45,7 +45,7 @@ public:
         FriendlyMimeType
     };
 
-//ig     typedef QList<KFileItemDelegate::Information> InformationList;
+//ig    typedef QList<KFileItemDelegate::Information> InformationList;
 
     explicit                KFileItemDelegate (QObject* parent /TransferThis/ = 0);
     virtual QSize           sizeHint (const QStyleOptionViewItem& option, const QModelIndex& index) const;
@@ -55,9 +55,9 @@ public:
     virtual void            setEditorData (QWidget* editor, const QModelIndex& index) const;
     virtual void            setModelData (QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const;
     virtual void            updateEditorGeometry (QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-//ig     void               setShowInformation (const KFileItemDelegate::InformationList& list);
+//ig    void                    setShowInformation (const KFileItemDelegate::InformationList& list);
     void                    setShowInformation (KFileItemDelegate::Information information);
-//ig     KFileItemDelegate::InformationList  showInformation () const;
+//ig    KFileItemDelegate::InformationList  showInformation () const;
     void                    setShadowColor (const QColor& color);
     QColor                  shadowColor () const;
     void                    setShadowOffset (const QPointF& offset);
@@ -73,7 +73,12 @@ public:
     QRegion                 shape (const QStyleOptionViewItem& option, const QModelIndex& index);
 
 private:
+//force
                             KFileItemDelegate (const KFileItemDelegate&);
-};   // KFileItemDelegate
+//end
+public:
+    ~KFileItemDelegate ();
+};
+// KFileItemDelegate
 
 

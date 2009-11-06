@@ -60,8 +60,13 @@ signals:
     void                    leaveModality ();
 
 private:
+//force
                             KPropertiesDialog (const KPropertiesDialog&);
-};   // KPropertiesDialog
+//end
+public:
+    ~KPropertiesDialog ();
+};
+// KPropertiesDialog
 
 
 class KPropertiesDialogPlugin : QObject
@@ -84,6 +89,9 @@ signals:
 
 protected:
     int                     fontHeight () const;
-};   // KPropertiesDialogPlugin
+public:
+    ~KPropertiesDialogPlugin ();
+};
+// KPropertiesDialogPlugin
 
 

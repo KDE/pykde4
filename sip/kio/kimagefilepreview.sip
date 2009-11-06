@@ -23,8 +23,8 @@
 class KImageFilePreview : KPreviewWidgetBase
 {
 %TypeHeaderCode
-#include <jobclasses.h>
 #include <kimagefilepreview.h>
+#include <jobclasses.h>
 %End
 
 
@@ -42,7 +42,12 @@ protected:
     virtual KIO::PreviewJob*  createJob (const KUrl& url, int width, int height);
 
 private:
+//force
                             KImageFilePreview (const KImageFilePreview&);
-};   // KImageFilePreview
+//end
+public:
+    ~KImageFilePreview ();
+};
+// KImageFilePreview
 
 

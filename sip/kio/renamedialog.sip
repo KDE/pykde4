@@ -75,9 +75,13 @@ public:
 
 protected:
     void                    enableRenameButton (const QString&);
-};   // RenameDialog
+public:
+    ~RenameDialog ();
+};
+// RenameDialog
 
-};   // KIO
+};
+// KIO
 
 
 

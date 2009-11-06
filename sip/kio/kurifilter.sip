@@ -28,8 +28,8 @@ class KUriFilterData
 %End
 
 
-public:
 
+public:
     enum UriTypes
     {
         NetProtocol,
@@ -63,8 +63,13 @@ public:
     QString                 typedString () const;
 
 private:
+//force
                             KUriFilterData (const KUriFilterData& data);
-};   // KUriFilterData
+//end
+public:
+    ~KUriFilterData ();
+};
+// KUriFilterData
 
 
 class KUriFilterPlugin : QObject
@@ -76,7 +81,7 @@ class KUriFilterPlugin : QObject
 
 public:
     explicit                KUriFilterPlugin (const QString& name, QObject* parent /TransferThis/ = 0);
-    virtual bool            filterUri (KUriFilterData& data) const = 0;
+    virtual bool            filterUri (KUriFilterData& data) const=0;
     virtual KCModule*       configModule (QWidget*, const char*) const;
     virtual QString         configName () const;
 
@@ -85,7 +90,8 @@ protected:
     void                    setErrorMsg (KUriFilterData& data, const QString& errmsg) const;
     void                    setUriType (KUriFilterData& data, KUriFilterData::UriTypes type) const;
     void                    setArguments (KUriFilterData& data, const QString& args) const;
-};   // KUriFilterPlugin
+};
+// KUriFilterPlugin
 
 
 class KUriFilter
@@ -109,7 +115,12 @@ protected:
     void                    loadPlugins ();
 
 private:
+//force
                             KUriFilter (const KUriFilter& other);
-};   // KUriFilter
+//end
+public:
+    ~KUriFilter ();
+};
+// KUriFilter
 
 

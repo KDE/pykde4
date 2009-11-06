@@ -36,6 +36,9 @@ public:
 protected:
     void                    slotConfigureFileSharing ();
     void                    slotConfigureFileSharingDone ();
-};   // KFileSharePropsPlugin
+public:
+    ~KFileSharePropsPlugin ();
+};
+// KFileSharePropsPlugin
 
 

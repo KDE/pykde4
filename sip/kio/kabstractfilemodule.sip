@@ -24,7 +24,6 @@
 
 %ModuleHeaderCode
 //ctscc
-#include <accessmanager.h>
 #include <chmodjob.h>
 #include <connection.h>
 #include <copyjob.h>
@@ -91,6 +90,7 @@
 #include <netaccess.h>
 #include <passworddialog.h>
 #include <previewjob.h>
+#include <qobject.h>
 #include <renamedialog.h>
 #include <renamedialogplugin.h>
 #include <scheduler.h>
@@ -110,17 +110,16 @@ class KAbstractFileModule : QObject
 
 public:
                             KAbstractFileModule (QObject* parent /TransferThis/);
-    virtual QWidget*        createFileWidget (const KUrl& startDir, QWidget* parent /Transfer/) = 0;
-    virtual KUrl            getStartUrl (const KUrl& startDir, QString& recentDirClass) = 0;
-    virtual void            setStartDir (const KUrl& directory) = 0;
-    virtual KUrl            selectDirectory (const KUrl& startDir, bool localOnly, QWidget* parent /Transfer/, const QString& caption) = 0;
+    virtual QWidget*        createFileWidget (const KUrl& startDir, QWidget* parent /Transfer/)=0;
+    virtual KUrl            getStartUrl (const KUrl& startDir, QString& recentDirClass)=0;
+    virtual void            setStartDir (const KUrl& directory)=0;
+    virtual KUrl            selectDirectory (const KUrl& startDir, bool localOnly, QWidget* parent /Transfer/, const QString& caption)=0;
 
-public:
 
 //  Subclasses of QObject
 
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'QObject'
     sipClass = NULL;
 
     if (dynamic_cast<KAbstractFileModule*>(sipCpp))
@@ -129,90 +128,56 @@ public:
         sipClass = sipClass_KAutoMount;
     else if (dynamic_cast<KAutoUnmount*>(sipCpp))
         sipClass = sipClass_KAutoUnmount;
-    else if (dynamic_cast<KBookmarkAction*>(sipCpp))
-        sipClass = sipClass_KBookmarkAction;
-    else if (dynamic_cast<KBookmarkActionMenu*>(sipCpp))
-        sipClass = sipClass_KBookmarkActionMenu;
-    else if (dynamic_cast<KBookmarkContextMenu*>(sipCpp))
-        sipClass = sipClass_KBookmarkContextMenu;
-    else if (dynamic_cast<KBookmarkDialog*>(sipCpp))
-        sipClass = sipClass_KBookmarkDialog;
     else if (dynamic_cast<KBookmarkDomBuilder*>(sipCpp))
         sipClass = sipClass_KBookmarkDomBuilder;
     else if (dynamic_cast<KBookmarkImporterBase*>(sipCpp))
         {
-            sipClass = sipClass_KBookmarkImporterBase;
-            if (dynamic_cast<KCrashBookmarkImporterImpl*>(sipCpp))
-                sipClass = sipClass_KCrashBookmarkImporterImpl;
-            else if (dynamic_cast<KIEBookmarkImporterImpl*>(sipCpp))
-                sipClass = sipClass_KIEBookmarkImporterImpl;
-            else if (dynamic_cast<KNSBookmarkImporterImpl*>(sipCpp))
-                {
-                    sipClass = sipClass_KNSBookmarkImporterImpl;
-                    if (dynamic_cast<KMozillaBookmarkImporterImpl*>(sipCpp))
-                        sipClass = sipClass_KMozillaBookmarkImporterImpl;
-                }
-            else if (dynamic_cast<KOperaBookmarkImporterImpl*>(sipCpp))
-                sipClass = sipClass_KOperaBookmarkImporterImpl;
-            else if (dynamic_cast<KXBELBookmarkImporterImpl*>(sipCpp))
-                sipClass = sipClass_KXBELBookmarkImporterImpl;
+        sipClass = sipClass_KBookmarkImporterBase;
+        if (dynamic_cast<KCrashBookmarkImporterImpl*>(sipCpp))
+            sipClass = sipClass_KCrashBookmarkImporterImpl;
+        else if (dynamic_cast<KIEBookmarkImporterImpl*>(sipCpp))
+            sipClass = sipClass_KIEBookmarkImporterImpl;
+        else if (dynamic_cast<KNSBookmarkImporterImpl*>(sipCpp))
+            {
+            sipClass = sipClass_KNSBookmarkImporterImpl;
+            if (dynamic_cast<KMozillaBookmarkImporterImpl*>(sipCpp))
+                sipClass = sipClass_KMozillaBookmarkImporterImpl;
+            }
+        else if (dynamic_cast<KOperaBookmarkImporterImpl*>(sipCpp))
+            sipClass = sipClass_KOperaBookmarkImporterImpl;
+        else if (dynamic_cast<KXBELBookmarkImporterImpl*>(sipCpp))
+            sipClass = sipClass_KXBELBookmarkImporterImpl;
         }
     else if (dynamic_cast<KBookmarkManager*>(sipCpp))
         sipClass = sipClass_KBookmarkManager;
     else if (dynamic_cast<KBookmarkMenu*>(sipCpp))
         {
-            sipClass = sipClass_KBookmarkMenu;
-            if (dynamic_cast<KonqBookmarkMenu*>(sipCpp))
-                sipClass = sipClass_KonqBookmarkMenu;
+        sipClass = sipClass_KBookmarkMenu;
+        if (dynamic_cast<KonqBookmarkMenu*>(sipCpp))
+            sipClass = sipClass_KonqBookmarkMenu;
         }
-    else if (dynamic_cast<KBuildSycocaProgressDialog*>(sipCpp))
-        sipClass = sipClass_KBuildSycocaProgressDialog;
+    else if (dynamic_cast<KUrlCompletion*>(sipCpp))
+        {
+        sipClass = sipClass_KUrlCompletion;
+        if (dynamic_cast<KShellCompletion*>(sipCpp))
+            sipClass = sipClass_KShellCompletion;
+        }
     else if (dynamic_cast<KCrashBookmarkImporter*>(sipCpp))
         sipClass = sipClass_KCrashBookmarkImporter;
     else if (dynamic_cast<KDataTool*>(sipCpp))
         sipClass = sipClass_KDataTool;
-    else if (dynamic_cast<KDataToolAction*>(sipCpp))
-        sipClass = sipClass_KDataToolAction;
-    else if (dynamic_cast<KDeviceListModel*>(sipCpp))
-        sipClass = sipClass_KDeviceListModel;
     else if (dynamic_cast<KDirLister*>(sipCpp))
         sipClass = sipClass_KDirLister;
-    else if (dynamic_cast<KDirModel*>(sipCpp))
-        sipClass = sipClass_KDirModel;
-    else if (dynamic_cast<KDirOperator*>(sipCpp))
-        sipClass = sipClass_KDirOperator;
-    else if (dynamic_cast<KDirSelectDialog*>(sipCpp))
-        sipClass = sipClass_KDirSelectDialog;
-    else if (dynamic_cast<KDirSortFilterProxyModel*>(sipCpp))
-        sipClass = sipClass_KDirSortFilterProxyModel;
     else if (dynamic_cast<KDirWatch*>(sipCpp))
         sipClass = sipClass_KDirWatch;
     else if (dynamic_cast<KDiskFreeSpace*>(sipCpp))
         sipClass = sipClass_KDiskFreeSpace;
-    else if (dynamic_cast<KFileDialog*>(sipCpp))
-        {
-            sipClass = sipClass_KFileDialog;
-            if (dynamic_cast<KEncodingFileDialog*>(sipCpp))
-                sipClass = sipClass_KEncodingFileDialog;
-        }
-    else if (dynamic_cast<KFileFilterCombo*>(sipCpp))
-        sipClass = sipClass_KFileFilterCombo;
     else if (dynamic_cast<KFileItemActions*>(sipCpp))
         sipClass = sipClass_KFileItemActions;
-    else if (dynamic_cast<KFileItemDelegate*>(sipCpp))
-        sipClass = sipClass_KFileItemDelegate;
-    else if (dynamic_cast<KFilePlacesModel*>(sipCpp))
-        sipClass = sipClass_KFilePlacesModel;
-    else if (dynamic_cast<KFilePlacesView*>(sipCpp))
-        sipClass = sipClass_KFilePlacesView;
     else if (dynamic_cast<KFilePreviewGenerator*>(sipCpp))
         sipClass = sipClass_KFilePreviewGenerator;
-    else if (dynamic_cast<KFileWidget*>(sipCpp))
-        sipClass = sipClass_KFileWidget;
     else if (dynamic_cast<KFileWritePlugin*>(sipCpp))
         sipClass = sipClass_KFileWritePlugin;
-    else if (dynamic_cast<KIO::AccessManager*>(sipCpp))
-        sipClass = sipClass_KIO_AccessManager;
     else if (dynamic_cast<KIO::Connection*>(sipCpp))
         sipClass = sipClass_KIO_Connection;
     else if (dynamic_cast<KIO::ConnectionServer*>(sipCpp))
@@ -221,132 +186,165 @@ public:
         sipClass = sipClass_KIO_FileUndoManager;
     else if (dynamic_cast<KIO::ForwardingSlaveBase*>(sipCpp))
         sipClass = sipClass_KIO_ForwardingSlaveBase;
-    else if (dynamic_cast<KIO::Job*>(sipCpp))
-        {
-            sipClass = sipClass_KIO_Job;
-            if (dynamic_cast<KIO::ChmodJob*>(sipCpp))
-                sipClass = sipClass_KIO_ChmodJob;
-            else if (dynamic_cast<KIO::CopyJob*>(sipCpp))
-                sipClass = sipClass_KIO_CopyJob;
-            else if (dynamic_cast<KIO::DeleteJob*>(sipCpp))
-                sipClass = sipClass_KIO_DeleteJob;
-            else if (dynamic_cast<KIO::DirectorySizeJob*>(sipCpp))
-                sipClass = sipClass_KIO_DirectorySizeJob;
-            else if (dynamic_cast<KIO::FileCopyJob*>(sipCpp))
-                sipClass = sipClass_KIO_FileCopyJob;
-            else if (dynamic_cast<KIO::MetaInfoJob*>(sipCpp))
-                sipClass = sipClass_KIO_MetaInfoJob;
-            else if (dynamic_cast<KIO::PreviewJob*>(sipCpp))
-                sipClass = sipClass_KIO_PreviewJob;
-            else if (dynamic_cast<KIO::SimpleJob*>(sipCpp))
-                {
-                    sipClass = sipClass_KIO_SimpleJob;
-                    if (dynamic_cast<KIO::FileJob*>(sipCpp))
-                        sipClass = sipClass_KIO_FileJob;
-                    else if (dynamic_cast<KIO::ListJob*>(sipCpp))
-                        sipClass = sipClass_KIO_ListJob;
-                    else if (dynamic_cast<KIO::StatJob*>(sipCpp))
-                        sipClass = sipClass_KIO_StatJob;
-                    else if (dynamic_cast<KIO::TransferJob*>(sipCpp))
-                        {
-                            sipClass = sipClass_KIO_TransferJob;
-                            if (dynamic_cast<KIO::DavJob*>(sipCpp))
-                                sipClass = sipClass_KIO_DavJob;
-                            else if (dynamic_cast<KIO::MimetypeJob*>(sipCpp))
-                                sipClass = sipClass_KIO_MimetypeJob;
-                            else if (dynamic_cast<KIO::MultiGetJob*>(sipCpp))
-                                sipClass = sipClass_KIO_MultiGetJob;
-                            else if (dynamic_cast<KIO::SpecialJob*>(sipCpp))
-                                sipClass = sipClass_KIO_SpecialJob;
-                            else if (dynamic_cast<KIO::StoredTransferJob*>(sipCpp))
-                                sipClass = sipClass_KIO_StoredTransferJob;
-                        }
-                }
-        }
-    else if (dynamic_cast<KIO::JobUiDelegate*>(sipCpp))
-        sipClass = sipClass_KIO_JobUiDelegate;
     else if (dynamic_cast<KIO::NetAccess*>(sipCpp))
         sipClass = sipClass_KIO_NetAccess;
-    else if (dynamic_cast<KIO::PasswordDialog*>(sipCpp))
-        sipClass = sipClass_KIO_PasswordDialog;
-    else if (dynamic_cast<KIO::RenameDialog*>(sipCpp))
-        sipClass = sipClass_KIO_RenameDialog;
-    else if (dynamic_cast<KIO::RenameDialogPlugin*>(sipCpp))
-        sipClass = sipClass_KIO_RenameDialogPlugin;
     else if (dynamic_cast<KIO::Scheduler*>(sipCpp))
         sipClass = sipClass_KIO_Scheduler;
     else if (dynamic_cast<KIO::SessionData*>(sipCpp))
         sipClass = sipClass_KIO_SessionData;
-    else if (dynamic_cast<KIO::SkipDialog*>(sipCpp))
-        sipClass = sipClass_KIO_SkipDialog;
     else if (dynamic_cast<KIO::SlaveConfig*>(sipCpp))
         sipClass = sipClass_KIO_SlaveConfig;
     else if (dynamic_cast<KIO::SlaveInterface*>(sipCpp))
         {
-            sipClass = sipClass_KIO_SlaveInterface;
-            if (dynamic_cast<KIO::Slave*>(sipCpp))
-                sipClass = sipClass_KIO_Slave;
+        sipClass = sipClass_KIO_SlaveInterface;
+        if (dynamic_cast<KIO::Slave*>(sipCpp))
+            sipClass = sipClass_KIO_Slave;
         }
-    else if (dynamic_cast<KIconButton*>(sipCpp))
-        sipClass = sipClass_KIconButton;
-    else if (dynamic_cast<KIconCanvas*>(sipCpp))
-        sipClass = sipClass_KIconCanvas;
-    else if (dynamic_cast<KIconDialog*>(sipCpp))
-        sipClass = sipClass_KIconDialog;
-    else if (dynamic_cast<KMimeTypeChooser*>(sipCpp))
-        sipClass = sipClass_KMimeTypeChooser;
-    else if (dynamic_cast<KMimeTypeChooserDialog*>(sipCpp))
-        sipClass = sipClass_KMimeTypeChooserDialog;
+    else if (dynamic_cast<KIO::Job*>(sipCpp))
+        {
+        sipClass = sipClass_KIO_Job;
+        if (dynamic_cast<KIO::ChmodJob*>(sipCpp))
+            sipClass = sipClass_KIO_ChmodJob;
+        else if (dynamic_cast<KIO::CopyJob*>(sipCpp))
+            sipClass = sipClass_KIO_CopyJob;
+        else if (dynamic_cast<KIO::DeleteJob*>(sipCpp))
+            sipClass = sipClass_KIO_DeleteJob;
+        else if (dynamic_cast<KIO::DirectorySizeJob*>(sipCpp))
+            sipClass = sipClass_KIO_DirectorySizeJob;
+        else if (dynamic_cast<KIO::FileCopyJob*>(sipCpp))
+            sipClass = sipClass_KIO_FileCopyJob;
+        else if (dynamic_cast<KIO::MetaInfoJob*>(sipCpp))
+            sipClass = sipClass_KIO_MetaInfoJob;
+        else if (dynamic_cast<KIO::PreviewJob*>(sipCpp))
+            sipClass = sipClass_KIO_PreviewJob;
+        else if (dynamic_cast<KIO::SimpleJob*>(sipCpp))
+            {
+            sipClass = sipClass_KIO_SimpleJob;
+            if (dynamic_cast<KIO::FileJob*>(sipCpp))
+                sipClass = sipClass_KIO_FileJob;
+            else if (dynamic_cast<KIO::ListJob*>(sipCpp))
+                sipClass = sipClass_KIO_ListJob;
+            else if (dynamic_cast<KIO::StatJob*>(sipCpp))
+                sipClass = sipClass_KIO_StatJob;
+            else if (dynamic_cast<KIO::TransferJob*>(sipCpp))
+                {
+                sipClass = sipClass_KIO_TransferJob;
+                if (dynamic_cast<KIO::DavJob*>(sipCpp))
+                    sipClass = sipClass_KIO_DavJob;
+                else if (dynamic_cast<KIO::MimetypeJob*>(sipCpp))
+                    sipClass = sipClass_KIO_MimetypeJob;
+                else if (dynamic_cast<KIO::MultiGetJob*>(sipCpp))
+                    sipClass = sipClass_KIO_MultiGetJob;
+                else if (dynamic_cast<KIO::SpecialJob*>(sipCpp))
+                    sipClass = sipClass_KIO_SpecialJob;
+                else if (dynamic_cast<KIO::StoredTransferJob*>(sipCpp))
+                    sipClass = sipClass_KIO_StoredTransferJob;
+                }
+            }
+        }
+    else if (dynamic_cast<KIO::JobUiDelegate*>(sipCpp))
+        sipClass = sipClass_KIO_JobUiDelegate;
     else if (dynamic_cast<KNFSShare*>(sipCpp))
         sipClass = sipClass_KNFSShare;
-    else if (dynamic_cast<KOCRDialog*>(sipCpp))
-        sipClass = sipClass_KOCRDialog;
-    else if (dynamic_cast<KOpenWithDialog*>(sipCpp))
-        sipClass = sipClass_KOpenWithDialog;
-    else if (dynamic_cast<KPreviewWidgetBase*>(sipCpp))
-        {
-            sipClass = sipClass_KPreviewWidgetBase;
-            if (dynamic_cast<KImageFilePreview*>(sipCpp))
-                sipClass = sipClass_KImageFilePreview;
-        }
-    else if (dynamic_cast<KPropertiesDialog*>(sipCpp))
-        sipClass = sipClass_KPropertiesDialog;
     else if (dynamic_cast<KPropertiesDialogPlugin*>(sipCpp))
         {
-            sipClass = sipClass_KPropertiesDialogPlugin;
-            if (dynamic_cast<KFileSharePropsPlugin*>(sipCpp))
-                sipClass = sipClass_KFileSharePropsPlugin;
+        sipClass = sipClass_KPropertiesDialogPlugin;
+        if (dynamic_cast<KFileSharePropsPlugin*>(sipCpp))
+            sipClass = sipClass_KFileSharePropsPlugin;
         }
     else if (dynamic_cast<KRun*>(sipCpp))
         sipClass = sipClass_KRun;
     else if (dynamic_cast<KSambaShare*>(sipCpp))
         sipClass = sipClass_KSambaShare;
-    else if (dynamic_cast<KScanDialog*>(sipCpp))
-        sipClass = sipClass_KScanDialog;
-    else if (dynamic_cast<KStatusBarOfflineIndicator*>(sipCpp))
-        sipClass = sipClass_KStatusBarOfflineIndicator;
     else if (dynamic_cast<KUriFilterPlugin*>(sipCpp))
         sipClass = sipClass_KUriFilterPlugin;
-    else if (dynamic_cast<KUrlComboBox*>(sipCpp))
-        sipClass = sipClass_KUrlComboBox;
-    else if (dynamic_cast<KUrlCompletion*>(sipCpp))
+    else if (dynamic_cast<KFileItemDelegate*>(sipCpp))
+        sipClass = sipClass_KFileItemDelegate;
+    else if (dynamic_cast<KDeviceListModel*>(sipCpp))
+        sipClass = sipClass_KDeviceListModel;
+    else if (dynamic_cast<KDirModel*>(sipCpp))
+        sipClass = sipClass_KDirModel;
+    else if (dynamic_cast<KFilePlacesModel*>(sipCpp))
+        sipClass = sipClass_KFilePlacesModel;
+    else if (dynamic_cast<KDirSortFilterProxyModel*>(sipCpp))
+        sipClass = sipClass_KDirSortFilterProxyModel;
+    else if (dynamic_cast<KBookmarkActionMenu*>(sipCpp))
+        sipClass = sipClass_KBookmarkActionMenu;
+    else if (dynamic_cast<KBookmarkAction*>(sipCpp))
+        sipClass = sipClass_KBookmarkAction;
+    else if (dynamic_cast<KDataToolAction*>(sipCpp))
+        sipClass = sipClass_KDataToolAction;
+    else if (dynamic_cast<KDirOperator*>(sipCpp))
+        sipClass = sipClass_KDirOperator;
+    else if (dynamic_cast<KFileWidget*>(sipCpp))
+        sipClass = sipClass_KFileWidget;
+    else if (dynamic_cast<KIO::RenameDialogPlugin*>(sipCpp))
+        sipClass = sipClass_KIO_RenameDialogPlugin;
+    else if (dynamic_cast<KPreviewWidgetBase*>(sipCpp))
         {
-            sipClass = sipClass_KUrlCompletion;
-            if (dynamic_cast<KShellCompletion*>(sipCpp))
-                sipClass = sipClass_KShellCompletion;
+        sipClass = sipClass_KPreviewWidgetBase;
+        if (dynamic_cast<KImageFilePreview*>(sipCpp))
+            sipClass = sipClass_KImageFilePreview;
         }
+    else if (dynamic_cast<KStatusBarOfflineIndicator*>(sipCpp))
+        sipClass = sipClass_KStatusBarOfflineIndicator;
     else if (dynamic_cast<KUrlNavigator*>(sipCpp))
         sipClass = sipClass_KUrlNavigator;
-    else if (dynamic_cast<KUrlRequester*>(sipCpp))
+    else if (dynamic_cast<KIconButton*>(sipCpp))
+        sipClass = sipClass_KIconButton;
+    else if (dynamic_cast<KFileFilterCombo*>(sipCpp))
+        sipClass = sipClass_KFileFilterCombo;
+    else if (dynamic_cast<KUrlComboBox*>(sipCpp))
+        sipClass = sipClass_KUrlComboBox;
+    else if (dynamic_cast<KBookmarkDialog*>(sipCpp))
+        sipClass = sipClass_KBookmarkDialog;
+    else if (dynamic_cast<KDirSelectDialog*>(sipCpp))
+        sipClass = sipClass_KDirSelectDialog;
+    else if (dynamic_cast<KFileDialog*>(sipCpp))
         {
-            sipClass = sipClass_KUrlRequester;
-            if (dynamic_cast<KUrlComboRequester*>(sipCpp))
-                sipClass = sipClass_KUrlComboRequester;
+        sipClass = sipClass_KFileDialog;
+        if (dynamic_cast<KEncodingFileDialog*>(sipCpp))
+            sipClass = sipClass_KEncodingFileDialog;
         }
+    else if (dynamic_cast<KIO::SkipDialog*>(sipCpp))
+        sipClass = sipClass_KIO_SkipDialog;
+    else if (dynamic_cast<KIconDialog*>(sipCpp))
+        sipClass = sipClass_KIconDialog;
+    else if (dynamic_cast<KMimeTypeChooserDialog*>(sipCpp))
+        sipClass = sipClass_KMimeTypeChooserDialog;
+    else if (dynamic_cast<KOpenWithDialog*>(sipCpp))
+        sipClass = sipClass_KOpenWithDialog;
+    else if (dynamic_cast<KOCRDialog*>(sipCpp))
+        sipClass = sipClass_KOCRDialog;
+    else if (dynamic_cast<KPropertiesDialog*>(sipCpp))
+        sipClass = sipClass_KPropertiesDialog;
+    else if (dynamic_cast<KScanDialog*>(sipCpp))
+        sipClass = sipClass_KScanDialog;
+    else if (dynamic_cast<KIO::PasswordDialog*>(sipCpp))
+        sipClass = sipClass_KIO_PasswordDialog;
     else if (dynamic_cast<KUrlRequesterDialog*>(sipCpp))
         sipClass = sipClass_KUrlRequesterDialog;
+    else if (dynamic_cast<KIO::RenameDialog*>(sipCpp))
+        sipClass = sipClass_KIO_RenameDialog;
+    else if (dynamic_cast<KBuildSycocaProgressDialog*>(sipCpp))
+        sipClass = sipClass_KBuildSycocaProgressDialog;
+    else if (dynamic_cast<KUrlRequester*>(sipCpp))
+        {
+        sipClass = sipClass_KUrlRequester;
+        if (dynamic_cast<KUrlComboRequester*>(sipCpp))
+            sipClass = sipClass_KUrlComboRequester;
+        }
+    else if (dynamic_cast<KMimeTypeChooser*>(sipCpp))
+        sipClass = sipClass_KMimeTypeChooser;
+    else if (dynamic_cast<KFilePlacesView*>(sipCpp))
+        sipClass = sipClass_KFilePlacesView;
+    else if (dynamic_cast<KIconCanvas*>(sipCpp))
+        sipClass = sipClass_KIconCanvas;
+    else if (dynamic_cast<KBookmarkContextMenu*>(sipCpp))
+        sipClass = sipClass_KBookmarkContextMenu;
 %End
 
-};   // KAbstractFileModule
+};
+// KAbstractFileModule
 
 

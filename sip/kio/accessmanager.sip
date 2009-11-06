@@ -32,10 +32,29 @@ public:
     void                    setExternalContentAllowed (bool allowed);
     bool                    isExternalContentAllowed () const;
 
+    enum Attribute
+    {
+        MetaData,
+        KioError
+    };
+    ~AccessManager ();
 protected:
-    virtual QNetworkReply*  createRequest (QNetworkAccessManager::Operation op, const QNetworkRequest& req, QIODevice* outgoingData = 0);
-};   // AccessManager
+    virtual QNetworkReply*  createRequest (Operation op, const QNetworkRequest& req, QIODevice* outgoingData = 0);
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'AccessManager'
+    sipClass = NULL;
 
-};   // KIO
+    if (dynamic_cast<KIO::AccessManager*>(sipCpp))
+        sipClass = sipClass_KIO_AccessManager;
+%End
+};
+// AccessManager
+
+};
+// KIO
 
 
+%ModuleHeaderCode
+//ctscc
+#include <kio/accessmanager.h>
+%End

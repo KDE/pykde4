@@ -46,7 +46,7 @@ class Job : KCompositeJob
 
 protected:
                             Job ();
-//ig                        Job (JobPrivate& dd);
+//ig                            Job (JobPrivate& dd);
 
 public:
     void                    start ();
@@ -79,7 +79,10 @@ signals:
 protected:
     virtual bool            addSubjob (KJob* job);
     virtual bool            removeSubjob (KJob* job);
-};   // Job
+public:
+    ~Job ();
+};
+// Job
 
 
 class SimpleJob : KIO::Job
@@ -105,15 +108,18 @@ protected:
     virtual void            slotWarning (const QString&);
     virtual void            slotMetaData (const KIO::MetaData& _metaData);
     void                    storeSSLSessionFromJob (const KUrl& m_redirectionURL);
-//ig                        SimpleJob (SimpleJobPrivate& dd);
+//ig                            SimpleJob (SimpleJobPrivate& dd);
 
-//force
 
 private:
+//force
                             SimpleJob ();
-//end
 
-};   // SimpleJob
+//end
+public:
+    ~SimpleJob ();
+};
+// SimpleJob
 
 
 class StatJob : KIO::SimpleJob
@@ -123,8 +129,8 @@ class StatJob : KIO::SimpleJob
 %End
 
 
-public:
 
+public:
     enum StatSide
     {
         SourceSide,
@@ -143,15 +149,18 @@ signals:
 protected:
     virtual void            slotFinished ();
     virtual void            slotMetaData (const KIO::MetaData& _metaData);
-//ig                        StatJob (StatJobPrivate& dd);
+//ig                            StatJob (StatJobPrivate& dd);
 
-//force
 
 private:
+//force
                             StatJob ();
-//end
 
-};   // StatJob
+//end
+public:
+    ~StatJob ();
+};
+// StatJob
 
 
 class TransferJob : KIO::SimpleJob
@@ -190,15 +199,18 @@ protected:
     virtual void            slotDataReq ();
     virtual void            slotMimetype (const QString& mimetype);
     virtual void            slotMetaData (const KIO::MetaData& _metaData);
-//ig                        TransferJob (TransferJobPrivate& dd);
+//ig                            TransferJob (TransferJobPrivate& dd);
 
-//force
 
 private:
+//force
                             TransferJob ();
-//end
 
-};   // TransferJob
+//end
+public:
+    ~TransferJob ();
+};
+// TransferJob
 
 
 class StoredTransferJob : KIO::TransferJob
@@ -213,15 +225,18 @@ public:
     QByteArray              data () const;
 
 protected:
-//ig                        StoredTransferJob (StoredTransferJobPrivate& dd);
+//ig                            StoredTransferJob (StoredTransferJobPrivate& dd);
 
-//force
 
 private:
+//force
                             StoredTransferJob ();
-//end
 
-};   // StoredTransferJob
+//end
+public:
+    ~StoredTransferJob ();
+};
+// StoredTransferJob
 
 
 class MultiGetJob : KIO::TransferJob
@@ -244,15 +259,18 @@ protected:
     virtual void            slotFinished ();
     virtual void            slotData (const QByteArray& data);
     virtual void            slotMimetype (const QString& mimetype);
-//ig                        MultiGetJob (MultiGetJobPrivate& dd);
+//ig                            MultiGetJob (MultiGetJobPrivate& dd);
 
-//force
 
 private:
+//force
                             MultiGetJob ();
-//end
 
-};   // MultiGetJob
+//end
+public:
+    ~MultiGetJob ();
+};
+// MultiGetJob
 
 
 class MimetypeJob : KIO::TransferJob
@@ -264,15 +282,18 @@ class MimetypeJob : KIO::TransferJob
 
 protected:
     virtual void            slotFinished ();
-//ig                        MimetypeJob (MimetypeJobPrivate& dd);
+//ig                            MimetypeJob (MimetypeJobPrivate& dd);
 
-//force
 
 private:
+//force
                             MimetypeJob ();
-//end
 
-};   // MimetypeJob
+//end
+public:
+    ~MimetypeJob ();
+};
+// MimetypeJob
 
 
 class FileCopyJob : KIO::Job
@@ -295,15 +316,18 @@ signals:
 
 protected:
     virtual void            slotResult (KJob* job);
-//ig                        FileCopyJob (FileCopyJobPrivate& dd);
+//ig                            FileCopyJob (FileCopyJobPrivate& dd);
 
-//force
 
 private:
+//force
                             FileCopyJob ();
-//end
 
-};   // FileCopyJob
+//end
+public:
+    ~FileCopyJob ();
+};
+// FileCopyJob
 
 
 class ListJob : KIO::SimpleJob
@@ -326,15 +350,18 @@ protected:
     virtual void            slotFinished ();
     virtual void            slotMetaData (const KIO::MetaData& _metaData);
     virtual void            slotResult (KJob* job);
-//ig                        ListJob (ListJobPrivate& dd);
+//ig                            ListJob (ListJobPrivate& dd);
 
-//force
 
 private:
+//force
                             ListJob ();
-//end
 
-};   // ListJob
+//end
+public:
+    ~ListJob ();
+};
+// ListJob
 
 
 class SpecialJob : KIO::TransferJob
@@ -349,15 +376,19 @@ public:
     void                    setArguments (const QByteArray& data);
     QByteArray              arguments () const;
 
-//force
 
 private:
+//force
                             SpecialJob ();
+
 //end
+public:
+    ~SpecialJob ();
+};
+// SpecialJob
 
-};   // SpecialJob
-
-};   // KIO
+};
+// KIO
 
 
 

@@ -56,7 +56,10 @@ protected:
     KBookmarkManager*       manager () const;
     KBookmarkOwner*         owner () const;
     KMenu*                  parentMenu () const;
-};   // KBookmarkMenu
+public:
+    ~KBookmarkMenu ();
+};
+// KBookmarkMenu
 
 
 class KBookmarkContextMenu : KMenu
@@ -85,7 +88,10 @@ protected:
     KBookmarkManager*       manager () const;
     KBookmarkOwner*         owner () const;
     KBookmark               bookmark () const;
-};   // KBookmarkContextMenu
+public:
+    ~KBookmarkContextMenu ();
+};
+// KBookmarkContextMenu
 
 
 class KBookmarkActionInterface
@@ -98,7 +104,9 @@ class KBookmarkActionInterface
 public:
                             KBookmarkActionInterface (const KBookmark& bk);
     const KBookmark         bookmark () const;
-};   // KBookmarkActionInterface
+    ~KBookmarkActionInterface ();
+};
+// KBookmarkActionInterface
 
 
 class KBookmarkActionMenu : KActionMenu, KBookmarkActionInterface
@@ -111,7 +119,9 @@ class KBookmarkActionMenu : KActionMenu, KBookmarkActionInterface
 public:
                             KBookmarkActionMenu (const KBookmark& bm, QObject* parent /TransferThis/);
                             KBookmarkActionMenu (const KBookmark& bm, const QString& text, QObject* parent /TransferThis/);
-};   // KBookmarkActionMenu
+    ~KBookmarkActionMenu ();
+};
+// KBookmarkActionMenu
 
 
 class KBookmarkAction : KAction, KBookmarkActionInterface
@@ -124,6 +134,8 @@ class KBookmarkAction : KAction, KBookmarkActionInterface
 public:
                             KBookmarkAction (const KBookmark& bk, KBookmarkOwner* owner, QObject* parent /TransferThis/);
     void                    slotSelected (Qt::MouseButtons mb, Qt::KeyboardModifiers km);
-};   // KBookmarkAction
+    ~KBookmarkAction ();
+};
+// KBookmarkAction
 
 

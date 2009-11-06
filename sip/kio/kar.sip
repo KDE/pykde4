@@ -24,6 +24,7 @@
 %ModuleHeaderCode
 //ctscc
 #include <kar.h>
+#include <karchive.h>
 #include <ktar.h>
 #include <kzip.h>
 %End
@@ -46,16 +47,16 @@ protected:
     virtual bool            doWriteSymLink (const QString& name, const QString& target, const QString& user, const QString& group, mode_t perm, time_t atime, time_t mtime, time_t ctime);
     virtual bool            openArchive (QIODevice::OpenMode mode);
     virtual bool            closeArchive ();
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 private:
-                            KAr (const KAr &other);
-
-public:
+//force
+                            KAr (const KAr& other);
 
 //  Subclasses of KArchive
 
+//end
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'KArchive'
     sipClass = NULL;
 
     if (dynamic_cast<KAr*>(sipCpp))
@@ -66,7 +67,10 @@ public:
         sipClass = sipClass_KZip;
 %End
 
-};   // KAr
+public:
+    ~KAr ();
+};
+// KAr
 
 
 

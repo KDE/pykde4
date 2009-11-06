@@ -50,10 +50,12 @@ public:
 //io         virtual void       virtual_hook (int id, void* data);
 
 
-    };   // UiInterface
+        ~UiInterface ();
+        virtual void            virtual_hook (int id, void* data);
+    };
+// UiInterface
 
 
-public:
     void                    setUiInterface (KIO::FileUndoManager::UiInterface* ui);
     KIO::FileUndoManager::UiInterface*  uiInterface () const;
 
@@ -83,10 +85,14 @@ signals:
     void                    jobRecordingFinished (KIO::FileUndoManager::CommandType op);
 
 private:
+//force
                             FileUndoManager ();
-    virtual                 ~FileUndoManager ();
-};   // FileUndoManager
+    ~FileUndoManager ();
+//end
+};
+// FileUndoManager
 
-};   // KIO
+};
+// KIO
 
 

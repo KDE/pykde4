@@ -37,7 +37,10 @@ signals:
     void                    newFolder (const QString& text, bool open, const QString& additionalInfo);
     void                    newSeparator ();
     void                    endFolder ();
-};   // KCrashBookmarkImporter
+public:
+    ~KCrashBookmarkImporter ();
+};
+// KCrashBookmarkImporter
 
 
 class KCrashBookmarkImporterImpl : KBookmarkImporterBase
@@ -53,6 +56,7 @@ public:
     virtual void            parse ();
     virtual QString         findDefaultLocation (bool forSaving = 0) const;
     static QStringList      getCrashLogs ();
-};   // KCrashBookmarkImporterImpl
+};
+// KCrashBookmarkImporterImpl
 
 

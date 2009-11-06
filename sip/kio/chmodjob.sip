@@ -35,18 +35,22 @@ class ChmodJob : KIO::Job
 
 protected:
     virtual void            slotResult (KJob* job);
-//ig                        ChmodJob (ChmodJobPrivate& dd);
+//ig                            ChmodJob (ChmodJobPrivate& dd);
 
-//force
 
 private:
+//force
                             ChmodJob ();
-//end
 
-};   // ChmodJob
+//end
+public:
+    ~ChmodJob ();
+};
+// ChmodJob
 
 KIO::ChmodJob*          chmod (const KFileItemList& lstItems, int permissions, int mask, const QString& newOwner, const QString& newGroup, bool recursive, KIO::JobFlags flags = KIO::DefaultFlags);
-};   // KIO
+};
+// KIO
 
 
 

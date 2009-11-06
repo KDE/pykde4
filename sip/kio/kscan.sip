@@ -40,7 +40,10 @@ signals:
     void                    preview (const QImage& img, int id);
     void                    finalImage (const QImage& img, int id);
     void                    textRecognized (const QString& text, int id);
-};   // KScanDialog
+public:
+    ~KScanDialog ();
+};
+// KScanDialog
 
 
 class KOCRDialog : KPageDialog
@@ -60,6 +63,9 @@ protected:
 
 signals:
     void                    textRecognized (const QString& text, int id);
-};   // KOCRDialog
+public:
+    ~KOCRDialog ();
+};
+// KOCRDialog
 
 

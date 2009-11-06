@@ -42,14 +42,17 @@ public:
     bool                    sendnow (int _cmd, const QByteArray& data);
     bool                    hasTaskAvailable () const;
     bool                    waitForIncomingTask (int ms = 30000);
-//ig     int                read (int* _cmd, QByteArray& data);
+//ig    int                     read (int* _cmd, QByteArray& data);
     void                    suspend ();
     void                    resume ();
     bool                    suspended () const;
 
 signals:
     void                    readyRead ();
-};   // Connection
+public:
+    ~Connection ();
+};
+// Connection
 
 
 class ConnectionServer : QObject
@@ -66,14 +69,14 @@ public:
     void                    close ();
     QString                 address () const;
     KIO::Connection*        nextPendingConnection ();
-    void                    setNextPendingConnection (KIO::Connection* conn);
 
 signals:
     void                    newConnection ();
-};   // ConnectionServer
+public:
+    ~ConnectionServer ();
+    void                    setNextPendingConnection (KIO::Connection* conn);
+};
+// ConnectionServer
 
-};   // KIO
-
-
-
-
+};
+// KIO

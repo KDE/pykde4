@@ -29,9 +29,9 @@ namespace KIO
 class MetaInfoJob : KIO::Job
 {
 %TypeHeaderCode
+#include <metainfojob.h>
 #include <kfileitem.h>
 #include <jobclasses.h>
-#include <metainfojob.h>
 %End
 
 
@@ -47,17 +47,21 @@ protected:
     void                    getMetaInfo ();
     virtual void            slotResult (KJob* job);
 
-//force
 
 private:
+//force
                             MetaInfoJob ();
-//end
 
-};   // MetaInfoJob
+//end
+public:
+    ~MetaInfoJob ();
+};
+// MetaInfoJob
 
 KIO::MetaInfoJob*       fileMetaInfo (const KFileItemList& items);
 KIO::MetaInfoJob*       fileMetaInfo (const KUrl::List& items);
-};   // KIO
+};
+// KIO
 
 
 

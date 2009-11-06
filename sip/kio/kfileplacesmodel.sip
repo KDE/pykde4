@@ -28,8 +28,8 @@ class KFilePlacesModel : QAbstractItemModel
 %End
 
 
-public:
 
+public:
     enum AdditionalRoles
     {
         UrlRole,
@@ -71,6 +71,9 @@ public:
 signals:
     void                    errorMessage (const QString& message);
     void                    setupDone (const QModelIndex& index, bool success);
-};   // KFilePlacesModel
+public:
+    ~KFilePlacesModel ();
+};
+// KFilePlacesModel
 
 

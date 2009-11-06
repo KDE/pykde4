@@ -43,17 +43,19 @@ public:
     };
 
     uint                    attributes () const;
-//ig     const QString&     key () const;
+//ig    const QString&          key () const;
     QVariant::Type          type () const;
     const QString&          name () const;
-//ig     const QString&     description () const;
+//ig    const QString&          description () const;
     QValidator*             createValidator () const;
     const QStringList&      suggestedValues () const;
     uint                    minCardinality () const;
     uint                    maxCardinality () const;
     const PredicateProperties&  parent () const;
-//ig     const QString&     unit () const;
+//ig    const QString&          unit () const;
     bool                    isValid () const;
-};   // PredicateProperties
+    ~PredicateProperties ();
+};
+// PredicateProperties
 
 

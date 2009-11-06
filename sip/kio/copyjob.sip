@@ -41,7 +41,8 @@ public:
     time_t ctime;
     time_t mtime;
     KIO::filesize_t size;
-};   // CopyInfo
+};
+// CopyInfo
 
 
 class CopyJob : KIO::Job
@@ -51,8 +52,8 @@ class CopyJob : KIO::Job
 %End
 
 
-public:
 
+public:
     enum CopyMode
     {
         Copy,
@@ -84,16 +85,19 @@ signals:
 
 protected:
     virtual void            slotResult (KJob* job);
-//ig                        CopyJob (CopyJobPrivate& dd);
+//ig                            CopyJob (CopyJobPrivate& dd);
     void                    emitResult ();
 
-//force
 
 private:
+//force
                             CopyJob ();
-//end
 
-};   // CopyJob
+//end
+public:
+    ~CopyJob ();
+};
+// CopyJob
 
 KIO::CopyJob*           copy (const KUrl& src, const KUrl& dest, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::CopyJob*           copyAs (const KUrl& src, const KUrl& dest, KIO::JobFlags flags = KIO::DefaultFlags);
@@ -106,7 +110,8 @@ KIO::CopyJob*           link (const KUrl::List& src, const KUrl& destDir, KIO::J
 KIO::CopyJob*           linkAs (const KUrl& src, const KUrl& dest, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::CopyJob*           trash (const KUrl& src, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::CopyJob*           trash (const KUrl::List& src, KIO::JobFlags flags = KIO::DefaultFlags);
-};   // KIO
+};
+// KIO
 
 
 

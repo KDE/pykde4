@@ -45,19 +45,23 @@ signals:
 
 protected:
     virtual void            slotResult (KJob* job);
-//ig                        DeleteJob (DeleteJobPrivate& dd);
+//ig                            DeleteJob (DeleteJobPrivate& dd);
 
-//force
 
 private:
+//force
                             DeleteJob ();
-//end
 
-};   // DeleteJob
+//end
+public:
+    ~DeleteJob ();
+};
+// DeleteJob
 
 KIO::DeleteJob*         del (const KUrl& src, KIO::JobFlags flags = KIO::DefaultFlags) /PyName=del_/;
 KIO::DeleteJob*         del (const KUrl::List& src, KIO::JobFlags flags = KIO::DefaultFlags) /PyName=del_/;
-};   // KIO
+};
+// KIO
 
 
 

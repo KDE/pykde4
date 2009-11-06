@@ -31,9 +31,12 @@ class PasswordDialog : KPasswordDialog
 
 public:
                             PasswordDialog (const QString& prompt, const QString& user, bool enableKeep = 0, bool modal = 1, QWidget* parent /TransferThis/ = 0);
-    static int              getNameAndPassword (QString& user, QString& pass, bool* keep /In, Out/, const QString& prompt = QString(), bool readOnly = 0, const QString& caption = QString(), const QString& comment = QString(), const QString& label = QString());
-};   // PasswordDialog
+    static int              getNameAndPassword (QString& user, QString& pass, bool* keep /In,Out/, const QString& prompt = QString(), bool readOnly = 0, const QString& caption = QString(), const QString& comment = QString(), const QString& label = QString());
+    ~PasswordDialog ();
+};
+// PasswordDialog
 
-};   // KIO
+};
+// KIO
 
 

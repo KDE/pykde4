@@ -46,9 +46,13 @@ public:
 
 signals:
     void                    result (KIO::SkipDialog* _this, int _button);
-};   // SkipDialog
+public:
+    ~SkipDialog ();
+};
+// SkipDialog
 
-};   // KIO
+};
+// KIO
 
 
 

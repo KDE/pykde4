@@ -34,7 +34,10 @@ public:
 protected:
     void                    postProcessMatch (QString* match) const;
     void                    postProcessMatches (QStringList* matches) const;
-//ig     void               postProcessMatches (KCompletionMatches* matches) const;
-};   // KShellCompletion
+//ig    void                    postProcessMatches (KCompletionMatches* matches) const;
+public:
+    ~KShellCompletion ();
+};
+// KShellCompletion
 
 

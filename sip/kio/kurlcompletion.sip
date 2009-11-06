@@ -27,8 +27,8 @@ class KUrlCompletion : KCompletion
 %End
 
 
-public:
 
+public:
     enum Mode
     {
         ExeCompletion,
@@ -55,8 +55,11 @@ public:
 protected:
     void                    postProcessMatch (QString* match) const;
     void                    postProcessMatches (QStringList* matches) const;
-//ig     void               postProcessMatches (KCompletionMatches* matches) const;
+//ig    void                    postProcessMatches (KCompletionMatches* matches) const;
     virtual void            customEvent (QEvent* e);
-};   // KUrlCompletion
+public:
+    ~KUrlCompletion ();
+};
+// KUrlCompletion
 
 

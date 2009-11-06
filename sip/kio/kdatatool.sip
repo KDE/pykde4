@@ -44,7 +44,9 @@ public:
     KComponentData          componentData () const;
     bool                    isValid () const;
     static QList<KDataToolInfo>  query (const QString& datatype, const QString& mimetype, const KComponentData& instance);
-};   // KDataToolInfo
+    ~KDataToolInfo ();
+};
+// KDataToolInfo
 
 
 class KDataToolAction : KAction
@@ -63,7 +65,10 @@ signals:
 
 protected:
     virtual void            slotActivated ();
-};   // KDataToolAction
+public:
+    ~KDataToolAction ();
+};
+// KDataToolAction
 
 
 class KDataTool : QObject
@@ -77,7 +82,9 @@ public:
                             KDataTool (QObject* parent /TransferThis/ = 0);
     void                    setComponentData (const KComponentData& componentData);
     const KComponentData&   componentData () const;
-    virtual bool            run (const QString& command, void* data /In/, const QString& datatype, const QString& mimetype) = 0;
-};   // KDataTool
+    virtual bool            run (const QString& command, void* data /In/, const QString& datatype, const QString& mimetype)=0;
+    ~KDataTool ();
+};
+// KDataTool
 
 

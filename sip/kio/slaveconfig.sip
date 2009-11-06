@@ -42,8 +42,12 @@ signals:
 
 protected:
                             SlaveConfig ();
-};   // SlaveConfig
+public:
+    ~SlaveConfig ();
+};
+// SlaveConfig
 
-};   // KIO
+};
+// KIO
 
 

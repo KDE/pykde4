@@ -40,19 +40,23 @@ public:
 
 protected:
     virtual void            slotResult (KJob* job);
-//ig                        DirectorySizeJob (DirectorySizeJobPrivate& dd);
+//ig                            DirectorySizeJob (DirectorySizeJobPrivate& dd);
 
-//force
 
 private:
+//force
                             DirectorySizeJob ();
-//end
 
-};   // DirectorySizeJob
+//end
+public:
+    ~DirectorySizeJob ();
+};
+// DirectorySizeJob
 
 KIO::DirectorySizeJob*  directorySize (const KUrl& directory);
 KIO::DirectorySizeJob*  directorySize (const KFileItemList& lstItems);
-};   // KIO
+};
+// KIO
 
 
 

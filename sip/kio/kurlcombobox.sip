@@ -27,8 +27,8 @@ class KUrlComboBox : KComboBox
 %End
 
 
-public:
 
+public:
     enum Mode
     {
         Files,
@@ -67,7 +67,12 @@ protected:
 
 
 private:
+//force
                             KUrlComboBox (const KUrlComboBox&);
-};   // KUrlComboBox
+//end
+public:
+    ~KUrlComboBox ();
+};
+// KUrlComboBox
 
 

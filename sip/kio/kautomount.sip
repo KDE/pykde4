@@ -35,8 +35,11 @@ signals:
     void                    error ();
 
 private:
-                            ~KAutoMount ();
-};   // KAutoMount
+//force
+    ~KAutoMount ();
+//end
+};
+// KAutoMount
 
 
 class KAutoUnmount : QObject
@@ -54,7 +57,10 @@ signals:
     void                    error ();
 
 private:
-                            ~KAutoUnmount ();
-};   // KAutoUnmount
+//force
+    ~KAutoUnmount ();
+//end
+};
+// KAutoUnmount
 
 

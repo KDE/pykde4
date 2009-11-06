@@ -37,7 +37,8 @@ QStringList             typeForMime (const QString& mimeType);
 QStringList             types (KImageIO::Mode mode = KImageIO::Writing);
 QStringList             mimeTypes (KImageIO::Mode mode = KImageIO::Writing);
 bool                    isSupported (const QString& mimeType, KImageIO::Mode mode = KImageIO::Writing);
-};   // KImageIO
+};
+// KImageIO
 
 
 

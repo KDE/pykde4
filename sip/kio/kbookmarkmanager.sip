@@ -56,7 +56,7 @@ public:
     void                    slotEditBookmarks ();
     void                    slotEditBookmarksAtAddress (const QString& address);
     void                    notifyCompleteChange (const QString& caller);
-//ig     void               notifyChanged (const QString& groupAddress, const QDBusMessage& msg);
+//ig    void                    notifyChanged (const QString& groupAddress, const QDBusMessage& msg);
     void                    notifyConfigChanged ();
 
 signals:
@@ -65,7 +65,10 @@ signals:
     void                    bookmarkConfigChanged ();
     void                    changed (const QString& groupAddress, const QString& caller);
     void                    configChanged ();
-};   // KBookmarkManager
+public:
+    ~KBookmarkManager ();
+};
+// KBookmarkManager
 
 
 class KBookmarkOwner
@@ -88,9 +91,23 @@ public:
     };
 
     virtual bool            enableOption (KBookmarkOwner::BookmarkOption option) const;
-    virtual void            openBookmark (const KBookmark& bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km) = 0;
+    virtual void            openBookmark (const KBookmark& bm, Qt::MouseButtons mb, Qt::KeyboardModifiers km)=0;
     virtual void            openFolderinTabs (const KBookmarkGroup& bm);
     virtual KBookmarkDialog*  bookmarkDialog (KBookmarkManager* mgr, QWidget* parent /Transfer/);
-};   // KBookmarkOwner
+    ~KBookmarkOwner ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'KBookmarkOwner'
+    sipClass = NULL;
+
+    if (dynamic_cast<KonqBookmarkOwner*>(sipCpp))
+        sipClass = sipClass_KonqBookmarkOwner;
+%End
+};
+// KBookmarkOwner
 
 
+%ModuleHeaderCode
+//ctscc
+#include <kbookmarkmanager.h>
+#include <konqbookmarkmenu.h>
+%End

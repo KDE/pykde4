@@ -65,8 +65,13 @@ protected:
     bool                    eventFilter (QObject* obj, QEvent* ev);
 
 private:
+//force
                             KUrlRequester (const KUrlRequester&);
-};   // KUrlRequester
+//end
+public:
+    ~KUrlRequester ();
+};
+// KUrlRequester
 
 
 class KUrlComboRequester : KUrlRequester
@@ -78,6 +83,7 @@ class KUrlComboRequester : KUrlRequester
 
 public:
     explicit                KUrlComboRequester (QWidget* parent /TransferThis/ = 0);
-};   // KUrlComboRequester
+};
+// KUrlComboRequester
 
 

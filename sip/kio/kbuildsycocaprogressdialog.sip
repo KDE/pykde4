@@ -31,8 +31,11 @@ public:
     static void             rebuildKSycoca (QWidget* parent /Transfer/);
 
 private:
+//force
                             KBuildSycocaProgressDialog (QWidget* parent /TransferThis/, const QString& caption, const QString& text);
-                            ~KBuildSycocaProgressDialog ();
-};   // KBuildSycocaProgressDialog
+    ~KBuildSycocaProgressDialog ();
+//end
+};
+// KBuildSycocaProgressDialog
 
 

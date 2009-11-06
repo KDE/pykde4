@@ -36,6 +36,9 @@ protected:
     void                    newFolder (const QString& text, bool open, const QString& additionalInfo);
     void                    newSeparator ();
     void                    endFolder ();
-};   // KBookmarkDomBuilder
+public:
+    ~KBookmarkDomBuilder ();
+};
+// KBookmarkDomBuilder
 
 

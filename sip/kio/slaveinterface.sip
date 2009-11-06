@@ -78,10 +78,9 @@ class SlaveInterface : QObject
 
 
 protected:
-//ig                        SlaveInterface (SlaveInterfacePrivate& dd, QObject* parent /TransferThis/ = 0);
+//ig                            SlaveInterface (SlaveInterfacePrivate& dd, QObject* parent /TransferThis/ = 0);
 
 public:
-    void                    setConnection (KIO::Connection* connection);
     KIO::Connection*        connection () const;
     void                    sendResumeAnswer (bool resume);
     void                    setOffset (KIO::filesize_t offset);
@@ -120,15 +119,20 @@ protected:
     void                    dropNetwork (const QString&, const QString&);
     void                    calcSpeed ();
 
-//force
 
 private:
+//force
                             SlaveInterface ();
+
 //end
+public:
+    ~SlaveInterface ();
+    void                    setConnection (KIO::Connection* connection);
+};
+// SlaveInterface
 
-};   // SlaveInterface
-
-};   // KIO
+};
+// KIO
 
 
 

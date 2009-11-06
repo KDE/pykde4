@@ -58,10 +58,15 @@ protected:
     virtual bool            openArchive (QIODevice::OpenMode mode);
     virtual bool            closeArchive ();
     virtual bool            doWriteDir (const QString& name, const QString& user, const QString& group, mode_t perm, time_t atime, time_t mtime, time_t ctime);
-//ig     virtual void       virtual_hook (int id, void* data);
+//ig    virtual void            virtual_hook (int id, void* data);
 private:
-                            KZip (const KZip &other);
-};   // KZip
+//force
+                            KZip (const KZip& other);
+//end
+public:
+    ~KZip ();
+};
+// KZip
 
 
 class KZipFileEntry : KArchiveFile
@@ -85,7 +90,12 @@ public:
     virtual QIODevice*      createDevice () const;
 
 private:
-                            KZipFileEntry (const KZipFileEntry &other);
-};   // KZipFileEntry
+//force
+                            KZipFileEntry (const KZipFileEntry& other);
+//end
+public:
+    ~KZipFileEntry ();
+};
+// KZipFileEntry
 
 

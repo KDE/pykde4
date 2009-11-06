@@ -27,8 +27,8 @@ class ThumbCreator
 %End
 
 
-public:
 
+public:
     enum Flags
     {
         None,
@@ -36,14 +36,25 @@ public:
         BlendIcon
     };
 
-    virtual bool            create (const QString& path, int width, int height, QImage& img) = 0;
+    virtual bool            create (const QString& path, int width, int height, QImage& img)=0;
     virtual ThumbCreator::Flags  flags () const;
-};   // ThumbCreator
+    ~ThumbCreator ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'ThumbCreator'
+    sipClass = NULL;
 
-//ig typedef ThumbCreator* (* newCreator)();
+    if (dynamic_cast<ThumbSequenceCreator*>(sipCpp))
+        sipClass = sipClass_ThumbSequenceCreator;
+%End
+};
+// ThumbCreator
+
+//ig typedef ThumbCreator* (*newCreator)();
 
 %ModuleHeaderCode
+//ctscc
 #include <thumbcreator.h>
+#include <kio/thumbsequencecreator.h>
 %End
 
 %ModuleHeaderCode

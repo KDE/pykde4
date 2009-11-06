@@ -28,8 +28,8 @@ class KFile
 %End
 
 
-public:
 
+public:
     enum Mode
     {
         File,
@@ -81,8 +81,10 @@ public:
     static bool             isDetailTreeView (const KFile::FileView& view);
 
 private:
+//force
                             KFile ();
-
-};   // KFile
+//end
+};
+// KFile
 
 

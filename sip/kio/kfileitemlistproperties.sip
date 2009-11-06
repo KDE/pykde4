@@ -40,6 +40,8 @@ public:
     bool                    isDirectory () const;
     QString                 mimeType () const;
     QString                 mimeGroup () const;
-};   // KFileItemListProperties
+    ~KFileItemListProperties ();
+};
+// KFileItemListProperties
 
 

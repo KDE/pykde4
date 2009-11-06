@@ -28,8 +28,8 @@ class KFileDialog : KDialog
 %End
 
 
-public:
 
+public:
     enum OperationMode
     {
         Other,
@@ -97,7 +97,12 @@ protected:
     virtual void            slotCancel ();
 
 private:
+//force
                             KFileDialog (const KFileDialog&);
-};   // KFileDialog
+//end
+public:
+    ~KFileDialog ();
+};
+// KFileDialog
 
 

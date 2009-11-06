@@ -55,11 +55,15 @@ signals:
     void                    reparseSlaveConfiguration (const QString&);
 
 private:
+//force
                             Scheduler (const KIO::Scheduler&);
                             Scheduler ();
-                            ~Scheduler ();
-};   // Scheduler
+    ~Scheduler ();
+//end
+};
+// Scheduler
 
-};   // KIO
+};
+// KIO
 
 

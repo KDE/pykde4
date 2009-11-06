@@ -29,6 +29,8 @@ class KStatusBarOfflineIndicator : QWidget
 
 public:
     explicit                KStatusBarOfflineIndicator (QWidget* parent /TransferThis/);
-};   // KStatusBarOfflineIndicator
+    ~KStatusBarOfflineIndicator ();
+};
+// KStatusBarOfflineIndicator
 
 

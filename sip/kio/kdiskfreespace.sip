@@ -35,6 +35,9 @@ public:
 signals:
     void                    foundMountPoint (const QString& mountPoint, quint64 kibSize, quint64 kibUsed, quint64 kibAvail);
     void                    done ();
-};   // KDiskFreeSpace
+public:
+    ~KDiskFreeSpace ();
+};
+// KDiskFreeSpace
 
 

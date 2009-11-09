@@ -33,7 +33,15 @@ public:
     {
         AppearAnimation,
         DisappearAnimation,
-        ActivateAnimation
+        ActivateAnimation,
+        FadeAnimation,
+        GrowAnimation,
+        ExpandAnimation,
+        PulseAnimation,
+        RotationAnimation,
+        RotationStackedAnimation,
+        SlideAnimation,
+        PauseAnimation
     };
 
 
@@ -79,6 +87,10 @@ protected:
 private:
     explicit                Animator (QObject* parent /TransferThis/ = 0);
     ~Animator ();
+public:
+//ig    static AbstractAnimation*  create (Plasma::Animator::Animation type, QObject* parent /Transfer/ = 0);
+    void                    registerScrollingManager (QGraphicsWidget* widget);
+    void                    unregisterScrollingManager (QGraphicsWidget* widget);
 };
 // Animator
 

@@ -54,6 +54,10 @@ protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
 public:
     ~TabBar ();
+    QGraphicsLayoutItem*    takeTab (int index);
+    QGraphicsLayoutItem*    tabAt (int index);
+protected:
+    void                    changeEvent (QEvent* event);
 };
 // TabBar
 

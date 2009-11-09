@@ -42,6 +42,8 @@ protected:
     void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 public:
     ~SvgWidget ();
+protected:
+    QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
 };
 // SvgWidget
 

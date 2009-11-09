@@ -47,6 +47,8 @@ protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
 public:
     ~RadioButton ();
+protected:
+    void                    changeEvent (QEvent* event);
 };
 // RadioButton
 

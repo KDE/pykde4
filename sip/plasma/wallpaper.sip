@@ -85,6 +85,13 @@ protected:
     void                    insertIntoCache (const QString& key, const QImage& image);
 public:
     ~Wallpaper ();
+    static KPluginInfo::List  listWallpaperInfoForMimetype (const QString& mimetype, const QString& formFactor = QString());
+    const Plasma::Package*  package () const;
+    QList<QAction*>         contextualActions () const;
+signals:
+    void                    urlDropped (const KUrl& url);
+protected:
+    void                    setContextualActions (const QList<QAction*>& actions);
 };
 // Wallpaper
 

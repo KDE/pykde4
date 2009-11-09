@@ -47,6 +47,8 @@ protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
 public:
     ~CheckBox ();
+protected:
+    void                    changeEvent (QEvent* event);
 };
 // CheckBox
 

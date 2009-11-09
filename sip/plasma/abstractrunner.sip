@@ -23,15 +23,22 @@
 %ModuleHeaderCode
 //ctscc
 #include <plasma/abstractrunner.h>
+#include <plasma/abstracttoolbox.h>
+#include <plasma/accessappletjob.h>
+#include <plasma/accessmanager.h>
 #include <plasma/animationdriver.h>
 #include <plasma/animator.h>
 #include <plasma/applet.h>
 #include <plasma/scripting/appletscript.h>
+#include <plasma/authorizationmanager.h>
+#include <plasma/authorizationrule.h>
 #include <plasma/widgets/busywidget.h>
 #include <plasma/widgets/checkbox.h>
+#include <plasma/clientpinrequest.h>
 #include <plasma/widgets/combobox.h>
 #include <plasma/configloader.h>
 #include <plasma/containment.h>
+#include <plasma/containmentactions.h>
 #include <plasma/context.h>
 #include <plasma/corona.h>
 #include <plasma/datacontainer.h>
@@ -49,6 +56,7 @@
 #include <plasma/glapplet.h>
 #include <plasma/widgets/groupbox.h>
 #include <plasma/widgets/iconwidget.h>
+#include <plasma/widgets/itembackground.h>
 #include <plasma/widgets/label.h>
 #include <plasma/widgets/lineedit.h>
 #include <plasma/widgets/meter.h>
@@ -63,7 +71,9 @@
 #include <plasma/scripting/scriptengine.h>
 #include <plasma/widgets/scrollbar.h>
 #include <plasma/widgets/scrollwidget.h>
+#include <plasma/widgets/separator.h>
 #include <plasma/service.h>
+#include <plasma/serviceaccessjob.h>
 #include <plasma/servicejob.h>
 #include <plasma/widgets/signalplotter.h>
 #include <plasma/widgets/slider.h>
@@ -80,6 +90,7 @@
 #include <plasma/widgets/videowidget.h>
 #include <plasma/view.h>
 #include <plasma/wallpaper.h>
+#include <plasma/scripting/wallpaperscript.h>
 #include <plasma/widgets/webview.h>
 %End
 
@@ -158,14 +169,28 @@ protected:
 
     if (dynamic_cast<Plasma::ConfigLoader*>(sipCpp))
         sipClass = sipClass_Plasma_ConfigLoader;
+    else if (dynamic_cast<Plasma::AccessAppletJob*>(sipCpp))
+        sipClass = sipClass_Plasma_AccessAppletJob;
+    else if (dynamic_cast<Plasma::ServiceAccessJob*>(sipCpp))
+        sipClass = sipClass_Plasma_ServiceAccessJob;
     else if (dynamic_cast<Plasma::ServiceJob*>(sipCpp))
         sipClass = sipClass_Plasma_ServiceJob;
     else if (dynamic_cast<Plasma::AbstractRunner*>(sipCpp))
         sipClass = sipClass_Plasma_AbstractRunner;
+    else if (dynamic_cast<Plasma::AccessManager*>(sipCpp))
+        sipClass = sipClass_Plasma_AccessManager;
     else if (dynamic_cast<Plasma::AnimationDriver*>(sipCpp))
         sipClass = sipClass_Plasma_AnimationDriver;
     else if (dynamic_cast<Plasma::Animator*>(sipCpp))
         sipClass = sipClass_Plasma_Animator;
+    else if (dynamic_cast<Plasma::AuthorizationManager*>(sipCpp))
+        sipClass = sipClass_Plasma_AuthorizationManager;
+    else if (dynamic_cast<Plasma::AuthorizationRule*>(sipCpp))
+        sipClass = sipClass_Plasma_AuthorizationRule;
+    else if (dynamic_cast<Plasma::ClientPinRequest*>(sipCpp))
+        sipClass = sipClass_Plasma_ClientPinRequest;
+    else if (dynamic_cast<Plasma::ContainmentActions*>(sipCpp))
+        sipClass = sipClass_Plasma_ContainmentActions;
     else if (dynamic_cast<Plasma::Context*>(sipCpp))
         sipClass = sipClass_Plasma_Context;
     else if (dynamic_cast<Plasma::DataContainer*>(sipCpp))
@@ -189,6 +214,8 @@ protected:
             sipClass = sipClass_Plasma_DataEngineScript;
         else if (dynamic_cast<Plasma::RunnerScript*>(sipCpp))
             sipClass = sipClass_Plasma_RunnerScript;
+        else if (dynamic_cast<Plasma::WallpaperScript*>(sipCpp))
+            sipClass = sipClass_Plasma_WallpaperScript;
         }
     else if (dynamic_cast<Plasma::Service*>(sipCpp))
         sipClass = sipClass_Plasma_Service;
@@ -208,6 +235,8 @@ protected:
         sipClass = sipClass_Plasma_Delegate;
     else if (dynamic_cast<Plasma::Corona*>(sipCpp))
         sipClass = sipClass_Plasma_Corona;
+    else if (dynamic_cast<Plasma::AbstractToolBox*>(sipCpp))
+        sipClass = sipClass_Plasma_AbstractToolBox;
     else if (dynamic_cast<Plasma::Applet*>(sipCpp))
         {
         sipClass = sipClass_Plasma_Applet;
@@ -236,10 +265,14 @@ protected:
         sipClass = sipClass_Plasma_Frame;
     else if (dynamic_cast<Plasma::IconWidget*>(sipCpp))
         sipClass = sipClass_Plasma_IconWidget;
+    else if (dynamic_cast<Plasma::ItemBackground*>(sipCpp))
+        sipClass = sipClass_Plasma_ItemBackground;
     else if (dynamic_cast<Plasma::Meter*>(sipCpp))
         sipClass = sipClass_Plasma_Meter;
     else if (dynamic_cast<Plasma::ScrollWidget*>(sipCpp))
         sipClass = sipClass_Plasma_ScrollWidget;
+    else if (dynamic_cast<Plasma::Separator*>(sipCpp))
+        sipClass = sipClass_Plasma_Separator;
     else if (dynamic_cast<Plasma::SignalPlotter*>(sipCpp))
         sipClass = sipClass_Plasma_SignalPlotter;
     else if (dynamic_cast<Plasma::SvgWidget*>(sipCpp))
@@ -288,6 +321,9 @@ public:
     ~AbstractRunner ();
 protected:
     void                    setSyntaxes (const QList<Plasma::RunnerSyntax>& syns);
+signals:
+    void                    prepare ();
+    void                    teardown ();
 };
 // AbstractRunner
 

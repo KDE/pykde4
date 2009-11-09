@@ -36,7 +36,9 @@ public:
         HighlightColor,
         BackgroundColor,
         ButtonTextColor,
-        ButtonBackgroundColor
+        ButtonBackgroundColor,
+        LinkColor,
+        VisitedLinkColor
     };
 
 

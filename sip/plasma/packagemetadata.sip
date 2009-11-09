@@ -69,6 +69,9 @@ private:
 //force
                             PackageMetadata (const Plasma::PackageMetadata& other);
 //end
+public:
+    KUrl                    remoteLocation () const;
+    void                    setRemoteLocation (const KUrl&);
 };
 // PackageMetadata
 

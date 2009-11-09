@@ -47,6 +47,7 @@ public:
     ~TextBrowser ();
 protected:
     void                    wheelEvent (QGraphicsSceneWheelEvent* event);
+    void                    changeEvent (QEvent* event);
 };
 // TextBrowser
 

@@ -49,6 +49,12 @@ public:
     ~ComboBox ();
 signals:
     void                    textChanged (const QString& text);
+public:
+    void                    setNativeWidget (KComboBox* nativeWidget);
+protected:
+    void                    focusInEvent (QFocusEvent* event);
+    void                    focusOutEvent (QFocusEvent* event);
+    void                    changeEvent (QEvent* event);
 };
 // ComboBox
 

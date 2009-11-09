@@ -53,6 +53,13 @@ protected:
     void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
 public:
     ~ToolButton ();
+    void                    setImage (const QString& path, const QString& elementid);
+    bool                    isDown () const;
+signals:
+    void                    pressed ();
+    void                    released ();
+protected:
+    void                    changeEvent (QEvent* event);
 };
 // ToolButton
 

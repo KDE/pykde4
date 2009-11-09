@@ -196,6 +196,24 @@ signals:
     void                    extenderItemRestored (Plasma::ExtenderItem* item);
 protected:
     QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
+public:
+    QPoint                  popupPosition (const QSize& s, Qt::AlignmentFlag alignment) const;
+    static KPluginInfo::List  listAppletInfoForUrl (const QUrl& url);
+    void                    setAssociatedApplication (const QString& string);
+    void                    setAssociatedApplicationUrls (const KUrl::List& urls);
+    QString                 associatedApplication () const;
+    KUrl::List              associatedApplicationUrls () const;
+    bool                    hasValidAssociatedApplication () const;
+signals:
+    void                    newStatus (Plasma::ItemStatus status);
+    void                    immutabilityChanged (Plasma::ImmutabilityType immutable);
+public:
+    Plasma::ItemStatus      status () const;
+    void                    setStatus (const Plasma::ItemStatus stat);
+//ig    void                    publish (Plasma::AnnouncementMethods methods, const QString& resourceName);
+    void                    unpublish ();
+    bool                    isPublished () const;
+    void                    runAssociatedApplication ();
 };
 // Applet
 

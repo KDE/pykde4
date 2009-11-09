@@ -66,6 +66,12 @@ protected:
     void                    dropEvent (QGraphicsSceneDragDropEvent* event);
 public:
     ~WebView ();
+    QSizeF                  contentsSize () const;
+    void                    setScrollPosition (const QPointF& position);
+    QPointF                 scrollPosition () const;
+    QRectF                  viewportGeometry () const;
+protected:
+    QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
 };
 // WebView
 

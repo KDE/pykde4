@@ -85,6 +85,8 @@ protected:
 
 public:
     ~DataEngine ();
+protected:
+    void                    forceImmediateUpdateOfAllVisualizations ();
 };
 // DataEngine
 

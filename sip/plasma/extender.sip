@@ -72,6 +72,8 @@ public:
     ~Extender ();
 protected:
     QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
+public:
+    Plasma::Applet*         applet () const;
 };
 // Extender
 

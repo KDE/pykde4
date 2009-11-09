@@ -51,6 +51,15 @@ protected:
     void                    removeAllSources ();
 public:
     ~DataEngineScript ();
+protected:
+    void                    addSource (Plasma::DataContainer* source);
+    Plasma::DataEngine::SourceDict  containerDict () const;
+    void                    setName (const QString& name);
+    void                    setIcon (const QString& icon);
+    void                    scheduleSourcesUpdated ();
+    void                    removeSource (const QString& source);
+    void                    updateAllSources ();
+    void                    forceImmediateUpdateOfAllVisualizations ();
 };
 // DataEngineScript
 

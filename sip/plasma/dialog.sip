@@ -69,6 +69,8 @@ protected:
     bool                    inControlArea (const QPoint& point);
 public:
     ~Dialog ();
+protected:
+    void                    focusInEvent (QFocusEvent* event);
 };
 // Dialog
 

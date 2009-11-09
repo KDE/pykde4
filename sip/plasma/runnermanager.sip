@@ -50,6 +50,10 @@ signals:
     void                    matchesChanged (const QList<Plasma::QueryMatch>& matches);
 public:
     ~RunnerManager ();
+    void                    setAllowedRunners (const QStringList& runners);
+    QStringList             allowedRunners () const;
+    void                    setupMatchSession ();
+    void                    matchSessionComplete ();
 };
 // RunnerManager
 

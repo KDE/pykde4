@@ -53,6 +53,13 @@ protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
 public:
     ~Label ();
+    void                    setTextSelectable (bool enable);
+    bool                    textSelectable () const;
+protected:
+    void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
+    void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+    void                    changeEvent (QEvent* event);
+    bool                    event (QEvent* event);
 };
 // Label
 

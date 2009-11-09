@@ -39,6 +39,7 @@ protected:
     void                    setResult (const QVariant& result);
 public:
     ~ServiceJob ();
+//ig    Credentials             identity () const;
 };
 // ServiceJob
 

@@ -50,6 +50,9 @@ public:
 private:
     explicit                ToolTipManager (QObject* parent /TransferThis/ = 0);
     ~ToolTipManager ();
+signals:
+    void                    windowPreviewActivated (WId window, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint& screenPos);
+    void                    linkActivated (const QString& anchor, Qt::MouseButtons buttons, Qt::KeyboardModifiers modifiers, const QPoint& screenPos);
 };
 // ToolTipManager
 

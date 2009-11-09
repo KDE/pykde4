@@ -84,6 +84,9 @@ protected:
 public:
     void                    drawActionButtonBase (QPainter* painter, const QSize& size, int element);
     ~IconWidget ();
+protected:
+    QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
+    void                    changeEvent (QEvent* event);
 };
 // IconWidget
 

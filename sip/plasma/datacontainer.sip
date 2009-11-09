@@ -48,6 +48,7 @@ protected:
     void                    checkUsage ();
 public:
     ~DataContainer ();
+    void                    forceImmediateUpdate ();
 };
 // DataContainer
 

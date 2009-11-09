@@ -44,6 +44,9 @@ protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
 public:
     ~TextEdit ();
+    void                    setNativeWidget (KTextEdit* nativeWidget);
+protected:
+    void                    changeEvent (QEvent* event);
 };
 // TextEdit
 

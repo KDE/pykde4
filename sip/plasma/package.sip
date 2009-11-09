@@ -51,6 +51,13 @@ private:
 //force
                             Package (const Plasma::Package& other);
 //end
+public:
+// FIXME bad enum/QFlags comp error.
+//ig    void                    publish (Plasma::AnnouncementMethods methods, const QString& name);
+//FIXME missing implementation
+//ig    void                    unpublish (const QString& name = QString());
+//ig    bool                    isPublished () const;
+    QString                 contentsHash () const;
 };
 // Package
 

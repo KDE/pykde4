@@ -47,6 +47,18 @@ protected:
     bool                    eventFilter (QObject* watched, QEvent* event);
 public:
     ~ScrollWidget ();
+    void                    ensureRectVisible (const QRectF& rect);
+    void                    ensureItemVisible (QGraphicsItem* item);
+    void                    registerAsDragHandle (QGraphicsWidget* item);
+    void                    unregisterAsDragHandle (QGraphicsWidget* item);
+    QRectF                  viewportGeometry () const;
+    QSizeF                  contentsSize () const;
+    void                    setScrollPosition (const QPointF& position);
+    QPointF                 scrollPosition () const;
+protected:
+    void                    mouseReleaseEvent (QGraphicsSceneMouseEvent* event);
+    void                    focusInEvent (QFocusEvent* event);
+    QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
 };
 // ScrollWidget
 

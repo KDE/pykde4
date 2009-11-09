@@ -56,6 +56,14 @@ protected:
     void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
 public:
     ~PushButton ();
+    void                    setImage (const QString& path, const QString& elementid);
+    void                    setIcon (const KIcon& icon);
+    bool                    isDown () const;
+signals:
+    void                    pressed ();
+    void                    released ();
+protected:
+    void                    changeEvent (QEvent* event);
 };
 // PushButton
 

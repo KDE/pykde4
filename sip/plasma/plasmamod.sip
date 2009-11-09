@@ -34,6 +34,16 @@
 
 %Include paintutils.sip
 %Include plasma.sip
+%Include abstracttoolbox.sip
+%Include accessappletjob.sip
+%Include accessmanager.sip
+%Include authorizationinterface.sip
+%Include authorizationmanager.sip
+%Include authorizationrule.sip
+%Include clientpinrequest.sip
+%Include containmentactions.sip
+%Include containmentactionspluginsconfig.sip
+%Include itembackground.sip
 %Include abstractrunner.sip
 %Include animationdriver.sip
 %Include animator.sip
@@ -98,3 +108,7 @@
 %Include treeview.sip
 %Include videowidget.sip
 %Include webview.sip
+%Include separator.sip
+%Include serviceaccessjob.sip
+%Include wallpaperscript.sip
+%Include windoweffects.sip

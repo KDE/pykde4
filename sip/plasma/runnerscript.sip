@@ -39,6 +39,26 @@ protected:
     const Plasma::Package*  package () const;
 public:
     ~RunnerScript ();
+signals:
+    void                    prepare ();
+    void                    teardown ();
+    void                    createRunOptions (QWidget* widget);
+    void                    reloadConfiguration ();
+protected:
+    KConfigGroup            config () const;
+    void                    setIgnoredTypes (Plasma::RunnerContext::Types types);
+    void                    setHasRunOptions (bool hasRunOptions);
+    void                    setSpeed (Plasma::AbstractRunner::Speed newSpeed);
+    void                    setPriority (Plasma::AbstractRunner::Priority newPriority);
+    KService::List          serviceQuery (const QString& serviceType, const QString& constraint = QString()) const;
+    QAction*                addAction (const QString& id, const QIcon& icon, const QString& text);
+    void                    addAction (const QString& id, QAction* action);
+    void                    removeAction (const QString& id);
+    QAction*                action (const QString& id) const;
+    QHash<QString,QAction*>  actions () const;
+    void                    clearActions ();
+    void                    addSyntax (const Plasma::RunnerSyntax& syntax);
+    void                    setSyntaxes (const QList<Plasma::RunnerSyntax>& syns);
 };
 // RunnerScript
 

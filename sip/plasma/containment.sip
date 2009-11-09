@@ -143,6 +143,16 @@ public:
     ~Containment ();
 protected:
     QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
+public:
+    void                    setContainmentActions (const QString& trigger, const QString& pluginName);
+    QStringList             containmentActionsTriggers ();
+    QString                 containmentActions (const QString& trigger);
+protected:
+    void                    dragLeaveEvent (QGraphicsSceneDragDropEvent* event);
+    void                    setToolBox (Plasma::AbstractToolBox* toolBox);
+    Plasma::AbstractToolBox*  toolBox () const;
+private:
+                            Containment (const QString& packagePath, uint appletId, const QVariantList& args);
 };
 // Containment
 

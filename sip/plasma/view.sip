@@ -57,6 +57,8 @@ protected:
     void                    configNeedsSaving () const;
 public:
     ~View ();
+signals:
+    void                    lostContainment ();
 };
 // View
 

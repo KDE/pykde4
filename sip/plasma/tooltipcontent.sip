@@ -56,6 +56,8 @@ public:
     void                    addResource (Plasma::ToolTipContent::ResourceType type, const QUrl& path, const QVariant& resource);
     void                    registerResources (QTextDocument* document) const;
     ~ToolTipContent ();
+    void                    setClickable (bool clickable);
+    bool                    isClickable () const;
 };
 // ToolTipContent
 

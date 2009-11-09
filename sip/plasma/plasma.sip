@@ -31,6 +31,7 @@ enum Constraint
     ImmutableConstraint,
     StartupCompletedConstraint,
     ContextConstraint,
+    PopupConstraint,
     AllConstraints
 };
 
@@ -156,7 +157,8 @@ enum ComponentType
     DataEngineComponent,
     RunnerComponent,
     AnimatorComponent,
-    ContainmentComponent
+    ContainmentComponent,
+    WallpaperComponent
 };
 
 typedef QFlags<Plasma::ComponentType> ComponentTypes;
@@ -187,5 +189,39 @@ Plasma::Direction       locationToDirection (Plasma::Location location);
 Plasma::Direction       locationToInverseDirection (Plasma::Location location);
 QGraphicsView*          viewFor (const QGraphicsItem* item);
 
+enum AnimationDirection
+{
+    MoveUp,
+    MoveUpRight,
+    MoveRight,
+    MoveDownRight,
+    MoveDown,
+    MoveDownLeft,
+    MoveLeft,
+    MoveUpLeft
+};
+enum ItemStatus
+{
+    UnknownStatus,
+    PassiveStatus,
+    ActiveStatus,
+    NeedsAttentionStatus,
+    AcceptingInputStatus
+};
+enum AnnouncementMethod
+{
+    NoAnnouncement,
+    ZeroconfAnnouncement
+};
+//ig typedef QFlags<AnnouncementMethod> AnnouncementMethods;
+enum TrustLevel
+{
+    InvalidCredentials,
+    UnknownCredentials,
+    ValidCredentials,
+    TrustedCredentials,
+    UltimateCredentials
+};
+QList<QAction*>         actionsFromMenu (QMenu* menu, const QString& prefix = QString(), QObject* parent /Transfer/ = 0);
 };
 // Plasma

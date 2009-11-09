@@ -54,6 +54,13 @@ public:
     ~AppletScript ();
 protected:
     void                    addStandardConfigurationPages (KConfigDialog* dialog);
+signals:
+    void                    saveState (KConfigGroup& group) const;
+protected:
+    void                    showMessage (const QIcon& icon, const QString& message, const Plasma::MessageButtons buttons);
+    void                    registerAsDragHandle (QGraphicsItem* item);
+    void                    unregisterAsDragHandle (QGraphicsItem* item);
+    bool                    isRegisteredAsDragHandle (QGraphicsItem* item);
 };
 // AppletScript
 

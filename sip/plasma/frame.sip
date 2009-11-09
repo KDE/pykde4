@@ -53,6 +53,10 @@ protected:
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
 public:
     ~Frame ();
+    void                    setEnabledBorders (const Plasma::FrameSvg::EnabledBorders borders);
+    Plasma::FrameSvg::EnabledBorders  enabledBorders () const;
+protected:
+    void                    changeEvent (QEvent* event);
 };
 // Frame
 

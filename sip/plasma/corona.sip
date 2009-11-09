@@ -77,6 +77,9 @@ protected:
     void                    dragMoveEvent (QGraphicsSceneDragDropEvent* event);
 public:
     ~Corona ();
+    QPoint                  popupPosition (const QGraphicsItem* item, const QSize& size, Qt::AlignmentFlag alignment);
+    void                    setContainmentActionsDefaults (Plasma::Containment::Type containmentType, const Plasma::ContainmentActionsPluginsConfig& config);
+    Plasma::ContainmentActionsPluginsConfig  containmentActionsDefaults (Plasma::Containment::Type containmentType);
 };
 // Corona
 

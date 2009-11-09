@@ -53,6 +53,8 @@ public:
     ~PopupApplet ();
     void                    setWidget (QWidget* widget);
     void                    setGraphicsWidget (QGraphicsWidget* widget);
+private:
+                            PopupApplet (const QString& packagePath, uint appletId, const QVariantList& args);
 };
 // PopupApplet
 

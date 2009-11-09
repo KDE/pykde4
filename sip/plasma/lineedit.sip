@@ -44,6 +44,14 @@ public:
     ~LineEdit ();
     void                    setClearButtonShown (bool show);
     bool                    isClearButtonShown () const;
+    void                    setNativeWidget (KLineEdit* nativeWidget);
+protected:
+    void                    hoverEnterEvent (QGraphicsSceneHoverEvent* event);
+    void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
+    void                    changeEvent (QEvent* event);
+    void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
+signals:
+    void                    textChanged (const QString& text);
 };
 // LineEdit
 

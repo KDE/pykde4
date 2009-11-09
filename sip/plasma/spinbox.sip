@@ -46,6 +46,12 @@ signals:
     void                    editingFinished ();
 public:
     ~SpinBox ();
+protected:
+    void                    changeEvent (QEvent* event);
+    void                    hoverEnterEvent (QGraphicsSceneHoverEvent* event);
+    void                    hoverLeaveEvent (QGraphicsSceneHoverEvent* event);
+    void                    resizeEvent (QGraphicsSceneResizeEvent* event);
+    void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 };
 // SpinBox
 

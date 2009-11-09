@@ -45,6 +45,8 @@ protected:
     void                    fadeOut ();
 public:
     ~FlashingLabel ();
+protected:
+    QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
 };
 // FlashingLabel
 

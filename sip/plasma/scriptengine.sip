@@ -44,6 +44,7 @@ Plasma::AppletScript*   loadScriptEngine (const QString& language, Plasma::Apple
 Plasma::DataEngineScript*  loadScriptEngine (const QString& language, Plasma::DataEngine* dataEngine);
 Plasma::RunnerScript*   loadScriptEngine (const QString& language, Plasma::AbstractRunner* runner);
 Plasma::PackageStructure::Ptr  packageStructure (const QString& language, Plasma::ComponentType type);
+Plasma::WallpaperScript*  loadScriptEngine (const QString& language, Plasma::Wallpaper* wallpaper);
 };
 // Plasma
 

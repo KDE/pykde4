@@ -153,8 +153,11 @@ typedef ACLUserPermissionsList ACLGroupPermissionsList;
             delete cpplist;
             return 0;
         }
+#if PY_MAJOR_VERSION >= 3
+        ushort p2 = (ushort)(PyLong_AsLong (PyTuple_GET_ITEM (elem, 1)));
+#else
         ushort p2 = (ushort)(PyInt_AS_LONG (PyTuple_GET_ITEM (elem, 1)));
-
+#endif
         cpplist->append (QPair<QString, unsigned short> (p1, p2));
     }
 

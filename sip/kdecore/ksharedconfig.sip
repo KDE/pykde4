@@ -71,7 +71,7 @@ typedef KSharedConfig::Ptr KSharedConfigPtr;
 
 %ConvertToTypeCode
     if (sipIsErr == NULL)
-        return PyInstance_Check(sipPy);
+        return 1;
 
     int state;
     KSharedConfig* ksc = (KSharedConfig *)sipConvertToInstance(sipPy, sipClass_KSharedConfig, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr);

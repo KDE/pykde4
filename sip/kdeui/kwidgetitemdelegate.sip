@@ -55,12 +55,14 @@ public:
         return NULL;
 
     // Set the list elements.
-    for (int i = 0; i < sipCpp->size(); ++i)
-    {
+    for (int i = 0; i < sipCpp->size(); ++i) {
         PyObject *pobj;
 
-        if ((pobj = PyInt_FromLong ((long)sipCpp->value(i))) == NULL)
-        {
+#if PY_MAJOR_VERSION >= 3
+        if ((pobj = PyLong_FromLong ((long)sipCpp->value(i))) == NULL) {
+#else
+        if ((pobj = PyInt_FromLong ((long)sipCpp->value(i))) == NULL) {
+#endif            
             Py_DECREF(l);
 
             return NULL;
@@ -79,9 +81,14 @@ public:
 
     QList<QEvent::Type> *ql = new QList<QEvent::Type>;
  
-    for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
+    for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i) {
+#if PY_MAJOR_VERSION >= 3
+        ql->append((QEvent::Type)PyLong_AsLong(PyList_GET_ITEM(sipPy, i)));
+#else
         ql->append((QEvent::Type)PyInt_AS_LONG (PyList_GET_ITEM(sipPy, i)));
- 
+#endif
+    }
+    
     *sipCppPtr = ql;
  
     return sipGetState(sipTransferObj);

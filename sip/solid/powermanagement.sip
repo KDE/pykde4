@@ -76,7 +76,11 @@ bool                    stopSuppressingSleep (int cookie);
     int i = 0;
     foreach (Solid::PowerManagement::SleepState value, set)
     {
+#if PY_MAJOR_VERSION >= 3
+        PyObject *obj = PyLong_FromLong ((long) value);
+#else
         PyObject *obj = PyInt_FromLong ((long) value);
+#endif
         if (obj == NULL || PyList_SET_ITEM (l, i, obj) < 0)
         {
             Py_DECREF(l);
@@ -113,7 +117,11 @@ bool                    stopSuppressingSleep (int cookie);
  
     for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
     {
+#if PY_MAJOR_VERSION >= 3
+        Solid::PowerManagement::SleepState t = (Solid::PowerManagement::SleepState)PyLong_AsLong (PyList_GET_ITEM (sipPy, i));
+#else
         Solid::PowerManagement::SleepState t = (Solid::PowerManagement::SleepState)PyInt_AS_LONG (PyList_GET_ITEM (sipPy, i));
+#endif
         *qs << t;
 
     }

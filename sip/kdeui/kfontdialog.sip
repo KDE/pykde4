@@ -45,8 +45,11 @@ int result;
     Py_BEGIN_ALLOW_THREADS
     result = KFontDialog::getFont (*a0, *a1, a2, &a3);
     Py_END_ALLOW_THREADS
-
+#if PY_MAJOR_VERSION >= 3
+    sipRes = PyLong_FromLong (result);
+#else
     sipRes = PyInt_FromLong (result);
+#endif
 %End
 
     static SIP_PYTUPLE      getFontDiff (QFont& theFont, KFontChooser::FontDiffFlags& diffFlags, const KFontChooser::DisplayFlags& flags = KFontChooser::NoDisplayFlags, QWidget* parent /Transfer/ = 0, Qt::CheckState sizeIsRelativeState = Qt::Unchecked) [int (QFont&, KFontChooser::FontDiffFlags&, const KFontChooser::DisplayFlags& = KFontChooser::NoDisplayFlags, QWidget* = 0, Qt::CheckState* = 0)];
@@ -56,7 +59,11 @@ int result;
     result = KFontDialog::getFontDiff (*a0, *a1, *a2, a3, &a4);
     Py_END_ALLOW_THREADS
 
+#if PY_MAJOR_VERSION >= 3
+    sipRes = PyLong_FromLong (result);
+#else
     sipRes = PyInt_FromLong (result);
+#endif
 %End
 
     static SIP_PYTUPLE      getFontAndText (QFont& theFont, QString& theString, const KFontChooser::DisplayFlags& flags = KFontChooser::NoDisplayFlags, QWidget* parent /Transfer/ = 0, Qt::CheckState sizeIsRelativeState = Qt::Unchecked) [int (QFont&, QString&, const KFontChooser::DisplayFlags& = KFontChooser::NoDisplayFlags, QWidget* = 0, Qt::CheckState* = 0)];
@@ -66,7 +73,11 @@ int result;
     result = KFontDialog::getFontAndText (*a0, *a1, *a2, a3, &a4);
     Py_END_ALLOW_THREADS
 
+#if PY_MAJOR_VERSION >= 3
+    sipRes = PyLong_FromLong (result);
+#else
     sipRes = PyInt_FromLong (result);
+#endif
 %End
 
 

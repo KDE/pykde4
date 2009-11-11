@@ -160,7 +160,11 @@ private:
         QVariant::Type t2 =  (QVariant::Type) (i.value());
 
         PyObject *t1obj = sipConvertFromNewType(t1, sipType_QString, sipTransferObj);
+#if PY_MAJOR_VERSION >= 3
+        PyObject *t2obj = PyLong_FromLong ((long) t2);
+#else
         PyObject *t2obj = PyInt_FromLong ((long) t2);
+#endif
 
         if (t1obj == NULL || t2obj == NULL || PyDict_SetItem(d, t1obj, t2obj) < 0)
         {
@@ -201,8 +205,15 @@ private:
             if (!sipCanConvertToType(t1obj, sipType_QString, SIP_NOT_NONE))
                 return 0;
 
-            if (!PyInt_Check (t2obj))
+#if PY_MAJOR_VERSION >= 3
+            if (!PyLong_Check (t2obj)) {
                 return 0;
+            }
+#else
+            if (!PyInt_Check (t2obj)) {
+                return 0;
+            }
+#endif
         } 
 
         return 1;
@@ -215,8 +226,12 @@ private:
         int state1;
 
         QString *t1 = reinterpret_cast<QString *>(sipConvertToType(t1obj, sipType_QString, sipTransferObj, SIP_NOT_NONE, &state1, sipIsErr));
+#if PY_MAJOR_VERSION >= 3
+        QVariant::Type t2 = (QVariant::Type)PyLong_AsLong (t2obj);
+#else
         QVariant::Type t2 = (QVariant::Type)PyInt_AS_LONG (t2obj);
- 
+#endif
+
         if (*sipIsErr)
         {
             sipReleaseType(t1, sipType_QString, state1);

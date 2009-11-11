@@ -239,10 +239,10 @@ template <TYPE>
 
 %ConvertToTypeCode
     // Convert a Python instance to a Ptr on the heap.
-
-    if (sipIsErr == NULL)
-        return PyInstance_Check(sipPy);
-
+    if (sipIsErr == NULL) {
+        return 1;
+    }
+    
     int iserr = 0;
     TYPE *cpp = (TYPE *)sipForceConvertToType(sipPy, sipType_TYPE, NULL, 0, NULL, &iserr);
 
@@ -716,12 +716,14 @@ template <TYPE1,TYPE2>
         return NULL;
 
     // Set the list elements.
-    for (int i = 0; i < sipCpp->size(); ++i)
-    {
+    for (int i = 0; i < sipCpp->size(); ++i) {
         PyObject *pobj;
 
-        if ((pobj = PyInt_FromLong(sipCpp->value(i))) == NULL)
-        {
+#if PY_MAJOR_VERSION >= 3
+        if ((pobj = PyLong_FromLong(sipCpp->value(i))) == NULL) {
+#else
+        if ((pobj = PyInt_FromLong(sipCpp->value(i))) == NULL) {
+#endif
             Py_DECREF(l);
 
             return NULL;
@@ -740,9 +742,14 @@ template <TYPE1,TYPE2>
 
     QList<uint> *ql = new QList<uint>;
  
-    for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
+    for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i) {
+#if PY_MAJOR_VERSION >= 3
+        ql->append(PyLong_AsLong(PyList_GET_ITEM(sipPy, i)));
+#else
         ql->append(PyInt_AsLong(PyList_GET_ITEM(sipPy, i)));
- 
+#endif        
+    }
+    
     *sipCppPtr = ql;
  
     return sipGetState(sipTransferObj);

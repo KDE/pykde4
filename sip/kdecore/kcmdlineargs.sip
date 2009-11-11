@@ -174,15 +174,22 @@ char **pyArgvToC(PyObject *argvlist,int *argcp)
     for (int a = 0; a < argc; ++a)
     {
         char *arg;
-
+#if PY_MAJOR_VERSION >= 3
+        PyObject *utf8bytes = PyUnicode_AsUTF8String(PyList_GetItem(argvlist,a));
+        arg = PyBytes_AsString(utf8bytes);
+#else
+        arg = PyString_AsString(PyList_GetItem(argvlist,a));
+#endif   
         // Get the argument and allocate memory for it.
-        if ((arg = PyString_AsString(PyList_GetItem(argvlist,a))) == NULL ||
-            (argv[a] = (char *)sipMalloc(strlen(arg) + 1)) == NULL)
+        if (arg == NULL || (argv[a] = (char *)sipMalloc(strlen(arg) + 1)) == NULL)
             return NULL;
 
         // Copy the argument and save a pointer to it.
         strcpy(argv[a],arg);
         argv[a + argc + 1] = argv[a];
+#if PY_MAJOR_VERSION >= 3
+        Py_DECREF(utf8bytes);
+#endif        
     }
 
     argv[argc + argc + 1] = argv[argc] = NULL;

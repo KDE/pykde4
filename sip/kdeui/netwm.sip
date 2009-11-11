@@ -48,9 +48,13 @@ public:
 int count   = PyList_Size (a3);
     unsigned long *list = new unsigned long [count];
 
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count; i++) {
+#if PY_MAJOR_VERSION >= 3
+        list [i] = (unsigned long)PyLong_AsLong (PyList_GET_ITEM (a3, i));
+#else
         list [i] = (unsigned long)PyInt_AS_LONG (PyList_GET_ITEM (a3, i));
-
+#endif
+    }
     Py_BEGIN_ALLOW_THREADS
     sipCpp = new sipNETRootInfo (a0, a1, a2, list, count, a4, a5);
     Py_END_ALLOW_THREADS
@@ -64,7 +68,11 @@ int count   = PyList_Size (a1);
     unsigned long *list = new unsigned long [count];
 
     for (int i = 0; i < count; i++)
+#if PY_MAJOR_VERSION >= 3        
+        list [i] = (unsigned long)PyLong_AsLong(PyList_GET_ITEM (a1, i));
+#else
         list [i] = (unsigned long)PyInt_AS_LONG (PyList_GET_ITEM (a1, i));
+#endif
 
     Py_BEGIN_ALLOW_THREADS
     sipCpp = new sipNETRootInfo (a0, list, count, a2, a3);
@@ -173,9 +181,14 @@ public:
 int count   = PyList_Size (a3);
     unsigned long *list = new unsigned long [count];
 
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count; i++) {
+#if PY_MAJOR_VERSION >= 3
+        list [i] = (unsigned long)PyLong_AsLong (PyList_GET_ITEM (a3, i));
+#else
         list [i] = (unsigned long)PyInt_AS_LONG (PyList_GET_ITEM (a3, i));
-
+#endif        
+    }
+    
     Py_BEGIN_ALLOW_THREADS
     sipCpp = new sipNETWinInfo (a0, a1, a2, list, count, a4);
     Py_END_ALLOW_THREADS

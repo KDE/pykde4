@@ -196,9 +196,11 @@ KAction*                aboutKDE (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject* paren
     for (int i = 0; i < sipCpp->size(); ++i)
     {
         PyObject *pobj;
-
-        if ((pobj = PyInt_FromLong ((long)sipCpp->value(i))) == NULL)
-        {
+#if PY_MAJOR_VERSION >= 3
+        if ((pobj = PyLong_FromLong ((long)sipCpp->value(i))) == NULL) {
+#else
+        if ((pobj = PyInt_FromLong ((long)sipCpp->value(i))) == NULL) {
+#endif            
             Py_DECREF(l);
 
             return NULL;
@@ -217,9 +219,13 @@ KAction*                aboutKDE (SIP_RXOBJ_CON, SIP_SLOT_CON (), QObject* paren
 
     QList<KStandardAction::StandardAction> *ql = new QList<KStandardAction::StandardAction>;
  
-    for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
+    for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i) {
+#if PY_MAJOR_VERSION >= 3        
+        ql->append((KStandardAction::StandardAction)PyLong_AsLong (PyList_GET_ITEM(sipPy, i)));
+#else
         ql->append((KStandardAction::StandardAction)PyInt_AS_LONG (PyList_GET_ITEM(sipPy, i)));
- 
+#endif
+    }
     *sipCppPtr = ql;
  
     return sipGetState(sipTransferObj);

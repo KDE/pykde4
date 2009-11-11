@@ -70,16 +70,28 @@ QString klocalizedstring_i18n_template(KLocalizedString base, PyObject *list,int
 
     for (int i=0; i < PyTuple_Size(list); i++) {
         PyObject *pyarg = PyTuple_GET_ITEM (list, i);
+#if PY_MAJOR_VERSION >= 3
+        if (PyLong_Check(pyarg)) {
+            long_arg = PyLong_AsLong(pyarg);
+#else
         if (PyInt_Check(pyarg)) {
             long_arg = PyInt_AsLong(pyarg);
+#endif            
             if (long_arg==-1 && PyErr_Occurred()) {
                 *sipIsErr = 1;
                 return QString();
             }
             result = result.subs(long_arg);
 
+#if PY_MAJOR_VERSION >= 3
+        } else if (PyNumber_Check(pyarg)) {
+            PyObject *long_py = PyNumber_Long(pyarg);
+            long_arg = PyLong_AsLong(long_py);
+            Py_DECREF(long_py);
+#else
         } else if (PyLong_Check(pyarg)) {
             long_arg = PyLong_AsLong(pyarg);
+#endif
             if (long_arg==-1 && PyErr_Occurred()) {
                 *sipIsErr = 1;
                 return QString();

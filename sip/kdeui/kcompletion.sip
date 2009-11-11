@@ -171,7 +171,11 @@ public:
     {
         KShortcut *t = new KShortcut(i.value());
 
+#if PY_MAJOR_VERSION >= 3
+        PyObject *kobj = PyLong_FromLong((int)i.key());
+#else
         PyObject *kobj = PyInt_FromLong((int)i.key());
+#endif
         PyObject *tobj = sipConvertFromNewInstance(t, sipClass_KShortcut, sipTransferObj);
 
         if (kobj == NULL || tobj == NULL || PyDict_SetItem(d, kobj, tobj) < 0)
@@ -220,7 +224,11 @@ public:
     while (PyDict_Next(sipPy, &i, &kobj, &tobj))
     {
         int state;
+#if PY_MAJOR_VERSION >= 3
+        int k = PyLong_AsLong(kobj);
+#else
         int k = PyInt_AsLong(kobj);
+#endif
         KShortcut *t = reinterpret_cast<KShortcut *>(sipConvertToInstance(tobj, sipClass_KShortcut, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
  
         if (*sipIsErr)

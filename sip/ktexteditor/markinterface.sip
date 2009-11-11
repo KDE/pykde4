@@ -151,7 +151,11 @@ private:
         int t1 = i.key();
         KTextEditor::Mark *t2 = i.value();
 
+#if PY_MAJOR_VERSION >= 3
+        PyObject *t1obj = PyLong_FromLong ((long)t1);
+#else
         PyObject *t1obj = PyInt_FromLong ((long)t1);
+#endif
         PyObject *t2obj = sipConvertFromNewInstance(t2, sipClass_KTextEditor_Mark, sipTransferObj);
 
         if (t2obj == NULL || PyDict_SetItem(d, t1obj, t2obj) < 0)
@@ -190,7 +194,11 @@ private:
 
         while (PyDict_Next(sipPy, &i, &t1obj, &t2obj))
         {
+#if PY_MAJOR_VERSION >= 3
+            if (!PyNumber_Check (t1obj))
+#else
             if (!PyInt_Check (t1obj))
+#endif
                 return 0;
 
             if (!sipCanConvertToInstance(t2obj, sipClass_KTextEditor_Mark, SIP_NOT_NONE))
@@ -206,7 +214,11 @@ private:
     {
         int state2;
 
+#if PY_MAJOR_VERSION >= 3
+        int t1 = PyLong_AsLong (t1obj);
+#else
         int t1 = PyInt_AS_LONG (t1obj);
+#endif
         KTextEditor::Mark *t2 = reinterpret_cast<KTextEditor::Mark *>(sipConvertToInstance(t2obj, sipClass_KTextEditor_Mark, sipTransferObj, SIP_NOT_NONE, &state2, sipIsErr));
  
         if (*sipIsErr)

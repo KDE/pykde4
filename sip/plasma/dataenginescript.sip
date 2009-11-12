@@ -35,7 +35,7 @@ public:
     virtual QStringList     sources () const;
     virtual bool            sourceRequestEvent (const QString& name);
     virtual bool            updateSourceEvent (const QString& source);
-    Plasma::Service*        serviceForSource (const QString& source);
+    virtual Plasma::Service* serviceForSource (const QString& source);
 
 protected:
     QString                 mainScript () const;

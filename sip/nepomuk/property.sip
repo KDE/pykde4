@@ -44,10 +44,13 @@ public:
     int                     maxCardinality ();
     bool                    isParentOf (const Nepomuk::Types::Property& other);
     bool                    isSubPropertyOf (const Nepomuk::Types::Property& other);
-};   // Property
+    ~Property ();
+};
+// Property
 
-};   // Types
+};
+// Types
 
-};   // Nepomuk
-
+//ig class Property;
 // Nepomuk::Property is deprecated.
+};

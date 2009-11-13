@@ -39,10 +39,13 @@ public:
     QList<Nepomuk::Types::Property>  allProperties ();
     Nepomuk::Types::Property  findPropertyByName (const QString& name);
     Nepomuk::Types::Property  findPropertyByLabel (const QString& label, const QString& language = QString());
-};   // Ontology
+    ~Ontology ();
+};
+// Ontology
 
-};   // Types
+};
+// Types
 
-};   // Nepomuk
-
+//ig class Ontology;
 // Nepomuk::Ontology is deprecated.
+};

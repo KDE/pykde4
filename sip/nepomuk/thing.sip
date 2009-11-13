@@ -33,17 +33,16 @@ public:
                             Thing (const QString& uriOrName, const QUrl& pimoType, Nepomuk::ResourceManager* manager);
                             Thing (const Nepomuk::Thing& other);
                             Thing (const Nepomuk::Resource& other);
-
-
-//mt undefined symbol: ResourceData* None -- need mapped type?
-//mt                        Thing (ResourceData*);
-
-
     QList<Nepomuk::Resource>  groundingOccurrences () const;
     QList<Nepomuk::Resource>  referencingOccurrences () const;
     QList<Nepomuk::Resource>  occurrences () const;
-};   // Thing
+//ig                            Thing (ResourceData*);
+    ~Thing ();
+    void                    addGroundingOccurrence (const Nepomuk::Resource& res);
+};
+// Thing
 
-};   // Nepomuk
+};
+// Nepomuk
 
 

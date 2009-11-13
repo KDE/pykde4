@@ -29,12 +29,6 @@ public:
                             KTagCloudWidget (QWidget* parent /TransferThis/ = 0);
     int                     tagWeight (const QString& tag) const;
     void                    addTag (const QString& tag, int weight);
-
-
-//mt undefined symbol: QMap<QString,int>& tags -- need mapped type?
-//mt     void               addTags (const QMap<QString,int>& tags);
-
-
     void                    clear ();
     void                    setMaxFontSize (int pointSize);
     void                    setMinFontSize (int pointSize);
@@ -44,6 +38,34 @@ signals:
 
 protected:
     void                    resizeEvent (QResizeEvent* e);
-};   // KTagCloudWidget
+public:
+    ~KTagCloudWidget ();
+// FIXME needs a mapped type.
+//ig    void                    addTags (const QMap<QString,int>& tags);
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'QWidget'
+    sipClass = NULL;
+
+    if (dynamic_cast<KTagCloudWidget*>(sipCpp))
+        {
+        sipClass = sipClass_KTagCloudWidget;
+        if (dynamic_cast<Nepomuk::TagCloud*>(sipCpp))
+            sipClass = sipClass_Nepomuk_TagCloud;
+        }
+    else if (dynamic_cast<KTagDisplayWidget*>(sipCpp))
+        sipClass = sipClass_KTagDisplayWidget;
+    else if (dynamic_cast<Nepomuk::TagWidget*>(sipCpp))
+        sipClass = sipClass_Nepomuk_TagWidget;
+%End
+};
+// KTagCloudWidget
 
 
+%ModuleHeaderCode
+//ctscc
+#include <nepomuk/kmetadatatagcloud.h>
+#include <nepomuk/kmetadatatagwidget.h>
+#include <nepomuk/ktagcloudwidget.h>
+#include <nepomuk/ktagdisplaywidget.h>
+#include <qobject.h>
+%End

@@ -24,7 +24,7 @@ namespace Nepomuk
 class TagWidget : QWidget
 {
 %TypeHeaderCode
-#include  <nepomuk/kmetadatatagwidget.h>
+#include <nepomuk/kmetadatatagwidget.h>
 %End
 
 public:
@@ -40,9 +40,12 @@ public:
     void                    setTaggedResource (const Nepomuk::Resource& resource);
     void                    setTaggedResources (const QList<Nepomuk::Resource>& resources);
     void                    setAssignedTags (const QList<Nepomuk::Tag>& tags);
-};   // TagWidget
+    ~TagWidget ();
+};
+// TagWidget
 
-};   // Nepomuk
+};
+// Nepomuk
 
 //ig uint                    qHash (const Nepomuk::Tag& res);
 

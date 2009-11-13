@@ -22,13 +22,7 @@
 
 %ModuleHeaderCode
 //ctscc
-#include <nepomuk/kmetadatatagcloud.h>
-#include <nepomuk/kmetadatatagwidget.h>
 #include <nepomuk/kratingwidget.h>
-#include <nepomuk/ktagcloudwidget.h>
-#include <nepomuk/ktagdisplaywidget.h>
-#include <nepomuk/nepomukservice.h>
-#include <nepomuk/resourcemanager.h>
 %End
 
 class KRatingWidget : QFrame
@@ -74,32 +68,20 @@ protected:
     void                    paintEvent (QPaintEvent* e);
     void                    resizeEvent (QResizeEvent* e);
 
-public:
 
 //  Subclasses of QObject
 
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'KRatingWidget'
     sipClass = NULL;
 
     if (dynamic_cast<KRatingWidget*>(sipCpp))
         sipClass = sipClass_KRatingWidget;
-    else if (dynamic_cast<KTagCloudWidget*>(sipCpp))
-        {
-            sipClass = sipClass_KTagCloudWidget;
-            if (dynamic_cast<Nepomuk::TagCloud*>(sipCpp))
-                sipClass = sipClass_Nepomuk_TagCloud;
-        }
-    else if (dynamic_cast<KTagDisplayWidget*>(sipCpp))
-        sipClass = sipClass_KTagDisplayWidget;
-    else if (dynamic_cast<Nepomuk::ResourceManager*>(sipCpp))
-        sipClass = sipClass_Nepomuk_ResourceManager;
-    else if (dynamic_cast<Nepomuk::Service*>(sipCpp))
-        sipClass = sipClass_Nepomuk_Service;
-    else if (dynamic_cast<Nepomuk::TagWidget*>(sipCpp))
-        sipClass = sipClass_Nepomuk_TagWidget;
 %End
 
-};   // KRatingWidget
+public:
+    ~KRatingWidget ();
+};
+// KRatingWidget
 
 

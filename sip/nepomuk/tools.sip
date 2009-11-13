@@ -30,13 +30,14 @@ namespace Nepomuk
 //ig QString                 typePredicate ();
 QList<Soprano::Node>    valuesToRDFNodes (const Nepomuk::Variant&);
 
-Soprano::Node      valueToRDFNode (const Nepomuk::Variant&);
-Nepomuk::Variant   RDFLiteralToValue (const Soprano::Node& node);
+Soprano::Node           valueToRDFNode (const Nepomuk::Variant&);
+Nepomuk::Variant        RDFLiteralToValue (const Soprano::Node& node);
 
 //ig QString                 rdfNamepace ();
 //ig QString                 rdfsNamespace ();
 //ig QString                 nrlNamespace ();
 //ig QString                 naoNamespace ();
-};   // Nepomuk
+};
+// Nepomuk
 
 

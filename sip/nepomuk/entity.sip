@@ -33,28 +33,45 @@ public:
                             Entity (const Nepomuk::Types::Entity&);
     QString                 name () const;
     QUrl                    uri () const;
-
-//mt undefined symbol: QString& language -- need mapped type?
-//mt     QString            label (const QString& language = KGlobal::locale()->language());
-
-//mt undefined symbol: QString& language -- need mapped type?
-//mt     QString            comment (const QString& language = KGlobal::locale()->language());
-
     QIcon                   icon ();
     bool                    isValid () const;
     bool                    isAvailable ();
     void                    reset (bool recursive = 0);
-//    QUrl                    operator QUrl () const;
     bool                    operator == (const Nepomuk::Types::Entity& other) const;
     bool                    operator != (const Nepomuk::Types::Entity& other) const;
 
 protected:
                             Entity ();
-};   // Entity
+public:
+    virtual ~Entity ();
+//ig    QUrl                    operator QUrl () const;
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'Entity'
+    sipClass = NULL;
+
+    if (dynamic_cast<Nepomuk::Types::Class*>(sipCpp))
+        sipClass = sipClass_Nepomuk_Types_Class;
+    else if (dynamic_cast<Nepomuk::Types::Ontology*>(sipCpp))
+        sipClass = sipClass_Nepomuk_Types_Ontology;
+    else if (dynamic_cast<Nepomuk::Types::Property*>(sipCpp))
+        sipClass = sipClass_Nepomuk_Types_Property;
+%End
+    QString                 label (const QString& language);
+    QString                 comment (const QString& language);
+};
+// Entity
 
 uint                    qHash (const Nepomuk::Types::Entity& c);
-};   // Types
+};
+// Types
 
-};   // Nepomuk
+//ig class Entity;
+};
 
-// Neopmuk::Entity is deprecated.
+%ModuleHeaderCode
+//ctscc
+#include <nepomuk/class.h>
+#include <nepomuk/entity.h>
+#include <nepomuk/ontology.h>
+#include <nepomuk/property.h>
+%End

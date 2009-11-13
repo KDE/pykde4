@@ -36,10 +36,13 @@ public:
     QUrl                    dataTypeUri () const;
     QVariant::Type          dataType () const;
     bool                    isValid () const;
-};   // Literal
+    ~Literal ();
+};
+// Literal
 
-};   // Types
+};
+// Types
 
-};   // Nepomuk
-
+//ig class Literal;
 //Nepomuk::Literal is deprecated.
+};

@@ -31,7 +31,8 @@ public:
                             Variant ();
                             Variant (const Nepomuk::Variant& other);
     explicit                Variant (const QVariant& other);
-//ig                        Variant (int i);
+
+//ig                            Variant (int i);
                             Variant (qlonglong i);
 //ig                            Variant (uint i);
 //ig                            Variant (qulonglong i);
@@ -45,15 +46,8 @@ public:
                             Variant (const QUrl& url);
                             Variant (const Nepomuk::Resource& r);
                             Variant (const QList<int>& i);
-//FIXME                            Variant (const QList<qlonglong>& i);
                             Variant (const QList<uint>& i);
-//FIXME                            Variant (const QList<qulonglong>& i);
-
-
-//mt undefined symbol: QList<bool>& b -- need mapped type?
-//mt                        Variant (const QList<bool>& b);
-
-
+//ig                            Variant (const QList<qulonglong>& i);
                             Variant (const QList<double>& d);
                             Variant (const QStringList& stringlist);
                             Variant (const QList<QDate>& date);
@@ -62,6 +56,7 @@ public:
                             Variant (const QList<QUrl>& url);
                             Variant (const QList<Nepomuk::Resource>& r);
                             Variant (const QList<Nepomuk::Variant>& vl);
+
 //ig    void                    append (int i);
     void                    append (qlonglong i);
 //ig    void                    append (uint i);
@@ -119,15 +114,7 @@ public:
     QUrl                    toUrl () const;
     Nepomuk::Resource       toResource () const;
     QList<int>              toIntList () const;
-//FIXME    QList<qlonglong>        toInt64List () const;
     QList<uint>             toUnsignedIntList () const;
-//FIXME    QList<qulonglong>       toUnsignedInt64List () const;
-
-
-//mt undefined symbol: QList<bool> None -- need mapped type?
-//mt     QList<bool>        toBoolList () const;
-
-
     QList<double>           toDoubleList () const;
     QStringList             toStringList () const;
     QList<QDate>            toDateList () const;
@@ -137,8 +124,17 @@ public:
     QList<Nepomuk::Resource>  toResourceList () const;
     QList<Nepomuk::Variant>  toVariantList () const;
     static Nepomuk::Variant  fromString (const QString& value, int type);
-};   // Variant
+    ~Variant ();
+//ig                            Variant (const QList<bool>& b);
+//ig    QList<qlonglong>        toInt64List () const;
+//ig    QList<qulonglong>       toUnsignedInt64List () const;
+//ig    QList<bool>             toBoolList () const;
+//ig                            Variant (const QList<qlonglong>& i);
+};
+// Variant
 
-};   // Nepomuk
+};
+// Nepomuk
 
 
+//ig QDebug                  operator << (QDebug dbg, const Nepomuk::Variant&);

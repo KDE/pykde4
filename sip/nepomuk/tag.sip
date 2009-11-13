@@ -45,8 +45,12 @@ protected:
                             Tag (const QUrl& uri, const QUrl& type);
                             Tag (const QString& uri, const QUrl& type, Nepomuk::ResourceManager* manager);
                             Tag (const QUrl& uri, const QUrl& type, Nepomuk::ResourceManager* manager);
-};   // Tag
+public:
+    ~Tag ();
+};
+// Tag
 
-};   // Nepomuk
+};
+// Nepomuk
 
 

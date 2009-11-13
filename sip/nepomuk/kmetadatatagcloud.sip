@@ -35,8 +35,12 @@ public:
 
 signals:
     void                    tagClicked (Nepomuk::Tag);
-};   // TagCloud
+public:
+    ~TagCloud ();
+};
+// TagCloud
 
-};   // Nepomuk
+};
+// Nepomuk
 
 

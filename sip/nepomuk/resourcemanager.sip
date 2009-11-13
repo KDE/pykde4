@@ -66,10 +66,16 @@ signals:
 
 private:
                             ResourceManager ();
-                            ~ResourceManager ();
-};   // ResourceManager
+    ~ResourceManager ();
+public:
+    Soprano::Model*         mainModel ();
+    void                    setOverrideMainModel (Soprano::Model* model);
+    static Nepomuk::ResourceManager*  createManagerForModel (Soprano::Model* model);
+};
+// ResourceManager
 
-};   // Nepomuk
+};
+// Nepomuk
 
 
 

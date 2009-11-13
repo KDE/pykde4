@@ -19,9 +19,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 %ModuleHeaderCode
+//ctscc
 #include <nepomuk/resource.h>
 #include <nepomuk/tag.h>
-
+#include <nepomuk/thing.h>
 %End
 
 
@@ -49,12 +50,12 @@ public:
                             Resource ();
                             Resource (Nepomuk::ResourceManager* manager);
                             Resource (const Nepomuk::Resource&);
-                            Resource (const QString& uriOrIdentifier, const QUrl& type = QUrl());
-                            Resource (const QString& uriOrIdentifier, const QUrl& type, Nepomuk::ResourceManager* manager);
-                            Resource (const QString& uriOrIdentifier, const QString& type);
+                            Resource (const QString& pathOrIdentifier, const QUrl& type = QUrl());
+                            Resource (const QString& pathOrIdentifier, const QUrl& type, Nepomuk::ResourceManager* manager);
+                            Resource (const QString& pathOrIdentifier, const QString& type);
                             Resource (const QUrl& uri, const QUrl& type = QUrl());
                             Resource (const QUrl& uri, const QUrl& type, Nepomuk::ResourceManager* manager);
-//ig                        Resource (ResourceData*);
+//ig                            Resource (ResourceData*);
     Nepomuk::ResourceManager*  manager () const;
     QString                 uri () const;
     QUrl                    resourceUri () const;
@@ -129,8 +130,23 @@ public:
     QList<Nepomuk::Resource>  annotationOf () const;
     QList<Nepomuk::Resource>  isRelatedOf () const;
     static QList<Nepomuk::Resource>  allResources ();
-};   // Resource
+    virtual ~Resource ();
+//ig    QHash<QString,Variant>  allProperties () const;
+//ig    QHash<QUrl,Variant>     properties () const;
+    bool                    operator != (const Nepomuk::Resource&) const;
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'Resource'
+    sipClass = NULL;
 
-};   // Nepomuk
+    if (dynamic_cast<Nepomuk::Tag*>(sipCpp))
+        sipClass = sipClass_Nepomuk_Tag;
+    else if (dynamic_cast<Nepomuk::Thing*>(sipCpp))
+        sipClass = sipClass_Nepomuk_Thing;
+%End
+};
+// Resource
+
+};
+// Nepomuk
 
 

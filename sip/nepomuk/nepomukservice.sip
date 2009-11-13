@@ -30,14 +30,20 @@ class Service : QObject
 public:
                             Service (QObject* parent /TransferThis/ = 0, bool delayedInitialization = 0);
 
-protected:
 
 
 //mt undefined symbol: Model* None -- need mapped type?
 //mt     Soprano::Model*    mainModel ();
-    void                    setServiceInitialized (bool succcess);
-};   // Service
+protected:
+    void                    setServiceInitialized (bool success);
+public:
+    virtual ~Service ();
+protected:
+    Soprano::Model*         mainModel ();
+};
+// Service
 
-};   // Nepomuk
+};
+// Nepomuk
 
 

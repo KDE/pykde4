@@ -34,6 +34,9 @@ public:
 
 signals:
     void                    tagClicked (const QString& tag);
-};   // KTagDisplayWidget
+public:
+    ~KTagDisplayWidget ();
+};
+// KTagDisplayWidget
 
 

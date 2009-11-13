@@ -43,10 +43,13 @@ public:
     QList<Nepomuk::Types::Class>  allSubClasses ();
     bool                    isParentOf (const Nepomuk::Types::Class& other);
     bool                    isSubClassOf (const Nepomuk::Types::Class& other);
-};   // Class
+    ~Class ();
+};
+// Class
 
-};   // Types
+};
+// Types
 
-};   // Nepomuk
-
+//ig class Class;
 // Nepomuk::Class is deprecated.
+};

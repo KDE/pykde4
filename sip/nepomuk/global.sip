@@ -18,9 +18,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+#include <nepomuk/global.h>
+%End
 namespace Nepomuk
 {
 QUrl                    extractNamespace (const QUrl& url);
-};   // Nepomuk
+};
+// Nepomuk
 
 

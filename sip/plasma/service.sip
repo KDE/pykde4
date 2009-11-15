@@ -20,7 +20,7 @@
 namespace Plasma
 {
 
-class Service : QObject /Abstract/
+class Service : QObject
 {
 %TypeHeaderCode
 #include <plasma/service.h>
@@ -63,5 +63,3 @@ signals:
 
 };
 // Plasma
-
-

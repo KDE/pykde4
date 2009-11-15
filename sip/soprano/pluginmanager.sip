@@ -31,10 +31,10 @@ public:
     void                    setPluginSearchPath (const QStringList& path, bool useDefaults = 1);
     const Soprano::Backend*  discoverBackendByName (const QString& name);
     const Soprano::Backend*  discoverBackendByFeatures (Soprano::BackendFeatures features, const QStringList& userFeatures = QStringList());
-    QList<const Soprano::Backend*>   allBackends ();
+    QList<const Soprano::Backend*>  allBackends ();
     const Soprano::Parser*  discoverParserByName (const QString& name);
     const Soprano::Parser*  discoverParserForSerialization (Soprano::RdfSerialization serialization, const QString& userSerialization = QString());
-    QList<const Soprano::Parser*>    allParsers ();
+    QList<const Soprano::Parser*>  allParsers ();
     const Soprano::Serializer*  discoverSerializerByName (const QString& name);
     const Soprano::Serializer*  discoverSerializerForSerialization (Soprano::RdfSerialization serialization, const QString& userSerialization = QString());
     QList<const Soprano::Serializer*>  allSerializers ();
@@ -42,9 +42,17 @@ public:
 
 private:
                             PluginManager (QObject* parent /TransferThis/ = 0);
-};   // PluginManager
+public:
+    ~PluginManager ();
+    bool                    loadCustomPlugin (const QString& path);
+    const Soprano::Backend*  loadCustomBackend (const QString& path);
+    const Soprano::Parser*  loadCustomParser (const QString& path);
+    const Soprano::Serializer*  loadCustomSerializer (const QString& path);
+};
+// PluginManager
 
-};   // Soprano
+};
+// Soprano
 
 %MappedType QList<const Soprano::Backend*>
 {

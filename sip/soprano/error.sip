@@ -47,16 +47,27 @@ public:
                             Error ();
                             Error (const QString& message, int code = Soprano::Error::ErrorUnknown);
                             Error (const Soprano::Error::Error&);
-//    bool                    operator bool() const;
+//ig    bool                    operator bool () const;
     QString                 message () const;
     int                     code () const;
     bool                    isParserError () const;
     Soprano::Error::ParserError  toParserError () const;
 
 protected:
-//ig                        Error (ErrorData*);
+//ig                            Error (ErrorData*);
 
-};   // Error
+public:
+    virtual ~Error ();
+//ig    bool                    operator bool () const;
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'Error'
+    sipClass = NULL;
+
+    if (dynamic_cast<Soprano::Error::ParserError*>(sipCpp))
+        sipClass = sipClass_Soprano_Error_ParserError;
+%End
+};
+// Error
 
 
 class ParserError : Soprano::Error::Error
@@ -70,7 +81,9 @@ public:
                             ParserError (const Soprano::Error::Locator&, const QString& message = QString(), int code = Soprano::Error::ErrorParsingFailed);
                             ParserError (const Soprano::Error::Error&);
     Soprano::Error::Locator  locator () const;
-};   // ParserError
+    ~ParserError ();
+};
+// ParserError
 
 
 class ErrorCache /NoDefaultCtors/
@@ -87,12 +100,21 @@ protected:
     void                    clearError () const;
     void                    setError (const Soprano::Error::Error&) const;
     void                    setError (const QString& errorMessage, int code = Soprano::Error::ErrorUnknown) const;
-private:
-                            ErrorCache(const Soprano::Error::ErrorCache &other);
-};   // ErrorCache
+public:
+    virtual ~ErrorCache ();
+};
+// ErrorCache
 
-};   // Error
+};
+// Error
 
-};   // Soprano
+};
+// Soprano
 
 
+//ig QDebug                  operator << (QDebug s, const Soprano::Error::Error&);
+QTextStream&            operator << (QTextStream& s, const Soprano::Error::Error&);
+%ModuleHeaderCode
+//ctscc
+#include <soprano/error.h>
+%End

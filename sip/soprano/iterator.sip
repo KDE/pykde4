@@ -29,8 +29,8 @@ class Iterator : Soprano::Error::ErrorCache /Abstract/
 
 public:
                             Iterator ();
-                            //Iterator (Soprano::IteratorBackend<T>* sti);
-                            //Iterator (const Soprano::Iterator& sti);
+//Iterator (Soprano::IteratorBackend<T>* sti);
+//Iterator (const Soprano::Iterator& sti);
     void                    close ();
     bool                    next ();
     T                       current () const;
@@ -41,8 +41,10 @@ public:
 protected:
 //ig    void                    setBackend (Soprano::IteratorBackend<T>* b);
 //ig    IteratorBackend<T>*     backend () const;
-};   // Iterator
+};
+// Iterator
 
-};   // Soprano
+};
+// Soprano
 
 

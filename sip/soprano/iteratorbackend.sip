@@ -29,14 +29,16 @@ class IteratorBackend : Soprano::Error::ErrorCache /NoDefaultCtors/
 %End
 
 public:
-    virtual bool            next () = 0;
-    virtual T               current () const = 0;
-    virtual void            close () = 0;
+    virtual bool            next ()=0;
+    virtual T               current () const=0;
+    virtual void            close ()=0;
 
 protected:
                             IteratorBackend ();
-};   // IteratorBackend
+};
+// IteratorBackend
 
-};   // Soprano
+};
+// Soprano
 
 

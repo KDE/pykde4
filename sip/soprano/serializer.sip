@@ -28,15 +28,22 @@ class Serializer : Soprano::Plugin, Soprano::Error::ErrorCache /NoDefaultCtors/
 %End
 
 public:
-    virtual Soprano::RdfSerializations  supportedSerializations () const = 0;
+    virtual Soprano::RdfSerializations  supportedSerializations () const=0;
     virtual QStringList     supportedUserSerializations () const;
     bool                    supportsSerialization (Soprano::RdfSerialization s, const QString& userSerialization = QString()) const;
-    virtual bool            serialize (Soprano::StatementIterator it, QTextStream& stream, Soprano::RdfSerialization serialization, const QString& userSerialization = QString()) const = 0;
+    virtual bool            serialize (Soprano::StatementIterator it, QTextStream& stream, Soprano::RdfSerialization serialization, const QString& userSerialization = QString()) const=0;
 
 protected:
                             Serializer (const QString& name);
-};   // Serializer
+public:
+    virtual ~Serializer ();
+    void                    addPrefix (const QString& qname, const QUrl& uri) const;
+    void                    clearPrefixes () const;
+    QHash<QString,QUrl>     prefixes () const;
+};
+// Serializer
 
-};   // Soprano
+};
+// Soprano
 
 

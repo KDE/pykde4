@@ -59,10 +59,14 @@ public:
     int                     statementCount () const;
     Soprano::Error::ErrorCode  write (QTextStream& os) const;
     Soprano::Node           createBlankNode ();
-};   // DummyModel
+    ~DummyModel ();
+};
+// DummyModel
 
-};   // Util
+};
+// Util
 
-};   // Soprano
+};
+// Soprano
 
 

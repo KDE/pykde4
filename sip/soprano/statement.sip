@@ -43,8 +43,13 @@ public:
     void                    setPredicate (const Soprano::Node& predicate);
     void                    setObject (const Soprano::Node& object);
     void                    setContext (const Soprano::Node& context);
-};   // Statement
+    virtual ~Statement ();
+};
+// Statement
 
-};   // Soprano
+};
+// Soprano
 
 
+//ig QDebug                  operator << (QDebug s, const Soprano::Statement&);
+QTextStream&            operator << (QTextStream& s, const Soprano::Statement&);

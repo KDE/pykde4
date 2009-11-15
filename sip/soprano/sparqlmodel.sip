@@ -38,20 +38,23 @@ public:
     Soprano::NodeIterator   listContexts () const;
     bool                    containsStatement (const Soprano::Statement& statement) const;
     bool                    containsAnyStatement (const Soprano::Statement& statement) const;
-
-
-//mt undefined symbol: QueryLanguage language -- need mapped type?
-//mt     Soprano::QueryResultIterator  executeQuery (const QString& query, Soprano::Query::QueryLanguage language = Query::QueryLanguageSparql, const QString& userQueryLanguage = QString()) const;
-
-
     Soprano::StatementIterator  listStatements (const Soprano::Statement& partial) const;
     int                     statementCount () const;
     bool                    isEmpty () const;
     Soprano::Node           createBlankNode ();
-};   // SparqlModel
+    ~SparqlModel ();
+    void                    setPath (const QString& path);
+    Soprano::Util::AsyncResult*  listStatementsAsync (const Soprano::Statement& statement) const;
+    Soprano::QueryResultIterator  executeQuery (const QString& query, Soprano::Query::QueryLanguage language = Soprano::Query::QueryLanguageSparql, const QString& userQueryLanguage = QString()) const;
+    Soprano::Util::AsyncResult*  executeQueryAsync (const QString& query, Soprano::Query::QueryLanguage language = Soprano::Query::QueryLanguageSparql, const QString& userQueryLanguage = QString()) const;
+    Soprano::Util::AsyncResult*  listContextsAsync () const;
+};
+// SparqlModel
 
-};   // Client
+};
+// Client
 
-};   // Soprano
+};
+// Soprano
 
 

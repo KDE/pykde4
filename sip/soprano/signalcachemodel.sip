@@ -38,10 +38,15 @@ protected:
     virtual void            parentStatementsAdded ();
     virtual void            parentStatementsRemoved ();
     void                    timerEvent (QTimerEvent* event);
-};   // SignalCacheModel
+public:
+    virtual ~SignalCacheModel ();
+};
+// SignalCacheModel
 
-};   // Util
+};
+// Util
 
-};   // Soprano
+};
+// Soprano
 
 

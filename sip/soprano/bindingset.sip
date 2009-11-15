@@ -40,8 +40,13 @@ public:
     void                    insert (const QString& name, const Soprano::Node& value);
     void                    replace (int offset, const Soprano::Node& value);
     void                    replace (const QString& name, const Soprano::Node& value);
-};   // BindingSet
+    ~BindingSet ();
+};
+// BindingSet
 
-};   // Soprano
+};
+// Soprano
 
 
+//ig QDebug                  operator << (QDebug s, const Soprano::BindingSet&);
+QTextStream&            operator << (QTextStream& s, const Soprano::BindingSet&);

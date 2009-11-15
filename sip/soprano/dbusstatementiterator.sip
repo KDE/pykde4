@@ -18,11 +18,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+//ctscc
+#include <soprano/dbusstatementiterator.h>
+%End
+
 namespace Soprano
 {
 namespace Client
 {
-
 class DBusStatementIterator : Soprano::StatementIterator
 {
 %TypeHeaderCode
@@ -31,10 +35,9 @@ class DBusStatementIterator : Soprano::StatementIterator
 
 public:
                             DBusStatementIterator (const QString& serviceName, const QString& dbusObject);
-};   // DBusStatementIterator
-
-};   // Client
-
-};   // Soprano
+};
+};
+};
+// Soprano
 
 

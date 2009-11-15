@@ -29,8 +29,8 @@ class MutexModel : Soprano::FilterModel
 #include <soprano/mutexmodel.h>
 %End
 
-public:
 
+public:
     enum ProtectionMode
     {
         PlainMultiThreading,
@@ -49,10 +49,14 @@ public:
     bool                    containsAnyStatement (const Soprano::Statement& statement) const;
     bool                    isEmpty () const;
     int                     statementCount () const;
-};   // MutexModel
+    ~MutexModel ();
+};
+// MutexModel
 
-};   // Util
+};
+// Util
 
-};   // Soprano
+};
+// Soprano
 
 

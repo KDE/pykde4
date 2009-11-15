@@ -28,17 +28,21 @@ class Parser : Soprano::Plugin, Soprano::Error::ErrorCache
 %End
 
 public:
-    virtual Soprano::RdfSerializations  supportedSerializations () const = 0;
+    virtual Soprano::RdfSerializations  supportedSerializations () const=0;
     virtual QStringList     supportedUserSerializations () const;
     bool                    supportsSerialization (Soprano::RdfSerialization s, const QString& userSerialization = QString()) const;
     virtual Soprano::StatementIterator  parseFile (const QString& filename, const QUrl& baseUri, Soprano::RdfSerialization serialization, const QString& userSerialization = QString()) const;
     virtual Soprano::StatementIterator  parseString (const QString& data, const QUrl& baseUri, Soprano::RdfSerialization serialization, const QString& userSerialization = QString()) const;
-    virtual Soprano::StatementIterator  parseStream (QTextStream& stream, const QUrl& baseUri, Soprano::RdfSerialization serialization, const QString& userSerialization = QString()) const = 0;
+    virtual Soprano::StatementIterator  parseStream (QTextStream& stream, const QUrl& baseUri, Soprano::RdfSerialization serialization, const QString& userSerialization = QString()) const=0;
 
 protected:
                             Parser (const QString& name);
-};   // Parser
+public:
+    virtual ~Parser ();
+};
+// Parser
 
-};   // Soprano
+};
+// Soprano
 
 

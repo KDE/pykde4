@@ -33,13 +33,24 @@ public:
                             RuleParser ();
     bool                    parseFile (const QString& path);
     Soprano::Inference::RuleSet  rules () const;
+
+    ~RuleParser ();
+    Soprano::Inference::Rule  parseRule (const QString& line);
+    void                    addPrefix (const QString& qname, const QUrl& uri);
+    QHash<QString,QUrl>     prefixes () const;
+    void                    clear ();
 private:
-                            RuleParser (const Soprano::Inference::RuleParser &other);
+//force
+                            RuleParser (const Soprano::Inference::RuleParser& other);
 
-};   // RuleParser
+//end
+};
+// RuleParser
 
-};   // Inference
+};
+// Inference
 
-};   // Soprano
+};
+// Soprano
 
 

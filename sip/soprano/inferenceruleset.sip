@@ -49,10 +49,14 @@ public:
     QStringList             ruleNames () const;
     QList<Soprano::Inference::Rule>  allRules () const;
     static Soprano::Inference::RuleSet  standardRuleSet (Soprano::Inference::StandardRuleSet);
-};   // RuleSet
+    ~RuleSet ();
+};
+// RuleSet
 
-};   // Inference
+};
+// Inference
 
-};   // Soprano
+};
+// Soprano
 
 

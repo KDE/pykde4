@@ -40,10 +40,14 @@ public:
     void                    clearInference ();
     void                    setCompressedSourceStatements (bool b);
     void                    setOptimizedQueriesEnabled (bool b);
-};   // InferenceModel
+    ~InferenceModel ();
+};
+// InferenceModel
 
-};   // Inference
+};
+// Inference
 
-};   // Soprano
+};
+// Soprano
 
 

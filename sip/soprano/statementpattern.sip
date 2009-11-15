@@ -38,10 +38,16 @@ public:
     Soprano::Inference::NodePattern  objectPattern () const;
     bool                    match (const Soprano::Statement&) const;
     QString                 createSparqlGraphPattern (const Soprano::BindingSet& bindings) const;
-};   // StatementPattern
+    ~StatementPattern ();
+    bool                    isValid () const;
+};
+// StatementPattern
 
-};   // Inference
+};
+// Inference
 
-};   // Soprano
+};
+// Soprano
 
 
+//ig QDebug                  operator << (QDebug s, const Soprano::Inference::StatementPattern&);

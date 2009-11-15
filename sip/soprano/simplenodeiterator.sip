@@ -33,10 +33,14 @@ public:
                             SimpleNodeIterator ();
                             SimpleNodeIterator (const QList<Soprano::Node>&);
                             SimpleNodeIterator (const Soprano::Util::SimpleNodeIterator&);
-};   // SimpleNodeIterator
+    virtual ~SimpleNodeIterator ();
+};
+// SimpleNodeIterator
 
-};   // Util
+};
+// Util
 
-};   // Soprano
+};
+// Soprano
 
 

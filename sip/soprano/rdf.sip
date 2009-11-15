@@ -18,6 +18,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+#include <soprano/rdf.h>
+%End
+
 namespace Soprano
 {
 namespace Vocabulary
@@ -40,10 +44,13 @@ QUrl                    rest ();
 QUrl                    subject ();
 QUrl                    type ();
 QUrl                    value ();
-};   // RDF
+};
+// RDF
 
-};   // Vocabulary
+};
+// Vocabulary
 
-};   // Soprano
+};
+// Soprano
 
 

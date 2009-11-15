@@ -18,6 +18,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+#include <soprano/nao.h>
+%End
+
 namespace Soprano
 {
 namespace Vocabulary
@@ -62,10 +66,13 @@ QUrl                    scoreParameter ();
 QUrl                    serializationLanguage ();
 QUrl                    status ();
 QUrl                    version ();
-};   // NAO
+};
+// NAO
 
-};   // Vocabulary
+};
+// Vocabulary
 
-};   // Soprano
+};
+// Soprano
 
 

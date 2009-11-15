@@ -64,8 +64,11 @@ public:
     Soprano::Graph&         operator << (const Soprano::Statement&);
     bool                    operator == (const Soprano::Graph& g) const;
     bool                    operator != (const Soprano::Graph& g) const;
-};   // Graph
+    ~Graph ();
+};
+// Graph
 
-};   // Soprano
+};
+// Soprano
 
 

@@ -20,35 +20,38 @@
 
 %ModuleHeaderCode
 #include <soprano/queryresultiteratorbackend.h>
-namespace Soprano
-{
-typedef IteratorBackend<Soprano::BindingSet> QueryResultIteratorBackendBase;
-}
 %End
 
 namespace Soprano
 {
-typedef IteratorBackend<Soprano::BindingSet> QueryResultIteratorBackendBase;
-class QueryResultIteratorBackend : Soprano::QueryResultIteratorBackendBase
+class QueryResultIteratorBackend
 {
 
 public:
-    virtual bool            next () = 0;
+    virtual bool            next ()=0;
     virtual Soprano::BindingSet  current () const;
-    virtual Soprano::Statement  currentStatement () const = 0;
-    virtual Soprano::Node   binding (const QString& name) const = 0;
-    virtual Soprano::Node   binding (int offset) const = 0;
-    virtual int             bindingCount () const = 0;
-    virtual QStringList     bindingNames () const = 0;
-    virtual bool            isGraph () const = 0;
-    virtual bool            isBinding () const = 0;
-    virtual bool            isBool () const = 0;
-    virtual bool            boolValue () const = 0;
+    virtual Soprano::Statement  currentStatement () const=0;
+    virtual Soprano::Node   binding (const QString& name) const=0;
+    virtual Soprano::Node   binding (int offset) const=0;
+    virtual int             bindingCount () const=0;
+    virtual QStringList     bindingNames () const=0;
+    virtual bool            isGraph () const=0;
+    virtual bool            isBinding () const=0;
+    virtual bool            isBool () const=0;
+    virtual bool            boolValue () const=0;
 
+//force
+    virtual void            close ()=0;
+
+//end
 protected:
                             QueryResultIteratorBackend ();
-};   // QueryResultIteratorBackend
+public:
+    virtual ~QueryResultIteratorBackend ();
+};
+// QueryResultIteratorBackend
 
-};   // Soprano
+};
+// Soprano
 
 

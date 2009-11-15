@@ -37,7 +37,9 @@ public:
     QString                 userOptionName () const;
     QVariant                value () const;
     void                    setValue (const QVariant& value);
-};   // BackendSetting
+    ~BackendSetting ();
+};
+// BackendSetting
 
 typedef QList<Soprano::BackendSetting> BackendSettings;
 
@@ -53,13 +55,21 @@ class Backend : Soprano::Plugin, Soprano::Error::ErrorCache
 
 public:
                             Backend (const QString& name);
-    virtual Soprano::StorageModel*  createModel (const Soprano::BackendSettings& settings = Soprano::BackendSettings()) const = 0;
-    virtual bool            deleteModelData (const Soprano::BackendSettings& settings) const = 0;
-    virtual Soprano::BackendFeatures  supportedFeatures () const = 0;
+    virtual Soprano::StorageModel*  createModel (const Soprano::BackendSettings& settings = Soprano::BackendSettings()) const=0;
+    virtual bool            deleteModelData (const Soprano::BackendSettings& settings) const=0;
+    virtual Soprano::BackendFeatures  supportedFeatures () const=0;
     virtual QStringList     supportedUserFeatures () const;
     bool                    supportsFeatures (Soprano::BackendFeatures feature, const QStringList& userFeatures = QStringList()) const;
-};   // Backend
+    virtual ~Backend ();
+};
+// Backend
 
-};   // Soprano
+//ig Soprano::BackendSetting  settingInSettings (const Soprano::BackendSettings& settings, Soprano::BackendOption option, const QString& userOptionName = QString());
+//ig Soprano::BackendSetting  settingInSettings (const Soprano::BackendSettings& settings, const QString& userOptionName = QString());
+QVariant                valueInSettings (const Soprano::BackendSettings& settings, const QString& userOptionName, const QVariant& defaultValue = QVariant());
+QVariant                valueInSettingsWithDefault (const Soprano::BackendSettings& settings, Soprano::BackendOption option, const QVariant& defaultValue);
+Soprano::BackendSetting&  settingInSettings (Soprano::BackendSettings& settings, const QString& userOptionName);
+};
+// Soprano
 
 

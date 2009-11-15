@@ -18,6 +18,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+#include <soprano/xesam.h>
+%End
+
 namespace Soprano
 {
 namespace Vocabulary
@@ -146,9 +150,6 @@ QUrl                    contentType ();
 QUrl                    contributor ();
 QUrl                    copyright ();
 QUrl                    creator ();
-QUrl                    definesClass ();
-QUrl                    definesFunction ();
-QUrl                    definesGlobalVariable ();
 QUrl                    deletionTime ();
 QUrl                    depends ();
 QUrl                    derivedFrom ();
@@ -296,10 +297,16 @@ QUrl                    wordCount ();
 QUrl                    workEmailAddress ();
 QUrl                    workPhoneNumber ();
 QUrl                    workPostalAddress ();
-};   // Xesam
+QUrl                    definesClass ();
+QUrl                    definesFunction ();
+QUrl                    definesGlobalVariable ();
+};
+// Xesam
 
-};   // Vocabulary
+};
+// Vocabulary
 
-};   // Soprano
+};
+// Soprano
 
 

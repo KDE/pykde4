@@ -36,10 +36,14 @@ public:
     void                    removeModel (const QString& name);
     bool                    connect (const QString& name = QString());
     void                    disconnect ();
-};   // LocalSocketClient
+    virtual ~LocalSocketClient ();
+};
+// LocalSocketClient
 
-};   // Client
+};
+// Client
 
-};   // Soprano
+};
+// Soprano
 
 

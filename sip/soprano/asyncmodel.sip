@@ -62,11 +62,18 @@ public:
     Soprano::Util::AsyncResult*  containsAnyStatementAsync (const Soprano::Statement& statement) const;
     Soprano::Util::AsyncResult*  containsAnyStatementAsync (const Soprano::Node& subject, const Soprano::Node& predicate, const Soprano::Node& object, const Soprano::Node& context = Soprano::Node()) const;
     Soprano::Util::AsyncResult*  createBlankNodeAsync ();
-};   // AsyncModel
+    ~AsyncModel ();
+    Soprano::StatementIterator  listStatements (const Soprano::Statement& partial) const;
+    Soprano::NodeIterator   listContexts () const;
+    Soprano::QueryResultIterator  executeQuery (const QString& query, Soprano::Query::QueryLanguage language, const QString& userQueryLanguage = QString()) const;
+};
+// AsyncModel
 
-};   // Util
+};
+// Util
 
-};   // Soprano
+};
+// Soprano
 
 
 

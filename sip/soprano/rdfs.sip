@@ -18,6 +18,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+#include <soprano/rdfs.h>
+%End
+
 namespace Soprano
 {
 namespace Vocabulary
@@ -40,10 +44,13 @@ QUrl                    range ();
 QUrl                    seeAlso ();
 QUrl                    subClassOf ();
 QUrl                    subPropertyOf ();
-};   // RDFS
+};
+// RDFS
 
-};   // Vocabulary
+};
+// Vocabulary
 
-};   // Soprano
+};
+// Soprano
 
 

@@ -21,12 +21,26 @@
 
 %ModuleHeaderCode
 //ctscc
+#include <soprano/asyncmodel.h>
+#include <soprano/asyncresult.h>
+#include <soprano/dbusclient.h>
+#include <soprano/dbusexportiterator.h>
+#include <soprano/dbusexportmodel.h>
+#include <soprano/dbusmodel.h>
+#include <soprano/dummymodel.h>
 #include <soprano/filtermodel.h>
+#include <soprano/inferencemodel.h>
+#include <soprano/localsocketclient.h>
 #include <soprano/model.h>
+#include <soprano/mutexmodel.h>
 #include <soprano/nrlmodel.h>
 #include <soprano/pluginmanager.h>
-#include <soprano/rdfschemamodel.h>
+#include <qobject.h>
+#include <soprano/servercore.h>
+#include <soprano/signalcachemodel.h>
+#include <soprano/sparqlmodel.h>
 #include <soprano/storagemodel.h>
+#include <soprano/tcpclient.h>
 %End
 
 namespace Soprano
@@ -40,31 +54,31 @@ class Model : QObject, Soprano::Error::ErrorCache
 
 
 public:
-    virtual Soprano::Error::ErrorCode  addStatement (const Soprano::Statement& statement) = 0;
+    virtual Soprano::Error::ErrorCode  addStatement (const Soprano::Statement& statement)=0;
     Soprano::Error::ErrorCode  addStatement (const Soprano::Node& subject, const Soprano::Node& predicate, const Soprano::Node& object, const Soprano::Node& context = Soprano::Node());
     Soprano::Error::ErrorCode  addStatements (const QList<Soprano::Statement>& statements);
-    virtual Soprano::Error::ErrorCode  removeStatement (const Soprano::Statement& statement) = 0;
+    virtual Soprano::Error::ErrorCode  removeStatement (const Soprano::Statement& statement)=0;
     Soprano::Error::ErrorCode  removeStatement (const Soprano::Node& subject, const Soprano::Node& predicate, const Soprano::Node& object, const Soprano::Node& context = Soprano::Node());
-    virtual Soprano::Error::ErrorCode  removeAllStatements (const Soprano::Statement& statement) = 0;
+    virtual Soprano::Error::ErrorCode  removeAllStatements (const Soprano::Statement& statement)=0;
     Soprano::Error::ErrorCode  removeAllStatements (const Soprano::Node& subject, const Soprano::Node& predicate, const Soprano::Node& object, const Soprano::Node& context = Soprano::Node());
     Soprano::Error::ErrorCode  removeStatements (const QList<Soprano::Statement>& statements);
     Soprano::Error::ErrorCode  removeContext (const Soprano::Node&);
     Soprano::Error::ErrorCode  removeAllStatements ();
-    virtual Soprano::StatementIterator  listStatements (const Soprano::Statement& partial) const = 0;
+    virtual Soprano::StatementIterator  listStatements (const Soprano::Statement& partial) const=0;
     Soprano::StatementIterator  listStatements (const Soprano::Node& subject, const Soprano::Node& predicate, const Soprano::Node& object, const Soprano::Node& context = Soprano::Node()) const;
     Soprano::StatementIterator  listStatements () const;
     Soprano::StatementIterator  listStatementsInContext (const Soprano::Node& context) const;
-    virtual Soprano::NodeIterator  listContexts () const = 0;
-    virtual Soprano::QueryResultIterator  executeQuery (const QString& query, Soprano::Query::QueryLanguage language, const QString& userQueryLanguage = QString()) const = 0;
-    virtual bool            containsAnyStatement (const Soprano::Statement& statement) const = 0;
+    virtual Soprano::NodeIterator  listContexts () const=0;
+    virtual Soprano::QueryResultIterator  executeQuery (const QString& query, Soprano::Query::QueryLanguage language, const QString& userQueryLanguage = QString()) const=0;
+    virtual bool            containsAnyStatement (const Soprano::Statement& statement) const=0;
     bool                    containsAnyStatement (const Soprano::Node& subject, const Soprano::Node& predicate, const Soprano::Node& object, const Soprano::Node& context = Soprano::Node()) const;
-    virtual bool            containsStatement (const Soprano::Statement& statement) const = 0;
+    virtual bool            containsStatement (const Soprano::Statement& statement) const=0;
     bool                    containsStatement (const Soprano::Node& subject, const Soprano::Node& predicate, const Soprano::Node& object, const Soprano::Node& context = Soprano::Node()) const;
     bool                    containsContext (const Soprano::Node& context) const;
-    virtual bool            isEmpty () const = 0;
-    virtual int             statementCount () const = 0;
+    virtual bool            isEmpty () const=0;
+    virtual int             statementCount () const=0;
     virtual Soprano::Error::ErrorCode  write (QTextStream& os) const;
-    virtual Soprano::Node   createBlankNode () = 0;
+    virtual Soprano::Node   createBlankNode ()=0;
 
 signals:
     void                    statementsAdded ();
@@ -78,36 +92,65 @@ protected:
 private:
                             Model (const Soprano::Model&);
 
-public:
 
 //  Subclasses of QObject
 
 %ConvertToSubClassCode
-
+    // CTSCC for subclasses of 'QObject'
     sipClass = NULL;
 
-    if (dynamic_cast<Soprano::Model*>(sipCpp))
+    if (dynamic_cast<Soprano::Client::DBusClient*>(sipCpp))
+        sipClass = sipClass_Soprano_Client_DBusClient;
+    else if (dynamic_cast<Soprano::Client::LocalSocketClient*>(sipCpp))
+        sipClass = sipClass_Soprano_Client_LocalSocketClient;
+    else if (dynamic_cast<Soprano::Client::TcpClient*>(sipCpp))
+        sipClass = sipClass_Soprano_Client_TcpClient;
+    else if (dynamic_cast<Soprano::Model*>(sipCpp))
         {
-            sipClass = sipClass_Soprano_Model;
-            if (dynamic_cast<Soprano::FilterModel*>(sipCpp))
-                {
-                    sipClass = sipClass_Soprano_FilterModel;
-                    if (dynamic_cast<Soprano::NRLModel*>(sipCpp))
-                        sipClass = sipClass_Soprano_NRLModel;
-//                    else if (dynamic_cast<Soprano::RdfSchemaModel*>(sipCpp))
-//                        sipClass = sipClass_Soprano_RdfSchemaModel;
-                }
-            else if (dynamic_cast<Soprano::StorageModel*>(sipCpp))
-                {
-                    sipClass = sipClass_Soprano_StorageModel;
-                }
+        sipClass = sipClass_Soprano_Model;
+        if (dynamic_cast<Soprano::Client::SparqlModel*>(sipCpp))
+            sipClass = sipClass_Soprano_Client_SparqlModel;
+        else if (dynamic_cast<Soprano::FilterModel*>(sipCpp))
+            {
+            sipClass = sipClass_Soprano_FilterModel;
+            if (dynamic_cast<Soprano::Inference::InferenceModel*>(sipCpp))
+                sipClass = sipClass_Soprano_Inference_InferenceModel;
+            else if (dynamic_cast<Soprano::NRLModel*>(sipCpp))
+                sipClass = sipClass_Soprano_NRLModel;
+            else if (dynamic_cast<Soprano::Server::DBusExportModel*>(sipCpp))
+                sipClass = sipClass_Soprano_Server_DBusExportModel;
+            else if (dynamic_cast<Soprano::Util::AsyncModel*>(sipCpp))
+                sipClass = sipClass_Soprano_Util_AsyncModel;
+            else if (dynamic_cast<Soprano::Util::MutexModel*>(sipCpp))
+                sipClass = sipClass_Soprano_Util_MutexModel;
+            else if (dynamic_cast<Soprano::Util::SignalCacheModel*>(sipCpp))
+                sipClass = sipClass_Soprano_Util_SignalCacheModel;
+            }
+        else if (dynamic_cast<Soprano::StorageModel*>(sipCpp))
+            {
+            sipClass = sipClass_Soprano_StorageModel;
+            if (dynamic_cast<Soprano::Client::DBusModel*>(sipCpp))
+                sipClass = sipClass_Soprano_Client_DBusModel;
+            }
+        else if (dynamic_cast<Soprano::Util::DummyModel*>(sipCpp))
+            sipClass = sipClass_Soprano_Util_DummyModel;
         }
     else if (dynamic_cast<Soprano::PluginManager*>(sipCpp))
         sipClass = sipClass_Soprano_PluginManager;
+    else if (dynamic_cast<Soprano::Server::DBusExportIterator*>(sipCpp))
+        sipClass = sipClass_Soprano_Server_DBusExportIterator;
+    else if (dynamic_cast<Soprano::Server::ServerCore*>(sipCpp))
+        sipClass = sipClass_Soprano_Server_ServerCore;
+    else if (dynamic_cast<Soprano::Util::AsyncResult*>(sipCpp))
+        sipClass = sipClass_Soprano_Util_AsyncResult;
 %End
 
-};   // Model
+public:
+    virtual ~Model ();
+};
+// Model
 
-};   // Soprano
+};
+// Soprano
 
 

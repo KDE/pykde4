@@ -39,10 +39,16 @@ public:
     QString                 variableName () const;
     bool                    match (const Soprano::Node& node) const;
     QString                 createSparqlNodePattern (const Soprano::BindingSet& bindings) const;
-};   // NodePattern
+    ~NodePattern ();
+    bool                    isValid () const;
+};
+// NodePattern
 
-};   // Inference
+};
+// Inference
 
-};   // Soprano
+};
+// Soprano
 
 
+//ig QDebug                  operator << (QDebug s, const Soprano::Inference::NodePattern&);

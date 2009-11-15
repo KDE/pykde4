@@ -36,8 +36,12 @@ public:
 
 protected:
                             StorageModel (const Soprano::Backend* backend);
-};   // StorageModel
+public:
+    virtual ~StorageModel ();
+};
+// StorageModel
 
-};   // Soprano
+};
+// Soprano
 
 

@@ -35,8 +35,16 @@ public:
     Soprano::Error::ErrorCode  addNrlStatement (const Soprano::Statement& s);
     QUrl                    createGraph (const QUrl& type, QUrl* metadataGraph = 0);
     Soprano::Error::ErrorCode  removeGraph (const QUrl& graph);
-};   // NRLModel
+    ~NRLModel ();
+    void                    setEnableQueryPrefixExpansion (bool enable);
+    bool                    queryPrefixExpansionEnabled () const;
+    QHash<QString,QUrl>     queryPrefixes () const;
+    virtual Soprano::QueryResultIterator  executeQuery (const QString& query, Soprano::Query::QueryLanguage language, const QString& userQueryLanguage = QString()) const;
+    virtual Soprano::Error::ErrorCode  removeAllStatements (const Soprano::Statement& statement);
+};
+// NRLModel
 
-};   // Soprano
+};
+// Soprano
 
 

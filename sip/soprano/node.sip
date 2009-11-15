@@ -27,8 +27,8 @@ class Node
 #include <soprano/node.h>
 %End
 
-public:
 
+public:
     enum Type
     {
         EmptyNode,
@@ -70,10 +70,15 @@ public:
     static QString          resourceToN3 (const QUrl& resource);
     static QString          blankToN3 (const QString& blank);
     static QString          literalToN3 (const Soprano::LiteralValue& literal);
-};   // Node
+    ~Node ();
+};
+// Node
 
 uint                    qHash (const Soprano::Node& node);
-};   // Soprano
+};
+// Soprano
 
 uint                    qHash (const QUrl& url);
 
+//ig QDebug                  operator << (QDebug s, const Soprano::Node&);
+QTextStream&            operator << (QTextStream& s, const Soprano::Node&);

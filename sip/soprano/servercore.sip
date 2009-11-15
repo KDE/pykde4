@@ -46,10 +46,15 @@ public:
 
 protected:
     virtual Soprano::Model*  createModel (const QList<Soprano::BackendSetting>& settings);
-};   // ServerCore
+public:
+    virtual ~ServerCore ();
+};
+// ServerCore
 
-};   // Server
+};
+// Server
 
-};   // Soprano
+};
+// Soprano
 
 

@@ -41,10 +41,14 @@ public:
     void                    setDeleteOnClose (bool deleteOnClose);
     bool                    registerIterator (const QString& dbusObjectPath, const QString& dbusClient = QString());
     void                    unregisterIterator ();
-};   // DBusExportIterator
+    ~DBusExportIterator ();
+};
+// DBusExportIterator
 
-};   // Server
+};
+// Server
 
-};   // Soprano
+};
+// Soprano
 
 

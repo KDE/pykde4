@@ -35,10 +35,14 @@ public:
     QStringList             allModels () const;
     Soprano::Client::DBusModel*  createModel (const QString& name, const Soprano::BackendSettings& settings = Soprano::BackendSettings());
     void                    removeModel (const QString& name);
-};   // DBusClient
+    ~DBusClient ();
+};
+// DBusClient
 
-};   // Client
+};
+// Client
 
-};   // Soprano
+};
+// Soprano
 
 

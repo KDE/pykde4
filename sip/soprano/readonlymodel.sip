@@ -17,37 +17,6 @@
 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-/* Not exported
-namespace Soprano
-{
-namespace Util
-{
 
-class ReadOnlyModel : Soprano::Model
-{
-%TypeHeaderCode
-  <soprano/readonlymodel.h>
-%End
-
-public:
-                            ReadOnlyModel (Soprano::Model* parentModel = 0);
-    void                    setParentModel (Soprano::Model* model);
-    Soprano::StatementIterator  listStatements (const Soprano::Statement& partial) const;
-    Soprano::NodeIterator   listContexts () const;
-    Soprano::QueryResultIterator  executeQuery (const QString& query, Soprano::Query::QueryLanguage language, const QString& userQueryLanguage = QString()) const;
-    bool                    containsStatement (const Soprano::Statement& statement) const;
-    bool                    containsAnyStatement (const Soprano::Statement& statement) const;
-    bool                    isEmpty () const;
-    int                     statementCount () const;
-    Soprano::Error::ErrorCode  addStatement (const Soprano::Statement& statement);
-    Soprano::Error::ErrorCode  removeStatement (const Soprano::Statement& statement);
-    Soprano::Error::ErrorCode  removeAllStatements (const Soprano::Statement& statement);
-    Soprano::Node           createBlankNode ();
-};   // ReadOnlyModel
-
-};   // Util
-
-};   // Soprano
-
-
-*/
+//ig namespace Soprano;
+// class ReadOnlyModel is not exported.

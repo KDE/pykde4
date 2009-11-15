@@ -34,16 +34,20 @@ public:
                             TcpClient (QObject* parent /TransferThis/ = 0);
     const quint16 DEFAULT_PORT;
 
-    bool               connect (const QHostAddress& address = QHostAddress::LocalHost, int port = Soprano::Server::ServerCore::DEFAULT_PORT);
+    bool                    connect (const QHostAddress& address = QHostAddress::LocalHost, int port = Soprano::Server::ServerCore::DEFAULT_PORT);
 
     bool                    isConnected ();
     void                    disconnect ();
     Soprano::Model*         createModel (const QString& name, const QList<Soprano::BackendSetting>& settings = QList<Soprano::BackendSetting>());
     void                    removeModel (const QString& name);
-};   // TcpClient
+    virtual ~TcpClient ();
+};
+// TcpClient
 
-};   // Client
+};
+// Client
 
-};   // Soprano
+};
+// Soprano
 
 

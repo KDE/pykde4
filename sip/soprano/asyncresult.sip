@@ -43,10 +43,15 @@ public:
 
 private:
                             AsyncResult ();
-};   // AsyncResult
+public:
+    ~AsyncResult ();
+};
+// AsyncResult
 
-};   // Util
+};
+// Util
 
-};   // Soprano
+};
+// Soprano
 
 

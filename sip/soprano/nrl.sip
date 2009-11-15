@@ -18,6 +18,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+#include <soprano/nrl.h>
+%End
+
 namespace Soprano
 {
 namespace Vocabulary
@@ -65,10 +69,13 @@ QUrl                    subGraphOf ();
 QUrl                    superGraphOf ();
 QUrl                    updatable ();
 QUrl                    viewOn ();
-};   // NRL
+};
+// NRL
 
-};   // Vocabulary
+};
+// Vocabulary
 
-};   // Soprano
+};
+// Soprano
 
 

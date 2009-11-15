@@ -79,9 +79,13 @@ public:
     static Soprano::LiteralValue  createPlainLiteral (const QString& value, const Soprano::LanguageTag& lang = Soprano::LanguageTag());
     static QVariant::Type   typeFromDataTypeUri (const QUrl& dataTypeUri);
     static QUrl             dataTypeUriFromType (QVariant::Type type);
-};   // LiteralValue
+    ~LiteralValue ();
+};
+// LiteralValue
 
 uint                    qHash (const Soprano::LiteralValue& lit);
-};   // Soprano
+};
+// Soprano
 
 
+//ig QDebug                  operator << (QDebug dbg, const Soprano::LiteralValue&);

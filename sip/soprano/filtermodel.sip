@@ -56,8 +56,12 @@ protected:
     virtual void            parentStatementsRemoved ();
     virtual void            parentStatementAdded (const Soprano::Statement&);
     virtual void            parentStatementRemoved (const Soprano::Statement&);
-};   // FilterModel
+public:
+    virtual ~FilterModel ();
+};
+// FilterModel
 
-};   // Soprano
+};
+// Soprano
 
 

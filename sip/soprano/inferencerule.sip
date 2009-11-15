@@ -42,10 +42,16 @@ public:
     QString                 createSparqlQuery (bool bindVariables = 0) const;
     Soprano::Statement      bindEffect (const Soprano::BindingSet& bindings) const;
     QList<Soprano::Statement>  bindPreconditions (const Soprano::BindingSet& bindings) const;
-};   // Rule
+    ~Rule ();
+    bool                    isValid () const;
+};
+// Rule
 
-};   // Inference
+};
+// Inference
 
-};   // Soprano
+};
+// Soprano
 
 
+//ig QDebug                  operator << (QDebug s, const Soprano::Inference::Rule&);

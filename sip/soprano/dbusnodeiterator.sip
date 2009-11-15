@@ -18,11 +18,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+//ctscc
+#include <soprano/dbusnodeiterator.h>
+#include <soprano/simplenodeiterator.h>
+%End
+
 namespace Soprano
 {
 namespace Client
 {
-
 class DBusNodeIterator : Soprano::NodeIterator
 {
 %TypeHeaderCode
@@ -31,10 +36,9 @@ class DBusNodeIterator : Soprano::NodeIterator
 
 public:
                             DBusNodeIterator (const QString& serviceName, const QString& dbusObject);
-};   // DBusNodeIterator
-
-};   // Client
-
-};   // Soprano
+};
+};
+};
+// Soprano
 
 

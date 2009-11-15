@@ -33,10 +33,30 @@ public:
 
 protected:
                             Plugin (const QString& name);
-private:
-                            Plugin(const Soprano::Plugin &other);
-};   // Plugin
+public:
+    virtual ~Plugin ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'Plugin'
+    sipClass = NULL;
 
-};   // Soprano
+    if (dynamic_cast<Soprano::Backend*>(sipCpp))
+        sipClass = sipClass_Soprano_Backend;
+    else if (dynamic_cast<Soprano::Parser*>(sipCpp))
+        sipClass = sipClass_Soprano_Parser;
+    else if (dynamic_cast<Soprano::Serializer*>(sipCpp))
+        sipClass = sipClass_Soprano_Serializer;
+%End
+};
+// Plugin
+
+};
+// Soprano
 
 
+%ModuleHeaderCode
+//ctscc
+#include <soprano/backend.h>
+#include <soprano/parser.h>
+#include <soprano/plugin.h>
+#include <soprano/serializer.h>
+%End

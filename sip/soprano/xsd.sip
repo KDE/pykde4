@@ -18,6 +18,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+#include <soprano/xsd.h>
+%End
+
 namespace Soprano
 {
 namespace Vocabulary
@@ -43,10 +47,13 @@ QUrl                    date ();
 QUrl                    dateTime ();
 QUrl                    time ();
 QUrl                    base64Binary ();
-};   // XMLSchema
+};
+// XMLSchema
 
-};   // Vocabulary
+};
+// Vocabulary
 
-};   // Soprano
+};
+// Soprano
 
 

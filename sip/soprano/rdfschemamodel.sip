@@ -17,39 +17,6 @@
 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-/* Not exported
-namespace Soprano
-{
 
-class RdfSchemaModel : Soprano::FilterModel
-{
-%TypeHeaderCode
-  <soprano/rdfschemamodel.h>
-%End
-
-public:
-                            RdfSchemaModel (Soprano::Model* parentModel = 0);
-    Soprano::StatementIterator  classes () const;
-    Soprano::StatementIterator  directSubClassOf (const Soprano::Node& subClass, const Soprano::Node& superClass = Soprano::Node()) const;
-    Soprano::StatementIterator  directSubPropertyOf (const Soprano::Node& subProperty, const Soprano::Node& superProperty = Soprano::Node()) const;
-    Soprano::StatementIterator  directType (const Soprano::Node& someClass, const Soprano::Node& someType) const;
-    Soprano::StatementIterator  domain (const Soprano::Node& prop, const Soprano::Node& domain) const;
-    Soprano::StatementIterator  properties () const;
-    Soprano::StatementIterator  range (const Soprano::Node& prop, const Soprano::Node& range) const;
-    Soprano::StatementIterator  subClassOf (const Soprano::Node& subClass, const Soprano::Node& superClass = Soprano::Node()) const;
-    Soprano::StatementIterator  subPropertyOf (const Soprano::Node& subProperty, const Soprano::Node& superProperty = Soprano::Node()) const;
-    Soprano::StatementIterator  type (const Soprano::Node& someClass, const Soprano::Node& someType) const;
-    bool                    isClass (const Soprano::Node& resource) const;
-    bool                    isProperty (const Soprano::Node& resource) const;
-    bool                    isDirectSubClassOf (const Soprano::Node& subClass, const Soprano::Node& superClass) const;
-    bool                    isDirectSubPropertyOf (const Soprano::Node& subProperty, const Soprano::Node& superProperty) const;
-    bool                    isDirectType (const Soprano::Node& someClass, const Soprano::Node& someType) const;
-    bool                    isSubClassOf (const Soprano::Node& subClass, const Soprano::Node& superClass) const;
-    bool                    isSubPropertyOf (const Soprano::Node& subProperty, const Soprano::Node& superProperty) const;
-    bool                    isType (const Soprano::Node& someClass, const Soprano::Node& someType) const;
-};   // RdfSchemaModel
-
-};   // Soprano
-
-
-*/
+//ig namespace Soprano;
+// class RdfSchemaModel is not exported.

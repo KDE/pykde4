@@ -27,8 +27,8 @@ class LanguageTag
 #include <soprano/languagetag.h>
 %End
 
-public:
 
+public:
     enum MatchFilter
     {
         MatchFilterBasic,
@@ -66,7 +66,13 @@ public:
     QLocale                 toLocale () const;
     static int              lookup (const QList<Soprano::LanguageTag>& choices, const QList<Soprano::LanguageTag>& priority, Soprano::LanguageTag::LookupFlags flags = Soprano::LanguageTag::LookupFlagNone, Soprano::LanguageTag::MatchFilter scheme = Soprano::LanguageTag::MatchFilterBasic);
     static int              lookup (const QList<Soprano::LanguageTag>& choices, const Soprano::LanguageTag& priority, Soprano::LanguageTag::LookupFlags flags = Soprano::LanguageTag::LookupFlagNone, Soprano::LanguageTag::MatchFilter scheme = Soprano::LanguageTag::MatchFilterBasic);
-};   // LanguageTag
+    ~LanguageTag ();
+//ig    QString                 operator QString () const;
+};
+// LanguageTag
 
 uint                    qHash (const Soprano::LanguageTag& node);
-};   // Soprano
+};
+// Soprano
+//ig QDebug                  operator << (QDebug s, const Soprano::LanguageTag&);
+QTextStream&            operator << (QTextStream& s, const Soprano::LanguageTag&);

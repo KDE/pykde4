@@ -18,11 +18,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+//ctscc
+#include <soprano/dbusqueryresultiterator.h>
+%End
+
 namespace Soprano
 {
 namespace Client
 {
-
 class DBusQueryResultIterator : Soprano::QueryResultIterator
 {
 %TypeHeaderCode
@@ -31,10 +35,7 @@ class DBusQueryResultIterator : Soprano::QueryResultIterator
 
 public:
                             DBusQueryResultIterator (const QString& serviceName, const QString& dbusObject);
-};   // DBusQueryResultIterator
-
-};   // Client
-
-};   // Soprano
-
-
+};
+};
+};
+// Soprano

@@ -41,10 +41,14 @@ public:
     void                    setColumn (int column);
     void                    setByte (int byte);
     void                    setFileName (const QString& fileName);
-};   // Locator
+    ~Locator ();
+};
+// Locator
 
-};   // Error
+};
+// Error
 
-};   // Soprano
+};
+// Soprano
 
 

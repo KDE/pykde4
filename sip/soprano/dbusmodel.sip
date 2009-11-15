@@ -44,10 +44,14 @@ public:
     bool                    containsStatement (const Soprano::Statement& statement) const;
     bool                    containsAnyStatement (const Soprano::Statement& statement) const;
     Soprano::Node           createBlankNode ();
-};   // DBusModel
+    ~DBusModel ();
+};
+// DBusModel
 
-};   // Client
+};
+// Client
 
-};   // Soprano
+};
+// Soprano
 
 

@@ -34,10 +34,14 @@ public:
     bool                    registerModel (const QString& dbusObjectPath);
     void                    unregisterModel ();
     QString                 dbusObjectPath () const;
-};   // DBusExportModel
+    ~DBusExportModel ();
+};
+// DBusExportModel
 
-};   // Server
+};
+// Server
 
-};   // Soprano
+};
+// Soprano
 
 

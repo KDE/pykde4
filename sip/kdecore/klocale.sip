@@ -201,6 +201,47 @@ public:
     QString                 removeAcceleratorMarker (const QString& label) const;
     ~KLocale ();
     QString                 convertDigits (const QString& str, KLocale::DigitSet digitSet, bool ignoreContext = 0) const;
+    enum BinarySizeUnits
+    {
+        DefaultBinaryUnits,
+        UnitByte,
+        UnitKiloByte,
+        UnitMegaByte,
+        UnitGigaByte,
+        UnitTeraByte,
+        UnitPetaByte,
+        UnitExaByte,
+        UnitZettaByte,
+        UnitYottaByte,
+        UnitLastUnit
+    };
+    enum BinaryUnitDialect
+    {
+        DefaultBinaryDialect,
+        IECBinaryDialect,
+        JEDECBinaryDialect,
+        MetricBinaryDialect,
+        LastBinaryDialect
+    };
+    QString                 formatByteSize (double size, int precision, KLocale::BinaryUnitDialect dialect = KLocale::DefaultBinaryDialect, KLocale::BinarySizeUnits specificUnit = KLocale::DefaultBinaryUnits) const;
+    KLocale::BinaryUnitDialect  binaryUnitDialect () const;
+    void                    setBinaryUnitDialect (KLocale::BinaryUnitDialect newDialect);
+    enum TimeFormatOption
+    {
+        TimeDefault,
+        TimeWithoutSeconds,
+        TimeWithoutAmPm,
+        TimeDuration
+    };
+    typedef QFlags<KLocale::TimeFormatOption> TimeFormatOptions;
+    QString                 formatLocaleTime (const QTime& pTime, KLocale::TimeFormatOptions options = KLocale::TimeDefault) const;
+    enum TimeProcessingOption
+    {
+        ProcessStrict,
+        ProcessNonStrict
+    };
+    typedef QFlags<KLocale::TimeProcessingOption> TimeProcessingOptions;
+    QTime                   readLocaleTime (const QString& str, bool* ok = 0, KLocale::TimeFormatOptions options = KLocale::TimeDefault, KLocale::TimeProcessingOptions processing = KLocale::ProcessNonStrict) const;
 };
 // KLocale
 

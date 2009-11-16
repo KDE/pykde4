@@ -90,7 +90,7 @@ public:
     virtual int             yearStringToInteger (const QString& sNum, int& iLength /Out/) const;
     virtual int             monthStringToInteger (const QString& sNum, int& iLength /Out/) const;
     virtual int             dayStringToInteger (const QString& sNum, int& iLength /Out/) const;
-    virtual QString         formatDate (const QDate& date, KLocale::DateFormat format = KLocale::LongDate) const;
+    virtual QString         formatDate (const QDate& fromDate, KLocale::DateFormat toFormat = KLocale::LongDate) const;
     virtual QDate           readDate (const QString& str, bool* ok /Out/ = 0) const;
     virtual QDate           readDate (const QString& intstr, const QString& format, bool* ok /Out/ = 0) const;
     virtual QDate           readDate (const QString& str, KLocale::ReadDateFlags flags, bool* ok /Out/ = 0) const;
@@ -112,6 +112,11 @@ private:
 //end
 public:
     ~KCalendarSystem ();
+    QString                 formatDate (const QDate& fromDate, const QString& toFormat) const;
+protected:
+    void                    setMaxMonthsInYear (int maxMonths);
+    void                    setMaxDaysInWeek (int maxDays);
+    void                    setHasYear0 (bool hasYear0);
 };
 // KCalendarSystem
 

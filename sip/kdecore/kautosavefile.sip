@@ -27,6 +27,7 @@
 %ModuleHeaderCode
 //ctscc
 #include <sonnet/backgroundchecker.h>
+#include <kauthactionwatcher.h>
 #include <kautosavefile.h>
 #include <kautostart.h>
 #include <kcompositejob.h>
@@ -81,7 +82,9 @@ private:
     // CTSCC for subclasses of 'QObject'
     sipClass = NULL;
 
-    if (dynamic_cast<KAutostart*>(sipCpp))
+    if (dynamic_cast<KAuth::ActionWatcher*>(sipCpp))
+        sipClass = sipClass_KAuth_ActionWatcher;
+    else if (dynamic_cast<KAutostart*>(sipCpp))
         sipClass = sipClass_KAutostart;
     else if (dynamic_cast<KCoreConfigSkeleton*>(sipCpp))
         sipClass = sipClass_KCoreConfigSkeleton;

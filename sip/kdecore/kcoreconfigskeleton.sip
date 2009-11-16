@@ -928,8 +928,8 @@ public:
 //ig    const KConfig*          config () const;
     void                    setSharedConfig (KSharedConfig::Ptr pConfig);
     KConfigSkeletonItem::List  items () const;
-    bool                    isImmutable (const QString& name);
-    KConfigSkeletonItem*    findItem (const QString& name);
+//ig    bool                    isImmutable (const QString& name);
+//ig    KConfigSkeletonItem*    findItem (const QString& name);
     virtual bool            useDefaults (bool b);
 
 signals:
@@ -942,6 +942,8 @@ protected:
     virtual void            usrWriteConfig ();
 public:
     ~KCoreConfigSkeleton ();
+    bool                    isImmutable (const QString& name) const;
+    KConfigSkeletonItem*    findItem (const QString& name) const;
 };
 // KCoreConfigSkeleton
 

@@ -53,6 +53,8 @@ protected:
     virtual void            changeEvent (QEvent* event);
 public:
     ~KCapacityBar ();
+    void                    setDrawTextMode (KCapacityBar::DrawTextMode mode);
+    KCapacityBar::DrawTextMode  drawTextMode () const;
 };
 // KCapacityBar
 

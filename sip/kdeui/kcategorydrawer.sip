@@ -30,7 +30,27 @@ public:
     virtual void            drawCategory (const QModelIndex& index, int sortRole, const QStyleOption& option, QPainter* painter) const;
     virtual int             categoryHeight (const QModelIndex& index, const QStyleOption& option) const;
     ~KCategoryDrawer ();
+    int                     leftMargin () const;
+    void                    setLeftMargin (int leftMargin);
+    int                     rightMargin () const;
+    void                    setRightMargin (int rightMargin);
 };
 // KCategoryDrawer
 
 
+class KCategoryDrawerV2 : QObject, KCategoryDrawer
+{
+%TypeHeaderCode
+#include <kcategorydrawer.h>
+%End
+
+public:
+                            KCategoryDrawerV2 (QObject* parent /TransferThis/ = 0);
+    virtual ~KCategoryDrawerV2 ();
+    virtual void            mouseButtonPressed (const QModelIndex& index, QMouseEvent* event);
+    virtual void            mouseButtonReleased (const QModelIndex& index, QMouseEvent* event);
+    virtual void            mouseButtonMoved (const QModelIndex& index, QMouseEvent* event);
+    virtual void            mouseButtonDoubleClicked (const QModelIndex& index, QMouseEvent* event);
+signals:
+    void                    collapseOrExpandClicked (const QModelIndex& index);
+};

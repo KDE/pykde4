@@ -106,6 +106,9 @@ public:
 
 //end
     ~KNotification ();
+    explicit                KNotification (const QString& eventId, const KNotification::NotificationFlags& flags, QObject* parent /TransferThis/ = NULL);
+    static KNotification*   event (const QString& eventId, const QString& title, const QString& text, const QPixmap& pixmap = QPixmap(), QWidget* widget = 0, const KNotification::NotificationFlags& flags = KNotification::CloseOnTimeout, const KComponentData& componentData = KComponentData());
+    static KNotification*   event (KNotification::StandardEvent eventId, const QString& title, const QString& text, const QPixmap& pixmap = QPixmap(), QWidget* widget = 0, const KNotification::NotificationFlags& flags = KNotification::CloseOnTimeout);
 };
 // KNotification
 

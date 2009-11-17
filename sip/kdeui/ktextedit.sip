@@ -88,6 +88,11 @@ protected:
     bool                    checkSpellingEnabledInternal () const;
 public:
     ~KTextEdit ();
+    void                    setClickMessage (const QString& msg);
+    QString                 clickMessage () const;
+protected:
+    virtual void            paintEvent (QPaintEvent*);
+    virtual void            focusOutEvent (QFocusEvent*);
 };
 // KTextEdit
 

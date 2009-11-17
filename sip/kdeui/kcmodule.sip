@@ -71,6 +71,13 @@ protected:
     void                    unmanagedWidgetChangeState (bool);
 public:
     ~KCModule ();
+    void                    setNeedsAuthorization (bool needsAuth);
+    bool                    needsAuthorization () const;
+    KAuth::Action*          authAction () const;
+signals:
+    void                    rootOnlyMessageChanged (bool use, QString message);
+protected:
+    void                    authStatusChanged (int);
 };
 // KCModule
 

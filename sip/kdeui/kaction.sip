@@ -72,6 +72,11 @@ signals:
     void                    globalShortcutChanged (const QKeySequence&);
 public:
     ~KAction ();
+    KAuth::Action*          authAction () const;
+    void                    setAuthAction (KAuth::Action* action);
+    void                    setAuthAction (const QString& actionName);
+signals:
+    void                    authorized (KAuth::Action* action);
 };
 // KAction
 

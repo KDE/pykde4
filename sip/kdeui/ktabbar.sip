@@ -44,12 +44,12 @@ public:
     int                     selectTab (const QPoint& position) const;
 
 signals:
-    void                    contextMenu (int, const QPoint&);
-    void                    emptyAreaContextMenu (const QPoint&);
+    void                    contextMenu (int index, const QPoint& globalPos);
+    void                    emptyAreaContextMenu (const QPoint& globalPos);
     void                    mouseDoubleClick (int);
-    void                    tabDoubleClicked (int);
+    void                    tabDoubleClicked (int index);
     void                    newTabRequest ();
-    void                    mouseMiddleClick (int);
+    void                    mouseMiddleClick (int index);
     void                    initiateDrag (int);
 //ig    void                    testCanDecode (const QDragMoveEvent*, bool&);
     void                    receivedDropEvent (int, QDropEvent*);

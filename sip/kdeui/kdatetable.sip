@@ -120,6 +120,8 @@ private:
 //end
 public:
     ~KDateTable ();
+protected:
+    virtual bool            event (QEvent* e);
 };
 // KDateTable
 

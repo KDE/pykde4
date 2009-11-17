@@ -74,6 +74,7 @@
 %Include kdatetimewidget.sip
 %Include kdatewidget.sip
 %Include kdeprintdialog.sip
+%Include kdescendantsproxymodel.sip
 %Include kdialog.sip
 %Include kdialogbuttonbox.sip
 %Include kdialogjobuidelegate.sip
@@ -139,6 +140,9 @@
 %Include kpixmapprovider.sip
 %Include kpixmapregionselectordialog.sip
 %Include kpixmapregionselectorwidget.sip
+%Include kpixmapsequence.sip
+%Include kpixmapsequenceoverlaypainter.sip
+%Include kpixmapsequencewidget.sip
 %Include kplotaxis.sip
 %Include kplotobject.sip
 %Include kplotpoint.sip
@@ -153,6 +157,7 @@
 %Include krichtextwidget.sip
 %Include kruler.sip
 %Include kselectaction.sip
+%Include kselectionproxymodel.sip
 %Include kselector.sip
 %Include kseparator.sip
 %Include ksessionmanager.sip
@@ -160,6 +165,7 @@
 %Include kshortcutsdialog.sip
 %Include kshortcutseditor.sip
 %Include kshortcutwidget.sip
+%Include ksortfilterproxymodel.sip
 %Include ksplashscreen.sip
 %Include ksqueezedtextlabel.sip
 %Include kstandardaction.sip
@@ -168,6 +174,7 @@
 %Include kstartupinfo.sip
 %Include kstatusbar.sip
 %Include kstatusbarjobtracker.sip
+%Include kstatusnotifieritem.sip
 %Include kstringvalidator.sip
 %Include kstyle.sip
 %Include ksvgrenderer.sip

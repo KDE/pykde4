@@ -45,6 +45,7 @@ protected:
     void                    squeezeTextToLabel ();
 public:
     ~KSqueezedTextLabel ();
+    QString                 fullText () const;
 };
 // KSqueezedTextLabel
 

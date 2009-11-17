@@ -39,6 +39,8 @@ protected:
     void                    keyPressEvent (QKeyEvent* e);
 public:
     ~KRestrictedLine ();
+protected:
+    void                    inputMethodEvent (QInputMethodEvent* e);
 };
 // KRestrictedLine
 

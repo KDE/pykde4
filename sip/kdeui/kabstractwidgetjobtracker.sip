@@ -45,6 +45,7 @@
 #include <kcapacitybar.h>
 #include <kcategorizedsortfilterproxymodel.h>
 #include <kcategorizedview.h>
+#include <kcategorydrawer.h>
 #include <kcharselect.h>
 #include <kcmodule.h>
 #include <kcodecaction.h>
@@ -62,6 +63,7 @@
 #include <kdatetable.h>
 #include <kdatetimewidget.h>
 #include <kdatewidget.h>
+#include <kdescendantsproxymodel.h>
 #include <kdialog.h>
 #include <kdialogbuttonbox.h>
 #include <kdialogjobuidelegate.h>
@@ -115,6 +117,8 @@
 #include <kpastetextaction.h>
 #include <kpixmapregionselectordialog.h>
 #include <kpixmapregionselectorwidget.h>
+#include <kpixmapsequenceoverlaypainter.h>
+#include <kpixmapsequencewidget.h>
 #include <kplotwidget.h>
 #include <kprogressdialog.h>
 #include <kpushbutton.h>
@@ -126,16 +130,19 @@
 #include <krichtextwidget.h>
 #include <kruler.h>
 #include <kselectaction.h>
+#include <kselectionproxymodel.h>
 #include <kselector.h>
 #include <kseparator.h>
 #include <kshortcutsdialog.h>
 #include <kshortcutseditor.h>
 #include <kshortcutwidget.h>
+#include <ksortfilterproxymodel.h>
 #include <ksplashscreen.h>
 #include <ksqueezedtextlabel.h>
 #include <kstartupinfo.h>
 #include <kstatusbar.h>
 #include <kstatusbarjobtracker.h>
+#include <kstatusnotifieritem.h>
 #include <kstringvalidator.h>
 #include <kstyle.h>
 #include <ksvgrenderer.h>
@@ -210,6 +217,8 @@ signals:
         sipClass = sipClass_KActionCategory;
     else if (dynamic_cast<KActionCollection*>(sipCpp))
         sipClass = sipClass_KActionCollection;
+    else if (dynamic_cast<KCategoryDrawerV2*>(sipCpp))
+        sipClass = sipClass_KCategoryDrawerV2;
     else if (dynamic_cast<KCompletion*>(sipCpp))
         sipClass = sipClass_KCompletion;
     else if (dynamic_cast<KConfigDialogManager*>(sipCpp))
@@ -256,12 +265,16 @@ signals:
         sipClass = sipClass_KPageWidgetItem;
     else if (dynamic_cast<KPassivePopupMessageHandler*>(sipCpp))
         sipClass = sipClass_KPassivePopupMessageHandler;
+    else if (dynamic_cast<KPixmapSequenceOverlayPainter*>(sipCpp))
+        sipClass = sipClass_KPixmapSequenceOverlayPainter;
     else if (dynamic_cast<KSelectionOwner*>(sipCpp))
         sipClass = sipClass_KSelectionOwner;
     else if (dynamic_cast<KSelectionWatcher*>(sipCpp))
         sipClass = sipClass_KSelectionWatcher;
     else if (dynamic_cast<KStartupInfo*>(sipCpp))
         sipClass = sipClass_KStartupInfo;
+    else if (dynamic_cast<KStatusNotifierItem*>(sipCpp))
+        sipClass = sipClass_KStatusNotifierItem;
     else if (dynamic_cast<KWallet::Wallet*>(sipCpp))
         sipClass = sipClass_KWallet_Wallet;
     else if (dynamic_cast<KXMLGUIFactory*>(sipCpp))
@@ -276,8 +289,14 @@ signals:
         if (dynamic_cast<KPageWidgetModel*>(sipCpp))
             sipClass = sipClass_KPageWidgetModel;
         }
+    else if (dynamic_cast<KDescendantsProxyModel*>(sipCpp))
+        sipClass = sipClass_KDescendantsProxyModel;
+    else if (dynamic_cast<KSelectionProxyModel*>(sipCpp))
+        sipClass = sipClass_KSelectionProxyModel;
     else if (dynamic_cast<KCategorizedSortFilterProxyModel*>(sipCpp))
         sipClass = sipClass_KCategorizedSortFilterProxyModel;
+    else if (dynamic_cast<KSortFilterProxyModel*>(sipCpp))
+        sipClass = sipClass_KSortFilterProxyModel;
     else if (dynamic_cast<KAction*>(sipCpp))
         {
         sipClass = sipClass_KAction;
@@ -386,6 +405,8 @@ signals:
         }
     else if (dynamic_cast<KPixmapRegionSelectorWidget*>(sipCpp))
         sipClass = sipClass_KPixmapRegionSelectorWidget;
+    else if (dynamic_cast<KPixmapSequenceWidget*>(sipCpp))
+        sipClass = sipClass_KPixmapSequenceWidget;
     else if (dynamic_cast<KShortcutWidget*>(sipCpp))
         sipClass = sipClass_KShortcutWidget;
     else if (dynamic_cast<KShortcutsEditor*>(sipCpp))

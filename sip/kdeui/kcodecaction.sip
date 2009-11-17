@@ -44,7 +44,6 @@ public:
 
 signals:
     void                    triggered (QTextCodec* codec);
-    void                    triggered (const QString&);
     void                    triggered (KEncodingDetector::AutoDetectScript);
     void                    defaultItemTriggered ();
 

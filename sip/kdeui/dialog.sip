@@ -55,6 +55,9 @@ private:
 //end
 public:
     ~Dialog ();
+    void                    showProgressDialog (int timeout = 500);
+    void                    showSpellCheckCompletionMessage (bool b = 1);
+    void                    setSpellCheckContinuedAfterReplacement (bool b);
 };
 // Dialog
 

@@ -50,6 +50,14 @@ protected:
     virtual void            startDrag ();
 public:
     ~KPushButton ();
+    virtual QSize           sizeHint () const;
+    KAuth::Action*          authAction () const;
+    void                    setAuthAction (KAuth::Action* action);
+    void                    setAuthAction (const QString& actionName);
+protected:
+    virtual void            paintEvent (QPaintEvent*);
+signals:
+    void                    authorized (KAuth::Action* action);
 };
 // KPushButton
 

@@ -27,6 +27,13 @@ namespace KdePrint
 {
 QPrintDialog*           createPrintDialog (QPrinter* printer, const QList<QWidget*>& customTabs, QWidget* parent /Transfer/ = 0);
 QPrintDialog*           createPrintDialog (QPrinter* printer, QWidget* parent /Transfer/ = 0);
+enum PageSelectPolicy
+{
+    ApplicationSelectsPages,
+    SystemSelectsPages
+};
+QPrintDialog*           createPrintDialog (QPrinter* printer, KdePrint::PageSelectPolicy pageSelectPolicy, const QList<QWidget*>& customTabs, QWidget* parent /Transfer/ = 0);
+QPrintDialog*           createPrintDialog (QPrinter* printer, KdePrint::PageSelectPolicy pageSelectPolicy, QWidget* parent /Transfer/ = 0);
 };
 // KdePrint
 

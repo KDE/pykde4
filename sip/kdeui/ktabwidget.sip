@@ -87,6 +87,8 @@ protected:
     virtual void            wheelDelta (int);
 public:
     ~KTabWidget ();
+protected:
+    virtual void            mouseReleaseEvent (QMouseEvent*);
 };
 // KTabWidget
 

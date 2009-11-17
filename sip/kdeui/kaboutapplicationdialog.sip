@@ -36,6 +36,14 @@ private:
 //end
 public:
     ~KAboutApplicationDialog ();
+    enum Option
+    {
+        NoOptions,
+        HideTranslators,
+        HideKdeVersion
+    };
+    typedef QFlags<KAboutApplicationDialog::Option> Options;
+    explicit                KAboutApplicationDialog (const KAboutData* aboutData, KAboutApplicationDialog::Options opts, QWidget* parent /TransferThis/ = 0);
 };
 // KAboutApplicationDialog
 

@@ -57,6 +57,16 @@ protected:
     virtual void            dataChanged (const QModelIndex& topLeft, const QModelIndex& bottomRight);
 public:
     ~KCategorizedView ();
+    void                    setGridSizeOwn (const QSize& size);
+    int                     categorySpacing () const;
+    void                    setCategorySpacing (int categorySpacing);
+    bool                    alternatingBlockColors () const;
+    void                    setAlternatingBlockColors (bool enable);
+    bool                    collapsibleBlocks () const;
+    void                    setCollapsibleBlocks (bool enable);
+protected:
+    virtual void            dragEnterEvent (QDragEnterEvent* event);
+    virtual void            rowsAboutToBeRemoved (const QModelIndex& parent, int start, int end);
 };
 // KCategorizedView
 

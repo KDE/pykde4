@@ -90,6 +90,7 @@ private:
 //end
 public:
     ~KColorPatch ();
+    QColor                  color () const;
 };
 // KColorPatch
 

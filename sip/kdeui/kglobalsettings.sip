@@ -132,7 +132,8 @@ public:
         CursorChanged,
         ToolbarStyleChanged,
         ClipboardConfigChanged,
-        BlockShortcuts
+        BlockShortcuts,
+        NaturalSortingChanged
     };
 
     static void             emitChange (KGlobalSettings::ChangeType changeType, int arg = 0);
@@ -165,6 +166,9 @@ private:
 public:
     ~KGlobalSettings ();
     void                    activate ();
+    static bool             naturalSorting ();
+signals:
+    void                    naturalSortingChanged ();
 };
 // KGlobalSettings
 

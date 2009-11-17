@@ -26,7 +26,6 @@ class ActionButton : PolkitQt::Action
 %TypeHeaderCode
 #include <PolicyKit/polkit-qt/actionbutton.h>
 %End
-                            ActionButton (const PolkitQt::ActionButton&);
 
 public:
     explicit                ActionButton (QAbstractButton* button, const QString& actionId = QString(), QObject* parent /TransferThis/ = 0);
@@ -37,15 +36,14 @@ public:
 signals:
     void                    clicked (QAbstractButton* button, bool checked = 0);
 
+public:
+    virtual ~ActionButton ();
 protected:
+//ig                            ActionButton (ActionButtonPrivate& dd, const QString& actionId, QObject* parent /TransferThis/ = 0);
+};
+// ActionButton
 
-
-//mt undefined symbol: ActionButtonPrivate& dd -- need mapped type?
-//mt                        ActionButton (ActionButtonPrivate& dd, const QString& actionId, QObject* parent /TransferThis/ = 0);
-
-
-};   // ActionButton
-
-};   // PolkitQt
+};
+// PolkitQt
 
 

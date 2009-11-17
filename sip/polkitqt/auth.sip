@@ -48,8 +48,10 @@ bool                    obtainAuth (const QString& actionId, WId winId = 0, qint
 PolkitQt::Auth::Result  isCallerAuthorized (const QString& actionId, qint64 pid, bool revokeIfOneShot);
 PolkitQt::Auth::Result  isCallerAuthorized (const QString& actionId, const QString& dbusName, bool revokeIfOneShot);
 //ig PolkitQt::Auth::Result  isCallerAuthorized (PolKitAction* action, const QString& dbusName, bool revokeIfOneShot);
-};   // Auth
+};
+// Auth
 
-};   // PolkitQt
+};
+// PolkitQt
 
 

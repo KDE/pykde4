@@ -34,8 +34,10 @@ public:
     QList<QAbstractButton*>  buttons () const;
     void                    addButton (QAbstractButton* button);
     void                    removeButton (QAbstractButton* button);
-};   // ActionButtons
+};
+// ActionButtons
 
-};   // PolkitQt
+};
+// PolkitQt
 
 

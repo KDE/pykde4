@@ -25,12 +25,11 @@
 namespace PolkitQt
 {
 
-class Context : QObject
+class Context : QObject /Abstract/
 {
 %TypeHeaderCode
 #include <PolicyKit/polkit-qt/context.h>
 %End
-                            Context (const PolkitQt::Context&);
 
 public:
 //ig    static PolkitQt::Context*  instance (PolKitContext* context = 0);
@@ -45,8 +44,12 @@ signals:
 
 private:
 //ig    explicit                Context (PolKitContext* context, QObject* parent /TransferThis/ = 0);
-};   // Context
+public:
+    ~Context ();
+};
+// Context
 
-};   // PolkitQt
+};
+// PolkitQt
 
 

@@ -28,7 +28,6 @@ class Action : QAction
 %TypeHeaderCode
 #include <PolicyKit/polkit-qt/action.h>
 %End
-                            Action (const PolkitQt::Action&);
 
 public:
     explicit                Action (const QString& actionId = QString(), QObject* parent /TransferThis/ = 0);
@@ -104,8 +103,11 @@ public:
     qint64                  targetPID () const;
     bool                    isAllowed () const;
     bool                    is (const QString& actionId) const /PyName=is_/;
-};   // Action
+    ~Action ();
+};
+// Action
 
-};   // PolkitQt
+};
+// PolkitQt
 
 

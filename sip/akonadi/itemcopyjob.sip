@@ -33,8 +33,12 @@ public:
 
 protected:
     void                    doStart ();
-};   // ItemCopyJob
+public:
+    ~ItemCopyJob ();
+};
+// ItemCopyJob
 
-};   // Akonadi
+};
+// Akonadi
 
 

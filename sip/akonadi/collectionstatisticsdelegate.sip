@@ -35,8 +35,12 @@ public:
 protected:
     virtual void            paint (QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
     virtual void            initStyleOption (QStyleOptionViewItem* option, const QModelIndex& index) const;
-};   // CollectionStatisticsDelegate
+public:
+    ~CollectionStatisticsDelegate ();
+};
+// CollectionStatisticsDelegate
 
-};   // Akonadi
+};
+// Akonadi
 
 

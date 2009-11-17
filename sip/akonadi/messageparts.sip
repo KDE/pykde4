@@ -17,3 +17,17 @@
 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+%ModuleHeaderCode
+#include <akonadi/kmime/messageparts.h>
+%End
+
+namespace Akonadi
+{
+namespace MessagePart
+{
+const char* Envelope;
+const char* Body;
+const char* Header;
+};
+};

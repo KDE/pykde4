@@ -28,13 +28,38 @@ class ItemSerializerPlugin /Abstract/
 %End
 
 public:
-    virtual bool            deserialize (Akonadi::Item& item, const QByteArray& label, QIODevice& data, int version) = 0;
+    virtual bool            deserialize (Akonadi::Item& item, const QByteArray& label, QIODevice& data, int version)=0;
 
-    virtual void       serialize (const Akonadi::Item& item, const QByteArray& label, QIODevice& data, int& version /in/) = 0;
+    virtual void            serialize (const Akonadi::Item& item, const QByteArray& label, QIODevice& data, int& version /in/)=0;
 
     virtual QSet<QByteArray>  parts (const Akonadi::Item& item) const;
-};   // ItemSerializerPlugin
+    virtual ~ItemSerializerPlugin ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'ItemSerializerPlugin'
+    sipClass = NULL;
 
-};   // Akonadi
+    if (dynamic_cast<Akonadi::ItemSerializerPluginV2*>(sipCpp))
+        sipClass = sipClass_Akonadi_ItemSerializerPluginV2;
+%End
+};
+// ItemSerializerPlugin
+
+class ItemSerializerPluginV2 : Akonadi::ItemSerializerPlugin
+{
+%TypeHeaderCode
+#include <akonadi/itemserializerplugin.h>
+%End
+
+public:
+    virtual ~ItemSerializerPluginV2 ();
+    virtual void            apply (Akonadi::Item& item, const Akonadi::Item& other);
+    virtual QSet<QByteArray>  availableParts (const Akonadi::Item& item) const;
+};
+};
+// Akonadi
 
 
+%ModuleHeaderCode
+//ctscc
+#include <akonadi/itemserializerplugin.h>
+%End

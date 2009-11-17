@@ -32,8 +32,11 @@ public:
     void                    configure (QWidget* parent /Transfer/ = 0);
     Akonadi::AgentInstance  instance () const;
     void                    start ();
-};   // AgentInstanceCreateJob
+    ~AgentInstanceCreateJob ();
+};
+// AgentInstanceCreateJob
 
-};   // Akonadi
+};
+// Akonadi
 
 

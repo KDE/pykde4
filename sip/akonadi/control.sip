@@ -38,8 +38,12 @@ public:
 
 protected:
                             Control ();
-};   // Control
+public:
+    ~Control ();
+};
+// Control
 
-};   // Akonadi
+};
+// Akonadi
 
 

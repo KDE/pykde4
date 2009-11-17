@@ -28,8 +28,8 @@ class CollectionModel : QAbstractItemModel
 %End
 
 
-public:
 
+public:
     enum Roles
     {
         OldCollectionIdRole,
@@ -56,12 +56,17 @@ public:
     virtual bool            dropMimeData (const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent);
     virtual QStringList     mimeTypes () const;
 
+
+protected:
+//ig    explicit                CollectionModel (CollectionModelPrivate* d, QObject* parent /TransferThis/ = 0);
+public:
+    virtual ~CollectionModel ();
 protected:
     Akonadi::Collection     collectionForId (Akonadi::Entity::Id id) const;
+};
+// CollectionModel
 
-//ig     explicit           CollectionModel (CollectionModelPrivate* d, QObject* parent /TransferThis/ = 0);
-};   // CollectionModel
-
-};   // Akonadi
+};
+// Akonadi
 
 

@@ -34,8 +34,13 @@ public:
 
 protected:
     virtual void            doStart ();
-};   // ItemDeleteJob
+public:
+    ~ItemDeleteJob ();
+    Akonadi::Item::List     deletedItems () const;
+};
+// ItemDeleteJob
 
-};   // Akonadi
+};
+// Akonadi
 
 

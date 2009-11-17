@@ -38,8 +38,11 @@ public:
     bool                    isWantedCollection (const Akonadi::Collection& collection) const;
     static bool             isWantedItem (const Akonadi::Item& item, const QString& wantedMimeType);
     static bool             isWantedCollection (const Akonadi::Collection& collection, const QString& wantedMimeType);
-};   // MimeTypeChecker
+    ~MimeTypeChecker ();
+};
+// MimeTypeChecker
 
-};   // Akonadi
+};
+// Akonadi
 
 

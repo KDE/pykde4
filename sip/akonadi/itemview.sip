@@ -44,8 +44,12 @@ signals:
 
 protected:
     void                    contextMenuEvent (QContextMenuEvent* event);
-};   // ItemView
+public:
+    virtual ~ItemView ();
+};
+// ItemView
 
-};   // Akonadi
+};
+// Akonadi
 
 

@@ -27,8 +27,8 @@ class CollectionFetchJob : Akonadi::Job
 #include <akonadi/collectionfetchjob.h>
 %End
 
-public:
 
+public:
     enum Type
     {
         Base,
@@ -50,8 +50,14 @@ protected:
     virtual void            doStart ();
     virtual void            doHandleResponse (const QByteArray& tag, const QByteArray& data);
     void                    slotResult (KJob* job);
-};   // CollectionFetchJob
+public:
+    virtual ~CollectionFetchJob ();
+    void                    setFetchScope (const Akonadi::CollectionFetchScope& fetchScope);
+    Akonadi::CollectionFetchScope&  fetchScope ();
+};
+// CollectionFetchJob
 
-};   // Akonadi
+};
+// Akonadi
 
 

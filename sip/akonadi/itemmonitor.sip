@@ -21,7 +21,7 @@
 namespace Akonadi
 {
 
-class ItemMonitor
+class ItemMonitor /NoDefaultCtors/
 {
 %TypeHeaderCode
 #include <akonadi/itemmonitor.h>
@@ -39,10 +39,12 @@ protected:
     void                    setFetchScope (const Akonadi::ItemFetchScope& fetchScope);
     Akonadi::ItemFetchScope&  fetchScope ();
 
-private:
-                            ItemMonitor (const Akonadi::ItemMonitor&);
-};   // ItemMonitor
+public:
+    virtual ~ItemMonitor ();
+};
+// ItemMonitor
 
-};   // Akonadi
+};
+// Akonadi
 
 

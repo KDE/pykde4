@@ -36,7 +36,6 @@ public:
 
     const char* FullPayload;
                             Item ();
-    explicit                Item (Id id);
     explicit                Item (const QString& mimeType);
                             Item (const Akonadi::Item& other);
     static Akonadi::Item    fromUrl (const KUrl& url);
@@ -67,8 +66,14 @@ public:
     };
 
     KUrl                    url (Akonadi::Item::UrlType type = Akonadi::Item::UrlShort) const;
-};   // Item
+    explicit                Item (Akonadi::Entity::Id id);
+    ~Item ();
+    QSet<QByteArray>        availablePayloadParts () const;
+    void                    apply (const Akonadi::Item& other);
+};
+// Item
 
-};   // Akonadi
+};
+// Akonadi
 
 

@@ -41,8 +41,12 @@ public:
     bool                    syncOnDemand () const;
     void                    setSyncOnDemand (bool enable);
     bool                    operator == (const Akonadi::CachePolicy& other) const;
-};   // CachePolicy
+    ~CachePolicy ();
+};
+// CachePolicy
 
-};   // Akonadi
+};
+// Akonadi
 
 
+//ig QDebug                  operator << (QDebug, const Akonadi::CachePolicy&);

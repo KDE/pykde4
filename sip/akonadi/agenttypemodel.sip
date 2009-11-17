@@ -27,8 +27,8 @@ class AgentTypeModel : QAbstractItemModel
 #include <akonadi/agenttypemodel.h>
 %End
 
-public:
 
+public:
     enum Roles
     {
         TypeRole,
@@ -46,8 +46,11 @@ public:
     virtual QModelIndex     index (int row, int column, const QModelIndex& parent = QModelIndex()) const;
     virtual QModelIndex     parent (const QModelIndex& index) const;
     virtual Qt::ItemFlags   flags (const QModelIndex& index) const;
-};   // AgentTypeModel
+    virtual ~AgentTypeModel ();
+};
+// AgentTypeModel
 
-};   // Akonadi
+};
+// Akonadi
 
 

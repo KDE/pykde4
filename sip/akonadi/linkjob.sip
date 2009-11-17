@@ -31,8 +31,12 @@ public:
 
 protected:
     void                    doStart ();
-};   // LinkJob
+public:
+    ~LinkJob ();
+};
+// LinkJob
 
-};   // Akonadi
+};
+// Akonadi
 
 

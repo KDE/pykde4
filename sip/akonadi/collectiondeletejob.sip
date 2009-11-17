@@ -32,8 +32,12 @@ public:
 
 protected:
     virtual void            doStart ();
-};   // CollectionDeleteJob
+public:
+    ~CollectionDeleteJob ();
+};
+// CollectionDeleteJob
 
-};   // Akonadi
+};
+// Akonadi
 
 

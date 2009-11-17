@@ -32,8 +32,12 @@ public:
 
 protected:
     void                    doStart ();
-};   // CollectionCopyJob
+public:
+    ~CollectionCopyJob ();
+};
+// CollectionCopyJob
 
-};   // Akonadi
+};
+// Akonadi
 
 

@@ -32,8 +32,13 @@ public:
 
 protected:
     void                    doStart ();
-};   // ItemMoveJob
+public:
+                            ItemMoveJob (const QList<Akonadi::Item>& items, const Akonadi::Collection& target, QObject* parent /TransferThis/ = 0);
+    ~ItemMoveJob ();
+};
+// ItemMoveJob
 
-};   // Akonadi
+};
+// Akonadi
 
 

@@ -30,8 +30,12 @@ class CollectionPropertiesDialog : KDialog
 public:
     explicit                CollectionPropertiesDialog (const Akonadi::Collection& collection, QWidget* parent /TransferThis/ = 0);
     static void             registerPage (Akonadi::CollectionPropertiesPageFactory* factory);
-};   // CollectionPropertiesDialog
+    ~CollectionPropertiesDialog ();
+    static void             useDefaultPage (bool defaultPage);
+};
+// CollectionPropertiesDialog
 
-};   // Akonadi
+};
+// Akonadi
 
 

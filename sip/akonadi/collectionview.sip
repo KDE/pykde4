@@ -44,8 +44,12 @@ protected:
     virtual void            dragLeaveEvent (QDragLeaveEvent* event);
     virtual void            dropEvent (QDropEvent* event);
     virtual void            contextMenuEvent (QContextMenuEvent* event);
-};   // CollectionView
+public:
+    virtual ~CollectionView ();
+};
+// CollectionView
 
-};   // Akonadi
+};
+// Akonadi
 
 

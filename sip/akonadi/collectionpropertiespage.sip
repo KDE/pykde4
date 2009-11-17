@@ -29,12 +29,14 @@ class CollectionPropertiesPage : QWidget
 
 public:
     explicit                CollectionPropertiesPage (QWidget* parent /TransferThis/ = 0);
-    virtual void            load (const Akonadi::Collection& collection) = 0;
-    virtual void            save (Akonadi::Collection& collection) = 0;
+    virtual void            load (const Akonadi::Collection& collection)=0;
+    virtual void            save (Akonadi::Collection& collection)=0;
     virtual bool            canHandle (const Akonadi::Collection& collection) const;
     void                    setPageTitle (const QString& title);
     QString                 pageTitle () const;
-};   // CollectionPropertiesPage
+    ~CollectionPropertiesPage ();
+};
+// CollectionPropertiesPage
 
 
 class CollectionPropertiesPageFactory
@@ -44,9 +46,12 @@ class CollectionPropertiesPageFactory
 %End
 
 public:
-    virtual Akonadi::CollectionPropertiesPage*  createWidget (QWidget* parent /Transfer/ = 0) const = 0;
-};   // CollectionPropertiesPageFactory
+    virtual Akonadi::CollectionPropertiesPage*  createWidget (QWidget* parent /Transfer/ = 0) const=0;
+    virtual ~CollectionPropertiesPageFactory ();
+};
+// CollectionPropertiesPageFactory
 
-};   // Akonadi
+};
+// Akonadi
 
 

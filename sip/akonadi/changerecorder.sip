@@ -38,8 +38,12 @@ public:
 signals:
     void                    changesAdded ();
     void                    nothingToReplay ();
-};   // ChangeRecorder
+public:
+    ~ChangeRecorder ();
+};
+// ChangeRecorder
 
-};   // Akonadi
+};
+// Akonadi
 
 

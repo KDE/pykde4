@@ -27,8 +27,8 @@ class MessageModel : Akonadi::ItemModel
 #include <akonadi/kmime/messagemodel.h>
 %End
 
-public:
 
+public:
     enum Column
     {
         Subject,
@@ -42,8 +42,13 @@ public:
     virtual int             columnCount (const QModelIndex& parent = QModelIndex()) const;
     virtual QVariant        data (const QModelIndex& index, int role = Qt::DisplayRole) const;
     virtual QVariant        headerData (int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-};   // MessageModel
+    virtual ~MessageModel ();
+    virtual int             rowCount (const QModelIndex& parent = QModelIndex()) const;
+    virtual QStringList     mimeTypes () const;
+};
+// MessageModel
 
-};   // Akonadi
+};
+// Akonadi
 
 

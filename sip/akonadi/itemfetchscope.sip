@@ -41,8 +41,19 @@ public:
     bool                    cacheOnly () const;
     void                    setCacheOnly (bool cacheOnly);
     bool                    isEmpty () const;
-};   // ItemFetchScope
+    enum AncestorRetrieval
+    {
+        None,
+        Parent,
+        All
+    };
+    ~ItemFetchScope ();
+    void                    setAncestorRetrieval (Akonadi::ItemFetchScope::AncestorRetrieval ancestorDepth);
+    Akonadi::ItemFetchScope::AncestorRetrieval  ancestorRetrieval () const;
+};
+// ItemFetchScope
 
-};   // Akonadi
+};
+// Akonadi
 
 

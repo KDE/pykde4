@@ -36,8 +36,13 @@ public:
 
 protected:
     virtual bool            filterAcceptsRow (int sourceRow, const QModelIndex& sourceParent) const;
-};   // CollectionFilterProxyModel
+public:
+    virtual ~CollectionFilterProxyModel ();
+    virtual Qt::ItemFlags   flags (const QModelIndex& index) const;
+};
+// CollectionFilterProxyModel
 
-};   // Akonadi
+};
+// Akonadi
 
 

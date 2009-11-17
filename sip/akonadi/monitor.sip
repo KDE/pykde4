@@ -41,7 +41,7 @@ public:
     void                    setItemFetchScope (const Akonadi::ItemFetchScope& fetchScope);
     Akonadi::ItemFetchScope&  itemFetchScope ();
     Akonadi::Collection::List  collectionsMonitored () const;
-//FIXME    QList<Item::Id>         itemsMonitored () const;
+    QList<Akonadi::Entity::Id>         itemsMonitored () const;
     QStringList             mimeTypesMonitored () const;
     QList<QByteArray>       resourcesMonitored () const;
     bool                    isAllMonitored () const;
@@ -56,7 +56,6 @@ signals:
     void                    collectionAdded (const Akonadi::Collection& collection, const Akonadi::Collection& parent);
     void                    collectionChanged (const Akonadi::Collection& collection);
     void                    collectionRemoved (const Akonadi::Collection& collection);
-    void                    collectionStatisticsChanged (Akonadi::Entity::Id id, const Akonadi::CollectionStatistics& statistics);
     void                    collectionMonitored (const Akonadi::Collection& collection, bool monitored);
     void                    itemMonitored (const Akonadi::Item& item, bool monitored);
     void                    resourceMonitored (const QByteArray& identifier, bool monitored);
@@ -64,9 +63,19 @@ signals:
     void                    allMonitored (bool monitored);
 
 protected:
-//ig     explicit           Monitor (MonitorPrivate* d, QObject* parent /TransferThis/ = 0);
-};   // Monitor
+//ig    explicit                Monitor (MonitorPrivate* d, QObject* parent /TransferThis/ = 0);
+public:
+    virtual ~Monitor ();
+    void                    setCollectionFetchScope (const Akonadi::CollectionFetchScope& fetchScope);
+    Akonadi::CollectionFetchScope&  collectionFetchScope ();
+signals:
+    void                    collectionChanged (const Akonadi::Collection& collection, const QSet<QByteArray>& attributeNames);
+    void                    collectionMoved (const Akonadi::Collection& collection, const Akonadi::Collection& source, const Akonadi::Collection& destination);
+    void                    collectionStatisticsChanged (Akonadi::Entity::Id id, const Akonadi::CollectionStatistics& statistics);
+};
+// Monitor
 
-};   // Akonadi
+};
+// Akonadi
 
 

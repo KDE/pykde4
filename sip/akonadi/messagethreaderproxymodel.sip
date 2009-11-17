@@ -40,8 +40,11 @@ public:
     QModelIndex             mapFromSource (const QModelIndex& index) const;
     QModelIndex             mapToSource (const QModelIndex& index) const;
     void                    setSourceModel (QAbstractItemModel* sourceMessageModel);
-};   // MessageThreaderProxyModel
+    virtual ~MessageThreaderProxyModel ();
+};
+// MessageThreaderProxyModel
 
-};   // Akonadi
+};
+// Akonadi
 
 

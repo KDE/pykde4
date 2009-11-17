@@ -35,8 +35,12 @@ public:
 signals:
     void                    currentChanged (const Akonadi::AgentInstance& current, const Akonadi::AgentInstance& previous);
     void                    doubleClicked (const Akonadi::AgentInstance& current);
-};   // AgentInstanceWidget
+public:
+    ~AgentInstanceWidget ();
+};
+// AgentInstanceWidget
 
-};   // Akonadi
+};
+// Akonadi
 
 

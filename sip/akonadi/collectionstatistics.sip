@@ -36,8 +36,11 @@ public:
     void                    setUnreadCount (qint64 count);
     qint64                  size () const;
     void                    setSize (qint64 size);
-};   // CollectionStatistics
+    ~CollectionStatistics ();
+};
+// CollectionStatistics
 
-};   // Akonadi
+};
+// Akonadi
 
-
+//ig QDebug                  operator << (QDebug d, const Akonadi::CollectionStatistics&);

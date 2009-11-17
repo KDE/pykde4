@@ -32,8 +32,12 @@ public:
 
 protected:
                             AttributeFactory ();
-};   // AttributeFactory
+public:
+    ~AttributeFactory ();
+};
+// AttributeFactory
 
-};   // Akonadi
+};
+// Akonadi
 
 

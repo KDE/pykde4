@@ -32,18 +32,22 @@ public:
     void                    setFullSyncItems (const Akonadi::Item::List& items);
     void                    setTotalItems (int amount);
     void                    setStreamingEnabled (bool enable);
-    void                    deliveryDone();
+    void                    deliveryDone ();
 
     void                    setIncrementalSyncItems (const Akonadi::Item::List& changedItems, const Akonadi::Item::List& removedItems);
 
-    void                    setFetchScope (Akonadi::ItemFetchScope &fetchScope);
-    Akonadi::ItemFetchScope&         fetchScope();
+    void                    setFetchScope (Akonadi::ItemFetchScope& fetchScope);
+    Akonadi::ItemFetchScope&  fetchScope ();
 
 protected:
     void                    doStart ();
-    virtual bool            updateItem (const Akonadi::Item &storedItem, Akonadi::Item &newItem);
-};   // ItemSync
+    virtual bool            updateItem (const Akonadi::Item& storedItem, Akonadi::Item& newItem);
+public:
+    ~ItemSync ();
+};
+// ItemSync
 
-};   // Akonadi
+};
+// Akonadi
 
 

@@ -35,8 +35,12 @@ protected:
     bool                    addSubjob (KJob* job);
     void                    doStart ();
     void                    slotResult (KJob* job);
-};   // TransactionSequence
+public:
+    ~TransactionSequence ();
+};
+// TransactionSequence
 
-};   // Akonadi
+};
+// Akonadi
 
 

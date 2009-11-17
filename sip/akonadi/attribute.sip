@@ -30,14 +30,44 @@ class Attribute /Abstract/
 public:
     typedef QList<Akonadi::Attribute*> List;
 
-    virtual QByteArray      type () const = 0;
+    virtual QByteArray      type () const=0;
 
 // FIXME This causes trouble for g++ w.r.t. the subclasses.
-//ig    virtual Akonadi::Attribute*  clone () const = 0;
-    virtual QByteArray      serialized () const = 0;
-    virtual void            deserialize (const QByteArray& data) = 0;
-};   // Attribute
+//ig    virtual Akonadi::Attribute*  clone () const=0;
+    virtual QByteArray      serialized () const=0;
+    virtual void            deserialize (const QByteArray& data)=0;
+    virtual ~Attribute ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'Attribute'
+    sipClass = NULL;
 
-};   // Akonadi
+    if (dynamic_cast<Akonadi::AddressAttribute*>(sipCpp))
+        sipClass = sipClass_Akonadi_AddressAttribute;
+    else if (dynamic_cast<Akonadi::CollectionQuotaAttribute*>(sipCpp))
+        sipClass = sipClass_Akonadi_CollectionQuotaAttribute;
+    else if (dynamic_cast<Akonadi::EntityDisplayAttribute*>(sipCpp))
+        sipClass = sipClass_Akonadi_EntityDisplayAttribute;
+    else if (dynamic_cast<Akonadi::EntityHiddenAttribute*>(sipCpp))
+        sipClass = sipClass_Akonadi_EntityHiddenAttribute;
+    else if (dynamic_cast<Akonadi::MessageFolderAttribute*>(sipCpp))
+        sipClass = sipClass_Akonadi_MessageFolderAttribute;
+    else if (dynamic_cast<Akonadi::MessageThreadingAttribute*>(sipCpp))
+        sipClass = sipClass_Akonadi_MessageThreadingAttribute;
+%End
+};
+// Attribute
+
+};
+// Akonadi
 
 
+%ModuleHeaderCode
+//ctscc
+#include <akonadi/kmime/addressattribute.h>
+#include <akonadi/attribute.h>
+#include <akonadi/collectionquotaattribute.h>
+#include <akonadi/entitydisplayattribute.h>
+#include <akonadi/entityhiddenattribute.h>
+#include <akonadi/kmime/messagefolderattribute.h>
+#include <akonadi/kmime/messagethreadingattribute.h>
+%End

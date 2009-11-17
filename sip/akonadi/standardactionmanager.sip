@@ -27,8 +27,8 @@ class StandardActionManager : QObject
 #include <akonadi/standardactionmanager.h>
 %End
 
-public:
 
+public:
     enum Type
     {
         CreateCollection,
@@ -40,6 +40,15 @@ public:
         Paste,
         DeleteItems,
         ManageLocalSubscriptions,
+        AddToFavoriteCollections,
+        RemoveFromFavoriteCollections,
+        RenameFavoriteCollection,
+        CopyCollectionToMenu,
+        CopyItemToMenu,
+        MoveItemToMenu,
+        MoveCollectionToMenu,
+        CutItems,
+        CutCollections,
         LastType
     };
 
@@ -53,8 +62,14 @@ public:
 
 signals:
     void                    actionStateUpdated ();
-};   // StandardActionManager
+public:
+    ~StandardActionManager ();
+    void                    setFavoriteCollectionsModel (Akonadi::FavoriteCollectionsModel* favoritesModel);
+    void                    setFavoriteSelectionModel (QItemSelectionModel* selectionModel);
+};
+// StandardActionManager
 
-};   // Akonadi
+};
+// Akonadi
 
 

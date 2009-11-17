@@ -32,7 +32,7 @@ public:
     explicit                ItemFetchJob (const Akonadi::Collection& collection, QObject* parent /TransferThis/ = 0);
     explicit                ItemFetchJob (const Akonadi::Item& item, QObject* parent /TransferThis/ = 0);
     Akonadi::Item::List     items () const;
-    void                    setFetchScope (Akonadi::ItemFetchScope& fetchScope);
+//ig    void                    setFetchScope (Akonadi::ItemFetchScope& fetchScope);
     Akonadi::ItemFetchScope&  fetchScope ();
     void                    setCollection (const Akonadi::Collection& collection);
 
@@ -42,8 +42,14 @@ signals:
 protected:
     virtual void            doStart ();
     virtual void            doHandleResponse (const QByteArray& tag, const QByteArray& data);
-};   // ItemFetchJob
+public:
+    explicit                ItemFetchJob (const Akonadi::Item::List& items, QObject* parent /TransferThis/ = 0);
+    virtual ~ItemFetchJob ();
+    void                    setFetchScope (const Akonadi::ItemFetchScope& fetchScope);
+};
+// ItemFetchJob
 
-};   // Akonadi
+};
+// Akonadi
 
 

@@ -31,7 +31,7 @@ class AgentManager : QObject
 public:
     static Akonadi::AgentManager*  self ();
     Akonadi::AgentType::List  types () const;
-    Akonadi::AgentType      type (const QString& identififer) const;
+    Akonadi::AgentType      type (const QString& identifier) const;
     Akonadi::AgentInstance::List  instances () const;
     Akonadi::AgentInstance  instance (const QString& identifier) const;
     void                    removeInstance (const Akonadi::AgentInstance& instance);
@@ -51,8 +51,12 @@ signals:
 
 private:
                             AgentManager ();
-};   // AgentManager
+public:
+    ~AgentManager ();
+};
+// AgentManager
 
-};   // Akonadi
+};
+// Akonadi
 
 

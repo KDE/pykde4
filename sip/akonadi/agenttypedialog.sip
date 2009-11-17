@@ -31,8 +31,11 @@ public:
     Akonadi::AgentType      agentType () const;
     Akonadi::AgentFilterProxyModel*  agentFilterProxyModel () const;
     virtual void            done (int result);
-};   // AgentTypeDialog
+    ~AgentTypeDialog ();
+};
+// AgentTypeDialog
 
-};   // Akonadi
+};
+// Akonadi
 
 

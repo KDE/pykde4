@@ -32,7 +32,10 @@ public:
 
 protected:
     virtual void            doStart ();
-};   // TransactionBeginJob
+public:
+    ~TransactionBeginJob ();
+};
+// TransactionBeginJob
 
 
 class TransactionRollbackJob : Akonadi::Job
@@ -46,7 +49,10 @@ public:
 
 protected:
     virtual void            doStart ();
-};   // TransactionRollbackJob
+public:
+    ~TransactionRollbackJob ();
+};
+// TransactionRollbackJob
 
 
 class TransactionCommitJob : Akonadi::Job
@@ -60,8 +66,12 @@ public:
 
 protected:
     virtual void            doStart ();
-};   // TransactionCommitJob
+public:
+    ~TransactionCommitJob ();
+};
+// TransactionCommitJob
 
-};   // Akonadi
+};
+// Akonadi
 
 

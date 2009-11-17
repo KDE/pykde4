@@ -32,8 +32,11 @@ public:
     QByteArray              sessionId () const;
     static Akonadi::Session*  defaultSession ();
     void                    clear ();
-};   // Session
+    ~Session ();
+};
+// Session
 
-};   // Akonadi
+};
+// Akonadi
 
 

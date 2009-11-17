@@ -40,13 +40,14 @@ public:
         CanChangeCollection,
         CanCreateCollection,
         CanDeleteCollection,
+        CanLinkItem,
+        CanUnlinkItem,
         AllRights
     };
 
     typedef QFlags<Akonadi::Collection::Right> Rights;
 
                             Collection ();
-    explicit                Collection (Id id);
                             Collection (const Akonadi::Collection& other);
     static Akonadi::Collection  fromUrl (const KUrl& url);
     QString                 name () const;
@@ -56,7 +57,6 @@ public:
     QStringList             contentMimeTypes () const;
     void                    setContentMimeTypes (const QStringList& types);
     Id                      parent () const;
-    void                    setParent (Id parent);
     void                    setParent (const Akonadi::Collection& collection);
     QString                 parentRemoteId () const;
     void                    setParentRemoteId (const QString& identifier);
@@ -69,9 +69,15 @@ public:
     Akonadi::CollectionStatistics  statistics () const;
     void                    setStatistics (const Akonadi::CollectionStatistics& statistics);
     KUrl                    url () const;
-};   // Collection
+    explicit                Collection (Akonadi::Entity::Id id);
+    ~Collection ();
+    void                    setParent (Akonadi::Entity::Id parent);
+};
+// Collection
 
-};   // Akonadi
+};
+// Akonadi
 
 uint                    qHash (const Akonadi::Collection& collection);
 
+//ig QDebug                  operator << (QDebug d, const Akonadi::Collection& collection);

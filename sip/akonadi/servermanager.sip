@@ -38,10 +38,12 @@ signals:
     void                    stopped ();
 
 private:
-//ig                        ServerManager (ServerManagerPrivate* dd);
+//ig                            ServerManager (ServerManagerPrivate* dd);
 
-};   // ServerManager
+};
+// ServerManager
 
-};   // Akonadi
+};
+// Akonadi
 
 

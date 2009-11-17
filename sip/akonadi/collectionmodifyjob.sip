@@ -32,8 +32,13 @@ public:
 
 protected:
     virtual void            doStart ();
-};   // CollectionModifyJob
+public:
+    ~CollectionModifyJob ();
+    Akonadi::Collection     collection () const;
+};
+// CollectionModifyJob
 
-};   // Akonadi
+};
+// Akonadi
 
 

@@ -49,7 +49,7 @@ signals:
     void                    writeFinished (Akonadi::Job* job);
 
 protected:
-    virtual void            doStart () = 0;
+    virtual void            doStart ()=0;
     virtual void            doHandleResponse (const QByteArray& tag, const QByteArray& data);
     virtual bool            addSubjob (KJob* job);
     virtual bool            removeSubjob (KJob* job);
@@ -57,11 +57,15 @@ protected:
     void                    emitWriteFinished ();
     virtual void            slotResult (KJob* job);
 
-//ig                        Job (JobPrivate* dd, QObject* parent /TransferThis/);
+//ig                            Job (JobPrivate* dd, QObject* parent /TransferThis/);
 
 
-};   // Job
+public:
+    virtual ~Job ();
+};
+// Job
 
-};   // Akonadi
+};
+// Akonadi
 
 

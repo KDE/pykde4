@@ -26,7 +26,6 @@ class CollectionRequester : KHBox
 %TypeHeaderCode
 #include <akonadi/collectionrequester.h>
 %End
-                            CollectionRequester (const Akonadi::CollectionRequester&);
 
 public:
     explicit                CollectionRequester (QWidget* parent /TransferThis/ = 0);
@@ -35,8 +34,11 @@ public:
     void                    setMimeTypeFilter (const QStringList& mimeTypes);
     QStringList             mimeTypeFilter () const;
     void                    setCollection (const Akonadi::Collection& collection);
-};   // CollectionRequester
+    ~CollectionRequester ();
+};
+// CollectionRequester
 
-};   // Akonadi
+};
+// Akonadi
 
 

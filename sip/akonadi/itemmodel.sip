@@ -27,8 +27,8 @@ class ItemModel : QAbstractTableModel
 #include <akonadi/itemmodel.h>
 %End
 
-public:
 
+public:
     enum Column
     {
         Id,
@@ -58,7 +58,7 @@ public:
     Akonadi::Item           itemForIndex (const QModelIndex& index) const;
     QModelIndex             indexForItem (const Akonadi::Item& item, const int column) const;
     bool                    dropMimeData (const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent);
-    Akonadi::Collection     collection() const;
+    Akonadi::Collection     collection () const;
     void                    setCollection (const Akonadi::Collection& collection);
 
 signals:
@@ -66,8 +66,13 @@ signals:
 
 protected:
     Akonadi::Session*       session () const;
-};   // ItemModel
+public:
+    virtual ~ItemModel ();
+    virtual Qt::DropActions  supportedDropActions () const;
+};
+// ItemModel
 
-};   // Akonadi
+};
+// Akonadi
 
 

@@ -58,8 +58,12 @@ public:
     void                    reconfigure () const;
     void                    restart () const;
 
-};   // AgentInstance
+    ~AgentInstance ();
+    void                    abortCurrentTask () const;
+};
+// AgentInstance
 
-};   // Akonadi
+};
+// Akonadi
 
 

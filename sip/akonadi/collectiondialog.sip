@@ -26,7 +26,6 @@ class CollectionDialog : KDialog
 %TypeHeaderCode
 #include <akonadi/collectiondialog.h>
 %End
-                            CollectionDialog (const Akonadi::CollectionDialog&);
 
 public:
     explicit                CollectionDialog (QWidget* parent /TransferThis/ = 0);
@@ -36,8 +35,16 @@ public:
     QStringList             mimeTypeFilter () const;
     void                    setSelectionMode (QAbstractItemView::SelectionMode mode);
     QAbstractItemView::SelectionMode  selectionMode () const;
-};   // CollectionDialog
+    explicit                CollectionDialog (QAbstractItemModel* model, QWidget* parent /TransferThis/ = 0);
+    ~CollectionDialog ();
+    void                    setAccessRightsFilter (Akonadi::Collection::Rights rights);
+    Akonadi::Collection::Rights  accessRightsFilter () const;
+    void                    setDescription (const QString& text);
+    void                    setDefaultCollection (const Akonadi::Collection& collection);
+};
+// CollectionDialog
 
-};   // Akonadi
+};
+// Akonadi
 
 

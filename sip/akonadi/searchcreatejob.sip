@@ -32,8 +32,15 @@ public:
 
 protected:
     void                    doStart ();
-};   // SearchCreateJob
+public:
+    ~SearchCreateJob ();
+    Akonadi::Collection     createdCollection () const;
+protected:
+    void                    doHandleResponse (const QByteArray& tag, const QByteArray& data);
+};
+// SearchCreateJob
 
-};   // Akonadi
+};
+// Akonadi
 
 

@@ -35,8 +35,12 @@ public:
 protected:
     virtual void            doStart ();
     virtual void            doHandleResponse (const QByteArray& tag, const QByteArray& data);
-};   // CollectionStatisticsJob
+public:
+    virtual ~CollectionStatisticsJob ();
+};
+// CollectionStatisticsJob
 
-};   // Akonadi
+};
+// Akonadi
 
 

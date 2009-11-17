@@ -37,8 +37,14 @@ public:
     Akonadi::EntityDisplayAttribute*  clone () const;
     QByteArray              serialized () const;
     void                    deserialize (const QByteArray& data);
-};   // EntityDisplayAttribute
+    ~EntityDisplayAttribute ();
+    void                    setActiveIconName (const QString& name);
+    KIcon                   activeIcon () const;
+    QString                 activeIconName () const;
+};
+// EntityDisplayAttribute
 
-};   // Akonadi
+};
+// Akonadi
 
 

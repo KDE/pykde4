@@ -41,8 +41,11 @@ public:
     QStringList             mimeTypes () const;
     QStringList             capabilities () const;
     bool                    operator == (const Akonadi::AgentType& other) const;
-};   // AgentType
+    ~AgentType ();
+};
+// AgentType
 
-};   // Akonadi
+};
+// Akonadi
 
 

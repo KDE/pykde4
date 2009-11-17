@@ -18,11 +18,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-%ModuleHeaderCode
-#include <akonadi/entity.h>
-%End
-
-
 uint                    qHash (const Akonadi::Entity&);
 namespace Akonadi
 {
@@ -37,7 +32,6 @@ class Entity
 public:
     typedef qint64 Id;
 
-    void                    setId (Id identifier);
     Id                      id () const;
     void                    setRemoteId (const QString& id);
     QString                 remoteId () const;
@@ -59,10 +53,18 @@ public:
 
 protected:
                             Entity (const Akonadi::Entity& other);
-//ig                        Entity (EntityPrivate* dd);
-};   // Entity
+//ig                            Entity (EntityPrivate* dd);
+public:
+    ~Entity ();
+    void                    setId (Akonadi::Entity::Id identifier);
+    Akonadi::Collection     parentCollection () const;
+//ig    Akonadi::Collection&    parentCollection ();
+    void                    setParentCollection (const Akonadi::Collection& parent);
+};
+// Entity
 
-};   // Akonadi
+};
+// Akonadi
 
 
 

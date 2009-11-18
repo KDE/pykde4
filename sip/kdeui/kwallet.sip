@@ -79,12 +79,12 @@ public:
     virtual const QString&  currentFolder () const;
     virtual QStringList     entryList ();
     virtual int             renameEntry (const QString& oldName, const QString& newName);
-    virtual int             readEntry (const QString& key, QByteArray& value);
-    virtual int             readMap (const QString& key, QMap<QString,QString>& value);
-    virtual int             readPassword (const QString& key, QString& value);
-    int                     readEntryList (const QString& key, QMap<QString,QByteArray>& value);
-//ig    int                     readMapList (const QString& key, QMap<QString,QMap<QString,QString>>& value);
-    int                     readPasswordList (const QString& key, QMap<QString,QString>& value);
+    virtual int             readEntry (const QString& key, QByteArray& value /Out/);
+    virtual int             readMap (const QString& key, QMap<QString,QString>& value /Out/);
+    virtual int             readPassword (const QString& key, QString& value /Out/);
+    int                     readEntryList (const QString& key, QMap<QString,QByteArray>& value /Out/);
+//ig    int                 readMapList (const QString& key, QMap<QString,QMap<QString,QString>>& value /Out/);
+    int                     readPasswordList (const QString& key, QMap<QString,QString>& value /Out/);
     virtual int             writeEntry (const QString& key, const QByteArray& value, KWallet::Wallet::EntryType entryType);
     virtual int             writeEntry (const QString& key, const QByteArray& value);
     virtual int             writeMap (const QString& key, const QMap<QString,QString>& value);

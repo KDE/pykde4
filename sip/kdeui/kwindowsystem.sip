@@ -99,7 +99,7 @@ signals:
     void                    showingDesktopChanged (bool showing);
 
 protected:
-    virtual void            connectNotify (const char* signal);
+    virtual void            connectNotify (SIP_SIGNAL);
 
 private:
                             KWindowSystem ();

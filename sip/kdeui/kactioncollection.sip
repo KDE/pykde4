@@ -68,6 +68,7 @@ signals:
 
 protected:
 //ig    virtual void            connectNotify (const char* signal);
+    virtual void            connectNotify (SIP_SIGNAL);
     virtual void            slotActionTriggered ();
     virtual void            slotActionHighlighted ();
 

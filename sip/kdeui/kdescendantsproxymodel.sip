@@ -32,7 +32,7 @@ public:
     bool                    displayAncestorData () const;
     void                    setAncestorSeparator (const QString& separator);
     QString                 ancestorSeparator () const;
-//ig FIXME not implemented
+//FIXME not implemented
 //ig    int                     descendantCount (const QModelIndex& index) const;
     QModelIndex             mapFromSource (const QModelIndex& sourceIndex) const;
     QModelIndex             mapToSource (const QModelIndex& proxyIndex) const;

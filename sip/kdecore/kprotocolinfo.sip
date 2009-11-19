@@ -125,19 +125,19 @@ private:
 //end
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KSycocaEntry'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KProtocolInfo*>(sipCpp))
-        sipClass = sipClass_KProtocolInfo;
+        sipType = sipType_KProtocolInfo;
     else if (dynamic_cast<KService*>(sipCpp))
-        sipClass = sipClass_KService;
+        sipType = sipType_KService;
     else if (dynamic_cast<KServiceGroup*>(sipCpp))
-        sipClass = sipClass_KServiceGroup;
+        sipType = sipType_KServiceGroup;
     else if (dynamic_cast<KServiceType*>(sipCpp))
         {
-        sipClass = sipClass_KServiceType;
+        sipType = sipType_KServiceType;
         if (dynamic_cast<KMimeType*>(sipCpp))
-            sipClass = sipClass_KMimeType;
+            sipType = sipType_KMimeType;
         }
 %End
 

@@ -61,10 +61,10 @@ public:
 //ig    bool                    operator bool () const;
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'Error'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<Soprano::Error::ParserError*>(sipCpp))
-        sipClass = sipClass_Soprano_Error_ParserError;
+        sipType = sipType_Soprano_Error_ParserError;
 %End
 };
 // Error

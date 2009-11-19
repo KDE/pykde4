@@ -177,15 +177,15 @@ private:
 //end
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KArchiveEntry'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KArchiveDirectory*>(sipCpp))
-        sipClass = sipClass_KArchiveDirectory;
+        sipType = sipType_KArchiveDirectory;
     else if (dynamic_cast<KArchiveFile*>(sipCpp))
         {
-        sipClass = sipClass_KArchiveFile;
+        sipType = sipType_KArchiveFile;
         if (dynamic_cast<KZipFileEntry*>(sipCpp))
-            sipClass = sipClass_KZipFileEntry;
+            sipType = sipType_KZipFileEntry;
         }
 %End
 

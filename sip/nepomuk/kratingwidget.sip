@@ -73,10 +73,10 @@ protected:
 
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KRatingWidget'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KRatingWidget*>(sipCpp))
-        sipClass = sipClass_KRatingWidget;
+        sipType = sipType_KRatingWidget;
 %End
 
 public:

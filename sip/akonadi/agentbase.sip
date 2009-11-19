@@ -43,10 +43,10 @@ public:
         virtual void            collectionRemoved (const Akonadi::Collection& collection);
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'Observer'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<Akonadi::AgentBase::ObserverV2*>(sipCpp))
-        sipClass = sipClass_Akonadi_AgentBase_ObserverV2;
+        sipType = sipType_Akonadi_AgentBase_ObserverV2;
 %End
     };
     class ObserverV2 : Akonadi::AgentBase::Observer

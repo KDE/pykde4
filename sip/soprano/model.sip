@@ -97,52 +97,52 @@ private:
 
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QObject'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<Soprano::Client::DBusClient*>(sipCpp))
-        sipClass = sipClass_Soprano_Client_DBusClient;
+        sipType = sipType_Soprano_Client_DBusClient;
     else if (dynamic_cast<Soprano::Client::LocalSocketClient*>(sipCpp))
-        sipClass = sipClass_Soprano_Client_LocalSocketClient;
+        sipType = sipType_Soprano_Client_LocalSocketClient;
     else if (dynamic_cast<Soprano::Client::TcpClient*>(sipCpp))
-        sipClass = sipClass_Soprano_Client_TcpClient;
+        sipType = sipType_Soprano_Client_TcpClient;
     else if (dynamic_cast<Soprano::Model*>(sipCpp))
         {
-        sipClass = sipClass_Soprano_Model;
+        sipType = sipType_Soprano_Model;
         if (dynamic_cast<Soprano::Client::SparqlModel*>(sipCpp))
-            sipClass = sipClass_Soprano_Client_SparqlModel;
+            sipType = sipType_Soprano_Client_SparqlModel;
         else if (dynamic_cast<Soprano::FilterModel*>(sipCpp))
             {
-            sipClass = sipClass_Soprano_FilterModel;
+            sipType = sipType_Soprano_FilterModel;
             if (dynamic_cast<Soprano::Inference::InferenceModel*>(sipCpp))
-                sipClass = sipClass_Soprano_Inference_InferenceModel;
+                sipType = sipType_Soprano_Inference_InferenceModel;
             else if (dynamic_cast<Soprano::NRLModel*>(sipCpp))
-                sipClass = sipClass_Soprano_NRLModel;
+                sipType = sipType_Soprano_NRLModel;
             else if (dynamic_cast<Soprano::Server::DBusExportModel*>(sipCpp))
-                sipClass = sipClass_Soprano_Server_DBusExportModel;
+                sipType = sipType_Soprano_Server_DBusExportModel;
             else if (dynamic_cast<Soprano::Util::AsyncModel*>(sipCpp))
-                sipClass = sipClass_Soprano_Util_AsyncModel;
+                sipType = sipType_Soprano_Util_AsyncModel;
             else if (dynamic_cast<Soprano::Util::MutexModel*>(sipCpp))
-                sipClass = sipClass_Soprano_Util_MutexModel;
+                sipType = sipType_Soprano_Util_MutexModel;
             else if (dynamic_cast<Soprano::Util::SignalCacheModel*>(sipCpp))
-                sipClass = sipClass_Soprano_Util_SignalCacheModel;
+                sipType = sipType_Soprano_Util_SignalCacheModel;
             }
         else if (dynamic_cast<Soprano::StorageModel*>(sipCpp))
             {
-            sipClass = sipClass_Soprano_StorageModel;
+            sipType = sipType_Soprano_StorageModel;
             if (dynamic_cast<Soprano::Client::DBusModel*>(sipCpp))
-                sipClass = sipClass_Soprano_Client_DBusModel;
+                sipType = sipType_Soprano_Client_DBusModel;
             }
         else if (dynamic_cast<Soprano::Util::DummyModel*>(sipCpp))
-            sipClass = sipClass_Soprano_Util_DummyModel;
+            sipType = sipType_Soprano_Util_DummyModel;
         }
     else if (dynamic_cast<Soprano::PluginManager*>(sipCpp))
-        sipClass = sipClass_Soprano_PluginManager;
+        sipType = sipType_Soprano_PluginManager;
     else if (dynamic_cast<Soprano::Server::DBusExportIterator*>(sipCpp))
-        sipClass = sipClass_Soprano_Server_DBusExportIterator;
+        sipType = sipType_Soprano_Server_DBusExportIterator;
     else if (dynamic_cast<Soprano::Server::ServerCore*>(sipCpp))
-        sipClass = sipClass_Soprano_Server_ServerCore;
+        sipType = sipType_Soprano_Server_ServerCore;
     else if (dynamic_cast<Soprano::Util::AsyncResult*>(sipCpp))
-        sipClass = sipClass_Soprano_Util_AsyncResult;
+        sipType = sipType_Soprano_Util_AsyncResult;
 %End
 
 public:

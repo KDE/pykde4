@@ -57,14 +57,14 @@ private:
 //end
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KArchive'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KAr*>(sipCpp))
-        sipClass = sipClass_KAr;
+        sipType = sipType_KAr;
     else if (dynamic_cast<KTar*>(sipCpp))
-        sipClass = sipClass_KTar;
+        sipType = sipType_KTar;
     else if (dynamic_cast<KZip*>(sipCpp))
-        sipClass = sipClass_KZip;
+        sipType = sipType_KZip;
 %End
 
 public:

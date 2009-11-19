@@ -53,19 +53,19 @@ private:
 //end
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QEvent'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KParts::Event*>(sipCpp))
         {
-        sipClass = sipClass_KParts_Event;
+        sipType = sipType_KParts_Event;
         if (dynamic_cast<KParts::GUIActivateEvent*>(sipCpp))
-            sipClass = sipClass_KParts_GUIActivateEvent;
+            sipType = sipType_KParts_GUIActivateEvent;
         else if (dynamic_cast<KParts::OpenUrlEvent*>(sipCpp))
-            sipClass = sipClass_KParts_OpenUrlEvent;
+            sipType = sipType_KParts_OpenUrlEvent;
         else if (dynamic_cast<KParts::PartActivateEvent*>(sipCpp))
-            sipClass = sipClass_KParts_PartActivateEvent;
+            sipType = sipType_KParts_PartActivateEvent;
         else if (dynamic_cast<KParts::PartSelectEvent*>(sipCpp))
-            sipClass = sipClass_KParts_PartSelectEvent;
+            sipType = sipType_KParts_PartSelectEvent;
         }
 %End
 

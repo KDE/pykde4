@@ -58,10 +58,10 @@ public:
 //end
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QueryResultIterator'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<Soprano::Client::DBusQueryResultIterator*>(sipCpp))
-        sipClass = sipClass_Soprano_Client_DBusQueryResultIterator;
+        sipType = sipType_Soprano_Client_DBusQueryResultIterator;
 %End
                             QueryResultIterator (Soprano::QueryResultIteratorBackend* qr);
 };

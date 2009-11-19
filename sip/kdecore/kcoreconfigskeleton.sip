@@ -350,54 +350,54 @@ public:
 //end
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KConfigSkeletonItem'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KCoreConfigSkeleton::ItemBool*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton_ItemBool;
+        sipType = sipType_KCoreConfigSkeleton_ItemBool;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemDateTime*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton_ItemDateTime;
+        sipType = sipType_KCoreConfigSkeleton_ItemDateTime;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemDouble*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton_ItemDouble;
+        sipType = sipType_KCoreConfigSkeleton_ItemDouble;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemInt*>(sipCpp))
         {
-        sipClass = sipClass_KCoreConfigSkeleton_ItemInt;
+        sipType = sipType_KCoreConfigSkeleton_ItemInt;
         if (dynamic_cast<KCoreConfigSkeleton::ItemEnum*>(sipCpp))
-            sipClass = sipClass_KCoreConfigSkeleton_ItemEnum;
+            sipType = sipType_KCoreConfigSkeleton_ItemEnum;
         }
     else if (dynamic_cast<KCoreConfigSkeleton::ItemIntList*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton_ItemIntList;
+        sipType = sipType_KCoreConfigSkeleton_ItemIntList;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemLongLong*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton_ItemLongLong;
+        sipType = sipType_KCoreConfigSkeleton_ItemLongLong;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemPoint*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton_ItemPoint;
+        sipType = sipType_KCoreConfigSkeleton_ItemPoint;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemProperty*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton_ItemProperty;
+        sipType = sipType_KCoreConfigSkeleton_ItemProperty;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemRect*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton_ItemRect;
+        sipType = sipType_KCoreConfigSkeleton_ItemRect;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemSize*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton_ItemSize;
+        sipType = sipType_KCoreConfigSkeleton_ItemSize;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemString*>(sipCpp))
         {
-        sipClass = sipClass_KCoreConfigSkeleton_ItemString;
+        sipType = sipType_KCoreConfigSkeleton_ItemString;
         if (dynamic_cast<KCoreConfigSkeleton::ItemPassword*>(sipCpp))
-            sipClass = sipClass_KCoreConfigSkeleton_ItemPassword;
+            sipType = sipType_KCoreConfigSkeleton_ItemPassword;
         else if (dynamic_cast<KCoreConfigSkeleton::ItemPath*>(sipCpp))
-            sipClass = sipClass_KCoreConfigSkeleton_ItemPath;
+            sipType = sipType_KCoreConfigSkeleton_ItemPath;
         }
     else if (dynamic_cast<KCoreConfigSkeleton::ItemStringList*>(sipCpp))
         {
-        sipClass = sipClass_KCoreConfigSkeleton_ItemStringList;
+        sipType = sipType_KCoreConfigSkeleton_ItemStringList;
         if (dynamic_cast<KCoreConfigSkeleton::ItemPathList*>(sipCpp))
-            sipClass = sipClass_KCoreConfigSkeleton_ItemPathList;
+            sipType = sipType_KCoreConfigSkeleton_ItemPathList;
         }
     else if (dynamic_cast<KCoreConfigSkeleton::ItemUInt*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton_ItemUInt;
+        sipType = sipType_KCoreConfigSkeleton_ItemUInt;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemULongLong*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton_ItemULongLong;
+        sipType = sipType_KCoreConfigSkeleton_ItemULongLong;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemUrl*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton_ItemUrl;
+        sipType = sipType_KCoreConfigSkeleton_ItemUrl;
     else if (dynamic_cast<KCoreConfigSkeleton::ItemUrlList*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton_ItemUrlList;
+        sipType = sipType_KCoreConfigSkeleton_ItemUrlList;
 %End
 //ig                                ItemBool (const QString& _group, const QString& _key, bool& reference, bool defaultValue = 1);
     };

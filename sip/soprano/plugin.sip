@@ -37,14 +37,14 @@ public:
     virtual ~Plugin ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'Plugin'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<Soprano::Backend*>(sipCpp))
-        sipClass = sipClass_Soprano_Backend;
+        sipType = sipType_Soprano_Backend;
     else if (dynamic_cast<Soprano::Parser*>(sipCpp))
-        sipClass = sipClass_Soprano_Parser;
+        sipType = sipType_Soprano_Parser;
     else if (dynamic_cast<Soprano::Serializer*>(sipCpp))
-        sipClass = sipClass_Soprano_Serializer;
+        sipType = sipType_Soprano_Serializer;
 %End
 };
 // Plugin

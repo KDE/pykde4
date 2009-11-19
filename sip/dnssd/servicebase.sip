@@ -49,15 +49,15 @@ protected:
 //ig    virtual void            virtual_hook (int, void*);
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'ServiceBase'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<DNSSD::ServiceBase*>(sipCpp))
         {
-        sipClass = sipClass_DNSSD_ServiceBase;
+        sipType = sipType_DNSSD_ServiceBase;
         if (dynamic_cast<DNSSD::PublicService*>(sipCpp))
-            sipClass = sipClass_DNSSD_PublicService;
+            sipType = sipType_DNSSD_PublicService;
         else if (dynamic_cast<DNSSD::RemoteService*>(sipCpp))
-            sipClass = sipClass_DNSSD_RemoteService;
+            sipType = sipType_DNSSD_RemoteService;
         }
 %End
 //ig                            ServiceBase (ServiceBasePrivate*const d);

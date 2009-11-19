@@ -47,12 +47,12 @@ public:
 //end
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'StatementIterator'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<Soprano::Client::DBusStatementIterator*>(sipCpp))
-        sipClass = sipClass_Soprano_Client_DBusStatementIterator;
+        sipType = sipType_Soprano_Client_DBusStatementIterator;
     else if (dynamic_cast<Soprano::Util::SimpleStatementIterator*>(sipCpp))
-        sipClass = sipClass_Soprano_Util_SimpleStatementIterator;
+        sipType = sipType_Soprano_Util_SimpleStatementIterator;
 %End
 };
 };

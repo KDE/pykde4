@@ -248,12 +248,12 @@ private:
 //end
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QObject'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KHTMLPart*>(sipCpp))
-        sipClass = sipClass_KHTMLPart;
+        sipType = sipType_KHTMLPart;
     else if (dynamic_cast<KHTMLView*>(sipCpp))
-        sipClass = sipClass_KHTMLView;
+        sipType = sipType_KHTMLView;
 %End
 
 public:

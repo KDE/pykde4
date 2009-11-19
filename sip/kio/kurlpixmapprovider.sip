@@ -53,10 +53,10 @@ private:
 //end
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KPixmapProvider'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KUrlPixmapProvider*>(sipCpp))
-        sipClass = sipClass_KUrlPixmapProvider;
+        sipType = sipType_KUrlPixmapProvider;
 %End
 
 public:

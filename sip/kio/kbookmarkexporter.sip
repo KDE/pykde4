@@ -33,14 +33,14 @@ public:
     ~KBookmarkExporterBase ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KBookmarkExporterBase'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KIEBookmarkExporterImpl*>(sipCpp))
-        sipClass = sipClass_KIEBookmarkExporterImpl;
+        sipType = sipType_KIEBookmarkExporterImpl;
     else if (dynamic_cast<KNSBookmarkExporterImpl*>(sipCpp))
-        sipClass = sipClass_KNSBookmarkExporterImpl;
+        sipType = sipType_KNSBookmarkExporterImpl;
     else if (dynamic_cast<KOperaBookmarkExporterImpl*>(sipCpp))
-        sipClass = sipClass_KOperaBookmarkExporterImpl;
+        sipType = sipType_KOperaBookmarkExporterImpl;
 %End
 };
 // KBookmarkExporterBase

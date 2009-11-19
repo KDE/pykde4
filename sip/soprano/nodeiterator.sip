@@ -41,12 +41,12 @@ public:
 //end
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'NodeIterator'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<Soprano::Client::DBusNodeIterator*>(sipCpp))
-        sipClass = sipClass_Soprano_Client_DBusNodeIterator;
+        sipType = sipType_Soprano_Client_DBusNodeIterator;
     else if (dynamic_cast<Soprano::Util::SimpleNodeIterator*>(sipCpp))
-        sipClass = sipClass_Soprano_Util_SimpleNodeIterator;
+        sipType = sipType_Soprano_Util_SimpleNodeIterator;
 %End
 };
 };

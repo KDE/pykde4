@@ -110,12 +110,12 @@ protected:
 
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KMacroExpanderBase'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KCharMacroExpander*>(sipCpp))
-        sipClass = sipClass_KCharMacroExpander;
+        sipType = sipType_KCharMacroExpander;
     else if (dynamic_cast<KWordMacroExpander*>(sipCpp))
-        sipClass = sipClass_KWordMacroExpander;
+        sipType = sipType_KWordMacroExpander;
 %End
 
 };

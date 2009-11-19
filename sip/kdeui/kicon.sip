@@ -46,10 +46,10 @@ public:
 
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QIcon'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KIcon*>(sipCpp))
-        sipClass = sipClass_KIcon;
+        sipType = sipType_KIcon;
 %End
 
     ~KIcon ();

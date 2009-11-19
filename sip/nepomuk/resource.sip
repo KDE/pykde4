@@ -136,12 +136,12 @@ public:
     bool                    operator != (const Nepomuk::Resource&) const;
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'Resource'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<Nepomuk::Tag*>(sipCpp))
-        sipClass = sipClass_Nepomuk_Tag;
+        sipType = sipType_Nepomuk_Tag;
     else if (dynamic_cast<Nepomuk::Thing*>(sipCpp))
-        sipClass = sipClass_Nepomuk_Thing;
+        sipType = sipType_Nepomuk_Thing;
 %End
 };
 // Resource

@@ -36,10 +36,10 @@ public:
     virtual ~ItemSerializerPlugin ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'ItemSerializerPlugin'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<Akonadi::ItemSerializerPluginV2*>(sipCpp))
-        sipClass = sipClass_Akonadi_ItemSerializerPluginV2;
+        sipType = sipType_Akonadi_ItemSerializerPluginV2;
 %End
 };
 // ItemSerializerPlugin

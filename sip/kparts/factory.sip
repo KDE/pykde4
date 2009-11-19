@@ -42,10 +42,10 @@ public:
     ~Factory ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'Factory'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KParts::Factory*>(sipCpp))
-        sipClass = sipClass_KParts_Factory;
+        sipType = sipType_KParts_Factory;
 %End
 };
 // Factory

@@ -94,18 +94,18 @@ private:
 //end
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KConfigBase'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KConfig*>(sipCpp))
         {
-        sipClass = sipClass_KConfig;
+        sipType = sipType_KConfig;
         if (dynamic_cast<KDesktopFile*>(sipCpp))
-            sipClass = sipClass_KDesktopFile;
+            sipType = sipType_KDesktopFile;
         else if (dynamic_cast<KSharedConfig*>(sipCpp))
-            sipClass = sipClass_KSharedConfig;
+            sipType = sipType_KSharedConfig;
         }
     else if (dynamic_cast<KConfigGroup*>(sipCpp))
-        sipClass = sipClass_KConfigGroup;
+        sipType = sipType_KConfigGroup;
 %End
 
 public:

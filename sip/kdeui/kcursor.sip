@@ -47,10 +47,10 @@ public:
 
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QCursor'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KCursor*>(sipCpp))
-        sipClass = sipClass_KCursor;
+        sipType = sipType_KCursor;
 %End
 
 };

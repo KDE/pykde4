@@ -39,20 +39,20 @@ public:
     virtual ~Attribute ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'Attribute'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<Akonadi::AddressAttribute*>(sipCpp))
-        sipClass = sipClass_Akonadi_AddressAttribute;
+        sipType = sipType_Akonadi_AddressAttribute;
     else if (dynamic_cast<Akonadi::CollectionQuotaAttribute*>(sipCpp))
-        sipClass = sipClass_Akonadi_CollectionQuotaAttribute;
+        sipType = sipType_Akonadi_CollectionQuotaAttribute;
     else if (dynamic_cast<Akonadi::EntityDisplayAttribute*>(sipCpp))
-        sipClass = sipClass_Akonadi_EntityDisplayAttribute;
+        sipType = sipType_Akonadi_EntityDisplayAttribute;
     else if (dynamic_cast<Akonadi::EntityHiddenAttribute*>(sipCpp))
-        sipClass = sipClass_Akonadi_EntityHiddenAttribute;
+        sipType = sipType_Akonadi_EntityHiddenAttribute;
     else if (dynamic_cast<Akonadi::MessageFolderAttribute*>(sipCpp))
-        sipClass = sipClass_Akonadi_MessageFolderAttribute;
+        sipType = sipType_Akonadi_MessageFolderAttribute;
     else if (dynamic_cast<Akonadi::MessageThreadingAttribute*>(sipCpp))
-        sipClass = sipClass_Akonadi_MessageThreadingAttribute;
+        sipType = sipType_Akonadi_MessageThreadingAttribute;
 %End
 };
 // Attribute

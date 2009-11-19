@@ -79,12 +79,12 @@ private:
 //end
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'SlaveBase'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KIO::ForwardingSlaveBase*>(sipCpp))
-        sipClass = sipClass_KIO_ForwardingSlaveBase;
+        sipType = sipType_KIO_ForwardingSlaveBase;
     else if (dynamic_cast<KIO::TCPSlaveBase*>(sipCpp))
-        sipClass = sipClass_KIO_TCPSlaveBase;
+        sipType = sipType_KIO_TCPSlaveBase;
 %End
 
 public:

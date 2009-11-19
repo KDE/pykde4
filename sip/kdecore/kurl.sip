@@ -364,10 +364,10 @@ sipRes = new KUrl::List();
 
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QUrl'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KUrl*>(sipCpp))
-        sipClass = sipClass_KUrl;
+        sipType = sipType_KUrl;
 %End
 
 //ig    QVariant                operator QVariant () const;

@@ -44,18 +44,18 @@ public:
 //ig    void                    addTags (const QMap<QString,int>& tags);
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QWidget'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KTagCloudWidget*>(sipCpp))
         {
-        sipClass = sipClass_KTagCloudWidget;
+        sipType = sipType_KTagCloudWidget;
         if (dynamic_cast<Nepomuk::TagCloud*>(sipCpp))
-            sipClass = sipClass_Nepomuk_TagCloud;
+            sipType = sipType_Nepomuk_TagCloud;
         }
     else if (dynamic_cast<KTagDisplayWidget*>(sipCpp))
-        sipClass = sipClass_KTagDisplayWidget;
+        sipType = sipType_KTagDisplayWidget;
     else if (dynamic_cast<Nepomuk::TagWidget*>(sipCpp))
-        sipClass = sipClass_Nepomuk_TagWidget;
+        sipType = sipType_Nepomuk_TagWidget;
 %End
 };
 // KTagCloudWidget

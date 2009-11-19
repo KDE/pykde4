@@ -42,10 +42,10 @@ protected:
     virtual QNetworkReply*  createRequest (Operation op, const QNetworkRequest& req, QIODevice* outgoingData = 0);
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'AccessManager'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KIO::AccessManager*>(sipCpp))
-        sipClass = sipClass_KIO_AccessManager;
+        sipType = sipType_KIO_AccessManager;
 %End
 };
 // AccessManager

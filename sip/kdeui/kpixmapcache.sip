@@ -71,10 +71,10 @@ public:
     ~KPixmapCache ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KPixmapCache'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KIconCache*>(sipCpp))
-        sipClass = sipClass_KIconCache;
+        sipType = sipType_KIconCache;
 %End
 };
 // KPixmapCache

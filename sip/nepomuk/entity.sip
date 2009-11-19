@@ -47,14 +47,14 @@ public:
 //ig    QUrl                    operator QUrl () const;
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'Entity'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<Nepomuk::Types::Class*>(sipCpp))
-        sipClass = sipClass_Nepomuk_Types_Class;
+        sipType = sipType_Nepomuk_Types_Class;
     else if (dynamic_cast<Nepomuk::Types::Ontology*>(sipCpp))
-        sipClass = sipClass_Nepomuk_Types_Ontology;
+        sipType = sipType_Nepomuk_Types_Ontology;
     else if (dynamic_cast<Nepomuk::Types::Property*>(sipCpp))
-        sipClass = sipClass_Nepomuk_Types_Property;
+        sipType = sipType_Nepomuk_Types_Property;
 %End
     QString                 label (const QString& language);
     QString                 comment (const QString& language);

@@ -39,12 +39,12 @@ public:
     ~DomShared ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'DomShared'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<DOM::CustomNodeFilter*>(sipCpp))
-        sipClass = sipClass_DOM_CustomNodeFilter;
+        sipType = sipType_DOM_CustomNodeFilter;
     else if (dynamic_cast<DOM::EventListener*>(sipCpp))
-        sipClass = sipClass_DOM_EventListener;
+        sipType = sipType_DOM_EventListener;
 %End
 };
 // DomShared

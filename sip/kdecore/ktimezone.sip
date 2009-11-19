@@ -165,12 +165,12 @@ public:
     ~KTimeZone ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KTimeZone'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KSystemTimeZone*>(sipCpp))
-        sipClass = sipClass_KSystemTimeZone;
+        sipType = sipType_KSystemTimeZone;
     else if (dynamic_cast<KTzfileTimeZone*>(sipCpp))
-        sipClass = sipClass_KTzfileTimeZone;
+        sipType = sipType_KTzfileTimeZone;
 %End
 };
 // KTimeZone
@@ -202,12 +202,12 @@ public:
     ~KTimeZoneBackend ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KTimeZoneBackend'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KSystemTimeZoneBackend*>(sipCpp))
-        sipClass = sipClass_KSystemTimeZoneBackend;
+        sipType = sipType_KSystemTimeZoneBackend;
     else if (dynamic_cast<KTzfileTimeZoneBackend*>(sipCpp))
-        sipClass = sipClass_KTzfileTimeZoneBackend;
+        sipType = sipType_KTzfileTimeZoneBackend;
 %End
 };
 // KTimeZoneBackend
@@ -235,12 +235,12 @@ public:
     ~KTimeZoneSource ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KTimeZoneSource'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KSystemTimeZoneSource*>(sipCpp))
-        sipClass = sipClass_KSystemTimeZoneSource;
+        sipType = sipType_KSystemTimeZoneSource;
     else if (dynamic_cast<KTzfileTimeZoneSource*>(sipCpp))
-        sipClass = sipClass_KTzfileTimeZoneSource;
+        sipType = sipType_KTzfileTimeZoneSource;
 %End
 };
 // KTimeZoneSource

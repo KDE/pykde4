@@ -80,64 +80,64 @@ private:
 //end
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QObject'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KAuth::ActionWatcher*>(sipCpp))
-        sipClass = sipClass_KAuth_ActionWatcher;
+        sipType = sipType_KAuth_ActionWatcher;
     else if (dynamic_cast<KAutostart*>(sipCpp))
-        sipClass = sipClass_KAutostart;
+        sipType = sipType_KAutostart;
     else if (dynamic_cast<KCoreConfigSkeleton*>(sipCpp))
-        sipClass = sipClass_KCoreConfigSkeleton;
+        sipType = sipType_KCoreConfigSkeleton;
     else if (dynamic_cast<KDEDModule*>(sipCpp))
-        sipClass = sipClass_KDEDModule;
+        sipType = sipType_KDEDModule;
     else if (dynamic_cast<KJob*>(sipCpp))
         {
-        sipClass = sipClass_KJob;
+        sipType = sipType_KJob;
         if (dynamic_cast<KCompositeJob*>(sipCpp))
-            sipClass = sipClass_KCompositeJob;
+            sipType = sipType_KCompositeJob;
         }
     else if (dynamic_cast<KJobTrackerInterface*>(sipCpp))
-        sipClass = sipClass_KJobTrackerInterface;
+        sipType = sipType_KJobTrackerInterface;
     else if (dynamic_cast<KJobUiDelegate*>(sipCpp))
-        sipClass = sipClass_KJobUiDelegate;
+        sipType = sipType_KJobUiDelegate;
     else if (dynamic_cast<KLibLoader*>(sipCpp))
-        sipClass = sipClass_KLibLoader;
+        sipType = sipType_KLibLoader;
     else if (dynamic_cast<KLocalSocketServer*>(sipCpp))
-        sipClass = sipClass_KLocalSocketServer;
+        sipType = sipType_KLocalSocketServer;
     else if (dynamic_cast<KPluginFactory*>(sipCpp))
-        sipClass = sipClass_KPluginFactory;
+        sipType = sipType_KPluginFactory;
     else if (dynamic_cast<KSycoca*>(sipCpp))
-        sipClass = sipClass_KSycoca;
+        sipType = sipType_KSycoca;
     else if (dynamic_cast<KSystemTimeZones*>(sipCpp))
-        sipClass = sipClass_KSystemTimeZones;
+        sipType = sipType_KSystemTimeZones;
     else if (dynamic_cast<KToolInvocation*>(sipCpp))
-        sipClass = sipClass_KToolInvocation;
+        sipType = sipType_KToolInvocation;
     else if (dynamic_cast<KFilterDev*>(sipCpp))
-        sipClass = sipClass_KFilterDev;
+        sipType = sipType_KFilterDev;
     else if (dynamic_cast<KPtyDevice*>(sipCpp))
-        sipClass = sipClass_KPtyDevice;
+        sipType = sipType_KPtyDevice;
     else if (dynamic_cast<KTcpSocket*>(sipCpp))
-        sipClass = sipClass_KTcpSocket;
+        sipType = sipType_KTcpSocket;
     else if (dynamic_cast<KLocalSocket*>(sipCpp))
-        sipClass = sipClass_KLocalSocket;
+        sipType = sipType_KLocalSocket;
     else if (dynamic_cast<KAutoSaveFile*>(sipCpp))
-        sipClass = sipClass_KAutoSaveFile;
+        sipType = sipType_KAutoSaveFile;
     else if (dynamic_cast<KSaveFile*>(sipCpp))
-        sipClass = sipClass_KSaveFile;
+        sipType = sipType_KSaveFile;
     else if (dynamic_cast<KTemporaryFile*>(sipCpp))
-        sipClass = sipClass_KTemporaryFile;
+        sipType = sipType_KTemporaryFile;
     else if (dynamic_cast<KProcess*>(sipCpp))
         {
-        sipClass = sipClass_KProcess;
+        sipType = sipType_KProcess;
         if (dynamic_cast<KPtyProcess*>(sipCpp))
-            sipClass = sipClass_KPtyProcess;
+            sipType = sipType_KPtyProcess;
         }
     else if (dynamic_cast<KLibrary*>(sipCpp))
-        sipClass = sipClass_KLibrary;
+        sipType = sipType_KLibrary;
     else if (dynamic_cast<KPluginLoader*>(sipCpp))
-        sipClass = sipClass_KPluginLoader;
+        sipType = sipType_KPluginLoader;
     else if (dynamic_cast<Sonnet::BackgroundChecker*>(sipCpp))
-        sipClass = sipClass_Sonnet_BackgroundChecker;
+        sipType = sipType_Sonnet_BackgroundChecker;
 %End
 
 public:

@@ -97,10 +97,10 @@ public:
     ~KBookmarkOwner ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KBookmarkOwner'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KonqBookmarkOwner*>(sipCpp))
-        sipClass = sipClass_KonqBookmarkOwner;
+        sipType = sipType_KonqBookmarkOwner;
 %End
 };
 // KBookmarkOwner

@@ -64,22 +64,22 @@ signals:
 
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QObject'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<DNSSD::DomainBrowser*>(sipCpp))
-        sipClass = sipClass_DNSSD_DomainBrowser;
+        sipType = sipType_DNSSD_DomainBrowser;
     else if (dynamic_cast<DNSSD::PublicService*>(sipCpp))
-        sipClass = sipClass_DNSSD_PublicService;
+        sipType = sipType_DNSSD_PublicService;
     else if (dynamic_cast<DNSSD::RemoteService*>(sipCpp))
-        sipClass = sipClass_DNSSD_RemoteService;
+        sipType = sipType_DNSSD_RemoteService;
     else if (dynamic_cast<DNSSD::ServiceBrowser*>(sipCpp))
-        sipClass = sipClass_DNSSD_ServiceBrowser;
+        sipType = sipType_DNSSD_ServiceBrowser;
     else if (dynamic_cast<DNSSD::ServiceTypeBrowser*>(sipCpp))
-        sipClass = sipClass_DNSSD_ServiceTypeBrowser;
+        sipType = sipType_DNSSD_ServiceTypeBrowser;
     else if (dynamic_cast<DNSSD::DomainModel*>(sipCpp))
-        sipClass = sipClass_DNSSD_DomainModel;
+        sipType = sipType_DNSSD_DomainModel;
     else if (dynamic_cast<DNSSD::ServiceModel*>(sipCpp))
-        sipClass = sipClass_DNSSD_ServiceModel;
+        sipType = sipType_DNSSD_ServiceModel;
 %End
 
 public:

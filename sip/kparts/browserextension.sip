@@ -200,38 +200,38 @@ Py_BEGIN_ALLOW_THREADS
 
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QObject'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KParts::BrowserExtension*>(sipCpp))
-        sipClass = sipClass_KParts_BrowserExtension;
+        sipType = sipType_KParts_BrowserExtension;
     else if (dynamic_cast<KParts::BrowserHostExtension*>(sipCpp))
-        sipClass = sipClass_KParts_BrowserHostExtension;
+        sipType = sipType_KParts_BrowserHostExtension;
     else if (dynamic_cast<KParts::BrowserInterface*>(sipCpp))
-        sipClass = sipClass_KParts_BrowserInterface;
+        sipType = sipType_KParts_BrowserInterface;
     else if (dynamic_cast<KParts::HistoryProvider*>(sipCpp))
-        sipClass = sipClass_KParts_HistoryProvider;
+        sipType = sipType_KParts_HistoryProvider;
     else if (dynamic_cast<KParts::LiveConnectExtension*>(sipCpp))
-        sipClass = sipClass_KParts_LiveConnectExtension;
+        sipType = sipType_KParts_LiveConnectExtension;
     else if (dynamic_cast<KParts::Part*>(sipCpp))
         {
-        sipClass = sipClass_KParts_Part;
+        sipType = sipType_KParts_Part;
         if (dynamic_cast<KParts::ReadOnlyPart*>(sipCpp))
             {
-            sipClass = sipClass_KParts_ReadOnlyPart;
+            sipType = sipType_KParts_ReadOnlyPart;
             if (dynamic_cast<KParts::ReadWritePart*>(sipCpp))
-                sipClass = sipClass_KParts_ReadWritePart;
+                sipType = sipType_KParts_ReadWritePart;
             }
         }
     else if (dynamic_cast<KParts::PartManager*>(sipCpp))
-        sipClass = sipClass_KParts_PartManager;
+        sipType = sipType_KParts_PartManager;
     else if (dynamic_cast<KParts::Plugin*>(sipCpp))
-        sipClass = sipClass_KParts_Plugin;
+        sipType = sipType_KParts_Plugin;
     else if (dynamic_cast<KParts::StatusBarExtension*>(sipCpp))
-        sipClass = sipClass_KParts_StatusBarExtension;
+        sipType = sipType_KParts_StatusBarExtension;
     else if (dynamic_cast<KParts::BrowserRun*>(sipCpp))
-        sipClass = sipClass_KParts_BrowserRun;
+        sipType = sipType_KParts_BrowserRun;
     else if (dynamic_cast<KParts::MainWindow*>(sipCpp))
-        sipClass = sipClass_KParts_MainWindow;
+        sipType = sipType_KParts_MainWindow;
 %End
 
     ~BrowserExtension ();

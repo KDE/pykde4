@@ -28,12 +28,12 @@
 %Import QtNetwork/QtNetworkmod.sip
 
 %Include typedefs.sip
-%Include kauthhelpersupport.sip
 %Include kaboutdata.sip
 %Include kascii.sip
 %Include kauthaction.sip
 %Include kauthactionreply.sip
 %Include kauthactionwatcher.sip
+%Include kauthhelpersupport.sip
 %Include kauthorized.sip
 %Include kautosavefile.sip
 %Include kautostart.sip

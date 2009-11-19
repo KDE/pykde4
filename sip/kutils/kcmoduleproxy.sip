@@ -78,26 +78,26 @@ protected:
 
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QObject'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KEmoticons*>(sipCpp))
-        sipClass = sipClass_KEmoticons;
+        sipType = sipType_KEmoticons;
     else if (dynamic_cast<KEmoticonsProvider*>(sipCpp))
-        sipClass = sipClass_KEmoticonsProvider;
+        sipType = sipType_KEmoticonsProvider;
     else if (dynamic_cast<KSettings::PluginPage*>(sipCpp))
-        sipClass = sipClass_KSettings_PluginPage;
+        sipType = sipType_KSettings_PluginPage;
     else if (dynamic_cast<KCModuleProxy*>(sipCpp))
-        sipClass = sipClass_KCModuleProxy;
+        sipType = sipType_KCModuleProxy;
     else if (dynamic_cast<KPluginSelector*>(sipCpp))
-        sipClass = sipClass_KPluginSelector;
+        sipType = sipType_KPluginSelector;
     else if (dynamic_cast<KCMultiDialog*>(sipCpp))
         {
-        sipClass = sipClass_KCMultiDialog;
+        sipType = sipType_KCMultiDialog;
         if (dynamic_cast<KSettings::Dialog*>(sipCpp))
-            sipClass = sipClass_KSettings_Dialog;
+            sipType = sipType_KSettings_Dialog;
         }
     else if (dynamic_cast<KPrintPreview*>(sipCpp))
-        sipClass = sipClass_KPrintPreview;
+        sipType = sipType_KPrintPreview;
 %End
 
 public:

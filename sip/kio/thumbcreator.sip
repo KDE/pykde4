@@ -41,10 +41,10 @@ public:
     ~ThumbCreator ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'ThumbCreator'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<ThumbSequenceCreator*>(sipCpp))
-        sipClass = sipClass_ThumbSequenceCreator;
+        sipType = sipType_ThumbSequenceCreator;
 %End
 };
 // ThumbCreator

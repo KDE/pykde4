@@ -51,12 +51,12 @@ public:
 
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'KConfigSkeletonItem'
-    sipClass = NULL;
+    sipType = NULL;
 
     if (dynamic_cast<KConfigSkeleton::ItemColor*>(sipCpp))
-        sipClass = sipClass_KConfigSkeleton_ItemColor;
+        sipType = sipType_KConfigSkeleton_ItemColor;
     else if (dynamic_cast<KConfigSkeleton::ItemFont*>(sipCpp))
-        sipClass = sipClass_KConfigSkeleton_ItemFont;
+        sipType = sipType_KConfigSkeleton_ItemFont;
 %End
 
     };

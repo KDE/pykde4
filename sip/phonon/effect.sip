@@ -35,10 +35,14 @@ public:
     void                    setParameterValue (const Phonon::EffectParameter&, const QVariant& value);
 
 protected:
-//ig                        Effect (EffectPrivate& dd, QObject* parent /TransferThis/);
+//ig                            Effect (EffectPrivate& dd, QObject* parent /TransferThis/);
 
-};   // Effect
+public:
+    ~Effect ();
+};
+// Effect
 
-};   // Phonon
+};
+// Phonon
 
 

@@ -28,10 +28,10 @@ class StreamInterface /Abstract,NoDefaultCtors/
 %End
 
 public:
-    virtual void            writeData (const QByteArray& data) = 0;
-    virtual void            endOfData () = 0;
-    virtual void            setStreamSize (qint64 newSize) = 0;
-    virtual void            setStreamSeekable (bool s) = 0;
+    virtual void            writeData (const QByteArray& data)=0;
+    virtual void            endOfData ()=0;
+    virtual void            setStreamSize (qint64 newSize)=0;
+    virtual void            setStreamSeekable (bool s)=0;
     void                    connectToSource (const Phonon::MediaSource& mediaSource);
     void                    needData ();
     void                    enoughData ();
@@ -40,8 +40,12 @@ public:
 
 protected:
                             StreamInterface ();
-};   // StreamInterface
+public:
+    virtual ~StreamInterface ();
+};
+// StreamInterface
 
-};   // Phonon
+};
+// Phonon
 
 

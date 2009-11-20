@@ -33,7 +33,8 @@ signals:
     void                    capabilitiesChanged ();
     void                    availableAudioOutputDevicesChanged ();
     void                    availableAudioCaptureDevicesChanged ();
-};   // Notifier
+};
+// Notifier
 
 Phonon::BackendCapabilities::Notifier*  notifier ();
 QStringList             availableMimeTypes ();
@@ -41,8 +42,10 @@ bool                    isMimeTypeAvailable (const QString& mimeType);
 QList<Phonon::AudioOutputDevice>  availableAudioOutputDevices ();
 QList<Phonon::AudioCaptureDevice>  availableAudioCaptureDevices ();
 QList<Phonon::EffectDescription>  availableAudioEffects ();
-};   // BackendCapabilities
+};
+// BackendCapabilities
 
-};   // Phonon
+};
+// Phonon
 
 

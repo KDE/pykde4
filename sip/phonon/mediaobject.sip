@@ -27,8 +27,8 @@ class MediaObject : QObject, Phonon::MediaNode
 #include <phonon/mediaobject.h>
 %End
 
-public:
 
+public:
     Phonon::State           state () const;
 
     bool                    hasVideo () const;
@@ -64,7 +64,7 @@ public:
     void                    clear ();
 
 signals:
-    void               stateChanged (Phonon::State newstate, Phonon::State oldstate);
+    void                    stateChanged (Phonon::State newstate, Phonon::State oldstate);
     void                    tick (qint64 time);
     void                    metaDataChanged ();
     void                    seekableChanged (bool isSeekable);
@@ -75,9 +75,13 @@ signals:
     void                    aboutToFinish ();
     void                    prefinishMarkReached (qint32 msecToEnd);
     void                    totalTimeChanged (qint64 newTotalTime);
-};   // MediaObject
+public:
+    ~MediaObject ();
+};
+// MediaObject
 
-Phonon::MediaObject*  createPlayer (Phonon::Category category, const Phonon::MediaSource& source = Phonon::MediaSource());
-};   // Phonon
+Phonon::MediaObject*    createPlayer (Phonon::Category category, const Phonon::MediaSource& source = Phonon::MediaSource());
+};
+// Phonon
 
 

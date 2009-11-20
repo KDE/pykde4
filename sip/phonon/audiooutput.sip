@@ -28,13 +28,13 @@ class AudioOutput /NoDefaultCtors/
 %End
 
 public:
-    explicit           AudioOutput (Phonon::Category category, QObject* parent /TransferThis/ = 0);
+    explicit                AudioOutput (Phonon::Category category, QObject* parent /TransferThis/ = 0);
     explicit                AudioOutput (QObject* parent /TransferThis/ = 0);
     QString                 name () const;
     qreal                   volume () const;
     qreal                   volumeDecibel () const;
 
-    Phonon::Category   category () const;
+    Phonon::Category        category () const;
 
     Phonon::AudioOutputDevice  outputDevice () const;
     bool                    isMuted () const;
@@ -48,8 +48,10 @@ signals:
     void                    volumeChanged (qreal newVolume);
     void                    mutedChanged (bool);
     void                    outputDeviceChanged (const Phonon::AudioOutputDevice& newAudioOutputDevice);
-};   // AudioOutput
+};
+// AudioOutput
 
-};   // Phonon
+};
+// Phonon
 
 

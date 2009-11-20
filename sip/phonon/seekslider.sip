@@ -44,8 +44,11 @@ public:
     void                    setIconVisible (bool);
     void                    setIconSize (const QSize& size);
     void                    setMediaObject (Phonon::MediaObject*);
-};   // SeekSlider
+    ~SeekSlider ();
+};
+// SeekSlider
 
-};   // Phonon
+};
+// Phonon
 
 

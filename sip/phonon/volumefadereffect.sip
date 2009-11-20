@@ -27,8 +27,8 @@ class VolumeFaderEffect : Phonon::Effect
 #include <phonon/volumefadereffect.h>
 %End
 
-public:
 
+public:
     enum FadeCurve
     {
         Fade3Decibel,
@@ -46,8 +46,10 @@ public:
     void                    setVolumeDecibel (double volumeDecibel);
     void                    setFadeCurve (Phonon::VolumeFaderEffect::FadeCurve curve);
     void                    fadeTo (float volume, int fadeTime);
-};   // VolumeFaderEffect
+};
+// VolumeFaderEffect
 
-};   // Phonon
+};
+// Phonon
 
 

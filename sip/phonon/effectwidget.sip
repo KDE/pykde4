@@ -29,8 +29,11 @@ class EffectWidget : QWidget
 
 public:
     explicit                EffectWidget (Phonon::Effect* effect, QWidget* parent /TransferThis/ = 0);
-};   // EffectWidget
+    ~EffectWidget ();
+};
+// EffectWidget
 
-};   // Phonon
+};
+// Phonon
 
 

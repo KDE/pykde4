@@ -41,9 +41,12 @@ public:
     bool                    operator != (const Phonon::Path& p) const;
     Phonon::MediaNode*      source () const;
     Phonon::MediaNode*      sink () const;
-};   // Path
+    ~Path ();
+};
+// Path
 
 Phonon::Path            createPath (Phonon::MediaNode* source, Phonon::MediaNode* sink);
-};   // Phonon
+};
+// Phonon
 
 

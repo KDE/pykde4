@@ -46,8 +46,11 @@ public:
     void                    setMuteVisible (bool);
     void                    setIconSize (const QSize& size);
     void                    setAudioOutput (Phonon::AudioOutput*);
-};   // VolumeSlider
+    ~VolumeSlider ();
+};
+// VolumeSlider
 
-};   // Phonon
+};
+// Phonon
 
 

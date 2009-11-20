@@ -27,8 +27,8 @@ class VideoWidget : QWidget
 #include <phonon/videowidget.h>
 %End
 
-public:
 
+public:
     enum AspectRatio
     {
         AspectRatioAuto,
@@ -61,14 +61,18 @@ public:
     void                    setHue (qreal value);
     void                    setSaturation (qreal value);
 
-protected:
 
-//ig                        VideoWidget (VideoWidgetPrivate& d, QWidget* parent /TransferThis/);
+protected:
+//ig                            VideoWidget (VideoWidgetPrivate& d, QWidget* parent /TransferThis/);
 
     void                    mouseMoveEvent (QMouseEvent*);
     bool                    event (QEvent*);
-};   // VideoWidget
+public:
+    QImage                  snapshot () const;
+};
+// VideoWidget
 
-};   // Phonon
+};
+// Phonon
 
 

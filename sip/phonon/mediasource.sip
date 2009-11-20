@@ -27,8 +27,8 @@ class MediaSource
 #include <phonon/mediasource.h>
 %End
 
-public:
 
+public:
     enum Type
     {
         Invalid,
@@ -57,9 +57,13 @@ public:
     Phonon::AbstractMediaStream*  stream () const;
 
 protected:
-//ig                        MediaSource (MediaSourcePrivate&);
-};   // MediaSource
+//ig                            MediaSource (MediaSourcePrivate&);
+public:
+    ~MediaSource ();
+};
+// MediaSource
 
-};   // Phonon
+};
+// Phonon
 
 

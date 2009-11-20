@@ -33,12 +33,45 @@ public:
     QList<Phonon::Path>     outputPaths () const;
 
 protected:
-//ig                       MediaNode (MediaNodePrivate& dd);
-private:
-                            MediaNode(const Phonon::MediaNode &other);
+//ig                            MediaNode (MediaNodePrivate& dd);
 
-};   // MediaNode
+public:
+    virtual ~MediaNode ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'MediaNode'
+    sipType = NULL;
 
-};   // Phonon
+    if (dynamic_cast<Phonon::AbstractAudioOutput*>(sipCpp))
+        {
+        sipType = sipType_Phonon_AbstractAudioOutput;
+        if (dynamic_cast<Phonon::AudioDataOutput*>(sipCpp))
+            sipType = sipType_Phonon_AudioDataOutput;
+        }
+    else if (dynamic_cast<Phonon::AbstractVideoOutput*>(sipCpp))
+        sipType = sipType_Phonon_AbstractVideoOutput;
+    else if (dynamic_cast<Phonon::Effect*>(sipCpp))
+        {
+        sipType = sipType_Phonon_Effect;
+        if (dynamic_cast<Phonon::VolumeFaderEffect*>(sipCpp))
+            sipType = sipType_Phonon_VolumeFaderEffect;
+        }
+    else if (dynamic_cast<Phonon::MediaObject*>(sipCpp))
+        sipType = sipType_Phonon_MediaObject;
+%End
+};
+// MediaNode
+
+};
+// Phonon
 
 
+%ModuleHeaderCode
+//ctscc
+#include <phonon/abstractaudiooutput.h>
+#include <phonon/abstractvideooutput.h>
+#include <phonon/audiodataoutput.h>
+#include <phonon/effect.h>
+#include <phonon/medianode.h>
+#include <phonon/mediaobject.h>
+#include <phonon/volumefadereffect.h>
+%End

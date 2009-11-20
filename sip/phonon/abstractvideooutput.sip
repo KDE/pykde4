@@ -25,8 +25,12 @@ class AbstractVideoOutput : Phonon::MediaNode /NoDefaultCtors/
 %TypeHeaderCode
 #include <phonon/abstractvideooutput.h>
 %End
-};   // AbstractVideoOutput
+protected:
+//ig                            AbstractVideoOutput (AbstractVideoOutputPrivate& d);
+};
+// AbstractVideoOutput
 
-};   // Phonon
+};
+// Phonon
 
 

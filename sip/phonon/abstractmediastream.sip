@@ -36,14 +36,18 @@ protected:
     void                    writeData (const QByteArray& data);
     void                    endOfData ();
     void                    error (Phonon::ErrorType errorType, const QString& errorString);
-    virtual void            reset () = 0;
-    virtual void            needData () = 0;
+    virtual void            reset ()=0;
+    virtual void            needData ()=0;
     virtual void            enoughData ();
     virtual void            seekStream (qint64 offset);
 
-//ig                        AbstractMediaStream (AbstractMediaStreamPrivate& dd, QObject* parent /TransferThis/);
-};   // AbstractMediaStream
+//ig                            AbstractMediaStream (AbstractMediaStreamPrivate& dd, QObject* parent /TransferThis/);
+public:
+    virtual ~AbstractMediaStream ();
+};
+// AbstractMediaStream
 
-};   // Phonon
+};
+// Phonon
 
 

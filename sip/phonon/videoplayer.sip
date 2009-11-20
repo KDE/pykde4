@@ -28,7 +28,7 @@ class VideoPlayer : QWidget
 %End
 
 public:
-    explicit           VideoPlayer (Phonon::Category category, QWidget* parent /TransferThis/ = 0);
+    explicit                VideoPlayer (Phonon::Category category, QWidget* parent /TransferThis/ = 0);
                             VideoPlayer (QWidget* parent /TransferThis/ = 0);
     qint64                  totalTime () const;
     qint64                  currentTime () const;
@@ -48,8 +48,12 @@ public:
 
 signals:
     void                    finished ();
-};   // VideoPlayer
+public:
+    ~VideoPlayer ();
+};
+// VideoPlayer
 
-};   // Phonon
+};
+// Phonon
 
 

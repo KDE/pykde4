@@ -30,7 +30,39 @@ enum ObjectDescriptionType
     AudioCaptureDeviceType
 };
 
-/*
+template <T>
+class ObjectDescription
+{
+%TypeHeaderCode
+#include <phonon/objectdescription.h>
+%End
+
+public:
+    static Phonon::ObjectDescription<T>  fromIndex (int index);
+    bool                    operator == (const ObjectDescription& otherDescription) const;
+    bool                    operator != (const ObjectDescription& otherDescription) const;
+    QString                 name () const;
+    QString                 description () const;
+    QVariant                property (const char* name) const;
+    QList<QByteArray>       propertyNames () const;
+    bool                    isValid () const;
+    int                     index () const;
+                            ObjectDescription ();
+                            ObjectDescription (int index, const QHash<QByteArray,QVariant>& properties);
+
+};
+// ObjectDescription
+
+typedef Phonon::ObjectDescription<Phonon::AudioOutputDeviceType> AudioOutputDevice;
+
+typedef Phonon::ObjectDescription<Phonon::AudioCaptureDeviceType> AudioCaptureDevice;
+
+typedef Phonon::ObjectDescription<Phonon::EffectType> EffectDescription;
+
+typedef Phonon::ObjectDescription<Phonon::AudioChannelType> AudioChannelDescription;
+
+typedef Phonon::ObjectDescription<Phonon::SubtitleType> SubtitleDescription;
+
 class ObjectDescriptionData
 {
 %TypeHeaderCode
@@ -46,44 +78,12 @@ public:
     bool                    isValid () const;
     int                     index () const;
     static Phonon::ObjectDescriptionData*  fromIndex (Phonon::ObjectDescriptionType type, int index);
-
+    ~ObjectDescriptionData ();
+//ig                            ObjectDescriptionData (ObjectDescriptionPrivate* = 0);
                             ObjectDescriptionData (int index, const QHash<QByteArray,QVariant>& properties);
-};   // ObjectDescriptionData
-*/
-//template <ObjectDescriptionType T>
-template <T>
-class ObjectDescription
-{
-%TypeHeaderCode
-#include <phonon/objectdescription.h>
-%End
-
-public:
-    static Phonon::ObjectDescription<T> fromIndex (int index);
-    bool                    operator == (const ObjectDescription& otherDescription) const;
-    bool                    operator != (const ObjectDescription& otherDescription) const;
-    QString                 name () const;
-    QString                 description () const;
-    QVariant                property (const char* name) const;
-    QList<QByteArray>       propertyNames () const;
-    bool                    isValid () const;
-    int                     index () const;
-                            ObjectDescription ();
-                            ObjectDescription (int index, const QHash<QByteArray,QVariant>& properties);
-
-};   // ObjectDescription
-
-typedef Phonon::ObjectDescription<Phonon::AudioOutputDeviceType> AudioOutputDevice;
-
-typedef Phonon::ObjectDescription<Phonon::AudioCaptureDeviceType> AudioCaptureDevice;
-
-typedef Phonon::ObjectDescription<Phonon::EffectType> EffectDescription;
-
-typedef Phonon::ObjectDescription<Phonon::AudioChannelType> AudioChannelDescription;
-
-typedef Phonon::ObjectDescription<Phonon::SubtitleType> SubtitleDescription;
-
-};   // Phonon
+};
+};
+// Phonon
 /*
 %MappedType QList<Phonon::ObjectDescription>
 {
@@ -160,4 +160,3 @@ typedef Phonon::ObjectDescription<Phonon::SubtitleType> SubtitleDescription;
 %End
 };
 */
-

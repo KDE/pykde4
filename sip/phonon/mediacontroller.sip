@@ -27,8 +27,8 @@ class MediaController : QObject
 #include <phonon/mediacontroller.h>
 %End
 
-public:
 
+public:
     enum Feature
     {
         Angles,
@@ -69,8 +69,12 @@ signals:
     void                    chapterChanged (int chapterNumber);
     void                    availableTitlesChanged (int availableTitles);
     void                    titleChanged (int titleNumber);
-};   // MediaController
+public:
+    ~MediaController ();
+};
+// MediaController
 
-};   // Phonon
+};
+// Phonon
 
 

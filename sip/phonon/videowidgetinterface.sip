@@ -28,21 +28,23 @@ class VideoWidgetInterface
 %End
 
 public:
-    virtual Phonon::VideoWidget::AspectRatio  aspectRatio () const = 0;
-    virtual void            setAspectRatio (Phonon::VideoWidget::AspectRatio) = 0;
-    virtual qreal           brightness () const = 0;
-    virtual void            setBrightness (qreal) = 0;
-    virtual Phonon::VideoWidget::ScaleMode  scaleMode () const = 0;
-    virtual void            setScaleMode (Phonon::VideoWidget::ScaleMode) = 0;
-    virtual qreal           contrast () const = 0;
-    virtual void            setContrast (qreal) = 0;
-    virtual qreal           hue () const = 0;
-    virtual void            setHue (qreal) = 0;
-    virtual qreal           saturation () const = 0;
-    virtual void            setSaturation (qreal) = 0;
-    virtual QWidget*        widget () = 0;
-};   // VideoWidgetInterface
+    virtual Phonon::VideoWidget::AspectRatio  aspectRatio () const=0;
+    virtual void            setAspectRatio (Phonon::VideoWidget::AspectRatio)=0;
+    virtual qreal           brightness () const=0;
+    virtual void            setBrightness (qreal)=0;
+    virtual Phonon::VideoWidget::ScaleMode  scaleMode () const=0;
+    virtual void            setScaleMode (Phonon::VideoWidget::ScaleMode)=0;
+    virtual qreal           contrast () const=0;
+    virtual void            setContrast (qreal)=0;
+    virtual qreal           hue () const=0;
+    virtual void            setHue (qreal)=0;
+    virtual qreal           saturation () const=0;
+    virtual void            setSaturation (qreal)=0;
+    virtual QWidget*        widget ()=0;
+};
+// VideoWidgetInterface
 
-};   // Phonon
+};
+// Phonon
 
 

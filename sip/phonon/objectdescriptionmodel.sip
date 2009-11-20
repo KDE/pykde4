@@ -17,14 +17,13 @@
 
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
-/*
+
 namespace Phonon
 {
-
 class ObjectDescriptionModelData
 {
 %TypeHeaderCode
-  <phonon/objectdescriptionmodel.h>
+#include <phonon/objectdescriptionmodel.h>
 %End
 
 public:
@@ -38,69 +37,18 @@ public:
     void                    moveDown (const QModelIndex& index);
 //ig    void                    setModelData (const QList<QExplicitlySharedDataPointer<Phonon::ObjectDescriptionData>>& data);
 //ig    QList<QExplicitlySharedDataPointer<Phonon::ObjectDescriptionData>>  modelData () const;
-
-//mt undefined symbol: QExplicitlySharedDataPointer<Phonon::ObjectDescriptionData> None -- need mapped type?
-//mt     QExplicitlySharedDataPointer<Phonon::ObjectDescriptionData>  modelData (const QModelIndex& index) const;
-
-
+//ig    QExplicitlySharedDataPointer<Phonon::ObjectDescriptionData>  modelData (const QModelIndex& index) const;
     Qt::DropActions         supportedDropActions () const;
     bool                    dropMimeData (Phonon::ObjectDescriptionType type, const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent);
     bool                    removeRows (int row, int count, const QModelIndex& parent = QModelIndex());
     QStringList             mimeTypes (Phonon::ObjectDescriptionType type) const;
                             ObjectDescriptionModelData (QAbstractListModel*);
-
 protected:
-                            ~ObjectDescriptionModelData ();
-};   // ObjectDescriptionModelData
-
-
-//template <ObjectDescriptionType type>
-template <type>
-class ObjectDescriptionModel : QAbstractListModel
-{
-%TypeHeaderCode
-#include <phonon/objectdescriptionmodel.h>
-%End
-
-public:
-    explicit                ObjectDescriptionModel (QObject* parent /TransferThis/ = 0);
-    explicit                ObjectDescriptionModel (const QList< Phonon::ObjectDescription<type> >& data, QObject* parent /TransferThis/ = 0);
-
-//ig    const QMetaObject staticMetaObject;
-//ig    const QMetaObject*      metaObject () const;
-
-//io     void*              qt_metacast (const char* _clname);
-
-    int                     rowCount (const QModelIndex& parent = QModelIndex()) const;
-    QVariant                data (const QModelIndex& index, int role = Qt::DisplayRole) const;
-    Qt::ItemFlags           flags (const QModelIndex& index) const;
-    QList<int>              tupleIndexOrder () const;
-    int                     tupleIndexAtPositionIndex (int positionIndex) const;
-    QMimeData*              mimeData (const QModelIndexList& indexes) const;
-    void                    moveUp (const QModelIndex& index);
-    void                    moveDown (const QModelIndex& index);
-
-
-//ig    void                    setModelData (const QList<Phonon::ObjectDescription<type>>& data);
-//ig    QList<ObjectDescription<type>>  modelData () const;
-//ig    ObjectDescription<type>  modelData (const QModelIndex& index) const;
-    Qt::DropActions         supportedDropActions () const;
-    bool                    dropMimeData (const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent);
-    bool                    removeRows (int row, int count, const QModelIndex& parent = QModelIndex());
-    QStringList             mimeTypes () const;
-};   // ObjectDescriptionModel
-
-typedef Phonon::ObjectDescriptionModel<Phonon::AudioOutputDeviceType> AudioOutputDeviceModel;
-
-typedef Phonon::ObjectDescriptionModel<Phonon::AudioCaptureDeviceType> AudioCaptureDeviceModel;
-
-typedef Phonon::ObjectDescriptionModel<Phonon::EffectType> EffectDescriptionModel;
-
-typedef Phonon::ObjectDescriptionModel<Phonon::AudioChannelType> AudioChannelDescriptionModel;
-
-typedef Phonon::ObjectDescriptionModel<Phonon::SubtitleType> SubtitleDescriptionModel;
-
-};   // Phonon
-
-
-*/
+    ~ObjectDescriptionModelData ();
+};
+typedef ObjectDescriptionModel<AudioOutputDeviceType> AudioOutputDeviceModel;
+typedef ObjectDescriptionModel<AudioCaptureDeviceType> AudioCaptureDeviceModel;
+typedef ObjectDescriptionModel<EffectType> EffectDescriptionModel;
+typedef ObjectDescriptionModel<AudioChannelType> AudioChannelDescriptionModel;
+typedef ObjectDescriptionModel<SubtitleType> SubtitleDescriptionModel;
+};

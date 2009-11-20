@@ -53,9 +53,12 @@ public:
 
                             EffectParameter (int parameterId, const QString& name, Phonon::EffectParameter::Hints hints, const QVariant& defaultValue, const QVariant& min = QVariant(), const QVariant& max = QVariant(), const QVariantList& values = QVariantList(), const QString& description = QString());
     int                     id () const;
-};   // EffectParameter
+    ~EffectParameter ();
+};
+// EffectParameter
 
 uint                    qHash (const Phonon::EffectParameter& param);
-};   // Phonon
+};
+// Phonon
 
 

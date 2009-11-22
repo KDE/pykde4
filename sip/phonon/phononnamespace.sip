@@ -22,7 +22,7 @@
 
 namespace Phonon
 {
-    const char *phononVersion();
+    const char *phononVersion() /Encoding="ASCII"/;
 
     enum DiscType {
         NoDisc,

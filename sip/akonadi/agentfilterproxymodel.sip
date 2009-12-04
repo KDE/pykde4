@@ -51,7 +51,6 @@
 #include <akonadi/control.h>
 #include <akonadi/entitylistview.h>
 #include <akonadi/entitymimetypefiltermodel.h>
-#include <akonadi/entityrightsfiltermodel.h>
 #include <akonadi/entitytreemodel.h>
 #include <akonadi/entitytreeview.h>
 #include <akonadi/entitytreeviewstatesaver.h>
@@ -80,8 +79,6 @@
 #include <akonadi/selectionproxymodel.h>
 #include <akonadi/servermanager.h>
 #include <akonadi/session.h>
-#include <akonadi/kmime/specialcollections.h>
-#include <akonadi/kmime/specialcollectionsrequestjob.h>
 #include <akonadi/standardactionmanager.h>
 #include <akonadi/statisticsproxymodel.h>
 #include <akonadi/transactionjobs.h>

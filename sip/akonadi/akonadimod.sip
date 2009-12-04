@@ -71,7 +71,6 @@
 %Include entityhiddenattribute.sip
 %Include entitylistview.sip
 %Include entitymimetypefiltermodel.sip
-%Include entityrightsfiltermodel.sip
 %Include entitytreemodel.sip
 %Include entitytreeview.sip
 %Include entitytreeviewstatesaver.sip
@@ -97,8 +96,6 @@
 %Include messageparts.sip
 %Include messagethreaderproxymodel.sip
 %Include messagethreadingattribute.sip
-%Include specialcollections.sip
-%Include specialcollectionsrequestjob.sip
 %Include linkjob.sip
 %Include mimetypechecker.sip
 %Include monitor.sip

@@ -19,26 +19,23 @@
 
 namespace Akonadi
 {
-class PreprocessorBase : Akonadi::AgentBase
+class SpecialCollections : QObject
 {
 %TypeHeaderCode
-#include <akonadi/preprocessorbase.h>
+#include <akonadi/specialcollections.h>
 %End
 
 public:
-    enum ProcessingResult
-    {
-        ProcessingCompleted,
-        ProcessingDelayed,
-        ProcessingFailed,
-        ProcessingRefused
-    };
-    virtual Akonadi::PreprocessorBase::ProcessingResult  processItem (const Akonadi::Item& item)=0;
-    void                    finishProcessing (Akonadi::PreprocessorBase::ProcessingResult result);
-    void                    setFetchScope (const Akonadi::ItemFetchScope& fetchScope);
-    Akonadi::ItemFetchScope&  fetchScope ();
+    ~SpecialCollections ();
+    bool                    hasCollection (const QByteArray& type, const Akonadi::AgentInstance& instance) const;
+    Akonadi::Collection     collection (const QByteArray& type, const Akonadi::AgentInstance& instance) const;
+    bool                    registerCollection (const QByteArray& type, const Akonadi::Collection& collection);
+    bool                    hasDefaultCollection (const QByteArray& type) const;
+    Akonadi::Collection     defaultCollection (const QByteArray& type) const;
+signals:
+    void                    collectionsChanged (const Akonadi::AgentInstance& instance);
+    void                    defaultCollectionsChanged ();
 protected:
-                            PreprocessorBase (const QString& id);
-    virtual ~PreprocessorBase ();
+    explicit                SpecialCollections (KCoreConfigSkeleton* config, QObject* parent /TransferThis/ = 0);
 };
 };

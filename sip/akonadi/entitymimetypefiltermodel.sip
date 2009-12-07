@@ -34,10 +34,6 @@ public:
     QStringList             mimeTypeExclusionFilters () const;
     void                    addMimeTypeInclusionFilter (const QString& mimeType);
     void                    addMimeTypeExclusionFilter (const QString& mimeType);
-//FIXME not implemented
-//ig    void                    addContentMimeTypeInclusionFilters (const QStringList& mimeTypes);
-//ig    QStringList             contentMimeTypeInclusionFilters () const;
-//ig    void                    addContentMimeTypeInclusionFilter (const QString& mimeType);
     void                    clearFilters ();
     void                    setHeaderGroup (Akonadi::EntityTreeModel::HeaderGroup headerGroup);
     virtual QVariant        headerData (int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;

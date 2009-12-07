@@ -67,7 +67,10 @@ protected:
         Append
     };
 //FIXME default priority is = Akonadi::ResourceBase::Append
+//ig    void                    scheduleCustomTask (QObject* receiver, const char* method, const QVariant& argument, Akonadi::ResourceBase::SchedulePriority priority = Akonadi::ResourceBase::SchedulePriority::Append);
+//force
     void                    scheduleCustomTask (QObject* receiver, const char* method, const QVariant& argument, Akonadi::ResourceBase::SchedulePriority priority);
+//end
     void                    taskDone ();
 };
 };

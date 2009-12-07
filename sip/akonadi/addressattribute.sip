@@ -40,5 +40,32 @@ public:
     void                    setCc (const QStringList& cc);
     QStringList             bcc () const;
     void                    setBcc (const QStringList& bcc);
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'Attribute'
+    sipType = NULL;
+
+    if (dynamic_cast<Akonadi::AddressAttribute*>(sipCpp))
+        sipType = sipType_Akonadi_AddressAttribute;
+    else if (dynamic_cast<Akonadi::CollectionQuotaAttribute*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionQuotaAttribute;
+    else if (dynamic_cast<Akonadi::EntityDisplayAttribute*>(sipCpp))
+        sipType = sipType_Akonadi_EntityDisplayAttribute;
+    else if (dynamic_cast<Akonadi::EntityHiddenAttribute*>(sipCpp))
+        sipType = sipType_Akonadi_EntityHiddenAttribute;
+    else if (dynamic_cast<Akonadi::MessageFolderAttribute*>(sipCpp))
+        sipType = sipType_Akonadi_MessageFolderAttribute;
+    else if (dynamic_cast<Akonadi::MessageThreadingAttribute*>(sipCpp))
+        sipType = sipType_Akonadi_MessageThreadingAttribute;
+%End
 };
 };
+%ModuleHeaderCode
+//ctscc
+#include <akonadi/kmime/addressattribute.h>
+#include <akonadi/attribute.h>
+#include <akonadi/collectionquotaattribute.h>
+#include <akonadi/entitydisplayattribute.h>
+#include <akonadi/entityhiddenattribute.h>
+#include <akonadi/kmime/messagefolderattribute.h>
+#include <akonadi/kmime/messagethreadingattribute.h>
+%End

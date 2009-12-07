@@ -33,6 +33,8 @@ public:
     static Akonadi::Session*  defaultSession ();
     void                    clear ();
     ~Session ();
+protected:
+//ig    explicit                Session (SessionPrivate* d, const QByteArray& sessionId = QByteArray(), QObject* parent /TransferThis/ = 0);
 };
 // Session
 

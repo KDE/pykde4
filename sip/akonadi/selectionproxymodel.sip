@@ -28,20 +28,215 @@ class SelectionProxyModel : KSelectionProxyModel
 public:
     explicit                SelectionProxyModel (QItemSelectionModel* selectionModel, QObject* parent /TransferThis/ = 0);
 %ConvertToSubClassCode
-    // CTSCC for subclasses of 'SelectionProxyModel'
-    sipClass = NULL;
+    // CTSCC for subclasses of 'QObject'
+    sipType = NULL;
 
-    if (dynamic_cast<Akonadi::SelectionProxyModel*>(sipCpp))
-        {
-        sipClass = sipClass_Akonadi_SelectionProxyModel;
-        if (dynamic_cast<Akonadi::FavoriteCollectionsModel*>(sipCpp))
-            sipClass = sipClass_Akonadi_FavoriteCollectionsModel;
-        }
+    if (dynamic_cast<Akonadi::AgentBase*>(sipCpp))
+        sipType = sipType_Akonadi_AgentBase;
+    else if (dynamic_cast<Akonadi::PreprocessorBase*>(sipCpp))
+        sipType = sipType_Akonadi_PreprocessorBase;
+    else if (dynamic_cast<Akonadi::ResourceBase*>(sipCpp))
+        sipType = sipType_Akonadi_ResourceBase;
+    else if (dynamic_cast<Akonadi::AgentManager*>(sipCpp))
+        sipType = sipType_Akonadi_AgentManager;
+    else if (dynamic_cast<Akonadi::Control*>(sipCpp))
+        sipType = sipType_Akonadi_Control;
+    else if (dynamic_cast<Akonadi::EntityTreeViewStateSaver*>(sipCpp))
+        sipType = sipType_Akonadi_EntityTreeViewStateSaver;
+    else if (dynamic_cast<Akonadi::ChangeRecorder*>(sipCpp))
+        sipType = sipType_Akonadi_ChangeRecorder;
+    else if (dynamic_cast<Akonadi::Monitor*>(sipCpp))
+        sipType = sipType_Akonadi_Monitor;
+    else if (dynamic_cast<Akonadi::ServerManager*>(sipCpp))
+        sipType = sipType_Akonadi_ServerManager;
+    else if (dynamic_cast<Akonadi::Session*>(sipCpp))
+        sipType = sipType_Akonadi_Session;
+    else if (dynamic_cast<Akonadi::SpecialCollections*>(sipCpp))
+        sipType = sipType_Akonadi_SpecialCollections;
+    else if (dynamic_cast<Akonadi::SpecialMailCollections*>(sipCpp))
+        sipType = sipType_Akonadi_SpecialMailCollections;
+    else if (dynamic_cast<Akonadi::StandardActionManager*>(sipCpp))
+        sipType = sipType_Akonadi_StandardActionManager;
+    else if (dynamic_cast<Akonadi::AgentInstanceCreateJob*>(sipCpp))
+        sipType = sipType_Akonadi_AgentInstanceCreateJob;
+    else if (dynamic_cast<Akonadi::PartFetcher*>(sipCpp))
+        sipType = sipType_Akonadi_PartFetcher;
+    else if (dynamic_cast<Akonadi::ResourceSynchronizationJob*>(sipCpp))
+        sipType = sipType_Akonadi_ResourceSynchronizationJob;
+    else if (dynamic_cast<Akonadi::Job*>(sipCpp))
+        sipType = sipType_Akonadi_Job;
+    else if (dynamic_cast<Akonadi::CollectionCopyJob*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionCopyJob;
+    else if (dynamic_cast<Akonadi::CollectionCreateJob*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionCreateJob;
+    else if (dynamic_cast<Akonadi::CollectionDeleteJob*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionDeleteJob;
+    else if (dynamic_cast<Akonadi::CollectionFetchJob*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionFetchJob;
+    else if (dynamic_cast<Akonadi::CollectionModifyJob*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionModifyJob;
+    else if (dynamic_cast<Akonadi::CollectionMoveJob*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionMoveJob;
+    else if (dynamic_cast<Akonadi::CollectionStatisticsJob*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionStatisticsJob;
+    else if (dynamic_cast<Akonadi::ItemCopyJob*>(sipCpp))
+        sipType = sipType_Akonadi_ItemCopyJob;
+    else if (dynamic_cast<Akonadi::ItemCreateJob*>(sipCpp))
+        sipType = sipType_Akonadi_ItemCreateJob;
+    else if (dynamic_cast<Akonadi::ItemDeleteJob*>(sipCpp))
+        sipType = sipType_Akonadi_ItemDeleteJob;
+    else if (dynamic_cast<Akonadi::ItemFetchJob*>(sipCpp))
+        sipType = sipType_Akonadi_ItemFetchJob;
+    else if (dynamic_cast<Akonadi::ItemModifyJob*>(sipCpp))
+        sipType = sipType_Akonadi_ItemModifyJob;
+    else if (dynamic_cast<Akonadi::ItemMoveJob*>(sipCpp))
+        sipType = sipType_Akonadi_ItemMoveJob;
+    else if (dynamic_cast<Akonadi::ItemSearchJob*>(sipCpp))
+        sipType = sipType_Akonadi_ItemSearchJob;
+    else if (dynamic_cast<Akonadi::ItemSync*>(sipCpp))
+        sipType = sipType_Akonadi_ItemSync;
+    else if (dynamic_cast<Akonadi::LinkJob*>(sipCpp))
+        sipType = sipType_Akonadi_LinkJob;
+    else if (dynamic_cast<Akonadi::SearchCreateJob*>(sipCpp))
+        sipType = sipType_Akonadi_SearchCreateJob;
+    else if (dynamic_cast<Akonadi::TransactionBeginJob*>(sipCpp))
+        sipType = sipType_Akonadi_TransactionBeginJob;
+    else if (dynamic_cast<Akonadi::TransactionCommitJob*>(sipCpp))
+        sipType = sipType_Akonadi_TransactionCommitJob;
+    else if (dynamic_cast<Akonadi::TransactionRollbackJob*>(sipCpp))
+        sipType = sipType_Akonadi_TransactionRollbackJob;
+    else if (dynamic_cast<Akonadi::TransactionSequence*>(sipCpp))
+        sipType = sipType_Akonadi_TransactionSequence;
+    else if (dynamic_cast<Akonadi::SpecialMailCollectionsRequestJob*>(sipCpp))
+        sipType = sipType_Akonadi_SpecialMailCollectionsRequestJob;
+    else if (dynamic_cast<Akonadi::SpecialCollectionsRequestJob*>(sipCpp))
+        sipType = sipType_Akonadi_SpecialCollectionsRequestJob;
+    else if (dynamic_cast<Akonadi::UnlinkJob*>(sipCpp))
+        sipType = sipType_Akonadi_UnlinkJob;
+    else if (dynamic_cast<Akonadi::CollectionStatisticsDelegate*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionStatisticsDelegate;
+    else if (dynamic_cast<Akonadi::AgentInstanceModel*>(sipCpp))
+        sipType = sipType_Akonadi_AgentInstanceModel;
+    else if (dynamic_cast<Akonadi::AgentTypeModel*>(sipCpp))
+        sipType = sipType_Akonadi_AgentTypeModel;
+    else if (dynamic_cast<Akonadi::CollectionStatisticsModel*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionStatisticsModel;
+    else if (dynamic_cast<Akonadi::CollectionModel*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionModel;
+    else if (dynamic_cast<Akonadi::EntityTreeModel*>(sipCpp))
+        sipType = sipType_Akonadi_EntityTreeModel;
+    else if (dynamic_cast<Akonadi::MessageThreaderProxyModel*>(sipCpp))
+        sipType = sipType_Akonadi_MessageThreaderProxyModel;
+    else if (dynamic_cast<Akonadi::SelectionProxyModel*>(sipCpp))
+        sipType = sipType_Akonadi_SelectionProxyModel;
+    else if (dynamic_cast<Akonadi::FavoriteCollectionsModel*>(sipCpp))
+        sipType = sipType_Akonadi_FavoriteCollectionsModel;
+    else if (dynamic_cast<Akonadi::AgentFilterProxyModel*>(sipCpp))
+        sipType = sipType_Akonadi_AgentFilterProxyModel;
+    else if (dynamic_cast<Akonadi::CollectionFilterProxyModel*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionFilterProxyModel;
+    else if (dynamic_cast<Akonadi::EntityMimeTypeFilterModel*>(sipCpp))
+        sipType = sipType_Akonadi_EntityMimeTypeFilterModel;
+    else if (dynamic_cast<Akonadi::StatisticsProxyModel*>(sipCpp))
+        sipType = sipType_Akonadi_StatisticsProxyModel;
+    else if (dynamic_cast<Akonadi::MessageModel*>(sipCpp))
+        sipType = sipType_Akonadi_MessageModel;
+    else if (dynamic_cast<Akonadi::ItemModel*>(sipCpp))
+        sipType = sipType_Akonadi_ItemModel;
+    else if (dynamic_cast<Akonadi::AgentInstanceWidget*>(sipCpp))
+        sipType = sipType_Akonadi_AgentInstanceWidget;
+    else if (dynamic_cast<Akonadi::AgentTypeWidget*>(sipCpp))
+        sipType = sipType_Akonadi_AgentTypeWidget;
+    else if (dynamic_cast<Akonadi::CollectionPropertiesPage*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionPropertiesPage;
+    else if (dynamic_cast<Akonadi::CollectionComboBox*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionComboBox;
+    else if (dynamic_cast<Akonadi::AgentTypeDialog*>(sipCpp))
+        sipType = sipType_Akonadi_AgentTypeDialog;
+    else if (dynamic_cast<Akonadi::CollectionDialog*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionDialog;
+    else if (dynamic_cast<Akonadi::CollectionPropertiesDialog*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionPropertiesDialog;
+    else if (dynamic_cast<Akonadi::CollectionRequester*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionRequester;
+    else if (dynamic_cast<Akonadi::EntityListView*>(sipCpp))
+        sipType = sipType_Akonadi_EntityListView;
+    else if (dynamic_cast<Akonadi::CollectionView*>(sipCpp))
+        sipType = sipType_Akonadi_CollectionView;
+    else if (dynamic_cast<Akonadi::EntityTreeView*>(sipCpp))
+        sipType = sipType_Akonadi_EntityTreeView;
+    else if (dynamic_cast<Akonadi::ItemView*>(sipCpp))
+        sipType = sipType_Akonadi_ItemView;
 %End
 };
 };
 %ModuleHeaderCode
 //ctscc
+#include <akonadi/agentbase.h>
+#include <akonadi/agentfilterproxymodel.h>
+#include <akonadi/agentinstancecreatejob.h>
+#include <akonadi/agentinstancemodel.h>
+#include <akonadi/agentinstancewidget.h>
+#include <akonadi/agentmanager.h>
+#include <akonadi/agenttypedialog.h>
+#include <akonadi/agenttypemodel.h>
+#include <akonadi/agenttypewidget.h>
+#include <akonadi/changerecorder.h>
+#include <akonadi/collectioncombobox.h>
+#include <akonadi/collectioncopyjob.h>
+#include <akonadi/collectioncreatejob.h>
+#include <akonadi/collectiondeletejob.h>
+#include <akonadi/collectiondialog.h>
+#include <akonadi/collectionfetchjob.h>
+#include <akonadi/collectionfilterproxymodel.h>
+#include <akonadi/collectionmodel.h>
+#include <akonadi/collectionmodifyjob.h>
+#include <akonadi/collectionmovejob.h>
+#include <akonadi/collectionpropertiesdialog.h>
+#include <akonadi/collectionpropertiespage.h>
+#include <akonadi/collectionrequester.h>
+#include <akonadi/collectionstatisticsdelegate.h>
+#include <akonadi/collectionstatisticsjob.h>
+#include <akonadi/collectionstatisticsmodel.h>
+#include <akonadi/collectionview.h>
+#include <akonadi/control.h>
+#include <akonadi/entitylistview.h>
+#include <akonadi/entitymimetypefiltermodel.h>
+#include <akonadi/entitytreemodel.h>
+#include <akonadi/entitytreeview.h>
+#include <akonadi/entitytreeviewstatesaver.h>
 #include <akonadi/favoritecollectionsmodel.h>
+#include <akonadi/itemcopyjob.h>
+#include <akonadi/itemcreatejob.h>
+#include <akonadi/itemdeletejob.h>
+#include <akonadi/itemfetchjob.h>
+#include <akonadi/itemmodel.h>
+#include <akonadi/itemmodifyjob.h>
+#include <akonadi/itemmovejob.h>
+#include <akonadi/itemsearchjob.h>
+#include <akonadi/itemsync.h>
+#include <akonadi/itemview.h>
+#include <akonadi/job.h>
+#include <akonadi/linkjob.h>
+#include <akonadi/kmime/messagemodel.h>
+#include <akonadi/kmime/messagethreaderproxymodel.h>
+#include <akonadi/monitor.h>
+#include <akonadi/partfetcher.h>
+#include <akonadi/preprocessorbase.h>
+#include <qobject.h>
+#include <akonadi/resourcebase.h>
+#include <akonadi/resourcesynchronizationjob.h>
+#include <akonadi/searchcreatejob.h>
 #include <akonadi/selectionproxymodel.h>
+#include <akonadi/servermanager.h>
+#include <akonadi/session.h>
+#include <akonadi/specialcollections.h>
+#include <akonadi/specialcollectionsrequestjob.h>
+#include <akonadi/kmime/specialmailcollections.h>
+#include <akonadi/kmime/specialmailcollectionsrequestjob.h>
+#include <akonadi/standardactionmanager.h>
+#include <akonadi/statisticsproxymodel.h>
+#include <akonadi/transactionjobs.h>
+#include <akonadi/transactionsequence.h>
+#include <akonadi/unlinkjob.h>
 %End

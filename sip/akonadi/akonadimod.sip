@@ -113,3 +113,7 @@
 %Include transactionsequence.sip
 %Include transportresourcebase.sip
 %Include unlinkjob.sip
+%Include specialcollections.sip
+%Include specialcollectionsrequestjob.sip
+%Include specialmailcollections.sip
+%Include specialmailcollectionsrequestjob.sip

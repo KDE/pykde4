@@ -41,6 +41,8 @@ public:
     void                    setActiveIconName (const QString& name);
     KIcon                   activeIcon () const;
     QString                 activeIconName () const;
+    QColor                  backgroundColor () const;
+    void                    setBackgroundColor (const QColor& color);
 };
 // EntityDisplayAttribute
 

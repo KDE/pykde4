@@ -19,25 +19,16 @@
 
 namespace Akonadi
 {
-class MessageFolderAttribute : Akonadi::Attribute /NoDefaultCtors/
+class SpecialMailCollectionsRequestJob : Akonadi::SpecialCollectionsRequestJob
 {
 %TypeHeaderCode
-#include <akonadi/kmime/messagefolderattribute.h>
+#include <akonadi/kmime/specialmailcollectionsrequestjob.h>
 %End
 
 public:
-                            MessageFolderAttribute ();
-    ~MessageFolderAttribute ();
-    bool                    isOutboundFolder () const;
-    void                    setOutboundFolder (bool outbound);
-    QByteArray              type () const;
-    Akonadi::MessageFolderAttribute*  clone () const;
-    QByteArray              serialized () const;
-    void                    deserialize (const QByteArray& data);
-                            MessageFolderAttribute (const Akonadi::MessageFolderAttribute& other);
-private:
-//force
-    Akonadi::MessageFolderAttribute& operator=(const Akonadi::MessageFolderAttribute&);
-//end
+    explicit                SpecialMailCollectionsRequestJob (QObject* parent /TransferThis/ = 0);
+    ~SpecialMailCollectionsRequestJob ();
+    void                    requestDefaultCollection (Akonadi::SpecialMailCollections::Type type);
+    void                    requestCollection (Akonadi::SpecialMailCollections::Type type, const Akonadi::AgentInstance& instance);
 };
 };

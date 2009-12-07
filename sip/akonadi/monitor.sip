@@ -41,7 +41,7 @@ public:
     void                    setItemFetchScope (const Akonadi::ItemFetchScope& fetchScope);
     Akonadi::ItemFetchScope&  itemFetchScope ();
     Akonadi::Collection::List  collectionsMonitored () const;
-    QList<Akonadi::Entity::Id>         itemsMonitored () const;
+    QList<Akonadi::Entity::Id>  itemsMonitored () const;
     QStringList             mimeTypesMonitored () const;
     QList<QByteArray>       resourcesMonitored () const;
     bool                    isAllMonitored () const;
@@ -71,7 +71,10 @@ public:
 signals:
     void                    collectionChanged (const Akonadi::Collection& collection, const QSet<QByteArray>& attributeNames);
     void                    collectionMoved (const Akonadi::Collection& collection, const Akonadi::Collection& source, const Akonadi::Collection& destination);
+//force
     void                    collectionStatisticsChanged (Akonadi::Entity::Id id, const Akonadi::CollectionStatistics& statistics);
+//end
+//ig    void                    collectionStatisticsChanged (Akonadi::Collection::Id id, const Akonadi::CollectionStatistics& statistics);
 };
 // Monitor
 

@@ -35,5 +35,6 @@ public:
     void                    addCollection (const Akonadi::Collection& collection);
     void                    removeCollection (const Akonadi::Collection& collection);
     void                    setFavoriteLabel (const Akonadi::Collection& collection, const QString& label);
+    QString                 favoriteLabel (const Akonadi::Collection& col);
 };
 };

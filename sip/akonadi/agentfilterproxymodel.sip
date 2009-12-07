@@ -226,8 +226,6 @@ protected:
         sipType = sipType_Akonadi_CollectionFilterProxyModel;
     else if (dynamic_cast<Akonadi::EntityMimeTypeFilterModel*>(sipCpp))
         sipType = sipType_Akonadi_EntityMimeTypeFilterModel;
-    else if (dynamic_cast<Akonadi::EntityRightsFilterModel*>(sipCpp))
-        sipType = sipType_Akonadi_EntityRightsFilterModel;
     else if (dynamic_cast<Akonadi::StatisticsProxyModel*>(sipCpp))
         sipType = sipType_Akonadi_StatisticsProxyModel;
     else if (dynamic_cast<Akonadi::ItemModel*>(sipCpp))

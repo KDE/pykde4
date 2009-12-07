@@ -62,7 +62,10 @@ protected:
 public:
     virtual ~CollectionModel ();
 protected:
+//force
     Akonadi::Collection     collectionForId (Akonadi::Entity::Id id) const;
+//end
+//ig    Akonadi::Collection     collectionForId (Collection::Id id) const;
 };
 // CollectionModel
 

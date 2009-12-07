@@ -35,6 +35,8 @@ public:
     QStringList             mimeTypeFilter () const;
     void                    setCollection (const Akonadi::Collection& collection);
     ~CollectionRequester ();
+    void                    setAccessRightsFilter (Akonadi::Collection::Rights rights);
+    Akonadi::Collection::Rights  accessRightsFilter () const;
 };
 // CollectionRequester
 

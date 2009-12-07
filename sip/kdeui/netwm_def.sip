@@ -316,7 +316,8 @@ public:
         WM2Opacity,
         WM2DesktopLayout,
         WM2FullPlacement,
-        WM2FullscreenMonitors
+        WM2FullscreenMonitors,
+        WM2FrameOverlap
     };
 
 

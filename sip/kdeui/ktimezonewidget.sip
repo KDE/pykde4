@@ -33,6 +33,11 @@ public:
     void                    setSelected (const QString& zone, bool selected);
     static QString          displayName (const KTimeZone& zone);
     ~KTimeZoneWidget ();
+    void                    setItemsCheckable (bool enable);
+    bool                    itemsCheckable () const;
+    void                    setSelectionMode (QAbstractItemView::SelectionMode mode);
+    QAbstractItemView::SelectionMode  selectionMode () const;
+    void                    clearSelection ();
 };
 // KTimeZoneWidget
 

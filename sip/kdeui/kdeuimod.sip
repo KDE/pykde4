@@ -74,7 +74,6 @@
 %Include kdatetimewidget.sip
 %Include kdatewidget.sip
 %Include kdeprintdialog.sip
-%Include kdescendantsproxymodel.sip
 %Include kdialog.sip
 %Include kdialogbuttonbox.sip
 %Include kdialogjobuidelegate.sip
@@ -165,7 +164,6 @@
 %Include kshortcutsdialog.sip
 %Include kshortcutseditor.sip
 %Include kshortcutwidget.sip
-%Include ksortfilterproxymodel.sip
 %Include ksplashscreen.sip
 %Include ksqueezedtextlabel.sip
 %Include kstandardaction.sip

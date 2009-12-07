@@ -60,10 +60,6 @@ public:
     QString                 attentionIconName () const;
     void                    setAttentionIconByPixmap (const QIcon& icon);
     QIcon                   attentionIconPixmap () const;
-    void                    setAttentionMovie (QMovie* movie);
-    void                    setAttentionMovie (const QVector<QPixmap>& movie);
-    void                    setAttentionMovie (const QVector<QImage>& movie);
-    QMovie*                 attentionMovie () const;
     void                    setToolTip (const QString& iconName, const QString& title, const QString& subTitle);
     void                    setToolTip (const QIcon& icon, const QString& title, const QString& subTitle);
     void                    setToolTipIconByName (const QString& name);
@@ -89,4 +85,7 @@ signals:
     void                    secondaryActivateRequested (const QPoint& pos);
 protected:
     bool                    eventFilter (QObject* watched, QEvent* event);
+public:
+    void                    setAttentionMovieByName (const QString& name);
+    QString                 attentionMovieName () const;
 };

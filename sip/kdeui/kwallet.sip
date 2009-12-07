@@ -83,7 +83,7 @@ public:
     virtual int             readMap (const QString& key, QMap<QString,QString>& value /Out/);
     virtual int             readPassword (const QString& key, QString& value /Out/);
     int                     readEntryList (const QString& key, QMap<QString,QByteArray>& value /Out/);
-//ig    int                 readMapList (const QString& key, QMap<QString,QMap<QString,QString>>& value /Out/);
+//ig    int                     readMapList (const QString& key, QMap<QString,QMap<QString,QString>>& value /Out/);
     int                     readPasswordList (const QString& key, QMap<QString,QString>& value /Out/);
     virtual int             writeEntry (const QString& key, const QByteArray& value, KWallet::Wallet::EntryType entryType);
     virtual int             writeEntry (const QString& key, const QByteArray& value);

@@ -46,7 +46,19 @@ protected:
     unsigned int            mostRecentMTime (const QSet<QString>& dirNames) const;
 public:
     ~KIconCache ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'KPixmapCache'
+    sipType = NULL;
+
+    if (dynamic_cast<KIconCache*>(sipCpp))
+        sipType = sipType_KIconCache;
+%End
 };
 // KIconCache
 
 
+%ModuleHeaderCode
+//ctscc
+#include <kiconcache.h>
+#include <kpixmapcache.h>
+%End

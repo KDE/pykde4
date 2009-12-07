@@ -267,6 +267,8 @@ public:
 //end
 //ig                            NETWinInfo (Display* display, Window window, Window rootWindow, const unsigned long properties [], int properties_size, NET::Role role = NET::Role::Client);
     ~NETWinInfo ();
+    void                    setFrameOverlap (NETStrut strut);
+    NETStrut                frameOverlap () const;
 };
 // NETWinInfo
 

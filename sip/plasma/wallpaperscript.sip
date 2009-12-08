@@ -56,5 +56,6 @@ protected:
     void                    configNeedsSaving ();
     virtual void            renderCompleted (const QImage& image);
     virtual void            urlDropped (const KUrl& url);
+    KPluginInfo             description () const;
 };
 };

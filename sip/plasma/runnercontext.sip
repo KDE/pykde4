@@ -64,6 +64,10 @@ signals:
 public:
     ~RunnerContext ();
     bool                    addMatches (const QString& term, const QList<Plasma::QueryMatch>& matches);
+    bool                    removeMatch (const QString matchId);
+    bool                    removeMatches (const QStringList matchIdList);
+    void                    setSingleRunnerQueryMode (bool enabled);
+    bool                    singleRunnerQueryMode () const;
 };
 // RunnerContext
 

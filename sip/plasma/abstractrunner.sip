@@ -205,26 +205,22 @@ protected:
         sipType = sipType_Plasma_RunnerContext;
     else if (dynamic_cast<Plasma::RunnerManager*>(sipCpp))
         sipType = sipType_Plasma_RunnerManager;
+    else if (dynamic_cast<Plasma::AppletScript*>(sipCpp))
+        sipType = sipType_Plasma_AppletScript;
+    else if (dynamic_cast<Plasma::DataEngineScript*>(sipCpp))
+        sipType = sipType_Plasma_DataEngineScript;
+    else if (dynamic_cast<Plasma::RunnerScript*>(sipCpp))
+        sipType = sipType_Plasma_RunnerScript;
+    else if (dynamic_cast<Plasma::WallpaperScript*>(sipCpp))
+        sipType = sipType_Plasma_WallpaperScript;
     else if (dynamic_cast<Plasma::ScriptEngine*>(sipCpp))
-        {
         sipType = sipType_Plasma_ScriptEngine;
-        if (dynamic_cast<Plasma::AppletScript*>(sipCpp))
-            sipType = sipType_Plasma_AppletScript;
-        else if (dynamic_cast<Plasma::DataEngineScript*>(sipCpp))
-            sipType = sipType_Plasma_DataEngineScript;
-        else if (dynamic_cast<Plasma::RunnerScript*>(sipCpp))
-            sipType = sipType_Plasma_RunnerScript;
-        else if (dynamic_cast<Plasma::WallpaperScript*>(sipCpp))
-            sipType = sipType_Plasma_WallpaperScript;
-        }
     else if (dynamic_cast<Plasma::Service*>(sipCpp))
         sipType = sipType_Plasma_Service;
+    else if (dynamic_cast<Plasma::FrameSvg*>(sipCpp))
+        sipType = sipType_Plasma_FrameSvg;
     else if (dynamic_cast<Plasma::Svg*>(sipCpp))
-        {
         sipType = sipType_Plasma_Svg;
-        if (dynamic_cast<Plasma::FrameSvg*>(sipCpp))
-            sipType = sipType_Plasma_FrameSvg;
-        }
     else if (dynamic_cast<Plasma::Theme*>(sipCpp))
         sipType = sipType_Plasma_Theme;
     else if (dynamic_cast<Plasma::ToolTipManager*>(sipCpp))
@@ -237,28 +233,24 @@ protected:
         sipType = sipType_Plasma_Corona;
     else if (dynamic_cast<Plasma::AbstractToolBox*>(sipCpp))
         sipType = sipType_Plasma_AbstractToolBox;
+    else if (dynamic_cast<Plasma::AppletProtectedThunk*>(sipCpp))
+        sipType = sipType_Plasma_AppletProtectedThunk;
+    else if (dynamic_cast<Plasma::Containment*>(sipCpp))
+        sipType = sipType_Plasma_Containment;
+    else if (dynamic_cast<Plasma::GLApplet*>(sipCpp))
+        sipType = sipType_Plasma_GLApplet;
+    else if (dynamic_cast<Plasma::PopupApplet*>(sipCpp))
+        sipType = sipType_Plasma_PopupApplet;
     else if (dynamic_cast<Plasma::Applet*>(sipCpp))
-        {
         sipType = sipType_Plasma_Applet;
-        if (dynamic_cast<Plasma::AppletProtectedThunk*>(sipCpp))
-            sipType = sipType_Plasma_AppletProtectedThunk;
-        else if (dynamic_cast<Plasma::Containment*>(sipCpp))
-            sipType = sipType_Plasma_Containment;
-        else if (dynamic_cast<Plasma::GLApplet*>(sipCpp))
-            sipType = sipType_Plasma_GLApplet;
-        else if (dynamic_cast<Plasma::PopupApplet*>(sipCpp))
-            sipType = sipType_Plasma_PopupApplet;
-        }
     else if (dynamic_cast<Plasma::BusyWidget*>(sipCpp))
         sipType = sipType_Plasma_BusyWidget;
     else if (dynamic_cast<Plasma::Extender*>(sipCpp))
         sipType = sipType_Plasma_Extender;
+    else if (dynamic_cast<Plasma::ExtenderGroup*>(sipCpp))
+        sipType = sipType_Plasma_ExtenderGroup;
     else if (dynamic_cast<Plasma::ExtenderItem*>(sipCpp))
-        {
         sipType = sipType_Plasma_ExtenderItem;
-        if (dynamic_cast<Plasma::ExtenderGroup*>(sipCpp))
-            sipType = sipType_Plasma_ExtenderGroup;
-        }
     else if (dynamic_cast<Plasma::FlashingLabel*>(sipCpp))
         sipType = sipType_Plasma_FlashingLabel;
     else if (dynamic_cast<Plasma::Frame*>(sipCpp))
@@ -324,6 +316,11 @@ protected:
 signals:
     void                    prepare ();
     void                    teardown ();
+public:
+    Plasma::RunnerSyntax*   defaultSyntax () const;
+protected:
+    void                    setDefaultSyntax (const Plasma::RunnerSyntax& syntax);
+    Plasma::DataEngine*     dataEngine (const QString& name) const;
 };
 // AbstractRunner
 

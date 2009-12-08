@@ -40,7 +40,7 @@ public:
     QList<QAction*>         actionsForMatch (const Plasma::QueryMatch& match);
     QString                 query () const;
     void                    reloadConfiguration ();
-    void                    launchQuery (const QString& term, const QString& runnerName);
+    void                    launchQuery (const QString& term, const QString& runnerId);
     void                    launchQuery (const QString& term);
     bool                    execQuery (const QString& term, const QString& runnerName);
     bool                    execQuery (const QString& term);
@@ -54,6 +54,13 @@ public:
     QStringList             allowedRunners () const;
     void                    setupMatchSession ();
     void                    matchSessionComplete ();
+    Plasma::AbstractRunner*  singleModeRunner () const;
+    void                    setSingleModeRunnerId (const QString& id);
+    QString                 singleModeRunnerId () const;
+    bool                    singleMode () const;
+    void                    setSingleMode (bool singleMode);
+    QString                 runnerName (const QString& id) const;
+    QStringList             enabledSingleModeRunnerIds () const;
 };
 // RunnerManager
 

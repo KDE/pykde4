@@ -34,22 +34,21 @@
 
 %Include paintutils.sip
 %Include plasma.sip
+%Include abstractrunner.sip
 %Include abstracttoolbox.sip
 %Include accessappletjob.sip
 %Include accessmanager.sip
+%Include animationdriver.sip
+%Include animator.sip
+%Include applet.sip
 %Include authorizationinterface.sip
 %Include authorizationmanager.sip
 %Include authorizationrule.sip
 %Include clientpinrequest.sip
-%Include containmentactions.sip
-%Include containmentactionspluginsconfig.sip
-%Include itembackground.sip
-%Include abstractrunner.sip
-%Include animationdriver.sip
-%Include animator.sip
-%Include applet.sip
 %Include configloader.sip
 %Include containment.sip
+%Include containmentactions.sip
+%Include containmentactionspluginsconfig.sip
 %Include context.sip
 %Include corona.sip
 %Include datacontainer.sip
@@ -74,7 +73,9 @@
 %Include dataenginescript.sip
 %Include runnerscript.sip
 %Include scriptengine.sip
+%Include wallpaperscript.sip
 %Include service.sip
+%Include serviceaccessjob.sip
 %Include servicejob.sip
 %Include svg.sip
 %Include theme.sip
@@ -90,6 +91,7 @@
 %Include frame.sip
 %Include groupbox.sip
 %Include iconwidget.sip
+%Include itembackground.sip
 %Include label.sip
 %Include lineedit.sip
 %Include meter.sip
@@ -97,6 +99,7 @@
 %Include radiobutton.sip
 %Include scrollbar.sip
 %Include scrollwidget.sip
+%Include separator.sip
 %Include signalplotter.sip
 %Include slider.sip
 %Include spinbox.sip
@@ -108,7 +111,4 @@
 %Include treeview.sip
 %Include videowidget.sip
 %Include webview.sip
-%Include separator.sip
-%Include serviceaccessjob.sip
-%Include wallpaperscript.sip
 %Include windoweffects.sip

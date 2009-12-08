@@ -47,6 +47,9 @@ public:
     void                    setNativeWidget (KTextEdit* nativeWidget);
 protected:
     void                    changeEvent (QEvent* event);
+public:
+    void                    setReadOnly (bool readOnly);
+    bool                    isReadOnly () const;
 };
 // TextEdit
 

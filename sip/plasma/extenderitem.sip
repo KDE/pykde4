@@ -68,6 +68,8 @@ protected:
     bool                    sceneEventFilter (QGraphicsItem* watched, QEvent* event);
 public:
     ~ExtenderItem ();
+protected:
+    QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
 };
 // ExtenderItem
 

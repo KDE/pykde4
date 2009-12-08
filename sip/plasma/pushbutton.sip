@@ -64,6 +64,8 @@ signals:
     void                    released ();
 protected:
     void                    changeEvent (QEvent* event);
+public:
+    bool                    isCheckable () const;
 };
 // PushButton
 

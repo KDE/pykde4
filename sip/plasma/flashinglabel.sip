@@ -47,6 +47,10 @@ public:
     ~FlashingLabel ();
 protected:
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
+public:
+    QFont                   font () const;
+    QColor                  color () const;
+    int                     duration () const;
 };
 // FlashingLabel
 

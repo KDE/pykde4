@@ -71,6 +71,9 @@ public:
     ~Dialog ();
 protected:
     void                    focusInEvent (QFocusEvent* event);
+public:
+    Plasma::AspectRatioMode  aspectRatioMode () const;
+    void                    setAspectRatioMode (Plasma::AspectRatioMode mode);
 };
 // Dialog
 

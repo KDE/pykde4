@@ -72,6 +72,9 @@ public:
     QRectF                  viewportGeometry () const;
 protected:
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
+public:
+    qreal                   zoomFactor () const;
+    void                    setZoomFactor (const qreal zoom);
 };
 // WebView
 

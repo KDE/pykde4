@@ -59,6 +59,11 @@ protected:
     void                    clearActions ();
     void                    addSyntax (const Plasma::RunnerSyntax& syntax);
     void                    setSyntaxes (const QList<Plasma::RunnerSyntax>& syns);
+signals:
+    void                    actionsForMatch (const Plasma::QueryMatch& match, QList<QAction*>* actions);
+protected:
+    KPluginInfo             description () const;
+    Plasma::DataEngine*     dataEngine (const QString& name);
 };
 // RunnerScript
 

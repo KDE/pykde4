@@ -50,9 +50,9 @@ public:
 private:
 //force
                             Package (const Plasma::Package& other);
+// FIXME bad enum/QFlags comp error.
 //end
 public:
-// FIXME bad enum/QFlags comp error.
 //ig    void                    publish (Plasma::AnnouncementMethods methods, const QString& name);
 //FIXME missing implementation
 //ig    void                    unpublish (const QString& name = QString());

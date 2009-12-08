@@ -61,6 +61,7 @@ protected:
     void                    registerAsDragHandle (QGraphicsItem* item);
     void                    unregisterAsDragHandle (QGraphicsItem* item);
     bool                    isRegisteredAsDragHandle (QGraphicsItem* item);
+    KPluginInfo             description () const;
 };
 // AppletScript
 

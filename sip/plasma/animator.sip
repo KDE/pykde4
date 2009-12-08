@@ -36,12 +36,12 @@ public:
         ActivateAnimation,
         FadeAnimation,
         GrowAnimation,
-        ExpandAnimation,
         PulseAnimation,
         RotationAnimation,
         RotationStackedAnimation,
         SlideAnimation,
-        PauseAnimation
+        GeoAnimation,
+        ZoomAnimation
     };
 
 

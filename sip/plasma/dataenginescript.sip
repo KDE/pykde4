@@ -35,7 +35,7 @@ public:
     virtual QStringList     sources () const;
     virtual bool            sourceRequestEvent (const QString& name);
     virtual bool            updateSourceEvent (const QString& source);
-    virtual Plasma::Service* serviceForSource (const QString& source);
+    virtual Plasma::Service*  serviceForSource (const QString& source);
 
 protected:
     QString                 mainScript () const;
@@ -60,6 +60,7 @@ protected:
     void                    removeSource (const QString& source);
     void                    updateAllSources ();
     void                    forceImmediateUpdateOfAllVisualizations ();
+    KPluginInfo             description () const;
 };
 // DataEngineScript
 

@@ -67,6 +67,7 @@ public:
     bool                    hasConfigurationInterface () const;
     void                    createConfigurationInterface (QWidget* parent /Transfer/);
     ~QueryMatch ();
+    bool                    operator == (const Plasma::QueryMatch& other) const;
 };
 // QueryMatch
 

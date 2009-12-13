@@ -17,24 +17,24 @@
 // Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-%Module PyKDE4.knewstuff
-
-%ModuleHeaderCode
-#pragma GCC visibility push(default)
+namespace KNS
+{
+class Button : KPushButton
+{
+%TypeHeaderCode
+#include <knewstuff2/ui/knewstuffbutton.h>
 %End
 
-%Import QtCore/QtCoremod.sip
-%Import QtGui/QtGuimod.sip
-%Import QtXml/QtXmlmod.sip
-%Import kdecore/kdecoremod.sip
-%Import kdeui/kdeuimod.sip
-
-%Include engine.sip
-%Include engine.sip
-%Include author.sip
-%Include category.sip
-%Include entry.sip
-%Include installation.sip
-%Include ktranslatable.sip
-%Include knewstuffaction.sip
-%Include knewstuffbutton.sip
+public:
+                            Button (const QString& what, const QString& providerList, const QString& resourceType, QWidget* parent /TransferThis/);
+                            Button (QWidget* parent /TransferThis/);
+    void                    setProviderList (const QString& providerList);
+    void                    setResourceType (const QString& resourceType);
+    void                    setButtonText (const QString& what);
+signals:
+    void                    aboutToShowDialog ();
+    void                    dialogFinished ();
+protected:
+    void                    showDialog ();
+};
+};

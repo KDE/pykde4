@@ -42,9 +42,14 @@ public:
     QList<Akonadi::Entity::Id>  unperfectParents () const;
     QList<Akonadi::Entity::Id>  subjectParents () const;
     ~MessageThreadingAttribute ();
+//force
     void                    setPerfectParents (const QList<Akonadi::Entity::Id>& parents);
     void                    setUnperfectParents (const QList<Akonadi::Entity::Id>& parents);
     void                    setSubjectParents (const QList<Akonadi::Entity::Id>& parents);
+//end
+//ig    void                    setPerfectParents (const QList<Item::Id>& parents);
+//ig    void                    setUnperfectParents (const QList<Item::Id>& parents);
+//ig    void                    setSubjectParents (const QList<Item::Id>& parents);
 };
 // MessageThreadingAttribute
 

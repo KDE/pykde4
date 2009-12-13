@@ -17,30 +17,34 @@
 // Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-namespace Phonon
+namespace KParts
 {
-class AudioDataOutput : Phonon::AbstractAudioOutput
+class BrowserOpenOrSaveQuestion
 {
 %TypeHeaderCode
-#include <phonon/audiodataoutput.h>
+#include <kparts/browseropenorsavequestion.h>
 %End
 
 public:
-    enum Channel
+                            BrowserOpenOrSaveQuestion (QWidget* parent /TransferThis/, const KUrl& url, const QString& mimeType);
+    ~BrowserOpenOrSaveQuestion ();
+    void                    setSuggestedFileName (const QString& suggestedFileName);
+    enum Feature
     {
-        LeftChannel,
-        RightChannel,
-        CenterChannel,
-        LeftSurroundChannel,
-        RightSurroundChannel,
-        SubwooferChannel
+        BasicFeatures,
+        ServiceSelection
     };
-    int                     dataSize () const;
-    int                     sampleRate () const;
-    void                    setDataSize (int size);
-// FIXME
-signals:
-//ig    void                    dataReady (const QMap<Phonon::AudioDataOutput::Channel,QVector<qint16>>& data);
-    void                    endOfMedia (int remainingSamples);
+    typedef QFlags<KParts::BrowserOpenOrSaveQuestion::Feature> Features;
+    void                    setFeatures (KParts::BrowserOpenOrSaveQuestion::Features features);
+    enum Result
+    {
+        Save,
+        Open,
+        Embed,
+        Cancel
+    };
+    KParts::BrowserOpenOrSaveQuestion::Result  askOpenOrSave ();
+    KParts::BrowserOpenOrSaveQuestion::Result  askEmbedOrSave (int flags = 0);
+    KService::Ptr           selectedService () const;
 };
 };

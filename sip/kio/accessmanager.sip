@@ -47,9 +47,40 @@ protected:
     if (dynamic_cast<KIO::AccessManager*>(sipCpp))
         sipType = sipType_KIO_AccessManager;
 %End
+public:
+    void                    setCookieJarWindowId (WId id);
+    WId                     cookieJarWindowid () const;
+    KIO::MetaData&          requestMetaData ();
+    KIO::MetaData&          sessionMetaData ();
 };
 // AccessManager
 
+namespace Integration
+{
+typedef KIO::AccessManager AccessManager;
+class CookieJar : QNetworkCookieJar
+{
+%TypeHeaderCode
+#include <accessmanager.h>
+%End
+
+public:
+    explicit                CookieJar (QObject* parent /TransferThis/ = 0);
+    ~CookieJar ();
+    WId                     windowId () const;
+    void                    setWindowId (WId id);
+    void                    reparseConfiguration ();
+    QList<QNetworkCookie>   cookiesForUrl (const QUrl& url) const;
+    bool                    setCookiesFromUrl (const QList<QNetworkCookie>& cookieList, const QUrl& url);
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'CookieJar'
+    sipType = NULL;
+
+    if (dynamic_cast<KIO::Integration::CookieJar*>(sipCpp))
+        sipType = sipType_KIO_Integration_CookieJar;
+%End
+};
+};
 };
 // KIO
 

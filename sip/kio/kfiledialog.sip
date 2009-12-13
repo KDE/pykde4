@@ -102,6 +102,18 @@ private:
 //end
 public:
     ~KFileDialog ();
+    enum Option
+    {
+        ConfirmOverwrite,
+        ShowInlinePreview
+    };
+    typedef QFlags<KFileDialog::Option> Options;
+    static QString          getSaveFileName (const KUrl& startDir, const QString& filter, QWidget* parent /Transfer/, const QString& caption, KFileDialog::Options options);
+    static QString          getSaveFileNameWId (const KUrl& startDir, const QString& filter, WId parent_id, const QString& caption, KFileDialog::Options options);
+    static KUrl             getSaveUrl (const KUrl& startDir, const QString& filter, QWidget* parent /Transfer/, const QString& caption, KFileDialog::Options options);
+signals:
+    void                    fileSelected (const KUrl&);
+    void                    fileHighlighted (const KUrl&);
 };
 // KFileDialog
 

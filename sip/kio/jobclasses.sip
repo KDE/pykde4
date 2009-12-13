@@ -159,6 +159,7 @@ private:
 //end
 public:
     ~StatJob ();
+    KUrl                    mostLocalUrl () const;
 };
 // StatJob
 

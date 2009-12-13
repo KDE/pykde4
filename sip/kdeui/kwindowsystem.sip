@@ -101,12 +101,14 @@ signals:
 protected:
 //force
     virtual void            connectNotify (SIP_SIGNAL);
-//end
 
+//end
 private:
                             KWindowSystem ();
 public:
     static void             allowExternalProcessWindowActivation (int pid = -1);
+protected:
+//ig    virtual void            connectNotify (const char* signal);
 };
 // KWindowSystem
 

@@ -36,6 +36,8 @@ public:
     QIcon                   icon ();
     bool                    isValid () const;
     bool                    isAvailable ();
+//ig    QIcon                   icon () const;
+//ig    bool                    isAvailable () const;
     void                    reset (bool recursive = 0);
     bool                    operator == (const Nepomuk::Types::Entity& other) const;
     bool                    operator != (const Nepomuk::Types::Entity& other) const;
@@ -56,8 +58,14 @@ public:
     else if (dynamic_cast<Nepomuk::Types::Property*>(sipCpp))
         sipType = sipType_Nepomuk_Types_Property;
 %End
+//ig    QString                 label (const QString& language = KGlobal::locale()->language());
+//ig    QString                 label (const QString& language = KGlobal::locale()->language()) const;
+//ig    QString                 comment (const QString& language = KGlobal::locale()->language());
+//ig    QString                 comment (const QString& language = KGlobal::locale()->language()) const;
+//force
     QString                 label (const QString& language);
     QString                 comment (const QString& language);
+//end
 };
 // Entity
 

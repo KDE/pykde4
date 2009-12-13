@@ -73,7 +73,7 @@ public:
     KLocale::SignPosition   positiveMonetarySignPosition () const;
     KLocale::SignPosition   negativeMonetarySignPosition () const;
     KLocale::DigitSet       monetaryDigitSet () const;
-    QString                 formatMoney (double num, const QString& currency = QString(), int digits = -1) const;
+    QString                 formatMoney (double num, const QString& currency = QString(), int precision = -1) const;
     QString                 formatNumber (double num, int precision = -1) const;
     QString                 formatNumber (const QString& numStr, bool round = 1, int precision = 2) const;
     QString                 formatLong (long num) const;
@@ -87,7 +87,10 @@ public:
         ShortDate,
         LongDate,
         FancyShortDate,
-        FancyLongDate
+        FancyLongDate,
+        IsoDate,
+        IsoWeekDate,
+        IsoOrdinalDate
     };
 
     QString                 formatDate (const QDate& date, KLocale::DateFormat format = KLocale::LongDate) const;
@@ -121,7 +124,10 @@ public:
     enum ReadDateFlags
     {
         NormalFormat,
-        ShortFormat
+        ShortFormat,
+        IsoFormat,
+        IsoWeekFormat,
+        IsoOrdinalFormat
     };
 
     QDate                   readDate (const QString& str, KLocale::ReadDateFlags flags, bool* ok /Out/ = 0) const;
@@ -242,6 +248,15 @@ public:
     };
     typedef QFlags<KLocale::TimeProcessingOption> TimeProcessingOptions;
     QTime                   readLocaleTime (const QString& str, bool* ok = 0, KLocale::TimeFormatOptions options = KLocale::TimeDefault, KLocale::TimeProcessingOptions processing = KLocale::ProcessNonStrict) const;
+    QString                 currencyCode () const;
+    KCurrencyCode*          currency () const;
+    int                     decimalPlaces () const;
+    int                     monetaryDecimalPlaces () const;
+    QStringList             currencyCodeList () const;
+    void                    setDecimalPlaces (int digits);
+    void                    setMonetaryDecimalPlaces (int digits);
+    void                    setCurrencyCode (const QString& newCurrencyCode);
+    static QString          defaultCurrencyCode ();
 };
 // KLocale
 

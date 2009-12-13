@@ -831,3 +831,116 @@ template <TYPE*>
 %End
 };
 
+%MappedType QHash<int,int>
+{
+%TypeHeaderCode
+#include <qhash.h>
+%End
+
+%ConvertFromTypeCode
+    // Create the dictionary.
+    PyObject *d = PyDict_New();
+
+    if (!d)
+        return NULL;
+
+    // Set the dictionary elements.
+    QHash<int, int>::const_iterator i = sipCpp->constBegin();
+
+    while (i != sipCpp->constEnd())
+    {
+        int t1 = i.key();
+        int t2 = i.value();
+
+#if PY_MAJOR_VERSION >= 3
+        PyObject *t1obj = PyLong_FromLong ((long)t1);
+        PyObject *t2obj = PyLong_FromLong ((long)t2);
+#else
+        PyObject *t1obj = PyInt_FromLong ((long)t1);
+        PyObject *t2obj = PyInt_FromLong ((long)t2);
+#endif
+
+        if (PyDict_SetItem(d, t1obj, t2obj) < 0)
+        {
+            Py_DECREF(d);
+
+            if (t1obj)
+                Py_DECREF(t1obj);
+
+            if (t2obj)
+                Py_DECREF(t2obj);
+
+            return NULL;
+        }
+
+        Py_DECREF(t1obj);
+        Py_DECREF(t2obj);
+
+        ++i;
+    }
+
+    return d;
+%End
+
+%ConvertToTypeCode
+    PyObject *t1obj, *t2obj;
+    SIP_SSIZE_T i = 0;
+
+    // Check the type if that is all that is required.
+    if (sipIsErr == NULL)
+    {
+        if (!PyDict_Check(sipPy))
+            return 0;
+
+        while (PyDict_Next(sipPy, &i, &t1obj, &t2obj))
+        {
+#if PY_MAJOR_VERSION >= 3
+            if (!PyNumber_Check (t1obj))
+#else
+            if (!PyInt_Check (t1obj))
+#endif
+                return 0;
+
+#if PY_MAJOR_VERSION >= 3
+            if (!PyNumber_Check (t2obj))
+#else
+            if (!PyInt_Check (t2obj))
+#endif
+                return 0;
+        } 
+
+        return 1;
+    }
+
+    QHash<int, int> *qm = new QHash<int, int>;
+ 
+    while (PyDict_Next(sipPy, &i, &t1obj, &t2obj))
+    {
+        int state2;
+
+#if PY_MAJOR_VERSION >= 3
+        int t1 = PyLong_AsLong (t1obj);
+#else
+        int t1 = PyInt_AS_LONG (t1obj);
+#endif
+
+#if PY_MAJOR_VERSION >= 3
+        int t2 = PyLong_AsLong (t2obj);
+#else
+        int t2 = PyInt_AS_LONG (t2obj);
+#endif
+ 
+        if (*sipIsErr)
+        {
+            delete qm;
+            return 0;
+        }
+
+        qm->insert(t1, t2);
+    }
+ 
+    *sipCppPtr = qm;
+ 
+    return sipGetState(sipTransferObj);
+%End
+};

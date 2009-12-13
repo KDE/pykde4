@@ -40,7 +40,7 @@ public:
         RotationAnimation,
         RotationStackedAnimation,
         SlideAnimation,
-        GeoAnimation,
+        GeometryAnimation,
         ZoomAnimation
     };
 

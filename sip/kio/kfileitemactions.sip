@@ -33,6 +33,7 @@ public:
     KAction*                preferredOpenWithAction (const QString& traderConstraint);
     int                     addServiceActionsTo (QMenu* menu);
     ~KFileItemActions ();
+    static KService::List   associatedApplications (const QStringList& mimeTypeList, const QString& traderConstraint);
 };
 // KFileItemActions
 

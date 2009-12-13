@@ -66,6 +66,20 @@ Py_BEGIN_ALLOW_THREADS
     QString                 toString () const;
     static Solid::Predicate  fromString (const QString& predicate);
     ~Predicate ();
+    enum Type
+    {
+        PropertyCheck,
+        Conjunction,
+        Disjunction,
+        InterfaceCheck
+    };
+    Solid::Predicate::Type  type () const;
+    Solid::DeviceInterface::Type  interfaceType () const;
+    QString                 propertyName () const;
+    QVariant                matchingValue () const;
+    Solid::Predicate::ComparisonOperator  comparisonOperator () const;
+    Solid::Predicate        firstOperand () const;
+    Solid::Predicate        secondOperand () const;
 };
 // Predicate
 

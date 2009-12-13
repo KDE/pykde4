@@ -71,6 +71,9 @@ public:
     Soprano::Model*         mainModel ();
     void                    setOverrideMainModel (Soprano::Model* model);
     static Nepomuk::ResourceManager*  createManagerForModel (Soprano::Model* model);
+signals:
+    void                    nepomukSystemStarted ();
+    void                    nepomukSystemStopped ();
 };
 // ResourceManager
 

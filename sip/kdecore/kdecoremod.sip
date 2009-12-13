@@ -46,6 +46,7 @@
 %Include kconfigbase.sip
 %Include kconfiggroup.sip
 %Include kcoreconfigskeleton.sip
+%Include kcurrencycode.sip
 %Include kdatetime.sip
 %Include kdedmodule.sip
 %Include kdesktopfile.sip

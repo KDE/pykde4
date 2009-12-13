@@ -47,6 +47,8 @@ public:
     Solid::DeviceInterface*  asDeviceInterface (const Solid::DeviceInterface::Type& type);
 //ig    const Solid::DeviceInterface*  asDeviceInterface (const Solid::DeviceInterface::Type& type) const;
     ~Device ();
+    QStringList             emblems () const;
+    QString                 description () const;
 };
 // Device
 

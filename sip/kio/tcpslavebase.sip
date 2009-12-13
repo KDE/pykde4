@@ -50,10 +50,6 @@ protected:
         ResultFailedEarly
     };
 
-
-//FIXME    typedef QFlags<KIO::TCPSlaveBase::SslResultDetail> SslResult;
-
-
     ssize_t                 write (const char* data, ssize_t len);
     ssize_t                 read (char* data, ssize_t len);
     ssize_t                 readLine (char* data, ssize_t len);
@@ -89,6 +85,7 @@ private:
 
 public:
     ~TCPSlaveBase ();
+    typedef QFlags<KIO::TCPSlaveBase::SslResultDetail> SslResult;
 };
 // TCPSlaveBase
 

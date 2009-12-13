@@ -110,6 +110,7 @@ public:
     bool                    isNull () const;
     ~KFileItem ();
 //ig    QVariant                operator QVariant () const;
+    KUrl                    nepomukUri () const;
 };
 // KFileItem
 
@@ -255,3 +256,4 @@ SIP_SSIZE_T len, start, stop, step, slicelength, i;
 
 QDataStream&            operator << (QDataStream& s, const KFileItem& a);
 QDataStream&            operator >> (QDataStream& s, KFileItem& a);
+//ig QDebug                  operator << (QDebug stream, const KFileItem& item);

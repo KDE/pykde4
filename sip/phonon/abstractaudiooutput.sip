@@ -19,28 +19,15 @@
 
 namespace Phonon
 {
-class AudioDataOutput : Phonon::AbstractAudioOutput
+class AbstractAudioOutput : QObject, Phonon::MediaNode /NoDefaultCtors/
 {
 %TypeHeaderCode
-#include <phonon/audiodataoutput.h>
+#include <phonon/abstractaudiooutput.h>
 %End
 
+protected:
+//ig                            AbstractAudioOutput (AbstractAudioOutputPrivate& dd, QObject* parent /TransferThis/);
 public:
-    enum Channel
-    {
-        LeftChannel,
-        RightChannel,
-        CenterChannel,
-        LeftSurroundChannel,
-        RightSurroundChannel,
-        SubwooferChannel
-    };
-    int                     dataSize () const;
-    int                     sampleRate () const;
-    void                    setDataSize (int size);
-// FIXME
-signals:
-//ig    void                    dataReady (const QMap<Phonon::AudioDataOutput::Channel,QVector<qint16>>& data);
-    void                    endOfMedia (int remainingSamples);
+    ~AbstractAudioOutput ();
 };
 };

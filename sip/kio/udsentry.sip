@@ -76,6 +76,8 @@ public:
         UDS_DEFAULT_ACL_STRING,
         UDS_DISPLAY_NAME,
         UDS_TARGET_URL,
+        UDS_DISPLAY_TYPE,
+        UDS_NEPOMUK_URI,
         UDS_EXTRA,
         UDS_EXTRA_END
     };

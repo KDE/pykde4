@@ -37,7 +37,7 @@ public:
                             MessageFolderAttribute (const Akonadi::MessageFolderAttribute& other);
 private:
 //force
-    Akonadi::MessageFolderAttribute& operator=(const Akonadi::MessageFolderAttribute&);
+    Akonadi::MessageFolderAttribute&  operator = (const Akonadi::MessageFolderAttribute&);
 //end
 };
 };

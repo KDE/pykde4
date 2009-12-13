@@ -78,6 +78,9 @@ private:
 //end
 public:
     ~KFileItemDelegate ();
+    QRect                   iconRect (const QStyleOptionViewItem& option, const QModelIndex& index) const;
+    void                    setWrapMode (QTextOption::WrapMode wrapMode);
+    QTextOption::WrapMode   wrapMode () const;
 };
 // KFileItemDelegate
 

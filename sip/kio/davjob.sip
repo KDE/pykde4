@@ -53,6 +53,7 @@ private:
 KIO::DavJob*            davPropFind (const KUrl& url, const QDomDocument& properties, const QString& depth, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::DavJob*            davPropPatch (const KUrl& url, const QDomDocument& properties, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::DavJob*            davSearch (const KUrl& url, const QString& nsURI, const QString& qName, const QString& query, KIO::JobFlags flags = KIO::DefaultFlags);
+KIO::DavJob*            davReport (const KUrl& url, const QString& report, const QString& depth, KIO::JobFlags flags = KIO::DefaultFlags);
 };
 // KIO
 

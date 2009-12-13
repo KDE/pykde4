@@ -71,9 +71,9 @@ public:
     void                    setErrorDescription (const QString& error);
     QByteArray              serialized () const;
     static KAuth::ActionReply  deserialize (const QByteArray& data);
-    bool                    operator == (const KAuth::ActionReply& reply);
-    bool                    operator != (const KAuth::ActionReply& reply);
 //ig    QDataStream&            operator << (QDataStream&, const KAuth::ActionReply&);
 //ig    QDataStream&            operator >> (QDataStream&, KAuth::ActionReply&);
+    bool                    operator == (const KAuth::ActionReply& reply) const;
+    bool                    operator != (const KAuth::ActionReply& reply) const;
 };
 };

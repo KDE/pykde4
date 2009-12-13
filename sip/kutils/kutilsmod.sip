@@ -38,6 +38,7 @@
 %Include kemoticons.sip
 %Include kemoticonsprovider.sip
 %Include kemoticonstheme.sip
+%Include kidletime.sip
 %Include kpluginselector.sip
 %Include kprintpreview.sip
 %Include pluginpage.sip

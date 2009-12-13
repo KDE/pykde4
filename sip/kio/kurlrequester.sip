@@ -70,6 +70,8 @@ private:
 //end
 public:
     ~KUrlRequester ();
+    Qt::WindowModality      fileDialogModality () const;
+    void                    setFileDialogModality (Qt::WindowModality modality);
 };
 // KUrlRequester
 

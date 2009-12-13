@@ -96,6 +96,8 @@
 %Include messageparts.sip
 %Include messagethreaderproxymodel.sip
 %Include messagethreadingattribute.sip
+%Include specialmailcollections.sip
+%Include specialmailcollectionsrequestjob.sip
 %Include linkjob.sip
 %Include mimetypechecker.sip
 %Include monitor.sip
@@ -107,13 +109,11 @@
 %Include selectionproxymodel.sip
 %Include servermanager.sip
 %Include session.sip
+%Include specialcollections.sip
+%Include specialcollectionsrequestjob.sip
 %Include standardactionmanager.sip
 %Include statisticsproxymodel.sip
 %Include transactionjobs.sip
 %Include transactionsequence.sip
 %Include transportresourcebase.sip
 %Include unlinkjob.sip
-%Include specialcollections.sip
-%Include specialcollectionsrequestjob.sip
-%Include specialmailcollections.sip
-%Include specialmailcollectionsrequestjob.sip

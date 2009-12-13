@@ -31,6 +31,7 @@
 %Import kio/kiomod.sip
 
 %Include genericfactory.sip
+%Include browseropenorsavequestion.sip
 %Include browserextension.sip
 %Include browserinterface.sip
 %Include browserrun.sip

@@ -30,6 +30,7 @@
 #include <kcmultidialog.h>
 #include <kemoticons.h>
 #include <kemoticonsprovider.h>
+#include <kidletime.h>
 #include <kpluginselector.h>
 #include <kprintpreview.h>
 #include <pluginpage.h>
@@ -84,6 +85,8 @@ protected:
         sipType = sipType_KEmoticons;
     else if (dynamic_cast<KEmoticonsProvider*>(sipCpp))
         sipType = sipType_KEmoticonsProvider;
+    else if (dynamic_cast<KIdleTime*>(sipCpp))
+        sipType = sipType_KIdleTime;
     else if (dynamic_cast<KSettings::PluginPage*>(sipCpp))
         sipType = sipType_KSettings_PluginPage;
     else if (dynamic_cast<KCModuleProxy*>(sipCpp))

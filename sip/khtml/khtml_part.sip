@@ -259,6 +259,8 @@ private:
 public:
     ~KHTMLPart ();
 //ig    DOM::Editor*            editor () const;
+protected:
+    void                    updateZoomFactor ();
 };
 // KHTMLPart
 

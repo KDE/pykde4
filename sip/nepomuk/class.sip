@@ -44,6 +44,16 @@ public:
     bool                    isParentOf (const Nepomuk::Types::Class& other);
     bool                    isSubClassOf (const Nepomuk::Types::Class& other);
     ~Class ();
+//ig    QList<Nepomuk::Types::Property>  rangeOf () const;
+//ig    QList<Nepomuk::Types::Property>  domainOf () const;
+//ig    Nepomuk::Types::Property  findPropertyByName (const QString& name) const;
+//ig    Nepomuk::Types::Property  findPropertyByLabel (const QString& label, const QString& language = QString()) const;
+//ig    QList<Nepomuk::Types::Class>  parentClasses () const;
+//ig    QList<Nepomuk::Types::Class>  subClasses () const;
+//ig    QList<Nepomuk::Types::Class>  allParentClasses () const;
+//ig    QList<Nepomuk::Types::Class>  allSubClasses () const;
+//ig    bool                    isParentOf (const Nepomuk::Types::Class& other) const;
+//ig    bool                    isSubClassOf (const Nepomuk::Types::Class& other) const;
 };
 // Class
 

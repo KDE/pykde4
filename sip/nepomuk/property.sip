@@ -45,6 +45,17 @@ public:
     bool                    isParentOf (const Nepomuk::Types::Property& other);
     bool                    isSubPropertyOf (const Nepomuk::Types::Property& other);
     ~Property ();
+//ig    QList<Nepomuk::Types::Property>  parentProperties () const;
+//ig    QList<Nepomuk::Types::Property>  subProperties () const;
+//ig    Nepomuk::Types::Property  inverseProperty () const;
+//ig    Nepomuk::Types::Class   range () const;
+//ig    Nepomuk::Types::Literal  literalRangeType () const;
+//ig    Nepomuk::Types::Class   domain () const;
+//ig    int                     cardinality () const;
+//ig    int                     minCardinality () const;
+//ig    int                     maxCardinality () const;
+//ig    bool                    isParentOf (const Nepomuk::Types::Property& other) const;
+//ig    bool                    isSubPropertyOf (const Nepomuk::Types::Property& other) const;
 };
 // Property
 

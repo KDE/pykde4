@@ -58,6 +58,7 @@ enum CopyCatalogs
 };
 
 void                    setLocale (KLocale*, KGlobal::CopyCatalogs copy = KGlobal::DoCopyCatalogs);
+QObject*                findDirectChild_helper (const QObject* parent, const QMetaObject& mo);
 };
 // KGlobal
 

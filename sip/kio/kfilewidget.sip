@@ -82,6 +82,11 @@ signals:
 public:
     KDirOperator*           dirOperator ();
     ~KFileWidget ();
+signals:
+    void                    fileSelected (const KUrl&);
+    void                    fileHighlighted (const KUrl&);
+public:
+    void                    readConfig (KConfigGroup& group);
 };
 // KFileWidget
 

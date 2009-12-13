@@ -40,8 +40,6 @@ public:
                             Action (const QString& name);
                             Action (const QString& name, const QString& details);
     ~Action ();
-    bool                    operator == (const KAuth::Action& action);
-    bool                    operator != (const KAuth::Action& action);
     QString                 name () const;
     void                    setName (const QString& name);
     void                    setDetails (const QString& details);
@@ -59,8 +57,10 @@ public:
     KAuth::ActionReply      execute (const QString& helperID) const;
     void                    setExecutesAsync (bool async);
     bool                    executesAsync () const;
-    static bool             executeActions (const QList<KAuth::Action>& actions, QList<KAuth::Action>* deniedActions, const QString& helper_id);
+    static bool             executeActions (const QList<KAuth::Action>& actions, QList<KAuth::Action>* deniedActions, const QString& helperId);
     void                    stop ();
     void                    stop (const QString& helperID);
+    bool                    operator == (const KAuth::Action& action) const;
+    bool                    operator != (const KAuth::Action& action) const;
 };
 };

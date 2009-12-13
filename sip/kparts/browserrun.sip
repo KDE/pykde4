@@ -79,6 +79,8 @@ protected:
     virtual void            slotStatResult (KJob* job);
 public:
     ~BrowserRun ();
+    static void             saveUrl (const KUrl& url, const QString& suggestedFileName, QWidget* window, const KParts::OpenUrlArguments& args);
+    static void             saveUrlUsingKIO (const KUrl& srcUrl, const KUrl& destUrl, QWidget* window, const QMap<QString,QString>& metaData);
 };
 // BrowserRun
 

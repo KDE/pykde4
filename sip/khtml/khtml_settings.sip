@@ -165,6 +165,7 @@ private:
                             KHTMLSettings (const KHTMLSettings& other);
 public:
     ~KHTMLSettings ();
+    QString                 adFilteredBy (const QString& url, bool* isWhiteListed = 0) const;
 };
 // KHTMLSettings
 

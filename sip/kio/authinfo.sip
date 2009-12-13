@@ -112,7 +112,10 @@ private:
                             NetRC (const KIO::NetRC& other);
 //end
 public:
+//ig    bool                    lookup (const KUrl& url, AutoLogin& login, bool userealnetrc = 0, const QString& type = QString(), KIO::NetRC::LookUpMode mode = LookUpMode(exactOnly)|defaultOnly);
+//force
     bool                    lookup (const KUrl& url, AutoLogin& login, bool userealnetrc, const QString& type, KIO::NetRC::LookUpMode mode);
+//end
 };
 // NetRC
 

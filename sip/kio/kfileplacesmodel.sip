@@ -34,7 +34,9 @@ public:
     {
         UrlRole,
         HiddenRole,
-        SetupNeededRole
+        SetupNeededRole,
+        FixedDeviceRole,
+        CapacityBarRecommendedRole
     };
 
                             KFilePlacesModel (QObject* parent /TransferThis/ = 0);

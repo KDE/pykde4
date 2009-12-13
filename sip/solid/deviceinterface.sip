@@ -156,6 +156,7 @@ private:
 
 public:
     ~DeviceInterface ();
+    static QString          typeDescription (Solid::DeviceInterface::Type type);
 };
 // DeviceInterface
 

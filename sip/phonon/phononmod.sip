@@ -29,13 +29,12 @@
 %Import solid/solidmod.sip
 
 %Include phononnamespace.sip
-%Include objectdescription.sip
-%Include objectdescriptionmodel.sip
-%Include abstractaudiooutput.sip
-%Include audiodataoutput.sip
 %Include audiodataoutputinterface.sip
+%Include globalconfig.sip
+%Include abstractaudiooutput.sip
 %Include abstractmediastream.sip
 %Include abstractvideooutput.sip
+%Include audiodataoutput.sip
 %Include audiooutput.sip
 %Include backendcapabilities.sip
 %Include effect.sip
@@ -45,6 +44,8 @@
 %Include medianode.sip
 %Include mediaobject.sip
 %Include mediasource.sip
+%Include objectdescription.sip
+%Include objectdescriptionmodel.sip
 %Include path.sip
 %Include seekslider.sip
 %Include streaminterface.sip

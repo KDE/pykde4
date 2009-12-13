@@ -17,30 +17,27 @@
 // Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-namespace Phonon
-{
-class AudioDataOutput : Phonon::AbstractAudioOutput
+class KIdleTime : QObject
 {
 %TypeHeaderCode
-#include <phonon/audiodataoutput.h>
+#include <kidletime.h>
 %End
 
 public:
-    enum Channel
-    {
-        LeftChannel,
-        RightChannel,
-        CenterChannel,
-        LeftSurroundChannel,
-        RightSurroundChannel,
-        SubwooferChannel
-    };
-    int                     dataSize () const;
-    int                     sampleRate () const;
-    void                    setDataSize (int size);
-// FIXME
+    static KIdleTime*       instance ();
+    virtual ~KIdleTime ();
+    int                     idleTime () const;
+    QHash<int,int>          idleTimeouts () const;
+    void                    simulateUserActivity ();
+    int                     addIdleTimeout (int msec);
+    void                    removeIdleTimeout (int identifier);
+    void                    removeAllIdleTimeouts ();
+    void                    catchNextResumeEvent ();
+    void                    stopCatchingResumeEvent ();
 signals:
-//ig    void                    dataReady (const QMap<Phonon::AudioDataOutput::Channel,QVector<qint16>>& data);
-    void                    endOfMedia (int remainingSamples);
-};
+    void                    resumingFromIdle ();
+    void                    timeoutReached (int identifier);
+    void                    timeoutReached (int identifier, int msec);
+private:
+                            KIdleTime ();
 };

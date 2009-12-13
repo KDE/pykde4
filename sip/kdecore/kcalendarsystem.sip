@@ -92,7 +92,7 @@ public:
     virtual int             dayStringToInteger (const QString& sNum, int& iLength /Out/) const;
     virtual QString         formatDate (const QDate& fromDate, KLocale::DateFormat toFormat = KLocale::LongDate) const;
     virtual QDate           readDate (const QString& str, bool* ok /Out/ = 0) const;
-    virtual QDate           readDate (const QString& intstr, const QString& format, bool* ok /Out/ = 0) const;
+    virtual QDate           readDate (const QString& dateString, const QString& dateFormat, bool* ok /Out/ = 0) const;
     virtual QDate           readDate (const QString& str, KLocale::ReadDateFlags flags, bool* ok /Out/ = 0) const;
     virtual int             weekStartDay () const;
     virtual int             weekDayOfPray () const=0;
@@ -117,6 +117,19 @@ protected:
     void                    setMaxMonthsInYear (int maxMonths);
     void                    setMaxDaysInWeek (int maxDays);
     void                    setHasYear0 (bool hasYear0);
+public:
+    bool                    isValid (int year, int dayOfYear) const;
+    bool                    isValidIsoWeekDate (int year, int isoWeekNumber, int dayOfIsoWeek) const;
+    bool                    setDate (QDate& date, int year, int dayOfYear) const;
+    bool                    setDateIsoWeek (QDate& date, int year, int isoWeekNumber, int dayOfIsoWeek) const;
+    QString                 dayOfYearString (const QDate& pDate, KCalendarSystem::StringFormat format = KCalendarSystem::LongFormat) const;
+    QString                 dayOfWeekString (const QDate& pDate) const;
+    QString                 weekNumberString (const QDate& pDate, KCalendarSystem::StringFormat format = KCalendarSystem::LongFormat) const;
+    QString                 monthsInYearString (const QDate& pDate, KCalendarSystem::StringFormat format = KCalendarSystem::LongFormat) const;
+    QString                 weeksInYearString (const QDate& pDate, KCalendarSystem::StringFormat format = KCalendarSystem::LongFormat) const;
+    QString                 daysInYearString (const QDate& pDate, KCalendarSystem::StringFormat format = KCalendarSystem::LongFormat) const;
+    QString                 daysInMonthString (const QDate& pDate, KCalendarSystem::StringFormat format = KCalendarSystem::LongFormat) const;
+    QString                 daysInWeekString (const QDate& date) const;
 };
 // KCalendarSystem
 

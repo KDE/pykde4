@@ -48,6 +48,8 @@ protected:
     virtual Soprano::Model*  createModel (const QList<Soprano::BackendSetting>& settings);
 public:
     virtual ~ServerCore ();
+    void                    setMaximumConnectionCount (int max);
+    int                     maximumConnectionCount () const;
 };
 // ServerCore
 

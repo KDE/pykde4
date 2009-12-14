@@ -22,6 +22,7 @@
 %ModuleHeaderCode
 //ctscc
 #include <soprano/asyncmodel.h>
+#include <soprano/asyncquery.h>
 #include <soprano/asyncresult.h>
 #include <soprano/dbusclient.h>
 #include <soprano/dbusexportiterator.h>
@@ -141,6 +142,8 @@ private:
         sipType = sipType_Soprano_Server_DBusExportIterator;
     else if (dynamic_cast<Soprano::Server::ServerCore*>(sipCpp))
         sipType = sipType_Soprano_Server_ServerCore;
+    else if (dynamic_cast<Soprano::Util::AsyncQuery*>(sipCpp))
+        sipType = sipType_Soprano_Util_AsyncQuery;
     else if (dynamic_cast<Soprano::Util::AsyncResult*>(sipCpp))
         sipType = sipType_Soprano_Util_AsyncResult;
 %End

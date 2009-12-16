@@ -60,7 +60,7 @@ public:
     bool                    singleMode () const;
     void                    setSingleMode (bool singleMode);
     QString                 runnerName (const QString& id) const;
-    QStringList             enabledSingleModeRunnerIds () const;
+    QStringList             singleModeAdvertisedRunnerIds () const;
 };
 // RunnerManager
 

@@ -22,7 +22,7 @@ namespace Phonon
 class GlobalConfig
 {
 %TypeHeaderCode
-#include <globalconfig.h>
+#include <phonon/globalconfig.h>
 %End
 
 public:

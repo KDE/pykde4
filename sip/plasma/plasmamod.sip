@@ -34,6 +34,7 @@
 
 %Include paintutils.sip
 %Include plasma.sip
+%Include animation.sip
 %Include abstractrunner.sip
 %Include abstracttoolbox.sip
 %Include accessappletjob.sip

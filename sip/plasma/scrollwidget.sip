@@ -59,8 +59,8 @@ protected:
     void                    mouseReleaseEvent (QGraphicsSceneMouseEvent* event);
     void                    focusInEvent (QFocusEvent* event);
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
-//force
 public:
+//force
 //ig    explicit                ScrollWidget (QGraphicsItem* parent);
 //end
 };

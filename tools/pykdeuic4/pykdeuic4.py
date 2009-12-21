@@ -39,7 +39,7 @@ class kde_i18n_string(qtproxies.i18n_string):
     def __init__(self,string):
         original_i18n_string.__init__(self,string)
     def __str__(self):
-        return "kdecore.i18n(\"%s\")" % (self.escape(self.string),)
+        return "kdecore.i18n(\"%s\")" % (qtproxies.escape(self.string),)
 qtproxies.i18n_string = kde_i18n_string
 
 def kdeFilter():

@@ -144,6 +144,7 @@ ADD_SIP_PYTHON_MODULE(PyKDE4.plasma sip/plasma/plasmamod.sip ${KDE4_PLASMA_LIBS}
 SET(PYKDE_MODULES "kdecore solid kdeui kio kutils kparts ktexteditor dnssd phonon plasma")
 
 IF(Soprano_FOUND)
+    include_directories(${SOPRANO_INCLUDE_DIR})
     FILE(GLOB soprano_files_sip sip/soprano/*.sip)
     set(SIP_EXTRA_FILES_DEPEND ${soprano_files_sip})
     ADD_SIP_PYTHON_MODULE(PyKDE4.soprano sip/soprano/sopranomod.sip ${SOPRANO_LIBRARIES} ${SOPRANO_CLIENT_LIBRARIES} ${SOPRANO_SERVER_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY})
@@ -151,6 +152,7 @@ IF(Soprano_FOUND)
 ENDIF(Soprano_FOUND)
 
 IF(Nepomuk_FOUND)
+    include_directories(${NEPOMUK_INCLUDE_DIR})
     FILE(GLOB nepomuk_files_sip sip/nepomuk/*.sip)
     set(SIP_EXTRA_FILES_DEPEND ${nepomuk_files_sip})
     ADD_SIP_PYTHON_MODULE(PyKDE4.nepomuk sip/nepomuk/nepomukmod.sip ${NEPOMUK_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${SOPRANO_LIBRARIES})
@@ -158,6 +160,7 @@ IF(Nepomuk_FOUND)
 ENDIF(Nepomuk_FOUND)
 
 IF(KDEPIMLIBS_FOUND)
+    include_directories(${KDEPIMLIBS_INCLUDE_DIR})
     FILE(GLOB akonadi_files_sip sip/akonadi/*.sip)
     set(SIP_EXTRA_FILES_DEPEND ${akonadi_files_sip})
     ADD_SIP_PYTHON_MODULE(PyKDE4.akonadi sip/akonadi/akonadimod.sip ${KDE4_AKONADI_LIBS} ${KDE4_AKONADI_KMIME_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})

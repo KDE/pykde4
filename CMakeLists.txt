@@ -1,5 +1,10 @@
 PROJECT(pykde4)
 
+# search packages used by KDE
+find_package(KDE4 REQUIRED)
+include(KDE4Defaults)
+include(MacroLibrary)
+
 # This module can be built independant from the rest of kdebindings.
 SET(CMAKE_MODULE_PATH ${pykde4_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH})
 

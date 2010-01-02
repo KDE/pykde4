@@ -47,6 +47,8 @@ signals:
     void                    valueChanged (int value);
 public:
     ~ScrollBar ();
+protected:
+    void                    contextMenuEvent (QGraphicsSceneContextMenuEvent* event);
 };
 // ScrollBar
 

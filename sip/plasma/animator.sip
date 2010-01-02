@@ -91,6 +91,8 @@ public:
 //ig    static AbstractAnimation*  create (Plasma::Animator::Animation type, QObject* parent /Transfer/ = 0);
     void                    registerScrollingManager (QGraphicsWidget* widget);
     void                    unregisterScrollingManager (QGraphicsWidget* widget);
+signals:
+    void                    scrollStateChanged (QGraphicsWidget* widget, QAbstractAnimation::State newState, QAbstractAnimation::State oldState);
 };
 // Animator
 

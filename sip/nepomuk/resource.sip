@@ -146,6 +146,7 @@ public:
 };
 // Resource
 
+uint                    qHash (const Nepomuk::Resource& res);
 };
 // Nepomuk
 

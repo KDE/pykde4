@@ -74,6 +74,8 @@ public:
 signals:
     void                    nepomukSystemStarted ();
     void                    nepomukSystemStopped ();
+public:
+    void                    clearCache ();
 };
 // ResourceManager
 

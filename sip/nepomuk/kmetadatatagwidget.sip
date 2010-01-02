@@ -47,5 +47,4 @@ public:
 };
 // Nepomuk
 
-//ig uint                    qHash (const Nepomuk::Tag& res);
 

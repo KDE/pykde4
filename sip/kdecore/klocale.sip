@@ -257,6 +257,10 @@ public:
     void                    setMonetaryDecimalPlaces (int digits);
     void                    setCurrencyCode (const QString& newCurrencyCode);
     static QString          defaultCurrencyCode ();
+    enum DateTimeFormatStandard
+    {
+        KdeFormat
+    };
 };
 // KLocale
 

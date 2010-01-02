@@ -30,8 +30,8 @@
 %Include rdfschemamodel.sip
 %Include readonlymodel.sip
 %Include sopranotypes.sip
-%Include asyncquery.sip
 %Include asyncmodel.sip
+%Include asyncquery.sip
 %Include asyncresult.sip
 %Include backend.sip
 %Include bindingset.sip

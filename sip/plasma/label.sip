@@ -60,6 +60,7 @@ protected:
     void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
     void                    changeEvent (QEvent* event);
     bool                    event (QEvent* event);
+    void                    contextMenuEvent (QGraphicsSceneContextMenuEvent* event);
 };
 // Label
 

@@ -88,6 +88,8 @@ public:
     void                    setMetaDataItem (const QString& key, const QString& value, KBookmark::MetaDataOverwriteMode mode = KBookmark::OverwriteMetaData);
     void                    populateMimeData (QMimeData* mimeData) const;
     bool                    operator == (const KBookmark& rhs) const;
+    QString                 description () const;
+    void                    setDescription (const QString& description);
 };
 // KBookmark
 

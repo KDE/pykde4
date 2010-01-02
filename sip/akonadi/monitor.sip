@@ -75,6 +75,9 @@ signals:
     void                    collectionStatisticsChanged (Akonadi::Entity::Id id, const Akonadi::CollectionStatistics& statistics);
 //end
 //ig    void                    collectionStatisticsChanged (Akonadi::Collection::Id id, const Akonadi::CollectionStatistics& statistics);
+public:
+    void                    setSession (Akonadi::Session* session);
+    Akonadi::Session*       session () const;
 };
 // Monitor
 

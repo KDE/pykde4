@@ -57,7 +57,6 @@ public:
         UserHeaders,
         EndHeaderGroup
     };
-                            EntityTreeModel (Akonadi::Session* session, Akonadi::ChangeRecorder* monitor, QObject* parent /TransferThis/ = 0);
     virtual ~EntityTreeModel ();
     enum ItemPopulationStrategy
     {
@@ -105,6 +104,9 @@ protected:
     virtual int             entityColumnCount (Akonadi::EntityTreeModel::HeaderGroup headerGroup) const;
     virtual bool            entityMatch (const Akonadi::Item& item, const QVariant& value, Qt::MatchFlags flags) const;
     virtual bool            entityMatch (const Akonadi::Collection& collection, const QVariant& value, Qt::MatchFlags flags) const;
-//ig                            EntityTreeModel (Akonadi::Session* session, Akonadi::ChangeRecorder* monitor, EntityTreeModelPrivate* d, QObject* parent /TransferThis/ = 0);
+public:
+    explicit                EntityTreeModel (Akonadi::ChangeRecorder* monitor, QObject* parent /TransferThis/ = 0);
+protected:
+//ig                            EntityTreeModel (Akonadi::ChangeRecorder* monitor, EntityTreeModelPrivate* d, QObject* parent /TransferThis/ = 0);
 };
 };

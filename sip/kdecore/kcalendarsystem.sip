@@ -112,7 +112,7 @@ private:
 //end
 public:
     ~KCalendarSystem ();
-    QString                 formatDate (const QDate& fromDate, const QString& toFormat) const;
+    QString                 formatDate (const QDate& fromDate, const QString& toFormat, KLocale::DateTimeFormatStandard formatStandard = KLocale::KdeFormat) const;
 protected:
     void                    setMaxMonthsInYear (int maxMonths);
     void                    setMaxDaysInWeek (int maxDays);
@@ -130,6 +130,7 @@ public:
     QString                 daysInYearString (const QDate& pDate, KCalendarSystem::StringFormat format = KCalendarSystem::LongFormat) const;
     QString                 daysInMonthString (const QDate& pDate, KCalendarSystem::StringFormat format = KCalendarSystem::LongFormat) const;
     QString                 daysInWeekString (const QDate& date) const;
+    QString                 formatDate (const QDate& fromDate, const QString& toFormat, KLocale::DigitSet digitSet, KLocale::DateTimeFormatStandard formatStandard = KLocale::KdeFormat) const;
 };
 // KCalendarSystem
 

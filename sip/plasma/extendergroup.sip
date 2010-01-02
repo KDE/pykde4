@@ -35,6 +35,10 @@ public:
     void                    expandGroup ();
     void                    collapseGroup ();
     ~ExtenderGroup ();
+    bool                    isGroupCollapsed () const;
+    bool                    isAutoCollapse () const;
+    void                    setAutoCollapse (bool collapse);
+    void                    setGroupCollapsed (bool collapsed);
 };
 // ExtenderGroup
 

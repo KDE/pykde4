@@ -156,6 +156,11 @@ public:
 //ig                            NETRootInfo (Display* display, Window supportWindow, const char* wmName, const unsigned long properties [], int properties_size, int screen = -1, bool doActivate = 1);
 //ig                            NETRootInfo (Display* display, const unsigned long properties [], int properties_size, int screen = -1, bool doActivate = 1);
     ~NETRootInfo ();
+    void                    setSupported (NET::Property property, bool on = 1);
+    void                    setSupported (NET::Property2 property, bool on = 1);
+    void                    setSupported (NET::WindowType property, bool on = 1);
+    void                    setSupported (NET::State property, bool on = 1);
+    void                    setSupported (NET::Action property, bool on = 1);
 };
 // NETRootInfo
 

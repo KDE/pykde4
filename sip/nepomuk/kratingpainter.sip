@@ -51,7 +51,7 @@ public:
     ~KRatingPainter ();
 private:
 //force
-    KRatingPainter(const KRatingPainter &other);
+                            KRatingPainter (const KRatingPainter& other);
 //end
 };
 // KRatingPainter

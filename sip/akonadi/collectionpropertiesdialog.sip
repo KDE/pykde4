@@ -31,7 +31,7 @@ public:
     explicit                CollectionPropertiesDialog (const Akonadi::Collection& collection, QWidget* parent /TransferThis/ = 0);
     static void             registerPage (Akonadi::CollectionPropertiesPageFactory* factory);
     ~CollectionPropertiesDialog ();
-    static void             useDefaultPage (bool defaultPage);
+    static void             useDefaultPage (bool use);
 };
 // CollectionPropertiesDialog
 

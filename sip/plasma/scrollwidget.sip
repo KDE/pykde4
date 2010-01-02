@@ -63,6 +63,8 @@ public:
 //force
 //ig    explicit                ScrollWidget (QGraphicsItem* parent);
 //end
+signals:
+    void                    scrollStateChanged (QAbstractAnimation::State newState, QAbstractAnimation::State oldState);
 };
 // ScrollWidget
 

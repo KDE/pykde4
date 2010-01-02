@@ -50,6 +50,8 @@ protected:
 public:
     void                    setReadOnly (bool readOnly);
     bool                    isReadOnly () const;
+protected:
+    void                    contextMenuEvent (QGraphicsSceneContextMenuEvent* event);
 };
 // TextEdit
 

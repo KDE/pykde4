@@ -58,6 +58,8 @@ public:
     ~ToolTipContent ();
     void                    setClickable (bool clickable);
     bool                    isClickable () const;
+    void                    setHighlightWindows (bool highlight);
+    bool                    highlightWindows () const;
 };
 // ToolTipContent
 

@@ -1,0 +1,1201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KParts.BrowserExtension</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>BrowserExtension Class Reference</h1>
+<code>from PyKDE4.kparts import *</code>
+<p>
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+
+Namespace: KParts.BrowserExtension<br />
+<h2>Detailed Description</h2>
+
+<p>The Browser Extension is an extension (yes, no kidding) to
+KParts.ReadOnlyPart, which allows a better integration of parts
+with browsers (in particular Konqueror).
+Remember that ReadOnlyPart only has openUrl(KUrl) and a few arguments() but not much more.
+For full-fledged browsing, we need much more than that, including
+enabling/disabling of standard actions (print, copy, paste...),
+allowing parts to save and restore their data into the back/forward history,
+allowing parts to control the location bar URL, to requests URLs
+to be opened by the hosting browser, etc.
+</p>
+<p>
+The part developer needs to define its own class derived from BrowserExtension,
+to implement the virtual methods [and the standard-actions slots, see below].
+</p>
+<p>
+The way to associate the BrowserExtension with the part is to simply
+create the BrowserExtension as a child of the part (in QObject's terms).
+The hosting application will look for it automatically.
+</p>
+<p>
+Another aspect of the browser integration is that a set of standard
+actions are provided by the browser, but implemented by the part
+(for the actions it supports).
+</p>
+<p>
+The following standard actions are defined by the host of the view :
+</p>
+<p>
+[selection-dependent actions]
+<li> <b>cut</b> : Copy selected items to clipboard and store 'not cut' in clipboard. </li>
+<li> <b>copy</b> : Copy selected items to clipboard and store 'cut' in clipboard. </li>
+<li> <b>paste</b> : Paste clipboard into view URL. </li>
+<li> <b>pasteTo(const</b> KUrl &amp;) : Paste clipboard into given URL. </li>
+<li> <b>searchProvider</b> : Lookup selected text at default search provider </li>
+</p>
+<p>
+[normal actions]
+<li> None anymore. </li>
+</p>
+<p>
+The view defines a slot with the name of the action in order to implement the action.
+The browser will detect the slot automatically and connect its action to it when
+appropriate (i.e. when the view is active).
+</p>
+<p>
+The selection-dependent actions are disabled by default and the view should
+enable them when the selection changes, emitting enableAction().
+</p>
+<p>
+The normal actions do not depend on the selection.
+</p>
+<p>
+A special case is the configuration slots, not connected to any action directly.
+</p>
+<p>
+[configuration slot]
+<li> <b>reparseConfiguration</b> : Re-read configuration and apply it. </li>
+<li> <b>disableScrolling:</b> no scrollbars </li>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#PopupFlag">PopupFlag</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;DefaultPopupItems, ShowNavigationItems, ShowUp, ShowReload, ShowBookmark, ShowCreateDirectory, ShowTextSelectionItems, NoDeletion, IsLink, ShowUrlOperations, ShowProperties&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#BrowserExtension">__init__</a> (self, <a href="../kparts/KParts.ReadOnlyPart.html">KParts.ReadOnlyPart</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kparts/KParts.BrowserExtension.ActionSlotMap.html">KParts.BrowserExtension.ActionSlotMap</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionSlotMap">actionSlotMap</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kparts/KParts.BrowserExtension.ActionSlotMap.html">KParts.BrowserExtension.ActionSlotMap</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionSlotMapPtr">actionSlotMapPtr</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionText">actionText</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addWebSideBar">addWebSideBar</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kparts/KParts.BrowserArguments.html">KParts.BrowserArguments</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#browserArguments">browserArguments</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kparts/KParts.BrowserInterface.html">KParts.BrowserInterface</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#browserInterface">browserInterface</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kparts/KParts.BrowserExtension.html">KParts.BrowserExtension</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#childObject">childObject</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> obj)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#createNewWindow">createNewWindow</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url, <a href="../kparts/KParts.OpenUrlArguments.html">KParts.OpenUrlArguments</a> arguments=KParts.OpenUrlArguments(), <a href="../kparts/KParts.BrowserArguments.html">KParts.BrowserArguments</a> browserArguments=KParts.BrowserArguments(), <a href="../kparts/KParts.WindowArgs.html">KParts.WindowArgs</a> windowArgs=KParts.WindowArgs(), <a href="../kparts/KParts.ReadOnlyPart.html">KParts.ReadOnlyPart</a> part=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#enableAction">enableAction</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, bool enabled)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#infoMessage">infoMessage</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isActionEnabled">isActionEnabled</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isURLDropHandlingEnabled">isURLDropHandlingEnabled</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsRemoved">itemsRemoved</a> (self, <a href="../kio/KFileItemList.html">KFileItemList</a> items)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#loadingProgress">loadingProgress</a> (self, int percent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mouseOverInfo">mouseOverInfo</a> (self, <a href="../kio/KFileItem.html">KFileItem</a> item)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#moveTopLevelWidget">moveTopLevelWidget</a> (self, int x, int y)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#openUrlNotify">openUrlNotify</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#openUrlRequest">openUrlRequest</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url, <a href="../kparts/KParts.OpenUrlArguments.html">KParts.OpenUrlArguments</a> arguments=KParts.OpenUrlArguments(), <a href="../kparts/KParts.BrowserArguments.html">KParts.BrowserArguments</a> browserArguments=KParts.BrowserArguments())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#openUrlRequestDelayed">openUrlRequestDelayed</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url, <a href="../kparts/KParts.OpenUrlArguments.html">KParts.OpenUrlArguments</a> arguments, <a href="../kparts/KParts.BrowserArguments.html">KParts.BrowserArguments</a> browserArguments)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pasteRequest">pasteRequest</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#requestFocus">requestFocus</a> (self, <a href="../kparts/KParts.ReadOnlyPart.html">KParts.ReadOnlyPart</a> part)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resizeTopLevelWidget">resizeTopLevelWidget</a> (self, int w, int h)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#restoreState">restoreState</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#saveState">saveState</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selectionInfo">selectionInfo</a> (self, <a href="../kio/KFileItemList.html">KFileItemList</a> items)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selectionInfo">selectionInfo</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selectionInfo">selectionInfo</a> (self, <a href="../kdecore/KUrl.List.html">KUrl.List</a> urls)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setActionText">setActionText</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setBrowserArguments">setBrowserArguments</a> (self, <a href="../kparts/KParts.BrowserArguments.html">KParts.BrowserArguments</a> args)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setBrowserInterface">setBrowserInterface</a> (self, <a href="../kparts/KParts.BrowserInterface.html">KParts.BrowserInterface</a> impl)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIconUrl">setIconUrl</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLocationBarUrl">setLocationBarUrl</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPageSecurity">setPageSecurity</a> (self, int a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setURLDropHandlingEnabled">setURLDropHandlingEnabled</a> (self, bool enable)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#speedProgress">speedProgress</a> (self, int bytesPerSecond)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#xOffset">xOffset</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#yOffset">yOffset</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="BrowserExtension"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kparts/KParts.ReadOnlyPart.html">KParts.ReadOnlyPart</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="actionSlotMap"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kparts/KParts.BrowserExtension.ActionSlotMap.html">KParts.BrowserExtension.ActionSlotMap</a> actionSlotMap</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a map containing the action names as keys and corresponding
+SLOT()'ified method names as data entries.
+</p>
+<p>
+This is very useful for
+the host component, when connecting the own signals with the
+extension's slots.
+Basically you iterate over the map, check if the extension implements
+the slot and connect to the slot using the data value of your map
+iterator.
+Checking if the extension implements a certain slot can be done like this:
+</p>
+<p>
+<pre class="fragment">
+   extension-&gt;metaObject()-&gt;slotNames().contains( actionName + "()" )
+</pre>
+</p>
+<p>
+(note that <b>actionName</b> is the iterator's key value if already
+iterating over the action slot map, returned by this method)
+</p>
+<p>
+Connecting to the slot can be done like this:
+</p>
+<p>
+<pre class="fragment">
+   connect( yourObject, SIGNAL( yourSignal() ),
+            extension, mapIterator.data() )
+</pre>
+</p>
+<p>
+(where "mapIterator" is your QMap&lt;QCString,QCString&gt; iterator)
+</p></div></div><a class="anchor" name="actionSlotMapPtr"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kparts/KParts.BrowserExtension.ActionSlotMap.html">KParts.BrowserExtension.ActionSlotMap</a> actionSlotMapPtr</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> a pointer to the static action-slot map. Preferred method to get it.
+The map is created if it doesn't exist yet
+</dd></dl>
+</p></div></div><a class="anchor" name="actionText"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> actionText</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the text of an action, if it was set explicitly by the part.
+When the setActionText signal is emitted, the browserextension
+stores the text of the action internally, so that it's possible
+to query later for the text of the action, using this method.
+</dd></dl>
+</p></div></div><a class="anchor" name="addWebSideBar"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addWebSideBar</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Ask the hosting application to add a new HTML (aka Mozilla/Netscape)
+SideBar entry.
+</p></div></div><a class="anchor" name="browserArguments"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kparts/KParts.BrowserArguments.html">KParts.BrowserArguments</a> browserArguments</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Retrieve the set of parameters to use for opening the URL
+(this must be called from openUrl() in the part).
+<dl class="see" compact><dt><b>See also:</b></dt><dd> BrowserArguments
+</dd></dl>
+</p></div></div><a class="anchor" name="browserInterface"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kparts/KParts.BrowserInterface.html">KParts.BrowserInterface</a> browserInterface</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="childObject"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kparts/KParts.BrowserExtension.html">KParts.BrowserExtension</a> childObject</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>obj</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Queries <b>obj</b> for a child object which inherits from this
+BrowserExtension class. Convenience method.
+</p></div></div><a class="anchor" name="createNewWindow"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> createNewWindow</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kparts/KParts.OpenUrlArguments.html">KParts.OpenUrlArguments</a>&nbsp;</td>
+<td class="paramname"><em>arguments=KParts.OpenUrlArguments()</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kparts/KParts.BrowserArguments.html">KParts.BrowserArguments</a>&nbsp;</td>
+<td class="paramname"><em>browserArguments=KParts.BrowserArguments()</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kparts/KParts.WindowArgs.html">KParts.WindowArgs</a>&nbsp;</td>
+<td class="paramname"><em>windowArgs=KParts.WindowArgs()</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kparts/KParts.ReadOnlyPart.html">KParts.ReadOnlyPart</a>&nbsp;</td>
+<td class="paramname"><em>part=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Asks the hosting browser to open a new window for the given <b>url</b>
+and return a reference to the content part.
+</p>
+<p>
+<b>arguments</b> is optional additional information about how to open the url,
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KParts.OpenUrlArguments
+</dd></dl> </p>
+<p>
+<b>browserArguments</b> is optional additional information for web browsers,
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KParts.BrowserArguments
+</dd></dl> </p>
+<p>
+The request for a pointer to the part is only fulfilled/processed
+if the mimeType is set in the <b>browserArguments.</b>
+(otherwise the request cannot be processed synchronously).
+</p></div></div><a class="anchor" name="enableAction"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> enableAction</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>enabled</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Enables or disable a standard action held by the browser.
+</p>
+<p>
+See class documentation for the list of standard actions.
+</p></div></div><a class="anchor" name="infoMessage"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> infoMessage</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="isActionEnabled"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isActionEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the status (enabled/disabled) of an action.
+When the enableAction signal is emitted, the browserextension
+stores the status of the action internally, so that it's possible
+to query later for the status of the action, using this method.
+</dd></dl>
+</p></div></div><a class="anchor" name="isURLDropHandlingEnabled"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isURLDropHandlingEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns whether url drop handling is enabled.
+See setURLDropHandlingEnabled for more information about this
+property.
+</p></div></div><a class="anchor" name="itemsRemoved"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> itemsRemoved</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KFileItemList.html">KFileItemList</a>&nbsp;</td>
+<td class="paramname"><em>items</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Inform the host about items that have been removed.
+</p></div></div><a class="anchor" name="loadingProgress"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> loadingProgress</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>percent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Since the part emits the jobid in the started() signal,
+progress information is automatically displayed.
+</p>
+<p>
+However, if you don't use a KIO.Job in the part,
+you can use loadingProgress() and speedProgress()
+to display progress information.
+</p></div></div><a class="anchor" name="mouseOverInfo"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> mouseOverInfo</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KFileItem.html">KFileItem</a>&nbsp;</td>
+<td class="paramname"><em>item</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Inform the hosting application that the user moved the mouse over an item.
+Used when the mouse is on an URL.
+</p></div></div><a class="anchor" name="moveTopLevelWidget"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> moveTopLevelWidget</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>y</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Ask the hosting application to move the top level widget.
+</p></div></div><a class="anchor" name="openUrlNotify"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> openUrlNotify</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Tells the hosting browser that the part opened a new URL (which can be
+queried via KParts.Part.url().
+</p>
+<p>
+This helps the browser to update/create an entry in the history.
+The part may <b>not</b> emit this signal together with openUrlRequest().
+Emit openUrlRequest() if you want the browser to handle a URL the user
+asked to open (from within your part/document). This signal however is
+useful if you want to handle URLs all yourself internally, while still
+telling the hosting browser about new opened URLs, in order to provide
+a proper history functionality to the user.
+An example of usage is a html rendering component which wants to emit
+this signal when a child frame document changed its URL.
+Conclusion: you probably want to use openUrlRequest() instead.
+</p></div></div><a class="anchor" name="openUrlRequest"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> openUrlRequest</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kparts/KParts.OpenUrlArguments.html">KParts.OpenUrlArguments</a>&nbsp;</td>
+<td class="paramname"><em>arguments=KParts.OpenUrlArguments()</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kparts/KParts.BrowserArguments.html">KParts.BrowserArguments</a>&nbsp;</td>
+<td class="paramname"><em>browserArguments=KParts.BrowserArguments()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Asks the host (browser) to open <b>url.</b>
+To set a reload, the x and y offsets, the service type etc., fill in the
+appropriate fields in the <b>args</b> structure.
+Hosts should not connect to this signal but to openUrlRequestDelayed().
+</p></div></div><a class="anchor" name="openUrlRequestDelayed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> openUrlRequestDelayed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kparts/KParts.OpenUrlArguments.html">KParts.OpenUrlArguments</a>&nbsp;</td>
+<td class="paramname"><em>arguments</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kparts/KParts.BrowserArguments.html">KParts.BrowserArguments</a>&nbsp;</td>
+<td class="paramname"><em>browserArguments</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted when openUrlRequest() is called, after a 0-seconds timer.
+This allows the caller to terminate what it's doing first, before (usually)
+being destroyed. Parts should never use this signal, hosts should only connect
+to this signal.
+</p></div></div><a class="anchor" name="pasteRequest"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> pasteRequest</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Asks the hosting browser to perform a paste (using openUrlRequestDelayed())
+</p></div></div><a class="anchor" name="requestFocus"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> requestFocus</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kparts/KParts.ReadOnlyPart.html">KParts.ReadOnlyPart</a>&nbsp;</td>
+<td class="paramname"><em>part</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Ask the hosting application to focus <b>part.</b>
+</p></div></div><a class="anchor" name="resizeTopLevelWidget"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> resizeTopLevelWidget</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>w</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>h</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Ask the hosting application to resize the top level widget.
+</p></div></div><a class="anchor" name="restoreState"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> restoreState</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a>&nbsp;</td>
+<td class="paramname"><em>stream</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Used by the browser to restore the view in the state
+it was when we left it.
+</p>
+<p>
+If you saved additional properties, reimplement it
+but don't forget to call the parent method (probably first).
+</p></div></div><a class="anchor" name="saveState"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> saveState</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a>&nbsp;</td>
+<td class="paramname"><em>stream</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Used by the browser to save the current state of the view
+(in order to restore it if going back in navigation).
+</p>
+<p>
+If you want to save additional properties, reimplement it
+but don't forget to call the parent method (probably first).
+</p></div></div><a class="anchor" name="selectionInfo"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> selectionInfo</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KFileItemList.html">KFileItemList</a>&nbsp;</td>
+<td class="paramname"><em>items</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Inform the hosting application about the current selection.
+Used when a set of URLs is selected.
+</p></div></div><a class="anchor" name="selectionInfo"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> selectionInfo</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Inform the hosting application about the current selection.
+Used when a set of URLs is selected.
+</p></div></div><a class="anchor" name="selectionInfo"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> selectionInfo</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.List.html">KUrl.List</a>&nbsp;</td>
+<td class="paramname"><em>urls</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Inform the hosting application about the current selection.
+Used when a set of URLs is selected.
+</p></div></div><a class="anchor" name="setActionText"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setActionText</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Change the text of a standard action held by the browser.
+This can be used to change "Paste" into "Paste Image" for instance.
+</p>
+<p>
+See class documentation for the list of standard actions.
+</p></div></div><a class="anchor" name="setBrowserArguments"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setBrowserArguments</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kparts/KParts.BrowserArguments.html">KParts.BrowserArguments</a>&nbsp;</td>
+<td class="paramname"><em>args</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the parameters to use for opening the next URL.
+This is called by the "hosting" application, to pass parameters to the part.
+<dl class="see" compact><dt><b>See also:</b></dt><dd> BrowserArguments
+</dd></dl>
+</p></div></div><a class="anchor" name="setBrowserInterface"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setBrowserInterface</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kparts/KParts.BrowserInterface.html">KParts.BrowserInterface</a>&nbsp;</td>
+<td class="paramname"><em>impl</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setIconUrl"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setIconUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the URL of an icon for the currently displayed page.
+</p></div></div><a class="anchor" name="setLocationBarUrl"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setLocationBarUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Updates the URL shown in the browser's location bar to <b>url.</b>
+</p></div></div><a class="anchor" name="setPageSecurity"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setPageSecurity</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Tell the host (browser) about security state of current page
+enum PageSecurity { NotCrypted, Encrypted, Mixed };
+</p></div></div><a class="anchor" name="setURLDropHandlingEnabled"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setURLDropHandlingEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>enable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Enables or disables url drop handling. URL drop handling is a property
+describing whether the hosting shell component is allowed to install an
+event filter on the part's widget, to listen for URI drop events.
+Set it to true if you are exporting a BrowserExtension implementation and
+do not provide any special URI drop handling. If set to false you can be
+sure to receive all those URI drop events unfiltered. Also note that the
+implementation as of Konqueror installs the event filter only on the part's
+widget itself, not on child widgets.
+</p></div></div><a class="anchor" name="speedProgress"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> speedProgress</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>bytesPerSecond</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="see" compact><dt><b>See also:</b></dt><dd> loadingProgress
+</dd></dl>
+</p></div></div><a class="anchor" name="xOffset"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int xOffset</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the current x offset.
+</p>
+<p>
+For a scrollview, implement this using contentsX().
+</p></div></div><a class="anchor" name="yOffset"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int yOffset</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the current y offset.
+</p>
+<p>
+For a scrollview, implement this using contentsY().
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="PopupFlag"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">PopupFlag</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

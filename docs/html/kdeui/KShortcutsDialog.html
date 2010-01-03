@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KShortcutsDialog</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>KShortcutsDialog Class Reference</h1>
+<code>from PyKDE4.kdeui import *</code>
+<p>
+Inherits: <a href="../kdeui/KDialog.html">KDialog</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdialog.html">QDialog</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+
+
+<h2>Detailed Description</h2>
+
+<p>Dialog for configuration of KActionCollection and KGlobalAccel.
+</p>
+<p>
+The KShortcutsDialog class is used for configuring dictionaries of key/action
+associations for KActionCollection and KGlobalAccel. It uses the KShortcutsEditor widget
+and offers buttons to set all keys to defaults and invoke on-line help.
+</p>
+<p>
+Several static methods are supplied which provide the most convenient interface
+to the dialog. The most common and most encouraged use is with KActionCollection.
+</p>
+<p>
+<pre class="fragment">
+ KShortcutsDialog.configure( actionCollection() );
+</pre>
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+By default this dialog is modal. If you don't want that, setModal(false) and then the non-static
+configure() will show the dialog. If you want to do anything extra when the dialog is done,
+connect to okClicked() and/or cancelClicked(). However, if your extra stuff depends on the
+changed settings already being saved, connect to saved() instead to be safe; if you connect to
+okClicked() your function might be called before the save happens.
+</dd></dl> </p>
+<p>
+example:
+<pre class="fragment">
+ KShortcutsDialog dlg;
+ dlg.addCollection(myActions);
+ dlg.setModal(false);
+ connect(&amp;dlg, SIGNAL(saved()), this, SLOT(doExtraStuff()));
+ dlg.configure();
+</pre>
+</p>
+<p>
+<div align="center"><img src="../images/kshortcutsdialog.png" /><p><strong> "KDE Shortcuts Dialog" </strong></p></div>
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Nicolas Hadacek &lt;hadacek@via.ecp.fr&gt; </dd></dl>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Hamish Rodda &lt;rodda@kde.org&gt; (KDE 4 porting) </dd></dl>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Michael Jansen &lt;kde@michael-jansen.biz&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#saved">saved</a> ()</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KShortcutsDialog">__init__</a> (self, <a href="../kdeui/KShortcutsEditor.ActionTypes.html">KShortcutsEditor.ActionTypes</a> types=KShortcutsEditor.AllActions, <a href="../kdeui/KShortcutsEditor.html#LetterShortcuts">KShortcutsEditor.LetterShortcuts</a> allowLetterShortcuts=KShortcutsEditor.LetterShortcutsAllowed, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KShortcutsDialog">__init__</a> (self, <a href="../kdeui/KShortcutsDialog.html">KShortcutsDialog</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[KActionCollectio]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionCollections">actionCollections</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addCollection">addCollection</a> (self, <a href="../kdeui/KActionCollection.html">KActionCollection</a> a0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> title=QString())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configure">configure</a> (self, bool saveSettings=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configure">configure</a> (self, <a href="../kdeui/KActionCollection.html">KActionCollection</a> collection, <a href="../kdeui/KShortcutsEditor.html#LetterShortcuts">KShortcutsEditor.LetterShortcuts</a> allowLetterShortcuts=KShortcutsEditor.LetterShortcutsAllowed, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0, bool bSaveSettings=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#saved">saved</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsize.html">QSize</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#sizeHint">sizeHint</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="KShortcutsDialog"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KShortcutsEditor.ActionTypes.html">KShortcutsEditor.ActionTypes</a>&nbsp;</td>
+<td class="paramname"><em>types=KShortcutsEditor.AllActions</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KShortcutsEditor.html#LetterShortcuts">KShortcutsEditor.LetterShortcuts</a>&nbsp;</td>
+<td class="paramname"><em>allowLetterShortcuts=KShortcutsEditor.LetterShortcutsAllowed</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="KShortcutsDialog"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KShortcutsDialog.html">KShortcutsDialog</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="actionCollections"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[KActionCollectio] actionCollections</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the list of action collections that are available for configuration in the dialog.
+</dd></dl>
+</p></div></div><a class="anchor" name="addCollection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addCollection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KActionCollection.html">KActionCollection</a>&nbsp;</td>
+<td class="paramname"><em>a0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>title=QString()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add all actions of the collection to the ones displayed and configured
+by the dialog.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>title</em>&nbsp;</td><td> the title associated with the collection (if null, the
+KAboutData.progName() of the collection's componentData is used)
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="configure"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool configure</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>saveSettings=1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Pops up a modal dialog for configuring key settings. The new
+shortcut settings will become active if the user presses OK.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>collection</em>&nbsp;</td><td> the KActionCollection to configure
+
+<tr><td></td><td valign="top"><em>allowLetterShortcuts</em>&nbsp;</td><td> set to KShortcutsEditor.LetterShortcutsDisallowed if unmodified alphanumeric
+keys ('A', '1', etc.) are not permissible shortcuts.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent widget to attach to
+
+<tr><td></td><td valign="top"><em>bSaveSettings</em>&nbsp;</td><td> if true, the settings will also be saved back
+by calling writeSettings() on the action collections that were added.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> Accept if the dialog was closed with OK, Reject otherwise.
+</dd></dl>
+</p></div></div><a class="anchor" name="configure"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int configure</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KActionCollection.html">KActionCollection</a>&nbsp;</td>
+<td class="paramname"><em>collection</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KShortcutsEditor.html#LetterShortcuts">KShortcutsEditor.LetterShortcuts</a>&nbsp;</td>
+<td class="paramname"><em>allowLetterShortcuts=KShortcutsEditor.LetterShortcutsAllowed</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>bSaveSettings=1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Pops up a modal dialog for configuring key settings. The new
+shortcut settings will become active if the user presses OK.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>collection</em>&nbsp;</td><td> the KActionCollection to configure
+
+<tr><td></td><td valign="top"><em>allowLetterShortcuts</em>&nbsp;</td><td> set to KShortcutsEditor.LetterShortcutsDisallowed if unmodified alphanumeric
+keys ('A', '1', etc.) are not permissible shortcuts.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent widget to attach to
+
+<tr><td></td><td valign="top"><em>bSaveSettings</em>&nbsp;</td><td> if true, the settings will also be saved back
+by calling writeSettings() on the action collections that were added.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> Accept if the dialog was closed with OK, Reject otherwise.
+</dd></dl>
+</p></div></div><a class="anchor" name="saved"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> saved</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>emitted after ok is clicked and settings are saved
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("saved()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="sizeHint"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsize.html">QSize</a> sizeHint</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="see" compact><dt><b>See also:</b></dt><dd> QWidget.sizeHint()
+</dd></dl>
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

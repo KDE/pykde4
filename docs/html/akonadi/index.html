@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Module PyKDE4.akonadi</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+<h1>PyKDE4.akonadi Module</h1>
+<hr><p><h2>Akonadi client library </h2>
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+libakonadi is the client access library for using the Akonadi PIM data server.
+All processes accessing Akonadi, including those which communicate with a remote
+server (\ref akonadi_design_agents "agents"), are considered clients.
+</p>
+<p>
+Functionality provided by libakonadi:
+</p>
+<p>
+- libakonadi_objects
+- libakonadi_collections
+- libakonadi_pimitems
+- libakonadi_jobs
+- libakonadi_monitor
+- libakonadi_serializer
+- libakonadi_resource
+- libakonadi_integration
+</p>
+<p>
+<b>Akonadi Objects </b>
+</p>
+<p>
+Akonadi works on two basic object types: collections and items.
+</p>
+<p>
+Collections are comparable to folders in a file system and are represented by
+the class Akonadi.Collection. Every collection has an associated cache policy
+represented by the class Akonadi.CachePolicy which defines what part of its
+content is cached for how long. All available ways to work with collections are
+listed in the libakonadi_collections "Collections" section.
+</p>
+<p>
+Akonadi items are comparable to files in a file system and are represented by
+the class Akonadi.Item. Each item represents a single PIM object such as a mail
+or a contact. The actual object it represents is its so-called payload. All
+available ways to work with items are listed in the libakonadi_pimitems "Items"
+section.
+</p>
+<p>
+Both items and collections are identified by a persistent unique identifier.
+Also, they can contain arbitrary attributes (derived from Akonadi.Attribute) to
+attach general or application specific meta data to them. Functionality common
+to both is provided by their base class Akonadi.Entity.
+</p>
+<p>
+<b>Collection retrieval and manipulation </b>
+</p>
+<p>
+A collection is represented by the Akonadi.Collection class.
+</p>
+<p>
+Classes to retrieve information about collections:
+</p>
+<p>
+- Akonadi.CollectionFetchJob
+- Akonadi.CollectionSelectJob
+- Akonadi.CollectionStatisticsJob
+</p>
+<p>
+Classes to manipulate collections:
+</p>
+<p>
+- Akonadi.CollectionCreateJob
+- Akonadi.CollectionCopyJob
+- Akonadi.CollectionModifyJob
+- Akonadi.CollectionDeleteJob
+</p>
+<p>
+There is also Akonadi.CollectionModel, which is a self-updating model class which can
+be used in combination with Akonadi.CollectionView. Akonadi.CollectionFilterProxyModel
+can be used to limit a displayed collection tree to collections supporting a certain
+type of PIM items. Akonadi.CollectionPropertiesDialog provides an extensible properties
+dialog for collections. Often needed KAction for collection operations are provided by
+Akonadi.StandardActionManager.
+</p>
+<p>
+<b>PIM item retrieval and manipulation </b>
+</p>
+<p>
+PIM items are represented by classes derived from Akonadi.Item.
+Items can be retrieved using Akonadi.ItemFetchJob.
+</p>
+<p>
+The following classes are provided to manipulate PIM items:
+</p>
+<p>
+- Akonadi.ItemCreateJob
+- Akonadi.ItemCopyJob
+- Akonadi.ItemModifyJob
+- Akonadi.ItemDeleteJob
+</p>
+<p>
+Akonadi.ItemModel provides a self-updating model class which can be used to display the content
+of a collection. Akonadi.ItemView is the base class for a corresponding view. Often needed KAction
+for item operations are provided by Akonadi.StandardActionManager.
+</p>
+<p>
+<b>Low-level access to the Akonadi server </b>
+</p>
+<p>
+Accessing the Akonadi server is done using job classes derived from Akonadi.Job. The
+communication channel with the server is provided by Akonadi.Session.
+</p>
+<p>
+To use server-side transactions, the following jobs are provided:
+</p>
+<p>
+- Akonadi.TransactionBeginJob
+- Akonadi.TransactionCommitJob
+- Akonadi.TransactionRollbackJob
+</p>
+<p>
+There also is Akonadi.TransactionSequence which can be used to automatically group
+a set of jobs into a single transaction.
+</p>
+<p>
+<b>Change notifications </b>
+</p>
+<p>
+The Akonadi.Monitor class allows you to monitor specific resources,
+collections and PIM items for changes. Akonadi.ChangeRecorder augments this
+by providing a way to record and replay change notifications.
+</p>
+<p>
+<b>PIM item serializer </b>
+</p>
+<p>
+The class Akonadi.ItemSerializer is responsible for converting between the stored (binary) representation
+of a PIM item and the objects used to handle these items provided by the corresponding libraries (kabc, kcal, etc.).
+</p>
+<p>
+Serializer plugins allow you to add support for new kinds of PIM items to Akonadi.
+Akonadi.ItemSerializerPlugin can be used as a base class for such a plugin.
+</p>
+<p>
+<b>Agents and Resources </b>
+</p>
+<p>
+The class Akonadi.AgentBase is the common base class for all agents. It provides commonly needed
+functionality such as change monitoring and recording.
+</p>
+<p>
+Resources are a special kind of agents. Akonadi.ResourceBase is the base class for them. It provides the
+necessary interfaces to the server as well as many convenience functions to make implementing
+a new resource as easy as possible. Note that a collection contains items belonging to a single
+resource, although there are plans in the future for 'virtual' collections which will contain
+the results of a search query spanning multiple resources.
+</p>
+<p>
+A resource can support multiple mimetypes. There are two places where a resource can specify
+mimetypes: in its desktop files, and in the content mimetypes field of
+collections created by it. The ones in the desktop file are used for
+filtering agent types, e.g. in the resource creation dialogs. The collection
+content mimetypes specify what you can actually put into a collection, which
+is not necessarily the same (e.g. the Kolab resource supports contacts and events, but not
+in the same folder).
+</p>
+<p>
+
+</p><h2>Namespaces</h2>
+<table width="95%" align="center" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td><a name="letter_A">&nbsp;&nbsp;A&nbsp;&nbsp;</a></td><td><a name="letter_G">&nbsp;&nbsp;G&nbsp;&nbsp;</a></td><td></td></tr>
+<tr><td><a class="el" href="Akonadi.html">Akonadi</a>&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="global.html"><i>global</i></a>&nbsp;&nbsp;&nbsp;</td><td></td></tr>
+</table>
+<h2>Class Index</h2>
+<table width="95%" align="center" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td><a name="letter_A">&nbsp;&nbsp;A&nbsp;&nbsp;</a></td><td><a class="el" href="Akonadi.CollectionStatisticsDelegate.html">CollectionStatisticsDelegate</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_M">&nbsp;&nbsp;M&nbsp;&nbsp;</a></td></tr>
+<tr><td><a class="el" href="Akonadi.AddressAttribute.html">AddressAttribute</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.CollectionStatisticsJob.html">CollectionStatisticsJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.MessageFolderAttribute.html">MessageFolderAttribute</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.AgentBase.html">AgentBase</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.CollectionStatisticsModel.html">CollectionStatisticsModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.MessageModel.html">MessageModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.AgentFilterProxyModel.html">AgentFilterProxyModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.CollectionView.html">CollectionView</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.MessageThreaderProxyModel.html">MessageThreaderProxyModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.AgentInstance.html">AgentInstance</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.Control.html">Control</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.MessageThreadingAttribute.html">MessageThreadingAttribute</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.AgentInstanceCreateJob.html">AgentInstanceCreateJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_E">&nbsp;&nbsp;E&nbsp;&nbsp;</a></td><td><a class="el" href="Akonadi.MimeTypeChecker.html">MimeTypeChecker</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.AgentInstanceModel.html">AgentInstanceModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.Entity.html">Entity</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.Monitor.html">Monitor</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.AgentInstanceWidget.html">AgentInstanceWidget</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.EntityDisplayAttribute.html">EntityDisplayAttribute</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_O">&nbsp;&nbsp;O&nbsp;&nbsp;</a></td></tr>
+<tr><td><a class="el" href="Akonadi.AgentManager.html">AgentManager</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.EntityHiddenAttribute.html">EntityHiddenAttribute</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi::AgentBase.Observer.html">Observer</a>&nbsp;(<a class="el" href="Akonadi::AgentBase.html">Akonadi::AgentBase</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.AgentType.html">AgentType</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.EntityListView.html">EntityListView</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi::AgentBase.ObserverV2.html">ObserverV2</a>&nbsp;(<a class="el" href="Akonadi::AgentBase.html">Akonadi::AgentBase</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.AgentTypeDialog.html">AgentTypeDialog</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.EntityMimeTypeFilterModel.html">EntityMimeTypeFilterModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_P">&nbsp;&nbsp;P&nbsp;&nbsp;</a></td></tr>
+<tr><td><a class="el" href="Akonadi.AgentTypeModel.html">AgentTypeModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.EntityTreeModel.html">EntityTreeModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.PartFetcher.html">PartFetcher</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.AgentTypeWidget.html">AgentTypeWidget</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.EntityTreeView.html">EntityTreeView</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.PreprocessorBase.html">PreprocessorBase</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.Attribute.html">Attribute</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.EntityTreeViewStateSaver.html">EntityTreeViewStateSaver</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_R">&nbsp;&nbsp;R&nbsp;&nbsp;</a></td></tr>
+<tr><td><a class="el" href="Akonadi.AttributeFactory.html">AttributeFactory</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_F">&nbsp;&nbsp;F&nbsp;&nbsp;</a></td><td><a class="el" href="Akonadi.ResourceBase.html">ResourceBase</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a name="letter_C">&nbsp;&nbsp;C&nbsp;&nbsp;</a></td><td><a class="el" href="Akonadi.FavoriteCollectionsModel.html">FavoriteCollectionsModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ResourceSynchronizationJob.html">ResourceSynchronizationJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CachePolicy.html">CachePolicy</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_I">&nbsp;&nbsp;I&nbsp;&nbsp;</a></td><td><a name="letter_S">&nbsp;&nbsp;S&nbsp;&nbsp;</a></td></tr>
+<tr><td><a class="el" href="Akonadi.ChangeRecorder.html">ChangeRecorder</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.Item.html">Item</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.SearchCreateJob.html">SearchCreateJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.Collection.html">Collection</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemCopyJob.html">ItemCopyJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.SelectionProxyModel.html">SelectionProxyModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionComboBox.html">CollectionComboBox</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemCreateJob.html">ItemCreateJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ServerManager.html">ServerManager</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionCopyJob.html">CollectionCopyJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemDeleteJob.html">ItemDeleteJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.Session.html">Session</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionCreateJob.html">CollectionCreateJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemFetchJob.html">ItemFetchJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.SpecialCollections.html">SpecialCollections</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionDeleteJob.html">CollectionDeleteJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemFetchScope.html">ItemFetchScope</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.SpecialCollectionsRequestJob.html">SpecialCollectionsRequestJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionDialog.html">CollectionDialog</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemModel.html">ItemModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.SpecialMailCollections.html">SpecialMailCollections</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionFetchJob.html">CollectionFetchJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemModifyJob.html">ItemModifyJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.SpecialMailCollectionsRequestJob.html">SpecialMailCollectionsRequestJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionFetchScope.html">CollectionFetchScope</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemMonitor.html">ItemMonitor</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.StandardActionManager.html">StandardActionManager</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionFilterProxyModel.html">CollectionFilterProxyModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemMoveJob.html">ItemMoveJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.StatisticsProxyModel.html">StatisticsProxyModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionModel.html">CollectionModel</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemSearchJob.html">ItemSearchJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_T">&nbsp;&nbsp;T&nbsp;&nbsp;</a></td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionModifyJob.html">CollectionModifyJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemSerializerPlugin.html">ItemSerializerPlugin</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.TransactionBeginJob.html">TransactionBeginJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionMoveJob.html">CollectionMoveJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemSerializerPluginV2.html">ItemSerializerPluginV2</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.TransactionCommitJob.html">TransactionCommitJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionPropertiesDialog.html">CollectionPropertiesDialog</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemSync.html">ItemSync</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.TransactionRollbackJob.html">TransactionRollbackJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionPropertiesPage.html">CollectionPropertiesPage</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.ItemView.html">ItemView</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.TransactionSequence.html">TransactionSequence</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionPropertiesPageFactory.html">CollectionPropertiesPageFactory</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_J">&nbsp;&nbsp;J&nbsp;&nbsp;</a></td><td><a class="el" href="Akonadi.TransportResourceBase.html">TransportResourceBase</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionQuotaAttribute.html">CollectionQuotaAttribute</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.Job.html">Job</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_U">&nbsp;&nbsp;U&nbsp;&nbsp;</a></td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionRequester.html">CollectionRequester</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a name="letter_L">&nbsp;&nbsp;L&nbsp;&nbsp;</a></td><td><a class="el" href="Akonadi.UnlinkJob.html">UnlinkJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td><a class="el" href="Akonadi.CollectionStatistics.html">CollectionStatistics</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td><a class="el" href="Akonadi.LinkJob.html">LinkJob</a>&nbsp;(<a class="el" href="Akonadi.html">Akonadi</a>)&nbsp;&nbsp;&nbsp;</td><td></td></tr>
+</table>
+
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

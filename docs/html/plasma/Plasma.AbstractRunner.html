@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Plasma.AbstractRunner</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>AbstractRunner Class Reference</h1>
+<code>from PyKDE4.plasma import *</code>
+<p>
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+
+Namespace: Plasma.AbstractRunner<br />
+<h2>Detailed Description</h2>
+
+<p>AbstractRunner plasma/abstractrunner.h &lt;Plasma/AbstractRunner&gt;
+</p>
+<p>
+An abstract base class for Plasma Runner plugins.
+</p>
+<p>
+Be aware that runners have to be thread-safe. This is due to the fact that
+each runner is executed in its own thread for each new term. Thus, a runner
+may be executed more than once at the same time. See match() for details.
+To let krunner expose the runner for single runner query mode, the runner
+must set the "SingleRunnerQueryMode" key to true in the .desktop file
+and set a default syntax. See setDefaultSyntax() for details.
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Priority">Priority</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;LowestPriority, LowPriority, NormalPriority, HighPriority, HighestPriority&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Speed">Speed</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;SlowSpeed, NormalSpeed&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#prepare">prepare</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#teardown">teardown</a> ()</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#AbstractRunner">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> serviceId=QString())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#AbstractRunner">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariantlist.html">QVariantList</a> args)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#action">action</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">{<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>:QActio}&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actions">actions</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[QActio]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionsForMatch">actionsForMatch</a> (self, <a href="../plasma/Plasma.QueryMatch.html">Plasma.QueryMatch</a> match)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addAction">addAction</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a> icon, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addAction">addAction</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a> action)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addSyntax">addSyntax</a> (self, <a href="../plasma/Plasma.RunnerSyntax.html">Plasma.RunnerSyntax</a> syntax)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmutex.html">QMutex</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#bigLock">bigLock</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearActions">clearActions</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KConfigGroup.html">KConfigGroup</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#config">config</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#createRunOptions">createRunOptions</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.DataEngine.html">Plasma.DataEngine</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dataEngine">dataEngine</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.RunnerSyntax.html">Plasma.RunnerSyntax</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#defaultSyntax">defaultSyntax</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#description">description</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#hasRunOptions">hasRunOptions</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#icon">icon</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#id">id</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.RunnerContext.Types.html">Plasma.RunnerContext.Types</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ignoredTypes">ignoredTypes</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#init">init</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#match">match</a> (self, <a href="../plasma/Plasma.RunnerContext.html">Plasma.RunnerContext</a> context)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.Package.html">Plasma.Package</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#package">package</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#performMatch">performMatch</a> (self, <a href="../plasma/Plasma.RunnerContext.html">Plasma.RunnerContext</a> context)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#prepare">prepare</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.AbstractRunner.html#Priority">Plasma.AbstractRunner.Priority</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#priority">priority</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#reloadConfiguration">reloadConfiguration</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeAction">removeAction</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#run">run</a> (self, <a href="../plasma/Plasma.RunnerContext.html">Plasma.RunnerContext</a> context, <a href="../plasma/Plasma.QueryMatch.html">Plasma.QueryMatch</a> match)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KService.List.html">KService.List</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#serviceQuery">serviceQuery</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> serviceType, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> constraint=QString())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDefaultSyntax">setDefaultSyntax</a> (self, <a href="../plasma/Plasma.RunnerSyntax.html">Plasma.RunnerSyntax</a> syntax)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setHasRunOptions">setHasRunOptions</a> (self, bool hasRunOptions)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIgnoredTypes">setIgnoredTypes</a> (self, <a href="../plasma/Plasma.RunnerContext.Types.html">Plasma.RunnerContext.Types</a> types)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPriority">setPriority</a> (self, <a href="../plasma/Plasma.AbstractRunner.html#Priority">Plasma.AbstractRunner.Priority</a> newPriority)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSpeed">setSpeed</a> (self, <a href="../plasma/Plasma.AbstractRunner.html#Speed">Plasma.AbstractRunner.Speed</a> newSpeed)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSyntaxes">setSyntaxes</a> (self, [<a href="../plasma/Plasma.RunnerSyntax.html">Plasma.RunnerSyntax</a>] syns)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.AbstractRunner.html#Speed">Plasma.AbstractRunner.Speed</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#speed">speed</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../plasma/Plasma.RunnerSyntax.html">Plasma.RunnerSyntax</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#syntaxes">syntaxes</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#teardown">teardown</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="AbstractRunner"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>serviceId=QString()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="AbstractRunner"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariantlist.html">QVariantList</a>&nbsp;</td>
+<td class="paramname"><em>args</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="action"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a> action</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>id</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the action associated with the id
+</p></div></div><a class="anchor" name="actions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">{<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>:QActio} actions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns all registered actions
+</p></div></div><a class="anchor" name="actionsForMatch"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[QActio] actionsForMatch</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../plasma/Plasma.QueryMatch.html">Plasma.QueryMatch</a>&nbsp;</td>
+<td class="paramname"><em>match</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>A given match can have more than action that can be performed on it.
+For example, a song match returned by a music player runner can be queued,
+added to the playlist, or played.
+</p>
+<p>
+Call this method to add actions that can be performed by the runner.
+Actions must first be added to the runner's action registry.
+Note: execution of correct action is left up to the runner.
+</p></div></div><a class="anchor" name="addAction"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a> addAction</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>id</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a>&nbsp;</td>
+<td class="paramname"><em>icon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds an action to the runner's action registry.
+</p>
+<p>
+The QAction must be created within the GUI thread;
+do not create it within the match method of AbstractRunner.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>id</em>&nbsp;</td><td> A unique identifier string
+
+<tr><td></td><td valign="top"><em>action</em>&nbsp;</td><td> The QAction to be stored
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addAction"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addAction</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>id</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>&nbsp;</td>
+<td class="paramname"><em>action</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds an action to the runner's action registry.
+</p>
+<p>
+The QAction must be created within the GUI thread;
+do not create it within the match method of AbstractRunner.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>id</em>&nbsp;</td><td> A unique identifier string
+
+<tr><td></td><td valign="top"><em>action</em>&nbsp;</td><td> The QAction to be stored
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addSyntax"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addSyntax</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../plasma/Plasma.RunnerSyntax.html">Plasma.RunnerSyntax</a>&nbsp;</td>
+<td class="paramname"><em>syntax</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds a registered syntax that this runner understands. This is used to
+display to the user what this runner can understand and how it can be
+used.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>syntax</em>&nbsp;</td><td> the syntax to register
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="bigLock"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmutex.html">QMutex</a> bigLock</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Access to a shared lock that all runners (and code that manages/interacts with them)
+can share to protect access to non-thread-safe shared code or data.
+Access of KSycoca records, for instance, is one place this lock should be used.
+</p>
+<p>
+Common usage:
+</p>
+<p>
+{
+QMutexLocker lock(bigLock());
+.. do something that isn't thread safe ..
+}
+</p></div></div><a class="anchor" name="clearActions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearActions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Clears the action registry.
+The action pool deletes the actions.
+</p></div></div><a class="anchor" name="config"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KConfigGroup.html">KConfigGroup</a> config</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Provides access to the runner's configuration object.
+</p></div></div><a class="anchor" name="createRunOptions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> createRunOptions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>widget</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>If hasRunOptions() returns true, this method may be called to get
+a widget displaying the options the user can interact with to modify
+the behaviour of what happens when a given match is selected.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>widget</em>&nbsp;</td><td> the parent of the options widgets.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="dataEngine"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../plasma/Plasma.DataEngine.html">Plasma.DataEngine</a> dataEngine</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Loads the given DataEngine
+</p>
+<p>
+Tries to load the data engine given by <b>name.</b> Each engine is
+only loaded once, and that instance is re-used on all subsequent
+requests.
+</p>
+<p>
+If the data engine was not found, an invalid data engine is returned
+(see DataEngine.isValid()).
+</p>
+<p>
+Note that you should &lt;em&gt;not&lt;/em&gt; delete the returned engine.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> Name of the data engine to load
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> pointer to the data engine if it was loaded,
+or an invalid data engine if the requested engine
+could not be loaded
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl>
+</p></div></div><a class="anchor" name="defaultSyntax"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../plasma/Plasma.RunnerSyntax.html">Plasma.RunnerSyntax</a> defaultSyntax</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the default syntax for the runner or 0 if no default syntax has been defined
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl>
+</p></div></div><a class="anchor" name="description"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> description</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the description of this Runner
+</dd></dl>
+</p></div></div><a class="anchor" name="hasRunOptions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool hasRunOptions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>If the runner has options that the user can interact with to modify
+what happens when run or one of the actions created in match
+is called, the runner should return true
+</p></div></div><a class="anchor" name="icon"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a> icon</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the icon for this Runner
+</dd></dl>
+</p></div></div><a class="anchor" name="id"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> an id string for the Runner
+</dd></dl>
+</p></div></div><a class="anchor" name="ignoredTypes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../plasma/Plasma.RunnerContext.Types.html">Plasma.RunnerContext.Types</a> ignoredTypes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the OR'ed value of all the Information types (as defined in RunnerContext.Type)
+this runner is not interested in.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> OR'ed value of black listed types
+</dd></dl>
+</p></div></div><a class="anchor" name="init"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> init</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="match"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> match</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../plasma/Plasma.RunnerContext.html">Plasma.RunnerContext</a>&nbsp;</td>
+<td class="paramname"><em>context</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This is the main query method. It should trigger creation of
+QueryMatch instances through RunnerContext.addMatch and
+RunnerContext.addMatches. It is called internally by performMatch().
+</p>
+<p>
+If the runner can run precisely the requested term (RunnerContext.query()),
+it should create an exact match by setting the type to RunnerContext.ExactMatch.
+The first runner that creates a QueryMatch will be the
+default runner. Other runner's matches will be suggested in the
+interface. Non-exact matches should be offered via RunnerContext.PossibleMatch.
+</p>
+<p>
+The match will be activated via run() if the user selects it.
+</p>
+<p>
+Each runner is executed in its own thread. Whenever the user input changes this
+method is called again. Thus, it needs to be thread-safe. Also, all matches need
+to be reported once this method returns. Asyncroneous runners therefore need
+to make use of a local event loop to wait for all matches.
+</p>
+<p>
+It is recommended to use local status data in async runners. The simplest way is
+to have a separate class doing all the work like so:
+</p>
+<p>
+<pre class="fragment">
+ void MyFancyAsyncRunner.match( RunnerContext&amp; context )
+ {
+     QEventLoop loop;
+     MyAsyncWorker worker( context );
+     connect( &amp;worker, SIGNAL(finished()),
+              &amp;loop, SLOT(quit()) );
+     worker.work();
+     loop.exec();
+ }
+</pre>
+</p>
+<p>
+Here MyAsyncWorker creates all the matches and calls RunnerContext.addMatch
+in some internal slot. It emits the finished() signal once done which will
+quit the loop and make the match() method return. The local status is kept
+entirely in MyAsyncWorker which makes match() trivially thread-safe.
+</p>
+<p>
+If a particular match supports multiple actions, set up the corresponding
+actions in the actionsForMatch method. Do not call any of the action methods
+within this method!
+</p>
+<p>
+Execution of the correct action should be handled in the run method.
+@caution This method needs to be thread-safe since KRunner will simply
+start a new thread for each new term.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> Returning from this method means to end execution of the runner.
+</dd></dl> </p>
+<p>
+@sa run(), RunnerContext.addMatch, RunnerContext.addMatches, QueryMatch
+</p></div></div><a class="anchor" name="name"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the user visible engine name for the Runner
+</dd></dl>
+</p></div></div><a class="anchor" name="package"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../plasma/Plasma.Package.html">Plasma.Package</a> package</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Accessor for the associated Package object if any.
+</p>
+<p>
+Note that the returned pointer is only valid for the lifetime of
+the runner.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the Package object, or 0 if none
+</dd></dl>
+</p></div></div><a class="anchor" name="performMatch"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> performMatch</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../plasma/Plasma.RunnerContext.html">Plasma.RunnerContext</a>&nbsp;</td>
+<td class="paramname"><em>context</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Triggers a call to match. This will call match() internally.
+</p>
+<p>
+@arg context the search context used in executing this match.
+</p></div></div><a class="anchor" name="prepare"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> prepare</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>This signal is emitted when matching is about to commence, giving runners
+an opportunity to prepare themselves, e.g. loading data sets or preparing
+IPC or network connections. This method should be fast so as not to cause
+slow downs. Things that take longer or which should be loaded once and
+remain extant for the lifespan of the AbstractRunner should be done in init().
+<dl class="see" compact><dt><b>See also:</b></dt><dd> init()
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("prepare()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="priority"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../plasma/Plasma.AbstractRunner.html#Priority">Plasma.AbstractRunner.Priority</a> priority</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The priority of the runner.
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setPriority
+</dd></dl>
+</p></div></div><a class="anchor" name="reloadConfiguration"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> reloadConfiguration</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Signal runner to reload its configuration.
+</p></div></div><a class="anchor" name="removeAction"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeAction</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>id</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Removes the action from the action registry.
+AbstractRunner deletes the action once removed.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>id</em>&nbsp;</td><td> The id of the action to be removed
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="run"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> run</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../plasma/Plasma.RunnerContext.html">Plasma.RunnerContext</a>&nbsp;</td>
+<td class="paramname"><em>context</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../plasma/Plasma.QueryMatch.html">Plasma.QueryMatch</a>&nbsp;</td>
+<td class="paramname"><em>match</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Called whenever an exact or possible match associated with this
+runner is triggered.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>context</em>&nbsp;</td><td> The context in which the match is triggered, i.e. for which
+the match was created.
+
+<tr><td></td><td valign="top"><em>match</em>&nbsp;</td><td> The actual match to run/execute.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="serviceQuery"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KService.List.html">KService.List</a> serviceQuery</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>serviceType</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>constraint=QString()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd>
+A blocking method to do queries of installed Services which can provide
+a measure of safety for runners running their own threads. This should
+be used instead of calling KServiceTypeTrader.query(..) directly.
+</dd></dl> </p>
+<p>
+@arg serviceType a service type like "Plasma/Applet" or "KFilePlugin"
+@arg constraint a constraint to limit the choices returned.
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KServiceTypeTrader.query(const QString&amp;, const QString&amp;)
+</dd></dl> </p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a list of services that satisfy the query.
+</dd></dl>
+</p></div></div><a class="anchor" name="setDefaultSyntax"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDefaultSyntax</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../plasma/Plasma.RunnerSyntax.html">Plasma.RunnerSyntax</a>&nbsp;</td>
+<td class="paramname"><em>syntax</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set <b>syntax</b> as the default syntax for the runner; the default syntax will be
+substituted to the empty query in single runner mode. This is also used to
+display to the user what this runner can understand and how it can be
+used.
+The default syntax is automatically added to the list of registered syntaxes, there
+is no need to add it using addSyntax.
+Note that there can be only one default syntax; if called more than once, the last
+call will determine the default syntax.
+A default syntax (even trivial) is required to enable single runner mode
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>syntax</em>&nbsp;</td><td> the syntax to register and to set as default
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl>
+</p></div></div><a class="anchor" name="setHasRunOptions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setHasRunOptions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>hasRunOptions</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets whether or not the runner has options for matches
+</p></div></div><a class="anchor" name="setIgnoredTypes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setIgnoredTypes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../plasma/Plasma.RunnerContext.Types.html">Plasma.RunnerContext.Types</a>&nbsp;</td>
+<td class="paramname"><em>types</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the types this runner will ignore
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>types</em>&nbsp;</td><td> OR'ed listed of ignored types
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setPriority"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setPriority</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../plasma/Plasma.AbstractRunner.html#Priority">Plasma.AbstractRunner.Priority</a>&nbsp;</td>
+<td class="paramname"><em>newPriority</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the priority of the runner. Lower priority runners are executed
+only after higher priority runners.
+</p></div></div><a class="anchor" name="setSpeed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setSpeed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../plasma/Plasma.AbstractRunner.html#Speed">Plasma.AbstractRunner.Speed</a>&nbsp;</td>
+<td class="paramname"><em>newSpeed</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the nominal speed of the runner. Only slow runners need
+to call this within their constructor because the default
+speed is NormalSpeed. Runners that use DBUS should call
+this within their constructors.
+</p></div></div><a class="anchor" name="setSyntaxes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setSyntaxes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="../plasma/Plasma.RunnerSyntax.html">Plasma.RunnerSyntax</a>]&nbsp;</td>
+<td class="paramname"><em>syns</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the list of syntaxes; passing in an empty list effectively clears
+the syntaxes.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>the</em>&nbsp;</td><td> syntaxes to register for this runner
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="speed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../plasma/Plasma.AbstractRunner.html#Speed">Plasma.AbstractRunner.Speed</a> speed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The nominal speed of the runner.
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setSpeed
+</dd></dl>
+</p></div></div><a class="anchor" name="syntaxes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../plasma/Plasma.RunnerSyntax.html">Plasma.RunnerSyntax</a>] syntaxes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the syntaxes the runner has registered that it accepts and understands
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="teardown"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> teardown</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>This signal is emitted when a session of matches is complete, giving runners
+the opportunity to tear down anything set up as a result of the prepare()
+method.
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("teardown()"), target_slot)</code></dd></dl></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="Priority"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">Priority</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"></table>
+</dl>
+</div></div><p><a class="anchor" name="Speed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">Speed</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

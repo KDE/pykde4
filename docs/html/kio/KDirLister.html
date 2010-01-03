@@ -1,0 +1,1985 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KDirLister</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>KDirLister Class Reference</h1>
+<code>from PyKDE4.kio import *</code>
+<p>
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+
+
+<h2>Detailed Description</h2>
+
+<p>Helper class for the kiojob used to list and update a directory.
+</p>
+<p>
+The dir lister deals with the kiojob used to list and update a directory
+and has signals for the user of this class (e.g. konqueror view or
+kdesktop) to create/destroy its items when asked.
+</p>
+<p>
+This class is independent from the graphical representation of the dir
+(icon container, tree view, ...) and it stores the items (as KFileItems).
+</p>
+<p>
+Typical usage :
+<li> Create an instance. </li>
+<li> Connect to at least update, clear, itemsAdded, and itemsDeleted. </li>
+<li> Call openUrl - the signals will be called. </li>
+<li> Reuse the instance when opening a new url (openUrl). </li>
+<li> Destroy the instance when not needed anymore (usually destructor). </li>
+</p>
+<p>
+Advanced usage : call openUrl with OpenUrlFlag.Keep to list directories
+without forgetting the ones previously read (e.g. for a tree view)
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Michael Brade &lt;brade@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Changes">Changes</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NONE, NAME_FILTER, MIME_FILTER, DOT_FILES, DIR_ONLY_MODE&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#OpenUrlFlag">OpenUrlFlag</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoFlags, Keep, Reload&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#WhichItems">WhichItems</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;AllItems, FilteredItems&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#canceled">canceled</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#canceled">canceled</a> (<a href="../kdecore/KUrl.html">KUrl</a> _url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clear">clear</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clear">clear</a> (<a href="../kdecore/KUrl.html">KUrl</a> _url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#completed">completed</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#completed">completed</a> (<a href="../kdecore/KUrl.html">KUrl</a> _url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deleteItem">deleteItem</a> (<a href="../kio/KFileItem.html">KFileItem</a> _fileItem)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#infoMessage">infoMessage</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> msg)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsAdded">itemsAdded</a> (<a href="../kdecore/KUrl.html">KUrl</a> directoryUrl, <a href="../kio/KFileItemList.html">KFileItemList</a> items)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsDeleted">itemsDeleted</a> (<a href="../kio/KFileItemList.html">KFileItemList</a> items)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsFilteredByMime">itemsFilteredByMime</a> (<a href="../kio/KFileItemList.html">KFileItemList</a> items)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newItems">newItems</a> (<a href="../kio/KFileItemList.html">KFileItemList</a> items)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#percent">percent</a> (int percent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#processedSize">processedSize</a> (<a href="../kio/KIO.filesize_t.html">KIO.filesize_t</a> size)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#redirection">redirection</a> (<a href="../kdecore/KUrl.html">KUrl</a> _url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#redirection">redirection</a> (<a href="../kdecore/KUrl.html">KUrl</a> oldUrl, <a href="../kdecore/KUrl.html">KUrl</a> newUrl)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#refreshItems">refreshItems</a> ([QPair<KFileItem,KFileItem>] items)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#speed">speed</a> (int bytes_per_second)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#started">started</a> (<a href="../kdecore/KUrl.html">KUrl</a> _url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#totalSize">totalSize</a> (<a href="../kio/KIO.filesize_t.html">KIO.filesize_t</a> size)</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KDirLister">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#autoErrorHandlingEnabled">autoErrorHandlingEnabled</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#autoUpdate">autoUpdate</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KFileItem.html">KFileItem</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cachedItemForUrl">cachedItemForUrl</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#canceled">canceled</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#canceled">canceled</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> _url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clear">clear</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clear">clear</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> _url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearMimeFilter">clearMimeFilter</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#completed">completed</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#completed">completed</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> _url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#delayedMimeTypes">delayedMimeTypes</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deleteItem">deleteItem</a> (self, <a href="../kio/KFileItem.html">KFileItem</a> _fileItem)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dirOnlyMode">dirOnlyMode</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.List.html">KUrl.List</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#directories">directories</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#doMimeFilter">doMimeFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mime, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> filters)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#doNameFilter">doNameFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregexp.html">QRegExp</a>] filters)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#emitChanges">emitChanges</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KFileItem.html">KFileItem</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findByName">findByName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KFileItem.html">KFileItem</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findByUrl">findByUrl</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> _url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#handleError">handleError</a> (self, <a href="../kio/KIO.Job.html">KIO.Job</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#infoMessage">infoMessage</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> msg)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isFinished">isFinished</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KFileItemList.html">KFileItemList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#items">items</a> (self, <a href="../kio/KDirLister.html#WhichItems">KDirLister.WhichItems</a> which=KDirLister.FilteredItems)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsAdded">itemsAdded</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> directoryUrl, <a href="../kio/KFileItemList.html">KFileItemList</a> items)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsDeleted">itemsDeleted</a> (self, <a href="../kio/KFileItemList.html">KFileItemList</a> items)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsFilteredByMime">itemsFilteredByMime</a> (self, <a href="../kio/KFileItemList.html">KFileItemList</a> items)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KFileItemList.html">KFileItemList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsForDir">itemsForDir</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> dir, <a href="../kio/KDirLister.html#WhichItems">KDirLister.WhichItems</a> which=KDirLister.FilteredItems)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mainWindow">mainWindow</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#matchesFilter">matchesFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#matchesFilter">matchesFilter</a> (self, <a href="../kio/KFileItem.html">KFileItem</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#matchesMimeFilter">matchesMimeFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mime)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#matchesMimeFilter">matchesMimeFilter</a> (self, <a href="../kio/KFileItem.html">KFileItem</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mimeFilters">mimeFilters</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nameFilter">nameFilter</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newItems">newItems</a> (self, <a href="../kio/KFileItemList.html">KFileItemList</a> items)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#openUrl">openUrl</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> _url, <a href="../kio/KDirLister.OpenUrlFlags.html">KDirLister.OpenUrlFlags</a> _flags=KDirLister.NoFlags)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#percent">percent</a> (self, int percent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#processedSize">processedSize</a> (self, <a href="../kio/KIO.filesize_t.html">KIO.filesize_t</a> size)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#redirection">redirection</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> _url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#redirection">redirection</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> oldUrl, <a href="../kdecore/KUrl.html">KUrl</a> newUrl)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#refreshItems">refreshItems</a> (self, [QPair<KFileItem,KFileItem>] items)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KFileItem.html">KFileItem</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rootItem">rootItem</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAutoErrorHandlingEnabled">setAutoErrorHandlingEnabled</a> (self, bool enable, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAutoUpdate">setAutoUpdate</a> (self, bool enable)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDelayedMimeTypes">setDelayedMimeTypes</a> (self, bool delayedMimeTypes)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDirOnlyMode">setDirOnlyMode</a> (self, bool dirsOnly)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMainWindow">setMainWindow</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> window)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMimeExcludeFilter">setMimeExcludeFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> mimeList)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMimeFilter">setMimeFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> mimeList)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setNameFilter">setNameFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filter)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowingDotFiles">setShowingDotFiles</a> (self, bool _showDotFiles)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showingDotFiles">showingDotFiles</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#speed">speed</a> (self, int bytes_per_second)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#started">started</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> _url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#stop">stop</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#stop">stop</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> _url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#totalSize">totalSize</a> (self, <a href="../kio/KIO.filesize_t.html">KIO.filesize_t</a> size)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#updateDirectory">updateDirectory</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> _dir)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#url">url</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="KDirLister"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="autoErrorHandlingEnabled"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool autoErrorHandlingEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Check whether auto error handling is enabled.
+If enabled, it will show an error dialog to the user when an
+error occurs. It is turned on by default.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if auto error handling is enabled, false otherwise
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setAutoErrorHandlingEnabled()
+</dd></dl>
+</p></div></div><a class="anchor" name="autoUpdate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool autoUpdate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Checks whether KDirWatch will automatically update directories. This is
+enabled by default.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if KDirWatch is used to automatically update directories.
+</dd></dl>
+</p></div></div><a class="anchor" name="cachedItemForUrl"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kio/KFileItem.html">KFileItem</a> cachedItemForUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Return the KFileItem for the given URL, if we listed it recently
+and it's still in the cache - which is always the case if a directory
+view is currently showing this item. If not, then it might be in the
+cache, or it might not, in which case you get a null KFileItem.
+If you really need a KFileItem for this URL in all cases, then use
+KIO.stat() instead.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
+</dd></dl>
+</p></div></div><a class="anchor" name="canceled"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> canceled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Tell the view that the listing of the directory <b>_url</b> was canceled.
+There might be other running jobs left.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_url</em>&nbsp;</td><td> the directory URL
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("canceled()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="canceled"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> canceled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>_url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Tell the view that the listing of the directory <b>_url</b> was canceled.
+There might be other running jobs left.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_url</em>&nbsp;</td><td> the directory URL
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("canceled(const const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="clear"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clear</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Signal to empty the directory <b>_url.</b>
+It is only emitted if the lister is holding more than one directory.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_url</em>&nbsp;</td><td> the directory that will be emptied
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("clear()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="clear"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clear</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>_url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Signal to empty the directory <b>_url.</b>
+It is only emitted if the lister is holding more than one directory.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_url</em>&nbsp;</td><td> the directory that will be emptied
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("clear(const const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="clearMimeFilter"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearMimeFilter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Clears the mime based filter.
+</p>
+<p>
+You need to call emitChanges() afterwards.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setMimeFilter
+</dd></dl>
+</p></div></div><a class="anchor" name="completed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> completed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Tell the view that the listing of the directory <b>_url</b> is finished.
+There might be other running jobs left.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_url</em>&nbsp;</td><td> the directory URL
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("completed()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="completed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> completed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>_url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Tell the view that the listing of the directory <b>_url</b> is finished.
+There might be other running jobs left.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_url</em>&nbsp;</td><td> the directory URL
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("completed(const const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="delayedMimeTypes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool delayedMimeTypes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the "delayed mimetypes" feature was enabled
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setDelayedMimeTypes
+</dd></dl>
+</p></div></div><a class="anchor" name="deleteItem"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> deleteItem</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KFileItem.html">KFileItem</a>&nbsp;</td>
+<td class="paramname"><em>_fileItem</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Signals that an item has been deleted
+</p>
+<p>
+<dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Don't connect to this signal. Use itemsDeleted instead.
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_fileItem</em>&nbsp;</td><td> the fileItem to delete
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("deleteItem(const const KFileItem&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="dirOnlyMode"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool dirOnlyMode</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Checks whether the KDirLister only lists directories or all
+files.
+By default this option is disabled (all files will be shown).
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if setDirOnlyMode(true) was called
+</dd></dl>
+</p></div></div><a class="anchor" name="directories"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KUrl.List.html">KUrl.List</a> directories</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns all URLs that are listed by this KDirLister. This is only
+useful if you called openUrl() with OpenUrlFlag.Keep, as it happens in a
+treeview, for example. (Note that the base url is included in the list
+as well, of course.)
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the list of all listed URLs
+</dd></dl>
+</p></div></div><a class="anchor" name="doMimeFilter"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool doMimeFilter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>mime</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramname"><em>filters</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Called by the public matchesMimeFilter() to do the
+actual filtering. Those methods may be reimplemented to customize
+filtering.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mime</em>&nbsp;</td><td> the mime type to filter
+
+<tr><td></td><td valign="top"><em>filters</em>&nbsp;</td><td> the list of mime types to filter
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="doNameFilter"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool doNameFilter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregexp.html">QRegExp</a>]&nbsp;</td>
+<td class="paramname"><em>filters</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Called by the public matchesFilter() to do the
+actual filtering. Those methods may be reimplemented to customize
+filtering.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> the name to filter
+
+<tr><td></td><td valign="top"><em>filters</em>&nbsp;</td><td> a list of regular expressions for filtering
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="emitChanges"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> emitChanges</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Actually emit the changes made with setShowingDotFiles, setDirOnlyMode,
+setNameFilter and setMimeFilter.
+</p></div></div><a class="anchor" name="findByName"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kio/KFileItem.html">KFileItem</a> findByName</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Find an item by its name.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> the item name
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the KFileItem
+</dd></dl>
+</p></div></div><a class="anchor" name="findByUrl"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kio/KFileItem.html">KFileItem</a> findByUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>_url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Find an item by its URL.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_url</em>&nbsp;</td><td> the item URL
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the KFileItem
+</dd></dl>
+</p></div></div><a class="anchor" name="handleError"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> handleError</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KIO.Job.html">KIO.Job</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Reimplement to customize error handling
+</p></div></div><a class="anchor" name="infoMessage"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> infoMessage</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>msg</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted to display information about running jobs.
+Examples of message are "Resolving host", "Connecting to host...", etc.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>msg</em>&nbsp;</td><td> the info message
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("infoMessage(const const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="isFinished"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isFinished</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns true if no io operation is currently in progress.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if finished, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="items"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kio/KFileItemList.html">KFileItemList</a> items</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KDirLister.html#WhichItems">KDirLister.WhichItems</a>&nbsp;</td>
+<td class="paramname"><em>which=KDirLister.FilteredItems</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the items listed for the current url().
+This method will NOT start listing a directory, you should only call
+this when receiving the finished() signal.
+</p>
+<p>
+The items in the KFileItemList are references to the items used
+by KDirLister, so e.g. an item gets destroyed when the deleteItem()
+signal is emitted.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>which</em>&nbsp;</td><td> specifies whether the returned list will contain all entries
+or only the ones that passed the nameFilter(), mimeFilter(),
+etc. Note that the latter causes iteration over all the
+items, filtering them. If this is too slow for you, use the
+newItems() signal, sending out filtered items in chunks.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the items listed for the current url().
+</dd></dl>
+</p></div></div><a class="anchor" name="itemsAdded"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> itemsAdded</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>directoryUrl</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KFileItemList.html">KFileItemList</a>&nbsp;</td>
+<td class="paramname"><em>items</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Signal that new items were found during directory listing.
+Alternative signal emitted at the same time as newItems(),
+but itemsAdded also passes the url of the parent directory.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>items</em>&nbsp;</td><td> a list of new items
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("itemsAdded(const const KUrl&, const const KFileItemList&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="itemsDeleted"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> itemsDeleted</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KFileItemList.html">KFileItemList</a>&nbsp;</td>
+<td class="paramname"><em>items</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Signal that items have been deleted
+Note that this signal is newer than deleteItem, so
+when items are deleted, both signals are emitted, for compatibility reasons.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.1.2
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>items</em>&nbsp;</td><td> the list of deleted items
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("itemsDeleted(const const KFileItemList&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="itemsFilteredByMime"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> itemsFilteredByMime</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KFileItemList.html">KFileItemList</a>&nbsp;</td>
+<td class="paramname"><em>items</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Send a list of items filtered-out by mime-type.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>items</em>&nbsp;</td><td> the list of filtered items
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("itemsFilteredByMime(const const KFileItemList&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="itemsForDir"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kio/KFileItemList.html">KFileItemList</a> itemsForDir</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>dir</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KDirLister.html#WhichItems">KDirLister.WhichItems</a>&nbsp;</td>
+<td class="paramname"><em>which=KDirLister.FilteredItems</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the items listed for the given <b>dir.</b>
+This method will NOT start listing <b>dir,</b> you should only call
+this when receiving the finished() signal.
+</p>
+<p>
+The items in the KFileItemList are references to the items used
+by KDirLister, so e.g. an item gets destroyed when the deleteItem()
+signal is emitted.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dir</em>&nbsp;</td><td> specifies the url for which the items should be returned. This
+is only useful if you use KDirLister with multiple URLs
+i.e. using bool OpenUrlFlag.Keep in openUrl().
+
+<tr><td></td><td valign="top"><em>which</em>&nbsp;</td><td> specifies whether the returned list will contain all entries
+or only the ones that passed the nameFilter, mimeFilter, etc.
+Note that the latter causes iteration over all the items,
+filtering them. If this is too slow for you, use the
+newItems() signal, sending out filtered items in chunks.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the items listed for <b>dir.</b>
+</dd></dl>
+</p></div></div><a class="anchor" name="mainWindow"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> mainWindow</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the main window associated with this object.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the associated main window, or 0 if there is none
+</dd></dl>
+</p></div></div><a class="anchor" name="matchesFilter"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool matchesFilter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Called for every new item before emitting newItems().
+You may reimplement this method in a subclass to implement your own
+filtering.
+The default implementation filters out ".." and everything not matching
+the name filter(s)
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the item is "ok".
+false if the item shall not be shown in a view, e.g.
+files not matching a pattern *.cpp ( KFileItem.isHidden())
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> matchesFilter
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setNameFilter
+</dd></dl>
+</p></div></div><a class="anchor" name="matchesFilter"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool matchesFilter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KFileItem.html">KFileItem</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Called for every new item before emitting newItems().
+You may reimplement this method in a subclass to implement your own
+filtering.
+The default implementation filters out ".." and everything not matching
+the name filter(s)
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the item is "ok".
+false if the item shall not be shown in a view, e.g.
+files not matching a pattern *.cpp ( KFileItem.isHidden())
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> matchesFilter
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setNameFilter
+</dd></dl>
+</p></div></div><a class="anchor" name="matchesMimeFilter"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool matchesMimeFilter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>mime</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Called for every new item before emitting newItems().
+You may reimplement this method in a subclass to implement your own
+filtering.
+The default implementation filters out ".." and everything not matching
+the name filter(s)
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the item is "ok".
+false if the item shall not be shown in a view, e.g.
+files not matching a pattern *.cpp ( KFileItem.isHidden())
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> matchesMimeFilter
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setMimeFilter
+</dd></dl>
+</p></div></div><a class="anchor" name="matchesMimeFilter"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool matchesMimeFilter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KFileItem.html">KFileItem</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Called for every new item before emitting newItems().
+You may reimplement this method in a subclass to implement your own
+filtering.
+The default implementation filters out ".." and everything not matching
+the name filter(s)
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the item is "ok".
+false if the item shall not be shown in a view, e.g.
+files not matching a pattern *.cpp ( KFileItem.isHidden())
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> matchesMimeFilter
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setMimeFilter
+</dd></dl>
+</p></div></div><a class="anchor" name="mimeFilters"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> mimeFilters</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the list of mime based filters, as set via setMimeFilter().
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the list of mime based filters. Empty, when no mime filter is set.
+</dd></dl>
+</p></div></div><a class="anchor" name="nameFilter"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> nameFilter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the current name filter, as set via setNameFilter()
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the current name filter, can be QString() if filtering
+is turned off
+</dd></dl>
+</p></div></div><a class="anchor" name="newItems"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> newItems</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KFileItemList.html">KFileItemList</a>&nbsp;</td>
+<td class="paramname"><em>items</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Signal new items.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>items</em>&nbsp;</td><td> a list of new items
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("newItems(const const KFileItemList&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="openUrl"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool openUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>_url</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KDirLister.OpenUrlFlags.html">KDirLister.OpenUrlFlags</a>&nbsp;</td>
+<td class="paramname"><em>_flags=KDirLister.NoFlags</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Run the directory lister on the given url.
+</p>
+<p>
+This method causes KDirLister to emit _all_ the items of <b>_url,</b> in any case.
+Depending on _flags, either clear() or clear(const KUrl &amp;) will be
+emitted first.
+</p>
+<p>
+The newItems() signal may be emitted more than once to supply you
+with KFileItems, up until the signal completed() is emitted
+(and isFinished() returns true).
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_url</em>&nbsp;</td><td> the directory URL.
+
+<tr><td></td><td valign="top"><em>_flags</em>&nbsp;</td><td> whether to keep previous directories, and whether to reload, see OpenUrlFlags
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if successful,
+false otherwise (e.g. invalid <b>_url)</b>
+</dd></dl>
+</p></div></div><a class="anchor" name="percent"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> percent</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>percent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Progress signal showing the overall progress of the KDirLister.
+This allows using a progress bar very easily. (see QProgressBar)
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>percent</em>&nbsp;</td><td> the progress in percent
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("percent(int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="processedSize"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> processedSize</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KIO.filesize_t.html">KIO.filesize_t</a>&nbsp;</td>
+<td class="paramname"><em>size</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Regularly emitted to show the progress of this KDirLister.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>size</em>&nbsp;</td><td> the processed size in bytes
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("processedSize(KIO::filesize_t)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="redirection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> redirection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>_url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Signal a redirection.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>oldUrl</em>&nbsp;</td><td> the original URL
+
+<tr><td></td><td valign="top"><em>newUrl</em>&nbsp;</td><td> the new URL
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("redirection(const const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="redirection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> redirection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>oldUrl</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>newUrl</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Signal a redirection.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>oldUrl</em>&nbsp;</td><td> the original URL
+
+<tr><td></td><td valign="top"><em>newUrl</em>&nbsp;</td><td> the new URL
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("redirection(const const KUrl&, const const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="refreshItems"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> refreshItems</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[QPair<KFileItem,KFileItem>]&nbsp;</td>
+<td class="paramname"><em>items</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Signal an item to refresh (its mimetype/icon/name has changed).
+Note: KFileItem.refresh has already been called on those items.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>items</em>&nbsp;</td><td> the items to refresh. This is a list of pairs, where
+the first item in the pair is the OLD item, and the second item is the
+NEW item. This allows to track which item has changed, especially after
+a renaming.
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("refreshItems(const const QList<QPair<KFileItem,KFileItem>>&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="rootItem"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kio/KFileItem.html">KFileItem</a> rootItem</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the file item of the URL.
+</p>
+<p>
+Can return an empty KFileItem.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the file item for url() itself (".")
+</dd></dl>
+</p></div></div><a class="anchor" name="setAutoErrorHandlingEnabled"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setAutoErrorHandlingEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>enable</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Enable or disable auto error handling is enabled.
+If enabled, it will show an error dialog to the user when an
+error occurs. It is turned on by default.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>enable</em>&nbsp;</td><td> true to enable auto error handling, false to disable
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent widget for the error dialogs, can be 0 for
+top-level
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> autoErrorHandlingEnabled()
+</dd></dl>
+</p></div></div><a class="anchor" name="setAutoUpdate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setAutoUpdate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>enable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Enable/disable automatic directory updating, when a directory changes
+(using KDirWatch).
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>enable</em>&nbsp;</td><td> true to enable, false to disable
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setDelayedMimeTypes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDelayedMimeTypes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>delayedMimeTypes</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Delayed mimetypes feature:
+If enabled, mime types will be fetched on demand, which leads to a
+faster initial directory listing, where icons get progressively replaced
+with the correct one while KMimeTypeResolver is going through the items
+with unknown or imprecise mimetype (e.g. files with no extension or an
+unknown extension).
+</p></div></div><a class="anchor" name="setDirOnlyMode"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDirOnlyMode</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>dirsOnly</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Call this to list only directories.
+You need to call emitChanges() afterwards.
+By default this option is disabled (all files will be shown).
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dirsOnly</em>&nbsp;</td><td> true to list only directories
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setMainWindow"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setMainWindow</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>window</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Pass the main window this object is associated with
+this is used for caching authentication data
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>window</em>&nbsp;</td><td> the window to associate with, 0 to disassociate
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setMimeExcludeFilter"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setMimeExcludeFilter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramname"><em>mimeList</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Filtering should be done with KFileFilter. This will be implemented in a later
+revision of KDirLister. This method may be removed then.
+</p>
+<p>
+Set mime-based exclude filter to only list items not matching the given mimetypes
+</p>
+<p>
+NOTE: setting the filter does not automatically reload directory.
+Also calling this function will not affect any named filter already set.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mimeList</em>&nbsp;</td><td> a list of mime-types.
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> clearMimeFilter
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> matchesMimeFilter
+</dd></dl> <dl class="internal" compact><dt><b>Internal:</b></dt><dd>
+</dd></dl>
+</p></div></div><a class="anchor" name="setMimeFilter"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setMimeFilter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramname"><em>mimeList</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set mime-based filter to only list items matching the given mimetypes.
+</p>
+<p>
+NOTE: setting the filter does not automatically reload directory.
+Also calling this function will not affect any named filter already set.
+</p>
+<p>
+You need to call emitChanges() afterwards.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mimeList</em>&nbsp;</td><td> a list of mime-types.
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> clearMimeFilter
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> matchesMimeFilter
+</dd></dl>
+</p></div></div><a class="anchor" name="setNameFilter"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setNameFilter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>filter</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set a name filter to only list items matching this name, e.g. "*.cpp".
+</p>
+<p>
+You can set more than one filter by separating them with whitespace, e.g
+"*.cpp *.h".
+Note: the directory is not automatically reloaded.
+You need to call emitChanges() afterwards.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>filter</em>&nbsp;</td><td> the new filter, QString() to disable filtering
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> matchesFilter
+</dd></dl>
+</p></div></div><a class="anchor" name="setShowingDotFiles"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowingDotFiles</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>_showDotFiles</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Changes the "is viewing dot files" setting.
+You need to call emitChanges() afterwards.
+By default this option is disabled (hidden files will not be shown).
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_showDotFiles</em>&nbsp;</td><td> true to enable showing hidden files, false to
+disable
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> showingDotFiles()
+</dd></dl>
+</p></div></div><a class="anchor" name="showingDotFiles"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showingDotFiles</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Checks whether hidden files (files beginning with a dot) will be
+shown.
+By default this option is disabled (hidden files will be not shown).
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if dot files are shown, false otherwise
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setShowingDotFiles()
+</dd></dl>
+</p></div></div><a class="anchor" name="speed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> speed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>bytes_per_second</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted to display information about the speed of the jobs.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>bytes_per_second</em>&nbsp;</td><td> the speed in bytes/s
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("speed(int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="started"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> started</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>_url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Tell the view that we started to list <b>_url.</b> NOTE: this does _not_ imply that there
+is really a job running! I.e. KDirLister.jobs() may return an empty list. In this case
+the items are taken from the cache.
+</p>
+<p>
+The view knows that openUrl should start it, so it might seem useless,
+but the view also needs to know when an automatic update happens.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_url</em>&nbsp;</td><td> the URL to list
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("started(const const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="stop"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> stop</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Stop listing the given directory.
+</p>
+<p>
+Emits canceled() if the killed job was the last running one.
+Emits canceled( const KUrl&amp; ) for the killed job if
+there are at least two directories being watched by KDirLister.
+No signal is emitted if there was no job running for <b>_url.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_url</em>&nbsp;</td><td> the directory URL
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="stop"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> stop</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>_url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Stop listing the given directory.
+</p>
+<p>
+Emits canceled() if the killed job was the last running one.
+Emits canceled( const KUrl&amp; ) for the killed job if
+there are at least two directories being watched by KDirLister.
+No signal is emitted if there was no job running for <b>_url.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_url</em>&nbsp;</td><td> the directory URL
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="totalSize"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> totalSize</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KIO.filesize_t.html">KIO.filesize_t</a>&nbsp;</td>
+<td class="paramname"><em>size</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted when we know the size of the jobs.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>size</em>&nbsp;</td><td> the total size in bytes
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("totalSize(KIO::filesize_t)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="updateDirectory"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> updateDirectory</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>_dir</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Update the directory <b>_dir.</b> This method causes KDirLister to _only_ emit
+the items of <b>_dir</b> that actually changed compared to the current state in the
+cache and updates the cache.
+</p>
+<p>
+The current implementation calls updateDirectory automatically for
+local files, using KDirWatch (if autoUpdate() is true), but it might be
+useful to force an update manually.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_dir</em>&nbsp;</td><td> the directory URL
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="url"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KUrl.html">KUrl</a> url</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the top level URL that is listed by this KDirLister.
+It might be different from the one given with openUrl() if there was a
+redirection. If you called openUrl() with OpenUrlFlag.Keep this is the
+first url opened (e.g. in a treeview this is the root).
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the url used by this instance to list the files.
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="Changes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">Changes</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"></table>
+</dl>
+</div></div><p><a class="anchor" name="OpenUrlFlag"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">OpenUrlFlag</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"></table>
+</dl>
+</div></div><p><a class="anchor" name="WhichItems"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">WhichItems</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

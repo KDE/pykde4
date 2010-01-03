@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Soprano.Model</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>Model Class Reference</h1>
+<code>from PyKDE4.soprano import *</code>
+<p>
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,Soprano.Error.ErrorCache<br />
+Subclasses: <a href="../soprano/Soprano.Util.DummyModel.html">Soprano.Util.DummyModel</a>, <a href="../soprano/Soprano.FilterModel.html">Soprano.FilterModel</a>, <a href="../soprano/Soprano.Client.SparqlModel.html">Soprano.Client.SparqlModel</a>, <a href="../soprano/Soprano.StorageModel.html">Soprano.StorageModel</a><br />
+Namespace: Soprano.Model<br />
+<h2>Detailed Description</h2>
+
+<p>\class Model model.h Soprano/Model
+</p>
+<p>
+A Model is the central class in %Soprano. It is a queryable
+collection of RDF quadruples, i.e statements.
+</p>
+<p>
+Model itself is just an interface for numerous implementations. (If you are looking for a simple container
+for statements, see Graph.) There are basically two types of Models in %Soprano:
+</p>
+<p>
+<li> StorageModel is the base class for Model implementations that actually store RDF quadruples. </li>
+StorageModels are created transparently by %Soprano backend plugins: Backend.createModel()
+<li> FilterModel is the base class for all filter models. FilterModels can be stacked on top of </li>
+a StorageModel to perform arbitrary tasks like inference or actual content filtering. An
+important FilterModel is Inference.InferenceModel.
+</p>
+<p>
+The simplest way to create a memory Model is to use the default Backend:
+</p>
+<p>
+<pre class="fragment">
+ Model* memModel = Soprano.createModel();
+</pre>
+</p>
+<p>
+<b>%Error handling:</b>
+</p>
+<p>
+Model is based on %Soprano's own error handling system which tries to emulate exceptions to a certain extend.
+Most methods in Model have a means of reporting if an operation was successful or not. For additional error
+information Model inherits ErrorCache which provides the method lastError().
+</p>
+<p>
+Thus, advanced error handling would look as follows:
+</p>
+<p>
+<pre class="fragment">
+ Soprano.Model* model = Soprano.createModel();
+ Soprano.Statement invalidStatement;
+ if( model-&gt;addStatement( invalidStatement ) != Error.ErrorNone ) {
+    showErrorMessage( model-&gt;lastError().message() );
+ }
+</pre>
+</p>
+<p>
+For this to work properly Model implementations have to reset the error in each method
+by either calling clearError() or setError().
+</p>
+<p>
+\sa soprano_error_handling
+</p>
+<p>
+Model is thread-safe when used with a thread-safe backend (all "official" %Soprano backends are thread-safe).
+However, it is recommended to create Model instances in the main thread.
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Daniele Galdi &lt;daniele.galdi@gmail.com&gt;<br>Sebastian Trueg &lt;trueg@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementAdded">statementAdded</a> (<a href="../soprano/Soprano.Statement.html">Soprano.Statement</a> statement)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementRemoved">statementRemoved</a> (<a href="../soprano/Soprano.Statement.html">Soprano.Statement</a> statement)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementsAdded">statementsAdded</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementsRemoved">statementsRemoved</a> ()</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Model">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Model">__init__</a> (self, <a href="../soprano/Soprano.Model.html">Soprano.Model</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addStatement">addStatement</a> (self, <a href="../soprano/Soprano.Statement.html">Soprano.Statement</a> statement)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addStatement">addStatement</a> (self, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> subject, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> predicate, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> object, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> context=Soprano.Node())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addStatements">addStatements</a> (self, [<a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>] statements)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#containsAnyStatement">containsAnyStatement</a> (self, <a href="../soprano/Soprano.Statement.html">Soprano.Statement</a> statement)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#containsAnyStatement">containsAnyStatement</a> (self, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> subject, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> predicate, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> object, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> context=Soprano.Node())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#containsContext">containsContext</a> (self, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> context)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#containsStatement">containsStatement</a> (self, <a href="../soprano/Soprano.Statement.html">Soprano.Statement</a> statement)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#containsStatement">containsStatement</a> (self, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> subject, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> predicate, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> object, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> context=Soprano.Node())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#createBlankNode">createBlankNode</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.QueryResultIterator.html">Soprano.QueryResultIterator</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#executeQuery">executeQuery</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> query, <a href="../soprano/Soprano.Query.html#QueryLanguage">Soprano.Query.QueryLanguage</a> language, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> userQueryLanguage=QString())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isEmpty">isEmpty</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.NodeIterator.html">Soprano.NodeIterator</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#listContexts">listContexts</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.StatementIterator.html">Soprano.StatementIterator</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#listStatements">listStatements</a> (self, <a href="../soprano/Soprano.Statement.html">Soprano.Statement</a> partial)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.StatementIterator.html">Soprano.StatementIterator</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#listStatements">listStatements</a> (self, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> subject, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> predicate, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> object, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> context=Soprano.Node())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.StatementIterator.html">Soprano.StatementIterator</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#listStatements">listStatements</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.StatementIterator.html">Soprano.StatementIterator</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#listStatementsInContext">listStatementsInContext</a> (self, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> context)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeAllStatements">removeAllStatements</a> (self, <a href="../soprano/Soprano.Statement.html">Soprano.Statement</a> statement)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeAllStatements">removeAllStatements</a> (self, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> subject, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> predicate, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> object, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> context=Soprano.Node())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeAllStatements">removeAllStatements</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeContext">removeContext</a> (self, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeStatement">removeStatement</a> (self, <a href="../soprano/Soprano.Statement.html">Soprano.Statement</a> statement)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeStatement">removeStatement</a> (self, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> subject, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> predicate, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> object, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> context=Soprano.Node())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeStatements">removeStatements</a> (self, [<a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>] statements)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementAdded">statementAdded</a> (self, <a href="../soprano/Soprano.Statement.html">Soprano.Statement</a> statement)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementCount">statementCount</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementRemoved">statementRemoved</a> (self, <a href="../soprano/Soprano.Statement.html">Soprano.Statement</a> statement)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementsAdded">statementsAdded</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementsRemoved">statementsRemoved</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#write">write</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qtextstream.html">QTextStream</a> os)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="Model"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="Model"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Model.html">Soprano.Model</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="addStatement"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a> addStatement</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>&nbsp;</td>
+<td class="paramname"><em>statement</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>
+</p></div></div><a class="anchor" name="addStatement"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a> addStatement</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>subject</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>predicate</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>object</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>context=Soprano.Node()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>
+</p></div></div><a class="anchor" name="addStatements"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a> addStatements</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>]&nbsp;</td>
+<td class="paramname"><em>statements</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>
+</p></div></div><a class="anchor" name="containsAnyStatement"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool containsAnyStatement</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>&nbsp;</td>
+<td class="paramname"><em>statement</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>subject</em>&nbsp;</td><td> The subject node to match. Can be empty as a wildcard.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>predicate</em>&nbsp;</td><td> The predicate node to match. Can be empty as a wildcard.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>object</em>&nbsp;</td><td> The object node to match. Can be empty as a wildcard.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>context</em>&nbsp;</td><td> The context node to match. Can be empty as a wildcard.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="containsAnyStatement"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool containsAnyStatement</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>subject</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>predicate</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>object</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>context=Soprano.Node()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>subject</em>&nbsp;</td><td> The subject node to match. Can be empty as a wildcard.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>predicate</em>&nbsp;</td><td> The predicate node to match. Can be empty as a wildcard.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>object</em>&nbsp;</td><td> The object node to match. Can be empty as a wildcard.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>context</em>&nbsp;</td><td> The context node to match. Can be empty as a wildcard.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="containsContext"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool containsContext</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>context</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convenience method which is based on containsAnyStatement
+</p></div></div><a class="anchor" name="containsStatement"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool containsStatement</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>&nbsp;</td>
+<td class="paramname"><em>statement</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>
+</p></div></div><a class="anchor" name="containsStatement"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool containsStatement</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>subject</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>predicate</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>object</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>context=Soprano.Node()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>
+</p></div></div><a class="anchor" name="createBlankNode"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Node.html">Soprano.Node</a> createBlankNode</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Creates a new blank node with a unique identifier.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> A blank node that can be used to create new statements.
+</dd></dl>
+</p></div></div><a class="anchor" name="executeQuery"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.QueryResultIterator.html">Soprano.QueryResultIterator</a> executeQuery</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>query</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Query.html#QueryLanguage">Soprano.Query.QueryLanguage</a>&nbsp;</td>
+<td class="paramname"><em>language</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>userQueryLanguage=QString()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Execute the given query over the Model.
+</p>
+<p>
+This is a const read-only method. As such Model implementations should not
+support SPARQL extensions such as INSERT or UPDATE through this method.
+A future version of %Soprano will provide an additional API for queries
+that change the Model.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>query</em>&nbsp;</td><td> The query to evaluate.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>language</em>&nbsp;</td><td> The %query language used to encode <b>query.</b>
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>userQueryLanguage</em>&nbsp;</td><td> If <b>language</b> equals Query.QueryLanguageUser
+userQueryLanguage defines the language to use.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> An iterator over all results matching the query,
+on error an invalid iterator is returned.
+</dd></dl>
+</p></div></div><a class="anchor" name="isEmpty"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isEmpty</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the Model doesn't contains any Statement.
+</dd></dl>
+</p></div></div><a class="anchor" name="listContexts"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.NodeIterator.html">Soprano.NodeIterator</a> listContexts</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>List all contexts in the model, i.e. all named graphs.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> An iterator over context Nodes, on error an invalid iterator is returned.
+</dd></dl>
+</p></div></div><a class="anchor" name="listStatements"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.StatementIterator.html">Soprano.StatementIterator</a> listStatements</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>&nbsp;</td>
+<td class="paramname"><em>partial</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> An iterator for all statements in the model, on error an invalid iterator is returned.
+</dd></dl>
+</p></div></div><a class="anchor" name="listStatements"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.StatementIterator.html">Soprano.StatementIterator</a> listStatements</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>subject</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>predicate</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>object</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>context=Soprano.Node()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> An iterator for all statements in the model, on error an invalid iterator is returned.
+</dd></dl>
+</p></div></div><a class="anchor" name="listStatements"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.StatementIterator.html">Soprano.StatementIterator</a> listStatements</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> An iterator for all statements in the model, on error an invalid iterator is returned.
+</dd></dl>
+</p></div></div><a class="anchor" name="listStatementsInContext"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.StatementIterator.html">Soprano.StatementIterator</a> listStatementsInContext</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>context</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convenience method which lists all statements in context.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> An iterator for all the matched Statements, on error an invalid iterator is returned.
+</dd></dl>
+</p></div></div><a class="anchor" name="removeAllStatements"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a> removeAllStatements</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>&nbsp;</td>
+<td class="paramname"><em>statement</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Convenience method that clear the Model of all statements
+</p></div></div><a class="anchor" name="removeAllStatements"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a> removeAllStatements</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>subject</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>predicate</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>object</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>context=Soprano.Node()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convenience method that clear the Model of all statements
+</p></div></div><a class="anchor" name="removeAllStatements"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a> removeAllStatements</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Convenience method that clear the Model of all statements
+</p></div></div><a class="anchor" name="removeContext"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a> removeContext</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convenience method that removes all statements in the context.
+</p></div></div><a class="anchor" name="removeStatement"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a> removeStatement</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>&nbsp;</td>
+<td class="paramname"><em>statement</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>
+</p></div></div><a class="anchor" name="removeStatement"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a> removeStatement</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>subject</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>predicate</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>object</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td>
+<td class="paramname"><em>context=Soprano.Node()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>
+</p></div></div><a class="anchor" name="removeStatements"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a> removeStatements</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>]&nbsp;</td>
+<td class="paramname"><em>statements</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convenience method which removes all %statements in statements.
+</p></div></div><a class="anchor" name="statementAdded"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> statementAdded</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>&nbsp;</td>
+<td class="paramname"><em>statement</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Notification signal for new statements. Model implementations
+should emit this signal for each newly added statement.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("statementAdded(const const Soprano::Statement&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="statementCount"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int statementCount</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>The number of statements stored in this Model.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The size of the Model, or -1 on error.
+</dd></dl>
+</p></div></div><a class="anchor" name="statementRemoved"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> statementRemoved</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>&nbsp;</td>
+<td class="paramname"><em>statement</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Notification signal for removed statements. Model implementations
+should emit this signal for each removed statement.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> Backends may choose not to emit this signal for each
+removed statement but only for a statement pattern (i.e. an
+invalid statement as used in removeAllStatements()) to
+prevent massive performance loss.
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("statementRemoved(const const Soprano::Statement&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="statementsAdded"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> statementsAdded</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emitted when new statements have been added to the model.
+</p>
+<p>
+Implementations of this interface have to emit this signal.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("statementsAdded()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="statementsRemoved"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> statementsRemoved</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emitted when statements have been removed from the model.
+</p>
+<p>
+Implementations of this interface have to emit this signal.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("statementsRemoved()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="write"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a> write</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qtextstream.html">QTextStream</a>&nbsp;</td>
+<td class="paramname"><em>os</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Write all statements in this Model to os.
+</p>
+<p>
+Default implementation is based on Model.listStatements
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

@@ -1,0 +1,931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KCModule</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>KCModule Class Reference</h1>
+<code>from PyKDE4.kdeui import *</code>
+<p>
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+
+
+<h2>Detailed Description</h2>
+
+<p>The base class for configuration modules.
+</p>
+<p>
+Configuration modules are realized as plugins that are loaded only when
+needed.
+</p>
+<p>
+The module in principle is a simple widget displaying the
+item to be changed. The module has a very small interface.
+</p>
+<p>
+All the necessary glue logic and the GUI bells and whistles
+are provided by the control center and must not concern
+the module author.
+</p>
+<p>
+To write a config module, you have to create a library
+that contains a factory function like the following:
+</p>
+<p>
+<pre class="fragment">
+ #include &lt;KPluginFactory&gt;
+
+ K_PLUGIN_FACTORY(MyKCModuleFactory, registerPlugin&lt;MyKCModule&gt;() )
+ K_EXPORT_PLUGIN(MyKCModuleFactory("yourLibName","name_of_the_po_file") )
+</pre>
+</p>
+<p>
+The optional parameter "name_of_the_po_file" has to correspond with the messages target
+that containst the strings to be translated. Instead of using the library name for
+<b>yourLibName</b> you can also use another name which you specify in the desktop
+file with <b>X-KDE-FactoryName.</b> This is useful to have more than one factory
+in one lib.
+</p>
+<p>
+The constructor of the KCModule then looks like this:
+<pre class="fragment">
+ YourKCModule.YourKCModule( QWidget* parent )
+   : KCModule( YourKCModuleFactory.componentData(), parent )
+ {
+   KAboutData *about = new KAboutData(
+     &lt;kcm name&gt;, 0, ki18n( "..." ),
+     KDE_VERSION_STRING, KLocalizedString(), KAboutData.License_GPL,
+     ki18n( "Copyright 2006 ..." ) );
+   about-&gt;addAuthor( ki18n(...) );
+   setAboutData( about );
+   .
+   .
+   .
+ }
+</pre>
+</p>
+<p>
+If you want to make the KCModule available only conditionally (i.e. show in
+the list of available modules only if some test succeeds) then you can use
+Hidden in the .desktop file. An example:
+<pre class="fragment">
+ Hidden[$e]=$(if test -e /dev/js*; then echo "false"; else echo "true"; fi)
+</pre>
+The example executes the given code in a shell and uses the stdout output for
+the Hidden value (so it's either Hidden=true or Hidden=false).
+</p>
+<p>
+See http://developer.kde.org/documentation/other/kcm_howto.html
+for more detailed documentation.
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Matthias Hoelzer-Kluepfel &lt;hoelzer@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Button">Button</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoAdditionalButton, Help, Default, Apply&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changed">changed</a> (bool state)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#quickHelpChanged">quickHelpChanged</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rootOnlyMessageChanged">rootOnlyMessageChanged</a> (bool use, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> message)</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KCModule">__init__</a> (self, <a href="../kdecore/KComponentData.html">KComponentData</a> componentData, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariantlist.html">QVariantList</a> args=QVariantList())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAboutData.html">KAboutData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aboutData">aboutData</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KConfigDialogManager.html">KConfigDialogManager</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addConfig">addConfig</a> (self, <a href="../kdeui/KConfigSkeleton.html">KConfigSkeleton</a> config, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.Action.html">KAuth.Action</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#authAction">authAction</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#authStatusChanged">authStatusChanged</a> (self, int a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KCModule.Buttons.html">KCModule.Buttons</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#buttons">buttons</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changed">changed</a> (self, bool state)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changed">changed</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KComponentData.html">KComponentData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#componentData">componentData</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[KConfigDialogManage]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configs">configs</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#defaults">defaults</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#load">load</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#managedWidgetChangeState">managedWidgetChangeState</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#needsAuthorization">needsAuthorization</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#quickHelp">quickHelp</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#quickHelpChanged">quickHelpChanged</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rootOnlyMessage">rootOnlyMessage</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rootOnlyMessageChanged">rootOnlyMessageChanged</a> (self, bool use, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> message)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#save">save</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAboutData">setAboutData</a> (self, <a href="../kdecore/KAboutData.html">KAboutData</a> about)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setButtons">setButtons</a> (self, <a href="../kdeui/KCModule.Buttons.html">KCModule.Buttons</a> btn)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setNeedsAuthorization">setNeedsAuthorization</a> (self, bool needsAuth)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setQuickHelp">setQuickHelp</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> help)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRootOnlyMessage">setRootOnlyMessage</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> message)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setUseRootOnlyMessage">setUseRootOnlyMessage</a> (self, bool on)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showEvent">showEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qshowevent.html">QShowEvent</a> ev)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unmanagedWidgetChangeState">unmanagedWidgetChangeState</a> (self, bool a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#useRootOnlyMessage">useRootOnlyMessage</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#widgetChanged">widgetChanged</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="KCModule"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KComponentData.html">KComponentData</a>&nbsp;</td>
+<td class="paramname"><em>componentData</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariantlist.html">QVariantList</a>&nbsp;</td>
+<td class="paramname"><em>args=QVariantList()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="aboutData"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KAboutData.html">KAboutData</a> aboutData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>This is generally only called for the KBugReport.
+If you override you should have it return a pointer to a constant.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the KAboutData for this module
+</dd></dl>
+</p></div></div><a class="anchor" name="addConfig"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KConfigDialogManager.html">KConfigDialogManager</a> addConfig</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KConfigSkeleton.html">KConfigSkeleton</a>&nbsp;</td>
+<td class="paramname"><em>config</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>widget</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds a KConfigskeleton <b>config</b> to watch the widget <b>widget</b>
+</p>
+<p>
+This function is useful if you need to handle multiple configuration files.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a pointer to the KConfigDialogManager in use
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>config</em>&nbsp;</td><td> the KConfigSkeleton to use
+
+<tr><td></td><td valign="top"><em>widget</em>&nbsp;</td><td> the widget to watch
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="authAction"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KAuth.Action.html">KAuth.Action</a> authAction</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the action previously set with setAuthAction(). By default its an invalid action.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The action that has to be authorized to execute the save() method.
+</dd></dl>
+</p></div></div><a class="anchor" name="authStatusChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> authStatusChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>The status of the auth action, if one, has changed
+</p></div></div><a class="anchor" name="buttons"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KCModule.Buttons.html">KCModule.Buttons</a> buttons</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Indicate which buttons will be used.
+</p>
+<p>
+The return value is a value or'ed together from
+the Button enumeration type.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KCModule.setButtons
+</dd></dl>
+</p></div></div><a class="anchor" name="changed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> changed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>state</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Calling this slot is equivalent to emitting changed(true).
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("changed(bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="changed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> changed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Calling this slot is equivalent to emitting changed(true).
+</p></div></div><a class="anchor" name="componentData"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KComponentData.html">KComponentData</a> componentData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="configs"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[KConfigDialogManage] configs</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> a list of KConfigDialogManager's in use, if any.
+</dd></dl>
+</p></div></div><a class="anchor" name="defaults"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> defaults</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Sets the configuration to sensible default values.
+</p>
+<p>
+This method is called when the user clicks the "Default"
+button. It should set the display to useful values.
+</p>
+<p>
+If you use KConfigXT, you do not have to reimplement this function since
+the fetching and settings of default values is done automatically. However, if you
+reimplement and also are using KConfigXT, remember to call the base function at the
+very end of your reimplementation.
+</p></div></div><a class="anchor" name="load"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> load</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Load the configuration data into the module.
+</p>
+<p>
+The load method sets the user interface elements of the
+module to reflect the current settings stored in the
+configuration files.
+</p>
+<p>
+This method is invoked whenever the module should read its configuration
+(most of the times from a config file) and update the user interface.
+This happens when the user clicks the "Reset" button in the control
+center, to undo all of his changes and restore the currently valid
+settings. It is also called right after construction.
+</p></div></div><a class="anchor" name="managedWidgetChangeState"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool managedWidgetChangeState</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the changed state of automatically managed widgets in this dialog
+</p></div></div><a class="anchor" name="needsAuthorization"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool needsAuthorization</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the value previously set with setNeedsAuthorization(). By default it's false.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the module's save() method requires authorization, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="quickHelp"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> quickHelp</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return a quick-help text.
+</p>
+<p>
+This method is called when the module is docked.
+The quick-help text should contain a short description of the module and
+links to the module's help files. You can use QML formatting tags in the text.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> make sure the quick help text gets translated (use i18n()).
+</dd></dl>
+</p></div></div><a class="anchor" name="quickHelpChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> quickHelpChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Indicate that the module's quickhelp has changed.
+</p>
+<p>
+Emit this signal whenever the module's quickhelp changes.
+Modules implemented as tabbed dialogs might want to implement
+per-tab quickhelp for example.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("quickHelpChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="rootOnlyMessage"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> rootOnlyMessage</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the RootOnly message for this module.
+</p>
+<p>
+When the module must be run as root, or acts differently
+for root and a normal user, it is sometimes useful to
+customize the message that appears at the top of the module
+when used as a normal user. This function returns this
+customized message. If none has been set, a default message
+will be used.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KCModule.setRootOnlyMessage
+</dd></dl>
+</p></div></div><a class="anchor" name="rootOnlyMessageChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> rootOnlyMessageChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>use</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>message</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Indicate that the module's root message has changed.
+</p>
+<p>
+Emits this signal whenever the module's root message changes.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("rootOnlyMessageChanged(bool, QString)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="save"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> save</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Save the configuration data.
+</p>
+<p>
+The save method stores the config information as shown
+in the user interface in the config files.
+</p>
+<p>
+If necessary, this method also updates the running system,
+e.g. by restarting applications. This normally does not apply for
+KSettings.Dialog modules where the updating is taken care of by
+KSettings.Dispatcher.
+</p>
+<p>
+save is called when the user clicks "Apply" or "Ok".
+</p>
+<p>
+If you use KConfigXT, saving is taken care off automatically and
+you do not need to load manually. However, if you for some reason reimplement it and
+also are using KConfigXT, you must call this function, otherwise the saving of KConfigXT
+options will not work. Call it at the very end of your reimplementation, to avoid
+changed() signals getting emitted when you modify widgets.
+</p></div></div><a class="anchor" name="setAboutData"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setAboutData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KAboutData.html">KAboutData</a>&nbsp;</td>
+<td class="paramname"><em>about</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This sets the KAboutData returned by aboutData()
+</p></div></div><a class="anchor" name="setButtons"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setButtons</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KCModule.Buttons.html">KCModule.Buttons</a>&nbsp;</td>
+<td class="paramname"><em>btn</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the buttons to display.
+</p>
+<p>
+Help: shows a "Help" button.
+</p>
+<p>
+Default: shows a "Use Defaults" button.
+</p>
+<p>
+Apply: in kcontrol this will show an "Apply" and "Reset" button,
+in kcmshell this will show an "Ok", "Apply" and "Cancel" button.
+</p>
+<p>
+If Apply is not specified, kcmshell will show a "Close" button.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KCModule.buttons
+</dd></dl>
+</p></div></div><a class="anchor" name="setNeedsAuthorization"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setNeedsAuthorization</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>needsAuth</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Tell if the module's save() method requires authorization to be executed.
+</p>
+<p>
+The module can set this property to true if it requires authorization.
+It will still have to execute the action itself using the KAuth library, so
+this method is not technically needed to perform the action, but
+using this and/or the setAuthAction() method will ensure that hosting
+applications like System Settings or kcmshell behave correctly.
+</p>
+<p>
+Called with true, if no action has been previously set using setAuthAction(),
+this method will set the action to a default value of "org.kde.kcontrol.name.save" where
+"name" is the aboutData()-&gt;appName() return value. This default action won't be set if
+the aboutData() object is not valid.
+</p>
+<p>
+Note that called with false, this method will reset the action name set with setAuthAction().
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>needsAuth</em>&nbsp;</td><td> Tells if the module's save() method requires authorization to be executed.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setQuickHelp"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setQuickHelp</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>help</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the quick help.
+</p></div></div><a class="anchor" name="setRootOnlyMessage"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setRootOnlyMessage</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>message</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the RootOnly message.
+</p>
+<p>
+This message will be shown at the top of the module if useRootOnlyMessage is
+set. If no message is set, a default one will be used.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KCModule.rootOnlyMessage
+</dd></dl>
+</p></div></div><a class="anchor" name="setUseRootOnlyMessage"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setUseRootOnlyMessage</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>on</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Change whether or not the RootOnly message should be shown.
+</p>
+<p>
+Following the value of <b>on,</b> the RootOnly message will be
+shown or not.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KCModule.useRootOnlyMessage
+</dd></dl>
+</p></div></div><a class="anchor" name="showEvent"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> showEvent</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qshowevent.html">QShowEvent</a>&nbsp;</td>
+<td class="paramname"><em>ev</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="unmanagedWidgetChangeState"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> unmanagedWidgetChangeState</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Call this method when your manually managed widgets change state between
+changed and not changed
+</p></div></div><a class="anchor" name="useRootOnlyMessage"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool useRootOnlyMessage</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Tell if KControl should show a RootOnly message when run as
+a normal user.
+</p>
+<p>
+In some cases, the module don't want a RootOnly message to
+appear (for example if it has already one). This function
+tells KControl if a RootOnly message should be shown
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KCModule.setUseRootOnlyMessage
+</dd></dl>
+</p></div></div><a class="anchor" name="widgetChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> widgetChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>A managed widget was changed, the widget settings and the current
+settings are compared and a corresponding changed() signal is emitted
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="Button"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">Button</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

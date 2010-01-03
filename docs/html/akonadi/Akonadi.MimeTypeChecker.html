@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Akonadi.MimeTypeChecker</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>MimeTypeChecker Class Reference</h1>
+<code>from PyKDE4.akonadi import *</code>
+<p>
+
+
+Namespace: Akonadi.MimeTypeChecker<br />
+<h2>Detailed Description</h2>
+
+<p>Helper for checking MIME types of Collections and Items.
+</p>
+<p>
+When it is necessary to decide whether an item has a certain MIME type
+or whether a collection can contain a certain MIME type, direct string
+comparison might not render the desired result because MIME types can
+have aliases and be a node in an "inheritance" hierachy.
+</p>
+<p>
+For example a check like this
+<pre class="fragment">
+ if ( item.mimeType() == QLatin1String( "text/directory" ) )
+</pre>
+would fail to detect "text/x-vcard" as being the same MIME type.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> KDE deals with this inside the KMimeType framework, this class is just
+a convenience helper for common Akonadi related checks.
+</dd></dl> </p>
+<p>
+Example: Checking whether an Akonadi.Item is contact MIME type
+<pre class="fragment">
+ Akonadi.MimeTypeChecker checker;
+ checker.addWantedMimeType( KABC.Addressee.mimeType() );
+
+ if ( checker.isWantedItem( item ) ){
+   // item.mimeType() is equal KABC.Addressee.mimeType(), an aliases
+   // or a sub type.
+ }
+</pre>
+</p>
+<p>
+Example: Checking whether an Akonadi.Collection could contain calendar
+items
+<pre class="fragment">
+ Akonadi.MimeTypeChecker checker;
+ checker.addWantedMimeType( QLatin1String( "text/calendar" ) );
+
+ if ( checker.isWantedCollection( collection ) ) {
+   // collection.contentMimeTypes() contains @c "text/calendar"
+   // or a sub type.
+ }
+</pre>
+</p>
+<p>
+Example: Checking whether an Akonadi.Collection could contain
+Calendar Event items (i.e. KCal.Event), making use of the respective
+MIME type "subclassing" provided by Akonadi's MIME type extensions.
+<pre class="fragment">
+ Akonadi.MimeTypeChecker checker;
+ checker.addWantedMimeType( QLatin1String( "application/x-vnd.akonadi.calendar.event" ) );
+
+ if ( checker.isWantedCollection( collection ) ) {
+   // collection.contentMimeTypes() contains @c "application/x-vnd.akonadi.calendar.event"
+   // or a sub type, but just containing @c "text/calendar" would not
+   // get here
+ }
+</pre>
+</p>
+<p>
+Example: Checking for items of more than one MIME type and treat one
+of them specially.
+<pre class="fragment">
+ Akonadi.MimeTypeChecker mimeFilter;
+ mimeFilter.setWantedMimeTypes( QStringList() &lt;&lt; KABC.Addressee.mimeType()
+                                &lt;&lt; KABC.ContactGroup.mimeType() );
+
+ if ( mimeFilter.isWantedItem( item ) ) {
+   if ( Akonadi.MimeTypeChecker.isWantedItem( item, KABC.ContactGroup.mimeType() ) {
+     // treat contact group's differently
+   }
+ }
+</pre>
+</p>
+<p>
+This class is implicitly shared.
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Kevin Krammer &lt;kevin.krammer@gmx.at&gt; </dd></dl>
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MimeTypeChecker">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MimeTypeChecker">__init__</a> (self, <a href="../akonadi/Akonadi.MimeTypeChecker.html">Akonadi.MimeTypeChecker</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addWantedMimeType">addWantedMimeType</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mimeType)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isWantedCollection">isWantedCollection</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isWantedCollection">isWantedCollection</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> wantedMimeType)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isWantedItem">isWantedItem</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> item)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isWantedItem">isWantedItem</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> item, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> wantedMimeType)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeWantedMimeType">removeWantedMimeType</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mimeType)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setWantedMimeTypes">setWantedMimeTypes</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> mimeTypes)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#wantedMimeTypes">wantedMimeTypes</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="MimeTypeChecker"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="MimeTypeChecker"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.MimeTypeChecker.html">Akonadi.MimeTypeChecker</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="addWantedMimeType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addWantedMimeType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>mimeType</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds another MIME type to the list of wanted MIME types this instance checks against.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mimeType</em>&nbsp;</td><td> The MIME types to add to the checklist.
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> setWantedMimeTypes()
+</dd></dl>
+</p></div></div><a class="anchor" name="isWantedCollection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isWantedCollection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>&nbsp;</td>
+<td class="paramname"><em>collection</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Checks whether a given <b>collection</b> has the given MIME type
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>item</em>&nbsp;</td><td> The collection to check the content MIME types of.
+
+<tr><td></td><td valign="top"><em>wantedMimeType</em>&nbsp;</td><td> The MIME type to check against.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if one of the <b>collection</b> content MIME types is
+the given wanted one, false if it isn't, the collection
+is invalid or has an empty content MIME type list.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setWantedMimeTypes()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> Collection.contentMimeTypes()
+</dd></dl>
+</p></div></div><a class="anchor" name="isWantedCollection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isWantedCollection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>&nbsp;</td>
+<td class="paramname"><em>collection</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>wantedMimeType</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Checks whether a given <b>collection</b> has the given MIME type
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>item</em>&nbsp;</td><td> The collection to check the content MIME types of.
+
+<tr><td></td><td valign="top"><em>wantedMimeType</em>&nbsp;</td><td> The MIME type to check against.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if one of the <b>collection</b> content MIME types is
+the given wanted one, false if it isn't, the collection
+is invalid or has an empty content MIME type list.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setWantedMimeTypes()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> Collection.contentMimeTypes()
+</dd></dl>
+</p></div></div><a class="anchor" name="isWantedItem"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isWantedItem</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>&nbsp;</td>
+<td class="paramname"><em>item</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Checks whether a given <b>item</b> has the given wanted MIME type
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>item</em>&nbsp;</td><td> The item to check the MIME type of.
+
+<tr><td></td><td valign="top"><em>wantedMimeType</em>&nbsp;</td><td> The MIME type to check against.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the <b>item</b> MIME type is the given one,
+</dd></dl> false if it isn't, the item is invalid or has an empty MIME type.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setWantedMimeTypes()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> Item.mimeType()
+</dd></dl>
+</p></div></div><a class="anchor" name="isWantedItem"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isWantedItem</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>&nbsp;</td>
+<td class="paramname"><em>item</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>wantedMimeType</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Checks whether a given <b>item</b> has the given wanted MIME type
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>item</em>&nbsp;</td><td> The item to check the MIME type of.
+
+<tr><td></td><td valign="top"><em>wantedMimeType</em>&nbsp;</td><td> The MIME type to check against.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the <b>item</b> MIME type is the given one,
+</dd></dl> false if it isn't, the item is invalid or has an empty MIME type.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setWantedMimeTypes()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> Item.mimeType()
+</dd></dl>
+</p></div></div><a class="anchor" name="removeWantedMimeType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeWantedMimeType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>mimeType</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Removes a MIME type from the list of wanted MIME types this instance checks against.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mimeType</em>&nbsp;</td><td> The MIME type to remove from the checklist.
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> addWantedMimeType()
+</dd></dl>
+</p></div></div><a class="anchor" name="setWantedMimeTypes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setWantedMimeTypes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramname"><em>mimeTypes</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the list of wanted MIME types this instance checks against.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mimeTypes</em>&nbsp;</td><td> The list of MIME types to check against.
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> wantedMimeTypes()
+</dd></dl>
+</p></div></div><a class="anchor" name="wantedMimeTypes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> wantedMimeTypes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the list of wanted MIME types this instance checks against.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setWantedMimeTypes()
+</dd></dl>
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

@@ -1,0 +1,2000 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KStandardDirs</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>KStandardDirs Class Reference</h1>
+<code>from PyKDE4.kdecore import *</code>
+<p>
+
+
+
+<h2>Detailed Description</h2>
+
+<p>Site-independent access to standard KDE directories.
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Stephan Kulow &lt;coolo@kde.org&gt; and Sirtaj Singh Kang &lt;taj@kde.org&gt; </dd></dl>
+</p>
+<p>
+This is one of the most central classes in kdelibs as
+it provides a basic service: It knows where the files
+reside on the user's hard disk. And it's meant to be the
+only one that knows -- to make the real location as
+transparent as possible to both the user and the applications.
+</p>
+<p>
+To this end it insulates the application from all information
+and applications always refer to a file with a resource type
+(e.g. icon) and a filename (e.g. &lt;tt&gt;khexdit.xpm&lt;/tt&gt;). In an ideal world
+the application would make no assumption where this file is and
+leave it up to KStandardDirs.findResource("apps", "Home.desktop")
+to apply this knowledge to return &lt;tt&gt;/opt/kde/share/applnk/Home.desktop&lt;/tt&gt;
+or .locate("data", "kgame/background.jpg") to return
+&lt;tt&gt;/opt/kde/share/apps/kgame/background.jpg&lt;/tt&gt;
+</p>
+<p>
+The main idea behind KStandardDirs is that there are several
+toplevel prefixes below which the files lie. One of these prefixes is
+the one where the user installed kdelibs, one is where the
+application was installed, and one is &lt;tt&gt;$HOME/.kde&lt;/tt&gt;, but there
+may be even more. Under these prefixes there are several well
+defined suffixes where specific resource types are to be found.
+For example, for the resource type "html" the suffixes could be
+share/doc/HTML and share/doc/kde/HTML.
+So the search algorithm basically appends to each prefix each registered
+suffix and tries to locate the file there.
+To make the thing even more complex, it's also possible to register
+absolute paths that KStandardDirs looks up after not finding anything
+in the former steps. They can be useful if the user wants to provide
+specific directories that aren't in his &lt;tt&gt;$HOME/.kde&lt;/tt&gt; directory for,
+for example, icons.
+</p>
+<p>
+<b>Standard resources that kdelibs allocates are:</b>\n
+</p>
+<p>
+<li> apps - Applications menu (.desktop files). </li>
+<li> autostart - Autostart directories (both XDG and kde-specific) </li>
+<li> cache - Cached information (e.g. favicons, web-pages) </li>
+<li> cgi - CGIs to run from kdehelp. </li>
+<li> config - Configuration files. </li>
+<li> data - Where applications store data. </li>
+<li> emoticons - Emoticons themes </li>
+<li> exe - Executables in $prefix/bin. findExe() for a function that takes $PATH into account. </li>
+<li> html - HTML documentation. </li>
+<li> icon - Icons, see KIconLoader. </li>
+<li> kcfg - KConfigXT config files. </li>
+<li> lib - Libraries. </li>
+<li> locale - Translation files for KLocale. </li>
+<li> mime - Mime types defined by KDE-specific .desktop files. </li>
+<li> module - Module (dynamically loaded library). </li>
+<li> qtplugins - Qt plugins (dynamically loaded objects for Qt) </li>
+<li> services - Services. </li>
+<li> servicetypes - Service types. </li>
+<li> sound - Application sounds. </li>
+<li> templates - Templates for the "Create new file" functionality. </li>
+<li> wallpaper - Wallpapers. </li>
+<li> tmp - Temporary files (specific for both current host and current user) </li>
+<li> socket - UNIX Sockets (specific for both current host and current user) </li>
+<li> xdgconf-menu - Freedesktop.org standard location for menu layout (.menu) files. </li>
+<li> xdgdata-apps - Freedesktop.org standard location for application desktop files. </li>
+<li> xdgdata-dirs - Freedesktop.org standard location for menu descriptions (.directory files). </li>
+<li> xdgdata-mime - Freedesktop.org standard location for MIME type definitions. </li>
+<li> xdgdata-icon - Freedesktop.org standard location for icons. </li>
+<li> xdgdata-pixmap - Gnome-compatibility location for pixmaps. </li>
+</p>
+<p>
+A type that is added by the class KApplication if you use it, is
+appdata. This one makes the use of the type data a bit easier as it
+appends the name of the application.
+So while you had to .locate("data", "appname/filename") so you can
+also write .locate("appdata", "filename") if your KApplication instance
+is called "appname" (as set via KApplication's constructor or KAboutData, if
+you use the global KStandardDirs object KGlobal.dirs()).
+Please note though that you cannot use the "appdata"
+type if you intend to use it in an applet for Kicker because 'appname' would
+be "Kicker" instead of the applet's name. Therefore, for applets, you've got
+to work around this by using .locate("data", "appletname/filename").
+</p>
+<p>
+<b>KStandardDirs supports the following environment variables:</b>
+</p>
+<p>
+<li> KDEDIRS - This may set an additional number of directory prefixes to </li>
+search for resources. The directories should be separated
+by &lt;tt&gt;':'&lt;/tt&gt;. The directories are searched in the order they are
+specified.
+<li> KDEHOME - The directory where changes are saved to. This directory is </li>
+used to search for resources first. If KDEHOME is not
+specified it defaults to "$HOME/.kde"
+<li> KDEROOTHOME - Like KDEHOME, but used for the root user. </li>
+If KDEROOTHOME is not set it defaults to the &lt;tt&gt;.kde&lt;/tt&gt; directory in the
+home directory of root, usually "/root/.kde".
+Note that the setting of $HOME is ignored in this case.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KGlobalSettings
+</dd></dl> </p>
+<p>
+On The Usage Of 'locate' and 'locateLocal'
+</p>
+<p>
+Typical KDE applications use resource files in one out of
+three ways:
+</p>
+<p>
+1) A resource file is read but is never written. A system
+default is supplied but the user can override this
+default in his local .kde directory:
+</p>
+<p>
+<pre class="fragment">
+    // Code example
+    myFile = KStandardDirs.locate("appdata", "groups.lst");
+    myData =  myReadGroups(myFile); // myFile may be null
+</pre>
+</p>
+<p>
+2) A resource file is read and written. If the user has no
+local version of the file the system default is used.
+The resource file is always written to the users local
+.kde directory.
+</p>
+<p>
+<pre class="fragment">
+    // Code example
+    myFile = KStandardDirs.locate("appdata", "groups.lst")
+    myData =  myReadGroups(myFile);
+    ...
+    doSomething(myData);
+    ...
+    myFile = KStandardDirs.locateLocal("appdata", "groups.lst");
+    myWriteGroups(myFile, myData);
+</pre>
+</p>
+<p>
+3) A resource file is read and written. No system default
+is used if the user has no local version of the file.
+The resource file is always written to the users local
+.kde directory.
+</p>
+<p>
+<pre class="fragment">
+    // Code example
+    myFile = KStandardDirs.locateLocal("appdata", "groups.lst");
+    myData =  myReadGroups(myFile);
+    ...
+    doSomething(myData);
+    ...
+    myFile = KStandardDirs.locateLocal("appdata", "groups.lst");
+    myWriteGroups(myFile, myData);
+</pre>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#SearchOption">SearchOption</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoSearchOptions, Recursive, NoDuplicates, IgnoreExecBit&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KStandardDirs">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KStandardDirs">__init__</a> (self, <a href="../kdecore/KStandardDirs.html">KStandardDirs</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addCustomized">addCustomized</a> (self, <a href="../kdecore/KConfig.html">KConfig</a> config)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addPrefix">addPrefix</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> dir)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addResourceDir">addResourceDir</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> absdir, bool priority=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addResourceType">addResourceType</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> relativename, bool priority=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addResourceType">addResourceType</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> basetype, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> relativename, bool priority=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addResourceType">addResourceType</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> basetype, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> relativename, bool priority=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addXdgConfigPrefix">addXdgConfigPrefix</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> dir)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addXdgDataPrefix">addXdgDataPrefix</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> dir)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#allTypes">allTypes</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#calcResourceHash">calcResourceHash</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filename, <a href="../kdecore/KStandardDirs.SearchOptions.html">KStandardDirs.SearchOptions</a> options=KStandardDirs.NoSearchOptions)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#checkAccess">checkAccess</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> pathname, int mode)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#exists">exists</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> fullPath)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findAllExe">findAllExe</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> list, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> appname, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> pathstr=QString(), <a href="../kdecore/KStandardDirs.SearchOptions.html">KStandardDirs.SearchOptions</a> options=KStandardDirs.NoSearchOptions)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findAllResources">findAllResources</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filter=QString(), <a href="../kdecore/KStandardDirs.SearchOptions.html">KStandardDirs.SearchOptions</a> options=KStandardDirs.NoSearchOptions)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findAllResources">findAllResources</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filter, <a href="../kdecore/KStandardDirs.SearchOptions.html">KStandardDirs.SearchOptions</a> options, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> relPaths)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findDirs">findDirs</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> reldir)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findExe">findExe</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> appname, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> pathstr=QString(), <a href="../kdecore/KStandardDirs.SearchOptions.html">KStandardDirs.SearchOptions</a> options=KStandardDirs.NoSearchOptions)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findResource">findResource</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filename)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findResourceDir">findResourceDir</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filename)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#installPath">installPath</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isRestrictedResource">isRestrictedResource</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> relPath=QString())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#kde_default">kde_default</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#kfsstnd_prefixes">kfsstnd_prefixes</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#kfsstnd_xdg_conf_prefixes">kfsstnd_xdg_conf_prefixes</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#kfsstnd_xdg_data_prefixes">kfsstnd_xdg_data_prefixes</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#localkdedir">localkdedir</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#localxdgconfdir">localxdgconfdir</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#localxdgdatadir">localxdgdatadir</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#locate">locate</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filename, <a href="../kdecore/KComponentData.html">KComponentData</a> cData=KGlobal.mainComponent())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#locateLocal">locateLocal</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filename, <a href="../kdecore/KComponentData.html">KComponentData</a> cData=KGlobal.mainComponent())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#locateLocal">locateLocal</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filename, bool createDir, <a href="../kdecore/KComponentData.html">KComponentData</a> cData=KGlobal.mainComponent())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#makeDir">makeDir</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> dir, int mode=0755)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#realFilePath">realFilePath</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filename)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#realPath">realPath</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> dirname)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#relativeLocation">relativeLocation</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> absPath)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resourceDirs">resourceDirs</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#saveLocation">saveLocation</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> suffix=QString(), bool create=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#systemPaths">systemPaths</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> pstr=QString())</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="KStandardDirs"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="KStandardDirs"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KStandardDirs.html">KStandardDirs</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="addCustomized"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool addCustomized</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KConfig.html">KConfig</a>&nbsp;</td>
+<td class="paramname"><em>config</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Reads customized entries out of the given config object and add
+them via addResourceDirs().
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>config</em>&nbsp;</td><td> The object the entries are read from. This should
+contain global config files
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if new config paths have been added
+from <b>config.</b>
+</dd></dl>
+</p></div></div><a class="anchor" name="addPrefix"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addPrefix</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>dir</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds another search dir to front of the <b>fsstnd</b> list.
+</p>
+<p>
+<li> When compiling kdelibs, the prefix is added to this. </li>
+<li> KDEDIRS is taken into account </li>
+<li> Additional dirs may be loaded from kdeglobals. </li>
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dir</em>&nbsp;</td><td> The directory to append relative paths to.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addResourceDir"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool addResourceDir</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>absdir</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>priority=1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds absolute path at the beginning of the search path for
+particular types (for example in case of icons where
+the user specifies extra paths).
+</p>
+<p>
+You shouldn't need this
+function in 99% of all cases besides adding user-given
+paths.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> Specifies a short descriptive string to access files
+of this type.
+
+<tr><td></td><td valign="top"><em>absdir</em>&nbsp;</td><td> Points to directory where to look for this specific
+type. Non-existent directories may be saved but pruned.
+
+<tr><td></td><td valign="top"><em>priority</em>&nbsp;</td><td> if true, the directory is added before any other,
+otherwise after
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if successful, false otherwise.
+</dd></dl>
+</p></div></div><a class="anchor" name="addResourceType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool addResourceType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>relativename</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>priority=1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds suffixes for types.
+</p>
+<p>
+You may add as many as you need, but it is advised that there
+is exactly one to make writing definite.
+All basic types are added by addKDEDefaults(),
+but for those you can add more relative paths as well.
+</p>
+<p>
+The later a suffix is added, the higher its priority. Note, that the
+suffix should end with / but doesn't have to start with one (as prefixes
+should end with one). So adding a suffix for app_pics would look
+like KGlobal.dirs()-&gt;addResourceType("app_pics", "data", "app/pics");
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> Specifies a short descriptive string to access
+files of this type.
+
+<tr><td></td><td valign="top"><em>basetype</em>&nbsp;</td><td> Specifies an already known type, or 0 if none
+
+<tr><td></td><td valign="top"><em>relativename</em>&nbsp;</td><td> Specifies a directory relative to the basetype
+
+<tr><td></td><td valign="top"><em>priority</em>&nbsp;</td><td> if true, the directory is added before any other,
+otherwise after
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if successful, false otherwise.
+</dd></dl>
+</p></div></div><a class="anchor" name="addResourceType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool addResourceType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>basetype</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>relativename</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>priority=1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds suffixes for types.
+</p>
+<p>
+You may add as many as you need, but it is advised that there
+is exactly one to make writing definite.
+All basic types are added by addKDEDefaults(),
+but for those you can add more relative paths as well.
+</p>
+<p>
+The later a suffix is added, the higher its priority. Note, that the
+suffix should end with / but doesn't have to start with one (as prefixes
+should end with one). So adding a suffix for app_pics would look
+like KGlobal.dirs()-&gt;addResourceType("app_pics", "data", "app/pics");
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> Specifies a short descriptive string to access
+files of this type.
+
+<tr><td></td><td valign="top"><em>basetype</em>&nbsp;</td><td> Specifies an already known type, or 0 if none
+
+<tr><td></td><td valign="top"><em>relativename</em>&nbsp;</td><td> Specifies a directory relative to the basetype
+
+<tr><td></td><td valign="top"><em>priority</em>&nbsp;</td><td> if true, the directory is added before any other,
+otherwise after
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if successful, false otherwise.
+</dd></dl>
+</p></div></div><a class="anchor" name="addResourceType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool addResourceType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>basetype</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>relativename</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>priority=1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds suffixes for types.
+</p>
+<p>
+You may add as many as you need, but it is advised that there
+is exactly one to make writing definite.
+All basic types are added by addKDEDefaults(),
+but for those you can add more relative paths as well.
+</p>
+<p>
+The later a suffix is added, the higher its priority. Note, that the
+suffix should end with / but doesn't have to start with one (as prefixes
+should end with one). So adding a suffix for app_pics would look
+like KGlobal.dirs()-&gt;addResourceType("app_pics", "data", "app/pics");
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> Specifies a short descriptive string to access
+files of this type.
+
+<tr><td></td><td valign="top"><em>basetype</em>&nbsp;</td><td> Specifies an already known type, or 0 if none
+
+<tr><td></td><td valign="top"><em>relativename</em>&nbsp;</td><td> Specifies a directory relative to the basetype
+
+<tr><td></td><td valign="top"><em>priority</em>&nbsp;</td><td> if true, the directory is added before any other,
+otherwise after
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if successful, false otherwise.
+</dd></dl>
+</p></div></div><a class="anchor" name="addXdgConfigPrefix"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addXdgConfigPrefix</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>dir</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds another search dir to front of the XDG_CONFIG_XXX list
+of prefixes.
+This prefix is only used for resources that start with "xdgconf-"
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dir</em>&nbsp;</td><td> The directory to append relative paths to.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addXdgDataPrefix"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addXdgDataPrefix</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>dir</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds another search dir to front of the XDG_DATA_XXX list
+of prefixes.
+This prefix is only used for resources that start with "xdgdata-"
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dir</em>&nbsp;</td><td> The directory to append relative paths to.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="allTypes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> allTypes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>This function will return a list of all the types that KStandardDirs
+supports.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> All types that KDE supports
+</dd></dl>
+</p></div></div><a class="anchor" name="calcResourceHash"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">long calcResourceHash</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>filename</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KStandardDirs.SearchOptions.html">KStandardDirs.SearchOptions</a>&nbsp;</td>
+<td class="paramname"><em>options=KStandardDirs.NoSearchOptions</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a number that identifies this version of the resource.
+When a change is made to the resource this number will change.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of the wanted resource
+
+<tr><td></td><td valign="top"><em>filename</em>&nbsp;</td><td> A relative filename of the resource.
+
+<tr><td></td><td valign="top"><em>options</em>&nbsp;</td><td> If the flags includes Recursive,
+all resources are taken into account
+otherwise only the one returned by findResource().
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A number identifying the current version of the
+resource.
+</dd></dl>
+</p></div></div><a class="anchor" name="checkAccess"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool checkAccess</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>pathname</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>mode</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Check, if a file may be accessed in a given mode.
+This is a wrapper around the access() system call.
+checkAccess() calls access() with the given parameters.
+If this is OK, checkAccess() returns true. If not, and W_OK
+is part of mode, it is checked if there is write access to
+the directory. If yes, checkAccess() returns true.
+In all other cases checkAccess() returns false.
+</p>
+<p>
+Other than access() this function EXPLICITLY ignores non-existent
+files if checking for write access.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>pathname</em>&nbsp;</td><td> The full path of the file you want to test
+
+<tr><td></td><td valign="top"><em>mode</em>&nbsp;</td><td> The access mode, as in the access() system call.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> Whether the access is allowed, true = Access allowed
+</dd></dl>
+</p></div></div><a class="anchor" name="exists"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool exists</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>fullPath</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Checks for existence and accessability of a file or directory.
+Faster than creating a QFileInfo first.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>fullPath</em>&nbsp;</td><td> the path to check. IMPORTANT: must end with a slash if expected to be a directory
+(and no slash for a file, obviously).
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the directory exists, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="findAllExe"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int findAllExe</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramname"><em>list</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>appname</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>pathstr=QString()</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KStandardDirs.SearchOptions.html">KStandardDirs.SearchOptions</a>&nbsp;</td>
+<td class="paramname"><em>options=KStandardDirs.NoSearchOptions</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Finds all occurrences of an executable in the system path.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>list</em>&nbsp;</td><td> will be filled with the pathnames of all the
+executables found. Will be empty if the executable
+was not found.
+
+<tr><td></td><td valign="top"><em>appname</em>&nbsp;</td><td> the name of the executable for which to
+search.
+
+<tr><td></td><td valign="top"><em>pathstr</em>&nbsp;</td><td> the path list which will be searched. If this
+is 0 (default), the $PATH environment variable will
+be searched.
+
+<tr><td></td><td valign="top"><em>options</em>&nbsp;</td><td> if the flags passed include IgnoreExecBit the path returned
+may not have the executable bit set.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The number of executables found, 0 if none were found.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> findExe()
+</dd></dl>
+</p></div></div><a class="anchor" name="findAllResources"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> findAllResources</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>filter=QString()</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KStandardDirs.SearchOptions.html">KStandardDirs.SearchOptions</a>&nbsp;</td>
+<td class="paramname"><em>options=KStandardDirs.NoSearchOptions</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Tries to find all resources with the specified type.
+</p>
+<p>
+The function will look into all specified directories
+and return all filenames (full and relative paths) in
+these directories.
+</p>
+<p>
+The "most local" files are returned before the "more global" files.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of resource to locate directories for. Can be icon,
+lib, pixmap, .... To get a complete list, call
+</td></tr> </table></dl>
+<p> <pre class="fragment">
+        kde4-config --types
+</pre>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>filter</em>&nbsp;</td><td> Only accept filenames that fit to filter. The filter
+may consist of an optional directory and a QRegExp
+wildcard expression. E.g. &lt;tt&gt;"images\*.jpg"&lt;/tt&gt;.
+Use QString() if you do not want a filter.
+
+<tr><td></td><td valign="top"><em>options</em>&nbsp;</td><td> if the flags passed include Recursive, subdirectories
+will also be search; if NoDuplicates is passed then only entries with
+unique filenames will be returned eliminating duplicates.
+</td></tr>
+
+<tr><td></td><td valign="top"><em>relPaths</em>&nbsp;</td><td> The list to store the relative paths into
+These can be used later to .locate() the file
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> List of all the files whose filename matches the
+specified filter.
+</dd></dl>
+</p></div></div><a class="anchor" name="findAllResources"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> findAllResources</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>filter</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KStandardDirs.SearchOptions.html">KStandardDirs.SearchOptions</a>&nbsp;</td>
+<td class="paramname"><em>options</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramname"><em>relPaths</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Tries to find all resources with the specified type.
+</p>
+<p>
+The function will look into all specified directories
+and return all filenames (full and relative paths) in
+these directories.
+</p>
+<p>
+The "most local" files are returned before the "more global" files.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of resource to locate directories for. Can be icon,
+lib, pixmap, .... To get a complete list, call
+</td></tr> </table></dl>
+<p> <pre class="fragment">
+        kde4-config --types
+</pre>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>filter</em>&nbsp;</td><td> Only accept filenames that fit to filter. The filter
+may consist of an optional directory and a QRegExp
+wildcard expression. E.g. &lt;tt&gt;"images\*.jpg"&lt;/tt&gt;.
+Use QString() if you do not want a filter.
+
+<tr><td></td><td valign="top"><em>options</em>&nbsp;</td><td> if the flags passed include Recursive, subdirectories
+will also be search; if NoDuplicates is passed then only entries with
+unique filenames will be returned eliminating duplicates.
+</td></tr>
+
+<tr><td></td><td valign="top"><em>relPaths</em>&nbsp;</td><td> The list to store the relative paths into
+These can be used later to .locate() the file
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> List of all the files whose filename matches the
+specified filter.
+</dd></dl>
+</p></div></div><a class="anchor" name="findDirs"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> findDirs</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>reldir</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Tries to find all directories whose names consist of the
+specified type and a relative path. So
+findDirs("apps", "Settings") would return
+<li> /home/joe/.kde/share/applnk/Settings/ </li>
+<li> /opt/kde/share/applnk/Settings/ </li>
+</p>
+<p>
+(from the most local to the most global)
+</p>
+<p>
+Note that it appends / to the end of the directories,
+so you can use this right away as directory names.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of the base directory.
+
+<tr><td></td><td valign="top"><em>reldir</em>&nbsp;</td><td> Relative directory.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A list of matching directories, or an empty
+list if the resource specified is not found.
+</dd></dl>
+</p></div></div><a class="anchor" name="findExe"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> findExe</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>appname</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>pathstr=QString()</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KStandardDirs.SearchOptions.html">KStandardDirs.SearchOptions</a>&nbsp;</td>
+<td class="paramname"><em>options=KStandardDirs.NoSearchOptions</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Finds the executable in the system path.
+</p>
+<p>
+A valid executable must
+be a file and have its executable bit set.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>appname</em>&nbsp;</td><td> The name of the executable file for which to search.
+if this contains a path separator, it will be resolved
+according to the current working directory
+(shell-like behaviour).
+
+<tr><td></td><td valign="top"><em>pathstr</em>&nbsp;</td><td> The path which will be searched. If this is
+null (default), the $PATH environment variable will
+be searched.
+
+<tr><td></td><td valign="top"><em>options</em>&nbsp;</td><td> if the flags passed include IgnoreExecBit the path returned
+may not have the executable bit set.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The path of the executable. If it was not found,
+it will return QString().
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> findAllExe()
+</dd></dl>
+</p></div></div><a class="anchor" name="findResource"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> findResource</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>filename</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Tries to find a resource in the following order:
+<li> All PREFIX/&lt;relativename&gt; paths (most recent first). </li>
+<li> All absolute paths (most recent first). </li>
+</p>
+<p>
+The filename should be a filename relative to the base dir
+for resources. So is a way to get the path to libkdecore.la
+to findResource("lib", "libkdecore.la"). KStandardDirs will
+then look into the subdir lib of all elements of all prefixes
+($KDEDIRS) for a file libkdecore.la and return the path to
+the first one it finds (e.g. /opt/kde/lib/libkdecore.la).
+You can use the program kde4-config to list all resource types:
+<pre class="fragment">
+ $ kde4-config --types
+</pre>
+</p>
+<p>
+Example:
+<pre class="fragment">
+ QString iconfilename=KGlobal.dirs()-&gt;findResource("icon",QString("oxygen/22x22/apps/ktip.png"));
+</pre>
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of the wanted resource
+
+<tr><td></td><td valign="top"><em>filename</em>&nbsp;</td><td> A relative filename of the resource.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A full path to the filename specified in the second
+argument, or QString() if not found.
+</dd></dl>
+</p></div></div><a class="anchor" name="findResourceDir"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> findResourceDir</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>filename</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Tries to find the directory the file is in.
+It works the same as findResource(), but it doesn't
+return the filename but the name of the directory.
+</p>
+<p>
+This way the application can access a couple of files
+that have been installed into the same directory without
+having to look for each file.
+</p>
+<p>
+findResourceDir("lib", "libkdecore.la") would return the
+path of the subdir libkdecore.la is found first in
+(e.g. /opt/kde/lib/)
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of the wanted resource
+
+<tr><td></td><td valign="top"><em>filename</em>&nbsp;</td><td> A relative filename of the resource.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The directory where the file specified in the second
+argument is located, or QString() if the type
+of resource specified is unknown or the resource
+cannot be found.
+</dd></dl>
+</p></div></div><a class="anchor" name="installPath"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> installPath</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the path where type was installed to by kdelibs. This is an absolute path and only
+one out of many search paths
+</dd></dl>
+</p></div></div><a class="anchor" name="isRestrictedResource"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isRestrictedResource</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>relPath=QString()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Checks whether a resource is restricted as part of the KIOSK
+framework. When a resource is restricted it means that user-
+specific files in the resource are ignored.
+</p>
+<p>
+E.g. by restricting the "wallpaper" resource, only system-wide
+installed wallpapers will be found by this class. Wallpapers
+installed under the $KDEHOME directory will be ignored.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of the resource to check
+
+<tr><td></td><td valign="top"><em>relPath</em>&nbsp;</td><td> A relative path in the resource.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> True if the resource is restricted.
+</dd></dl>
+</p></div></div><a class="anchor" name="kde_default"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> kde_default</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This returns a default relative path for the standard KDE
+resource types. Below is a list of them so you get an idea
+of what this is all about.
+</p>
+<p>
+<li> data - share/apps </li>
+<li> html - share/doc/HTML </li>
+<li> icon - share/icon </li>
+<li> config - share/config </li>
+<li> pixmap - share/pixmaps </li>
+<li> apps - share/applnk </li>
+<li> sound - share/sounds </li>
+<li> locale - share/locale </li>
+<li> services - share/kde4/services </li>
+<li> servicetypes - share/kde4/servicetypes </li>
+<li> mime - share/mimelnk </li>
+<li> cgi - cgi-bin </li>
+<li> wallpaper - share/wallpapers </li>
+<li> templates - share/templates </li>
+<li> exe - bin </li>
+<li> lib - lib[suffix] </li>
+<li> module - lib[suffix]/kde4 </li>
+<li> qtplugins - lib[suffix]/kde4/plugins </li>
+<li> kcfg - share/config.kcfg </li>
+<li> emoticons - share/emoticons </li>
+<li> xdgdata-apps - applications </li>
+<li> xdgdata-icon - icons </li>
+<li> xdgdata-pixmap - pixmaps </li>
+<li> xdgdata-dirs - desktop-directories </li>
+<li> xdgdata-mime - mime </li>
+<li> xdgconf-menu - menus </li>
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> Static default for the specified resource. You
+should probably be using locate() or locateLocal()
+instead.
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> locate()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> locateLocal()
+</dd></dl>
+</p></div></div><a class="anchor" name="kfsstnd_prefixes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> kfsstnd_prefixes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd> (for use by sycoca only)
+</dd></dl>
+</p></div></div><a class="anchor" name="kfsstnd_xdg_conf_prefixes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> kfsstnd_xdg_conf_prefixes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd> (for use by sycoca only)
+</dd></dl>
+</p></div></div><a class="anchor" name="kfsstnd_xdg_data_prefixes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> kfsstnd_xdg_data_prefixes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd> (for use by sycoca only)
+</dd></dl>
+</p></div></div><a class="anchor" name="localkdedir"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> localkdedir</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the toplevel directory in which KStandardDirs
+will store things. Most likely &lt;tt&gt;$HOME/.kde&lt;/tt&gt;.
+Don't use this function if you can use locateLocal()
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the toplevel directory
+</dd></dl>
+</p></div></div><a class="anchor" name="localxdgconfdir"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> localxdgconfdir</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> $XDG_CONFIG_HOME
+See also http://www.freedesktop.org/standards/basedir/draft/basedir-spec/basedir-spec.html
+</dd></dl>
+</p></div></div><a class="anchor" name="localxdgdatadir"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> localxdgdatadir</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> $XDG_DATA_HOME
+See also http://www.freedesktop.org/standards/basedir/draft/basedir-spec/basedir-spec.html
+</dd></dl>
+</p></div></div><a class="anchor" name="locate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> locate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>filename</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KComponentData.html">KComponentData</a>&nbsp;</td>
+<td class="paramname"><em>cData=KGlobal.mainComponent()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This function is just for convenience. It simply calls
+instance-&gt;dirs()-&gt;\link KStandardDirs.findResource() findResource\endlink(type, filename).
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of the wanted resource, see KStandardDirs
+
+<tr><td></td><td valign="top"><em>filename</em>&nbsp;</td><td> A relative filename of the resource
+
+<tr><td></td><td valign="top"><em>cData</em>&nbsp;</td><td> The KComponentData object
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A full path to the filename specified in the second
+argument, or QString() if not found
+</dd></dl>
+</p></div></div><a class="anchor" name="locateLocal"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> locateLocal</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>filename</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KComponentData.html">KComponentData</a>&nbsp;</td>
+<td class="paramname"><em>cData=KGlobal.mainComponent()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This function is much like locate. No check is made if the
+specified filename actually exists. Missing directories
+are created if <b>createDir</b> is true. If <b>filename</b> is only
+a directory, without a specific file, <b>filename</b> must have
+a trailing slash.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of the wanted resource, see KStandardDirs
+
+<tr><td></td><td valign="top"><em>filename</em>&nbsp;</td><td> A relative filename of the resource
+
+<tr><td></td><td valign="top"><em>createDir</em>&nbsp;</td><td> If true, missing directories are created,
+if false, no directory is created
+
+<tr><td></td><td valign="top"><em>cData</em>&nbsp;</td><td> The KComponentData object
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A full path to the filename specified in the second
+argument, or QString() if not found
+</dd></dl>
+</p></div></div><a class="anchor" name="locateLocal"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> locateLocal</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>filename</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>createDir</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KComponentData.html">KComponentData</a>&nbsp;</td>
+<td class="paramname"><em>cData=KGlobal.mainComponent()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This function is much like locate. No check is made if the
+specified filename actually exists. Missing directories
+are created if <b>createDir</b> is true. If <b>filename</b> is only
+a directory, without a specific file, <b>filename</b> must have
+a trailing slash.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of the wanted resource, see KStandardDirs
+
+<tr><td></td><td valign="top"><em>filename</em>&nbsp;</td><td> A relative filename of the resource
+
+<tr><td></td><td valign="top"><em>createDir</em>&nbsp;</td><td> If true, missing directories are created,
+if false, no directory is created
+
+<tr><td></td><td valign="top"><em>cData</em>&nbsp;</td><td> The KComponentData object
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A full path to the filename specified in the second
+argument, or QString() if not found
+</dd></dl>
+</p></div></div><a class="anchor" name="makeDir"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool makeDir</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>dir</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>mode=0755</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Recursively creates still-missing directories in the given path.
+</p>
+<p>
+The resulting permissions will depend on the current umask setting.
+&lt;tt&gt;permission = mode &amp; ~umask&lt;/tt&gt;.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dir</em>&nbsp;</td><td> Absolute path of the directory to be made.
+
+<tr><td></td><td valign="top"><em>mode</em>&nbsp;</td><td> Directory permissions.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if successful, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="realFilePath"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> realFilePath</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>filename</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Expands all symbolic links and resolves references to
+'/./', '/../' and extra '/' characters in <b>filename</b>
+and returns the canonicalized absolute pathname.
+The resulting path will have no symbolic link, '/./'
+or '/../' components.
+</p></div></div><a class="anchor" name="realPath"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> realPath</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>dirname</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Expands all symbolic links and resolves references to
+'/./', '/../' and extra '/' characters in <b>dirname</b>
+and returns the canonicalized absolute pathname.
+The resulting path will have no symbolic link, '/./'
+or '/../' components.
+</p></div></div><a class="anchor" name="relativeLocation"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> relativeLocation</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>absPath</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Converts an absolute path to a path relative to a certain
+resource.
+</p>
+<p>
+If "abs = .locate(resource, rel)"
+then "rel = relativeLocation(resource, abs)" and vice versa.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of resource.
+</td></tr>
+
+<tr><td></td><td valign="top"><em>absPath</em>&nbsp;</td><td> An absolute path to make relative.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A relative path relative to resource <b>type</b> that
+will find <b>absPath.</b> If no such relative path exists, <b>absPath</b>
+will be returned unchanged.
+</dd></dl>
+</p></div></div><a class="anchor" name="resourceDirs"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> resourceDirs</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This function is used internally by almost all other function as
+it serves and fills the directories cache.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of resource
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The list of possible directories for the specified <b>type.</b>
+The function updates the cache if possible. If the resource
+type specified is unknown, it will return an empty list.
+Note, that the directories are assured to exist beside the save
+location, which may not exist, but is returned anyway.
+</dd></dl>
+</p></div></div><a class="anchor" name="saveLocation"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> saveLocation</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>suffix=QString()</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>create=1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Finds a location to save files into for the given type
+in the user's home directory.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of location to return.
+
+<tr><td></td><td valign="top"><em>suffix</em>&nbsp;</td><td> A subdirectory name.
+Makes it easier for you to create subdirectories.
+You can't pass filenames here, you _have_ to pass
+directory names only and add possible filename in
+that directory yourself. A directory name always has a
+trailing slash ('/').
+
+<tr><td></td><td valign="top"><em>create</em>&nbsp;</td><td> If set, saveLocation() will create the directories
+needed (including those given by <b>suffix).</b>
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A path where resources of the specified type should be
+saved, or QString() if the resource type is unknown.
+</dd></dl>
+</p></div></div><a class="anchor" name="systemPaths"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> systemPaths</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>pstr=QString()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a QStringList list of pathnames in the system path.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>pstr</em>&nbsp;</td><td> The path which will be searched. If this is
+null (default), the $PATH environment variable will
+be searched.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> a QStringList list of pathnames in the system path.
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="SearchOption"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">SearchOption</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

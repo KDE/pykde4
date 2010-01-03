@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KAuth.ActionReply</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>ActionReply Class Reference</h1>
+<code>from PyKDE4.kdecore import *</code>
+<p>
+
+
+Namespace: KAuth.ActionReply<br />
+<h2>Detailed Description</h2>
+
+<p>Class that encapsulates a reply coming from the helper after executing an action
+</p>
+<p>
+An instance of ActionReply is returned every time you execute an action with the Action
+class. You get the reply directly from the Action.execute() method or indirectly as
+a parameter of the ActionWatcher.actionPerformed() signal.
+</p>
+<p>
+ActionReply objects can contain both data from a successful action or an error indicator.
+In case of success, the errorCode() is ActionReply.NoError (zero) and the type() is
+ActionReply.Success. The data() method returns a QVariantMap object that may contain
+custom data sent back by the helper.
+</p>
+<p>
+In case of errors coming from the library, the type() is ActionReply.KAuthError. In this
+case, errorCode() will always be one of the predefined errors from the ActionReply.Error enum.
+An error reply of KAuthError type always contains an empty data() object. For some kind of errors
+you could get a human-readable description with errorDescription().
+</p>
+<p>
+If, instead, the helper itself has to report some errors occurred during the action execution,
+the type() will be (and has to be) ActionReply.HelperError. In this case the data() object can
+contain custom data from the helper, and the errorCode() and errorDescription() values are
+application-dependent.
+</p>
+<p>
+In the helper, to create an action reply object you have two choices: using the constructor, or
+the predefined replies. For example, to create a successful reply you can use the default constructor
+but to create an helper error reply, instead of writing &lt;i&gt;ActionReply(ActionReply.HelperError)&lt;/i&gt;
+you could use the more convenient &lt;i&gt;ActionReply.HelperErrorReply&lt;/i&gt; constant.
+</p>
+<p>
+You should not use the predefined error replies to create and return new errors. Replies with the
+KAuthError type are intended to be returned by the library only. However, you can use them for
+comparisons.
+</p>
+<p>
+To quickly check for success or failure of an action, you can use succeeded() or failed().
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Error">Error</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoError, NoResponder, NoSuchAction, InvalidAction, AuthorizationDenied, UserCancelled, HelperBusy, DBusError&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Type">Type</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;KAuthError, HelperError, Success&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Attributes</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#varAuthorizationDeniedReply">AuthorizationDeniedReply</a></td></tr><tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#varDBusErrorReply">DBusErrorReply</a></td></tr><tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#varHelperBusyReply">HelperBusyReply</a></td></tr><tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#varHelperErrorReply">HelperErrorReply</a></td></tr><tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#varInvalidActionReply">InvalidActionReply</a></td></tr><tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#varNoResponderReply">NoResponderReply</a></td></tr><tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#varNoSuchActionReply">NoSuchActionReply</a></td></tr><tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#varSuccessReply">SuccessReply</a></td></tr><tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#varUserCancelledReply">UserCancelledReply</a></td></tr><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ActionReply">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ActionReply">__init__</a> (self, <a href="../kdecore/KAuth.ActionReply.html#Type">KAuth.ActionReply.Type</a> type)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ActionReply">__init__</a> (self, <a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> reply)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addData">addData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> key, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a> value)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariantmap.html">QVariantMap</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#data">data</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deserialize">deserialize</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> data)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#errorCode">errorCode</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#errorDescription">errorDescription</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#failed">failed</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator !=">operator !=</a> (self, <a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> reply)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator ==">operator ==</a> (self, <a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> reply)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#serialized">serialized</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setData">setData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariantmap.html">QVariantMap</a> data)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setErrorCode">setErrorCode</a> (self, int errorCode)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setErrorDescription">setErrorDescription</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> error)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#succeeded">succeeded</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionReply.html#Type">KAuth.ActionReply.Type</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#type">type</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="ActionReply"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="ActionReply"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KAuth.ActionReply.html#Type">KAuth.ActionReply.Type</a>&nbsp;</td>
+<td class="paramname"><em>type</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="ActionReply"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td>
+<td class="paramname"><em>reply</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="addData"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>key</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>&nbsp;</td>
+<td class="paramname"><em>value</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convenience method to add some data to the reply.
+</p>
+<p>
+This method adds the pair key/value to the QVariantMap used to
+report back custom data to the application.
+</p>
+<p>
+Use this method if you don't want to create a new QVariantMap only to
+add a new entry.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>key</em>&nbsp;</td><td> The new entry's key
+
+<tr><td></td><td valign="top"><em>value</em>&nbsp;</td><td> The value of the new entry
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="data"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariantmap.html">QVariantMap</a> data</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the custom data coming from the helper.
+</p>
+<p>
+This method is used to get the object that contains the custom
+data coming from the helper. In the helper's code, you can set it
+using setData() or the convenience method addData().
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The data coming from (or that will be sent by) the helper
+</dd></dl>
+</p></div></div><a class="anchor" name="deserialize"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> deserialize</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td>
+<td class="paramname"><em>data</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Deserialize a reply from a QByteArray
+</p>
+<p>
+This method returns a reply from a QByteArray obtained from
+the serialized() method.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> A QByteArray obtained with serialized()
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="errorCode"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int errorCode</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the error code of an error reply
+</p>
+<p>
+The error code returned is one of the values in the ActionReply.Error
+enumeration if type() == KAuthError, or is totally application-dependent if
+type() == HelperError. It also should be zero for successful replies.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The reply error code
+</dd></dl>
+</p></div></div><a class="anchor" name="errorDescription"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> errorDescription</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Gets a human-readble description of the error, if available
+</p>
+<p>
+Currently, replies of type KAuthError rarely report an error description.
+This situation could change in the future.
+</p>
+<p>
+By now, you can use this method for custom errors of type HelperError.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The error human-readable description
+</dd></dl>
+</p></div></div><a class="anchor" name="failed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool failed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="operator !="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator !=</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td>
+<td class="paramname"><em>reply</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Negated comparison operator
+</p>
+<p>
+See the operator==() for an important notice.
+</p></div></div><a class="anchor" name="operator =="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator ==</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td>
+<td class="paramname"><em>reply</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Comparison operator
+</p>
+<p>
+This operator checks if the type and the error code of two replies are the same.
+It <b>doesn't</b> compare the data or the error descriptions, so be careful.
+</p>
+<p>
+The suggested use it to compare a reply agains one of the predefined error replies:
+<pre class="fragment">
+ if(reply == ActionReply.HelperBusyReply) {
+    // Do something...
+ }
+</pre>
+</p>
+<p>
+Note that you can do it also by compare errorCode() with the relative enumeration value.
+</p></div></div><a class="anchor" name="serialized"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> serialized</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Serialize the reply into a QByteArray.
+</p>
+<p>
+This is a convenience method used internally to sent the reply to a remote peer.
+To recreate the reply, use deserialize()
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> A QByteArray representation of this reply
+</dd></dl>
+</p></div></div><a class="anchor" name="setData"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariantmap.html">QVariantMap</a>&nbsp;</td>
+<td class="paramname"><em>data</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the custom data to send back to the application
+</p>
+<p>
+In the helper's code you can use this function to set an QVariantMap
+with custom data that will be sent back to the application.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> The new QVariantMap object.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setErrorCode"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setErrorCode</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>errorCode</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the error code of an error reply
+</p>
+<p>
+If you're setting the error code in the helper because
+you need to return an error to the application, please make sure
+you already have set the type to HelperError, either by calling
+setType() or by creating the reply in the right way.
+</p>
+<p>
+If the type is Success when you call this method, it will become KAuthError
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>errorCode</em>&nbsp;</td><td> The new reply error code
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setErrorDescription"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setErrorDescription</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>error</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets a human-readble description of the error
+</p>
+<p>
+Call this method from the helper if you want to send back a description for
+a custom error. Note that this method doesn't affect the errorCode in any way
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>error</em>&nbsp;</td><td> The new error description
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="succeeded"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool succeeded</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="type"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KAuth.ActionReply.html#Type">KAuth.ActionReply.Type</a> type</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><hr><h2>Attribute Documentation</h2><a class="anchor" name="var223676364"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> AuthorizationDeniedReply</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><p><a class="anchor" name="var223677036"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> DBusErrorReply</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><p><a class="anchor" name="var223676812"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> HelperBusyReply</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><p><a class="anchor" name="var223675660"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> HelperErrorReply</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><p><a class="anchor" name="var223676140"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> InvalidActionReply</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><p><a class="anchor" name="var223675724"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> NoResponderReply</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><p><a class="anchor" name="var223675916"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> NoSuchActionReply</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><p><a class="anchor" name="var223675276"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> SuccessReply</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><p><a class="anchor" name="var223676588"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> UserCancelledReply</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><p><hr><h2>Enumeration Documentation</h2><a class="anchor" name="Error"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">Error</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"></table>
+</dl>
+</div></div><p><a class="anchor" name="Type"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">Type</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

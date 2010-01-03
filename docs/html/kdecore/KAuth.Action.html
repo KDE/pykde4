@@ -1,0 +1,931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KAuth.Action</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>Action Class Reference</h1>
+<code>from PyKDE4.kdecore import *</code>
+<p>
+
+
+Namespace: KAuth.Action<br />
+<h2>Detailed Description</h2>
+
+<p>Class to access, authorize and execute actions.
+</p>
+<p>
+This is the main class of the kauth API. It provides the interface to
+manipulate actions. Every action is identified by its name. Every instance
+of the Action class with the same name refers to the same action.
+</p>
+<p>
+Once you have an action object you can tell the helper to execute it
+(asking the user to authenticate if needed) with one of the execute*() methods.
+The simplest thing to do is to execute a single action synchronously
+blocking for the reply, using the execute() method.
+</p>
+<p>
+For asynchronous calls, use the executeAsync() method. It sends the request
+to the helper and returns immediately. You can optionally provide an object
+and a slot. This will be connected to the actionPerformed() signal of the
+action's ActionWatcher object.
+By calling the watcher() method, you obtain an object that emits some useful
+signals that you can receive while the action is in progress. Those signals
+are emitted also with the synchronous calls.
+To execute a bunch of actions with a single call, you can use the executeActions()
+static method. This is not the same as calling executeAsync() for each action,
+because the actions are execute with a single request to the helper.
+To use any of the execute*() methods you have to set the default helper's ID using
+the setHelperID() static method. Alternatively, you can specify the helperID using
+the overloaded version of the methods that takes it as a parameter.
+</p>
+<p>
+Each action object contains a QVariantMap object that is passed directly to the
+helper when the action is executed. You can access this map using the arguments()
+method. You can insert into it any kind of custom data you need to pass to the helper.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#AuthStatus">AuthStatus</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Denied, Error, Invalid, Authorized, AuthRequired, UserCancelled&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Action">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Action">__init__</a> (self, <a href="../kdecore/KAuth.Action.html">KAuth.Action</a> action)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Action">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Action">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> details)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addArgument">addArgument</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> key, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a> value)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariantmap.html">QVariantMap</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#arguments">arguments</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.Action.html#AuthStatus">KAuth.Action.AuthStatus</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#authorize">authorize</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#details">details</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#execute">execute</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#execute">execute</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> helperID)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#executeActions">executeActions</a> (self, [<a href="../kdecore/KAuth.Action.html">KAuth.Action</a>] actions, [<a href="../kdecore/KAuth.Action.html">KAuth.Action</a>] deniedActions, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> helperId)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#executesAsync">executesAsync</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#helperID">helperID</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isValid">isValid</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator !=">operator !=</a> (self, <a href="../kdecore/KAuth.Action.html">KAuth.Action</a> action)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator ==">operator ==</a> (self, <a href="../kdecore/KAuth.Action.html">KAuth.Action</a> action)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setArguments">setArguments</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariantmap.html">QVariantMap</a> arguments)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDetails">setDetails</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> details)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setExecutesAsync">setExecutesAsync</a> (self, bool async)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setHelperID">setHelperID</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setName">setName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.Action.html#AuthStatus">KAuth.Action.AuthStatus</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#status">status</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#stop">stop</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#stop">stop</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> helperID)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.ActionWatcher.html">KAuth.ActionWatcher</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#watcher">watcher</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="Action"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="Action"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KAuth.Action.html">KAuth.Action</a>&nbsp;</td>
+<td class="paramname"><em>action</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="Action"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="Action"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>details</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="addArgument"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addArgument</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>key</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>&nbsp;</td>
+<td class="paramname"><em>value</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convenience method to add an argument.
+</p>
+<p>
+This method adds the pair key/value to the QVariantMap used to
+send custom data to the helper.
+</p>
+<p>
+Use this method if you don't want to create a new QVariantMap only to
+add a new entry.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>key</em>&nbsp;</td><td> The new entry's key
+
+<tr><td></td><td valign="top"><em>value</em>&nbsp;</td><td> The value of the new entry
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="arguments"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariantmap.html">QVariantMap</a> arguments</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns map object used to pass arguments to the helper.
+</p>
+<p>
+This method returns the variant map that the application
+can use to pass arbitrary data to the helper when executing the action.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The arguments map that will be passed to the helper.
+</dd></dl>
+</p></div></div><a class="anchor" name="authorize"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KAuth.Action.html#AuthStatus">KAuth.Action.AuthStatus</a> authorize</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Acquires authorization for an action without excuting it.
+</p>
+<p>
+This method acquires the authorization rights for the action, asking
+the user to authenticate if needed.
+</p>
+<p>
+The result of this method is strictly related to the result of status().
+If it returns Action.Denied or Action.Authorized, this method
+will always return the same. Instead, if the status()
+result was Action.AuthRequired, the method would ask the user to authenticate.
+The Action.UserCancelled value is intended to be returned when the authentication
+fails because the user purposely cancelled it. Unfortunately, this isn't currently
+supported by policykit, so instead you'll get a Denied result in this case.
+The Mac OS X backend will return UserCancelled when appropriate.
+</p>
+<p>
+It's not so common to use this method directly, because it's already
+called by any of the execute methods. Use it only if you need to acquire the
+authorization long time before the execution, for example if you want to
+enable some GUI elements after user authentication.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The result of the authorization process
+</dd></dl>
+</p></div></div><a class="anchor" name="details"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> details</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Gets the action's details
+</p>
+<p>
+The details that will be shown in the authorization dialog, if the
+backend supports it.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The action's details
+</dd></dl>
+</p></div></div><a class="anchor" name="execute"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> execute</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Synchronously executes the action with a specific helperID
+</p>
+<p>
+This method does the exact same thing as execute(), but it takes a specific helperID, useful
+if you don't want to use the default one without changing it with setHelperID()
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>helperID</em>&nbsp;</td><td> The helper ID to use for the execution of this action
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The reply from the helper, or an error if something's wrong.
+</dd></dl>
+</p></div></div><a class="anchor" name="execute"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KAuth.ActionReply.html">KAuth.ActionReply</a> execute</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>helperID</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Synchronously executes the action with a specific helperID
+</p>
+<p>
+This method does the exact same thing as execute(), but it takes a specific helperID, useful
+if you don't want to use the default one without changing it with setHelperID()
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>helperID</em>&nbsp;</td><td> The helper ID to use for the execution of this action
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The reply from the helper, or an error if something's wrong.
+</dd></dl>
+</p></div></div><a class="anchor" name="executeActions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool executeActions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="../kdecore/KAuth.Action.html">KAuth.Action</a>]&nbsp;</td>
+<td class="paramname"><em>actions</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="../kdecore/KAuth.Action.html">KAuth.Action</a>]&nbsp;</td>
+<td class="paramname"><em>deniedActions</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>helperId</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Asynchronously executes a group of actions with a single request
+</p>
+<p>
+This method executes each action in the list. It checks for authorization of each action, and put the
+denied actions, if any, in the list pointed by the deniedActions parameter, if not NULL.
+</p>
+<p>
+Please note that with the dbus helper proxy (currently the only one implemented), the execution of a group
+of actions is very different from executing in sequence each action using, for example, executeAsync().
+Currently, the helper can execute only one request at the time. For this reason, if you have to call
+different actions in sequence, you can't call executeAsync() like this:
+<pre class="fragment">
+ action1.executeAsync();
+ action2.executeAsync();
+</pre>
+because the second call will almost certainly return ActionReply.HelperBusy. You would have to execute the second
+action in the slot connected to the first action's actionPerformed() signal. This is not so good. This method
+allows the application to send a request with a list of actions. With this method, the code above becomes:
+<pre class="fragment">
+ QList&lt;Action&gt; list;
+ list &lt;&lt; action1 &lt;&lt; action2;
+ Action.executeActions(list);
+</pre>
+The return value will be false if communication errors occur. It will also be false if <b>all</b> the actions
+in the list are denied.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>actions</em>&nbsp;</td><td> The list of actions to execute
+
+<tr><td></td><td valign="top"><em>deniedActions</em>&nbsp;</td><td> A pointer to a list to fill with the denied actions. Pass NULL if you don't need them.
+
+<tr><td></td><td valign="top"><em>helperId</em>&nbsp;</td><td> The helper ID to execute the actions on.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="executesAsync"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool executesAsync</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="helperID"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> helperID</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Gets the default helper ID used for actions execution
+</p>
+<p>
+The helper ID is the string that uniquely identifies the helper in
+the system. It is the string passed to the KDE4_AUTH_HELPER() macro
+in the helper source. Because one could have different helpers,
+you need to specify an helper ID for each execution, or set a default
+ID by calling setHelperID(). This method returns the current default
+value.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The default helper ID.
+</dd></dl>
+</p></div></div><a class="anchor" name="isValid"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isValid</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns if the object represents a valid action
+</p>
+<p>
+Action names have to respect a simple syntax.
+They have to be all in lowercase characters, separated
+by dots. Dots can't appear at the beginning and at the end of
+the name.
+</p>
+<p>
+In other words, the action name has to match this perl-like
+regular expression:
+@verbatim
+/^[a-z]+(\.[a-z]+)*$/
+@endverbatim
+</p>
+<p>
+This method returns false if the action name doesn't match the
+valid syntax.
+</p>
+<p>
+Invalid actions cannot be authorized nor executed.
+The empty string is not a valid action name, so the default
+constructor returns an invalid action.
+</p></div></div><a class="anchor" name="name"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Gets the action's name.
+</p>
+<p>
+This is the unique attribute that identifies
+an action object. Two action objects with the same
+name always refer to the same action.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The action name
+</dd></dl>
+</p></div></div><a class="anchor" name="operator !="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator !=</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KAuth.Action.html">KAuth.Action</a>&nbsp;</td>
+<td class="paramname"><em>action</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Negated comparison operator
+</p>
+<p>
+Returns the negation of operator==
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the two actions are different and not both invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="operator =="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator ==</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KAuth.Action.html">KAuth.Action</a>&nbsp;</td>
+<td class="paramname"><em>action</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Comparison operator
+</p>
+<p>
+This comparison operator compares the <b>names</b> of two
+actions and returns whether they are the same. It does not
+care about the arguments stored in the actions. However,
+if two actions are invalid they'll match as equal, even
+if the invalid names are different.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the two actions are the same or both invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="setArguments"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setArguments</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariantmap.html">QVariantMap</a>&nbsp;</td>
+<td class="paramname"><em>arguments</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the map object used to pass arguments to the helper.
+</p>
+<p>
+This method sets the variant map that the application
+can use to pass arbitrary data to the helper when executing the action.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>arguments</em>&nbsp;</td><td> The new arguments map
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setDetails"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDetails</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>details</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the action's details
+</p>
+<p>
+You can use this function to provide the user more details
+(if the backend supports it) on the action being authorized in
+the authorization dialog
+</p></div></div><a class="anchor" name="setExecutesAsync"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setExecutesAsync</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>async</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setHelperID"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setHelperID</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>id</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the default helper ID used for actions execution
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>id</em>&nbsp;</td><td> The default helper ID.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setName"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setName</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the action's name.
+</p>
+<p>
+It's not common to change the action name
+after its creation. Usually you set the name
+with the constructor (and you have to, because
+there's no default constructor)
+</p></div></div><a class="anchor" name="status"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KAuth.Action.html#AuthStatus">KAuth.Action.AuthStatus</a> status</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Gets information about the authorization status of an action
+</p>
+<p>
+This methods query the authorization backend to know if the user can try
+to acquire the authorization for this action. If the result is Action.AuthRequired,
+the user can try to acquire the authorization by authenticating.
+</p>
+<p>
+It should not be needed to call this method directly, because the execution methods
+already take care of all the authorization stuff.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> Action.Denied if the user doesn't have the authorization to execute the action,
+</dd></dl> Action.Authorized if the action can be executed,
+Action.AuthRequired if the user could acquire the authorization after authentication,
+Action.UserCancelled if the user cancels the authentication dialog. Not currently supported by the Polkit backend
+</p></div></div><a class="anchor" name="stop"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> stop</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Ask the helper to stop executing an action, using a specific helper ID
+</p>
+<p>
+This method works exactly as the stop() method, but it lets you specify an helper ID different from the
+default one.
+</p>
+<p>
+To stop an action you need to send the stop request to the helper that is executing that action. This of course means you have to
+use the same helperID used for the execution call (either passed as a parameter or set as default with setHelperID() )
+</p></div></div><a class="anchor" name="stop"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> stop</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>helperID</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Ask the helper to stop executing an action, using a specific helper ID
+</p>
+<p>
+This method works exactly as the stop() method, but it lets you specify an helper ID different from the
+default one.
+</p>
+<p>
+To stop an action you need to send the stop request to the helper that is executing that action. This of course means you have to
+use the same helperID used for the execution call (either passed as a parameter or set as default with setHelperID() )
+</p></div></div><a class="anchor" name="watcher"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KAuth.ActionWatcher.html">KAuth.ActionWatcher</a> watcher</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Gets the ActionWatcher object for this action
+</p>
+<p>
+ActionWatcher objects are used to get notifications about the action
+execution status. Every action watcher is tied to an action and
+every action has a watcher. This means that if you call this method
+on two different Action objects with the same name, you'll get the
+same watcher object.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The action watcher for this action
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="AuthStatus"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">AuthStatus</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

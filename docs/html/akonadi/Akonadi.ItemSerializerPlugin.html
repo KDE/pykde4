@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Akonadi.ItemSerializerPlugin</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>ItemSerializerPlugin Class Reference</h1>
+<code>from PyKDE4.akonadi import *</code>
+<p>
+
+Subclasses: <a href="../akonadi/Akonadi.ItemSerializerPluginV2.html">Akonadi.ItemSerializerPluginV2</a><br />
+Namespace: Akonadi.ItemSerializerPlugin<br />
+<h2>Detailed Description</h2>
+<dl class="abstract" compact><dt><b>Abstract class:</b></dt>
+<dd>This class can be used as a base class for new classes, but can not be instantiated directly.</dd></dl>
+<p>The base class for item type serializer plugins.
+</p>
+<p>
+Serializer plugins convert between the payload of Akonadi.Item objects and
+a textual or binary representation of the actual content data.
+This allows to easily add support for new types to Akonadi.
+</p>
+<p>
+The following example shows how to implement a serializer plugin for
+a new data type PimNote.
+</p>
+<p>
+The PimNote data structure:
+<pre class="fragment">
+ typedef struct {
+   QString author;
+   QDateTime dateTime;
+   QString text;
+ } PimNote;
+</pre>
+</p>
+<p>
+The serializer plugin code:
+<pre class="fragment">
+ #include &lt;QtCore/qplugin.h&gt;
+
+ class SerializerPluginPimNote : public QObject, public Akonadi.ItemSerializerPlugin
+ {
+   Q_OBJECT
+   Q_INTERFACES( Akonadi.ItemSerializerPlugin )
+
+   public:
+     bool deserialize( Akonadi.Item&amp; item, const QByteArray&amp; label, QIODevice&amp; data, int version )
+     {
+       // we don't handle versions in this example
+       Q_UNUSED( version );
+
+       // we work only on full payload
+       if ( label != Akonadi.Item.FullPayload )
+         return false;
+
+       QDataStream stream( &amp;data );
+
+       PimNote note;
+       stream &gt;&gt; note.author;
+       stream &gt;&gt; note.dateTime;
+       stream &gt;&gt; note.text;
+
+       item.setPayload&lt;PimNote&gt;( note );
+
+       return true;
+     }
+
+     void serialize( const Akonadi.Item&amp; item, const QByteArray&amp; label, QIODevice&amp; data, int &amp;version )
+     {
+       // we don't handle versions in this example
+       Q_UNUSED( version );
+
+       if ( label != Akonadi.Item.FullPayload || !item.hasPayload&lt;PimNote&gt;() )
+         return;
+
+       QDataStream stream( &amp;data );
+
+       PimNote note = item.payload&lt;PimNote&gt;();
+
+       stream &lt;&lt; note.author;
+       stream &lt;&lt; note.dateTime;
+       stream &lt;&lt; note.text;
+     }
+ };
+
+ Q_EXPORT_PLUGIN2( akonadi_serializer_pimnote, SerializerPluginPimNote )
+
+</pre>
+</p>
+<p>
+The desktop file:
+<pre class="fragment">
+ [Misc]
+ Name=Pim Note Serializer
+ Comment=An Akonadi serializer plugin for note objects
+
+ [Plugin]
+ Type=application/x-pimnote
+ X-KDE-Library=akonadi_serializer_pimnote
+</pre>
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Till Adam &lt;adam@kde.org&gt;, Volker Krause &lt;vkrause@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deserialize">deserialize</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> item, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> label, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qiodevice.html">QIODevice</a> data, int version)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QSet<QByteArray>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parts">parts</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> item)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#serialize">serialize</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> item, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> label, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qiodevice.html">QIODevice</a> data, int version)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="deserialize"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool deserialize</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>&nbsp;</td>
+<td class="paramname"><em>item</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td>
+<td class="paramname"><em>label</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qiodevice.html">QIODevice</a>&nbsp;</td>
+<td class="paramname"><em>data</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>version</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Converts serialized item data provided in <b>data</b> into payload for <b>item.</b>
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>item</em>&nbsp;</td><td> The item to which the payload should be added.
+It is guaranteed to have a mime type matching one of the supported
+mime types of this plugin.
+However it might contain a unsuited payload added manually
+by the application developer.
+Verifying the payload type in case a payload is already available
+is recommended therefore.
+
+<tr><td></td><td valign="top"><em>label</em>&nbsp;</td><td> The part identifier of the part to deserialize.
+<b>label</b> might be an unsupported item part, return false if this is the case.
+
+<tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> A QIODevice providing access to the serialized data.
+The QIODevice is opened in read-only mode and positioned at the beginning.
+The QIODevice is guaranteed to be valid.
+
+<tr><td></td><td valign="top"><em>version</em>&nbsp;</td><td> The version of the data format as set by the user in serialize() or 0 (default).
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> false if the specified part is not supported by this plugin, true if the part
+could be de-serialized successfully.
+</dd></dl>
+</p></div></div><a class="anchor" name="parts"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QSet<QByteArray> parts</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>&nbsp;</td>
+<td class="paramname"><em>item</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a list of available parts for the given item payload.
+The default implementation returns Item.FullPayload if a payload is set.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>item</em>&nbsp;</td><td> The item.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="serialize"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> serialize</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>&nbsp;</td>
+<td class="paramname"><em>item</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td>
+<td class="paramname"><em>label</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qiodevice.html">QIODevice</a>&nbsp;</td>
+<td class="paramname"><em>data</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>version</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Convert the payload object provided in <b>item</b> into its serialzed form into <b>data.</b>
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>item</em>&nbsp;</td><td> The item which contains the payload.
+It is guaranteed to have a mimetype matching one of the supported
+mimetypes of this plugin as well as the existence of a payload object.
+However it might contain an unsupported payload added manually by
+the application developer.
+Verifying the payload type is recommended therefore.
+
+<tr><td></td><td valign="top"><em>label</em>&nbsp;</td><td> The part identifier of the part to serialize.
+<b>label</b> will be one of the item parts returned by parts().
+
+<tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> The QIODevice where the serialized data should be written to.
+The QIODevice is opened in write-only mode and positioned at the beginning.
+The QIODevice is guaranteed to be valid.
+
+<tr><td></td><td valign="top"><em>version</em>&nbsp;</td><td> The version of the data format. Can be set by the user to handle different
+versions.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

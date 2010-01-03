@@ -1,0 +1,1051 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KFind</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>KFind Class Reference</h1>
+<code>from PyKDE4.kdeui import *</code>
+<p>
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+Subclasses: <a href="../kdeui/KReplace.html">KReplace</a><br />
+
+<h2>Detailed Description</h2>
+
+<p>A generic implementation of the "find" function.
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> S.R.Haque &lt;srhaque@iee.org&gt;, David Faure &lt;faure@kde.org&gt;, </dd></dl>
+Arend van Beelen jr. &lt;arend@auton.nl&gt;
+</p>
+<p>
+<b>Detail:</b>
+</p>
+<p>
+This class includes prompt handling etc. Also provides some
+static functions which can be used to create custom behavior
+instead of using the class directly.
+</p>
+<p>
+<b>Example:</b>
+</p>
+<p>
+To use the class to implement a complete find feature:
+</p>
+<p>
+In the slot connected to the find action, after using KFindDialog:
+<pre class="fragment">
+
+  // This creates a find-next-prompt dialog if needed.
+  m_find = new KFind(pattern, options, this);
+
+  // Connect highlight signal to code which handles highlighting
+  // of found text.
+  connect( m_find, SIGNAL( highlight( const QString &amp;, int, int ) ),
+          this, SLOT( slotHighlight( const QString &amp;, int, int ) ) );
+  // Connect findNext signal - called when pressing the button in the dialog
+  connect( m_find, SIGNAL( findNext() ),
+          this, SLOT( slotFindNext() ) );
+</pre>
+</p>
+<p>
+If you are using a non-modal find dialog (the recommended new way
+in KDE-3.2), you should call right away m_find-&gt;closeFindNextDialog().
+</p>
+<p>
+Then initialize the variables determining the "current position"
+(to the cursor, if the option FromCursor is set,
+to the beginning of the selection if the option SelectedText is set,
+and to the beginning of the document otherwise).
+Initialize the "end of search" variables as well (end of doc or end of selection).
+Swap begin and end if FindBackwards.
+Finally, call slotFindNext();
+</p>
+<p>
+<pre class="fragment">
+  void slotFindNext()
+  {
+      KFind.Result res = KFind.NoMatch;
+      while ( res == KFind.NoMatch &amp;&amp; &lt;position not at end&gt; ) {
+          if ( m_find-&gt;needData() )
+              m_find-&gt;setData( &lt;current text fragment&gt; );
+
+          // Let KFind inspect the text fragment, and display a dialog if a match is found
+          res = m_find-&gt;find();
+
+          if ( res == KFind.NoMatch ) {
+              &lt;Move to the next text fragment, honoring the FindBackwards setting for the direction&gt;
+          }
+      }
+
+      if ( res == KFind.NoMatch ) // i.e. at end
+          &lt;Call either  m_find-&gt;displayFinalDialog(); m_find-&gt;deleteLater(); m_find = 0L;
+           or           if ( m_find-&gt;shouldRestart() ) { reinit (w/o FromCursor) and call slotFindNext(); }
+                        else { m_find-&gt;closeFindNextDialog(); }&gt;
+  }
+</pre>
+</p>
+<p>
+Don't forget to delete m_find in the destructor of your class,
+unless you gave it a parent widget on construction.
+</p>
+<p>
+This implementation allows to have a "Find Next" action, which resumes the
+search, even if the user closed the "Find Next" dialog.
+</p>
+<p>
+A "Find Previous" action can simply switch temporarily the value of
+FindBackwards and call slotFindNext() - and reset the value afterwards.
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Options">Options</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;WholeWordsOnly, FromCursor, SelectedText, CaseSensitive, FindBackwards, RegularExpression, FindIncremental, MinimumUserOption&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Result">Result</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoMatch, Match&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dialogClosed">dialogClosed</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findNext">findNext</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#highlight">highlight</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, int matchingIndex, int matchedLength)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#highlight">highlight</a> (int id, int matchingIndex, int matchedLength)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#optionsChanged">optionsChanged</a> ()</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KFind">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> pattern, long options, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KFind">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> pattern, long options, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> findDialog)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#closeFindNextDialog">closeFindNextDialog</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dialogClosed">dialogClosed</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dialogsParent">dialogsParent</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#displayFinalDialog">displayFinalDialog</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KFind.html#Result">KFind.Result</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#find">find</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int, int (matchedlength)&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#find">find</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> pattern, int index, long options, )</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int, int (matchedlength)&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#find">find</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregexp.html">QRegExp</a> pattern, int index, long options, )</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findNext">findNext</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KDialog.html">KDialog</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#findNextDialog">findNextDialog</a> (self, bool create=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#highlight">highlight</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, int matchingIndex, int matchedLength)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#highlight">highlight</a> (self, int id, int matchingIndex, int matchedLength)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#index">index</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#needData">needData</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#numMatches">numMatches</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#options">options</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#optionsChanged">optionsChanged</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parentWidget">parentWidget</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pattern">pattern</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resetCounts">resetCounts</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setData">setData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> data, int startPos=-1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setData">setData</a> (self, int id, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> data, int startPos=-1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setOptions">setOptions</a> (self, long options)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPattern">setPattern</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> pattern)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#shouldRestart">shouldRestart</a> (self, bool forceAsking=0, bool showNumMatches=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#validateMatch">validateMatch</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, int index, int matchedlength)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="KFind"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>pattern</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>options</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="KFind"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>pattern</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>options</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>findDialog</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="closeFindNextDialog"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> closeFindNextDialog</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Close the "find next?" dialog. The application should do this when
+the last match was hit. If the application deletes the KFind, then
+"find previous" won't be possible anymore.
+</p>
+<p>
+IMPORTANT: you should also call this if you are using a non-modal
+find dialog, to tell KFind not to pop up its own dialog.
+</p></div></div><a class="anchor" name="dialogClosed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> dialogClosed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emitted when the 'find next' dialog is being closed.
+Some apps might want to remove the highlighted text when this happens.
+Apps without support for "Find Next" can also do m_find-&gt;deleteLater()
+to terminate the find operation.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("dialogClosed()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="dialogsParent"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> dialogsParent</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="displayFinalDialog"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> displayFinalDialog</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Displays the final dialog saying "no match was found", if that was the case.
+Call either this or shouldRestart().
+</p></div></div><a class="anchor" name="find"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KFind.html#Result">KFind.Result</a> find</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Search the given string, and returns whether a match was found. If one is,
+the length of the string matched is also returned.
+</p>
+<p>
+A performance optimised version of the function is provided for use
+with regular expressions.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> The string to search.
+
+<tr><td></td><td valign="top"><em>pattern</em>&nbsp;</td><td> The pattern to look for.
+
+<tr><td></td><td valign="top"><em>index</em>&nbsp;</td><td> The starting index into the string.
+
+<tr><td></td><td valign="top"><em>options</em>&nbsp;</td><td> The options to use.
+
+<tr><td></td><td valign="top"><em>matchedlength</em>&nbsp;</td><td> The length of the string that was matched
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The index at which a match was found, or -1 if no match was found.
+</dd></dl>
+</p></div></div><a class="anchor" name="find"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int, int (matchedlength) find</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>pattern</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>options</em>, </td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Search the given string, and returns whether a match was found. If one is,
+the length of the string matched is also returned.
+</p>
+<p>
+A performance optimised version of the function is provided for use
+with regular expressions.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> The string to search.
+
+<tr><td></td><td valign="top"><em>pattern</em>&nbsp;</td><td> The pattern to look for.
+
+<tr><td></td><td valign="top"><em>index</em>&nbsp;</td><td> The starting index into the string.
+
+<tr><td></td><td valign="top"><em>options</em>&nbsp;</td><td> The options to use.
+
+<tr><td></td><td valign="top"><em>matchedlength</em>&nbsp;</td><td> The length of the string that was matched
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The index at which a match was found, or -1 if no match was found.
+</dd></dl>
+</p></div></div><a class="anchor" name="find"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int, int (matchedlength) find</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregexp.html">QRegExp</a>&nbsp;</td>
+<td class="paramname"><em>pattern</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>options</em>, </td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Search the given string, and returns whether a match was found. If one is,
+the length of the string matched is also returned.
+</p>
+<p>
+A performance optimised version of the function is provided for use
+with regular expressions.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> The string to search.
+
+<tr><td></td><td valign="top"><em>pattern</em>&nbsp;</td><td> The pattern to look for.
+
+<tr><td></td><td valign="top"><em>index</em>&nbsp;</td><td> The starting index into the string.
+
+<tr><td></td><td valign="top"><em>options</em>&nbsp;</td><td> The options to use.
+
+<tr><td></td><td valign="top"><em>matchedlength</em>&nbsp;</td><td> The length of the string that was matched
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The index at which a match was found, or -1 if no match was found.
+</dd></dl>
+</p></div></div><a class="anchor" name="findNext"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> findNext</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("findNext()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="findNextDialog"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KDialog.html">KDialog</a> findNextDialog</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>create=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Return (or create) the dialog that shows the "find next?" prompt.
+Usually you don't need to call this.
+One case where it can be useful, is when the user selects the "Find"
+menu item while a find operation is under way. In that case, the
+program may want to call setActiveWindow() on that dialog.
+</p></div></div><a class="anchor" name="highlight"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> highlight</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>matchingIndex</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>matchedLength</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Connect to this signal to implement highlighting of found text during the find
+operation.
+</p>
+<p>
+Use this signal if you've set your data with setData(id, text), otherwise
+use the signal with highlight(text, matchingIndex, matchedLength).
+</p>
+<p>
+WARNING: If you're using the FindIncremental option, the id argument
+passed by this signal is not necessarily the id of the data last set
+through setData(), but can also be of an earlier set data block.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setData()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("highlight(const const QString&, int, int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="highlight"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> highlight</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>id</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>matchingIndex</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>matchedLength</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Connect to this signal to implement highlighting of found text during the find
+operation.
+</p>
+<p>
+Use this signal if you've set your data with setData(id, text), otherwise
+use the signal with highlight(text, matchingIndex, matchedLength).
+</p>
+<p>
+WARNING: If you're using the FindIncremental option, the id argument
+passed by this signal is not necessarily the id of the data last set
+through setData(), but can also be of an earlier set data block.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setData()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("highlight(int, int, int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="index"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int index</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the current matching index ( or -1 ).
+Same as the matchingIndex parameter passed to highlight.
+You usually don't need to use this, except maybe when updating the current data,
+so you need to call setData( newData, index() ).
+</dd></dl>
+</p></div></div><a class="anchor" name="needData"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool needData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the application must supply a new text fragment
+It also means the last call returned "NoMatch". But by storing this here
+the application doesn't have to store it in a member variable (between
+calls to slotFindNext()).
+</dd></dl>
+</p></div></div><a class="anchor" name="numMatches"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int numMatches</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the number of matches found (i.e. the number of times
+the highlight signal was emitted).
+If 0, can be used in a dialog box to tell the user "no match was found".
+The final dialog does so already, unless you used setDisplayFinalDialog(false).
+</p></div></div><a class="anchor" name="options"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">long options</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the current options.
+</p>
+<p>
+Warning: this is usually the same value as the one passed to the constructor,
+but options might change _during_ the replace operation:
+e.g. the "All" button resets the PromptOnReplace flag.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KFind.Options
+</dd></dl>
+</p></div></div><a class="anchor" name="optionsChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> optionsChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emitted when the options have changed.
+This can happen e.g. with "Replace All", or if our 'find next' dialog
+gets a "find previous" one day.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("optionsChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="parentWidget"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parentWidget</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="pattern"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> pattern</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the pattern we're currently looking for
+</dd></dl>
+</p></div></div><a class="anchor" name="resetCounts"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> resetCounts</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Call this to reset the numMatches count
+(and the numReplacements count for a KReplace).
+Can be useful if reusing the same KReplace for different operations,
+or when restarting from the beginning of the document.
+</p></div></div><a class="anchor" name="setData"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>data</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>startPos=-1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Call this when needData returns true, before calling find(). The use of
+ID's is especially useful if you're using the FindIncremental option.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>id</em>&nbsp;</td><td> the id of the text fragment
+
+<tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> the text fragment (line)
+
+<tr><td></td><td valign="top"><em>startPos</em>&nbsp;</td><td> if set, the index at which the search should start.
+This is only necessary for the very first call to setData usually,
+for the 'find in selection' feature. A value of -1 (the default value)
+means "process all the data", i.e. either 0 or data.length()-1 depending
+on FindBackwards.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setData"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>id</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>data</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>startPos=-1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Call this when needData returns true, before calling find(). The use of
+ID's is especially useful if you're using the FindIncremental option.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>id</em>&nbsp;</td><td> the id of the text fragment
+
+<tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> the text fragment (line)
+
+<tr><td></td><td valign="top"><em>startPos</em>&nbsp;</td><td> if set, the index at which the search should start.
+This is only necessary for the very first call to setData usually,
+for the 'find in selection' feature. A value of -1 (the default value)
+means "process all the data", i.e. either 0 or data.length()-1 depending
+on FindBackwards.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setOptions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setOptions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>options</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set new options. Usually this is used for setting or clearing the
+FindBackwards options.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KFind.Options
+</dd></dl>
+</p></div></div><a class="anchor" name="setPattern"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setPattern</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>pattern</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Change the pattern we're looking for
+</p></div></div><a class="anchor" name="shouldRestart"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool shouldRestart</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>forceAsking=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>showNumMatches=1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns true if we should restart the search from scratch.
+Can ask the user, or return false (if we already searched the whole document).
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>forceAsking</em>&nbsp;</td><td> set to true if the user modified the document during the
+search. In that case it makes sense to restart the search again.
+</td></tr>
+
+<tr><td></td><td valign="top"><em>showNumMatches</em>&nbsp;</td><td> set to true if the dialog should show the number of
+matches. Set to false if the application provides a "find previous" action,
+in which case the match count will be erroneous when hitting the end,
+and we could even be hitting the beginning of the document (so not all
+matches have even been seen).
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="validateMatch"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool validateMatch</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>matchedlength</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Virtual method, which allows applications to add extra checks for
+validating a candidate match. It's only necessary to reimplement this
+if the find dialog extension has been used to provide additional
+criterias.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> The current text fragment
+
+<tr><td></td><td valign="top"><em>index</em>&nbsp;</td><td> The starting index where the candidate match was found
+
+<tr><td></td><td valign="top"><em>matchedlength</em>&nbsp;</td><td> The length of the candidate match
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="Options"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">Options</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"></table>
+</dl>
+</div></div><p><a class="anchor" name="Result"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">Result</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KSystemTimeZones</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>KSystemTimeZones Class Reference</h1>
+<code>from PyKDE4.kdecore import *</code>
+<p>
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+
+
+<h2>Detailed Description</h2>
+<dl class="abstract" compact><dt><b>Abstract class:</b></dt>
+<dd>This class can be used as a base class for new classes, but can not be instantiated directly.</dd></dl>
+<p>The KSystemTimeZones class represents the system time zone database, consisting
+of a collection of individual system time zone definitions, indexed by name.
+Each individual time zone is defined in a KSystemTimeZone instance. Additional
+time zones (of any class derived from KTimeZone) may be added if desired.
+</p>
+<p>
+At initialisation, KSystemTimeZones reads the zone.tab file to obtain the list
+of system time zones, and creates a KSystemTimeZone instance for each one.
+</p>
+<p>
+Note that KSystemTimeZones is not derived from KTimeZones, but instead contains
+a KTimeZones instance which holds the system time zone database. Convenience
+static methods are defined to access its data, or alternatively you can access
+the KTimeZones instance directly via the timeZones() method.
+</p>
+<p>
+As an example, find the local time in Oman corresponding to the local system
+time of 12:15:00 on 13th November 1999:
+<pre class="fragment">
+ QDateTime sampleTime(QDate(1999,11,13), QTime(12,15,0), Qt.LocalTime);
+ KTimeZone local = KSystemTimeZones.local();
+ KTimeZone oman  = KSystemTimeZones.zone("Asia/Muscat");
+ QDateTime omaniTime = local.convert(oman, sampleTime);
+</pre>
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> The time zones in the KSystemTimeZones collection are by default
+instances of the KSystemTimeZone class, which uses the standard system
+libraries to access time zone data, and whose functionality is limited to
+what these libraries provide. For guaranteed accuracy for past time change
+dates and time zone abbreviations, you should use KSystemTimeZones.readZone()
+or the KTzfileTimeZone class instead, which provide accurate information from
+the time zone definition files (but are likely to incur more overhead).
+</dd></dl> </p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> This class provides a facility to simulate the local system time
+zone. This facility is provided for testing purposes only, and is only
+available if the library is compiled with debug enabled. In release mode,
+simulation is inoperative and the real local system time zone is used at all
+times.
+</dd></dl> </p>
+<p>
+System time zone access
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KTimeZones, KSystemTimeZone, KSystemTimeZoneSource, KTzfileTimeZone
+</dd></dl> 
+<dl class="author" compact><dt><b>Author:</b></dt><dd> David Jarvie &lt;djarvie@kde.org&gt;. </dd></dl>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> S.R.Haque &lt;srhaque@iee.org&gt;. </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KSystemTimeZones">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isSimulated">isSimulated</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KTimeZone.html">KTimeZone</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#local">local</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KTimeZone.html">KTimeZone</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#readZone">readZone</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KTimeZone.html">KTimeZone</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#realLocalZone">realLocalZone</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLocalZone">setLocalZone</a> (self, <a href="../kdecore/KTimeZone.html">KTimeZone</a> tz)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KTimeZones.html">KTimeZones</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#timeZones">timeZones</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KTimeZone.html">KTimeZone</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#zone">zone</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#zoneinfoDir">zoneinfoDir</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KTimeZones.ZoneMap.html">KTimeZones.ZoneMap</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#zones">zones</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="KSystemTimeZones"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="isSimulated"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isSimulated</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Check whether there is a simulated local system time zone.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> This method is provided only for testing purposes, and should
+not be used in released code. If the library is compiled without
+debug enabled, isSimulated() always returns false.
+To avoid confusion, it is recommended that calls to it should be
+conditionally compiled, e.g.:
+</dd></dl> <pre class="fragment">
+          #ifndef NDEBUG
+             if (KSystemTimeZones.isSimulated())
+             {
+                 ...
+             }
+          #endif
+</pre>
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setLocalZone()
+</dd></dl>
+</p></div></div><a class="anchor" name="local"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KTimeZone.html">KTimeZone</a> local</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the current local system time zone.
+</p>
+<p>
+The idea of this routine is to provide a robust lookup of the local time
+zone. On Unix systems, there are a variety of mechanisms for setting this
+information, and no well defined way of getting it. For example, if you
+set your time zone to "Europe/London", then the tzname[] maintained by
+tzset() typically returns { "GMT", "BST" }. The function of this routine
+is to actually return "Europe/London" (or rather, the corresponding
+KTimeZone).
+</p>
+<p>
+Note that depending on how the system stores its current time zone, this
+routine may return a synonym of the expected time zone. For example,
+"Europe/London", "Europe/Guernsey" and some other time zones are all
+identical and there may be no way for the routine to distinguish which
+of these is the correct zone name from the user's point of view.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> For testing purposes, if the library is compiled with debug
+enabled, this method returns any simulated local system time
+zone set by setLocalZone(). If the library is compiled in
+release mode, it always returns the real local system time zone.
+</dd></dl> </p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> local system time zone. If necessary, we will use a series of
+heuristics which end by returning UTC. We will never return NULL.
+Note that if UTC is returned as a default, it may not belong to the
+the collection returned by KSystemTimeZones.zones().
+</dd></dl>
+</p></div></div><a class="anchor" name="readZone"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KTimeZone.html">KTimeZone</a> readZone</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the time zone with the given name, containing the full time zone
+definition read directly from the system time zone database. This may
+incur a higher overhead than zone(), but will provide whatever historical
+data the system holds.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> name of time zone
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> time zone (usually a KTzfileTimeZone instance), or invalid if not found
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> zone()
+</dd></dl>
+</p></div></div><a class="anchor" name="realLocalZone"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KTimeZone.html">KTimeZone</a> realLocalZone</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the real (not simulated) local system time zone.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> This method is provided only for testing purposes, and should
+not be used in released code. If the library is compiled without
+debug enabled, local() and realLocalZone() both return the real
+local system time zone.
+To avoid confusion, it is recommended that calls to
+realLocalZone() should be conditionally compiled, e.g.:
+</dd></dl> <pre class="fragment">
+          #ifndef NDEBUG
+             tz = KSystemTimeZones.realLocalZone();
+          #endif
+</pre>
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setLocalZone()
+</dd></dl>
+</p></div></div><a class="anchor" name="setLocalZone"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setLocalZone</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KTimeZone.html">KTimeZone</a>&nbsp;</td>
+<td class="paramname"><em>tz</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set or clear the simulated local system time zone.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> This method is provided only for testing purposes, and should
+not be used in released code. If the library is compiled without
+debug enabled, setLocalZone() has no effect.
+To avoid confusion, it is recommended that calls to it should be
+conditionally compiled, e.g.:
+</dd></dl> <pre class="fragment">
+          #ifndef NDEBUG
+             KSystemTimeZones.setLocalZone(tz);
+          #endif
+</pre>
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>tz</em>&nbsp;</td><td> the time zone to simulate, or an invalid KTimeZone instance
+(i.e. <pre class="fragment"> tz.isValid() == false \endcode) to cancel
+           simulation
+</p></div></div><a class="anchor" name="timeZones"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KTimeZones.html">KTimeZones</a> timeZones</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the unique KTimeZones instance containing the system time zones
+collection. It is first created if it does not already exist.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> time zones.
+</dd></dl>
+</p></div></div><a class="anchor" name="zone"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KTimeZone.html">KTimeZone</a> zone</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the time zone with the given name.
+</p>
+<p>
+The time zone definition is obtained using system library calls, and may
+not contain historical data. If you need historical time change data,
+use the potentially slower method readZone().
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> name of time zone
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> time zone (usually a KSystemTimeZone instance), or invalid if not found
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> readZone()
+</dd></dl>
+</p></div></div><a class="anchor" name="zoneinfoDir"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> zoneinfoDir</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the location of the system time zone zoneinfo database.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> path of directory containing the zoneinfo database
+</dd></dl>
+</p></div></div><a class="anchor" name="zones"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KTimeZones.ZoneMap.html">KTimeZones.ZoneMap</a> zones</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns all the time zones defined in this collection.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> time zone collection
+</dd></dl>
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

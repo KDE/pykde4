@@ -52,6 +52,8 @@ public:
     bool                    isReadOnly () const;
 protected:
     void                    contextMenuEvent (QGraphicsSceneContextMenuEvent* event);
+public:
+    void                    append (const QString& text);
 };
 // TextEdit
 

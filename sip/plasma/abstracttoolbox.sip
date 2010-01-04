@@ -37,5 +37,15 @@ signals:
     void                    visibilityChanged (bool);
 protected:
     Plasma::Containment*    containment () const;
+public:
+    enum ToolType
+    {
+        AddTool,
+        ConfigureTool,
+        ControlTool,
+        MiscTool,
+        DestructiveTool,
+        UserToolType
+    };
 };
 };

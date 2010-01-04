@@ -37,8 +37,6 @@ public:
     };
     explicit                Animation (QObject* parent /TransferThis/ = 0);
     virtual ~Animation ()=0;
-    virtual void            setWidgetToAnimate (QGraphicsWidget* widget);
-    QGraphicsWidget*        widgetToAnimate ();
     void                    setEasingCurveType (QEasingCurve::Type type);
     QEasingCurve::Type      easingCurveType () const;
 protected:
@@ -52,6 +50,9 @@ protected:
     if (dynamic_cast<Plasma::Animation*>(sipCpp))
         sipType = sipType_Plasma_Animation;
 %End
+public:
+    void                    setTargetWidget (QGraphicsWidget* widget);
+    QGraphicsWidget*        targetWidget () const;
 };
 };
 %ModuleHeaderCode

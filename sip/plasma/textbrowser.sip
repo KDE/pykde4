@@ -49,6 +49,8 @@ protected:
     void                    wheelEvent (QGraphicsSceneWheelEvent* event);
     void                    changeEvent (QEvent* event);
     void                    contextMenuEvent (QGraphicsSceneContextMenuEvent* event);
+public:
+    void                    append (const QString& text);
 };
 // TextBrowser
 

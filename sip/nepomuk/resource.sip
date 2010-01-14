@@ -66,8 +66,8 @@ public:
     void                    addType (const QUrl& type);
     bool                    hasType (const QUrl& typeUri) const;
     QString                 className () const;
-//FIXME    QHash<QString,Nepomuk::Variant>  allProperties () const;
-//FIXME    QHash<QUrl,Nepomuk::Variant>  properties () const;
+    QHash<QString,Nepomuk::Variant>  allProperties () const;
+    QHash<QUrl,Nepomuk::Variant>  properties () const;
     bool                    hasProperty (const QUrl& uri) const;
     bool                    hasProperty (const QString& uri) const;
     Nepomuk::Variant        property (const QUrl& uri) const;
@@ -131,8 +131,6 @@ public:
     QList<Nepomuk::Resource>  isRelatedOf () const;
     static QList<Nepomuk::Resource>  allResources ();
     virtual ~Resource ();
-//ig    QHash<QString,Variant>  allProperties () const;
-//ig    QHash<QUrl,Variant>     properties () const;
     bool                    operator != (const Nepomuk::Resource&) const;
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'Resource'

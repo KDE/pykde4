@@ -40,8 +40,7 @@ protected:
     void                    resizeEvent (QResizeEvent* e);
 public:
     ~KTagCloudWidget ();
-// FIXME needs a mapped type.
-//ig    void                    addTags (const QMap<QString,int>& tags);
+    void                    addTags (const QMap<QString,int>& tags);
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'QWidget'
     sipType = NULL;

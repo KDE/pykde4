@@ -298,7 +298,7 @@ template <TYPE1,int>
 
     QMap<TYPE1, int> *qm = new QMap<TYPE1, int>;
  
-    SIP_SSIZE_T i = 0;
+    i = 0;
     while (PyDict_Next(sipPy, &i, &t1obj, &t2obj))
     {
         int state1;

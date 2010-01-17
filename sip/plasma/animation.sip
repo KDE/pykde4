@@ -37,12 +37,9 @@ public:
     };
     explicit                Animation (QObject* parent /TransferThis/ = 0);
     virtual ~Animation ()=0;
-    void                    setEasingCurveType (QEasingCurve::Type type);
-    QEasingCurve::Type      easingCurveType () const;
 protected:
     virtual void            setDuration (int duration = 250);
     virtual void            updateCurrentTime (int currentTime);
-    QEasingCurve&           easingCurve ();
 %ConvertToSubClassCode
     // CTSCC for subclasses of 'Animation'
     sipType = NULL;
@@ -53,6 +50,19 @@ protected:
 public:
     void                    setTargetWidget (QGraphicsWidget* widget);
     QGraphicsWidget*        targetWidget () const;
+    enum MovementDirection
+    {
+        MoveUp,
+        MoveUpRight,
+        MoveRight,
+        MoveDownRight,
+        MoveDown,
+        MoveDownLeft,
+        MoveLeft,
+        MoveUpLeft
+    };
+    void                    setEasingCurve (const QEasingCurve& curve);
+    QEasingCurve            easingCurve () const;
 };
 };
 %ModuleHeaderCode

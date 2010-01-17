@@ -30,7 +30,8 @@ enum Effect
     WindowPreview,
     PresentWindows,
     PresentWindowsGroup,
-    HighlightWindows
+    HighlightWindows,
+    OverrideShadow
 };
 bool                    isEffectAvailable (Plasma::WindowEffects::Effect effect);
 void                    slideWindow (WId id, Plasma::Location location, int offset);
@@ -40,5 +41,6 @@ void                    showWindowThumbnails (WId parent, const QList<WId>& wind
 void                    presentWindows (WId controller, const QList<WId>& ids);
 void                    presentWindows (WId controller, int desktop = -1);
 void                    highlightWindows (WId controller, const QList<WId>& ids);
+void                    overrideShadow (WId window, bool override);
 };
 };

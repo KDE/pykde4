@@ -66,6 +66,8 @@ protected:
     void                    changeEvent (QEvent* event);
 public:
     bool                    isCheckable () const;
+protected:
+    QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
 };
 // PushButton
 

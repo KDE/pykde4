@@ -189,17 +189,6 @@ Plasma::Direction       locationToDirection (Plasma::Location location);
 Plasma::Direction       locationToInverseDirection (Plasma::Location location);
 QGraphicsView*          viewFor (const QGraphicsItem* item);
 
-enum AnimationDirection
-{
-    MoveUp,
-    MoveUpRight,
-    MoveRight,
-    MoveDownRight,
-    MoveDown,
-    MoveDownLeft,
-    MoveLeft,
-    MoveUpLeft
-};
 enum ItemStatus
 {
     UnknownStatus,

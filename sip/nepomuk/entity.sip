@@ -58,10 +58,10 @@ public:
     else if (dynamic_cast<Nepomuk::Types::Property*>(sipCpp))
         sipType = sipType_Nepomuk_Types_Property;
 %End
-//ig    QString                 label (const QString& language = KGlobal::locale()->language());
-//ig    QString                 label (const QString& language = KGlobal::locale()->language()) const;
-//ig    QString                 comment (const QString& language = KGlobal::locale()->language());
-//ig    QString                 comment (const QString& language = KGlobal::locale()->language()) const;
+//ig    QString                 label (const QString& language = 0);
+//ig    QString                 label (const QString& language = 0) const;
+//ig    QString                 comment (const QString& language = 0);
+//ig    QString                 comment (const QString& language = 0) const;
 //force
     QString                 label (const QString& language);
     QString                 comment (const QString& language);

@@ -127,7 +127,7 @@ ADD_SIP_PYTHON_MODULE(PyKDE4.khtml sip/khtml/khtmlmod.sip ${KDE4_KHTML_LIBS})
 
 FILE(GLOB knewstuff_files_sip sip/knewstuff/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${knewstuff_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.knewstuff sip/knewstuff/knewstuffmod.sip ${KDE4_KNEWSTUFF2_LIBS} ${QT_QTCORE_LIBRARY})
+ADD_SIP_PYTHON_MODULE(PyKDE4.knewstuff sip/knewstuff/knewstuffmod.sip ${KDE4_KNEWSTUFF2_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTCORE_LIBRARY})
 
 FILE(GLOB dnssd_files_sip sip/dnssd/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${dnssd_files_sip})

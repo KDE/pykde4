@@ -72,6 +72,7 @@ Example:
 
  // Delete a couple of items inside a transaction
  Akonadi.TransactionSequence *transaction = new TransactionSequence;
+ connect( transaction, SIGNAL( result( KJob* ) ), SLOT( transactionFinished( KJob* ) ) );
 
  const Akonadi.Item.List items = ...
 
@@ -79,7 +80,15 @@ Example:
    new Akonadi.ItemDeleteJob( item, transaction );
  }
 
- transaction-&gt;exec();
+ ...
+
+ MyClass.transactionFinished( KJob *job )
+ {
+   if ( job-&gt;error() )
+     qDebug() &lt;&lt; "Error occurred";
+   else
+     qDebug() &lt;&lt; "Items deleted successfully";
+ }
 
 </pre>
 </p>

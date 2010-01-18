@@ -65,11 +65,17 @@ This job copies a single collection into a specified target collection.
  Akonadi.Collection target = ...
 
  Akonadi.CollectionCopyJob *job = new Akonadi.CollectionCopyJob( source, target );
+ connect( job, SIGNAL( result( KJob* ) ), SLOT( copyFinished( KJob* ) ) );
 
- if ( job-&gt;exec() )
-   qDebug() &lt;&lt; "Copied successfully";
- else
-   qDebug() &lt;&lt; "Error occurred";
+ ...
+
+ MyClass.copyFinished( KJob *job )
+ {
+   if ( job-&gt;error() )
+     qDebug() &lt;&lt; "Error occurred";
+   else
+     qDebug() &lt;&lt; "Copied successfully";
+ }
 
 </pre>
 </p>

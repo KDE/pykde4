@@ -69,8 +69,20 @@ Collections are hierarchical, i.e., they may have a parent collection.
 
  // fetching all collections recursive, starting at the root collection
  CollectionFetchJob *job = new CollectionFetchJob( Collection.root(), CollectionFetchJob.Recursive );
- if ( job-&gt;exec() ) {
-   Collection.List collections = job-&gt;collections();
+ connect( job, SIGNAL( result( KJob* ) ), SLOT( fetchFinished( KJob* ) ) );
+
+ ...
+
+ MyClass.fetchFinished( KJob *job )
+ {
+   if ( job-&gt;error() ) {
+     qDebug() &lt;&lt; "Error occurred";
+     return;
+   }
+
+   CollectionFetchJob *fetchJob = qobject_cast&lt;CollectionFetchJob*&gt;( job );
+
+   const Collection.List collections = fetchJob-&gt;collections();
    foreach( const Collection &amp;collection, collections ) {
      qDebug() &lt;&lt; "Name:" &lt;&lt; collection.name();
    }

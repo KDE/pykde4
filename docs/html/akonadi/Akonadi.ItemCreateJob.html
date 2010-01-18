@@ -77,11 +77,17 @@ Example:
  Akonadi.Collection collection = Akonadi.Collection.root();
 
  Akonadi.ItemCreateJob *job = new Akonadi.ItemCreateJob( item, collection );
+ connect( job, SIGNAL( result( KJob* ) ), SLOT( jobFinished( KJob* ) ) );
 
- if ( job-&gt;exec() )
-   qDebug() &lt;&lt; "Contact item created successfully";
- else
-   qDebug() &lt;&lt; "Error occurred";
+ ...
+
+ MyClass.jobFinished( KJob *job )
+ {
+   if ( job-&gt;error() )
+     qDebug() &lt;&lt; "Error occurred";
+   else
+     qDebug() &lt;&lt; "Contact item created successfully";
+ }
 
 </pre>
 </p>

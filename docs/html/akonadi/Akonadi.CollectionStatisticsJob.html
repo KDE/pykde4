@@ -67,8 +67,20 @@ Example:
  Akonadi.Collection collection = ...
 
  Akonadi.CollectionStatisticsJob *job = new Akonadi.CollectionStatisticsJob( collection );
- if ( job-&gt;exec() ) {
-   Akonadi.CollectionStatistics statistics = job-&gt;statistics();
+ connect( job, SIGNAL( result( KJob* ) ), SLOT( jobFinished( KJob* ) ) );
+
+ ...
+
+ MyClass.jobFinished( KJob *job )
+ {
+   if ( job-&gt;error() ) {
+     qDebug() &lt;&lt; "Error occurred";
+     return;
+   }
+
+   CollectionStatisticsJob *statisticsJob = qobject_cast&lt;CollectionStatisticsJob*&gt;( job );
+
+   const Akonadi.CollectionStatistics statistics = statisticsJob-&gt;statistics();
    qDebug() &lt;&lt; "Unread items:" &lt;&lt; statistics.unreadCount();
  }
 

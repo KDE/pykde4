@@ -70,11 +70,16 @@ Example:
  const Akonadi.Item.List items = ...
 
  Akonadi.LinkJob *job = new Akonadi.LinkJob( virtualCollection, items );
+ connect( job, SIGNAL( result( KJob* ) ), SLOT( jobFinished( KJob* ) ) );
 
- if ( job-&gt;exec() ) {
-   qDebug() &lt;&lt; "Linked items successfully";
- } else {
-   qDebug() &lt;&lt; "Error occurred";
+ ...
+
+ MyClass.jobFinished( KJob *job )
+ {
+   if ( job-&gt;error() )
+     qDebug() &lt;&lt; "Error occurred";
+   else
+     qDebug() &lt;&lt; "Linked items successfully";
  }
 
 </pre>

@@ -68,15 +68,24 @@ Example:
 
  // Fetch all items with full payload from the root collection
  Akonadi.ItemFetchJob *job = new Akonadi.ItemFetchJob( Akonadi.Collection.root() );
+ connect( job, SIGNAL( result( KJob* ) ), SLOT( jobFinished( KJob* ) ) );
  job-&gt;fetchScope().fetchFullPayload();
 
- if ( job-&gt;exec() ) {
-   Akonadi.Item.List items = job-&gt;items();
+ ...
+
+ MyClass.jobFinished( KJob *job )
+ {
+   if ( job-&gt;error() ) {
+     qDebug() &lt;&lt; "Error occurred";
+     return;
+   }
+
+   Akonadi.ItemFetchJob *fetchJob = qobject_cast&lt;Akonadi.ItemFetchJob*&gt;( job );
+
+   const Akonadi.Item.List items = fetchJob-&gt;items();
    foreach( const Akonadi.Item &amp;item, items ) {
      qDebug() &lt;&lt; "Item ID:" &lt;&lt; item.id();
    }
- } else {
-   qDebug() &lt;&lt; "Error occurred";
  }
 
 </pre>

@@ -56,8 +56,13 @@ Namespace: Akonadi.SelectionProxyModel<br />
 <p>A proxy model used to reference count selected Akonadi.Collection in a view
 </p>
 <p>
-This model extends KSelectionProxyModel implement reference counting on the Collections
-in an EntityTreeModel. This should only be used if the EntityTreeModel uses LazyPopulation.
+Only selected Collections will be populated and monitored for changes. Unselected
+Collections will be ignored.
+</p>
+<p>
+This model extends KSelectionProxyModel to implement reference counting on the Collections
+in an EntityTreeModel. The EntityTreeModel must use LazyPopulation to enable
+SelectionProxyModel to work.
 </p>
 <p>
 By selecting a Collection, its reference count will be increased. A Collection in the
@@ -113,6 +118,9 @@ Example:
  EntityListView *itemView = new EntityListView( this );
  itemView-&gt;setModel( itemModel );
 </pre>
+</p>
+<p>
+See libakonadi_integration "Integration in your Application" for further guidance on the use of this class.
 </p>
 <p>
 

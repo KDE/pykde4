@@ -27,7 +27,7 @@ class Animation : QAbstractAnimation
 
 public:
     int                     duration () const;
-    enum Reference
+    enum ReferenceFlag
     {
         Center,
         Up,
@@ -35,6 +35,7 @@ public:
         Left,
         Right
     };
+    
     explicit                Animation (QObject* parent /TransferThis/ = 0);
     virtual ~Animation ()=0;
 protected:
@@ -50,17 +51,15 @@ protected:
 public:
     void                    setTargetWidget (QGraphicsWidget* widget);
     QGraphicsWidget*        targetWidget () const;
-    enum MovementDirection
+    enum MovementDirectionFlag
     {
+	MoveAny,
         MoveUp,
-        MoveUpRight,
         MoveRight,
-        MoveDownRight,
         MoveDown,
-        MoveDownLeft,
         MoveLeft,
-        MoveUpLeft
     };
+
     void                    setEasingCurve (const QEasingCurve& curve);
     QEasingCurve            easingCurve () const;
 };

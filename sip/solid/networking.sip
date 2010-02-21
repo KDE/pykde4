@@ -51,9 +51,14 @@ Solid::Networking::Status  status ();
 //ig void                    setDisconnectPolicy (Solid::Networking::ManagementPolicy policy);
 //ig Solid::Networking::ManagementPolicy  disconnectPolicy ();
 
-//ig class Notifier;
+class Notifier : QObject /Abstract,PyQt4NoQMetaObject/
+{
+    void statusChanged(Solid::Networking::Status status);
+    void shouldConnect();
+    void shouldDisconnect();
+};
 
-//ig Solid::Networking::Notifier*  notifier ();
+Solid::Networking::Notifier*               notifier ();
 };
 // Networking
 

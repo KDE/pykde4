@@ -91,8 +91,8 @@ use DomainBrowser.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#State">State</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Working, Stopped, Unsupported&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#finished">finished</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#serviceAdded">serviceAdded</a> (<a href="../dnssd/DNSSD.RemoteService.Ptr.html">DNSSD.RemoteService.Ptr</a> service)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#serviceRemoved">serviceRemoved</a> (<a href="../dnssd/DNSSD.RemoteService.Ptr.html">DNSSD.RemoteService.Ptr</a> service)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#serviceAdded">serviceAdded</a> (, <a href="../dnssd/DNSSD.RemoteService.Ptr.html">DNSSD.RemoteService.Ptr</a> service)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#serviceRemoved">serviceRemoved</a> (, <a href="../dnssd/DNSSD.RemoteService.Ptr.html">DNSSD.RemoteService.Ptr</a> service)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ServiceBrowser">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, bool autoResolve=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> subtype=QString())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#finished">finished</a> (self)</td></tr>
@@ -146,7 +146,49 @@ use DomainBrowser.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="finished"></a>
+<div class="memdoc"><p>Create a ServiceBrowser for a particular service type
+</p>
+<p>
+DomainBrowser can be used to find other domains to browse on.
+If no domain is given, the default domain is used.
+</p>
+<p>
+The service type is the high-level protocol type, followed by a dot,
+followed by the transport protocol type (@c _tcp or _udp).
+The <a href="http://www.dns-sd.org">DNS-SD website</a> maintains
+<a href="http://www.dns-sd.org/ServiceTypes.html">a full list</a>
+of service types.
+</p>
+<p>
+The <b>subtype</b> parameter allows you to do more fine-grained filtering
+on the services you are interested in. So you might request only
+FTP servers that allow anonymous access by passing "_ftp._tcp" as the
+<b>type</b> and "_anon" as the <b>subtype.</b> Subtypes are particularly
+important for types like _soap and _upnp, which are far too generic
+for most applications. In these cases, the subtype can be used to
+specify the particular SOAP or UPnP protocol they want.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd>
+Enabling <b>autoResolve</b> will increase network usage by resolving
+all services, so this feature should be used only when necessary.
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> service types to browse for (example: "_http._tcp")
+
+<tr><td></td><td valign="top"><em>autoResolve</em>&nbsp;</td><td> discovered services will be resolved before being
+reported with the serviceAdded() signal
+
+<tr><td></td><td valign="top"><em>domain</em>&nbsp;</td><td> a domain to search on instead of the default one
+
+<tr><td></td><td valign="top"><em>subtype</em>&nbsp;</td><td> only browse for a specific subtype
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> startBrowse() and isAvailable()
+</dd></dl>
+</p></div></div><a class="anchor" name="finished"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -487,8 +529,9 @@ function returns.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Availability of DNS-SD services
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Working</em>&nbsp;</td><td><tr><td valign="top"><em>Stopped</em>&nbsp;</td><td><tr><td valign="top"><em>Unsupported</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

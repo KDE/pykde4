@@ -225,7 +225,7 @@ notification-&gt;sendEvent();
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#action2Activated">action2Activated</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#action3Activated">action3Activated</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#activated">activated</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#activated">activated</a> (long action)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#activated">activated</a> (, long action)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#closed">closed</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ignored">ignored</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
@@ -304,7 +304,31 @@ notification-&gt;sendEvent();
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KNotification"></a>
+<div class="memdoc"><p>Create a new notification.
+</p>
+<p>
+You have to use sendEvent to show the notification.
+</p>
+<p>
+The pointer is automatically deleted when the event is closed.
+</p>
+<p>
+Make sure you use one of the NotificationFlags CloseOnTimeOut or
+CloseWhenWidgetActivated, if not,
+you have to close the notification yourself.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>eventId</em>&nbsp;</td><td> is the name of the event
+
+<tr><td></td><td valign="top"><em>widget</em>&nbsp;</td><td> is a widget where the notification reports to
+
+<tr><td></td><td valign="top"><em>flags</em>&nbsp;</td><td> is a bitmask of NotificationFlag
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KNotification"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -338,7 +362,34 @@ notification-&gt;sendEvent();
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="action1Activated"></a>
+<div class="memdoc"><p>Create a new notification.
+</p>
+<p>
+You have to use sendEvent to show the notification.
+</p>
+<p>
+The pointer is automatically deleted when the event is closed.
+</p>
+<p>
+Make sure you use one of the NotificationFlags CloseOnTimeOut or
+CloseWhenWidgetActivated, if not,
+you have to close the notification yourself.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>eventId</em>&nbsp;</td><td> is the name of the event
+
+<tr><td></td><td valign="top"><em>flags</em>&nbsp;</td><td> is a bitmask of NotificationFlag
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> parent object
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="action1Activated"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -1379,8 +1430,28 @@ Depending on the configuration, the taskbar entry of the window containing the w
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Sometimes the user may want different notifications for the same event,
+depending the source of the event. Example, you want to be notified for mails
+that arrive in your folder "personal inbox" but not for those in "spam" folder
+</p>
+<p>
+A notification context is a pair of two strings.
+The first string is a key from what the context is. example "group" or
+"filter" (not translated).
+The second is the id of the context. In our example, the group id or the
+filter id in the applications.
+These strings are the ones present in the config file, and are in theory not
+shown in the user interface.
+</p>
+<p>
+The order of contexts in the list is is important, the most important context
+should be placed first. They are processed in that order when the notification occurs.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> event
+</dd></dl>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>RaiseWidgetOnActivation</em>&nbsp;=&nbsp;0x01</td><td><tr><td valign="top"><em>CloseOnTimeout</em>&nbsp;=&nbsp;0x00</td><td><tr><td valign="top"><em>Persistent</em>&nbsp;=&nbsp;0x02</td><td><tr><td valign="top"><em>CloseWhenWidgetActivated</em>&nbsp;=&nbsp;0x04</td><td><tr><td valign="top"><em>Persistant</em>&nbsp;=&nbsp;Persistent</td><td><tr><td valign="top"><em>DefaultEvent</em>&nbsp;=&nbsp;0xF000</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="StandardEvent"></a>
 <div class="memitem">
@@ -1390,8 +1461,9 @@ Depending on the configuration, the taskbar entry of the window containing the w
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>default events you can use in the event function
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Notification</em>&nbsp;</td><td><tr><td valign="top"><em>Warning</em>&nbsp;</td><td><tr><td valign="top"><em>Error</em>&nbsp;</td><td><tr><td valign="top"><em>Catastrophe</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

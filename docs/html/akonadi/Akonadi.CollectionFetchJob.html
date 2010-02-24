@@ -79,7 +79,7 @@ from the Akonadi storage.
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Type">Type</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Base, FirstLevel, Recursive&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#collectionsReceived">collectionsReceived</a> (<a href="../akonadi/Akonadi.Collection.List.html">Akonadi.Collection.List</a> collections)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#collectionsReceived">collectionsReceived</a> (, <a href="../akonadi/Akonadi.Collection.List.html">Akonadi.Collection.List</a> collections)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#CollectionFetchJob">__init__</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection, <a href="../akonadi/Akonadi.CollectionFetchJob.html#Type">Akonadi.CollectionFetchJob.Type</a> type=Akonadi.CollectionFetchJob.FirstLevel, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#CollectionFetchJob">__init__</a> (self, <a href="../akonadi/Akonadi.Collection.List.html">Akonadi.Collection.List</a> collections, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
@@ -128,7 +128,25 @@ from the Akonadi storage.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="CollectionFetchJob"></a>
+<div class="memdoc"><p>Creates a new collection fetch job. If the given base collection
+has a unique identifier, this is used to identify the collection in the
+Akonadi server. If only a remote identifier is avaiable the collection
+is identified using that, given a resource search context has been
+specified. There two ways of doing that: by calling setResource()
+or globally using Akonadi.ResourceSelectJob.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>collection</em>&nbsp;</td><td> The base collection for the listing.
+
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> The type of fetch depth.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent object.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="CollectionFetchJob"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -156,7 +174,19 @@ from the Akonadi storage.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="collections"></a>
+<div class="memdoc"><p>Creates a new collection fetch job to retrieve a list of collections.
+The same rules for identifiers apply as noted in the constructor above.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>collections</em>&nbsp;</td><td> A list of collections to fetch. Must not be empty.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent object.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="collections"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -200,7 +230,7 @@ from the Akonadi storage.
 </td></tr>
 </table></dl>
 <p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("collectionsReceived(const const Akonadi::Collection::List&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="doHandleResponse"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("collectionsReceived(const Akonadi::Collection::List&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="doHandleResponse"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -418,8 +448,9 @@ from the server as well as filter to select which collections to fetch.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Describes the type of fetch depth.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>CreateCollection</em>&nbsp;</td><td><tr><td valign="top"><em>CopyCollections</em>&nbsp;</td><td><tr><td valign="top"><em>DeleteCollections</em>&nbsp;</td><td><tr><td valign="top"><em>SynchronizeCollections</em>&nbsp;</td><td><tr><td valign="top"><em>CollectionProperties</em>&nbsp;</td><td><tr><td valign="top"><em>CopyItems</em>&nbsp;</td><td><tr><td valign="top"><em>Paste</em>&nbsp;</td><td><tr><td valign="top"><em>DeleteItems</em>&nbsp;</td><td><tr><td valign="top"><em>ManageLocalSubscriptions</em>&nbsp;</td><td><tr><td valign="top"><em>AddToFavoriteCollections</em>&nbsp;</td><td><tr><td valign="top"><em>RemoveFromFavoriteCollections</em>&nbsp;</td><td><tr><td valign="top"><em>RenameFavoriteCollection</em>&nbsp;</td><td><tr><td valign="top"><em>CopyCollectionToMenu</em>&nbsp;</td><td><tr><td valign="top"><em>CopyItemToMenu</em>&nbsp;</td><td><tr><td valign="top"><em>MoveItemToMenu</em>&nbsp;</td><td><tr><td valign="top"><em>MoveCollectionToMenu</em>&nbsp;</td><td><tr><td valign="top"><em>CutItems</em>&nbsp;</td><td><tr><td valign="top"><em>CutCollections</em>&nbsp;</td><td><tr><td valign="top"><em>LastType</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

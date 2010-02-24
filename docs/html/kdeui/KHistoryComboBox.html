@@ -119,7 +119,27 @@ duplicates will be disabled when HISTCONTROL is set to "ignoredups" or
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KHistoryComboBox"></a>
+<div class="memdoc"><p>Constructs a "read-write" combobox. A read-only history combobox
+doesn't make much sense, so it is only available as read-write.
+Completion will be used automatically for the items in the combo.
+</p>
+<p>
+The insertion-policy is set to NoInsert, you have to add the items
+yourself via the slot addToHistory. If you want every item added,
+use
+</p>
+<p>
+<pre class="fragment">
+ connect( combo, SIGNAL( activated( const QString&amp; )),
+          combo, SLOT( addToHistory( const QString&amp; )));
+</pre>
+</p>
+<p>
+Use QComboBox.setMaxCount() to limit the history.
+</p>
+<p>
+<b>parent</b> the parent object of this widget.
+</p></div></div><a class="anchor" name="KHistoryComboBox"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -147,7 +167,11 @@ duplicates will be disabled when HISTCONTROL is set to "ignoredups" or
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KHistoryComboBox"></a>
+<div class="memdoc"><p>Same as the previous constructor, but additionally has the option
+to specify whether you want to let KHistoryComboBox handle completion
+or not. If set to <b>true,</b> KHistoryComboBox will sync the completion to the
+contents of the combobox.
+</p></div></div><a class="anchor" name="KHistoryComboBox"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

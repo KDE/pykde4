@@ -236,7 +236,7 @@ real (not simulated) system time, use realCurrentLocalDateTime().
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatetime.html">QDateTime</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dateTime">dateTime</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#daysTo">daysTo</a> (self, <a href="../kdecore/KDateTime.html">KDateTime</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#detach">detach</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KDateTime.html">KDateTime</a>, bool (negZero)&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fromString">fromString</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> string, <a href="../kdecore/KDateTime.html#TimeFormat">KDateTime.TimeFormat</a> format=KDateTime.ISODate, )</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KDateTime.html">KDateTime</a>, bool negZero&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fromString">fromString</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> string, <a href="../kdecore/KDateTime.html#TimeFormat">KDateTime.TimeFormat</a> format=KDateTime.ISODate)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KDateTime.html">KDateTime</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fromString">fromString</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> string, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> format, <a href="../kdecore/KTimeZones.html">KTimeZones</a> zones=0, bool offsetIfAmbiguous=1)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isClockTime">isClockTime</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isDateOnly">isDateOnly</a> (self)</td></tr>
@@ -294,7 +294,8 @@ real (not simulated) system time, use realCurrentLocalDateTime().
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KDateTime"></a>
+<div class="memdoc"><p>Constructs an invalid date/time.
+</p></div></div><a class="anchor" name="KDateTime"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -322,7 +323,30 @@ real (not simulated) system time, use realCurrentLocalDateTime().
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KDateTime"></a>
+<div class="memdoc"><p>Constructs a date-only value expressed in a given time specification. The
+time is set to 00:00:00.
+</p>
+<p>
+The instance is initialised according to the time specification type of
+<b>spec</b> as follows:
+- UTC : date is stored as UTC.
+- OffsetFromUTC : date is a local time at the specified offset
+from UTC.
+- TimeZone : date is a local time in the specified time zone.
+- LocalZone : date is a local date in the current system time
+zone.
+- ClockTime : time zones are ignored.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>date</em>&nbsp;</td><td> date in the time zone indicated by <b>spec</b>
+
+<tr><td></td><td valign="top"><em>spec</em>&nbsp;</td><td> time specification
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KDateTime"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -356,7 +380,31 @@ real (not simulated) system time, use realCurrentLocalDateTime().
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KDateTime"></a>
+<div class="memdoc"><p>Constructs a date/time expressed as specified by <b>spec.</b>
+</p>
+<p>
+<b>date</b> and <b>time</b> are interpreted and stored according to the value of
+<b>spec</b> as follows:
+- UTC : <b>date</b> and <b>time</b> are in UTC.
+- OffsetFromUTC : date/time is a local time at the specified offset
+from UTC.
+- TimeZone : date/time is a local time in the specified time zone.
+- LocalZone : <b>date</b> and <b>time</b> are local times in the current
+system time zone.
+- ClockTime : time zones are ignored.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>date</em>&nbsp;</td><td> date in the time zone indicated by <b>spec</b>
+
+<tr><td></td><td valign="top"><em>time</em>&nbsp;</td><td> time in the time zone indicated by <b>spec</b>
+
+<tr><td></td><td valign="top"><em>spec</em>&nbsp;</td><td> time specification
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KDateTime"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -384,7 +432,42 @@ real (not simulated) system time, use realCurrentLocalDateTime().
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KDateTime"></a>
+<div class="memdoc"><p>Constructs a date/time expressed in a given time specification.
+</p>
+<p>
+<b>dt</b> is interpreted and stored according to the time specification type
+of <b>spec</b> as follows:
+- UTC : <b>dt</b> is stored as a UTC value. If
+dt.timeSpec() is Qt.LocalTime, <b>dt</b> is first
+converted from the current system time zone to UTC
+before storage.
+- OffsetFromUTC : date/time is stored as a local time at the specified
+offset from UTC. If dt.timeSpec() is Qt.UTC,
+the time is adjusted by the UTC offset before
+storage. If dt.timeSpec() is Qt.LocalTime,
+it is assumed to be a local time at the specified
+offset from UTC, and is stored without adjustment.
+- TimeZone : if <b>dt</b> is specified as a UTC time (i.e. dt.timeSpec()
+is Qt.UTC), it is first converted to local time in
+specified time zone before being stored.
+- LocalZone : <b>dt</b> is stored as a local time in the current system
+time zone. If dt.timeSpec() is Qt.UTC, <b>dt</b> is
+first converted to local time before storage.
+- ClockTime : If dt.timeSpec() is Qt.UTC, <b>dt</b> is first
+converted to local time in the current system time zone
+before storage. After storage, the time is treated as a
+simple clock time, ignoring time zones.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dt</em>&nbsp;</td><td> date and time
+
+<tr><td></td><td valign="top"><em>spec</em>&nbsp;</td><td> time specification
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KDateTime"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -406,7 +489,18 @@ real (not simulated) system time, use realCurrentLocalDateTime().
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KDateTime"></a>
+<div class="memdoc"><p>Constructs a date/time from a QDateTime.
+The KDateTime is expressed in either UTC or the local system time zone,
+according to <b>dt.timeSpec().</b>
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dt</em>&nbsp;</td><td> date and time
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KDateTime"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -901,7 +995,7 @@ inappropriately, it will reduce efficiency!
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="../kdecore/KDateTime.html">KDateTime</a>, bool (negZero) fromString</td>
+<td class="memname"><a href="../kdecore/KDateTime.html">KDateTime</a>, bool negZero fromString</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
@@ -915,7 +1009,7 @@ inappropriately, it will reduce efficiency!
 <td class="memname"></td>
 <td></td>
 <td class="paramtype"><a href="../kdecore/KDateTime.html#TimeFormat">KDateTime.TimeFormat</a>&nbsp;</td>
-<td class="paramname"><em>format=KDateTime.ISODate</em>, </td>
+<td class="paramname"><em>format=KDateTime.ISODate</em></td>
 </tr>
 <tr>
 <td></td>
@@ -2590,8 +2684,26 @@ the number of seconds to add to UTC to get the local time.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>How this KDateTime compares with another.
+If any date-only value is involved, comparison of KDateTime values
+requires them to be considered as representing time periods. A date-only
+instance represents a time period from 00:00:00 to 23:59:59.999 on a given
+date, while a date/time instance can be considered to represent a time
+period whose start and end times are the same. They may therefore be
+earlier or later, or may overlap or be contained one within the other.
+</p>
+<p>
+Values may be OR'ed with each other in any combination of 'consecutive'
+intervals to represent different types of relationship.
+</p>
+<p>
+In the descriptions of the values below,
+- s1 = start time of this instance
+- e1 = end time of this instance
+- s2 = start time of other instance
+- e2 = end time of other instance.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Before</em>&nbsp;=&nbsp;0x01</td><td><tr><td valign="top"><em>AtStart</em>&nbsp;=&nbsp;0x02</td><td><tr><td valign="top"><em>Inside</em>&nbsp;=&nbsp;0x04</td><td><tr><td valign="top"><em>AtEnd</em>&nbsp;=&nbsp;0x08</td><td><tr><td valign="top"><em>After</em>&nbsp;=&nbsp;0x10</td><td><tr><td valign="top"><em>Equal</em>&nbsp;=&nbsp;AtStart|Inside|AtEnd</td><td><tr><td valign="top"><em>Outside</em>&nbsp;=&nbsp;Before|AtStart|Inside|AtEnd|After</td><td><tr><td valign="top"><em>StartsAt</em>&nbsp;=&nbsp;AtStart|Inside|AtEnd|After</td><td><tr><td valign="top"><em>EndsAt</em>&nbsp;=&nbsp;Before|AtStart|Inside|AtEnd</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="SpecType"></a>
 <div class="memitem">
@@ -2601,8 +2713,13 @@ the number of seconds to add to UTC to get the local time.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>The time specification type of a KDateTime instance.
+This specifies how the date/time component of the KDateTime instance
+should be interpreted, i.e. what type of time zone (if any) the date/time
+is expressed in. For the full time specification (including time zone
+details), see KDateTime.Spec.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Invalid</em>&nbsp;</td><td><tr><td valign="top"><em>UTC</em>&nbsp;</td><td><tr><td valign="top"><em>OffsetFromUTC</em>&nbsp;</td><td><tr><td valign="top"><em>TimeZone</em>&nbsp;</td><td><tr><td valign="top"><em>LocalZone</em>&nbsp;</td><td><tr><td valign="top"><em>ClockTime</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="TimeFormat"></a>
 <div class="memitem">
@@ -2612,8 +2729,9 @@ the number of seconds to add to UTC to get the local time.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Format for strings representing date/time values.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>ISODate</em>&nbsp;</td><td><tr><td valign="top"><em>RFCDate</em>&nbsp;</td><td><tr><td valign="top"><em>RFCDateDay</em>&nbsp;</td><td><tr><td valign="top"><em>QtTextDate</em>&nbsp;</td><td><tr><td valign="top"><em>LocalDate</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

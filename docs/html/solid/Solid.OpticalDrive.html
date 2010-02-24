@@ -61,8 +61,8 @@ A Cdrom is a storage that can handle optical discs.
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#MediumType">MediumType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Cdr, Cdrw, Dvd, Dvdr, Dvdrw, Dvdram, Dvdplusr, Dvdplusrw, Dvdplusdl, Dvdplusdlrw, Bd, Bdr, Bdre, HdDvd, HdDvdr, HdDvdrw&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ejectDone">ejectDone</a> (<a href="../solid/Solid.html#ErrorType">Solid.ErrorType</a> error, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a> errorData, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> udi)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ejectPressed">ejectPressed</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> udi)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ejectDone">ejectDone</a> (, <a href="../solid/Solid.html#ErrorType">Solid.ErrorType</a> error, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a> errorData, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> udi)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ejectPressed">ejectPressed</a> (, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> udi)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#OpticalDrive">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> backendObject)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../solid/Solid.DeviceInterface.html#Type">Solid.DeviceInterface.Type</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deviceInterfaceType">deviceInterfaceType</a> (self)</td></tr>
@@ -96,7 +96,18 @@ A Cdrom is a storage that can handle optical discs.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="deviceInterfaceType"></a>
+<div class="memdoc"><p>Creates a new Cdrom object.
+You generally won't need this. It's created when necessary using
+Device.as().
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>backendObject</em>&nbsp;</td><td> the device interface object provided by the backend
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> Solid.Device.as()
+</dd></dl>
+</p></div></div><a class="anchor" name="deviceInterfaceType"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -166,7 +177,7 @@ If this drive is empty, but has a tray it'll be opened.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("ejectDone(Solid::ErrorType, QVariant, const const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="ejectPressed"></a>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("ejectDone(Solid::ErrorType, QVariant, const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="ejectPressed"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -199,7 +210,7 @@ Please note that some (broken) drives doesn't report this event.
 </td></tr>
 </table></dl>
 <p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("ejectPressed(const const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="readSpeed"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("ejectPressed(const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="readSpeed"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -276,8 +287,27 @@ kilobytes per second.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>This enum type defines the type of medium a cdrom drive supports.
+</p>
+<p>
+- Cdr : A Recordable Compact Disc (CD-R)
+- Cdrw : A ReWritable Compact Disc (CD-RW)
+- Dvd : A Digital Versatile Disc (DVD)
+- Dvdr : A Recordable Digital Versatile Disc (DVD-R)
+- Dvdrw : A ReWritable Digital Versatile Disc (DVD-RW)
+- Dvdram : A Random Access Memory Digital Versatile Disc (DVD-RAM)
+- Dvdplusr : A Recordable Digital Versatile Disc (DVD+R)
+- Dvdplusrw : A ReWritable Digital Versatile Disc (DVD+RW)
+- Dvdplusdl : A Dual Layer Digital Versatile Disc (DVD+R DL)
+- Dvdplusdlrw : A Dual Layer Digital Versatile Disc (DVD+RW DL)
+- Bd : A Blu-ray Disc (BD)
+- Bdr : A Blu-ray Disc Recordable (BD-R)
+- Bdre : A Blu-ray Disc Recordable and Eraseable (BD-RE)
+- HdDvd : A High Density Digital Versatile Disc (HD DVD)
+- HdDvdr : A High Density Digital Versatile Disc Recordable (HD DVD-R)
+- HdDvdrw : A High Density Digital Versatile Disc ReWritable (HD DVD-RW)
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Cdr</em>&nbsp;=&nbsp;0x00001</td><td><tr><td valign="top"><em>Cdrw</em>&nbsp;=&nbsp;0x00002</td><td><tr><td valign="top"><em>Dvd</em>&nbsp;=&nbsp;0x00004</td><td><tr><td valign="top"><em>Dvdr</em>&nbsp;=&nbsp;0x00008</td><td><tr><td valign="top"><em>Dvdrw</em>&nbsp;=&nbsp;0x00010</td><td><tr><td valign="top"><em>Dvdram</em>&nbsp;=&nbsp;0x00020</td><td><tr><td valign="top"><em>Dvdplusr</em>&nbsp;=&nbsp;0x00040</td><td><tr><td valign="top"><em>Dvdplusrw</em>&nbsp;=&nbsp;0x00080</td><td><tr><td valign="top"><em>Dvdplusdl</em>&nbsp;=&nbsp;0x00100</td><td><tr><td valign="top"><em>Dvdplusdlrw</em>&nbsp;=&nbsp;0x00200</td><td><tr><td valign="top"><em>Bd</em>&nbsp;=&nbsp;0x00400</td><td><tr><td valign="top"><em>Bdr</em>&nbsp;=&nbsp;0x00800</td><td><tr><td valign="top"><em>Bdre</em>&nbsp;=&nbsp;0x01000</td><td><tr><td valign="top"><em>HdDvd</em>&nbsp;=&nbsp;0x02000</td><td><tr><td valign="top"><em>HdDvdr</em>&nbsp;=&nbsp;0x04000</td><td><tr><td valign="top"><em>HdDvdrw</em>&nbsp;=&nbsp;0x08000</td><td></table>
 </dl>
 </div></div><p>
 </div>

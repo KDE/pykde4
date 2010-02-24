@@ -49,7 +49,7 @@
 <code>from PyKDE4.kdecore import *</code>
 <p>
 
-Subclasses: <a href="../kdecore/KTzfileTimeZoneSource.html">KTzfileTimeZoneSource</a>, <a href="../kdecore/KSystemTimeZoneSource.html">KSystemTimeZoneSource</a><br />
+Subclasses: <a href="../kdecore/KSystemTimeZoneSource.html">KSystemTimeZoneSource</a>, <a href="../kdecore/KTzfileTimeZoneSource.html">KTzfileTimeZoneSource</a><br />
 
 <h2>Detailed Description</h2>
 
@@ -116,7 +116,30 @@ Base class representing a source of time zone information
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KTimeZoneSource"></a>
+<div class="memdoc"><p>Constructor for use by derived classes, which specifies whether the
+source database supports the ad hoc extraction of data for individual
+time zones using parse(const KTimeZone&amp;).
+</p>
+<p>
+If parse(const KTimeZone&amp;) cannot be used, KTimeZone derived classes
+which use this KTimeZoneSource derived class must create a
+KTimeZoneData object at construction time so that KTimeZone.data()
+will always return a data object.
+</p>
+<p>
+Note the default constructor is equivalent to KTimeZoneSource(true), i.e.
+it is only necessary to use this constructor if parse(const KTimeZone&amp;)
+does not work.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>useZoneParse</em>&nbsp;</td><td> true if parse(const KTimeZone&amp;) works, false if
+parsing must be performed by other methods
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KTimeZoneSource"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

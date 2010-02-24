@@ -134,7 +134,8 @@ KColorScheme.ShadeRole
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KColorScheme"></a>
+<div class="memdoc"><p>Construct a copy of another KColorScheme.
+</p></div></div><a class="anchor" name="KColorScheme"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -168,7 +169,17 @@ KColorScheme.ShadeRole
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="adjustBackground"></a>
+<div class="memdoc"><p>Construct a palette from given color set and state, using the colors
+from the given KConfig (if null, the system colors are used).
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> KColorScheme provides direct access to the color scheme for users
+that deal directly with widget states. Unless you are a low-level user
+or have a legitimate reason to only care about a fixed, limited number
+of states (e.g. windows that cannot be inactive), consider using a
+.KStatefulBrush instead.
+</dd></dl>
+</p></div></div><a class="anchor" name="adjustBackground"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -514,8 +525,16 @@ darker than the base color, with light() == mid().
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>This enumeration describes the background color being selected from the
+given set.
+</p>
+<p>
+Background colors are suitable for drawing under text, and should never
+be used to draw text. In combination with one of the overloads of
+KColorScheme.shade, they may be used to generate colors for drawing
+frames, bevels, and similar decorations.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NormalBackground</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>AlternateBackground</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>ActiveBackground</em>&nbsp;=&nbsp;2</td><td><tr><td valign="top"><em>LinkBackground</em>&nbsp;=&nbsp;3</td><td><tr><td valign="top"><em>VisitedBackground</em>&nbsp;=&nbsp;4</td><td><tr><td valign="top"><em>NegativeBackground</em>&nbsp;=&nbsp;5</td><td><tr><td valign="top"><em>NeutralBackground</em>&nbsp;=&nbsp;6</td><td><tr><td valign="top"><em>PositiveBackground</em>&nbsp;=&nbsp;7</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="ColorSet"></a>
 <div class="memitem">
@@ -525,8 +544,14 @@ darker than the base color, with light() == mid().
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>This enumeration describes the color set for which a color is being
+selected.
+</p>
+<p>
+Color sets define a color "environment", suitable for drawing all parts
+of a given region. Colors from different sets should not be combined.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>View</em>&nbsp;</td><td><tr><td valign="top"><em>Window</em>&nbsp;</td><td><tr><td valign="top"><em>Button</em>&nbsp;</td><td><tr><td valign="top"><em>Selection</em>&nbsp;</td><td><tr><td valign="top"><em>Tooltip</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="DecorationRole"></a>
 <div class="memitem">
@@ -536,8 +561,16 @@ darker than the base color, with light() == mid().
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>This enumeration describes the decoration color being selected from the
+given set.
+</p>
+<p>
+Decoration colors are used to draw decorations (such as frames) for
+special purposes. Like color shades, they are neither foreground nor
+background colors. Text should not be painted over a decoration color,
+and decoration colors should not be used to draw text.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>FocusColor</em>&nbsp;</td><td><tr><td valign="top"><em>HoverColor</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="ForegroundRole"></a>
 <div class="memitem">
@@ -547,8 +580,24 @@ darker than the base color, with light() == mid().
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>This enumeration describes the foreground color being selected from the
+given set.
+</p>
+<p>
+Foreground colors are suitable for drawing text or glyphs (such as the
+symbols on window decoration buttons, assuming a suitable background
+brush is used), and should never be used to draw backgrounds.
+</p>
+<p>
+For window decorations, the following is suggested, but not set in
+stone:
+<li> Maximize - PositiveText </li>
+<li> Minimize - NeutralText </li>
+<li> Close - NegativeText </li>
+<li> WhatsThis - LinkText </li>
+<li> Sticky - ActiveText </li>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NormalText</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>InactiveText</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>ActiveText</em>&nbsp;=&nbsp;2</td><td><tr><td valign="top"><em>LinkText</em>&nbsp;=&nbsp;3</td><td><tr><td valign="top"><em>VisitedText</em>&nbsp;=&nbsp;4</td><td><tr><td valign="top"><em>NegativeText</em>&nbsp;=&nbsp;5</td><td><tr><td valign="top"><em>NeutralText</em>&nbsp;=&nbsp;6</td><td><tr><td valign="top"><em>PositiveText</em>&nbsp;=&nbsp;7</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="ShadeRole"></a>
 <div class="memitem">
@@ -558,8 +607,15 @@ darker than the base color, with light() == mid().
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>This enumeration describes the color shade being selected from the given
+set.
+</p>
+<p>
+Color shades are used to draw "3d" elements, such as frames and bevels.
+They are neither foreground nor background colors. Text should not be
+painted over a shade, and shades should not be used to draw text.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>LightShade</em>&nbsp;</td><td><tr><td valign="top"><em>MidlightShade</em>&nbsp;</td><td><tr><td valign="top"><em>MidShade</em>&nbsp;</td><td><tr><td valign="top"><em>DarkShade</em>&nbsp;</td><td><tr><td valign="top"><em>ShadowShade</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

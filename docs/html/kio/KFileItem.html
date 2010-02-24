@@ -62,7 +62,7 @@ It includes many file attributes such as mimetype, icon, text, mode, link...
 KFileItem is implicitly shared, i.e. it can be used as a value and copied around at almost no cost.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj2950438476">&lt;anonymous&gt;</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Unknown&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj481079852">&lt;anonymous&gt;</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Unknown&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#FileTimes">FileTimes</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ModificationTime, AccessTime, CreationTime&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KFileItem">__init__</a> (self)</td></tr>
@@ -102,7 +102,7 @@ KFileItem is implicitly shared, i.e. it can be used as a value and copied around
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KMimeType.Ptr.html">KMimeType.Ptr</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mimeTypePtr">mimeTypePtr</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mimetype">mimetype</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/mode_t.html">mode_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mode">mode</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>, bool (local)&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mostLocalUrl">mostLocalUrl</a> (self, )</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>, bool local&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mostLocalUrl">mostLocalUrl</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self, bool lowerCase=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nepomukUri">nepomukUri</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator !=">operator !=</a> (self, <a href="../kio/KFileItem.html">KFileItem</a> other)</td></tr>
@@ -141,7 +141,12 @@ KFileItem is implicitly shared, i.e. it can be used as a value and copied around
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KFileItem"></a>
+<div class="memdoc"><p>Null KFileItem. Doesn't represent any file, only exists for convenience.
+</p>
+<p>
+NOTE KDE 4.0 when porting from KFileItem* to KFileItem&amp;:
+'(KFileItem*)a==0' becomes '(KFileItem)a.isNull()'
+</p></div></div><a class="anchor" name="KFileItem"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -181,7 +186,27 @@ KFileItem is implicitly shared, i.e. it can be used as a value and copied around
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KFileItem"></a>
+<div class="memdoc"><p>Creates an item representing a file, from a UDSEntry.
+This is the preferred constructor when using KIO.listDir().
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>entry</em>&nbsp;</td><td> the KIO entry used to get the file, contains info about it
+
+<tr><td></td><td valign="top"><em>itemOrDirUrl</em>&nbsp;</td><td> the URL of the item or of the directory containing this item (see urlIsDirectory).
+
+<tr><td></td><td valign="top"><em>delayedMimeTypes</em>&nbsp;</td><td> specifies if the mimetype of the given
+URL should be determined immediately or on demand.
+See the bool delayedMimeTypes in the KDirLister constructor.
+
+<tr><td></td><td valign="top"><em>urlIsDirectory</em>&nbsp;</td><td> specifies if the url is just the directory of the
+fileitem and the filename from the UDSEntry should be used.
+</td></tr>
+</table></dl>
+<p> When creating KFileItems out of the UDSEntry emitted by a KIO list job,
+use KFileItem(entry, listjob-&gt;url(), delayedMimeTypes, true);
+</p></div></div><a class="anchor" name="KFileItem"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -221,7 +246,26 @@ KFileItem is implicitly shared, i.e. it can be used as a value and copied around
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KFileItem"></a>
+<div class="memdoc"><p>Creates an item representing a file, from all the necessary info for it.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mode</em>&nbsp;</td><td> the file mode (according to stat() (e.g. S_IFDIR...)
+Set to KFileItem.Unknown if unknown. For local files, KFileItem will use stat().
+
+<tr><td></td><td valign="top"><em>permissions</em>&nbsp;</td><td> the access permissions
+If you set both the mode and the permissions, you save a .stat() for
+local files.
+Set to KFileItem.Unknown if you don't know the mode or the permission.
+
+<tr><td></td><td valign="top"><em>url</em>&nbsp;</td><td> the file url
+</td></tr>
+
+<tr><td></td><td valign="top"><em>delayedMimeTypes</em>&nbsp;</td><td> specify if the mimetype of the given URL
+should be determined immediately or on demand
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KFileItem"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -255,7 +299,18 @@ KFileItem is implicitly shared, i.e. it can be used as a value and copied around
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KFileItem"></a>
+<div class="memdoc"><p>Creates an item representing a file, for which the mimetype is already known.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>url</em>&nbsp;</td><td> the file url
+
+<tr><td></td><td valign="top"><em>mimeType</em>&nbsp;</td><td> the name of the file's mimetype
+
+<tr><td></td><td valign="top"><em>mode</em>&nbsp;</td><td> the mode (S_IFDIR...)
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KFileItem"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -277,7 +332,8 @@ KFileItem is implicitly shared, i.e. it can be used as a value and copied around
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="ACL"></a>
+<div class="memdoc"><p>Copy constructor
+</p></div></div><a class="anchor" name="ACL"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -852,17 +908,13 @@ the mimetype first. Equivalent to determineMimeType()-&gt;name()
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="../kdecore/KUrl.html">KUrl</a>, bool (local) mostLocalUrl</td>
+<td class="memname"><a href="../kdecore/KUrl.html">KUrl</a>, bool local mostLocalUrl</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
 <td width="100%"> </td>
-</tr></table>
+</tr>
+</table>
 </div>
 <div class="memdoc"><p>Tries to give a local URL for this file item if possible.
 The given boolean indicates if the returned url is local or not.
@@ -1473,7 +1525,7 @@ on <b>which.</b>
 <div class="memdoc"><p>Returns the owner of the file.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> the file's owner
 </dd></dl>
-</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj2950438476"></a>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj481079852"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -1492,8 +1544,12 @@ on <b>which.</b>
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>The timestamps associated with a file.
+- ModificationTime: the time the file's contents were last modified
+- AccessTime: the time the file was last accessed (last read or written to)
+- CreationTime: the time the file was created
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>ModificationTime</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>AccessTime</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>CreationTime</em>&nbsp;=&nbsp;2</td><td></table>
 </dl>
 </div></div><p>
 </div>

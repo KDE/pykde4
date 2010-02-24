@@ -76,13 +76,13 @@ for this is that moves of files and directories are treated as separate insert a
 Based on work by Hamish Rodda and Pascal Letourneau
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj2951081900">&lt;anonymous&gt;</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ChildCountUnknown&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj479940812">&lt;anonymous&gt;</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ChildCountUnknown&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#AdditionalRoles">AdditionalRoles</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;FileItemRole, ChildCountRole&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#DropsAllowedFlag">DropsAllowedFlag</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoDrops, DropOnDirectory, DropOnAnyFile, DropOnLocalExecutable&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#ModelColumns">ModelColumns</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Name, Size, ModifiedTime, Permissions, Owner, Group, Type, ColumnCount&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#expand">expand</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> index)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#needSequenceIcon">needSequenceIcon</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> index, int sequenceIndex)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#expand">expand</a> (, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> index)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#needSequenceIcon">needSequenceIcon</a> (, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> index, int sequenceIndex)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KDirModel">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#canFetchMore">canFetchMore</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent)</td></tr>
@@ -136,7 +136,13 @@ Based on work by Hamish Rodda and Pascal Letourneau
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="canFetchMore"></a>
+<div class="memdoc"><p></p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> parent qobject
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="canFetchMore"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -293,7 +299,7 @@ Based on work by Hamish Rodda and Pascal Letourneau
 This allows to asynchronously open a tree view down to a given directory.
 Also emitted for the final file, if expandToUrl is called with a file
 (for instance so that it can be selected).
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("expand(const const QModelIndex&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="expandToUrl"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("expand(const QModelIndex&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="expandToUrl"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -658,7 +664,7 @@ If no meaningful alternative icons can be generated, this should be ignored.
 </td></tr> </table></dl>
 <p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
 </dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("needSequenceIcon(const const QModelIndex&, int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="parent"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("needSequenceIcon(const QModelIndex&, int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="parent"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -826,9 +832,7 @@ The model takes ownership.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>*
-Useful "default" columns. Views can use a proxy to have more control over this.
-</p></div></div><a class="anchor" name="simplifiedUrlList"></a>
+<div class="memdoc"></div></div><a class="anchor" name="simplifiedUrlList"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -889,7 +893,7 @@ For example, for a list of "/home/foo/a", "/home/foo/a/a.txt", "/home/foo/a/a/a.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj2951081900"></a>
+<div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj479940812"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -909,7 +913,7 @@ For example, for a list of "/home/foo/a", "/home/foo/a/a.txt", "/home/foo/a/a/a.
 </table>
 </div>
 <div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>FileItemRole</em>&nbsp;=&nbsp;0x07A263FF</td><td><tr><td valign="top"><em>ChildCountRole</em>&nbsp;=&nbsp;0x2C4D0A40</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="DropsAllowedFlag"></a>
 <div class="memitem">
@@ -920,7 +924,7 @@ For example, for a list of "/home/foo/a", "/home/foo/a/a.txt", "/home/foo/a/a/a.
 </table>
 </div>
 <div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NoDrops</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>DropOnDirectory</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>DropOnAnyFile</em>&nbsp;=&nbsp;2</td><td><tr><td valign="top"><em>DropOnLocalExecutable</em>&nbsp;=&nbsp;4</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="ModelColumns"></a>
 <div class="memitem">
@@ -930,8 +934,10 @@ For example, for a list of "/home/foo/a", "/home/foo/a/a.txt", "/home/foo/a/a/a.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>*
+Useful "default" columns. Views can use a proxy to have more control over this.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Name</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>Size</em>&nbsp;</td><td><tr><td valign="top"><em>ModifiedTime</em>&nbsp;</td><td><tr><td valign="top"><em>Permissions</em>&nbsp;</td><td><tr><td valign="top"><em>Owner</em>&nbsp;</td><td><tr><td valign="top"><em>Group</em>&nbsp;</td><td><tr><td valign="top"><em>Type</em>&nbsp;</td><td><tr><td valign="top"><em>ColumnCount</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

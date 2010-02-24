@@ -74,7 +74,7 @@ A combo box showing a number of recent URLs/directories
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Mode">Mode</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Files, Directories, Both&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#OverLoadResolving">OverLoadResolving</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;RemoveTop, RemoveBottom&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlActivated">urlActivated</a> (<a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlActivated">urlActivated</a> (, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUrlComboBox">__init__</a> (self, <a href="../kio/KUrlComboBox.html#Mode">KUrlComboBox.Mode</a> mode, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUrlComboBox">__init__</a> (self, <a href="../kio/KUrlComboBox.html#Mode">KUrlComboBox.Mode</a> mode, bool rw, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
@@ -122,7 +122,27 @@ A combo box showing a number of recent URLs/directories
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KUrlComboBox"></a>
+<div class="memdoc"><p>Constructs a KUrlComboBox.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mode</em>&nbsp;</td><td> is either Files, Directories or Both and controls the
+following behavior:
+</td></tr> </table></dl>
+<p> <li> Files all inserted URLs will be treated as files, therefore the </li>
+url shown in the combo will never show a trailing /
+the icon will be the one associated with the file's mimetype.
+<li> Directories all inserted URLs will be treated as directories, will </li>
+have a trailing slash in the combobox. The current
+directory will show the "open folder" icon, other
+directories the "folder" icon.
+<li> Both Don't mess with anything, just show the url as given. </li>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent object of this widget.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KUrlComboBox"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -538,7 +558,7 @@ it won't have a protocol (file:/), otherwise it will.
 </td></tr>
 </table></dl>
 <p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlActivated(const const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="urls"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlActivated(const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="urls"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -567,8 +587,9 @@ file:/
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>This enum describes which kind of items is shown in the combo box.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>ExeCompletion</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>FileCompletion</em>&nbsp;</td><td><tr><td valign="top"><em>DirCompletion</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="OverLoadResolving"></a>
 <div class="memitem">
@@ -578,8 +599,14 @@ file:/
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>This Enumeration is used in setUrl() to determine which items
+will be removed when the given list is larger than maxItems().
+</p>
+<p>
+<li> RemoveTop means that items will be removed from top </li>
+<li> RemoveBottom means, that items will be removed from the bottom </li>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>RemoveTop</em>&nbsp;</td><td><tr><td valign="top"><em>RemoveBottom</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

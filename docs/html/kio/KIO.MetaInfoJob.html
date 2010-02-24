@@ -59,8 +59,8 @@ Namespace: KIO.MetaInfoJob<br />
 KIO Job to retrieve meta information from files.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#failed">failed</a> (<a href="../kio/KFileItem.html">KFileItem</a> item)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gotMetaInfo">gotMetaInfo</a> (<a href="../kio/KFileItem.html">KFileItem</a> item)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#failed">failed</a> (, <a href="../kio/KFileItem.html">KFileItem</a> item)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gotMetaInfo">gotMetaInfo</a> (, <a href="../kio/KFileItem.html">KFileItem</a> item)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MetaInfoJob">__init__</a> (self, <a href="../kio/KFileItemList.html">KFileItemList</a> items, <a href="../kio/KFileMetaInfo.WhatFlags.html">KFileMetaInfo.WhatFlags</a> w=KFileMetaInfo.Everything, int iocost=3, int cpucost=6, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> requiredfields=QStringList(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> requestedfields=QStringList())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MetaInfoJob">__init__</a> (self)</td></tr>
@@ -122,7 +122,39 @@ KIO Job to retrieve meta information from files.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="MetaInfoJob"></a>
+<div class="memdoc"><p>Creates a new MetaInfoJob.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>items</em>&nbsp;</td><td> A list of KFileItems to get the metainfo for
+
+<tr><td></td><td valign="top"><em>w</em>&nbsp;</td><td> Flags which serve as a preset which can be customized
+with other parameters.
+
+<tr><td></td><td valign="top"><em>iocost</em>&nbsp;</td><td> The allowed cost in terms of io to retrieve the
+metainfo. The approximate maximum number of bytes to
+be read is 10^iocost. Negative values mean that
+there is no limit on the cost. 0 means that no fields
+other than the required fields will be retrieved.
+The default value of 3 means about 1024 bytes per
+file may be read. This is merely a suggestion and not
+a hard limit.
+
+<tr><td></td><td valign="top"><em>cpucost</em>&nbsp;</td><td> The allowed cost in terms of cpu to determine the
+information in the fields. The number mean the amount
+of instructions allowed is 10^cpucost and is a suggestion only.
+The default value of 6 means that about a million
+instructions (10^6) are allowed. This is useful for
+expensive fields like md5 or thumbnails.
+
+<tr><td></td><td valign="top"><em>requiredfields</em>&nbsp;</td><td> The names of fields or groups of fields that should
+be retrieved regardless of cost.
+
+<tr><td></td><td valign="top"><em>requestedfields</em>&nbsp;</td><td> The names of fields or groups of fields that should
+be retrieved first.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="MetaInfoJob"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -165,7 +197,7 @@ exist, or because something went wrong.
 </td></tr>
 </table></dl>
 <p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("failed(const const KFileItem&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="getMetaInfo"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("failed(const KFileItem&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="getMetaInfo"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -207,7 +239,7 @@ retrieved.
 </td></tr>
 </table></dl>
 <p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("gotMetaInfo(const const KFileItem&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="removeItem"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("gotMetaInfo(const KFileItem&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="removeItem"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

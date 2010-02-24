@@ -78,7 +78,7 @@ KFileMetaInfoWidget.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#canceled">canceled</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#leaveModality">leaveModality</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#propertiesClosed">propertiesClosed</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#saveAs">saveAs</a> (<a href="../kdecore/KUrl.html">KUrl</a> oldUrl, <a href="../kdecore/KUrl.html">KUrl</a> newUrl)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#saveAs">saveAs</a> (, <a href="../kdecore/KUrl.html">KUrl</a> oldUrl, <a href="../kdecore/KUrl.html">KUrl</a> newUrl)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KPropertiesDialog">__init__</a> (self, <a href="../kio/KFileItem.html">KFileItem</a> item, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KPropertiesDialog">__init__</a> (self, <a href="../kio/KFileItemList.html">KFileItemList</a> _items, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
@@ -138,7 +138,24 @@ KFileMetaInfoWidget.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KPropertiesDialog"></a>
+<div class="memdoc"><p>Brings up a Properties dialog, as shown above.
+This is the normal constructor for
+file-manager type applications, where you have a KFileItem instance
+to work with. Normally you will use this
+method rather than the one below.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>item</em>&nbsp;</td><td> file item whose properties should be displayed.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> is the parent of the dialog widget.
+
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> is the internal name.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KPropertiesDialog"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -166,7 +183,24 @@ KFileMetaInfoWidget.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KPropertiesDialog"></a>
+<div class="memdoc"><p>
+You use this constructor for cases where you have a number of items,
+rather than a single item. Be careful which methods you use
+when passing a list of files or URLs, since some of them will only
+work on the first item in a list.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_items</em>&nbsp;</td><td> list of file items whose properties should be displayed.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> is the parent of the dialog widget.
+
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> is the internal name.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KPropertiesDialog"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -194,7 +228,27 @@ KFileMetaInfoWidget.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KPropertiesDialog"></a>
+<div class="memdoc"><p>Brings up a Properties dialog. Convenience constructor for
+non-file-manager applications, where you have a KUrl rather than a
+KFileItem or KFileItemList.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_url</em>&nbsp;</td><td> the URL whose properties should be displayed
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> is the parent of the dialog widget.
+
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> is the internal name.
+</td></tr>
+</table></dl>
+<p> IMPORTANT: This constructor, together with exec(), leads to a grave
+display bug (due to KIO.stat() being run before the dialog has all the
+necessary information). Do not use this combination for now.
+TODO: Check if the above is still true with Qt4.
+For local files with a known mimetype, simply create a KFileItem and pass
+it to the other constructor.
+</p></div></div><a class="anchor" name="KPropertiesDialog"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -234,7 +288,27 @@ KFileMetaInfoWidget.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KPropertiesDialog"></a>
+<div class="memdoc"><p>Creates a properties dialog for a new .desktop file (whose name
+is not known yet), based on a template. Special constructor for
+"File / New" in file-manager type applications.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_tempUrl</em>&nbsp;</td><td> template used for reading only
+
+<tr><td></td><td valign="top"><em>_currentDir</em>&nbsp;</td><td> directory where the file will be written to
+
+<tr><td></td><td valign="top"><em>_defaultName</em>&nbsp;</td><td> something to put in the name field,
+like mimetype.desktop
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> is the parent of the dialog widget.
+
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> is the internal name.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KPropertiesDialog"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -262,7 +336,23 @@ KFileMetaInfoWidget.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KPropertiesDialog"></a>
+<div class="memdoc"><p>Creates an empty properties dialog (for applications that want use
+a standard dialog, but for things not doable via the plugin-mechanism).
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>title</em>&nbsp;</td><td> is the string display as the "filename" in the caption of the dialog.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> is the parent of the dialog widget.
+
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> is the internal name.
+
+<tr><td></td><td valign="top"><em>modal</em>&nbsp;</td><td> tells the dialog whether it should be modal.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KPropertiesDialog"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -568,7 +658,7 @@ the dialog applies to a single file or URL.
 <div class="memdoc"><p>Emitted before changes to <b>oldUrl</b> are saved as <b>newUrl.</b>
 The receiver may change <b>newUrl</b> to point to an alternative
 save location.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("saveAs(const const KUrl&, KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="setFileNameReadOnly"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("saveAs(const KUrl&, KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="setFileNameReadOnly"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

@@ -90,12 +90,12 @@ QAbstractItemView with the URL given by the URL navigator.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#activated">activated</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#editableStateChanged">editableStateChanged</a> (bool editable)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#editableStateChanged">editableStateChanged</a> (, bool editable)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#historyChanged">historyChanged</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#returnPressed">returnPressed</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlChanged">urlChanged</a> (<a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlsDropped">urlsDropped</a> (<a href="../kdecore/KUrl.List.html">KUrl.List</a> urls, <a href="../kdecore/KUrl.html">KUrl</a> destination)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlsDropped">urlsDropped</a> (<a href="../kdecore/KUrl.html">KUrl</a> destination, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdropevent.html">QDropEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlChanged">urlChanged</a> (, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlsDropped">urlsDropped</a> (, <a href="../kdecore/KUrl.List.html">KUrl.List</a> urls, <a href="../kdecore/KUrl.html">KUrl</a> destination)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlsDropped">urlsDropped</a> (, <a href="../kdecore/KUrl.html">KUrl</a> destination, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdropevent.html">QDropEvent</a> event)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUrlNavigator">__init__</a> (self, <a href="../kio/KFilePlacesModel.html">KFilePlacesModel</a> placesModel, <a href="../kdecore/KUrl.html">KUrl</a> url, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUrlNavigator">__init__</a> (self, <a href="../kio/KUrlNavigator.html">KUrlNavigator</a> a0)</td></tr>
@@ -174,7 +174,19 @@ QAbstractItemView with the URL given by the URL navigator.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KUrlNavigator"></a>
+<div class="memdoc"><p></p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>placesModel</em>&nbsp;</td><td> Model for the places which are selectable inside a
+menu. A place can be a bookmark or a device. If it is 0,
+there is no places selector displayed.
+
+<tr><td></td><td valign="top"><em>url</em>&nbsp;</td><td> URL which is used for the navigation or editing.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> Parent widget.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KUrlNavigator"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -958,7 +970,7 @@ then the following URLs are returned for an index:
 the user.
 <dl class="see" compact><dt><b>See also:</b></dt><dd> KUrlNavigator.setUrl()
 </dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlChanged(const const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="urlsDropped"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlChanged(const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="urlsDropped"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -993,7 +1005,7 @@ the dropped data can be handled.
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
 </dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlsDropped(const const KUrl::List&, const const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="urlsDropped"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlsDropped(const KUrl::List&, const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="urlsDropped"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -1028,7 +1040,7 @@ the dropped data can be handled.
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
 </dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlsDropped(const const KUrl&, QDropEvent*)"), target_slot)</code></dd></dl></div></div>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlsDropped(const KUrl&, QDropEvent*)"), target_slot)</code></dd></dl></div></div>
 </div>
 </div>
 </div>

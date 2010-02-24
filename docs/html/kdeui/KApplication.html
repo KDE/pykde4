@@ -89,7 +89,7 @@ Controls and provides information to all KDE applications.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KApplication">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/display.html">Display</a> display, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::HANDLE</a> visual, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::HANDLE</a> colormap, <a href="../kdecore/KComponentData.html">KComponentData</a> cData)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KApplication">__init__</a> (self, <a href="../kdeui/KApplication.html">KApplication</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KApplication">__init__</a> (self, bool a0, bool a1)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>, bool (bRecover)&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#checkRecoverFile">checkRecoverFile</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> pFilename, )</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>, bool bRecover&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#checkRecoverFile">checkRecoverFile</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> pFilename)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearStartupId">clearStartupId</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#commitData">commitData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsessionmanager.html">QSessionManager</a> sm)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#disableSessionManagement">disableSessionManagement</a> (self)</td></tr>
@@ -136,7 +136,24 @@ Controls and provides information to all KDE applications.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KApplication"></a>
+<div class="memdoc"><p>This constructor is the one you should use.
+It takes aboutData and command line arguments from KCmdLineArgs.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>GUIenabled</em>&nbsp;</td><td> Set to false to disable all GUI stuff.
+Note that for a non-GUI daemon, you might want to use QCoreApplication
+and a KComponentData instance instead. You'll save an unnecessary dependency
+to kdeui. The main difference is that you will have to do a number of things yourself:
+&lt;ul&gt;
+&lt;li&gt;Register to DBus, if necessary.&lt;/li&gt;
+&lt;li&gt;Call KGlobal.locale(), if using multiple threads.&lt;/li&gt;
+&lt;/ul&gt;
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KApplication"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -170,7 +187,28 @@ Controls and provides information to all KDE applications.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KApplication"></a>
+<div class="memdoc"><p>Constructor. Parses command-line arguments. Use this constructor when you
+you need to use a non-default visual or colormap.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>display</em>&nbsp;</td><td> Will be passed to Qt as the X display. The display must be
+valid and already opened.
+</td></tr>
+
+<tr><td></td><td valign="top"><em>visual</em>&nbsp;</td><td> A pointer to the X11 visual that should be used by the
+application. Note that only TrueColor visuals are supported on depths
+greater than 8 bpp. If this parameter is NULL, the default visual will
+be used instead.
+</td></tr>
+
+<tr><td></td><td valign="top"><em>colormap</em>&nbsp;</td><td> The colormap that should be used by the application. If
+this parameter is 0, the default colormap will be used instead.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KApplication"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -238,7 +276,9 @@ Controls and provides information to all KDE applications.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KApplication"></a>
+<div class="memdoc"><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd> Used by KUniqueApplication
+</dd></dl>
+</p></div></div><a class="anchor" name="KApplication"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -278,7 +318,9 @@ Controls and provides information to all KDE applications.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KApplication"></a>
+<div class="memdoc"><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd> Used by KUniqueApplication
+</dd></dl>
+</p></div></div><a class="anchor" name="KApplication"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -332,7 +374,7 @@ Controls and provides information to all KDE applications.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>, bool (bRecover) checkRecoverFile</td>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>, bool bRecover checkRecoverFile</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
@@ -340,7 +382,7 @@ Controls and provides information to all KDE applications.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>pFilename</em>, </td>
+<td class="paramname"><em>pFilename</em></td>
 </tr>
 <tr>
 <td></td>
@@ -911,7 +953,7 @@ Consult focus stealing prevention section in kdebase/kwin/README.
 </div>
 <div class="memdoc"><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd>
 </dd></dl>
-</p></div></div><hr><h2>Attribute Documentation</h2><a class="anchor" name="var2988676044"></a>
+</p></div></div><hr><h2>Attribute Documentation</h2><a class="anchor" name="varloadedByKdeinit"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">

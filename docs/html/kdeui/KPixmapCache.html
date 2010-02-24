@@ -173,7 +173,14 @@ using setTimestamp() method.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="cacheLimit"></a>
+<div class="memdoc"><p>Constucts the pixmap cache object.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> unique name of the cache
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="cacheLimit"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -230,6 +237,13 @@ Default setting is 3 megabytes.
 </table>
 </div>
 <div class="memdoc"><p>Deletes all entries and reinitializes this cache.
+</p>
+<p>
+<b>NOTE:</b> If useQPixmapCache is set to true then that cache must also
+be cleared. There is only one QPixmapCache for the entire process
+however so other KPixmapCaches and other QPixmapCache users may also
+be affected, leading to a temporary slowdown until the QPixmapCache is
+repopulated.
 </p></div></div><a class="anchor" name="ensureInited"></a>
 <div class="memitem">
 <div class="memproto">
@@ -676,6 +690,13 @@ has outdated.
 </div>
 <div class="memdoc"><p>Whether QPixmapCache should be used to cache pixmaps in memory in
 addition to caching them on the disk.
+</p>
+<p>
+<b>NOTE:</b> The design of QPixmapCache means that the entries stored in
+the cache are shared throughout the entire process, and not just in
+this particular KPixmapCache. KPixmapCache makes an effort to ensure
+that entries from other KPixmapCaches do not inadvertently spill over
+into this one, but is not entirely successful (@see discard())
 </p></div></div><a class="anchor" name="writeCustomData"></a>
 <div class="memitem">
 <div class="memproto">
@@ -730,8 +751,12 @@ addition to caching them on the disk.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Describes which entries will be removed first during cache cleanup.
+<li> RemoveOldest oldest entries are removed first. </li>
+<li> RemoveSeldomUsed least used entries are removed first. </li>
+<li> RemoveLeastRecentlyUsed least recently used entries are removed first. </li>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>RemoveOldest</em>&nbsp;</td><td><tr><td valign="top"><em>RemoveSeldomUsed</em>&nbsp;</td><td><tr><td valign="top"><em>RemoveLeastRecentlyUsed</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

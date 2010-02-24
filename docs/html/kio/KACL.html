@@ -70,9 +70,9 @@ a POSIX ACL encapsulation
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/mode_t.html">mode_t</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#basePermissions">basePermissions</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isExtended">isExtended</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isValid">isValid</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">long, bool (exists)&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#maskPermissions">maskPermissions</a> (self, )</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">long, bool (exists)&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#namedGroupPermissions">namedGroupPermissions</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, )</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">long, bool (exists)&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#namedUserPermissions">namedUserPermissions</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, )</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long, bool exists&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#maskPermissions">maskPermissions</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long, bool exists&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#namedGroupPermissions">namedGroupPermissions</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long, bool exists&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#namedUserPermissions">namedUserPermissions</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator !=">operator !=</a> (self, <a href="../kio/KACL.html">KACL</a> rhs)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator ==">operator ==</a> (self, <a href="../kio/KACL.html">KACL</a> rhs)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#othersPermissions">othersPermissions</a> (self)</td></tr>
@@ -110,7 +110,9 @@ a POSIX ACL encapsulation
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KACL"></a>
+<div class="memdoc"><p>Creates a new KACL from <b>aclString.</b> If the string is a valid acl
+string, isValid() will afterwards return true.
+</p></div></div><a class="anchor" name="KACL"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -132,7 +134,8 @@ a POSIX ACL encapsulation
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KACL"></a>
+<div class="memdoc"><p>Copy ctor
+</p></div></div><a class="anchor" name="KACL"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -154,7 +157,9 @@ a POSIX ACL encapsulation
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KACL"></a>
+<div class="memdoc"><p>Creates a new KACL from the basic permissions passed in <b>basicPermissions.</b>
+isValid() will return true, afterwards.
+</p></div></div><a class="anchor" name="KACL"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -166,7 +171,9 @@ a POSIX ACL encapsulation
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="allGroupPermissions"></a>
+<div class="memdoc"><p>Creates an empty KACL. Until a valid acl string is set via setACL,
+isValid() will return false.
+</p></div></div><a class="anchor" name="allGroupPermissions"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -266,17 +273,13 @@ using only basic file permissions.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">long, bool (exists) maskPermissions</td>
+<td class="memname">long, bool exists maskPermissions</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
 <td width="100%"> </td>
-</tr></table>
+</tr>
+</table>
 </div>
 <div class="memdoc"><p>Return the entry for the permissions mask if there is one and sets
 <b>exists</b> to true. If there is no such entry, <b>exists</b> is set to false.
@@ -286,7 +289,7 @@ using only basic file permissions.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">long, bool (exists) namedGroupPermissions</td>
+<td class="memname">long, bool exists namedGroupPermissions</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
@@ -294,7 +297,7 @@ using only basic file permissions.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>name</em>, </td>
+<td class="paramname"><em>name</em></td>
 </tr>
 <tr>
 <td></td>
@@ -313,7 +316,7 @@ set to true if a matching entry exists and to false otherwise.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">long, bool (exists) namedUserPermissions</td>
+<td class="memname">long, bool exists namedUserPermissions</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
@@ -321,7 +324,7 @@ set to true if a matching entry exists and to false otherwise.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>name</em>, </td>
+<td class="paramname"><em>name</em></td>
 </tr>
 <tr>
 <td></td>

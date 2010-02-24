@@ -49,7 +49,7 @@
 <code>from PyKDE4.kdecore import *</code>
 <p>
 Inherits: <a href="../kdecore/KConfigBase.html">KConfigBase</a><br />
-Subclasses: <a href="../kdecore/KSharedConfig.html">KSharedConfig</a>, <a href="../kdecore/KDesktopFile.html">KDesktopFile</a><br />
+Subclasses: <a href="../kdecore/KDesktopFile.html">KDesktopFile</a>, <a href="../kdecore/KSharedConfig.html">KSharedConfig</a><br />
 
 <h2>Detailed Description</h2>
 
@@ -153,7 +153,39 @@ KConfig constructors.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KConfig"></a>
+<div class="memdoc"><p>Creates a KConfig object to manipulate a configuration file for the
+current application.
+</p>
+<p>
+If an absolute path is specified for <b>file,</b> that file will be used
+as the store for the configuration settings. If a non-absolute path
+is provided, the file will be looked for in the standard directory
+specified by resourceType. If no path is provided, a default
+configuration file will be used based on the name of the main
+application component.
+</p>
+<p>
+<b>mode</b> determines whether the user or global settings will be allowed
+to influence the values returned by this object. See OpenFlags for
+more details.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> You probably want to use KSharedConfig.openConfig instead.
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>file</em>&nbsp;</td><td> the name of the file
+
+<tr><td></td><td valign="top"><em>mode</em>&nbsp;</td><td> how global settings should affect the configuration
+options exposed by this KConfig object
+
+<tr><td></td><td valign="top"><em>resourceType</em>&nbsp;</td><td> The standard directory to look for the configuration
+file in (see KStandardDirs)
+</td></tr>
+</table></dl>
+<p> @sa KSharedConfig.openConfig(const QString&amp;, OpenFlags, const char*)
+</p></div></div><a class="anchor" name="KConfig"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -193,7 +225,42 @@ KConfig constructors.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KConfig"></a>
+<div class="memdoc"><p>Creates a KConfig object to manipulate the configuration for a specific
+component.
+</p>
+<p>
+If an absolute path is specified for <b>file,</b> that file will be used
+as the store for the configuration settings. If a non-absolute path
+is provided, the file will be looked for in the standard directory
+specified by resourceType. If no path is provided, a default
+configuration file will be used based on the component's name.
+</p>
+<p>
+<b>mode</b> determines whether the user or global settings will be allowed
+to influence the values returned by this object. See KConfig.OpenFlags for
+more details.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> You probably want to use KSharedConfig.openConfig instead.
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>componentData</em>&nbsp;</td><td> the component that you wish to load a configuration
+file for
+
+<tr><td></td><td valign="top"><em>file</em>&nbsp;</td><td> overrides the configuration file name if not empty
+
+<tr><td></td><td valign="top"><em>mode</em>&nbsp;</td><td> how global settings should affect the configuration
+options exposed by this KConfig object.
+See OpenFlags
+
+<tr><td></td><td valign="top"><em>resourceType</em>&nbsp;</td><td> The standard directory to look for the configuration
+file in
+</td></tr>
+</table></dl>
+<p> @sa KSharedConfig.openConfig(const KComponentData&amp;, const QString&amp;, OpenFlags, const char*)
+</p></div></div><a class="anchor" name="KConfig"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -227,7 +294,21 @@ KConfig constructors.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KConfig"></a>
+<div class="memdoc"><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd>
+</dd></dl> </p>
+<p>
+Creates a KConfig object using the specified backend. If the backend can not
+be found or loaded, then the standard configuration parser is used as a fallback.
+</p>
+<p>
+@arg file the file to be parsed
+@arg backend the backend to load
+@arg resourceType where to look for the file if an absolute path is not provided
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.1
+</dd></dl>
+</p></div></div><a class="anchor" name="KConfig"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -851,8 +932,24 @@ user's settings
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Determines how the system-wide and user's global settings will affect
+the reading of the configuration.
+</p>
+<p>
+If CascadeConfig is selected, system-wide configuration sources are used
+to provide defaults for the settings accessed through this object, or
+possibly to override those settings in certain cases.
+</p>
+<p>
+IncludeGlobals does the same, but with the global settings sources.
+</p>
+<p>
+Note that the main configuration source overrides the cascaded sources,
+which override those provided to addConfigSources(), which override the
+global sources. The exception is that if a key or group is marked as
+being immutable, it will not be overridden.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>IncludeGlobals</em>&nbsp;=&nbsp;0x01</td><td><tr><td valign="top"><em>CascadeConfig</em>&nbsp;=&nbsp;0x02</td><td><tr><td valign="top"><em>SimpleConfig</em>&nbsp;=&nbsp;0x00</td><td><tr><td valign="top"><em>NoCascade</em>&nbsp;=&nbsp;IncludeGlobals</td><td><tr><td valign="top"><em>NoGlobals</em>&nbsp;=&nbsp;CascadeConfig</td><td><tr><td valign="top"><em>FullConfig</em>&nbsp;=&nbsp;IncludeGlobals|CascadeConfig</td><td></table>
 </dl>
 </div></div><p>
 </div>

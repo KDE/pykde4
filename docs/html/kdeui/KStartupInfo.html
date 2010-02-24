@@ -79,12 +79,12 @@ they are ready.
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Lubos Lunak &lt;l.lunak@kde.org&gt; </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj2984224908">&lt;anonymous&gt;</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;CleanOnCantDetect, DisableKWinModule, AnnounceSilenceChanges&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj396985292">&lt;anonymous&gt;</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;CleanOnCantDetect, DisableKWinModule, AnnounceSilenceChanges&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#startup_t">startup_t</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoMatch, Match, CantDetect&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gotNewStartup">gotNewStartup</a> (<a href="../kdeui/KStartupInfoId.html">KStartupInfoId</a> id, <a href="../kdeui/KStartupInfoData.html">KStartupInfoData</a> data)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gotRemoveStartup">gotRemoveStartup</a> (<a href="../kdeui/KStartupInfoId.html">KStartupInfoId</a> id, <a href="../kdeui/KStartupInfoData.html">KStartupInfoData</a> data)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gotStartupChange">gotStartupChange</a> (<a href="../kdeui/KStartupInfoId.html">KStartupInfoId</a> id, <a href="../kdeui/KStartupInfoData.html">KStartupInfoData</a> data)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gotNewStartup">gotNewStartup</a> (, <a href="../kdeui/KStartupInfoId.html">KStartupInfoId</a> id, <a href="../kdeui/KStartupInfoData.html">KStartupInfoData</a> data)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gotRemoveStartup">gotRemoveStartup</a> (, <a href="../kdeui/KStartupInfoId.html">KStartupInfoId</a> id, <a href="../kdeui/KStartupInfoData.html">KStartupInfoData</a> data)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gotStartupChange">gotStartupChange</a> (, <a href="../kdeui/KStartupInfoId.html">KStartupInfoId</a> id, <a href="../kdeui/KStartupInfoData.html">KStartupInfoData</a> data)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KStartupInfo">__init__</a> (self, int flags, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KStartupInfo">__init__</a> (self, <a href="../kdeui/KStartupInfo.html">KStartupInfo</a> a0)</td></tr>
@@ -141,7 +141,28 @@ they are ready.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KStartupInfo"></a>
+<div class="memdoc"><p>Creates an instance that will receive the startup notifications.
+The various flags passed may be
+<li> CleanOnCantDetect - when a new unknown window appears, all startup </li>
+notifications for applications that are not compliant with
+the startup protocol are removed
+<li> DisableKWinModule - KWinModule, which is normally used to detect </li>
+new windows, is disabled. With this flag, checkStartup() must be
+called in order to check newly mapped windows.
+<li> AnnounceSilenceChanges - normally, startup notifications are </li>
+"removed" when they're silenced, and "recreated" when they're resumed.
+With this flag, the change is normally announced with gotStartupChange().
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>flags</em>&nbsp;</td><td> OR-ed combination of flags
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent of this QObject (can be 0 for no parent)
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KStartupInfo"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -480,7 +501,7 @@ being started).
 </td></tr>
 </table></dl>
 <p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("gotNewStartup(const const KStartupInfoId&, const const KStartupInfoData&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="gotRemoveStartup"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("gotNewStartup(const KStartupInfoId&, const KStartupInfoData&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="gotRemoveStartup"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -518,7 +539,7 @@ that the application is ready or because of a timeout).
 </td></tr>
 </table></dl>
 <p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("gotRemoveStartup(const const KStartupInfoId&, const const KStartupInfoData&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="gotStartupChange"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("gotRemoveStartup(const KStartupInfoId&, const KStartupInfoData&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="gotStartupChange"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -555,7 +576,7 @@ that the application is ready or because of a timeout).
 </td></tr>
 </table></dl>
 <p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("gotStartupChange(const const KStartupInfoId&, const const KStartupInfoData&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="handleAutoAppStartedSending"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("gotStartupChange(const KStartupInfoId&, const KStartupInfoData&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="handleAutoAppStartedSending"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -894,7 +915,7 @@ resume twice.
 </td></tr> </table></dl>
 <p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the startup notification id. Can be null if not found.
 </dd></dl>
-</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj2984224908"></a>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj396985292"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -902,7 +923,8 @@ resume twice.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<div class="memdoc"><p>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>CleanOnCantDetect</em>&nbsp;</td><td><tr><td valign="top"><em>DisableKWinModule</em>&nbsp;</td><td><tr><td valign="top"><em>AnnounceSilenceChanges</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="startup_t"></a>
@@ -913,8 +935,12 @@ resume twice.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p><li> NoMatch - the window doesn't match any existing startup notification </li>
+<li> Match - the window matches an existing startup notification </li>
+<li> CantDetect - unable to detect if the window matches any existing </li>
+startup notification
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NoMatch</em>&nbsp;</td><td><tr><td valign="top"><em>Match</em>&nbsp;</td><td><tr><td valign="top"><em>CantDetect</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

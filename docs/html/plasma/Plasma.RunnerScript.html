@@ -59,16 +59,16 @@ Namespace: Plasma.RunnerScript<br />
 Provides a restricted interface for scripting a runner.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionsForMatch">actionsForMatch</a> (<a href="../plasma/Plasma.QueryMatch.html">Plasma.QueryMatch</a> match, [QActio] actions)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#createRunOptions">createRunOptions</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionsForMatch">actionsForMatch</a> (, <a href="../plasma/Plasma.QueryMatch.html">Plasma.QueryMatch</a> match, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>] actions)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#createRunOptions">createRunOptions</a> (, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#prepare">prepare</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#reloadConfiguration">reloadConfiguration</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#teardown">teardown</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#RunnerScript">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#action">action</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">{<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>:QActio}&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actions">actions</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionsForMatch">actionsForMatch</a> (self, <a href="../plasma/Plasma.QueryMatch.html">Plasma.QueryMatch</a> match, [QActio] actions)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">{<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>:<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>}&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actions">actions</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#actionsForMatch">actionsForMatch</a> (self, <a href="../plasma/Plasma.QueryMatch.html">Plasma.QueryMatch</a> match, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>] actions)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addAction">addAction</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qicon.html">QIcon</a> icon, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addAction">addAction</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a> action)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addSyntax">addSyntax</a> (self, <a href="../plasma/Plasma.RunnerSyntax.html">Plasma.RunnerSyntax</a> syntax)</td></tr>
@@ -116,7 +116,12 @@ Provides a restricted interface for scripting a runner.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="action"></a>
+<div class="memdoc"><p>Default constructor for a RunnerScript.
+Subclasses should not attempt to access the Plasma.AbstractRunner
+associated with this RunnerScript in the constructor. All
+such set up that requires the AbstractRunner itself should be done
+in the init() method.
+</p></div></div><a class="anchor" name="action"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -142,7 +147,7 @@ Provides a restricted interface for scripting a runner.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">{<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>:QActio} actions</td>
+<td class="memname">{<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>:<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>} actions</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -167,7 +172,7 @@ Provides a restricted interface for scripting a runner.
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">[QActio]&nbsp;</td>
+<td class="paramtype">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>]&nbsp;</td>
 <td class="paramname"><em>actions</em></td>
 </tr>
 <tr>
@@ -178,7 +183,7 @@ Provides a restricted interface for scripting a runner.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("actionsForMatch(const const Plasma::QueryMatch&, QList<QAction*>*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="addAction"></a>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("actionsForMatch(const Plasma::QueryMatch&, QList<QAction*>*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="addAction"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

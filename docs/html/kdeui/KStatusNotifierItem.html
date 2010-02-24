@@ -80,9 +80,9 @@ instance the ones about hardware status.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#ItemCategory">ItemCategory</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ApplicationStatus, Communications, SystemServices, Hardware, Reserved&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#ItemStatus">ItemStatus</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Passive, Active, NeedsAttention&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#activateRequested">activateRequested</a> (bool active, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> pos)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#scrollRequested">scrollRequested</a> (int delta, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::Orientation</a> orientation)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#secondaryActivateRequested">secondaryActivateRequested</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> pos)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#activateRequested">activateRequested</a> (, bool active, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> pos)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#scrollRequested">scrollRequested</a> (, int delta, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::Orientation</a> orientation)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#secondaryActivateRequested">secondaryActivateRequested</a> (, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> pos)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KStatusNotifierItem">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KStatusNotifierItem">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
@@ -153,7 +153,18 @@ instance the ones about hardware status.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KStatusNotifierItem"></a>
+<div class="memdoc"><p>Construct a new status notifier item
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent object for this object. If the object passed in as
+a parent is also a QWidget, it will be used as the main application window
+represented by this icon and will be shown/hidden when an activation is requested.
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> associatedWidget
+</dd></dl>
+</p></div></div><a class="anchor" name="KStatusNotifierItem"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -181,7 +192,30 @@ instance the ones about hardware status.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="actionCollection"></a>
+<div class="memdoc"><p>Construct a new status notifier item with a unique identifier.
+If your application has more than one status notifier item and the user
+should be able to manipulate them separately (e.g. mark them for hiding
+in a user interface), the id can be used to differentiate between them.
+</p>
+<p>
+The id should remain consistent even between application restarts.
+Status notifier items without ids default to the application's name for the id.
+This id may be used, for instance, by hosts displaying status notifier items to
+associate configuration information with this item in a way that can persist
+between sessions or application restarts.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>id</em>&nbsp;</td><td> the unique id for this icon
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent object for this object. If the object passed in as
+a parent is also a QWidget, it will be used as the main application window
+represented by this icon and will be shown/hidden when an activation is requested.
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> associatedWidget
+</dd></dl>
+</p></div></div><a class="anchor" name="actionCollection"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -267,7 +301,7 @@ trigger this signal, QPoint() if it's not the consequence of a mouse click.
 </td></tr>
 </table></dl>
 <p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("activateRequested(bool, const const QPoint&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="associatedWidget"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("activateRequested(bool, const QPoint&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="associatedWidget"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -528,7 +562,7 @@ trigger this signal, QPoint() if it's not the consequence of a mouse click.
 </td></tr>
 </table></dl>
 <p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("secondaryActivateRequested(const const QPoint&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="setAssociatedWidget"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("secondaryActivateRequested(const QPoint&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="setAssociatedWidget"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -1243,8 +1277,10 @@ if toolTipImage() is not empty this will always return an empty string
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Different kinds of applications announce their type to the systemtray,
+so can be drawn in a different way or in a different place
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>ApplicationStatus</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>Communications</em>&nbsp;=&nbsp;2</td><td><tr><td valign="top"><em>SystemServices</em>&nbsp;=&nbsp;3</td><td><tr><td valign="top"><em>Hardware</em>&nbsp;=&nbsp;4</td><td><tr><td valign="top"><em>Reserved</em>&nbsp;=&nbsp;129</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="ItemStatus"></a>
 <div class="memitem">
@@ -1254,8 +1290,10 @@ if toolTipImage() is not empty this will always return an empty string
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>All the possible status this icon can have, depending on the
+importance of the events that happens in the parent application
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Passive</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>Active</em>&nbsp;=&nbsp;2</td><td><tr><td valign="top"><em>NeedsAttention</em>&nbsp;=&nbsp;3</td><td></table>
 </dl>
 </div></div><p>
 </div>

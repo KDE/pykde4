@@ -126,9 +126,9 @@ for more detailed documentation.
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Button">Button</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoAdditionalButton, Help, Default, Apply&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changed">changed</a> (bool state)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changed">changed</a> (, bool state)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#quickHelpChanged">quickHelpChanged</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rootOnlyMessageChanged">rootOnlyMessageChanged</a> (bool use, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> message)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rootOnlyMessageChanged">rootOnlyMessageChanged</a> (, bool use, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> message)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KCModule">__init__</a> (self, <a href="../kdecore/KComponentData.html">KComponentData</a> componentData, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariantlist.html">QVariantList</a> args=QVariantList())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAboutData.html">KAboutData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aboutData">aboutData</a> (self)</td></tr>
@@ -139,7 +139,7 @@ for more detailed documentation.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changed">changed</a> (self, bool state)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changed">changed</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KComponentData.html">KComponentData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#componentData">componentData</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[KConfigDialogManage]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configs">configs</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdeui/KConfigDialogManager.html">KConfigDialogManager</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configs">configs</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#defaults">defaults</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#load">load</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#managedWidgetChangeState">managedWidgetChangeState</a> (self)</td></tr>
@@ -194,7 +194,13 @@ for more detailed documentation.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="aboutData"></a>
+<div class="memdoc"><p>Base class for all KControlModules.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> do not emit changed signals here, since they are not yet connected
+to any slot.
+</dd></dl>
+</p></div></div><a class="anchor" name="aboutData"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -368,7 +374,7 @@ the Button enumeration type.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">[KConfigDialogManage] configs</td>
+<td class="memname">[<a href="../kdeui/KConfigDialogManager.html">KConfigDialogManager</a>] configs</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -876,8 +882,15 @@ settings are compared and a corresponding changed() signal is emitted
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>An enumeration type for the buttons used by this module.
+You should only use Help, Default and Apply. The rest is obsolete.
+NoAdditionalButton can be used when we do not want have other button that Ok Cancel
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KCModule.buttons <dl class="see" compact><dt><b>See also:</b></dt><dd> KCModule.setButtons
+</dd></dl>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Add</em>&nbsp;=&nbsp;0x0001</td><td><tr><td valign="top"><em>Remove</em>&nbsp;=&nbsp;0x0002</td><td><tr><td valign="top"><em>UpDown</em>&nbsp;=&nbsp;0x0004</td><td><tr><td valign="top"><em>All</em>&nbsp;=&nbsp;Add|Remove|UpDown</td><td></table>
 </dl>
 </div></div><p>
 </div>

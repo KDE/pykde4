@@ -49,7 +49,7 @@
 <code>from PyKDE4.kdeui import *</code>
 <p>
 Inherits: <a href="../kdeui/KDialog.html">KDialog</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdialog.html">QDialog</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
-Subclasses: <a href="../kdeui/KConfigDialog.html">KConfigDialog</a>, <a href="../kdeui/KAssistantDialog.html">KAssistantDialog</a><br />
+Subclasses: <a href="../kdeui/KAssistantDialog.html">KAssistantDialog</a>, <a href="../kdeui/KConfigDialog.html">KConfigDialog</a><br />
 
 <h2>Detailed Description</h2>
 
@@ -93,8 +93,8 @@ types are available (@see KPageView).
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#FaceType">FaceType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Auto, Plain, List, Tree, Tabbed&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#currentPageChanged">currentPageChanged</a> (<a href="../kdeui/KPageWidgetItem.html">KPageWidgetItem</a> current, <a href="../kdeui/KPageWidgetItem.html">KPageWidgetItem</a> before)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pageRemoved">pageRemoved</a> (<a href="../kdeui/KPageWidgetItem.html">KPageWidgetItem</a> page)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#currentPageChanged">currentPageChanged</a> (, <a href="../kdeui/KPageWidgetItem.html">KPageWidgetItem</a> current, <a href="../kdeui/KPageWidgetItem.html">KPageWidgetItem</a> before)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pageRemoved">pageRemoved</a> (, <a href="../kdeui/KPageWidgetItem.html">KPageWidgetItem</a> page)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KPageDialog">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::WFlags</a> flags=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KPageDialog">__init__</a> (self, <a href="../kdeui/KPageWidget.html">KPageWidget</a> widget, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::WFlags</a> flags=0)</td></tr>
@@ -140,7 +140,8 @@ types are available (@see KPageView).
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KPageDialog"></a>
+<div class="memdoc"><p>Creates a new page dialog.
+</p></div></div><a class="anchor" name="KPageDialog"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -174,7 +175,17 @@ types are available (@see KPageView).
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="addPage"></a>
+<div class="memdoc"><p>This constructor can be used by subclasses to provide a custom page widget.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>widget</em>&nbsp;</td><td> The KPageWidget object will be reparented to this object, so you can create
+it without parent and you are not allowed to delete it.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addPage"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -588,8 +599,21 @@ be the current page and emits the currentPageChanged() signal.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p><li> <b>Auto</b> - A dialog with a face based on the structure of the </li>
+available pages.
+If only a single page is added, the dialog behaves like
+in <b>Plain</b> mode, with multiple pages without sub pages
+it behaves like in <b>List</b> mode and like in <b>Tree</b> mode
+otherwise.
+<li> <b>Plain</b> - A normal dialog. </li>
+<li> <b>List</b> - A dialog with an icon list on the left side and a </li>
+representation of the contents on the right side.
+<li> <b>Tree</b> - A dialog with a tree on the left side and a </li>
+representation of the contents on the right side.
+<li> <b>Tabbed</b> - A dialog with a tab bar above the representation </li>
+of the contents.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Auto</em>&nbsp;</td><td><tr><td valign="top"><em>Plain</em>&nbsp;</td><td><tr><td valign="top"><em>List</em>&nbsp;</td><td><tr><td valign="top"><em>Tree</em>&nbsp;</td><td><tr><td valign="top"><em>Tabbed</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

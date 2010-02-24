@@ -130,7 +130,31 @@ Typical usage might look like:
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="addToAllowedEnvironments"></a>
+<div class="memdoc"><p>Creates a new KAutostart object that represents the autostart
+service "entryName". If the service already exists in the system
+then the values associated with that service, such as the executable
+command, will be loaded as well.
+</p>
+<p>
+Note that unless this service is explicitly set to autostart,
+simply creating a KAutostart object will not result in the
+service being autostarted on next log in.
+</p>
+<p>
+If no such service is already registered and the command to be
+executed on startup is not the same as entryName, then you will want
+to set the associated command with setExec(const QString&amp;)
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setExec
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>entryName</em>&nbsp;</td><td> the name used to identify the service. If none is
+provided then it uses the name registered with KAboutData.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> QObject
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addToAllowedEnvironments"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -656,8 +680,10 @@ environments.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Flags for each of the conditions that may affect whether or not
+a service actually autostarted on login
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NoConditions</em>&nbsp;=&nbsp;0x0</td><td><tr><td valign="top"><em>CheckCommand</em>&nbsp;=&nbsp;0x1</td><td><tr><td valign="top"><em>CheckCondition</em>&nbsp;=&nbsp;0x2</td><td><tr><td valign="top"><em>CheckAll</em>&nbsp;=&nbsp;0xff</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="StartPhase"></a>
 <div class="memitem">
@@ -667,8 +693,9 @@ environments.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Enumerates the various autostart phases that occur during start-up.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>BaseDesktop</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>DesktopServices</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>Applications</em>&nbsp;=&nbsp;2</td><td></table>
 </dl>
 </div></div><p>
 </div>

@@ -130,7 +130,7 @@ that holds a ref in KGlobal - like a KIO job, or a systray icon.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KMenu.html">KMenu</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#helpMenu">helpMenu</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> aboutAppText=QString(), bool showWhatsThis=1)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ignoreInitialGeometry">ignoreInitialGeometry</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#initialGeometrySet">initialGeometrySet</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[KMainWindo]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#memberList">memberList</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdeui/KMainWindow.html">KMainWindow</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#memberList">memberList</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KMenuBar.html">KMenuBar</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#menuBar">menuBar</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parseGeometry">parseGeometry</a> (self, bool parsewidth)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#queryClose">queryClose</a> (self)</td></tr>
@@ -157,7 +157,7 @@ that holds a ref in KGlobal - like a KIO job, or a systray icon.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showAboutApplication">showAboutApplication</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KStatusBar.html">KStatusBar</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statusBar">statusBar</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KToolBar.html">KToolBar</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolBar">toolBar</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name=QString())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[KToolBa]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolBars">toolBars</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdeui/KToolBar.html">KToolBar</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolBars">toolBars</a> (self)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="KMainWindow"></a>
 <div class="memitem">
@@ -187,7 +187,43 @@ that holds a ref in KGlobal - like a KIO job, or a systray icon.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="appHelpActivated"></a>
+<div class="memdoc"><p>Construct a main window.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The widget parent. This is usually 0 but it may also be the window
+group leader. In that case, the KMainWindow becomes sort of a
+secondary window.
+</td></tr>
+
+<tr><td></td><td valign="top"><em>f</em>&nbsp;</td><td> Specify the window flags. The default is none.
+</td></tr>
+</table></dl>
+<p> Note that a KMainWindow per-default is created with the
+WA_DeleteOnClose attribute, i.e. it is automatically destroyed when the
+window is closed. If you do not want this behavior, call
+setAttribute(Qt.WA_DeleteOnClose, false);
+</p>
+<p>
+KMainWindows must be created on the heap with 'new', like:
+<pre class="fragment">
+ KMainWindow *kmw = new KMainWindow(...);
+ kmw-&gt;setObjectName(...);
+</pre>
+</p>
+<p>
+IMPORTANT: For session management and window management to work
+properly, all main windows in the application should have a
+different name. If you don't do it, KMainWindow will create
+a unique name, but it's recommended to explicitly pass a window name that will
+also describe the type of the window. If there can be several windows of the same
+type, append '#' (hash) to the name, and KMainWindow will replace it with numbers to make
+the names unique. For example, for a mail client which has one main window showing
+the mails and folders, and which can also have one or more windows for composing
+mails, the name for the folders window should be e.g. "mainwindow" and
+for the composer windows "composer#".
+</p></div></div><a class="anchor" name="appHelpActivated"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -587,7 +623,7 @@ and this is the first window created (the one on which this option applies)
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">[KMainWindo] memberList</td>
+<td class="memname">[<a href="../kdeui/KMainWindow.html">KMainWindow</a>] memberList</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -1407,7 +1443,7 @@ specified "mainToolBar" is assumed.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">[KToolBa] toolBars</td>
+<td class="memname">[<a href="../kdeui/KToolBar.html">KToolBar</a>] toolBars</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>

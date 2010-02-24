@@ -84,7 +84,7 @@ To publish asynchronously instead, do:
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Jakub Stachowski </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#published">published</a> (bool successful)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#published">published</a> (, bool successful)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#PublicService">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type=QString(), long port=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> domain=QString(), <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> subtypes=QStringList())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isPublished">isPublished</a> (self)</td></tr>
@@ -147,7 +147,45 @@ To publish asynchronously instead, do:
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="isPublished"></a>
+<div class="memdoc"><p>Creates a service description that can be published
+</p>
+<p>
+If no <b>name</b> is given, the computer name is used instead. If there
+is already a service with the same name, type and domain a number will
+be appended to the name to make it unique.
+</p>
+<p>
+If no <b>domain</b> is specified, the service is published on the link-local
+domain (.local).
+</p>
+<p>
+The subtypes can be used to specify server attributes, such
+as "_anon" for anonymous FTP servers, or can specify a specific protocol
+(such as a web service interface) on top of a generic protocol like SOAP.
+</p>
+<p>
+There is
+<a href="http://www.dns-sd.org/ServiceTypes.html">a comprehensive list
+of possible types</a> available, but you are largely on your own for
+subtypes.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> a service name to use instead of the computer name
+
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> service type, in the form _sometype._udp or _sometype._tcp
+
+<tr><td></td><td valign="top"><em>port</em>&nbsp;</td><td> port number, or 0 to "reserve" the service name
+
+<tr><td></td><td valign="top"><em>domain</em>&nbsp;</td><td> the domain to publish the service on (see DomainBrowser)
+
+<tr><td></td><td valign="top"><em>subtypes</em>&nbsp;</td><td> optional list of subtypes, each with a leading underscore
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> ServiceBrowser.ServiceBrowser()
+</dd></dl>
+</p></div></div><a class="anchor" name="isPublished"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

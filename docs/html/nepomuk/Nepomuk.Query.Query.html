@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Nepomuk.Query.Query</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.4 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>Query Class Reference</h1>
+<code>from PyKDE4.nepomuk import *</code>
+<p>
+
+Subclasses: <a href="../nepomuk/Nepomuk.Query.FileQuery.html">Nepomuk.Query.FileQuery</a><br />
+Namespace: Nepomuk.Query.Query<br />
+<h2>Detailed Description</h2>
+
+<p>\class Query query.h Nepomuk/Query/Query
+</p>
+<p>
+A Nepomuk desktop query.
+</p>
+<p>
+A Query consists or a combination of Terms that can be optionally
+restricted via a limit (setLimit()) or folder filters (setIncludeFolders() and
+setExcludeFolders()).
+</p>
+<p>
+Additionally setRequestProperties() allows to retrieve additional information
+about the results.
+</p>
+<p>
+Queries can be easily converted to SPARQL via the toSparqlQuery() method or to
+search URLs ready for KIO.DirLister using toSearchUrl().
+</p>
+<p>
+The typical usage of a Query instance would be QueryServiceClient.query().
+However one can also use toSparqlQuery() to convert it into a SPARQL query
+string and use that string in QueryServiceClient.sparqlQuery() or even
+directly in Soprano.Model.executeQuery() via <b>ResourceManager.instance()-&gt;mainModel()</b>
+or in a custom Model.
+</p>
+<p>
+\sa QueryParser
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Sebastian Trueg &lt;trueg@kde.org&gt; </dd></dl>
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#SparqlFlag">SparqlFlag</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoFlags, CreateCountQuery, HandleInverseProperties&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Query">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Query">__init__</a> (self, <a href="../nepomuk/Nepomuk.Query.Term.html">Nepomuk.Query.Term</a> term)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Query">__init__</a> (self, <a href="../nepomuk/Nepomuk.Query.Query.html">Nepomuk.Query.Query</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addRequestProperty">addRequestProperty</a> (self, <a href="../nepomuk/Nepomuk.Query.Query.RequestProperty.html">Nepomuk.Query.Query.RequestProperty</a> property)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isValid">isValid</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#limit">limit</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator ==">operator ==</a> (self, <a href="../nepomuk/Nepomuk.Query.Query.html">Nepomuk.Query.Query</a> query)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../nepomuk/Nepomuk.Query.Query.RequestProperty.html">Nepomuk.Query.Query.RequestProperty</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#requestProperties">requestProperties</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../nepomuk/Nepomuk.Query.RequestPropertyMap.html">Nepomuk.Query.RequestPropertyMap</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#requestPropertyMap">requestPropertyMap</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLimit">setLimit</a> (self, int a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRequestProperties">setRequestProperties</a> (self, [<a href="../nepomuk/Nepomuk.Query.Query.RequestProperty.html">Nepomuk.Query.Query.RequestProperty</a>] properties)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setTerm">setTerm</a> (self, <a href="../nepomuk/Nepomuk.Query.Term.html">Nepomuk.Query.Term</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../nepomuk/Nepomuk.Query.Term.html">Nepomuk.Query.Term</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#term">term</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toSearchUrl">toSearchUrl</a> (self, <a href="../nepomuk/Nepomuk.Query.Query.SparqlFlags.html">Nepomuk.Query.Query.SparqlFlags</a> flags=Nepomuk.Query.Query.SparqlFlag.NoFlags)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toSparqlQuery">toSparqlQuery</a> (self, <a href="../nepomuk/Nepomuk.Query.Query.SparqlFlags.html">Nepomuk.Query.Query.SparqlFlags</a> flags=Nepomuk.Query.Query.SparqlFlag.NoFlags)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="Query"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Copy constructor.
+</p></div></div><a class="anchor" name="Query"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Query.Term.html">Nepomuk.Query.Term</a>&nbsp;</td>
+<td class="paramname"><em>term</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Create a query of type PlainQuery based on
+<b>term.</b>
+</p></div></div><a class="anchor" name="Query"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Query.Query.html">Nepomuk.Query.Query</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Copy constructor.
+</p></div></div><a class="anchor" name="addRequestProperty"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addRequestProperty</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Query.Query.RequestProperty.html">Nepomuk.Query.Query.RequestProperty</a>&nbsp;</td>
+<td class="paramname"><em>property</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add a property that should be reported with each search result.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>property</em>&nbsp;</td><td> The requested property.
+</td></tr>
+</table></dl>
+<p> \sa setRequestProperties, requestProperties
+</p></div></div><a class="anchor" name="isValid"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isValid</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> <b>true</b> if the query is valid, i.e.
+it has a valid term().
+</dd></dl>
+</p></div></div><a class="anchor" name="limit"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int limit</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The maximum number of results that this query should yield.
+</p>
+<p>
+\sa setLimit
+</p></div></div><a class="anchor" name="operator =="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator ==</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Query.Query.html">Nepomuk.Query.Query</a>&nbsp;</td>
+<td class="paramname"><em>query</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Comparison operator.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> <b>true</b> if this query is equal to <b>query.</b>
+</dd></dl>
+</p></div></div><a class="anchor" name="requestProperties"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../nepomuk/Nepomuk.Query.Query.RequestProperty.html">Nepomuk.Query.Query.RequestProperty</a>] requestProperties</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The list of RequestProperty instances set via addRequestProperty
+and setRequestProperties.
+</dd></dl>
+</p></div></div><a class="anchor" name="requestPropertyMap"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../nepomuk/Nepomuk.Query.RequestPropertyMap.html">Nepomuk.Query.RequestPropertyMap</a> requestPropertyMap</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Build a request property map as used in QueryServiceClient.sparqlQuery()
+from the request properties set via addRequestProperty() and setRequestProperties().
+</p>
+<p>
+Be aware that in most situations it is much simpler to use QueryServiceClient.query().
+</p></div></div><a class="anchor" name="setLimit"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setLimit</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the maximum number of results this query
+should yield.
+</p>
+<p>
+\sa limit
+</p></div></div><a class="anchor" name="setRequestProperties"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setRequestProperties</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="../nepomuk/Nepomuk.Query.Query.RequestProperty.html">Nepomuk.Query.Query.RequestProperty</a>]&nbsp;</td>
+<td class="paramname"><em>properties</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the properties that should be reported with each search result.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>properties</em>&nbsp;</td><td> The requested properties.
+</td></tr>
+</table></dl>
+<p> \sa addRequestProperty, requestProperties
+</p></div></div><a class="anchor" name="setTerm"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setTerm</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Query.Term.html">Nepomuk.Query.Term</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the root term of the query.
+</p>
+<p>
+\sa term
+</p></div></div><a class="anchor" name="term"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../nepomuk/Nepomuk.Query.Term.html">Nepomuk.Query.Term</a> term</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The root term of the query.
+This can be any type of term.
+</p>
+<p>
+\sa setTerm
+</p></div></div><a class="anchor" name="toSearchUrl"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KUrl.html">KUrl</a> toSearchUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Query.Query.SparqlFlags.html">Nepomuk.Query.Query.SparqlFlags</a>&nbsp;</td>
+<td class="paramname"><em>flags=Nepomuk.Query.Query.SparqlFlag.NoFlags</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convert the query into a URL which can be listed using KIO.DirLister.
+The URL will use the <b>nepomuksearch:/</b> KIO protocol to handle the listing
+of search results.
+</p>
+<p>
+This is the perfect method for listing results in file managers or file
+dialogs.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>flags</em>&nbsp;</td><td> Optional flags to change the query. Query.CreateCountQuery is not
+supported and will silently be dropped from <b>flags.</b>
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A URL which will list a virtual folder containing all search results
+from this query or an invalid URL in case this query is invalid.
+</dd></dl> </p>
+<p>
+\sa toSparqlQuery(), SparqlFlag
+</p></div></div><a class="anchor" name="toSparqlQuery"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> toSparqlQuery</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Query.Query.SparqlFlags.html">Nepomuk.Query.Query.SparqlFlags</a>&nbsp;</td>
+<td class="paramname"><em>flags=Nepomuk.Query.Query.SparqlFlag.NoFlags</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convert the query into a SPARQL query which can be used with the
+Nepomuk query service or directly in Soprano.Model.executeQuery.
+</p>
+<p>
+The resulting query will bind the results to variable <b>'r'.</b> Request
+properties will be bound to variables <b>'reqProp1'</b> through <b>'reqPropN'.</b>
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> The SPARQL queries created by this method contain SPARQL extensions
+from Virtuoso and will not work with other RDF storage solutions!
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>flags</em>&nbsp;</td><td> Optional flags to change the query.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The SPARQL representation of this query or an empty string
+if the query could not be converted (invalid query.)
+</dd></dl> </p>
+<p>
+\sa toSearchUrl(), SparqlFlag
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="SparqlFlag"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">SparqlFlag</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Aditional flags modifying the behaviour of toSparqlQuery() and toSearchUrl().
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NoFlags</em>&nbsp;=&nbsp;0x0</td><td><tr><td valign="top"><em>CreateCountQuery</em>&nbsp;=&nbsp;0x1</td><td><tr><td valign="top"><em>HandleInverseProperties</em>&nbsp;=&nbsp;0x2</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

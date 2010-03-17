@@ -40,6 +40,8 @@ class KPythonPluginFactory : public KPluginFactory
         KPythonPluginFactory(const char *name=0);
         ~KPythonPluginFactory();
 
+        static PyThreadState *threadState;
+
     protected:
         virtual QObject *create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args, const QString &keyword);
     private:
@@ -48,6 +50,7 @@ class KPythonPluginFactory : public KPluginFactory
         static QSet<QString> loadedKeywords;
 };
 QSet<QString> KPythonPluginFactory::loadedKeywords;
+PyThreadState *KPythonPluginFactory::threadState = 0;
 
 K_EXPORT_PLUGIN(KPythonPluginFactory("kpythonpluginfactory"))
 K_GLOBAL_STATIC(KComponentData, KPythonPluginFactory_factorycomponentdata)
@@ -62,6 +65,12 @@ PyObject *RunFunction(PyObject *object, PyObject *args);
 // is shutdown before the PyQt shared libraries etc are unloaded.
 static void KPythonPluginFactoryCleanup_PostRoutine()
 {
+    PyThreadState *tstate = PyThreadState_GET();
+    if (!tstate)
+    {
+        // Ensure that thread state is not null.
+        PyThreadState_Swap(KPythonPluginFactory::threadState);
+    }
     if (Py_IsInitialized())
     {
         Py_Finalize();
@@ -103,6 +112,7 @@ void KPythonPluginFactory::initialize()
 
         kDebug() << "Succesfully initialized Python interpreter.";
 
+        threadState = PyThreadState_GET();
         // free the lock
         PyEval_ReleaseLock();
     }
@@ -122,7 +132,7 @@ QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, 
         kError() << "Unable to find plugin code: " << keyword;
         return 0;
     }
-    
+
     QFileInfo pathInfo(completePath);
     QString path = pathInfo.absoluteDir().absolutePath();
     QString scriptName = pathInfo.baseName();
@@ -137,7 +147,7 @@ QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, 
             kError() << "Failed to set sys.path to " << path;
             return 0;
         }
-    }    
+    }
 
     // Load the Python script.
     PyObject *pyModule = ImportModule(scriptName);
@@ -189,7 +199,7 @@ QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, 
     {
         registerPlugin<KCModule>(keyword,0);//,&QObject::staticMetaObject,0);
     }
-    
+
     loadedKeywords << keyword;
 
     // Call the factory function. Set up the args.
@@ -221,10 +231,10 @@ QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, 
     // cleanup a bit
     Py_XDECREF(functionArgs);
     Py_XDECREF(factoryFunction);
-    
+
     // Stop this from getting garbage collected.
     Py_INCREF(PyTuple_GET_ITEM(pyResultTuple,0));
-    
+
     // convert the KCModule PyObject to a real C++ KCModule *.
     PyObject *pyQObject;
     pyQObject = PyTuple_GET_ITEM(pyResultTuple,1);
@@ -236,7 +246,7 @@ QObject *KPythonPluginFactory::create(const char *iface, QWidget *parentWidget, 
         return 0;
     }
     Py_XDECREF(pyResultTuple);
-    
+
     // take care of any translation info
 //    KGlobal::locale()->insertCatalogue(script);
     kDebug() << "Returning result qobject";
@@ -383,11 +393,11 @@ int kdemain( int argc, char **argv )
     PyTuple_SetItem(pArgs, 0, pArg1);
     PyTuple_SetItem(pArgs, 1, pArg2);
     RunFunction(factoryFunction, pArgs);
-    
+
     Py_XDECREF(pClass);
     Py_XDECREF(pArgs);
     Py_XDECREF(pModule);
-    
+
     Py_Finalize();
     return 0;
 }

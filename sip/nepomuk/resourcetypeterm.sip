@@ -24,7 +24,7 @@ namespace Query
 class ResourceTypeTerm : Nepomuk::Query::Term
 {
 %TypeHeaderCode
-#include <resourcetypeterm.h>
+#include <nepomuk/resourcetypeterm.h>
 %End
 
 public:

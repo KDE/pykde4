@@ -24,7 +24,7 @@ namespace Query
 class SimpleTerm : Nepomuk::Query::Term
 {
 %TypeHeaderCode
-#include <simpleterm.h>
+#include <nepomuk/simpleterm.h>
 %End
 
 public:
@@ -33,7 +33,7 @@ public:
     void                    setSubTerm (const Nepomuk::Query::Term& term);
 protected:
                             SimpleTerm (const Nepomuk::Query::Term& term);
-                            SimpleTerm (TermPrivate*);
+//ig                            SimpleTerm (TermPrivate*);
 };
 };
 };

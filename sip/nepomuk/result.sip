@@ -24,7 +24,7 @@ namespace Query
 class Result
 {
 %TypeHeaderCode
-#include <result.h>
+#include <nepomuk/result.h>
 %End
 
 public:
@@ -36,7 +36,7 @@ public:
     Nepomuk::Resource       resource () const;
     void                    setScore (double score);
     void                    addRequestProperty (const Nepomuk::Types::Property& property, const Soprano::Node& value);
-    QHash<Types::Property,Soprano::Node>  requestProperties () const;
+    QHash<Nepomuk::Types::Property,Soprano::Node>  requestProperties () const;
     Soprano::Node           operator [] (const Nepomuk::Types::Property& property) const;
     Soprano::Node           requestProperty (const Nepomuk::Types::Property& property) const;
     bool                    operator == (const Nepomuk::Query::Result&) const;

@@ -24,7 +24,7 @@ namespace Query
 class GroupTerm : Nepomuk::Query::Term
 {
 %TypeHeaderCode
-#include <groupterm.h>
+#include <nepomuk/groupterm.h>
 %End
 
 public:
@@ -34,8 +34,8 @@ public:
     void                    addSubTerm (const Nepomuk::Query::Term& term);
 protected:
                             GroupTerm (const Nepomuk::Query::Term& term);
-                            GroupTerm (TermPrivate*);
-                            GroupTerm (TermPrivate*, const Nepomuk::Query::Term& term1, const Nepomuk::Query::Term& term2, const Nepomuk::Query::Term& term3 = Nepomuk::Query::Term(), const Nepomuk::Query::Term& term4 = Nepomuk::Query::Term(), const Nepomuk::Query::Term& term5 = Nepomuk::Query::Term(), const Nepomuk::Query::Term& term6 = Nepomuk::Query::Term());
+//ig                            GroupTerm (TermPrivate*);
+//ig                            GroupTerm (TermPrivate*, const Nepomuk::Query::Term& term1, const Nepomuk::Query::Term& term2, const Nepomuk::Query::Term& term3 = Nepomuk::Query::Term(), const Nepomuk::Query::Term& term4 = Nepomuk::Query::Term(), const Nepomuk::Query::Term& term5 = Nepomuk::Query::Term(), const Nepomuk::Query::Term& term6 = Nepomuk::Query::Term());
 };
 };
 };

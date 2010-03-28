@@ -24,7 +24,7 @@ namespace Query
 class Term
 {
 %TypeHeaderCode
-#include <term.h>
+#include <nepomuk/term.h>
 %End
 
 public:
@@ -58,60 +58,20 @@ public:
     Nepomuk::Query::OrTerm  toOrTerm () const;
     Nepomuk::Query::ComparisonTerm  toComparisonTerm () const;
     Nepomuk::Query::ResourceTypeTerm  toResourceTypeTerm () const;
-    Nepomuk::Query::LiteralTerm&  toLiteralTerm ();
-    Nepomuk::Query::ResourceTerm&  toResourceTerm ();
-    Nepomuk::Query::NegationTerm&  toNegationTerm ();
-    Nepomuk::Query::AndTerm&  toAndTerm ();
-    Nepomuk::Query::OrTerm&  toOrTerm ();
-    Nepomuk::Query::ComparisonTerm&  toComparisonTerm ();
-    Nepomuk::Query::ResourceTypeTerm&  toResourceTypeTerm ();
+//ig    Nepomuk::Query::LiteralTerm&  toLiteralTerm ();
+//ig    Nepomuk::Query::ResourceTerm&  toResourceTerm ();
+//ig    Nepomuk::Query::NegationTerm&  toNegationTerm ();
+//ig    Nepomuk::Query::AndTerm&  toAndTerm ();
+//ig    Nepomuk::Query::OrTerm&  toOrTerm ();
+//ig    Nepomuk::Query::ComparisonTerm&  toComparisonTerm ();
+//ig    Nepomuk::Query::ResourceTypeTerm&  toResourceTypeTerm ();
     bool                    operator == (const Nepomuk::Query::Term& term) const;
-    QDebug                  operator << (QDebug) const;
+//ig    QDebug                  operator << (QDebug) const;
 protected:
-                            Term (TermPrivate*);
-%ConvertToSubClassCode
-    // CTSCC for subclasses of 'Term'
-    sipType = NULL;
-
-    if (dynamic_cast<Nepomuk::Query::GroupTerm*>(sipCpp))
-        {
-        sipType = sipType_Nepomuk_Query_GroupTerm;
-        if (dynamic_cast<Nepomuk::Query::AndTerm*>(sipCpp))
-            sipType = sipType_Nepomuk_Query_AndTerm;
-        else if (dynamic_cast<Nepomuk::Query::OrTerm*>(sipCpp))
-            sipType = sipType_Nepomuk_Query_OrTerm;
-        }
-    else if (dynamic_cast<Nepomuk::Query::LiteralTerm*>(sipCpp))
-        sipType = sipType_Nepomuk_Query_LiteralTerm;
-    else if (dynamic_cast<Nepomuk::Query::ResourceTerm*>(sipCpp))
-        sipType = sipType_Nepomuk_Query_ResourceTerm;
-    else if (dynamic_cast<Nepomuk::Query::ResourceTypeTerm*>(sipCpp))
-        sipType = sipType_Nepomuk_Query_ResourceTypeTerm;
-    else if (dynamic_cast<Nepomuk::Query::SimpleTerm*>(sipCpp))
-        {
-        sipType = sipType_Nepomuk_Query_SimpleTerm;
-        if (dynamic_cast<Nepomuk::Query::ComparisonTerm*>(sipCpp))
-            sipType = sipType_Nepomuk_Query_ComparisonTerm;
-        else if (dynamic_cast<Nepomuk::Query::NegationTerm*>(sipCpp))
-            sipType = sipType_Nepomuk_Query_NegationTerm;
-        }
-%End
+//ig                            Term (TermPrivate*);
 };
 uint                    qHash (const Nepomuk::Query::Term&);
 };
 };
 //ig Nepomuk::Query::TermPrivate*  clone ();
 //ig QDebug                  operator << (QDebug, const Nepomuk::Query::Term&);
-%ModuleHeaderCode
-//ctscc
-#include <andterm.h>
-#include <comparisonterm.h>
-#include <groupterm.h>
-#include <literalterm.h>
-#include <negationterm.h>
-#include <orterm.h>
-#include <resourceterm.h>
-#include <resourcetypeterm.h>
-#include <simpleterm.h>
-#include <term.h>
-%End

@@ -21,10 +21,10 @@ namespace Nepomuk
 {
 namespace Query
 {
-class QueryParser
+class QueryParser /NoDefaultCtors/
 {
 %TypeHeaderCode
-#include <queryparser.h>
+#include <nepomuk/queryparser.h>
 %End
 
 public:

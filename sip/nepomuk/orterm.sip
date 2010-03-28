@@ -24,7 +24,7 @@ namespace Query
 class OrTerm : Nepomuk::Query::GroupTerm
 {
 %TypeHeaderCode
-#include <orterm.h>
+#include <nepomuk/orterm.h>
 %End
 
 public:

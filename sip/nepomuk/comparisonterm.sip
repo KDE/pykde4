@@ -24,7 +24,7 @@ namespace Query
 class ComparisonTerm : Nepomuk::Query::SimpleTerm
 {
 %TypeHeaderCode
-#include <comparisonterm.h>
+#include <nepomuk/comparisonterm.h>
 %End
 
 public:
@@ -40,7 +40,7 @@ public:
     };
                             ComparisonTerm ();
                             ComparisonTerm (const Nepomuk::Query::ComparisonTerm& term);
-                            ComparisonTerm (const Nepomuk::Types::Property& property, const Nepomuk::Query::Term& term, Nepomuk::Query::ComparisonTerm::Comparator comparator = Nepomuk::Query::ComparisonTerm::Comparator::Contains);
+                            ComparisonTerm (const Nepomuk::Types::Property& property, const Nepomuk::Query::Term& term, Nepomuk::Query::ComparisonTerm::Comparator comparator = Nepomuk::Query::ComparisonTerm::Contains);
     ~ComparisonTerm ();
     Nepomuk::Query::ComparisonTerm::Comparator  comparator () const;
     Nepomuk::Types::Property  property () const;

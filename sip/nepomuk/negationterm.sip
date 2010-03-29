@@ -24,7 +24,7 @@ namespace Query
 class NegationTerm : Nepomuk::Query::SimpleTerm
 {
 %TypeHeaderCode
-#include <negationterm.h>
+#include <nepomuk/negationterm.h>
 %End
 
 public:

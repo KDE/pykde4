@@ -24,7 +24,7 @@ namespace Query
 class LiteralTerm : Nepomuk::Query::Term
 {
 %TypeHeaderCode
-#include <literalterm.h>
+#include <nepomuk/literalterm.h>
 %End
 
 public:

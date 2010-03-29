@@ -25,7 +25,7 @@ typedef QHash<QString,Nepomuk::Types::Property> RequestPropertyMap;
 class Query
 {
 %TypeHeaderCode
-#include <query.h>
+#include <nepomuk/query.h>
 %End
 
 public:
@@ -41,7 +41,7 @@ public:
     class RequestProperty
     {
 %TypeHeaderCode
-#include <query.h>
+#include <nepomuk/query.h>
 %End
 
     public:
@@ -61,25 +61,13 @@ public:
         CreateCountQuery,
         HandleInverseProperties
     };
-    typedef QFlags<SparqlFlag> SparqlFlags;
-    QString                 toSparqlQuery (Nepomuk::Query::Query::SparqlFlags flags = Nepomuk::Query::Query::SparqlFlag::NoFlags) const;
-    KUrl                    toSearchUrl (Nepomuk::Query::Query::SparqlFlags flags = Nepomuk::Query::Query::SparqlFlag::NoFlags) const;
+    typedef QFlags<Nepomuk::Query::Query::SparqlFlag> SparqlFlags;
+    QString                 toSparqlQuery (Nepomuk::Query::Query::SparqlFlags flags = Nepomuk::Query::Query::NoFlags) const;
+    KUrl                    toSearchUrl (Nepomuk::Query::Query::SparqlFlags flags = Nepomuk::Query::Query::NoFlags) const;
     Nepomuk::Query::RequestPropertyMap  requestPropertyMap () const;
     bool                    operator == (const Nepomuk::Query::Query& query) const;
-%ConvertToSubClassCode
-    // CTSCC for subclasses of 'Query'
-    sipType = NULL;
-
-    if (dynamic_cast<Nepomuk::Query::FileQuery*>(sipCpp))
-        sipType = sipType_Nepomuk_Query_FileQuery;
-%End
 };
 uint                    qHash (const Nepomuk::Query::Query&);
 };
 };
-QDebug                  operator << (QDebug, const Nepomuk::Query::Query&);
-%ModuleHeaderCode
-//ctscc
-#include <filequery.h>
-#include <query.h>
-%End
+//ig QDebug                  operator << (QDebug, const Nepomuk::Query::Query&);

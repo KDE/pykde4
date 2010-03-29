@@ -24,7 +24,7 @@ namespace Query
 class AndTerm : Nepomuk::Query::GroupTerm
 {
 %TypeHeaderCode
-#include <andterm.h>
+#include <nepomuk/andterm.h>
 %End
 
 public:

@@ -24,7 +24,7 @@ namespace Query
 class QueryServiceClient : QObject
 {
 %TypeHeaderCode
-#include <queryserviceclient.h>
+#include <nepomuk/queryserviceclient.h>
 %End
 
 public:

@@ -24,7 +24,7 @@ namespace Query
 class FileQuery : Nepomuk::Query::Query
 {
 %TypeHeaderCode
-#include <filequery.h>
+#include <nepomuk/filequery.h>
 %End
 
 public:

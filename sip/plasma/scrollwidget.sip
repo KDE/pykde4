@@ -65,6 +65,18 @@ public:
 //end
 signals:
     void                    scrollStateChanged (QAbstractAnimation::State newState, QAbstractAnimation::State oldState);
+public:
+    void                    setAlignment (Qt::Alignment align);
+    Qt::Alignment           alignment () const;
+    void                    setOverShoot (bool enable);
+    bool                    hasOverShoot () const;
+    void                    setSnapSize (const QSizeF& size);
+    QSizeF                  snapSize () const;
+signals:
+    void                    viewportGeometryChanged (const QRectF& geomety);
+protected:
+    void                    keyPressEvent (QKeyEvent* event);
+    bool                    sceneEventFilter (QGraphicsItem* i, QEvent* e);
 };
 // ScrollWidget
 

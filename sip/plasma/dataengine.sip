@@ -87,6 +87,10 @@ public:
     ~DataEngine ();
 protected:
     void                    forceImmediateUpdateOfAllVisualizations ();
+public:
+    Plasma::Service*        createDefaultService (QObject* parent /Transfer/ = 0);
+protected:
+    void                    setDefaultService (const QString& serviceName);
 };
 // DataEngine
 

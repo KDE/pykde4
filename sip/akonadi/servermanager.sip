@@ -40,6 +40,18 @@ signals:
 private:
 //ig                            ServerManager (ServerManagerPrivate* dd);
 
+public:
+    enum State
+    {
+        NotRunning,
+        Starting,
+        Running,
+        Stopping,
+        Broken
+    };
+    static Akonadi::ServerManager::State  state ();
+signals:
+    void                    stateChanged (Akonadi::ServerManager::State state);
 };
 // ServerManager
 

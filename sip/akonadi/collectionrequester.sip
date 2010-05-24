@@ -37,6 +37,8 @@ public:
     ~CollectionRequester ();
     void                    setAccessRightsFilter (Akonadi::Collection::Rights rights);
     Akonadi::Collection::Rights  accessRightsFilter () const;
+signals:
+    void                    collectionChanged (const Akonadi::Collection& collection);
 };
 // CollectionRequester
 

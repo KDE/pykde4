@@ -61,6 +61,12 @@ public:
     void                    setSingleMode (bool singleMode);
     QString                 runnerName (const QString& id) const;
     QStringList             singleModeAdvertisedRunnerIds () const;
+    void                    loadRunner (const KService::Ptr service);
+    void                    loadRunner (const QString& path);
+    QMimeData*              mimeDataForMatch (const Plasma::QueryMatch& match) const;
+    QMimeData*              mimeDataForMatch (const QString& id) const;
+signals:
+    void                    queryFinished ();
 };
 // RunnerManager
 

@@ -156,6 +156,10 @@ signals:
     void                    currentIconSizeChanged (int size);
 public:
     ~KDirOperator ();
+    void                    setNewFileMenuSupportedMimeTypes (const QStringList& mime);
+    QStringList             newFileMenuSupportedMimeTypes () const;
+protected:
+    virtual void            keyPressEvent (QKeyEvent* event);
 };
 // KDirOperator
 

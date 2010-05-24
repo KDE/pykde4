@@ -78,6 +78,7 @@ public:
         UDS_TARGET_URL,
         UDS_DISPLAY_TYPE,
         UDS_NEPOMUK_URI,
+        UDS_ICON_OVERLAY_NAMES,
         UDS_EXTRA,
         UDS_EXTRA_END
     };

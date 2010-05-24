@@ -57,6 +57,9 @@ public:
 
     unsigned short code;
     ~DOMException ();
+    DOM::DOMString          codeAsString () const;
+    static DOM::DOMString   codeAsString (int code);
+    static bool             isDOMExceptionCode (int exceptioncode);
 };
 // DOMException
 

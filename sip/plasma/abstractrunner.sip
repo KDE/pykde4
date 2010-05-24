@@ -22,10 +22,12 @@
 
 %ModuleHeaderCode
 //ctscc
+#include <plasma/abstractdialogmanager.h>
 #include <plasma/abstractrunner.h>
 #include <plasma/abstracttoolbox.h>
 #include <plasma/accessappletjob.h>
 #include <plasma/accessmanager.h>
+#include <plasma/animation.h>
 #include <plasma/animationdriver.h>
 #include <plasma/animator.h>
 #include <plasma/applet.h>
@@ -143,7 +145,7 @@ public:
     static QMutex*          bigLock ();
 
 protected:
-    explicit                AbstractRunner (QObject* parent /TransferThis/ = 0, const QString& serviceId = QString());
+    explicit                AbstractRunner (QObject* parent /TransferThis/ = 0, const QString& path = QString());
                             AbstractRunner (QObject* parent /TransferThis/, const QVariantList& args);
     KConfigGroup            config () const;
     void                    setHasRunOptions (bool hasRunOptions);
@@ -175,6 +177,8 @@ protected:
         sipType = sipType_Plasma_ServiceAccessJob;
     else if (dynamic_cast<Plasma::ServiceJob*>(sipCpp))
         sipType = sipType_Plasma_ServiceJob;
+    else if (dynamic_cast<Plasma::AbstractDialogManager*>(sipCpp))
+        sipType = sipType_Plasma_AbstractDialogManager;
     else if (dynamic_cast<Plasma::AbstractRunner*>(sipCpp))
         sipType = sipType_Plasma_AbstractRunner;
     else if (dynamic_cast<Plasma::AccessManager*>(sipCpp))
@@ -231,6 +235,8 @@ protected:
         sipType = sipType_Plasma_ToolTipManager;
     else if (dynamic_cast<Plasma::Wallpaper*>(sipCpp))
         sipType = sipType_Plasma_Wallpaper;
+    else if (dynamic_cast<Plasma::Animation*>(sipCpp))
+        sipType = sipType_Plasma_Animation;
     else if (dynamic_cast<Plasma::Delegate*>(sipCpp))
         sipType = sipType_Plasma_Delegate;
     else if (dynamic_cast<Plasma::Corona*>(sipCpp))
@@ -329,6 +335,8 @@ public:
 protected:
     void                    setDefaultSyntax (const Plasma::RunnerSyntax& syntax);
     Plasma::DataEngine*     dataEngine (const QString& name) const;
+    explicit                AbstractRunner (const KService::Ptr service, QObject* parent /TransferThis/ = 0);
+    QMimeData*              mimeDataForMatch (const Plasma::QueryMatch* match);
 };
 // AbstractRunner
 

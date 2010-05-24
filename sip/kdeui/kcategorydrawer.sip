@@ -53,4 +53,22 @@ public:
     virtual void            mouseButtonDoubleClicked (const QModelIndex& index, QMouseEvent* event);
 signals:
     void                    collapseOrExpandClicked (const QModelIndex& index);
+    void                    actionRequested (int action, const QModelIndex& index);
+};
+class KCategoryDrawerV3 : KCategoryDrawerV2
+{
+%TypeHeaderCode
+#include <kcategorydrawer.h>
+%End
+
+public:
+                            KCategoryDrawerV3 (KCategorizedView* view);
+    virtual ~KCategoryDrawerV3 ();
+    KCategorizedView*       view () const;
+protected:
+    virtual void            mouseButtonPressed (const QModelIndex& index, const QRect& blockRect, QMouseEvent* event);
+    virtual void            mouseButtonReleased (const QModelIndex& index, const QRect& blockRect, QMouseEvent* event);
+    virtual void            mouseMoved (const QModelIndex& index, const QRect& blockRect, QMouseEvent* event);
+    virtual void            mouseButtonDoubleClicked (const QModelIndex& index, const QRect& blockRect, QMouseEvent* event);
+    virtual void            mouseLeft (const QModelIndex& index, const QRect& blockRect);
 };

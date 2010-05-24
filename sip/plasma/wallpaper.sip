@@ -92,6 +92,9 @@ signals:
     void                    urlDropped (const KUrl& url);
 protected:
     void                    setContextualActions (const QList<QAction*>& actions);
+public:
+    bool                    isPreviewing () const;
+    void                    setPreviewing (bool previewing);
 };
 // Wallpaper
 

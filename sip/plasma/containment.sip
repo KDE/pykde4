@@ -153,6 +153,8 @@ protected:
     Plasma::AbstractToolBox*  toolBox () const;
 private:
                             Containment (const QString& packagePath, uint appletId, const QVariantList& args);
+public:
+    Plasma::Context*        context () const;
 };
 // Containment
 

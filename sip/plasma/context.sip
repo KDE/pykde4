@@ -39,6 +39,8 @@ signals:
     void                    locationChanged (Plasma::Context* context);
 public:
     ~Context ();
+    void                    setCurrentActivityId (const QString& id);
+    QString                 currentActivityId () const;
 };
 // Context
 

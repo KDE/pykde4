@@ -87,7 +87,7 @@ signals:
     void                    error (const QString& message);
     void                    abortRequested ();
     void                    reloadConfiguration ();
-    void                    onlineChanged (bool b);
+    void                    onlineChanged (bool online);
     void                    configurationDialogAccepted ();
     void                    configurationDialogRejected ();
 protected:

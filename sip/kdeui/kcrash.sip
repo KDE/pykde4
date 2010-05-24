@@ -46,6 +46,8 @@ typedef QFlags<KCrash::CrashFlag> CrashFlags;
 void                    setFlags (KCrash::CrashFlags flags);
 void                    setApplicationPath (const QString& path);
 void                    setApplicationName (const QString& name);
+void                    setDrKonqiEnabled (bool enabled);
+bool                    isDrKonqiEnabled ();
 };
 // KCrash
 

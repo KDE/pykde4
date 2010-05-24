@@ -70,7 +70,6 @@ signals:
     void                    returnPressed ();
 
 protected:
-    virtual void            keyReleaseEvent (QKeyEvent* event);
     virtual void            mouseReleaseEvent (QMouseEvent* event);
     virtual void            resizeEvent (QResizeEvent* event);
     virtual bool            eventFilter (QObject* watched, QEvent* event);
@@ -81,6 +80,18 @@ private:
 //end
 public:
     ~KUrlNavigator ();
+                            KUrlNavigator (QWidget* parent /TransferThis/ = 0);
+    KUrl                    locationUrl (int historyIndex = -1) const;
+    void                    saveLocationState (const QByteArray& state);
+    QByteArray              locationState (int historyIndex = -1) const;
+    void                    setHomeUrl (const KUrl& url);
+    KUrl                    homeUrl () const;
+    void                    setLocationUrl (const KUrl& url);
+signals:
+    void                    urlAboutToBeChanged (const KUrl& newUrl);
+    void                    tabRequested (const KUrl& url);
+protected:
+    virtual void            keyPressEvent (QKeyEvent* event);
 };
 // KUrlNavigator
 

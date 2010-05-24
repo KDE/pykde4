@@ -64,7 +64,7 @@ public:
 
 private:
 //force
-                            KUriFilterData (const KUriFilterData& data);
+                            KUriFilterData (const KUriFilterData& other);
 //end
 public:
     ~KUriFilterData ();

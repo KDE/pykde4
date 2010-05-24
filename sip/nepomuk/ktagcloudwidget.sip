@@ -63,8 +63,8 @@ public:
 %ModuleHeaderCode
 //ctscc
 #include <nepomuk/kmetadatatagcloud.h>
-#include <nepomuk/kmetadatatagwidget.h>
 #include <nepomuk/ktagcloudwidget.h>
 #include <nepomuk/ktagdisplaywidget.h>
 #include <qobject.h>
+#include <nepomuk/tagwidget.h>
 %End

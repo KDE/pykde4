@@ -141,6 +141,9 @@ public:
     else if (dynamic_cast<Nepomuk::Thing*>(sipCpp))
         sipType = sipType_Nepomuk_Thing;
 %End
+    bool                    hasProperty (const Nepomuk::Types::Property& p, const Nepomuk::Variant& v) const;
+    int                     usageCount () const;
+    void                    increaseUsageCount ();
 };
 // Resource
 

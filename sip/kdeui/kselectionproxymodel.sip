@@ -54,4 +54,6 @@ public:
     virtual int             columnCount (const QModelIndex& = QModelIndex()) const;
 protected:
     QList<QPersistentModelIndex>  sourceRootIndexes () const;
+public:
+    virtual QModelIndexList  match (const QModelIndex& start, int role, const QVariant& value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith|Qt::MatchWrap)) const;
 };

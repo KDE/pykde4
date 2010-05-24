@@ -130,6 +130,7 @@ public:
 //ig    QList<qulonglong>       toUnsignedInt64List () const;
 //ig    QList<bool>             toBoolList () const;
 //ig                            Variant (const QList<qlonglong>& i);
+    static Nepomuk::Variant  fromNode (const Soprano::Node& node);
 };
 // Variant
 

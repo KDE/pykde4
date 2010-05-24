@@ -82,7 +82,7 @@ public:
         FullName
     };
 
-                            KAboutData (const QByteArray& appName, const QByteArray& catalogName, const KLocalizedString& programName, const QByteArray& version, const KLocalizedString& shortDescription = KLocalizedString(), KAboutData::LicenseKey licenseType = KAboutData::License_Unknown, const KLocalizedString& copyrightStatement = KLocalizedString(), const KLocalizedString& text = KLocalizedString(), const QByteArray& homePageAddress = QByteArray(), const QByteArray& bugsEmailAddress = "submit@bugs.kde.org");
+                            KAboutData (const QByteArray& appName, const QByteArray& catalogName, const KLocalizedString& programName, const QByteArray& version, const KLocalizedString& shortDescription = KLocalizedString(), KAboutData::LicenseKey licenseType = KAboutData::License_Unknown, const KLocalizedString& copyrightStatement = KLocalizedString(), const KLocalizedString& otherText = KLocalizedString(), const QByteArray& homePageAddress = QByteArray(), const QByteArray& bugsEmailAddress = "submit@bugs.kde.org");
                             KAboutData (const KAboutData& other);
     KAboutData&             addAuthor (const KLocalizedString& name, const KLocalizedString& task = KLocalizedString(), const QByteArray& emailAddress = QByteArray(), const QByteArray& webAddress = QByteArray());
     KAboutData&             addCredit (const KLocalizedString& name, const KLocalizedString& task = KLocalizedString(), const QByteArray& emailAddress = QByteArray(), const QByteArray& webAddress = QByteArray());

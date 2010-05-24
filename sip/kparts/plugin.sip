@@ -65,6 +65,8 @@ public:
     ~Plugin ();
 //ig    static void             loadPlugins (QObject* parent /Transfer/, const QList<PluginInfo>& pluginInfos);
 //ig    static void             loadPlugins (QObject* parent /Transfer/, const QList<PluginInfo>& pluginInfos, const KComponentData& instance);
+protected:
+    static KParts::Plugin*  loadPlugin (QObject* parent /Transfer/, const QString& libname, const QString& keyword);
 };
 // Plugin
 

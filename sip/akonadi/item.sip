@@ -70,6 +70,7 @@ public:
     ~Item ();
     QSet<QByteArray>        availablePayloadParts () const;
     void                    apply (const Akonadi::Item& other);
+    void                    clearPayload ();
 };
 // Item
 

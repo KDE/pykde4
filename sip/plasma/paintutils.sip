@@ -35,6 +35,7 @@ QPixmap                 shadowText (QString text, QColor textColor, QColor shado
 //ig QPixmap                 shadowText (QString text, const QFont& font, QColor textColor = 0, QColor shadowColor = 0, QPoint offset = QPoint(1,1), int radius = 2);
 //ig QPixmap                 shadowText (QString text, QColor textColor = 0, QColor shadowColor = 0, QPoint offset = QPoint(1,1), int radius = 2);
 void                    drawHalo (QPainter* painter, const QRectF& rect);
+void                    centerPixmaps (QPixmap& from, QPixmap& to);
 };
 // PaintUtils
 

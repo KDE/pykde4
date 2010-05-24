@@ -64,7 +64,8 @@ public:
     enum AdditionalRoles
     {
         FileItemRole,
-        ChildCountRole
+        ChildCountRole,
+        HasJobRole
     };
 
 
@@ -102,6 +103,8 @@ signals:
     void                    needSequenceIcon (const QModelIndex& index, int sequenceIndex);
 public:
     ~KDirModel ();
+    void                    setJobTransfersVisible (bool value);
+    bool                    jobTransfersVisible () const;
 };
 // KDirModel
 

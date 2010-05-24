@@ -88,6 +88,8 @@ protected:
     mode_t                  mode () const;
 public:
     ~KRun ();
+    static bool             runCommand (const QString& cmd, QWidget* window, const QString& workingDirectory);
+    static bool             runCommand (const QString& cmd, const QString& execName, const QString& icon, QWidget* window, const QByteArray& asn, const QString& workingDirectory);
 };
 // KRun
 

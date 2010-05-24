@@ -82,7 +82,8 @@ public:
         DOCUMENT_NODE,
         DOCUMENT_TYPE_NODE,
         DOCUMENT_FRAGMENT_NODE,
-        NOTATION_NODE
+        NOTATION_NODE,
+        XPATH_NAMESPACE_NODE
     };
 
     DOM::DOMString          nodeName () const;

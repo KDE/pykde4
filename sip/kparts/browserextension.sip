@@ -31,6 +31,7 @@
 #include <kparts/partmanager.h>
 #include <kparts/plugin.h>
 #include <qobject.h>
+#include <kparts/scriptableextension.h>
 #include <kparts/statusbarextension.h>
 %End
 
@@ -226,6 +227,8 @@ Py_BEGIN_ALLOW_THREADS
         sipType = sipType_KParts_PartManager;
     else if (dynamic_cast<KParts::Plugin*>(sipCpp))
         sipType = sipType_KParts_Plugin;
+    else if (dynamic_cast<KParts::ScriptableExtension*>(sipCpp))
+        sipType = sipType_KParts_ScriptableExtension;
     else if (dynamic_cast<KParts::StatusBarExtension*>(sipCpp))
         sipType = sipType_KParts_StatusBarExtension;
     else if (dynamic_cast<KParts::BrowserRun*>(sipCpp))

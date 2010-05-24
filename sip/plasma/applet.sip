@@ -214,6 +214,8 @@ public:
     void                    unpublish ();
     bool                    isPublished () const;
     void                    runAssociatedApplication ();
+    void                    showConfigurationInterface (QWidget* widget);
+    bool                    isUserConfiguring () const;
 };
 // Applet
 

@@ -37,5 +37,7 @@ signals:
 protected:
     void                    doStart ();
     virtual void            doHandleResponse (const QByteArray& tag, const QByteArray& data);
+public:
+    static QUrl             akonadiItemIdUri ();
 };
 };

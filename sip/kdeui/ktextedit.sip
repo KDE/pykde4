@@ -93,6 +93,8 @@ public:
 protected:
     virtual void            paintEvent (QPaintEvent*);
     virtual void            focusOutEvent (QFocusEvent*);
+signals:
+    void                    aboutToShowContextMenu (QMenu* menu);
 };
 // KTextEdit
 

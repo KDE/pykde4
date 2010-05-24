@@ -44,6 +44,8 @@ signals:
 protected:
                             HistoryProvider (QObject* parent /TransferThis/ = 0);
     ~HistoryProvider ();
+public:
+    static bool             exists ();
 };
 // HistoryProvider
 

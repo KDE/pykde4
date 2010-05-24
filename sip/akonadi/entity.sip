@@ -60,6 +60,8 @@ public:
     Akonadi::Collection     parentCollection () const;
 //ig    Akonadi::Collection&    parentCollection ();
     void                    setParentCollection (const Akonadi::Collection& parent);
+    void                    setRemoteRevision (const QString& revision);
+    QString                 remoteRevision () const;
 };
 // Entity
 

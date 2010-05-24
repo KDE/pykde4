@@ -62,6 +62,10 @@ protected:
     void                    unregisterAsDragHandle (QGraphicsItem* item);
     bool                    isRegisteredAsDragHandle (QGraphicsItem* item);
     KPluginInfo             description () const;
+signals:
+    void                    popupEvent (bool popped) const;
+protected:
+    Plasma::Animation*      loadAnimationFromPackage (const QString& name, QObject* parent /Transfer/);
 };
 // AppletScript
 

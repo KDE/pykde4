@@ -40,7 +40,9 @@ public:
         MouseBattery,
         KeyboardBattery,
         KeyboardMouseBattery,
-        CameraBattery
+        CameraBattery,
+        PhoneBattery,
+        MonitorBattery
     };
 
 

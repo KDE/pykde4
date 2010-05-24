@@ -46,6 +46,9 @@ protected:
 //ig                            StorageAccess (StorageAccessPrivate& dd, QObject* backendObject);
 public:
     ~StorageAccess ();
+signals:
+    void                    setupRequested (const QString& udi);
+    void                    teardownRequested (const QString& udi);
 };
 // StorageAccess
 

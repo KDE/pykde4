@@ -118,6 +118,8 @@ private:
 //end
 public:
     ~SimpleJob ();
+    bool                    isRedirectionHandlingEnabled () const;
+    void                    setRedirectionHandlingEnabled (bool handle);
 };
 // SimpleJob
 

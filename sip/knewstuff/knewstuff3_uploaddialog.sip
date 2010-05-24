@@ -32,5 +32,11 @@ public:
     void                    setUploadFile (const KUrl& payloadFile);
     void                    setUploadName (const QString& name);
     virtual void            accept ();
+    void                    setVersion (const QString& version);
+    void                    setDescription (const QString& description);
+    void                    setChangelog (const QString& changelog);
+    void                    setPrice (double price);
+    void                    setPriceReason (const QString& reason);
+    void                    selectCategory (const QString& category);
 };
 };

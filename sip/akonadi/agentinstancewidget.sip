@@ -37,6 +37,8 @@ signals:
     void                    doubleClicked (const Akonadi::AgentInstance& current);
 public:
     ~AgentInstanceWidget ();
+    QList<Akonadi::AgentInstance>  selectedAgentInstances () const;
+    QAbstractItemView*      view () const;
 };
 // AgentInstanceWidget
 

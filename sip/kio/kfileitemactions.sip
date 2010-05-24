@@ -29,11 +29,12 @@ public:
                             KFileItemActions (QObject* parent /TransferThis/ = 0);
     void                    setItemListProperties (const KFileItemListProperties& itemList);
     void                    setParentWidget (QWidget* widget);
-    void                    addOpenWithActionsTo (QMenu* menu, const QString& traderConstraint);
     KAction*                preferredOpenWithAction (const QString& traderConstraint);
     int                     addServiceActionsTo (QMenu* menu);
     ~KFileItemActions ();
     static KService::List   associatedApplications (const QStringList& mimeTypeList, const QString& traderConstraint);
+    void                    addOpenWithActionsTo (QMenu* menu, const QString& traderConstraint = QString());
+    void                    runPreferredApplications (const KFileItemList& fileOpenList, const QString& traderConstraint);
 };
 // KFileItemActions
 

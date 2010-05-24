@@ -63,6 +63,8 @@ protected:
     virtual void            paint (QPainter* p, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 public:
     ~Meter ();
+protected:
+    QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
 };
 // Meter
 

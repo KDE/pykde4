@@ -41,6 +41,7 @@ private:
 //end
 public:
     ~KPixmapRegionSelectorDialog ();
+    void                    adjustRegionSelectorWidgetSizeToFitScreen ();
 };
 // KPixmapRegionSelectorDialog
 

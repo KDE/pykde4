@@ -61,6 +61,13 @@ protected:
     void                    changeEvent (QEvent* event);
     bool                    event (QEvent* event);
     void                    contextMenuEvent (QGraphicsSceneContextMenuEvent* event);
+public:
+    void                    setWordWrap (bool wrap);
+    bool                    wordWrap () const;
+protected:
+    void                    mouseMoveEvent (QGraphicsSceneMouseEvent* event);
+    QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
+    QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
 };
 // Label
 

@@ -33,7 +33,9 @@ public:
         Downloadable,
         Installed,
         Updateable,
-        Deleted
+        Deleted,
+        Installing,
+        Updating
     };
     ~Entry ();
                             Entry (const KNS3::Entry& other);
@@ -47,5 +49,8 @@ public:
     QString                 version () const;
 private:
                             Entry ();
+public:
+    QString                 id () const;
+    QString                 providerId () const;
 };
 };

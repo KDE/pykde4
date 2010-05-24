@@ -37,5 +37,6 @@ public:
     virtual QVariant        headerData (int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     virtual Qt::ItemFlags   flags (const QModelIndex& index) const;
     virtual int             columnCount (const QModelIndex& parent = QModelIndex()) const;
+    virtual QModelIndexList  match (const QModelIndex& start, int role, const QVariant& value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith|Qt::MatchWrap)) const;
 };
 };

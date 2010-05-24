@@ -56,6 +56,8 @@ public:
         sipType = sipType_Akonadi_MessageFolderAttribute;
     else if (dynamic_cast<Akonadi::MessageThreadingAttribute*>(sipCpp))
         sipType = sipType_Akonadi_MessageThreadingAttribute;
+    else if (dynamic_cast<Akonadi::PersistentSearchAttribute*>(sipCpp))
+        sipType = sipType_Akonadi_PersistentSearchAttribute;
 %End
 };
 };
@@ -68,4 +70,5 @@ public:
 #include <akonadi/entityhiddenattribute.h>
 #include <akonadi/kmime/messagefolderattribute.h>
 #include <akonadi/kmime/messagethreadingattribute.h>
+#include <akonadi/persistentsearchattribute.h>
 %End

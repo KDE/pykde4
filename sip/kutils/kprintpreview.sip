@@ -34,6 +34,7 @@ protected:
     void                    showEvent (QShowEvent* event);
 public:
     ~KPrintPreview ();
+    static bool             isAvailable ();
 };
 // KPrintPreview
 

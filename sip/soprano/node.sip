@@ -78,7 +78,6 @@ uint                    qHash (const Soprano::Node& node);
 };
 // Soprano
 
-uint                    qHash (const QUrl& url);
 
 //ig QDebug                  operator << (QDebug s, const Soprano::Node&);
 QTextStream&            operator << (QTextStream& s, const Soprano::Node&);

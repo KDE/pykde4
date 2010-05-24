@@ -277,6 +277,8 @@ protected:
 //ig                            Element (ElementImpl* _impl);
 public:
     ~Element ();
+    DOM::Element            querySelector (const DOM::DOMString& query) const;
+    DOM::NodeList           querySelectorAll (const DOM::DOMString& query) const;
 };
 // Element
 

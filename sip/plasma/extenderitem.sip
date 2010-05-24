@@ -70,6 +70,10 @@ public:
     ~ExtenderItem ();
 protected:
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
+public:
+    void                    setGroup (Plasma::ExtenderGroup* group, const QPointF& pos);
+signals:
+    void                    destroyed (Plasma::ExtenderItem* item);
 };
 // ExtenderItem
 

@@ -143,6 +143,7 @@ private:
 
 public:
     ~KProtocolInfo ();
+    static int              maxSlavesPerHost (const QString& protocol);
 };
 // KProtocolInfo
 

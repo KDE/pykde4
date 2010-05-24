@@ -234,9 +234,6 @@ public:
     KTcpSocket::EncryptionMode  encryptionMode () const;
 
 signals:
-    void                    aboutToClose ();
-    void                    bytesWritten (qint64 bytes);
-    void                    readyRead ();
     void                    connected ();
     void                    disconnected ();
     void                    error (KTcpSocket::Error);
@@ -251,6 +248,8 @@ public:
     void                    ignoreSslErrors ();
     void                    startClientEncryption ();
     ~KTcpSocket ();
+    QVariant                socketOption (QAbstractSocket::SocketOption options) const;
+    void                    setSocketOption (QAbstractSocket::SocketOption options, const QVariant& value);
 };
 // KTcpSocket
 

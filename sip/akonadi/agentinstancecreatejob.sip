@@ -33,6 +33,7 @@ public:
     Akonadi::AgentInstance  instance () const;
     void                    start ();
     ~AgentInstanceCreateJob ();
+    explicit                AgentInstanceCreateJob (const QString& typeId, QObject* parent /TransferThis/ = 0);
 };
 // AgentInstanceCreateJob
 

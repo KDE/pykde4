@@ -34,7 +34,8 @@ public:
         NoAdditionalButton,
         Help,
         Default,
-        Apply
+        Apply,
+        Export
     };
 
     typedef QFlags<KCModule::Button> Buttons;
@@ -78,6 +79,9 @@ signals:
     void                    rootOnlyMessageChanged (bool use, QString message);
 protected:
     void                    authStatusChanged (int);
+public:
+    QString                 exportText () const;
+    void                    setExportText (const QString&);
 };
 // KCModule
 

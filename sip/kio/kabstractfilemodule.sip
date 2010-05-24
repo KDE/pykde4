@@ -61,6 +61,8 @@
 #include <kfilefiltercombo.h>
 #include <kfileitemactions.h>
 #include <kfileitemdelegate.h>
+#include <kfilemetadataconfigurationwidget.h>
+#include <kfilemetadatawidget.h>
 #include <kfileplacesmodel.h>
 #include <kfileplacesview.h>
 #include <kfilepreviewgenerator.h>
@@ -70,6 +72,8 @@
 #include <kicondialog.h>
 #include <kimagefilepreview.h>
 #include <kmimetypechooser.h>
+#include <knameandurlinputdialog.h>
+#include <knewfilemenu.h>
 #include <knfsshare.h>
 #include <konqbookmarkmenu.h>
 #include <kopenwithdialog.h>
@@ -270,12 +274,18 @@ public:
         sipType = sipType_KDirSortFilterProxyModel;
     else if (dynamic_cast<KBookmarkActionMenu*>(sipCpp))
         sipType = sipType_KBookmarkActionMenu;
+    else if (dynamic_cast<KNewFileMenu*>(sipCpp))
+        sipType = sipType_KNewFileMenu;
     else if (dynamic_cast<KBookmarkAction*>(sipCpp))
         sipType = sipType_KBookmarkAction;
     else if (dynamic_cast<KDataToolAction*>(sipCpp))
         sipType = sipType_KDataToolAction;
     else if (dynamic_cast<KDirOperator*>(sipCpp))
         sipType = sipType_KDirOperator;
+    else if (dynamic_cast<KFileMetaDataConfigurationWidget*>(sipCpp))
+        sipType = sipType_KFileMetaDataConfigurationWidget;
+    else if (dynamic_cast<KFileMetaDataWidget*>(sipCpp))
+        sipType = sipType_KFileMetaDataWidget;
     else if (dynamic_cast<KFileWidget*>(sipCpp))
         sipType = sipType_KFileWidget;
     else if (dynamic_cast<KIO::RenameDialogPlugin*>(sipCpp))
@@ -312,6 +322,8 @@ public:
         sipType = sipType_KIconDialog;
     else if (dynamic_cast<KMimeTypeChooserDialog*>(sipCpp))
         sipType = sipType_KMimeTypeChooserDialog;
+    else if (dynamic_cast<KNameAndUrlInputDialog*>(sipCpp))
+        sipType = sipType_KNameAndUrlInputDialog;
     else if (dynamic_cast<KOpenWithDialog*>(sipCpp))
         sipType = sipType_KOpenWithDialog;
     else if (dynamic_cast<KOCRDialog*>(sipCpp))

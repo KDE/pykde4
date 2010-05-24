@@ -53,12 +53,12 @@ Solid::Networking::Status  status ();
 
 class Notifier : QObject /Abstract,PyQt4NoQMetaObject/
 {
-    void statusChanged(Solid::Networking::Status status);
-    void shouldConnect();
-    void shouldDisconnect();
+    void                    statusChanged (Solid::Networking::Status status);
+    void                    shouldConnect ();
+    void                    shouldDisconnect ();
 };
 
-Solid::Networking::Notifier*               notifier ();
+Solid::Networking::Notifier*  notifier ();
 };
 // Networking
 

@@ -24,7 +24,7 @@ namespace Nepomuk
 class TagWidget : QWidget
 {
 %TypeHeaderCode
-#include <nepomuk/kmetadatatagwidget.h>
+#include <nepomuk/tagwidget.h>
 %End
 
 public:
@@ -41,6 +41,25 @@ public:
     void                    setTaggedResources (const QList<Nepomuk::Resource>& resources);
     void                    setAssignedTags (const QList<Nepomuk::Tag>& tags);
     ~TagWidget ();
+    QList<Nepomuk::Tag>     selectedTags () const;
+    int                     maxTagsShown () const;
+    Qt::Alignment           alignment () const;
+    enum ModeFlag
+    {
+        MiniMode,
+        StandardMode,
+        ReadOnly,
+        DisableTagClicking
+    };
+    typedef QFlags<Nepomuk::TagWidget::ModeFlag> ModeFlags;
+    Nepomuk::TagWidget::ModeFlags  modeFlags () const;
+signals:
+    void                    selectionChanged (const QList<Nepomuk::Tag>& tags);
+public:
+    void                    setSelectedTags (const QList<Nepomuk::Tag>& tags);
+    void                    setMaxTagsShown (int max);
+    void                    setAlignment (Qt::Alignment alignment);
+    void                    setModeFlags (Nepomuk::TagWidget::ModeFlags flags);
 };
 // TagWidget
 

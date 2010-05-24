@@ -43,6 +43,9 @@ public:
 
     unsigned short code;
     ~RangeException ();
+    DOM::DOMString          codeAsString () const;
+    static DOM::DOMString   codeAsString (int rangeCode);
+    static bool             isRangeExceptionCode (int exceptioncode);
 };
 // RangeException
 

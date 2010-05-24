@@ -115,6 +115,8 @@ public:
     void                    updateRendering ();
 //ig                            Document (DocumentImpl* i);
     ~Document ();
+    DOM::Element            querySelector (const DOM::DOMString& query) const;
+    DOM::NodeList           querySelectorAll (const DOM::DOMString& query) const;
 };
 // Document
 
@@ -135,6 +137,8 @@ protected:
 //ig                            DocumentFragment (DocumentFragmentImpl* i);
 public:
     ~DocumentFragment ();
+    DOM::Element            querySelector (const DOM::DOMString& query) const;
+    DOM::NodeList           querySelectorAll (const DOM::DOMString& query) const;
 };
 // DocumentFragment
 

@@ -50,6 +50,8 @@ protected:
     virtual void            keyPressEvent (QKeyEvent* e);
 public:
     ~KColorButton ();
+    void                    setAlphaChannelEnabled (bool alpha);
+    bool                    isAlphaChannelEnabled () const;
 };
 // KColorButton
 

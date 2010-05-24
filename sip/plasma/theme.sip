@@ -83,6 +83,8 @@ public:
     void                    settingsChanged ();
     ~Theme ();
     void                    insertIntoCache (const QString& key, const QPixmap& pix, const QString& id);
+    QString                 animationPath (const QString& name) const;
+    QString                 styleSheet (const QString& css = QString()) const;
 };
 // Theme
 

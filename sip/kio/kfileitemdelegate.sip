@@ -42,7 +42,9 @@ public:
         ModificationTime,
         AccessTime,
         MimeType,
-        FriendlyMimeType
+        FriendlyMimeType,
+        LinkDest,
+        LocalPathOrUrl
     };
 
 //ig    typedef QList<KFileItemDelegate::Information> InformationList;
@@ -81,6 +83,8 @@ public:
     QRect                   iconRect (const QStyleOptionViewItem& option, const QModelIndex& index) const;
     void                    setWrapMode (QTextOption::WrapMode wrapMode);
     QTextOption::WrapMode   wrapMode () const;
+    void                    setJobTransfersVisible (bool jobTransfersVisible);
+    bool                    jobTransfersVisible () const;
 };
 // KFileItemDelegate
 

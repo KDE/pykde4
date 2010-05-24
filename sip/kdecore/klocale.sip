@@ -54,7 +54,17 @@ public:
         ArabicDigits,
         ArabicIndicDigits,
         EasternArabicIndicDigits,
-        DevenagariDigits
+        DevenagariDigits,
+        BengaliDigits,
+        GujaratiDigits,
+        GurmukhiDigits,
+        KannadaDigits,
+        KhmerDigits,
+        MalayalamDigits,
+        OriyaDigits,
+        TamilDigits,
+        TeluguDigits,
+        ThaiDigits
     };
 
     QString                 digitSetToName (KLocale::DigitSet digitSet, bool withDigits = 0) const;
@@ -259,7 +269,9 @@ public:
     static QString          defaultCurrencyCode ();
     enum DateTimeFormatStandard
     {
-        KdeFormat
+        KdeFormat,
+        PosixFormat,
+        UnicodeFormat
     };
 };
 // KLocale

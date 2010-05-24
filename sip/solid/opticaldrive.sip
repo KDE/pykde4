@@ -70,6 +70,8 @@ signals:
     void                    ejectDone (Solid::ErrorType error, QVariant errorData, const QString& udi);
 public:
     ~OpticalDrive ();
+signals:
+    void                    ejectRequested (const QString& udi);
 };
 // OpticalDrive
 

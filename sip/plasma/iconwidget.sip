@@ -87,6 +87,13 @@ public:
 protected:
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
     void                    changeEvent (QEvent* event);
+public:
+    void                    setPreferredIconSize (const QSizeF& size);
+    QSizeF                  preferredIconSize () const;
+    void                    setMinimumIconSize (const QSizeF& size);
+    QSizeF                  minimumIconSize () const;
+    void                    setMaximumIconSize (const QSizeF& size);
+    QSizeF                  maximumIconSize () const;
 };
 // IconWidget
 

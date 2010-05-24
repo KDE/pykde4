@@ -60,6 +60,8 @@ private:
 //end
 public:
     ~KPixmapRegionSelectorWidget ();
+signals:
+    void                    pixmapRotated ();
 };
 // KPixmapRegionSelectorWidget
 

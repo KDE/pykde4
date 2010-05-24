@@ -66,6 +66,8 @@ signals:
     void                    slaveDied (KIO::Slave* slave);
 public:
     ~Slave ();
+    void                    setJob (KIO::SimpleJob* job);
+    KIO::SimpleJob*         job () const;
 };
 // Slave
 

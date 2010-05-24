@@ -66,6 +66,8 @@ public:
     QString                 label (const QString& language);
     QString                 comment (const QString& language);
 //end
+    bool                    operator == (const QUrl& other) const;
+    bool                    operator != (const QUrl& other) const;
 };
 // Entity
 

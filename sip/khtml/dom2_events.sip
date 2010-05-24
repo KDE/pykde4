@@ -103,6 +103,9 @@ public:
 
     unsigned short code;
     ~EventException ();
+    DOM::DOMString          codeAsString () const;
+    static DOM::DOMString   codeAsString (int cssCode);
+    static bool             isEventExceptionCode (int exceptioncode);
 };
 // EventException
 

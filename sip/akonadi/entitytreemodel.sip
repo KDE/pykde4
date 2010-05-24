@@ -45,6 +45,7 @@ public:
         CollectionDerefRole,
         PendingCutRole,
         EntityUrlRole,
+        UnreadCountRole,
         UserRole,
         TerminalUserRole,
         EndRole
@@ -76,7 +77,8 @@ public:
     {
         FetchNoCollections,
         FetchFirstLevelChildCollections,
-        FetchCollectionsRecursive
+        FetchCollectionsRecursive,
+        InvisibleCollectionFetch
     };
     void                    setCollectionFetchStrategy (Akonadi::EntityTreeModel::CollectionFetchStrategy strategy);
     Akonadi::EntityTreeModel::CollectionFetchStrategy  collectionFetchStrategy () const;
@@ -108,5 +110,8 @@ public:
     explicit                EntityTreeModel (Akonadi::ChangeRecorder* monitor, QObject* parent /TransferThis/ = 0);
 protected:
 //ig                            EntityTreeModel (Akonadi::ChangeRecorder* monitor, EntityTreeModelPrivate* d, QObject* parent /TransferThis/ = 0);
+public:
+    static QModelIndex      modelIndexForCollection (const QAbstractItemModel* model, const Akonadi::Collection& collection);
+    static QModelIndexList  modelIndexesForItem (const QAbstractItemModel* model, const Akonadi::Item& item);
 };
 };

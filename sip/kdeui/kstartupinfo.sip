@@ -184,6 +184,8 @@ public:
 
 //end
     ~KStartupInfoData ();
+    QString                 applicationId () const;
+    void                    setApplicationId (const QString& desktop);
 };
 // KStartupInfoData
 

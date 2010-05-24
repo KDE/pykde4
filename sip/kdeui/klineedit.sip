@@ -62,7 +62,7 @@ signals:
     void                    userTextChanged (const QString&);
     void                    textRotation (KCompletionBase::KeyBindingType);
     void                    completionModeChanged (KGlobalSettings::Completion);
-    void                    aboutToShowContextMenu (QMenu* p);
+    void                    aboutToShowContextMenu (QMenu* menu);
     void                    clearButtonClicked ();
 
 public:

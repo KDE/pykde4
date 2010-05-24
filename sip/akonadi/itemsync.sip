@@ -44,6 +44,8 @@ protected:
     virtual bool            updateItem (const Akonadi::Item& storedItem, Akonadi::Item& newItem);
 public:
     ~ItemSync ();
+protected:
+    void                    slotResult (KJob* job);
 };
 // ItemSync
 

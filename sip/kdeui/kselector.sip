@@ -86,6 +86,8 @@ private:
 //end
 public:
     ~KGradientSelector ();
+    void                    setStops (const QGradientStops& stops);
+    QGradientStops          stops () const;
 };
 // KGradientSelector
 

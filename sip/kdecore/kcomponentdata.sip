@@ -54,6 +54,7 @@ protected:
 //ig    virtual void            virtual_hook (int id, void* data);
 public:
     ~KComponentData ();
+    void                    setAboutData (const KAboutData& aboutData);
 };
 // KComponentData
 

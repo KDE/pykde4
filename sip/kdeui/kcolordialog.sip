@@ -127,6 +127,8 @@ private:
 //end
 public:
     ~KColorDialog ();
+    void                    setAlphaChannelEnabled (bool alpha);
+    bool                    isAlphaChannelEnabled () const;
 };
 // KColorDialog
 

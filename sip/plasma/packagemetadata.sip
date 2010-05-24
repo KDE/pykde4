@@ -72,6 +72,8 @@ private:
 public:
     KUrl                    remoteLocation () const;
     void                    setRemoteLocation (const KUrl&);
+    QString                 icon () const;
+    void                    setIcon (const QString& icon);
 };
 // PackageMetadata
 

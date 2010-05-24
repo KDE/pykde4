@@ -58,6 +58,8 @@ public:
     QMap<QString,QVariant>  parametersFromDescription (const KConfigGroup& description);
 signals:
     void                    serviceReady (Plasma::Service* service);
+public:
+    static Plasma::Service*  load (const QString& name, const QVariantList& args, QObject* parent /Transfer/ = 0);
 };
 // Service
 

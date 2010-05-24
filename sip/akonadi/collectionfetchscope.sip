@@ -46,5 +46,6 @@ public:
     void                    setAncestorRetrieval (Akonadi::CollectionFetchScope::AncestorRetrieval ancestorDepth);
     Akonadi::CollectionFetchScope::AncestorRetrieval  ancestorRetrieval () const;
     bool                    isEmpty () const;
+    bool                    includeUnsubscribed () const;
 };
 };

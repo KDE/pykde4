@@ -75,6 +75,9 @@ public:
     };
 
     ~CSSException ();
+    DOM::DOMString          codeAsString () const;
+    static DOM::DOMString   codeAsString (int cssCode);
+    static bool             isCSSExceptionCode (int exceptioncode);
 };
 // CSSException
 

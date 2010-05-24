@@ -39,6 +39,13 @@ public:
     bool                    isAutoCollapse () const;
     void                    setAutoCollapse (bool collapse);
     void                    setGroupCollapsed (bool collapsed);
+protected:
+    void                    resizeEvent (QGraphicsSceneResizeEvent* event);
+    bool                    eventFilter (QObject* watched, QEvent* event);
+    void                    dragEnterEvent (QGraphicsSceneDragDropEvent* event);
+    void                    dragMoveEvent (QGraphicsSceneDragDropEvent* event);
+    void                    dragLeaveEvent (QGraphicsSceneDragDropEvent* event);
+    void                    dropEvent (QGraphicsSceneDragDropEvent* event);
 };
 // ExtenderGroup
 

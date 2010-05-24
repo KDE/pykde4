@@ -81,6 +81,8 @@ public:
     ~BrowserRun ();
     static void             saveUrl (const KUrl& url, const QString& suggestedFileName, QWidget* window, const KParts::OpenUrlArguments& args);
     static void             saveUrlUsingKIO (const KUrl& srcUrl, const KUrl& destUrl, QWidget* window, const QMap<QString,QString>& metaData);
+protected:
+    KParts::BrowserRun::NonEmbeddableResult  handleNonEmbeddable (const QString& mimeType, KService::Ptr* pSelectedService);
 };
 // BrowserRun
 

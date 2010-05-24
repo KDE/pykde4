@@ -40,6 +40,8 @@ signals:
     void                    nothingToReplay ();
 public:
     ~ChangeRecorder ();
+protected:
+//ig    explicit                ChangeRecorder (ChangeRecorderPrivate* d, QObject* parent /TransferThis/ = 0);
 };
 // ChangeRecorder
 

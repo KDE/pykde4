@@ -80,6 +80,13 @@ public:
     QPoint                  popupPosition (const QGraphicsItem* item, const QSize& size, Qt::AlignmentFlag alignment);
     void                    setContainmentActionsDefaults (Plasma::Containment::Type containmentType, const Plasma::ContainmentActionsPluginsConfig& config);
     Plasma::ContainmentActionsPluginsConfig  containmentActionsDefaults (Plasma::Containment::Type containmentType);
+    void                    setDialogManager (Plasma::AbstractDialogManager* manager);
+    Plasma::AbstractDialogManager*  dialogManager ();
+    QList<Plasma::Containment*>  importLayout (const KConfigBase& config);
+    void                    layoutContainments ();
+protected:
+    void                    mapAnimation (Plasma::Animator::Animation from, Plasma::Animator::Animation to);
+    void                    mapAnimation (Plasma::Animator::Animation from, const QString& to);
 };
 // Corona
 

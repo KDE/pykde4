@@ -89,6 +89,8 @@ protected:
                             KMultiTabBarButton (const QPixmap& pic, const QString&, int id, QWidget* parent /TransferThis/);
 public:
     ~KMultiTabBarButton ();
+protected:
+    virtual void            paintEvent (QPaintEvent*);
 };
 // KMultiTabBarButton
 

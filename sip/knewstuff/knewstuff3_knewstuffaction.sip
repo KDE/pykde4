@@ -24,4 +24,5 @@
 namespace KNS3
 {
 KAction*                standardAction (const QString& what, SIP_RXOBJ_CON, SIP_SLOT_CON (), KActionCollection* parent, const char* name = 0);
+KAction*                standardActionUpload (const QString& what, SIP_RXOBJ_CON, SIP_SLOT_CON (), KActionCollection* parent, const char* name = 0);
 };

@@ -37,6 +37,8 @@ protected:
     void                    slotResult (KJob* job);
 public:
     ~TransactionSequence ();
+    void                    setIgnoreJobFailure (KJob* job);
+    void                    setAutomaticCommittingEnabled (bool enable);
 };
 // TransactionSequence
 

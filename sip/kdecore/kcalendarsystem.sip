@@ -131,6 +131,25 @@ public:
     QString                 daysInMonthString (const QDate& pDate, KCalendarSystem::StringFormat format = KCalendarSystem::LongFormat) const;
     QString                 daysInWeekString (const QDate& date) const;
     QString                 formatDate (const QDate& fromDate, const QString& toFormat, KLocale::DigitSet digitSet, KLocale::DateTimeFormatStandard formatStandard = KLocale::KdeFormat) const;
+    static KCalendarSystem*  create (const QString& calType, KSharedConfig::Ptr config, const KLocale* locale = 0);
+    explicit                KCalendarSystem (const KSharedConfig::Ptr config, const KLocale* locale = 0);
+    bool                    isValid (const QString& eraName, int yearInEra, int month, int day) const;
+    bool                    setDate (QDate& date, QString eraName, int yearInEra, int month, int day) const;
+    void                    getDate (const QDate date, int* year, int* month, int* day) const;
+    QString                 eraName (const QDate& date, KCalendarSystem::StringFormat format = KCalendarSystem::ShortFormat) const;
+    QString                 eraYear (const QDate& date, KCalendarSystem::StringFormat format = KCalendarSystem::ShortFormat) const;
+    int                     yearInEra (const QDate& date) const;
+    void                    dateDifference (const QDate& fromDate, const QDate& toDate, int* yearsDiff, int* monthsDiff, int* daysDiff, int* direction) const;
+    int                     yearsDifference (const QDate& fromDate, const QDate& toDate) const;
+    int                     monthsDifference (const QDate& fromDate, const QDate& toDate) const;
+    int                     daysDifference (const QDate& fromDate, const QDate& toDate) const;
+    int                     monthsInYear (int year) const;
+    int                     daysInYear (int year) const;
+    int                     daysInMonth (int year, int month) const;
+    QString                 yearInEraString (const QDate& date, KCalendarSystem::StringFormat format = KCalendarSystem::ShortFormat) const;
+    QDate                   readDate (const QString& dateString, const QString& dateFormat, bool* ok, KLocale::DateTimeFormatStandard formatStandard) const;
+protected:
+//ig                            KCalendarSystem (KCalendarSystemPrivate& dd, const KSharedConfig::Ptr config = KSharedConfig::Ptr(), const KLocale* locale = 0);
 };
 // KCalendarSystem
 

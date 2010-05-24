@@ -41,7 +41,10 @@ public:
         RotationStackedAnimation,
         SlideAnimation,
         GeometryAnimation,
-        ZoomAnimation
+        ZoomAnimation,
+        PixmapTransitionAnimation,
+        WaterAnimation,
+        LastAnimation
     };
 
 
@@ -50,7 +53,8 @@ public:
         EaseInCurve,
         EaseOutCurve,
         EaseInOutCurve,
-        LinearCurve
+        LinearCurve,
+        PendularCurve
     };
 
 
@@ -93,6 +97,9 @@ public:
     void                    unregisterScrollingManager (QGraphicsWidget* widget);
 signals:
     void                    scrollStateChanged (QGraphicsWidget* widget, QAbstractAnimation::State newState, QAbstractAnimation::State oldState);
+public:
+    static Plasma::Animation*  create (const QString& animationName, QObject* parent /Transfer/ = 0);
+    static QEasingCurve     create (Plasma::Animator::CurveShape type);
 };
 // Animator
 

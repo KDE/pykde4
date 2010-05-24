@@ -69,6 +69,7 @@ QUrl                    subGraphOf ();
 QUrl                    superGraphOf ();
 QUrl                    updatable ();
 QUrl                    viewOn ();
+QUrl                    DiscardableInstanceBase ();
 };
 // NRL
 

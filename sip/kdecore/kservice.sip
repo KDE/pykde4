@@ -100,6 +100,7 @@ private:
 //ig    QDataStream&            operator << (QDataStream&, const ServiceTypeAndPreference&);
 public:
     ~KService ();
+    bool                    showInKDE () const;
 };
 // KService
 

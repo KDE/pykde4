@@ -61,6 +61,8 @@ signals:
 protected:
     void                    changeEvent (QEvent* event);
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
+public:
+    void                    setDown (bool down);
 };
 // ToolButton
 

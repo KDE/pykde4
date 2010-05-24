@@ -75,6 +75,8 @@ protected:
 public:
     qreal                   zoomFactor () const;
     void                    setZoomFactor (const qreal zoom);
+protected:
+    QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
 };
 // WebView
 

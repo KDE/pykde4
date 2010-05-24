@@ -67,6 +67,9 @@ public:
 protected:
     virtual void            dragEnterEvent (QDragEnterEvent* event);
     virtual void            rowsAboutToBeRemoved (const QModelIndex& parent, int start, int end);
+public:
+    QModelIndexList         block (const QString& category);
+    QModelIndexList         block (const QModelIndex& representative);
 };
 // KCategorizedView
 

@@ -61,6 +61,8 @@ protected:
 //ig    const KPageWidget*      pageWidget () const;
 public:
     ~KPageDialog ();
+protected:
+    void                    setPageWidget (KPageWidget* widget);
 };
 // KPageDialog
 

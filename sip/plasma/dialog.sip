@@ -74,6 +74,7 @@ protected:
 public:
     Plasma::AspectRatioMode  aspectRatioMode () const;
     void                    setAspectRatioMode (Plasma::AspectRatioMode mode);
+    void                    syncToGraphicsWidget ();
 };
 // Dialog
 

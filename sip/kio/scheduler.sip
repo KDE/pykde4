@@ -60,6 +60,8 @@ private:
                             Scheduler ();
     ~Scheduler ();
 //end
+public:
+    static void             setJobPriority (KIO::SimpleJob* job, int priority);
 };
 // Scheduler
 

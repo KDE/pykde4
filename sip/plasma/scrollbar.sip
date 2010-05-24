@@ -49,6 +49,8 @@ public:
     ~ScrollBar ();
 protected:
     void                    contextMenuEvent (QGraphicsSceneContextMenuEvent* event);
+public:
+    Qt::Orientation         orientation () const;
 };
 // ScrollBar
 

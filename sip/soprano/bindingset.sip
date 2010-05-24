@@ -41,6 +41,8 @@ public:
     void                    replace (int offset, const Soprano::Node& value);
     void                    replace (const QString& name, const Soprano::Node& value);
     ~BindingSet ();
+    bool                    operator == (const Soprano::BindingSet& other) const;
+    bool                    operator != (const Soprano::BindingSet& other) const;
 };
 // BindingSet
 

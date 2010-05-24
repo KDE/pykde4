@@ -70,6 +70,7 @@ protected:
 //ig                            StorageDrive (StorageDrivePrivate& dd, QObject* backendObject);
 public:
     ~StorageDrive ();
+    qulonglong              size () const;
 };
 // StorageDrive
 

@@ -39,7 +39,8 @@ public:
     enum DeletionType
     {
         Delete,
-        Trash
+        Trash,
+        EmptyTrash
     };
 
 

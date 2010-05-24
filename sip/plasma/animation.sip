@@ -53,15 +53,17 @@ public:
     QGraphicsWidget*        targetWidget () const;
     enum MovementDirectionFlag
     {
-	MoveAny,
+        MoveAny,
         MoveUp,
         MoveRight,
         MoveDown,
-        MoveLeft,
+        MoveLeft
     };
 
     void                    setEasingCurve (const QEasingCurve& curve);
     QEasingCurve            easingCurve () const;
+    typedef QFlags<Plasma::Animation::ReferenceFlag> Reference;
+    typedef QFlags<Plasma::Animation::MovementDirectionFlag> MovementDirection;
 };
 };
 %ModuleHeaderCode

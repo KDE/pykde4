@@ -48,6 +48,7 @@ enum RenameDialog_Result
     R_SKIP,
     R_AUTO_SKIP,
     R_RENAME,
+    R_AUTO_RENAME,
     R_CANCEL
 };
 
@@ -77,6 +78,7 @@ protected:
     void                    enableRenameButton (const QString&);
 public:
     ~RenameDialog ();
+    KUrl                    autoDestUrl () const;
 };
 // RenameDialog
 

@@ -24,13 +24,7 @@ class KBreadcrumbSelectionModel : QItemSelectionModel
 %End
 
 public:
-    enum Direction
-    {
-        Forward,
-        Reverse
-    };
     explicit                KBreadcrumbSelectionModel (QItemSelectionModel* selectionModel, QObject* parent /TransferThis/ = 0);
-                            KBreadcrumbSelectionModel (QItemSelectionModel* selectionModel, KBreadcrumbSelectionModel::Direction direction, QObject* parent /TransferThis/ = 0);
     virtual ~KBreadcrumbSelectionModel ();
     bool                    isActualSelectionIncluded () const;
     void                    setActualSelectionIncluded (bool isActualSelectionIncluded);
@@ -38,4 +32,10 @@ public:
     void                    setBreadcrumbLength (int breadcrumbLength);
     void                    select (const QModelIndex& index, QItemSelectionModel::SelectionFlags command);
     void                    select (const QItemSelection& selection, QItemSelectionModel::SelectionFlags command);
+    enum BreadcrumbTarget
+    {
+        MakeBreadcrumbSelectionInOther,
+        MakeBreadcrumbSelectionInSelf
+    };
+                            KBreadcrumbSelectionModel (QItemSelectionModel* selectionModel, KBreadcrumbSelectionModel::BreadcrumbTarget target, QObject* parent /TransferThis/ = 0);
 };

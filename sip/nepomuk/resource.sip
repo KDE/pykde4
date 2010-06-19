@@ -144,6 +144,7 @@ public:
     bool                    hasProperty (const Nepomuk::Types::Property& p, const Nepomuk::Variant& v) const;
     int                     usageCount () const;
     void                    increaseUsageCount ();
+    static Nepomuk::Resource  fromResourceUri (const KUrl& uri, const Nepomuk::Types::Class& type = Nepomuk::Types::Class(), Nepomuk::ResourceManager* manager = 0);
 };
 // Resource
 

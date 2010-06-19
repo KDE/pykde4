@@ -75,6 +75,7 @@ signals:
     void                    setupDone (const QModelIndex& index, bool success);
 public:
     ~KFilePlacesModel ();
+    void                    addPlace (const QString& text, const KUrl& url, const QString& iconName, const QString& appName, const QModelIndex& after);
 };
 // KFilePlacesModel
 

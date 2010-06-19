@@ -62,5 +62,7 @@ public:
     void                    stop (const QString& helperID);
     bool                    operator == (const KAuth::Action& action) const;
     bool                    operator != (const KAuth::Action& action) const;
+    bool                    hasHelper () const;
+    KAuth::Action::AuthStatus  earlyAuthorize () const;
 };
 };

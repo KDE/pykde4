@@ -25,8 +25,7 @@
 %ModuleHeaderCode
 //ctscc
 #include <khtml_part.h>
-#include <khtmlview.h>
-#include <qobject.h>
+#include <kxmlguiclient.h>
 %End
 
 class KHTMLPart : KParts::ReadOnlyPart
@@ -247,13 +246,11 @@ private:
 
 //end
 %ConvertToSubClassCode
-    // CTSCC for subclasses of 'QObject'
+    // CTSCC for subclasses of 'KXMLGUIClient'
     sipType = NULL;
 
     if (dynamic_cast<KHTMLPart*>(sipCpp))
         sipType = sipType_KHTMLPart;
-    else if (dynamic_cast<KHTMLView*>(sipCpp))
-        sipType = sipType_KHTMLView;
 %End
 
 public:

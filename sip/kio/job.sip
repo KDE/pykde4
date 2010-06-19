@@ -62,6 +62,7 @@ KIO::SimpleJob*         file_delete (const KUrl& src, KIO::JobFlags flags = KIO:
 KIO::ListJob*           listDir (const KUrl& url, KIO::JobFlags flags = KIO::DefaultFlags, bool includeHidden = 1);
 KIO::ListJob*           listRecursive (const KUrl& url, KIO::JobFlags flags = KIO::DefaultFlags, bool includeHidden = 1);
 KIO::StatJob*           mostLocalUrl (const KUrl& url, KIO::JobFlags flags = KIO::DefaultFlags);
+//ig KIO::FileCopyJob*       file_copy (const KUrl& src, const KUrl& dest, KIO::JobFlags flags);
 };
 // KIO
 

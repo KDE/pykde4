@@ -54,6 +54,9 @@ protected:
     void                    contextMenuEvent (QGraphicsSceneContextMenuEvent* event);
 public:
     void                    append (const QString& text);
+protected:
+    void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
+    void                    focusOutEvent (QFocusEvent* event);
 };
 // TextEdit
 

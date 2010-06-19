@@ -80,6 +80,7 @@ public:
         sipType = sipType_KIO_Integration_CookieJar;
 %End
 };
+bool                    sslConfigFromMetaData (const KIO::MetaData& metadata, QSslConfiguration& sslconfig);
 };
 };
 // KIO

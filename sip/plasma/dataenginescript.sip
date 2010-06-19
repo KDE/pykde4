@@ -61,6 +61,7 @@ protected:
     void                    updateAllSources ();
     void                    forceImmediateUpdateOfAllVisualizations ();
     KPluginInfo             description () const;
+    void                    setData (const QString& source, const Plasma::DataEngine::Data& values);
 };
 // DataEngineScript
 

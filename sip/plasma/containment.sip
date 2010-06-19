@@ -155,6 +155,9 @@ private:
                             Containment (const QString& packagePath, uint appletId, const QVariantList& args);
 public:
     Plasma::Context*        context () const;
+    int                     lastScreen () const;
+    int                     lastDesktop () const;
+    bool                    isToolBoxOpen () const;
 };
 // Containment
 

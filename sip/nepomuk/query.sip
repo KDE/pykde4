@@ -68,6 +68,13 @@ public:
     bool                    operator == (const Nepomuk::Query::Query& query) const;
     int                     offset () const;
     void                    setOffset (int offset);
+    bool                    isFileQuery () const;
+    KUrl                    toSearchUrl (const QString& customTitle, Nepomuk::Query::Query::SparqlFlags flags = Nepomuk::Query::Query::NoFlags) const;
+    QString                 toString () const;
+    static Nepomuk::Query::Query  fromString (const QString& queryString);
+    static Nepomuk::Query::Query  fromQueryUrl (const KUrl& url);
+    static QString          sparqlFromQueryUrl (const KUrl& url);
+    static QString          titleFromQueryUrl (const KUrl& url);
 };
 uint                    qHash (const Nepomuk::Query::Query&);
 };

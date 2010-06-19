@@ -273,6 +273,10 @@ public:
         PosixFormat,
         UnicodeFormat
     };
+    void                    translateRawFrom (const char* catname, const char* msg, QString* lang, QString* trans) const;
+    void                    translateRawFrom (const char* catname, const char* ctxt, const char* msg, QString* lang, QString* trans) const;
+    void                    translateRawFrom (const char* catname, const char* singular, const char* plural, unsigned long n, QString* lang, QString* trans) const;
+    void                    translateRawFrom (const char* catname, const char* ctxt, const char* singular, const char* plural, unsigned long n, QString* lang, QString* trans) const;
 };
 // KLocale
 

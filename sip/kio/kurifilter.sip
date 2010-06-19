@@ -68,6 +68,16 @@ private:
 //end
 public:
     ~KUriFilterData ();
+    QString                 searchTerm () const;
+    QChar                   searchTermSeparator () const;
+    QString                 searchProvider () const;
+    QStringList             preferredSearchProviders () const;
+    QString                 queryForPreferredSearchProvider (const QString& provider) const;
+    QString                 iconNameForPreferredSearchProvider (const QString& provider) const;
+    QStringList             alternateSearchProviders () const;
+    QString                 alternateDefaultSearchProvider () const;
+    void                    setAlternateSearchProviders (const QStringList& providers);
+    void                    setAlternateDefaultSearchProvider (const QString& provider);
 };
 // KUriFilterData
 
@@ -90,6 +100,9 @@ protected:
     void                    setErrorMsg (KUriFilterData& data, const QString& errmsg) const;
     void                    setUriType (KUriFilterData& data, KUriFilterData::UriTypes type) const;
     void                    setArguments (KUriFilterData& data, const QString& args) const;
+    void                    setSearchProvider (KUriFilterData& data, const QString& provider, const QString& term, const QChar& separator) const;
+//ig    void                    setPreferredSearchProviders (KUriFilterData& data, const KUriFilterPlugin::ProviderInfoList& providers) const;
+    QString                 iconNameFor (const KUrl& url, KUriFilterData::UriTypes type) const;
 };
 // KUriFilterPlugin
 
@@ -120,6 +133,7 @@ private:
 //end
 public:
     ~KUriFilter ();
+    bool                    filterSearchUri (KUriFilterData& data);
 };
 // KUriFilter
 

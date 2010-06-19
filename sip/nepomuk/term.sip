@@ -74,6 +74,8 @@ public:
     bool                    isOptionalTerm () const;
     Nepomuk::Query::OptionalTerm  toOptionalTerm () const;
 //ig    Nepomuk::Query::OptionalTerm&  toOptionalTerm ();
+    QString                 toString () const;
+    static Nepomuk::Query::Term  fromString (const QString& s);
 };
 uint                    qHash (const Nepomuk::Query::Term&);
 };

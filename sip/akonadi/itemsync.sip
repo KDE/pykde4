@@ -46,6 +46,8 @@ public:
     ~ItemSync ();
 protected:
     void                    slotResult (KJob* job);
+public:
+    void                    rollback ();
 };
 // ItemSync
 

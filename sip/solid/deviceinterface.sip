@@ -32,6 +32,7 @@
 #include <devicenotifier.h>
 #include <dvbinterface.h>
 #include <genericinterface.h>
+#include <networking.h>
 #include <networkinterface.h>
 #include <opticaldisc.h>
 #include <opticaldrive.h>
@@ -152,6 +153,8 @@ private:
         }
     else if (dynamic_cast<Solid::DeviceNotifier*>(sipCpp))
         sipType = sipType_Solid_DeviceNotifier;
+    else if (dynamic_cast<Solid::Networking::Notifier*>(sipCpp))
+        sipType = sipType_Solid_Networking_Notifier;
 %End
 
 public:

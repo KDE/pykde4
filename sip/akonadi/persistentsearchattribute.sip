@@ -38,7 +38,7 @@ public:
     virtual void            deserialize (const QByteArray& data);
 private:
 //force
-  Akonadi::PersistentSearchAttribute & operator = (const Akonadi::PersistentSearchAttribute &);
+    Akonadi::PersistentSearchAttribute&  operator = (const Akonadi::PersistentSearchAttribute&);
 //end
 };
 };

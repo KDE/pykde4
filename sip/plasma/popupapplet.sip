@@ -55,6 +55,8 @@ public:
     void                    setGraphicsWidget (QGraphicsWidget* widget);
 private:
                             PopupApplet (const QString& packagePath, uint appletId, const QVariantList& args);
+protected:
+    QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
 };
 // PopupApplet
 

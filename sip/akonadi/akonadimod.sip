@@ -29,7 +29,6 @@
 %Import kdecore/kdecoremod.sip
 %Import kio/kiomod.sip
 
-%Include agentsearchinterface.sip
 %Include agentbase.sip
 %Include agentfilterproxymodel.sip
 %Include agentinstance.sip
@@ -37,6 +36,7 @@
 %Include agentinstancemodel.sip
 %Include agentinstancewidget.sip
 %Include agentmanager.sip
+%Include agentsearchinterface.sip
 %Include agenttype.sip
 %Include agenttypedialog.sip
 %Include agenttypemodel.sip
@@ -103,6 +103,7 @@
 %Include mimetypechecker.sip
 %Include monitor.sip
 %Include partfetcher.sip
+%Include persistentsearchattribute.sip
 %Include preprocessorbase.sip
 %Include resourcebase.sip
 %Include resourcesynchronizationjob.sip
@@ -118,4 +119,3 @@
 %Include transactionsequence.sip
 %Include transportresourcebase.sip
 %Include unlinkjob.sip
-%Include persistentsearchattribute.sip

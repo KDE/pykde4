@@ -44,6 +44,7 @@ public:
     ~SvgWidget ();
 protected:
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
+    void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
 };
 // SvgWidget
 

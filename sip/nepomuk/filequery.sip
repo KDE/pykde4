@@ -37,6 +37,16 @@ public:
     void                    addExcludeFolder (const KUrl& folder);
     void                    setExcludeFolders (const KUrl::List& folders);
     KUrl::List              excludeFolders () const;
+    explicit                FileQuery (const Nepomuk::Query::Term& term);
+    enum FileModeFlags
+    {
+        QueryFiles,
+        QueryFolders,
+        QueryFilesAndFolders
+    };
+    typedef QFlags<Nepomuk::Query::FileQuery::FileModeFlags> FileMode;
+    void                    setFileMode (Nepomuk::Query::FileQuery::FileMode mode);
+    Nepomuk::Query::FileQuery::FileMode  fileMode () const;
 };
 };
 };

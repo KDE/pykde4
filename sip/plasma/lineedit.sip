@@ -52,6 +52,12 @@ protected:
     void                    paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 signals:
     void                    textChanged (const QString& text);
+public:
+    void                    setClickMessage (const QString& message);
+    QString                 clickMessage () const;
+protected:
+    void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
+    void                    focusOutEvent (QFocusEvent* event);
 };
 // LineEdit
 

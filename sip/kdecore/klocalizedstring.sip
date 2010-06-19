@@ -49,6 +49,8 @@ private:
                             KLocalizedString (const char* ctxt, const char* msg, const char* plural);
 public:
     ~KLocalizedString ();
+    QString                 toString (const QString& catalogName) const;
+    QString                 toString (const KLocale* locale, const QString& catalogName) const;
 };
 // KLocalizedString
 

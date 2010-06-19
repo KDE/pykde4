@@ -42,5 +42,5 @@
 %Include part.sip
 %Include partmanager.sip
 %Include plugin.sip
-%Include statusbarextension.sip
 %Include scriptableextension.sip
+%Include statusbarextension.sip

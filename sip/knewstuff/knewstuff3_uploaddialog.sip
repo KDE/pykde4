@@ -38,5 +38,6 @@ public:
     void                    setPrice (double price);
     void                    setPriceReason (const QString& reason);
     void                    selectCategory (const QString& category);
+    void                    setPriceEnabled (bool enabled);
 };
 };

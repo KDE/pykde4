@@ -55,6 +55,7 @@ protected:
     void                    focusInEvent (QFocusEvent* event);
     void                    focusOutEvent (QFocusEvent* event);
     void                    changeEvent (QEvent* event);
+    void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
 };
 // ComboBox
 

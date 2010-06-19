@@ -338,7 +338,8 @@ sipRes = new KUrl::List();
     enum EqualsOption
     {
         CompareWithoutTrailingSlash,
-        CompareWithoutFragment
+        CompareWithoutFragment,
+        AllowEmptyPath
     };
 
     typedef QFlags<KUrl::EqualsOption> EqualsOptions;

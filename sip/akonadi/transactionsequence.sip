@@ -39,6 +39,7 @@ public:
     ~TransactionSequence ();
     void                    setIgnoreJobFailure (KJob* job);
     void                    setAutomaticCommittingEnabled (bool enable);
+    void                    rollback ();
 };
 // TransactionSequence
 

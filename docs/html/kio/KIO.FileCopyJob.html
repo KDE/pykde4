@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
 <h1>FileCopyJob Class Reference</h1>
 <code>from PyKDE4.kio import *</code>
 <p>
-Inherits: KIO.Job &#x2192; <a href="../kdecore/KCompositeJob.html">KCompositeJob</a> &#x2192; <a href="../kdecore/KJob.html">KJob</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+Inherits: <a href="../kio/KIO.Job.html">KIO.Job</a> &#x2192; <a href="../kdecore/KCompositeJob.html">KCompositeJob</a> &#x2192; <a href="../kdecore/KJob.html">KJob</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
 
-Namespace: KIO.FileCopyJob<br />
+Namespace: <a href="../kio/KIO.html">KIO</a><br />
 <h2>Detailed Description</h2>
 
 <p>The FileCopyJob copies data from one place to another.
@@ -65,13 +65,50 @@ Namespace: KIO.FileCopyJob<br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#destUrl">destUrl</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#doResume">doResume</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#doSuspend">doSuspend</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mimetype">mimetype</a> (self, <a href="../kio/KIO.Job.html">KIO.Job</a> job, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setModificationTime">setModificationTime</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatetime.html">QDateTime</a> mtime)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSourceSize">setSourceSize</a> (self, <a href="../kio/KIO.filesize_t.html">KIO.filesize_t</a> size)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSourceSize">setSourceSize</a> (self, long size)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#slotResult">slotResult</a> (self, <a href="../kdecore/KJob.html">KJob</a> job)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#srcUrl">srcUrl</a> (self)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="FileCopyJob"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="mimetype"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> mimetype</td>
+<td>(</td>
+<td class="paramtype"><a href="../kio/KIO.Job.html">KIO.Job</a>&nbsp;</td>
+<td class="paramname"><em>job</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>type</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Mimetype determined during a file copy.
+This is never emitted during a move, and might not be emitted during
+a file copy, depending on the slave. But when a get and a put are
+being used (which is the common case), this signal forwards the
+mimetype information from the get job.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>job</em>&nbsp;</td><td> the job that emitted this signal
+
+<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> the mime type
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("mimetype(KIO::Job*, const QString&)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="FileCopyJob"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -122,50 +159,7 @@ Namespace: KIO.FileCopyJob<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="mimetype"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> mimetype</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../kio/KIO.Job.html">KIO.Job</a>&nbsp;</td>
-<td class="paramname"><em>job</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>type</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Mimetype determined during a file copy.
-This is never emitted during a move, and might not be emitted during
-a file copy, depending on the slave. But when a get and a put are
-being used (which is the common case), this signal forwards the
-mimetype information from the get job.
-</p>
-<p>
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>job</em>&nbsp;</td><td> the job that emitted this signal
-
-<tr><td></td><td valign="top"><em>type</em>&nbsp;</td><td> the mime type
-</td></tr>
-</table></dl>
-<p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("mimetype(KIO::Job*, const const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="setModificationTime"></a>
+<div class="memdoc"></div></div><a class="anchor" name="setModificationTime"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -204,7 +198,7 @@ supports the concept).
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../kio/KIO.filesize_t.html">KIO.filesize_t</a>&nbsp;</td>
+<td class="paramtype">long&nbsp;</td>
 <td class="paramname"><em>size</em></td>
 </tr>
 <tr>

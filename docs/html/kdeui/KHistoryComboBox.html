@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -84,7 +84,6 @@ duplicates will be disabled when HISTCONTROL is set to "ignoredups" or
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KHistoryComboBox">__init__</a> (self, <a href="../kdeui/KHistoryComboBox.html">KHistoryComboBox</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addToHistory">addToHistory</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> item)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearHistory">clearHistory</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cleared">cleared</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#historyItems">historyItems</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#insertItems">insertItems</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> items)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#keyPressEvent">keyPressEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qkeyevent.html">QKeyEvent</a> a0)</td></tr>
@@ -97,7 +96,20 @@ duplicates will be disabled when HISTCONTROL is set to "ignoredups" or
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#useCompletion">useCompletion</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#wheelEvent">wheelEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwheelevent.html">QWheelEvent</a> ev)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="KHistoryComboBox"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="cleared"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> cleared</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emitted when the history was cleared by the entry in the popup menu.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("cleared()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="KHistoryComboBox"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -119,7 +131,27 @@ duplicates will be disabled when HISTCONTROL is set to "ignoredups" or
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KHistoryComboBox"></a>
+<div class="memdoc"><p>Constructs a "read-write" combobox. A read-only history combobox
+doesn't make much sense, so it is only available as read-write.
+Completion will be used automatically for the items in the combo.
+</p>
+<p>
+The insertion-policy is set to NoInsert, you have to add the items
+yourself via the slot addToHistory. If you want every item added,
+use
+</p>
+<p>
+<pre class="fragment">
+ connect( combo, SIGNAL( activated( const QString&amp; )),
+          combo, SLOT( addToHistory( const QString&amp; )));
+</pre>
+</p>
+<p>
+Use QComboBox.setMaxCount() to limit the history.
+</p>
+<p>
+<b>parent</b> the parent object of this widget.
+</p></div></div><a class="anchor" name="KHistoryComboBox"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -147,7 +179,11 @@ duplicates will be disabled when HISTCONTROL is set to "ignoredups" or
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KHistoryComboBox"></a>
+<div class="memdoc"><p>Same as the previous constructor, but additionally has the option
+to specify whether you want to let KHistoryComboBox handle completion
+or not. If set to <b>true,</b> KHistoryComboBox will sync the completion to the
+contents of the combobox.
+</p></div></div><a class="anchor" name="KHistoryComboBox"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -226,20 +262,7 @@ not in the combobox, and vice versa.
 </table>
 </div>
 <div class="memdoc"><p>Clears the history and the completion list.
-</p></div></div><a class="anchor" name="cleared"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> cleared</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Emitted when the history was cleared by the entry in the popup menu.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("cleared()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="historyItems"></a>
+</p></div></div><a class="anchor" name="historyItems"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

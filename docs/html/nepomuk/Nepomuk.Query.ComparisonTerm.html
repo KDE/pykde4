@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Nepomuk.Query.ComparisonTerm</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.5 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>ComparisonTerm Class Reference</h1>
+<code>from PyKDE4.nepomuk import *</code>
+<p>
+Inherits: <a href="../nepomuk/Nepomuk.Query.SimpleTerm.html">Nepomuk.Query.SimpleTerm</a> &#x2192; <a href="../nepomuk/Nepomuk.Query.Term.html">Nepomuk.Query.Term</a><br />
+
+Namespace: <a href="../nepomuk/Nepomuk.Query.html">Nepomuk.Query</a><br />
+<h2>Detailed Description</h2>
+
+<p>\class ComparisonTerm comparisonterm.h Nepomuk/Query/ComparisonTerm
+</p>
+<p>
+A term matching the value of a property.
+</p>
+<p>
+The %ComparisonTerm is the most important term in the query API. It can be
+used to match the values of properties. As such its core components are
+a property(), a comparator() (see Comparator for details) and a subTerm().
+The latter can be any other term including AndTerm, OrTerm, or even an invalid
+term. The matching is done as follows:
+</p>
+<p>
+<li> A LiteralTerm as subTerm() is directly matched to the value of a literal </li>
+property (see also Nepomuk.Types.Property.literalRangeType()) or to the
+labels of related resources in case of a property that has a resource range.
+<li> An invalid sub term simply matches any resource or value, effectively </li>
+acting as a wildcard.
+<li> Any other term type will be used as a sort of subquery to match the </li>
+related resources. This means that the property() needs to have a resource
+range.
+</p>
+<p>
+In addition to these basic features %ComparisonTerm has a few tricks up its
+sleeve:
+</p>
+<p>
+<li> By forcing the variable name via setVariableName() it is possible to </li>
+include a value matched by the term in the resulting SPARQL query (Query.toSparqlQuery())
+or accessing it via Result.additionalBinding().
+<li> It is possible to set an aggregate function via setAggregateFunction() </li>
+to count or sum up the results instead of returning the actual values.
+<li> Using setSortWeight() the sorting of the results in the final query </li>
+can be influenced in a powerful way - especially when combined with setAggregateFunction().
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Sebastian Trueg &lt;trueg@kde.org&gt; </dd></dl>
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#AggregateFunction">AggregateFunction</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoAggregateFunction, Count, DistinctCount, Max, Min, Sum, DistinctSum, Average, DistinctAverage&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Comparator">Comparator</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Contains, Regexp, Equal, Greater, Smaller, GreaterOrEqual, SmallerOrEqual&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ComparisonTerm">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ComparisonTerm">__init__</a> (self, <a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html">Nepomuk.Query.ComparisonTerm</a> term)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ComparisonTerm">__init__</a> (self, <a href="../nepomuk/Nepomuk.Types.Property.html">Nepomuk.Types.Property</a> property, <a href="../nepomuk/Nepomuk.Query.Term.html">Nepomuk.Query.Term</a> term, <a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html#Comparator">Nepomuk.Query.ComparisonTerm.Comparator</a> comparator=Nepomuk.Query.ComparisonTerm.Contains)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html#AggregateFunction">Nepomuk.Query.ComparisonTerm.AggregateFunction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aggregateFunction">aggregateFunction</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html#Comparator">Nepomuk.Query.ComparisonTerm.Comparator</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#comparator">comparator</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html">Nepomuk.Query.ComparisonTerm</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#inverted">inverted</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isInverted">isInverted</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../nepomuk/Nepomuk.Types.Property.html">Nepomuk.Types.Property</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#property">property</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAggregateFunction">setAggregateFunction</a> (self, <a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html#AggregateFunction">Nepomuk.Query.ComparisonTerm.AggregateFunction</a> function)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setComparator">setComparator</a> (self, <a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html#Comparator">Nepomuk.Query.ComparisonTerm.Comparator</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setInverted">setInverted</a> (self, bool invert)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setProperty">setProperty</a> (self, <a href="../nepomuk/Nepomuk.Types.Property.html">Nepomuk.Types.Property</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSortWeight">setSortWeight</a> (self, int weight, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::SortOrder</a> sortOrder=Qt.AscendingOrder)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setVariableName">setVariableName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::SortOrder</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#sortOrder">sortOrder</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#sortWeight">sortWeight</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#variableName">variableName</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="ComparisonTerm"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Default constructor: creates a comparison term that matches all properties.
+</p></div></div><a class="anchor" name="ComparisonTerm"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html">Nepomuk.Query.ComparisonTerm</a>&nbsp;</td>
+<td class="paramname"><em>term</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Copy constructor.
+</p></div></div><a class="anchor" name="ComparisonTerm"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Types.Property.html">Nepomuk.Types.Property</a>&nbsp;</td>
+<td class="paramname"><em>property</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Query.Term.html">Nepomuk.Query.Term</a>&nbsp;</td>
+<td class="paramname"><em>term</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html#Comparator">Nepomuk.Query.ComparisonTerm.Comparator</a>&nbsp;</td>
+<td class="paramname"><em>comparator=Nepomuk.Query.ComparisonTerm.Contains</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convinience constructor which covers most simple use cases.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>property</em>&nbsp;</td><td> The property that should be matched. An invalid property will act as a wildcard.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>term</em>&nbsp;</td><td> The sub term to match to.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>comparator</em>&nbsp;</td><td> The Comparator to use for comparison. Not all Comparators make sense
+with all sub term types.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="aggregateFunction"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html#AggregateFunction">Nepomuk.Query.ComparisonTerm.AggregateFunction</a> aggregateFunction</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The aggregate function to be used with the additional binding set in
+setVariableName().
+</p>
+<p>
+\sa setAggregateFunction()
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="comparator"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html#Comparator">Nepomuk.Query.ComparisonTerm.Comparator</a> comparator</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The Comparator used by ComparisonTerm Terms.
+</p>
+<p>
+\sa setComparator
+</p></div></div><a class="anchor" name="inverted"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html">Nepomuk.Query.ComparisonTerm</a> inverted</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Create an inverted copy of this %ComparisonTerm.
+This is a convenience method to allow inline creation of
+inverted comparison terms when creating queries in a
+single line of code.
+</p>
+<p>
+Be aware that calling this method twice wil result in
+a non-inverted comparison term:
+</p>
+<p>
+<pre class="fragment">
+ // always true:
+ (term.inverted().inverted() == term);
+</pre>
+</p>
+<p>
+\sa setInverted()
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="isInverted"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isInverted</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> <b>true</b> if the comparison is inverted.
+</dd></dl> \sa setInverted
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="property"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../nepomuk/Nepomuk.Types.Property.html">Nepomuk.Types.Property</a> property</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>A property used for ComparisonTerm Terms.
+An invalid property will act as a wildcard.
+</p>
+<p>
+\sa setProperty
+</p></div></div><a class="anchor" name="setAggregateFunction"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setAggregateFunction</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html#AggregateFunction">Nepomuk.Query.ComparisonTerm.AggregateFunction</a>&nbsp;</td>
+<td class="paramname"><em>function</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set an aggregate function which changes the
+result. The typical usage is to count the results instead of actually
+returning them. For counting the results of a complete query use
+Query.CreateCountQuery.
+</p>
+<p>
+\sa aggregateFunction()
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="setComparator"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setComparator</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Query.ComparisonTerm.html#Comparator">Nepomuk.Query.ComparisonTerm.Comparator</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the comparator
+</p></div></div><a class="anchor" name="setInverted"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setInverted</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>invert</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Invert the comparison, i.e. make the subterm the subject
+of the term and match to objects of the term.
+</p>
+<p>
+A typical example would be:
+</p>
+<p>
+<pre class="fragment">
+ ComparisonTerm term( Soprano.Vocabulary.NAO.hasTag(),
+                      ResourceTerm( somefile ) );
+ term.setInverted(true);
+</pre>
+</p>
+<p>
+which would yield a query like the following:
+</p>
+<p>
+<pre class="fragment">
+ select ?r where { &lt;somefile&gt; nao:hasTag ?r . }
+</pre>
+</p>
+<p>
+to get all tags attached to a file.
+</p>
+<p>
+Be aware that this does only make sense with
+sub terms that match to resources. When using
+LiteralTerm as a sub term <b>invert</b> is ignored.
+</p>
+<p>
+\sa inverted()
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="setProperty"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setProperty</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Types.Property.html">Nepomuk.Types.Property</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the property for ComparisonTerm
+Terms. An invalid property will act as a wildcard.
+</p>
+<p>
+\sa property
+</p></div></div><a class="anchor" name="setSortWeight"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setSortWeight</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>weight</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::SortOrder</a>&nbsp;</td>
+<td class="paramname"><em>sortOrder=Qt.AscendingOrder</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the sort weight of this property. By default all ComparisonTerms have
+a weight of 0 which means that they are ignored for sorting. By setting \p
+weight to a value different from 0 (typically higher than 0) the comparison
+subterm will be used for sorting.
+</p>
+<p>
+Be aware that as with the variableName() sorting does not apply to sub
+terms of types ResourceTerm or LiteralTerm.
+In those cases the value will be ignored. The only exception
+are LiteralTerm sub terms that are compared other than
+with equals.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>weight</em>&nbsp;</td><td> The new sort weight. If different from 0 this term will be
+used for sorting in the Query.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>sortOrder</em>&nbsp;</td><td> The sort order to use for this term.
+</td></tr>
+</table></dl>
+<p> \sa sortWeight()
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="setVariableName"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setVariableName</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the variable name that is to be used for the
+variable to match to. The variable will then be added
+to the set of variables returned in the results and can
+be read via Result.additionalBinding(). Setting
+the variable name can be seen as a less restricted variant
+of Query.addRequestProperty().
+</p>
+<p>
+When manually setting the variable name on more
+than one ComparisonTerm there is no guarantee for the
+uniqueness of variable names anymore which can result
+in unwanted query results. However, this can also be
+used deliberately in case one needs to compare the
+same variable twice:
+</p>
+<p>
+<pre class="fragment">
+ ComparisonTerm ct1( prop1, Term() );
+ ComparisonTerm ct1( prop2, Term() );
+ ct1.setVariableName( "myvar" );
+ ct2.setVariableName( "myvar" );
+</pre>
+</p>
+<p>
+The above example would result in a SPARQL query
+pattern along the lines of
+</p>
+<p>
+<pre class="fragment">
+ ?r &lt;prop1&gt; ?myVar .
+ ?r &lt;prop2&gt; ?myVar .
+</pre>
+</p>
+<p>
+Be aware that the variable name does not apply
+to sub terms of types ResourceTerm or LiteralTerm.
+In those cases the value will be ignored. The only exception
+are LiteralTerm sub terms that are compared other than
+with equals.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> The name of the variable to be used when requesting
+the binding via Result.additionalBinding()
+</td></tr>
+</table></dl>
+<p> \sa Result.additionalBinding(), Query.HandleInverseProperties, examples_query
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="sortOrder"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::SortOrder</a> sortOrder</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The sort order as set in setSortWeight().
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="sortWeight"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int sortWeight</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The sort weight as set in setSortWeight() or 0 if
+sorting is disabled for this term.
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="variableName"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> variableName</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The variable name set in setVariableName() or an empty
+string if none has been set.
+</p>
+<p>
+\sa setVariableName()
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="AggregateFunction"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">AggregateFunction</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Aggregate functions which can be applied to a comparison term to influence
+the value they return.
+</p>
+<p>
+\sa setAggregateFunction()
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NoAggregateFunction</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>Count</em>&nbsp;</td><td><tr><td valign="top"><em>DistinctCount</em>&nbsp;</td><td><tr><td valign="top"><em>Max</em>&nbsp;</td><td><tr><td valign="top"><em>Min</em>&nbsp;</td><td><tr><td valign="top"><em>Sum</em>&nbsp;</td><td><tr><td valign="top"><em>DistinctSum</em>&nbsp;</td><td><tr><td valign="top"><em>Average</em>&nbsp;</td><td><tr><td valign="top"><em>DistinctAverage</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p><a class="anchor" name="Comparator"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">Comparator</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>%ComparisonTerm supports different ways to compare values.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Contains</em>&nbsp;</td><td><tr><td valign="top"><em>Regexp</em>&nbsp;</td><td><tr><td valign="top"><em>Equal</em>&nbsp;</td><td><tr><td valign="top"><em>Greater</em>&nbsp;</td><td><tr><td valign="top"><em>Smaller</em>&nbsp;</td><td><tr><td valign="top"><em>GreaterOrEqual</em>&nbsp;</td><td><tr><td valign="top"><em>SmallerOrEqual</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

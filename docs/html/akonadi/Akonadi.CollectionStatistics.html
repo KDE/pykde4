@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
 <p>
 
 
-Namespace: Akonadi.CollectionStatistics<br />
+Namespace: <a href="../akonadi/Akonadi.html">Akonadi</a><br />
 <h2>Detailed Description</h2>
 
 <p>Provides statistics information of a Collection.
@@ -73,8 +73,20 @@ Example:
  Akonadi.Collection collection = ...
 
  Akonadi.CollectionStatisticsJob *job = new Akonadi.CollectionStatisticsJob( collection );
- if ( job-&gt;exec() ) {
-   Akonadi.CollectionStatistics statistics = job-&gt;statistics();
+ connect( job, SIGNAL( result( KJob* ) ), SLOT( jobFinished( KJob* ) ) );
+
+ ...
+
+ MyClass.jobFinished( KJob *job )
+ {
+   if ( job-&gt;error() ) {
+     qDebug() &lt;&lt; "Error occurred";
+     return;
+   }
+
+   CollectionStatisticsJob *statisticsJob = qobject_cast&lt;CollectionStatisticsJob*&gt;( job );
+
+   const Akonadi.CollectionStatistics statistics = statisticsJob-&gt;statistics();
    qDebug() &lt;&lt; "Unread items:" &lt;&lt; statistics.unreadCount();
  }
 
@@ -109,7 +121,8 @@ This class is implicitely shared.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="CollectionStatistics"></a>
+<div class="memdoc"><p>Creates a new collection statistics object.
+</p></div></div><a class="anchor" name="CollectionStatistics"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -131,7 +144,8 @@ This class is implicitely shared.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="count"></a>
+<div class="memdoc"><p>Creates a collection statistics object from an <b>other</b> one.
+</p></div></div><a class="anchor" name="count"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -136,14 +136,71 @@ unless you gave it a parent widget on construction.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#displayFinalDialog">displayFinalDialog</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#numReplacements">numReplacements</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KFind.html#Result">KFind.Result</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#replace">replace</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int, int (replacedLength)&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#replace">replace</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> pattern, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> replacement, int index, long options, )</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int, int (replacedLength)&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#replace">replace</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregexp.html">QRegExp</a> pattern, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> replacement, int index, long options, )</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#replace">replace</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, int replacementIndex, int replacedLength, int matchedLength)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KDialog.html">KDialog</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#replaceNextDialog">replaceNextDialog</a> (self, bool create=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resetCounts">resetCounts</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#shouldRestart">shouldRestart</a> (self, bool forceAsking=0, bool showNumMatches=1)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int, int replacedLength&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#replace">replace</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> pattern, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> replacement, int index, long options)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int, int replacedLength&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#replace">replace</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregexp.html">QRegExp</a> pattern, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> replacement, int index, long options)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="KReplace"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="replace"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> replace</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>replacementIndex</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>replacedLength</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>matchedLength</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Connect to this slot to implement updating of replaced text during the replace
+operation.
+</p>
+<p>
+Extra care must be taken to properly implement the "no prompt-on-replace" case.
+For instance highlight isn't emitted in that case (some code might rely on it),
+and for performance reasons one should repaint after replace() ONLY if
+prompt-on-replace was selected.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> The text, in which the replacement has already been done.
+
+<tr><td></td><td valign="top"><em>replacementIndex</em>&nbsp;</td><td> Starting index of the matched substring
+
+<tr><td></td><td valign="top"><em>replacedLength</em>&nbsp;</td><td> Length of the replacement string
+
+<tr><td></td><td valign="top"><em>matchedLength</em>&nbsp;</td><td> Length of the matched string
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("replace(const QString&, int, int, int)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="KReplace"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -183,7 +240,9 @@ unless you gave it a parent widget on construction.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KReplace"></a>
+<div class="memdoc"><p>Only use this constructor if you don't use KFindDialog, or if
+you use it as a modal dialog.
+</p></div></div><a class="anchor" name="KReplace"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -229,7 +288,11 @@ unless you gave it a parent widget on construction.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="closeReplaceNextDialog"></a>
+<div class="memdoc"><p>This is the recommended constructor if you also use KReplaceDialog (non-modal).
+You should pass the pointer to it here, so that when a message box
+appears it has the right parent. Don't worry about deletion, KReplace
+will notice if the find dialog is closed.
+</p></div></div><a class="anchor" name="closeReplaceNextDialog"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -308,205 +371,7 @@ prompt-on-replace was selected.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="replace"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">int, int (replacedLength) replace</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>text</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>pattern</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>replacement</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>index</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">long&nbsp;</td>
-<td class="paramname"><em>options</em>, </td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Connect to this slot to implement updating of replaced text during the replace
-operation.
-</p>
-<p>
-Extra care must be taken to properly implement the "no prompt-on-replace" case.
-For instance highlight isn't emitted in that case (some code might rely on it),
-and for performance reasons one should repaint after replace() ONLY if
-prompt-on-replace was selected.
-</p>
-<p>
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> The text, in which the replacement has already been done.
-
-<tr><td></td><td valign="top"><em>replacementIndex</em>&nbsp;</td><td> Starting index of the matched substring
-
-<tr><td></td><td valign="top"><em>replacedLength</em>&nbsp;</td><td> Length of the replacement string
-
-<tr><td></td><td valign="top"><em>matchedLength</em>&nbsp;</td><td> Length of the matched string
-</td></tr>
-</table></dl>
-<p>
-</p></div></div><a class="anchor" name="replace"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">int, int (replacedLength) replace</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>text</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregexp.html">QRegExp</a>&nbsp;</td>
-<td class="paramname"><em>pattern</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>replacement</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>index</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">long&nbsp;</td>
-<td class="paramname"><em>options</em>, </td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Connect to this slot to implement updating of replaced text during the replace
-operation.
-</p>
-<p>
-Extra care must be taken to properly implement the "no prompt-on-replace" case.
-For instance highlight isn't emitted in that case (some code might rely on it),
-and for performance reasons one should repaint after replace() ONLY if
-prompt-on-replace was selected.
-</p>
-<p>
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> The text, in which the replacement has already been done.
-
-<tr><td></td><td valign="top"><em>replacementIndex</em>&nbsp;</td><td> Starting index of the matched substring
-
-<tr><td></td><td valign="top"><em>replacedLength</em>&nbsp;</td><td> Length of the replacement string
-
-<tr><td></td><td valign="top"><em>matchedLength</em>&nbsp;</td><td> Length of the matched string
-</td></tr>
-</table></dl>
-<p>
-</p></div></div><a class="anchor" name="replace"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> replace</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>text</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>replacementIndex</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>replacedLength</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>matchedLength</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Connect to this slot to implement updating of replaced text during the replace
-operation.
-</p>
-<p>
-Extra care must be taken to properly implement the "no prompt-on-replace" case.
-For instance highlight isn't emitted in that case (some code might rely on it),
-and for performance reasons one should repaint after replace() ONLY if
-prompt-on-replace was selected.
-</p>
-<p>
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> The text, in which the replacement has already been done.
-
-<tr><td></td><td valign="top"><em>replacementIndex</em>&nbsp;</td><td> Starting index of the matched substring
-
-<tr><td></td><td valign="top"><em>replacedLength</em>&nbsp;</td><td> Length of the replacement string
-
-<tr><td></td><td valign="top"><em>matchedLength</em>&nbsp;</td><td> Length of the matched string
-</td></tr>
-</table></dl>
-<p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("replace(const const QString&, int, int, int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="replaceNextDialog"></a>
+</p></div></div><a class="anchor" name="replaceNextDialog"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -592,6 +457,132 @@ matches. Set to false if the application provides a "find previous" action,
 in which case the match count will be erroneous when hitting the end,
 and we could even be hitting the beginning of the document (so not all
 matches have even been seen).
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="replace"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int, int replacedLength replace</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>pattern</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>replacement</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>options</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Connect to this slot to implement updating of replaced text during the replace
+operation.
+</p>
+<p>
+Extra care must be taken to properly implement the "no prompt-on-replace" case.
+For instance highlight isn't emitted in that case (some code might rely on it),
+and for performance reasons one should repaint after replace() ONLY if
+prompt-on-replace was selected.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> The text, in which the replacement has already been done.
+
+<tr><td></td><td valign="top"><em>replacementIndex</em>&nbsp;</td><td> Starting index of the matched substring
+
+<tr><td></td><td valign="top"><em>replacedLength</em>&nbsp;</td><td> Length of the replacement string
+
+<tr><td></td><td valign="top"><em>matchedLength</em>&nbsp;</td><td> Length of the matched string
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="replace"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int, int replacedLength replace</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregexp.html">QRegExp</a>&nbsp;</td>
+<td class="paramname"><em>pattern</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>replacement</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>index</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>options</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Connect to this slot to implement updating of replaced text during the replace
+operation.
+</p>
+<p>
+Extra care must be taken to properly implement the "no prompt-on-replace" case.
+For instance highlight isn't emitted in that case (some code might rely on it),
+and for performance reasons one should repaint after replace() ONLY if
+prompt-on-replace was selected.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> The text, in which the replacement has already been done.
+
+<tr><td></td><td valign="top"><em>replacementIndex</em>&nbsp;</td><td> Starting index of the matched substring
+
+<tr><td></td><td valign="top"><em>replacedLength</em>&nbsp;</td><td> Length of the replacement string
+
+<tr><td></td><td valign="top"><em>matchedLength</em>&nbsp;</td><td> Length of the matched string
 </td></tr>
 </table></dl>
 <p>

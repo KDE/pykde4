@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -239,7 +239,7 @@ here's how:
 </div>
 <div class="memdoc"><p>The standard menubar and toolbar actions.
 </p><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>ActionNone</em>&nbsp;</td><td><tr><td valign="top"><em>New</em>&nbsp;</td><td><tr><td valign="top"><em>Open</em>&nbsp;</td><td><tr><td valign="top"><em>OpenRecent</em>&nbsp;</td><td><tr><td valign="top"><em>Save</em>&nbsp;</td><td><tr><td valign="top"><em>SaveAs</em>&nbsp;</td><td><tr><td valign="top"><em>Revert</em>&nbsp;</td><td><tr><td valign="top"><em>Close</em>&nbsp;</td><td><tr><td valign="top"><em>Print</em>&nbsp;</td><td><tr><td valign="top"><em>PrintPreview</em>&nbsp;</td><td><tr><td valign="top"><em>Mail</em>&nbsp;</td><td><tr><td valign="top"><em>Quit</em>&nbsp;</td><td><tr><td valign="top"><em>Undo</em>&nbsp;</td><td><tr><td valign="top"><em>Redo</em>&nbsp;</td><td><tr><td valign="top"><em>Cut</em>&nbsp;</td><td><tr><td valign="top"><em>Copy</em>&nbsp;</td><td><tr><td valign="top"><em>Paste</em>&nbsp;</td><td><tr><td valign="top"><em>SelectAll</em>&nbsp;</td><td><tr><td valign="top"><em>Deselect</em>&nbsp;</td><td><tr><td valign="top"><em>Find</em>&nbsp;</td><td><tr><td valign="top"><em>FindNext</em>&nbsp;</td><td><tr><td valign="top"><em>FindPrev</em>&nbsp;</td><td><tr><td valign="top"><em>Replace</em>&nbsp;</td><td><tr><td valign="top"><em>ActualSize</em>&nbsp;</td><td><tr><td valign="top"><em>FitToPage</em>&nbsp;</td><td><tr><td valign="top"><em>FitToWidth</em>&nbsp;</td><td><tr><td valign="top"><em>FitToHeight</em>&nbsp;</td><td><tr><td valign="top"><em>ZoomIn</em>&nbsp;</td><td><tr><td valign="top"><em>ZoomOut</em>&nbsp;</td><td><tr><td valign="top"><em>Zoom</em>&nbsp;</td><td><tr><td valign="top"><em>Redisplay</em>&nbsp;</td><td><tr><td valign="top"><em>Up</em>&nbsp;</td><td><tr><td valign="top"><em>Back</em>&nbsp;</td><td><tr><td valign="top"><em>Forward</em>&nbsp;</td><td><tr><td valign="top"><em>Home</em>&nbsp;</td><td><tr><td valign="top"><em>Prior</em>&nbsp;</td><td><tr><td valign="top"><em>Next</em>&nbsp;</td><td><tr><td valign="top"><em>Goto</em>&nbsp;</td><td><tr><td valign="top"><em>GotoPage</em>&nbsp;</td><td><tr><td valign="top"><em>GotoLine</em>&nbsp;</td><td><tr><td valign="top"><em>FirstPage</em>&nbsp;</td><td><tr><td valign="top"><em>LastPage</em>&nbsp;</td><td><tr><td valign="top"><em>DocumentBack</em>&nbsp;</td><td><tr><td valign="top"><em>DocumentForward</em>&nbsp;</td><td><tr><td valign="top"><em>AddBookmark</em>&nbsp;</td><td><tr><td valign="top"><em>EditBookmarks</em>&nbsp;</td><td><tr><td valign="top"><em>Spelling</em>&nbsp;</td><td><tr><td valign="top"><em>ShowMenubar</em>&nbsp;</td><td><tr><td valign="top"><em>ShowToolbar</em>&nbsp;</td><td><tr><td valign="top"><em>ShowStatusbar</em>&nbsp;</td><td><tr><td valign="top"><em>SaveOptions</em>&nbsp;</td><td><tr><td valign="top"><em>KeyBindings</em>&nbsp;</td><td><tr><td valign="top"><em>Preferences</em>&nbsp;</td><td><tr><td valign="top"><em>ConfigureToolbars</em>&nbsp;</td><td><tr><td valign="top"><em>Help</em>&nbsp;</td><td><tr><td valign="top"><em>HelpContents</em>&nbsp;</td><td><tr><td valign="top"><em>WhatsThis</em>&nbsp;</td><td><tr><td valign="top"><em>ReportBug</em>&nbsp;</td><td><tr><td valign="top"><em>AboutApp</em>&nbsp;</td><td><tr><td valign="top"><em>AboutKDE</em>&nbsp;</td><td><tr><td valign="top"><em>TipofDay</em>&nbsp;</td><td><tr><td valign="top"><em>ConfigureNotifications</em>&nbsp;</td><td><tr><td valign="top"><em>FullScreen</em>&nbsp;</td><td><tr><td valign="top"><em>Clear</em>&nbsp;</td><td><tr><td valign="top"><em>PasteText</em>&nbsp;</td><td><tr><td valign="top"><em>SwitchApplicationLanguage</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p><hr><h2>Function Documentation</h2><a class="anchor" name="aboutApp"></a>
 <div class="memitem">
@@ -629,8 +629,30 @@ here's how:
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Creates an action corresponding to the
-KStandardAction.StandardAction enum.
+<div class="memdoc"><p>Creates an action corresponding to one of the
+KStandardAction.StandardAction actions, which is connected to the given
+object and <b>slot,</b> and is owned by <b>parent.</b>
+</p>
+<p>
+The signal that is connected to <b>slot</b> is triggered(bool), except for the case of
+OpenRecent standard action, which uses the urlSelected(const KUrl &amp;) signal of
+KRecentFilesAction.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>id</em>&nbsp;</td><td> The StandardAction identifier to create a KAction for.
+
+<tr><td></td><td valign="top"><em>recvr</em>&nbsp;</td><td> The QObject to receive the signal, or 0 if no notification
+is needed.
+
+<tr><td></td><td valign="top"><em>slot</em>&nbsp;</td><td> The slot to connect the signal to (remember to use the SLOT() macro).
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The QObject that should own the created KAction, or 0 if no parent will
+own the KAction returned (ensure you delete it manually in this case).
+</td></tr>
+</table></dl>
+<p>
 </p></div></div><a class="anchor" name="cut"></a>
 <div class="memitem">
 <div class="memproto">

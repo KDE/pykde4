@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
 <p>
 
 
-Namespace: KParts.BrowserOpenOrSaveQuestion<br />
+Namespace: <a href="../kparts/KParts.html">KParts</a><br />
 <h2>Detailed Description</h2>
 
 <p>This class shows the dialog that asks the user whether to
@@ -70,8 +70,8 @@ It also has the variant which asks "save or embed" (e.g. into konqueror).
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#BrowserOpenOrSaveQuestion">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent, <a href="../kdecore/KUrl.html">KUrl</a> url, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mimeType)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kparts/KParts.BrowserOpenOrSaveQuestion.html#Result">KParts.BrowserOpenOrSaveQuestion.Result</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#askEmbedOrSave">askEmbedOrSave</a> (self, int flags=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kparts/KParts.BrowserOpenOrSaveQuestion.html#Result">KParts.BrowserOpenOrSaveQuestion.Result</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#askOpenOrSave">askOpenOrSave</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KService.Ptr.html">KService.Ptr</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selectedService">selectedService</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setFeatures">setFeatures</a> (self, <a href="../kparts/KParts.BrowserOpenOrSaveQuestion.Features.html">KParts.BrowserOpenOrSaveQuestion.Features</a> features)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">KSharedPtr<KService>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selectedService">selectedService</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setFeatures">setFeatures</a> (self, <a href="../kparts/KParts.BrowserOpenOrSaveQuestion.html">KParts.BrowserOpenOrSaveQuestion.Features</a> features)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSuggestedFileName">setSuggestedFileName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> suggestedFileName)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="BrowserOpenOrSaveQuestion"></a>
@@ -108,7 +108,16 @@ It also has the variant which asks "save or embed" (e.g. into konqueror).
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="askEmbedOrSave"></a>
+<div class="memdoc"><p>Constructor, for all kinds of dialogs shown in this class.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>url</em>&nbsp;</td><td> the URL in question
+
+<tr><td></td><td valign="top"><em>mimeType</em>&nbsp;</td><td> the mimetype of the URL
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="askEmbedOrSave"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -164,7 +173,7 @@ But if the server said "attachment", it means the user is download a file for sa
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="../kdecore/KService.Ptr.html">KService.Ptr</a> selectedService</td>
+<td class="memname">KSharedPtr<KService> selectedService</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -190,7 +199,7 @@ Requires setFeatures(BrowserOpenOrSaveQuestion.ServiceSelection).
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../kparts/KParts.BrowserOpenOrSaveQuestion.Features.html">KParts.BrowserOpenOrSaveQuestion.Features</a>&nbsp;</td>
+<td class="paramtype"><a href="../kparts/KParts.BrowserOpenOrSaveQuestion.html">KParts.BrowserOpenOrSaveQuestion.Features</a>&nbsp;</td>
 <td class="paramname"><em>features</em></td>
 </tr>
 <tr>
@@ -239,8 +248,12 @@ Requires setFeatures(BrowserOpenOrSaveQuestion.ServiceSelection).
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Set of features that should be enabled in this dialog.
+This allows to add features before making all applications ready for those features
+(e.g. applications need to read selectedService() otherwise the dialog should not
+show the service selection button)
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>BasicFeatures</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>ServiceSelection</em>&nbsp;=&nbsp;1</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="Result"></a>
 <div class="memitem">
@@ -251,7 +264,7 @@ Requires setFeatures(BrowserOpenOrSaveQuestion.ServiceSelection).
 </table>
 </div>
 <div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Save</em>&nbsp;</td><td><tr><td valign="top"><em>Open</em>&nbsp;</td><td><tr><td valign="top"><em>Embed</em>&nbsp;</td><td><tr><td valign="top"><em>Cancel</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

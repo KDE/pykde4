@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -79,16 +79,96 @@ specified otherwise
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#catchNextResumeEvent">catchNextResumeEvent</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#idleTime">idleTime</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">{int:int}&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#idleTimeouts">idleTimeouts</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kutils/KIdleTime.html">KIdleTime</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#instance">instance</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeAllIdleTimeouts">removeAllIdleTimeouts</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeIdleTimeout">removeIdleTimeout</a> (self, int identifier)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resumingFromIdle">resumingFromIdle</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#simulateUserActivity">simulateUserActivity</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#stopCatchingResumeEvent">stopCatchingResumeEvent</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#timeoutReached">timeoutReached</a> (self, int identifier)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#timeoutReached">timeoutReached</a> (self, int identifier, int msec)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kutils/KIdleTime.html">KIdleTime</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#instance">instance</a> ()</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="KIdleTime"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="resumingFromIdle"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> resumingFromIdle</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Triggered, if KIdleTime is catching resume events, when the system resumes from an idle state. This means
+that either simulateUserActivity was called or the user sent an input to the system.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> catchNextResumeEvent
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("resumingFromIdle()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="timeoutReached"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> timeoutReached</td>
+<td>(</td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>identifier</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Overload. Streams the duration as well. It is guaranteed that msec will exactly
+correspond to the timeout registered with addIdleTimeout
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>msec</em>&nbsp;</td><td> the time, in milliseconds, the system has been idle for
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> addIdleTimeout
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> removeIdleTimeout
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("timeoutReached(int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="timeoutReached"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> timeoutReached</td>
+<td>(</td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>identifier</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>msec</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Overload. Streams the duration as well. It is guaranteed that msec will exactly
+correspond to the timeout registered with addIdleTimeout
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>msec</em>&nbsp;</td><td> the time, in milliseconds, the system has been idle for
+</td></tr>
+</table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> addIdleTimeout
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> removeIdleTimeout
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("timeoutReached(int, int)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="KIdleTime"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -207,23 +287,6 @@ the library is currently listening to.
 </dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> removeIdleTimeout
 </dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> timeoutReached
 </dd></dl>
-</p></div></div><a class="anchor" name="instance"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../kutils/KIdleTime.html">KIdleTime</a> instance</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Returns the singleton instance. Use this method to access KIdleTime
-</p>
-<p>
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> the instance of KIdleTime
-</dd></dl>
 </p></div></div><a class="anchor" name="removeAllIdleTimeouts"></a>
 <div class="memitem">
 <div class="memproto">
@@ -276,25 +339,7 @@ Otherwise does nothing.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="resumingFromIdle"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> resumingFromIdle</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Triggered, if KIdleTime is catching resume events, when the system resumes from an idle state. This means
-that either simulateUserActivity was called or the user sent an input to the system.
-</p>
-<p>
-<dl class="see" compact><dt><b>See also:</b></dt><dd> catchNextResumeEvent
-</dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("resumingFromIdle()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="simulateUserActivity"></a>
+</p></div></div><a class="anchor" name="simulateUserActivity"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -333,81 +378,24 @@ yet triggered
 <dl class="see" compact><dt><b>See also:</b></dt><dd> resumingFromIdle
 </dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> catchNextResumeEvent
 </dd></dl>
-</p></div></div><a class="anchor" name="timeoutReached"></a>
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="instance"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> timeoutReached</td>
+<td class="memname"><a href="../kutils/KIdleTime.html">KIdleTime</a> instance</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>identifier</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
 <td width="100%"> </td>
-</tr></table>
+</tr>
+</table>
 </div>
-<div class="memdoc"><p>Overload. Streams the duration as well. It is guaranteed that msec will exactly
-correspond to the timeout registered with addIdleTimeout
+<div class="memdoc"><p>Returns the singleton instance. Use this method to access KIdleTime
 </p>
 <p>
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>msec</em>&nbsp;</td><td> the time, in milliseconds, the system has been idle for
-</td></tr>
-</table></dl>
-<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> addIdleTimeout
-</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> removeIdleTimeout
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the instance of KIdleTime
 </dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("timeoutReached(int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="timeoutReached"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> timeoutReached</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>identifier</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>msec</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Overload. Streams the duration as well. It is guaranteed that msec will exactly
-correspond to the timeout registered with addIdleTimeout
-</p>
-<p>
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>msec</em>&nbsp;</td><td> the time, in milliseconds, the system has been idle for
-</td></tr>
-</table></dl>
-<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> addIdleTimeout
-</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> removeIdleTimeout
-</dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("timeoutReached(int, int)"), target_slot)</code></dd></dl></div></div>
+</p></div></div>
 </div>
 </div>
 </div>

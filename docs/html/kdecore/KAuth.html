@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -67,7 +67,7 @@ Not only: the library can also be used to lock down some actions in your applica
 </p>
 <p>
 The KDE Authorization library uses different backends depending on the system where it's built. As far as the user authorization is concerned, it currently uses PolicyKit on linux and Authorization Services
-on Mac OSX, and a Windows backend will eventually be written, too. At the communication layer, the library uses dbus on every supported platform.
+on Mac OSX, and a Windows backend will eventually be written, too. At the communication layer, the library uses D-Bus on every supported platform.
 </p>
 <p>
 <b>Concepts </b>
@@ -261,6 +261,7 @@ all the data you need. As a convenience, you can also pass an object and a slot 
 The piece of code that calls the action of the previous example is located in example/mainwindow.cpp in the on_readAction_triggered() slot. It looks like this:
 <pre class="fragment">
 Action readAction = "org.kde.auth.example.read";
+readAction.setHelperID("org.kde.auth.example");
 readAction.arguments()["filename"] = filename;
 
 ActionReply reply = readAction.execute();
@@ -274,7 +275,9 @@ contents = reply.data()["contents"].toString();
 First of all, it creates the action object specifying the action id. Then it loads the filename (we want to read a forbidden file) into the arguments() QVariantMap, which will be directly passed to the
 helper in the read() slot's parameter. This example code uses a synchronous call to execute the action and retrieve the reply. If the reply succeeded, the reply data is retrieved from the returned QVariantMap
 object. Please note that, although the execute() method will return only when the action is completed, the GUI will remain responsive because an internal event loop is entered. This means you should be
-prepared to receive other events in the meanwhile.
+prepared to receive other events in the meanwhile. Also, notice that you have to set explicitely the helper ID to the action: this is done for an added safety, to prevent the caller from accidentally invoking
+an helper, and also because KAuth actions may be used without an helper attached (the default). In this case, action.execute() will return ActionSuccess if the authentication went well. This is quite useful
+if you want your user to authenticate before doing something, which however needs no privileged permissions implementation-wise.
 </p>
 <p>
 <b>Asynchronous calls, data reporting, and action termination </b>

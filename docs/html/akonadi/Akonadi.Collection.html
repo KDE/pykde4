@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
 <h1>Collection Class Reference</h1>
 <code>from PyKDE4.akonadi import *</code>
 <p>
-Inherits: Akonadi.Entity<br />
+Inherits: <a href="../akonadi/Akonadi.Entity.html">Akonadi.Entity</a><br />
 
-Namespace: Akonadi.Collection<br />
+Namespace: <a href="../akonadi/Akonadi.html">Akonadi</a><br />
 <h2>Detailed Description</h2>
 
 <p>Represents a collection of PIM items.
@@ -69,9 +69,21 @@ Collections are hierarchical, i.e., they may have a parent collection.
 
  // fetching all collections recursive, starting at the root collection
  CollectionFetchJob *job = new CollectionFetchJob( Collection.root(), CollectionFetchJob.Recursive );
- if ( job-&gt;exec() ) {
-   Collection.List collections = job-&gt;collections();
-   foreach( const Collection &amp;collection, collections ) {
+ connect( job, SIGNAL( result( KJob* ) ), SLOT( fetchFinished( KJob* ) ) );
+
+ ...
+
+ MyClass.fetchFinished( KJob *job )
+ {
+   if ( job-&gt;error() ) {
+     qDebug() &lt;&lt; "Error occurred";
+     return;
+   }
+
+   CollectionFetchJob *fetchJob = qobject_cast&lt;CollectionFetchJob*&gt;( job );
+
+   const Collection.List collections = fetchJob-&gt;collections();
+   foreach ( const Collection &amp;collection, collections ) {
      qDebug() &lt;&lt; "Name:" &lt;&lt; collection.name();
    }
  }
@@ -87,28 +99,29 @@ Collections are hierarchical, i.e., they may have a parent collection.
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Collection">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Collection">__init__</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> other)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Collection">__init__</a> (self, <a href="../akonadi/Akonadi.Entity.Id.html">Akonadi.Entity.Id</a> id)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Collection">__init__</a> (self, long id)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.CachePolicy.html">Akonadi.CachePolicy</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cachePolicy">cachePolicy</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#contentMimeTypes">contentMimeTypes</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fromUrl">fromUrl</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mimeType">mimeType</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">Id&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parent">parent</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parentRemoteId">parentRemoteId</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resource">resource</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.Collection.Rights.html">Akonadi.Collection.Rights</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rights">rights</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#root">root</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection.Rights</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rights">rights</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCachePolicy">setCachePolicy</a> (self, <a href="../akonadi/Akonadi.CachePolicy.html">Akonadi.CachePolicy</a> policy)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setContentMimeTypes">setContentMimeTypes</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> types)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setName">setName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setParent">setParent</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setParent">setParent</a> (self, <a href="../akonadi/Akonadi.Entity.Id.html">Akonadi.Entity.Id</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setParent">setParent</a> (self, long parent)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setParentRemoteId">setParentRemoteId</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> identifier)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setResource">setResource</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> identifier)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRights">setRights</a> (self, <a href="../akonadi/Akonadi.Collection.Rights.html">Akonadi.Collection.Rights</a> rights)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRights">setRights</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection.Rights</a> rights)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setStatistics">setStatistics</a> (self, <a href="../akonadi/Akonadi.CollectionStatistics.html">Akonadi.CollectionStatistics</a> statistics)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.CollectionStatistics.html">Akonadi.CollectionStatistics</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statistics">statistics</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#url">url</a> (self)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fromUrl">fromUrl</a> (<a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mimeType">mimeType</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#root">root</a> ()</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="Collection"></a>
 <div class="memitem">
@@ -122,7 +135,8 @@ Collections are hierarchical, i.e., they may have a parent collection.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="Collection"></a>
+<div class="memdoc"><p>Creates an invalid collection.
+</p></div></div><a class="anchor" name="Collection"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -144,7 +158,8 @@ Collections are hierarchical, i.e., they may have a parent collection.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="Collection"></a>
+<div class="memdoc"><p>Creates a collection from an <b>other</b> collection.
+</p></div></div><a class="anchor" name="Collection"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -155,7 +170,7 @@ Collections are hierarchical, i.e., they may have a parent collection.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../akonadi/Akonadi.Entity.Id.html">Akonadi.Entity.Id</a>&nbsp;</td>
+<td class="paramtype">long&nbsp;</td>
 <td class="paramname"><em>id</em></td>
 </tr>
 <tr>
@@ -166,7 +181,16 @@ Collections are hierarchical, i.e., they may have a parent collection.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="cachePolicy"></a>
+<div class="memdoc"><p>Create a new collection.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>id</em>&nbsp;</td><td> The unique identifier of the collection.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="cachePolicy"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -194,42 +218,6 @@ Collections are hierarchical, i.e., they may have a parent collection.
 <div class="memdoc"><p>Returns a list of possible content mimetypes,
 e.g. message/rfc822, x-akonadi/collection for a mail folder that
 supports sub-folders.
-</p></div></div><a class="anchor" name="fromUrl"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> fromUrl</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
-<td class="paramname"><em>url</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Creates a collection from the given <b>url.</b>
-</p></div></div><a class="anchor" name="mimeType"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mimeType</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Returns the mimetype used for collections.
 </p></div></div><a class="anchor" name="name"></a>
 <div class="memitem">
 <div class="memproto">
@@ -291,7 +279,7 @@ supports sub-folders.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="../akonadi/Akonadi.Collection.Rights.html">Akonadi.Collection.Rights</a> rights</td>
+<td class="memname"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection.Rights</a> rights</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -300,19 +288,6 @@ supports sub-folders.
 </table>
 </div>
 <div class="memdoc"><p>Returns the rights the user has on the collection.
-</p></div></div><a class="anchor" name="root"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> root</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Returns the root collection.
 </p></div></div><a class="anchor" name="setCachePolicy"></a>
 <div class="memitem">
 <div class="memproto">
@@ -426,7 +401,7 @@ supports sub-folders.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../akonadi/Akonadi.Entity.Id.html">Akonadi.Entity.Id</a>&nbsp;</td>
+<td class="paramtype">long&nbsp;</td>
 <td class="paramname"><em>parent</em></td>
 </tr>
 <tr>
@@ -499,7 +474,7 @@ supports sub-folders.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../akonadi/Akonadi.Collection.Rights.html">Akonadi.Collection.Rights</a>&nbsp;</td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection.Rights</a>&nbsp;</td>
 <td class="paramname"><em>rights</em></td>
 </tr>
 <tr>
@@ -560,6 +535,50 @@ supports sub-folders.
 </table>
 </div>
 <div class="memdoc"><p>Returns the collection url
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="fromUrl"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> fromUrl</td>
+<td>(</td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Creates a collection from the given <b>url.</b>
+</p></div></div><a class="anchor" name="mimeType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mimeType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the mimetype used for collections.
+</p></div></div><a class="anchor" name="root"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> root</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the root collection.
 </p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="Right"></a>
 <div class="memitem">
 <div class="memproto">
@@ -568,8 +587,9 @@ supports sub-folders.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Describes rights of a collection.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>ReadOnly</em>&nbsp;=&nbsp;0x0</td><td><tr><td valign="top"><em>CanChangeItem</em>&nbsp;=&nbsp;0x1</td><td><tr><td valign="top"><em>CanCreateItem</em>&nbsp;=&nbsp;0x2</td><td><tr><td valign="top"><em>CanDeleteItem</em>&nbsp;=&nbsp;0x4</td><td><tr><td valign="top"><em>CanChangeCollection</em>&nbsp;=&nbsp;0x8</td><td><tr><td valign="top"><em>CanCreateCollection</em>&nbsp;=&nbsp;0x10</td><td><tr><td valign="top"><em>CanDeleteCollection</em>&nbsp;=&nbsp;0x20</td><td><tr><td valign="top"><em>CanLinkItem</em>&nbsp;=&nbsp;0x40</td><td><tr><td valign="top"><em>CanUnlinkItem</em>&nbsp;=&nbsp;0x80</td><td><tr><td valign="top"><em>AllRights</em>&nbsp;=&nbsp;(CanChangeItem|CanCreateItem|CanDeleteItem|CanChangeCollection|CanCreateCollection|CanDeleteCollection)</td><td></table>
 </dl>
 </div></div><p>
 </div>

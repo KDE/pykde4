@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
 <p>
 Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
 Subclasses: <a href="../plasma/Plasma.FrameSvg.html">Plasma.FrameSvg</a><br />
-Namespace: Plasma.Svg<br />
+Namespace: <a href="../plasma/Plasma.html">Plasma</a><br />
 <h2>Detailed Description</h2>
 
 <p>Svg plasma/svg.h &lt;Plasma/Svg&gt;
@@ -85,7 +85,6 @@ optimizations to help lower the cost of painting SVGs, such as caching.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paint">paint</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpainter.html">QPainter</a> painter, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qrectf.html">QRectF</a> rect, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> elementID=QString())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paint">paint</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpainter.html">QPainter</a> painter, int x, int y, int width, int height, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> elementID=QString())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pixmap">pixmap</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> elementID=QString())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#repaintNeeded">repaintNeeded</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resize">resize</a> (self, float width, float height)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resize">resize</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsizef.html">QSizeF</a> size)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resize">resize</a> (self)</td></tr>
@@ -96,7 +95,19 @@ optimizations to help lower the cost of painting SVGs, such as caching.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsize.html">QSize</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#size">size</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.Theme.html">Plasma.Theme</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#theme">theme</a> (self)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="Svg"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="repaintNeeded"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> repaintNeeded</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("repaintNeeded()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="Svg"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -118,7 +129,21 @@ optimizations to help lower the cost of painting SVGs, such as caching.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="containsMultipleImages"></a>
+<div class="memdoc"><p>Constructs an SVG object that implicitly shares and caches rendering
+As opposed to QSvgRenderer, which this class uses internally,
+Plasma.Svg represents an image generated from an SVG. As such, it
+has a related size and transform matrix (the latter being provided
+by the painter used to paint the image).
+</p>
+<p>
+The size is initialized to be the SVG's native size.
+</p>
+<p>
+@arg parent options QObject to parent this to
+</p>
+<p>
+@related Plasma.Theme
+</p></div></div><a class="anchor" name="containsMultipleImages"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -501,19 +526,7 @@ string for the whole SVG (the default)
 string for the whole SVG (the default)
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> a QPixmap of the rendered SVG
 </dd></dl>
-</p></div></div><a class="anchor" name="repaintNeeded"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> repaintNeeded</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("repaintNeeded()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="resize"></a>
+</p></div></div><a class="anchor" name="resize"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

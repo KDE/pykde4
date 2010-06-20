@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -68,12 +68,14 @@ This includes:
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KFileItemActions">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addOpenWithActionsTo">addOpenWithActionsTo</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmenu.html">QMenu</a> menu, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> traderConstraint)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addOpenWithActionsTo">addOpenWithActionsTo</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmenu.html">QMenu</a> menu, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> traderConstraint=QString())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addServiceActionsTo">addServiceActionsTo</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmenu.html">QMenu</a> menu)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KService.List.html">KService.List</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#associatedApplications">associatedApplications</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> mimeTypeList, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> traderConstraint)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#preferredOpenWithAction">preferredOpenWithAction</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> traderConstraint)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#runPreferredApplications">runPreferredApplications</a> (self, <a href="../kio/KFileItemList.html">KFileItemList</a> fileOpenList, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> traderConstraint)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setItemListProperties">setItemListProperties</a> (self, <a href="../kio/KFileItemListProperties.html">KFileItemListProperties</a> itemList)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setParentWidget">setParentWidget</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[KSharedPtr<KService>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#associatedApplications">associatedApplications</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> mimeTypeList, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> traderConstraint)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="KFileItemActions"></a>
 <div class="memitem">
@@ -97,7 +99,10 @@ This includes:
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="addOpenWithActionsTo"></a>
+<div class="memdoc"><p>Creates a KFileItemActions instance.
+Note that this instance must stay alive for at least as long as the popupmenu;
+it has the slots for the actions created by addOpenWithActionsTo/addServiceActionsTo.
+</p></div></div><a class="anchor" name="addOpenWithActionsTo"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -115,7 +120,7 @@ This includes:
 <td class="memname"></td>
 <td></td>
 <td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>traderConstraint</em></td>
+<td class="paramname"><em>traderConstraint=QString()</em></td>
 </tr>
 <tr>
 <td></td>
@@ -133,6 +138,7 @@ All actions are created as children of the menu.
 
 <tr><td></td><td valign="top"><em>traderConstraint</em>&nbsp;</td><td> this constraint allows to exclude the current application
 from the "open with" list. Example: "DesktopEntryName != 'kfmclient'".
+(Default value added in kdelibs-4.5, pass QString() explicitely for earlier versions).
 </td></tr>
 </table></dl>
 <p>
@@ -172,54 +178,6 @@ This is controlled by Require=Write in the servicemenu desktop files.
 All actions are created as children of the menu.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> the number of actions added
 </dd></dl>
-</p></div></div><a class="anchor" name="associatedApplications"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../kdecore/KService.List.html">KService.List</a> associatedApplications</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
-<td class="paramname"><em>mimeTypeList</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>traderConstraint</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Helper method used internally, can also be used for similar GUIs that
-show the list of associated applications.
-Used in KParts.BrowserOpenOrSaveQuestion for example.
-</p>
-<p>
-This is basically a KMimeTypeTrader.query, but it also cleans up duplicates,
-and honors OnlyShowIn and NotShowIn fields.
-</p>
-<p>
-Returns the applications associated with all the given mimetypes.
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>mimeTypeList</em>&nbsp;</td><td> the mimetypes
-
-<tr><td></td><td valign="top"><em>traderConstraint</em>&nbsp;</td><td> this optional constraint allows to exclude the current application
-from the "open with" list. Example: "DesktopEntryName != 'kfmclient'".
-</td></tr> </table></dl>
-<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the list of services.
-</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
-</dd></dl>
 </p></div></div><a class="anchor" name="preferredOpenWithAction"></a>
 <div class="memitem">
 <div class="memproto">
@@ -249,6 +207,43 @@ from the "open with" list. Example: "DesktopEntryName != 'kfmclient'".
 from the "open with" list. Example: "DesktopEntryName != 'kfmclient'".
 </td></tr> </table></dl>
 <p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the action - or 0 if no application was found.
+</dd></dl>
+</p></div></div><a class="anchor" name="runPreferredApplications"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> runPreferredApplications</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KFileItemList.html">KFileItemList</a>&nbsp;</td>
+<td class="paramname"><em>fileOpenList</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>traderConstraint</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Slot used to execute a list of files in their respective preferred application.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>fileOpenList</em>&nbsp;</td><td> the list of KFileItems to open.
+
+<tr><td></td><td valign="top"><em>traderConstraint</em>&nbsp;</td><td> this optional constraint allows to exclude the current application
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
 </dd></dl>
 </p></div></div><a class="anchor" name="setItemListProperties"></a>
 <div class="memitem">
@@ -304,6 +299,59 @@ This should normally be your mainwindow, not a popup menu,
 so that it still exists even after the popup is closed
 (e.g. error message from KRun) and so that QAction.setStatusTip
 can find a statusbar, too.
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="associatedApplications"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[KSharedPtr<KService>] associatedApplications</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td>
+<td class="paramname"><em>mimeTypeList</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>traderConstraint</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Helper method used internally, can also be used for similar GUIs that
+show the list of associated applications.
+Used in KParts.BrowserOpenOrSaveQuestion for example.
+</p>
+<p>
+This is basically a KMimeTypeTrader.query, but it supports multiple mimetypes, and
+also cleans up "apparent" duplicates, such as the kde3 and kde4 applications with the same name.
+</p>
+<p>
+The list is sorted according to the user preferences for the given mimetype(s).
+In case multiple mimetypes appear in the url list, the logic is:
+applications that on average appear earlier on the associated applications
+list for the given mimetypes also appear earlier on the final applications list.
+</p>
+<p>
+Note that for a single mimetype there is no need to use this, you should use
+KMimeTypeTrader instead, e.g. query() or preferredService().
+</p>
+<p>
+Returns the applications associated with all the given mimetypes.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mimeTypeList</em>&nbsp;</td><td> the mimetypes
+
+<tr><td></td><td valign="top"><em>traderConstraint</em>&nbsp;</td><td> this optional constraint allows to exclude the current application
+from the "open with" list. Example: "DesktopEntryName != 'kfmclient'".
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the sorted list of services.
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl>
 </p></div></div>
 </div>
 </div>

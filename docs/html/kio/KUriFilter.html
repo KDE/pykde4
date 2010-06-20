@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -58,16 +58,15 @@
 <p>
 The intention of this plugin class is to allow people to extend the
 functionality of KUrl without modifying it directly. This way KUrl will
-remain a generic parser capable of parsing any generic URL that adheres
-to specifications.
+remain a generic parser capable of parsing any generic URL that adheres to
+specifications.
 </p>
 <p>
 The KUriFilter class applies a number of filters to a URI and returns the
 filtered version whenever possible. The filters are implemented using
 plugins to provide easy extensibility of the filtering mechanism. New
-filters can be added in the future by simply inheriting from
-KUriFilterPlugin and implementing the KUriFilterPlugin.filterUri
-method.
+filters can be added in the future by simply inheriting from the
+KUriFilterPlugin class.
 </p>
 <p>
 Use of this plugin-manager class is straight forward. Since it is a
@@ -140,6 +139,7 @@ Filters a given URL into its proper format whenever possible.
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUriFilter">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUriFilter">__init__</a> (self, <a href="../kio/KUriFilter.html">KUriFilter</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#filterSearchUri">filterSearchUri</a> (self, <a href="../kio/KUriFilterData.html">KUriFilterData</a> data)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#filterUri">filterUri</a> (self, <a href="../kio/KUriFilterData.html">KUriFilterData</a> data, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> filters=QStringList())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#filterUri">filterUri</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> uri, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> filters=QStringList())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#filterUri">filterUri</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> uri, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> filters=QStringList())</td></tr>
@@ -147,7 +147,8 @@ Filters a given URL into its proper format whenever possible.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#filteredUri">filteredUri</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> uri, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> filters=QStringList())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#loadPlugins">loadPlugins</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pluginNames">pluginNames</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KUriFilter.html">KUriFilter</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#self">self</a> (self)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KUriFilter.html">KUriFilter</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#self">self</a> ()</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="KUriFilter"></a>
 <div class="memitem">
@@ -161,7 +162,12 @@ Filters a given URL into its proper format whenever possible.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KUriFilter"></a>
+<div class="memdoc"><p>Constructor.
+</p>
+<p>
+Creates a KUriFilter object and calls loadPlugins to load all
+available URI filter plugins.
+</p></div></div><a class="anchor" name="KUriFilter"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -183,7 +189,45 @@ Filters a given URL into its proper format whenever possible.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="filterUri"></a>
+<div class="memdoc"></div></div><a class="anchor" name="filterSearchUri"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool filterSearchUri</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KUriFilterData.html">KUriFilterData</a>&nbsp;</td>
+<td class="paramname"><em>data</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Filters <b>data</b> using only the default search uri filter plugins.
+</p>
+<p>
+Only use this function if you are sure that the input you want to
+filter is a search term.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> object that contains the URI to be filtered.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the the data specified by <b>data</b> was successfully filtered.
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="filterUri"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -418,8 +462,7 @@ If the list is empty all available filters would be used.
 <div class="memdoc"><p>Loads all allowed plugins.
 </p>
 <p>
-This function loads all filters that have not
-been disbled.
+This function only loads URI filter plugins that have not been disabled.
 </p></div></div><a class="anchor" name="pluginNames"></a>
 <div class="memitem">
 <div class="memproto">
@@ -437,14 +480,14 @@ been disbled.
 <p>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> a QStringList of plugin names
 </dd></dl>
-</p></div></div><a class="anchor" name="self"></a>
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="self"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
 <td class="memname"><a href="../kio/KUriFilter.html">KUriFilter</a> self</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
+<td class="paramname">)</td>
 <td width="100%"> </td>
 </tr>
 </table>

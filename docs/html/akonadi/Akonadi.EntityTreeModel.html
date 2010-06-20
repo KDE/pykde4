@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
 <p>
 Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
 
-Namespace: Akonadi.EntityTreeModel<br />
+Namespace: <a href="../akonadi/Akonadi.html">Akonadi</a><br />
 <h2>Detailed Description</h2>
 
 <p>A model for collections and items together.
@@ -86,22 +86,8 @@ and the EntityTreeModel.
 </p>
 <p>
 If you want to retrieve a Collection for a particular Collection.Id and you do not yet
-have a valid QModelIndex, use match:
+have a valid QModelIndex, use modelIndexForCollection.
 </p>
-<p>
-<pre class="fragment">
- QModelIndexList list = model-&gt;match( QModelIndex(), CollectionIdRole, id );
- if ( list.isEmpty() )
-   return; // A Collection with that Id is not in the model.
- Q_ASSERT( list.size() == 1 ); // Otherwise there must be only one instance of it.
- Collection collection = list.at( 0 ).data( EntityTreeModel.CollectionRole ).value&lt;Collection&gt;();
-</pre>
-</p>
-<p>
-Not that a single Item may appear multiple times in a model, so the list size may not be 1
-if it is not empty in that case, so the Q_ASSERT should not be used.
-<dl class="see" compact><dt><b>See also:</b></dt><dd> virtual-collections
-</dd></dl> </p>
 <p>
 &lt;h3&gt;Using EntityTreeModel in your application&lt;/h3&gt;
 </p>
@@ -382,10 +368,10 @@ That is the purpose of these lines in the above example
 </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#CollectionFetchStrategy">CollectionFetchStrategy</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;FetchNoCollections, FetchFirstLevelChildCollections, FetchCollectionsRecursive&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#CollectionFetchStrategy">CollectionFetchStrategy</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;FetchNoCollections, FetchFirstLevelChildCollections, FetchCollectionsRecursive, InvisibleCollectionFetch&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#HeaderGroup">HeaderGroup</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;EntityTreeHeaders, CollectionTreeHeaders, ItemListHeaders, UserHeaders, EndHeaderGroup&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#ItemPopulationStrategy">ItemPopulationStrategy</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoItemPopulation, ImmediatePopulation, LazyPopulation&nbsp;}</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Roles">Roles</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ItemIdRole, ItemRole, MimeTypeRole, CollectionIdRole, CollectionRole, RemoteIdRole, CollectionChildOrderRole, AmazingCompletionRole, ParentCollectionRole, ColumnCountRole, LoadedPartsRole, AvailablePartsRole, SessionRole, CollectionRefRole, CollectionDerefRole, PendingCutRole, EntityUrlRole, UserRole, TerminalUserRole, EndRole&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Roles">Roles</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ItemIdRole, ItemRole, MimeTypeRole, CollectionIdRole, CollectionRole, RemoteIdRole, CollectionChildOrderRole, AmazingCompletionRole, ParentCollectionRole, ColumnCountRole, LoadedPartsRole, AvailablePartsRole, SessionRole, CollectionRefRole, CollectionDerefRole, PendingCutRole, EntityUrlRole, UnreadCountRole, UserRole, TerminalUserRole, EndRole&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#EntityTreeModel">__init__</a> (self, <a href="../akonadi/Akonadi.ChangeRecorder.html">Akonadi.ChangeRecorder</a> monitor, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#canFetchMore">canFetchMore</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent)</td></tr>
@@ -407,8 +393,8 @@ That is the purpose of these lines in the above example
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#includeRootCollection">includeRootCollection</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#index">index</a> (self, int row, int column, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent=QModelIndex())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.EntityTreeModel.html#ItemPopulationStrategy">Akonadi.EntityTreeModel.ItemPopulationStrategy</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemPopulationStrategy">itemPopulationStrategy</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindexlist.html">QModelIndexList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#match">match</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> start, int role, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a> value, int hits=1, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::MatchFlags</a> flags=Qt.MatchFlags(Qt.MatchStartsWith|Qt.MatchWrap))</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmimedata.html">QMimeData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mimeData">mimeData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindexlist.html">QModelIndexList</a> indexes)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#match">match</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> start, int role, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a> value, int hits=1, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::MatchFlags</a> flags=Qt.MatchFlags(Qt.MatchStartsWith|Qt.MatchWrap))</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmimedata.html">QMimeData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mimeData">mimeData</a> (self, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>] indexes)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mimeTypes">mimeTypes</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parent">parent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> index)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rootCollectionDisplayName">rootCollectionDisplayName</a> (self)</td></tr>
@@ -421,6 +407,9 @@ That is the purpose of these lines in the above example
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowSystemEntities">setShowSystemEntities</a> (self, bool show)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::DropActions</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#supportedDropActions">supportedDropActions</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#systemEntitiesShown">systemEntitiesShown</a> (self)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#modelIndexForCollection">modelIndexForCollection</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a> model, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#modelIndexesForItem">modelIndexesForItem</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a> model, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> item)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="EntityTreeModel"></a>
 <div class="memitem">
@@ -450,7 +439,18 @@ That is the purpose of these lines in the above example
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="canFetchMore"></a>
+<div class="memdoc"><p>Creates a new entity tree model.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>monitor</em>&nbsp;</td><td> The ChangeRecorder whose entities should be represented in the model.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent object.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="canFetchMore"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -963,7 +963,7 @@ with multiple proxies and views, and each should show different header data.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindexlist.html">QModelIndexList</a> match</td>
+<td class="memname">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>] match</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
@@ -1017,7 +1017,7 @@ with multiple proxies and views, and each should show different header data.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindexlist.html">QModelIndexList</a>&nbsp;</td>
+<td class="paramtype">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>]&nbsp;</td>
 <td class="paramname"><em>indexes</em></td>
 </tr>
 <tr>
@@ -1288,6 +1288,93 @@ Most applications will not need to use this feature.
 </table>
 </div>
 <div class="memdoc"><p>Returns true if internal system entities are shown, and false otherwise.
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="modelIndexForCollection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> modelIndexForCollection</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a>&nbsp;</td>
+<td class="paramname"><em>model</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>&nbsp;</td>
+<td class="paramname"><em>collection</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a QModelIndex in <b>model</b> which points to <b>collection.</b>
+This method can be used through proxy models if <b>model</b> is a proxy model.
+</p>
+<p>
+<pre class="fragment">
+ EntityTreeModel *model = getEntityTreeModel();
+ QSortFilterProxyModel *proxy1 = new QSortFilterProxyModel;
+ proxy1-&gt;setSourceModel(model);
+ QSortFilterProxyModel *proxy2 = new QSortFilterProxyModel;
+ proxy2-&gt;setSourceModel(proxy1);
+
+ ...
+
+ QModelIndex idx = EntityTreeModel.modelIndexForCollection(proxy2, Collection(colId));
+ if (!idx.isValid())
+   // Collection with id colId is not in the proxy2.
+   // Maybe it is filtered out if proxy 2 is only showing items? Make sure you use the correct proxy.
+   return;
+
+ Collection collection = idx.data( EntityTreeModel.CollectionRole ).value&lt;Collection&gt;();
+ // collection has the id colId, and all other attributes already fetched by the model such as name, remoteId, Akonadi.Attributes etc.
+
+</pre>
+</p>
+<p>
+This can be useful for example if an id is stored in a config file and needs to be used in the application.
+</p>
+<p>
+Note however, that to restore view state such as scrolling, selection and expansion of items in trees, the EntityTreeViewStateSaver can be used for convenience.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> modelIndexesForItem
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="modelIndexesForItem"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>] modelIndexesForItem</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a>&nbsp;</td>
+<td class="paramname"><em>model</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>&nbsp;</td>
+<td class="paramname"><em>item</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a QModelIndex in <b>model</b> which points to <b>item.</b>
+This method can be used through proxy models if <b>model</b> is a proxy model.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> modelIndexForCollection
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
 </p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="CollectionFetchStrategy"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1296,8 +1383,9 @@ Most applications will not need to use this feature.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Describes what collections shall be fetched by and represent in the model.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>FetchNoCollections</em>&nbsp;</td><td><tr><td valign="top"><em>FetchFirstLevelChildCollections</em>&nbsp;</td><td><tr><td valign="top"><em>FetchCollectionsRecursive</em>&nbsp;</td><td><tr><td valign="top"><em>InvisibleCollectionFetch</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="HeaderGroup"></a>
 <div class="memitem">
@@ -1307,8 +1395,9 @@ Most applications will not need to use this feature.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Describes what header information the model shall return.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>EntityTreeHeaders</em>&nbsp;</td><td><tr><td valign="top"><em>CollectionTreeHeaders</em>&nbsp;</td><td><tr><td valign="top"><em>ItemListHeaders</em>&nbsp;</td><td><tr><td valign="top"><em>UserHeaders</em>&nbsp;=&nbsp;10</td><td><tr><td valign="top"><em>EndHeaderGroup</em>&nbsp;=&nbsp;32</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="ItemPopulationStrategy"></a>
 <div class="memitem">
@@ -1318,8 +1407,9 @@ Most applications will not need to use this feature.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Describes how the model should populated its items.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NoItemPopulation</em>&nbsp;</td><td><tr><td valign="top"><em>ImmediatePopulation</em>&nbsp;</td><td><tr><td valign="top"><em>LazyPopulation</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="Roles"></a>
 <div class="memitem">
@@ -1329,8 +1419,9 @@ Most applications will not need to use this feature.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Describes the roles for items. Roles for collections are defined by the superclass.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>IdRole</em>&nbsp;=&nbsp;Qt::UserRole+1</td><td><tr><td valign="top"><em>ItemRole</em>&nbsp;</td><td><tr><td valign="top"><em>MimeTypeRole</em>&nbsp;</td><td><tr><td valign="top"><em>UserRole</em>&nbsp;=&nbsp;Qt::UserRole+42</td><td></table>
 </dl>
 </div></div><p>
 </div>

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -93,12 +93,13 @@ Add X-KDE-HasTempFileOption=true to the .desktop file to indicate this.
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUniqueApplication">__init__</a> (self, bool GUIenabled=1, bool configUnique=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUniqueApplication">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/display.html">Display</a> display, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::HANDLE</a> visual=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::HANDLE</a> colormap=0, bool configUnique=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addCmdLineOptions">addCmdLineOptions</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newInstance">newInstance</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#restoringSession">restoringSession</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setHandleAutoStarted">setHandleAutoStarted</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#start">start</a> (self, <a href="../kdeui/KUniqueApplication.StartFlags.html">KUniqueApplication.StartFlags</a> flags)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#start">start</a> (self)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addCmdLineOptions">addCmdLineOptions</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setHandleAutoStarted">setHandleAutoStarted</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#start">start</a> (<a href="../kdeui/KUniqueApplication.html">KUniqueApplication.StartFlags</a> flags)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#start">start</a> ()</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="KUniqueApplication"></a>
 <div class="memitem">
@@ -128,7 +129,21 @@ Add X-KDE-HasTempFileOption=true to the .desktop file to indicate this.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KUniqueApplication"></a>
+<div class="memdoc"><p>Constructor. Takes command line arguments from KCmdLineArgs
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>GUIenabled</em>&nbsp;</td><td> Set to false to disable all GUI stuff. This implies
+no styles either.
+
+<tr><td></td><td valign="top"><em>configUnique</em>&nbsp;</td><td> If true, the uniqueness of the application will
+depend on the value of the "MultipleInstances"
+key in the "KDE" group of the application config file.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KUniqueApplication"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -168,23 +183,29 @@ Add X-KDE-HasTempFileOption=true to the .desktop file to indicate this.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="addCmdLineOptions"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> addCmdLineOptions</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Adds command line options specific for KUniqueApplication.
+<div class="memdoc"><p>Constructor. Takes command line arguments from KCmdLineArgs
 </p>
 <p>
-Should be called before calling KUniqueApplication constructor
-and / or start().
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>display</em>&nbsp;</td><td> Will be passed to Qt as the X display. The display
+must be valid and already opened.
+</td></tr>
+
+<tr><td></td><td valign="top"><em>visual</em>&nbsp;</td><td> Pointer to the X11 visual that should be used by the
+application. If NULL, the default visual will be used instead.
+</td></tr>
+
+<tr><td></td><td valign="top"><em>colormap</em>&nbsp;</td><td> The colormap that should be used by the application.
+If 0, the default colormap will be used instead.
+</td></tr>
+
+<tr><td></td><td valign="top"><em>configUnique</em>&nbsp;</td><td> If true, the uniqueness of the application will
+depend on the value of the "MultipleInstances"
+key in the "KDE" group of the application config file.
+</td></tr>
+</table></dl>
+<p>
 </p></div></div><a class="anchor" name="newInstance"></a>
 <div class="memitem">
 <div class="memproto">
@@ -257,6 +278,23 @@ return 0;
 </div>
 <div class="memdoc"><p>Returns whether newInstance() is being called while session
 restoration is in progress.
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="addCmdLineOptions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addCmdLineOptions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Adds command line options specific for KUniqueApplication.
+</p>
+<p>
+Should be called before calling KUniqueApplication constructor
+and / or start().
 </p></div></div><a class="anchor" name="setHandleAutoStarted"></a>
 <div class="memitem">
 <div class="memproto">
@@ -264,7 +302,7 @@ restoration is in progress.
 <td class="memname"> setHandleAutoStarted</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
+<td class="paramname">)</td>
 <td width="100%"> </td>
 </tr>
 </table>
@@ -277,12 +315,7 @@ restoration is in progress.
 <table class="memname"><tr>
 <td class="memname">bool start</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../kdeui/KUniqueApplication.StartFlags.html">KUniqueApplication.StartFlags</a>&nbsp;</td>
+<td class="paramtype"><a href="../kdeui/KUniqueApplication.html">KUniqueApplication.StartFlags</a>&nbsp;</td>
 <td class="paramname"><em>flags</em></td>
 </tr>
 <tr>
@@ -340,7 +373,7 @@ false if another process was already running.
 <td class="memname">bool start</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
+<td class="paramname">)</td>
 <td width="100%"> </td>
 </tr>
 </table>
@@ -393,8 +426,10 @@ false if another process was already running.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>These flags can be used to specify how new instances of
+unique applications are created.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NonUniqueInstance</em>&nbsp;=&nbsp;0x1</td><td></table>
 </dl>
 </div></div><p>
 </div>

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -59,12 +59,48 @@ Inherits: <a href="../kdeui/KPageDialog.html">KPageDialog</a> &#x2192; <a href="
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#textRecognized">textRecognized</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, int id)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KOCRDialog">__init__</a> (self, int dialogFace=Tabbed, int buttonMask=Close|Help, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0, bool modal=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KOCRDialog.html">KOCRDialog</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#getOCRDialog">getOCRDialog</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#id">id</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nextId">nextId</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#textRecognized">textRecognized</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text, int id)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KOCRDialog.html">KOCRDialog</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#getOCRDialog">getOCRDialog</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="KOCRDialog"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="textRecognized"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> textRecognized</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>id</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Informs you that the image with the id <b>id</b> has been run through
+text-recognition. The text is in the QString parameter. In the future,
+a compound document, using rich text will be used instead.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> the text that has been recognized
+
+<tr><td></td><td valign="top"><em>id</em>&nbsp;</td><td> the id of the image
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("textRecognized(const QString&, int)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="KOCRDialog"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -104,38 +140,23 @@ Inherits: <a href="../kdeui/KPageDialog.html">KPageDialog</a> &#x2192; <a href="
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="getOCRDialog"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../kio/KOCRDialog.html">KOCRDialog</a> getOCRDialog</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
-<td class="paramname"><em>parent=0</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Creates the user's preferred OCR dialog and returns it,
-or 0L if no OCR-support
-is available. Pass a suitable <b>parent</b> widget, if you like. If you
-don't you have to 'delete' the returned pointer yourself.
+<div class="memdoc"><p>Constructs the OCR dialog. If you implement an own dialog, you can
+customize it with the usual KPageDialog flags.
+</p>
+<p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dialogFace</em>&nbsp;</td><td> the KPageDialog.FaceType
+
+<tr><td></td><td valign="top"><em>buttonMask</em>&nbsp;</td><td> a ORed mask of all buttons (see
+KDialog.ButtonCode)
+
 <tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the QWidget's parent, or 0
-</td></tr> </table></dl>
-<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the KOCRDialog, or 0 if the function failed
-</dd></dl>
+
+<tr><td></td><td valign="top"><em>modal</em>&nbsp;</td><td> if true the dialog is model
+</td></tr>
+</table></dl>
+<p>
 </p></div></div><a class="anchor" name="id"></a>
 <div class="memitem">
 <div class="memproto">
@@ -177,25 +198,14 @@ for the signals.
 </dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> id
 </dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> textRecognized
 </dd></dl>
-</p></div></div><a class="anchor" name="textRecognized"></a>
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="getOCRDialog"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> textRecognized</td>
+<td class="memname"><a href="../kio/KOCRDialog.html">KOCRDialog</a> getOCRDialog</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>text</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>id</em></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
 </tr>
 <tr>
 <td></td>
@@ -205,20 +215,17 @@ for the signals.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Informs you that the image with the id <b>id</b> has been run through
-text-recognition. The text is in the QString parameter. In the future,
-a compound document, using rich text will be used instead.
-</p>
-<p>
+<div class="memdoc"><p>Creates the user's preferred OCR dialog and returns it,
+or 0L if no OCR-support
+is available. Pass a suitable <b>parent</b> widget, if you like. If you
+don't you have to 'delete' the returned pointer yourself.
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> the text that has been recognized
-
-<tr><td></td><td valign="top"><em>id</em>&nbsp;</td><td> the id of the image
-</td></tr>
-</table></dl>
-<p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("textRecognized(const const QString&, int)"), target_slot)</code></dd></dl></div></div>
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the QWidget's parent, or 0
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the KOCRDialog, or 0 if the function failed
+</dd></dl>
+</p></div></div>
 </div>
 </div>
 </div>

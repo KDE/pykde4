@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -73,14 +73,29 @@ to be loaded only for local files, for instance.
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KPropertiesDialogPlugin">__init__</a> (self, <a href="../kio/KPropertiesDialog.html">KPropertiesDialog</a> _props)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#applyChanges">applyChanges</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changed">changed</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fontHeight">fontHeight</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isDesktopFile">isDesktopFile</a> (self, <a href="../kio/KFileItem.html">KFileItem</a> _item)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isDirty">isDirty</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDirty">setDirty</a> (self, bool b)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDirty">setDirty</a> (self)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isDesktopFile">isDesktopFile</a> (<a href="../kio/KFileItem.html">KFileItem</a> _item)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="KPropertiesDialogPlugin"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="changed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> changed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emit this signal when the user changed anything in the plugin's tabs.
+The hosting PropertiesDialog will call applyChanges only if the
+PropsPlugin has emitted this signal or if you have called setDirty() before.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("changed()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="KPropertiesDialogPlugin"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -102,7 +117,10 @@ to be loaded only for local files, for instance.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="applyChanges"></a>
+<div class="memdoc"><p>Constructor
+To insert tabs into the properties dialog, use the add methods provided by
+KPageDialog (the properties dialog is a KPageDialog).
+</p></div></div><a class="anchor" name="applyChanges"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -117,22 +135,7 @@ to be loaded only for local files, for instance.
 <div class="memdoc"><p>Applies all changes to the file.
 This function is called when the user presses 'Ok'. The last plugin inserted
 is called first.
-</p></div></div><a class="anchor" name="changed"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> changed</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Emit this signal when the user changed anything in the plugin's tabs.
-The hosting PropertiesDialog will call applyChanges only if the
-PropsPlugin has emitted this signal or if you have called setDirty() before.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("changed()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="fontHeight"></a>
+</p></div></div><a class="anchor" name="fontHeight"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -145,32 +148,6 @@ PropsPlugin has emitted this signal or if you have called setDirty() before.
 </table>
 </div>
 <div class="memdoc"><p>Returns the font height.
-</p></div></div><a class="anchor" name="isDesktopFile"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool isDesktopFile</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../kio/KFileItem.html">KFileItem</a>&nbsp;</td>
-<td class="paramname"><em>_item</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Convenience method for most .supports methods
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the file is a local, regular, readable, desktop file
-</dd></dl> <dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> use KFileItem.isDesktopFile
-</dd></dl>
 </p></div></div><a class="anchor" name="isDirty"></a>
 <div class="memitem">
 <div class="memproto">
@@ -217,7 +194,28 @@ PropsPlugin has emitted this signal or if you have called setDirty() before.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div>
+<div class="memdoc"></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="isDesktopFile"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isDesktopFile</td>
+<td>(</td>
+<td class="paramtype"><a href="../kio/KFileItem.html">KFileItem</a>&nbsp;</td>
+<td class="paramname"><em>_item</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convenience method for most .supports methods
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the file is a local, regular, readable, desktop file
+</dd></dl> <dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> use KFileItem.isDesktopFile
+</dd></dl>
+</p></div></div>
 </div>
 </div>
 </div>

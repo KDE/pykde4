@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -90,9 +90,9 @@ already added to a KPlotObject will be invalid.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpen.html">QPen</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#labelPen">labelPen</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpen.html">QPen</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#linePen">linePen</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpen.html">QPen</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pen">pen</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KPlotObject.PlotTypes.html">KPlotObject.PlotTypes</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#plotTypes">plotTypes</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KPlotObject.html">KPlotObject.PlotTypes</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#plotTypes">plotTypes</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KPlotObject.html#PointStyle">KPlotObject.PointStyle</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pointStyle">pointStyle</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[KPlotPoin]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#points">points</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdeui/KPlotPoint.html">KPlotPoint</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#points">points</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removePoint">removePoint</a> (self, int index)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setBarBrush">setBarBrush</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbrush.html">QBrush</a> b)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setBarPen">setBarPen</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpen.html">QPen</a> p)</td></tr>
@@ -147,7 +147,22 @@ already added to a KPlotObject will be invalid.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KPlotObject"></a>
+<div class="memdoc"><p>Constructor.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>color</em>&nbsp;</td><td> The color for plotting this object. By default this sets
+the color for Points, Lines and Bars, but there are functions to
+override any of these.
+
+<tr><td></td><td valign="top"><em>otype</em>&nbsp;</td><td> the PlotType for this object (Points, Lines or Bars)
+
+<tr><td></td><td valign="top"><em>size</em>&nbsp;</td><td> the size to use for plotted points, in pixels
+
+<tr><td></td><td valign="top"><em>ps</em>&nbsp;</td><td> The PointStyle describing the shape for plotted points
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KPlotObject"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -460,7 +475,7 @@ points, lines, bars and labels (this pen is always used for points).
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="../kdeui/KPlotObject.PlotTypes.html">KPlotObject.PlotTypes</a> plotTypes</td>
+<td class="memname"><a href="../kdeui/KPlotObject.html">KPlotObject.PlotTypes</a> plotTypes</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -488,7 +503,7 @@ points, lines, bars and labels (this pen is always used for points).
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">[KPlotPoin] points</td>
+<td class="memname">[<a href="../kdeui/KPlotPoint.html">KPlotPoint</a>] points</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -838,8 +853,18 @@ points, lines, bars and labels (this pen is always used for points).
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>The type classification of the KPlotObject.
+</p>
+<p>
+These are bitmask values that can be OR'd together, so that a set
+of points can be represented in the plot in multiple ways.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> points should be added in order of increasing x-coordinate
+when using Bars.
+</dd></dl>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>UnknownType</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>Points</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>Lines</em>&nbsp;=&nbsp;2</td><td><tr><td valign="top"><em>Bars</em>&nbsp;=&nbsp;4</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="PointStyle"></a>
 <div class="memitem">
@@ -849,8 +874,9 @@ points, lines, bars and labels (this pen is always used for points).
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>The available shape styles for plotted points.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NoPoints</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>Circle</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>Letter</em>&nbsp;=&nbsp;2</td><td><tr><td valign="top"><em>Triangle</em>&nbsp;=&nbsp;3</td><td><tr><td valign="top"><em>Square</em>&nbsp;=&nbsp;4</td><td><tr><td valign="top"><em>Pentagon</em>&nbsp;=&nbsp;5</td><td><tr><td valign="top"><em>Hexagon</em>&nbsp;=&nbsp;6</td><td><tr><td valign="top"><em>Asterisk</em>&nbsp;=&nbsp;7</td><td><tr><td valign="top"><em>Star</em>&nbsp;=&nbsp;8</td><td><tr><td valign="top"><em>UnknwonPoint</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

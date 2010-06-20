@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -75,6 +75,7 @@ QTreeView *leftView = new QTreeView(this);
 leftView-&gt;setModel(sourceModel);
 
 KSelectionProxyModel *selectionProxy = new KSelectionProxyModel(leftView-&gt;selectionModel(), this);
+selectionProxy-&gt;setSourceModel(sourceModel);
 
 QTreeView *rightView = new QTreeView(this);
 rightView-&gt;setModel(selectionProxy);
@@ -136,7 +137,8 @@ See also: http://doc.trolltech.com/4.5/model-view-proxy-models.html
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#index">index</a> (self, int a0, int a1, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> a2=QModelIndex())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapFromSource">mapFromSource</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> sourceIndex)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapToSource">mapToSource</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> proxyIndex)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmimedata.html">QMimeData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mimeData">mimeData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindexlist.html">QModelIndexList</a> indexes)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#match">match</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> start, int role, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a> value, int hits=1, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::MatchFlags</a> flags=Qt.MatchFlags(Qt.MatchStartsWith|Qt.MatchWrap))</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmimedata.html">QMimeData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mimeData">mimeData</a> (self, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>] indexes)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mimeTypes">mimeTypes</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parent">parent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rowCount">rowCount</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent=QModelIndex())</td></tr>
@@ -174,7 +176,11 @@ See also: http://doc.trolltech.com/4.5/model-view-proxy-models.html
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="columnCount"></a>
+<div class="memdoc"><p>ctor.
+</p>
+<p>
+<b>selectionModel</b> The selection model used to filter what is presented by the proxy.
+</p></div></div><a class="anchor" name="columnCount"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -438,6 +444,52 @@ See also: http://doc.trolltech.com/4.5/model-view-proxy-models.html
 <td width="100%"> </td>
 </tr></table>
 </div>
+<div class="memdoc"></div></div><a class="anchor" name="match"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>] match</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td>
+<td class="paramname"><em>start</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>role</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>&nbsp;</td>
+<td class="paramname"><em>value</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>hits=1</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::MatchFlags</a>&nbsp;</td>
+<td class="paramname"><em>flags=Qt.MatchFlags(Qt.MatchStartsWith|Qt.MatchWrap)</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
 <div class="memdoc"></div></div><a class="anchor" name="mimeData"></a>
 <div class="memitem">
 <div class="memproto">
@@ -449,7 +501,7 @@ See also: http://doc.trolltech.com/4.5/model-view-proxy-models.html
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindexlist.html">QModelIndexList</a>&nbsp;</td>
+<td class="paramtype">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>]&nbsp;</td>
 <td class="paramname"><em>indexes</em></td>
 </tr>
 <tr>
@@ -739,7 +791,7 @@ This is the behavior used by the Favourite Folder View in KMail.
 </table>
 </div>
 <div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>SubTrees</em>&nbsp;</td><td><tr><td valign="top"><em>SubTreeRoots</em>&nbsp;</td><td><tr><td valign="top"><em>SubTreesWithoutRoots</em>&nbsp;</td><td><tr><td valign="top"><em>ExactSelection</em>&nbsp;</td><td><tr><td valign="top"><em>ChildrenOfExactSelection</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

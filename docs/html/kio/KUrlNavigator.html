@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -53,15 +53,15 @@ Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qw
 
 <h2>Detailed Description</h2>
 
-<p>Allows to navigate through the paths of an URL.
+<p>Widget that allows to navigate through the paths of an URL.
 </p>
 <p>
 The URL navigator offers two modes:
-- Editable: Represents the 'classic' mode, where the URL
+- Editable: Represents the 'classic' mode, where the URL of the location
 is editable inside a line editor. By pressing RETURN
 the URL will get activated.
-- Non editable ("breadcrumb view"): The URL is represented by a
-number of buttons, where each button represents a path
+- Non editable ("breadcrumb view"): The URL of the location is represented by
+a number of buttons, where each button represents a path
 of the URL. By clicking on a button the path will get
 activated. This mode also supports drag and drop of items.
 </p>
@@ -88,38 +88,51 @@ given by the URL navigator.
 - Connect to the signal KUrlNavigator.urlChanged() and synchronize the content of
 QAbstractItemView with the URL given by the URL navigator.
 </p>
+<p>
+It is recommended, that the application remembers the state of the QAbstractItemView
+when the URL has been changed. This allows to restore the view state when going back in history.
+KUrlNavigator offers support for remembering the view state:
+- The signal urlAboutToBeChanged() will be emitted before the URL change takes places.
+This allows the application to store the view state by KUrlNavigator.saveLocationState().
+- The signal urlChanged() will be emitted after the URL change took place. This allows
+the application to restore the view state by getting the values from
+KUrlNavigator.locationState().
+</p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#activated">activated</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#editableStateChanged">editableStateChanged</a> (bool editable)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#historyChanged">historyChanged</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#returnPressed">returnPressed</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#tabRequested">tabRequested</a> (<a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlAboutToBeChanged">urlAboutToBeChanged</a> (<a href="../kdecore/KUrl.html">KUrl</a> newUrl)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlChanged">urlChanged</a> (<a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlsDropped">urlsDropped</a> (<a href="../kdecore/KUrl.List.html">KUrl.List</a> urls, <a href="../kdecore/KUrl.html">KUrl</a> destination)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlsDropped">urlsDropped</a> (<a href="../kdecore/KUrl.html">KUrl</a> destination, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdropevent.html">QDropEvent</a> event)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUrlNavigator">__init__</a> (self, <a href="../kio/KFilePlacesModel.html">KFilePlacesModel</a> placesModel, <a href="../kdecore/KUrl.html">KUrl</a> url, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUrlNavigator">__init__</a> (self, <a href="../kio/KUrlNavigator.html">KUrlNavigator</a> a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#activated">activated</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUrlNavigator">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#customProtocols">customProtocols</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#editableStateChanged">editableStateChanged</a> (self, bool editable)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KUrlComboBox.html">KUrlComboBox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#editor">editor</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#eventFilter">eventFilter</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> watched, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a> event)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#goBack">goBack</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#goForward">goForward</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#goHome">goHome</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#goUp">goUp</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#historyChanged">historyChanged</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#historyIndex">historyIndex</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#historySize">historySize</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#historyUrl">historyUrl</a> (self, int historyIndex)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#homeUrl">homeUrl</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isActive">isActive</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isPlacesSelectorVisible">isPlacesSelectorVisible</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isUrlEditable">isUrlEditable</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#keyReleaseEvent">keyReleaseEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qkeyevent.html">QKeyEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#keyPressEvent">keyPressEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qkeyevent.html">QKeyEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#locationState">locationState</a> (self, int historyIndex=-1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#locationUrl">locationUrl</a> (self, int historyIndex=-1)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mouseReleaseEvent">mouseReleaseEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmouseevent.html">QMouseEvent</a> event)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#requestActivation">requestActivation</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resizeEvent">resizeEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qresizeevent.html">QResizeEvent</a> event)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#returnPressed">returnPressed</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#saveLocationState">saveLocationState</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> state)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#savePosition">savePosition</a> (self, int x, int y)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#saveRootUrl">saveRootUrl</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#savedPosition">savedPosition</a> (self)</td></tr>
@@ -128,6 +141,8 @@ QAbstractItemView with the URL given by the URL navigator.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCustomProtocols">setCustomProtocols</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> protocols)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setFocus">setFocus</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setHomeUrl">setHomeUrl</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> homeUrl)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setHomeUrl">setHomeUrl</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setLocationUrl">setLocationUrl</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPlacesSelectorVisible">setPlacesSelectorVisible</a> (self, bool visible)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowFullPath">setShowFullPath</a> (self, bool show)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setUrl">setUrl</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
@@ -136,11 +151,193 @@ QAbstractItemView with the URL given by the URL navigator.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#uncommittedUrl">uncommittedUrl</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#url">url</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#url">url</a> (self, int index)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlChanged">urlChanged</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlsDropped">urlsDropped</a> (self, <a href="../kdecore/KUrl.List.html">KUrl.List</a> urls, <a href="../kdecore/KUrl.html">KUrl</a> destination)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#urlsDropped">urlsDropped</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> destination, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdropevent.html">QDropEvent</a> event)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="KUrlNavigator"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="activated"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> activated</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Is emitted, if the URL navigator has been activated by
+an user interaction
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KUrlNavigator.setActive()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("activated()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="editableStateChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> editableStateChanged</td>
+<td>(</td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>editable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Is emitted, if the editable state for the URL has been changed
+(see KUrlNavigator.setUrlEditable()).
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("editableStateChanged(bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="historyChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> historyChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Is emitted, if the history has been changed. Usually
+the history is changed if a new URL has been selected.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("historyChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="returnPressed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> returnPressed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>This signal is emitted when the Return or Enter key is pressed.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("returnPressed()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="tabRequested"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> tabRequested</td>
+<td>(</td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Is emitted if the URL <b>url</b> should be opened in a new tab because
+the user clicked on a breadcrumb with the middle mouse button.
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("tabRequested(const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="urlAboutToBeChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> urlAboutToBeChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>newUrl</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Is emitted, before the location URL is going to be changed to <b>newUrl.</b>
+The signal KUrlNavigator.urlChanged() will be emitted after the change
+has been done. Connecting to this signal is useful to save the state
+of a view with KUrlNavigator.saveLocationState().
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlAboutToBeChanged(const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="urlChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> urlChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Is emitted, if the location URL has been changed e. g. by
+the user.
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KUrlNavigator.setUrl()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlChanged(const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="urlsDropped"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> urlsDropped</td>
+<td>(</td>
+<td class="paramtype"><a href="../kdecore/KUrl.List.html">KUrl.List</a>&nbsp;</td>
+<td class="paramname"><em>urls</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>destination</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Is emitted if the URLs <b>urls</b> have been dropped
+to the destination <b>destination.</b>
+<dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Use
+KUrlNavigator.urlsDropped(const KUrl&amp; destination, QDropEvent* event)
+instead.
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlsDropped(const KUrl::List&, const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="urlsDropped"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> urlsDropped</td>
+<td>(</td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>destination</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdropevent.html">QDropEvent</a>&nbsp;</td>
+<td class="paramname"><em>event</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Is emitted if the URLs <b>urls</b> have been dropped
+to the destination <b>destination.</b>
+<dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Use
+KUrlNavigator.urlsDropped(const KUrl&amp; destination, QDropEvent* event)
+instead.
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlsDropped(const KUrl&, QDropEvent*)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="KUrlNavigator"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -174,7 +371,19 @@ QAbstractItemView with the URL given by the URL navigator.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KUrlNavigator"></a>
+<div class="memdoc"><p></p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>placesModel</em>&nbsp;</td><td> Model for the places which are selectable inside a
+menu. A place can be a bookmark or a device. If it is 0,
+no places selector is displayed.
+
+<tr><td></td><td valign="top"><em>url</em>&nbsp;</td><td> URL which is used for the navigation or editing.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> Parent widget.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KUrlNavigator"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -196,21 +405,31 @@ QAbstractItemView with the URL given by the URL navigator.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="activated"></a>
+<div class="memdoc"></div></div><a class="anchor" name="KUrlNavigator"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> activated</td>
+<td class="memname">__init__</td>
 <td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
 </tr>
-</table>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
-<div class="memdoc"><p>Is emitted, if the URL navigator has been activated by
-a user interaction.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("activated()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="customProtocols"></a>
+<div class="memdoc"><p><dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="customProtocols"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -222,32 +441,9 @@ a user interaction.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns the custom protocols if they are set, QStringList() otherwise.
-</p></div></div><a class="anchor" name="editableStateChanged"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> editableStateChanged</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">bool&nbsp;</td>
-<td class="paramname"><em>editable</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Is emitted, if the editable state for the URL has been changed
-(see KUrlNavigator.setUrlEditable()).
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("editableStateChanged(bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="editor"></a>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The custom protocols if they are set, QStringList() otherwise.
+</dd></dl>
+</p></div></div><a class="anchor" name="editor"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -259,8 +455,9 @@ a user interaction.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns the used editor when the navigator is in the edit mode
-(see KUrlNavigator.setUrlEditable()).
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The used editor when the navigator is in the edit mode
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> KUrlNavigator.setUrlEditable()
+</dd></dl>
 </p></div></div><a class="anchor" name="eventFilter"></a>
 <div class="memitem">
 <div class="memproto">
@@ -302,10 +499,10 @@ a user interaction.
 </table>
 </div>
 <div class="memdoc"><p>Goes back one step in the URL history. The signals
-KUrlNavigator.urlChanged() and KUrlNavigator.historyChanged()
-are emitted if true is returned. False is returned if the beginning
-of the history has already been reached and hence going back was not
-possible. The history index (see KUrlNavigator.historyIndex()) is
+KUrlNavigator.urlAboutToBeChanged(), KUrlNavigator.urlChanged() and
+KUrlNavigator.historyChanged() are emitted if true is returned. False is returned
+if the beginning of the history has already been reached and hence going back was
+not possible. The history index (see KUrlNavigator.historyIndex()) is
 increased by one if the operation was successful.
 </p></div></div><a class="anchor" name="goForward"></a>
 <div class="memitem">
@@ -320,9 +517,9 @@ increased by one if the operation was successful.
 </table>
 </div>
 <div class="memdoc"><p>Goes forward one step in the URL history. The signals
-KUrlNavigator.urlChanged() and KUrlNavigator.historyChanged()
-are emitted if true is returned. False is returned if the end
-of the history has already been reached and hence going forward
+KUrlNavigator.urlAboutToBeChanged(), KUrlNavigator.urlChanged() and
+KUrlNavigator.historyChanged() are emitted if true is returned. False is returned
+if the end of the history has already been reached and hence going forward
 was not possible. The history index (see KUrlNavigator.historyIndex()) is
 decreased by one if the operation was successful.
 </p></div></div><a class="anchor" name="goHome"></a>
@@ -338,7 +535,7 @@ decreased by one if the operation was successful.
 </table>
 </div>
 <div class="memdoc"><p>Goes to the home URL and remembers the old URL in the history.
-The signals KUrlNavigator.urlChanged()
+The signals KUrlNavigator.urlAboutToBeChanged(), KUrlNavigator.urlChanged()
 and KUrlNavigator.historyChanged() are emitted.
 </p>
 <p>
@@ -357,25 +554,11 @@ and KUrlNavigator.historyChanged() are emitted.
 </table>
 </div>
 <div class="memdoc"><p>Goes up one step of the URL path and remembers the old path
-in the history. The signals KUrlNavigator.urlChanged() and
-KUrlNavigator.historyChanged() are emitted if true is returned.
-False is returned if going up was not possible as the root has
-been reached.
-</p></div></div><a class="anchor" name="historyChanged"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> historyChanged</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Is emitted, if the history has been changed. Usually
-the history is changed if a new URL has been selected.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("historyChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="historyIndex"></a>
+in the history. The signals KUrlNavigator.urlAboutToBeChanged(),
+KUrlNavigator.urlChanged() and KUrlNavigator.historyChanged() are
+emitted if true is returned. False is returned if going up was not
+possible as the root has been reached.
+</p></div></div><a class="anchor" name="historyIndex"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -387,10 +570,10 @@ the history is changed if a new URL has been selected.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns the history index of the current URL, where
-0 &lt;= history index &lt; KUrlNavigator.historySize(). As long
-as KUrlNavigator.goBack() is not invoked, the history index
-stays on 0.
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The history index of the current location, where
+0 &lt;= history index &lt; KUrlNavigator.historySize(). 0 is the most
+recent history entry.
+</dd></dl>
 </p></div></div><a class="anchor" name="historySize"></a>
 <div class="memitem">
 <div class="memproto">
@@ -403,7 +586,10 @@ stays on 0.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns the amount of items in the history.
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The amount of locations in the history. The data for each
+location can be retrieved by KUrlNavigator.locationUrl() and
+KUrlNavigator.locationState().
+</dd></dl>
 </p></div></div><a class="anchor" name="historyUrl"></a>
 <div class="memitem">
 <div class="memproto">
@@ -429,8 +615,21 @@ stays on 0.
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> URL for the history element with the index <b>historyIndex.</b>
 The history index 0 represents the most recent URL.
 </dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl> <dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Use KUrlNavigator.locationUrl(historyIndex) instead.
 </dd></dl>
-</p></div></div><a class="anchor" name="isActive"></a>
+</p></div></div><a class="anchor" name="homeUrl"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KUrl.html">KUrl</a> homeUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="isActive"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -442,8 +641,8 @@ The history index 0 represents the most recent URL.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns true, if the URL navigator is in the active mode.
-<dl class="see" compact><dt><b>See also:</b></dt><dd> KUrlNavigator.setActive()
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> True, if the URL navigator is in the active mode.
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> KUrlNavigator.setActive()
 </dd></dl>
 </p></div></div><a class="anchor" name="isPlacesSelectorVisible"></a>
 <div class="memitem">
@@ -457,7 +656,8 @@ The history index 0 represents the most recent URL.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns true, if the places selector is visible.
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> True, if the places selector is visible.
+</dd></dl>
 </p></div></div><a class="anchor" name="isUrlEditable"></a>
 <div class="memitem">
 <div class="memproto">
@@ -474,11 +674,11 @@ The history index 0 represents the most recent URL.
 If false is returned, each part of the URL is presented by a button
 for fast navigation ("breadcrumb view").
 </dd></dl>
-</p></div></div><a class="anchor" name="keyReleaseEvent"></a>
+</p></div></div><a class="anchor" name="keyPressEvent"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> keyReleaseEvent</td>
+<td class="memname"> keyPressEvent</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
@@ -496,7 +696,60 @@ for fast navigation ("breadcrumb view").
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="mouseReleaseEvent"></a>
+<div class="memdoc"></div></div><a class="anchor" name="locationState"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> locationState</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>historyIndex=-1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> Location state given by <b>historyIndex.</b> If <b>historyIndex</b>
+is smaller than 0, the state of the current location is returned.
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> KUrlNavigator.saveLocationState()
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="locationUrl"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KUrl.html">KUrl</a> locationUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>historyIndex=-1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> URL of the location given by the <b>historyIndex.</b> If <b>historyIndex</b>
+is smaller than 0, the URL of the current location is returned.
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="mouseReleaseEvent"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -532,6 +785,8 @@ for fast navigation ("breadcrumb view").
 </div>
 <div class="memdoc"><p>Activates the URL navigator (KUrlNavigator.isActive() will return true)
 and emits the signal KUrlNavigator.activated().
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KUrlNavigator.setActive()
+</dd></dl>
 </p></div></div><a class="anchor" name="resizeEvent"></a>
 <div class="memitem">
 <div class="memproto">
@@ -554,20 +809,50 @@ and emits the signal KUrlNavigator.activated().
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="returnPressed"></a>
+<div class="memdoc"></div></div><a class="anchor" name="saveLocationState"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> returnPressed</td>
+<td class="memname"> saveLocationState</td>
 <td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a>&nbsp;</td>
+<td class="paramname"><em>state</em></td>
 </tr>
-</table>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
-<div class="memdoc"><p>This signal is emitted when the Return or Enter key is pressed.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("returnPressed()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="savePosition"></a>
+<div class="memdoc"><p>Saves the location state described by <b>state</b> for the current location. It is recommended
+that at least the scroll position of a view is remembered and restored when traversing
+through the history. Saving the location state should be done when the signal
+KUrlNavigator.urlAboutToBeChanged() has been emitted. Restoring the location state (see
+KUrlNavigator.locationState()) should be done when the signal KUrlNavigator.urlChanged()
+has been emitted.
+</p>
+<p>
+Example:
+<pre class="fragment">
+ QByteArray state;
+ QDataStream data(&amp;state, QIODevice.WriteOnly);
+ data &lt;&lt; QPoint(x, y);
+ data &lt;&lt; ...;
+ ...
+ urlNavigator.saveLocationState(state);
+</pre>
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="savePosition"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -595,14 +880,8 @@ and emits the signal KUrlNavigator.activated().
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Saves the coordinates of the contents for
-the current history element. The contents of the URL is usually shown
-inside an instance of QAbstractItemView. It is recommended to invoke this
-slot whenever the upper left position of the QAbstractItemView has been
-changed to be able to restore the position when going back in history.
-</p>
-<p>
-<dl class="see" compact><dt><b>See also:</b></dt><dd> KUrlNavigator.savedPosition()
+<div class="memdoc"><p>Saves the coordinates of the contents for the current history element.
+<dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Use KUrlNavigator.saveLocationState() instead.
 </dd></dl>
 </p></div></div><a class="anchor" name="saveRootUrl"></a>
 <div class="memitem">
@@ -627,9 +906,8 @@ changed to be able to restore the position when going back in history.
 </tr></table>
 </div>
 <div class="memdoc"><p>Saves the used root URL of the content for the current history element.
-Saving the root URL might be useful if the item view is represented by a tree or
-columns, where it is mandatory to restore the root URL to iterating
-through the history.
+<dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Use KUrlNavigator.saveLocationState() instead.
+</dd></dl>
 </p></div></div><a class="anchor" name="savedPosition"></a>
 <div class="memitem">
 <div class="memproto">
@@ -642,8 +920,10 @@ through the history.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns the saved contents position of the upper left corner
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The saved contents position of the upper left corner
 for the current URL.
+</dd></dl> <dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Use KUrlNavigator.locationState() instead.
+</dd></dl>
 </p></div></div><a class="anchor" name="savedRootUrl"></a>
 <div class="memitem">
 <div class="memproto">
@@ -656,8 +936,9 @@ for the current URL.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns the saved root URL for the current URL
-(see KUrlNavigator.saveRootUrl()).
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The saved root URL for the current URL (see KUrlNavigator.saveRootUrl()).
+</dd></dl> <dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Use KUrlNavigator.locationState() instead.
+</dd></dl>
 </p></div></div><a class="anchor" name="setActive"></a>
 <div class="memitem">
 <div class="memproto">
@@ -746,8 +1027,60 @@ with <b>protocols</b> .
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets the home URL used by KUrlNavigator.goHome(). If no
-home URL is set, the default home path of the user is used.
+<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Use setHomeUrl(const KUrl&amp; url) instead.
+</dd></dl>
+</p></div></div><a class="anchor" name="setHomeUrl"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setHomeUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Use setHomeUrl(const KUrl&amp; url) instead.
+</dd></dl>
+</p></div></div><a class="anchor" name="setLocationUrl"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setLocationUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the location to <b>url.</b> The old URL is added to the history.
+The signals KUrlNavigator.urlAboutToBeChanged(), KUrlNavigator.urlChanged()
+and KUrlNavigator.historyChanged() are emitted. Use
+KUrlNavigator.locationUrl() to read the location.
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
 </p></div></div><a class="anchor" name="setPlacesSelectorVisible"></a>
 <div class="memitem">
 <div class="memproto">
@@ -826,9 +1159,9 @@ as [/] &gt; [home] &gt; [Pictures] &gt; [2008].
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets the active URL to <b>url.</b> The old URL is added to the history.
-The signals KUrlNavigator.urlChanged() and KUrlNavigator.historyChanged()
-are emitted.
+<div class="memdoc"><p>Sets the location to <b>url.</b>
+<dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Use KUrlNavigator.setLocationUrl(url).
+</dd></dl>
 </p></div></div><a class="anchor" name="setUrlEditable"></a>
 <div class="memitem">
 <div class="memproto">
@@ -882,8 +1215,9 @@ the URL is presented by a button for a fast navigation ("breadcrumb view").
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns the currently entered, but not accepted URL.
-Attention: It is possible that the returned URL is not valid!
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The currently entered, but not accepted URL.
+It is possible that the returned URL is not valid.
+</dd></dl>
 </p></div></div><a class="anchor" name="url"></a>
 <div class="memitem">
 <div class="memproto">
@@ -896,13 +1230,15 @@ Attention: It is possible that the returned URL is not valid!
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns the portion of the current URL up to the path part given
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The portion of the current URL up to the path part given
 by <b>index.</b> Assuming that the current URL is /home/peter/Documents/Music,
 then the following URLs are returned for an index:
 - index &lt;= 0: /home
 - index is 1: /home/peter
 - index is 2: /home/peter/Documents
 - index &gt;= 3: /home/peter/Documents/Music
+</dd></dl> <dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> It should not be necessary for a client of KUrlNavigator to query this information.
+</dd></dl>
 </p></div></div><a class="anchor" name="url"></a>
 <div class="memitem">
 <div class="memproto">
@@ -925,110 +1261,16 @@ then the following URLs are returned for an index:
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Returns the portion of the current URL up to the path part given
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The portion of the current URL up to the path part given
 by <b>index.</b> Assuming that the current URL is /home/peter/Documents/Music,
 then the following URLs are returned for an index:
 - index &lt;= 0: /home
 - index is 1: /home/peter
 - index is 2: /home/peter/Documents
 - index &gt;= 3: /home/peter/Documents/Music
-</p></div></div><a class="anchor" name="urlChanged"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> urlChanged</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
-<td class="paramname"><em>url</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Is emitted, if the URL has been changed e. g. by
-the user.
-<dl class="see" compact><dt><b>See also:</b></dt><dd> KUrlNavigator.setUrl()
+</dd></dl> <dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> It should not be necessary for a client of KUrlNavigator to query this information.
 </dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlChanged(const const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="urlsDropped"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> urlsDropped</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../kdecore/KUrl.List.html">KUrl.List</a>&nbsp;</td>
-<td class="paramname"><em>urls</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
-<td class="paramname"><em>destination</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Is emitted if a dropping has been done above the destination
-<b>destination.</b> The receiver must accept the drop event if
-the dropped data can be handled.
-</p>
-<p>
-<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
-</dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlsDropped(const const KUrl::List&, const const KUrl&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="urlsDropped"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> urlsDropped</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
-<td class="paramname"><em>destination</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdropevent.html">QDropEvent</a>&nbsp;</td>
-<td class="paramname"><em>event</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Is emitted if a dropping has been done above the destination
-<b>destination.</b> The receiver must accept the drop event if
-the dropped data can be handled.
-</p>
-<p>
-<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.2
-</dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("urlsDropped(const const KUrl&, QDropEvent*)"), target_slot)</code></dd></dl></div></div>
+</p></div></div>
 </div>
 </div>
 </div>

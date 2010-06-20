@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
 <h1>AsyncQuery Class Reference</h1>
 <code>from PyKDE4.soprano import *</code>
 <p>
-Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,Soprano.Error.ErrorCache<br />
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,<a href="../soprano/Soprano.Error.ErrorCache.html">Soprano.Error.ErrorCache</a><br />
 
-Namespace: Soprano.Util.AsyncQuery<br />
+Namespace: <a href="../soprano/Soprano.Util.html">Soprano.Util</a><br />
 <h2>Detailed Description</h2>
 
 <p>\class AsyncQuery asyncquery.h Soprano/Util/AsyncQuery
@@ -75,8 +75,20 @@ This also means that boolean results need to be read in a slot
 connected to the finished() signal.
 </p>
 <p>
-Typical usage would be to connect to the nextReady signal and call
-next() in it to trigger async iteration to the next element.
+Typical usage would be to connect to the nextReady() signal, use one of the
+binding() methods or currentStatement() to get the current value, and then
+call next() in it to trigger async iteration to the next element:
+</p>
+<p>
+<pre class="fragment">
+ void MyQueryHandler.slotNextReady( Soprano.Util.AsyncQuery* query ) {
+     // do something with the current value
+     addToSomeList( query-&gt;binding(0) );
+
+     // trigger async iteration to the next element
+     query-&gt;next();
+ }
+</pre>
 </p>
 <p>
 \sa Soprano.Util.AsyncModel
@@ -102,15 +114,76 @@ next() in it to trigger async iteration to the next element.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#close">close</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.BindingSet.html">Soprano.BindingSet</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#currentBindings">currentBindings</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#currentStatement">currentStatement</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Util.AsyncQuery.html">Soprano.Util.AsyncQuery</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#executeQuery">executeQuery</a> (self, <a href="../soprano/Soprano.Model.html">Soprano.Model</a> model, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> query, <a href="../soprano/Soprano.Query.html#QueryLanguage">Soprano.Query.QueryLanguage</a> language, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> userQueryLanguage=QString())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#finished">finished</a> (self, <a href="../soprano/Soprano.Util.AsyncQuery.html">Soprano.Util.AsyncQuery</a> query)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isBinding">isBinding</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isBool">isBool</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isGraph">isGraph</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#next">next</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nextReady">nextReady</a> (self, <a href="../soprano/Soprano.Util.AsyncQuery.html">Soprano.Util.AsyncQuery</a> query)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Util.AsyncQuery.html">Soprano.Util.AsyncQuery</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#executeQuery">executeQuery</a> (<a href="../soprano/Soprano.Model.html">Soprano.Model</a> model, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> query, <a href="../soprano/Soprano.Query.html#QueryLanguage">Soprano.Query.QueryLanguage</a> language, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> userQueryLanguage=QString())</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="AsyncQuery"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="finished"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> finished</td>
+<td>(</td>
+<td class="paramtype"><a href="../soprano/Soprano.Util.AsyncQuery.html">Soprano.Util.AsyncQuery</a>&nbsp;</td>
+<td class="paramname"><em>query</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted once the last element has been read and the internal
+iterator is finished after the last call to next() or if the result
+of a boolean query is available.
+</p>
+<p>
+Once this signals has been emitted the query will delete itself.
+In a slot connected to this signal ErrorCache.lastError() can be
+used to retrieve information about the success of the query.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>query</em>&nbsp;</td><td> The query itself for convinience.
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("finished(Soprano::Util::AsyncQuery*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="nextReady"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> nextReady</td>
+<td>(</td>
+<td class="paramtype"><a href="../soprano/Soprano.Util.AsyncQuery.html">Soprano.Util.AsyncQuery</a>&nbsp;</td>
+<td class="paramname"><em>query</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted once the next value is ready when iterating the result via
+next(). Will be emitted automatically for the first element.
+The last call in a connected slot should be next() to trigger
+iteration to the next element.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>query</em>&nbsp;</td><td> The query itself for convinience.
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("nextReady(Soprano::Util::AsyncQuery*)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="AsyncQuery"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -296,113 +369,7 @@ This method does only make sense for tuple queries.
 </div>
 <div class="memdoc"><p>Retrieve the current Statement after nextReady has been emitted.
 This method does only make sense for graph queries.
-</p></div></div><a class="anchor" name="executeQuery"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../soprano/Soprano.Util.AsyncQuery.html">Soprano.Util.AsyncQuery</a> executeQuery</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../soprano/Soprano.Model.html">Soprano.Model</a>&nbsp;</td>
-<td class="paramname"><em>model</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>query</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../soprano/Soprano.Query.html#QueryLanguage">Soprano.Query.QueryLanguage</a>&nbsp;</td>
-<td class="paramname"><em>language</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>userQueryLanguage=QString()</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Create a new query object.
-</p>
-<p>
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>model</em>&nbsp;</td><td> The model to execute the query on.
-</td></tr> </table></dl>
-<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>query</em>&nbsp;</td><td> The query to evaluate.
-</td></tr> </table></dl>
-<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>language</em>&nbsp;</td><td> The %query language used to encode <b>query.</b>
-</td></tr> </table></dl>
-<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>userQueryLanguage</em>&nbsp;</td><td> If <b>language</b> equals Query.QueryLanguageUser
-userQueryLanguage defines the language to use.
-</td></tr>
-</table></dl>
-<p> \sa Model.executeQuery
-</p>
-<p>
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> A new AsyncQuery instance which is ready to be used or 0 if <b>model</b>
-is 0. The query will delete itself once it is finished. It can also be deleted
-at any point in time to cancel the query.
-</dd></dl>
-</p></div></div><a class="anchor" name="finished"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> finished</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../soprano/Soprano.Util.AsyncQuery.html">Soprano.Util.AsyncQuery</a>&nbsp;</td>
-<td class="paramname"><em>query</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Emitted once the last element has been read and the internal
-iterator is finished after the last call to next() or if the result
-of a boolean query is available.
-</p>
-<p>
-Once this signals has been emitted the query will delete itself.
-In a slot connected to this signal ErrorCache.lastError() can be
-used to retrieve information about the success of the query.
-</p>
-<p>
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>query</em>&nbsp;</td><td> The query itself for convinience.
-</td></tr>
-</table></dl>
-<p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("finished(Soprano::Util::AsyncQuery*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="isBinding"></a>
+</p></div></div><a class="anchor" name="isBinding"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -472,26 +439,40 @@ returns valid values.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Trigger iteration to the next element. Be aware that this has not to be called
+<div class="memdoc"><p>Trigger iteration to the next element once the current has been read via one of
+the binding() methods or currentStatement(). Be aware that this has not to be called
 for the first element which is emitted automatically.
 Once the next result has been retrieved the nextReady signal is emitted.
 </p>
 <p>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> <b>true</b> if successful, <b>false</b> if the iteration reached the end.
 </dd></dl>
-</p></div></div><a class="anchor" name="nextReady"></a>
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="executeQuery"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> nextReady</td>
+<td class="memname"><a href="../soprano/Soprano.Util.AsyncQuery.html">Soprano.Util.AsyncQuery</a> executeQuery</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
+<td class="paramtype"><a href="../soprano/Soprano.Model.html">Soprano.Model</a>&nbsp;</td>
+<td class="paramname"><em>model</em>, </td>
+</tr>
+<tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../soprano/Soprano.Util.AsyncQuery.html">Soprano.Util.AsyncQuery</a>&nbsp;</td>
-<td class="paramname"><em>query</em></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>query</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../soprano/Soprano.Query.html#QueryLanguage">Soprano.Query.QueryLanguage</a>&nbsp;</td>
+<td class="paramname"><em>language</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>userQueryLanguage=QString()</em></td>
 </tr>
 <tr>
 <td></td>
@@ -501,17 +482,35 @@ Once the next result has been retrieved the nextReady signal is emitted.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Emitted once the next value is ready when iterating the result via
-next(). Will be emitted automatically for the first element.
+<div class="memdoc"><p>Create a new query object.
 </p>
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>query</em>&nbsp;</td><td> The query itself for convinience.
+<tr><td></td><td valign="top"><em>model</em>&nbsp;</td><td> The model to execute the query on.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>query</em>&nbsp;</td><td> The query to evaluate.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>language</em>&nbsp;</td><td> The %query language used to encode <b>query.</b>
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>userQueryLanguage</em>&nbsp;</td><td> If <b>language</b> equals Query.QueryLanguageUser
+userQueryLanguage defines the language to use.
 </td></tr>
 </table></dl>
+<p> \sa Model.executeQuery
+</p>
 <p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("nextReady(Soprano::Util::AsyncQuery*)"), target_slot)</code></dd></dl></div></div>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> A new AsyncQuery instance which is ready to be used or 0 if <b>model</b>
+is 0. The query will delete itself once it is finished. It can also be deleted
+at any point in time to cancel the query.
+</dd></dl>
+</p></div></div>
 </div>
 </div>
 </div>

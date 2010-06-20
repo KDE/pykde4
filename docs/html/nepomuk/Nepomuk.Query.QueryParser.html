@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Nepomuk.Query.QueryParser</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.5 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>QueryParser Class Reference</h1>
+<code>from PyKDE4.nepomuk import *</code>
+<p>
+
+
+Namespace: <a href="../nepomuk/Nepomuk.Query.html">Nepomuk.Query</a><br />
+<h2>Detailed Description</h2>
+
+<p>\class QueryParser queryparser.h Nepomuk/Query/QueryParser
+</p>
+<p>
+Parser for desktop user queries.
+</p>
+<p>
+The QueryParser can be used to parse queries and convert them into
+Query instances.
+</p>
+<p>
+The syntax is fairly simple: plain strings match to LiteralTerm terms,
+URIs need to be N3-encoded, when using white space parenthesis need to
+be put around properties and values, terms can be excluded via <b>'-'.</b>
+</p>
+<p>
+<b>Examples </b>
+</p>
+<p>
+%Query everything that contains the term "nepomuk":
+<pre class="fragment">
+ nepomuk
+</pre>
+</p>
+<p>
+%Query everything that contains both the terms "Hello" and "World":
+<pre class="fragment">
+ Hello World
+</pre>
+</p>
+<p>
+%Query everything that contains the term "Hello World":
+<pre class="fragment">
+ "Hello World"
+</pre>
+</p>
+<p>
+%Query everything that has a tag whose label matches "nepomuk" (actually
+this is where Query.resolveProperties would match "hastag" to nao:hasTag):
+<pre class="fragment">
+ hastag:nepomuk
+</pre>
+</p>
+<p>
+%Query everything that has a tag labeled "nepomuk" or a tag labeled "scribo:
+<pre class="fragment">
+ hastag:nepomuk OR hastag:scribo
+</pre>
+</p>
+<p>
+%Query everything that has a tag labeled "nepomuk" but not a tag labeled "scribo":
+<pre class="fragment">
+ +hastag:nepomuk AND -hastag:scribo
+</pre>
+</p>
+<p>
+The parser can handle one special case of nesting (TODO: implement a "real" parser)
+which matches all resources that are related to a resource which in turn has a certain
+property:
+<pre class="fragment">
+ related:(hastag:nepomuk)
+</pre>
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Sebastian Trueg &lt;trueg@kde.org&gt; </dd></dl>
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#ParserFlag">ParserFlag</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoParserFlags, QueryTermGlobbing&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#QueryParser">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../nepomuk/Nepomuk.Types.Property.html">Nepomuk.Types.Property</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#matchProperty">matchProperty</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> fieldName)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../nepomuk/Nepomuk.Query.Query.html">Nepomuk.Query.Query</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parse">parse</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> query)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../nepomuk/Nepomuk.Query.Query.html">Nepomuk.Query.Query</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parse">parse</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> query, <a href="../nepomuk/Nepomuk.Query.QueryParser.html">Nepomuk.Query.QueryParser.ParserFlags</a> flags)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../nepomuk/Nepomuk.Query.Query.html">Nepomuk.Query.Query</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parseQuery">parseQuery</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> query)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="QueryParser"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Create a new query parser.
+</p></div></div><a class="anchor" name="matchProperty"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../nepomuk/Nepomuk.Types.Property.html">Nepomuk.Types.Property</a>] matchProperty</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>fieldName</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Try to match a field name as used in a query string to actual
+properties.
+</p>
+<p>
+The matching is cached inside the Query instance for fast
+subsequent lookups.
+</p>
+<p>
+Example:
+<pre class="fragment">
+ hastag:nepomuk
+</pre>
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> A list of properties that match <b>fieldName</b> or an empty
+list in case nothing was matched.
+</dd></dl> </p>
+<p>
+This method is used by parse() to match properties used in user queries.
+</p></div></div><a class="anchor" name="parse"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../nepomuk/Nepomuk.Query.Query.html">Nepomuk.Query.Query</a> parse</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>query</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Parse a user query.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>query</em>&nbsp;</td><td> The query string to parse
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>flags</em>&nbsp;</td><td> a set of flags influencing the parsing process.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The parsed query or an invalid Query object
+in case the parsing failed.
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="parse"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../nepomuk/Nepomuk.Query.Query.html">Nepomuk.Query.Query</a> parse</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>query</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../nepomuk/Nepomuk.Query.QueryParser.html">Nepomuk.Query.QueryParser.ParserFlags</a>&nbsp;</td>
+<td class="paramname"><em>flags</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Parse a user query.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>query</em>&nbsp;</td><td> The query string to parse
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>flags</em>&nbsp;</td><td> a set of flags influencing the parsing process.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The parsed query or an invalid Query object
+in case the parsing failed.
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="parseQuery"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../nepomuk/Nepomuk.Query.Query.html">Nepomuk.Query.Query</a> parseQuery</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>query</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Convenience method to quickly parse a query without creating an object.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The parsed query or an invalid Query object
+in case the parsing failed.
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="ParserFlag"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">ParserFlag</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Flags to change the behaviour of the parser.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NoParserFlags</em>&nbsp;=&nbsp;0x0</td><td><tr><td valign="top"><em>QueryTermGlobbing</em>&nbsp;=&nbsp;0x1</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -89,13 +89,28 @@ types that KLocalSocket does (see KLocalSocket.LocalSocketType).
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#localPath">localPath</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalSocket.html#LocalSocketType">KLocalSocket.LocalSocketType</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#localSocketType">localSocketType</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#maxPendingConnections">maxPendingConnections</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newConnection">newConnection</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalSocket.html">KLocalSocket</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nextPendingConnection">nextPendingConnection</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractsocket::socketerror.html">QAbstractSocket.SocketError</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#serverError">serverError</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractsocket-socketerror.html">QAbstractSocket.SocketError</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#serverError">serverError</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMaxPendingConnections">setMaxPendingConnections</a> (self, int numConnections)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool, bool (timedOut)&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#waitForNewConnection">waitForNewConnection</a> (self, int msec=0, )</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool, bool timedOut&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#waitForNewConnection">waitForNewConnection</a> (self, int msec=0)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="KLocalSocketServer"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="newConnection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> newConnection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The newConnection() signal is emitted whenever a new connection
+is ready and has been accepted. Whenever it is emitted, calling
+nextPendingConnection() will return a valid object at least
+once.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("newConnection()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="KLocalSocketServer"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -117,7 +132,18 @@ types that KLocalSocket does (see KLocalSocket.LocalSocketType).
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KLocalSocketServer"></a>
+<div class="memdoc"><p>Creates a KLocalSocketServer object with <b>parent</b> as the
+parent object. The object is created without binding to any
+address.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent object
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KLocalSocketServer"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -319,23 +345,7 @@ is not listening, returns QAbstractSocket.UnknownLocalSocketType.
 </table>
 </div>
 <div class="memdoc"><p>Returns the value set with setMaxPendingConnections().
-</p></div></div><a class="anchor" name="newConnection"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> newConnection</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>The newConnection() signal is emitted whenever a new connection
-is ready and has been accepted. Whenever it is emitted, calling
-nextPendingConnection() will return a valid object at least
-once.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("newConnection()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="nextPendingConnection"></a>
+</p></div></div><a class="anchor" name="nextPendingConnection"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -358,7 +368,7 @@ the current object.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractsocket::socketerror.html">QAbstractSocket.SocketError</a> serverError</td>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractsocket-socketerror.html">QAbstractSocket.SocketError</a> serverError</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -408,7 +418,7 @@ and keep queued.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">bool, bool (timedOut) waitForNewConnection</td>
+<td class="memname">bool, bool timedOut waitForNewConnection</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
@@ -416,7 +426,7 @@ and keep queued.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>msec=0</em>, </td>
+<td class="paramname"><em>msec=0</em></td>
 </tr>
 <tr>
 <td></td>

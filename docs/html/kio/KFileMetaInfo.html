@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -63,7 +63,7 @@ through KFileMetaInfoItem objects.
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#What">What</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Fastest, TechnicalInfo, ContentInfo, ExternalSources, Thumbnail, LinkedData, Everything&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KFileMetaInfo">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> path, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mimetype=QString(), <a href="../kio/KFileMetaInfo.WhatFlags.html">KFileMetaInfo.WhatFlags</a> w=KFileMetaInfo.Everything)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KFileMetaInfo">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> path, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mimetype=QString(), <a href="../kio/KFileMetaInfo.html">KFileMetaInfo.WhatFlags</a> w=KFileMetaInfo.Everything)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KFileMetaInfo">__init__</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KFileMetaInfo">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KFileMetaInfo">__init__</a> (self, <a href="../kio/KFileMetaInfo.html">KFileMetaInfo</a> a0)</td></tr>
@@ -99,7 +99,7 @@ through KFileMetaInfoItem objects.
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../kio/KFileMetaInfo.WhatFlags.html">KFileMetaInfo.WhatFlags</a>&nbsp;</td>
+<td class="paramtype"><a href="../kio/KFileMetaInfo.html">KFileMetaInfo.WhatFlags</a>&nbsp;</td>
 <td class="paramname"><em>w=KFileMetaInfo.Everything</em></td>
 </tr>
 <tr>
@@ -110,7 +110,12 @@ through KFileMetaInfoItem objects.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KFileMetaInfo"></a>
+<div class="memdoc"><p>Construct a KFileMetaInfo that contains metainformation about
+the resource pointed to by <b>path.</b>
+</p>
+<p>
+When w is not Everything, a limit of 64kbytes is imposed on the file size.
+</p></div></div><a class="anchor" name="KFileMetaInfo"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -132,7 +137,11 @@ through KFileMetaInfoItem objects.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KFileMetaInfo"></a>
+<div class="memdoc"><p>Construct a KFileMetaInfo that contains metainformation about
+the resource pointed to by <b>url.</b>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> that c'tor is not thread-safe
+</dd></dl>
+</p></div></div><a class="anchor" name="KFileMetaInfo"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -144,7 +153,8 @@ through KFileMetaInfoItem objects.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KFileMetaInfo"></a>
+<div class="memdoc"><p>Construct a KFileMetaInfo instance from another one.
+</p></div></div><a class="anchor" name="KFileMetaInfo"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -166,7 +176,8 @@ through KFileMetaInfoItem objects.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="applyChanges"></a>
+<div class="memdoc"><p>Construct a KFileMetaInfo instance from another one.
+</p></div></div><a class="anchor" name="applyChanges"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -284,8 +295,12 @@ through KFileMetaInfoItem objects.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>This is used to specify what a KFileMetaInfo object should read, so
+you can specify if you want to read "expensive" items or not.
+This is like a preset which can be customized by passing additional
+parameters to constructors.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Fastest</em>&nbsp;=&nbsp;0x1</td><td><tr><td valign="top"><em>TechnicalInfo</em>&nbsp;=&nbsp;0x4</td><td><tr><td valign="top"><em>ContentInfo</em>&nbsp;=&nbsp;0x8</td><td><tr><td valign="top"><em>ExternalSources</em>&nbsp;=&nbsp;0x10</td><td><tr><td valign="top"><em>Thumbnail</em>&nbsp;=&nbsp;0x20</td><td><tr><td valign="top"><em>LinkedData</em>&nbsp;=&nbsp;0x80</td><td><tr><td valign="top"><em>Everything</em>&nbsp;=&nbsp;0xffff</td><td></table>
 </dl>
 </div></div><p>
 </div>

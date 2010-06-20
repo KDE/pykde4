@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -93,10 +93,11 @@ KStandardDirs.locateLocal() does.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#create">create</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> directoryPrefix, int mode)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#exists">exists</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeDir">removeDir</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> path)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAutoRemove">setAutoRemove</a> (self, bool autoRemove)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#status">status</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unlink">unlink</a> (self)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeDir">removeDir</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> path)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="KTempDir"></a>
 <div class="memitem">
@@ -126,7 +127,29 @@ KStandardDirs.locateLocal() does.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KTempDir"></a>
+<div class="memdoc"><p>Creates a temporary directory with the name:
+<b>\&lt;directoryPrefix\&gt;\&lt;six</b> letters&gt;
+</p>
+<p>
+The default <b>directoryPrefix</b> is "$KDEHOME/tmp-$HOST/appname", i.e.
+as returned by KStandardDirs.locateLocal("tmp", KGlobal.mainComponent().componentName())
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>directoryPrefix</em>&nbsp;</td><td> the prefix of the file name, or
+QString() for the default value
+
+<tr><td></td><td valign="top"><em>mode</em>&nbsp;</td><td> the file permissions,
+almost always in octal. The first digit selects permissions for
+the user who owns the file: read (4), write (2), and execute
+(1); the second selects permissions for other users in the
+file's group, with the same values; and the third for other
+users not in the file's group, with the same values.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KTempDir"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -232,55 +255,6 @@ trailing '/'.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> The name of the directory, or QString() if creating the
 directory has failed or the directory has been unlinked
 </dd></dl>
-</p></div></div><a class="anchor" name="removeDir"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool removeDir</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>path</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Remove a directory and all its contents
-</p>
-<p>
-Remove recursively a directory, even if it is not empty
-or contains other directories.
-</p>
-<p>
-However the function works too when the <b>path</b> given
-is a non-directory file. In that case it simply remove that file.
-</p>
-<p>
-The function stops on the first error.
-</p>
-<p>
-<dl class="note" compact><dt><b>Note:</b></dt><dd> This function is more meant for removing a directory
-not created by the user. For user-created directories,
-using KIO.NetAccess.del is recommended instead,
-especially as it has user feedback for long operations.
-</dd></dl> </p>
-<p>
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>path</em>&nbsp;</td><td> Path of the directory to delete
-</td></tr> </table></dl>
-<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if successful, otherwise false
-(Use errno for more details about the error.)
-</dd></dl> To do: decide how and where this function should be defined in KDE4
 </p></div></div><a class="anchor" name="setAutoRemove"></a>
 <div class="memitem">
 <div class="memproto">
@@ -346,6 +320,50 @@ whether the directory could be created.
 </table>
 </div>
 <div class="memdoc"><p>Deletes the directory recursively
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="removeDir"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool removeDir</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>path</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Remove a directory and all its contents
+</p>
+<p>
+Remove recursively a directory, even if it is not empty
+or contains other directories.
+</p>
+<p>
+However the function works too when the <b>path</b> given
+is a non-directory file. In that case it simply remove that file.
+</p>
+<p>
+The function stops on the first error.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> This function is more meant for removing a directory
+not created by the user. For user-created directories,
+using KIO.NetAccess.del is recommended instead,
+especially as it has user feedback for long operations.
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>path</em>&nbsp;</td><td> Path of the directory to delete
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if successful, otherwise false
+(Use errno for more details about the error.)
+</dd></dl> To do: decide how and where this function should be defined in KDE4
 </p></div></div>
 </div>
 </div>

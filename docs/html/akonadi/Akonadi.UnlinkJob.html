@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
 <h1>UnlinkJob Class Reference</h1>
 <code>from PyKDE4.akonadi import *</code>
 <p>
-Inherits: Akonadi.Job &#x2192; <a href="../kdecore/KCompositeJob.html">KCompositeJob</a> &#x2192; <a href="../kdecore/KJob.html">KJob</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+Inherits: <a href="../akonadi/Akonadi.Job.html">Akonadi.Job</a> &#x2192; <a href="../kdecore/KCompositeJob.html">KCompositeJob</a> &#x2192; <a href="../kdecore/KJob.html">KJob</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
 
-Namespace: Akonadi.UnlinkJob<br />
+Namespace: <a href="../akonadi/Akonadi.html">Akonadi</a><br />
 <h2>Detailed Description</h2>
 
 <p>Job that unlinks items inside the Akonadi storage.
@@ -70,11 +70,16 @@ Example:
  const Akonadi.Item.List items = ...
 
  Akonadi.UnlinkJob *job = new Akonadi.UnlinkJob( virtualCollection, items );
+ connect( job, SIGNAL( result( KJob* ) ), SLOT( jobFinished( KJob* ) ) );
 
- if ( job-&gt;exec() ) {
-   qDebug() &lt;&lt; "Unlinked items successfully";
- } else {
-   qDebug() &lt;&lt; "Error occurred";
+ ...
+
+ MyClass.jobFinished( KJob *job )
+ {
+   if ( job-&gt;error() )
+     qDebug() &lt;&lt; "Error occurred";
+   else
+     qDebug() &lt;&lt; "Unlinked items successfully";
  }
 
 </pre>
@@ -87,7 +92,7 @@ Example:
 </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#UnlinkJob">__init__</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection, <a href="../akonadi/Akonadi.Item.List.html">Akonadi.Item.List</a> items, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#UnlinkJob">__init__</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection, [<a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>] items, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#doStart">doStart</a> (self)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="UnlinkJob"></a>
@@ -107,7 +112,7 @@ Example:
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../akonadi/Akonadi.Item.List.html">Akonadi.Item.List</a>&nbsp;</td>
+<td class="paramtype">[<a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>]&nbsp;</td>
 <td class="paramname"><em>items</em>, </td>
 </tr>
 <tr>
@@ -124,7 +129,23 @@ Example:
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="doStart"></a>
+<div class="memdoc"><p>Creates a new unlink job.
+</p>
+<p>
+The job will remove references to the given items from the given collection.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>collection</em>&nbsp;</td><td> The collection from which the references should be removed.
+
+<tr><td></td><td valign="top"><em>items</em>&nbsp;</td><td> The items of which the references should be removed.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent object.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="doStart"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

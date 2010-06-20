@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -98,13 +98,25 @@ As demonstrated, you can use cache's timestamp() method to see when
 the cache was created. If necessary, you can also change the timestamp
 using setTimestamp() method.
 </p>
+<p>
+<dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> KPixmapCache is susceptible to various non-trivial locking bugs and
+inefficiencies, and is supported for backward compatibility only (since it exposes
+a QDataStream API for subclasses). Users should port to KImageCache for a very close
+work-alike, or KSharedDataCache if they need more control.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KImageCache, KSharedDataCache
+</dd></dl> </p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Rivo Laks </dd></dl>
+</p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#RemoveStrategy">RemoveStrategy</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;RemoveOldest, RemoveSeldomUsed, RemoveLeastRecentlyUsed&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KPixmapCache">__init__</a> (self, <a href="../kdeui/KPixmapCache.html">KPixmapCache</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KPixmapCache">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cacheLimit">cacheLimit</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deleteCache">deleteCache</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#discard">discard</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ensureInited">ensureInited</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#find">find</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> key, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a> pix)</td></tr>
@@ -128,6 +140,8 @@ using setTimestamp() method.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#useQPixmapCache">useQPixmapCache</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#writeCustomData">writeCustomData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#writeCustomIndexHeader">writeCustomIndexHeader</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deleteCache">deleteCache</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="KPixmapCache"></a>
 <div class="memitem">
@@ -173,7 +187,14 @@ using setTimestamp() method.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="cacheLimit"></a>
+<div class="memdoc"><p>Constucts the pixmap cache object.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> unique name of the cache
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="cacheLimit"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -186,37 +207,8 @@ using setTimestamp() method.
 </table>
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> maximum size of the cache (in kilobytes).
-Default setting is 3 megabytes.
+Default setting is 3 megabytes (1 megabyte = 2^20 bytes).
 </dd></dl>
-</p></div></div><a class="anchor" name="deleteCache"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> deleteCache</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
-<td class="paramname"><em>name</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Deletes a pixmap cache.
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> unique name of the cache to be deleted
-</td></tr>
-</table></dl>
-<p>
 </p></div></div><a class="anchor" name="discard"></a>
 <div class="memitem">
 <div class="memproto">
@@ -230,6 +222,13 @@ Default setting is 3 megabytes.
 </table>
 </div>
 <div class="memdoc"><p>Deletes all entries and reinitializes this cache.
+</p>
+<p>
+<b>NOTE:</b> If useQPixmapCache is set to true then that cache must also
+be cleared. There is only one QPixmapCache for the entire process
+however so other KPixmapCaches and other QPixmapCache users may also
+be affected, leading to a temporary slowdown until the QPixmapCache is
+repopulated.
 </p></div></div><a class="anchor" name="ensureInited"></a>
 <div class="memitem">
 <div class="memproto">
@@ -242,7 +241,16 @@ Default setting is 3 megabytes.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Makes sure that the cache is initialized correctly.
+<div class="memdoc"><p>Makes sure that the cache is initialized correctly, including the loading of the
+cache index and data, and any shared memory attachments (for systems where that
+is enabled).
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> Although this method is protected you should not use it from any subclasses.
+</dd></dl> </p>
+<p>
+<dl class="internal" compact><dt><b>Internal:</b></dt><dd>
+</dd></dl>
 </p></div></div><a class="anchor" name="find"></a>
 <div class="memitem">
 <div class="memproto">
@@ -271,7 +279,10 @@ Default setting is 3 megabytes.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Tries to load pixmap with the specified key from cache.
+<div class="memdoc"><p>Tries to load pixmap with the specified <b>key</b> from cache. If the pixmap
+is found it is stored in <b>pix,</b> otherwise <b>pix</b> is unchanged.
+</p>
+<p>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> true when pixmap was found and loaded from cache, false otherwise
 </dd></dl>
 </p></div></div><a class="anchor" name="insert"></a>
@@ -302,9 +313,10 @@ Default setting is 3 megabytes.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Insert specified pixmap into the cache.
-If the cache already contains pixmap with the specified key then it is
-overwritten.
+<div class="memdoc"><p>Inserts the pixmap <b>pix</b> into the cache, associated with the key <b>key.</b>
+</p>
+<p>
+Any existing pixmaps associated with <b>key</b> are overwritten.
 </p></div></div><a class="anchor" name="isEnabled"></a>
 <div class="memitem">
 <div class="memproto">
@@ -317,9 +329,11 @@ overwritten.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> true when the cache is enabled.
-Cache will be disabled when e.g. its data file cannot be created or
+<div class="memdoc"><p>Cache will be disabled when e.g. its data file cannot be created or
 read.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true when the cache is enabled.
 </dd></dl>
 </p></div></div><a class="anchor" name="isValid"></a>
 <div class="memitem">
@@ -333,9 +347,9 @@ read.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> true when the cache is ready to be used.
-False usually means that some additional initing has to be done before
-the cache can be used.
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> true when the cache is ready to be used. Not being valid usually
+means that some additional initialization has to be done before the
+cache can be used.
 </dd></dl>
 </p></div></div><a class="anchor" name="loadCustomData"></a>
 <div class="memitem">
@@ -359,7 +373,22 @@ the cache can be used.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Can be used by subclasses to write custom data into the stream.
+<div class="memdoc"><p>Can be used by subclasses to load custom data from the stream.
+This function will be called by KPixmapCache immediately following the
+image data for a single image being read from <b>stream.</b>
+(This function is called once for every single image).
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> writeCustomData
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> loadCustomIndexHeader
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>stream</em>&nbsp;</td><td> the QDataStream to read data from
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if custom data was successfully loaded, false otherwise. If
+false is returned then the cached item is assumed to be invalid and
+will not be available to find() or contains().
+</dd></dl>
 </p></div></div><a class="anchor" name="loadCustomIndexHeader"></a>
 <div class="memitem">
 <div class="memproto">
@@ -382,7 +411,22 @@ the cache can be used.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Can be used by subclasses to write custom data into cache's header.
+<div class="memdoc"><p>Can be used by subclasses to load custom data from cache's header.
+This function will be called by KPixmapCache immediately after the
+index header has been written out. (This function is called one time
+only for the entire cache).
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> loadCustomData
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> writeCustomIndexHeader
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>stream</em>&nbsp;</td><td> the QDataStream to read data from
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if custom index header data was successfully read, false
+otherwise. If false is returned then the cache is assumed to
+be invalid and further processing does not occur.
+</dd></dl>
 </p></div></div><a class="anchor" name="loadFromFile"></a>
 <div class="memitem">
 <div class="memproto">
@@ -405,9 +449,28 @@ the cache can be used.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Loads pixmap from given file, using the cache.
-If file's modified-time is more recent than cache's timestamp() ,
-then the cache is discarded.
+<div class="memdoc"><p>Loads a pixmap from given file, using the cache. If the file does not
+exist on disk, an empty pixmap is returned, even if that file had
+previously been cached. In addition, if the file's modified-time is
+more recent than cache's timestamp(), the <b>entire</b> cache is
+discarded (to be regenerated). This behavior may change in a future
+KDE Platform release. If the cached data is current the pixmap
+is returned directly from the cache without any file loading.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> The mapping between <b>filename</b> and the actual key used internally
+is implementation-dependent and can change without warning. Use insert()
+manually if you need control of the key, otherwise consistently use this
+function.
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>filename</em>&nbsp;</td><td> The name of the pixmap to load, cache, and return.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The given pixmap, or an empty pixmap if the file was invalid or did
+not exist.
+</dd></dl>
 </p></div></div><a class="anchor" name="loadFromSvg"></a>
 <div class="memitem">
 <div class="memproto">
@@ -436,14 +499,25 @@ then the cache is discarded.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Same as above, but uses SVG file instead.
+<div class="memdoc"><p>Same as loadFromFile(), but using an SVG file instead. You may optionally
+pass in a <b>size</b> to control the size of the output pixmap.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> The returned pixmap is only cached for identical filenames and sizes.
+If you change the size in between calls to this function then the
+pixmap will have to be regenerated again.
+</dd></dl> </p>
+<p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>filename</em>&nbsp;</td><td> The filename of the SVG file to load.
+
 <tr><td></td><td valign="top"><em>size</em>&nbsp;</td><td> size of the pixmap where the SVG is render to. If not given
-then SVG's default size is used.
-</td></tr>
-</table></dl>
-<p>
+then the SVG file's default size is used.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> an empty pixmap if the file does not exist or was invalid, otherwise
+a pixmap of the desired <b>size.</b>
+</dd></dl>
 </p></div></div><a class="anchor" name="recreateCacheFiles"></a>
 <div class="memitem">
 <div class="memproto">
@@ -456,7 +530,20 @@ then SVG's default size is used.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Recreates the cache files.
+<div class="memdoc"><p>This function causes the cache files to be recreate by invalidating the cache.
+Any shared memory mappings (if enabled) are dropped temporarily as well.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> The recreated cache will be initially empty, but with the same size limits
+and entry removal strategy (see removeEntryStrategy()).
+</dd></dl> </p>
+<p>
+If you use this in a subclass be prepared to handle writeCustomData() and
+writeCustomIndexHeader().
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the cache was successfully recreated.
+</dd></dl>
 </p></div></div><a class="anchor" name="removeEntries"></a>
 <div class="memitem">
 <div class="memproto">
@@ -481,15 +568,18 @@ then SVG's default size is used.
 </div>
 <div class="memdoc"><p>Removes some of the entries in the cache according to current
 removeEntryStrategy().
+</p>
+<p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>newsize</em>&nbsp;</td><td> wanted size of the cache, in bytes. If 0 is given then
 current cacheLimit() is used.
 </td></tr>
 </table></dl>
-<p> Warning: this works by copying some entries to a new cache and then
-replacing the old cache with the new one. Thus it might be slow and
+<p> <dl class="warning" compact><dt><b>Warning:</b></dt><dd> This currently works by copying some entries to a new cache and
+then replacing the old cache with the new one. Thus it might be slow and
 will temporarily use extra disk space.
+</dd></dl>
 </p></div></div><a class="anchor" name="removeEntryStrategy"></a>
 <div class="memitem">
 <div class="memproto">
@@ -528,9 +618,12 @@ Default is RemoveLeastRecentlyUsed.
 </tr></table>
 </div>
 <div class="memdoc"><p>Sets the maximum size of the cache (in kilobytes). If cache gets bigger
-the limit then some entries are removed (according to
-removeEntryStrategy() ).
-Setting cache limit to 0 disables automatic cache size limiting.
+than the limit then some entries are removed (according to
+removeEntryStrategy()).
+</p>
+<p>
+Setting the cache limit to 0 disables caching (as all entries will get
+immediately removed).
 </p>
 <p>
 Note that the cleanup might not be done immediately, so the cache might
@@ -581,7 +674,7 @@ temporarily (for a few seconds) grow bigger than the limit.
 </tr></table>
 </div>
 <div class="memdoc"><p>Sets the timestamp of app-specific cache. It's saved in the cache file
-and can later be retrieved using <b>timestamp()</b> method.
+and can later be retrieved using the timestamp() method.
 By default the timestamp is set to the cache creation time.
 </p></div></div><a class="anchor" name="setUseQPixmapCache"></a>
 <div class="memitem">
@@ -606,8 +699,19 @@ By default the timestamp is set to the cache creation time.
 </tr></table>
 </div>
 <div class="memdoc"><p>Sets whether QPixmapCache (memory caching) should be used in addition
-to disk cache.
-QPixmapCache is used by default.
+to disk cache. QPixmapCache is used by default.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> On most systems KPixmapCache can use shared-memory to share cached
+pixmaps with other applications attached to the same shared pixmap,
+which means additional memory caching is unnecessary and actually
+wasteful of memory.
+</dd></dl> </p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> QPixmapCache is shared among the entire process and therefore
+can cause strange interactions with other instances of KPixmapCache.
+This may be fixed in the future and should be not relied upon.
+</dd></dl>
 </p></div></div><a class="anchor" name="setValid"></a>
 <div class="memitem">
 <div class="memproto">
@@ -630,8 +734,18 @@ QPixmapCache is used by default.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Can be used by subclasses to indicate that cache needs some additional
-initing before it can be used.
+<div class="memdoc"><p>Sets whether this cache is valid or not. (The cache must be enabled in addition
+for isValid() to return true. <dl class="see" compact><dt><b>See also:</b></dt><dd> isEnabled(), <dl class="see" compact><dt><b>See also:</b></dt><dd> setEnabled()).
+</dd></dl> </p>
+<p>
+Most cache functions do not work if the cache is not valid. KPixmapCache assumes
+the cache is valid as long as its cache files were able to be created (see
+recreateCacheFiles()) even if the cache is not enabled.
+</p>
+<p>
+Can be used by subclasses to indicate that cache needs some additional
+initialization before it can be used (note that KPixmapCache will <b>not</b> handle
+actually performing this extra initialization).
 </p></div></div><a class="anchor" name="size"></a>
 <div class="memitem">
 <div class="memproto">
@@ -644,7 +758,7 @@ initing before it can be used.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> approximate size of the cache, in kilobytes.
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> approximate size of the cache, in kilobytes (1 kilobyte == 1024 bytes)
 </dd></dl>
 </p></div></div><a class="anchor" name="timestamp"></a>
 <div class="memitem">
@@ -658,9 +772,9 @@ initing before it can be used.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> timestamp of the cache, set using the <b>setTimestamp</b> method.
-It can be used by the application to check whether app-specific cache
-has outdated.
+<div class="memdoc"><p><dl class="note" compact><dt><b>Note:</b></dt><dd> KPixmapCache does not ever change the timestamp, so the application
+must set the timestamp if it to be used.
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> Timestamp of the cache, set using the setTimestamp() method.
 </dd></dl>
 </p></div></div><a class="anchor" name="useQPixmapCache"></a>
 <div class="memitem">
@@ -676,6 +790,13 @@ has outdated.
 </div>
 <div class="memdoc"><p>Whether QPixmapCache should be used to cache pixmaps in memory in
 addition to caching them on the disk.
+</p>
+<p>
+<b>NOTE:</b> The design of QPixmapCache means that the entries stored in
+the cache are shared throughout the entire process, and not just in
+this particular KPixmapCache. KPixmapCache makes an effort to ensure
+that entries from other KPixmapCaches do not inadvertently spill over
+into this one, but is not entirely successful (see discard())
 </p></div></div><a class="anchor" name="writeCustomData"></a>
 <div class="memitem">
 <div class="memproto">
@@ -698,7 +819,20 @@ addition to caching them on the disk.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Can be used by subclasses to load custom data from the stream.
+<div class="memdoc"><p>Can be used by subclasses to write custom data into the stream.
+This function will be called by KPixmapCache immediately after the
+image data for a single image has been written to <b>stream.</b>
+(This function is called once for every single image).
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> loadCustomData
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> writeCustomIndexHeader
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>stream</em>&nbsp;</td><td> the QDataStream to write data to
+</td></tr>
+</table></dl>
+<p>
 </p></div></div><a class="anchor" name="writeCustomIndexHeader"></a>
 <div class="memitem">
 <div class="memproto">
@@ -721,7 +855,44 @@ addition to caching them on the disk.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Can be used by subclasses to load custom data from cache's header.
+<div class="memdoc"><p>Can be used by subclasses to write custom data into cache's header.
+This function will be called by KPixmapCache immediately following the
+index header has being loaded. (This function is called one time
+only for the entire cache).
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> writeCustomData
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> loadCustomIndexHeader
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>stream</em>&nbsp;</td><td> the QDataStream to write data to
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="deleteCache"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> deleteCache</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Deletes a pixmap cache.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> unique name of the cache to be deleted
+</td></tr>
+</table></dl>
+<p>
 </p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="RemoveStrategy"></a>
 <div class="memitem">
 <div class="memproto">
@@ -730,8 +901,11 @@ addition to caching them on the disk.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>Describes which entries will be removed first during cache cleanup.
+<dl class="see" compact><dt><b>See also:</b></dt><dd> removeEntryStrategy(), <dl class="see" compact><dt><b>See also:</b></dt><dd> setRemoveEntryStrategy()
+</dd></dl>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>RemoveOldest</em>&nbsp;</td><td><tr><td valign="top"><em>RemoveSeldomUsed</em>&nbsp;</td><td><tr><td valign="top"><em>RemoveLeastRecentlyUsed</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

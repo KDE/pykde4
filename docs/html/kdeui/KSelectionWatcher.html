@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -61,15 +61,54 @@ ICCCM manager selection watching
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#lostOwner">lostOwner</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newOwner">newOwner</a> (<a href="../kdecore/Window.html">Window</a> owner)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newOwner">newOwner</a> (long owner)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KSelectionWatcher">__init__</a> (self, <a href="../kdeui/Atom.html">Atom</a> selection, int screen=-1, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=NULL)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KSelectionWatcher">__init__</a> (self, long selection, int screen=-1, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=NULL)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KSelectionWatcher">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> selection, int screen=-1, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=NULL)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#lostOwner">lostOwner</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newOwner">newOwner</a> (self, <a href="../kdecore/Window.html">Window</a> owner)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/Window.html">Window</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#owner">owner</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#owner">owner</a> (self)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="KSelectionWatcher"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="lostOwner"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> lostOwner</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>This signal is emitted when the selection is given up, i.e. there's no
+owner. Note that the selection may be immediatelly claimed again,
+so the newOwner() signal may be emitted right after this one.
+It's safe to delete the instance in a slot connected to this signal.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("lostOwner()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="newOwner"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> newOwner</td>
+<td>(</td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>owner</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted when the selection is successfully claimed by a new
+owner.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>owner</em>&nbsp;</td><td> the new owner of the selection
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("newOwner(Window)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="KSelectionWatcher"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -80,7 +119,7 @@ ICCCM manager selection watching
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../kdeui/Atom.html">Atom</a>&nbsp;</td>
+<td class="paramtype">long&nbsp;</td>
 <td class="paramname"><em>selection</em>, </td>
 </tr>
 <tr>
@@ -103,7 +142,22 @@ ICCCM manager selection watching
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KSelectionWatcher"></a>
+<div class="memdoc"><p>
+This constructor accepts the selection name and creates the appropriate atom
+for it automatically.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>selection</em>&nbsp;</td><td> name of the manager selection
+
+<tr><td></td><td valign="top"><em>screen</em>&nbsp;</td><td> X screen, or -1 for default
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> parent object, or NULL if there is none
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KSelectionWatcher"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -137,57 +191,26 @@ ICCCM manager selection watching
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="lostOwner"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> lostOwner</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>This signal is emitted when the selection is given up, i.e. there's no
-owner. Note that the selection may be immediatelly claimed again,
-so the newOwner() signal may be emitted right after this one.
-It's safe to delete the instance in a slot connected to this signal.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("lostOwner()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="newOwner"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> newOwner</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../kdecore/Window.html">Window</a>&nbsp;</td>
-<td class="paramname"><em>owner</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>This signal is emitted when the selection is successfully claimed by a new
-owner.
+<div class="memdoc"><p>
+This constructor accepts the selection name and creates the appropriate atom
+for it automatically.
+</p>
+<p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>owner</em>&nbsp;</td><td> the new owner of the selection
+<tr><td></td><td valign="top"><em>selection</em>&nbsp;</td><td> name of the manager selection
+
+<tr><td></td><td valign="top"><em>screen</em>&nbsp;</td><td> X screen, or -1 for default
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> parent object, or NULL if there is none
 </td></tr>
 </table></dl>
 <p>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("newOwner(Window)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="owner"></a>
+</p></div></div><a class="anchor" name="owner"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="../kdecore/Window.html">Window</a> owner</td>
+<td class="memname">long owner</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>

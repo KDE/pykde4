@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -50,23 +50,27 @@
 <p>
 Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
 
-Namespace: Akonadi.Control<br />
+Namespace: <a href="../akonadi/Akonadi.html">Akonadi</a><br />
 <h2>Detailed Description</h2>
 
 <p>Provides methods to control the Akonadi server process.
 </p>
 <p>
-This class provides high-level methods to control the Akonadi
-server. These methods are synchronously (ie. use a sub-eventloop)
-and can show dialogs. For more low-level methods see
+This class provides synchronous methods (ie. use a sub-eventloop)
+to control the Akonadi service. For asynchronous methods see
 Akonadi.ServerManager.
 </p>
 <p>
-While the Akonadi server normally is started by the KDE session
-manager, it is not guaranteed that your application is running
-inside a KDE session. Therefore it is recommended to execute
-Akonadi.Control.start() during startup to ensure the Akonadi
-server is running.
+The most important method in here is widgetNeedsAkonadi(). It is
+recommended to call it with every top-level widget of your application
+as argument, assuming your application relies on Akonadi being operational
+of course.
+</p>
+<p>
+While the Akonadi server automatically started by Akonadi.Session
+on first use, it might be necessary for some use-cases to guarantee
+a running Akonadi service at some point. This can be done using
+start().
 </p>
 <p>
 Example:
@@ -93,13 +97,14 @@ Example:
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Control">__init__</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#restart">restart</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#restart">restart</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#start">start</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#start">start</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#stop">stop</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#stop">stop</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#widgetNeedsAkonadi">widgetNeedsAkonadi</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#restart">restart</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#restart">restart</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#start">start</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#start">start</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#stop">stop</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#stop">stop</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#widgetNeedsAkonadi">widgetNeedsAkonadi</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="Control"></a>
 <div class="memitem">
@@ -113,14 +118,15 @@ Example:
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="restart"></a>
+<div class="memdoc"><p>Creates the control object.
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="restart"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
 <td class="memname">bool restart</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
+<td class="paramname">)</td>
 <td width="100%"> </td>
 </tr>
 </table>
@@ -138,11 +144,6 @@ Example:
 <table class="memname"><tr>
 <td class="memname">bool restart</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
 <td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
 <td class="paramname"><em>parent</em></td>
 </tr>
@@ -168,7 +169,7 @@ Example:
 <td class="memname">bool start</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
+<td class="paramname">)</td>
 <td width="100%"> </td>
 </tr>
 </table>
@@ -186,11 +187,6 @@ Example:
 <table class="memname"><tr>
 <td class="memname">bool start</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
 <td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
 <td class="paramname"><em>parent</em></td>
 </tr>
@@ -216,7 +212,7 @@ Example:
 <td class="memname">bool stop</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
+<td class="paramname">)</td>
 <td width="100%"> </td>
 </tr>
 </table>
@@ -234,11 +230,6 @@ Example:
 <table class="memname"><tr>
 <td class="memname">bool stop</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
 <td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
 <td class="paramname"><em>parent</em></td>
 </tr>
@@ -263,11 +254,6 @@ Example:
 <table class="memname"><tr>
 <td class="memname"> widgetNeedsAkonadi</td>
 <td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
 <td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
 <td class="paramname"><em>widget</em></td>
 </tr>
@@ -281,7 +267,7 @@ Example:
 </div>
 <div class="memdoc"><p>Disable the given widget when Akonadi is not operational and show
 an error overlay (given enough space). Cascading use is automatically
-detected.
+detected and resolved.
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>widget</em>&nbsp;</td><td> The widget depending on Akonadi being operational.

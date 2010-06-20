@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -94,13 +94,14 @@ KApplication.appearanceChanged() signal.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#saveState">saveState</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdomelement.html">QDomElement</a> element)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setContextMenuEnabled">setContextMenuEnabled</a> (self, bool enable=1)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIconDimensions">setIconDimensions</a> (self, int size)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setToolBarsEditable">setToolBarsEditable</a> (self, bool editable)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setToolBarsLocked">setToolBarsLocked</a> (self, bool locked)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setXMLGUIClient">setXMLGUIClient</a> (self, <a href="../kdeui/KXMLGUIClient.html">KXMLGUIClient</a> client)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#slotMovableChanged">slotMovableChanged</a> (self, bool movable)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolBarsEditable">toolBarsEditable</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolBarsLocked">toolBarsLocked</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::ToolButtonStyle</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolButtonStyleSetting">toolButtonStyleSetting</a> (self)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setToolBarsEditable">setToolBarsEditable</a> (bool editable)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setToolBarsLocked">setToolBarsLocked</a> (bool locked)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolBarsEditable">toolBarsEditable</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolBarsLocked">toolBarsLocked</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::ToolButtonStyle</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolButtonStyleSetting">toolButtonStyleSetting</a> ()</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="KToolBar"></a>
 <div class="memitem">
@@ -136,7 +137,29 @@ KApplication.appearanceChanged() signal.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KToolBar"></a>
+<div class="memdoc"><p>Constructor.
+</p>
+<p>
+This constructor takes care of adding the toolbar to the mainwindow,
+if <b>parent</b> is a QMainWindow.
+</p>
+<p>
+Normally KDE applications do not call this directly, they either
+call KMainWindow.toolBar(name), or they use XML-GUI and specify
+toolbars using XML.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The standard toolbar parent (usually a KMainWindow)
+
+<tr><td></td><td valign="top"><em>isMainToolBar</em>&nbsp;</td><td> True for the "main toolbar", false for other toolbars. Different settings apply.
+
+<tr><td></td><td valign="top"><em>readConfig</em>&nbsp;</td><td> whether to apply the configuration (global and application-specific)
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KToolBar"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -188,7 +211,28 @@ KApplication.appearanceChanged() signal.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KToolBar"></a>
+<div class="memdoc"><p>Alternate constructor with additional arguments, e.g. to choose in which area
+the toolbar should be auto-added. This is rarely used in KDE. When using XMLGUI
+you can specify this as an xml attribute instead.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>objectName</em>&nbsp;</td><td> The QObject name of this toolbar, required so that QMainWindow can save and load the toolbar position
+
+<tr><td></td><td valign="top"><em>parentWindow</em>&nbsp;</td><td> The window that should be the parent of this toolbar
+
+<tr><td></td><td valign="top"><em>area</em>&nbsp;</td><td> The position of the toolbar. Usually Qt.TopToolBarArea.
+
+<tr><td></td><td valign="top"><em>newLine</em>&nbsp;</td><td> If true, start a new line in the dock for this toolbar.
+
+<tr><td></td><td valign="top"><em>isMainToolBar</em>&nbsp;</td><td> True for the "main toolbar", false for other toolbars. Different settings apply.
+
+<tr><td></td><td valign="top"><em>readConfig</em>&nbsp;</td><td> whether to apply the configuration (global and application-specific)
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KToolBar"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -222,7 +266,30 @@ KApplication.appearanceChanged() signal.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="actionEvent"></a>
+<div class="memdoc"><p>Constructor.
+</p>
+<p>
+This constructor takes care of adding the toolbar to the mainwindow,
+if <b>parent</b> is a QMainWindow.
+</p>
+<p>
+Normally KDE applications do not call this directly, they either
+call KMainWindow.toolBar(name), or they use XML-GUI and specify
+toolbars using XML.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>objectName</em>&nbsp;</td><td> The QObject name of this toolbar, required so that QMainWindow can save and load the toolbar position,
+and so that KToolBar can find out if it's the main toolbar.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The standard toolbar parent (usually a KMainWindow)
+
+<tr><td></td><td valign="top"><em>readConfig</em>&nbsp;</td><td> whether to apply the configuration (global and application-specific)
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="actionEvent"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -668,54 +735,6 @@ not for icon size etc. Only visibility is still controlled by this.
 </tr></table>
 </div>
 <div class="memdoc"><p>Convenience function to set icon size
-</p></div></div><a class="anchor" name="setToolBarsEditable"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setToolBarsEditable</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">bool&nbsp;</td>
-<td class="paramname"><em>editable</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Enable or disable toolbar editing via drag &amp; drop of actions. This is
-called by KEditToolbar and should generally be set to disabled whenever
-KEditToolbar is not active.
-</p></div></div><a class="anchor" name="setToolBarsLocked"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setToolBarsLocked</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">bool&nbsp;</td>
-<td class="paramname"><em>locked</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Allows you to lock and unlock all toolbars (i.e., disallow/allow moving of the toobars).
 </p></div></div><a class="anchor" name="setXMLGUIClient"></a>
 <div class="memitem">
 <div class="memproto">
@@ -761,14 +780,52 @@ KEditToolbar is not active.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="toolBarsEditable"></a>
+<div class="memdoc"></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="setToolBarsEditable"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setToolBarsEditable</td>
+<td>(</td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>editable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Enable or disable toolbar editing via drag &amp; drop of actions. This is
+called by KEditToolbar and should generally be set to disabled whenever
+KEditToolbar is not active.
+</p></div></div><a class="anchor" name="setToolBarsLocked"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setToolBarsLocked</td>
+<td>(</td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>locked</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Allows you to lock and unlock all toolbars (i.e., disallow/allow moving of the toobars).
+</p></div></div><a class="anchor" name="toolBarsEditable"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
 <td class="memname">bool toolBarsEditable</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
+<td class="paramname">)</td>
 <td width="100%"> </td>
 </tr>
 </table>
@@ -781,7 +838,7 @@ KEditToolbar is not active.
 <td class="memname">bool toolBarsLocked</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
+<td class="paramname">)</td>
 <td width="100%"> </td>
 </tr>
 </table>
@@ -794,7 +851,7 @@ KEditToolbar is not active.
 <td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::ToolButtonStyle</a> toolButtonStyleSetting</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
+<td class="paramname">)</td>
 <td width="100%"> </td>
 </tr>
 </table>

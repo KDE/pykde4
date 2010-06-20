@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,17 +48,17 @@
 <h1>ChangeRecorder Class Reference</h1>
 <code>from PyKDE4.akonadi import *</code>
 <p>
-Inherits: Akonadi.Monitor &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+Inherits: <a href="../akonadi/Akonadi.Monitor.html">Akonadi.Monitor</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
 
-Namespace: Akonadi.ChangeRecorder<br />
+Namespace: <a href="../akonadi/Akonadi.html">Akonadi</a><br />
 <h2>Detailed Description</h2>
 
 <p>Records and replays change notification.
 </p>
 <p>
-This class is responsible for recording change notification during
-an agent is not online and replay the notifications when the agent
-is online again. Therefor the agent doesn't have to care about
+This class is responsible for recording change notification while
+an agent is not online and replaying the notifications when the agent
+is online again. Therefore the agent doesn't have to care about
 online/offline mode in its synchronization algorithm.
 </p>
 <p>
@@ -71,14 +71,41 @@ online/offline mode in its synchronization algorithm.
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ChangeRecorder">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changeProcessed">changeProcessed</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changesAdded">changesAdded</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isEmpty">isEmpty</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nothingToReplay">nothingToReplay</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#replayNext">replayNext</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setChangeRecordingEnabled">setChangeRecordingEnabled</a> (self, bool enable)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setConfig">setConfig</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsettings.html">QSettings</a> settings)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="ChangeRecorder"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="changesAdded"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> changesAdded</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emitted when new changes are recorded.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("changesAdded()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="nothingToReplay"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> nothingToReplay</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emitted when replayNext() was called, but there was no valid change to replay.
+This can happen when all pending changes have been filtered out, for example.
+You only need to connect to this signal if you rely on one signal being emitted
+as a result of calling replayNext().
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("nothingToReplay()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="ChangeRecorder"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -100,7 +127,8 @@ online/offline mode in its synchronization algorithm.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="changeProcessed"></a>
+<div class="memdoc"><p>Creates a new change recorder.
+</p></div></div><a class="anchor" name="changeProcessed"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -113,20 +141,7 @@ online/offline mode in its synchronization algorithm.
 </table>
 </div>
 <div class="memdoc"><p>Removes the previously emitted change from the records.
-</p></div></div><a class="anchor" name="changesAdded"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> changesAdded</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Emitted when new changes are recorded.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("changesAdded()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="isEmpty"></a>
+</p></div></div><a class="anchor" name="isEmpty"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -139,23 +154,7 @@ online/offline mode in its synchronization algorithm.
 </table>
 </div>
 <div class="memdoc"><p>Returns whether there are recorded changes.
-</p></div></div><a class="anchor" name="nothingToReplay"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> nothingToReplay</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Emitted when replayNext() was called, but there was no valid change to replay.
-This can happen when all pending changes have been filtered out for example.
-You only need to connect to this signal if you rely on one signal being emitted
-as a result of calling replayNext().
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("nothingToReplay()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="replayNext"></a>
+</p></div></div><a class="anchor" name="replayNext"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -215,7 +214,7 @@ Change recording is enabled by default.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets the QSettings object used for persisting recorded changes.
+<div class="memdoc"><p>Sets the QSettings object used for persistent recorded changes.
 </p></div></div>
 </div>
 </div>

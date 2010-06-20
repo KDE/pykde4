@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
 <p>
 Inherits: <a href="../kutils/KCMultiDialog.html">KCMultiDialog</a> &#x2192; <a href="../kdeui/KPageDialog.html">KPageDialog</a> &#x2192; <a href="../kdeui/KDialog.html">KDialog</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdialog.html">QDialog</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
 
-Namespace: KSettings.Dialog<br />
+Namespace: <a href="../kutils/KSettings.html">KSettings</a><br />
 <h2>Detailed Description</h2>
 
 <p>Generic configuration dialog that works over component boundaries
@@ -104,13 +104,29 @@ For more information see KSettings.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addPluginInfos">addPluginInfos</a> (self, [<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>] plugininfos)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#allowComponentSelection">allowComponentSelection</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pluginInfos">pluginInfos</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pluginSelectionChanged">pluginSelectionChanged</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAllowComponentSelection">setAllowComponentSelection</a> (self, bool allowSelection)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setComponentBlacklist">setComponentBlacklist</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> blacklist)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setKCMArguments">setKCMArguments</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> arguments)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#showEvent">showEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qshowevent.html">QShowEvent</a> a0)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="Dialog"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="pluginSelectionChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> pluginSelectionChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>If you use the dialog in Configurable mode and want to be notified
+when the user changes the plugin selections use this signal. It's
+emitted if the selection has changed and the user pressed Apply or
+Ok. In the slot you would then load and unload the plugins as
+requested.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("pluginSelectionChanged()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="Dialog"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -132,7 +148,22 @@ For more information see KSettings.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="Dialog"></a>
+<div class="memdoc"><p>Construct a new Preferences Dialog for the application. It uses all
+KCMs with X-KDE-ParentApp set to KGlobal.mainComponent().componentName().
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>content</em>&nbsp;</td><td> Select whether you want a static or configurable
+config dialog.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent is only used as the parent for the
+dialog - centering the dialog over the parent
+widget.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="Dialog"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -160,7 +191,24 @@ For more information see KSettings.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="addPluginInfos"></a>
+<div class="memdoc"><p>Construct a new Preferences Dialog with the pages for the selected
+instance names. For example if you want to have the configuration
+pages for the kviewviewer KPart you would pass a
+QStringList consisting of only the name of the part "kviewviewer".
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>components</em>&nbsp;</td><td> A list of the names of the components that your
+config dialog should merge the config pages in.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent is only used as the parent for the
+dialog - centering the dialog over the parent
+widget.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addPluginInfos"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -209,24 +257,7 @@ objects that the dialog should configure.
 </table>
 </div>
 <div class="memdoc"><p>Returns a list of all KPluginInfo objects the dialog uses.
-</p></div></div><a class="anchor" name="pluginSelectionChanged"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> pluginSelectionChanged</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>If you use the dialog in Configurable mode and want to be notified
-when the user changes the plugin selections use this signal. It's
-emitted if the selection has changed and the user pressed Apply or
-Ok. In the slot you would then load and unload the plugins as
-requested.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("pluginSelectionChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="setAllowComponentSelection"></a>
+</p></div></div><a class="anchor" name="setAllowComponentSelection"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

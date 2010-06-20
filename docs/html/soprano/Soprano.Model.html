@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
 <h1>Model Class Reference</h1>
 <code>from PyKDE4.soprano import *</code>
 <p>
-Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,Soprano.Error.ErrorCache<br />
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>,<a href="../soprano/Soprano.Error.ErrorCache.html">Soprano.Error.ErrorCache</a><br />
 Subclasses: <a href="../soprano/Soprano.Util.DummyModel.html">Soprano.Util.DummyModel</a>, <a href="../soprano/Soprano.FilterModel.html">Soprano.FilterModel</a>, <a href="../soprano/Soprano.Client.SparqlModel.html">Soprano.Client.SparqlModel</a>, <a href="../soprano/Soprano.StorageModel.html">Soprano.StorageModel</a><br />
-Namespace: Soprano.Model<br />
+Namespace: <a href="../soprano/Soprano.html">Soprano</a><br />
 <h2>Detailed Description</h2>
 
 <p>\class Model model.h Soprano/Model
@@ -144,14 +144,87 @@ However, it is recommended to create Model instances in the main thread.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeStatement">removeStatement</a> (self, <a href="../soprano/Soprano.Statement.html">Soprano.Statement</a> statement)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeStatement">removeStatement</a> (self, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> subject, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> predicate, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> object, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> context=Soprano.Node())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeStatements">removeStatements</a> (self, [<a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>] statements)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementAdded">statementAdded</a> (self, <a href="../soprano/Soprano.Statement.html">Soprano.Statement</a> statement)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementCount">statementCount</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementRemoved">statementRemoved</a> (self, <a href="../soprano/Soprano.Statement.html">Soprano.Statement</a> statement)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementsAdded">statementsAdded</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statementsRemoved">statementsRemoved</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Error.html#ErrorCode">Soprano.Error.ErrorCode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#write">write</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qtextstream.html">QTextStream</a> os)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="Model"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="statementAdded"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> statementAdded</td>
+<td>(</td>
+<td class="paramtype"><a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>&nbsp;</td>
+<td class="paramname"><em>statement</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Notification signal for new statements. Model implementations
+should emit this signal for each newly added statement.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("statementAdded(const Soprano::Statement&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="statementRemoved"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> statementRemoved</td>
+<td>(</td>
+<td class="paramtype"><a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>&nbsp;</td>
+<td class="paramname"><em>statement</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Notification signal for removed statements. Model implementations
+should emit this signal for each removed statement.
+</p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> Backends may choose not to emit this signal for each
+removed statement but only for a statement pattern (i.e. an
+invalid statement as used in removeAllStatements()) to
+prevent massive performance loss.
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("statementRemoved(const Soprano::Statement&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="statementsAdded"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> statementsAdded</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emitted when new statements have been added to the model.
+</p>
+<p>
+Implementations of this interface have to emit this signal.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("statementsAdded()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="statementsRemoved"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> statementsRemoved</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emitted when statements have been removed from the model.
+</p>
+<p>
+Implementations of this interface have to emit this signal.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("statementsRemoved()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="Model"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -163,7 +236,8 @@ However, it is recommended to create Model instances in the main thread.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="Model"></a>
+<div class="memdoc"><p>Model instances are not meant to be copied.
+</p></div></div><a class="anchor" name="Model"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -185,7 +259,8 @@ However, it is recommended to create Model instances in the main thread.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="addStatement"></a>
+<div class="memdoc"><p>Model instances are not meant to be copied.
+</p></div></div><a class="anchor" name="addStatement"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -864,31 +939,7 @@ on error an invalid iterator is returned.
 </tr></table>
 </div>
 <div class="memdoc"><p>Convenience method which removes all %statements in statements.
-</p></div></div><a class="anchor" name="statementAdded"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> statementAdded</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>&nbsp;</td>
-<td class="paramname"><em>statement</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Notification signal for new statements. Model implementations
-should emit this signal for each newly added statement.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("statementAdded(const const Soprano::Statement&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="statementCount"></a>
+</p></div></div><a class="anchor" name="statementCount"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -903,70 +954,7 @@ should emit this signal for each newly added statement.
 <div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>The number of statements stored in this Model.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> The size of the Model, or -1 on error.
 </dd></dl>
-</p></div></div><a class="anchor" name="statementRemoved"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> statementRemoved</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../soprano/Soprano.Statement.html">Soprano.Statement</a>&nbsp;</td>
-<td class="paramname"><em>statement</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>Notification signal for removed statements. Model implementations
-should emit this signal for each removed statement.
-</p>
-<p>
-<dl class="warning" compact><dt><b>Warning:</b></dt><dd> Backends may choose not to emit this signal for each
-removed statement but only for a statement pattern (i.e. an
-invalid statement as used in removeAllStatements()) to
-prevent massive performance loss.
-</dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("statementRemoved(const const Soprano::Statement&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="statementsAdded"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> statementsAdded</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Emitted when new statements have been added to the model.
-</p>
-<p>
-Implementations of this interface have to emit this signal.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("statementsAdded()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="statementsRemoved"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> statementsRemoved</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>Emitted when statements have been removed from the model.
-</p>
-<p>
-Implementations of this interface have to emit this signal.
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("statementsRemoved()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="write"></a>
+</p></div></div><a class="anchor" name="write"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

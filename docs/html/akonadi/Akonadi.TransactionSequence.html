@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,9 +48,9 @@
 <h1>TransactionSequence Class Reference</h1>
 <code>from PyKDE4.akonadi import *</code>
 <p>
-Inherits: Akonadi.Job &#x2192; <a href="../kdecore/KCompositeJob.html">KCompositeJob</a> &#x2192; <a href="../kdecore/KJob.html">KJob</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+Inherits: <a href="../akonadi/Akonadi.Job.html">Akonadi.Job</a> &#x2192; <a href="../kdecore/KCompositeJob.html">KCompositeJob</a> &#x2192; <a href="../kdecore/KJob.html">KJob</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
 Subclasses: <a href="../akonadi/Akonadi.SpecialCollectionsRequestJob.html">Akonadi.SpecialCollectionsRequestJob</a><br />
-Namespace: Akonadi.TransactionSequence<br />
+Namespace: <a href="../akonadi/Akonadi.html">Akonadi</a><br />
 <h2>Detailed Description</h2>
 
 <p>Base class for jobs that need to run a sequence of sub-jobs in a transaction.
@@ -72,6 +72,7 @@ Example:
 
  // Delete a couple of items inside a transaction
  Akonadi.TransactionSequence *transaction = new TransactionSequence;
+ connect( transaction, SIGNAL( result( KJob* ) ), SLOT( transactionFinished( KJob* ) ) );
 
  const Akonadi.Item.List items = ...
 
@@ -79,7 +80,15 @@ Example:
    new Akonadi.ItemDeleteJob( item, transaction );
  }
 
- transaction-&gt;exec();
+ ...
+
+ MyClass.transactionFinished( KJob *job )
+ {
+   if ( job-&gt;error() )
+     qDebug() &lt;&lt; "Error occurred";
+   else
+     qDebug() &lt;&lt; "Items deleted successfully";
+ }
 
 </pre>
 </p>
@@ -92,6 +101,9 @@ Example:
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addSubjob">addSubjob</a> (self, <a href="../kdecore/KJob.html">KJob</a> job)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#commit">commit</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#doStart">doStart</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rollback">rollback</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAutomaticCommittingEnabled">setAutomaticCommittingEnabled</a> (self, bool enable)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIgnoreJobFailure">setIgnoreJobFailure</a> (self, <a href="../kdecore/KJob.html">KJob</a> job)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#slotResult">slotResult</a> (self, <a href="../kdecore/KJob.html">KJob</a> job)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="TransactionSequence"></a>
@@ -116,7 +128,16 @@ Example:
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="addSubjob"></a>
+<div class="memdoc"><p>Creates a new transaction sequence.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent object.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addSubjob"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -163,7 +184,87 @@ Example:
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="slotResult"></a>
+<div class="memdoc"></div></div><a class="anchor" name="rollback"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> rollback</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Rolls back the current transaction as soon as possible.
+You only need to call this method when you want to roll back due to external
+reasons (e.g. user cancellation), the transaction is automatically rolled back
+if one of its subjobs fails.
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="setAutomaticCommittingEnabled"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setAutomaticCommittingEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>enable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Disable automatic committing.
+Use this when you want to add jobs to this sequence after execution
+has been started, usually that is outside of the contstructor or the
+method that creates this transaction sequence.
+<dl class="note" compact><dt><b>Note:</b></dt><dd> Calling this method after execution of this job has been started
+has no effect.
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>enable</em>&nbsp;</td><td> true to enable autocommitting (default), false to disable it
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="setIgnoreJobFailure"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setIgnoreJobFailure</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KJob.html">KJob</a>&nbsp;</td>
+<td class="paramname"><em>job</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets which job of the sequence might fail without rolling back the
+complete transaction.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="slotResult"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

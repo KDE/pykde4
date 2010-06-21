@@ -31,7 +31,6 @@ public:
     virtual ~ScriptableExtension ();
     static KParts::ScriptableExtension*  childObject (QObject* obj);
     static KParts::ScriptableExtension*  adapterFromLiveConnect (QObject* parentObj, KParts::LiveConnectExtension* oldApi);
-    static void             registerDBusTypes ();
     void                    setHost (KParts::ScriptableExtension* host);
     KParts::ScriptableExtension*  host () const;
     virtual QVariant        rootObject ();
@@ -59,9 +58,3 @@ public:
 //ig unsigned int            qHash (const KParts::ScriptableExtension::Object& o);
 //ig unsigned int            qHash (const KParts::ScriptableExtension::FunctionRef& f);
 };
-//ig const QDBusArgument&    operator << (QDBusArgument& argument, const KParts::ScriptableExtension::Null& n);
-//ig const QDBusArgument&    operator >> (const QDBusArgument& argument, KParts::ScriptableExtension::Null& n);
-//ig const QDBusArgument&    operator << (QDBusArgument& argument, const KParts::ScriptableExtension::Undefined& u);
-//ig const QDBusArgument&    operator >> (const QDBusArgument& argument, KParts::ScriptableExtension::Undefined& u);
-//ig const QDBusArgument&    operator << (QDBusArgument& argument, const KParts::ScriptableExtension::Exception& e);
-//ig const QDBusArgument&    operator >> (const QDBusArgument& argument, KParts::ScriptableExtension::Exception& e);

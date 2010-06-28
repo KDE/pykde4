@@ -53,9 +53,13 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 
 <h2>Detailed Description</h2>
 
+<p>KArchive is a base class for reading and writing archives.
+generic class for reading/writing archives
 
+<dl class="author" compact><dt><b>Author:</b></dt><dd> David Faure &lt;faure@kde.org&gt; </dd></dl>
+</p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj485348236">&lt;anonymous&gt;</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;UnknownTime&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj251285292">&lt;anonymous&gt;</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;UnknownTime&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KArchive">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> fileName)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KArchive">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qiodevice.html">QIODevice</a> dev)</td></tr>
@@ -109,7 +113,16 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KArchive"></a>
+<div class="memdoc"><p>Base constructor (protected since this is a pure virtual class).
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>fileName</em>&nbsp;</td><td> is a local path (e.g. "/tmp/myfile.ext"),
+from which the archive will be read from, or into which the archive
+will be written, depending on the mode given to open().
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KArchive"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -131,7 +144,17 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KArchive"></a>
+<div class="memdoc"><p>Base constructor (protected since this is a pure virtual class).
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dev</em>&nbsp;</td><td> the I/O device where the archive reads its data
+Note that this can be a file, but also a data buffer, a compression filter, etc.
+For a file in writing mode it is better to use the other constructor
+though, to benefit from the use of KSaveFile when saving.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KArchive"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -181,7 +204,23 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="addLocalFile"></a>
+<div class="memdoc"><p>Writes a local directory into the archive, including all its contents, recursively.
+Calls addLocalFile for each file to be added.
+</p>
+<p>
+Since KDE 3.2 it will also add a <b>path</b> that is a symbolic link to a
+directory. The symbolic link will be dereferenced and the content of the
+directory it is pointing to added recursively. However, symbolic links
+*under* <b>path</b> will be stored as is.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>path</em>&nbsp;</td><td> full path to an existing local directory, to be added to the archive.
+
+<tr><td></td><td valign="top"><em>destName</em>&nbsp;</td><td> the resulting name (or relative path) of the file in the archive.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addLocalFile"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -209,7 +248,22 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="close"></a>
+<div class="memdoc"><p>Writes a local file into the archive. The main difference with writeFile,
+is that this method minimizes memory usage, by not loading the whole file
+into memory in one go.
+</p>
+<p>
+If <b>fileName</b> is a symbolic link, it will be written as is, i. e.
+it will not be resolved before.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>fileName</em>&nbsp;</td><td> full path to an existing local file, to be added to the archive.
+
+<tr><td></td><td valign="top"><em>destName</em>&nbsp;</td><td> the resulting name (or relative path) of the file in the archive.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="close"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -221,7 +275,14 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="closeArchive"></a>
+<div class="memdoc"><p>Closes the archive.
+Inherited classes might want to reimplement closeArchive instead.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if close succeeded without problems
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> open
+</dd></dl>
+</p></div></div><a class="anchor" name="closeArchive"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -233,7 +294,9 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="createDevice"></a>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Closes the archive.
+Called by close.
+</p></div></div><a class="anchor" name="createDevice"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -255,7 +318,11 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="device"></a>
+<div class="memdoc"><p>Can be reimplemented in order to change the creation of the device
+(when using the fileName constructor). By default this method uses
+KSaveFile when saving, and a simple QFile on reading.
+This method is called by open().
+</p></div></div><a class="anchor" name="device"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -267,7 +334,10 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="directory"></a>
+<div class="memdoc"><p>The underlying device.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the underlying device.
+</dd></dl>
+</p></div></div><a class="anchor" name="directory"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -279,7 +349,11 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="doFinishWriting"></a>
+<div class="memdoc"><p>If an archive is opened for reading, then the contents
+of the archive can be accessed via this function.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the directory of the archive
+</dd></dl>
+</p></div></div><a class="anchor" name="doFinishWriting"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -301,7 +375,17 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="doPrepareWriting"></a>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Called after writing the data.
+This virtual method must be implemented by subclasses.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>size</em>&nbsp;</td><td> the size of the file
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> finishWriting()
+</dd></dl>
+</p></div></div><a class="anchor" name="doPrepareWriting"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -365,7 +449,33 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="doWriteDir"></a>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>This virtual method must be implemented by subclasses.
+</p>
+<p>
+Depending on the archive type not all metadata might be used.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> the name of the file
+
+<tr><td></td><td valign="top"><em>user</em>&nbsp;</td><td> the user that owns the file
+
+<tr><td></td><td valign="top"><em>group</em>&nbsp;</td><td> the group that owns the file
+
+<tr><td></td><td valign="top"><em>size</em>&nbsp;</td><td> the size of the file
+
+<tr><td></td><td valign="top"><em>perm</em>&nbsp;</td><td> permissions of the file. Use 0100644 if you don't have any more specific permissions to set.
+
+<tr><td></td><td valign="top"><em>atime</em>&nbsp;</td><td> time the file was last accessed
+
+<tr><td></td><td valign="top"><em>mtime</em>&nbsp;</td><td> modification time of the file
+
+<tr><td></td><td valign="top"><em>ctime</em>&nbsp;</td><td> time of last status change
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> prepareWriting
+</dd></dl>
+</p></div></div><a class="anchor" name="doWriteDir"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -423,7 +533,32 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="doWriteSymLink"></a>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Write a directory to the archive.
+This virtual method must be implemented by subclasses.
+</p>
+<p>
+Depending on the archive type not all metadata might be used.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> the name of the directory
+
+<tr><td></td><td valign="top"><em>user</em>&nbsp;</td><td> the user that owns the directory
+
+<tr><td></td><td valign="top"><em>group</em>&nbsp;</td><td> the group that owns the directory
+
+<tr><td></td><td valign="top"><em>perm</em>&nbsp;</td><td> permissions of the directory. Use 040755 if you don't have any other information.
+
+<tr><td></td><td valign="top"><em>atime</em>&nbsp;</td><td> time the file was last accessed
+
+<tr><td></td><td valign="top"><em>mtime</em>&nbsp;</td><td> modification time of the file
+
+<tr><td></td><td valign="top"><em>ctime</em>&nbsp;</td><td> time of last status change
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> writeDir
+</dd></dl>
+</p></div></div><a class="anchor" name="doWriteSymLink"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -487,7 +622,31 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="fileName"></a>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Writes a symbolic link to the archive.
+This virtual method must be implemented by subclasses.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> name of symbolic link
+
+<tr><td></td><td valign="top"><em>target</em>&nbsp;</td><td> target of symbolic link
+
+<tr><td></td><td valign="top"><em>user</em>&nbsp;</td><td> the user that owns the directory
+
+<tr><td></td><td valign="top"><em>group</em>&nbsp;</td><td> the group that owns the directory
+
+<tr><td></td><td valign="top"><em>perm</em>&nbsp;</td><td> permissions of the directory
+
+<tr><td></td><td valign="top"><em>atime</em>&nbsp;</td><td> time the file was last accessed
+
+<tr><td></td><td valign="top"><em>mtime</em>&nbsp;</td><td> modification time of the file
+
+<tr><td></td><td valign="top"><em>ctime</em>&nbsp;</td><td> time of last status change
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> writeSymLink
+</dd></dl>
+</p></div></div><a class="anchor" name="fileName"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -499,7 +658,11 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="findOrCreate"></a>
+<div class="memdoc"><p>The name of the archive file, as passed to the constructor that takes a
+fileName, or an empty string if you used the QIODevice constructor.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the name of the file, or QString() if unknown
+</dd></dl>
+</p></div></div><a class="anchor" name="findOrCreate"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -521,7 +684,15 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="finishWriting"></a>
+<div class="memdoc"><p>Ensures that <b>path</b> exists, create otherwise.
+This handles e.g. tar files missing directory entries, like mico-2.3.0.tar.gz :)
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>path</em>&nbsp;</td><td> the path of the directory
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the directory with the given <b>path</b>
+</dd></dl>
+</p></div></div><a class="anchor" name="finishWriting"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -543,7 +714,14 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="isOpen"></a>
+<div class="memdoc"><p>Call finishWriting after writing the data.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>size</em>&nbsp;</td><td> the size of the file
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> prepareWriting()
+</dd></dl>
+</p></div></div><a class="anchor" name="isOpen"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -555,7 +733,10 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="mode"></a>
+<div class="memdoc"><p>Checks whether the archive is open.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the archive is opened
+</dd></dl>
+</p></div></div><a class="anchor" name="mode"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -567,7 +748,11 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="open"></a>
+<div class="memdoc"><p>Returns the mode in which the archive was opened
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the mode in which the archive was opened (QIODevice.ReadOnly or QIODevice.WriteOnly)
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> open()
+</dd></dl>
+</p></div></div><a class="anchor" name="open"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -589,7 +774,15 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="openArchive"></a>
+<div class="memdoc"><p>Opens the archive for reading or writing.
+Inherited classes might want to reimplement openArchive instead.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mode</em>&nbsp;</td><td> may be QIODevice.ReadOnly or QIODevice.WriteOnly
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> close
+</dd></dl>
+</p></div></div><a class="anchor" name="openArchive"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -611,7 +804,15 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="prepareWriting"></a>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Opens an archive for reading or writing.
+Called by open.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mode</em>&nbsp;</td><td> may be QIODevice.ReadOnly or QIODevice.WriteOnly
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="prepareWriting"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -675,7 +876,37 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="rootDir"></a>
+<div class="memdoc"><p>Here's another way of writing a file into an archive:
+Call prepareWriting(), then call writeData()
+as many times as wanted then call finishWriting( totalSize ).
+For tar.gz files, you need to know the size before hand, it is needed in the header!
+For zip files, size isn't used.
+</p>
+<p>
+This method also allows some file metadata to be
+set. However, depending on the archive type not all metadata might be
+regarded.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> the name of the file
+
+<tr><td></td><td valign="top"><em>user</em>&nbsp;</td><td> the user that owns the file
+
+<tr><td></td><td valign="top"><em>group</em>&nbsp;</td><td> the group that owns the file
+
+<tr><td></td><td valign="top"><em>size</em>&nbsp;</td><td> the size of the file
+
+<tr><td></td><td valign="top"><em>perm</em>&nbsp;</td><td> permissions of the file
+
+<tr><td></td><td valign="top"><em>atime</em>&nbsp;</td><td> time the file was last accessed
+
+<tr><td></td><td valign="top"><em>mtime</em>&nbsp;</td><td> modification time of the file
+
+<tr><td></td><td valign="top"><em>ctime</em>&nbsp;</td><td> time of last status change
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="rootDir"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -687,7 +918,13 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="setDevice"></a>
+<div class="memdoc"><p>Retrieves or create the root directory.
+The default implementation assumes that openArchive() did the parsing,
+so it creates a dummy rootdir if none was set (write mode, or no '/' in the archive).
+Reimplement this to provide parsing/listing on demand.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the root directory
+</dd></dl>
+</p></div></div><a class="anchor" name="setDevice"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -709,7 +946,9 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="setRootDir"></a>
+<div class="memdoc"><p>Can be called by derived classes in order to set the underlying device.
+Note that KArchive will -not- own the device, it must be deleted by the derived class.
+</p></div></div><a class="anchor" name="setRootDir"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -731,7 +970,9 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="writeData"></a>
+<div class="memdoc"><p>Derived classes call setRootDir from openArchive,
+to set the root directory after parsing an existing archive.
+</p></div></div><a class="anchor" name="writeData"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -759,7 +1000,8 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="writeDir"></a>
+<div class="memdoc"><p>Write data into the current file - to be called after calling prepareWriting
+</p></div></div><a class="anchor" name="writeDir"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -817,7 +1059,33 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="writeFile"></a>
+<div class="memdoc"><p>If an archive is opened for writing then you can add new directories
+using this function. KArchive won't write one directory twice.
+</p>
+<p>
+This method also allows some file metadata to be set.
+However, depending on the archive type not all metadata might be regarded.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> the name of the directory
+
+<tr><td></td><td valign="top"><em>user</em>&nbsp;</td><td> the user that owns the directory
+
+<tr><td></td><td valign="top"><em>group</em>&nbsp;</td><td> the group that owns the directory
+
+<tr><td></td><td valign="top"><em>perm</em>&nbsp;</td><td> permissions of the directory
+
+<tr><td></td><td valign="top"><em>atime</em>&nbsp;</td><td> time the file was last accessed
+
+<tr><td></td><td valign="top"><em>mtime</em>&nbsp;</td><td> modification time of the file
+
+<tr><td></td><td valign="top"><em>ctime</em>&nbsp;</td><td> time of last status change
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="writeFile"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -887,7 +1155,38 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="writeSymLink"></a>
+<div class="memdoc"><p>If an archive is opened for writing then you can add a new file
+using this function. If the file name is for example "mydir/test1" then
+the directory "mydir" is automatically appended first if that did not
+happen yet.
+</p>
+<p>
+This method also allows some file metadata to be
+set. However, depending on the archive type not all metadata might be
+regarded.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> the name of the file
+
+<tr><td></td><td valign="top"><em>user</em>&nbsp;</td><td> the user that owns the file
+
+<tr><td></td><td valign="top"><em>group</em>&nbsp;</td><td> the group that owns the file
+
+<tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> the data to write (@p size bytes)
+
+<tr><td></td><td valign="top"><em>size</em>&nbsp;</td><td> the size of the file
+
+<tr><td></td><td valign="top"><em>perm</em>&nbsp;</td><td> permissions of the file
+
+<tr><td></td><td valign="top"><em>atime</em>&nbsp;</td><td> time the file was last accessed
+
+<tr><td></td><td valign="top"><em>mtime</em>&nbsp;</td><td> modification time of the file
+
+<tr><td></td><td valign="top"><em>ctime</em>&nbsp;</td><td> time of last status change
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="writeSymLink"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -951,7 +1250,31 @@ Subclasses: <a href="../kio/KAr.html">KAr</a>, <a href="../kio/KTar.html">KTar</
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj485348236"></a>
+<div class="memdoc"><p>Writes a symbolic link to the archive if supported.
+The archive must be opened for writing.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> name of symbolic link
+
+<tr><td></td><td valign="top"><em>target</em>&nbsp;</td><td> target of symbolic link
+
+<tr><td></td><td valign="top"><em>user</em>&nbsp;</td><td> the user that owns the directory
+
+<tr><td></td><td valign="top"><em>group</em>&nbsp;</td><td> the group that owns the directory
+
+<tr><td></td><td valign="top"><em>perm</em>&nbsp;</td><td> permissions of the directory
+
+<tr><td></td><td valign="top"><em>atime</em>&nbsp;</td><td> time the file was last accessed
+
+<tr><td></td><td valign="top"><em>mtime</em>&nbsp;</td><td> modification time of the file
+
+<tr><td></td><td valign="top"><em>ctime</em>&nbsp;</td><td> time of last status change
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj251285292"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">

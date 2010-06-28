@@ -53,7 +53,8 @@ Inherits: <a href="../kio/KArchiveFile.html">KArchiveFile</a> &#x2192; <a href="
 
 <h2>Detailed Description</h2>
 
-
+<p>A KZipFileEntry represents an file in a zip archive.
+</p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KZipFileEntry">__init__</a> (self, <a href="../kio/KZip.html">KZip</a> zip, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, int access, int date, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> user, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> group, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> symlink, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> path, long start, long uncompressedSize, int encoding, long compressedSize)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KZipFileEntry">__init__</a> (self, <a href="../kio/KZipFileEntry.html">KZipFileEntry</a> other)</td></tr>
@@ -156,7 +157,8 @@ Inherits: <a href="../kio/KArchiveFile.html">KArchiveFile</a> &#x2192; <a href="
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KZipFileEntry"></a>
+<div class="memdoc"><p>Creates a new zip file entry. Do not call this, KZip takes care of it.
+</p></div></div><a class="anchor" name="KZipFileEntry"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -214,7 +216,12 @@ Inherits: <a href="../kio/KArchiveFile.html">KArchiveFile</a> &#x2192; <a href="
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="data"></a>
+<div class="memdoc"><p>This method returns a QIODevice to read the file contents.
+This is obviously for reading only.
+Note that the ownership of the device is being transferred to the caller,
+who will have to delete it.
+The returned device auto-opens (in readonly mode), no need to open it.
+</p></div></div><a class="anchor" name="data"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -226,7 +233,10 @@ Inherits: <a href="../kio/KArchiveFile.html">KArchiveFile</a> &#x2192; <a href="
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="encoding"></a>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the content of this file.
+Call data() with care (only once per file), this data isn't cached.
+</dd></dl>
+</p></div></div><a class="anchor" name="encoding"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

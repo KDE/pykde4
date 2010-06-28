@@ -53,7 +53,14 @@ Inherits: <a href="../kio/KArchiveEntry.html">KArchiveEntry</a><br />
 
 <h2>Detailed Description</h2>
 
-
+<p>Represents a directory entry in a KArchive.
+A directory in an archive.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KArchive
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> KArchiveFile
+</dd></dl>
+</p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KArchiveDirectory">__init__</a> (self, <a href="../kio/KArchive.html">KArchive</a> archive, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, int access, int date, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> user, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> group, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> symlink)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KArchiveDirectory">__init__</a> (self, <a href="../kio/KArchiveDirectory.html">KArchiveDirectory</a> other)</td></tr>
@@ -121,7 +128,26 @@ Inherits: <a href="../kio/KArchiveEntry.html">KArchiveEntry</a><br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="KArchiveDirectory"></a>
+<div class="memdoc"><p>Creates a new directory entry.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>archive</em>&nbsp;</td><td> the entries archive
+
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> the name of the entry
+
+<tr><td></td><td valign="top"><em>access</em>&nbsp;</td><td> the permissions in unix format
+
+<tr><td></td><td valign="top"><em>date</em>&nbsp;</td><td> the date (in seconds since 1970)
+
+<tr><td></td><td valign="top"><em>user</em>&nbsp;</td><td> the user that owns the entry
+
+<tr><td></td><td valign="top"><em>group</em>&nbsp;</td><td> the group that owns the entry
+
+<tr><td></td><td valign="top"><em>symlink</em>&nbsp;</td><td> the symlink, or QString()
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KArchiveDirectory"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -165,7 +191,10 @@ Inherits: <a href="../kio/KArchiveEntry.html">KArchiveEntry</a><br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="copyTo"></a>
+<div class="memdoc"><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd>
+Adds a new entry to the directory.
+</dd></dl>
+</p></div></div><a class="anchor" name="copyTo"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -193,7 +222,17 @@ Inherits: <a href="../kio/KArchiveEntry.html">KArchiveEntry</a><br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="entries"></a>
+<div class="memdoc"><p>Extracts all entries in this archive directory to the directory
+<b>dest.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dest</em>&nbsp;</td><td> the directory to extract to
+
+<tr><td></td><td valign="top"><em>recursive</em>&nbsp;</td><td> if set to true, subdirectories are extracted as well
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="entries"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -205,7 +244,14 @@ Inherits: <a href="../kio/KArchiveEntry.html">KArchiveEntry</a><br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="entry"></a>
+<div class="memdoc"><p>Returns a list of sub-entries.
+Note that the list is not sorted, it's even in random order (due to using a hashtable).
+Use sort() on the result to sort the list by filename.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the names of all entries in this directory (filenames, no path).
+</dd></dl>
+</p></div></div><a class="anchor" name="entry"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -227,7 +273,14 @@ Inherits: <a href="../kio/KArchiveEntry.html">KArchiveEntry</a><br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="isDirectory"></a>
+<div class="memdoc"><p>Returns the entry with the given name.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> may be "test1", "mydir/test3", "mydir/mysubdir/test3", etc.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> a pointer to the entry in the directory.
+</dd></dl>
+</p></div></div><a class="anchor" name="isDirectory"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -239,7 +292,10 @@ Inherits: <a href="../kio/KArchiveEntry.html">KArchiveEntry</a><br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div>
+<div class="memdoc"><p>Checks whether this entry is a directory.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true, since this entry is a directory
+</dd></dl>
+</p></div></div>
 </div>
 </div>
 </div>

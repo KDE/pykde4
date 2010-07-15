@@ -59,6 +59,10 @@ public:
     else if (dynamic_cast<Akonadi::PersistentSearchAttribute*>(sipCpp))
         sipType = sipType_Akonadi_PersistentSearchAttribute;
 %End
+private:
+//force
+Akonadi::AddressAttribute& operator = (const Akonadi::AddressAttribute&);
+//end
 };
 };
 %ModuleHeaderCode

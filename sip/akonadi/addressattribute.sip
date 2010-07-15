@@ -57,6 +57,10 @@ public:
     else if (dynamic_cast<Akonadi::MessageThreadingAttribute*>(sipCpp))
         sipType = sipType_Akonadi_MessageThreadingAttribute;
 %End
+private:
+//force
+Akonadi::AddressAttribute& operator = (const Akonadi::AddressAttribute&);
+//end
 };
 };
 %ModuleHeaderCode

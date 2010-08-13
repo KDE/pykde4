@@ -1,5 +1,5 @@
 
-PYTHON_INSTALL(kde4.py ${PYTHON_SITE_PACKAGES_DIR}/PyQt4/uic/widget-plugins/)
-PYTHON_INSTALL(pykdeuic4.py ${PYTHON_SITE_PACKAGES_DIR}/PyQt4/uic/)
+PYTHON_INSTALL(kde4.py ${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyQt4/uic/widget-plugins/)
+PYTHON_INSTALL(pykdeuic4.py ${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyQt4/uic/)
 find_path(cmake_module_dir create_exe_symlink.cmake ${CMAKE_MODULE_PATH})
-INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -DTARGET=${PYTHON_SITE_PACKAGES_DIR}/PyQt4/uic/pykdeuic4.py -DLINK_NAME=${BIN_INSTALL_DIR}/pykdeuic4 -P ${cmake_module_dir}/create_exe_symlink.cmake)" )
+INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -DTARGET=${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyQt4/uic/pykdeuic4.py -DLINK_NAME=${BIN_INSTALL_DIR}/pykdeuic4 -P ${cmake_module_dir}/create_exe_symlink.cmake)" )

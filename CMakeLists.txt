@@ -188,12 +188,12 @@ IF(POLKITQT_FOUND)
     SET(PYKDE_MODULES "${PYKDE_MODULES} polkitqt")
 ENDIF(POLKITQT_FOUND)
 
-PYTHON_INSTALL(__init__.py ${PYTHON_SITE_PACKAGES_DIR}/PyKDE4)
+PYTHON_INSTALL(__init__.py ${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4)
 
 MESSAGE(STATUS "KDE_VERSION: ${KDE_VERSION}")
 MESSAGE(STATUS "KDE4_INCLUDE_DIR: ${KDE4_INCLUDE_DIR}")
 MESSAGE(STATUS "KDE4_LIB_DIR: ${KDE4_LIB_DIR}")
-MESSAGE(STATUS "PYTHON_SITE_PACKAGES_DIR: ${PYTHON_SITE_PACKAGES_DIR}")
+MESSAGE(STATUS "PYTHON_SITE_PACKAGES_INSTALL_DIR: ${PYTHON_SITE_PACKAGES_INSTALL_DIR}")
 
 # Setup and install pykdeconfig.py
 
@@ -225,7 +225,7 @@ _pkg_config = {
     'konsolepart':          'False',
     'libdir':               '${LIB_DIR}',
     'pykde_kde_sip_flags':  '${_SIP_TAGS} ${_SIP_X} ${SIP_EXTRA_OPTIONS}',
-    'pykde_mod_dir':        '${PYTHON_SITE_PACKAGES_DIR}/PyKDE4',
+    'pykde_mod_dir':        '${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4',
     'pykde_modules':        '${PYKDE_MODULES}',
     'pykde_sip_dir':        '${SIP_DEFAULT_SIP_DIR}/PyKDE4',
     'pykde_version':        kde_version_hex,
@@ -235,7 +235,7 @@ _pkg_config = {
 _default_macros = None")
 
 CONFIGURE_FILE(pykdeconfig.py.in ${CMAKE_CURRENT_BINARY_DIR}/pykdeconfig.py)
-PYTHON_INSTALL(${CMAKE_CURRENT_BINARY_DIR}/pykdeconfig.py ${PYTHON_SITE_PACKAGES_DIR}/PyKDE4)
+PYTHON_INSTALL(${CMAKE_CURRENT_BINARY_DIR}/pykdeconfig.py ${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4)
 
 # Install the .sip files for anyone that wants to build bindings on top of PyKDE4.
 # (Don't forget the / at the end of sip/.)

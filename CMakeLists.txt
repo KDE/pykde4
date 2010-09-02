@@ -26,15 +26,15 @@ FIND_PACKAGE(PythonLibrary REQUIRED)
 INCLUDE(PythonMacros)
 
 FIND_PACKAGE(SIP REQUIRED)
-IF(SIP_VERSION STRLESS "040900")    # These version numbers also appear in ../CMakeLists.txt
-    MESSAGE(FATAL_ERROR "The version of SIP found is too old. 4.9.0 or later is needed.")
-ENDIF(SIP_VERSION STRLESS "040900")
+IF(SIP_VERSION STRLESS "041100")    # These version numbers also appear in ../CMakeLists.txt
+    MESSAGE(FATAL_ERROR "The version of SIP found is too old. 4.11.0 or later is needed.")
+ENDIF(SIP_VERSION STRLESS "041100")
 INCLUDE(SIPMacros)
 
 FIND_PACKAGE(PyQt4 REQUIRED)
-IF(PYQT4_VERSION STRLESS "040700")  # These version numbers also appear in ../CMakeLists.txt
-    MESSAGE(FATAL_ERROR "The version of PyQt found is too old. 4.7.0 or later is required.")
-ENDIF(PYQT4_VERSION STRLESS "040700")
+IF(PYQT4_VERSION STRLESS "040705")  # These version numbers also appear in ../CMakeLists.txt
+    MESSAGE(FATAL_ERROR "The version of PyQt found is too old. 4.7.5 or later is required.")
+ENDIF(PYQT4_VERSION STRLESS "040705")
 
 
 SET(SOPRANO_MIN_VERSION "2.0")

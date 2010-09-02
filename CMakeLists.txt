@@ -26,9 +26,9 @@ FIND_PACKAGE(PythonLibrary REQUIRED)
 INCLUDE(PythonMacros)
 
 FIND_PACKAGE(SIP REQUIRED)
-IF(SIP_VERSION STRLESS "041100")    # These version numbers also appear in ../CMakeLists.txt
+IF(SIP_VERSION STRLESS "040b00")    # These version numbers also appear in ../CMakeLists.txt
     MESSAGE(FATAL_ERROR "The version of SIP found is too old. 4.11.0 or later is needed.")
-ENDIF(SIP_VERSION STRLESS "041100")
+ENDIF(SIP_VERSION STRLESS "040b00")
 INCLUDE(SIPMacros)
 
 FIND_PACKAGE(PyQt4 REQUIRED)

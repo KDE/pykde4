@@ -54,8 +54,8 @@ public:
 protected:
                             Entity (const Akonadi::Entity& other);
 //ig                            Entity (EntityPrivate* dd);
+                            ~Entity ();
 public:
-    ~Entity ();
     void                    setId (Akonadi::Entity::Id identifier);
     Akonadi::Collection     parentCollection () const;
 //ig    Akonadi::Collection&    parentCollection ();

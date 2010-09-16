@@ -35,8 +35,6 @@
 %Include global.sip
 %Include groupterm.sip
 %Include kmetadatatagcloud.sip
-%Include kratingpainter.sip
-%Include kratingwidget.sip
 %Include ktagcloudwidget.sip
 %Include ktagdisplaywidget.sip
 %Include literal.sip

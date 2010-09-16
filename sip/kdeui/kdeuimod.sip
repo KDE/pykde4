@@ -151,6 +151,8 @@
 %Include kplotwidget.sip
 %Include kprogressdialog.sip
 %Include kpushbutton.sip
+%Include kratingpainter.sip
+%Include kratingwidget.sip
 %Include krecentfilesaction.sip
 %Include krecursivefilterproxymodel.sip
 %Include kreplace.sip

@@ -44,9 +44,16 @@ public:
     void                    setAudioCaptureDeviceListFor (Phonon::Category category, QList<int> order);
     QList<int>              audioCaptureDeviceListFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
     int                     audioCaptureDeviceFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
-//force
 private:
-    Phonon::GlobalConfig&   operator=(const Phonon::GlobalConfig&);
+//force
+    Phonon::GlobalConfig&   operator = (const Phonon::GlobalConfig&);
 //end
+public:
+    QHash<QByteArray,QVariant>  deviceProperties (Phonon::ObjectDescriptionType deviceType, int index) const;
+    QHash<QByteArray,QVariant>  audioOutputDeviceProperties (int index) const;
+    QList<int>              videoCaptureDeviceListFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
+    int                     videoCaptureDeviceFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
+    QHash<QByteArray,QVariant>  videoCaptureDeviceProperties (int index) const;
+    QHash<QByteArray,QVariant>  audioCaptureDeviceProperties (int index) const;
 };
 };

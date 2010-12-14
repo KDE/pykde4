@@ -31,5 +31,6 @@ public:
     QModelIndex             index () const;
     QByteArray              partName () const;
     Akonadi::Item           item () const;
+    virtual ~PartFetcher ();
 };
 };

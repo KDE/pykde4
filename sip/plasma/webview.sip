@@ -77,6 +77,13 @@ public:
     void                    setZoomFactor (const qreal zoom);
 protected:
     QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
+public:
+    void                    back ();
+    void                    forward ();
+    void                    reload ();
+    void                    stop ();
+signals:
+    void                    urlChanged (const QUrl& url);
 };
 // WebView
 

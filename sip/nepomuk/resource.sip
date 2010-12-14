@@ -20,6 +20,7 @@
 
 %ModuleHeaderCode
 //ctscc
+#include <nepomuk/file.h>
 #include <nepomuk/resource.h>
 #include <nepomuk/tag.h>
 #include <nepomuk/thing.h>
@@ -136,7 +137,9 @@ public:
     // CTSCC for subclasses of 'Resource'
     sipType = NULL;
 
-    if (dynamic_cast<Nepomuk::Tag*>(sipCpp))
+    if (dynamic_cast<Nepomuk::File*>(sipCpp))
+        sipType = sipType_Nepomuk_File;
+    else if (dynamic_cast<Nepomuk::Tag*>(sipCpp))
         sipType = sipType_Nepomuk_Tag;
     else if (dynamic_cast<Nepomuk::Thing*>(sipCpp))
         sipType = sipType_Nepomuk_Thing;
@@ -145,6 +148,8 @@ public:
     int                     usageCount () const;
     void                    increaseUsageCount ();
     static Nepomuk::Resource  fromResourceUri (const KUrl& uri, const Nepomuk::Types::Class& type = Nepomuk::Types::Class(), Nepomuk::ResourceManager* manager = 0);
+    bool                    isFile () const;
+    Nepomuk::File           toFile () const;
 };
 // Resource
 

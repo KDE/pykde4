@@ -69,6 +69,7 @@ private:
 //end
 public:
     ~Highlighter ();
+    bool                    checkerEnabledByDefault () const;
 };
 // Highlighter
 

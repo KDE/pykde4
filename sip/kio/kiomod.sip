@@ -80,6 +80,7 @@
 %Include kfiledialog.sip
 %Include kfilefiltercombo.sip
 %Include kfileitem.sip
+%Include kfileitemactionplugin.sip
 %Include kfileitemactions.sip
 %Include kfileitemdelegate.sip
 %Include kfileitemlistproperties.sip

@@ -35,4 +35,6 @@ signals:
     void                    urlActivated (const KUrl& url);
 protected:
     virtual bool            event (QEvent* event);
+signals:
+    void                    metaDataRequestFinished (const KFileItemList& items);
 };

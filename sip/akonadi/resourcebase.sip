@@ -72,5 +72,14 @@ protected:
     void                    scheduleCustomTask (QObject* receiver, const char* method, const QVariant& argument, Akonadi::ResourceBase::SchedulePriority priority);
 //end
     void                    taskDone ();
+signals:
+    void                    attributesSynchronized (qlonglong collectionId);
+protected:
+    void                    retrieveCollectionAttributes (const Akonadi::Collection& collection);
+    void                    abortActivity ();
+    void                    collectionAttributesRetrieved (const Akonadi::Collection& collection);
+    void                    setItemTransactionMode (Akonadi::ItemSync::TransactionMode mode);
+    void                    setItemSynchronizationFetchScope (const Akonadi::ItemFetchScope& fetchScope);
+    void                    synchronizeCollectionAttributes (qint64 id);
 };
 };

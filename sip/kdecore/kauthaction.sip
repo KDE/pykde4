@@ -64,5 +64,8 @@ public:
     bool                    operator != (const KAuth::Action& action) const;
     bool                    hasHelper () const;
     KAuth::Action::AuthStatus  earlyAuthorize () const;
+    static bool             executeActions (const QList<KAuth::Action>& actions, QList<KAuth::Action>* deniedActions, const QString& helperId, QWidget* parent);
+    void                    setParentWidget (QWidget* parent);
+    QWidget*                parentWidget () const;
 };
 };

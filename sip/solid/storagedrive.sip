@@ -71,6 +71,7 @@ protected:
 public:
     ~StorageDrive ();
     qulonglong              size () const;
+    bool                    isInUse () const;
 };
 // StorageDrive
 

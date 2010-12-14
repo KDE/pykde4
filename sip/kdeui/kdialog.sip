@@ -159,6 +159,7 @@ private:
 //end
 public:
     ~KDialog ();
+    static void             setAllowEmbeddingInGraphicsView (bool allowEmbedding);
 };
 // KDialog
 

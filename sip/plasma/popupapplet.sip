@@ -57,6 +57,10 @@ private:
                             PopupApplet (const QString& packagePath, uint appletId, const QVariantList& args);
 protected:
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
+public:
+    void                    setPopupAlignment (Qt::AlignmentFlag alignment);
+    Qt::AlignmentFlag       popupAlignment () const;
+    bool                    isIconified () const;
 };
 // PopupApplet
 

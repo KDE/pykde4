@@ -274,6 +274,7 @@ public:
     ~NETWinInfo ();
     void                    setFrameOverlap (NETStrut strut);
     NETStrut                frameOverlap () const;
+    const char*             activities () const;
 };
 // NETWinInfo
 

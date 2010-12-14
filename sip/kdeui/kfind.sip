@@ -81,6 +81,7 @@ protected:
     QWidget*                dialogsParent () const;
 public:
     ~KFind ();
+    typedef QFlags<KFind::Options> SearchOptions;
 };
 // KFind
 

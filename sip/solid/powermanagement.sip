@@ -44,6 +44,8 @@ bool                    stopSuppressingSleep (int cookie);
 //ig class Notifier;
 
 //ig Solid::PowerManagement::Notifier*  notifier ();
+int                     beginSuppressingScreenPowerManagement (const QString& reason = QString());
+bool                    stopSuppressingScreenPowerManagement (int cookie);
 };
 // PowerManagement
 

@@ -229,6 +229,7 @@ sipRes = new KUrl::List();
 
 //end
 //ig        QVariant                operator QVariant () const;
+        QStringList             toStringList (KUrl::AdjustPathOption trailing) const;
     };
 // List
 

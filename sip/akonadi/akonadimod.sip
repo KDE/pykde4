@@ -29,6 +29,11 @@
 %Import kdecore/kdecoremod.sip
 %Import kio/kiomod.sip
 
+%Include abstractdifferencesreporter.sip
+%Include differencesalgorithminterface.sip
+%Include messageflags.sip
+%Include agentactionmanager.sip
+%Include agentfactory.sip
 %Include agentbase.sip
 %Include agentfilterproxymodel.sip
 %Include agentinstance.sip
@@ -119,3 +124,14 @@
 %Include transactionsequence.sip
 %Include transportresourcebase.sip
 %Include unlinkjob.sip
+%Include collectionattributessynchronizationjob.sip
+%Include entityorderproxymodel.sip
+%Include entityrightsfiltermodel.sip
+%Include etmviewstatesaver.sip
+%Include indexpolicyattribute.sip
+%Include messagestatus.sip
+%Include recursivecollectionfilterproxymodel.sip
+%Include recursiveitemfetchjob.sip
+%Include resourcebasesettings.sip
+%Include resourcesettings.sip
+%Include standardmailactionmanager.sip

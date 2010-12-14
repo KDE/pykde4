@@ -48,6 +48,13 @@ protected:
     void                    slotResult (KJob* job);
 public:
     void                    rollback ();
+    enum TransactionMode
+    {
+        SingleTransaction,
+        MultipleTransactions,
+        NoTransaction
+    };
+    void                    setTransactionMode (Akonadi::ItemSync::TransactionMode mode);
 };
 // ItemSync
 

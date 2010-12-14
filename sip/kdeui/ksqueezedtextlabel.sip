@@ -46,6 +46,8 @@ protected:
 public:
     ~KSqueezedTextLabel ();
     QString                 fullText () const;
+protected:
+    void                    mouseReleaseEvent (QMouseEvent*);
 };
 // KSqueezedTextLabel
 

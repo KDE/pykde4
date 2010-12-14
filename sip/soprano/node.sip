@@ -71,6 +71,16 @@ public:
     static QString          blankToN3 (const QString& blank);
     static QString          literalToN3 (const Soprano::LiteralValue& literal);
     ~Node ();
+    enum N3ParserFlag
+    {
+        NoFlags,
+        StrictLiteralTypes,
+        StrictUris,
+        IgnorePrefixes
+    };
+    typedef QFlags<Soprano::Node::N3ParserFlag> N3ParserFlags;
+    static Soprano::Node    fromN3 (const QString& n3, Soprano::Node::N3ParserFlags flags = Soprano::Node::NoFlags);
+    static Soprano::Node    fromN3Stream (QTextStream& stream, Soprano::Node::N3ParserFlags flags = Soprano::Node::NoFlags);
 };
 // Node
 
@@ -81,3 +91,4 @@ uint                    qHash (const Soprano::Node& node);
 
 //ig QDebug                  operator << (QDebug s, const Soprano::Node&);
 QTextStream&            operator << (QTextStream& s, const Soprano::Node&);
+QTextStream&            operator >> (QTextStream& s, Soprano::Node&);

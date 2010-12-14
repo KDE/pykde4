@@ -150,6 +150,24 @@ public:
     QDate                   readDate (const QString& dateString, const QString& dateFormat, bool* ok, KLocale::DateTimeFormatStandard formatStandard) const;
 protected:
 //ig                            KCalendarSystem (KCalendarSystemPrivate& dd, const KSharedConfig::Ptr config = KSharedConfig::Ptr(), const KLocale* locale = 0);
+public:
+    static KCalendarSystem*  create (KLocale::CalendarSystem calendarSystem, const KLocale* locale = 0);
+    static KCalendarSystem*  create (KLocale::CalendarSystem calendarSystem, KSharedConfig::Ptr config, const KLocale* locale = 0);
+    static QList<KLocale::CalendarSystem>  calendarSystemsList ();
+    static QString          calendarLabel (KLocale::CalendarSystem calendarSystem, const KLocale* locale = KGlobal::locale());
+    KLocale::CalendarSystem  calendarSystem () const;
+    QString                 calendarLabel () const;
+    QDate                   firstDayOfYear (int year) const;
+    QDate                   lastDayOfYear (int year) const;
+    QDate                   firstDayOfYear (const QDate& date = QDate::currentDate()) const;
+    QDate                   lastDayOfYear (const QDate& date = QDate::currentDate()) const;
+    QDate                   firstDayOfMonth (int year, int month) const;
+    QDate                   lastDayOfMonth (int year, int month) const;
+    QDate                   firstDayOfMonth (const QDate& date = QDate::currentDate()) const;
+    QDate                   lastDayOfMonth (const QDate& date = QDate::currentDate()) const;
+    QString                 formatDateComponent (const QDate& date, KLocale::DateTimeComponent component, KLocale::DateTimeComponentFormat format = KLocale::DefaultComponentFormat) const;
+    int                     shortYearWindowStartYear () const;
+    int                     applyShortYearWindow (int inputYear) const;
 };
 // KCalendarSystem
 

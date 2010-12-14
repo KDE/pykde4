@@ -33,11 +33,13 @@ class OpticalDisc : Solid::StorageVolume
 public:
     enum ContentType
     {
+        NoContent,
         Audio,
         Data,
         VideoCd,
         SuperVideoCd,
-        VideoDvd
+        VideoDvd,
+        VideoBluRay
     };
 
     typedef QFlags<Solid::OpticalDisc::ContentType> ContentTypes;

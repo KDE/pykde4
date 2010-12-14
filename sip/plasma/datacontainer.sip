@@ -49,6 +49,11 @@ protected:
 public:
     ~DataContainer ();
     void                    forceImmediateUpdate ();
+    void                    setStorageEnabled (bool store);
+    bool                    isStorageEnabled () const;
+    bool                    needsToBeStored () const;
+    void                    setNeedsToBeStored (bool store);
+    Plasma::DataEngine*     getDataEngine ();
 };
 // DataContainer
 

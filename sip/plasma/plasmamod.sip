@@ -29,11 +29,13 @@
 %Import QtSvg/QtSvgmod.sip
 %Import QtWebKit/QtWebKitmod.sip
 %Import QtXml/QtXmlmod.sip
+%Import QtDeclarative/QtDeclarativemod.sip
 %Import kdecore/kdecoremod.sip
 %Import kdeui/kdeuimod.sip
 
 %Include paintutils.sip
 %Include plasma.sip
+%Include declarativewidget.sip
 %Include abstractdialogmanager.sip
 %Include abstractrunner.sip
 %Include abstracttoolbox.sip
@@ -114,3 +116,4 @@
 %Include videowidget.sip
 %Include webview.sip
 %Include windoweffects.sip
+%Include pluginloader.sip

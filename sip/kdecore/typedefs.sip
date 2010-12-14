@@ -920,3 +920,192 @@ template <TYPE*>
     return sipGetState(sipTransferObj);
 %End
 };
+
+
+template <TYPE1>
+%MappedType QHash<TYPE1,bool>
+{
+%TypeHeaderCode
+#include <qhash.h>
+%End
+
+%ConvertFromTypeCode
+    // Create the dictionary.
+    PyObject *d = PyDict_New();
+
+    if (!d)
+        return NULL;
+
+    // Set the dictionary elements.
+    QHash<TYPE1, bool>::const_iterator i = sipCpp->constBegin();
+
+    while (i != sipCpp->constEnd())
+    {
+        TYPE1 *t1 = new TYPE1(i.key());
+        bool t2 = i.value();
+
+        PyObject *t1obj = sipConvertFromNewType(t1, sipType_TYPE1, sipTransferObj);
+#if PY_MAJOR_VERSION >= 3
+        PyObject *t2obj = PyBool_FromLong ((long)t2);
+#else
+        PyObject *t2obj = PyBool_FromLong ((long)t2);
+#endif
+
+        if (t1obj == NULL || t2obj == NULL || PyDict_SetItem(d, t1obj, t2obj) < 0)
+        {
+            Py_DECREF(d);
+
+            if (t1obj) {
+                Py_DECREF(t1obj);
+            } else {
+                delete t1;
+            }
+            
+            if (t2obj) {
+                Py_DECREF(t2obj);
+            }
+
+            return NULL;
+        }
+
+        Py_DECREF(t1obj);
+        Py_DECREF(t2obj);
+
+        ++i;
+    }
+
+    return d;
+%End
+
+%ConvertToTypeCode
+    PyObject *t1obj, *t2obj;
+    SIP_SSIZE_T i = 0;
+
+    // Check the type if that is all that is required.
+    if (sipIsErr == NULL)
+    {
+        if (!PyDict_Check(sipPy))
+            return 0;
+
+        while (PyDict_Next(sipPy, &i, &t1obj, &t2obj))
+        {
+            if (!sipCanConvertToType(t1obj, sipType_TYPE1, SIP_NOT_NONE))
+                return 0;
+
+#if PY_MAJOR_VERSION >= 3
+            if (!PyBool_Check (t2obj))
+#else
+            if (!PyBool_Check (t2obj))
+#endif
+                return 0;
+        } 
+
+        return 1;
+    }
+
+    QHash<TYPE1, bool> *qm = new QHash<TYPE1, bool>;
+ 
+    while (PyDict_Next(sipPy, &i, &t1obj, &t2obj))
+    {
+        int state1, state2;
+
+        TYPE1 *t1 = reinterpret_cast<TYPE1 *>(sipConvertToType(t1obj, sipType_TYPE1, sipTransferObj, SIP_NOT_NONE, &state1, sipIsErr));
+ #if PY_MAJOR_VERSION >= 3
+        bool t2 = PyObject_IsTrue(t2obj);
+#else
+        bool t2 = PyObject_IsTrue (t2obj);
+#endif
+
+        if (*sipIsErr)
+        {
+            sipReleaseType(t1, sipType_TYPE1, state1);
+
+            delete qm;
+            return 0;
+        }
+
+        qm->insert(*t1, t2);
+
+        sipReleaseType(t1, sipType_TYPE1, state1);
+    }
+ 
+    *sipCppPtr = qm;
+ 
+    return sipGetState(sipTransferObj);
+%End
+};
+
+%MappedType QVector<int>
+{
+%TypeHeaderCode
+#include <qvector.h>
+%End
+
+%ConvertFromTypeCode
+    // Create the list.
+    PyObject *l;
+
+    if ((l = PyList_New(sipCpp->size())) == NULL)
+        return NULL;
+
+    // Set the list elements.
+    for (int i = 0; i < sipCpp->size(); ++i)
+    {
+        int t = (sipCpp->at(i));
+
+#if PY_MAJOR_VERSION >= 3        
+        PyObject *tobj = PyLong_FromLong(t);
+#else
+        PyObject *tobj = PyInt_FromLong(t);
+#endif
+
+        PyList_SET_ITEM(l, i, tobj);
+    }
+
+    return l;
+%End
+
+%ConvertToTypeCode
+    // Check the type if that is all that is required.
+    if (sipIsErr == NULL)
+    {
+        if (!PyList_Check(sipPy))
+            return 0;
+
+        for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i) {
+            PyObject *tobj = PyList_GET_ITEM(sipPy, i);
+#if PY_MAJOR_VERSION >= 3
+            if (!PyNumber_Check(tobj))
+#else
+            if (!PyInt_Check(tobj))
+#endif
+                return 0;
+        }
+        return 1;
+    }
+
+    QVector<int> *qv = new QVector<int>;
+ 
+    for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
+    {
+        PyObject *tobj = PyList_GET_ITEM(sipPy, i);
+ #if PY_MAJOR_VERSION >= 3
+        int t = PyLong_AsLong (tobj);
+#else
+        int t = PyInt_AS_LONG (tobj);
+#endif
+
+        if (*sipIsErr)
+        {
+            delete qv;
+            return 0;
+        }
+
+        qv->append(t);
+    }
+ 
+    *sipCppPtr = qv;
+ 
+    return sipGetState(sipTransferObj);
+%End
+};

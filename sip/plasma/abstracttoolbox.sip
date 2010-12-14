@@ -34,7 +34,7 @@ public:
     virtual void            setShowing (const bool show)=0;
 signals:
     void                    toggled ();
-    void                    visibilityChanged (bool);
+    void                    visibilityChanged (bool open);
 protected:
     Plasma::Containment*    containment () const;
 public:
@@ -47,5 +47,11 @@ public:
         DestructiveTool,
         UserToolType
     };
+    explicit                AbstractToolBox (QObject* parent /TransferThis/ = 0, const QVariantList& args = QVariantList());
+    static Plasma::AbstractToolBox*  load (const QString& name, const QVariantList& args = QVariantList(), Plasma::Containment* containment = 0);
+    static KPluginInfo::List  listToolBoxInfo (const QString& parentApp = QString());
+    void                    restore (const KConfigGroup& group);
+    void                    save (const KConfigGroup& group);
+    void                    reposition ();
 };
 };

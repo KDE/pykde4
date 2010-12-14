@@ -101,6 +101,12 @@ protected:
     void                    setOnline (bool state);
 //ig    explicit                AgentBase (AgentBasePrivate* d, const QString& id);
     virtual void            doSetOnline (bool online);
+public:
+    static KComponentData   componentData ();
+signals:
+    void                    advancedStatus (const QVariantMap& status);
+protected:
+    KSharedConfigPtr        config ();
 };
 };
 %ModuleHeaderCode

@@ -58,6 +58,7 @@ public:
 //ig    void                    unpublish (const QString& name = QString());
 //ig    bool                    isPublished () const;
     QString                 contentsHash () const;
+    explicit                Package ();
 };
 // Package
 

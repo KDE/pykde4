@@ -52,6 +52,8 @@ public:
         sipType = sipType_Akonadi_EntityDisplayAttribute;
     else if (dynamic_cast<Akonadi::EntityHiddenAttribute*>(sipCpp))
         sipType = sipType_Akonadi_EntityHiddenAttribute;
+    else if (dynamic_cast<Akonadi::IndexPolicyAttribute*>(sipCpp))
+        sipType = sipType_Akonadi_IndexPolicyAttribute;
     else if (dynamic_cast<Akonadi::MessageFolderAttribute*>(sipCpp))
         sipType = sipType_Akonadi_MessageFolderAttribute;
     else if (dynamic_cast<Akonadi::MessageThreadingAttribute*>(sipCpp))
@@ -61,7 +63,7 @@ public:
 %End
 private:
 //force
-Akonadi::AddressAttribute& operator = (const Akonadi::AddressAttribute&);
+    Akonadi::AddressAttribute&  operator = (const Akonadi::AddressAttribute&);
 //end
 };
 };
@@ -72,6 +74,7 @@ Akonadi::AddressAttribute& operator = (const Akonadi::AddressAttribute&);
 #include <akonadi/collectionquotaattribute.h>
 #include <akonadi/entitydisplayattribute.h>
 #include <akonadi/entityhiddenattribute.h>
+#include <akonadi/indexpolicyattribute.h>
 #include <akonadi/kmime/messagefolderattribute.h>
 #include <akonadi/kmime/messagethreadingattribute.h>
 #include <akonadi/persistentsearchattribute.h>

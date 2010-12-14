@@ -68,6 +68,7 @@ public:
 //end
     bool                    operator == (const QUrl& other) const;
     bool                    operator != (const QUrl& other) const;
+    bool                    userVisible () const;
 };
 // Entity
 

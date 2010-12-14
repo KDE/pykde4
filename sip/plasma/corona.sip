@@ -87,6 +87,13 @@ public:
 protected:
     void                    mapAnimation (Plasma::Animator::Animation from, Plasma::Animator::Animation to);
     void                    mapAnimation (Plasma::Animator::Animation from, const QString& to);
+public:
+    Plasma::Containment*    containmentForScreen (int screen, int desktop, const QString& defaultPluginIfNonExistent, const QVariantList& defaultArgs = QVariantList());
+    QString                 preferredToolBoxPlugin (const Plasma::Containment::Type type) const;
+    QList<Plasma::Containment*>  importLayout (const KConfigGroup& config);
+    void                    exportLayout (KConfigGroup& config, QList<Plasma::Containment*> containments);
+protected:
+    void                    setPreferredToolBoxPlugin (const Plasma::Containment::Type type, const QString& plugin);
 };
 // Corona
 

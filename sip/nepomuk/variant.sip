@@ -131,6 +131,9 @@ public:
 //ig    QList<bool>             toBoolList () const;
 //ig                            Variant (const QList<qlonglong>& i);
     static Nepomuk::Variant  fromNode (const Soprano::Node& node);
+    Soprano::Node           toNode () const;
+    QList<Soprano::Node>    toNodeList () const;
+    static Nepomuk::Variant  fromNodeList (const QList<Soprano::Node>& node);
 };
 // Variant
 

@@ -54,7 +54,7 @@ public:
 protected:
                             Entity (const Akonadi::Entity& other);
 //ig                            Entity (EntityPrivate* dd);
-                            ~Entity ();
+    ~Entity ();
 public:
     void                    setId (Akonadi::Entity::Id identifier);
     Akonadi::Collection     parentCollection () const;
@@ -107,6 +107,53 @@ public:
         return PyList_Check(sipPy);
 
     QList<Akonadi::Entity::Id> *ql = new QList<Akonadi::Entity::Id>;
+ 
+    for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
+        ql->append((Akonadi::Entity::Id)PyLong_AsLongLong(PyList_GET_ITEM(sipPy, i)));
+ 
+    *sipCppPtr = ql;
+ 
+    return sipGetState(sipTransferObj);
+%End
+};
+
+%MappedType QVector<Akonadi::Entity::Id>
+{
+%TypeHeaderCode
+#include <qvector.h>
+%End
+
+%ConvertFromTypeCode
+    // Create the list.
+    PyObject *l;
+
+    if ((l = PyList_New(sipCpp->size())) == NULL)
+        return NULL;
+
+    // Set the list elements.
+    for (int i = 0; i < sipCpp->size(); ++i)
+    {
+        PyObject *pobj;
+
+        if ((pobj = PyLong_FromLongLong (sipCpp->value(i))) == NULL)
+        {
+            Py_DECREF(l);
+
+            return NULL;
+        }
+
+        PyList_SET_ITEM(l, i, pobj);
+    }
+
+    return l;
+%End
+
+%ConvertToTypeCode
+    // Check the type if that is all that is required.
+    if (sipIsErr == NULL)
+        return PyList_Check(sipPy);
+
+    QVector<Akonadi::Entity::Id> *ql = new QVector<Akonadi::Entity::Id>;
  
     for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
         ql->append((Akonadi::Entity::Id)PyLong_AsLongLong(PyList_GET_ITEM(sipPy, i)));

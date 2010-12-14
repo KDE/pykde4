@@ -46,6 +46,8 @@ public:
         PendingCutRole,
         EntityUrlRole,
         UnreadCountRole,
+        FetchStateRole,
+        CollectionSyncProgressRole,
         UserRole,
         TerminalUserRole,
         EndRole
@@ -113,5 +115,12 @@ protected:
 public:
     static QModelIndex      modelIndexForCollection (const QAbstractItemModel* model, const Akonadi::Collection& collection);
     static QModelIndexList  modelIndexesForItem (const QAbstractItemModel* model, const Akonadi::Item& item);
+    enum FetchState
+    {
+        IdleState,
+        FetchingState
+    };
+    bool                    includeUnsubscribed () const;
+    void                    setIncludeUnsubscribed (bool show);
 };
 };

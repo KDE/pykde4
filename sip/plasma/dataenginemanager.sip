@@ -39,6 +39,8 @@ public:
 private:
                             DataEngineManager ();
     ~DataEngineManager ();
+protected:
+    void                    timerEvent (QTimerEvent* event);
 };
 // DataEngineManager
 

@@ -82,6 +82,8 @@ protected:
 public:
     QString                 exportText () const;
     void                    setExportText (const QString&);
+protected:
+    KConfigDialogManager*   addConfig (KCoreConfigSkeleton* config, QWidget* widget);
 };
 // KCModule
 

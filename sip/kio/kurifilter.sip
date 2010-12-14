@@ -78,6 +78,20 @@ public:
     QString                 alternateDefaultSearchProvider () const;
     void                    setAlternateSearchProviders (const QStringList& providers);
     void                    setAlternateDefaultSearchProvider (const QString& provider);
+    enum SearchFilterOption
+    {
+        SearchFilterOptionNone,
+        RetrieveSearchProvidersOnly,
+        RetrievePreferredSearchProvidersOnly,
+        RetrieveAvailableSearchProvidersOnly
+    };
+    typedef QFlags<KUriFilterData::SearchFilterOption> SearchFilterOptions;
+    KUriFilterSearchProvider  queryForSearchProvider (const QString& provider) const;
+    QStringList             allQueriesForSearchProvider (const QString& provider) const;
+    QString                 defaultUrlScheme () const;
+    KUriFilterData::SearchFilterOptions  searchFilteringOptions () const;
+    void                    setDefaultUrlScheme (const QString&);
+    void                    setSearchFilteringOptions (KUriFilterData::SearchFilterOptions options);
 };
 // KUriFilterData
 
@@ -103,6 +117,7 @@ protected:
     void                    setSearchProvider (KUriFilterData& data, const QString& provider, const QString& term, const QChar& separator) const;
 //ig    void                    setPreferredSearchProviders (KUriFilterData& data, const KUriFilterPlugin::ProviderInfoList& providers) const;
     QString                 iconNameFor (const KUrl& url, KUriFilterData::UriTypes type) const;
+    void                    setSearchProviders (KUriFilterData& data, const QList<KUriFilterSearchProvider*>& providers) const;
 };
 // KUriFilterPlugin
 
@@ -134,7 +149,35 @@ private:
 public:
     ~KUriFilter ();
     bool                    filterSearchUri (KUriFilterData& data);
+    enum SearchFilterType
+    {
+        NormalTextFilter,
+        WebShortcutFilter
+    };
+    typedef QFlags<KUriFilter::SearchFilterType> SearchFilterTypes;
+    bool                    filterSearchUri (KUriFilterData& data, KUriFilter::SearchFilterTypes types);
 };
 // KUriFilter
 
 
+class KUriFilterSearchProvider
+{
+%TypeHeaderCode
+#include <kurifilter.h>
+%End
+
+public:
+                            KUriFilterSearchProvider ();
+                            KUriFilterSearchProvider (const KUriFilterSearchProvider&);
+    virtual ~KUriFilterSearchProvider ();
+    QString                 desktopEntryName () const;
+    QString                 name () const;
+    QString                 iconName () const;
+    QStringList             keys () const;
+    QString                 defaultKey () const;
+protected:
+    void                    setDesktopEntryName (const QString&);
+    void                    setIconName (const QString&);
+    void                    setKeys (const QStringList&);
+    void                    setName (const QString&);
+};

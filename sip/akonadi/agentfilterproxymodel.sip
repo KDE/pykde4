@@ -262,6 +262,7 @@ protected:
 
 public:
     ~AgentFilterProxyModel ();
+    void                    excludeCapabilities (const QString& capability);
 };
 // AgentFilterProxyModel
 

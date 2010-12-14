@@ -32,7 +32,8 @@ enum Effect
     PresentWindowsGroup,
     HighlightWindows,
     OverrideShadow,
-    BlurBehind
+    BlurBehind,
+    Dashboard
 };
 bool                    isEffectAvailable (Plasma::WindowEffects::Effect effect);
 void                    slideWindow (WId id, Plasma::Location location, int offset);
@@ -44,5 +45,6 @@ void                    presentWindows (WId controller, int desktop = -1);
 void                    highlightWindows (WId controller, const QList<WId>& ids);
 void                    overrideShadow (WId window, bool override);
 void                    enableBlurBehind (WId window, bool enable = 1, const QRegion& region = QRegion());
+void                    markAsDashboard (WId window);
 };
 };

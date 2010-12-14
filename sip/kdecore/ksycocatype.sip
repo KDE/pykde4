@@ -28,6 +28,7 @@ enum KSycocaType
     KST_KMimeType,
     KST_KFolderMimeType,
     KST_KDEDesktopMimeType,
+    KST_KMimeTypeEntry,
     KST_KServiceGroup,
     KST_KImageIOFormat,
     KST_KProtocolInfo,

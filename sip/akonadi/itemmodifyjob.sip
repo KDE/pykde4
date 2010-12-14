@@ -39,6 +39,9 @@ protected:
     virtual void            doHandleResponse (const QByteArray& tag, const QByteArray& data);
 public:
     virtual ~ItemModifyJob ();
+    explicit                ItemModifyJob (const Akonadi::Item::List& items, QObject* parent /TransferThis/ = 0);
+    Akonadi::Item::List     items () const;
+    void                    disableAutomaticConflictHandling ();
 };
 // ItemModifyJob
 

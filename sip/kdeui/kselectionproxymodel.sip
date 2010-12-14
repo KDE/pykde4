@@ -56,4 +56,6 @@ protected:
     QList<QPersistentModelIndex>  sourceRootIndexes () const;
 public:
     virtual QModelIndexList  match (const QModelIndex& start, int role, const QVariant& value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith|Qt::MatchWrap)) const;
+    QItemSelection          mapSelectionFromSource (const QItemSelection& selection) const;
+    QItemSelection          mapSelectionToSource (const QItemSelection& selection) const;
 };

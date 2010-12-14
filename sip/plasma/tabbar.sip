@@ -58,6 +58,11 @@ public:
     QGraphicsLayoutItem*    tabAt (int index);
 protected:
     void                    changeEvent (QEvent* event);
+public:
+    void                    setFirstPositionWidget (QGraphicsWidget* widget);
+    QGraphicsWidget*        firstPositionWidget () const;
+    void                    setLastPositionWidget (QGraphicsWidget* widget);
+    QGraphicsWidget*        lastPositionWidget () const;
 };
 // TabBar
 

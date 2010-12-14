@@ -337,6 +337,12 @@ protected:
     Plasma::DataEngine*     dataEngine (const QString& name) const;
     explicit                AbstractRunner (const KService::Ptr service, QObject* parent /TransferThis/ = 0);
     QMimeData*              mimeDataForMatch (const Plasma::QueryMatch* match);
+public:
+    bool                    isMatchingSuspended () const;
+signals:
+    void                    matchingSuspended (bool suspended);
+protected:
+    void                    suspendMatching (bool suspend);
 };
 // AbstractRunner
 

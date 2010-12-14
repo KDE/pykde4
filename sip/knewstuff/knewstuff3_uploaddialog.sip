@@ -39,5 +39,6 @@ public:
     void                    setPriceReason (const QString& reason);
     void                    selectCategory (const QString& category);
     void                    setPriceEnabled (bool enabled);
+    void                    setPreviewImageFile (uint number, const KUrl& file);
 };
 };

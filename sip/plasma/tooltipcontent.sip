@@ -60,6 +60,8 @@ public:
     bool                    isClickable () const;
     void                    setHighlightWindows (bool highlight);
     bool                    highlightWindows () const;
+    void                    setGraphicsWidget (QGraphicsWidget* widget);
+    QGraphicsWidget*        graphicsWidget () const;
 };
 // ToolTipContent
 

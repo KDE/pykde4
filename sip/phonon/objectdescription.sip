@@ -18,6 +18,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+%ModuleHeaderCode
+#include <phonon/objectdescription.h>
+%End
 namespace Phonon
 {
 
@@ -27,7 +30,8 @@ enum ObjectDescriptionType
     EffectType,
     AudioChannelType,
     SubtitleType,
-    AudioCaptureDeviceType
+    AudioCaptureDeviceType,
+    VideoCaptureDeviceType
 };
 
 template <T>
@@ -57,11 +61,18 @@ typedef Phonon::ObjectDescription<Phonon::AudioOutputDeviceType> AudioOutputDevi
 
 typedef Phonon::ObjectDescription<Phonon::AudioCaptureDeviceType> AudioCaptureDevice;
 
+typedef Phonon::ObjectDescription<Phonon::VideoCaptureDeviceType> VideoCaptureDevice;
+
 typedef Phonon::ObjectDescription<Phonon::EffectType> EffectDescription;
 
 typedef Phonon::ObjectDescription<Phonon::AudioChannelType> AudioChannelDescription;
 
 typedef Phonon::ObjectDescription<Phonon::SubtitleType> SubtitleDescription;
+
+typedef QPair<QByteArray, QString> DeviceAccess;
+
+typedef QList< QPair<QByteArray, QString> > DeviceAccessList;
+// typedef QList<Phonon::DeviceAccess> DeviceAccessList;
 
 class ObjectDescriptionData
 {
@@ -82,6 +93,7 @@ public:
 //ig                            ObjectDescriptionData (ObjectDescriptionPrivate* = 0);
                             ObjectDescriptionData (int index, const QHash<QByteArray,QVariant>& properties);
 };
+void                    registerMetaTypes ();
 };
 // Phonon
 /*

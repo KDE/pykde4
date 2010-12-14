@@ -36,6 +36,7 @@ public:
         Url,
         Disc,
         Stream,
+        CaptureDevice,
         Empty
     };
 
@@ -60,6 +61,13 @@ protected:
 //ig                            MediaSource (MediaSourcePrivate&);
 public:
     ~MediaSource ();
+                            MediaSource (const Phonon::AudioCaptureDevice& acDevice);
+                            MediaSource (const Phonon::VideoCaptureDevice& vcDevice);
+    const Phonon::DeviceAccessList&  deviceAccessList () const;
+    Phonon::AudioCaptureDevice  audioCaptureDevice () const;
+    Phonon::VideoCaptureDevice  videoCaptureDevice () const;
+protected:
+                            MediaSource (const Phonon::DeviceAccess& access);
 };
 // MediaSource
 

@@ -38,6 +38,7 @@
 %Include devicenotifier.sip
 %Include dvbinterface.sip
 %Include genericinterface.sip
+%Include internetgateway.sip
 %Include networking.sip
 %Include networkinterface.sip
 %Include opticaldisc.sip

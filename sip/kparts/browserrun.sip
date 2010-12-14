@@ -83,6 +83,8 @@ public:
     static void             saveUrlUsingKIO (const KUrl& srcUrl, const KUrl& destUrl, QWidget* window, const QMap<QString,QString>& metaData);
 protected:
     KParts::BrowserRun::NonEmbeddableResult  handleNonEmbeddable (const QString& mimeType, KService::Ptr* pSelectedService);
+public:
+    static KUrl             makeErrorUrl (int error, const QString& errorText, const QString& initialUrl);
 };
 // BrowserRun
 

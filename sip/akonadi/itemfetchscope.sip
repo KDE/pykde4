@@ -50,6 +50,8 @@ public:
     ~ItemFetchScope ();
     void                    setAncestorRetrieval (Akonadi::ItemFetchScope::AncestorRetrieval ancestorDepth);
     Akonadi::ItemFetchScope::AncestorRetrieval  ancestorRetrieval () const;
+    void                    setFetchModificationTime (bool retrieveMtime);
+    bool                    fetchModificationTime () const;
 };
 // ItemFetchScope
 

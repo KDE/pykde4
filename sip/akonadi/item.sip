@@ -71,6 +71,7 @@ public:
     QSet<QByteArray>        availablePayloadParts () const;
     void                    apply (const Akonadi::Item& other);
     void                    clearPayload ();
+    QVector<int>            availablePayloadMetaTypeIds () const;
 };
 // Item
 

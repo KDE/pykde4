@@ -247,7 +247,8 @@ public:
         TimeDefault,
         TimeWithoutSeconds,
         TimeWithoutAmPm,
-        TimeDuration
+        TimeDuration,
+        TimeFoldHours
     };
     typedef QFlags<KLocale::TimeFormatOption> TimeFormatOptions;
     QString                 formatLocaleTime (const QTime& pTime, KLocale::TimeFormatOptions options = KLocale::TimeDefault) const;
@@ -277,6 +278,80 @@ public:
     void                    translateRawFrom (const char* catname, const char* ctxt, const char* msg, QString* lang, QString* trans) const;
     void                    translateRawFrom (const char* catname, const char* singular, const char* plural, unsigned long n, QString* lang, QString* trans) const;
     void                    translateRawFrom (const char* catname, const char* ctxt, const char* singular, const char* plural, unsigned long n, QString* lang, QString* trans) const;
+    enum CalendarSystem
+    {
+        QDateCalendar,
+        CopticCalendar,
+        EthiopianCalendar,
+        GregorianCalendar,
+        HebrewCalendar,
+        IslamicCivilCalendar,
+        IndianNationalCalendar,
+        JalaliCalendar,
+        JapaneseCalendar,
+        JulianCalendar,
+        MinguoCalendar,
+        ThaiCalendar
+    };
+    enum WeekNumberSystem
+    {
+        IsoWeekNumber
+    };
+    enum DateTimeParseMode
+    {
+        LiberalParsing
+    };
+    enum DateTimeComponent
+    {
+        Year,
+        YearName,
+        Month,
+        MonthName,
+        Day,
+        DayName,
+        JulianDay,
+        EraName,
+        EraYear,
+        YearInEra,
+        DayOfYear,
+        DayOfYearName,
+        DayOfWeek,
+        DayOfWeekName,
+        Week,
+        WeekYear,
+        MonthsInYear,
+        WeeksInYear,
+        DaysInYear,
+        DaysInMonth,
+        DaysInWeek,
+        Hour,
+        Minute,
+        Second,
+        Millisecond,
+        DayPeriod,
+        DayPeriodHour,
+        Timezone,
+        TimezoneName,
+        UnixTime
+    };
+    typedef QFlags<KLocale::DateTimeComponent> DateTimeComponents;
+    enum DateTimeComponentFormat
+    {
+        DefaultComponentFormat,
+        ShortNumber,
+        LongNumber,
+        NarrowName,
+        ShortName,
+        LongName
+    };
+    QString                 dayPeriodText (const QTime& time, KLocale::DateTimeComponentFormat format = KLocale::DefaultComponentFormat) const;
+    KLocale::CalendarSystem  calendarSystem () const;
+    void                    setCalendarSystem (KLocale::CalendarSystem calendarSystem);
+    void                    setWeekNumberSystem (KLocale::WeekNumberSystem weekNumberSystem);
+    KLocale::WeekNumberSystem  weekNumberSystem ();
+    QString                 countryDivisionCode () const;
+    QStringList             installedLanguages () const;
+    bool                    setCountryDivisionCode (const QString& countryDivision);
 };
 // KLocale
 

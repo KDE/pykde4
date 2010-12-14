@@ -50,6 +50,8 @@ signals:
     void                    finished ();
 public:
     ~VideoPlayer ();
+protected:
+    bool                    event (QEvent*);
 };
 // VideoPlayer
 

@@ -60,6 +60,7 @@ private:
 //end
 public:
     ~KConfigDialogManager ();
+                            KConfigDialogManager (QWidget* parent /TransferThis/, KCoreConfigSkeleton* conf);
 };
 // KConfigDialogManager
 

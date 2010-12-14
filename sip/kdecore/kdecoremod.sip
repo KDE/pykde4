@@ -62,6 +62,7 @@
 %Include klibloader.sip
 %Include klibrary.sip
 %Include klocale.sip
+%Include klocalizeddate.sip
 %Include klocalizedstring.sip
 %Include klocalsocket.sip
 %Include klockfile.sip

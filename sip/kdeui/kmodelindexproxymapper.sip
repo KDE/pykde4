@@ -29,4 +29,5 @@ public:
     QModelIndex             mapRightToLeft (const QModelIndex& index) const;
     QItemSelection          mapSelectionLeftToRight (const QItemSelection& selection) const;
     QItemSelection          mapSelectionRightToLeft (const QItemSelection& selection) const;
+    ~KModelIndexProxyMapper ();
 };

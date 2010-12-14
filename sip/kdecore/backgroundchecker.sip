@@ -57,6 +57,7 @@ protected:
     void                    slotEngineDone ();
 public:
     ~BackgroundChecker ();
+    void                    restore (KConfig* config);
 };
 // BackgroundChecker
 

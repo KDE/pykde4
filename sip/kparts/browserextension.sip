@@ -25,7 +25,9 @@
 #include <kparts/browserextension.h>
 #include <kparts/browserinterface.h>
 #include <kparts/browserrun.h>
+#include <kparts/fileinfoextension.h>
 #include <kparts/historyprovider.h>
+#include <kparts/htmlextension.h>
 #include <kparts/mainwindow.h>
 #include <kparts/part.h>
 #include <kparts/partmanager.h>
@@ -33,6 +35,7 @@
 #include <qobject.h>
 #include <kparts/scriptableextension.h>
 #include <kparts/statusbarextension.h>
+#include <kparts/textextension.h>
 %End
 
 namespace KParts
@@ -209,8 +212,12 @@ Py_BEGIN_ALLOW_THREADS
         sipType = sipType_KParts_BrowserHostExtension;
     else if (dynamic_cast<KParts::BrowserInterface*>(sipCpp))
         sipType = sipType_KParts_BrowserInterface;
+    else if (dynamic_cast<KParts::FileInfoExtension*>(sipCpp))
+        sipType = sipType_KParts_FileInfoExtension;
     else if (dynamic_cast<KParts::HistoryProvider*>(sipCpp))
         sipType = sipType_KParts_HistoryProvider;
+    else if (dynamic_cast<KParts::HtmlExtension*>(sipCpp))
+        sipType = sipType_KParts_HtmlExtension;
     else if (dynamic_cast<KParts::LiveConnectExtension*>(sipCpp))
         sipType = sipType_KParts_LiveConnectExtension;
     else if (dynamic_cast<KParts::Part*>(sipCpp))
@@ -231,6 +238,8 @@ Py_BEGIN_ALLOW_THREADS
         sipType = sipType_KParts_ScriptableExtension;
     else if (dynamic_cast<KParts::StatusBarExtension*>(sipCpp))
         sipType = sipType_KParts_StatusBarExtension;
+    else if (dynamic_cast<KParts::TextExtension*>(sipCpp))
+        sipType = sipType_KParts_TextExtension;
     else if (dynamic_cast<KParts::BrowserRun*>(sipCpp))
         sipType = sipType_KParts_BrowserRun;
     else if (dynamic_cast<KParts::MainWindow*>(sipCpp))

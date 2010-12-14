@@ -56,6 +56,12 @@ protected:
     void                    focusOutEvent (QFocusEvent* event);
     void                    changeEvent (QEvent* event);
     void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
+public:
+    int                     count () const;
+    int                     currentIndex () const;
+    void                    setCurrentIndex (int index);
+signals:
+    void                    currentIndexChanged (int index);
 };
 // ComboBox
 

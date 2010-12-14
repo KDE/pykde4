@@ -37,6 +37,9 @@ protected:
     virtual void            initStyleOption (QStyleOptionViewItem* option, const QModelIndex& index) const;
 public:
     ~CollectionStatisticsDelegate ();
+    explicit                CollectionStatisticsDelegate (QAbstractItemView* parent);
+    void                    setProgressAnimationEnabled (bool enable);
+    bool                    progressAnimationEnabled () const;
 };
 // CollectionStatisticsDelegate
 

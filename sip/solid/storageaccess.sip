@@ -49,6 +49,8 @@ public:
 signals:
     void                    setupRequested (const QString& udi);
     void                    teardownRequested (const QString& udi);
+public:
+    bool                    isIgnored () const;
 };
 // StorageAccess
 

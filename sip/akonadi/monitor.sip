@@ -78,6 +78,12 @@ signals:
 public:
     void                    setSession (Akonadi::Session* session);
     Akonadi::Session*       session () const;
+//FIXME
+    QVector<Akonadi::Entity::Id>       itemsMonitoredEx () const;
+//ig    QVector<Akonadi::Item::Id>       itemsMonitoredEx () const;
+signals:
+    void                    collectionSubscribed (const Akonadi::Collection& collection, const Akonadi::Collection& parent);
+    void                    collectionUnsubscribed (const Akonadi::Collection& collection);
 };
 // Monitor
 

@@ -52,7 +52,15 @@ public:
         INVALID_ACCESS_ERR,
         VALIDATION_ERR,
         TYPE_MISMATCH_ERR,
-        SECURITY_ERR
+        SECURITY_ERR,
+        NETWORK_ERR,
+        ABORT_ERR,
+        URL_MISMATCH_ERR,
+        QUOTA_EXCEEDED_ERR,
+        TIMEOUT_ERR,
+        NOT_READABLE_ERR,
+        DATA_CLONE_ERR,
+        ENCODING_ERR
     };
 
     unsigned short code;

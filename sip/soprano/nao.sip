@@ -66,6 +66,9 @@ QUrl                    scoreParameter ();
 QUrl                    serializationLanguage ();
 QUrl                    status ();
 QUrl                    version ();
+QUrl                    deprecated ();
+QUrl                    isDataGraphFor ();
+QUrl                    userVisible ();
 };
 // NAO
 

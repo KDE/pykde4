@@ -49,6 +49,15 @@ public:
         MoveCollectionToMenu,
         CutItems,
         CutCollections,
+        CreateResource,
+        DeleteResources,
+        ResourceProperties,
+        SynchronizeResources,
+        ToggleWorkOffline,
+        CopyCollectionToDialog,
+        MoveCollectionToDialog,
+        CopyItemToDialog,
+        MoveItemToDialog,
         LastType
     };
 
@@ -66,6 +75,24 @@ public:
     ~StandardActionManager ();
     void                    setFavoriteCollectionsModel (Akonadi::FavoriteCollectionsModel* favoritesModel);
     void                    setFavoriteSelectionModel (QItemSelectionModel* selectionModel);
+    enum TextContext
+    {
+        DialogTitle,
+        DialogText,
+        MessageBoxTitle,
+        MessageBoxText,
+        MessageBoxAlternativeText,
+        ErrorMessageTitle,
+        ErrorMessageText
+    };
+    void                    interceptAction (Akonadi::StandardActionManager::Type type, bool intercept = 1);
+    Akonadi::Collection::List  selectedCollections () const;
+    Akonadi::Item::List     selectedItems () const;
+    void                    setContextText (Akonadi::StandardActionManager::Type type, Akonadi::StandardActionManager::TextContext context, const QString& text);
+    void                    setContextText (Akonadi::StandardActionManager::Type type, Akonadi::StandardActionManager::TextContext context, const KLocalizedString& text);
+    void                    setMimeTypeFilter (const QStringList& mimeTypes);
+    void                    setCapabilityFilter (const QStringList& capabilities);
+    void                    setCollectionPropertiesPageNames (const QStringList& names);
 };
 // StandardActionManager
 

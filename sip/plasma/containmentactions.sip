@@ -52,5 +52,8 @@ protected:
     void                    setConfigurationRequired (bool needsConfiguring = 1);
     Plasma::Containment*    containment ();
     void                    paste (QPointF scenePos, QPoint screenPos);
+public:
+    QPoint                  popupPosition (const QSize& s, QEvent* event);
+    void                    setContainment (Plasma::Containment* newContainment);
 };
 };

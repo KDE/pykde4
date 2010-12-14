@@ -63,6 +63,8 @@ protected:
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint) const;
 public:
     void                    setDown (bool down);
+protected:
+    QVariant                itemChange (QGraphicsItem::GraphicsItemChange change, const QVariant& value);
 };
 // ToolButton
 

@@ -43,6 +43,8 @@ public:
     void                    setAdditionalBindings (const Soprano::BindingSet& bindings);
     Soprano::BindingSet     additionalBindings () const;
     Nepomuk::Variant        additionalBinding (const QString& name) const;
+    void                    setExcerpt (const QString& text);
+    QString                 excerpt () const;
 };
 };
 };

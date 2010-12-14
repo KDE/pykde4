@@ -54,6 +54,8 @@ public:
     virtual bool            isScriptLanguageSupported (KParts::ScriptableExtension::ScriptLanguage lang) const;
     virtual void            acquire (quint64 objid);
     virtual void            release (quint64 objid);
+    static QVariant         acquireValue (const QVariant& v);
+    static QVariant         releaseValue (const QVariant& v);
 };
 //ig unsigned int            qHash (const KParts::ScriptableExtension::Object& o);
 //ig unsigned int            qHash (const KParts::ScriptableExtension::FunctionRef& f);

@@ -78,6 +78,8 @@ protected:
     virtual void            keyPressEvent (QKeyEvent* event);
 public:
     ~KRichTextEdit ();
+    void                    makeRightToLeft ();
+    void                    makeLeftToRight ();
 };
 // KRichTextEdit
 

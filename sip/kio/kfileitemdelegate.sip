@@ -44,7 +44,8 @@ public:
         MimeType,
         FriendlyMimeType,
         LinkDest,
-        LocalPathOrUrl
+        LocalPathOrUrl,
+        Comment
     };
 
 //ig    typedef QList<KFileItemDelegate::Information> InformationList;

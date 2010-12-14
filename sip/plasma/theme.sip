@@ -38,7 +38,13 @@ public:
         ButtonTextColor,
         ButtonBackgroundColor,
         LinkColor,
-        VisitedLinkColor
+        VisitedLinkColor,
+        ButtonHoverColor,
+        ButtonFocusColor,
+        ViewTextColor,
+        ViewBackgroundColor,
+        ViewHoverColor,
+        ViewFocusColor
     };
 
 
@@ -85,6 +91,7 @@ public:
     void                    insertIntoCache (const QString& key, const QPixmap& pix, const QString& id);
     QString                 animationPath (const QString& name) const;
     QString                 styleSheet (const QString& css = QString()) const;
+    QStringList             listCachedRectKeys (const QString& image) const;
 };
 // Theme
 

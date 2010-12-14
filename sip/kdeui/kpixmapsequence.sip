@@ -27,7 +27,7 @@ public:
                             KPixmapSequence ();
                             KPixmapSequence (const KPixmapSequence& other);
     explicit                KPixmapSequence (const QPixmap& pixmap, const QSize& frameSize = QSize());
-    explicit                KPixmapSequence (const QString& xdgIconName, int size = KIconLoader::SizeSmall);
+    explicit                KPixmapSequence (const QString& iconName, int size = KIconLoader::SizeSmall);
     ~KPixmapSequence ();
     bool                    isValid () const;
     bool                    isEmpty () const;

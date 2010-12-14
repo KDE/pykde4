@@ -135,6 +135,11 @@ private:
 //end
 public:
     ~SlaveBase ();
+protected:
+    enum VirtualFunctionId
+    {
+        AppConnectionMade
+    };
 };
 // SlaveBase
 

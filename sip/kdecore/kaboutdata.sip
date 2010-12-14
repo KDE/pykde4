@@ -44,6 +44,8 @@ private:
 
 public:
     ~KAboutPerson ();
+    explicit                KAboutPerson (const KLocalizedString& name, const KLocalizedString& task, const QByteArray& emailAddress, const QByteArray& webAddress, const QByteArray& ocsUsername);
+    QString                 ocsUsername () const;
 };
 // KAboutPerson
 
@@ -148,6 +150,10 @@ public:
     KAboutData&             setCustomAuthorText (const KLocalizedString& plainText, const KLocalizedString& richText);
     KAboutData&             unsetCustomAuthorText ();
     ~KAboutData ();
+    KAboutData&             addAuthor (const KLocalizedString& name, const KLocalizedString& task, const QByteArray& emailAddress, const QByteArray& webAddress, const QByteArray& ocsUsername);
+    KAboutData&             addCredit (const KLocalizedString& name, const KLocalizedString& task, const QByteArray& emailAddress, const QByteArray& webAddress, const QByteArray& ocsUsername);
+    KAboutData&             setOcsProvider (const QByteArray& providerUrl);
+    QString                 ocsProviderUrl () const;
 };
 // KAboutData
 

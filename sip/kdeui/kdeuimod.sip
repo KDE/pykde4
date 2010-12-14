@@ -51,6 +51,7 @@
 %Include kcategorizedview.sip
 %Include kcategorydrawer.sip
 %Include kcharselect.sip
+%Include kcheckableproxymodel.sip
 %Include kcmodule.sip
 %Include kcodecaction.sip
 %Include kcolorbutton.sip
@@ -75,10 +76,13 @@
 %Include kdatetimewidget.sip
 %Include kdatewidget.sip
 %Include kdeprintdialog.sip
+%Include kdescendantsproxymodel.sip
 %Include kdialog.sip
 %Include kdialogbuttonbox.sip
 %Include kdialogjobuidelegate.sip
+%Include kdualaction.sip
 %Include keditlistbox.sip
+%Include keditlistwidget.sip
 %Include kedittoolbar.sip
 %Include kextendableitemdelegate.sip
 %Include kfadewidgeteffect.sip
@@ -105,6 +109,7 @@
 %Include kiconeffect.sip
 %Include kiconloader.sip
 %Include kicontheme.sip
+%Include kidentityproxymodel.sip
 %Include kinputdialog.sip
 %Include kkeysequencewidget.sip
 %Include kkeyserver.sip
@@ -151,8 +156,6 @@
 %Include kplotwidget.sip
 %Include kprogressdialog.sip
 %Include kpushbutton.sip
-%Include kratingpainter.sip
-%Include kratingwidget.sip
 %Include krecentfilesaction.sip
 %Include krecursivefilterproxymodel.sip
 %Include kreplace.sip
@@ -182,6 +185,7 @@
 %Include kstringvalidator.sip
 %Include kstyle.sip
 %Include ksvgrenderer.sip
+%Include ksystemeventfilter.sip
 %Include ksystemtrayicon.sip
 %Include ktabbar.sip
 %Include ktabwidget.sip
@@ -203,6 +207,7 @@
 %Include kuniqueapplication.sip
 %Include kurllabel.sip
 %Include kvbox.sip
+%Include kviewstatemaintainer.sip
 %Include kviewstatesaver.sip
 %Include kwallet.sip
 %Include kwidgetitemdelegate.sip
@@ -217,6 +222,8 @@
 %Include kxmlguiwindow.sip
 %Include kxutils.sip
 %Include kxyselector.sip
+%Include kratingpainter.sip
+%Include kratingwidget.sip
 %Include netwm.sip
 %Include netwm_def.sip
 %Include configdialog.sip

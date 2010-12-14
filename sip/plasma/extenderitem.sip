@@ -74,6 +74,9 @@ public:
     void                    setGroup (Plasma::ExtenderGroup* group, const QPointF& pos);
 signals:
     void                    destroyed (Plasma::ExtenderItem* item);
+public:
+    void                    setTransient (const bool transient);
+    bool                    isTransient () const;
 };
 // ExtenderItem
 

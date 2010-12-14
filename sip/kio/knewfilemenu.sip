@@ -39,4 +39,7 @@ signals:
     void                    directoryCreated (const KUrl& url);
 protected:
     virtual void            slotResult (KJob* job);
+public:
+    bool                    isModal () const;
+    void                    setModal (bool modality);
 };

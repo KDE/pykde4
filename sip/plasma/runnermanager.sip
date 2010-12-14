@@ -67,6 +67,8 @@ public:
     QMimeData*              mimeDataForMatch (const QString& id) const;
 signals:
     void                    queryFinished ();
+public:
+    static KPluginInfo::List  listRunnerInfo (const QString& parentApp = QString());
 };
 // RunnerManager
 

@@ -95,6 +95,9 @@ protected:
 public:
     bool                    isPreviewing () const;
     void                    setPreviewing (bool previewing);
+    bool                    needsPreviewDuringConfiguration () const;
+protected:
+    void                    setPreviewDuringConfiguration (const bool preview);
 };
 // Wallpaper
 

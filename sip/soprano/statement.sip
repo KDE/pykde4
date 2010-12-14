@@ -47,6 +47,7 @@ public:
 };
 // Statement
 
+uint                    qHash (const Soprano::Statement& s);
 };
 // Soprano
 

@@ -41,6 +41,14 @@ public:
     Akonadi::Collection::Rights  accessRightsFilter () const;
     void                    setDescription (const QString& text);
     void                    setDefaultCollection (const Akonadi::Collection& collection);
+    enum CollectionDialogOption
+    {
+        None,
+        AllowToCreateNewChildCollection
+    };
+    typedef QFlags<Akonadi::CollectionDialog::CollectionDialogOption> CollectionDialogOptions;
+    explicit                CollectionDialog (Akonadi::CollectionDialog::CollectionDialogOptions options, QAbstractItemModel* model = 0, QWidget* parent /TransferThis/ = 0);
+    void                    changeCollectionDialogOptions (Akonadi::CollectionDialog::CollectionDialogOptions options);
 };
 // CollectionDialog
 

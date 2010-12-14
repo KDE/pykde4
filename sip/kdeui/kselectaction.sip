@@ -83,6 +83,8 @@ protected:
 //ig                            KSelectAction (KSelectActionPrivate& dd, QObject* parent /TransferThis/);
 public:
     ~KSelectAction ();
+protected:
+    virtual bool            event (QEvent* event);
 };
 // KSelectAction
 

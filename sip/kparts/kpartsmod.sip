@@ -31,6 +31,8 @@
 %Import kio/kiomod.sip
 
 %Include genericfactory.sip
+%Include fileinfoextension.sip
+%Include htmlextension.sip
 %Include browserextension.sip
 %Include browserinterface.sip
 %Include browseropenorsavequestion.sip
@@ -44,3 +46,4 @@
 %Include plugin.sip
 %Include scriptableextension.sip
 %Include statusbarextension.sip
+%Include textextension.sip

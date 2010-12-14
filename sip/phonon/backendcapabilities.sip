@@ -42,6 +42,8 @@ bool                    isMimeTypeAvailable (const QString& mimeType);
 QList<Phonon::AudioOutputDevice>  availableAudioOutputDevices ();
 QList<Phonon::AudioCaptureDevice>  availableAudioCaptureDevices ();
 QList<Phonon::EffectDescription>  availableAudioEffects ();
+QList<Phonon::VideoCaptureDevice>  availableVideoCaptureDevices ();
+QList<Phonon::VideoCaptureDevice>  availableAVCaptureDevices ();
 };
 // BackendCapabilities
 

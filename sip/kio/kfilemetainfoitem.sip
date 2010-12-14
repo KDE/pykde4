@@ -49,6 +49,8 @@ private:
 //end
 public:
     ~KFileMetaInfoItem ();
+private:
+                            KFileMetaInfoItem (const QString& p, const QVariant& v, KFileWritePlugin* w, bool e);
 };
 // KFileMetaInfoItem
 

@@ -58,6 +58,7 @@ public:
 protected:
     void                    mousePressEvent (QGraphicsSceneMouseEvent* event);
     void                    focusOutEvent (QFocusEvent* event);
+    void                    focusInEvent (QFocusEvent* event);
 };
 // LineEdit
 

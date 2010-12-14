@@ -59,7 +59,8 @@ public:
     {
         NoFlags,
         CreateCountQuery,
-        HandleInverseProperties
+        HandleInverseProperties,
+        CreateAskQuery
     };
     typedef QFlags<Nepomuk::Query::Query::SparqlFlag> SparqlFlags;
     QString                 toSparqlQuery (Nepomuk::Query::Query::SparqlFlags flags = Nepomuk::Query::Query::NoFlags) const;
@@ -75,8 +76,27 @@ public:
     static Nepomuk::Query::Query  fromQueryUrl (const KUrl& url);
     static QString          sparqlFromQueryUrl (const KUrl& url);
     static QString          titleFromQueryUrl (const KUrl& url);
+    Nepomuk::Query::FileQuery  toFileQuery () const;
+    void                    setFullTextScoringEnabled (bool enabled);
+    void                    setFullTextScoringSortOrder (Qt::SortOrder order);
+    bool                    fullTextScoringEnabled () const;
+    Qt::SortOrder           fullTextScoringSortOrder () const;
+    enum QueryFlag
+    {
+        NoQueryFlags,
+        NoResultRestrictions,
+        WithoutFullTextExcerpt
+    };
+    typedef QFlags<Nepomuk::Query::Query::QueryFlag> QueryFlags;
+    void                    setQueryFlags (Nepomuk::Query::Query::QueryFlags flags);
+    Nepomuk::Query::Query::QueryFlags  queryFlags () const;
+    bool                    operator != (const Nepomuk::Query::Query& query) const;
+    Nepomuk::Query::Query   optimized () const;
 };
 uint                    qHash (const Nepomuk::Query::Query&);
+//ig Nepomuk::Query::Query   operator && (const Nepomuk::Query::Query& query, const Nepomuk::Query::Term& term);
+//ig Nepomuk::Query::Query   operator || (const Nepomuk::Query::Query& query, const Nepomuk::Query::Term& term);
+//ig Nepomuk::Query::Query   operator ! (const Nepomuk::Query::Query& query);
 };
 };
 //ig QDebug                  operator << (QDebug, const Nepomuk::Query::Query&);

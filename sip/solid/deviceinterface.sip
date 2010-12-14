@@ -32,6 +32,7 @@
 #include <devicenotifier.h>
 #include <dvbinterface.h>
 #include <genericinterface.h>
+#include <internetgateway.h>
 #include <networking.h>
 #include <networkinterface.h>
 #include <opticaldisc.h>
@@ -81,6 +82,7 @@ public:
         Video,
         SerialInterface,
         SmartCardReader,
+        InternetGateway,
         Last
     };
 
@@ -124,6 +126,8 @@ private:
             sipType = sipType_Solid_DvbInterface;
         else if (dynamic_cast<Solid::GenericInterface*>(sipCpp))
             sipType = sipType_Solid_GenericInterface;
+        else if (dynamic_cast<Solid::InternetGateway*>(sipCpp))
+            sipType = sipType_Solid_InternetGateway;
         else if (dynamic_cast<Solid::NetworkInterface*>(sipCpp))
             sipType = sipType_Solid_NetworkInterface;
         else if (dynamic_cast<Solid::PortableMediaPlayer*>(sipCpp))

@@ -91,6 +91,7 @@ public:
     Plasma::Service*        createDefaultService (QObject* parent /Transfer/ = 0);
 protected:
     void                    setDefaultService (const QString& serviceName);
+    void                    setStorageEnabled (const QString& source, bool store);
 };
 // DataEngine
 

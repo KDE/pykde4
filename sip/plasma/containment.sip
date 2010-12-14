@@ -158,6 +158,8 @@ public:
     int                     lastScreen () const;
     int                     lastDesktop () const;
     bool                    isToolBoxOpen () const;
+    KConfigGroup            containmentActionsConfig ();
+    void                    configChanged ();
 };
 // Containment
 

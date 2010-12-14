@@ -216,6 +216,7 @@ public:
     void                    runAssociatedApplication ();
     void                    showConfigurationInterface (QWidget* widget);
     bool                    isUserConfiguring () const;
+    explicit                Applet (const KPluginInfo& info, QGraphicsItem* parent = 0, uint appletId = 0);
 };
 // Applet
 

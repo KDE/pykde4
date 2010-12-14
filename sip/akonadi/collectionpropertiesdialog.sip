@@ -32,6 +32,7 @@ public:
     static void             registerPage (Akonadi::CollectionPropertiesPageFactory* factory);
     ~CollectionPropertiesDialog ();
     static void             useDefaultPage (bool use);
+                            CollectionPropertiesDialog (const Akonadi::Collection& collection, const QStringList& pages, QWidget* parent /TransferThis/ = 0);
 };
 // CollectionPropertiesDialog
 

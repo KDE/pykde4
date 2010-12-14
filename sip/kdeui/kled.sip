@@ -80,6 +80,10 @@ protected:
     bool                    paintCachedPixmap ();
 public:
     ~KLed ();
+protected:
+    void                    resizeEvent (QResizeEvent*);
+    void                    updateCachedPixmap ();
+    void                    paintLed (KLed::Shape shape, KLed::Look look);
 };
 // KLed
 

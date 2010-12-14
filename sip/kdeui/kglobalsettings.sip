@@ -169,6 +169,14 @@ public:
     static bool             naturalSorting ();
 signals:
     void                    naturalSortingChanged ();
+public:
+    enum ActivateOption
+    {
+        ApplySettings,
+        ListenForChanges
+    };
+    typedef QFlags<KGlobalSettings::ActivateOption> ActivateOptions;
+    void                    activate (KGlobalSettings::ActivateOptions options);
 };
 // KGlobalSettings
 

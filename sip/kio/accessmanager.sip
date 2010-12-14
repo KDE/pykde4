@@ -79,6 +79,8 @@ public:
     if (dynamic_cast<KIO::Integration::CookieJar*>(sipCpp))
         sipType = sipType_KIO_Integration_CookieJar;
 %End
+    bool                    isCookieStorageDisabled () const;
+    void                    setDisableCookieStorage (bool disable);
 };
 bool                    sslConfigFromMetaData (const KIO::MetaData& metadata, QSslConfiguration& sslconfig);
 };

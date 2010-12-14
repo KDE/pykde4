@@ -79,6 +79,8 @@ public:
         UDS_DISPLAY_TYPE,
         UDS_NEPOMUK_URI,
         UDS_ICON_OVERLAY_NAMES,
+        UDS_NEPOMUK_QUERY,
+        UDS_COMMENT,
         UDS_EXTRA,
         UDS_EXTRA_END
     };

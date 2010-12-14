@@ -27,10 +27,14 @@
 %Import kdecore/kdecoremod.sip
 %Import soprano/sopranomod.sip
 
+%Include ncal.sip
+%Include nco.sip
+%Include ndo.sip
 %Include andterm.sip
 %Include class.sip
 %Include comparisonterm.sip
 %Include entity.sip
+%Include file.sip
 %Include filequery.sip
 %Include global.sip
 %Include groupterm.sip
@@ -55,9 +59,16 @@
 %Include resourcetypeterm.sip
 %Include result.sip
 %Include simpleterm.sip
+%Include standardqueries.sip
 %Include tag.sip
 %Include tagwidget.sip
 %Include term.sip
 %Include thing.sip
 %Include tools.sip
 %Include variant.sip
+%Include nfo.sip
+%Include nie.sip
+%Include nmm.sip
+%Include nuao.sip
+%Include pimo.sip
+%Include tmo.sip

@@ -101,6 +101,7 @@ private:
 public:
     ~KService ();
     bool                    showInKDE () const;
+    bool                    hasMimeType (const QString& mimeType) const;
 };
 // KService
 

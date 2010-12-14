@@ -28,5 +28,5 @@ KAction*                standardAction (const QString& what, SIP_RXOBJ_CON, SIP_
 KAction*                standardActionUpload (const QString& what, SIP_RXOBJ_CON, SIP_SLOT_CON (), KActionCollection* parent, const char* name = 0);
 //end
 //ig KAction*                standardAction (const QString& what, const QObject* receiver, const char* slot, KActionCollection* parent, const char* name = 0);
-//ig +KAction*                standardActionUpload (const QString& what, const QObject* receiver, const char* slot, KActionCollection* parent, const char* name = 0);
+//ig KAction*                standardActionUpload (const QString& what, const QObject* receiver, const char* slot, KActionCollection* parent, const char* name = 0);
 };

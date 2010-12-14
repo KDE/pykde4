@@ -89,6 +89,8 @@ protected:
 public:
     ~KXMLGUIClient ();
     void                    replaceXMLFile (const QString& xmlfile, const QString& localxmlfile, bool merge = 0);
+protected:
+    void                    loadStandardsXmlFile ();
 };
 // KXMLGUIClient
 

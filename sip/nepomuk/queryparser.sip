@@ -36,10 +36,12 @@ public:
     enum ParserFlag
     {
         NoParserFlags,
-        QueryTermGlobbing
+        QueryTermGlobbing,
+        DetectFilenamePattern
     };
     typedef QFlags<Nepomuk::Query::QueryParser::ParserFlag> ParserFlags;
     Nepomuk::Query::Query   parse (const QString& query, Nepomuk::Query::QueryParser::ParserFlags flags) const;
+    static Nepomuk::Query::Query  parseQuery (const QString& query, Nepomuk::Query::QueryParser::ParserFlags flags);
 };
 };
 };

@@ -51,6 +51,7 @@ public:
         SupportFormatPainting,
         SupportToPlainText,
         SupportSuperScriptAndSubScript,
+        SupportDirection,
         FullSupport
     };
 

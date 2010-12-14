@@ -48,6 +48,7 @@
 #include <kcategorizedview.h>
 #include <kcategorydrawer.h>
 #include <kcharselect.h>
+#include <kcheckableproxymodel.h>
 #include <kcmodule.h>
 #include <kcodecaction.h>
 #include <kcolorbutton.h>
@@ -64,10 +65,13 @@
 #include <kdatetable.h>
 #include <kdatetimewidget.h>
 #include <kdatewidget.h>
+#include <kdescendantsproxymodel.h>
 #include <kdialog.h>
 #include <kdialogbuttonbox.h>
 #include <kdialogjobuidelegate.h>
+#include <kdualaction.h>
 #include <keditlistbox.h>
+#include <keditlistwidget.h>
 #include <kedittoolbar.h>
 #include <kextendableitemdelegate.h>
 #include <kfadewidgeteffect.h>
@@ -88,6 +92,7 @@
 #include <khistorycombobox.h>
 #include <khuesaturationselect.h>
 #include <kiconloader.h>
+#include <kidentityproxymodel.h>
 #include <kkeysequencewidget.h>
 #include <klanguagebutton.h>
 #include <kled.h>
@@ -124,6 +129,7 @@
 #include <kplotwidget.h>
 #include <kprogressdialog.h>
 #include <kpushbutton.h>
+#include <nepomuk/kratingwidget.h>
 #include <krecentfilesaction.h>
 #include <krecursivefilterproxymodel.h>
 #include <kreplace.h>
@@ -169,6 +175,7 @@
 #include <kuniqueapplication.h>
 #include <kurllabel.h>
 #include <kvbox.h>
+#include <kviewstatemaintainer.h>
 #include <kviewstatesaver.h>
 #include <kwallet.h>
 #include <kwidgetitemdelegate.h>
@@ -284,6 +291,8 @@ signals:
         sipType = sipType_KStartupInfo;
     else if (dynamic_cast<KStatusNotifierItem*>(sipCpp))
         sipType = sipType_KStatusNotifierItem;
+    else if (dynamic_cast<KViewStateMaintainerBase*>(sipCpp))
+        sipType = sipType_KViewStateMaintainerBase;
     else if (dynamic_cast<KViewStateSaver*>(sipCpp))
         sipType = sipType_KViewStateSaver;
     else if (dynamic_cast<KWallet::Wallet*>(sipCpp))
@@ -300,6 +309,14 @@ signals:
         if (dynamic_cast<KPageWidgetModel*>(sipCpp))
             sipType = sipType_KPageWidgetModel;
         }
+    else if (dynamic_cast<KDescendantsProxyModel*>(sipCpp))
+        sipType = sipType_KDescendantsProxyModel;
+    else if (dynamic_cast<KIdentityProxyModel*>(sipCpp))
+        {
+        sipType = sipType_KIdentityProxyModel;
+        if (dynamic_cast<KCheckableProxyModel*>(sipCpp))
+            sipType = sipType_KCheckableProxyModel;
+        }
     else if (dynamic_cast<KSelectionProxyModel*>(sipCpp))
         sipType = sipType_KSelectionProxyModel;
     else if (dynamic_cast<KCategorizedSortFilterProxyModel*>(sipCpp))
@@ -311,6 +328,8 @@ signals:
         sipType = sipType_KAction;
         if (dynamic_cast<KActionMenu*>(sipCpp))
             sipType = sipType_KActionMenu;
+        else if (dynamic_cast<KDualAction*>(sipCpp))
+            sipType = sipType_KDualAction;
         else if (dynamic_cast<KPasteTextAction*>(sipCpp))
             sipType = sipType_KPasteTextAction;
         else if (dynamic_cast<KSelectAction*>(sipCpp))
@@ -386,6 +405,8 @@ signals:
         sipType = sipType_KDateTimeWidget;
     else if (dynamic_cast<KDateWidget*>(sipCpp))
         sipType = sipType_KDateWidget;
+    else if (dynamic_cast<KEditListWidget*>(sipCpp))
+        sipType = sipType_KEditListWidget;
     else if (dynamic_cast<KFadeWidgetEffect*>(sipCpp))
         sipType = sipType_KFadeWidgetEffect;
     else if (dynamic_cast<KFilterProxySearchLine*>(sipCpp))
@@ -536,6 +557,8 @@ signals:
         sipType = sipType_KPlotWidget;
     else if (dynamic_cast<KPopupFrame*>(sipCpp))
         sipType = sipType_KPopupFrame;
+    else if (dynamic_cast<KRatingWidget*>(sipCpp))
+        sipType = sipType_KRatingWidget;
     else if (dynamic_cast<KSeparator*>(sipCpp))
         sipType = sipType_KSeparator;
     else if (dynamic_cast<KCategorizedView*>(sipCpp))

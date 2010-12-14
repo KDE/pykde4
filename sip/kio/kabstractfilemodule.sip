@@ -59,6 +59,7 @@
 #include <kencodingfiledialog.h>
 #include <kfiledialog.h>
 #include <kfilefiltercombo.h>
+#include <kfileitemactionplugin.h>
 #include <kfileitemactions.h>
 #include <kfileitemdelegate.h>
 #include <kfilemetadataconfigurationwidget.h>
@@ -176,6 +177,8 @@ public:
         sipType = sipType_KDirWatch;
     else if (dynamic_cast<KDiskFreeSpace*>(sipCpp))
         sipType = sipType_KDiskFreeSpace;
+    else if (dynamic_cast<KFileItemActionPlugin*>(sipCpp))
+        sipType = sipType_KFileItemActionPlugin;
     else if (dynamic_cast<KFileItemActions*>(sipCpp))
         sipType = sipType_KFileItemActions;
     else if (dynamic_cast<KFilePreviewGenerator*>(sipCpp))

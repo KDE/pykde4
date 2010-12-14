@@ -111,6 +111,8 @@ public:
     ~KFileItem ();
 //ig    QVariant                operator QVariant () const;
     KUrl                    nepomukUri () const;
+    QString                 comment () const;
+//ig    KUrl                    mostLocalUrl () const;
 };
 // KFileItem
 

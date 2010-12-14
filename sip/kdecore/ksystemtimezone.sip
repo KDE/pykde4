@@ -47,6 +47,7 @@ public:
     static KTimeZone        realLocalZone ();
     static void             setLocalZone (const KTimeZone& tz);
     static bool             isSimulated ();
+    static bool             isTimeZoneDaemonAvailable ();
 };
 // class KSystemTimeZones
 

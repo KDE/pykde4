@@ -39,6 +39,8 @@ public:
     Akonadi::Collection::Rights  accessRightsFilter () const;
 signals:
     void                    collectionChanged (const Akonadi::Collection& collection);
+public:
+    void                    changeCollectionDialogOptions (Akonadi::CollectionDialog::CollectionDialogOptions options);
 };
 // CollectionRequester
 

@@ -100,7 +100,8 @@ public:
     enum FileNameUsedForCopying
     {
         Name,
-        FromUrl
+        FromUrl,
+        DisplayName
     };
 
     bool                    supportsListing () const;

@@ -28,7 +28,6 @@ class ScrollBar : QGraphicsProxyWidget
 
 
 public:
-    explicit                ScrollBar (QGraphicsWidget* parent /TransferThis/);
     void                    setRange (int min, int max);
     void                    setSingleStep (int val);
     int                     singleStep ();
@@ -51,6 +50,9 @@ protected:
     void                    contextMenuEvent (QGraphicsSceneContextMenuEvent* event);
 public:
     Qt::Orientation         orientation () const;
+    explicit                ScrollBar (QGraphicsWidget* parent /TransferThis/ = 0);
+    void                    setMinimum (const int min) const;
+    void                    setMaximum (const int max) const;
 };
 // ScrollBar
 

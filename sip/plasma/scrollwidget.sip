@@ -77,6 +77,9 @@ signals:
 protected:
     void                    keyPressEvent (QKeyEvent* event);
     bool                    sceneEventFilter (QGraphicsItem* i, QEvent* e);
+public:
+    bool                    overflowBordersVisible () const;
+    void                    setOverflowBordersVisible (const bool visible);
 };
 // ScrollWidget
 

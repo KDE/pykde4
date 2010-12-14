@@ -75,6 +75,11 @@ protected:
 
 public:
     ~PackageStructure ();
+    void                    removeDefinition (const char* key);
+    QStringList             searchPath (const char* key) const;
+    QStringList             contentsPrefixPaths () const;
+protected:
+    void                    setContentsPrefixPaths (const QStringList& prefixPaths);
 };
 // PackageStructure
 

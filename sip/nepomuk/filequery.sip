@@ -47,6 +47,9 @@ public:
     typedef QFlags<Nepomuk::Query::FileQuery::FileModeFlags> FileMode;
     void                    setFileMode (Nepomuk::Query::FileQuery::FileMode mode);
     Nepomuk::Query::FileQuery::FileMode  fileMode () const;
+    void                    addIncludeFolder (const KUrl& folder, bool recursive);
+    void                    setIncludeFolders (const QHash<KUrl,bool>& folders);
+    QHash<KUrl,bool>        allIncludeFolders () const;
 };
 };
 };

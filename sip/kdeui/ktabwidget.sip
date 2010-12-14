@@ -89,6 +89,10 @@ public:
     ~KTabWidget ();
 protected:
     virtual void            mouseReleaseEvent (QMouseEvent*);
+public:
+    QString                 label (int index) const;
+    QString                 tabLabel (QWidget* w) const;
+    void                    setTabLabel (QWidget* w, const QString& l);
 };
 // KTabWidget
 

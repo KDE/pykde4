@@ -20,6 +20,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 %ModuleHeaderCode
+//ctscc
 #include <css_rule.h>
 %End
 
@@ -47,6 +48,7 @@ public:
         MEDIA_RULE,
         FONT_FACE_RULE,
         PAGE_RULE,
+        NAMESPACE_RULE,
         QUIRKS_RULE
     };
 
@@ -221,6 +223,21 @@ public:
 };
 // CSSRuleList
 
+class CSSNamespaceRule : DOM::CSSRule
+{
+%TypeHeaderCode
+#include <css_rule.h>
+%End
+
+public:
+                            CSSNamespaceRule ();
+                            CSSNamespaceRule (const DOM::CSSNamespaceRule& other);
+                            CSSNamespaceRule (const DOM::CSSRule& other);
+//ig                            CSSNamespaceRule (CSSNamespaceRuleImpl* impl);
+    DOM::DOMString          namespaceURI () const;
+    DOM::DOMString          prefix () const;
+    ~CSSNamespaceRule ();
+};
 };
 // DOM
 

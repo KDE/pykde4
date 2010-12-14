@@ -47,6 +47,7 @@ protected:
     void                    slotHelpClicked ();
 public:
     ~KCMultiDialog ();
+    void                    setButtons (KDialog::ButtonCodes buttonMask);
 };
 // KCMultiDialog
 

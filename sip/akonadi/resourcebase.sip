@@ -81,5 +81,6 @@ protected:
     void                    setItemTransactionMode (Akonadi::ItemSync::TransactionMode mode);
     void                    setItemSynchronizationFetchScope (const Akonadi::ItemFetchScope& fetchScope);
     void                    synchronizeCollectionAttributes (qint64 id);
+    void                    synchronizeCollection (qint64 id, bool recursive);
 };
 };

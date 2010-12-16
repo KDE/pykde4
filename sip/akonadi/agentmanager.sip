@@ -53,6 +53,7 @@ private:
                             AgentManager ();
 public:
     ~AgentManager ();
+    void                    synchronizeCollection (const Akonadi::Collection& collection, bool recursive);
 };
 // AgentManager
 

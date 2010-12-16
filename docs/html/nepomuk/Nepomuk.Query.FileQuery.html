@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -83,12 +83,15 @@ specific folders via setIncludeFolders() and setExcludeFolders().
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#FileQuery">__init__</a> (self, <a href="../nepomuk/Nepomuk.Query.Term.html">Nepomuk.Query.Term</a> term)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addExcludeFolder">addExcludeFolder</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> folder)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addIncludeFolder">addIncludeFolder</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> folder)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addIncludeFolder">addIncludeFolder</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> folder, bool recursive)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">{<a href="../kdecore/KUrl.html">KUrl</a>:bool}&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#allIncludeFolders">allIncludeFolders</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.List.html">KUrl.List</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#excludeFolders">excludeFolders</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../nepomuk/Nepomuk.Query.FileQuery.html">Nepomuk.Query.FileQuery.FileMode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fileMode">fileMode</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.List.html">KUrl.List</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#includeFolders">includeFolders</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setExcludeFolders">setExcludeFolders</a> (self, <a href="../kdecore/KUrl.List.html">KUrl.List</a> folders)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setFileMode">setFileMode</a> (self, <a href="../nepomuk/Nepomuk.Query.FileQuery.html">Nepomuk.Query.FileQuery.FileMode</a> mode)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIncludeFolders">setIncludeFolders</a> (self, <a href="../kdecore/KUrl.List.html">KUrl.List</a> folders)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIncludeFolders">setIncludeFolders</a> (self, {<a href="../kdecore/KUrl.html">KUrl</a>:bool} folders)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="FileQuery"></a>
 <div class="memitem">
@@ -179,10 +182,6 @@ specific folders via setIncludeFolders() and setExcludeFolders().
 will be restricted to files that are not in that folder and its subfolders.
 </p>
 <p>
-Be aware that setting a folder filter will implicitely restrict the query
-to files and folders.
-</p>
-<p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>folder</em>&nbsp;</td><td> The folder to exclude from the search.
@@ -211,20 +210,91 @@ to files and folders.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Add a folder to include in the search. If include folders are set the query
-will be restricted to files from that folders and their subfolders.
-</p>
-<p>
-Be aware that setting a folder filter will implicitely restrict the query
-to files and folders.
+<div class="memdoc"><p>Add a folder to include in the search path. If include folders are set the query
+will be restricted to files from that folders and optionally their subfolders.
 </p>
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>folder</em>&nbsp;</td><td> The folder to include in the search.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>recursive</em>&nbsp;</td><td> If <b>true</b> subfolders of <b>folder</b> will be searched, too.
 </td></tr>
 </table></dl>
 <p> \sa setIncludeFolders, includeFolders, addExcludeFolder
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
+</p></div></div><a class="anchor" name="addIncludeFolder"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addIncludeFolder</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td>
+<td class="paramname"><em>folder</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>recursive</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add a folder to include in the search path. If include folders are set the query
+will be restricted to files from that folders and optionally their subfolders.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>folder</em>&nbsp;</td><td> The folder to include in the search.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>recursive</em>&nbsp;</td><td> If <b>true</b> subfolders of <b>folder</b> will be searched, too.
+</td></tr>
+</table></dl>
+<p> \sa setIncludeFolders, includeFolders, addExcludeFolder
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
+</p></div></div><a class="anchor" name="allIncludeFolders"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">{<a href="../kdecore/KUrl.html">KUrl</a>:bool} allIncludeFolders</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>The hash of include folders set via addIncludeFolder() and
+setIncludeFolders() including their recursive flag.
+</p>
+<p>
+\sa includeFolders, addIncludeFolder, setIncludeFolders, excludeFolders
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="excludeFolders"></a>
 <div class="memitem">
 <div class="memproto">
@@ -275,7 +345,7 @@ setExcludeFolders().
 setIncludeFolders().
 </p>
 <p>
-\sa addIncludeFolder, setIncludeFolders, excludeFolders
+\sa allIncludeFolders, addIncludeFolder, setIncludeFolders, excludeFolders
 </p></div></div><a class="anchor" name="setExcludeFolders"></a>
 <div class="memitem">
 <div class="memproto">
@@ -362,10 +432,43 @@ By default both files and folders are returned.
 <div class="memdoc"><p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>folders</em>&nbsp;</td><td> The folders to include in the search.
+<tr><td></td><td valign="top"><em>folders</em>&nbsp;</td><td> A hash of the folders to include in the search and
+their recursive flag.
 </td></tr>
 </table></dl>
-<p> \sa addIncludeFolder, includeFolders, setExcludeFolders
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
+</p></div></div><a class="anchor" name="setIncludeFolders"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setIncludeFolders</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">{<a href="../kdecore/KUrl.html">KUrl</a>:bool}&nbsp;</td>
+<td class="paramname"><em>folders</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>folders</em>&nbsp;</td><td> A hash of the folders to include in the search and
+their recursive flag.
+</td></tr>
+</table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="FileModeFlags"></a>
 <div class="memitem">
 <div class="memproto">

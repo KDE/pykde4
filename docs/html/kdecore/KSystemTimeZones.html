@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -60,9 +60,16 @@ Each individual time zone is defined in a KSystemTimeZone instance. Additional
 time zones (of any class derived from KTimeZone) may be added if desired.
 </p>
 <p>
-At initialisation, KSystemTimeZones reads the zone.tab file to obtain the list
-of system time zones, and creates a KSystemTimeZone instance for each one.
+At initialisation, KSystemTimeZones on UNIX systems reads the zone.tab file
+to obtain the list of system time zones, and creates a KSystemTimeZone
+instance for each one.
 </p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> KSystemTimeZones gets the system's time zone configuration, including
+the current local system time zone and the location of zone.tab, from the KDE
+time zone daemon, ktimezoned. If ktimezoned cannot be started, KSystemTimeZones
+will only know about the UTC time zone.
+</dd></dl> </p>
 <p>
 Note that KSystemTimeZones is not derived from KTimeZones, but instead contains
 a KTimeZones instance which holds the system time zone database. Convenience
@@ -107,6 +114,7 @@ System time zone access
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KSystemTimeZones">__init__</a> (self)</td></tr>
 <tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isSimulated">isSimulated</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isTimeZoneDaemonAvailable">isTimeZoneDaemonAvailable</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KTimeZone.html">KTimeZone</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#local">local</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KTimeZone.html">KTimeZone</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#readZone">readZone</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KTimeZone.html">KTimeZone</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#realLocalZone">realLocalZone</a> ()</td></tr>
@@ -159,6 +167,23 @@ conditionally compiled, e.g.:
 </p>
 <p>
 <dl class="see" compact><dt><b>See also:</b></dt><dd> setLocalZone()
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="isTimeZoneDaemonAvailable"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isTimeZoneDaemonAvailable</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the KDE time zone daemon, ktimezoned, is available. If
+not, UTC will be the only recognized time zone.
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
 </dd></dl>
 </p></div></div><a class="anchor" name="local"></a>
 <div class="memitem">
@@ -261,6 +286,7 @@ realLocalZone() should be conditionally compiled, e.g.:
 </p>
 <p>
 <dl class="see" compact><dt><b>See also:</b></dt><dd> setLocalZone()
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
 </dd></dl>
 </p></div></div><a class="anchor" name="setLocalZone"></a>
 <div class="memitem">
@@ -299,6 +325,7 @@ conditionally compiled, e.g.:
 <tr><td></td><td valign="top"><em>tz</em>&nbsp;</td><td> the time zone to simulate, or an invalid KTimeZone instance
 (i.e. <pre class="fragment"> tz.isValid() == false \endcode) to cancel
            simulation
+ @since 4.3
 </p></div></div><a class="anchor" name="timeZones"></a>
 <div class="memitem">
 <div class="memproto">

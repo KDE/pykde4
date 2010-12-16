@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -81,10 +81,12 @@ A sample file looks like this :
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#bookmarksChanged">bookmarksChanged</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> groupAddress)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changed">changed</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> groupAddress, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> caller)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configChanged">configChanged</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#error">error</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> errorMessage)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KBookmarkManager">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> bookmarksFile, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> dbusObjectName)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KBookmarkManager">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> bookmarksFile)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KBookmarkManager">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#autoErrorHandlingEnabled">autoErrorHandlingEnabled</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#emitChanged">emitChanged</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#emitChanged">emitChanged</a> (self, <a href="../kio/KBookmarkGroup.html">KBookmarkGroup</a> group)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#emitConfigChanged">emitConfigChanged</a> (self)</td></tr>
@@ -96,6 +98,7 @@ A sample file looks like this :
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KBookmarkGroup.html">KBookmarkGroup</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#root">root</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#save">save</a> (self, bool toolbarCache=1)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#saveAs">saveAs</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filename, bool toolbarCache=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAutoErrorHandlingEnabled">setAutoErrorHandlingEnabled</a> (self, bool enable, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setEditorOptions">setEditorOptions</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> caption, bool browser)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setUpdate">setUpdate</a> (self, bool update)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#slotEditBookmarks">slotEditBookmarks</a> (self)</td></tr>
@@ -198,7 +201,28 @@ connect to this
 </table>
 </div>
 <div class="memdoc"><p>Signals that the config changed
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("configChanged()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="KBookmarkManager"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("configChanged()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="error"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> error</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>errorMessage</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted when an error occurs.
+Contains the translated error message.
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("error(const QString&)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="KBookmarkManager"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -287,6 +311,26 @@ An empty dbusObjectName disables the registration to dbus (used for temporary ma
 </table>
 </div>
 <div class="memdoc"><p>Creates a temp bookmark manager
+</p></div></div><a class="anchor" name="autoErrorHandlingEnabled"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool autoErrorHandlingEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Check whether auto error handling is enabled.
+If enabled, it will show an error dialog to the user when an
+error occurs. It is turned on by default.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if auto error handling is enabled, false otherwise
+</dd></dl> <dl class="note" compact><dt><b>Note:</b></dt><dd> dialogs will only be displayed if the current thread is the gui thread
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setAutoErrorHandlingEnabled()
+</dd></dl>
 </p></div></div><a class="anchor" name="emitChanged"></a>
 <div class="memitem">
 <div class="memproto">
@@ -532,6 +576,48 @@ Only use this if you don't want the emitChanged signal.
 <tr><td></td><td valign="top"><em>toolbarCache</em>&nbsp;</td><td> iff true save a cache of the toolbar folder, too
 </td></tr> </table></dl>
 <p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if saving was successful
+</dd></dl>
+</p></div></div><a class="anchor" name="setAutoErrorHandlingEnabled"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setAutoErrorHandlingEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>enable</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Enable or disable auto error handling is enabled.
+If enabled, it will show an error dialog to the user when an
+error occurs. It is turned on by default.
+If disabled, the application should react on the error() signal.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>enable</em>&nbsp;</td><td> true to enable auto error handling, false to disable
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent widget for the error dialogs, can be 0 for
+top-level
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> autoErrorHandlingEnabled()
 </dd></dl>
 </p></div></div><a class="anchor" name="setEditorOptions"></a>
 <div class="memitem">

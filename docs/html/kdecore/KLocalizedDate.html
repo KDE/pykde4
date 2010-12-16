@@ -1,0 +1,2923 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KLocalizedDate</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.6 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>KLocalizedDate Class Reference</h1>
+<code>from PyKDE4.kdecore import *</code>
+<p>
+
+
+
+<h2>Detailed Description</h2>
+
+<p>A class representing a date localized using the local calendar system, language and formats
+</p>
+<p>
+Topics:
+- intro
+- calsys
+- custom
+- formatting
+- maths
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+This class provides a simple and convenient way to localize dates
+</p>
+<p>
+<b>Calendar System </b>
+</p>
+<p>
+KDE supports the use of different calendar systems.
+</p>
+<p>
+<b>Default and Custom Locale and Calendar System </b>
+</p>
+<p>
+In most cases you will want to use the default Global Locale and Calendar
+System, in which case you need only create a default KLocalizedDate. If
+however you specifically need a different Calendar System or Locale settings
+then you need to take some extra steps.
+</p>
+<p>
+The simplest method is just changing the Calendar System while keeping the
+current Locale settings. This is easily done using setCalendarSystem()
+which will copy the current Locale being used and apply this to the new
+Calendar System. Note this means any changes to the old locale settings,
+either the Global Locale or a custom Locale (see below) will not apply
+to that date instance.
+</p>
+<p>
+You may however wish to use a custom Locale with the Calendar System.
+For example, if you want your app to normally show dates using the Global
+Locale and Calendar System, but wish to show an info box with the Islamic
+date in Arabic language and format, then you need a custom Locale to do
+this.
+</p>
+<p>
+<pre class="fragment">
+ KLocale *myLocale = new KLocale("myapp", "ar", "eg");
+ KCalendarSystem *myCalendar = KCalendarSystem.create(KLocale.IslamicCivilCalendar, myLocale);
+ KLocalizedDate myDate(QDate(2010,1,1), myCalendar);
+</pre>
+</p>
+<p>
+In this case you are responsible for the memory management of the KLocale
+and KCalendarSystem. This allows you to reuse this calendar across multiple
+date instances without it being deleted under you. It also allows you to
+change any setting in the Locale and have it apply across all those date
+instances. <dl class="warning" compact><dt><b>Warning:</b></dt><dd> Don't try changing the Calendar System via your Locale
+instance, your KCalendarSystem instance will be deleted and all the dates
+will be invalid!
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd>
+</dd></dl> </p>
+<p>
+<b>Date Formatting </b>
+</p>
+<p>
+When you display dates or date components to users in a GUI, they will
+expect them to be displayed in their language and digit set following their
+local date formatting conventions. Directly displaying values returned by
+the normal date component methods such as day() will not conform to these
+expectations, so you need to use different methods to obtain the localized
+string form of the date or component.
+</p>
+<p>
+You can either format the entire date, or just a single component of the
+date such as the month or day.
+</p>
+<p>
+When formatting a full date, it is preferred to use one of the standard date
+formats defined in the Locale, although you can provide your own format in
+either the KDE, POSIX, or UNICODE standards.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate() formatDate()
+</dd></dl> </p>
+<p>
+<b>Date Parsing </b>
+</p>
+<p>
+Basic concepts on date parsing, then full details on KLocale.ReadDateFlags
+formats, definging your own date format strings, and setting how strictly
+the format is appplied.
+</p>
+<p>
+You can choose how strictly a date format is applied in parsing. Currently
+only liberal Parsing is supported.
+</p>
+<p>
+The KLocale.LiberalParsing mode applies the following rules:
+</p>
+<p>
+1) You must supply a format and string containing at least one of the following combinations to
+create a valid date:
+<li> a month and day of month </li>
+<li> a day of year </li>
+<li> a ISO week number and day of week </li>
+</p>
+<p>
+2) If a year number is not supplied then the current year will be assumed.
+</p>
+<p>
+3) All date components must be separated by a non-numeric character.
+</p>
+<p>
+4) The format is not applied strictly to the input string:
+<li> extra whitespace is ignored </li>
+<li> leading 0's on numbers are ignored </li>
+<li> capitalisation of literals is ignored </li>
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> readDate()
+</dd></dl> </p>
+<p>
+<b>Date Maths </b>
+</p>
+<p>
+A full set of date maths functions are provided which operate in a consistent
+manner, i.e. you can safely round-trip.
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KLocalizedDate">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> date=QDate(), <a href="../kdecore/KCalendarSystem.html">KCalendarSystem</a> calendar=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KLocalizedDate">__init__</a> (self, int year, int month, int day, <a href="../kdecore/KCalendarSystem.html">KCalendarSystem</a> calendar=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KLocalizedDate">__init__</a> (self, <a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> rhs)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addDays">addDays</a> (self, int days)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addDaysTo">addDaysTo</a> (self, int days)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addMonths">addMonths</a> (self, int months)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addMonthsTo">addMonthsTo</a> (self, int months)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addYears">addYears</a> (self, int years)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addYearsTo">addYearsTo</a> (self, int years)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KCalendarSystem.html">KCalendarSystem</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#calendar">calendar</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocale.html#CalendarSystem">KLocale.CalendarSystem</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#calendarSystem">calendarSystem</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#date">date</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dateDifference">dateDifference</a> (self, <a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> toDate, int yearsDiff, int monthsDiff, int daysDiff, int direction)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dateDifference">dateDifference</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> toDate, int yearsDiff, int monthsDiff, int daysDiff, int direction)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#day">day</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dayOfWeek">dayOfWeek</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dayOfYear">dayOfYear</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#daysDifference">daysDifference</a> (self, <a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> toDate)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#daysDifference">daysDifference</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> toDate)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#daysInMonth">daysInMonth</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#daysInWeek">daysInWeek</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#daysInYear">daysInYear</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#eraName">eraName</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#eraYear">eraYear</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#firstDayOfMonth">firstDayOfMonth</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#firstDayOfYear">firstDayOfYear</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#formatDate">formatDate</a> (self, <a href="../kdecore/KLocale.html#DateFormat">KLocale.DateFormat</a> dateFormat=KLocale.LongDate)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#formatDate">formatDate</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> formatString, <a href="../kdecore/KLocale.html#DateTimeFormatStandard">KLocale.DateTimeFormatStandard</a> formatStandard=KLocale.KdeFormat)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#formatDate">formatDate</a> (self, <a href="../kdecore/KLocale.html#DateTimeComponent">KLocale.DateTimeComponent</a> component, <a href="../kdecore/KLocale.html#DateTimeComponentFormat">KLocale.DateTimeComponentFormat</a> format=KLocale.DefaultComponentFormat, <a href="../kdecore/KLocale.html#WeekNumberSystem">KLocale.WeekNumberSystem</a> weekNumberSystem=KLocale.DefaultWeekNumber)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#getDate">getDate</a> (self, int year, int month, int day)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isLeapYear">isLeapYear</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isNull">isNull</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isValid">isValid</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#lastDayOfMonth">lastDayOfMonth</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#lastDayOfYear">lastDayOfYear</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#month">month</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#monthsDifference">monthsDifference</a> (self, <a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> toDate)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#monthsDifference">monthsDifference</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> toDate)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#monthsInYear">monthsInYear</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator !=">operator !=</a> (self, <a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator !=">operator !=</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator <">operator <</a> (self, <a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator <">operator <</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator <=">operator <=</a> (self, <a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator <=">operator <=</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator ==">operator ==</a> (self, <a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator ==">operator ==</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator >">operator ></a> (self, <a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator >">operator ></a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator >=">operator >=</a> (self, <a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator >=">operator >=</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCalendarSystem">setCalendarSystem</a> (self, <a href="../kdecore/KLocale.html#CalendarSystem">KLocale.CalendarSystem</a> calendarSystem)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCurrentDate">setCurrentDate</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDate">setDate</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> date)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDate">setDate</a> (self, int year, int month, int day)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDate">setDate</a> (self, int year, int dayOfYear)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDate">setDate</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> eraName, int yearInEra, int month, int day)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDate">setDate</a> (self, <a href="../kdecore/KLocale.html#WeekNumberSystem">KLocale.WeekNumberSystem</a> weekNumberSystem, int year, int weekOfYear, int dayOfWeek)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toJulianDay">toJulianDay</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#week">week</a> (self, int yearNum=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#week">week</a> (self, <a href="../kdecore/KLocale.html#WeekNumberSystem">KLocale.WeekNumberSystem</a> weekNumberSystem, int yearNum=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#weeksInYear">weeksInYear</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#weeksInYear">weeksInYear</a> (self, <a href="../kdecore/KLocale.html#WeekNumberSystem">KLocale.WeekNumberSystem</a> weekNumberSystem)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#year">year</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#yearInEra">yearInEra</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#yearsDifference">yearsDifference</a> (self, <a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> toDate)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#yearsDifference">yearsDifference</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> toDate)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#currentDate">currentDate</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fromDate">fromDate</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> date)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fromJulianDay">fromJulianDay</a> (int jd)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#readDate">readDate</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> dateString, <a href="../kdecore/KLocale.html#DateTimeParseMode">KLocale.DateTimeParseMode</a> parseMode=KLocale.LiberalParsing, <a href="../kdecore/KCalendarSystem.html">KCalendarSystem</a> calendar=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#readDate">readDate</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> dateString, <a href="../kdecore/KLocale.html#ReadDateFlags">KLocale.ReadDateFlags</a> formatFlags, <a href="../kdecore/KLocale.html#DateTimeParseMode">KLocale.DateTimeParseMode</a> parseMode=KLocale.LiberalParsing, <a href="../kdecore/KCalendarSystem.html">KCalendarSystem</a> calendar=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#readDate">readDate</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> dateString, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> dateFormat, <a href="../kdecore/KLocale.html#DateTimeParseMode">KLocale.DateTimeParseMode</a> parseMode=KLocale.LiberalParsing, <a href="../kdecore/KLocale.html#DateTimeFormatStandard">KLocale.DateTimeFormatStandard</a> formatStandard=KLocale.KdeFormat, <a href="../kdecore/KCalendarSystem.html">KCalendarSystem</a> calendar=0)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="KLocalizedDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td>
+<td class="paramname"><em>date=QDate()</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KCalendarSystem.html">KCalendarSystem</a>&nbsp;</td>
+<td class="paramname"><em>calendar=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Constructs a localized date with the given date.
+</p>
+<p>
+By default, uses the global Calendar System and Locale.
+</p>
+<p>
+If you pass in a custom Calendar System then you retain ownership of it
+and are responsible for deleting it. This allows you to reuse the same
+custom Calendar System for many localized date instances.
+</p>
+<p>
+See custom for more details on using custom Calendar Systems.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>date</em>&nbsp;</td><td> the QDate to set the KLocalizedDate to, defaults to invalid date
+
+<tr><td></td><td valign="top"><em>locale</em>&nbsp;</td><td> the locale to use for date formats, defaults to the global
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KLocalizedDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>year</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>month</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>day</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KCalendarSystem.html">KCalendarSystem</a>&nbsp;</td>
+<td class="paramname"><em>calendar=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Constructs a localized date with the given year, month and day.
+</p>
+<p>
+By default, uses the global Calendar System and Locale.
+</p>
+<p>
+If you pass in a custom Calendar System then you retain ownership of it
+and are responsible for deleting it. This allows you to reuse the same
+custom Calendar System for many localized date instances.
+</p>
+<p>
+See custom for more details on using custom Calendar Systems.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>year</em>&nbsp;</td><td> the year to set the KLocalizedDate to
+
+<tr><td></td><td valign="top"><em>month</em>&nbsp;</td><td> the month to set the KLocalizedDate to
+
+<tr><td></td><td valign="top"><em>day</em>&nbsp;</td><td> the day to set the KLocalizedDate to
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="KLocalizedDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td>
+<td class="paramname"><em>rhs</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Copy constructor
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>rhs</em>&nbsp;</td><td> the date to copy
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addDays"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> addDays</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>days</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a KLocalizedDate containing a date <b>days</b> days later.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addDaysTo()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> addYears() addMonths()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dateDifference() yearsDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>days</em>&nbsp;</td><td> number of days to add
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The new date, null date if any errors
+</dd></dl>
+</p></div></div><a class="anchor" name="addDaysTo"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool addDaysTo</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>days</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add days onto this date instance.
+</p>
+<p>
+If the result of the addition is invalid in the current Calendar System
+then the date will become invalid.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addDays()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> addYearsTo(), addMonthsTo()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dateDifference() yearsDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>days</em>&nbsp;</td><td> The number of days to add
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> if the resulting date is valid
+</dd></dl>
+</p></div></div><a class="anchor" name="addMonths"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> addMonths</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>months</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a KLocalizedDate containing a date <b>months</b> months later.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addMonthsTo()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> addYears() addDays()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dateDifference() yearsDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>months</em>&nbsp;</td><td> number of months to add
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The new date, null date if any errors
+</dd></dl>
+</p></div></div><a class="anchor" name="addMonthsTo"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool addMonthsTo</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>months</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add months onto this date instance.
+</p>
+<p>
+If the result of the addition is invalid in the current Calendar System
+then the date will become invalid.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addMonths()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> addYearsTo() addDaysTo()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dateDifference() yearsDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>months</em>&nbsp;</td><td> The number of months to add
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> if the resulting date is valid
+</dd></dl>
+</p></div></div><a class="anchor" name="addYears"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> addYears</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>years</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a KLocalizedDate containing a date <b>years</b> years later.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addYearsTo()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> addMonths() addDays()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dateDifference() yearsDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>years</em>&nbsp;</td><td> The number of years to add
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The new date, null date if any errors
+</dd></dl>
+</p></div></div><a class="anchor" name="addYearsTo"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool addYearsTo</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>years</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add years onto this date instance.
+</p>
+<p>
+If the result of the addition is invalid in the current Calendar System
+then the date will become invalid.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addYears()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> addMonthsTo() addDaysTo()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dateDifference() yearsDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>years</em>&nbsp;</td><td> The number of years to add
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> if the resulting date is valid
+</dd></dl>
+</p></div></div><a class="anchor" name="calendar"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KCalendarSystem.html">KCalendarSystem</a> calendar</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a pointer to the Calendar System object used by this date instance.
+</p>
+<p>
+Usually this will be the Global Calendar System, but this may have been
+changed.
+</p>
+<p>
+Normally you will not need to access this object unless the KLocalizedDate
+API does not provide the methods you require.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KCalendarSystem
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> calendarSystem
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setCalendarSystem
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the current calendar system instance
+</dd></dl>
+</p></div></div><a class="anchor" name="calendarSystem"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocale.html#CalendarSystem">KLocale.CalendarSystem</a> calendarSystem</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the Calendar System used by this localized date instance
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KLocale.CalendarSystem
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setCalendarSystem()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the Calendar System currently used
+</dd></dl>
+</p></div></div><a class="anchor" name="date"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a> date</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the currently set date as a QDate
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the currently set date as a QDate
+</dd></dl>
+</p></div></div><a class="anchor" name="dateDifference"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> dateDifference</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td>
+<td class="paramname"><em>toDate</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>yearsDiff</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>monthsDiff</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>daysDiff</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>direction</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the difference between this and another date in years, months and days
+in the current Calendar System.
+</p>
+<p>
+The difference is always calculated from the earlier date to the later
+date in year, month and day order, with the <b>direction</b> parameter
+indicating which direction the difference is applied from this date.
+In other words, this difference can be added onto the earlier date in
+year, month, day order to reach the later date.
+</p>
+<p>
+For example, the difference between 2010-06-10 and 2012-09-5 is 2 years,
+2 months and 26 days. Note that the difference between two last days of
+the month is always 1 month, e.g. 2010-01-31 to 2010-02-28 is 1 month
+not 28 days.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addYears() addMonths() addDays()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> yearsDifference() monthsDifference() daysDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>toDate</em>&nbsp;</td><td> The date to end at
+
+<tr><td></td><td valign="top"><em>yearsDiff</em>&nbsp;</td><td> Returns number of years difference
+
+<tr><td></td><td valign="top"><em>monthsDiff</em>&nbsp;</td><td> Returns number of months difference
+
+<tr><td></td><td valign="top"><em>daysDiff</em>&nbsp;</td><td> Returns number of days difference
+
+<tr><td></td><td valign="top"><em>direction</em>&nbsp;</td><td> Returns direction of difference, 1 if this Date &lt;= toDate, -1 otherwise
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="dateDifference"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> dateDifference</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td>
+<td class="paramname"><em>toDate</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>yearsDiff</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>monthsDiff</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>daysDiff</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>direction</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the difference between this and another date in years, months and days
+in the current Calendar System.
+</p>
+<p>
+The difference is always calculated from the earlier date to the later
+date in year, month and day order, with the <b>direction</b> parameter
+indicating which direction the difference is applied from this date.
+In other words, this difference can be added onto the earlier date in
+year, month, day order to reach the later date.
+</p>
+<p>
+For example, the difference between 2010-06-10 and 2012-09-5 is 2 years,
+2 months and 26 days. Note that the difference between two last days of
+the month is always 1 month, e.g. 2010-01-31 to 2010-02-28 is 1 month
+not 28 days.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addYears() addMonths() addDays()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> yearsDifference() monthsDifference() daysDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>toDate</em>&nbsp;</td><td> The date to end at
+
+<tr><td></td><td valign="top"><em>yearsDiff</em>&nbsp;</td><td> Returns number of years difference
+
+<tr><td></td><td valign="top"><em>monthsDiff</em>&nbsp;</td><td> Returns number of months difference
+
+<tr><td></td><td valign="top"><em>daysDiff</em>&nbsp;</td><td> Returns number of days difference
+
+<tr><td></td><td valign="top"><em>direction</em>&nbsp;</td><td> Returns direction of difference, 1 if this Date &lt;= toDate, -1 otherwise
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="day"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int day</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the day portion of the date in the current calendar system
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the localized day number, 0 if date is invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="dayOfWeek"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int dayOfWeek</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the weekday number for the date
+</p>
+<p>
+The weekdays are numbered 1..7 for Monday..Sunday.
+</p>
+<p>
+This value is <b>not</b> affected by the value of KLocale.weekStartDay()
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> day of week number, -1 if date not valid
+</dd></dl>
+</p></div></div><a class="anchor" name="dayOfYear"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int dayOfYear</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the day number of year for the date
+</p>
+<p>
+The days are numbered 1..daysInYear()
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> day of year number, -1 if date not valid
+</dd></dl>
+</p></div></div><a class="anchor" name="daysDifference"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int daysDifference</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td>
+<td class="paramname"><em>toDate</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the difference between this and another date in days
+The returned value will be negative if <b>toDate</b> &lt; this date.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addDays()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dateDifference() yearsDifference() monthsDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>toDate</em>&nbsp;</td><td> The date to end at
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The number of days difference
+</dd></dl>
+</p></div></div><a class="anchor" name="daysDifference"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int daysDifference</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td>
+<td class="paramname"><em>toDate</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the difference between this and another date in days
+The returned value will be negative if <b>toDate</b> &lt; this date.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addDays()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dateDifference() yearsDifference() monthsDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>toDate</em>&nbsp;</td><td> The date to end at
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The number of days difference
+</dd></dl>
+</p></div></div><a class="anchor" name="daysInMonth"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int daysInMonth</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the number of days in the month.
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> number of days in month, -1 if date invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="daysInWeek"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int daysInWeek</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the number of days in the week.
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> number of days in week, -1 if date invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="daysInYear"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int daysInYear</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the number of days in the year.
+</p>
+<p>
+For example, in the Gregorian calendar most years have 365 days but Leap
+Years have 366 years. Other Calendar Systems have different length years.
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> number of days in year, -1 if date invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="eraName"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> eraName</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the Era Name portion of the date in the current calendar system,
+for example "AD" or "Anno Domini" for the Gregorian calendar and Christian Era.
+</p>
+<p>
+See formatting for more details on Date Formatting.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>format</em>&nbsp;</td><td> format to return, either short or long
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the localized era name, empty string if date is invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="eraYear"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> eraYear</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the Era Year portion of the date in the current
+calendar system, for example "2000 AD" or "Heisei 22".
+</p>
+<p>
+See formatting for more details on Date Formatting.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>format</em>&nbsp;</td><td> format to return, either short or long
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the localized era year string, empty string if date is invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="firstDayOfMonth"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> firstDayOfMonth</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a KLocalizedDate containing the first day of the currently set month
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> lastDayOfMonth()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The first day of the month
+</dd></dl>
+</p></div></div><a class="anchor" name="firstDayOfYear"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> firstDayOfYear</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a KLocalizedDate containing the first day of the currently set year
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> lastDayOfYear()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The first day of the year
+</dd></dl>
+</p></div></div><a class="anchor" name="formatDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> formatDate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#DateFormat">KLocale.DateFormat</a>&nbsp;</td>
+<td class="paramname"><em>dateFormat=KLocale.LongDate</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a Date Component as a localized string in the requested format.
+</p>
+<p>
+See formatting for more details on Date Formatting.
+</p>
+<p>
+Each format size may vary depending on Locale and Calendar System but will
+generally match the format description. Some formats may not be directly
+valid but a sensible value will always be returned.
+</p>
+<p>
+For example for 2010-01-01 the KLocale.Month with en_US Locale and Gregorian calendar may return:
+KLocale.ShortNumber = "1"
+KLocale.LongNumber = "01"
+KLocale.NarrowName = "J"
+KLocale.ShortName = "Jan"
+KLocale.LongName = "January"
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>component</em>&nbsp;</td><td> The date component to return
+
+<tr><td></td><td valign="top"><em>format</em>&nbsp;</td><td> The format to return the <b>component</b> in
+
+<tr><td></td><td valign="top"><em>weekNumberSystem</em>&nbsp;</td><td> To override the default Week Number System to use
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The string form of the date component
+</dd></dl>
+</p></div></div><a class="anchor" name="formatDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> formatDate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>formatString</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#DateTimeFormatStandard">KLocale.DateTimeFormatStandard</a>&nbsp;</td>
+<td class="paramname"><em>formatStandard=KLocale.KdeFormat</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a Date Component as a localized string in the requested format.
+</p>
+<p>
+See formatting for more details on Date Formatting.
+</p>
+<p>
+Each format size may vary depending on Locale and Calendar System but will
+generally match the format description. Some formats may not be directly
+valid but a sensible value will always be returned.
+</p>
+<p>
+For example for 2010-01-01 the KLocale.Month with en_US Locale and Gregorian calendar may return:
+KLocale.ShortNumber = "1"
+KLocale.LongNumber = "01"
+KLocale.NarrowName = "J"
+KLocale.ShortName = "Jan"
+KLocale.LongName = "January"
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>component</em>&nbsp;</td><td> The date component to return
+
+<tr><td></td><td valign="top"><em>format</em>&nbsp;</td><td> The format to return the <b>component</b> in
+
+<tr><td></td><td valign="top"><em>weekNumberSystem</em>&nbsp;</td><td> To override the default Week Number System to use
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The string form of the date component
+</dd></dl>
+</p></div></div><a class="anchor" name="formatDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> formatDate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#DateTimeComponent">KLocale.DateTimeComponent</a>&nbsp;</td>
+<td class="paramname"><em>component</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#DateTimeComponentFormat">KLocale.DateTimeComponentFormat</a>&nbsp;</td>
+<td class="paramname"><em>format=KLocale.DefaultComponentFormat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#WeekNumberSystem">KLocale.WeekNumberSystem</a>&nbsp;</td>
+<td class="paramname"><em>weekNumberSystem=KLocale.DefaultWeekNumber</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a Date Component as a localized string in the requested format.
+</p>
+<p>
+See formatting for more details on Date Formatting.
+</p>
+<p>
+Each format size may vary depending on Locale and Calendar System but will
+generally match the format description. Some formats may not be directly
+valid but a sensible value will always be returned.
+</p>
+<p>
+For example for 2010-01-01 the KLocale.Month with en_US Locale and Gregorian calendar may return:
+KLocale.ShortNumber = "1"
+KLocale.LongNumber = "01"
+KLocale.NarrowName = "J"
+KLocale.ShortName = "Jan"
+KLocale.LongName = "January"
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>component</em>&nbsp;</td><td> The date component to return
+
+<tr><td></td><td valign="top"><em>format</em>&nbsp;</td><td> The format to return the <b>component</b> in
+
+<tr><td></td><td valign="top"><em>weekNumberSystem</em>&nbsp;</td><td> To override the default Week Number System to use
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The string form of the date component
+</dd></dl>
+</p></div></div><a class="anchor" name="getDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> getDate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>year</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>month</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>day</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the year, month and day portion of the date in the current
+Calendar System.
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setDate()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>year</em>&nbsp;</td><td> year number returned in this variable
+
+<tr><td></td><td valign="top"><em>month</em>&nbsp;</td><td> month number returned in this variable
+
+<tr><td></td><td valign="top"><em>day</em>&nbsp;</td><td> day of month returned in this variable
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="isLeapYear"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isLeapYear</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns whether the currently set date falls in a Leap Year in the
+current Calendar System.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the date falls in a leap year
+</dd></dl>
+</p></div></div><a class="anchor" name="isNull"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isNull</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns whether the date is null, i.e. invalid in any Calendar System.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> isValid
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the date is null, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="isValid"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isValid</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns whether the date is valid in the current Calendar System.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> isNull
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the date is valid, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="lastDayOfMonth"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> lastDayOfMonth</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a KLocalizedDate containing the last day of the currently set month
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> firstDayOfMonth()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The last day of the month
+</dd></dl>
+</p></div></div><a class="anchor" name="lastDayOfYear"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> lastDayOfYear</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a KLocalizedDate containing the last day of the currently set year
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> firstDayOfYear()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The last day of the year
+</dd></dl>
+</p></div></div><a class="anchor" name="month"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int month</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the month portion of the date in the current calendar system
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the localized month number, 0 if date is invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="monthsDifference"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int monthsDifference</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td>
+<td class="paramname"><em>toDate</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the difference between this and another date in completed calendar months
+in the current Calendar System.
+</p>
+<p>
+The returned value will be negative if <b>toDate</b> &lt; this date.
+</p>
+<p>
+For example, the difference between 2010-06-10 and 2012-09-5 is 26 months.
+Note that the difference between two last days of the month is always 1
+month, e.g. 2010-01-31 to 2010-02-28 is 1 month not 28 days.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addMonths()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dateDifference() yearsDifference() daysDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>toDate</em>&nbsp;</td><td> The date to end at
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The number of months difference
+</dd></dl>
+</p></div></div><a class="anchor" name="monthsDifference"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int monthsDifference</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td>
+<td class="paramname"><em>toDate</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the difference between this and another date in completed calendar months
+in the current Calendar System.
+</p>
+<p>
+The returned value will be negative if <b>toDate</b> &lt; this date.
+</p>
+<p>
+For example, the difference between 2010-06-10 and 2012-09-5 is 26 months.
+Note that the difference between two last days of the month is always 1
+month, e.g. 2010-01-31 to 2010-02-28 is 1 month not 28 days.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addMonths()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dateDifference() yearsDifference() daysDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>toDate</em>&nbsp;</td><td> The date to end at
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The number of months difference
+</dd></dl>
+</p></div></div><a class="anchor" name="monthsInYear"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int monthsInYear</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns number of months in the year
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> number of months in the year, -1 if date invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="operator !="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator !=</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>QDate inequality operator
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>other</em>&nbsp;</td><td> the date to compare
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="operator !="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator !=</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>QDate inequality operator
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>other</em>&nbsp;</td><td> the date to compare
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="operator <"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator <</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>QDate less than operator
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>other</em>&nbsp;</td><td> the date to compare
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="operator <"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator <</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>QDate less than operator
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>other</em>&nbsp;</td><td> the date to compare
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="operator <="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator <=</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>QDate less than or equal to operator
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>other</em>&nbsp;</td><td> the date to compare
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="operator <="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator <=</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>QDate less than or equal to operator
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>other</em>&nbsp;</td><td> the date to compare
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="operator =="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator ==</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>QDate equality operator
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>other</em>&nbsp;</td><td> the date to compare
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="operator =="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator ==</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>QDate equality operator
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>other</em>&nbsp;</td><td> the date to compare
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="operator >"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator ></td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>QDate greater than operator
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>other</em>&nbsp;</td><td> the date to compare
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="operator >"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator ></td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>QDate greater than operator
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>other</em>&nbsp;</td><td> the date to compare
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="operator >="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator >=</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>QDate greater than or equal to operator
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>other</em>&nbsp;</td><td> the date to compare
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="operator >="></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool operator >=</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>QDate greater than or equal to operator
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>other</em>&nbsp;</td><td> the date to compare
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setCalendarSystem"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setCalendarSystem</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#CalendarSystem">KLocale.CalendarSystem</a>&nbsp;</td>
+<td class="paramname"><em>calendarSystem</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the Calendar System used for this date instance only.
+</p>
+<p>
+This method is mostly useful for when you quickly want to see what the
+currently set date would look like in a different Calendar System but
+using the same Locale.
+</p>
+<p>
+When the Calendar System is changed, a copy will be taken of the Locale
+previously used and this copy will be applied to the new Calendar System.
+Any changes to the old Locale settings, either the Global or a Custom
+Locale, will not be applied to this date instance.
+</p>
+<p>
+See custom for more details on using custom Calendar Systems.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KLocale.CalendarSystem
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> calendarSystem()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>calendarSystem</em>&nbsp;</td><td> the Calendar System to use
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setCurrentDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool setCurrentDate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Set the date to today's date
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> currentDate()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the date is valid, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="setDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool setDate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td>
+<td class="paramname"><em>date</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the date using the year, week and day of week.
+</p>
+<p>
+Currently only the ISO Week Number System is supported.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> week()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dayOfWeek()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>weekNumberSystem</em>&nbsp;</td><td> the week number system to use
+
+<tr><td></td><td valign="top"><em>year</em>&nbsp;</td><td> year
+
+<tr><td></td><td valign="top"><em>weekOfYear</em>&nbsp;</td><td> week of year
+
+<tr><td></td><td valign="top"><em>dayOfWeek</em>&nbsp;</td><td> day of week Mon..Sun (1..7)
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the date is valid, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="setDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool setDate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>year</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>month</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>day</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the date using the year, week and day of week.
+</p>
+<p>
+Currently only the ISO Week Number System is supported.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> week()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dayOfWeek()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>weekNumberSystem</em>&nbsp;</td><td> the week number system to use
+
+<tr><td></td><td valign="top"><em>year</em>&nbsp;</td><td> year
+
+<tr><td></td><td valign="top"><em>weekOfYear</em>&nbsp;</td><td> week of year
+
+<tr><td></td><td valign="top"><em>dayOfWeek</em>&nbsp;</td><td> day of week Mon..Sun (1..7)
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the date is valid, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="setDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool setDate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>year</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>dayOfYear</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the date using the year, week and day of week.
+</p>
+<p>
+Currently only the ISO Week Number System is supported.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> week()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dayOfWeek()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>weekNumberSystem</em>&nbsp;</td><td> the week number system to use
+
+<tr><td></td><td valign="top"><em>year</em>&nbsp;</td><td> year
+
+<tr><td></td><td valign="top"><em>weekOfYear</em>&nbsp;</td><td> week of year
+
+<tr><td></td><td valign="top"><em>dayOfWeek</em>&nbsp;</td><td> day of week Mon..Sun (1..7)
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the date is valid, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="setDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool setDate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>eraName</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>yearInEra</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>month</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>day</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the date using the year, week and day of week.
+</p>
+<p>
+Currently only the ISO Week Number System is supported.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> week()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dayOfWeek()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>weekNumberSystem</em>&nbsp;</td><td> the week number system to use
+
+<tr><td></td><td valign="top"><em>year</em>&nbsp;</td><td> year
+
+<tr><td></td><td valign="top"><em>weekOfYear</em>&nbsp;</td><td> week of year
+
+<tr><td></td><td valign="top"><em>dayOfWeek</em>&nbsp;</td><td> day of week Mon..Sun (1..7)
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the date is valid, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="setDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool setDate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#WeekNumberSystem">KLocale.WeekNumberSystem</a>&nbsp;</td>
+<td class="paramname"><em>weekNumberSystem</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>year</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>weekOfYear</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>dayOfWeek</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the date using the year, week and day of week.
+</p>
+<p>
+Currently only the ISO Week Number System is supported.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> week()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dayOfWeek()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>weekNumberSystem</em>&nbsp;</td><td> the week number system to use
+
+<tr><td></td><td valign="top"><em>year</em>&nbsp;</td><td> year
+
+<tr><td></td><td valign="top"><em>weekOfYear</em>&nbsp;</td><td> week of year
+
+<tr><td></td><td valign="top"><em>dayOfWeek</em>&nbsp;</td><td> day of week Mon..Sun (1..7)
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the date is valid, false otherwise
+</dd></dl>
+</p></div></div><a class="anchor" name="toJulianDay"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int toJulianDay</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the currently set date as a Julian Day number
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> fromJulianDay()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the currently set date as a Julian Day number
+</dd></dl>
+</p></div></div><a class="anchor" name="week"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int week</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>yearNum=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the Week Number for the date in the required Week Number System.
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+Unless you want a specific Week Number System (e.g. ISO Week), you should
+use the localized Week Number form of week().
+</p>
+<p>
+If the date falls in the last week of the previous year or the first
+week of the following year, then the yearNum returned will be set to the
+appropriate year.
+</p>
+<p>
+Technically, the ISO Week Number only applies to the ISO/Gregorian Calendar
+System, but the same rules will be applied to the current Calendar System.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> weeksInYear()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>weekNumberSystem</em>&nbsp;</td><td> the Week Number System to use
+
+<tr><td></td><td valign="top"><em>yearNum</em>&nbsp;</td><td> returns the year the date belongs to
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> week number, -1 if input date invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="week"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int week</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#WeekNumberSystem">KLocale.WeekNumberSystem</a>&nbsp;</td>
+<td class="paramname"><em>weekNumberSystem</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>yearNum=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the Week Number for the date in the required Week Number System.
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+Unless you want a specific Week Number System (e.g. ISO Week), you should
+use the localized Week Number form of week().
+</p>
+<p>
+If the date falls in the last week of the previous year or the first
+week of the following year, then the yearNum returned will be set to the
+appropriate year.
+</p>
+<p>
+Technically, the ISO Week Number only applies to the ISO/Gregorian Calendar
+System, but the same rules will be applied to the current Calendar System.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> weeksInYear()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>weekNumberSystem</em>&nbsp;</td><td> the Week Number System to use
+
+<tr><td></td><td valign="top"><em>yearNum</em>&nbsp;</td><td> returns the year the date belongs to
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> week number, -1 if input date invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="weeksInYear"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int weeksInYear</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the number of Weeks in the currently set year using the required
+Week Number System.
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+Unless you specifically want a particular Week Number System (e.g. ISO Weeks)
+you should use the localized number of weeks provided by weeksInYear().
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> week()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>weekNumberSystem</em>&nbsp;</td><td> the week number system to use
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> number of weeks in the year, -1 if date invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="weeksInYear"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int weeksInYear</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#WeekNumberSystem">KLocale.WeekNumberSystem</a>&nbsp;</td>
+<td class="paramname"><em>weekNumberSystem</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the number of Weeks in the currently set year using the required
+Week Number System.
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+Unless you specifically want a particular Week Number System (e.g. ISO Weeks)
+you should use the localized number of weeks provided by weeksInYear().
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> week()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>weekNumberSystem</em>&nbsp;</td><td> the week number system to use
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> number of weeks in the year, -1 if date invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="year"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int year</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the year portion of the date in the current calendar system
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the localized year number
+</dd></dl>
+</p></div></div><a class="anchor" name="yearInEra"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int yearInEra</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the Year In Era portion of the date in the current calendar
+system, for example 1 for "1 BC".
+</p>
+<p>
+See formatting for why you should never display this value.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> formatDate()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> formatYearInEra()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the localized Year In Era number, -1 if date is invalid
+</dd></dl>
+</p></div></div><a class="anchor" name="yearsDifference"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int yearsDifference</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a>&nbsp;</td>
+<td class="paramname"><em>toDate</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the difference between this and another date in completed calendar years
+in the current Calendar System.
+</p>
+<p>
+The returned value will be negative if <b>toDate</b> &lt; this date.
+</p>
+<p>
+For example, the difference between 2010-06-10 and 2012-09-5 is 2 years.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addYears()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dateDifference() monthsDifference() daysDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>toDate</em>&nbsp;</td><td> The date to end at
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The number of years difference
+</dd></dl>
+</p></div></div><a class="anchor" name="yearsDifference"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int yearsDifference</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td>
+<td class="paramname"><em>toDate</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the difference between this and another date in completed calendar years
+in the current Calendar System.
+</p>
+<p>
+The returned value will be negative if <b>toDate</b> &lt; this date.
+</p>
+<p>
+For example, the difference between 2010-06-10 and 2012-09-5 is 2 years.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> addYears()
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> dateDifference() monthsDifference() daysDifference()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>toDate</em>&nbsp;</td><td> The date to end at
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> The number of years difference
+</dd></dl>
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="currentDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> currentDate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a KLocalizedDate set to today's date in the Global Locale and
+Calendar System.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setCurrentDate()
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> today's localized date
+</dd></dl>
+</p></div></div><a class="anchor" name="fromDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> fromDate</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdate.html">QDate</a>&nbsp;</td>
+<td class="paramname"><em>date</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a KLocalizedDate set the required date in the Global Locale and
+Calendar System.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>date</em>&nbsp;</td><td> the date to set to
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> a localized date
+</dd></dl>
+</p></div></div><a class="anchor" name="fromJulianDay"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> fromJulianDay</td>
+<td>(</td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>jd</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a KLocalizedDate set the required Julian Day number in the Global
+Locale and Calendar System.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> toJulianDay()
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>jd</em>&nbsp;</td><td> the Julian Day number to set to
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> a localized date
+</dd></dl>
+</p></div></div><a class="anchor" name="readDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> readDate</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>dateString</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#DateTimeParseMode">KLocale.DateTimeParseMode</a>&nbsp;</td>
+<td class="paramname"><em>parseMode=KLocale.LiberalParsing</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KCalendarSystem.html">KCalendarSystem</a>&nbsp;</td>
+<td class="paramname"><em>calendar=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Converts a localized date string to a KLocalizedDate using either the
+Global Calendar System and Locale, or the provided Calendar System.
+</p>
+<p>
+See parsing for more details on Date Parsing from strings.
+</p>
+<p>
+This method allows you to define your own date format to parse the date
+string with.
+</p>
+<p>
+If you require one of the standard any KLocale.ReadDateFlags formats
+then use one of the other readDate() methods.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dateString</em>&nbsp;</td><td> the string to parse
+
+<tr><td></td><td valign="top"><em>dateFormat</em>&nbsp;</td><td> the date format to try parse the string with
+
+<tr><td></td><td valign="top"><em>parseMode</em>&nbsp;</td><td> how strictly to apply the <b>dateFormat</b> to the <b>dateString</b>
+
+<tr><td></td><td valign="top"><em>formatStandard</em>&nbsp;</td><td> the standard the <b>dateFormat</b> format uses
+
+<tr><td></td><td valign="top"><em>calendar</em>&nbsp;</td><td> the Calendar System to use when parsing the date
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the localized date parsed from the string
+</dd></dl>
+</p></div></div><a class="anchor" name="readDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> readDate</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>dateString</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#ReadDateFlags">KLocale.ReadDateFlags</a>&nbsp;</td>
+<td class="paramname"><em>formatFlags</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#DateTimeParseMode">KLocale.DateTimeParseMode</a>&nbsp;</td>
+<td class="paramname"><em>parseMode=KLocale.LiberalParsing</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KCalendarSystem.html">KCalendarSystem</a>&nbsp;</td>
+<td class="paramname"><em>calendar=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Converts a localized date string to a KLocalizedDate using either the
+Global Calendar System and Locale, or the provided Calendar System.
+</p>
+<p>
+See parsing for more details on Date Parsing from strings.
+</p>
+<p>
+This method allows you to define your own date format to parse the date
+string with.
+</p>
+<p>
+If you require one of the standard any KLocale.ReadDateFlags formats
+then use one of the other readDate() methods.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dateString</em>&nbsp;</td><td> the string to parse
+
+<tr><td></td><td valign="top"><em>dateFormat</em>&nbsp;</td><td> the date format to try parse the string with
+
+<tr><td></td><td valign="top"><em>parseMode</em>&nbsp;</td><td> how strictly to apply the <b>dateFormat</b> to the <b>dateString</b>
+
+<tr><td></td><td valign="top"><em>formatStandard</em>&nbsp;</td><td> the standard the <b>dateFormat</b> format uses
+
+<tr><td></td><td valign="top"><em>calendar</em>&nbsp;</td><td> the Calendar System to use when parsing the date
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the localized date parsed from the string
+</dd></dl>
+</p></div></div><a class="anchor" name="readDate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KLocalizedDate.html">KLocalizedDate</a> readDate</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>dateString</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>dateFormat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#DateTimeParseMode">KLocale.DateTimeParseMode</a>&nbsp;</td>
+<td class="paramname"><em>parseMode=KLocale.LiberalParsing</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KLocale.html#DateTimeFormatStandard">KLocale.DateTimeFormatStandard</a>&nbsp;</td>
+<td class="paramname"><em>formatStandard=KLocale.KdeFormat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KCalendarSystem.html">KCalendarSystem</a>&nbsp;</td>
+<td class="paramname"><em>calendar=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Converts a localized date string to a KLocalizedDate using either the
+Global Calendar System and Locale, or the provided Calendar System.
+</p>
+<p>
+See parsing for more details on Date Parsing from strings.
+</p>
+<p>
+This method allows you to define your own date format to parse the date
+string with.
+</p>
+<p>
+If you require one of the standard any KLocale.ReadDateFlags formats
+then use one of the other readDate() methods.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dateString</em>&nbsp;</td><td> the string to parse
+
+<tr><td></td><td valign="top"><em>dateFormat</em>&nbsp;</td><td> the date format to try parse the string with
+
+<tr><td></td><td valign="top"><em>parseMode</em>&nbsp;</td><td> how strictly to apply the <b>dateFormat</b> to the <b>dateString</b>
+
+<tr><td></td><td valign="top"><em>formatStandard</em>&nbsp;</td><td> the standard the <b>dateFormat</b> format uses
+
+<tr><td></td><td valign="top"><em>calendar</em>&nbsp;</td><td> the Calendar System to use when parsing the date
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the localized date parsed from the string
+</dd></dl>
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

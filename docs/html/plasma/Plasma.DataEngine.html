@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -109,6 +109,7 @@ DataEngine might provide a data source for each network interface.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMinimumPollingInterval">setMinimumPollingInterval</a> (self, int minimumMs)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setName">setName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setPollingInterval">setPollingInterval</a> (self, long frequency)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setStorageEnabled">setStorageEnabled</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> source, bool store)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setValid">setValid</a> (self, bool valid)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#sourceRequestEvent">sourceRequestEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> source)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#sources">sources</a> (self)</td></tr>
@@ -330,7 +331,7 @@ without side-effects. This can be useful to change the pollingInterval.
 </p>
 <p>
 Note that this method does not automatically connect sources that
-may appear later on. Connecting and responding to the sourceAdded sigal
+may appear later on. Connecting and responding to the sourceAdded signal
 is still required to achieve that.
 </p>
 <p>
@@ -457,7 +458,7 @@ If the data has not changed, no update will be sent.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Retrevies a pointer to the DataContainer for a given source. This method
+<div class="memdoc"><p>Retrieves a pointer to the DataContainer for a given source. This method
 should not be used if possible. An exception is for script engines that
 can not provide a QMetaObject as required by connectSource for the initial
 call to dataUpdated. Using this method, such engines can provide their own
@@ -534,7 +535,7 @@ A DataEngine* is sent to the created service via the QVariantList arguments.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Disconnects a source to an object that was receiving data updates.
+<div class="memdoc"><p>Disconnects a source from an object that was receiving data updates.
 </p>
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
@@ -612,6 +613,10 @@ which have the need to perform a startup routine.
 </div>
 <div class="memdoc"><p>Returns true if the data engine is empty, which is to say that it has no
 data sources currently.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the engine has no sources currently
+</dd></dl>
 </p></div></div><a class="anchor" name="isValid"></a>
 <div class="memitem">
 <div class="memproto">
@@ -625,6 +630,10 @@ data sources currently.
 </table>
 </div>
 <div class="memdoc"><p>Returns true if this engine is valid, otherwise returns false
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the engine is valid
+</dd></dl>
 </p></div></div><a class="anchor" name="maxSourceCount"></a>
 <div class="memitem">
 <div class="memproto">
@@ -699,7 +708,8 @@ at any given time.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns the plugin name for the applet
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the plugin name for the applet
+</dd></dl>
 </p></div></div><a class="anchor" name="query"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1143,6 +1153,9 @@ due to multiple update requests coming in, which can be useful for
 expensive (time- or resource-wise) update mechanisms.
 </p>
 <p>
+The default minimumPollingInterval is -1, or "never perform automatic updates"
+</p>
+<p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>minimumMs</em>&nbsp;</td><td> the minimum time lapse, in milliseconds, between updates.
@@ -1209,6 +1222,45 @@ will stop internally triggered updates.
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="setStorageEnabled"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setStorageEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>source</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>store</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets a source to be stored for easy retrieval
+when the real source of the data (usually a network connection)
+is unavailable.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>source</em>&nbsp;</td><td> the name of the source
+
+<tr><td></td><td valign="top"><em>store</em>&nbsp;</td><td> if source should be stored
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="setValid"></a>
 <div class="memitem">
 <div class="memproto">

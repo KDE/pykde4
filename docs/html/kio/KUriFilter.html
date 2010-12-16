@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -53,26 +53,17 @@
 
 <h2>Detailed Description</h2>
 
-<p>Manages the filtering of URIs.
+<p>KUriFilter applies a number of filters to a URI and returns a filtered version if any
+filter matches.
+A simple example is "kde.org" to "http://www.kde.org", which is commonplace in web browsers.
 </p>
 <p>
-The intention of this plugin class is to allow people to extend the
-functionality of KUrl without modifying it directly. This way KUrl will
-remain a generic parser capable of parsing any generic URL that adheres to
-specifications.
+The filters are implemented as plugins in KUriFilterPlugin subclasses.
 </p>
 <p>
-The KUriFilter class applies a number of filters to a URI and returns the
-filtered version whenever possible. The filters are implemented using
-plugins to provide easy extensibility of the filtering mechanism. New
-filters can be added in the future by simply inheriting from the
-KUriFilterPlugin class.
-</p>
-<p>
-Use of this plugin-manager class is straight forward. Since it is a
-singleton object, all you have to do is obtain an instance by doing
-<b>KUriFilter.self()</b> and use any of the public member functions to
-preform the filtering.
+KUriFilter is a singleton object: obtain the instance by calling
+<b>KUriFilter.self()</b> and use the public member functions to
+perform the filtering.
 </p>
 <p>
 <b>Example</b>
@@ -82,7 +73,8 @@ To simply filter a given string:
 </p>
 <p>
 <pre class="fragment">
- bool filtered = KUriFilter.self()-&gt;filterUri( "kde.org" );
+ QString url("kde.org");
+ bool filtered = KUriFilter.self()-&gt;filteredUri( url );
 </pre>
 </p>
 <p>
@@ -90,7 +82,7 @@ You can alternatively use a KUrl:
 </p>
 <p>
 <pre class="fragment">
- KUrl url = "kde.org";
+ KUrl url("kde.org");
  bool filtered = KUriFilter.self()-&gt;filterUri( url );
 </pre>
 </p>
@@ -101,45 +93,93 @@ of a boolean flag:
 </p>
 <p>
 <pre class="fragment">
- QString u = KUriFilter.self()-&gt;filteredUri( "kde.org" );
+ QString filteredText = KUriFilter.self()-&gt;filteredUri( "kde.org" );
 </pre>
 </p>
 <p>
-You can also restrict the filter(s) to be used by supplying
-the name of the filter(s) to use. By defualt all available
-filters will be used. To use specific filters, add the names
-of the filters you want to use to a QStringList and invoke
-the appropriate filtering function. The examples below show
-the use of specific filters. The first one uses a single
-filter called kshorturifilter while the second example uses
-multiple filters:
+All of the above examples should result in "kde.org" being filtered into
+"http://kde.org".
+</p>
+<p>
+You can also restrict the filters to be used by supplying the name of the
+filters you want to use. By defualt all available filters are used.
+</p>
+<p>
+To use specific filters, add the names of the filters you want to use to a
+QStringList and invoke the appropriate filtering function.
+</p>
+<p>
+The examples below show the use of specific filters. KDE ships with the
+following filter plugins by default:
+</p>
+<p>
+kshorturifilter:
+This is used for filtering potentially valid url inputs such as "kde.org"
+Additionally it filters shell variables and shortcuts such as $HOME and
+~ as well as man and info page shortcuts, # and ## respectively.
+</p>
+<p>
+kuriikwsfilter:
+This is used for filtering normal input text into a web search url using the
+configured fallback search engine selected by the user.
+</p>
+<p>
+kurisearchfilter:
+This is used for filtering KDE webshortcuts. For example "gg:KDE" will be
+converted to a url for searching the work "KDE" using the Google search
+engine.
+</p>
+<p>
+localdomainfilter:
+This is used for doing a DNS lookup to determine whether the input is a valid
+local address.
 </p>
 <p>
 <pre class="fragment">
- QString text = "kde.org";
- bool filtered = KUriFilter.self()-&gt;filterUri( text, "kshorturifilter" );
+ QString text ("kde.org");
+ bool filtered = KUriFilter.self()-&gt;filterUri(text, QLatin1String("kshorturifilter"));
 </pre>
+</p>
+<p>
+The above code should result in "kde.org" being filtered into "http://kde.org".
 </p>
 <p>
 <pre class="fragment">
  QStringList list;
- list &lt;&lt; "kshorturifilter" &lt;&lt; "localdomainfilter";
+ list &lt;&lt; QLatin1String("kshorturifilter") &lt;&lt; QLatin1String("localdomainfilter");
  bool filtered = KUriFilter.self()-&gt;filterUri( text, list );
 </pre>
 </p>
 <p>
-KUriFilter also allows richer data exchange through a simple
-meta-object called <b>KUriFilterData.</b> Using this meta-object
-you can find out more information about the URL you want to
-filter. See KUriFilterData for examples and details.
+Additionally if you only want to do search related filtering, you can use the
+search specific function, filterSearchUri, that is available in KDE
+4.5 and higher. For example, to search for a given input on the web you
+can do the following:
 </p>
 <p>
-Filters a given URL into its proper format whenever possible.
+KUriFilterData filterData ("foo");
+bool filtered = KUriFilter.self()-&gt;filterSearchUri(filterData, KUriFilterData.NormalTextFilter);
 </p>
-<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<p>
+KUriFilter converts all filtering requests to use KUriFilterData
+internally. The use of this bi-directional class allows you to send specific
+instructions to the filter plugins as well as receive detailed information
+about the filtered request from them. See the documentation of KUriFilterData
+class for more examples and details.
+</p>
+<p>
+All functions in this class are thread safe and reentrant.
+</p>
+<p>
+Filters the given input into a valid url whenever possible.
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#SearchFilterType">SearchFilterType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NormalTextFilter, WebShortcutFilter&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUriFilter">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUriFilter">__init__</a> (self, <a href="../kio/KUriFilter.html">KUriFilter</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#filterSearchUri">filterSearchUri</a> (self, <a href="../kio/KUriFilterData.html">KUriFilterData</a> data)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#filterSearchUri">filterSearchUri</a> (self, <a href="../kio/KUriFilterData.html">KUriFilterData</a> data, <a href="../kio/KUriFilter.html">KUriFilter.SearchFilterTypes</a> types)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#filterUri">filterUri</a> (self, <a href="../kio/KUriFilterData.html">KUriFilterData</a> data, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> filters=QStringList())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#filterUri">filterUri</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> uri, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> filters=QStringList())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#filterUri">filterUri</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> uri, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> filters=QStringList())</td></tr>
@@ -211,21 +251,79 @@ available URI filter plugins.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Filters <b>data</b> using only the default search uri filter plugins.
+<div class="memdoc"><p>Filter <b>data</b> using the criteria specified by <b>types.</b>
 </p>
 <p>
-Only use this function if you are sure that the input you want to
-filter is a search term.
+The search filter type can be individual value of SearchFilterTypes
+or a combination of those types using the bitwise OR operator.
+</p>
+<p>
+You can also use the flags from KUriFilterData.SearchFilterOption
+to alter the filtering mechanisms of the search filter providers.
 </p>
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> object that contains the URI to be filtered.
+
+<tr><td></td><td valign="top"><em>types</em>&nbsp;</td><td> the search filters used to filter the request.
 </td></tr> </table></dl>
-<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the the data specified by <b>data</b> was successfully filtered.
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the specified <b>data</b> was successfully filtered.
 </dd></dl> </p>
 <p>
-<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KUriFilterData.setSearchFilteringOptions
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
+</p></div></div><a class="anchor" name="filterSearchUri"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool filterSearchUri</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KUriFilterData.html">KUriFilterData</a>&nbsp;</td>
+<td class="paramname"><em>data</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KUriFilter.html">KUriFilter.SearchFilterTypes</a>&nbsp;</td>
+<td class="paramname"><em>types</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Filter <b>data</b> using the criteria specified by <b>types.</b>
+</p>
+<p>
+The search filter type can be individual value of SearchFilterTypes
+or a combination of those types using the bitwise OR operator.
+</p>
+<p>
+You can also use the flags from KUriFilterData.SearchFilterOption
+to alter the filtering mechanisms of the search filter providers.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>data</em>&nbsp;</td><td> object that contains the URI to be filtered.
+
+<tr><td></td><td valign="top"><em>types</em>&nbsp;</td><td> the search filters used to filter the request.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the specified <b>data</b> was successfully filtered.
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KUriFilterData.setSearchFilteringOptions
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
 </dd></dl>
 </p></div></div><a class="anchor" name="filterUri"></a>
 <div class="memitem">
@@ -493,7 +591,23 @@ This function only loads URI filter plugins that have not been disabled.
 </table>
 </div>
 <div class="memdoc"><p>Returns an instance of KUriFilter.
-</p></div></div>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="SearchFilterType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">SearchFilterType</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>This enum describes the types of search plugin filters available.
+</p>
+<p>
+<li> NormalTextFilter The plugin used to filter normal text, e.g. "some term to search". </li>
+<li> WebShortcutFilter The plugin used to filter web shortcuts, e.g. gg:KDE. </li>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NormalTextFilter</em>&nbsp;=&nbsp;0x01</td><td><tr><td valign="top"><em>WebShortcutFilter</em>&nbsp;=&nbsp;0x02</td><td></table>
+</dl>
+</div></div><p>
 </div>
 </div>
 </div>

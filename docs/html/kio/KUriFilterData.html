@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -53,8 +53,9 @@
 
 <h2>Detailed Description</h2>
 
-<p>A basic message object used for exchanging filtering information between the
-filter plugins and the application requesting the filtering service.
+<p>This class is a basic messaging class used to exchange filtering information
+between the filter plugins and the application requesting the filtering
+service.
 </p>
 <p>
 Use this object if you require a more detailed information about the URI you
@@ -63,39 +64,50 @@ it to KUriFilter to have the plugins fill out all possible information about
 the URI.
 </p>
 <p>
-The member functions provided by this class are thread safe and reentrant. However,
-since the class itself is a Singleton, you have to take care when calling self()
-in multi-threaded applications. It is highly adviced that you hold a member variable
+On successful filtering you can use uriType() to determine what type
+of resource the request was filtered into. See KUriFilter.UriTypes for
+details. If an error is encountered, then KUriFilter.Error is returned.
+You can use errorMsg to obtain the error information.
+</p>
+<p>
+The functions in this class are not reentrant.
 </p>
 <p>
 <b>Example</b>
 </p>
 <p>
+Here is a basic example of how this class is used with KUriFilter:
 <pre class="fragment">
-   QString text = "kde.org";
-   KUriFilterData d = text;
-   bool filtered = KUriFilter.self()-&gt;filter( d );
-   cout &lt;&lt; "URL: " &lt;&lt; text.toLatin1() &lt;&lt; endl
-        &lt;&lt; "Filtered URL: " &lt;&lt; d.uri().url().toLatin1() &lt;&lt; endl
-        &lt;&lt; "URI Type: " &lt;&lt; d.uriType() &lt;&lt; endl
-        &lt;&lt; "Was Filtered: " &lt;&lt; filtered &lt;&lt; endl;
+   KUriFilterData filterData (QLatin1String("kde.org"));
+   bool filtered = KUriFilter.self()-&gt;filterUri(filterData);
 </pre>
 </p>
 <p>
-The above code should yield the following output:
+If you are only interested in getting the list of preferred search providers,
+then you can do the following (requires KDE &gt;= 4.5):
+</p>
+<p>
 <pre class="fragment">
-   URI: kde.org
-   Filtered URI: http://kde.org
-   URI Type: 0            &lt;== means NET_PROTOCOL
-   Was Filtered: 1        &lt;== means the URL was successfully filtered
+ KDE 4.5:
+ KUriFilterData data;
+ data.setData("&lt;text-to-search-for&gt;");
+ data.setAlternateDefaultSearchProvider("google");
+ bool filtered = KUriFilter.self()-&gt;filterUri(data, "kuriikwsfilter");
+
+ KDE &gt;= 4.6:
+ KUriFilterData data;
+ data.setData("&lt;text-to-search-for&gt;");
+ data.setSearchFilteringOption(KUriFilterData.RetrievePreferredSearchProvidersOnly);
+ bool filtered = KUriFilter.self()-&gt;filterSearchUri(data, KUriFilter.NormalTextFilter);
 </pre>
 </p>
 <p>
-A message object for exchanging filtering URI info.
+A class for exchanging filtering information.
 
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Dawit Alemayehu &lt;adawit at kde.org&gt; </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#SearchFilterOption">SearchFilterOption</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;SearchFilterOptionNone, RetrieveSearchProvidersOnly, RetrievePreferredSearchProvidersOnly, RetrieveAvailableSearchProvidersOnly&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#UriTypes">UriTypes</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NetProtocol, LocalFile, LocalDir, Executable, Help, Shell, Blocked, Error, Unknown&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUriFilterData">__init__</a> (self)</td></tr>
@@ -103,10 +115,12 @@ A message object for exchanging filtering URI info.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUriFilterData">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> url)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KUriFilterData">__init__</a> (self, <a href="../kio/KUriFilterData.html">KUriFilterData</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#absolutePath">absolutePath</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#allQueriesForSearchProvider">allQueriesForSearchProvider</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> provider)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#alternateDefaultSearchProvider">alternateDefaultSearchProvider</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#alternateSearchProviders">alternateSearchProviders</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#argsAndOptions">argsAndOptions</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#checkForExecutables">checkForExecutables</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#defaultUrlScheme">defaultUrlScheme</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#errorMsg">errorMsg</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#hasAbsolutePath">hasAbsolutePath</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#hasArgsAndOptions">hasArgsAndOptions</a> (self)</td></tr>
@@ -114,6 +128,8 @@ A message object for exchanging filtering URI info.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#iconNameForPreferredSearchProvider">iconNameForPreferredSearchProvider</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> provider)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#preferredSearchProviders">preferredSearchProviders</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#queryForPreferredSearchProvider">queryForPreferredSearchProvider</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> provider)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KUriFilterSearchProvider.html">KUriFilterSearchProvider</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#queryForSearchProvider">queryForSearchProvider</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> provider)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KUriFilterData.html">KUriFilterData.SearchFilterOptions</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#searchFilteringOptions">searchFilteringOptions</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#searchProvider">searchProvider</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#searchTerm">searchTerm</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qchar.html">QChar</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#searchTermSeparator">searchTermSeparator</a> (self)</td></tr>
@@ -123,6 +139,8 @@ A message object for exchanging filtering URI info.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCheckForExecutables">setCheckForExecutables</a> (self, bool check)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setData">setData</a> (self, <a href="../kdecore/KUrl.html">KUrl</a> url)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setData">setData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDefaultUrlScheme">setDefaultUrlScheme</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSearchFilteringOptions">setSearchFilteringOptions</a> (self, <a href="../kio/KUriFilterData.html">KUriFilterData.SearchFilterOptions</a> options)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#typedString">typedString</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KUrl.html">KUrl</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#uri">uri</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KUriFilterData.html#UriTypes">KUriFilterData.UriTypes</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#uriType">uriType</a> (self)</td></tr>
@@ -259,6 +277,41 @@ Creates a KUriFilterData object from another KURIFilterData object.
 <p>
 <dl class="see" compact><dt><b>See also:</b></dt><dd> hasAbsolutePath()
 </dd></dl>
+</p></div></div><a class="anchor" name="allQueriesForSearchProvider"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> allQueriesForSearchProvider</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>provider</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns all the query urls for the given search provider.
+</p>
+<p>
+Use this function to obtain all the different queries that can be used
+for the given provider. For example, if a search engine provider named
+"foobar" has web shortcuts named "foobar", "foo" and "bar", then this
+function, unlike queryForPreferredSearchProvider, will return a
+a query for each and every web shortcut.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> queryForPreferredSearchProvider
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="alternateDefaultSearchProvider"></a>
 <div class="memitem">
 <div class="memproto">
@@ -274,8 +327,9 @@ Creates a KUriFilterData object from another KURIFilterData object.
 <div class="memdoc"><p>Returns the search provider to use when a default provider is not available.
 </p>
 <p>
-The alternate default search provider is not set by default and this function
-returns an empty string.
+This function returns an empty string if setAlternateDefaultSearchProvider
+was not called to set the default search provider to be used when none has been
+chosen by the user through the search configuration module.
 </p>
 <p>
 <dl class="see" compact><dt><b>See also:</b></dt><dd> setAlternateDefaultSearchProvider
@@ -297,8 +351,9 @@ returns an empty string.
 </p>
 <p>
 This function returns an empty list if setAlternateSearchProviders
-was not called to set alternate search providers to be used in place of
-the preferred search providers when they are not available.
+was not called to set the alternate search providers to be when no
+preferred providers have been chosen by the user through the search
+configuration module.
 </p>
 <p>
 <dl class="see" compact><dt><b>See also:</b></dt><dd> setAlternatteSearchProviders
@@ -337,6 +392,27 @@ when present.
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the filters should attempt to check whether the
 supplied uri is an executable. False otherwise.
+</dd></dl>
+</p></div></div><a class="anchor" name="defaultUrlScheme"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> defaultUrlScheme</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the default protocol to use when filtering potentially valid url inputs.
+</p>
+<p>
+By default this function will return an empty string.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setDefaultUrlScheme
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
 </dd></dl>
 </p></div></div><a class="anchor" name="errorMsg"></a>
 <div class="memitem">
@@ -459,19 +535,32 @@ preferred search providers returned by preferredSearchProviders.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns a list of the names of the preferred search providers.
+<div class="memdoc"><p>Returns a list of the names of preferred or available search providers.
 </p>
 <p>
-This function returns the list of favorite or preferred providers only
-when this data filtered through the default search uri plugin 'kurisearchfilter'.
-Otherwise, it returns an empty list.
+This function returns the list of providers marked as preferred whenever
+the input data, i.e. typedString, is successfully filtered.
 </p>
 <p>
-You can use queryForPreferredServiceProvider to obtain the queries
-associated with the returned search providers.
+If no default search provider has been selected prior to a filter request,
+this function will return an empty list. To avoid this problem you must
+either set an alternate default search provider using setAlternateDefaultSearchProvider
+or set one of the SearchFilterOption flags if you are only interested
+in getting the list of providers and not filtering the input.
 </p>
 <p>
-<dl class="see" compact><dt><b>See also:</b></dt><dd> searchProvider
+Additionally, you can also provide alternate search providers in case
+there are no preferred ones already selected.
+</p>
+<p>
+You can use queryForPreferredServiceProvider to obtain the query
+associated with the list of search providers returned by this function.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setAlternateSearchProviders
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setAlternateDefaultSearchProvider
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setSearchFilteringOption
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> queryForPreferredServiceProvider
 </dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
 </dd></dl>
 </p></div></div><a class="anchor" name="queryForPreferredSearchProvider"></a>
@@ -496,17 +585,74 @@ associated with the returned search providers.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Returns the query url for the given preferred search provider.
+<div class="memdoc"><p>Returns the web shortcut url for the given preferred search provider.
 </p>
 <p>
 You can use this function to obtain the query for the preferred search
-providers returned by preferredSearchProviders. Note that this
-function actually returns a query, e.g. "gg:foo bar", that must be
-processed using the KUriFilter class.
+providers returned by preferredSearchProviders.
+</p>
+<p>
+The query returned by this function is in web shortcut format, i.e.
+"gg:foo bar", and must be re-filtered through KUriFilter to obtain a
+valid url.
 </p>
 <p>
 <dl class="see" compact><dt><b>See also:</b></dt><dd> preferredSearchProviders
 </dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="queryForSearchProvider"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kio/KUriFilterSearchProvider.html">KUriFilterSearchProvider</a> queryForSearchProvider</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>provider</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns information about <b>provider.</b>
+</p>
+<p>
+You can use this function to obtain the more information about the search
+providers returned by preferredSearchProviders.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> preferredSearchProviders
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> KUriFilterSearchProvider
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
+</p></div></div><a class="anchor" name="searchFilteringOptions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kio/KUriFilterData.html">KUriFilterData.SearchFilterOptions</a> searchFilteringOptions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the specified search filter options.
+</p>
+<p>
+By default this function returns SearchFilterOptionNone.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setSearchFilteringOptions
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
 </dd></dl>
 </p></div></div><a class="anchor" name="searchProvider"></a>
 <div class="memitem">
@@ -637,11 +783,17 @@ of calling path () instead of url ().
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets the search provider to use when there no default provider has been
-set by though the web shortcuts configuration dialog.
+<div class="memdoc"><p>Sets the search provider to use in case no default provider is available.
 </p>
 <p>
-<dl class="see" compact><dt><b>See also:</b></dt><dd> setAlternateDefaultSearchProvider
+The default search provider set using this function will only be used if
+the default and favorite search providers have not yet been selected by
+the user. Otherwise, the default provider specified by through function
+will be ignored.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> alternateDefaultSearchProvider
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> preferredSearchProviders
 </dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
 </dd></dl>
 </p></div></div><a class="anchor" name="setAlternateSearchProviders"></a>
@@ -666,17 +818,17 @@ set by though the web shortcuts configuration dialog.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets a list of search providers to use in case no default preferred search
+<div class="memdoc"><p>Sets a list of search providers to use in case no preferred search
 providers are available.
 </p>
 <p>
-The list of preferred search providers set using this function will only be
-used if the default and favorite search providers have not yet been configured
-through the configuration dialogs. Otherwise, the providers specified by this
+The list of preferred search providers set using this function will only
+be used if the default and favorite search providers have not yet been
+selected by the user. Otherwise, the providers specified through this
 function will be ignored.
 </p>
 <p>
-<dl class="see" compact><dt><b>See also:</b></dt><dd> alternatteSearchProviders
+<dl class="see" compact><dt><b>See also:</b></dt><dd> alternateSearchProviders
 </dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> preferredSearchProviders
 </dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
 </dd></dl>
@@ -780,6 +932,83 @@ object.
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="setDefaultUrlScheme"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDefaultUrlScheme</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the default scheme used when filtering potentially valid url inputs.
+</p>
+<p>
+Use this function to change the default protocol used when filtering
+potentially valid url inputs. The default protocol is http.
+</p>
+<p>
+If the scheme is specified without a separator, then "://" will be used
+as the separator by default. For example, if the default url scheme was
+simply set to "ftp", then a potentially valid url input such as "kde.org"
+will be filtered to "ftp://kde.org".
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> defaultUrlScheme
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
+</p></div></div><a class="anchor" name="setSearchFilteringOptions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setSearchFilteringOptions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kio/KUriFilterData.html">KUriFilterData.SearchFilterOptions</a>&nbsp;</td>
+<td class="paramname"><em>options</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the options used by search filter plugins to filter requests.
+</p>
+<p>
+The default search filter option is SearchFilterOptionNone. See
+SearchFilterOption for the description of the other flags.
+</p>
+<p>
+It is important to note that the options set through this function can
+prevent any filtering from being performed by search filter plugins.
+As such, uriTypes can return KUriFilterData.Unknown and uri
+can return an invalid url eventhough the filtering request returned
+a successful response.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> searchFilteringOptions
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="typedString"></a>
 <div class="memitem">
 <div class="memproto">
@@ -835,7 +1064,42 @@ not filtered.
 <p>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> the type of the URI
 </dd></dl>
-</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="UriTypes"></a>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="SearchFilterOption"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">SearchFilterOption</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>This enum describes the search filtering options to be used.
+</p>
+<p>
+<li> SearchFilterOptionNone </li>
+No search filter options are set and normal filtering is performed
+on the input data.
+<li> RetrieveSearchProvidersOnly </li>
+If set, the list of all available search providers are returned without
+any input filtering. This flag only applies when used in conjunction
+with the KUriFilter.NormalTextFilter flag.
+<li> RetrievePreferredSearchProvidersOnly </li>
+If set, the list of preferred search providers are returned without
+any input filtering. This flag only applies when used in conjunction
+with the KUriFilter.NormalTextFilter flag.
+<li> RetrieveAvailableSearchProvidersOnly </li>
+Same as doing RetrievePreferredSearchProvidersOnly | RetrieveSearchProvidersOnly,
+where all available search providers are returned if no preferred ones
+ones are available. No input filtering will be performed.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> setSearchFilteringOptions
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> KUriFilter.filterSearchUri
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>SearchFilterOptionNone</em>&nbsp;=&nbsp;0x0</td><td><tr><td valign="top"><em>RetrieveSearchProvidersOnly</em>&nbsp;=&nbsp;0x01</td><td><tr><td valign="top"><em>RetrievePreferredSearchProvidersOnly</em>&nbsp;=&nbsp;0x02</td><td><tr><td valign="top"><em>RetrieveAvailableSearchProvidersOnly</em>&nbsp;=&nbsp;(RetrievePreferredSearchProvidersOnly|RetrieveSearchProvidersOnly)</td><td></table>
+</dl>
+</div></div><p><a class="anchor" name="UriTypes"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">

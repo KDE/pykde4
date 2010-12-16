@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -101,16 +101,39 @@ Example:
 </pre>
 </p>
 <p>
+&lt;h3&gt;Conflict Resolution&lt;/h3&gt;
+</p>
+<p>
+When the job is executed, a check is made to ensure that the Item contained
+in the job is not older than the version of the Item already held in the
+Akonadi database. If it is older, a conflict resolution dialog is displayed
+for the user to choose which version of the Item to use, unless
+disableAutomaticConflictHandling() has been called to disable the dialog, or
+disableRevisionCheck() has been called to disable version checking
+altogether.
+</p>
+<p>
+The item version is checked by comparing the Item.revision() values in the
+job and in the database. To ensure that two successive ItemModifyJobs for
+the same Item work correctly, the revision number of the Item supplied to
+the second ItemModifyJob should be set equal to the Item's revision number
+on completion of the first ItemModifyJob. This can be obtained by, for
+example, calling item().revision() in the job's result slot.
+</p>
+<p>
 
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Volker Krause &lt;vkrause@kde.org&gt; </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ItemModifyJob">__init__</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> item, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ItemModifyJob">__init__</a> (self, [<a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>] items, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#disableAutomaticConflictHandling">disableAutomaticConflictHandling</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#disableRevisionCheck">disableRevisionCheck</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#doHandleResponse">doHandleResponse</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> tag, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> data)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#doStart">doStart</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ignorePayload">ignorePayload</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#item">item</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#items">items</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIgnorePayload">setIgnorePayload</a> (self, bool ignore)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="ItemModifyJob"></a>
@@ -152,6 +175,78 @@ Example:
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="ItemModifyJob"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[<a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>]&nbsp;</td>
+<td class="paramname"><em>items</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Creates a new item modify job for bulk modifications.
+</p>
+<p>
+Using this is different from running a modification job per item.
+Use this when applying the same change to a set of items, such as a
+mass-change of item flags, not if you just want to store a bunch of
+randomly modified items.
+</p>
+<p>
+Currently the following modifications are supported:
+- flag changes
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> Since this does not do payload modifications, it implies
+setIgnorePayload( true ) and disableRevisionCheck().
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>items</em>&nbsp;</td><td> The list of items to modify, must not be empty.
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
+</p></div></div><a class="anchor" name="disableAutomaticConflictHandling"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> disableAutomaticConflictHandling</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Disables the automatic handling of conflicts.
+</p>
+<p>
+By default the item modify job will bring up a dialog to resolve
+a conflict that might happen when modifying an item.
+Calling this method will avoid that and the job returns with an
+error in case of a conflict.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="disableRevisionCheck"></a>
 <div class="memitem">
 <div class="memproto">
@@ -236,6 +331,27 @@ omitted from transmission to the Akonadi storage.
 </table>
 </div>
 <div class="memdoc"><p>Returns the modified and stored item including the changed revision number.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> Use this method only when using the single item constructor.
+</dd></dl>
+</p></div></div><a class="anchor" name="items"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>] items</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the modified and stored items including the changed revision number.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="setIgnorePayload"></a>
 <div class="memitem">
 <div class="memproto">

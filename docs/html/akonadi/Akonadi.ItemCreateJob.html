@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -60,6 +60,11 @@ This job creates a new item with all the set properties in the
 given target collection.
 </p>
 <p>
+Note that items can not be created in the root collection (Collection.root())
+and the collection must have Collection.contentMimeTypes() that match the mimetype
+of the item being created.
+</p>
+<p>
 Example:
 </p>
 <p>
@@ -74,7 +79,7 @@ Example:
  item.setMimeType( "text/directory" );
  item.setPayload&lt;KABC.Addressee&gt;( addr );
 
- Akonadi.Collection collection = Akonadi.Collection.root();
+ Akonadi.Collection collection = getCollection();
 
  Akonadi.ItemCreateJob *job = new Akonadi.ItemCreateJob( item, collection );
  connect( job, SIGNAL( result( KJob* ) ), SLOT( jobFinished( KJob* ) ) );

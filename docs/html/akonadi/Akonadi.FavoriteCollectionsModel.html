@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -90,6 +90,7 @@ Example:
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#FavoriteCollectionsModel">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a> model, <a href="../kdecore/KConfigGroup.html">KConfigGroup</a> group, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addCollection">addCollection</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[long]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#collectionIds">collectionIds</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#collections">collections</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#data">data</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> index, int role=Qt.DisplayRole)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#favoriteLabel">favoriteLabel</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> col)</td></tr>
@@ -170,6 +171,41 @@ selection of favorite collections.
 </tr></table>
 </div>
 <div class="memdoc"><p>Adds a <b>collection</b> to the list of favorite collections.
+</p></div></div><a class="anchor" name="collectionIds"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[long] collectionIds</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the list of ids of favorite collections set on the FavoriteCollectionsModel.
+</p>
+<p>
+Note that if you want Collections with actual data
+you should use something like this instead:
+</p>
+<p>
+<pre class="fragment">
+   FavoriteCollectionsModel* favs = getFavsModel();
+   Collection.List cols;
+   const int rowCount = favs-&gt;rowCount();
+   for (int row = 0; row &lt; rowcount; ++row) {
+     static const int column = 0;
+     const QModelIndex index = favs-&gt;index(row, column);
+     const Collection col = index.data(EntityTreeModel.CollectionRole).value&lt;Collection&gt;();
+     cols &lt;&lt; col;
+   }
+</pre>
+</p>
+<p>
+Note that due to the asynchronous nature of the model, this method returns collection ids
+of collections which may not be in the model yet. If you want the ids of the collections
+that are actually in the model, use a loop similar to above with the CollectionIdRole.
 </p></div></div><a class="anchor" name="collections"></a>
 <div class="memitem">
 <div class="memproto">
@@ -183,6 +219,8 @@ selection of favorite collections.
 </table>
 </div>
 <div class="memdoc"><p>Returns the list of favorite collections.
+<dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> Use collectionIds instead.
+</dd></dl>
 </p></div></div><a class="anchor" name="data"></a>
 <div class="memitem">
 <div class="memproto">

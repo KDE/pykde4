@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -77,6 +77,7 @@ with other KXMLGUIClients.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KXMLGUIFactory.html">KXMLGUIFactory</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#factory">factory</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KXMLGUIClient.StateChange.html">KXMLGUIClient.StateChange</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#getActionsToChangeForState">getActionsToChangeForState</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> state)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#insertChildClient">insertChildClient</a> (self, <a href="../kdeui/KXMLGUIClient.html">KXMLGUIClient</a> child)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#loadStandardsXmlFile">loadStandardsXmlFile</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#localXMLFile">localXMLFile</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KXMLGUIClient.html">KXMLGUIClient</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parentClient">parentClient</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#plugActionList">plugActionList</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qaction.html">QAction</a>] actionList)</td></tr>
@@ -441,6 +442,21 @@ by a KXMLGUIFactory.
 Usually you don't need to call this method, as it is called
 automatically when using the second constructor, which takes a
 parent argument.
+</p></div></div><a class="anchor" name="loadStandardsXmlFile"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> loadStandardsXmlFile</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Load the ui_standards.rc file. Usually followed by setXMLFile(xmlFile, true), for merging.
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="localXMLFile"></a>
 <div class="memitem">
 <div class="memproto">
@@ -507,7 +523,7 @@ In your xxxui.rc file ( the one that you set in setXMLFile() / pass to setupGUI(
 <p>
 Example:
 <pre class="fragment">
- &lt;kpartgui name="xxx_part" version="1"&gt;
+ &lt;gui name="xxx_part" version="1"&gt;
  &lt;MenuBar&gt;
    &lt;Menu name="file"&gt;
      ...  &lt;!-- some useful actions--&gt;
@@ -516,7 +532,7 @@ Example:
    &lt;/Menu&gt;
    ...
  &lt;/MenuBar&gt;
- &lt;/kpartgui&gt;
+ &lt;/gui&gt;
 </pre>
 </p>
 <p>
@@ -577,9 +593,12 @@ menu too..
 </div>
 <div class="memdoc"><p>Forces this client to re-read its XML resource file. This is
 intended to be used when you know that the resource file has
-changed and you will soon be rebuilding the GUI. It has no
-useful effect with non-KParts GUIs, so don't bother using it
-unless your app is component based.
+changed and you will soon be rebuilding the GUI. This will only have
+an effect if the client is then removed and re-added to the factory.
+</p>
+<p>
+This method is only for child clients, do not call it for a mainwindow!
+For a mainwindow, use loadStandardsXmlFile + setXmlFile(xmlFile()) instead.
 </p></div></div><a class="anchor" name="removeChildClient"></a>
 <div class="memitem">
 <div class="memproto">
@@ -637,7 +656,7 @@ unless your app is component based.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets a new xmlFile() and localXMLFile(). The purpose of this pulic
+<div class="memdoc"><p>Sets a new xmlFile() and localXMLFile(). The purpose of this public
 method is to allow non-inherited objects to replace the ui definition
 of an embedded client with a customized version. It corresponds to the
 usual calls to setXMLFile() and setLocalXMLFile().

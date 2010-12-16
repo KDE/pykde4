@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -897,7 +897,7 @@ if there is no file (and thus no path).
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Checks whether the URL has a reference part.
+<div class="memdoc"><p>Checks whether the URL has a reference/fragment part.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the URL has a reference part. In a URL like
 http://www.kde.org/kdebase.tar#tar:/README it would
 return true, too.
@@ -1390,7 +1390,8 @@ query items.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>The reference is <b>never</b> decoded automatically.
+<div class="memdoc"><p>Returns the reference (or "fragment") of the URL.
+The reference is <b>never</b> decoded automatically.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> the undecoded reference, or QString() if there is none
 </dd></dl>
 </p></div></div><a class="anchor" name="setDirectory"></a>
@@ -1686,11 +1687,11 @@ The query may contain the 0 character.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets the reference part (everything after '#').
+<div class="memdoc"><p>Sets the reference/fragment part (everything after '#').
 If you have an encoded fragment already (as a QByteArray), you can call setFragment directly.
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>fragment</em>&nbsp;</td><td> the encoded reference (or QString() to remove it).
+<tr><td></td><td valign="top"><em>fragment</em>&nbsp;</td><td> the unencoded reference (or QString() to remove it).
 </td></tr>
 </table></dl>
 <p>
@@ -1969,8 +1970,9 @@ Internally used by KUrl.List.fromMimeData, which is probably what you want to us
 </tr></table>
 </div>
 <div class="memdoc"><p>Creates a KUrl object from a QString representing an absolute path.
-KUrl url( somePath ) does the same, but this method is more explicit
-and avoids the path-or-url detection in the KUrl constructor.
+KUrl url( somePath ) is almost the same, but this method is more explicit,
+avoids the path-or-url detection in the KUrl constructor, and parses
+"abc:def" as a filename, not as URL.
 </p>
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>

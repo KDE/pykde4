@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -85,9 +85,10 @@ See ScriptValueTypes for how values are passed to/from various methods here.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setException">setException</a> (self, <a href="../kparts/KParts.ScriptableExtension.html">KParts.ScriptableExtension</a> callerPrincipal, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> message)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setHost">setHost</a> (self, <a href="../kparts/KParts.ScriptableExtension.html">KParts.ScriptableExtension</a> host)</td></tr>
 <tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acquireValue">acquireValue</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a> v)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kparts/KParts.ScriptableExtension.html">KParts.ScriptableExtension</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adapterFromLiveConnect">adapterFromLiveConnect</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parentObj, <a href="../kparts/KParts.LiveConnectExtension.html">KParts.LiveConnectExtension</a> oldApi)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kparts/KParts.ScriptableExtension.html">KParts.ScriptableExtension</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#childObject">childObject</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> obj)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#registerDBusTypes">registerDBusTypes</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#releaseValue">releaseValue</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a> v)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="ScriptableExtension"></a>
 <div class="memitem">
@@ -120,11 +121,6 @@ following custom types:
 <li> Exception </li>
 <li> Object </li>
 <li> FunctionRef </li>
-</p>
-<p>
-All of these other than Object and FunctionRef also provide DBus marshallers.
-These are registered when ScriptableExtension.registerDBusTypes()
-is called, which is in particular done by ScriptableExtension constructor.
 </p></div></div><a class="anchor" name="acquire"></a>
 <div class="memitem">
 <div class="memproto">
@@ -638,7 +634,30 @@ context. Returns true on success
 <div class="memdoc"><p>Reports the hosting ScriptableExtension to a child. It's the responsibility
 of a parent part to call this method on all of its kids' ScriptableExtensions
 as soon as possible.
-</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="adapterFromLiveConnect"></a>
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="acquireValue"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a> acquireValue</td>
+<td>(</td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>&nbsp;</td>
+<td class="paramname"><em>v</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Helper that calls acquire on any object or function reference base
+stored in <b>v.</b>
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a copy of the passed in value
+</dd></dl>
+</p></div></div><a class="anchor" name="adapterFromLiveConnect"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -683,21 +702,29 @@ The bridge's parent will be the <b>parentObj.</b>
 </div>
 <div class="memdoc"><p>Queries <b>obj</b> for a child object which inherits from this
 ScriptableExtension class. Convenience method.
-</p></div></div><a class="anchor" name="registerDBusTypes"></a>
+</p></div></div><a class="anchor" name="releaseValue"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> registerDBusTypes</td>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a> releaseValue</td>
 <td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname">)</td>
-<td width="100%"> </td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>&nbsp;</td>
+<td class="paramname"><em>v</em></td>
 </tr>
-</table>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
-<div class="memdoc"><p>Registers dbus encodings of Null, Undefined, and Exception.
-This is called by the ScriptableExtension constructor, so you
-likely will not need to do so yourself
+<div class="memdoc"><p>Helper that calls release on any object or function reference base
+stored in <b>v.</b>
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a copy of the passed in value
+</dd></dl>
 </p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="ScriptLanguage"></a>
 <div class="memitem">
 <div class="memproto">

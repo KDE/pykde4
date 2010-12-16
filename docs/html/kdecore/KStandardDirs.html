@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -58,38 +58,35 @@
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Stephan Kulow &lt;coolo@kde.org&gt; and Sirtaj Singh Kang &lt;taj@kde.org&gt; </dd></dl>
 </p>
 <p>
-This is one of the most central classes in kdelibs as
-it provides a basic service: It knows where the files
-reside on the user's hard disk. And it's meant to be the
-only one that knows -- to make the real location as
-transparent as possible to both the user and the applications.
+This is one of the most central classes in kdelibs: It knows where KDE-related files
+reside on the user's hard disk. It's meant to be the only one that knows --
+so applications and the end user don't have to.
 </p>
 <p>
-To this end it insulates the application from all information
-and applications always refer to a file with a resource type
-(e.g. icon) and a filename (e.g. &lt;tt&gt;khexdit.xpm&lt;/tt&gt;). In an ideal world
-the application would make no assumption where this file is and
-leave it up to KStandardDirs.findResource("apps", "Home.desktop")
-to apply this knowledge to return &lt;tt&gt;/opt/kde/share/applnk/Home.desktop&lt;/tt&gt;
+Applications should always refer to a file with a resource type.
+The application should leave it up to e.g.
+KStandardDirs.findResource("apps", "Home.desktop")
+to return the desired path &lt;tt&gt;/opt/kde/share/applnk/Home.desktop&lt;/tt&gt;
 or .locate("data", "kgame/background.jpg") to return
 &lt;tt&gt;/opt/kde/share/apps/kgame/background.jpg&lt;/tt&gt;
 </p>
 <p>
-The main idea behind KStandardDirs is that there are several
-toplevel prefixes below which the files lie. One of these prefixes is
-the one where the user installed kdelibs, one is where the
-application was installed, and one is &lt;tt&gt;$HOME/.kde&lt;/tt&gt;, but there
-may be even more. Under these prefixes there are several well
-defined suffixes where specific resource types are to be found.
+There are several toplevel prefixes under which files can be located.
+One of them is the kdelibs install location, one is the application
+install location, and one is &lt;tt&gt;$KDEHOME&lt;/tt&gt;.
+Under these toplevel prefixes there are several well-defined suffixes
+where specific resource types can be found.
 For example, for the resource type "html" the suffixes could be
 share/doc/HTML and share/doc/kde/HTML.
-So the search algorithm basically appends to each prefix each registered
-suffix and tries to locate the file there.
-To make the thing even more complex, it's also possible to register
+The search algorithm tries to locate the file under each prefix-suffix
+combination.
+</p>
+<p>
+It is also possible to register
 absolute paths that KStandardDirs looks up after not finding anything
 in the former steps. They can be useful if the user wants to provide
-specific directories that aren't in his &lt;tt&gt;$HOME/.kde&lt;/tt&gt; directory for,
-for example, icons.
+specific directories that aren't in his &lt;tt&gt;$KDEHOME&lt;/tt&gt; directory, for
+example for icons.
 </p>
 <p>
 <b>Standard resources that kdelibs allocates are:</b>\n

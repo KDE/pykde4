@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -67,15 +67,15 @@ to items in order to handle them but the meta data should not be stored back to 
 resource.
 </p>
 <p>
-This class contains beside some type-agnostic information (flags, revision)
-a single payload object representing its actual data. Which objects these actually
-are depends on the mimetype of the item and the corresponding serializer plugin.
-</p>
-<p>
 This class is implicitly shared.
 </p>
 <p>
 &lt;h4&gt;Payload&lt;/h4&gt;
+</p>
+<p>
+This class contains, beside some type-agnostic information (flags, revision),
+zero or more payload objects representing its actual data. Which objects these actually
+are depends on the mimetype of the item and the corresponding serializer plugin(s).
 </p>
 <p>
 Technically the only restriction on payload objects is that they have to be copyable.
@@ -84,13 +84,44 @@ ownership would not be clear. In this case, usage of a shared pointer is
 recommended (such as boost.shared_ptr or QSharedPointer).
 </p>
 <p>
-Using a shared pointer is also recommended in case the payload uses polymorphic
-types. For supported shared pointer types implicit casting is provided when possible.
+Using a shared pointer is also required in case the payload is a polymorphic
+type. For supported shared pointer types implicit casting is provided when possible.
 </p>
 <p>
 When using a value-based class as payload, it is recommended to use one that does
 support implicit sharing as setting and retrieving a payload as well as copying
 an Akonadi.Item object imply copying of the payload object.
+</p>
+<p>
+Since KDE 4.6, Item supports multiple payload types per mime type,
+and will automatically convert between them using the serialiser
+plugins (which is slow). It also supports mixing shared pointer
+types, e.g. inserting a boost.shared_ptr&lt;Foo&gt; and extracting a
+QSharedPointer&lt;Foo&gt;. Since the two shared pointer types cannot
+share ownership of the same object, the payload class T needs to
+provide a clone() method with the usual signature, ie.
+</p>
+<p>
+<pre class="fragment">
+ virtual T * T.clone() const
+</pre>
+</p>
+<p>
+If the class that does not have a clone() method, asking for an
+incompatible shared pointer will throw a PayloadException.
+</p>
+<p>
+Since using different shared pointer types and different payload
+types for the same mimetype incurs slow conversions (between
+payload types) and cloning (between shared pointer types), as well
+as manifold memory usage (results of conversions are cached inside
+the Item, and only destroyed when a new payload is set by the user
+of the class), you want to restrict yourself to just one type and
+one shared pointer type. This mechanism was mainly introduced for
+backwards compatibility (e.g., putting in a
+boost.shared_ptr&lt;KCal.Incidence&gt; and extracting a
+QSharedPointer&lt;KCalCore.Incidence&gt;), so it is not optimized for
+performance.
 </p>
 <p>
 The availability of a payload of a specific type can be checked using hasPayload(),
@@ -99,7 +130,7 @@ to the documentation of those methods for more details.
 </p>
 <p>
 
-<dl class="author" compact><dt><b>Author:</b></dt><dd> Volker Krause &lt;vkrause@kde.org&gt;, Till Adam &lt;adam@kde.org&gt; </dd></dl>
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Volker Krause &lt;vkrause@kde.org&gt;, Till Adam &lt;adam@kde.org&gt;, Marc Mutz &lt;mutz@kde.org&gt; </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#UrlType">UrlType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;UrlShort, UrlWithMimeType&nbsp;}</td></tr>
@@ -110,6 +141,7 @@ to the documentation of those methods for more details.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Item">__init__</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Item">__init__</a> (self, long id)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#apply">apply</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<int>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#availablePayloadMetaTypeIds">availablePayloadMetaTypeIds</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QSet<QByteArray>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#availablePayloadParts">availablePayloadParts</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearFlag">clearFlag</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearFlags">clearFlags</a> (self)</td></tr>
@@ -261,6 +293,23 @@ of the payload.
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
 </dd></dl>
+</p></div></div><a class="anchor" name="availablePayloadMetaTypeIds"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QVector<int> availablePayloadMetaTypeIds</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a list of metatype-ids, describing the different
+variants of payload that are currently contained in this item.
+</p>
+<p>
+The result is always sorted (increasing ids).
 </p></div></div><a class="anchor" name="availablePayloadParts"></a>
 <div class="memitem">
 <div class="memproto">

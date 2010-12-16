@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -133,6 +133,7 @@ for more detailed documentation.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KCModule">__init__</a> (self, <a href="../kdecore/KComponentData.html">KComponentData</a> componentData, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>] args=QVariantList())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAboutData.html">KAboutData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aboutData">aboutData</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KConfigDialogManager.html">KConfigDialogManager</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addConfig">addConfig</a> (self, <a href="../kdeui/KConfigSkeleton.html">KConfigSkeleton</a> config, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KConfigDialogManager.html">KConfigDialogManager</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addConfig">addConfig</a> (self, <a href="../kdecore/KCoreConfigSkeleton.html">KCoreConfigSkeleton</a> config, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> widget)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAuth.Action.html">KAuth.Action</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#authAction">authAction</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#authStatusChanged">authStatusChanged</a> (self, int a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KCModule.html">KCModule.Buttons</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#buttons">buttons</a> (self)</td></tr>
@@ -296,6 +297,49 @@ If you override you should have it return a pointer to a constant.
 <td class="memname"></td>
 <td></td>
 <td class="paramtype"><a href="../kdeui/KConfigSkeleton.html">KConfigSkeleton</a>&nbsp;</td>
+<td class="paramname"><em>config</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>widget</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Adds a KConfigskeleton <b>config</b> to watch the widget <b>widget</b>
+</p>
+<p>
+This function is useful if you need to handle multiple configuration files.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a pointer to the KConfigDialogManager in use
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>config</em>&nbsp;</td><td> the KConfigSkeleton to use
+
+<tr><td></td><td valign="top"><em>widget</em>&nbsp;</td><td> the widget to watch
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addConfig"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KConfigDialogManager.html">KConfigDialogManager</a> addConfig</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KCoreConfigSkeleton.html">KCoreConfigSkeleton</a>&nbsp;</td>
 <td class="paramname"><em>config</em>, </td>
 </tr>
 <tr>
@@ -706,7 +750,7 @@ If Apply is not specified, kcmshell will show a "Close" button.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Tell if the module's save() method requires authorization to be executed.
+<div class="memdoc"><p>Set if the module's save() method requires authorization to be executed.
 </p>
 <p>
 The module can set this property to true if it requires authorization.
@@ -716,9 +760,8 @@ using this and/or the setAuthAction() method will ensure that hosting
 applications like System Settings or kcmshell behave correctly.
 </p>
 <p>
-Called with true, if no action has been previously set using setAuthAction(),
-this method will set the action to a default value of "org.kde.kcontrol.name.save" where
-"name" is the aboutData()-&gt;appName() return value. This default action won't be set if
+Called with true, this method will set the action to "org.kde.kcontrol.name.save" where
+"name" is aboutData()-&gt;appName() return value. This default action won't be set if
 the aboutData() object is not valid.
 </p>
 <p>

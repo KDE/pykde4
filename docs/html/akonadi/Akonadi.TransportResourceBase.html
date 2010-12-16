@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -56,14 +56,21 @@ Namespace: <a href="../akonadi/Akonadi.html">Akonadi</a><br />
 <p>Resource implementing mail transport capability.
 </p>
 <p>
-To implement a transport-enabled resource, inherit from both
-ResourceBase and TransportResourceBase, implement the virtual method
-sendItem(), and call emitTransportResult() when finished sending.
-The resource must also have the "MailTransport" capability flag.
+This class allows a resource to provide mail transport (i.e. sending
+mail). A resource than can provide mail transport inherits from both
+ResourceBase and TransportResourceBase, implements the virtual method
+sendItem(), and calls itemSent() when finished sending.
+</p>
+<p>
+The resource must also have the "MailTransport" capability flag. For example
+the desktop file may contain:
+<pre class="fragment">
+X-Akonadi-Capabilities=Resource,MailTransport
+</pre>
 </p>
 <p>
 For an example of a transport-enabled resource, see
-kdepim/akonadi/resources/mailtransport_dummy.
+kdepim/runtime/resources/mailtransport_dummy
 </p>
 <p>
 
@@ -134,9 +141,9 @@ as finished.
 <tr><td></td><td valign="top"><em>item</em>&nbsp;</td><td> The item that was sent.
 
 <tr><td></td><td valign="top"><em>result</em>&nbsp;</td><td> The result that indicates whether the sending
-was successfully or not.
+was successful or not.
 
-<tr><td></td><td valign="top"><em>message</em>&nbsp;</td><td> An optional textual explanation of the result.
+<tr><td></td><td valign="top"><em>message</em>&nbsp;</td><td> An optional text explanation of the result.
 </td></tr> </table></dl>
 <p> <dl class="see" compact><dt><b>See also:</b></dt><dd> Transport.
 </dd></dl>
@@ -164,7 +171,7 @@ was successfully or not.
 </div>
 <div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>This method is called when the given <b>item</b> shall be send.
 When the sending is done or an error occurred during
-sending, call itemSent() with the according result flag.
+sending, call itemSent() with the appropriate result flag.
 </p>
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>

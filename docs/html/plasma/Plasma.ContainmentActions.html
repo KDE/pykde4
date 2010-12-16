@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -86,9 +86,11 @@ plasma-containmentactions-&lt;pluginname&gt;.desktop
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paste">paste</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpointf.html">QPointF</a> scenePos, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> screenPos)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pluginName">pluginName</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#popupPosition">popupPosition</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsize.html">QSize</a> s, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a> event)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#restore">restore</a> (self, <a href="../kdecore/KConfigGroup.html">KConfigGroup</a> config)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#save">save</a> (self, <a href="../kdecore/KConfigGroup.html">KConfigGroup</a> config)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setConfigurationRequired">setConfigurationRequired</a> (self, bool needsConfiguring=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setContainment">setContainment</a> (self, <a href="../plasma/Plasma.Containment.html">Plasma.Containment</a> newContainment)</td></tr>
 <tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#eventToString">eventToString</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a> event)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#listContainmentActionsInfo">listContainmentActionsInfo</a> ()</td></tr>
@@ -227,7 +229,7 @@ otherwise, false
 <div class="memdoc"><p>Implement this to respond to events.
 The user can configure whatever button and modifier they like, so please don't look at
 those parameters.
-So far the event could be a QGraphicsSceneMouseEvent or a QGraphicsSceneWheelEvent.
+The event may be a QGraphicsSceneMouseEvent or a QGraphicsSceneWheelEvent.
 </p></div></div><a class="anchor" name="contextualActions"></a>
 <div class="memitem">
 <div class="memproto">
@@ -334,7 +336,8 @@ could not be loaded
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="icon"></a>
+<div class="memdoc"><p>@reimplemented
+</p></div></div><a class="anchor" name="icon"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -452,6 +455,42 @@ could not be loaded
 </table>
 </div>
 <div class="memdoc"><p>Returns the plugin name for the containmentactions
+</p></div></div><a class="anchor" name="popupPosition"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> popupPosition</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsize.html">QSize</a>&nbsp;</td>
+<td class="paramname"><em>s</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a>&nbsp;</td>
+<td class="paramname"><em>event</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a popup position appropriate to the event and the size.
+</p>
+<p>
+@arg s size of the popup
+@arg event a pointer to the event that triggered the popup
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the preferred top-left position for the popup
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="restore"></a>
 <div class="memitem">
 <div class="memproto">
@@ -543,6 +582,31 @@ or false if it doesn't
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="setContainment"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setContainment</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../plasma/Plasma.Containment.html">Plasma.Containment</a>&nbsp;</td>
+<td class="paramname"><em>newContainment</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><b>newContainment</b> the containment the plugin should be associated with.
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="eventToString"></a>
 <div class="memitem">
 <div class="memproto">
@@ -619,8 +683,9 @@ deleting it when no longer needed.
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent containment. Required; if you send null you'll get back null.
-
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent containment. <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6 null is allowed.
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>info</em>&nbsp;</td><td> KPluginInfo object for the desired containmentactions
 
 <tr><td></td><td valign="top"><em>args</em>&nbsp;</td><td> to send the containmentactions extra arguments
@@ -666,8 +731,9 @@ deleting it when no longer needed.
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent containment. Required; if you send null you'll get back null.
-
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent containment. <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6 null is allowed.
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>info</em>&nbsp;</td><td> KPluginInfo object for the desired containmentactions
 
 <tr><td></td><td valign="top"><em>args</em>&nbsp;</td><td> to send the containmentactions extra arguments

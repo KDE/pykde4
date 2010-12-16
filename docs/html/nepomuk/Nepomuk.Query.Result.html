@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -81,6 +81,7 @@ can be retrieved using additionalBinding().
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addRequestProperty">addRequestProperty</a> (self, <a href="../nepomuk/Nepomuk.Types.Property.html">Nepomuk.Types.Property</a> property, <a href="../soprano/Soprano.Node.html">Soprano.Node</a> value)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../nepomuk/Nepomuk.Variant.html">Nepomuk.Variant</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#additionalBinding">additionalBinding</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.BindingSet.html">Soprano.BindingSet</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#additionalBindings">additionalBindings</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#excerpt">excerpt</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator ==">operator ==</a> (self, <a href="../nepomuk/Nepomuk.Query.Result.html">Nepomuk.Query.Result</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.Node.html">Soprano.Node</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#operator []">operator []</a> (self, <a href="../nepomuk/Nepomuk.Types.Property.html">Nepomuk.Types.Property</a> property)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">{<a href="../nepomuk/Nepomuk.Types.Property.html">Nepomuk.Types.Property</a>:<a href="../soprano/Soprano.Node.html">Soprano.Node</a>}&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#requestProperties">requestProperties</a> (self)</td></tr>
@@ -88,6 +89,7 @@ can be retrieved using additionalBinding().
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../nepomuk/Nepomuk.Resource.html">Nepomuk.Resource</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resource">resource</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#score">score</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAdditionalBindings">setAdditionalBindings</a> (self, <a href="../soprano/Soprano.BindingSet.html">Soprano.BindingSet</a> bindings)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setExcerpt">setExcerpt</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> text)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setScore">setScore</a> (self, float score)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="Result"></a>
@@ -265,6 +267,32 @@ Normally one would use additionalBinding() instead.
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
 </dd></dl>
+</p></div></div><a class="anchor" name="excerpt"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> excerpt</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>An excerpt of the matched text with highlighted search words
+in case the query contained a full text matching.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> A rich-text snippet highlighting the search words or
+and empty string if the query did not contain any full text
+search terms.
+</dd></dl> </p>
+<p>
+\sa LiteralTerm
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="operator =="></a>
 <div class="memitem">
 <div class="memproto">
@@ -385,6 +413,10 @@ Normally one would use additionalBinding() instead.
 which means no score.
 </p>
 <p>
+Be aware that scoring needs to be enabled via Query.setFullTextScoringEnabled()
+in order for this value to be filled.
+</p>
+<p>
 \sa setScore
 </p></div></div><a class="anchor" name="setAdditionalBindings"></a>
 <div class="memitem">
@@ -418,6 +450,37 @@ does set the bindings.
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
 </dd></dl>
+</p></div></div><a class="anchor" name="setExcerpt"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setExcerpt</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>text</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the excerpt from the query.
+</p>
+<p>
+Normally there is no need to call this method as the query service
+does set the excerpt.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="setScore"></a>
 <div class="memitem">
 <div class="memproto">
@@ -441,6 +504,10 @@ does set the bindings.
 </tr></table>
 </div>
 <div class="memdoc"><p>Set the score of the result.
+</p>
+<p>
+Normally there is no need to call this method as the query service
+does set the bindings.
 </p>
 <p>
 \sa score

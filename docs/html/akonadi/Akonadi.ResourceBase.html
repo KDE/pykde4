@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -128,10 +128,12 @@ the following three methods:
 - itemAdded()
 - itemChanged()
 - itemRemoved()
+</p>
+<p>
 Note that these three functions don't get the full payload of the items by default,
 you need to change the item fetch scope of the change recorder to fetch the full
 payload. This can be expensive with big payloads, though.<br>
-Once you have handled changes in these methods call changeCommitted().
+Once you have handled changes in these methods, call changeCommitted().
 These methods are called whenever a local item related to this resource is
 added, modified or deleted. They are only called if the resource is online, otherwise
 all changes are recorded and replayed as soon the resource is online again.
@@ -173,15 +175,18 @@ To do: Convenience base class for collection-less resources
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#SchedulePriority">SchedulePriority</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Prepend, AfterChangeReplay, Append&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#attributesSynchronized">attributesSynchronized</a> (long collectionId)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nameChanged">nameChanged</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#synchronized">synchronized</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ResourceBase">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abortActivity">abortActivity</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cancelTask">cancelTask</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cancelTask">cancelTask</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> error)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changeCommitted">changeCommitted</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> item)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changeCommitted">changeCommitted</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearCache">clearCache</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#collectionAttributesRetrieved">collectionAttributesRetrieved</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#collectionsRetrievalDone">collectionsRetrievalDone</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#collectionsRetrieved">collectionsRetrieved</a> (self, [<a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>] collections)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#collectionsRetrievedIncremental">collectionsRetrievedIncremental</a> (self, [<a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>] changedCollections, [<a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>] removedCollections)</td></tr>
@@ -194,6 +199,7 @@ To do: Convenience base class for collection-less resources
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsRetrieved">itemsRetrieved</a> (self, [<a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>] items)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsRetrievedIncremental">itemsRetrievedIncremental</a> (self, [<a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>] changedItems, [<a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>] removedItems)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#retrieveCollectionAttributes">retrieveCollectionAttributes</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#retrieveCollections">retrieveCollections</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#retrieveItem">retrieveItem</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> item, QSet<QByteArray> parts)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#retrieveItems">retrieveItems</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection)</td></tr>
@@ -201,14 +207,44 @@ To do: Convenience base class for collection-less resources
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCollectionStreamingEnabled">setCollectionStreamingEnabled</a> (self, bool enable)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setHierarchicalRemoteIdentifiersEnabled">setHierarchicalRemoteIdentifiersEnabled</a> (self, bool enable)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setItemStreamingEnabled">setItemStreamingEnabled</a> (self, bool enable)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setItemSynchronizationFetchScope">setItemSynchronizationFetchScope</a> (self, <a href="../akonadi/Akonadi.ItemFetchScope.html">Akonadi.ItemFetchScope</a> fetchScope)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setItemTransactionMode">setItemTransactionMode</a> (self, <a href="../akonadi/Akonadi.ItemSync.html#TransactionMode">Akonadi.ItemSync.TransactionMode</a> mode)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setName">setName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setTotalItems">setTotalItems</a> (self, int amount)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#synchronize">synchronize</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#synchronizeCollection">synchronizeCollection</a> (self, long id)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#synchronizeCollection">synchronizeCollection</a> (self, long id, bool recursive)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#synchronizeCollectionAttributes">synchronizeCollectionAttributes</a> (self, long id)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#synchronizeCollectionTree">synchronizeCollectionTree</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#taskDone">taskDone</a> (self)</td></tr>
 </table>
-<hr><h2>Signal Documentation</h2><a class="anchor" name="nameChanged"></a>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="attributesSynchronized"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> attributesSynchronized</td>
+<td>(</td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>collectionId</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Emitted when a collection attributes synchronization has been completed.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>collectionId</em>&nbsp;</td><td> The identifier of the collection whose attributes got synchronized.
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("attributesSynchronized(qlonglong)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="nameChanged"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -278,6 +314,23 @@ To do: Convenience base class for collection-less resources
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="abortActivity"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> abortActivity</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Abort any activity in progress in the backend. By default this method does nothing.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="cancelTask"></a>
 <div class="memitem">
 <div class="memproto">
@@ -407,6 +460,37 @@ and therefor the cached items might not be valid any longer.
 </p>
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="collectionAttributesRetrieved"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> collectionAttributesRetrieved</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>&nbsp;</td>
+<td class="paramname"><em>collection</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Call this method from retrieveCollectionAttributes() once the result is available.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>item</em>&nbsp;</td><td> The collection whose attributes got retrieved.
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
 </dd></dl>
 </p></div></div><a class="anchor" name="collectionsRetrievalDone"></a>
 <div class="memitem">
@@ -538,6 +622,14 @@ using collectionsRetrieved() or collectionsRetrievedIncremental().
 <div class="memdoc"><p>Stops the execution of the current task and continues with the next one.
 The current task will be tried again later.
 </p>
+<p>
+This can be used to delay the task processing until the resource has reached a safe
+state, e.g. login to a server succeeded.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> This does not change the order of tasks so if there is no task with higher priority
+e.g. a custom task added with #Prepend the deferred task will be processed again.
+</dd></dl> </p>
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
 </dd></dl>
@@ -701,6 +793,41 @@ recommended to use itemsRetrievedIncremental() instead.
 </table>
 </div>
 <div class="memdoc"><p>Returns the name of the resource.
+</p></div></div><a class="anchor" name="retrieveCollectionAttributes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> retrieveCollectionAttributes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>&nbsp;</td>
+<td class="paramname"><em>collection</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Retrieve the attributes of a single collection from the backend. The
+collection to retrieve attributes for is provided as <b>collection.</b>
+Add the attributes parts and call collectionAttributesRetrieved()
+when done.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>collection</em>&nbsp;</td><td> The collection whose attributes should be retrieved.
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> collectionAttributesRetrieved()
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="retrieveCollections"></a>
 <div class="memitem">
 <div class="memproto">
@@ -950,6 +1077,67 @@ Item streaming is disabled by default.
 </td></tr>
 </table></dl>
 <p>
+</p></div></div><a class="anchor" name="setItemSynchronizationFetchScope"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setItemSynchronizationFetchScope</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.ItemFetchScope.html">Akonadi.ItemFetchScope</a>&nbsp;</td>
+<td class="paramname"><em>fetchScope</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the fetch scope applied for item synchronization.
+By default, the one set on the changeRecorder() is used. However, it can make sense
+to specify a specialized fetch scope for synchronization to improve performance.
+The rule of thumb is to remove anything from this fetch scope that does not provide
+additional information regarding whether and item has changed or not. This is primarily
+relevant for backends not supporting incremental retrieval.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>fetchScope</em>&nbsp;</td><td> The fetch scope to use by the internal Akonadi.ItemSync instance.
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> Akonadi.ItemSync
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
+</p></div></div><a class="anchor" name="setItemTransactionMode"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setItemTransactionMode</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.ItemSync.html#TransactionMode">Akonadi.ItemSync.TransactionMode</a>&nbsp;</td>
+<td class="paramname"><em>mode</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set transaction mode for item sync'ing.
+<dl class="see" compact><dt><b>See also:</b></dt><dd> Akonadi.ItemSync.TransactionMode
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="setName"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1038,6 +1226,80 @@ that way.
 </div>
 <div class="memdoc"><p>This method is called whenever the collection with the given <b>id</b>
 shall be synchronized.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>recursive</em>&nbsp;</td><td> if true, a recursive syncronization is done
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="synchronizeCollection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> synchronizeCollection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>id</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>recursive</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This method is called whenever the collection with the given <b>id</b>
+shall be synchronized.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>recursive</em>&nbsp;</td><td> if true, a recursive syncronization is done
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="synchronizeCollectionAttributes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> synchronizeCollectionAttributes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>id</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This method is called whenever the collection with the given <b>id</b>
+shall have its attributes synchronized.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>id</em>&nbsp;</td><td> The id of the collection to synchronize
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="synchronizeCollectionTree"></a>
 <div class="memitem">
 <div class="memproto">

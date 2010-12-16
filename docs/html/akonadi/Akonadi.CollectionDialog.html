@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -57,10 +57,13 @@ Namespace: <a href="../akonadi/Akonadi.html">Akonadi</a><br />
 </p>
 <p>
 Provides a dialog that lists collections that are available
-on the Akonadi storage and allows to select one or multiple
+on the Akonadi storage and allows the selection of one or multiple
 collections.
-The list of shown collections can be filtered by mime type
-and access rights.
+</p>
+<p>
+The list of shown collections can be filtered by mime type and access
+rights. Note that mime types are not enabled by default, so
+setMimeTypeFilter() must be called to enable the desired mime types.
 </p>
 <p>
 Example:
@@ -89,10 +92,14 @@ Example:
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
 </dd></dl>
 </p>
-<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#CollectionDialogOption">CollectionDialogOption</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;None, AllowToCreateNewChildCollection&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#CollectionDialog">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#CollectionDialog">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a> model, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#CollectionDialog">__init__</a> (self, <a href="../akonadi/Akonadi.CollectionDialog.html">Akonadi.CollectionDialog.CollectionDialogOptions</a> options, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a> model=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection.Rights</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#accessRightsFilter">accessRightsFilter</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changeCollectionDialogOptions">changeCollectionDialogOptions</a> (self, <a href="../akonadi/Akonadi.CollectionDialog.html">Akonadi.CollectionDialog.CollectionDialogOptions</a> options)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mimeTypeFilter">mimeTypeFilter</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selectedCollection">selectedCollection</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selectedCollections">selectedCollections</a> (self)</td></tr>
@@ -178,6 +185,58 @@ on top of the custom model.
 </table></dl>
 <p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
 </dd></dl>
+</p></div></div><a class="anchor" name="CollectionDialog"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.CollectionDialog.html">Akonadi.CollectionDialog.CollectionDialogOptions</a>&nbsp;</td>
+<td class="paramname"><em>options</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a>&nbsp;</td>
+<td class="paramname"><em>model=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Creates a new collection dialog with a custom <b>model.</b>
+</p>
+<p>
+The filtering by content mime type and access rights is done
+on top of the custom model.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>options</em>&nbsp;</td><td> The collection dialog options.
+
+<tr><td></td><td valign="top"><em>model</em>&nbsp;</td><td> The custom model to use.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent widget.
+</td></tr>
+</table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><a class="anchor" name="accessRightsFilter"></a>
 <div class="memitem">
 <div class="memproto">
@@ -194,6 +253,31 @@ on top of the custom model.
 </p>
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl>
+</p></div></div><a class="anchor" name="changeCollectionDialogOptions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> changeCollectionDialogOptions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.CollectionDialog.html">Akonadi.CollectionDialog.CollectionDialogOptions</a>&nbsp;</td>
+<td class="paramname"><em>options</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Change collection dialog options.
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
 </dd></dl>
 </p></div></div><a class="anchor" name="mimeTypeFilter"></a>
 <div class="memitem">
@@ -355,6 +439,7 @@ or nothing is selected, an invalid collection is returned.
 </tr></table>
 </div>
 <div class="memdoc"><p>Sets the mime types any of which the selected collection(s) shall support.
+Note that mime types are not enabled by default.
 </p></div></div><a class="anchor" name="setSelectionMode"></a>
 <div class="memitem">
 <div class="memproto">
@@ -381,7 +466,18 @@ or nothing is selected, an invalid collection is returned.
 QAbstractItemView.SingleSelection.
 <dl class="see" compact><dt><b>See also:</b></dt><dd> QAbstractItemView.setSelectionMode()
 </dd></dl>
-</p></div></div>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="CollectionDialogOption"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">CollectionDialogOption</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>None</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>AllowToCreateNewChildCollection</em>&nbsp;=&nbsp;1</td><td></table>
+</dl>
+</div></div><p>
 </div>
 </div>
 </div>

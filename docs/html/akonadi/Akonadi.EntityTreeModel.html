@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -60,7 +60,7 @@ Akonadi models and views provide a high level way to interact with the akonadi s
 Most applications will use these classes.
 </p>
 <p>
-Models provide an interface for viewing, deleting and moving Items and Collections.
+Models provide an interface for viewing, updating, deleting and moving Items and Collections.
 Additionally, the models are updated automatically if another application changes the
 data or inserts of deletes items etc.
 </p>
@@ -217,6 +217,17 @@ By default the displayed name of the root collection is '[*]', because it doesn'
 This feature is used in KAddressBook.
 </p>
 <p>
+If items are to be fetched by the model, it is necessary to specify which parts of the items
+are to be fetched, using the ItemFetchScope class. By default, only the basic metadata is
+fetched. To fetch all item data, including all attributes:
+</p>
+<p>
+<pre class="fragment">
+ changeRecorder-&gt;itemFetchScope().fetchFullPayload();
+ changeRecorder-&gt;itemFetchScope().fetchAllAttributes();
+</pre>
+</p>
+<p>
 &lt;h2&gt;Using EntityTreeModel with Proxy models&lt;/h2&gt;
 </p>
 <p>
@@ -362,6 +373,19 @@ That is the purpose of these lines in the above example
 </pre>
 </p>
 <p>
+&lt;h3&gt;Progress reporting&lt;/h3&gt;
+</p>
+<p>
+The EntityTreeModel uses asynchronous Akonadi.Job instances to fill and update itself.
+For example, a job is run to fetch the contents of collections (that is, list the items in it).
+Additionally, individual Akonadi.Items can be fetched in different parts at different times.
+</p>
+<p>
+To indicate that such a job is underway, the EntityTreeModel makes the FetchState available. The
+FetchState returned from a QModelIndex representing a Akonadi.Collection will be FetchingState if a
+listing of the items in that collection is underway, otherwise the state is IdleState.
+</p>
+<p>
 
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Stephen Kelly &lt;steveire@gmail.com&gt; </dd></dl>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
@@ -369,9 +393,10 @@ That is the purpose of these lines in the above example
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#CollectionFetchStrategy">CollectionFetchStrategy</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;FetchNoCollections, FetchFirstLevelChildCollections, FetchCollectionsRecursive, InvisibleCollectionFetch&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#FetchState">FetchState</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;IdleState, FetchingState&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#HeaderGroup">HeaderGroup</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;EntityTreeHeaders, CollectionTreeHeaders, ItemListHeaders, UserHeaders, EndHeaderGroup&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#ItemPopulationStrategy">ItemPopulationStrategy</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoItemPopulation, ImmediatePopulation, LazyPopulation&nbsp;}</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Roles">Roles</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ItemIdRole, ItemRole, MimeTypeRole, CollectionIdRole, CollectionRole, RemoteIdRole, CollectionChildOrderRole, AmazingCompletionRole, ParentCollectionRole, ColumnCountRole, LoadedPartsRole, AvailablePartsRole, SessionRole, CollectionRefRole, CollectionDerefRole, PendingCutRole, EntityUrlRole, UnreadCountRole, UserRole, TerminalUserRole, EndRole&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Roles">Roles</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ItemIdRole, ItemRole, MimeTypeRole, CollectionIdRole, CollectionRole, RemoteIdRole, CollectionChildOrderRole, AmazingCompletionRole, ParentCollectionRole, ColumnCountRole, LoadedPartsRole, AvailablePartsRole, SessionRole, CollectionRefRole, CollectionDerefRole, PendingCutRole, EntityUrlRole, UnreadCountRole, FetchStateRole, CollectionSyncProgressRole, UserRole, TerminalUserRole, EndRole&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#EntityTreeModel">__init__</a> (self, <a href="../akonadi/Akonadi.ChangeRecorder.html">Akonadi.ChangeRecorder</a> monitor, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#canFetchMore">canFetchMore</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent)</td></tr>
@@ -391,6 +416,7 @@ That is the purpose of these lines in the above example
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#hasChildren">hasChildren</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent=QModelIndex())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#headerData">headerData</a> (self, int section, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::Orientation</a> orientation, int role=Qt.DisplayRole)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#includeRootCollection">includeRootCollection</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#includeUnsubscribed">includeUnsubscribed</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#index">index</a> (self, int row, int column, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> parent=QModelIndex())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.EntityTreeModel.html#ItemPopulationStrategy">Akonadi.EntityTreeModel.ItemPopulationStrategy</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemPopulationStrategy">itemPopulationStrategy</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#match">match</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> start, int role, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a> value, int hits=1, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::MatchFlags</a> flags=Qt.MatchFlags(Qt.MatchStartsWith|Qt.MatchWrap))</td></tr>
@@ -402,6 +428,7 @@ That is the purpose of these lines in the above example
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCollectionFetchStrategy">setCollectionFetchStrategy</a> (self, <a href="../akonadi/Akonadi.EntityTreeModel.html#CollectionFetchStrategy">Akonadi.EntityTreeModel.CollectionFetchStrategy</a> strategy)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setData">setData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> index, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a> value, int role=Qt.EditRole)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIncludeRootCollection">setIncludeRootCollection</a> (self, bool include)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setIncludeUnsubscribed">setIncludeUnsubscribed</a> (self, bool show)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setItemPopulationStrategy">setItemPopulationStrategy</a> (self, <a href="../akonadi/Akonadi.EntityTreeModel.html#ItemPopulationStrategy">Akonadi.EntityTreeModel.ItemPopulationStrategy</a> strategy)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRootCollectionDisplayName">setRootCollectionDisplayName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setShowSystemEntities">setShowSystemEntities</a> (self, bool show)</td></tr>
@@ -912,6 +939,23 @@ with multiple proxies and views, and each should show different header data.
 </table>
 </div>
 <div class="memdoc"><p>Returns whether the root collection is provided by the model.
+</p></div></div><a class="anchor" name="includeUnsubscribed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool includeUnsubscribed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns whether unsubscribed entities will be included in the listing.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
 </p></div></div><a class="anchor" name="index"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1181,6 +1225,39 @@ with multiple proxies and views, and each should show different header data.
 <p>
 <dl class="see" compact><dt><b>See also:</b></dt><dd> setRootCollectionDisplayName()
 </dd></dl>
+</p></div></div><a class="anchor" name="setIncludeUnsubscribed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setIncludeUnsubscribed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>show</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets whether unsubscribed entities will be included in the listing.
+By default it's true
+</p>
+<p>
+Note that it is possible to change the monitor's fetchscope directly,
+bypassing this method, which will lead to inconsistencies. Use
+this method for turning on/off listing of subscribed folders.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
 </p></div></div><a class="anchor" name="setItemPopulationStrategy"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1339,7 +1416,7 @@ This method can be used through proxy models if <b>model</b> is a proxy model.
 This can be useful for example if an id is stored in a config file and needs to be used in the application.
 </p>
 <p>
-Note however, that to restore view state such as scrolling, selection and expansion of items in trees, the EntityTreeViewStateSaver can be used for convenience.
+Note however, that to restore view state such as scrolling, selection and expansion of items in trees, the ETMViewStateSaver can be used for convenience.
 </p>
 <p>
 <dl class="see" compact><dt><b>See also:</b></dt><dd> modelIndexesForItem
@@ -1386,6 +1463,20 @@ This method can be used through proxy models if <b>model</b> is a proxy model.
 <div class="memdoc"><p>Describes what collections shall be fetched by and represent in the model.
 </p><dl compact><dt><b>Enumerator: </b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>FetchNoCollections</em>&nbsp;</td><td><tr><td valign="top"><em>FetchFirstLevelChildCollections</em>&nbsp;</td><td><tr><td valign="top"><em>FetchCollectionsRecursive</em>&nbsp;</td><td><tr><td valign="top"><em>InvisibleCollectionFetch</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p><a class="anchor" name="FetchState"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">FetchState</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Describes the state of fetch jobs related to particular entities.
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>IdleState</em>&nbsp;</td><td><tr><td valign="top"><em>FetchingState</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="HeaderGroup"></a>
 <div class="memitem">

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -59,18 +59,39 @@ Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qo
 This class implements the Status notifier Item Dbus specification.
 It provides an icon similar to the classical systemtray icons,
 with some key differences:
-the actual representation is done by the systemtray
-(or the app behaving like it) itself, not by this app.
 </p>
 <p>
-there is communication between the systemtray and the icon owner,
-so the system tray can know if the application is in a normal
-or in a requesting attention state
+- the actual representation is done by the systemtray (or the app behaving
+like it) itself, not by this app. Since 4.5 this also includes the menu,
+which means you cannot use embed widgets in the menu.
 </p>
 <p>
-icons are divided in categories, so the systemtray can represent
-in a different way the icons from normal applications and for
-instance the ones about hardware status.
+- there is communication between the systemtray and the icon owner, so the
+system tray can know if the application is in a normal or in a requesting
+attention state.
+</p>
+<p>
+- icons are divided in categories, so the systemtray can represent in a
+different way the icons from normal applications and for instance the ones
+about hardware status.
+</p>
+<p>
+Whenever possible you should prefer passing icon by name rather than by
+pixmap because:
+</p>
+<p>
+- it is much lighter on Dbus (no need to pass all image pixels).
+</p>
+<p>
+- it makes it possible for the systemtray to load an icon of the appropriate
+size or to replace your icon with a systemtray specific icon which matches
+with the desktop theme.
+</p>
+<p>
+- some implementations of the system tray do not support passing icons by
+pixmap and will show a blank icon instead.
+</p>
+<p>
 
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Marco Martin &lt;notmart@gmail.com&gt; </dd></dl>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
@@ -567,6 +588,13 @@ storing configuration related to this item.
 </tr></table>
 </div>
 <div class="memdoc"><p>Sets the main widget associated with this StatusNotifierItem
+</p>
+<p>
+If you pass contextMenu() as a parent then the menu will be displayed
+when the user activate the icon. In this case the activate() method will
+not be called and the activateRequested() signal will not be emitted
+</p>
+<p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the new main widget: must be a top level window,

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -65,6 +65,25 @@ This job deletes a collection and all its sub-collections as well as all associa
 
  Akonadi.CollectionDeleteJob *job = new Akonadi.CollectionDeleteJob( collection );
  connect( job, SIGNAL( result( KJob* ) ), this, SLOT( deletionResult( KJob* ) ) );
+
+</pre>
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> This job deletes the data from the backend storage. To delete the collection
+from the Akonadi storage only, leaving the backend storage unchanged, delete
+the Agent instead, as follows. (Note that if it's a sub-collection, deleting
+the agent will also delete its parent collection; in this case the only
+option is to delete the sub-collection data in both Akonadi and backend
+storage.)
+</dd></dl> </p>
+<p>
+<pre class="fragment">
+
+ const Akonadi.AgentInstance instance =
+                   Akonadi.AgentManager.self()-&gt;instance( collection.resource() );
+ if ( instance.isValid() ) {
+   Akonadi.AgentManager.self()-&gt;removeInstance( instance );
+ }
 
 </pre>
 </p>

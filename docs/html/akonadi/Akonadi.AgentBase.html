@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -67,6 +67,29 @@ It provides:
 - problem reporting
 </p>
 <p>
+Akonadi Server supports serveral ways to launch agents and resources:
+- As a seperate application (@see AKONADI_AGENT_MAIN)
+- As a thread in the AgentServer
+- As a seperate process, using the akonadi_agent_launcher
+</p>
+<p>
+The idea is this, the agent or resource is written as a plugin instead of an
+executable (@see AgentFactory). In the AgentServer case, the AgentServer
+looks up the plugin and launches the agent in a seperate thread. In the
+launcher case, a new akonadi_agent_launcher process is started for each
+agent or resource instance.
+</p>
+<p>
+When making an Agent or Resource suitable for running in the AgentServer some
+extra caution is needed. Because multiple instances of several kinds of agents
+run in the same process, one cannot blindly use global objects like KGlobal.
+For this reasons several methods where added to avoid problems in this context,
+most notably AgentBase.config() and AgentBase.componentData(). Additionally,
+one cannot use QDBusConnection.sessionBus() with dbus &lt; 1.4, because of a
+multithreading bug in libdbus. Instead one should use
+DBusConnectionPool.threadConnection() which works around this problem.
+</p>
+<p>
 
 <dl class="author" compact><dt><b>Author:</b></dt><dd> Till Adam &lt;adam@kde.org&gt;, Volker Krause &lt;vkrause@kde.org&gt; </dd></dl>
 </p>
@@ -74,6 +97,7 @@ It provides:
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Status">Status</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Idle, Running, Broken&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abortRequested">abortRequested</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#advancedStatus">advancedStatus</a> ({<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>:<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>} status)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#agentNameChanged">agentNameChanged</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configurationDialogAccepted">configurationDialogAccepted</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configurationDialogRejected">configurationDialogRejected</a> ()</td></tr>
@@ -90,6 +114,7 @@ It provides:
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changeProcessed">changeProcessed</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.ChangeRecorder.html">Akonadi.ChangeRecorder</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changeRecorder">changeRecorder</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cleanup">cleanup</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">KSharedPtr<KSharedConfig>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#config">config</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configure">configure</a> (self, int windowId)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#doSetOnline">doSetOnline</a> (self, bool online)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#identifier">identifier</a> (self)</td></tr>
@@ -103,6 +128,8 @@ It provides:
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#status">status</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#statusMessage">statusMessage</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#winIdForDialogs">winIdForDialogs</a> (self)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KComponentData.html">KComponentData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#componentData">componentData</a> ()</td></tr>
 </table>
 <hr><h2>Signal Documentation</h2><a class="anchor" name="abortRequested"></a>
 <div class="memitem">
@@ -124,7 +151,32 @@ and cleaning up, agents should return to Idle status.
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
 </dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("abortRequested()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="agentNameChanged"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("abortRequested()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="advancedStatus"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> advancedStatus</td>
+<td>(</td>
+<td class="paramtype">{<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>:<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>}&nbsp;</td>
+<td class="paramname"><em>status</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal should be emitted whenever the status of the agent has been changed.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>status</em>&nbsp;</td><td> The object that describes the status change.
+</td></tr>
+</table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("advancedStatus(const QVariantMap&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="agentNameChanged"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -462,6 +514,19 @@ the system, so it can do some cleanup stuff.
 <dl class="note" compact><dt><b>Note:</b></dt><dd> If you reimplement this in a subclass make sure
 to call this base implementation at the end.
 </dd></dl>
+</p></div></div><a class="anchor" name="config"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">KSharedPtr<KSharedConfig> config</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the config object for this Agent.
 </p></div></div><a class="anchor" name="configure"></a>
 <div class="memitem">
 <div class="memproto">
@@ -731,6 +796,25 @@ the onLine status of the agent.
 </table>
 </div>
 <div class="memdoc"><p>This method returns the windows id, which should be used for dialogs.
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="componentData"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KComponentData.html">KComponentData</a> componentData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the component data object for this agent instance.
+In case of stand-alone agents this is identical to KGlobal.mainComponent().
+In case of in-process agents there is one component data object
+per agent instance thread.
+This method provides valid results even when called in the agent ctor.
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
+</dd></dl>
 </p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="Status"></a>
 <div class="memitem">
 <div class="memproto">

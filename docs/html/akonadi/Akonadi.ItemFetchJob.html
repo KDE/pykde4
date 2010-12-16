@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.5 PyKDE API Reference
+        KDE 4.6 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -61,13 +61,27 @@ Which parts of the items (e.g. headers only, attachments or all)
 can be specified by the ItemFetchScope.
 </p>
 <p>
+Note that ItemFetchJob does not refresh the Akonadi storage from the
+backend; this is unnecessary due to the fact that backend updates
+automatically trigger an update to the Akonadi database whenever they occur
+(unless the resource is offline).
+</p>
+<p>
+Note that items can not be created in the root collection (Collection.root())
+and therefore can not be fetched from there either. That is - an item fetch in
+the root collection will yield an empty list.
+</p>
+<p>
 Example:
 </p>
 <p>
 <pre class="fragment">
 
- // Fetch all items with full payload from the root collection
- Akonadi.ItemFetchJob *job = new Akonadi.ItemFetchJob( Akonadi.Collection.root() );
+ // Fetch all items with full payload from a collection
+
+ const Collection collection = getCollection();
+
+ Akonadi.ItemFetchJob *job = new Akonadi.ItemFetchJob( collection );
  connect( job, SIGNAL( result( KJob* ) ), SLOT( jobFinished( KJob* ) ) );
  job-&gt;fetchScope().fetchFullPayload();
 
@@ -127,7 +141,7 @@ Example:
 <div class="memdoc"><p>This signal is emitted whenever new items have been fetched completely.
 </p>
 <p>
-<dl class="note" compact><dt><b>Note:</b></dt><dd> This is an optimization, instead of waiting for the end of the job
+<dl class="note" compact><dt><b>Note:</b></dt><dd> This is an optimization; instead of waiting for the end of the job
 and calling items(), you can connect to this signal and get the items
 incrementally.
 </dd></dl> </p>
@@ -206,9 +220,9 @@ incrementally.
 </tr></table>
 </div>
 <div class="memdoc"><p>Creates a new item fetch job that retrieves the specified item.
-If the item has an uid set, this is used to identify the item on the Akonadi
-server. If only a remote identifier is available, that one is used.
-However, as remote identifier are not necessarily globally unique, you
+If the item has a uid set, this is used to identify the item on the Akonadi
+server. If only a remote identifier is available, that is used.
+However, as remote identifiers are not necessarily globally unique, you
 need to specify the resource and/or collection to search in in that case,
 using setCollection() or Akonadi.ResourceSelectJob.
 </p>
@@ -250,9 +264,9 @@ using setCollection() or Akonadi.ResourceSelectJob.
 </tr></table>
 </div>
 <div class="memdoc"><p>Creates a new item fetch job that retrieves the specified items.
-If the items have an uid set, this is used to identify the item on the Akonadi
-server. If only a remote identifier is available, that one is used.
-However, as remote identifier are not necessarily globally unique, you
+If the items have a uid set, this is used to identify the item on the Akonadi
+server. If only a remote identifier is available, that is used.
+However, as remote identifiers are not necessarily globally unique, you
 need to specify the resource and/or collection to search in in that case,
 using setCollection() or Akonadi.ResourceSelectJob.
 </p>

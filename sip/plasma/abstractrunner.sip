@@ -47,6 +47,7 @@
 #include <plasma/dataengine.h>
 #include <plasma/dataenginemanager.h>
 #include <plasma/scripting/dataenginescript.h>
+#include <plasma/widgets/declarativewidget.h>
 #include <plasma/delegate.h>
 #include <plasma/dialog.h>
 #include <plasma/extender.h>
@@ -257,6 +258,8 @@ protected:
         }
     else if (dynamic_cast<Plasma::BusyWidget*>(sipCpp))
         sipType = sipType_Plasma_BusyWidget;
+    else if (dynamic_cast<Plasma::DeclarativeWidget*>(sipCpp))
+        sipType = sipType_Plasma_DeclarativeWidget;
     else if (dynamic_cast<Plasma::Extender*>(sipCpp))
         sipType = sipType_Plasma_Extender;
     else if (dynamic_cast<Plasma::ExtenderItem*>(sipCpp))

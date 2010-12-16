@@ -67,6 +67,10 @@ signals:
     void                    configChanged ();
 public:
     ~KBookmarkManager ();
+    bool                    autoErrorHandlingEnabled () const;
+    void                    setAutoErrorHandlingEnabled (bool enable, QWidget* parent /Transfer/);
+signals:
+    void                    error (const QString& errorMessage);
 };
 // KBookmarkManager
 

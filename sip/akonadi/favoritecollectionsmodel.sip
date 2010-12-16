@@ -36,7 +36,7 @@ public:
     void                    removeCollection (const Akonadi::Collection& collection);
     void                    setFavoriteLabel (const Akonadi::Collection& collection, const QString& label);
     QString                 favoriteLabel (const Akonadi::Collection& col);
-//ig    QList<Akonadi::Collection::Id>   collectionIds () const;
-    QList<Akonadi::Entity::Id>   collectionIds () const;
+//ig    QList<Akonadi::Collection::Id>  collectionIds () const;
+    QList<Akonadi::Entity::Id>  collectionIds () const;
 };
 };

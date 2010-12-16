@@ -44,6 +44,7 @@ protected:
     void                    slotDateChanged ();
 public:
     ~KDateWidget ();
+    bool                    setCalendarSystem (KLocale::CalendarSystem calendarSystem);
 };
 // KDateWidget
 

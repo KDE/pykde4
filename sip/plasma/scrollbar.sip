@@ -53,6 +53,8 @@ public:
     explicit                ScrollBar (QGraphicsWidget* parent /TransferThis/ = 0);
     void                    setMinimum (const int min) const;
     void                    setMaximum (const int max) const;
+signals:
+    void                    sliderMoved (int value);
 };
 // ScrollBar
 

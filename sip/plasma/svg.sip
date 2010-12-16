@@ -57,6 +57,8 @@ signals:
     void                    repaintNeeded ();
 public:
     ~Svg ();
+signals:
+    void                    sizeChanged ();
 };
 // Svg
 

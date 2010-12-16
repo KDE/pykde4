@@ -64,9 +64,6 @@ public:
     bool                    isLeapYear () const;
     QString                 formatDate (KLocale::DateFormat dateFormat = KLocale::LongDate) const;
     QString                 formatDate (const QString& formatString, KLocale::DateTimeFormatStandard formatStandard = KLocale::KdeFormat) const;
-    QString                 formatDateComponent (KLocale::DateTimeComponent component, KLocale::DateTimeComponentFormat format = KLocale::DefaultComponentFormat) const;
-    QString                 formatWeek (KLocale::WeekNumberSystem weekNumberSystem, KLocale::DateTimeComponentFormat format = KLocale::DefaultComponentFormat) const;
-    QString                 formatWeeksInYear (KLocale::WeekNumberSystem weekNumberSystem, KLocale::DateTimeComponentFormat format = KLocale::DefaultComponentFormat) const;
     static KLocalizedDate   readDate (const QString& dateString, KLocale::DateTimeParseMode parseMode = KLocale::LiberalParsing, const KCalendarSystem* calendar = 0);
     static KLocalizedDate   readDate (const QString& dateString, KLocale::ReadDateFlags formatFlags, KLocale::DateTimeParseMode parseMode = KLocale::LiberalParsing, const KCalendarSystem* calendar = 0);
     static KLocalizedDate   readDate (const QString& dateString, const QString& dateFormat, KLocale::DateTimeParseMode parseMode = KLocale::LiberalParsing, KLocale::DateTimeFormatStandard formatStandard = KLocale::KdeFormat, const KCalendarSystem* calendar = 0);
@@ -100,6 +97,7 @@ public:
     bool                    operator > (const QDate& other) const;
     bool                    operator >= (const KLocalizedDate& other) const;
     bool                    operator >= (const QDate& other) const;
+    QString                 formatDate (KLocale::DateTimeComponent component, KLocale::DateTimeComponentFormat format = KLocale::DefaultComponentFormat, KLocale::WeekNumberSystem weekNumberSystem = KLocale::DefaultWeekNumber) const;
 };
 QDataStream             operator << (QDataStream& out, const KLocalizedDate& date);
 QDataStream             operator >> (QDataStream& in, KLocalizedDate& date);

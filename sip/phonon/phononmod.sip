@@ -47,6 +47,7 @@
 %Include objectdescription.sip
 %Include objectdescriptionmodel.sip
 %Include path.sip
+%Include pulsesupport.sip
 %Include seekslider.sip
 %Include streaminterface.sip
 %Include videoplayer.sip
@@ -54,4 +55,3 @@
 %Include videowidgetinterface.sip
 %Include volumefadereffect.sip
 %Include volumeslider.sip
-%Include pulsesupport.sip

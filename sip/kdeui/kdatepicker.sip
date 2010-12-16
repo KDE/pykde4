@@ -66,6 +66,7 @@ signals:
     void                    tableClicked ();
 public:
     ~KDatePicker ();
+    bool                    setCalendarSystem (KLocale::CalendarSystem calendarSystem);
 };
 // KDatePicker
 

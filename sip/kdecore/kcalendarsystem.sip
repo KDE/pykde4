@@ -165,9 +165,10 @@ public:
     QDate                   lastDayOfMonth (int year, int month) const;
     QDate                   firstDayOfMonth (const QDate& date = QDate::currentDate()) const;
     QDate                   lastDayOfMonth (const QDate& date = QDate::currentDate()) const;
-    QString                 formatDateComponent (const QDate& date, KLocale::DateTimeComponent component, KLocale::DateTimeComponentFormat format = KLocale::DefaultComponentFormat) const;
     int                     shortYearWindowStartYear () const;
     int                     applyShortYearWindow (int inputYear) const;
+    static KLocale::CalendarSystem  calendarSystemForCalendarType (const QString& calendarType);
+    QString                 formatDate (const QDate& date, KLocale::DateTimeComponent component, KLocale::DateTimeComponentFormat format = KLocale::DefaultComponentFormat, KLocale::WeekNumberSystem weekNumberSystem = KLocale::DefaultWeekNumber) const;
 };
 // KCalendarSystem
 

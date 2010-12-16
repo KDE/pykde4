@@ -29,9 +29,7 @@ public:
                             ETMViewStateSaver (QObject* parent /TransferThis/ = 0);
     void                    selectCollections (const Akonadi::Collection::List& list);
 //ig    void                    selectCollections (const QList<Akonadi::Collection::Id>& list);
-    void                    selectCollections (const QList<Akonadi::Entity::Id>& list);
     void                    selectItems (const Akonadi::Item::List& list);
-    void                    selectItems (const QList<Akonadi::Entity::Id>& list);
 //ig    void                    selectItems (const QList<Akonadi::Item::Id>& list);
 protected:
     QModelIndex             indexFromConfigString (const QAbstractItemModel* model, const QString& key) const;

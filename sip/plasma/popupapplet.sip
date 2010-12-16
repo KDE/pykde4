@@ -61,6 +61,8 @@ public:
     void                    setPopupAlignment (Qt::AlignmentFlag alignment);
     Qt::AlignmentFlag       popupAlignment () const;
     bool                    isIconified () const;
+protected:
+    void                    timerEvent (QTimerEvent* event);
 };
 // PopupApplet
 

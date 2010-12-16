@@ -27,9 +27,6 @@
 %Import kdecore/kdecoremod.sip
 %Import soprano/sopranomod.sip
 
-%Include ncal.sip
-%Include nco.sip
-%Include ndo.sip
 %Include andterm.sip
 %Include class.sip
 %Include comparisonterm.sip
@@ -43,12 +40,20 @@
 %Include ktagdisplaywidget.sip
 %Include literal.sip
 %Include literalterm.sip
+%Include ncal.sip
+%Include nco.sip
+%Include ndo.sip
 %Include negationterm.sip
 %Include nepomukmassupdatejob.sip
 %Include nepomukservice.sip
+%Include nfo.sip
+%Include nie.sip
+%Include nmm.sip
+%Include nuao.sip
 %Include ontology.sip
 %Include optionalterm.sip
 %Include orterm.sip
+%Include pimo.sip
 %Include property.sip
 %Include query.sip
 %Include queryparser.sip
@@ -64,11 +69,6 @@
 %Include tagwidget.sip
 %Include term.sip
 %Include thing.sip
+%Include tmo.sip
 %Include tools.sip
 %Include variant.sip
-%Include nfo.sip
-%Include nie.sip
-%Include nmm.sip
-%Include nuao.sip
-%Include pimo.sip
-%Include tmo.sip

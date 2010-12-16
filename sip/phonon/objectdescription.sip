@@ -69,9 +69,9 @@ typedef Phonon::ObjectDescription<Phonon::AudioChannelType> AudioChannelDescript
 
 typedef Phonon::ObjectDescription<Phonon::SubtitleType> SubtitleDescription;
 
-typedef QPair<QByteArray, QString> DeviceAccess;
+typedef QPair<QByteArray,QString> DeviceAccess;
 
-typedef QList< QPair<QByteArray, QString> > DeviceAccessList;
+typedef QList<QPair<QByteArray,QString>> DeviceAccessList;
 // typedef QList<Phonon::DeviceAccess> DeviceAccessList;
 
 class ObjectDescriptionData

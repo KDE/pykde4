@@ -122,6 +122,8 @@ public:
     ~KDateTable ();
 protected:
     virtual bool            event (QEvent* e);
+public:
+    bool                    setCalendarSystem (KLocale::CalendarSystem calendarSystem);
 };
 // KDateTable
 

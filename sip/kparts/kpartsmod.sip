@@ -31,15 +31,15 @@
 %Import kio/kiomod.sip
 
 %Include genericfactory.sip
-%Include fileinfoextension.sip
-%Include htmlextension.sip
 %Include browserextension.sip
 %Include browserinterface.sip
 %Include browseropenorsavequestion.sip
 %Include browserrun.sip
 %Include event.sip
 %Include factory.sip
+%Include fileinfoextension.sip
 %Include historyprovider.sip
+%Include htmlextension.sip
 %Include mainwindow.sip
 %Include part.sip
 %Include partmanager.sip

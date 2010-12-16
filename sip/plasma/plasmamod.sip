@@ -35,7 +35,6 @@
 
 %Include paintutils.sip
 %Include plasma.sip
-%Include declarativewidget.sip
 %Include abstractdialogmanager.sip
 %Include abstractrunner.sip
 %Include abstracttoolbox.sip
@@ -68,6 +67,7 @@
 %Include package.sip
 %Include packagemetadata.sip
 %Include packagestructure.sip
+%Include pluginloader.sip
 %Include popupapplet.sip
 %Include querymatch.sip
 %Include runnercontext.sip
@@ -91,6 +91,7 @@
 %Include busywidget.sip
 %Include checkbox.sip
 %Include combobox.sip
+%Include declarativewidget.sip
 %Include flashinglabel.sip
 %Include frame.sip
 %Include groupbox.sip
@@ -116,4 +117,3 @@
 %Include videowidget.sip
 %Include webview.sip
 %Include windoweffects.sip
-%Include pluginloader.sip

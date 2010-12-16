@@ -295,6 +295,7 @@ public:
     };
     enum WeekNumberSystem
     {
+        DefaultWeekNumber,
         IsoWeekNumber
     };
     enum DateTimeParseMode

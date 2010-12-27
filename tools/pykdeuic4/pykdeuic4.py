@@ -20,6 +20,8 @@
 #
 import sys
 import time
+import optparse
+
 from PyQt4.uic.Compiler import indenter, compiler
 from PyQt4.uic.Compiler import qtproxies
 from PyQt4.uic.objcreator import MATCH,NO_MATCH
@@ -111,38 +113,29 @@ if __name__ == '__main__':
     if output_filename is not None:
         output.close()
 
-def usage(rcode = 2):
-    print("""Usage:
-    pykdeuic4 [-h] [-e] [-o output_file] ui_file
-Where:
-    -h      Displays this message
-    -e      Generate extra code to display the UI
-    -o file Write the output to file instead of stdout
-""")
-    sys.exit(rcode)
-
 def main():
-    import getopt
-    try:
-        optlist, args = getopt.getopt(sys.argv[1:], "o:eh")
-    except getopt.GetoptError:
-        usage()
 
-    exe = False
-    output_filename = None
+    usage = "pykdeuic4 [-h] [-e] [-o output_file] ui_file"
 
-    for opt, arg in optlist:
-        if opt == "-h":
-            usage(0)
-        elif opt=="-e":
-            exe = True
-        elif opt=="-o":
-            output_filename = arg
+    parser = optparse.OptionParser(usage=usage)
+    parser.add_option("-e", action="store_true", dest="exe",
+                      help="Generate extra code to display the UI",
+                      default=False)
+    parser.add_option("-o", dest="output_filename",
+                      metavar="file",
+                      help="Write the output to file instead of stdout",
+                      default=None)
 
-    if len(args)!=1:
-        usage()
+    options, arguments = parser.parse_args()
 
-    processUI(args[0], output_filename, exe)
+    if len(arguments) != 1:
+        parser.error("Wrong number of arguments.")
+
+    source_ui = arguments[0]
+    exe = options.exe
+    output_filename = options.output_filename
+
+    processUI(source_ui, output_filename, exe)
 
 if __name__ == '__main__':
     main()

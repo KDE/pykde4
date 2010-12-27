@@ -39,7 +39,7 @@ class kde_i18n_string(qtproxies.i18n_string):
     def __init__(self,string):
         original_i18n_string.__init__(self,string)
     def __str__(self):
-        return "kdecore.i18n(\"%s\")" % (qtproxies.escape(self.string),)
+        return "kdecore.i18n(%s)" % (qtproxies.as_string(self.string),)
 qtproxies.i18n_string = kde_i18n_string
 
 def kdeFilter():
@@ -71,7 +71,7 @@ def processUI(uifile, output_filename=None, exe=False, indent=4):
     indenter.indentwidth = indent
     comp = compiler.UICompiler()
     comp.factory._cwFilters.append(kdeFilter())
-    winfo = comp.compileUi(uifile, output)
+    winfo = comp.compileUi(uifile, output, None)
 
     if exe:
         output.write("""
@@ -104,7 +104,7 @@ if __name__ == '__main__':
     app = kdeui.KApplication()
     mainWindow = MainWin(None, "main window")
     mainWindow.show()
-    app.connect (app, QtCore.SIGNAL ("lastWindowClosed ()"), app.quit)
+    app.lastWindowClosed.connect(app.quit)
     app.exec_ ()
 """)
 

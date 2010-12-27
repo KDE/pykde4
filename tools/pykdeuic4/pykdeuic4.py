@@ -5,15 +5,15 @@
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Library General Public
 # License as published by the Free Software Foundation; either
-# version 2 of the License or (at your option) version 2.1 or 
+# version 2 of the License or (at your option) version 2.1 or
 # version 3 or, at the discretion of KDE e.V. (which shall act as
 # a proxy as in section 14 of the GPLv3), any later version.
-# 
+#
 # This library is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # Library General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Library General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston MA  02110-1301 USA
@@ -60,12 +60,12 @@ def kdeFilter():
     return _kdefilter
 
 def processUI(uifile, output_filename=None, exe=False, indent=4):
-    
+
     if output_filename is not None:
         output = open(output_filename,'w')
     else:
         output = sys.stdout
-    
+
     # Write out the header.
     output.write(header % (uifile,time.ctime()))
     indenter.indentwidth = indent
@@ -85,7 +85,7 @@ if __name__ == '__main__':
             self.setupUi(rootWidget)
             self.resize(640, 480)
             self.setCentralWidget(rootWidget)
-    
+
     appName     = "default"
     catalog     = ""
     programName = kdecore.ki18n("default")
@@ -100,7 +100,7 @@ if __name__ == '__main__':
     aboutData   = kdecore.KAboutData(appName, catalog, programName, version, description,
                               license, copyright, text, homePage, bugEmail)
     kdecore.KCmdLineArgs.init(sys.argv, aboutData)
-    
+
     app = kdeui.KApplication()
     mainWindow = MainWin(None, "main window")
     mainWindow.show()
@@ -127,10 +127,10 @@ def main():
         optlist, args = getopt.getopt(sys.argv[1:], "o:eh")
     except getopt.GetoptError:
         usage()
-        
+
     exe = False
     output_filename = None
-    
+
     for opt, arg in optlist:
         if opt == "-h":
             usage(0)
@@ -138,11 +138,11 @@ def main():
             exe = True
         elif opt=="-o":
             output_filename = arg
-            
+
     if len(args)!=1:
         usage()
 
     processUI(args[0], output_filename, exe)
-    
+
 if __name__ == '__main__':
     main()

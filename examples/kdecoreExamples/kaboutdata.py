@@ -30,10 +30,13 @@ Click the button to launch the application.
 """        
 
 
-
 class MainWindow (KMainWindow):
-    def __init__ (self):
-        KMainWindow.__init__ (self)
+    
+    """Example KMainWindow class."""
+
+    def __init__ (self, *args):
+
+        super(MainWindow, self).__init__(*args)
 
         self.resize (640, 480)
         label = QLabel ("This is a simple PyKDE4 program", self)

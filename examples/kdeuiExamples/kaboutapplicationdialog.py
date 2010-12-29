@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from PyQt4.QtCore import SIGNAL, Qt
 from PyQt4.QtGui import QLabel, QSizePolicy
 
@@ -35,17 +38,22 @@ aboutData.addAuthor (ki18n ("Troy Melhase"), ki18n ("original concept"))
 aboutData.addAuthor (ki18n ("Jim Bublitz"), ki18n ("pykdedocs"))
 
 
-class MainFrame(KVBox):       
+class MainFrame(KVBox):
+
+    """Example class showing how KAboutApplicationDialog works."""
+
     def __init__(self, parent):
-        KVBox.__init__(self, parent)
+
+        super(MainFrame, self).__init__(parent)
+        
         self.help = QLabel (helpText, self)
         self.layout ().setAlignment (self.help, Qt.AlignHCenter)
         
         hBox = KHBox (self)
         self.button = KPushButton(i18n("Show %s" % dialogName), hBox)
         self.button.setMaximumSize (250, 30)
-        
-        self.connect(self.button, SIGNAL('clicked()'), self.showDialog)
+       
+        self.button.clicked.connect(self.showDialog)
 
     def showDialog(self):
         dlg = KAboutApplicationDialog (aboutData, self.parent ())
@@ -81,5 +89,5 @@ if __name__ == '__main__':
     app = KApplication ()
     mainWindow = MainWin (None, "main window")
     mainWindow.show()
-    app.connect (app, SIGNAL ("lastWindowClosed ()"), app.quit)
+    app.lastWindowClosed.connect(app.quit)
     app.exec_ ()

@@ -1,4 +1,9 @@
-from PyQt4.QtCore import SIGNAL, Qt
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""Example module showing the use of KStandardDirs."""
+
+from PyQt4.QtCore import Qt, QString
 from PyQt4.QtGui import QLabel
 
 from PyKDE4.kdecore import i18n, KStandardDirs
@@ -16,8 +21,11 @@ helpText = """KStandardDirs provides methods for locating KDE objects
 """
 
 class MainFrame(KVBox):
+
+    """Example class showing the use of KStandardDirs."""
+
     def __init__(self, parent=None):
-        KVBox.__init__(self, parent)
+        super(KVBox, self).__init__(parent)
         self.help  = QLabel (i18n (helpText), self)
         self.layout ().setAlignment (self.help, Qt.AlignHCenter)
         self.setSpacing (10)
@@ -34,12 +42,16 @@ class MainFrame(KVBox):
         types         = self.stdDirs.allTypes ()
         
         comboLbl      = QLabel ("Types", cBox)
-        combo         = KComboBox (cBox)        
+        combo         = KComboBox (cBox)
         combo.addItems (types)
         cBox.layout ().setAlignment (comboLbl, Qt.AlignTop)
         cBox.layout ().setAlignment (combo, Qt.AlignTop)
-        
-        self.connect (combo, SIGNAL ("currentIndexChanged (const QString&)"), self.slotIndexChanged)
+
+        # We're calling the QString version of the signal, as
+        # currentIndexChanged can also be emitted with an int (the index that
+        # changed)
+
+        self.combo.currentIndexChanged[QString].connect(self.slotIndexChanged)
 
         lBox          = KVBox (hBox)
         listLbl       = QLabel ("Directories", lBox)
@@ -52,11 +64,13 @@ class MainFrame(KVBox):
 
         self.slotIndexChanged (combo.currentText ())
 
-    def slotIndexChanged (self, s):
-        self.location.clear ()
-        self.location.insertItems (0, self.stdDirs.resourceDirs (str (s)))
+    def slotIndexChanged (self, text):
 
-        
+        """Slot connected to currentIndexChanged."""
+
+        self.location.clear ()
+        self.location.insertItems (0, self.stdDirs.resourceDirs (
+            unicode (text)))
 
 
 # This example can be run standalone
@@ -100,5 +114,5 @@ if __name__ == '__main__':
     app = KApplication ()
     mainWindow = MainWin (None, "main window")
     mainWindow.show()
-    app.connect (app, SIGNAL ("lastWindowClosed ()"), app.quit)
+    app.lastWindowClosed.connect (app.quit)
     app.exec_ ()

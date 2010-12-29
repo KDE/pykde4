@@ -12,7 +12,10 @@ Press the button below to display the dialog.
 
 dialogName = "KAboutKdeDialog" 
 
-class MainFrame(KVBox):       
+class MainFrame(KVBox):
+
+    """Class showing the use of KAboutKdeDialog."""
+
     def __init__(self, parent):
         KVBox.__init__(self, parent)
         self.help = QLabel (helpText, self)
@@ -21,14 +24,15 @@ class MainFrame(KVBox):
         hBox = KHBox (self)
         self.button = KPushButton(i18n("Show %s" % dialogName), hBox)
         self.button.setMaximumSize (250, 30)
-        
-        self.connect(self.button, SIGNAL('clicked()'), self.showDialog)
+       
+        self.button.clicked.connect(self.showDialog)
 
     def showDialog(self):
+
+        """Slot called by the clicked() slot of the KPushButton."""
+
         dlg = KAboutKdeDialog (self.parent ())
         dlg.exec_ ()
-
-
 
 # This example can be run standalone
 
@@ -72,5 +76,5 @@ if __name__ == '__main__':
     app = KApplication ()
     mainWindow = MainWin (None, "main window")
     mainWindow.show()
-    app.connect (app, SIGNAL ("lastWindowClosed ()"), app.quit)
+    app.lastWindowClosed.connect(app.quit)
     app.exec_ ()

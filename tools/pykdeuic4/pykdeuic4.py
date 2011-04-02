@@ -20,7 +20,6 @@
 #
 import sys
 import time
-import optparse
 
 from PyQt4.uic.Compiler import indenter, compiler
 from PyQt4.uic.Compiler import qtproxies
@@ -35,13 +34,19 @@ header = """#!/usr/bin/env python
 from PyKDE4 import kdecore
 from PyKDE4 import kdeui
 """
+
 # Override how messages are translated.
 original_i18n_string = qtproxies.i18n_string
+
 class kde_i18n_string(qtproxies.i18n_string):
-    def __init__(self,string):
-        original_i18n_string.__init__(self,string)
+
+    "Wrapper around qtproxies.i18n_string to add support for kdecore's i18n."
+
+    def __init__(self,string, disambig=None):
+        original_i18n_string.__init__(self,string, disambig)
     def __str__(self):
-        return "kdecore.i18n(%s)" % (qtproxies.as_string(self.string),)
+        return "kdecore.i18n(\"%s\")" % (qtproxies.escape(self.string),)
+
 qtproxies.i18n_string = kde_i18n_string
 
 def kdeFilter():
@@ -73,7 +78,7 @@ def processUI(uifile, output_filename=None, exe=False, indent=4):
     indenter.indentwidth = indent
     comp = compiler.UICompiler()
     comp.factory._cwFilters.append(kdeFilter())
-    winfo = comp.compileUi(uifile, output, None)
+    winfo = comp.compileUi(uifile, output)
 
     if exe:
         output.write("""
@@ -106,36 +111,45 @@ if __name__ == '__main__':
     app = kdeui.KApplication()
     mainWindow = MainWin(None, "main window")
     mainWindow.show()
-    app.lastWindowClosed.connect(app.quit)
+    app.connect (app, QtCore.SIGNAL ("lastWindowClosed ()"), app.quit)
     app.exec_ ()
 """)
 
     if output_filename is not None:
         output.close()
 
+def usage(rcode = 2):
+    print("""Usage:
+    pykdeuic4 [-h] [-e] [-o output_file] ui_file
+Where:
+    -h      Displays this message
+    -e      Generate extra code to display the UI
+    -o file Write the output to file instead of stdout
+""")
+    sys.exit(rcode)
+
 def main():
+    import getopt
+    try:
+        optlist, args = getopt.getopt(sys.argv[1:], "o:eh")
+    except getopt.GetoptError:
+        usage()
 
-    usage = "pykdeuic4 [-h] [-e] [-o output_file] ui_file"
+    exe = False
+    output_filename = None
 
-    parser = optparse.OptionParser(usage=usage)
-    parser.add_option("-e", action="store_true", dest="exe",
-                      help="Generate extra code to display the UI",
-                      default=False)
-    parser.add_option("-o", dest="output_filename",
-                      metavar="file",
-                      help="Write the output to file instead of stdout",
-                      default=None)
+    for opt, arg in optlist:
+        if opt == "-h":
+            usage(0)
+        elif opt=="-e":
+            exe = True
+        elif opt=="-o":
+            output_filename = arg
 
-    options, arguments = parser.parse_args()
+    if len(args)!=1:
+        usage()
 
-    if len(arguments) != 1:
-        parser.error("Wrong number of arguments.")
-
-    source_ui = arguments[0]
-    exe = options.exe
-    output_filename = options.output_filename
-
-    processUI(source_ui, output_filename, exe)
+    processUI(args[0], output_filename, exe)
 
 if __name__ == '__main__':
     main()

@@ -21,7 +21,7 @@
 namespace Phonon
 {
 
-class AudioOutput /NoDefaultCtors/
+class AudioOutput : Phonon::MediaNode /NoDefaultCtors/
 {
 %TypeHeaderCode
 #include <phonon/audiooutput.h>

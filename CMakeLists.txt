@@ -149,7 +149,11 @@ FILE(GLOB plasma_files_sip sip/plasma/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${plasma_files_sip})
 ADD_SIP_PYTHON_MODULE(PyKDE4.plasma sip/plasma/plasmamod.sip ${KDE4_PLASMA_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTUITOOLS_LIBRARY} ${KDE4_KIO_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY})
 
-SET(PYKDE_MODULES "kdecore solid kdeui kio kutils kparts ktexteditor dnssd phonon plasma")
+FILE(GLOB kterminal_files_sip sip/kterminal/*.sip)
+set(SIP_EXTRA_FILES_DEPEND ${kterminal_files_sip})
+ADD_SIP_PYTHON_MODULE(PyKDE4.kterminal sip/kterminal/kterminalmod.sip ${KDE4_TERMINAL_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
+
+SET(PYKDE_MODULES "kdecore solid kdeui kio kutils kparts ktexteditor dnssd phonon plasma kterminal")
 
 IF(Soprano_FOUND)
     include_directories(${SOPRANO_INCLUDE_DIR})

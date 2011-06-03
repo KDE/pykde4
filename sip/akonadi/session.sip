@@ -35,6 +35,8 @@ public:
     ~Session ();
 protected:
 //ig    explicit                Session (SessionPrivate* d, const QByteArray& sessionId = QByteArray(), QObject* parent /TransferThis/ = 0);
+signals:
+    void                    reconnected ();
 };
 // Session
 

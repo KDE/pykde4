@@ -45,6 +45,7 @@ signals:
     void                    filterChanged ();
 public:
     ~KFileFilterCombo ();
+    bool                    isMimeFilter () const;
 };
 // KFileFilterCombo
 

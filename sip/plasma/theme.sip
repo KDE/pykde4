@@ -92,6 +92,7 @@ public:
     QString                 animationPath (const QString& name) const;
     QString                 styleSheet (const QString& css = QString()) const;
     QStringList             listCachedRectKeys (const QString& image) const;
+    KUrl                    homepage () const;
 };
 // Theme
 

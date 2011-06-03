@@ -20,14 +20,11 @@
 
 namespace Phonon
 {
-%TypeHeaderCode
-#include <phonon/abstractvideooutput.h>
-%End
-
 class VideoWidget : QWidget, Phonon::AbstractVideoOutput
 {
 %TypeHeaderCode
 #include <phonon/videowidget.h>
+#include <phonon/abstractvideooutput.h>
 %End
 
 

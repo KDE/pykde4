@@ -177,6 +177,7 @@ public:
     };
     typedef QFlags<KGlobalSettings::ActivateOption> ActivateOptions;
     void                    activate (KGlobalSettings::ActivateOptions options);
+    static QPalette         createNewApplicationPalette (const KSharedConfigPtr& config = KSharedConfigPtr());
 };
 // KGlobalSettings
 

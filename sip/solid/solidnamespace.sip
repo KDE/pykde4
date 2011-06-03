@@ -29,7 +29,12 @@ namespace Solid
 enum ErrorType
 {
     NoError,
-    UnauthorizedOperation
+    UnauthorizedOperation,
+    DeviceBusy,
+    OperationFailed,
+    UserCanceled,
+    InvalidOption,
+    MissingDriver
 };
 
 };

@@ -147,7 +147,8 @@ enum Error
     ERR_POST_DENIED,
     ERR_COULD_NOT_SEEK,
     ERR_CANNOT_SETTIME,
-    ERR_CANNOT_CHOWN
+    ERR_CANNOT_CHOWN,
+    ERR_POST_NO_SIZE
 };
 
 QString                 buildErrorString (int errorCode, const QString& errorText);

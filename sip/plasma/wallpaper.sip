@@ -98,6 +98,11 @@ public:
     bool                    needsPreviewDuringConfiguration () const;
 protected:
     void                    setPreviewDuringConfiguration (const bool preview);
+public:
+    void                    setUrls (const KUrl::List& urls);
+    bool                    supportsMimetype (const QString& mimetype) const;
+protected:
+    void                    addUrls (const KUrl::List& urls);
 };
 // Wallpaper
 

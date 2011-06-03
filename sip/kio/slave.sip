@@ -68,6 +68,7 @@ public:
     ~Slave ();
     void                    setJob (KIO::SimpleJob* job);
     KIO::SimpleJob*         job () const;
+    static bool             checkForHeldSlave (const KUrl& url);
 };
 // Slave
 

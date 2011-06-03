@@ -62,6 +62,8 @@ public:
     bool                    highlightWindows () const;
     void                    setGraphicsWidget (QGraphicsWidget* widget);
     QGraphicsWidget*        graphicsWidget () const;
+    void                    setInstantPopup (bool enabled);
+    bool                    isInstantPopup () const;
 };
 // ToolTipContent
 

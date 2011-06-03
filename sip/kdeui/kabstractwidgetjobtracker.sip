@@ -61,8 +61,11 @@
 #include <kconfigdialog.h>
 #include <kconfigdialogmanager.h>
 #include <kconfigskeleton.h>
+#include <kdatecombobox.h>
+#include <kdateedit.h>
 #include <kdatepicker.h>
 #include <kdatetable.h>
+#include <kdatetimeedit.h>
 #include <kdatetimewidget.h>
 #include <kdatewidget.h>
 #include <kdescendantsproxymodel.h>
@@ -105,6 +108,7 @@
 #include <kmenu.h>
 #include <kmenubar.h>
 #include <kmessageboxmessagehandler.h>
+#include <kmessagewidget.h>
 #include <kmodelindexproxymapper.h>
 #include <kmodifierkeyinfo.h>
 #include <kmultitabbar.h>
@@ -159,6 +163,8 @@
 #include <ktabwidget.h>
 #include <ktextbrowser.h>
 #include <ktextedit.h>
+#include <ktimecombobox.h>
+#include <ktimeedit.h>
 #include <ktimezonewidget.h>
 #include <ktip.h>
 #include <ktitlewidget.h>
@@ -401,6 +407,14 @@ signals:
         sipType = sipType_KCharSelect;
     else if (dynamic_cast<KDateTable*>(sipCpp))
         sipType = sipType_KDateTable;
+    else if (dynamic_cast<KDateTimeEdit*>(sipCpp))
+        {
+        sipType = sipType_KDateTimeEdit;
+        if (dynamic_cast<KDateEdit*>(sipCpp))
+            sipType = sipType_KDateEdit;
+        else if (dynamic_cast<KTimeEdit*>(sipCpp))
+            sipType = sipType_KTimeEdit;
+        }
     else if (dynamic_cast<KDateTimeWidget*>(sipCpp))
         sipType = sipType_KDateTimeWidget;
     else if (dynamic_cast<KDateWidget*>(sipCpp))
@@ -488,10 +502,14 @@ signals:
     else if (dynamic_cast<KComboBox*>(sipCpp))
         {
         sipType = sipType_KComboBox;
-        if (dynamic_cast<KFontComboBox*>(sipCpp))
+        if (dynamic_cast<KDateComboBox*>(sipCpp))
+            sipType = sipType_KDateComboBox;
+        else if (dynamic_cast<KFontComboBox*>(sipCpp))
             sipType = sipType_KFontComboBox;
         else if (dynamic_cast<KHistoryComboBox*>(sipCpp))
             sipType = sipType_KHistoryComboBox;
+        else if (dynamic_cast<KTimeComboBox*>(sipCpp))
+            sipType = sipType_KTimeComboBox;
         else if (dynamic_cast<Sonnet::DictionaryComboBox*>(sipCpp))
             sipType = sipType_Sonnet_DictionaryComboBox;
         }
@@ -551,6 +569,8 @@ signals:
         if (dynamic_cast<KVBox*>(sipCpp))
             sipType = sipType_KVBox;
         }
+    else if (dynamic_cast<KMessageWidget*>(sipCpp))
+        sipType = sipType_KMessageWidget;
     else if (dynamic_cast<KPassivePopup*>(sipCpp))
         sipType = sipType_KPassivePopup;
     else if (dynamic_cast<KPlotWidget*>(sipCpp))

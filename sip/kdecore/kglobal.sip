@@ -64,3 +64,12 @@ void                    insertCatalog (const QString& catalog);
 // KGlobal
 
 
+class KCatalogLoader
+{
+%TypeHeaderCode
+#include <kglobal.h>
+%End
+
+public:
+                            KCatalogLoader (const QString& catalogName);
+};

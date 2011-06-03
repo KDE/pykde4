@@ -28,13 +28,15 @@ class ItemMoveJob : Akonadi::Job
 %End
 
 public:
-                            ItemMoveJob (const Akonadi::Item& item, const Akonadi::Collection& target, QObject* parent /TransferThis/ = 0);
+                            ItemMoveJob (const Akonadi::Item& item, const Akonadi::Collection& destination, QObject* parent /TransferThis/ = 0);
 
 protected:
     void                    doStart ();
 public:
-                            ItemMoveJob (const QList<Akonadi::Item>& items, const Akonadi::Collection& target, QObject* parent /TransferThis/ = 0);
+                            ItemMoveJob (const QList<Akonadi::Item>& items, const Akonadi::Collection& destination, QObject* parent /TransferThis/ = 0);
     ~ItemMoveJob ();
+    Akonadi::Collection     destinationCollection () const;
+    QList<Akonadi::Item>    items () const;
 };
 // ItemMoveJob
 

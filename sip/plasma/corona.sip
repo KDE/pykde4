@@ -94,6 +94,10 @@ public:
     void                    exportLayout (KConfigGroup& config, QList<Plasma::Containment*> containments);
 protected:
     void                    setPreferredToolBoxPlugin (const Plasma::Containment::Type type, const QString& plugin);
+public:
+    QString                 defaultContainmentPlugin () const;
+protected:
+    void                    setDefaultContainmentPlugin (const QString& name);
 };
 // Corona
 

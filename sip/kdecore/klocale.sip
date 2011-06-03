@@ -296,7 +296,10 @@ public:
     enum WeekNumberSystem
     {
         DefaultWeekNumber,
-        IsoWeekNumber
+        IsoWeekNumber,
+        FirstFullWeek,
+        FirstPartialWeek,
+        SimpleWeek
     };
     enum DateTimeParseMode
     {
@@ -353,6 +356,7 @@ public:
     QString                 countryDivisionCode () const;
     QStringList             installedLanguages () const;
     bool                    setCountryDivisionCode (const QString& countryDivision);
+//ig    KLocale::WeekNumberSystem  weekNumberSystem () const;
 };
 // KLocale
 

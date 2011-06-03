@@ -62,6 +62,9 @@ private:
 //end
 public:
     static void             setJobPriority (KIO::SimpleJob* job, int priority);
+    static bool             isSlaveOnHoldFor (const KUrl& url);
+signals:
+    void                    slaveOnHoldListChanged ();
 };
 // Scheduler
 

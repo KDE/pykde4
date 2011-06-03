@@ -35,6 +35,7 @@
 #include <internetgateway.h>
 #include <networking.h>
 #include <networkinterface.h>
+#include <networkshare.h>
 #include <opticaldisc.h>
 #include <opticaldrive.h>
 #include <portablemediaplayer.h>
@@ -83,6 +84,7 @@ public:
         SerialInterface,
         SmartCardReader,
         InternetGateway,
+        NetworkShare,
         Last
     };
 
@@ -130,6 +132,8 @@ private:
             sipType = sipType_Solid_InternetGateway;
         else if (dynamic_cast<Solid::NetworkInterface*>(sipCpp))
             sipType = sipType_Solid_NetworkInterface;
+        else if (dynamic_cast<Solid::NetworkShare*>(sipCpp))
+            sipType = sipType_Solid_NetworkShare;
         else if (dynamic_cast<Solid::PortableMediaPlayer*>(sipCpp))
             sipType = sipType_Solid_PortableMediaPlayer;
         else if (dynamic_cast<Solid::Processor*>(sipCpp))

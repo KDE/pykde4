@@ -78,7 +78,8 @@ public:
         RFCDate,
         RFCDateDay,
         QtTextDate,
-        LocalDate
+        LocalDate,
+        RFC3339Date
     };
 
 

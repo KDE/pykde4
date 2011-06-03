@@ -48,7 +48,15 @@ public:
             sipType = sipType_Phonon_AudioDataOutput;
         }
     else if (dynamic_cast<Phonon::AbstractVideoOutput*>(sipCpp))
+        {
         sipType = sipType_Phonon_AbstractVideoOutput;
+        if (dynamic_cast<Phonon::VideoWidget*>(sipCpp))
+            sipType = sipType_Phonon_VideoWidget;
+        else if (dynamic_cast<Phonon::VideoWidget*>(sipCpp))
+            sipType = sipType_Phonon_VideoWidget;
+        }
+    else if (dynamic_cast<Phonon::AudioOutput*>(sipCpp))
+        sipType = sipType_Phonon_AudioOutput;
     else if (dynamic_cast<Phonon::Effect*>(sipCpp))
         {
         sipType = sipType_Phonon_Effect;
@@ -70,8 +78,10 @@ public:
 #include <phonon/abstractaudiooutput.h>
 #include <phonon/abstractvideooutput.h>
 #include <phonon/audiodataoutput.h>
+#include <phonon/audiooutput.h>
 #include <phonon/effect.h>
 #include <phonon/medianode.h>
 #include <phonon/mediaobject.h>
+#include <videowidget.h>
 #include <phonon/volumefadereffect.h>
 %End

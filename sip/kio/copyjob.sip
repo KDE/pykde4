@@ -96,6 +96,7 @@ private:
 //end
 public:
     ~CopyJob ();
+    void                    setAutoRename (bool autoRename);
 };
 // CopyJob
 

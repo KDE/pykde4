@@ -38,12 +38,6 @@ public:
     };
     bool                    hideAdvancedDevices () const;
     void                    setHideAdvancedDevices (bool hide = 1);
-    void                    setAudioOutputDeviceListFor (Phonon::Category category, QList<int> order);
-    QList<int>              audioOutputDeviceListFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
-    int                     audioOutputDeviceFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
-    void                    setAudioCaptureDeviceListFor (Phonon::Category category, QList<int> order);
-    QList<int>              audioCaptureDeviceListFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
-    int                     audioCaptureDeviceFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
 private:
 //force
     Phonon::GlobalConfig&   operator = (const Phonon::GlobalConfig&);
@@ -51,9 +45,22 @@ private:
 public:
     QHash<QByteArray,QVariant>  deviceProperties (Phonon::ObjectDescriptionType deviceType, int index) const;
     QHash<QByteArray,QVariant>  audioOutputDeviceProperties (int index) const;
-    QList<int>              videoCaptureDeviceListFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
-    int                     videoCaptureDeviceFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
     QHash<QByteArray,QVariant>  videoCaptureDeviceProperties (int index) const;
     QHash<QByteArray,QVariant>  audioCaptureDeviceProperties (int index) const;
+    void                    setAudioOutputDeviceListFor (Phonon::Category category, QList<int> order);
+    QList<int>              audioOutputDeviceListFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
+    int                     audioOutputDeviceFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
+    void                    setVideoCaptureDeviceListFor (Phonon::CaptureCategory category, QList<int> order);
+    QList<int>              videoCaptureDeviceListFor (Phonon::CaptureCategory category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
+    int                     videoCaptureDeviceFor (Phonon::CaptureCategory category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
+    void                    setVideoCaptureDeviceListFor (Phonon::Category category, QList<int> order);
+    QList<int>              videoCaptureDeviceListFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
+    int                     videoCaptureDeviceFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
+    void                    setAudioCaptureDeviceListFor (Phonon::CaptureCategory category, QList<int> order);
+    QList<int>              audioCaptureDeviceListFor (Phonon::CaptureCategory category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
+    int                     audioCaptureDeviceFor (Phonon::CaptureCategory category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
+    void                    setAudioCaptureDeviceListFor (Phonon::Category category, QList<int> order);
+    QList<int>              audioCaptureDeviceListFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
+    int                     audioCaptureDeviceFor (Phonon::Category category, int override = Phonon::GlobalConfig::AdvancedDevicesFromSettings) const;
 };
 };

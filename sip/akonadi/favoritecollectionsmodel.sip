@@ -38,5 +38,9 @@ public:
     QString                 favoriteLabel (const Akonadi::Collection& col);
 //ig    QList<Akonadi::Collection::Id>  collectionIds () const;
     QList<Akonadi::Entity::Id>  collectionIds () const;
+    virtual bool            setData (const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
+    virtual bool            dropMimeData (const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent);
+    virtual QStringList     mimeTypes () const;
+    virtual Qt::ItemFlags   flags (const QModelIndex& index) const;
 };
 };

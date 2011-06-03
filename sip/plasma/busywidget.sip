@@ -47,6 +47,8 @@ protected:
     void                    timerEvent (QTimerEvent* event);
 public:
     ~BusyWidget ();
+protected:
+    void                    mouseReleaseEvent (QGraphicsSceneMouseEvent* event);
 };
 // BusyWidget
 

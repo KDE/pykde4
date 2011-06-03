@@ -33,7 +33,8 @@ public:
     {
         Base,
         FirstLevel,
-        Recursive
+        Recursive,
+        NonOverlappingRoots
     };
 
     explicit                CollectionFetchJob (const Akonadi::Collection& collection, Akonadi::CollectionFetchJob::Type type = Akonadi::CollectionFetchJob::FirstLevel, QObject* parent /TransferThis/ = 0);
@@ -54,6 +55,7 @@ public:
     virtual ~CollectionFetchJob ();
     void                    setFetchScope (const Akonadi::CollectionFetchScope& fetchScope);
     Akonadi::CollectionFetchScope&  fetchScope ();
+                            CollectionFetchJob (const Akonadi::Collection::List& collections, Akonadi::CollectionFetchJob::Type type, QObject* parent /TransferThis/ = 0);
 };
 // CollectionFetchJob
 

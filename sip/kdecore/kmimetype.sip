@@ -75,6 +75,7 @@ public:
     ~KMimeType ();
     static KMimeType::Ptr   findByContent (QIODevice* device, int* accuracy = 0);
     static KMimeType::Ptr   findByNameAndContent (const QString& name, QIODevice* device, mode_t mode = 0, int* accuracy = 0);
+    static bool             matchFileName (const QString& filename, const QString& pattern);
 };
 // KMimeType
 

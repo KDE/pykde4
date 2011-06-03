@@ -250,6 +250,7 @@ public:
     ~KTcpSocket ();
     QVariant                socketOption (QAbstractSocket::SocketOption options) const;
     void                    setSocketOption (QAbstractSocket::SocketOption options, const QVariant& value);
+    void                    setVerificationPeerName (const QString& hostName);
 };
 // KTcpSocket
 
@@ -264,6 +265,7 @@ public:
                             KSslErrorUiData ();
                             KSslErrorUiData (const KTcpSocket* socket);
                             KSslErrorUiData (const KSslErrorUiData& other);
+    ~KSslErrorUiData ();
 };
 // KSslErrorUiData
 

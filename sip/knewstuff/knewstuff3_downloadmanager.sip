@@ -44,5 +44,7 @@ public:
 signals:
     void                    searchResult (const KNS3::Entry::List& entries);
     void                    entryStatusChanged (const KNS3::Entry& entry);
+public:
+    void                    uninstallEntry (const KNS3::Entry& entry);
 };
 };

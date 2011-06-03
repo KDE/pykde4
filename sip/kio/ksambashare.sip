@@ -42,6 +42,10 @@ private:
 //end
 public:
     ~KSambaShare ();
+    bool                    isShareNameAvailable (const QString& name) const;
+    QStringList             shareNames () const;
+    KSambaShareData         getShareByName (const QString& name) const;
+    QList<KSambaShareData>  getSharesByPath (const QString& path) const;
 };
 // KSambaShare
 

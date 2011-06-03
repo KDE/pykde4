@@ -43,7 +43,9 @@ public:
     // CTSCC for subclasses of 'ThumbCreator'
     sipType = NULL;
 
-    if (dynamic_cast<ThumbSequenceCreator*>(sipCpp))
+    if (dynamic_cast<ThumbCreatorV2*>(sipCpp))
+        sipType = sipType_ThumbCreatorV2;
+    else if (dynamic_cast<ThumbSequenceCreator*>(sipCpp))
         sipType = sipType_ThumbSequenceCreator;
 %End
 };
@@ -62,3 +64,14 @@ public:
 %End
 
 
+class ThumbCreatorV2 : ThumbCreator
+{
+%TypeHeaderCode
+#include <thumbcreator.h>
+%End
+
+public:
+    virtual ~ThumbCreatorV2 ();
+    virtual QWidget*        createConfigurationWidget ();
+    virtual void            writeConfiguration (const QWidget* configurationWidget);
+};

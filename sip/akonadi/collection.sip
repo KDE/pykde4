@@ -72,6 +72,13 @@ public:
     explicit                Collection (Akonadi::Entity::Id id);
     ~Collection ();
     void                    setParent (Akonadi::Entity::Id parent);
+    enum UrlType
+    {
+        UrlShort,
+        UrlWithName
+    };
+    KUrl                    url (Akonadi::Collection::UrlType type) const;
+    bool                    isVirtual () const;
 };
 // Collection
 

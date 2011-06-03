@@ -33,6 +33,7 @@ public:
     {
         Angles,
         Chapters,
+        Navigations,
         Titles
     };
 
@@ -71,6 +72,22 @@ signals:
     void                    titleChanged (int titleNumber);
 public:
     ~MediaController ();
+/* FIXME
+    enum NavigationMenu
+    {
+        RootMenu,
+        TitleMenu,
+        AudioMenu,
+        SubtitleMenu,
+        ChapterMenu,
+        AngleMenu
+    };
+    static QString          navigationMenuToString (Phonon::MediaController::NavigationMenu menu);
+    QList<Phonon::MediaController::NavigationMenu>  availableMenus () const;
+    void                    setCurrentMenu (Phonon::MediaController::NavigationMenu menu);
+signals:
+    void                    availableMenusChanged (QList<Phonon::MediaController::NavigationMenu> menus);
+*/
 };
 // MediaController
 

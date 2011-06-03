@@ -33,6 +33,12 @@ public:
     ~CollectionPropertiesDialog ();
     static void             useDefaultPage (bool use);
                             CollectionPropertiesDialog (const Akonadi::Collection& collection, const QStringList& pages, QWidget* parent /TransferThis/ = 0);
+    enum DefaultPage
+    {
+        GeneralPage,
+        CachePage
+    };
+    static QString          defaultPageObjectName (Akonadi::CollectionPropertiesDialog::DefaultPage page);
 };
 // CollectionPropertiesDialog
 

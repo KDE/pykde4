@@ -23,6 +23,7 @@ class PulseSupport : QObject
 {
 %TypeHeaderCode
 #include <phonon/pulsesupport.h>
+#include <phonon/phononnamespace.h>
 %End
 
 public:
@@ -32,11 +33,6 @@ public:
     void                    enable (bool enabled = 1);
     QList<int>              objectDescriptionIndexes (Phonon::ObjectDescriptionType type) const;
     QHash<QByteArray,QVariant>  objectDescriptionProperties (Phonon::ObjectDescriptionType type, int index) const;
-    QList<int>              objectIndexesByCategory (Phonon::ObjectDescriptionType type, Phonon::Category category) const;
-    void                    setOutputDevicePriorityForCategory (Phonon::Category category, QList<int> order);
-    void                    setCaptureDevicePriorityForCategory (Phonon::Category category, QList<int> order);
-//ig    PulseStream*            registerOutputStream (QString streamUuid, Phonon::Category category);
-//ig    PulseStream*            registerCaptureStream (QString streamUuid, Phonon::Category category);
     void                    emitObjectDescriptionChanged (Phonon::ObjectDescriptionType);
     bool                    setOutputName (QString streamUuid, QString name);
     bool                    setOutputDevice (QString streamUuid, int device);
@@ -51,5 +47,16 @@ signals:
 private:
                             PulseSupport ();
     ~PulseSupport ();
+public:
+    QList<int>              objectIndexesByCategory (Phonon::ObjectDescriptionType type, Phonon::Category category) const;
+    QList<int>              objectIndexesByCategory (Phonon::ObjectDescriptionType type, Phonon::CaptureCategory category) const;
+    void                    setOutputDevicePriorityForCategory (Phonon::Category category, QList<int> order);
+    void                    setCaptureDevicePriorityForCategory (Phonon::CaptureCategory category, QList<int> order);
+    void                    setCaptureDevicePriorityForCategory (Phonon::Category category, QList<int> order);
+
+// PulseStream is private.
+//ig    PulseStream*            registerOutputStream (QString streamUuid, Phonon::Category category);
+//ig    PulseStream*            registerCaptureStream (QString streamUuid, Phonon::CaptureCategory category);
+//ig    PulseStream*            registerCaptureStream (QString streamUuid, Phonon::Category category);
 };
 };

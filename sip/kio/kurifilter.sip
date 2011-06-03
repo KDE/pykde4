@@ -118,6 +118,7 @@ protected:
 //ig    void                    setPreferredSearchProviders (KUriFilterData& data, const KUriFilterPlugin::ProviderInfoList& providers) const;
     QString                 iconNameFor (const KUrl& url, KUriFilterData::UriTypes type) const;
     void                    setSearchProviders (KUriFilterData& data, const QList<KUriFilterSearchProvider*>& providers) const;
+    QHostInfo               resolveName (const QString& hostname, unsigned long timeout) const;
 };
 // KUriFilterPlugin
 

@@ -66,6 +66,11 @@ signals:
     void                    popupEvent (bool popped) const;
 protected:
     Plasma::Animation*      loadAnimationFromPackage (const QString& name, QObject* parent /Transfer/);
+public:
+    bool                    drawWallpaper () const;
+    void                    setDrawWallpaper (bool drawWallpaper);
+    Plasma::Containment::Type  containmentType () const;
+    void                    setContainmentType (Plasma::Containment::Type type);
 };
 // AppletScript
 

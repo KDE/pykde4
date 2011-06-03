@@ -51,6 +51,7 @@ namespace Phonon
         PausedState,
         ErrorState
     };
+
     enum Category
     {
         NoCategory,
@@ -61,6 +62,23 @@ namespace Phonon
         GameCategory,
         AccessibilityCategory,
         LastCategory
+    };
+
+    enum CaptureCategory
+    {
+        NoCaptureCategory = NoCategory,
+        CommunicationCaptureCategory = CommunicationCategory,
+        RecordingCaptureCategory,
+        ControlCaptureCategory = AccessibilityCategory
+    };
+
+    namespace Capture
+    {
+        enum DeviceType
+        {
+            AudioType,
+            VideoType
+        };
     };
 
     enum ErrorType {

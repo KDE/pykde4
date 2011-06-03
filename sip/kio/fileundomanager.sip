@@ -66,7 +66,8 @@ public:
         Rename,
         Link,
         Mkdir,
-        Trash
+        Trash,
+        Put
     };
 
     void                    recordJob (KIO::FileUndoManager::CommandType op, const KUrl::List& src, const KUrl& dst, KIO::Job* job);

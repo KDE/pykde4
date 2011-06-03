@@ -57,5 +57,7 @@ protected:
     virtual void            renderCompleted (const QImage& image);
     virtual void            urlDropped (const KUrl& url);
     KPluginInfo             description () const;
+public:
+    void                    setUrls (const KUrl::List urls);
 };
 };

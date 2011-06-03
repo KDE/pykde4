@@ -58,6 +58,7 @@ public:
         MoveCollectionToDialog,
         CopyItemToDialog,
         MoveItemToDialog,
+        SynchronizeCollectionsRecursive,
         LastType
     };
 

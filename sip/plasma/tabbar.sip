@@ -63,6 +63,8 @@ public:
     QGraphicsWidget*        firstPositionWidget () const;
     void                    setLastPositionWidget (QGraphicsWidget* widget);
     QGraphicsWidget*        lastPositionWidget () const;
+    void                    setTabHighlighted (int index, bool highlight);
+    bool                    isTabHighlighted (int index) const;
 };
 // TabBar
 

@@ -109,6 +109,8 @@ public:
     static void             allowExternalProcessWindowActivation (int pid = -1);
 protected:
 //ig    virtual void            connectNotify (const char* signal);
+public:
+    static void             setBlockingCompositing (WId window, bool active);
 };
 // KWindowSystem
 

@@ -52,6 +52,10 @@ public:
     WId                     cookieJarWindowid () const;
     KIO::MetaData&          requestMetaData ();
     KIO::MetaData&          sessionMetaData ();
+    void                    setWindow (QWidget* widget);
+    QWidget*                window () const;
+    static void             putReplyOnHold (QNetworkReply* reply);
+    void                    setEmitReadyReadOnMetaDataChange (bool);
 };
 // AccessManager
 

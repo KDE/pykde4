@@ -60,11 +60,25 @@ private:
 //end
 public:
     ~PreviewJob ();
+    enum ScaleType
+    {
+        Unscaled,
+        Scaled,
+        ScaledAndCached
+    };
+                            PreviewJob (const KFileItemList& items, const QSize& size, const QStringList* enabledPlugins = 0);
+    void                    setOverlayIconSize (int size);
+    int                     overlayIconSize () const;
+    void                    setOverlayIconAlpha (int alpha);
+    int                     overlayIconAlpha () const;
+    void                    setScaleType (KIO::PreviewJob::ScaleType type);
+    KIO::PreviewJob::ScaleType  scaleType () const;
 };
 // PreviewJob
 
 KIO::PreviewJob*        filePreview (const KFileItemList& items, int width, int height = 0, int iconSize = 0, int iconAlpha = 70, bool scale = 1, bool save = 1, const QStringList* enabledPlugins = 0);
 KIO::PreviewJob*        filePreview (const KUrl::List& items, int width, int height = 0, int iconSize = 0, int iconAlpha = 70, bool scale = 1, bool save = 1, const QStringList* enabledPlugins = 0);
+KIO::PreviewJob*        filePreview (const KFileItemList& items, const QSize& size, const QStringList* enabledPlugins = 0);
 };
 // KIO
 

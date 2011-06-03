@@ -69,6 +69,8 @@ QUrl                    version ();
 QUrl                    deprecated ();
 QUrl                    isDataGraphFor ();
 QUrl                    userVisible ();
+QUrl                    Agent ();
+QUrl                    maintainedBy ();
 };
 // NAO
 

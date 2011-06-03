@@ -35,6 +35,7 @@
 #include <forwardingslavebase.h>
 #include <jobclasses.h>
 #include <jobuidelegate.h>
+#include <kabstractfileitemactionplugin.h>
 #include <kabstractfilemodule.h>
 #include <kautomount.h>
 #include <kbookmarkdialog.h>
@@ -127,7 +128,9 @@ public:
     // CTSCC for subclasses of 'QObject'
     sipType = NULL;
 
-    if (dynamic_cast<KAbstractFileModule*>(sipCpp))
+    if (dynamic_cast<KAbstractFileItemActionPlugin*>(sipCpp))
+        sipType = sipType_KAbstractFileItemActionPlugin;
+    else if (dynamic_cast<KAbstractFileModule*>(sipCpp))
         sipType = sipType_KAbstractFileModule;
     else if (dynamic_cast<KAutoMount*>(sipCpp))
         sipType = sipType_KAutoMount;

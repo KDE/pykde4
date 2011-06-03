@@ -43,7 +43,6 @@ public:
                             MediaSource ();
                             MediaSource (const QString& fileName);
                             MediaSource (const QUrl& url);
-                            MediaSource (Phonon::DiscType discType, const QString& deviceName = QString());
                             MediaSource (Phonon::AbstractMediaStream* stream);
                             MediaSource (QIODevice* ioDevice);
                             MediaSource (const Phonon::MediaSource& rhs);
@@ -61,13 +60,17 @@ protected:
 //ig                            MediaSource (MediaSourcePrivate&);
 public:
     ~MediaSource ();
-                            MediaSource (const Phonon::AudioCaptureDevice& acDevice);
-                            MediaSource (const Phonon::VideoCaptureDevice& vcDevice);
+                            MediaSource (const Phonon::AudioCaptureDevice& device);
+                            MediaSource (const Phonon::VideoCaptureDevice& device);
     const Phonon::DeviceAccessList&  deviceAccessList () const;
     Phonon::AudioCaptureDevice  audioCaptureDevice () const;
     Phonon::VideoCaptureDevice  videoCaptureDevice () const;
 protected:
                             MediaSource (const Phonon::DeviceAccess& access);
+public:
+                            MediaSource (Phonon::DiscType discType, const QString& deviceName = QString());
+                            MediaSource (Phonon::Capture::DeviceType deviceType, Phonon::CaptureCategory category = Phonon::NoCaptureCategory);
+    Phonon::Mrl             mrl () const;
 };
 // MediaSource
 

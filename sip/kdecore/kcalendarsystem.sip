@@ -41,14 +41,16 @@ public:
         ShortName,
         LongName,
         ShortNamePossessive,
-        LongNamePossessive
+        LongNamePossessive,
+        NarrowName
     };
 
 
     enum WeekDayNameFormat
     {
         ShortDayName,
-        LongDayName
+        LongDayName,
+        NarrowDayName
     };
 
     static KCalendarSystem*  create (const QString& calType = QLatin1String("gregorian"), const KLocale* locale = 0);
@@ -169,6 +171,13 @@ public:
     int                     applyShortYearWindow (int inputYear) const;
     static KLocale::CalendarSystem  calendarSystemForCalendarType (const QString& calendarType);
     QString                 formatDate (const QDate& date, KLocale::DateTimeComponent component, KLocale::DateTimeComponentFormat format = KLocale::DefaultComponentFormat, KLocale::WeekNumberSystem weekNumberSystem = KLocale::DefaultWeekNumber) const;
+
+// Missing implementation
+//ig    int                     weeksInYear (const QDate& date, KLocale::WeekNumberSystem weekNumberSystem) const;
+
+    int                     weeksInYear (int year, KLocale::WeekNumberSystem weekNumberSystem) const;
+    int                     week (const QDate& date, int* yearNum = 0) const;
+    int                     week (const QDate& date, KLocale::WeekNumberSystem weekNumberSystem, int* yearNum = 0) const;
 };
 // KCalendarSystem
 

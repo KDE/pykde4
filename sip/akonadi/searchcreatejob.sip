@@ -37,6 +37,8 @@ public:
     Akonadi::Collection     createdCollection () const;
 protected:
     void                    doHandleResponse (const QByteArray& tag, const QByteArray& data);
+public:
+    void                    setQueryLanguage (const QString& queryLanguage);
 };
 // SearchCreateJob
 

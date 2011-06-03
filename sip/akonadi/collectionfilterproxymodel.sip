@@ -39,6 +39,7 @@ protected:
 public:
     virtual ~CollectionFilterProxyModel ();
     virtual Qt::ItemFlags   flags (const QModelIndex& index) const;
+    void                    setExcludeVirtualCollections (bool exclude);
 };
 // CollectionFilterProxyModel
 

@@ -275,6 +275,8 @@ public:
     void                    setFrameOverlap (NETStrut strut);
     NETStrut                frameOverlap () const;
     const char*             activities () const;
+    void                    setBlockingCompositing (bool active);
+    bool                    isBlockingCompositing () const;
 };
 // NETWinInfo
 

@@ -22,7 +22,173 @@
 
 %ModuleHeaderCode
 //ctscc
+#include <sonnet/configdialog.h>
+#include <sonnet/configwidget.h>
+#include <sonnet/dialog.h>
+#include <sonnet/dictionarycombobox.h>
+#include <sonnet/highlighter.h>
+#include <kaboutapplicationdialog.h>
+#include <kabstractwidgetjobtracker.h>
+#include <kaction.h>
+#include <kactioncategory.h>
+#include <kactioncollection.h>
+#include <kactionmenu.h>
+#include <kactionselector.h>
+#include <kanimatedbutton.h>
+#include <kapplication.h>
+#include <karrowbutton.h>
+#include <kassistantdialog.h>
+#include <kbreadcrumbselectionmodel.h>
+#include <kbugreport.h>
+#include <kbuttongroup.h>
+#include <kcapacitybar.h>
+#include <kcategorizedsortfilterproxymodel.h>
+#include <kcategorizedview.h>
+#include <kcategorydrawer.h>
+#include <kcharselect.h>
+#include <kcheckableproxymodel.h>
+#include <kcmodule.h>
+#include <kcodecaction.h>
+#include <kcolorbutton.h>
+#include <kcolorcombo.h>
+#include <kcolordialog.h>
+#include <kcolorvalueselector.h>
+#include <kcombobox.h>
+#include <kcompletion.h>
+#include <kcompletionbox.h>
+#include <kconfigdialog.h>
+#include <kconfigdialogmanager.h>
+#include <kconfigskeleton.h>
+#include <kdatecombobox.h>
+#include <kdateedit.h>
+#include <kdatepicker.h>
+#include <kdatetable.h>
+#include <kdatetimeedit.h>
+#include <kdatetimewidget.h>
+#include <kdatewidget.h>
+#include <kdescendantsproxymodel.h>
+#include <kdialog.h>
+#include <kdialogbuttonbox.h>
+#include <kdialogjobuidelegate.h>
+#include <kdualaction.h>
+#include <keditlistbox.h>
+#include <keditlistwidget.h>
+#include <kedittoolbar.h>
+#include <kextendableitemdelegate.h>
+#include <kfadewidgeteffect.h>
+#include <kfilterproxysearchline.h>
+#include <kfind.h>
+#include <kfinddialog.h>
+#include <kfontaction.h>
+#include <kfontchooser.h>
+#include <kfontcombobox.h>
+#include <kfontdialog.h>
+#include <kfontrequester.h>
+#include <kfontsizeaction.h>
+#include <kglobalaccel.h>
+#include <kglobalsettings.h>
+#include <kglobalshortcutinfo.h>
+#include <khbox.h>
+#include <khelpmenu.h>
+#include <khistorycombobox.h>
+#include <khuesaturationselect.h>
+#include <kiconloader.h>
+#include <kidentityproxymodel.h>
+#include <kkeysequencewidget.h>
+#include <klanguagebutton.h>
+#include <kled.h>
+#include <klineedit.h>
+#include <klinkitemselectionmodel.h>
+#include <klistwidget.h>
+#include <klistwidgetsearchline.h>
+#include <kmainwindow.h>
+#include <kmanagerselection.h>
+#include <kmenu.h>
+#include <kmenubar.h>
+#include <kmessageboxmessagehandler.h>
+#include <kmessagewidget.h>
+#include <kmodelindexproxymapper.h>
+#include <kmodifierkeyinfo.h>
+#include <kmultitabbar.h>
+#include <knewpassworddialog.h>
+#include <knotification.h>
+#include <knotificationrestrictions.h>
+#include <knuminput.h>
+#include <knumvalidator.h>
+#include <kpagedialog.h>
+#include <kpagemodel.h>
+#include <kpageview.h>
+#include <kpagewidget.h>
+#include <kpagewidgetmodel.h>
+#include <kpassivepopup.h>
+#include <kpassivepopupmessagehandler.h>
+#include <kpassworddialog.h>
+#include <kpastetextaction.h>
+#include <kpixmapregionselectordialog.h>
+#include <kpixmapregionselectorwidget.h>
+#include <kpixmapsequenceoverlaypainter.h>
+#include <kpixmapsequencewidget.h>
+#include <kplotwidget.h>
+#include <kprogressdialog.h>
+#include <kpushbutton.h>
 #include <nepomuk/kratingwidget.h>
+#include <krecentfilesaction.h>
+#include <krecursivefilterproxymodel.h>
+#include <kreplace.h>
+#include <kreplacedialog.h>
+#include <krestrictedline.h>
+#include <krichtextedit.h>
+#include <krichtextwidget.h>
+#include <kruler.h>
+#include <kselectaction.h>
+#include <kselectionproxymodel.h>
+#include <kselector.h>
+#include <kseparator.h>
+#include <kshortcutsdialog.h>
+#include <kshortcutseditor.h>
+#include <kshortcutwidget.h>
+#include <ksplashscreen.h>
+#include <ksqueezedtextlabel.h>
+#include <kstartupinfo.h>
+#include <kstatusbar.h>
+#include <kstatusbarjobtracker.h>
+#include <kstatusnotifieritem.h>
+#include <kstringvalidator.h>
+#include <kstyle.h>
+#include <ksvgrenderer.h>
+#include <ksystemtrayicon.h>
+#include <ktabbar.h>
+#include <ktabwidget.h>
+#include <ktextbrowser.h>
+#include <ktextedit.h>
+#include <ktimecombobox.h>
+#include <ktimeedit.h>
+#include <ktimezonewidget.h>
+#include <ktip.h>
+#include <ktitlewidget.h>
+#include <ktoggleaction.h>
+#include <ktogglefullscreenaction.h>
+#include <ktoggletoolbaraction.h>
+#include <ktoolbar.h>
+#include <ktoolbarlabelaction.h>
+#include <ktoolbarpopupaction.h>
+#include <ktoolbarspaceraction.h>
+#include <ktreewidgetsearchline.h>
+#include <kuiserverjobtracker.h>
+#include <kundostack.h>
+#include <kuniqueapplication.h>
+#include <kurllabel.h>
+#include <kvbox.h>
+#include <kviewstatemaintainer.h>
+#include <kviewstatesaver.h>
+#include <kwallet.h>
+#include <kwidgetitemdelegate.h>
+#include <kwidgetjobtracker.h>
+#include <kxmessages.h>
+#include <kxmlguifactory.h>
+#include <kxmlguiwindow.h>
+#include <kxyselector.h>
+#include <qobject.h>
 %End
 
 class KRatingWidget : QFrame
@@ -72,11 +238,425 @@ protected:
 //  Subclasses of QObject
 
 %ConvertToSubClassCode
-    // CTSCC for subclasses of 'KRatingWidget'
+    // CTSCC for subclasses of 'QObject'
     sipType = NULL;
 
-    if (dynamic_cast<KRatingWidget*>(sipCpp))
+    if (dynamic_cast<KActionCategory*>(sipCpp))
+        sipType = sipType_KActionCategory;
+    else if (dynamic_cast<KActionCollection*>(sipCpp))
+        sipType = sipType_KActionCollection;
+    else if (dynamic_cast<KCategoryDrawerV2*>(sipCpp))
+        {
+        sipType = sipType_KCategoryDrawerV2;
+        if (dynamic_cast<KCategoryDrawerV3*>(sipCpp))
+            sipType = sipType_KCategoryDrawerV3;
+        }
+    else if (dynamic_cast<KCompletion*>(sipCpp))
+        sipType = sipType_KCompletion;
+    else if (dynamic_cast<KConfigDialogManager*>(sipCpp))
+        sipType = sipType_KConfigDialogManager;
+    else if (dynamic_cast<KConfigSkeleton*>(sipCpp))
+        sipType = sipType_KConfigSkeleton;
+    else if (dynamic_cast<KFind*>(sipCpp))
+        {
+        sipType = sipType_KFind;
+        if (dynamic_cast<KReplace*>(sipCpp))
+            sipType = sipType_KReplace;
+        }
+    else if (dynamic_cast<KGlobalAccel*>(sipCpp))
+        sipType = sipType_KGlobalAccel;
+    else if (dynamic_cast<KGlobalSettings*>(sipCpp))
+        sipType = sipType_KGlobalSettings;
+    else if (dynamic_cast<KGlobalShortcutInfo*>(sipCpp))
+        sipType = sipType_KGlobalShortcutInfo;
+    else if (dynamic_cast<KHelpMenu*>(sipCpp))
+        sipType = sipType_KHelpMenu;
+    else if (dynamic_cast<KIconLoader*>(sipCpp))
+        sipType = sipType_KIconLoader;
+    else if (dynamic_cast<KAbstractWidgetJobTracker*>(sipCpp))
+        {
+        sipType = sipType_KAbstractWidgetJobTracker;
+        if (dynamic_cast<KStatusBarJobTracker*>(sipCpp))
+            sipType = sipType_KStatusBarJobTracker;
+        else if (dynamic_cast<KWidgetJobTracker*>(sipCpp))
+            sipType = sipType_KWidgetJobTracker;
+        }
+    else if (dynamic_cast<KUiServerJobTracker*>(sipCpp))
+        sipType = sipType_KUiServerJobTracker;
+    else if (dynamic_cast<KDialogJobUiDelegate*>(sipCpp))
+        sipType = sipType_KDialogJobUiDelegate;
+    else if (dynamic_cast<KMessageBoxMessageHandler*>(sipCpp))
+        sipType = sipType_KMessageBoxMessageHandler;
+    else if (dynamic_cast<KModelIndexProxyMapper*>(sipCpp))
+        sipType = sipType_KModelIndexProxyMapper;
+    else if (dynamic_cast<KModifierKeyInfo*>(sipCpp))
+        sipType = sipType_KModifierKeyInfo;
+    else if (dynamic_cast<KNotification*>(sipCpp))
+        sipType = sipType_KNotification;
+    else if (dynamic_cast<KNotificationRestrictions*>(sipCpp))
+        sipType = sipType_KNotificationRestrictions;
+    else if (dynamic_cast<KPageWidgetItem*>(sipCpp))
+        sipType = sipType_KPageWidgetItem;
+    else if (dynamic_cast<KPassivePopupMessageHandler*>(sipCpp))
+        sipType = sipType_KPassivePopupMessageHandler;
+    else if (dynamic_cast<KPixmapSequenceOverlayPainter*>(sipCpp))
+        sipType = sipType_KPixmapSequenceOverlayPainter;
+    else if (dynamic_cast<KSelectionOwner*>(sipCpp))
+        sipType = sipType_KSelectionOwner;
+    else if (dynamic_cast<KSelectionWatcher*>(sipCpp))
+        sipType = sipType_KSelectionWatcher;
+    else if (dynamic_cast<KStartupInfo*>(sipCpp))
+        sipType = sipType_KStartupInfo;
+    else if (dynamic_cast<KStatusNotifierItem*>(sipCpp))
+        sipType = sipType_KStatusNotifierItem;
+    else if (dynamic_cast<KViewStateMaintainerBase*>(sipCpp))
+        sipType = sipType_KViewStateMaintainerBase;
+    else if (dynamic_cast<KViewStateSaver*>(sipCpp))
+        sipType = sipType_KViewStateSaver;
+    else if (dynamic_cast<KWallet::Wallet*>(sipCpp))
+        sipType = sipType_KWallet_Wallet;
+    else if (dynamic_cast<KXMLGUIFactory*>(sipCpp))
+        sipType = sipType_KXMLGUIFactory;
+    else if (dynamic_cast<KWidgetItemDelegate*>(sipCpp))
+        sipType = sipType_KWidgetItemDelegate;
+    else if (dynamic_cast<KExtendableItemDelegate*>(sipCpp))
+        sipType = sipType_KExtendableItemDelegate;
+    else if (dynamic_cast<KPageModel*>(sipCpp))
+        {
+        sipType = sipType_KPageModel;
+        if (dynamic_cast<KPageWidgetModel*>(sipCpp))
+            sipType = sipType_KPageWidgetModel;
+        }
+    else if (dynamic_cast<KDescendantsProxyModel*>(sipCpp))
+        sipType = sipType_KDescendantsProxyModel;
+    else if (dynamic_cast<KIdentityProxyModel*>(sipCpp))
+        {
+        sipType = sipType_KIdentityProxyModel;
+        if (dynamic_cast<KCheckableProxyModel*>(sipCpp))
+            sipType = sipType_KCheckableProxyModel;
+        }
+    else if (dynamic_cast<KSelectionProxyModel*>(sipCpp))
+        sipType = sipType_KSelectionProxyModel;
+    else if (dynamic_cast<KCategorizedSortFilterProxyModel*>(sipCpp))
+        sipType = sipType_KCategorizedSortFilterProxyModel;
+    else if (dynamic_cast<KRecursiveFilterProxyModel*>(sipCpp))
+        sipType = sipType_KRecursiveFilterProxyModel;
+    else if (dynamic_cast<KAction*>(sipCpp))
+        {
+        sipType = sipType_KAction;
+        if (dynamic_cast<KActionMenu*>(sipCpp))
+            sipType = sipType_KActionMenu;
+        else if (dynamic_cast<KDualAction*>(sipCpp))
+            sipType = sipType_KDualAction;
+        else if (dynamic_cast<KPasteTextAction*>(sipCpp))
+            sipType = sipType_KPasteTextAction;
+        else if (dynamic_cast<KSelectAction*>(sipCpp))
+            {
+            sipType = sipType_KSelectAction;
+            if (dynamic_cast<KCodecAction*>(sipCpp))
+                sipType = sipType_KCodecAction;
+            else if (dynamic_cast<KFontAction*>(sipCpp))
+                sipType = sipType_KFontAction;
+            else if (dynamic_cast<KFontSizeAction*>(sipCpp))
+                sipType = sipType_KFontSizeAction;
+            else if (dynamic_cast<KRecentFilesAction*>(sipCpp))
+                sipType = sipType_KRecentFilesAction;
+            }
+        else if (dynamic_cast<KToggleAction*>(sipCpp))
+            {
+            sipType = sipType_KToggleAction;
+            if (dynamic_cast<KToggleFullScreenAction*>(sipCpp))
+                sipType = sipType_KToggleFullScreenAction;
+            else if (dynamic_cast<KToggleToolBarAction*>(sipCpp))
+                sipType = sipType_KToggleToolBarAction;
+            }
+        else if (dynamic_cast<KToolBarLabelAction*>(sipCpp))
+            sipType = sipType_KToolBarLabelAction;
+        else if (dynamic_cast<KToolBarPopupAction*>(sipCpp))
+            sipType = sipType_KToolBarPopupAction;
+        else if (dynamic_cast<KToolBarSpacerAction*>(sipCpp))
+            sipType = sipType_KToolBarSpacerAction;
+        }
+    else if (dynamic_cast<KApplication*>(sipCpp))
+        {
+        sipType = sipType_KApplication;
+        if (dynamic_cast<KUniqueApplication*>(sipCpp))
+            sipType = sipType_KUniqueApplication;
+        }
+    else if (dynamic_cast<KBreadcrumbSelectionModel*>(sipCpp))
+        sipType = sipType_KBreadcrumbSelectionModel;
+    else if (dynamic_cast<KLinkItemSelectionModel*>(sipCpp))
+        sipType = sipType_KLinkItemSelectionModel;
+    else if (dynamic_cast<KStyle*>(sipCpp))
+        sipType = sipType_KStyle;
+    else if (dynamic_cast<KSvgRenderer*>(sipCpp))
+        sipType = sipType_KSvgRenderer;
+    else if (dynamic_cast<Sonnet::Highlighter*>(sipCpp))
+        sipType = sipType_Sonnet_Highlighter;
+    else if (dynamic_cast<KSystemTrayIcon*>(sipCpp))
+        sipType = sipType_KSystemTrayIcon;
+    else if (dynamic_cast<KUndoStack*>(sipCpp))
+        sipType = sipType_KUndoStack;
+    else if (dynamic_cast<KDateValidator*>(sipCpp))
+        sipType = sipType_KDateValidator;
+    else if (dynamic_cast<KFloatValidator*>(sipCpp))
+        sipType = sipType_KFloatValidator;
+    else if (dynamic_cast<KIntValidator*>(sipCpp))
+        sipType = sipType_KIntValidator;
+    else if (dynamic_cast<KMimeTypeValidator*>(sipCpp))
+        sipType = sipType_KMimeTypeValidator;
+    else if (dynamic_cast<KStringListValidator*>(sipCpp))
+        sipType = sipType_KStringListValidator;
+    else if (dynamic_cast<KDoubleValidator*>(sipCpp))
+        sipType = sipType_KDoubleValidator;
+    else if (dynamic_cast<KActionSelector*>(sipCpp))
+        sipType = sipType_KActionSelector;
+    else if (dynamic_cast<KCModule*>(sipCpp))
+        sipType = sipType_KCModule;
+    else if (dynamic_cast<KCapacityBar*>(sipCpp))
+        sipType = sipType_KCapacityBar;
+    else if (dynamic_cast<KCharSelect*>(sipCpp))
+        sipType = sipType_KCharSelect;
+    else if (dynamic_cast<KDateTable*>(sipCpp))
+        sipType = sipType_KDateTable;
+    else if (dynamic_cast<KDateTimeEdit*>(sipCpp))
+        {
+        sipType = sipType_KDateTimeEdit;
+        if (dynamic_cast<KDateEdit*>(sipCpp))
+            sipType = sipType_KDateEdit;
+        else if (dynamic_cast<KTimeEdit*>(sipCpp))
+            sipType = sipType_KTimeEdit;
+        }
+    else if (dynamic_cast<KDateTimeWidget*>(sipCpp))
+        sipType = sipType_KDateTimeWidget;
+    else if (dynamic_cast<KDateWidget*>(sipCpp))
+        sipType = sipType_KDateWidget;
+    else if (dynamic_cast<KEditListWidget*>(sipCpp))
+        sipType = sipType_KEditListWidget;
+    else if (dynamic_cast<KFadeWidgetEffect*>(sipCpp))
+        sipType = sipType_KFadeWidgetEffect;
+    else if (dynamic_cast<KFilterProxySearchLine*>(sipCpp))
+        sipType = sipType_KFilterProxySearchLine;
+    else if (dynamic_cast<KFontChooser*>(sipCpp))
+        sipType = sipType_KFontChooser;
+    else if (dynamic_cast<KFontRequester*>(sipCpp))
+        sipType = sipType_KFontRequester;
+    else if (dynamic_cast<KKeySequenceWidget*>(sipCpp))
+        sipType = sipType_KKeySequenceWidget;
+    else if (dynamic_cast<KLanguageButton*>(sipCpp))
+        sipType = sipType_KLanguageButton;
+    else if (dynamic_cast<KLed*>(sipCpp))
+        sipType = sipType_KLed;
+    else if (dynamic_cast<KMultiTabBar*>(sipCpp))
+        sipType = sipType_KMultiTabBar;
+    else if (dynamic_cast<KNumInput*>(sipCpp))
+        {
+        sipType = sipType_KNumInput;
+        if (dynamic_cast<KDoubleNumInput*>(sipCpp))
+            sipType = sipType_KDoubleNumInput;
+        else if (dynamic_cast<KIntNumInput*>(sipCpp))
+            sipType = sipType_KIntNumInput;
+        }
+    else if (dynamic_cast<KPageView*>(sipCpp))
+        {
+        sipType = sipType_KPageView;
+        if (dynamic_cast<KPageWidget*>(sipCpp))
+            sipType = sipType_KPageWidget;
+        }
+    else if (dynamic_cast<KPixmapRegionSelectorWidget*>(sipCpp))
+        sipType = sipType_KPixmapRegionSelectorWidget;
+    else if (dynamic_cast<KPixmapSequenceWidget*>(sipCpp))
+        sipType = sipType_KPixmapSequenceWidget;
+    else if (dynamic_cast<KShortcutWidget*>(sipCpp))
+        sipType = sipType_KShortcutWidget;
+    else if (dynamic_cast<KShortcutsEditor*>(sipCpp))
+        sipType = sipType_KShortcutsEditor;
+    else if (dynamic_cast<KTitleWidget*>(sipCpp))
+        sipType = sipType_KTitleWidget;
+    else if (dynamic_cast<KTreeWidgetSearchLineWidget*>(sipCpp))
+        sipType = sipType_KTreeWidgetSearchLineWidget;
+    else if (dynamic_cast<KXMessages*>(sipCpp))
+        sipType = sipType_KXMessages;
+    else if (dynamic_cast<KXYSelector*>(sipCpp))
+        {
+        sipType = sipType_KXYSelector;
+        if (dynamic_cast<KHueSaturationSelector*>(sipCpp))
+            sipType = sipType_KHueSaturationSelector;
+        }
+    else if (dynamic_cast<KArrowButton*>(sipCpp))
+        sipType = sipType_KArrowButton;
+    else if (dynamic_cast<KColorButton*>(sipCpp))
+        sipType = sipType_KColorButton;
+    else if (dynamic_cast<KMultiTabBarButton*>(sipCpp))
+        {
+        sipType = sipType_KMultiTabBarButton;
+        if (dynamic_cast<KMultiTabBarTab*>(sipCpp))
+            sipType = sipType_KMultiTabBarTab;
+        }
+    else if (dynamic_cast<KPushButton*>(sipCpp))
+        sipType = sipType_KPushButton;
+    else if (dynamic_cast<KAnimatedButton*>(sipCpp))
+        sipType = sipType_KAnimatedButton;
+    else if (dynamic_cast<KRuler*>(sipCpp))
+        sipType = sipType_KRuler;
+    else if (dynamic_cast<KSelector*>(sipCpp))
+        {
+        sipType = sipType_KSelector;
+        if (dynamic_cast<KColorValueSelector*>(sipCpp))
+            sipType = sipType_KColorValueSelector;
+        else if (dynamic_cast<KGradientSelector*>(sipCpp))
+            sipType = sipType_KGradientSelector;
+        }
+    else if (dynamic_cast<KIntSpinBox*>(sipCpp))
+        sipType = sipType_KIntSpinBox;
+    else if (dynamic_cast<KColorCombo*>(sipCpp))
+        sipType = sipType_KColorCombo;
+    else if (dynamic_cast<KComboBox*>(sipCpp))
+        {
+        sipType = sipType_KComboBox;
+        if (dynamic_cast<KDateComboBox*>(sipCpp))
+            sipType = sipType_KDateComboBox;
+        else if (dynamic_cast<KFontComboBox*>(sipCpp))
+            sipType = sipType_KFontComboBox;
+        else if (dynamic_cast<KHistoryComboBox*>(sipCpp))
+            sipType = sipType_KHistoryComboBox;
+        else if (dynamic_cast<KTimeComboBox*>(sipCpp))
+            sipType = sipType_KTimeComboBox;
+        else if (dynamic_cast<Sonnet::DictionaryComboBox*>(sipCpp))
+            sipType = sipType_Sonnet_DictionaryComboBox;
+        }
+    else if (dynamic_cast<KDialog*>(sipCpp))
+        {
+        sipType = sipType_KDialog;
+        if (dynamic_cast<KAboutApplicationDialog*>(sipCpp))
+            sipType = sipType_KAboutApplicationDialog;
+        else if (dynamic_cast<KBugReport*>(sipCpp))
+            sipType = sipType_KBugReport;
+        else if (dynamic_cast<KColorDialog*>(sipCpp))
+            sipType = sipType_KColorDialog;
+        else if (dynamic_cast<KEditToolBar*>(sipCpp))
+            sipType = sipType_KEditToolBar;
+        else if (dynamic_cast<KFindDialog*>(sipCpp))
+            {
+            sipType = sipType_KFindDialog;
+            if (dynamic_cast<KReplaceDialog*>(sipCpp))
+                sipType = sipType_KReplaceDialog;
+            }
+        else if (dynamic_cast<KFontDialog*>(sipCpp))
+            sipType = sipType_KFontDialog;
+        else if (dynamic_cast<KNewPasswordDialog*>(sipCpp))
+            sipType = sipType_KNewPasswordDialog;
+        else if (dynamic_cast<KPageDialog*>(sipCpp))
+            {
+            sipType = sipType_KPageDialog;
+            if (dynamic_cast<KAssistantDialog*>(sipCpp))
+                sipType = sipType_KAssistantDialog;
+            else if (dynamic_cast<KConfigDialog*>(sipCpp))
+                sipType = sipType_KConfigDialog;
+            }
+        else if (dynamic_cast<KPasswordDialog*>(sipCpp))
+            sipType = sipType_KPasswordDialog;
+        else if (dynamic_cast<KPixmapRegionSelectorDialog*>(sipCpp))
+            sipType = sipType_KPixmapRegionSelectorDialog;
+        else if (dynamic_cast<KProgressDialog*>(sipCpp))
+            sipType = sipType_KProgressDialog;
+        else if (dynamic_cast<KShortcutsDialog*>(sipCpp))
+            sipType = sipType_KShortcutsDialog;
+        else if (dynamic_cast<KTipDialog*>(sipCpp))
+            sipType = sipType_KTipDialog;
+        else if (dynamic_cast<Sonnet::ConfigDialog*>(sipCpp))
+            sipType = sipType_Sonnet_ConfigDialog;
+        else if (dynamic_cast<Sonnet::Dialog*>(sipCpp))
+            sipType = sipType_Sonnet_Dialog;
+        }
+    else if (dynamic_cast<KDialogButtonBox*>(sipCpp))
+        sipType = sipType_KDialogButtonBox;
+    else if (dynamic_cast<KColorPatch*>(sipCpp))
+        sipType = sipType_KColorPatch;
+    else if (dynamic_cast<KDatePicker*>(sipCpp))
+        sipType = sipType_KDatePicker;
+    else if (dynamic_cast<KHBox*>(sipCpp))
+        {
+        sipType = sipType_KHBox;
+        if (dynamic_cast<KVBox*>(sipCpp))
+            sipType = sipType_KVBox;
+        }
+    else if (dynamic_cast<KMessageWidget*>(sipCpp))
+        sipType = sipType_KMessageWidget;
+    else if (dynamic_cast<KPassivePopup*>(sipCpp))
+        sipType = sipType_KPassivePopup;
+    else if (dynamic_cast<KPlotWidget*>(sipCpp))
+        sipType = sipType_KPlotWidget;
+    else if (dynamic_cast<KPopupFrame*>(sipCpp))
+        sipType = sipType_KPopupFrame;
+    else if (dynamic_cast<KRatingWidget*>(sipCpp))
         sipType = sipType_KRatingWidget;
+    else if (dynamic_cast<KSeparator*>(sipCpp))
+        sipType = sipType_KSeparator;
+    else if (dynamic_cast<KCategorizedView*>(sipCpp))
+        sipType = sipType_KCategorizedView;
+    else if (dynamic_cast<KListWidget*>(sipCpp))
+        {
+        sipType = sipType_KListWidget;
+        if (dynamic_cast<KCompletionBox*>(sipCpp))
+            sipType = sipType_KCompletionBox;
+        }
+    else if (dynamic_cast<KColorCells*>(sipCpp))
+        sipType = sipType_KColorCells;
+    else if (dynamic_cast<KTimeZoneWidget*>(sipCpp))
+        sipType = sipType_KTimeZoneWidget;
+    else if (dynamic_cast<KTextEdit*>(sipCpp))
+        {
+        sipType = sipType_KTextEdit;
+        if (dynamic_cast<KRichTextEdit*>(sipCpp))
+            {
+            sipType = sipType_KRichTextEdit;
+            if (dynamic_cast<KRichTextWidget*>(sipCpp))
+                sipType = sipType_KRichTextWidget;
+            }
+        }
+    else if (dynamic_cast<KTextBrowser*>(sipCpp))
+        sipType = sipType_KTextBrowser;
+    else if (dynamic_cast<KSqueezedTextLabel*>(sipCpp))
+        sipType = sipType_KSqueezedTextLabel;
+    else if (dynamic_cast<KUrlLabel*>(sipCpp))
+        sipType = sipType_KUrlLabel;
+    else if (dynamic_cast<KButtonGroup*>(sipCpp))
+        sipType = sipType_KButtonGroup;
+    else if (dynamic_cast<KEditListBox*>(sipCpp))
+        sipType = sipType_KEditListBox;
+    else if (dynamic_cast<KLineEdit*>(sipCpp))
+        {
+        sipType = sipType_KLineEdit;
+        if (dynamic_cast<KListWidgetSearchLine*>(sipCpp))
+            sipType = sipType_KListWidgetSearchLine;
+        else if (dynamic_cast<KRestrictedLine*>(sipCpp))
+            sipType = sipType_KRestrictedLine;
+        else if (dynamic_cast<KTreeWidgetSearchLine*>(sipCpp))
+            sipType = sipType_KTreeWidgetSearchLine;
+        }
+    else if (dynamic_cast<KMainWindow*>(sipCpp))
+        {
+        sipType = sipType_KMainWindow;
+        if (dynamic_cast<KXmlGuiWindow*>(sipCpp))
+            sipType = sipType_KXmlGuiWindow;
+        }
+    else if (dynamic_cast<KMenu*>(sipCpp))
+        sipType = sipType_KMenu;
+    else if (dynamic_cast<KMenuBar*>(sipCpp))
+        sipType = sipType_KMenuBar;
+    else if (dynamic_cast<KSplashScreen*>(sipCpp))
+        sipType = sipType_KSplashScreen;
+    else if (dynamic_cast<KStatusBar*>(sipCpp))
+        sipType = sipType_KStatusBar;
+    else if (dynamic_cast<KTabBar*>(sipCpp))
+        sipType = sipType_KTabBar;
+    else if (dynamic_cast<KTabWidget*>(sipCpp))
+        sipType = sipType_KTabWidget;
+    else if (dynamic_cast<KToolBar*>(sipCpp))
+        sipType = sipType_KToolBar;
+    else if (dynamic_cast<Sonnet::ConfigWidget*>(sipCpp))
+        sipType = sipType_Sonnet_ConfigWidget;
 %End
 
 public:

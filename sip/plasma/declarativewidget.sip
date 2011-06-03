@@ -39,5 +39,7 @@ protected:
     void                    resizeEvent (QGraphicsSceneResizeEvent* event);
 signals:
     void                    finished ();
+public:
+    QScriptEngine*          scriptEngine () const;
 };
 };

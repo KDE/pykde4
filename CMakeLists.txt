@@ -73,6 +73,7 @@ INCLUDE_DIRECTORIES(
     ${QT_QTWEBKIT_INCLUDE_DIR}
     ${KDE4_INCLUDE_DIR}
     ${KDE4_INCLUDE_DIR}/solid
+    ${KDE4_INCLUDE_DIR}/phonon
     ${KDE4_INCLUDE_DIR}/kio
     ${KDE4_INCLUDE_DIR}/kdeprint
     ${KDE4_INCLUDE_DIR}/kdeprint/lpr

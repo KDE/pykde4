@@ -163,7 +163,6 @@
 #include <ktextbrowser.h>
 #include <ktextedit.h>
 #include <ktimecombobox.h>
-#include <ktimeedit.h>
 #include <ktimezonewidget.h>
 #include <ktip.h>
 #include <ktitlewidget.h>

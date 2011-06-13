@@ -62,7 +62,6 @@
 #include <kconfigdialogmanager.h>
 #include <kconfigskeleton.h>
 #include <kdatecombobox.h>
-#include <kdateedit.h>
 #include <kdatepicker.h>
 #include <kdatetable.h>
 #include <kdatetimeedit.h>

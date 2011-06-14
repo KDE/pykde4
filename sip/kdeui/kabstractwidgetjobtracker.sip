@@ -406,13 +406,7 @@ signals:
     else if (dynamic_cast<KDateTable*>(sipCpp))
         sipType = sipType_KDateTable;
     else if (dynamic_cast<KDateTimeEdit*>(sipCpp))
-        {
         sipType = sipType_KDateTimeEdit;
-        if (dynamic_cast<KDateEdit*>(sipCpp))
-            sipType = sipType_KDateEdit;
-        else if (dynamic_cast<KTimeEdit*>(sipCpp))
-            sipType = sipType_KTimeEdit;
-        }
     else if (dynamic_cast<KDateTimeWidget*>(sipCpp))
         sipType = sipType_KDateTimeWidget;
     else if (dynamic_cast<KDateWidget*>(sipCpp))

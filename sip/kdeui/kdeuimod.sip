@@ -73,7 +73,6 @@
 %Include kcrash.sip
 %Include kcursor.sip
 %Include kdatecombobox.sip
-%Include kdateedit.sip
 %Include kdatepicker.sip
 %Include kdatetable.sip
 %Include kdatetimeedit.sip
@@ -197,7 +196,6 @@
 %Include ktextbrowser.sip
 %Include ktextedit.sip
 %Include ktimecombobox.sip
-%Include ktimeedit.sip
 %Include ktimezonewidget.sip
 %Include ktip.sip
 %Include ktitlewidget.sip

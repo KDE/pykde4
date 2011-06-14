@@ -29,7 +29,6 @@
 %Import QtSvg/QtSvgmod.sip
 %Import kdecore/kdecoremod.sip
 
-%Include kfontutils.sip
 %Include k3icon_p.sip
 %Include kaboutapplicationdialog.sip
 %Include kabstractwidgetjobtracker.sip
@@ -73,7 +72,6 @@
 %Include kcrash.sip
 %Include kcursor.sip
 %Include kdatecombobox.sip
-%Include kdateedit.sip
 %Include kdatepicker.sip
 %Include kdatetable.sip
 %Include kdatetimeedit.sip
@@ -99,6 +97,7 @@
 %Include kfontdialog.sip
 %Include kfontrequester.sip
 %Include kfontsizeaction.sip
+%Include kfontutils.sip
 %Include kgesture.sip
 %Include kglobalaccel.sip
 %Include kglobalsettings.sip
@@ -197,7 +196,6 @@
 %Include ktextbrowser.sip
 %Include ktextedit.sip
 %Include ktimecombobox.sip
-%Include ktimeedit.sip
 %Include ktimezonewidget.sip
 %Include ktip.sip
 %Include ktitlewidget.sip

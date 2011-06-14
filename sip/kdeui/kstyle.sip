@@ -116,20 +116,20 @@ public:
 //ig    class TextOption;
 
 protected:
-//ig    virtual void            drawKStylePrimitive (KStyle::WidgetType widgetType, int primitive, const QStyleOption* opt, const QRect& r, const QPalette& pal, State flags, QPainter* p, const QWidget* widget = 0, KStyle::Option* kOpt = 0) const;
+//ig    virtual void            drawKStylePrimitive (KStyle::WidgetType widgetType, int primitive, const QStyleOption* opt, const QRect& r, const QPalette& pal, QStyle::State flags, QPainter* p, const QWidget* widget = 0, KStyle::Option* kOpt = 0) const;
 public:
-    void                    drawControl (ControlElement elem, const QStyleOption* opt, QPainter* p, const QWidget* w) const;
-    void                    drawPrimitive (PrimitiveElement elem, const QStyleOption* opt, QPainter* p, const QWidget* w) const;
-    int                     pixelMetric (PixelMetric metric, const QStyleOption* opt = 0, const QWidget* w = 0) const;
-    QRect                   subElementRect (SubElement subRect, const QStyleOption* opt, const QWidget* w) const;
-    QSize                   sizeFromContents (ContentsType type, const QStyleOption* opt, const QSize& contentsSize, const QWidget* w) const;
-    int                     styleHint (StyleHint hint, const QStyleOption* opt, const QWidget* w, QStyleHintReturn* returnData) const;
-    QRect                   subControlRect (ComplexControl control, const QStyleOptionComplex* opt, SubControl subControl, const QWidget* w) const;
-    SubControl              hitTestComplexControl (ComplexControl cc, const QStyleOptionComplex* opt, const QPoint& pt, const QWidget* w) const;
-    void                    drawComplexControl (ComplexControl cc, const QStyleOptionComplex* opt, QPainter* p, const QWidget* w) const;
-    QPixmap                 standardPixmap (StandardPixmap standardPixmap, const QStyleOption* opt, const QWidget* widget = 0) const;
+    void                    drawControl (QStyle::ControlElement elem, const QStyleOption* opt, QPainter* p, const QWidget* w) const;
+    void                    drawPrimitive (QStyle::PrimitiveElement elem, const QStyleOption* opt, QPainter* p, const QWidget* w) const;
+    int                     pixelMetric (QStyle::PixelMetric metric, const QStyleOption* opt = 0, const QWidget* w = 0) const;
+    QRect                   subElementRect (QStyle::SubElement subRect, const QStyleOption* opt, const QWidget* w) const;
+    QSize                   sizeFromContents (QStyle::ContentsType type, const QStyleOption* opt, const QSize& contentsSize, const QWidget* w) const;
+    int                     styleHint (QStyle::StyleHint hint, const QStyleOption* opt, const QWidget* w, QStyleHintReturn* returnData) const;
+    QRect                   subControlRect (QStyle::ComplexControl control, const QStyleOptionComplex* opt, QStyle::SubControl subControl, const QWidget* w) const;
+    QStyle::SubControl      hitTestComplexControl (QStyle::ComplexControl cc, const QStyleOptionComplex* opt, const QPoint& pt, const QWidget* w) const;
+    void                    drawComplexControl (QStyle::ComplexControl cc, const QStyleOptionComplex* opt, QPainter* p, const QWidget* w) const;
+    QPixmap                 standardPixmap (QStyle::StandardPixmap standardPixmap, const QStyleOption* opt, const QWidget* widget = 0) const;
 protected:
-    QIcon                   standardIconImplementation (StandardPixmap standardIcon, const QStyleOption* option = 0, const QWidget* widget = 0) const;
+    QIcon                   standardIconImplementation (QStyle::StandardPixmap standardIcon, const QStyleOption* option = 0, const QWidget* widget = 0) const;
 };
 // KStyle
 

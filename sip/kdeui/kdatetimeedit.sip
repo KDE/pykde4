@@ -30,25 +30,21 @@ public:
         ShowDate,
         ShowTime,
         ShowTimeSpec,
-        EditCalendar,
         EditDate,
         EditTime,
-        EditTimeSpec,
         SelectCalendar,
         SelectDate,
         SelectTime,
         SelectTimeSpec,
         DatePicker,
         DateKeywords,
-        ForceInterval,
-        WarnOnInvalid,
-        ErrorOnInvalid
+        ForceTime,
+        WarnOnInvalid
     };
     typedef QFlags<KDateTimeEdit::Option> Options;
     explicit                KDateTimeEdit (QWidget* parent /TransferThis/ = 0);
     virtual ~KDateTimeEdit ();
-    KDateTime               fullDateTime () const;
-    QDateTime               dateTime () const;
+    KDateTime               dateTime () const;
     QDate                   date () const;
     KLocale::CalendarSystem  calendarSystem ();
 //ig    const KCalendarSystem*  calendar () const;
@@ -57,32 +53,13 @@ public:
     bool                    isValid () const;
     KDateTimeEdit::Options  options () const;
 //ig    KLocale::DateFormat     dateDisplayFormat ();
-//ig    void                    setDateDisplayFormat (KLocale::DateFormat options);
+//ig    void                    setDateDisplayFormat (KLocale::DateFormat format);
 //ig    KLocale::TimeFormatOptions  timeDisplayFormat ();
-//ig    void                    setTimeDisplaayFormat (KLocale::TimeFormatOptions options);
-    QDateTime               minimumDateTime () const;
+    KDateTime               minimumDateTime () const;
     void                    resetMinimumDateTime ();
-    QDateTime               maximumDateTime () const;
+    KDateTime               maximumDateTime () const;
     void                    resetMaximumDateTime ();
-    void                    setDateTimeRange (const QDateTime& minDateTime, const QDateTime& maxDateTime, const QString& minErrorMsg = QString(), const QString& maxErrorMsg = QString());
     void                    resetDateTimeRange ();
-    void                    clearDateTimeRange ();
-    QDate                   minimumDate () const;
-    void                    resetMinimumDate ();
-    QDate                   maximumDate () const;
-    void                    resetMaximumDate ();
-    void                    setDateRange (const QDate& minDate, const QDate& maxDate, const QString& minErrorMsg = QString(), const QString& maxErrorMsg = QString());
-    void                    resetDateRange ();
-    void                    clearDateRange ();
-    QTime                   minimumTime () const;
-    void                    resetMinimumTime ();
-    QTime                   maximumTime () const;
-    void                    resetMaximumTime ();
-    void                    setTimeRange (const QTime& minTime, const QTime& maxTime, const QString& minErrorMsg = QString(), const QString& maxErrorMsg = QString());
-    void                    resetTimeRange ();
-    void                    clearTimeRange ();
-    void                    setTimeInterval (int minutes);
-    int                     timeInterval () const;
     void                    setCalendar (KCalendarSystem* calendar = 0);
     void                    setTimeZones (const KTimeZones::ZoneMap& zones);
 signals:
@@ -91,9 +68,6 @@ signals:
     void                    dateTimeEntered (const KDateTime& dateTime);
     void                    dateTimeChanged (const KDateTime& dateTime);
     void                    dateTimeEdited (const KDateTime& dateTime);
-    void                    dateTimeEntered (const QDateTime& dateTime);
-    void                    dateTimeChanged (const QDateTime& dateTime);
-    void                    dateTimeEdited (const QDateTime& dateTime);
     void                    dateEntered (const QDate& date);
     void                    dateChanged (const QDate& date);
     void                    dateEdited (const QDate& date);
@@ -104,7 +78,6 @@ signals:
     void                    timeSpecChanged (const KDateTime::Spec& spec);
 public:
     void                    setDateTime (const KDateTime& dateTime);
-    void                    setDateTime (const QDateTime& dateTime);
     void                    setDate (const QDate& date);
     void                    setCalendarSystem (KLocale::CalendarSystem calendarSystem);
     void                    setTime (const QTime& time);
@@ -113,9 +86,28 @@ public:
 protected:
     virtual bool            eventFilter (QObject* object, QEvent* event);
     virtual void            assignDateTime (const KDateTime& dateTime);
-    virtual void            assignDateTime (const QDateTime& dateTime);
     virtual void            assignDate (const QDate& date);
 //ig    void                    assignCalendarSystem (KLocale::CalendarSystem calendarSystem);
     virtual void            assignTime (const QTime& time);
 //ig    void                    assignTimeSpec (const KDateTime::Spec& spec);
+public:
+    QList<KLocale::CalendarSystem>  calendarSystemsList ();
+    QMap<QDate,QString>     dateMap () const;
+    int                     timeListInterval () const;
+    QList<QTime>            timeList () const;
+    KTimeZones::ZoneMap     timeZones ();
+    bool                    isValidDate () const;
+    bool                    isValidTime () const;
+    void                    setDateTimeRange (const KDateTime& minDateTime, const KDateTime& maxDateTime, const QString& minWarnMsg = QString(), const QString& maxWarnMsg = QString());
+    void                    setMinimumDateTime (const KDateTime& minDateTime, const QString& minWarnMsg = QString());
+    void                    setMaximumDateTime (const KDateTime& maxDateTime, const QString& maxWarnMsg = QString());
+    void                    setCalendarSystemsList (QList<KLocale::CalendarSystem> calendars);
+    void                    setDateMap (QMap<QDate,QString> dateMap);
+    void                    setTimeDisplayFormat (KLocale::TimeFormatOptions formatOptions);
+    void                    setTimeListInterval (int minutes);
+    void                    setTimeList (QList<QTime> timeList, const QString& minWarnMsg = QString(), const QString& maxWarnMsg = QString());
+protected:
+    virtual void            focusInEvent (QFocusEvent* event);
+    virtual void            focusOutEvent (QFocusEvent* event);
+    virtual void            resizeEvent (QResizeEvent* event);
 };

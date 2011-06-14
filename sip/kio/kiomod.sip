@@ -30,7 +30,6 @@
 %Import kdeui/kdeuimod.sip
 %Import solid/solidmod.sip
 
-%Include krecentdirs.sip
 %Include authinfo.sip
 %Include chmodjob.sip
 %Include connection.sip
@@ -112,6 +111,7 @@
 %Include kpreviewwidgetbase.sip
 %Include kpropertiesdialog.sip
 %Include kprotocolmanager.sip
+%Include krecentdirs.sip
 %Include krecentdocument.sip
 %Include kremoteencoding.sip
 %Include krun.sip

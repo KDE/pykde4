@@ -30,8 +30,7 @@ public:
         SelectDate,
         DatePicker,
         DateKeywords,
-        WarnOnInvalid,
-        ErrorOnInvalid
+        WarnOnInvalid
     };
     typedef QFlags<KDateComboBox::Option> Options;
     explicit                KDateComboBox (QWidget* parent /TransferThis/ = 0);
@@ -46,9 +45,8 @@ public:
     void                    resetMinimumDate ();
     QDate                   maximumDate () const;
     void                    resetMaximumDate ();
-    void                    setDateRange (const QDate& minDate, const QDate& maxDate, const QString& minErrorMsg = QString(), const QString& maxErrorMsg = QString());
+    void                    setDateRange (const QDate& minDate, const QDate& maxDate, const QString& minWarnMsg = QString(), const QString& maxWarnMsg = QString());
     void                    resetDateRange ();
-    void                    clearDateRange ();
     void                    setCalendar (KCalendarSystem* calendar = 0);
 signals:
     void                    dateEntered (const QDate& date);
@@ -71,4 +69,9 @@ protected:
     virtual void            resizeEvent (QResizeEvent* event);
     virtual void            assignDate (const QDate& date);
     virtual void            assignCalendarSystem (KLocale::CalendarSystem calendarSystem);
+public:
+    QMap<QDate,QString>     dateMap () const;
+    void                    setMinimumDate (const QDate& minTime, const QString& minWarnMsg = QString());
+    void                    setMaximumDate (const QDate& maxDate, const QString& maxWarnMsg = QString());
+    void                    setDateMap (QMap<QDate,QString> dateMap);
 };

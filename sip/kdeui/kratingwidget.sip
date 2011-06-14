@@ -60,7 +60,6 @@
 #include <kconfigdialogmanager.h>
 #include <kconfigskeleton.h>
 #include <kdatecombobox.h>
-#include <kdateedit.h>
 #include <kdatepicker.h>
 #include <kdatetable.h>
 #include <kdatetimeedit.h>
@@ -162,7 +161,6 @@
 #include <ktextbrowser.h>
 #include <ktextedit.h>
 #include <ktimecombobox.h>
-#include <ktimeedit.h>
 #include <ktimezonewidget.h>
 #include <ktip.h>
 #include <ktitlewidget.h>
@@ -419,14 +417,6 @@ protected:
         sipType = sipType_KCharSelect;
     else if (dynamic_cast<KDateTable*>(sipCpp))
         sipType = sipType_KDateTable;
-    else if (dynamic_cast<KDateTimeEdit*>(sipCpp))
-        {
-        sipType = sipType_KDateTimeEdit;
-        if (dynamic_cast<KDateEdit*>(sipCpp))
-            sipType = sipType_KDateEdit;
-        else if (dynamic_cast<KTimeEdit*>(sipCpp))
-            sipType = sipType_KTimeEdit;
-        }
     else if (dynamic_cast<KDateTimeWidget*>(sipCpp))
         sipType = sipType_KDateTimeWidget;
     else if (dynamic_cast<KDateWidget*>(sipCpp))

@@ -178,6 +178,8 @@ public:
     int                     weeksInYear (int year, KLocale::WeekNumberSystem weekNumberSystem) const;
     int                     week (const QDate& date, int* yearNum = 0) const;
     int                     week (const QDate& date, KLocale::WeekNumberSystem weekNumberSystem, int* yearNum = 0) const;
+    static KLocale::CalendarSystem  calendarSystem (const QString& calendarType);
+    static QString          calendarType (KLocale::CalendarSystem calendarSystem);
 };
 // KCalendarSystem
 

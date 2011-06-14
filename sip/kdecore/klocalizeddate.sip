@@ -101,4 +101,4 @@ public:
 };
 QDataStream             operator << (QDataStream& out, const KLocalizedDate& date);
 QDataStream             operator >> (QDataStream& in, KLocalizedDate& date);
-//ig QDebug                  operator << (QDebug, const KLocalizedDate&);
+//ig QDebug                  operator << (QDebug debug, const KLocalizedDate& date);

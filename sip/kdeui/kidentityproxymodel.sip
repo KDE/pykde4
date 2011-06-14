@@ -44,4 +44,10 @@ public:
 protected:
 //ig                            KIdentityProxyModel (KIdentityProxyModelPrivate* privateClass, QObject* parent /TransferThis/);
     virtual void            resetInternalData ();
+public:
+    virtual bool            canFetchMore (const QModelIndex& parent) const;
+    virtual void            fetchMore (const QModelIndex& parent);
+    virtual QStringList     mimeTypes () const;
+    virtual QMimeData*      mimeData (const QModelIndexList& indexes) const;
+    virtual Qt::DropActions  supportedDropActions () const;
 };

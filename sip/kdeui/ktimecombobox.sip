@@ -28,9 +28,8 @@ public:
     {
         EditTime,
         SelectTime,
-        ForceInterval,
-        WarnOnInvalid,
-        ErrorOnInvalid
+        ForceTime,
+        WarnOnInvalid
     };
     typedef QFlags<KTimeComboBox::Option> Options;
     explicit                KTimeComboBox (QWidget* parent /TransferThis/ = 0);
@@ -43,10 +42,8 @@ public:
     void                    resetMinimumTime ();
     QTime                   maximumTime () const;
     void                    resetMaximumTime ();
-    void                    setTimeRange (const QTime& minTime, const QTime& maxTime, const QString& minErrorMsg = QString(), const QString& maxErrorMsg = QString());
+    void                    setTimeRange (const QTime& minTime, const QTime& maxTime, const QString& minWarnMsg = QString(), const QString& maxWarnMsg = QString());
     void                    resetTimeRange ();
-    void                    clearTimeRange ();
-    int                     timeInterval () const;
 signals:
     void                    timeEntered (const QTime& time);
     void                    timeChanged (const QTime& time);
@@ -55,7 +52,6 @@ public:
     void                    setTime (const QTime& time);
     void                    setOptions (KTimeComboBox::Options options);
     void                    setDisplayFormat (KLocale::TimeFormatOptions formatOptions);
-    void                    setTimeInterval (int minutes);
 protected:
     virtual bool            eventFilter (QObject* object, QEvent* event);
     virtual void            showPopup ();
@@ -67,4 +63,11 @@ protected:
     virtual void            focusOutEvent (QFocusEvent* event);
     virtual void            resizeEvent (QResizeEvent* event);
     virtual void            assignTime (const QTime& time);
+public:
+    int                     timeListInterval () const;
+    QList<QTime>            timeList () const;
+    void                    setMinimumTime (const QTime& minTime, const QString& minWarnMsg = QString());
+    void                    setMaximumTime (const QTime& maxTime, const QString& maxWarnMsg = QString());
+    void                    setTimeListInterval (int minutes);
+    void                    setTimeList (QList<QTime> timeList, const QString& minWarnMsg = QString(), const QString& maxWarnMsg = QString());
 };

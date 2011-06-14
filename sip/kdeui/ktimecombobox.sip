@@ -28,7 +28,7 @@ public:
     {
         EditTime,
         SelectTime,
-        ForceInterval,
+        ForceTime,
         WarnOnInvalid,
     };
     typedef QFlags<KTimeComboBox::Option> Options;
@@ -45,7 +45,7 @@ public:
     void                    setTimeRange (const QTime& minTime, const QTime& maxTime, const QString& minWarnMsg = QString(), const QString& maxWarnMsg = QString());
     void                    resetTimeRange ();
     int                     timeListInterval () const;
-    QList<Qtime>            timeList () const;
+    QList<QTime>            timeList () const;
 signals:
     void                    timeEntered (const QTime& time);
     void                    timeChanged (const QTime& time);

@@ -31,7 +31,6 @@ public:
         DatePicker,
         DateKeywords,
         WarnOnInvalid,
-        ErrorOnInvalid
     };
     typedef QFlags<KDateComboBox::Option> Options;
     explicit                KDateComboBox (QWidget* parent /TransferThis/ = 0);
@@ -43,13 +42,8 @@ public:
     KDateComboBox::Options  options () const;
     KLocale::DateFormat     displayFormat ();
     QDate                   minimumDate () const;
-    void                    resetMinimumDate ();
     QDate                   maximumDate () const;
-    void                    resetMaximumDate ();
-    void                    setDateRange (const QDate& minDate, const QDate& maxDate, const QString& minErrorMsg = QString(), const QString& maxErrorMsg = QString());
-    void                    resetDateRange ();
-    void                    clearDateRange ();
-    void                    setCalendar (KCalendarSystem* calendar = 0);
+    QMap<QDate, QString>    dateMap () const;
 signals:
     void                    dateEntered (const QDate& date);
     void                    dateChanged (const QDate& date);
@@ -57,8 +51,16 @@ signals:
 public:
     void                    setDate (const QDate& date);
     void                    setCalendarSystem (KLocale::CalendarSystem calendarSystem);
+    void                    setCalendar (KCalendarSystem* calendar = 0);
     void                    setOptions (KDateComboBox::Options options);
     void                    setDisplayFormat (KLocale::DateFormat format);
+    void                    setDateRange (const QDate& minDate, const QDate& maxDate, const QString& minWarnMsg = QString(), const QString& maxWarnMsg = QString());
+    void                    resetDateRange ();
+    void                    setMinimumDate (const QDate& minTime, const QString& minWarnMsg = QString());
+    void                    resetMinimumDate ();
+    void                    setMaximumDate (const QDate& maxDate, const QString& maxWarnMsg = QString());
+    void                    resetMaximumDate ();
+    void                    setDateMap (QMap<QDate, QString> dateMap);
 protected:
     virtual bool            eventFilter (QObject* object, QEvent* event);
     virtual void            showPopup ();

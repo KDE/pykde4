@@ -79,20 +79,20 @@ signals:
 public:
     void                    setOptions (Options options);
     void                    setDateTime (const KDateTime& dateTime);
-    void                    setCalendarSystem (KLocale:CalendarSystem calendarSystem);
+    void                    setCalendarSystem (KLocale::CalendarSystem calendarSystem);
     void                    setCalendar (KCalendarSystem* calendar = 0);
     void                    setDate (const QDate& date);
     void                    setTime (const QTime& time);
     void                    setTimeSpec (const KDateTime::Spec& spec);
     void                    setDateTimeRange (const KDateTime& minDateTime, const KDateTime& maxDateTime, const QString& minWarnMsg = QString(), const QString& maxWarnMsg = QString());
     void                    resetDateTimeRange ();
-    void                    setMinimumDateTime (const KDateTime& minDateTime, const Qstring& minWarnMsg = Qstring());
+    void                    setMinimumDateTime (const KDateTime& minDateTime, const QString& minWarnMsg = QString());
     void                    resetMinimumDateTime ();
-    void                    setMaximumDateTime (const KDateTime& maxDateTime, const Qstring& maxWarnMsg = Qstring());
+    void                    setMaximumDateTime (const KDateTime& maxDateTime, const QString& maxWarnMsg = QString());
     void                    resetMaximumDateTime ();
-    void                    setDateDisplayFormat (KLocale:DateFormat format);
+    void                    setDateDisplayFormat (KLocale::DateFormat format);
     void                    setCalendarSystemsList (QList<KLocale::CalendarSystem> calendars);
-    void                    setDateMape (QMap<QDate, QString> dateMap);
+    void                    setDateMap (QMap<QDate, QString> dateMap);
     void                    setTimeDisplayFormat (KLocale::TimeFormatOptions formatoptions);
     void                    setTimeListInterval (int minutes);
     void                    setTimeList (QList<QTime> timeList, const QString& minWarnMsg = QString(), const QString& maxWarnMsg = QString());

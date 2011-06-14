@@ -50,21 +50,25 @@ public:
 //ig    const KCalendarSystem*  calendar () const;
     QTime                   time () const;
     KDateTime::Spec         timeSpec () const;
+    QList<KLocale::CalendarSystem> calendarSystemsList ();
+    KDateTime               minimumDateTime () const;
+    KDateTime               maximumDateTime () const;
+    KLocale::DateFormat     dateDisplayFormat ();
+    KLocale::TimeFormatOptions  timeDisplayFormat ();
+    QMap<QDate, QString>    dateMap () const;
+    QList<QTime>            timeList () const;
+    KTimeZones::ZoneMap     timeZones ();
     bool                    isValid () const;
     KDateTimeEdit::Options  options () const;
 //ig    KLocale::DateFormat     dateDisplayFormat ();
 //ig    void                    setDateDisplayFormat (KLocale::DateFormat format);
 //ig    KLocale::TimeFormatOptions  timeDisplayFormat ();
-    KDateTime               minimumDateTime () const;
     void                    resetMinimumDateTime ();
-    KDateTime               maximumDateTime () const;
     void                    resetMaximumDateTime ();
     void                    resetDateTimeRange ();
     void                    setCalendar (KCalendarSystem* calendar = 0);
     void                    setTimeZones (const KTimeZones::ZoneMap& zones);
 signals:
-    void                    calendarEntered (KLocale::CalendarSystem calendarSystem);
-    void                    calendarChanged (KLocale::CalendarSystem calendarSystem);
     void                    dateTimeEntered (const KDateTime& dateTime);
     void                    dateTimeChanged (const KDateTime& dateTime);
     void                    dateTimeEdited (const KDateTime& dateTime);
@@ -77,37 +81,33 @@ signals:
     void                    timeSpecEntered (const KDateTime::Spec& spec);
     void                    timeSpecChanged (const KDateTime::Spec& spec);
 public:
+    void                    setOptions (Options options);
     void                    setDateTime (const KDateTime& dateTime);
     void                    setDate (const QDate& date);
     void                    setCalendarSystem (KLocale::CalendarSystem calendarSystem);
     void                    setTime (const QTime& time);
     void                    setTimeSpec (const KDateTime::Spec& spec);
-    void                    setOptions (KDateTimeEdit::Options options);
-protected:
-    virtual bool            eventFilter (QObject* object, QEvent* event);
-    virtual void            assignDateTime (const KDateTime& dateTime);
-    virtual void            assignDate (const QDate& date);
-//ig    void                    assignCalendarSystem (KLocale::CalendarSystem calendarSystem);
-    virtual void            assignTime (const QTime& time);
-//ig    void                    assignTimeSpec (const KDateTime::Spec& spec);
-public:
-    QList<KLocale::CalendarSystem>  calendarSystemsList ();
-    QMap<QDate,QString>     dateMap () const;
-    int                     timeListInterval () const;
-    QList<QTime>            timeList () const;
-    KTimeZones::ZoneMap     timeZones ();
-    bool                    isValidDate () const;
-    bool                    isValidTime () const;
     void                    setDateTimeRange (const KDateTime& minDateTime, const KDateTime& maxDateTime, const QString& minWarnMsg = QString(), const QString& maxWarnMsg = QString());
     void                    setMinimumDateTime (const KDateTime& minDateTime, const QString& minWarnMsg = QString());
     void                    setMaximumDateTime (const KDateTime& maxDateTime, const QString& maxWarnMsg = QString());
-    void                    setCalendarSystemsList (QList<KLocale::CalendarSystem> calendars);
-    void                    setDateMap (QMap<QDate,QString> dateMap);
-    void                    setTimeDisplayFormat (KLocale::TimeFormatOptions formatOptions);
-    void                    setTimeListInterval (int minutes);
+    void                    setDateDisplayFormat (KLocale::DateFormat format);
+    void                    setDateMap (QMap<QDate, QString> dateMap);
+    void                    setTimeDisplayFormat (KLocale::TimeFormatOptions formatoptions);
     void                    setTimeList (QList<QTime> timeList, const QString& minWarnMsg = QString(), const QString& maxWarnMsg = QString());
 protected:
+    virtual bool            eventFilter (QObject* object, QEvent* event);
     virtual void            focusInEvent (QFocusEvent* event);
     virtual void            focusOutEvent (QFocusEvent* event);
     virtual void            resizeEvent (QResizeEvent* event);
+    virtual void            assignDateTime (const KDateTime& dateTime);
+    virtual void            assignDate (const QDate& date);
+    void                    assignCalendarSystem (KLocale::CalendarSystem calendarSystem);
+    virtual void            assignTime (const QTime& time);
+//ig    void                    assignTimeSpec (const KDateTime::Spec& spec);
+public:
+    int                     timeListInterval () const;
+    bool                    isValidDate () const;
+    bool                    isValidTime () const;
+    void                    setCalendarSystemsList (QList<KLocale::CalendarSystem> calendars);
+    void                    setTimeListInterval (int minutes);
 };

@@ -417,6 +417,8 @@ protected:
         sipType = sipType_KCharSelect;
     else if (dynamic_cast<KDateTable*>(sipCpp))
         sipType = sipType_KDateTable;
+    else if (dynamic_cast<KDateTimeEdit*>(sipCpp))
+        sipType = sipType_KDateTimeEdit;
     else if (dynamic_cast<KDateTimeWidget*>(sipCpp))
         sipType = sipType_KDateTimeWidget;
     else if (dynamic_cast<KDateWidget*>(sipCpp))

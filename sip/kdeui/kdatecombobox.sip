@@ -42,7 +42,6 @@ public:
     KDateComboBox::Options  options () const;
     KLocale::DateFormat     displayFormat ();
     QDate                   minimumDate () const;
-    void                    resetMinimumDate ();
     QDate                   maximumDate () const;
     void                    resetMaximumDate ();
     void                    setDateRange (const QDate& minDate, const QDate& maxDate, const QString& minWarnMsg = QString(), const QString& maxWarnMsg = QString());
@@ -57,6 +56,10 @@ public:
     void                    setCalendarSystem (KLocale::CalendarSystem calendarSystem);
     void                    setOptions (KDateComboBox::Options options);
     void                    setDisplayFormat (KLocale::DateFormat format);
+    void                    setMinimumDate (const QDate& minTime, const QString& minWarnMsg = QString());
+    void                    resetMinimumDate ();
+    void                    setMaximumDate (const QDate& maxDate, const QString& maxWarnMsg = QString());
+    void                    setDateMap (QMap<QDate, QString> dateMap);
 protected:
     virtual bool            eventFilter (QObject* object, QEvent* event);
     virtual void            showPopup ();
@@ -71,7 +74,4 @@ protected:
     virtual void            assignCalendarSystem (KLocale::CalendarSystem calendarSystem);
 public:
     QMap<QDate,QString>     dateMap () const;
-    void                    setMinimumDate (const QDate& minTime, const QString& minWarnMsg = QString());
-    void                    setMaximumDate (const QDate& maxDate, const QString& maxWarnMsg = QString());
-    void                    setDateMap (QMap<QDate,QString> dateMap);
 };

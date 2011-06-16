@@ -59,7 +59,7 @@ public:
     void                    setMinimumDate (const QDate& minTime, const QString& minWarnMsg = QString());
     void                    resetMinimumDate ();
     void                    setMaximumDate (const QDate& maxDate, const QString& maxWarnMsg = QString());
-    void                    setDateMap (QMap<QDate, QString> dateMap);
+    void                    setDateMap (QMap<QDate,QString> dateMap);
 protected:
     virtual bool            eventFilter (QObject* object, QEvent* event);
     virtual void            showPopup ();

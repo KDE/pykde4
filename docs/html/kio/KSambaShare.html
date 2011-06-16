@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.6 PyKDE API Reference
+        KDE 4.7 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -48,23 +48,25 @@
 <h1>KSambaShare Class Reference</h1>
 <code>from PyKDE4.kio import *</code>
 <p>
-Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+Inherits: QObject<br />
 
 
 <h2>Detailed Description</h2>
 
-<p>Similar functionality like KFileShare,
-but works only for Samba and do not need
-any suid script.
+<p>This class lists Samba user shares and monitors them for addition, update and removal.
 Singleton class, call instance() to get an instance.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changed">changed</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#KSambaShare">__init__</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isDirectoryShared">isDirectoryShared</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> path)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#sharedDirectories">sharedDirectories</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#smbConfPath">smbConfPath</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KSambaShareData.html">KSambaShareData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#getShareByName">getShareByName</a> (self, QString name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kio/KSambaShareData.html">KSambaShareData</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#getSharesByPath">getSharesByPath</a> (self, QString path)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isDirectoryShared">isDirectoryShared</a> (self, QString path)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isShareNameAvailable">isShareNameAvailable</a> (self, QString name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QStringList&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#shareNames">shareNames</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QStringList&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#sharedDirectories">sharedDirectories</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#smbConfPath">smbConfPath</a> (self)</td></tr>
 <tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KSambaShare.html">KSambaShare</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#instance">instance</a> ()</td></tr>
 </table>
@@ -80,7 +82,7 @@ Singleton class, call instance() to get an instance.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Emitted when the smb.conf file has changed
+<div class="memdoc"><p>Emitted when a share is updated, added or removed
 </p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("changed()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="KSambaShare"></a>
 <div class="memitem">
 <div class="memproto">
@@ -93,7 +95,79 @@ Singleton class, call instance() to get an instance.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="isDirectoryShared"></a>
+<div class="memdoc"></div></div><a class="anchor" name="getShareByName"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kio/KSambaShareData.html">KSambaShareData</a> getShareByName</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns the KSambaShareData object of the share name.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> the share name.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the KSambaShareData object that matches the name.
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> an empty KSambaShareData object if there isn't match for the name.
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.7
+</dd></dl>
+</p></div></div><a class="anchor" name="getSharesByPath"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../kio/KSambaShareData.html">KSambaShareData</a>] getSharesByPath</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>path</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Returns a list of KSambaShareData matching the path.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>path</em>&nbsp;</td><td> the path that wants to get KSambaShareData object.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the QList of KSambaShareData objects that matches the path.
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> an empty QList if there aren't matches for the given path.
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.7
+</dd></dl>
+</p></div></div><a class="anchor" name="isDirectoryShared"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -104,7 +178,7 @@ Singleton class, call instance() to get an instance.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>path</em></td>
 </tr>
 <tr>
@@ -116,17 +190,55 @@ Singleton class, call instance() to get an instance.
 </tr></table>
 </div>
 <div class="memdoc"><p>Whether or not the given path is shared by Samba.
+</p>
+<p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>path</em>&nbsp;</td><td> the path to check if it is shared by Samba.
-</td></tr> </table></dl>
+</td></tr>
+</table></dl>
 <p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> whether the given path is shared by Samba.
 </dd></dl>
-</p></div></div><a class="anchor" name="sharedDirectories"></a>
+</p></div></div><a class="anchor" name="isShareNameAvailable"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> sharedDirectories</td>
+<td class="memname">bool isShareNameAvailable</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>name</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Tests that a share name is valid and does not conflict with system users names or shares.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> the share name.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> whether the given name is already being used or not.
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.7
+</dd></dl>
+</p></div></div><a class="anchor" name="shareNames"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QStringList shareNames</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -134,15 +246,38 @@ Singleton class, call instance() to get an instance.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns a list of all directories shared by Samba.
+<div class="memdoc"><p>Returns the list of available shares.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a QStringList containing the user shares names.
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> an empty list if there aren't user shared directories.
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.7
+</dd></dl>
+</p></div></div><a class="anchor" name="sharedDirectories"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QStringList sharedDirectories</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a list of all directories shared by local users in Samba.
 The resulting list is not sorted.
+</p>
+<p>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> a list of all directories shared by Samba.
 </dd></dl>
 </p></div></div><a class="anchor" name="smbConfPath"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> smbConfPath</td>
+<td class="memname">QString smbConfPath</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -151,7 +286,14 @@ The resulting list is not sorted.
 </table>
 </div>
 <div class="memdoc"><p>Returns the path to the used smb.conf file
-or null if no file was found
+or empty string if no file was found
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the path to the smb.conf file
+</dd></dl> </p>
+<p>
+<dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd>
+</dd></dl>
 </p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="instance"></a>
 <div class="memitem">
 <div class="memproto">
@@ -164,7 +306,8 @@ or null if no file was found
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns the one and only instance of KSambaShare
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the one and only instance of KSambaShare.
+</dd></dl>
 </p></div></div>
 </div>
 </div>

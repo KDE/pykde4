@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.6 PyKDE API Reference
+        KDE 4.7 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -56,7 +56,10 @@ Namespace: <a href="../plasma/Plasma.html">Plasma</a><br />
 <p>This is an abstract base class which defines an interface to which Plasma's
 Applet Loading logic can communicate with a parent application. The plugin loader
 must be set before any plugins are loaded, otherwise (for safety reasons), the
-default PluginLoader implementation will be used.
+default PluginLoader implementation will be used. The reimplemented version should
+not do more than simply returning a loaded plugin. It should not init() it, and it should not
+hang on to it. The associated methods will be called only when a component of Plasma
+needs to load a _new_ plugin. (e.g. DataEngine does it's own caching).
 </p>
 <p>
 
@@ -66,22 +69,22 @@ default PluginLoader implementation will be used.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#PluginLoader">__init__</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#internalAppletInfo">internalAppletInfo</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> category)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#internalAppletInfo">internalAppletInfo</a> (self, QString category)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#internalDataEngineInfo">internalDataEngineInfo</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.Applet.html">Plasma.Applet</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#internalLoadApplet">internalLoadApplet</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, long appletId=0, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>] args=QVariantList())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.DataEngine.html">Plasma.DataEngine</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#internalLoadDataEngine">internalLoadDataEngine</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.AbstractRunner.html">Plasma.AbstractRunner</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#internalLoadRunner">internalLoadRunner</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.Service.html">Plasma.Service</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#internalLoadService">internalLoadService</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>] args, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.Applet.html">Plasma.Applet</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#internalLoadApplet">internalLoadApplet</a> (self, QString name, long appletId=0, [QVariant] args=QVariantList())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.DataEngine.html">Plasma.DataEngine</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#internalLoadDataEngine">internalLoadDataEngine</a> (self, QString name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.AbstractRunner.html">Plasma.AbstractRunner</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#internalLoadRunner">internalLoadRunner</a> (self, QString name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.Service.html">Plasma.Service</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#internalLoadService">internalLoadService</a> (self, QString name, [QVariant] args, QObject parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#internalRunnerInfo">internalRunnerInfo</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#internalServiceInfo">internalServiceInfo</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#listAppletInfo">listAppletInfo</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> category, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> parentApp=QString())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#listDataEngineInfo">listDataEngineInfo</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> parentApp=QString())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#listRunnerInfo">listRunnerInfo</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> parentApp=QString())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.Applet.html">Plasma.Applet</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#loadApplet">loadApplet</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, long appletId=0, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>] args=QVariantList())</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.DataEngine.html">Plasma.DataEngine</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#loadDataEngine">loadDataEngine</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.AbstractRunner.html">Plasma.AbstractRunner</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#loadRunner">loadRunner</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.Service.html">Plasma.Service</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#loadService">loadService</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, [<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>] args, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#standardInternalAppletInfo">standardInternalAppletInfo</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> category)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#listAppletInfo">listAppletInfo</a> (self, QString category, QString parentApp=QString())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#listDataEngineInfo">listDataEngineInfo</a> (self, QString parentApp=QString())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#listRunnerInfo">listRunnerInfo</a> (self, QString parentApp=QString())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.Applet.html">Plasma.Applet</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#loadApplet">loadApplet</a> (self, QString name, long appletId=0, [QVariant] args=QVariantList())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.DataEngine.html">Plasma.DataEngine</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#loadDataEngine">loadDataEngine</a> (self, QString name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.AbstractRunner.html">Plasma.AbstractRunner</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#loadRunner">loadRunner</a> (self, QString name)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.Service.html">Plasma.Service</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#loadService">loadService</a> (self, QString name, [QVariant] args, QObject parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#standardInternalAppletInfo">standardInternalAppletInfo</a> (self, QString category)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#standardInternalDataEngineInfo">standardInternalDataEngineInfo</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#standardInternalRunnerInfo">standardInternalRunnerInfo</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#standardInternalServiceInfo">standardInternalServiceInfo</a> (self)</td></tr>
@@ -112,7 +115,7 @@ default PluginLoader implementation will be used.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>category</em></td>
 </tr>
 <tr>
@@ -173,7 +176,7 @@ for DataEngineManager.listDataEngines.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>name</em>, </td>
 </tr>
 <tr>
@@ -185,7 +188,7 @@ for DataEngineManager.listDataEngines.
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>]&nbsp;</td>
+<td class="paramtype">[QVariant]&nbsp;</td>
 <td class="paramname"><em>args=QVariantList()</em></td>
 </tr>
 <tr>
@@ -225,7 +228,7 @@ assigned automatically.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>name</em></td>
 </tr>
 <tr>
@@ -260,7 +263,7 @@ plugin mechanisms.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>name</em></td>
 </tr>
 <tr>
@@ -295,19 +298,19 @@ plugin mechanisms.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>name</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>]&nbsp;</td>
+<td class="paramtype">[QVariant]&nbsp;</td>
 <td class="paramname"><em>args</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramtype">QObject&nbsp;</td>
 <td class="paramname"><em>parent=0</em></td>
 </tr>
 <tr>
@@ -381,13 +384,13 @@ plugin mechanisms.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>category</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>parentApp=QString()</em></td>
 </tr>
 <tr>
@@ -430,7 +433,7 @@ registered to an application.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>parentApp=QString()</em></td>
 </tr>
 <tr>
@@ -465,7 +468,7 @@ registered to an application.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>parentApp=QString()</em></td>
 </tr>
 <tr>
@@ -500,7 +503,7 @@ registered to an application.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>name</em>, </td>
 </tr>
 <tr>
@@ -512,7 +515,7 @@ registered to an application.
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>]&nbsp;</td>
+<td class="paramtype">[QVariant]&nbsp;</td>
 <td class="paramname"><em>args=QVariantList()</em></td>
 </tr>
 <tr>
@@ -548,7 +551,7 @@ assigned automatically.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>name</em></td>
 </tr>
 <tr>
@@ -579,7 +582,7 @@ assigned automatically.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>name</em></td>
 </tr>
 <tr>
@@ -606,19 +609,19 @@ assigned automatically.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>name</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">[<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>]&nbsp;</td>
+<td class="paramtype">[QVariant]&nbsp;</td>
 <td class="paramname"><em>args</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a>&nbsp;</td>
+<td class="paramtype">QObject&nbsp;</td>
 <td class="paramname"><em>parent=0</em></td>
 </tr>
 <tr>
@@ -654,7 +657,7 @@ assigned automatically.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramtype">QString&nbsp;</td>
 <td class="paramname"><em>category</em></td>
 </tr>
 <tr>

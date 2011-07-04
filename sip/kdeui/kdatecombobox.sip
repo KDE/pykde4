@@ -36,11 +36,9 @@ public:
     explicit                KDateComboBox (QWidget* parent /TransferThis/ = 0);
     virtual ~KDateComboBox ();
     QDate                   date () const;
-    KLocale::CalendarSystem  calendarSystem ();
     const KCalendarSystem*  calendar () const;
     bool                    isValid () const;
     KDateComboBox::Options  options () const;
-    KLocale::DateFormat     displayFormat ();
     QDate                   minimumDate () const;
     QDate                   maximumDate () const;
     void                    resetMaximumDate ();
@@ -74,4 +72,7 @@ protected:
     virtual void            assignCalendarSystem (KLocale::CalendarSystem calendarSystem);
 public:
     QMap<QDate,QString>     dateMap () const;
+    KLocale::CalendarSystem  calendarSystem () const;
+    bool                    isNull () const;
+    KLocale::DateFormat     displayFormat () const;
 };

@@ -46,23 +46,18 @@ public:
     virtual ~KDateTimeEdit ();
     KDateTime               dateTime () const;
     QDate                   date () const;
-    KLocale::CalendarSystem  calendarSystem ();
 //ig    const KCalendarSystem*  calendar () const;
     QTime                   time () const;
     KDateTime::Spec         timeSpec () const;
-    QList<KLocale::CalendarSystem>  calendarSystemsList ();
     KDateTime               minimumDateTime () const;
     KDateTime               maximumDateTime () const;
-    KLocale::DateFormat     dateDisplayFormat ();
-    KLocale::TimeFormatOptions  timeDisplayFormat ();
+//ig    KLocale::DateFormat     dateDisplayFormat ();
+//ig    KLocale::TimeFormatOptions  timeDisplayFormat ();
     QMap<QDate,QString>     dateMap () const;
     QList<QTime>            timeList () const;
-    KTimeZones::ZoneMap     timeZones ();
     bool                    isValid () const;
     KDateTimeEdit::Options  options () const;
-//ig    KLocale::DateFormat     dateDisplayFormat ();
 //ig    void                    setDateDisplayFormat (KLocale::DateFormat format);
-//ig    KLocale::TimeFormatOptions  timeDisplayFormat ();
     void                    resetMinimumDateTime ();
     void                    resetMaximumDateTime ();
     void                    resetDateTimeRange ();
@@ -114,4 +109,12 @@ signals:
     void                    calendarChanged (KLocale::CalendarSystem calendarSystem);
 public:
     void                    setOptions (KDateTimeEdit::Options options);
+    KLocale::CalendarSystem  calendarSystem () const;
+    QList<KLocale::CalendarSystem>  calendarSystemsList () const;
+    KLocale::DateFormat     dateDisplayFormat () const;
+    KLocale::TimeFormatOptions  timeDisplayFormat () const;
+    KTimeZones::ZoneMap     timeZones () const;
+    bool                    isNull () const;
+    bool                    isNullDate () const;
+    bool                    isNullTime () const;
 };

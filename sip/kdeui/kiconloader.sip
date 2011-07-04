@@ -123,6 +123,8 @@ public:
     ~KIconLoader ();
 signals:
     void                    iconLoaderSettingsChanged ();
+public:
+    void                    drawOverlays (const QStringList& overlays, QPixmap& pixmap, KIconLoader::Group group, int state = KIconLoader::DefaultState) const;
 };
 // KIconLoader
 

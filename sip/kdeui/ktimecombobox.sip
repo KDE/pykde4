@@ -37,7 +37,6 @@ public:
     QTime                   time () const;
     bool                    isValid () const;
     KTimeComboBox::Options  options () const;
-    KLocale::TimeFormatOptions  displayFormat ();
     QTime                   minimumTime () const;
     void                    resetMinimumTime ();
     QTime                   maximumTime () const;
@@ -70,4 +69,6 @@ public:
     void                    setMaximumTime (const QTime& maxTime, const QString& maxWarnMsg = QString());
     void                    setTimeListInterval (int minutes);
     void                    setTimeList (QList<QTime> timeList, const QString& minWarnMsg = QString(), const QString& maxWarnMsg = QString());
+    bool                    isNull () const;
+    KLocale::TimeFormatOptions  displayFormat () const;
 };

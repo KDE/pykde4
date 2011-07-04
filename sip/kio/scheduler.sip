@@ -65,6 +65,8 @@ public:
     static bool             isSlaveOnHoldFor (const KUrl& url);
 signals:
     void                    slaveOnHoldListChanged ();
+public:
+    static void             updateInternalMetaData (KIO::SimpleJob* job);
 };
 // Scheduler
 

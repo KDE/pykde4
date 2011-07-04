@@ -65,6 +65,8 @@ public:
     ~Meter ();
 protected:
     QSizeF                  sizeHint (Qt::SizeHint which, const QSizeF& constraint = QSizeF()) const;
+signals:
+    void                    valueChanged (const int& value);
 };
 // Meter
 

@@ -109,6 +109,7 @@ def processUI(uifile, output_filename=None, exe=False, indent=4):
     if output_filename is not None:
         output.close()
 
+
 def main():
 
     usage = "pykdeuic4 [-h] [-e] [-o output_file] ui_file"
@@ -132,6 +133,7 @@ def main():
     output_filename = options.output_filename
 
     processUI(source_ui, output_filename, exe)
+
 
 if __name__ == '__main__':
     main()

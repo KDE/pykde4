@@ -38,64 +38,11 @@ from PyKDE4 import kdecore
 from PyKDE4 import kdeui
 """
 
-# Override how messages are translated.
-original_i18n_string = qtproxies.i18n_string
-
-class kde_i18n_string(qtproxies.i18n_string):
-
-    "Wrapper around qtproxies.i18n_string to add support for kdecore's i18n."
-
-    def __init__(self, string, disambig=None):
-        original_i18n_string.__init__(self,string, disambig)
-
-    def __str__(self):
-        return "kdecore.i18n(%s)" % (qtproxies.as_string(self.string),)
-
-qtproxies.i18n_string = kde_i18n_string
-
-def kdeFilter():
-
-    """Filter used to make the UI compiler PyKDE4-aware"""
-
-    import PyKDE4.kdeui
-    import PyKDE4.kio
-
-    # Load in the lists of KDE widgets.
-    kde_widgets = {}
-    for name,mod in [ ('PyKDE4.kdeui',PyKDE4.kdeui), ('PyKDE4.kio',PyKDE4.kio)]:
-        for symbol in dir(mod):
-            kde_widgets[symbol] = name
-
-    def _kdefilter(widgetname, baseclassname, module):
-
-        if widgetname in kde_widgets:
-            return (MATCH, (widgetname, baseclassname, kde_widgets[widgetname]))
-        else:
-            return (NO_MATCH, None)
-    return _kdefilter
-
-def processUI(uifile, output_filename=None, exe=False, indent=4):
-
-    """Compile and process the UI file."""
-
-    if output_filename is not None:
-        output = open(output_filename,'w')
-    else:
-        output = sys.stdout
-
-    # Write out the header.
-    output.write(HEADER % (uifile, time.ctime()))
-    indenter.indentwidth = indent
-    comp = compiler.UICompiler()
-    comp.factory._cwFilters.append(kdeFilter())
-    winfo = comp.compileUi(uifile, output, None)
-
-    if exe:
-        output.write("""
+DISPLAY_CODE = """
 if __name__ == '__main__':
     import sys
     global app
-    class MainWin(kdeui.KMainWindow, """ + winfo['uiclass'] + """):
+    class MainWin(kdeui.KMainWindow, %s):
         def __init__ (self, *args):
             kdeui.KMainWindow.__init__ (self)
             rootWidget = QtGui.QWidget(self)
@@ -123,7 +70,41 @@ if __name__ == '__main__':
     mainWindow.show()
     app.lastWindowClosed.connect(app.quit)
     app.exec_ ()
-""")
+"""
+
+# Override how messages are translated.
+original_i18n_string = qtproxies.i18n_string
+
+class kde_i18n_string(qtproxies.i18n_string):
+
+    "Wrapper around qtproxies.i18n_string to add support for kdecore's i18n."
+
+    def __init__(self, string, disambig=None):
+        original_i18n_string.__init__(self,string, disambig)
+
+    def __str__(self):
+        return "kdecore.i18n(%s)" % (qtproxies.as_string(self.string),)
+
+qtproxies.i18n_string = kde_i18n_string
+
+
+def processUI(uifile, output_filename=None, exe=False, indent=4):
+
+    """Compile and process the UI file."""
+
+    if output_filename is not None:
+        output = open(output_filename,'w')
+    else:
+        output = sys.stdout
+
+    # Write out the header.
+    output.write(HEADER % (uifile, time.ctime()))
+    indenter.indentwidth = indent
+    comp = compiler.UICompiler()
+    winfo = comp.compileUi(uifile, output, None)
+
+    if exe:
+        output.write(DISPLAY_CODE % winfo["uiclass"])
 
     if output_filename is not None:
         output.close()

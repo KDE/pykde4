@@ -22,7 +22,7 @@ namespace Phonon
 class Mrl : QUrl
 {
 %TypeHeaderCode
-#include <mrl.h>
+#include <phonon/mrl.h>
 %End
 
 public:
@@ -42,6 +42,6 @@ public:
 };
 %ModuleHeaderCode
 //ctscc
-#include <mrl.h>
+#include <phonon/mrl.h>
 #include <qurl.h>
 %End

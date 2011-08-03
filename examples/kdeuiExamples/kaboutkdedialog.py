@@ -2,7 +2,7 @@ from PyQt4.QtCore import SIGNAL, Qt
 from PyQt4.QtGui import QLabel
 
 from PyKDE4.kdecore import i18n
-from PyKDE4.kdeui import KVBox, KHBox, KPushButton, KAboutKdeDialog
+from PyKDE4.kdeui import KVBox, KHBox, KPushButton, KHelpMenu
 
 helpText = """The KAboutKdeDialog is the dialog that is normally
 available from the help menu.
@@ -25,14 +25,9 @@ class MainFrame(KVBox):
         self.button = KPushButton(i18n("Show %s" % dialogName), hBox)
         self.button.setMaximumSize (250, 30)
        
-        self.button.clicked.connect(self.showDialog)
+        self.helpmenu = KHelpMenu(parent, "", False)
+        self.button.clicked.connect(self.helpmenu.aboutKDE)
 
-    def showDialog(self):
-
-        """Slot called by the clicked() slot of the KPushButton."""
-
-        dlg = KAboutKdeDialog (self.parent ())
-        dlg.exec_ ()
 
 # This example can be run standalone
 

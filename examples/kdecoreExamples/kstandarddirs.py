@@ -51,7 +51,7 @@ class MainFrame(KVBox):
         # currentIndexChanged can also be emitted with an int (the index that
         # changed)
 
-        self.combo.currentIndexChanged[QString].connect(self.slotIndexChanged)
+        combo.currentIndexChanged[QString].connect(self.slotIndexChanged)
 
         lBox          = KVBox (hBox)
         listLbl       = QLabel ("Directories", lBox)

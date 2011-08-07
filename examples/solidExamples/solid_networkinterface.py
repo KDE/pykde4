@@ -3,7 +3,7 @@ from PyQt4.QtGui import QSizePolicy, QTreeWidget, QTreeWidgetItem, QLabel
 
 from PyKDE4.kdecore import i18n
 from PyKDE4.solid import Solid, Solid
-from PyKDE4.kdeui import KVBox, KHBox, KTextEdit
+from PyKDE4.kdeui import KVBox, KHBox
 
 helpText = """The Solid class discovers information about the hardware on a machine.
 
@@ -82,11 +82,11 @@ if __name__ == '__main__':
     
     #-------------------- main ------------------------------------------------
     
-    appName     = "Solid_StorageDrive"
+    appName     = "Solid_NetworkInterface"
     catalog     = ""
-    programName = ki18n ("Solid_StorageDrive")                 #ki18n required here
+    programName = ki18n ("Solid_NetworkInterface")                 #ki18n required here
     version     = "1.0"
-    description = ki18n ("Solid.StorageDrive Example")         #ki18n required here
+    description = ki18n ("Solid.NetworkInterface Example")         #ki18n required here
     license     = KAboutData.License_GPL
     copyright   = ki18n ("(c) 2007 Jim Bublitz")    #ki18n required here
     text        = ki18n ("none")                    #ki18n required here

@@ -3,7 +3,7 @@ from PyQt4.QtGui import QSizePolicy, QTreeWidget, QTreeWidgetItem, QLabel
 
 from PyKDE4.kdecore import i18n
 from PyKDE4.solid import Solid
-from PyKDE4.kdeui import KVBox, KHBox, KColorButton
+from PyKDE4.kdeui import KVBox, KHBox
 
 helpText = """The Solid class discovers information about the hardware on a machine.
 

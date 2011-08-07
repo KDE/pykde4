@@ -22,7 +22,7 @@ class MainFrame(KVBox):
         self.layout ().setAlignment (self.help, Qt.AlignHCenter)
         self.setSpacing (10)
         
-        display = QTreeWidget ()        
+        display = QTreeWidget (self)        
         display.setHeaderLabels (["Processor", "Max Speed", "Number", "Change Freq"])
         
         # retrieve a list of Solid.Device for this machine
@@ -60,11 +60,11 @@ if __name__ == '__main__':
     
     #-------------------- main ------------------------------------------------
     
-    appName     = "Solid_StorageDrive"
+    appName     = "Solid_Processor"
     catalog     = ""
-    programName = ki18n ("Solid_StorageDrive")                 #ki18n required here
+    programName = ki18n ("Solid_Processor")                 #ki18n required here
     version     = "1.0"
-    description = ki18n ("Solid.StorageDrive Example")         #ki18n required here
+    description = ki18n ("Solid.Processor Example")         #ki18n required here
     license     = KAboutData.License_GPL
     copyright   = ki18n ("(c) 2007 Jim Bublitz")    #ki18n required here
     text        = ki18n ("none")                    #ki18n required here

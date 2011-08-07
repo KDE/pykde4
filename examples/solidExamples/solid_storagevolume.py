@@ -78,11 +78,11 @@ if __name__ == '__main__':
     
     #-------------------- main ------------------------------------------------
     
-    appName     = "Solid_StorageDrive"
+    appName     = "Solid_StorageVolume"
     catalog     = ""
-    programName = ki18n ("Solid_StorageDrive")                 #ki18n required here
+    programName = ki18n ("Solid_StorageVolume")                 #ki18n required here
     version     = "1.0"
-    description = ki18n ("Solid.StorageDrive Example")         #ki18n required here
+    description = ki18n ("Solid.StorageVolume Example")         #ki18n required here
     license     = KAboutData.License_GPL
     copyright   = ki18n ("(c) 2007 Jim Bublitz")    #ki18n required here
     text        = ki18n ("none")                    #ki18n required here

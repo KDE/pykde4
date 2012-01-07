@@ -236,7 +236,11 @@ SIP_SSIZE_T len, start, stop, step, slicelength, i;
         
         len = sipCpp->count();
         
+#if PY_VERSION_HEX >= 0x03020000
+        if (PySlice_GetIndicesEx(a0, len, &start, &stop, &step, &slicelength) < 0)
+#else
         if (PySlice_GetIndicesEx((PySliceObject *)a0, len, &start, &stop, &step, &slicelength) < 0)
+#endif
             sipIsErr = 1;
         else
         {

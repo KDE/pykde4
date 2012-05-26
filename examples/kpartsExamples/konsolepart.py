@@ -40,6 +40,7 @@ class MainWindow (KMainWindow):
         service = KService.serviceByDesktopName("konsolepart");
         factory = KPluginLoader(service.library()).factory()
         part = factory.create(self)
+        part.destroyed.connect(self.deleteLater)
         self.setCentralWidget(part.widget())
         terminal = KTerminal(part).terminalInterfaceV2()
         terminal.startProgram("/bin/bash", QStringList())

@@ -55,6 +55,7 @@ private:
 //end
 public:
     ~KConfigDialog ();
+                            KConfigDialog (QWidget* parent /TransferThis/, const QString& name, KCoreConfigSkeleton* config);
 };
 // KConfigDialog
 

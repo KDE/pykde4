@@ -58,7 +58,8 @@ public:
         AllowLink,
         Dangerous,
         PlainCaption,
-        NoExec
+        NoExec,
+        WindowModal
     };
 
     typedef QFlags<KMessageBox::Option> Options;

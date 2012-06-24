@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
 <code>from PyKDE4.kdeui import *</code>
 <p>
 Inherits: <a href="../kdeui/KDialog.html">KDialog</a> &#x2192; QDialog &#x2192; QWidget &#x2192; QObject<br />
-
+Subclasses: <a href="../kdeui/KReplaceDialog.html">KReplaceDialog</a><br />
 
 <h2>Detailed Description</h2>
 
@@ -94,7 +94,20 @@ To create a non-modal find dialog:
    }
 </pre>
 Don't forget to delete and reset m_findDia when closed.
-(But do NOT delete your KFind object at that point, it's needed for "Find Next")
+(But do NOT delete your KFind object at that point, it's needed for "Find Next".)
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> If using a non-modal find dialog, in the slot connected to the okClicked()
+signal you need to check if a regular expression has been entered and if so,
+whether it is valid. Otherwise, if it is invalid, the user will see an error
+message followed unexpectedly by a search taking place.
+</dd></dl> <pre class="fragment">
+   if ( (m_findDia-&gt;options() &amp; KFind.RegularExpression)
+       &amp;&amp; !QRegExp(m_findDia-&gt;pattern()).isValid() )
+   {
+       // Don't attempt to search
+   }
+</pre>
 </p>
 <p>
 To use your own extensions: see findExtension().

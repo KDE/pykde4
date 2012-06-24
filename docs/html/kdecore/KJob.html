@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -49,14 +49,14 @@
 <code>from PyKDE4.kdecore import *</code>
 <p>
 Inherits: QObject<br />
-
+Subclasses: <a href="../kdecore/KCompositeJob.html">KCompositeJob</a><br />
 
 <h2>Detailed Description</h2>
 
 <p>The base class for all jobs.
-For all jobs created in an application, the code looks like
 </p>
 <p>
+For all jobs created in an application, the code looks like
 <pre class="fragment">
  void SomeClass.methodWithAsynchronousJobCall()
  {
@@ -70,8 +70,6 @@ For all jobs created in an application, the code looks like
 </p>
 <p>
 And handleResult is usually at least:
-</p>
-<p>
 <pre class="fragment">
  void SomeClass.handleResult( KJob *job )
  {
@@ -82,8 +80,6 @@ And handleResult is usually at least:
 </p>
 <p>
 With the synchronous interface the code looks like
-</p>
-<p>
 <pre class="fragment">
  void SomeClass.methodWithSynchronousJobCall()
  {
@@ -100,13 +96,21 @@ With the synchronous interface the code looks like
 </pre>
 </p>
 <p>
-@note: KJob and its subclasses is meant to be used
-in a fire-and-forget way. It's deleting itself when
-it has finished using deleteLater() so the job
-instance disappears after the next event loop run.
+Subclasses must implement start(), which should trigger
+the execution of the job (although the work should be
+done asynchronously). errorString() should also be
+reimplemented by any subclasses that introduce new
+error codes.
+</p>
+<p>
+@note: KJob and its subclasses are meant to be used
+in a fire-and-forget way. Jobs will delete themselves
+when they finish using deleteLater() (although this
+behaviour can be changed), so a job instance will
+disappear after the next event loop run.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj1247217772">&lt;anonymous&gt;</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoError, KilledJobError, UserDefinedError&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj224577260">&lt;anonymous&gt;</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoError, KilledJobError, UserDefinedError&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Capability">Capability</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoCapabilities, Killable, Suspendable&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#KillVerbosity">KillVerbosity</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Quietly, EmitResult&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Unit">Unit</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Bytes, Files, Directories&nbsp;}</td></tr>
@@ -386,6 +390,8 @@ Please connect to this signal instead of finished.
 </table>
 </div>
 <div class="memdoc"><p>Aborts this job quietly.
+</p>
+<p>
 This simply kills the job, no error reporting or job deletion should be involved.
 </p>
 <p>
@@ -534,6 +540,8 @@ Emits the speed signal and starts the timer for removing that info
 </table>
 </div>
 <div class="memdoc"><p>Returns the error code, if there has been an error.
+</p>
+<p>
 Only call this method from the slot connected to result().
 </p>
 <p>
@@ -551,22 +559,23 @@ Only call this method from the slot connected to result().
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Converts an error code and a non-i18n error message into an
-error message in the current language. The low level (non-i18n)
-error message (usually a url) is put into the translated error
-message using %1.
+<div class="memdoc"><p>A human-readable error message.
 </p>
 <p>
-Example for errid == ERR_CANNOT_OPEN_FOR_READING:
+This provides a translated, human-readable description of the
+error. Only call if error is not 0.
+</p>
+<p>
+Subclasses should implement this to create a translated
+error message from the error code and error text.
+For example:
 <pre class="fragment">
-   i18n( "Could not read\n%1" , errorText() );
+ if (error() == ReadFailed)
+   i18n( "Could not read \"%1\"", errorText() );
 </pre>
-Only call if error is not 0.
 </p>
 <p>
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> the error message and if there is no error, a message
-telling the user that the app is broken, so check with
-error() whether there is an error
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a translated error message, providing error() is 0
 </dd></dl>
 </p></div></div><a class="anchor" name="errorText"></a>
 <div class="memitem">
@@ -581,12 +590,17 @@ error() whether there is an error
 </table>
 </div>
 <div class="memdoc"><p>Returns the error text if there has been an error.
-Only call if error is not 0.
-This is really internal, better use errorString.
 </p>
 <p>
-<dl class="return" compact><dt><b>Returns:</b></dt><dd> a string to help understand the error, usually the url
-related to the error. Only valid if error() is not 0.
+Only call if error is not 0.
+</p>
+<p>
+This is usually some extra data associated with the error,
+such as a URL. Use errorString() to get a human-readable,
+translated message.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a string to help understand the error
 </dd></dl>
 </p></div></div><a class="anchor" name="exec"></a>
 <div class="memitem">
@@ -681,6 +695,8 @@ finishing.
 </tr></table>
 </div>
 <div class="memdoc"><p>Aborts this job.
+</p>
+<p>
 This kills and deletes the job.
 </p>
 <p>
@@ -873,8 +889,22 @@ of the job.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets the error code. It should be called when an error
+<div class="memdoc"><p>Sets the error code.
+</p>
+<p>
+It should be called when an error
 is encountered in the job, just before calling emitResult().
+</p>
+<p>
+You should define an (anonymous) enum of error codes,
+with values starting at KJob.UserDefinedError, and use
+those. For example,
+<pre class="fragment">
+ enum {
+   InvalidFoo = UserDefinedError,
+   BarNotFound
+ };
+</pre>
 </p>
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
@@ -905,15 +935,23 @@ is encountered in the job, just before calling emitResult().
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Sets the error text. It should be called when an error
+<div class="memdoc"><p>Sets the error text.
+</p>
+<p>
+It should be called when an error
 is encountered in the job, just before calling emitResult().
+</p>
+<p>
+Provides extra information about the error that cannot be
+determined directly from the error code. For example, a
+URL or filename. This string is not normally translatable.
 </p>
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>errorText</em>&nbsp;</td><td> the error text
 </td></tr> </table></dl>
-<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> emitResult()
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> emitResult(), errorString(), setError()
 </dd></dl>
 </p></div></div><a class="anchor" name="setPercent"></a>
 <div class="memitem">
@@ -1076,8 +1114,10 @@ attached to the job, the UI delegate will be deleted with the job.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Starts the job asynchronously. When the job is finished,
-result() is emitted.
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Starts the job asynchronously.
+</p>
+<p>
+When the job is finished, result() is emitted.
 </p>
 <p>
 Warning: Never implement any synchronous workload in this method. This method
@@ -1172,7 +1212,7 @@ KJob, use setTotalAmount() instead.
 <p>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> the delegate attached to this job, or 0 if there's no such delegate
 </dd></dl>
-</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj1247217772"></a>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj224577260"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">

@@ -128,6 +128,8 @@ private:
 public:
     ~SlaveInterface ();
     void                    setConnection (KIO::Connection* connection);
+    QWidget*                window () const;
+    void                    setWindow (QWidget* window);
 };
 // SlaveInterface
 

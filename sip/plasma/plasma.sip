@@ -158,7 +158,8 @@ enum ComponentType
     RunnerComponent,
     AnimatorComponent,
     ContainmentComponent,
-    WallpaperComponent
+    WallpaperComponent,
+    GenericComponent
 };
 
 typedef QFlags<Plasma::ComponentType> ComponentTypes;

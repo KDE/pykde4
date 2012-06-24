@@ -48,6 +48,8 @@ public:
         sipType = sipType_Akonadi_AddressAttribute;
     else if (dynamic_cast<Akonadi::CollectionQuotaAttribute*>(sipCpp))
         sipType = sipType_Akonadi_CollectionQuotaAttribute;
+    else if (dynamic_cast<Akonadi::EntityDeletedAttribute*>(sipCpp))
+        sipType = sipType_Akonadi_EntityDeletedAttribute;
     else if (dynamic_cast<Akonadi::EntityDisplayAttribute*>(sipCpp))
         sipType = sipType_Akonadi_EntityDisplayAttribute;
     else if (dynamic_cast<Akonadi::EntityHiddenAttribute*>(sipCpp))
@@ -72,6 +74,7 @@ private:
 #include <akonadi/kmime/addressattribute.h>
 #include <akonadi/attribute.h>
 #include <akonadi/collectionquotaattribute.h>
+#include <akonadi/entitydeletedattribute.h>
 #include <akonadi/entitydisplayattribute.h>
 #include <akonadi/entityhiddenattribute.h>
 #include <akonadi/indexpolicyattribute.h>

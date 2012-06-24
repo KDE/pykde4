@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
 <code>from PyKDE4.plasma import *</code>
 <p>
 Inherits: QObject<br />
-
+Subclasses: <a href="../plasma/Plasma.FrameSvg.html">Plasma.FrameSvg</a><br />
 Namespace: <a href="../plasma/Plasma.html">Plasma</a><br />
 <h2>Detailed Description</h2>
 
@@ -108,7 +108,16 @@ optimizations to help lower the cost of painting SVGs, such as caching.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("repaintNeeded()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="sizeChanged"></a>
+<div class="memdoc"><p>Emitted whenever the SVG data has changed in such a way that a repaint is required.
+Any usage of an Svg object that does the painting itself must connect to this signal
+and respond by updating the painting. Note that connected to Theme.themeChanged is
+incorrect in such a use case as the Svg itself may not be updated yet nor may theme
+change be the only case when a repaint is needed. Also note that classes or QML code
+which take Svg objects as parameters for their own painting all respond to this signal
+so that in those cases manually responding to the signal is unnecessary; ONLY when
+direct, manual painting with an Svg object is done in application code is this signal
+used.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("repaintNeeded()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="sizeChanged"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -120,7 +129,9 @@ optimizations to help lower the cost of painting SVGs, such as caching.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("sizeChanged()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="Svg"></a>
+<div class="memdoc"><p>Emitted whenever the size of the Svg is changed. <dl class="see" compact><dt><b>See also:</b></dt><dd> resize()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("sizeChanged()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="Svg"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

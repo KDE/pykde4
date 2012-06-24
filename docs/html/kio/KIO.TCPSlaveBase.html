@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -70,6 +70,7 @@ A call to foo() results in a call to slotFoo() on the other end.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#TCPSlaveBase">__init__</a> (self, <a href="../kio/KIO.TCPSlaveBase.html">KIO.TCPSlaveBase</a> other)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#atEnd">atEnd</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#connectToHost">connectToHost</a> (self, QString protocol, QString host, int port)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#connectToHost">connectToHost</a> (self, QString host, int port, QString errorString=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#disconnectFromHost">disconnectFromHost</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isAutoSsl">isAutoSsl</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isConnected">isConnected</a> (self)</td></tr>
@@ -203,22 +204,79 @@ therefore be transparent to higher layers.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Performs the initial TCP connection stuff and/or
-SSL handshaking as necessary.
+<div class="memdoc"><p>Connects to the specified host and port.
 </p>
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>protocol</em>&nbsp;</td><td> the protocol being used
-
-<tr><td></td><td valign="top"><em>host</em>&nbsp;</td><td> hostname
+<tr><td></td><td valign="top"><em>host</em>&nbsp;</td><td> host name
 
 <tr><td></td><td valign="top"><em>port</em>&nbsp;</td><td> port number
+
+<tr><td></td><td valign="top"><em>errorString</em>&nbsp;</td><td> if not NULL, this string will contain error information
+on why the connection request failed.
 </td></tr>
 </table></dl>
-<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> on succes, true is returned.
-on failure, false is returned and an appropriate
-error message is sent to the application.
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> on success, 0 is returned. on failure, a KIO.Error code is returned.
+</dd></dl> errorString, if not NULL, will contain the appropriate error message
+that can be sent back to the client.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.7.2
+</dd></dl>
+</p></div></div><a class="anchor" name="connectToHost"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int connectToHost</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>host</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>port</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>errorString=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Connects to the specified host and port.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>host</em>&nbsp;</td><td> host name
+
+<tr><td></td><td valign="top"><em>port</em>&nbsp;</td><td> port number
+
+<tr><td></td><td valign="top"><em>errorString</em>&nbsp;</td><td> if not NULL, this string will contain error information
+on why the connection request failed.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> on success, 0 is returned. on failure, a KIO.Error code is returned.
+</dd></dl> errorString, if not NULL, will contain the appropriate error message
+that can be sent back to the client.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.7.2
 </dd></dl>
 </p></div></div><a class="anchor" name="disconnectFromHost"></a>
 <div class="memitem">

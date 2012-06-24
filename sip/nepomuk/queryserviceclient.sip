@@ -51,6 +51,7 @@ public:
 signals:
     void                    resultCount (int count);
     void                    error (const QString& errorMessage);
+    void                    serviceAvailabilityChanged (bool running);
 };
 };
 };

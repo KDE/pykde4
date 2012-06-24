@@ -36,7 +36,8 @@ public:
         ScaledAndCroppedResize,
         TiledResize,
         CenterTiledResize,
-        MaxpectResize
+        MaxpectResize,
+        LastResizeMethod
     };
 
     explicit                Wallpaper (QObject* parent /TransferThis/ = 0);
@@ -103,6 +104,11 @@ public:
     bool                    supportsMimetype (const QString& mimetype) const;
 protected:
     void                    addUrls (const KUrl::List& urls);
+public:
+    Plasma::Wallpaper::ResizeMethod  resizeMethodHint () const;
+    QSizeF                  targetSizeHint () const;
+protected:
+    void                    render (const QImage& image, const QSize& size, Plasma::Wallpaper::ResizeMethod resizeMethod = Plasma::Wallpaper::ScaledResize, const QColor& color = QColor(0,0,0));
 };
 // Wallpaper
 

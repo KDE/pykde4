@@ -62,6 +62,7 @@ public:
     void                    setParentCollection (const Akonadi::Collection& parent);
     void                    setRemoteRevision (const QString& revision);
     QString                 remoteRevision () const;
+    bool                    operator < (const Akonadi::Entity& other) const;
 };
 // Entity
 

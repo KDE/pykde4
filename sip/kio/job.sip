@@ -65,6 +65,7 @@ KIO::StatJob*           mostLocalUrl (const KUrl& url, KIO::JobFlags flags = KIO
 //ig KIO::FileCopyJob*       file_copy (const KUrl& src, const KUrl& dest, KIO::JobFlags flags);
 KIO::TransferJob*       http_post (const KUrl& url, QIODevice* device, qint64 size = -1, KIO::JobFlags flags = KIO::DefaultFlags);
 KIO::StoredTransferJob*  storedHttpPost (QIODevice* device, const KUrl& url, qint64 size = -1, KIO::JobFlags flags = KIO::DefaultFlags);
+KIO::TransferJob*       http_delete (const KUrl& url, KIO::JobFlags flags = KIO::DefaultFlags);
 };
 // KIO
 

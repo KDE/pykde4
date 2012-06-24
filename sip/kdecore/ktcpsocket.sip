@@ -141,6 +141,8 @@ public:
         SslV3,
         TlsV1,
         SslV3_1,
+        TlsV1SslV3,
+        SecureProtocols,
         AnySslVersion
     };
 
@@ -251,6 +253,8 @@ public:
     QVariant                socketOption (QAbstractSocket::SocketOption options) const;
     void                    setSocketOption (QAbstractSocket::SocketOption options, const QVariant& value);
     void                    setVerificationPeerName (const QString& hostName);
+signals:
+    void                    encryptedBytesWritten (qint64 written);
 };
 // KTcpSocket
 
@@ -266,6 +270,7 @@ public:
                             KSslErrorUiData (const KTcpSocket* socket);
                             KSslErrorUiData (const KSslErrorUiData& other);
     ~KSslErrorUiData ();
+                            KSslErrorUiData (const QSslSocket* socket);
 };
 // KSslErrorUiData
 

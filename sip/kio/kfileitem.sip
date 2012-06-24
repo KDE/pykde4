@@ -113,6 +113,7 @@ public:
     KUrl                    nepomukUri () const;
     QString                 comment () const;
 //ig    KUrl                    mostLocalUrl () const;
+    bool                    isSlow () const;
 };
 // KFileItem
 

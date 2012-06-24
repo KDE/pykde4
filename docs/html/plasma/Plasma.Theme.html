@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -76,7 +76,7 @@ file system paths to SVGs by name.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#ColorRole">ColorRole</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;TextColor, HighlightColor, BackgroundColor, ButtonTextColor, ButtonBackgroundColor, LinkColor, VisitedLinkColor, ButtonHoverColor, ButtonFocusColor, ViewTextColor, ViewBackgroundColor, ViewHoverColor, ViewFocusColor&nbsp;}</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#FontRole">FontRole</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;DefaultFont, DesktopFont&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#FontRole">FontRole</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;DefaultFont, DesktopFont, SmallestFont&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#themeChanged">themeChanged</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
@@ -106,6 +106,7 @@ file system paths to SVGs by name.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#settingsChanged">settingsChanged</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#styleSheet">styleSheet</a> (self, QString css=QString())</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#themeName">themeName</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toolTipDelay">toolTipDelay</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#useGlobalSettings">useGlobalSettings</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#useNativeWidgetStyle">useNativeWidgetStyle</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#wallpaperPath">wallpaperPath</a> (self, QSize size=QSize())</td></tr>
@@ -127,8 +128,12 @@ file system paths to SVGs by name.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Emitted when the user changes the theme. SVGs should be reloaded at
-that point
+<div class="memdoc"><p>Emitted when the user changes the theme. Stylesheet usage, colors, etc. should
+be updated at this point. However, SVGs should *not* be repainted in response
+to this signal; connect to Svg.repaintNeeded() instead for that, as Svg objects
+need repainting not only when themeChanged() is emitted; moreover Svg objects
+connect to and respond appropriately to themeChanged() internally, emitting
+Svg.repaintNeeded() at an appropriate time.
 </p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("themeChanged()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="Theme"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1017,6 +1022,20 @@ matching Plasma.Theme.
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the name of the theme.
 </dd></dl>
+</p></div></div><a class="anchor" name="toolTipDelay"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int toolTipDelay</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the default tool tip delay; -1 means "no tooltips"
+</dd></dl>
 </p></div></div><a class="anchor" name="useGlobalSettings"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1154,7 +1173,7 @@ is passed in, then a default size will be provided instead.
 </table>
 </div>
 <div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>DefaultFont</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>DesktopFont</em>&nbsp;</td><td></table>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>DefaultFont</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>DesktopFont</em>&nbsp;</td><td><tr><td valign="top"><em>SmallestFont</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

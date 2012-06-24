@@ -86,6 +86,8 @@ private:
 public:
     ~TCPSlaveBase ();
     typedef QFlags<KIO::TCPSlaveBase::SslResultDetail> SslResult;
+protected:
+    int                     connectToHost (const QString& host, quint16 port, QString* errorString = 0);
 };
 // TCPSlaveBase
 

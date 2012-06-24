@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
 <code>from PyKDE4.akonadi import *</code>
 <p>
 Inherits: QObject<br />
-
+Subclasses: <a href="../akonadi/Akonadi.ChangeRecorder.html">Akonadi.ChangeRecorder</a><br />
 Namespace: <a href="../akonadi/Akonadi.html">Akonadi</a><br />
 <h2>Detailed Description</h2>
 
@@ -119,6 +119,7 @@ To do: Special case for collection content counts changed
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Monitor">__init__</a> (self, QObject parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.CollectionFetchScope.html">Akonadi.CollectionFetchScope</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#collectionFetchScope">collectionFetchScope</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#collectionsMonitored">collectionsMonitored</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fetchChangedOnly">fetchChangedOnly</a> (self, bool enable)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fetchCollection">fetchCollection</a> (self, bool enable)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fetchCollectionStatistics">fetchCollectionStatistics</a> (self, bool enable)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ignoreSession">ignoreSession</a> (self, <a href="../akonadi/Akonadi.Session.html">Akonadi.Session</a> session)</td></tr>
@@ -841,6 +842,59 @@ for an example.
 </p>
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+</dd></dl>
+</p></div></div><a class="anchor" name="fetchChangedOnly"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> fetchChangedOnly</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>enable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Instructs the monitor to fetch only those parts that were changed and
+were requested in the fetch scope.
+</p>
+<p>
+This is taken in account only for item modifications.
+Example usage:
+<pre class="fragment">
+   monitor-&gt;itemFetchScope().fetchFullPayload( true );
+   monitor-&gt;fetchChangedOnly(true);
+</pre>
+</p>
+<p>
+In the example if an item was changed, but its payload was not, the full
+payload will not be retrieved.
+If the item's payload was changed, the monitor retrieves the changed
+payload as well.
+</p>
+<p>
+The default is to fetch everything requested.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.8
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>enable</em>&nbsp;</td><td> true to enable the feature, false means everything
+that was requested will be fetched.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> void
 </dd></dl>
 </p></div></div><a class="anchor" name="fetchCollection"></a>
 <div class="memitem">

@@ -27,6 +27,7 @@ namespace KKeyServer
 {
 QString                 modToStringUser (uint mod);
 uint                    stringUserToMod (const QString& mod);
+bool                    isShiftAsModifierAllowed (int keyQt);
 };
 // KKeyServer
 

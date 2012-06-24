@@ -56,5 +56,7 @@ public:
     void                    setContextText (Akonadi::AgentActionManager::Type type, Akonadi::AgentActionManager::TextContext context, const QString& text);
 signals:
     void                    actionStateUpdated ();
+public:
+    void                    setContextText (Akonadi::AgentActionManager::Type type, Akonadi::AgentActionManager::TextContext context, const KLocalizedString& text);
 };
 };

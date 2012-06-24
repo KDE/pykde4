@@ -111,6 +111,8 @@ protected:
 //ig    virtual void            connectNotify (const char* signal);
 public:
     static void             setBlockingCompositing (WId window, bool active);
+signals:
+    void                    compositingChanged (bool enabled);
 };
 // KWindowSystem
 

@@ -276,6 +276,8 @@ protected:
     void                    setLeapSecondChanges (const QList<KTimeZone::LeapSeconds>& adjusts);
 public:
     ~KTimeZoneData ();
+protected:
+    void                    setPhases (const QList<KTimeZone::Phase>& phases, const KTimeZone::Phase& previousPhase);
 };
 // KTimeZoneData
 

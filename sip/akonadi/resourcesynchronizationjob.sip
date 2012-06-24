@@ -30,5 +30,7 @@ public:
     ~ResourceSynchronizationJob ();
     Akonadi::AgentInstance  resource () const;
     void                    start ();
+    bool                    collectionTreeOnly () const;
+    void                    setCollectionTreeOnly (bool collectionTreeOnly);
 };
 };

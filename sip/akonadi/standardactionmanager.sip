@@ -59,6 +59,15 @@ public:
         CopyItemToDialog,
         MoveItemToDialog,
         SynchronizeCollectionsRecursive,
+        MoveCollectionsToTrash,
+        MoveItemsToTrash,
+        RestoreCollectionsFromTrash,
+        RestoreItemsFromTrash,
+        MoveToTrashRestoreCollection,
+        MoveToTrashRestoreCollectionAlternative,
+        MoveToTrashRestoreItem,
+        MoveToTrashRestoreItemAlternative,
+        SynchronizeFavoriteCollections,
         LastType
     };
 
@@ -94,6 +103,7 @@ public:
     void                    setMimeTypeFilter (const QStringList& mimeTypes);
     void                    setCapabilityFilter (const QStringList& capabilities);
     void                    setCollectionPropertiesPageNames (const QStringList& names);
+    void                    createActionFolderMenu (QMenu* menu, Akonadi::StandardActionManager::Type type);
 };
 // StandardActionManager
 

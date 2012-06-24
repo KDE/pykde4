@@ -146,7 +146,9 @@ public:
         SETTINGS_PATHS,
         SETTINGS_POPUPMENU,
         SETTINGS_QT,
-        SETTINGS_SHORTCUTS
+        SETTINGS_SHORTCUTS,
+        SETTINGS_LOCALE,
+        SETTINGS_STYLE
     };
 
 

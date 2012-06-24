@@ -35,6 +35,8 @@ public:
     static KService::List   associatedApplications (const QStringList& mimeTypeList, const QString& traderConstraint);
     void                    addOpenWithActionsTo (QMenu* menu, const QString& traderConstraint = QString());
     void                    runPreferredApplications (const KFileItemList& fileOpenList, const QString& traderConstraint);
+signals:
+    void                    openWithDialogAboutToBeShown ();
 };
 // KFileItemActions
 

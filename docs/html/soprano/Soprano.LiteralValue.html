@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -139,6 +139,7 @@ Literal values can be converted from strings via fromString().
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QUrl&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dataTypeUriFromType">dataTypeUriFromType</a> (QVariant::Type type)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.LiteralValue.html">Soprano.LiteralValue</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fromString">fromString</a> (QString value, QVariant::Type type)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.LiteralValue.html">Soprano.LiteralValue</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fromString">fromString</a> (QString value, QUrl dataTypeUri)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../soprano/Soprano.LiteralValue.html">Soprano.LiteralValue</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#fromVariant">fromVariant</a> (QVariant value, QUrl dataType)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QVariant::Type&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#typeFromDataTypeUri">typeFromDataTypeUri</a> (QUrl dataTypeUri)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="LiteralValue"></a>
@@ -202,6 +203,9 @@ Literal values can be converted from strings via fromString().
 <div class="memdoc"><p>Creates a new LiteralValue from a QVariant.
 User types are not supported. If v contains an
 unsupported type an invalid LiteralValue is created.
+</p>
+<p>
+\sa fromVariant()
 </p></div></div><a class="anchor" name="LiteralValue"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1010,6 +1014,60 @@ Vocabulary.XMLSchema.string.
 </p>
 <p>
 \sa fromString(const QString&amp;, QVariant.Type), Vocabulary.XMLSchema
+</p></div></div><a class="anchor" name="fromVariant"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../soprano/Soprano.LiteralValue.html">Soprano.LiteralValue</a> fromVariant</td>
+<td>(</td>
+<td class="paramtype">QVariant&nbsp;</td>
+<td class="paramname"><em>value</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QUrl&nbsp;</td>
+<td class="paramname"><em>dataType</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Create a LiteralValue object by converting <b>value</b> to the given <b>dataType.</b>
+</p>
+<p>
+If the type of the variant matches the <b>dataType</b> this method has the same
+effect as the constructor which takes a QVariant as parameter. However, this
+method supports automatic conversion for a set of types including:
+</p>
+<p>
+<li> Conversion of different decimal types </li>
+<li> Conversion of everything to xsd:string </li>
+<li> Conversion of decimal types to xsd:dateTime (using QDateTime.fromTime_t()) </li>
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>value</em>&nbsp;</td><td> The value the created LiteralValue should have. If invalid an
+invalid LiteralValue will be created.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>dataType</em>&nbsp;</td><td> The RDF literal data type the created LiteralValue should have.
+If empty the result will be the same as providing <b>value</b> to the constructor
+of LiteralValue. No conversion will take place.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> A newly created Literalvalue instance based on the given <b>value</b> and
+</dd></dl> <b>dataType.</b>
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 2.7
+</dd></dl>
 </p></div></div><a class="anchor" name="typeFromDataTypeUri"></a>
 <div class="memitem">
 <div class="memproto">

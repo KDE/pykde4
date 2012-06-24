@@ -84,5 +84,11 @@ protected:
     void                    synchronizeCollection (qint64 id, bool recursive);
 public:
     void                    setAutomaticProgressReporting (bool enabled);
+signals:
+    void                    collectionTreeSynchronized ();
+protected:
+    void                    invalidateCache (const Akonadi::Collection& collection);
+    QString                 dumpNotificationListToString () const;
+    QString                 dumpSchedulerToString () const;
 };
 };

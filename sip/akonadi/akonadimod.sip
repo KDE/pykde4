@@ -135,3 +135,9 @@
 %Include transactionsequence.sip
 %Include transportresourcebase.sip
 %Include unlinkjob.sip
+//%Include collectionutils_p.sip
+%Include entitydeletedattribute.sip
+%Include trashfilterproxymodel.sip
+%Include trashjob.sip
+%Include trashrestorejob.sip
+%Include trashsettings.sip

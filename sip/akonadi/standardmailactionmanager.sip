@@ -62,5 +62,7 @@ public:
     void                    setCollectionPropertiesPageNames (const QStringList& names);
 signals:
     void                    actionStateUpdated ();
+public:
+    Akonadi::StandardActionManager*  standardActionManager () const;
 };
 };

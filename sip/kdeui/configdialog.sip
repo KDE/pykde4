@@ -50,6 +50,9 @@ private:
 //end
 public:
     ~ConfigDialog ();
+    QString                 language () const;
+signals:
+    void                    configChanged ();
 };
 // ConfigDialog
 

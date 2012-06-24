@@ -75,6 +75,9 @@ public:
     Plasma::AspectRatioMode  aspectRatioMode () const;
     void                    setAspectRatioMode (Plasma::AspectRatioMode mode);
     void                    syncToGraphicsWidget ();
+    bool                    isUserResizing () const;
+    void                    setMinimumResizeLimits (int left, int top, int right, int bottom);
+    void                    getMinimumResizeLimits (int* left, int* top, int* right, int* bottom);
 };
 // Dialog
 

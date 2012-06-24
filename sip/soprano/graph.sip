@@ -65,9 +65,11 @@ public:
     bool                    operator == (const Soprano::Graph& g) const;
     bool                    operator != (const Soprano::Graph& g) const;
     ~Graph ();
+    QSet<Soprano::Statement>  toSet () const;
 };
 // Graph
 
+//ig QDebug                  operator << (QDebug dbg, const Soprano::Graph& graph);
 };
 // Soprano
 

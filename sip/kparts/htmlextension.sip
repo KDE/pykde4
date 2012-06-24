@@ -70,5 +70,66 @@ public:
         void                    swap (KParts::SelectorInterface::Element& other);
     };
 };
+class HtmlSettingsInterface
+{
+%TypeHeaderCode
+#include <kparts/htmlextension.h>
+%End
+
+public:
+    enum HtmlSettingsType
+    {
+        AutoLoadImages,
+        DnsPrefetchEnabled,
+        JavaEnabled,
+        JavascriptEnabled,
+        MetaRefreshEnabled,
+        PluginsEnabled,
+        PrivateBrowsingEnabled,
+        OfflineStorageDatabaseEnabled,
+        OfflineWebApplicationCacheEnabled,
+        LocalStorageEnabled,
+        UserDefinedStyleSheetURL
+    };
+    enum JavaScriptAdvice
+    {
+        JavaScriptDunno,
+        JavaScriptAccept,
+        JavaScriptReject
+    };
+    enum JSWindowOpenPolicy
+    {
+        JSWindowOpenAllow,
+        JSWindowOpenAsk,
+        JSWindowOpenDeny,
+        JSWindowOpenSmart
+    };
+    enum JSWindowStatusPolicy
+    {
+        JSWindowStatusAllow,
+        JSWindowStatusIgnore
+    };
+    enum JSWindowMovePolicy
+    {
+        JSWindowMoveAllow,
+        JSWindowMoveIgnore
+    };
+    enum JSWindowResizePolicy
+    {
+        JSWindowResizeAllow,
+        JSWindowResizeIgnore
+    };
+    enum JSWindowFocusPolicy
+    {
+        JSWindowFocusAllow,
+        JSWindowFocusIgnore
+    };
+    virtual ~HtmlSettingsInterface ();
+    virtual QVariant        htmlSettingsProperty (KParts::HtmlSettingsInterface::HtmlSettingsType type) const=0;
+    virtual bool            setHtmlSettingsProperty (KParts::HtmlSettingsInterface::HtmlSettingsType type, const QVariant& value)=0;
+    static KParts::HtmlSettingsInterface::JavaScriptAdvice  textToJavascriptAdvice (const QString& text);
+    static const char*      javascriptAdviceToText (KParts::HtmlSettingsInterface::JavaScriptAdvice advice);
+    static void             splitDomainAdvice (const QString& text, QString& domain, KParts::HtmlSettingsInterface::JavaScriptAdvice& javaAdvice, KParts::HtmlSettingsInterface::JavaScriptAdvice& javaScriptAdvice);
+};
 };
 void                    qSwap (KParts::SelectorInterface::Element& lhs, KParts::SelectorInterface::Element& rhs);

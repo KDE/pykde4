@@ -46,6 +46,7 @@ public:
     explicit                ItemFetchJob (const Akonadi::Item::List& items, QObject* parent /TransferThis/ = 0);
     virtual ~ItemFetchJob ();
     void                    setFetchScope (const Akonadi::ItemFetchScope& fetchScope);
+//ig    explicit                ItemFetchJob (const QList<Akonadi::Item::Id>& items, QObject* parent /TransferThis/ = 0);
 };
 // ItemFetchJob
 

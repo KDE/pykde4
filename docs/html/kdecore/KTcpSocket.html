@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -58,12 +58,13 @@ Inherits: QIODevice &#x2192; QObject<br />
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#EncryptionMode">EncryptionMode</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;UnencryptedMode, SslClientMode, SslServerMode&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Error">Error</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;UnknownError, ConnectionRefusedError, RemoteHostClosedError, HostNotFoundError, SocketAccessError, SocketResourceError, SocketTimeoutError, NetworkError, UnsupportedSocketOperationError&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#ProxyPolicy">ProxyPolicy</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;AutoProxy, ManualProxy&nbsp;}</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#SslVersion">SslVersion</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;UnknownSslVersion, SslV2, SslV3, TlsV1, SslV3_1, AnySslVersion&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#SslVersion">SslVersion</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;UnknownSslVersion, SslV2, SslV3, TlsV1, SslV3_1, TlsV1SslV3, SecureProtocols, AnySslVersion&nbsp;}</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#State">State</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;UnconnectedState, HostLookupState, ConnectingState, ConnectedState, BoundState, ListeningState, ClosingState&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#connected">connected</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#disconnected">disconnected</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#encrypted">encrypted</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#encryptedBytesWritten">encryptedBytesWritten</a> (long written)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#encryptionModeChanged">encryptionModeChanged</a> (<a href="../kdecore/KTcpSocket.html#EncryptionMode">KTcpSocket.EncryptionMode</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#error">error</a> (<a href="../kdecore/KTcpSocket.html#Error">KTcpSocket.Error</a> a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#hostFound">hostFound</a> ()</td></tr>
@@ -164,7 +165,24 @@ Inherits: QIODevice &#x2192; QObject<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("encrypted()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="encryptionModeChanged"></a>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("encrypted()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="encryptedBytesWritten"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> encryptedBytesWritten</td>
+<td>(</td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>written</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("encryptedBytesWritten(qint64)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="encryptionModeChanged"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -1336,7 +1354,7 @@ depend on high-level information like protocol or username.
 </table>
 </div>
 <div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>UnknownSslVersion</em>&nbsp;=&nbsp;0x01</td><td><tr><td valign="top"><em>SslV2</em>&nbsp;=&nbsp;0x02</td><td><tr><td valign="top"><em>SslV3</em>&nbsp;=&nbsp;0x04</td><td><tr><td valign="top"><em>TlsV1</em>&nbsp;=&nbsp;0x08</td><td><tr><td valign="top"><em>SslV3_1</em>&nbsp;=&nbsp;0x08</td><td><tr><td valign="top"><em>AnySslVersion</em>&nbsp;=&nbsp;SslV2|SslV3|TlsV1</td><td></table>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>UnknownSslVersion</em>&nbsp;=&nbsp;0x01</td><td><tr><td valign="top"><em>SslV2</em>&nbsp;=&nbsp;0x02</td><td><tr><td valign="top"><em>SslV3</em>&nbsp;=&nbsp;0x04</td><td><tr><td valign="top"><em>TlsV1</em>&nbsp;=&nbsp;0x08</td><td><tr><td valign="top"><em>SslV3_1</em>&nbsp;=&nbsp;0x08</td><td><tr><td valign="top"><em>TlsV1SslV3</em>&nbsp;=&nbsp;0x10</td><td><tr><td valign="top"><em>SecureProtocols</em>&nbsp;=&nbsp;0x20</td><td><tr><td valign="top"><em>AnySslVersion</em>&nbsp;=&nbsp;SslV2|SslV3|TlsV1</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="State"></a>
 <div class="memitem">

@@ -54,6 +54,8 @@ public:
     bool                    needsToBeStored () const;
     void                    setNeedsToBeStored (bool store);
     Plasma::DataEngine*     getDataEngine ();
+protected:
+    void                    timerEvent (QTimerEvent* event);
 };
 // DataContainer
 

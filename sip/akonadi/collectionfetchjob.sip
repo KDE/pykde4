@@ -56,6 +56,7 @@ public:
     void                    setFetchScope (const Akonadi::CollectionFetchScope& fetchScope);
     Akonadi::CollectionFetchScope&  fetchScope ();
                             CollectionFetchJob (const Akonadi::Collection::List& collections, Akonadi::CollectionFetchJob::Type type, QObject* parent /TransferThis/ = 0);
+//ig    explicit                CollectionFetchJob (const QList<Akonadi::Collection::Id>& collections, Akonadi::CollectionFetchJob::Type type = Akonadi::CollectionFetchJob::Type::Base, QObject* parent /TransferThis/ = 0);
 };
 // CollectionFetchJob
 

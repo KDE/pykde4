@@ -84,6 +84,8 @@ public:
 signals:
     void                    collectionSubscribed (const Akonadi::Collection& collection, const Akonadi::Collection& parent);
     void                    collectionUnsubscribed (const Akonadi::Collection& collection);
+public:
+    void                    fetchChangedOnly (bool enable);
 };
 // Monitor
 

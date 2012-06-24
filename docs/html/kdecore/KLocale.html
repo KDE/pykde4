@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -172,6 +172,7 @@ class for supporting locale settings and national language
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QTime, bool ok&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#readTime">readTime</a> (self, QString str, <a href="../kdecore/KLocale.html#ReadTimeFlags">KLocale.ReadTimeFlags</a> flags)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeAcceleratorMarker">removeAcceleratorMarker</a> (self, QString label)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeCatalog">removeCatalog</a> (self, QString catalog)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#reparseConfiguration">reparseConfiguration</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setActiveCatalog">setActiveCatalog</a> (self, QString catalog)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setBinaryUnitDialect">setBinaryUnitDialect</a> (self, <a href="../kdecore/KLocale.html#BinaryUnitDialect">KLocale.BinaryUnitDialect</a> newDialect)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCalendar">setCalendar</a> (self, QString calendarType)</td></tr>
@@ -444,11 +445,17 @@ language names.
 </tr>
 </table>
 </div>
-<div class="memdoc"><p>Returns the user's default binary unit dialect.
+<div class="memdoc"><p>Returns the user's configured binary unit dialect.
+e.g. if MetricBinaryDialect is returned then the values
+configured for how much a set of bytes are worth would
+be 10^(3*n) and KB (1000 bytes == 1 KB), in this case.
+</p>
+<p>
+Will never return DefaultBinaryDialect.
 </p>
 <p>
 <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
-</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> User's default binary unit dialect
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> User's configured binary unit dialect
 </dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> BinaryUnitDialect
 </dd></dl>
 </p></div></div><a class="anchor" name="calendar"></a>
@@ -1159,6 +1166,7 @@ a sanely-sized number.
 </td></tr> </table></dl>
 <p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> converted size as a translated string including the units.
 E.g. "1.23 KiB", "2 GB" (JEDEC), "4.2 kB" (Metric).
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> BinaryUnitDialect
 </dd></dl>
 </p></div></div><a class="anchor" name="formatByteSize"></a>
 <div class="memitem">
@@ -1231,6 +1239,7 @@ a sanely-sized number.
 </td></tr> </table></dl>
 <p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> converted size as a translated string including the units.
 E.g. "1.23 KiB", "2 GB" (JEDEC), "4.2 kB" (Metric).
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> BinaryUnitDialect
 </dd></dl>
 </p></div></div><a class="anchor" name="formatDate"></a>
 <div class="memitem">
@@ -2675,6 +2684,23 @@ from UI labels.
 </td></tr> </table></dl>
 <p> <dl class="see" compact><dt><b>See also:</b></dt><dd> insertCatalog()
 </dd></dl>
+</p></div></div><a class="anchor" name="reparseConfiguration"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> reparseConfiguration</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="since" compact><dt><b>Since:</b></dt><dd> 4.8
+</dd></dl> </p>
+<p>
+Reparse locale configuration files for the current selected
+language.
 </p></div></div><a class="anchor" name="setActiveCatalog"></a>
 <div class="memitem">
 <div class="memproto">

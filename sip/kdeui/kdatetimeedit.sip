@@ -51,8 +51,6 @@ public:
     KDateTime::Spec         timeSpec () const;
     KDateTime               minimumDateTime () const;
     KDateTime               maximumDateTime () const;
-//ig    KLocale::DateFormat     dateDisplayFormat ();
-//ig    KLocale::TimeFormatOptions  timeDisplayFormat ();
     QMap<QDate,QString>     dateMap () const;
     QList<QTime>            timeList () const;
     bool                    isValid () const;

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -84,7 +84,7 @@ a job from the queue.
 Example:
 <pre class="fragment">
     TransferJob *job = KIO.get(KUrl("http://www.kde.org"));
-    KIO.Scheduler.scheduleJob(job);
+    KIO.Scheduler.setJobPriority(job, 1);
 </pre>
 </p>
 <p>
@@ -568,7 +568,7 @@ and must not be assigned to any job.
 </div>
 <div class="memdoc"><p>Register <b>job</b> with the scheduler.
 The default is to create a new slave for the job if no slave
-is available. This can be changed by calling scheduleJob.
+is available. This can be changed by calling setJobPriority.
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>job</em>&nbsp;</td><td> the job to register
@@ -790,8 +790,9 @@ was put on hold it will be killed.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Schedules <b>job</b> scheduled for later
-execution. This just sets the job's priority to 1 now.
+<div class="memdoc"><p>Schedules <b>job</b> scheduled for later execution.
+This method is deprecated and just sets the job's priority to 1. It is
+recommended to replace calls to scheduleJob(job) with setJobPriority(job, 1).
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>job</em>&nbsp;</td><td> the job to schedule

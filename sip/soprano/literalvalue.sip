@@ -80,6 +80,7 @@ public:
     static QVariant::Type   typeFromDataTypeUri (const QUrl& dataTypeUri);
     static QUrl             dataTypeUriFromType (QVariant::Type type);
     ~LiteralValue ();
+    static Soprano::LiteralValue  fromVariant (const QVariant& value, const QUrl& dataType);
 };
 // LiteralValue
 

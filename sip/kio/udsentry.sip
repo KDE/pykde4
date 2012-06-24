@@ -81,6 +81,8 @@ public:
         UDS_ICON_OVERLAY_NAMES,
         UDS_NEPOMUK_QUERY,
         UDS_COMMENT,
+        UDS_DEVICE_ID,
+        UDS_INODE,
         UDS_EXTRA,
         UDS_EXTRA_END
     };

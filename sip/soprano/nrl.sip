@@ -70,6 +70,8 @@ QUrl                    superGraphOf ();
 QUrl                    updatable ();
 QUrl                    viewOn ();
 QUrl                    DiscardableInstanceBase ();
+QUrl                    DefiningProperty ();
+QUrl                    NonDefiningProperty ();
 };
 // NRL
 

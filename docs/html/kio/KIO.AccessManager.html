@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -102,12 +102,12 @@ cannot use the standard KDE API directly.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Attribute">Attribute</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;MetaData, KioError&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#AccessManager">__init__</a> (self, QObject parent)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cookieJarWindowid">cookieJarWindowid</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cookieJarWindowid">cookieJarWindowid</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QNetworkReply&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#createRequest">createRequest</a> (self, Operation op, QNetworkRequest req, QIODevice outgoingData=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isExternalContentAllowed">isExternalContentAllowed</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KIO.MetaData.html">KIO.MetaData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#requestMetaData">requestMetaData</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kio/KIO.MetaData.html">KIO.MetaData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#sessionMetaData">sessionMetaData</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCookieJarWindowId">setCookieJarWindowId</a> (self, int id)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCookieJarWindowId">setCookieJarWindowId</a> (self, long id)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setEmitReadyReadOnMetaDataChange">setEmitReadyReadOnMetaDataChange</a> (self, bool a0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setExternalContentAllowed">setExternalContentAllowed</a> (self, bool allowed)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setWindow">setWindow</a> (self, QWidget widget)</td></tr>
@@ -142,7 +142,7 @@ cannot use the standard KDE API directly.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">int cookieJarWindowid</td>
+<td class="memname">long cookieJarWindowid</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -284,7 +284,7 @@ request.
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">int&nbsp;</td>
+<td class="paramtype">long&nbsp;</td>
 <td class="paramname"><em>id</em></td>
 </tr>
 <tr>
@@ -339,9 +339,13 @@ to properly manage session based cookies.
 </p>
 <p>
 Meta data is any information that is not the actual content itself, e.g.
-HTTP response headers of the HTTP protocol. You should only call this
-function, when an application does not connect to a reply object's
-metaDataChanged signal.
+HTTP response headers of the HTTP protocol.
+</p>
+<p>
+Calling this function will force the code connecting to QNetworkReply's
+readyRead signal to prematurely start dealing with the content that might
+not yet have arrived. However, it is essential to make the put ioslave on
+hold functionality of KIO work in libraries like QtWebKit.
 </p>
 <p>
 <dl class="see" compact><dt><b>See also:</b></dt><dd> QNetworkReply.metaDataChanged

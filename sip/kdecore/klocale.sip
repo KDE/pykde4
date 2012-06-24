@@ -357,6 +357,7 @@ public:
     QStringList             installedLanguages () const;
     bool                    setCountryDivisionCode (const QString& countryDivision);
 //ig    KLocale::WeekNumberSystem  weekNumberSystem () const;
+    void                    reparseConfiguration ();
 };
 // KLocale
 

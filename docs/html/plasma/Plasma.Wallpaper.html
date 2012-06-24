@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -75,7 +75,7 @@ it should include a Actions= entry in the .desktop file, listing the possible
 actions. An actions group should be included to provide for translatable names.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#ResizeMethod">ResizeMethod</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ScaledResize, CenteredResize, ScaledAndCroppedResize, TiledResize, CenterTiledResize, MaxpectResize&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#ResizeMethod">ResizeMethod</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;ScaledResize, CenteredResize, ScaledAndCroppedResize, TiledResize, CenterTiledResize, MaxpectResize, LastResizeMethod&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configNeedsSaving">configNeedsSaving</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configurationRequired">configurationRequired</a> (bool needsConfig)</td></tr>
@@ -110,7 +110,9 @@ actions. An actions group should be included to provide for translatable names.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#paint">paint</a> (self, QPainter painter, QRectF exposedRect)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pluginName">pluginName</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#render">render</a> (self, QString sourceImagePath, QSize size, <a href="../plasma/Plasma.Wallpaper.html#ResizeMethod">Plasma.Wallpaper.ResizeMethod</a> resizeMethod=Plasma.Wallpaper.ScaledResize, QColor color=QColor(0,0,0))</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#render">render</a> (self, QImage image, QSize size, <a href="../plasma/Plasma.Wallpaper.html#ResizeMethod">Plasma.Wallpaper.ResizeMethod</a> resizeMethod=Plasma.Wallpaper.ScaledResize, QColor color=QColor(0,0,0))</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KServiceAction.html">KServiceAction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderingMode">renderingMode</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../plasma/Plasma.Wallpaper.html#ResizeMethod">Plasma.Wallpaper.ResizeMethod</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#resizeMethodHint">resizeMethodHint</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#restore">restore</a> (self, <a href="../kdecore/KConfigGroup.html">KConfigGroup</a> config)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#save">save</a> (self, <a href="../kdecore/KConfigGroup.html">KConfigGroup</a> config)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setBoundingRect">setBoundingRect</a> (self, QRectF boundingRect)</td></tr>
@@ -124,6 +126,7 @@ actions. An actions group should be included to provide for translatable names.
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setUrls">setUrls</a> (self, <a href="../kdecore/KUrl.List.html">KUrl.List</a> urls)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setUsingRenderingCache">setUsingRenderingCache</a> (self, bool useCache)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#supportsMimetype">supportsMimetype</a> (self, QString mimetype)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QSizeF&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#targetSizeHint">targetSizeHint</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#wheelEvent">wheelEvent</a> (self, QGraphicsSceneWheelEvent event)</td></tr>
 <tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdecore/KPluginInfo.html">KPluginInfo</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#listWallpaperInfo">listWallpaperInfo</a> (QString formFactor=QString())</td></tr>
@@ -927,8 +930,7 @@ complete, the renderCompleted signal is emitted.
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>sourceImagePath</em>&nbsp;</td><td> the path to the image file on disk. Common image formats such as
-PNG, JPEG and SVG are supported
+<tr><td></td><td valign="top"><em>image</em>&nbsp;</td><td> the raw QImage
 
 <tr><td></td><td valign="top"><em>size</em>&nbsp;</td><td> the size to render the image as
 
@@ -939,7 +941,66 @@ ResizeMethod
 <tr><td></td><td valign="top"><em>color</em>&nbsp;</td><td> the color to use to pad the rendered image if it doesn't take up the
 entire size with the given ResizeMethod
 </td></tr> </table></dl>
-<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.7.4
+</dd></dl>
+</p></div></div><a class="anchor" name="render"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> render</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QImage&nbsp;</td>
+<td class="paramname"><em>image</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QSize&nbsp;</td>
+<td class="paramname"><em>size</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../plasma/Plasma.Wallpaper.html#ResizeMethod">Plasma.Wallpaper.ResizeMethod</a>&nbsp;</td>
+<td class="paramname"><em>resizeMethod=Plasma.Wallpaper.ScaledResize</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QColor&nbsp;</td>
+<td class="paramname"><em>color=QColor(0,0,0)</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Renders the wallpaper asyncronously with the given parameters. When the rendering is
+complete, the renderCompleted signal is emitted.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>image</em>&nbsp;</td><td> the raw QImage
+
+<tr><td></td><td valign="top"><em>size</em>&nbsp;</td><td> the size to render the image as
+
+<tr><td></td><td valign="top"><em>resizeMethod</em>&nbsp;</td><td> the method to use when resizing the image to fit size, <dl class="see" compact><dt><b>See also:</b></dt><dd>
+ResizeMethod
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>color</em>&nbsp;</td><td> the color to use to pad the rendered image if it doesn't take up the
+entire size with the given ResizeMethod
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.7.4
 </dd></dl>
 </p></div></div><a class="anchor" name="renderingMode"></a>
 <div class="memitem">
@@ -954,6 +1015,21 @@ entire size with the given ResizeMethod
 </table>
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the currently active rendering mode
+</dd></dl>
+</p></div></div><a class="anchor" name="resizeMethodHint"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../plasma/Plasma.Wallpaper.html#ResizeMethod">Plasma.Wallpaper.ResizeMethod</a> resizeMethodHint</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the current resize method hint
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.7.2
 </dd></dl>
 </p></div></div><a class="anchor" name="restore"></a>
 <div class="memitem">
@@ -1361,6 +1437,21 @@ the .desktop file, and can include mimetypes that may not be
 suitable for drag-and-drop purposes.
 </dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.7
 </dd></dl>
+</p></div></div><a class="anchor" name="targetSizeHint"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QSizeF targetSizeHint</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> the current target size method hint
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.7.2
+</dd></dl>
 </p></div></div><a class="anchor" name="wheelEvent"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1569,7 +1660,7 @@ default size and resize methods.
 </div>
 <div class="memdoc"><p>Various resize modes supported by the built in image renderer
 </p><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>ScaledResize</em>&nbsp;</td><td><tr><td valign="top"><em>CenteredResize</em>&nbsp;</td><td><tr><td valign="top"><em>ScaledAndCroppedResize</em>&nbsp;</td><td><tr><td valign="top"><em>TiledResize</em>&nbsp;</td><td><tr><td valign="top"><em>CenterTiledResize</em>&nbsp;</td><td><tr><td valign="top"><em>MaxpectResize</em>&nbsp;</td><td></table>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>ScaledResize</em>&nbsp;</td><td><tr><td valign="top"><em>CenteredResize</em>&nbsp;</td><td><tr><td valign="top"><em>ScaledAndCroppedResize</em>&nbsp;</td><td><tr><td valign="top"><em>TiledResize</em>&nbsp;</td><td><tr><td valign="top"><em>CenterTiledResize</em>&nbsp;</td><td><tr><td valign="top"><em>MaxpectResize</em>&nbsp;</td><td><tr><td valign="top"><em>LastResizeMethod</em>&nbsp;=&nbsp;MaxpectResize</td><td></table>
 </dl>
 </div></div><p>
 </div>

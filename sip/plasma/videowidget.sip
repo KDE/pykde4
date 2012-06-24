@@ -80,6 +80,8 @@ public:
 //ig    Phonon::MediaObject*    mediaObject () const;
 //ig    Phonon::AudioOutput*    audioOutput () const;
 //ig    Phonon::VideoWidget*    nativeWidget () const;
+    void                    setTickInterval (qint64 interval);
+    qint64                  tickInterval () const;
 };
 // VideoWidget
 

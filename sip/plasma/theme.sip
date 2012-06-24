@@ -51,7 +51,8 @@ public:
     enum FontRole
     {
         DefaultFont,
-        DesktopFont
+        DesktopFont,
+        SmallestFont
     };
 
     static Plasma::Theme*   defaultTheme ();
@@ -93,6 +94,7 @@ public:
     QString                 styleSheet (const QString& css = QString()) const;
     QStringList             listCachedRectKeys (const QString& image) const;
     KUrl                    homepage () const;
+    int                     toolTipDelay () const;
 };
 // Theme
 

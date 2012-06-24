@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.7 PyKDE API Reference
+        KDE 4.9 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -176,6 +176,7 @@ To do: Convenience base class for collection-less resources
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#SchedulePriority">SchedulePriority</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Prepend, AfterChangeReplay, Append&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#attributesSynchronized">attributesSynchronized</a> (long collectionId)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#collectionTreeSynchronized">collectionTreeSynchronized</a> ()</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nameChanged">nameChanged</a> (QString name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#synchronized">synchronized</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
@@ -194,6 +195,9 @@ To do: Convenience base class for collection-less resources
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#currentItem">currentItem</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deferTask">deferTask</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#doSetOnline">doSetOnline</a> (self, bool online)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dumpNotificationListToString">dumpNotificationListToString</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dumpSchedulerToString">dumpSchedulerToString</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#invalidateCache">invalidateCache</a> (self, <a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a> collection)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemRetrieved">itemRetrieved</a> (self, <a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a> item)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsRetrievalDone">itemsRetrievalDone</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsRetrieved">itemsRetrieved</a> (self, [<a href="../akonadi/Akonadi.Item.html">Akonadi.Item</a>] items)</td></tr>
@@ -245,7 +249,24 @@ To do: Convenience base class for collection-less resources
 </td></tr> </table></dl>
 <p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.6
 </dd></dl>
-</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("attributesSynchronized(qlonglong)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="nameChanged"></a>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("attributesSynchronized(qlonglong)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="collectionTreeSynchronized"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> collectionTreeSynchronized</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emitted when a collection tree synchronization has been completed.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.8
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("collectionTreeSynchronized()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="nameChanged"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -456,11 +477,11 @@ This implicitly calls changeProcessed().
 server cache.
 </p>
 <p>
-The method should be used whenever the configuration of the resource has changed
-and therefor the cached items might not be valid any longer.
+The method should not be used anymore
 </p>
 <p>
-<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
+<dl class="see" compact><dt><b>See also:</b></dt><dd> invalidateCache()
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.3
 </dd></dl>
 </p></div></div><a class="anchor" name="collectionAttributesRetrieved"></a>
 <div class="memitem">
@@ -663,6 +684,67 @@ e.g. a custom task added with #Prepend the deferred task will be processed again
 </tr></table>
 </div>
 <div class="memdoc"><p>Inherited from AgentBase.
+</p></div></div><a class="anchor" name="dumpNotificationListToString"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString dumpNotificationListToString</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Dump the contents of the current ChangeReplay
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.8.1
+</dd></dl>
+</p></div></div><a class="anchor" name="dumpSchedulerToString"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString dumpSchedulerToString</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Dump the state of the scheduler
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.8.1
+</dd></dl>
+</p></div></div><a class="anchor" name="invalidateCache"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> invalidateCache</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../akonadi/Akonadi.Collection.html">Akonadi.Collection</a>&nbsp;</td>
+<td class="paramname"><em>collection</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Call this method to invalidate all cached content in <b>collection.</b>
+</p>
+<p>
+The method should be used when the backend indicated that the cached content
+is no longer valid.
+</p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.8
+</dd></dl>
 </p></div></div><a class="anchor" name="itemRetrieved"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1273,7 +1355,7 @@ that way.
 shall be synchronized.
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>recursive</em>&nbsp;</td><td> if true, a recursive syncronization is done
+<tr><td></td><td valign="top"><em>recursive</em>&nbsp;</td><td> if true, a recursive synchronization is done
 </td></tr>
 </table></dl>
 <p>
@@ -1309,7 +1391,7 @@ shall be synchronized.
 shall be synchronized.
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>recursive</em>&nbsp;</td><td> if true, a recursive syncronization is done
+<tr><td></td><td valign="top"><em>recursive</em>&nbsp;</td><td> if true, a recursive synchronization is done
 </td></tr>
 </table></dl>
 <p>

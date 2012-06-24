@@ -47,5 +47,7 @@ protected:
 public:
     void                    setDropActionMenuEnabled (bool enabled);
     bool                    isDropActionMenuEnabled () const;
+    bool                    isManualSortingActive () const;
+    void                    setManualSortingActive (bool active);
 };
 };

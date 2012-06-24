@@ -53,4 +53,6 @@ protected:
     bool                    event (QEvent* event);
     void                    resizeEvent (QResizeEvent* event);
     void                    showEvent (QShowEvent* event);
+public:
+    int                     heightForWidth (int width) const;
 };

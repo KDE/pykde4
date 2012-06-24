@@ -43,5 +43,8 @@ protected:
     virtual void            dropEvent (QDropEvent* event);
     virtual void            contextMenuEvent (QContextMenuEvent* event);
     virtual void            startDrag (Qt::DropActions supportedActions);
+public:
+    void                    setDropActionMenuEnabled (bool enabled);
+    bool                    isDropActionMenuEnabled () const;
 };
 };

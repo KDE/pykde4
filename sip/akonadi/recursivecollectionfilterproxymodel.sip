@@ -35,5 +35,9 @@ public:
     QStringList             contentMimeTypeInclusionFilters () const;
 protected:
     bool                    acceptRow (int sourceRow, const QModelIndex& sourceParent) const;
+public:
+    void                    setSearchPattern (const QString& pattern);
+protected:
+    int                     columnCount (const QModelIndex& index) const;
 };
 };

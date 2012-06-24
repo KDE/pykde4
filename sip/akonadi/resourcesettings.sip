@@ -141,6 +141,10 @@ private:
                     sipType = sipType_Akonadi_SpecialMailCollectionsRequestJob;
                 }
             }
+        else if (dynamic_cast<Akonadi::TrashJob*>(sipCpp))
+            sipType = sipType_Akonadi_TrashJob;
+        else if (dynamic_cast<Akonadi::TrashRestoreJob*>(sipCpp))
+            sipType = sipType_Akonadi_TrashRestoreJob;
         else if (dynamic_cast<Akonadi::UnlinkJob*>(sipCpp))
             sipType = sipType_Akonadi_UnlinkJob;
         }
@@ -182,6 +186,8 @@ private:
         sipType = sipType_Akonadi_EntityRightsFilterModel;
     else if (dynamic_cast<Akonadi::RecursiveCollectionFilterProxyModel*>(sipCpp))
         sipType = sipType_Akonadi_RecursiveCollectionFilterProxyModel;
+    else if (dynamic_cast<Akonadi::TrashFilterProxyModel*>(sipCpp))
+        sipType = sipType_Akonadi_TrashFilterProxyModel;
     else if (dynamic_cast<Akonadi::ItemModel*>(sipCpp))
         {
         sipType = sipType_Akonadi_ItemModel;
@@ -294,5 +300,8 @@ private:
 #include <akonadi/statisticsproxymodel.h>
 #include <akonadi/transactionjobs.h>
 #include <akonadi/transactionsequence.h>
+#include <akonadi/trashfilterproxymodel.h>
+#include <akonadi/trashjob.h>
+#include <akonadi/trashrestorejob.h>
 #include <akonadi/unlinkjob.h>
 %End

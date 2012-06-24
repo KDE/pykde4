@@ -31,6 +31,7 @@ enum ErrorCode
     ErrorNotSupported,
     ErrorParsingFailed,
     ErrorPermissionDenied,
+    ErrorTimeout,
     ErrorUnknown
 };
 

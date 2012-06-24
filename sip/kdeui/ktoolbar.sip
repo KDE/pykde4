@@ -61,6 +61,7 @@ protected:
 public:
     explicit                KToolBar (const QString& objectName, QWidget* parent /TransferThis/, bool readConfig = 1);
     ~KToolBar ();
+    void                    addXMLGUIClient (KXMLGUIClient* client);
 };
 // KToolBar
 

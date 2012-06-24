@@ -80,6 +80,7 @@ enum QueryLanguage
     QueryLanguageSparql,
     QueryLanguageRdql,
     QueryLanguageSerql,
+    QueryLanguageSparqlNoInference,
     QueryLanguageUser,
     QUERY_LANGUAGE_NONE,
     QUERY_LANGUAGE_SPARQL,

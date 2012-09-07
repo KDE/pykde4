@@ -74,8 +74,6 @@ INCLUDE_DIRECTORIES(
     ${KDE4_INCLUDE_DIR}
     ${KDE4_INCLUDE_DIR}/solid
     ${KDE4_INCLUDE_DIR}/kio
-    ${KDE4_INCLUDE_DIR}/kdeprint
-    ${KDE4_INCLUDE_DIR}/kdeprint/lpr
     ${KDE4_INCLUDE_DIR}/dom
     ${KDE4_INCLUDE_DIR}/ksettings
     ${KDE4_INCLUDE_DIR}/knewstuff2

@@ -951,6 +951,9 @@ template <TYPE1>
 %End
 };
 
+%Feature PyKDE_QVector
+
+%If(PyKDE_QVector)
 %MappedType QVector<int>
 {
 %TypeHeaderCode
@@ -1025,3 +1028,4 @@ template <TYPE1>
     return sipGetState(sipTransferObj);
 %End
 };
+%End

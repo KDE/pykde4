@@ -33,7 +33,7 @@ INCLUDE(SIPMacros)
 
 FIND_PACKAGE(PyQt4 REQUIRED)
 IF(PYQT4_VERSION STRLESS "040905")  # These version numbers also appear in ../CMakeLists.txt
-    MESSAGE(FATAL_ERROR "The version of PyQt found is too old. 4.9.5 or later is required.")
+    MESSAGE(FATAL_ERROR "The version of PyQt found is too old. 4.9 or later is required.")
 ENDIF(PYQT4_VERSION STRLESS "040905")
 
 

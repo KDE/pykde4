@@ -1,14 +1,14 @@
 PROJECT(pykde4)
 
 # search packages used by KDE
-find_package(KDE4 REQUIRED)
+FIND_PACKAGE(KDE4 REQUIRED)
 FIND_PACKAGE(PythonInterp)
 
 include(KDE4Defaults)
 include(MacroLibrary)
 INCLUDE(PythonMacros)
 
-include_directories (${KDE4_INCLUDES})
+INCLUDE_DIRECTORIES(${KDE4_INCLUDES})
 
 # Set the Python libraries to what we actually found for interpreters
 SET(Python_ADDITIONAL_VERSIONS "${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}")
@@ -45,7 +45,6 @@ MACRO_LOG_FEATURE(KDEPIMLIBS_FOUND "Kdepimlibs" "KDE pim Libraries" "kdepimlibs"
 
 MACRO_OPTIONAL_FIND_PACKAGE(PolkitQt)
 MACRO_LOG_FEATURE(POLKITQT_FOUND "Polkit-Qt" "Qt Wrapper around PolicyKit" "kdesupport" FALSE "" "Required to build PolicyKit-Qt support")
-
 
 INCLUDE_DIRECTORIES(
     ${PYTHON_INCLUDE_PATH}
@@ -194,11 +193,6 @@ IF(POLKITQT_FOUND)
 ENDIF(POLKITQT_FOUND)
 
 PYTHON_INSTALL(__init__.py ${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4)
-
-MESSAGE(STATUS "KDE_VERSION: ${KDE_VERSION}")
-MESSAGE(STATUS "KDE4_INCLUDE_DIR: ${KDE4_INCLUDE_DIR}")
-MESSAGE(STATUS "KDE4_LIB_DIR: ${KDE4_LIB_DIR}")
-MESSAGE(STATUS "PYTHON_SITE_PACKAGES_INSTALL_DIR: ${PYTHON_SITE_PACKAGES_INSTALL_DIR}")
 
 # Setup and install pykdeconfig.py
 

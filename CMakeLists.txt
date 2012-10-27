@@ -4,8 +4,8 @@ PROJECT(pykde4)
 FIND_PACKAGE(KDE4 REQUIRED)
 FIND_PACKAGE(PythonInterp)
 
-include(KDE4Defaults)
-include(MacroLibrary)
+INCLUDE(KDE4Defaults)
+INCLUDE(MacroLibrary)
 INCLUDE(PythonMacros)
 
 INCLUDE_DIRECTORIES(${KDE4_INCLUDES})

@@ -1,21 +1,14 @@
 PROJECT(pykde4)
 
-# If the module is checkedout standalone we have to do some additional stuff
-if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
-
-    # search packages used by KDE
-    find_package(KDE4 REQUIRED)
-    include(KDE4Defaults)
-    include(MacroLibrary)
-
-    include_directories (${KDE4_INCLUDES})
-
-endif(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_CURRENT_SOURCE_DIR})
-
-# This module can be built independant from the rest of kdebindings.
-SET(CMAKE_MODULE_PATH ${pykde4_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH})
-
+# search packages used by KDE
+find_package(KDE4 REQUIRED)
 FIND_PACKAGE(PythonInterp)
+
+include(KDE4Defaults)
+include(MacroLibrary)
+INCLUDE(PythonMacros)
+
+include_directories (${KDE4_INCLUDES})
 
 # Set the Python libraries to what we actually found for interpreters
 SET(Python_ADDITIONAL_VERSIONS "${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}")
@@ -28,7 +21,6 @@ ENDIF (NOT DEFINED PYTHON_SITE_PACKAGES_INSTALL_DIR)
 MESSAGE(STATUS "Using Python site packages directory: ${PYTHON_SITE_PACKAGES_INSTALL_DIR}")
 
 FIND_PACKAGE(PythonLibs)
-INCLUDE(PythonMacros)
 
 FIND_PACKAGE(SIP REQUIRED)
 IF(SIP_VERSION STRLESS "040d01")    # These version numbers also appear in ../CMakeLists.txt

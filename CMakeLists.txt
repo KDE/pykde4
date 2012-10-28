@@ -13,9 +13,9 @@ INCLUDE_DIRECTORIES(${KDE4_INCLUDES})
 # Set the Python libraries to what we actually found for interpreters
 SET(Python_ADDITIONAL_VERSIONS "${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}")
 
-# Auto-detect site-packages dir if we didn't supply any
+# Auto-detect site-packages dir if we didn't supply any: Set True to get_python_lib to get the arch-specific dir
 IF (NOT DEFINED PYTHON_SITE_PACKAGES_INSTALL_DIR)
-    EXECUTE_PROCESS ( COMMAND ${PYTHON_EXECUTABLE} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())" OUTPUT_VARIABLE PYTHON_SITE_PACKAGES_INSTALL_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
+    EXECUTE_PROCESS ( COMMAND ${PYTHON_EXECUTABLE} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(True))" OUTPUT_VARIABLE PYTHON_SITE_PACKAGES_INSTALL_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
 ENDIF (NOT DEFINED PYTHON_SITE_PACKAGES_INSTALL_DIR)
 
 MESSAGE(STATUS "Using Python site packages directory: ${PYTHON_SITE_PACKAGES_INSTALL_DIR}")

@@ -2,25 +2,13 @@ PROJECT(pykde4)
 
 # search packages used by KDE
 FIND_PACKAGE(KDE4 REQUIRED)
-FIND_PACKAGE(PythonInterp)
+FIND_PACKAGE(PythonLibrary)
 
 INCLUDE(KDE4Defaults)
 INCLUDE(MacroLibrary)
 INCLUDE(PythonMacros)
 
 INCLUDE_DIRECTORIES(${KDE4_INCLUDES})
-
-# Set the Python libraries to what we actually found for interpreters
-SET(Python_ADDITIONAL_VERSIONS "${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}")
-
-# Auto-detect site-packages dir if we didn't supply any: Set True to get_python_lib to get the arch-specific dir
-IF (NOT DEFINED PYTHON_SITE_PACKAGES_INSTALL_DIR)
-    EXECUTE_PROCESS ( COMMAND ${PYTHON_EXECUTABLE} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(True))" OUTPUT_VARIABLE PYTHON_SITE_PACKAGES_INSTALL_DIR OUTPUT_STRIP_TRAILING_WHITESPACE)
-ENDIF (NOT DEFINED PYTHON_SITE_PACKAGES_INSTALL_DIR)
-
-MESSAGE(STATUS "Using Python site packages directory: ${PYTHON_SITE_PACKAGES_INSTALL_DIR}")
-
-FIND_PACKAGE(PythonLibs)
 
 FIND_PACKAGE(SIP REQUIRED)
 IF(SIP_VERSION STRLESS "040e00")    # These version numbers also appear in ../CMakeLists.txt

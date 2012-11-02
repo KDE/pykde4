@@ -1,40 +1,53 @@
-PROJECT(pykde4)
+project(pykde4)
 
 # search packages used by KDE
-FIND_PACKAGE(KDE4 REQUIRED)
-FIND_PACKAGE(PythonLibrary)
+find_package(KDE4 REQUIRED)
+find_package(PythonLibrary)
 
-INCLUDE(KDE4Defaults)
-INCLUDE(MacroLibrary)
-INCLUDE(PythonMacros)
+include(KDE4Defaults)
+include(MacroLibrary)
+include(PythonMacros)
 
-INCLUDE_DIRECTORIES(${KDE4_INCLUDES})
+set(CMAKE_MODULE_PATH ${pykde4_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH})
 
-FIND_PACKAGE(SIP REQUIRED)
-IF(SIP_VERSION STRLESS "040e00")    # These version numbers also appear in ../CMakeLists.txt
-    MESSAGE(FATAL_ERROR "The version of SIP found is too old. 4.14 or later is needed.")
-ENDIF(SIP_VERSION STRLESS "040e00")
-INCLUDE(SIPMacros)
+macro_log_feature(KDE4_FOUND "KDE libraries" "The KDE Development Platform" "kdelibs"
+                  TRUE "" "Required to build PyKDE4")
+macro_log_feature(PYTHONLIBRARY_FOUND "Python library" "The Python interpreter and libraries"
+                  "http://python.org" TRUE "" "Required to build PyKDE4" )
 
-FIND_PACKAGE(PyQt4 REQUIRED)
-IF(PYQT4_VERSION STRLESS "040905")  # These version numbers also appear in ../CMakeLists.txt
-    MESSAGE(FATAL_ERROR "The version of PyQt found is too old. 4.9 or later is required.")
-ENDIF(PYQT4_VERSION STRLESS "040905")
+include_directories(${KDE4_INCLUDES})
 
-SET(SOPRANO_MIN_VERSION "2.0")
-MACRO_OPTIONAL_FIND_PACKAGE(Soprano)
-MACRO_LOG_FEATURE(Soprano_FOUND "Soprano" "Soprano Libraries" "kdesupport" FALSE "" "Required for Soprano Python bindings.")
+find_package(SIP)
+macro_log_feature(SIP_FOUND "SIP" "The SIP binding generator" "http://riverbankcomputing.com" TRUE
+                  "" "Required to build PyKDE4" )
+include(SIPMacros)
 
-MACRO_OPTIONAL_FIND_PACKAGE(Nepomuk)
-MACRO_LOG_FEATURE(Nepomuk_FOUND "Nepomuk" "Nepomuk Libraries" "kdesupport" FALSE "" "Required for Nepomuk Python bindings.")
+if(SIP_VERSION STRLESS "040e00")    # These version numbers also appear in ../CMakeLists.txt
+    message(FATAL_ERROR "The version of SIP found is too old. 4.14 or later is needed.")
+endif(SIP_VERSION STRLESS "040e00")
 
-MACRO_OPTIONAL_FIND_PACKAGE(KdepimLibs)
-MACRO_LOG_FEATURE(KDEPIMLIBS_FOUND "Kdepimlibs" "KDE pim Libraries" "kdepimlibs" FALSE "" "Required for Akonadi Python bindings.")
+find_package(PyQt4)
+macro_log_feature(PYQT4_FOUND "PyQt4" "The PyQt bindings" "http://riverbankcomputing.com" TRUE
+                  "" "Required to build PyKDE4")
 
-MACRO_OPTIONAL_FIND_PACKAGE(PolkitQt)
-MACRO_LOG_FEATURE(POLKITQT_FOUND "Polkit-Qt" "Qt Wrapper around PolicyKit" "kdesupport" FALSE "" "Required to build PolicyKit-Qt support")
+if(PYQT4_VERSION STRLESS "040905")  # These version numbers also appear in ../CMakeLists.txt
+    message(FATAL_ERROR "The version of PyQt found is too old. 4.9 or later is required.")
+endif(PYQT4_VERSION STRLESS "040905")
 
-INCLUDE_DIRECTORIES(
+set(SOPRANO_MIN_VERSION "2.0")
+macro_optional_find_package(Soprano)
+macro_log_feature(Soprano_FOUND "Soprano" "Soprano Libraries" "kdesupport" FALSE "" "Required for Soprano Python bindings.")
+
+macro_optional_find_package(Nepomuk)
+macro_log_feature(Nepomuk_FOUND "Nepomuk" "Nepomuk Libraries" "kdesupport" FALSE "" "Required for Nepomuk Python bindings.")
+
+macro_optional_find_package(KdepimLibs)
+macro_log_feature(KDEPIMLIBS_FOUND "Kdepimlibs" "KDE pim Libraries" "kdepimlibs" FALSE "" "Required for Akonadi Python bindings.")
+
+macro_optional_find_package(PolkitQt)
+macro_log_feature(POLKITQT_FOUND "Polkit-Qt" "Qt Wrapper around PolicyKit" "kdesupport" FALSE "" "Required to build PolicyKit-Qt support")
+
+include_directories(
     ${PYTHON_INCLUDE_PATH}
     ${SIP_INCLUDE_DIR}
     ${QT_INCLUDE_DIR}
@@ -59,143 +72,143 @@ INCLUDE_DIRECTORIES(
     ${KDEPIMLIBS_INCLUDE_DIRS}
 )
 
-SET(SIP_INCLUDES ${PYQT4_SIP_DIR} sip)
-SET(SIP_CONCAT_PARTS 8)
-IF (WIN32)
-    SET(SIP_TAGS ALL WS_WIN ${PYQT4_VERSION_TAG})
-ELSE (WIN32)
-    SET(SIP_TAGS ALL WS_X11 ${PYQT4_VERSION_TAG})
-ENDIF (WIN32)
-SET(SIP_DISABLE_FEATURES VendorID PyQt_NoPrintRangeBug)
+set(SIP_INCLUDES ${PYQT4_SIP_DIR} sip)
+set(SIP_CONCAT_PARTS 8)
+if (WIN32)
+    set(SIP_TAGS ALL WS_WIN ${PYQT4_VERSION_TAG})
+else (WIN32)
+    set(SIP_TAGS ALL WS_X11 ${PYQT4_VERSION_TAG})
+endif (WIN32)
+set(SIP_DISABLE_FEATURES VendorID PyQt_NoPrintRangeBug)
 
 # Use an extra option when compiling on Python 3.
-IF (PYTHON_VERSION_MAJOR GREATER 2)
-    IF(PYQT4_VERSION STRGREATER "040904")  
+if (PYTHON_VERSION_MAJOR GREATER 2)
+    if(PYQT4_VERSION STRGREATER "040904")
 	# Disable for newer PyQt
-	SET(SIP_EXTRA_OPTIONS -g -x PyKDE_QVector -x Py_v3)
-    ELSE (PYQT4_VERSION STRGREATER "040904")
-	SET(SIP_EXTRA_OPTIONS -g -x Py_v3)
-    ENDIF(PYQT4_VERSION STRGREATER "040904")
-ELSE (PYTHON_VERSION_MAJOR GREATER 2)
-    IF(PYQT4_VERSION STRGREATER "040904")  
+	set(SIP_EXTRA_OPTIONS -g -x PyKDE_QVector -x Py_v3)
+    else (PYQT4_VERSION STRGREATER "040904")
+	set(SIP_EXTRA_OPTIONS -g -x Py_v3)
+    endif(PYQT4_VERSION STRGREATER "040904")
+else (PYTHON_VERSION_MAJOR GREATER 2)
+    if(PYQT4_VERSION STRGREATER "040904")
 	# Disable for newer PyQt
-	SET(SIP_EXTRA_OPTIONS -g -x PyKDE_QVector)
-    ELSE (PYQT4_VERSION STRGREATER "040904")
-	SET(SIP_EXTRA_OPTIONS -g)
-    ENDIF(PYQT4_VERSION STRGREATER "040904")
-ENDIF (PYTHON_VERSION_MAJOR GREATER 2)
+	set(SIP_EXTRA_OPTIONS -g -x PyKDE_QVector)
+    else (PYQT4_VERSION STRGREATER "040904")
+	set(SIP_EXTRA_OPTIONS -g)
+    endif(PYQT4_VERSION STRGREATER "040904")
+endif (PYTHON_VERSION_MAJOR GREATER 2)
 
-ADD_DEFINITIONS(-D_REENTRANT -DQT_CORE_LIB -DQT_GUI_LIB -DUSING_SOPRANO_NRLMODEL_UNSTABLE_API)
+add_definitions(-D_REENTRANT -DQT_CORE_LIB -DQT_GUI_LIB -DUSING_SOPRANO_NRLMODEL_UNSTABLE_API)
 
-FILE(GLOB kdecore_files_sip sip/kdecore/*.sip)
+file(GLOB kdecore_files_sip sip/kdecore/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${kdecore_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.kdecore sip/kdecore/kdecoremod.sip ${KDE4_KDECORE_LIBS} ${KDE4_KPTY_LIBS} ${QT_QTNETWORK_LIBRARY})
+add_sip_python_module(PyKDE4.kdecore sip/kdecore/kdecoremod.sip ${KDE4_KDECORE_LIBS} ${KDE4_KPTY_LIBS} ${QT_QTNETWORK_LIBRARY})
 
-FILE(GLOB solid_files_sip sip/solid/*.sip)
+file(GLOB solid_files_sip sip/solid/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${solid_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.solid sip/solid/solidmod.sip ${KDE4_SOLID_LIBS} ${QT_QTCORE_LIBRARY})
+add_sip_python_module(PyKDE4.solid sip/solid/solidmod.sip ${KDE4_SOLID_LIBS} ${QT_QTCORE_LIBRARY})
 
-FILE(GLOB kdeui_files_sip sip/kdeui/*.sip)
+file(GLOB kdeui_files_sip sip/kdeui/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${kdeui_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.kdeui sip/kdeui/kdeuimod.sip ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY})
+add_sip_python_module(PyKDE4.kdeui sip/kdeui/kdeuimod.sip ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY})
 
-FILE(GLOB kio_files_sip sip/kio/*.sip)
+file(GLOB kio_files_sip sip/kio/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${kio_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.kio sip/kio/kiomod.sip ${KDE4_KIO_LIBS} ${KDE4_KFILE_LIBS})
+add_sip_python_module(PyKDE4.kio sip/kio/kiomod.sip ${KDE4_KIO_LIBS} ${KDE4_KFILE_LIBS})
 
-FILE(GLOB kutils_files_sip sip/kutils/*.sip)
+file(GLOB kutils_files_sip sip/kutils/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${kutils_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.kutils sip/kutils/kutilsmod.sip ${KDE4_KUTILS_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDEUI_LIBS})
+add_sip_python_module(PyKDE4.kutils sip/kutils/kutilsmod.sip ${KDE4_KUTILS_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTCORE_LIBRARY} ${KDE4_KDEUI_LIBS})
 
-FILE(GLOB kparts_files_sip sip/kparts/*.sip)
+file(GLOB kparts_files_sip sip/kparts/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${kparts_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.kparts sip/kparts/kpartsmod.sip ${KDE4_KPARTS_LIBS})
+add_sip_python_module(PyKDE4.kparts sip/kparts/kpartsmod.sip ${KDE4_KPARTS_LIBS})
 
-FILE(GLOB ktexteditor_files_sip sip/ktexteditor/*.sip)
+file(GLOB ktexteditor_files_sip sip/ktexteditor/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${ktexteditor_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.ktexteditor sip/ktexteditor/ktexteditormod.sip ${KDE4_KTEXTEDITOR_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
+add_sip_python_module(PyKDE4.ktexteditor sip/ktexteditor/ktexteditormod.sip ${KDE4_KTEXTEDITOR_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
 
-FILE(GLOB khtml_files_sip sip/khtml/*.sip)
+file(GLOB khtml_files_sip sip/khtml/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${khtml_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.khtml sip/khtml/khtmlmod.sip ${KDE4_KHTML_LIBS})
+add_sip_python_module(PyKDE4.khtml sip/khtml/khtmlmod.sip ${KDE4_KHTML_LIBS})
 
-FILE(GLOB knewstuff_files_sip sip/knewstuff/*.sip)
+file(GLOB knewstuff_files_sip sip/knewstuff/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${knewstuff_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.knewstuff sip/knewstuff/knewstuffmod.sip ${KDE4_KNEWSTUFF2_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTCORE_LIBRARY})
+add_sip_python_module(PyKDE4.knewstuff sip/knewstuff/knewstuffmod.sip ${KDE4_KNEWSTUFF2_LIBS} ${KDE4_KNEWSTUFF3_LIBS} ${QT_QTCORE_LIBRARY})
 
-FILE(GLOB dnssd_files_sip sip/dnssd/*.sip)
+file(GLOB dnssd_files_sip sip/dnssd/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${dnssd_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.dnssd sip/dnssd/dnssdmod.sip ${KDE4_KDNSSD_LIBS} ${QT_QTCORE_LIBRARY})
+add_sip_python_module(PyKDE4.dnssd sip/dnssd/dnssdmod.sip ${KDE4_KDNSSD_LIBS} ${QT_QTCORE_LIBRARY})
 
-FILE(GLOB phonon_files_sip sip/phonon/*.sip)
+file(GLOB phonon_files_sip sip/phonon/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${phonon_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.phonon sip/phonon/phononmod.sip ${PHONON_LIBS} ${QT_QTDBUS_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
+add_sip_python_module(PyKDE4.phonon sip/phonon/phononmod.sip ${PHONON_LIBS} ${QT_QTDBUS_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
 
-FILE(GLOB plasma_files_sip sip/plasma/*.sip)
+file(GLOB plasma_files_sip sip/plasma/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${plasma_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.plasma sip/plasma/plasmamod.sip ${KDE4_PLASMA_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTUITOOLS_LIBRARY} ${KDE4_KIO_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY})
+add_sip_python_module(PyKDE4.plasma sip/plasma/plasmamod.sip ${KDE4_PLASMA_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTUITOOLS_LIBRARY} ${KDE4_KIO_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY})
 
-FILE(GLOB kterminal_files_sip sip/kterminal/*.sip)
+file(GLOB kterminal_files_sip sip/kterminal/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${kterminal_files_sip})
-ADD_SIP_PYTHON_MODULE(PyKDE4.kterminal sip/kterminal/kterminalmod.sip ${KDE4_TERMINAL_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
+add_sip_python_module(PyKDE4.kterminal sip/kterminal/kterminalmod.sip ${KDE4_TERMINAL_LIBS} ${KDE4_KPARTS_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
 
-SET(PYKDE_MODULES "kdecore solid kdeui kio kutils kparts ktexteditor dnssd phonon plasma kterminal")
+set(PYKDE_MODULES "kdecore solid kdeui kio kutils kparts ktexteditor dnssd phonon plasma kterminal")
 
-IF(Soprano_FOUND)
+if(Soprano_FOUND)
     include_directories(${SOPRANO_INCLUDE_DIR})
-    FILE(GLOB soprano_files_sip sip/soprano/*.sip)
+    file(GLOB soprano_files_sip sip/soprano/*.sip)
     set(SIP_EXTRA_FILES_DEPEND ${soprano_files_sip})
-    ADD_SIP_PYTHON_MODULE(PyKDE4.soprano sip/soprano/sopranomod.sip ${SOPRANO_LIBRARIES} ${SOPRANO_CLIENT_LIBRARIES} ${SOPRANO_SERVER_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY})
-    SET(PYKDE_MODULES "${PYKDE_MODULES} soprano")
-ENDIF(Soprano_FOUND)
+    add_sip_python_module(PyKDE4.soprano sip/soprano/sopranomod.sip ${SOPRANO_LIBRARIES} ${SOPRANO_CLIENT_LIBRARIES} ${SOPRANO_SERVER_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY})
+    set(PYKDE_MODULES "${PYKDE_MODULES} soprano")
+endif(Soprano_FOUND)
 
-IF(Nepomuk_FOUND)
+if(Nepomuk_FOUND)
     include_directories(${NEPOMUK_INCLUDE_DIR})
-    FILE(GLOB nepomuk_files_sip sip/nepomuk/*.sip)
+    file(GLOB nepomuk_files_sip sip/nepomuk/*.sip)
     set(SIP_EXTRA_FILES_DEPEND ${nepomuk_files_sip})
-    ADD_SIP_PYTHON_MODULE(PyKDE4.nepomuk sip/nepomuk/nepomukmod.sip ${NEPOMUK_LIBRARIES} ${NEPOMUK_QUERY_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${SOPRANO_LIBRARIES} ${KDE4_KIO_LIBS})
-    SET(PYKDE_MODULES "${PYKDE_MODULES} nepomuk")
-ENDIF(Nepomuk_FOUND)
+    add_sip_python_module(PyKDE4.nepomuk sip/nepomuk/nepomukmod.sip ${NEPOMUK_LIBRARIES} ${NEPOMUK_QUERY_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${SOPRANO_LIBRARIES} ${KDE4_KIO_LIBS})
+    set(PYKDE_MODULES "${PYKDE_MODULES} nepomuk")
+endif(Nepomuk_FOUND)
 
-IF(KDEPIMLIBS_FOUND)
+if(KDEPIMLIBS_FOUND)
     include_directories(${KDEPIMLIBS_INCLUDE_DIR})
-    FILE(GLOB akonadi_files_sip sip/akonadi/*.sip)
+    file(GLOB akonadi_files_sip sip/akonadi/*.sip)
     set(SIP_EXTRA_FILES_DEPEND ${akonadi_files_sip})
-    ADD_SIP_PYTHON_MODULE(PyKDE4.akonadi sip/akonadi/akonadimod.sip ${KDE4_AKONADI_LIBS} ${KDE4_AKONADI_KMIME_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
-    SET(PYKDE_MODULES "${PYKDE_MODULES} akonadi")
-ENDIF(KDEPIMLIBS_FOUND)
+    add_sip_python_module(PyKDE4.akonadi sip/akonadi/akonadimod.sip ${KDE4_AKONADI_LIBS} ${KDE4_AKONADI_KMIME_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
+    set(PYKDE_MODULES "${PYKDE_MODULES} akonadi")
+endif(KDEPIMLIBS_FOUND)
 
-IF(POLKITQT_FOUND)
-    INCLUDE_DIRECTORIES(${POLKITQT_INCLUDE_DIR})
+if(POLKITQT_FOUND)
+    include_directories(${POLKITQT_INCLUDE_DIR})
 
-    FILE(GLOB pollkitqt_files_sip sip/polkitqt/*.sip)
+    file(GLOB pollkitqt_files_sip sip/polkitqt/*.sip)
 
     # ${POLKITQT_INCLUDE_DIR} -- We don't use this directly, because we need the #includes
     # in the .sip file to be more specific otherwise they pick up the wrong action.h etc.
 
     set(SIP_EXTRA_FILES_DEPEND ${pollkitqt_files_sip})
-    ADD_SIP_PYTHON_MODULE(PyKDE4.polkitqt sip/polkitqt/polkitqtmod.sip ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${POLKITQT_LIBRARIES})
-    SET(PYKDE_MODULES "${PYKDE_MODULES} polkitqt")
-ENDIF(POLKITQT_FOUND)
+    add_sip_python_module(PyKDE4.polkitqt sip/polkitqt/polkitqtmod.sip ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${POLKITQT_LIBRARIES})
+    set(PYKDE_MODULES "${PYKDE_MODULES} polkitqt")
+endif(POLKITQT_FOUND)
 
-PYTHON_INSTALL(__init__.py ${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4)
+python_install(__init__.py ${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4)
 
 # Setup and install pykdeconfig.py
 
 # Turn these into formatted strings.
-SET(_SIP_TAGS)
-FOREACH (_TAG ${SIP_TAGS})
-    SET(_SIP_TAGS "${_SIP_TAGS} -t ${_TAG}")
-ENDFOREACH (_TAG)
+set(_SIP_TAGS)
+foreach (_TAG ${SIP_TAGS})
+    set(_SIP_TAGS "${_SIP_TAGS} -t ${_TAG}")
+endforeach (_TAG)
 
-SET(_SIP_X)
-FOREACH (_X ${SIP_DISABLE_FEATURES})
-    SET(_SIP_X "${_SIP_X} -X ${_X}")
-ENDFOREACH (_X ${SIP_DISABLE_FEATURES})
+set(_SIP_X)
+foreach (_X ${SIP_DISABLE_FEATURES})
+    set(_SIP_X "${_SIP_X} -X ${_X}")
+endforeach (_X ${SIP_DISABLE_FEATURES})
 
-GET_FILENAME_COMPONENT(LIB_DIR ${KDE4_LIB_DIR} NAME)
+get_filename_component(LIB_DIR ${KDE4_LIB_DIR} NAME)
 
-SET(SIP_CONFIGURATION "
+set(SIP_CONFIGURATION "
 kde_version_parts = '${KDE_VERSION}'.split('.')
 kde_version_hex = int(kde_version_parts[0])*65536 + int(kde_version_parts[1])*256 + int(kde_version_parts[2])
 _pkg_config = {
@@ -219,19 +232,21 @@ _pkg_config = {
 
 _default_macros = None")
 
-CONFIGURE_FILE(pykdeconfig.py.in ${CMAKE_CURRENT_BINARY_DIR}/pykdeconfig.py)
-PYTHON_INSTALL(${CMAKE_CURRENT_BINARY_DIR}/pykdeconfig.py ${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4)
+configure_file(pykdeconfig.py.in ${CMAKE_CURRENT_BINARY_DIR}/pykdeconfig.py)
+python_install(${CMAKE_CURRENT_BINARY_DIR}/pykdeconfig.py ${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4)
 
 # Install the .sip files for anyone that wants to build bindings on top of PyKDE4.
 # (Don't forget the / at the end of sip/.)
-INSTALL(DIRECTORY sip/ DESTINATION ${SIP_DEFAULT_SIP_DIR}/PyKDE4
+install(DIRECTORY sip/ DESTINATION ${SIP_DEFAULT_SIP_DIR}/PyKDE4
     PATTERN "*~" EXCLUDE    # This sucks, why can't I just whitelist what I _do_ want?
     PATTERN ".svn" EXCLUDE
     PATTERN "*.in" EXCLUDE)
 
-ADD_SUBDIRECTORY(tools)
-#ADD_SUBDIRECTORY(docs)
-ADD_SUBDIRECTORY(examples)
-IF (PYTHON_VERSION_MAJOR LESS 3)
-    ADD_SUBDIRECTORY(kpythonpluginfactory)
-ENDIF (PYTHON_VERSION_MAJOR LESS 3)
+add_subdirectory(tools)
+#add_subdirectory(docs)
+add_subdirectory(examples)
+if (PYTHON_VERSION_MAJOR LESS 3)
+    add_subdirectory(kpythonpluginfactory)
+endif (PYTHON_VERSION_MAJOR LESS 3)
+
+macro_display_feature_log()

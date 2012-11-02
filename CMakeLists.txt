@@ -1,20 +1,8 @@
 PROJECT(pykde4)
 
-include(FeatureSummary)
-
 # search packages used by KDE
-FIND_PACKAGE(KDE4)
+FIND_PACKAGE(KDE4 REQUIRED)
 FIND_PACKAGE(PythonLibrary)
-find_package(SIP)
-find_package(PyQt4)
-
-set_package_properties(KDE4 PROPERTIES TYPE REQUIRED)
-set_package_properties(PythonLibrary PROPERTIES TYPE REQUIRED
-                                                DESCRIPTION "The Python C library and interperter"
-                                                PURPOSE "Needed to build PyKDE4")
-set_package_properties(SIP PROPERTIES TYPE REQUIRED
-                                           DESCRIPTION "The SIP C++ binding generator"
-                                           PURPOSE "Needed to build PyKDE4")
 
 INCLUDE(KDE4Defaults)
 INCLUDE(MacroLibrary)
@@ -22,31 +10,29 @@ INCLUDE(PythonMacros)
 
 INCLUDE_DIRECTORIES(${KDE4_INCLUDES})
 
+FIND_PACKAGE(SIP REQUIRED)
 IF(SIP_VERSION STRLESS "040e00")    # These version numbers also appear in ../CMakeLists.txt
     MESSAGE(FATAL_ERROR "The version of SIP found is too old. 4.14 or later is needed.")
 ENDIF(SIP_VERSION STRLESS "040e00")
-
 INCLUDE(SIPMacros)
 
+FIND_PACKAGE(PyQt4 REQUIRED)
+IF(PYQT4_VERSION STRLESS "040905")  # These version numbers also appear in ../CMakeLists.txt
+    MESSAGE(FATAL_ERROR "The version of PyQt found is too old. 4.9 or later is required.")
+ENDIF(PYQT4_VERSION STRLESS "040905")
+
 SET(SOPRANO_MIN_VERSION "2.0")
+MACRO_OPTIONAL_FIND_PACKAGE(Soprano)
+MACRO_LOG_FEATURE(Soprano_FOUND "Soprano" "Soprano Libraries" "kdesupport" FALSE "" "Required for Soprano Python bindings.")
 
-find_package(Soprano)
-set_package_properties(Soprano PROPERTIES DESCRIPTION "Soprano Libraries"
-                                          URL "kdesupport"
-                                          PURPOSE "Required for Soprano Python bindings.")
-find_package(Nepomuk)
-set_package_properties(Nepomuk PROPERTIES DESCRIPTION "Nepomuk Libraries"
-                                          URL "kdesupport"
-                                          PURPOSE "Required for Nepomuk Python bindings.")
-find_package(KdepimLibs)
-set_package_properties(KdepimLibs PROPERTIES DESCRIPTION "KDE PIM libraries"
-                                             URL "kdepimlibs"
-                                             PURPOSE "Required for Akonadi Python bindings.")
-find_package(PolkitQt)
-set_package_properties(PolkitQt PROPERTIES DESCRIPTION "Qt Wrapper around PolicyKit"
-                                           URL "kdesupport"
-                                           PURPOSE "Required to build PolkitQt Python bindings.")
+MACRO_OPTIONAL_FIND_PACKAGE(Nepomuk)
+MACRO_LOG_FEATURE(Nepomuk_FOUND "Nepomuk" "Nepomuk Libraries" "kdesupport" FALSE "" "Required for Nepomuk Python bindings.")
 
+MACRO_OPTIONAL_FIND_PACKAGE(KdepimLibs)
+MACRO_LOG_FEATURE(KDEPIMLIBS_FOUND "Kdepimlibs" "KDE pim Libraries" "kdepimlibs" FALSE "" "Required for Akonadi Python bindings.")
+
+MACRO_OPTIONAL_FIND_PACKAGE(PolkitQt)
+MACRO_LOG_FEATURE(POLKITQT_FOUND "Polkit-Qt" "Qt Wrapper around PolicyKit" "kdesupport" FALSE "" "Required to build PolicyKit-Qt support")
 
 INCLUDE_DIRECTORIES(
     ${PYTHON_INCLUDE_PATH}
@@ -84,14 +70,14 @@ SET(SIP_DISABLE_FEATURES VendorID PyQt_NoPrintRangeBug)
 
 # Use an extra option when compiling on Python 3.
 IF (PYTHON_VERSION_MAJOR GREATER 2)
-    IF(PYQT4_VERSION STRGREATER "040904")
+    IF(PYQT4_VERSION STRGREATER "040904")  
 	# Disable for newer PyQt
 	SET(SIP_EXTRA_OPTIONS -g -x PyKDE_QVector -x Py_v3)
     ELSE (PYQT4_VERSION STRGREATER "040904")
 	SET(SIP_EXTRA_OPTIONS -g -x Py_v3)
     ENDIF(PYQT4_VERSION STRGREATER "040904")
 ELSE (PYTHON_VERSION_MAJOR GREATER 2)
-    IF(PYQT4_VERSION STRGREATER "040904")
+    IF(PYQT4_VERSION STRGREATER "040904")  
 	# Disable for newer PyQt
 	SET(SIP_EXTRA_OPTIONS -g -x PyKDE_QVector)
     ELSE (PYQT4_VERSION STRGREATER "040904")
@@ -249,5 +235,3 @@ ADD_SUBDIRECTORY(examples)
 IF (PYTHON_VERSION_MAJOR LESS 3)
     ADD_SUBDIRECTORY(kpythonpluginfactory)
 ENDIF (PYTHON_VERSION_MAJOR LESS 3)
-
-feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

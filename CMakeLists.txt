@@ -24,7 +24,7 @@ include(SIPMacros)
 
 if(SIP_VERSION STRLESS "040e00")    # These version numbers also appear in ../CMakeLists.txt
     message(FATAL_ERROR "The version of SIP found is too old. 4.14 or later is needed.")
-endif(SIP_VERSION STRLESS "040e00")
+endif()
 
 find_package(PyQt4)
 macro_log_feature(PYQT4_FOUND "PyQt4" "The PyQt bindings" "http://riverbankcomputing.com" TRUE
@@ -32,7 +32,7 @@ macro_log_feature(PYQT4_FOUND "PyQt4" "The PyQt bindings" "http://riverbankcompu
 
 if(PYQT4_VERSION STRLESS "040905")  # These version numbers also appear in ../CMakeLists.txt
     message(FATAL_ERROR "The version of PyQt found is too old. 4.9 or later is required.")
-endif(PYQT4_VERSION STRLESS "040905")
+endif()
 
 set(SOPRANO_MIN_VERSION "2.0")
 macro_optional_find_package(Soprano)
@@ -76,27 +76,27 @@ set(SIP_INCLUDES ${PYQT4_SIP_DIR} sip)
 set(SIP_CONCAT_PARTS 8)
 if (WIN32)
     set(SIP_TAGS ALL WS_WIN ${PYQT4_VERSION_TAG})
-else (WIN32)
+else ()
     set(SIP_TAGS ALL WS_X11 ${PYQT4_VERSION_TAG})
-endif (WIN32)
+endif ()
 set(SIP_DISABLE_FEATURES VendorID PyQt_NoPrintRangeBug)
 
 # Use an extra option when compiling on Python 3.
 if (PYTHON_VERSION_MAJOR GREATER 2)
     if(PYQT4_VERSION STRGREATER "040904")
-	# Disable for newer PyQt
-	set(SIP_EXTRA_OPTIONS -g -x PyKDE_QVector)
-    else (PYQT4_VERSION STRGREATER "040904")
-	set(SIP_EXTRA_OPTIONS -g)
-    endif(PYQT4_VERSION STRGREATER "040904")
+	    # Disable for newer PyQt
+	    set(SIP_EXTRA_OPTIONS -g -x PyKDE_QVector)
+    else ()
+	    set(SIP_EXTRA_OPTIONS -g)
+    endif()
 else (PYTHON_VERSION_MAJOR GREATER 2)
     if(PYQT4_VERSION STRGREATER "040904")
 	# Disable for newer PyQt
-	set(SIP_EXTRA_OPTIONS -g -x PyKDE_QVector -x Py_v3)
-    else (PYQT4_VERSION STRGREATER "040904")
-	set(SIP_EXTRA_OPTIONS -g -x Py_v3)
-    endif(PYQT4_VERSION STRGREATER "040904")
-endif (PYTHON_VERSION_MAJOR GREATER 2)
+    	set(SIP_EXTRA_OPTIONS -g -x PyKDE_QVector -x Py_v3)
+    else ()
+	    set(SIP_EXTRA_OPTIONS -g -x Py_v3)
+    endif()
+endif ()
 
 add_definitions(-D_REENTRANT -DQT_CORE_LIB -DQT_GUI_LIB -DUSING_SOPRANO_NRLMODEL_UNSTABLE_API)
 
@@ -160,7 +160,7 @@ if(Soprano_FOUND)
     set(SIP_EXTRA_FILES_DEPEND ${soprano_files_sip})
     add_sip_python_module(PyKDE4.soprano sip/soprano/sopranomod.sip ${SOPRANO_LIBRARIES} ${SOPRANO_CLIENT_LIBRARIES} ${SOPRANO_SERVER_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY})
     set(PYKDE_MODULES "${PYKDE_MODULES} soprano")
-endif(Soprano_FOUND)
+endif()
 
 if(Nepomuk_FOUND)
     include_directories(${NEPOMUK_INCLUDE_DIR})
@@ -168,15 +168,15 @@ if(Nepomuk_FOUND)
     set(SIP_EXTRA_FILES_DEPEND ${nepomuk_files_sip})
     add_sip_python_module(PyKDE4.nepomuk sip/nepomuk/nepomukmod.sip ${NEPOMUK_LIBRARIES} ${NEPOMUK_QUERY_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${SOPRANO_LIBRARIES} ${KDE4_KIO_LIBS})
     set(PYKDE_MODULES "${PYKDE_MODULES} nepomuk")
-endif(Nepomuk_FOUND)
+endif()
 
-if(KDEPIMLIBS_FOUND)
+if(KdepimLibs_FOUND)
     include_directories(${KDEPIMLIBS_INCLUDE_DIR})
     file(GLOB akonadi_files_sip sip/akonadi/*.sip)
     set(SIP_EXTRA_FILES_DEPEND ${akonadi_files_sip})
     add_sip_python_module(PyKDE4.akonadi sip/akonadi/akonadimod.sip ${KDE4_AKONADI_LIBS} ${KDE4_AKONADI_KMIME_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
     set(PYKDE_MODULES "${PYKDE_MODULES} akonadi")
-endif(KDEPIMLIBS_FOUND)
+endif()
 
 if(POLKITQT_FOUND)
     include_directories(${POLKITQT_INCLUDE_DIR})
@@ -189,7 +189,7 @@ if(POLKITQT_FOUND)
     set(SIP_EXTRA_FILES_DEPEND ${pollkitqt_files_sip})
     add_sip_python_module(PyKDE4.polkitqt sip/polkitqt/polkitqtmod.sip ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${POLKITQT_LIBRARIES})
     set(PYKDE_MODULES "${PYKDE_MODULES} polkitqt")
-endif(POLKITQT_FOUND)
+endif()
 
 python_install(__init__.py ${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4)
 
@@ -247,6 +247,6 @@ add_subdirectory(tools)
 add_subdirectory(examples)
 if (PYTHON_VERSION_MAJOR LESS 3)
     add_subdirectory(kpythonpluginfactory)
-endif (PYTHON_VERSION_MAJOR LESS 3)
+endif ()
 
 macro_display_feature_log()

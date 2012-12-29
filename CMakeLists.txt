@@ -1,25 +1,45 @@
 project(pykde4)
 
+cmake_minimum_required(VERSION 2.8.6 FATAL_ERROR)
+
 # search packages used by KDE
-find_package(KDE4 REQUIRED)
+find_package(KDE4 4.9.4 REQUIRED)
+
+# Match what's used in the main macros
+cmake_policy(SET CMP0002 OLD)
 find_package(PythonLibrary)
+
+
 
 include(KDE4Defaults)
 include(MacroLibrary)
 include(PythonMacros)
+include(FeatureSummary)
+
+option(PYKDEUIC4_ALTINSTALL "Enable parallel-installation of the PyKDE4 tools" FALSE)
 
 set(CMAKE_MODULE_PATH ${pykde4_SOURCE_DIR}/cmake/modules ${CMAKE_MODULE_PATH})
 
-macro_log_feature(KDE4_FOUND "KDE libraries" "The KDE Development Platform" "kdelibs"
-                  TRUE "" "Required to build PyKDE4")
-macro_log_feature(PYTHONLIBRARY_FOUND "Python library" "The Python interpreter and libraries"
-                  "http://python.org" TRUE "" "Required to build PyKDE4" )
+find_package(PythonLibrary)
+
+set_package_properties(KDE4 PROPERTIES DESCRIPTION "The KDE libraries"
+                       URL "http://www.kde.org" TYPE REQUIRED
+                       PURPOSE "Required to build PyKDE4")
+set_package_properties(PythonLibrary PROPERTIES DESCRIPTION
+                       "The Python Library" URL "http://www.python.org"
+                       TYPE REQUIRED PURPOSE "Required to build PyKDE4")
+set_package_properties(PythonInterp PROPERTIES
+                       DESCRIPTION "The Python interpreter"
+                       URL "http://www.python.org" TYPE REQUIRED
+                       PURPOSE "Required to build PyKDE4")
 
 include_directories(${KDE4_INCLUDES})
 
 find_package(SIP)
-macro_log_feature(SIP_FOUND "SIP" "The SIP binding generator" "http://riverbankcomputing.com" TRUE
-                  "" "Required to build PyKDE4" )
+set_package_properties(SIP PROPERTIES DESCRIPTION "The SIP binding generator"
+                       URL "http://riverbankcomputing.com" TYPE REQUIRED
+                       PURPOSE "Required to build PyKDE4")
+
 include(SIPMacros)
 
 if(SIP_VERSION STRLESS "040e00")    # These version numbers also appear in ../CMakeLists.txt
@@ -27,25 +47,34 @@ if(SIP_VERSION STRLESS "040e00")    # These version numbers also appear in ../CM
 endif()
 
 find_package(PyQt4)
-macro_log_feature(PYQT4_FOUND "PyQt4" "The PyQt bindings" "http://riverbankcomputing.com" TRUE
-                  "" "Required to build PyKDE4")
+set_package_properties(PyQt4 PROPERTIES DESCRIPTION "The PyQt bindings"
+                       URL "http://riverbankcomputing.com" TYPE REQUIRED
+                       PURPOSE "Required to build PyKDE4")
 
 if(PYQT4_VERSION STRLESS "040905")  # These version numbers also appear in ../CMakeLists.txt
     message(FATAL_ERROR "The version of PyQt found is too old. 4.9 or later is required.")
 endif()
 
-set(SOPRANO_MIN_VERSION "2.0")
 macro_optional_find_package(Soprano)
-macro_log_feature(Soprano_FOUND "Soprano" "Soprano Libraries" "kdesupport" FALSE "" "Required for Soprano Python bindings.")
+set_package_properties(Soprano PROPERTIES DESCRIPTION "The Soprano libraries"
+                       URL "http://projects.kde.org/kdesupport/soprano"
+                       TYPE OPTIONAL PURPOSE
+                       "Required for Soprano Python bindings")
 
 macro_optional_find_package(Nepomuk)
-macro_log_feature(Nepomuk_FOUND "Nepomuk" "Nepomuk Libraries" "kdesupport" FALSE "" "Required for Nepomuk Python bindings.")
+set_package_properties(Nepomuk PROPERTIES DESCRIPTION "The Nepomuk libraries"
+                       URL "http://projects.kde.org/kde/kdelibs/" TYPE OPTIONAL
+                       PURPOSE "Required for Nepomuk Python bindings")
 
 macro_optional_find_package(KdepimLibs)
-macro_log_feature(KdepimLibs_FOUND "Kdepimlibs" "KDE pim Libraries" "kdepimlibs" FALSE "" "Required for Akonadi Python bindings.")
+set_package_properties(KdepimLibs PROPERTIES DESCRIPTION "The KDE PIM libraries"
+                       URL "http://projects.kde.org/kde/kdepimlibs" TYPE OPTIONAL
+                       PURPOSE "Required for the Akonadi Python bindings")
 
 macro_optional_find_package(PolkitQt)
-macro_log_feature(POLKITQT_FOUND "Polkit-Qt" "Qt Wrapper around PolicyKit" "kdesupport" FALSE "" "Required to build PolicyKit-Qt support")
+set_package_properties(PolkitQt PROPERTIES DESCRIPTION "Qt wrapper around Polkit"
+                       TYPE OPTIONAL PURPOSE
+                       "Required to build Python Polkit bindings")
 
 include_directories(
     ${PYTHON_INCLUDE_PATH}
@@ -171,7 +200,11 @@ if(Nepomuk_FOUND)
 endif()
 
 if(KdepimLibs_FOUND)
-    include_directories(${KDEPIMLIBS_INCLUDE_DIR})
+    find_package(Boost 1.34.0)
+    set_package_properties(Boost PROPERTIES DESCRIPTION "Boost C++ Libraries"
+                           URL "http://www.boost.org" TYPE REQUIRED
+                           PURPOSE "Boost is required by Akonadi")
+    include_directories(${KDEPIMLIBS_INCLUDE_DIRS})
     file(GLOB akonadi_files_sip sip/akonadi/*.sip)
     set(SIP_EXTRA_FILES_DEPEND ${akonadi_files_sip})
     add_sip_python_module(PyKDE4.akonadi sip/akonadi/akonadimod.sip ${KDE4_AKONADI_LIBS} ${KDE4_AKONADI_KMIME_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS})
@@ -249,4 +282,4 @@ if (PYTHON_VERSION_MAJOR LESS 3)
     add_subdirectory(kpythonpluginfactory)
 endif ()
 
-macro_display_feature_log()
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

@@ -4,7 +4,7 @@ set(kpythonpluginfactory_SRCS
     kpythonpluginfactory.cpp)
 
 GET_FILENAME_COMPONENT(LIB_PYTHON ${PYTHON_LIBRARIES} NAME)
-ADD_DEFINITIONS(-DLIB_PYTHON=\\"${LIB_PYTHON}\\")
+ADD_DEFINITIONS(-DLIB_PYTHON="\\"${LIB_PYTHON}\\"")
 ADD_DEFINITIONS(-DKDE_DEFAULT_DEBUG_AREA=15000)
 
 kde4_add_plugin(kpythonpluginfactory ${kpythonpluginfactory_SRCS})

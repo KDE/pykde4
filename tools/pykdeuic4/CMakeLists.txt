@@ -10,7 +10,7 @@ INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -DTARGET=${PYTHON_SITE_PA
 
 if (NOT PYKDEUIC4_ALTINSTALL)
     # Step 2: Make a the generated symlink a link to "pykdeuic4"
-    install(CODE "EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E create_symlink ${BIN_INSTALL_DIR}/${_uic_name} ${BIN_INSTALL_DIR}/pykdeuic4)" )
+    INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -DTARGET=${BIN_INSTALL_DIR}/${_uic_name} -DLINK_NAME=${BIN_INSTALL_DIR}/pykdeuic4 -P ${cmake_module_dir}/create_exe_symlink.cmake)" )
 endif()
 
 unset(_uic_name)

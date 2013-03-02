@@ -241,6 +241,8 @@ endforeach (_X ${SIP_DISABLE_FEATURES})
 
 get_filename_component(LIB_DIR ${KDE4_LIB_DIR} NAME)
 
+set (SIP_FILES_INSTALL_DIR ${SHARE_INSTALL_PREFIX}/sip)
+
 set(SIP_CONFIGURATION "
 kde_version_parts = '${KDE_VERSION}'.split('.')
 kde_version_hex = int(kde_version_parts[0])*65536 + int(kde_version_parts[1])*256 + int(kde_version_parts[2])
@@ -258,7 +260,7 @@ _pkg_config = {
     'pykde_kde_sip_flags':  '${_SIP_TAGS} ${_SIP_X} ${SIP_EXTRA_OPTIONS}',
     'pykde_mod_dir':        '${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4',
     'pykde_modules':        '${PYKDE_MODULES}',
-    'pykde_sip_dir':        '${SIP_DEFAULT_SIP_DIR}/PyKDE4',
+    'pykde_sip_dir':        '${SIP_FILES_INSTALL_DIR}/PyKDE4',
     'pykde_version':        kde_version_hex,
     'pykde_version_str':    '${KDE_VERSION}'
 }
@@ -270,7 +272,7 @@ python_install(${CMAKE_CURRENT_BINARY_DIR}/pykdeconfig.py ${PYTHON_SITE_PACKAGES
 
 # Install the .sip files for anyone that wants to build bindings on top of PyKDE4.
 # (Don't forget the / at the end of sip/.)
-install(DIRECTORY sip/ DESTINATION ${SIP_DEFAULT_SIP_DIR}/PyKDE4
+install(DIRECTORY sip/ DESTINATION ${SIP_FILES_INSTALL_DIR}/PyKDE4
     PATTERN "*~" EXCLUDE    # This sucks, why can't I just whitelist what I _do_ want?
     PATTERN ".svn" EXCLUDE
     PATTERN "*.in" EXCLUDE)

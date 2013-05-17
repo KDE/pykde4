@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KTextEditor.ModificationInterface</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.9 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>ModificationInterface Class Reference</h1>
+<code>from PyKDE4.ktexteditor import *</code>
+<p>
+
+
+Namespace: <a href="../ktexteditor/KTextEditor.html">KTextEditor</a><br />
+<h2>Detailed Description</h2>
+
+<p>External modification extension interface for the Document.
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+The class ModificationInterface provides methods to handle modifications
+of all opened files caused by external programs. Whenever the
+modified-on-disk state changes the signal modifiedOnDisk() is emitted
+along with a ModifiedOnDiskReason. Set the state by calling
+setModifiedOnDisk(). Whether the Editor should show warning dialogs to
+inform the user about external modified files can be controlled with
+setModifiedOnDiskWarning(). The slot modifiedOnDisk() is called to ask
+the user what to do whenever a file was modified.
+</p>
+<p>
+<b>Accessing the ModificationInterface </b>
+</p>
+<p>
+The ModificationInterface is supposed to be an extension interface for a
+Document, i.e. the Document inherits the interface provided that the
+used KTextEditor library implements the interface. Use qobject_cast to
+access the interface:
+<pre class="fragment">
+ // doc is of type KTextEditor.Document*
+ KTextEditor.ModificationInterface *iface =
+     qobject_cast&lt;KTextEditor.ModificationInterface*&gt;( doc );
+
+ if( iface ) {
+     // the implementation supports the interface
+     // do stuff
+ }
+</pre>
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KTextEditor.Document
+</dd></dl> 
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Christoph Cullmann &lt;cullmann@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#ModifiedOnDiskReason">ModifiedOnDiskReason</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;OnDiskUnmodified, OnDiskModified, OnDiskCreated, OnDiskDeleted&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ModificationInterface">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#modifiedOnDisk">modifiedOnDisk</a> (self, <a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a> document, bool isModified, <a href="../ktexteditor/KTextEditor.ModificationInterface.html#ModifiedOnDiskReason">KTextEditor.ModificationInterface.ModifiedOnDiskReason</a> reason)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setModifiedOnDisk">setModifiedOnDisk</a> (self, <a href="../ktexteditor/KTextEditor.ModificationInterface.html#ModifiedOnDiskReason">KTextEditor.ModificationInterface.ModifiedOnDiskReason</a> reason)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setModifiedOnDiskWarning">setModifiedOnDiskWarning</a> (self, bool on)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#slotModifiedOnDisk">slotModifiedOnDisk</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view=0)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="ModificationInterface"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="modifiedOnDisk"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> modifiedOnDisk</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a>&nbsp;</td>
+<td class="paramname"><em>document</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>isModified</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.ModificationInterface.html#ModifiedOnDiskReason">KTextEditor.ModificationInterface.ModifiedOnDiskReason</a>&nbsp;</td>
+<td class="paramname"><em>reason</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>This signal is emitted whenever the <b>document</b> changed its
+modified-on-disk state.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>document</em>&nbsp;</td><td> the Document object that represents the file on disk
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>isModified</em>&nbsp;</td><td> if true, the file was modified rather than created
+or deleted
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>reason</em>&nbsp;</td><td> the reason why the signal was emitted
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> setModifiedOnDisk()
+</dd></dl>
+</p></div></div><a class="anchor" name="setModifiedOnDisk"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setModifiedOnDisk</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.ModificationInterface.html#ModifiedOnDiskReason">KTextEditor.ModificationInterface.ModifiedOnDiskReason</a>&nbsp;</td>
+<td class="paramname"><em>reason</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Set the document's modified-on-disk state to <b>reason.</b>
+KTextEditor implementations should emit the signal modifiedOnDisk()
+along with the reason. When the document is in a clean state again the
+reason should be ModifiedOnDiskReason.OnDiskUnmodified.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>reason</em>&nbsp;</td><td> the modified-on-disk reason.
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> ModifiedOnDiskReason, modifiedOnDisk()
+</dd></dl>
+</p></div></div><a class="anchor" name="setModifiedOnDiskWarning"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setModifiedOnDiskWarning</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>on</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Control, whether the editor should show a warning dialog whenever a file
+was modified on disk. If <b>on</b> is true the editor will show warning
+dialogs.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>on</em>&nbsp;</td><td> controls, whether the editor should show a warning dialog for
+files modified on disk
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="slotModifiedOnDisk"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> slotModifiedOnDisk</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Ask the user what to do, if the file was modified on disk.
+The argument <b>view</b> is used to avoid asking again, when the editor
+regains focus after the dialog is hidden.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> the view that should be notified of the user's decision
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> setModifiedOnDisk(), modifiedOnDisk()
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="ModifiedOnDiskReason"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">ModifiedOnDiskReason</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Reasons why a document is modified on disk.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>OnDiskUnmodified</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>OnDiskModified</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>OnDiskCreated</em>&nbsp;=&nbsp;2</td><td><tr><td valign="top"><em>OnDiskDeleted</em>&nbsp;=&nbsp;3</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

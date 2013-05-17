@@ -32,11 +32,53 @@ class ContainerInterface
 %End
 
 public:
-    virtual void         setContainer (QObject*)  = 0;
-    virtual QObject*     container ()  = 0;
+    virtual void            setContainer (QObject* container)=0;
+    virtual QObject*        container ()=0;
 
-};  // class ContainerInterface
+                            ContainerInterface ();
+    virtual ~ContainerInterface ();
+};
+// class ContainerInterface
 
-};  // namespace KTextEditor
+class MdiContainer
+{
+%TypeHeaderCode
+#include <ktexteditor/containerinterface.h>
+%End
+
+public:
+                            MdiContainer ();
+    virtual ~MdiContainer ();
+    virtual void            setActiveView (KTextEditor::View* view)=0;
+    virtual KTextEditor::View*  activeView ()=0;
+    virtual KTextEditor::Document*  createDocument ()=0;
+    virtual bool            closeDocument (KTextEditor::Document* doc)=0;
+    virtual KTextEditor::View*  createView (KTextEditor::Document* doc)=0;
+    virtual bool            closeView (KTextEditor::View* view)=0;
+};
+class ViewBarContainer
+{
+%TypeHeaderCode
+#include <ktexteditor/containerinterface.h>
+%End
+
+public:
+    enum Position
+    {
+        LeftBar,
+        TopBar,
+        RightBar,
+        BottomBar
+    };
+                            ViewBarContainer ();
+    virtual ~ViewBarContainer ();
+    virtual QWidget*        getViewBarParent (KTextEditor::View* view, KTextEditor::ViewBarContainer::Position position)=0;
+    virtual void            addViewBarToLayout (KTextEditor::View* view, QWidget* bar, KTextEditor::ViewBarContainer::Position position)=0;
+    virtual void            showViewBarForView (KTextEditor::View* view, KTextEditor::ViewBarContainer::Position position)=0;
+    virtual void            hideViewBarForView (KTextEditor::View* view, KTextEditor::ViewBarContainer::Position position)=0;
+    virtual void            deleteViewBarForView (KTextEditor::View* view, KTextEditor::ViewBarContainer::Position position)=0;
+};
+};
+// namespace KTextEditor
 
 

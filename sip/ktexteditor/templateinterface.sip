@@ -32,17 +32,32 @@ class TemplateInterface
 
 
 public:
-                         TemplateInterface ();
-    static bool          expandMacros (QMap<QString, QString>&, QWidget*);
+                            TemplateInterface ();
+    static bool             expandMacros (QMap<QString,QString>& initialValues, QWidget* parentWindow);
 
-public:
-    bool                 insertTemplateText (const KTextEditor::Cursor&, const QString&, const QMap<QString, QString>&);
+    bool                    insertTemplateText (const KTextEditor::Cursor& insertPosition, const QString& templateString, const QMap<QString,QString>& initialValues);
 
 protected:
-    virtual bool         insertTemplateTextImplementation (const KTextEditor::Cursor&, const QString&, const QMap<QString, QString>&)  = 0;
-private:
-                          TemplateInterface (const KTextEditor::TemplateInterface &other);
-};  // class TemplateInterface
+    virtual bool            insertTemplateTextImplementation (const KTextEditor::Cursor& insertPosition, const QString& templateString, const QMap<QString,QString>& initialValues)=0;
+public:
+    virtual ~TemplateInterface ();
+protected:
+    bool                    KTE_INTERNAL_setupIntialValues (const QString& templateString, QMap<QString,QString>* initialValues);
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'TemplateInterface'
+    sipType = NULL;
 
-};  // namespace KTextEditor
+    if (dynamic_cast<KTextEditor::TemplateInterface2*>(sipCpp))
+        sipType = sipType_KTextEditor_TemplateInterface2;
+%End
+};
+// class TemplateInterface
 
+};
+// namespace KTextEditor
+
+%ModuleHeaderCode
+//ctscc
+#include <ktexteditor/templateinterface.h>
+#include <ktexteditor/templateinterface2.h>
+%End

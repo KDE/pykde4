@@ -32,11 +32,13 @@ class Command
 
 
 public:
-    virtual const QStringList& cmds ()  = 0;
-    virtual bool         exec (KTextEditor::View*, const QString&, QString&)  = 0 /PyName=exec_/;
-    virtual bool         help (KTextEditor::View*, const QString&, QString&)  = 0;
+    virtual const QStringList&  cmds ()=0;
+    virtual bool            exec (KTextEditor::View* view, const QString& cmd, QString& msg)=0 /PyName=exec_/;
+    virtual bool            help (KTextEditor::View* view, const QString& cmd, QString& msg)=0;
 
-};  // class Command
+    virtual ~Command ();
+};
+// class Command
 
 
 class CommandExtension
@@ -47,12 +49,14 @@ class CommandExtension
 
 
 public:
-    virtual void         flagCompletions (QStringList&)  = 0;
-    virtual KCompletion* completionObject (KTextEditor::View*, const QString&)  = 0;
-    virtual bool         wantsToProcessText (const QString&)  = 0;
-    virtual void         processText (KTextEditor::View*, const QString&)  = 0;
+    virtual void            flagCompletions (QStringList& list)=0;
+    virtual KCompletion*    completionObject (KTextEditor::View* view, const QString& cmdname)=0;
+    virtual bool            wantsToProcessText (const QString& cmdname)=0;
+    virtual void            processText (KTextEditor::View* view, const QString& text)=0;
 
-};  // class CommandExtension
+    virtual ~CommandExtension ();
+};
+// class CommandExtension
 
 
 class CommandInterface
@@ -63,13 +67,27 @@ class CommandInterface
 
 
 public:
-    virtual bool         registerCommand (KTextEditor::Command*)  = 0;
-    virtual bool         unregisterCommand (KTextEditor::Command*)  = 0;
-    virtual KTextEditor::Command* queryCommand (const QString&) const = 0;
-    virtual QList<KTextEditor::Command*> commands () const = 0;
-    virtual QStringList  commandList () const = 0;
+    virtual bool            registerCommand (KTextEditor::Command* cmd)=0;
+    virtual bool            unregisterCommand (KTextEditor::Command* cmd)=0;
+    virtual KTextEditor::Command*  queryCommand (const QString& cmd) const=0;
+    virtual QList<KTextEditor::Command*>  commands () const=0;
+    virtual QStringList     commandList () const=0;
 
-};  // class CommandInterface
+    virtual ~CommandInterface ();
+};
+// class CommandInterface
 
-};  // namespace KTextEditor
+class RangeCommand
+{
+%TypeHeaderCode
+#include <ktexteditor/commandinterface.h>
+%End
+
+public:
+    virtual ~RangeCommand ();
+    virtual bool            exec (KTextEditor::View* view, const QString& cmd, QString& msg, const KTextEditor::Range& range)=0;
+    virtual bool            supportsRange (const QString& cmd)=0;
+};
+};
+// namespace KTextEditor
 

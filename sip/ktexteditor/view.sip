@@ -24,7 +24,7 @@
 namespace KTextEditor
 {
 
-class View : QWidget, KXMLGUIClient
+class View : QWidget, KXMLGUIClient /Abstract/
 {
 %TypeHeaderCode
 #include <ktexteditor/view.h>
@@ -36,100 +36,92 @@ class View : QWidget, KXMLGUIClient
 
 
 public:
-                         View (QWidget* /TransferThis/);
+                            View (QWidget* parent /TransferThis/);
 
-public:
-    virtual KTextEditor::Document* document () const = 0;
-    bool                 isActiveView () const;
+    virtual KTextEditor::Document*  document () const=0;
+    bool                    isActiveView () const;
 
-public:
-    virtual QString      viewMode () const = 0;
+    virtual QString         viewMode () const=0;
 
     enum EditMode
     {
-        EditInsert, 
+        EditInsert,
         EditOverwrite
     };
 
-    virtual KTextEditor::View::EditMode viewEditMode () const = 0;
+    virtual KTextEditor::View::EditMode  viewEditMode () const=0;
 
 signals:
-    void                 focusIn (KTextEditor::View*);
-    void                 focusOut (KTextEditor::View*);
-    void                 viewModeChanged (KTextEditor::View*);
-    void                 viewEditModeChanged (KTextEditor::View*, KTextEditor::View::EditMode);
-    void                 informationMessage (KTextEditor::View*, const QString&);
-    void                 textInserted (KTextEditor::View*, const KTextEditor::Cursor&, const QString&);
+    void                    focusIn (KTextEditor::View* view);
+    void                    focusOut (KTextEditor::View* view);
+    void                    viewModeChanged (KTextEditor::View* view);
+    void                    viewEditModeChanged (KTextEditor::View* view, KTextEditor::View::EditMode mode);
+    void                    informationMessage (KTextEditor::View* view, const QString& message);
+    void                    textInserted (KTextEditor::View* view, const KTextEditor::Cursor& position, const QString& text);
 
 public:
-    virtual void         setContextMenu (QMenu*)  = 0;
-    virtual QMenu*       contextMenu () const = 0;
-    virtual QMenu*       defaultContextMenu (QMenu* = 0) const = 0;
+    virtual void            setContextMenu (QMenu* menu)=0;
+    virtual QMenu*          contextMenu () const=0;
+    virtual QMenu*          defaultContextMenu (QMenu* menu = 0) const=0;
 
 signals:
-    void                 contextMenuAboutToShow (KTextEditor::View*, QMenu*);
+    void                    contextMenuAboutToShow (KTextEditor::View* view, QMenu* menu);
 
 public:
-    virtual bool         setCursorPosition (KTextEditor::Cursor)  = 0;
-    virtual KTextEditor::Cursor cursorPosition () const = 0;
-    virtual KTextEditor::Cursor cursorPositionVirtual () const = 0;
-    virtual QPoint       cursorToCoordinate (const KTextEditor::Cursor&) const = 0;
-    virtual QPoint       cursorPositionCoordinates () const = 0;
+    virtual bool            setCursorPosition (KTextEditor::Cursor position)=0;
+    virtual KTextEditor::Cursor  cursorPosition () const=0;
+    virtual KTextEditor::Cursor  cursorPositionVirtual () const=0;
+    virtual QPoint          cursorToCoordinate (const KTextEditor::Cursor& cursor) const=0;
+    virtual QPoint          cursorPositionCoordinates () const=0;
 
 signals:
-    void                 cursorPositionChanged (KTextEditor::View*, const KTextEditor::Cursor&);
-    void                 verticalScrollPositionChanged (KTextEditor::View*, const KTextEditor::Cursor&);
-    void                 horizontalScrollPositionChanged (KTextEditor::View*);
+    void                    cursorPositionChanged (KTextEditor::View* view, const KTextEditor::Cursor& newPosition);
+    void                    verticalScrollPositionChanged (KTextEditor::View* view, const KTextEditor::Cursor& newPos);
+    void                    horizontalScrollPositionChanged (KTextEditor::View* view);
 
 public:
-    virtual bool         mouseTrackingEnabled () const = 0;
-    virtual bool         setMouseTrackingEnabled (bool)  = 0;
+    virtual bool            mouseTrackingEnabled () const=0;
+    virtual bool            setMouseTrackingEnabled (bool enable)=0;
 
 signals:
-    void                 mousePositionChanged (KTextEditor::View*, const KTextEditor::Cursor&);
+    void                    mousePositionChanged (KTextEditor::View* view, const KTextEditor::Cursor& newPosition);
 
 public:
-    virtual bool         setSelection (const KTextEditor::Range&)  = 0;
-    virtual bool         setSelection (const KTextEditor::Cursor&, int, bool = 1);
-    virtual bool         selection () const = 0;
-    virtual const KTextEditor::Range& selectionRange () const = 0;
-    virtual QString      selectionText () const = 0;
-    virtual bool         removeSelection ()  = 0;
-    virtual bool         removeSelectionText ()  = 0;
+    virtual bool            setSelection (const KTextEditor::Range& range)=0;
+    virtual bool            setSelection (const KTextEditor::Cursor& position, int length, bool wrap = 1);
+    virtual bool            selection () const=0;
+    virtual const KTextEditor::Range&  selectionRange () const=0;
+    virtual QString         selectionText () const=0;
+    virtual bool            removeSelection ()=0;
+    virtual bool            removeSelectionText ()=0;
 
-public:
-    virtual bool         setBlockSelection (bool)  = 0;
-    virtual bool         blockSelection () const = 0;
+    virtual bool            setBlockSelection (bool on)=0;
+    virtual bool            blockSelection () const=0;
 
 signals:
-    void                 selectionChanged (KTextEditor::View*);
+    void                    selectionChanged (KTextEditor::View* view);
 
 public:
-    virtual bool         insertText (const QString&);
+    virtual bool            insertText (const QString& text);
     
     
-    KTextEditor::CodeCompletionInterface *codeCompletionInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::CodeCompletionInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
-%End
     
-    KTextEditor::SessionConfigInterface *sessionConfigInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::SessionConfigInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
-%End
     
-    KTextEditor::TextHintInterface *textHintInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::TextHintInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
+
+    virtual ~View ();
+};
+// class View
+
+class CoordinatesToCursorInterface
+{
+%TypeHeaderCode
+#include <ktexteditor/view.h>
 %End
 
-};  // class View
-
-};  // namespace KTextEditor
+public:
+    virtual ~CoordinatesToCursorInterface ();
+    virtual KTextEditor::Cursor  coordinatesToCursor (const QPoint& coord) const=0;
+};
+};
+// namespace KTextEditor
 

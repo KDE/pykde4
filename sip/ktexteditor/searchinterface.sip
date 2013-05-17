@@ -32,18 +32,19 @@ namespace Search
 
 enum SearchOptionsEnum
 {
-    Default, 
-    Regex, 
-    CaseInsensitive, 
-    Backwards, 
-    BlockInputRange, 
-    EscapeSequences, 
-    WholeWords, 
+    Default,
+    Regex,
+    CaseInsensitive,
+    Backwards,
+    BlockInputRange,
+    EscapeSequences,
+    WholeWords,
     DotMatchesNewline
 };
 
 typedef QFlags<KTextEditor::Search::SearchOptionsEnum> SearchOptions;
-};  // namespace Search
+};
+// namespace Search
 
 
 class SearchInterface
@@ -54,14 +55,14 @@ class SearchInterface
 
 
 public:
-                         SearchInterface ();
+                            SearchInterface ();
 
-public:
-    virtual QVector<KTextEditor::Range> searchText (const KTextEditor::Range&, const QString&, const KTextEditor::Search::SearchOptions = KTextEditor::Search::Default )  = 0;
-    virtual KTextEditor::Search::SearchOptions supportedSearchOptions () const = 0;
-private:
-                        SearchInterface (const KTextEditor::SearchInterface &other);
-};  // class SearchInterface
+    virtual QVector<KTextEditor::Range>  searchText (const KTextEditor::Range& range, const QString& pattern, const KTextEditor::Search::SearchOptions options = KTextEditor::Search::Default)=0;
+    virtual KTextEditor::Search::SearchOptions  supportedSearchOptions () const=0;
+    virtual ~SearchInterface ();
+};
+// class SearchInterface
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 

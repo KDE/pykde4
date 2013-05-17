@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KTextEditor.CodeCompletionModel</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.9 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>CodeCompletionModel Class Reference</h1>
+<code>from PyKDE4.ktexteditor import *</code>
+<p>
+Inherits: QAbstractItemModel &#x2192; QObject<br />
+
+Namespace: <a href="../ktexteditor/KTextEditor.html">KTextEditor</a><br />
+<h2>Detailed Description</h2>
+
+<p>An item model for providing code completion, and meta information for
+enhanced presentation.
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+The CodeCompletionModel is the actual workhorse to provide code completions
+in a KTextEditor.View. It is meant to be used in conjunction with the
+CodeCompletionInterface. The CodeCompletionModel is not meant to be used as
+is. Rather you need to implement a subclass of CodeCompletionModel to actually
+generate completions appropriate for your type of Document.
+</p>
+<p>
+<b>Implementing a CodeCompletionModel </b>
+</p>
+<p>
+The CodeCompletionModel is a QAbstractItemModel, and can be subclassed in the
+same way. It provides default implementations of several members, however, so
+in most cases (if your completions are essentially a non-hierarchical, flat list
+of matches) you will only need to overload few virtual functions.
+</p>
+<p>
+<b>Implementing a CodeCompletionModel for a flat list </b>
+</p>
+<p>
+For the simple case of a flat list of completions, you will need to:
+- Implement completionInvoked() to actually generate/update the list of completion
+matches
+- implement itemData() (or QAbstractItemModel.data()) to return the information that
+should be displayed for each match.
+- use setRowCount() to reflect the number of matches.
+</p>
+<p>
+<b>Columns and roles </b>
+</p>
+<p>
+To do: document the meaning and usage of the columns and roles used by the
+CodeCompletionInterface
+</p>
+<p>
+<b>Using the new CodeCompletionModel </b>
+</p>
+<p>
+To start using your CodeCompletionModel, refer to CodeCompletionInterface.
+</p>
+<p>
+<b>ControllerInterface to get more control </b>
+</p>
+<p>
+To have more control over code completion implement
+CodeCompletionModelControllerInterface in your CodeCompletionModel.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> CodeCompletionInterface, CodeCompletionModelControllerInterface
+</dd></dl> 
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Hamish Rodda &lt;rodda@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#Columns">Columns</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Prefix, Icon, Scope, Name, Arguments, Postfix&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#CompletionProperty">CompletionProperty</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoProperty, FirstProperty, Public, Protected, Private, Static, Const, Namespace, Class, Struct, Union, Function, Variable, Enum, Template, TypeAlias, Virtual, Override, Inline, Friend, Signal, Slot, LocalScope, NamespaceScope, GlobalScope, LastProperty&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#ExtraItemDataRoles">ExtraItemDataRoles</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;CompletionRole, ScopeIndex, MatchQuality, SetMatchContext, HighlightingMethod, CustomHighlight, InheritanceDepth, IsExpandable, ExpandingWidget, ItemSelected, ArgumentHintDepth, BestMatchesCount, AccessibilityNext, AccessibilityPrevious, AccessibilityAccept, GroupRole&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#HighlightMethod">HighlightMethod</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoHighlighting, InternalHighlighting, CustomHighlighting&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#InvocationType">InvocationType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;AutomaticInvocation, UserInvocation, ManualInvocation&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Attributes</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#varColumnCount">ColumnCount</a></td></tr><tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#varLastItemDataRole">LastItemDataRole</a></td></tr><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#hasGroupsChanged">hasGroupsChanged</a> (<a href="../ktexteditor/KTextEditor.CodeCompletionModel.html">KTextEditor.CodeCompletionModel</a> model, bool hasGroups)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#waitForReset">waitForReset</a> ()</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#CodeCompletionModel">__init__</a> (self, QObject parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#columnCount">columnCount</a> (self, QModelIndex parent=QModelIndex())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#completionInvoked">completionInvoked</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> range, <a href="../ktexteditor/KTextEditor.CodeCompletionModel.html#InvocationType">KTextEditor.CodeCompletionModel.InvocationType</a> invocationType)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#executeCompletionItem">executeCompletionItem</a> (self, <a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a> document, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> word, int row)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#hasGroups">hasGroups</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QModelIndex&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#index">index</a> (self, int row, int column, QModelIndex parent=QModelIndex())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">{int:QVariant}&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemData">itemData</a> (self, QModelIndex index)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QModelIndex&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parent">parent</a> (self, QModelIndex index)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rowCount">rowCount</a> (self, QModelIndex parent=QModelIndex())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setHasGroups">setHasGroups</a> (self, bool hasGroups)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRowCount">setRowCount</a> (self, int rowCount)</td></tr>
+</table>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="hasGroupsChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> hasGroupsChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.CodeCompletionModel.html">KTextEditor.CodeCompletionModel</a>&nbsp;</td>
+<td class="paramname"><em>model</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>hasGroups</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Internal
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("hasGroupsChanged(KTextEditor::CodeCompletionModel*, bool)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="waitForReset"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> waitForReset</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Emit this if the code-completion for this model was invoked, some time is needed in order to get the data,
+and the model is reset once the data is available.
+</p>
+<p>
+This only has an effect if emitted from within completionInvoked(..).
+</p>
+<p>
+This prevents the code-completion list from showing until this model is reset,
+so there is no annoying flashing in the user-interface resulting from other models
+supplying their data earlier.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> The implementation may choose to show the completion-list anyway after some timeout
+</dd></dl> </p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> If you emit this, you _must_ also reset the model at some point,
+else the code-completion will be completely broken to the user.
+Consider that there may always be additional completion-models apart from yours.
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> KDE 4.3
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("waitForReset()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="CodeCompletionModel"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QObject&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="columnCount"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int columnCount</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QModelIndex&nbsp;</td>
+<td class="paramname"><em>parent=QModelIndex()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Reimplemented from QAbstractItemModel.columnCount(). The default implementation
+returns ColumnCount for all indices.
+</p></div></div><a class="anchor" name="completionInvoked"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> completionInvoked</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>range</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.CodeCompletionModel.html#InvocationType">KTextEditor.CodeCompletionModel.InvocationType</a>&nbsp;</td>
+<td class="paramname"><em>invocationType</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This function is responsible to generating / updating the list of current
+completions. The default implementation does nothing.
+</p>
+<p>
+When implementing this function, remember to call setRowCount() (or implement
+rowCount()), and to generate the appropriate change notifications (for instance
+by calling QAbstractItemModel.reset()).
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> The view to generate completions for
+
+<tr><td></td><td valign="top"><em>range</em>&nbsp;</td><td> The range of text to generate completions for
+
+<tr><td></td><td valign="top"><em>invocationType</em>&nbsp;</td><td> How the code completion was triggered
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="executeCompletionItem"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> executeCompletionItem</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a>&nbsp;</td>
+<td class="paramname"><em>document</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>word</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>row</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd> This does not work if your model is hierarchical(@see GroupRole). Use CodeCompletionModel2.executeCompletionItem2 instead.
+</dd></dl> </p>
+<p>
+This function is responsible for inserting a selected completion into the
+document. The default implementation replaces the text that the completions
+were based on with the Qt.DisplayRole of the Name column of the given match.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>document</em>&nbsp;</td><td> The document to insert the completion into
+
+<tr><td></td><td valign="top"><em>word</em>&nbsp;</td><td> The Range that the completions are based on (what the user entered
+so far)
+
+<tr><td></td><td valign="top"><em>row</em>&nbsp;</td><td> The row of the completion match to insert
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="hasGroups"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool hasGroups</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>This function returns true if the model needs grouping, otherwise false
+in KDE 4 default value is true, in KDE 5 the default will be false
+TODO KDE 5
+</p></div></div><a class="anchor" name="index"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QModelIndex index</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>row</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>column</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QModelIndex&nbsp;</td>
+<td class="paramname"><em>parent=QModelIndex()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Reimplemented from QAbstractItemModel.index(). The default implementation
+returns a standard QModelIndex as long as the row and column are valid.
+</p></div></div><a class="anchor" name="itemData"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">{int:QVariant} itemData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QModelIndex&nbsp;</td>
+<td class="paramname"><em>index</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Reimplemented from QAbstractItemModel.itemData(). The default implementation
+returns a map with the QAbstractItemModel.data() for all roles that are used
+by the CodeCompletionInterface. You will need to reimplement either this
+function or QAbstractItemModel.data() in your CodeCompletionModel.
+</p></div></div><a class="anchor" name="parent"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QModelIndex parent</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QModelIndex&nbsp;</td>
+<td class="paramname"><em>index</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Reimplemented from QAbstractItemModel.parent(). The default implementation
+returns an invalid QModelIndex for all items. This is appropriate for
+non-hierarchical / flat lists of completions.
+</p></div></div><a class="anchor" name="rowCount"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int rowCount</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QModelIndex&nbsp;</td>
+<td class="paramname"><em>parent=QModelIndex()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Reimplemented from QAbstractItemModel.rowCount(). The default implementation
+returns the value set by setRowCount() for invalid (toplevel) indices, and 0
+for all other indices. This is appropriate for non-hierarchical / flat lists
+of completions
+</p></div></div><a class="anchor" name="setHasGroups"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setHasGroups</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>hasGroups</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setRowCount"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setRowCount</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>rowCount</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><hr><h2>Attribute Documentation</h2><a class="anchor" name="varColumnCount"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">int ColumnCount</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><p><a class="anchor" name="varLastItemDataRole"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">int LastItemDataRole</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><p><hr><h2>Enumeration Documentation</h2><a class="anchor" name="Columns"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">Columns</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Prefix</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>Icon</em>&nbsp;</td><td><tr><td valign="top"><em>Scope</em>&nbsp;</td><td><tr><td valign="top"><em>Name</em>&nbsp;</td><td><tr><td valign="top"><em>Arguments</em>&nbsp;</td><td><tr><td valign="top"><em>Postfix</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p><a class="anchor" name="CompletionProperty"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">CompletionProperty</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NoProperty</em>&nbsp;=&nbsp;0x0</td><td><tr><td valign="top"><em>FirstProperty</em>&nbsp;=&nbsp;0x1</td><td><tr><td valign="top"><em>Public</em>&nbsp;=&nbsp;0x1</td><td><tr><td valign="top"><em>Protected</em>&nbsp;=&nbsp;0x2</td><td><tr><td valign="top"><em>Private</em>&nbsp;=&nbsp;0x4</td><td><tr><td valign="top"><em>Static</em>&nbsp;=&nbsp;0x8</td><td><tr><td valign="top"><em>Const</em>&nbsp;=&nbsp;0x10</td><td><tr><td valign="top"><em>Namespace</em>&nbsp;=&nbsp;0x20</td><td><tr><td valign="top"><em>Class</em>&nbsp;=&nbsp;0x40</td><td><tr><td valign="top"><em>Struct</em>&nbsp;=&nbsp;0x80</td><td><tr><td valign="top"><em>Union</em>&nbsp;=&nbsp;0x100</td><td><tr><td valign="top"><em>Function</em>&nbsp;=&nbsp;0x200</td><td><tr><td valign="top"><em>Variable</em>&nbsp;=&nbsp;0x400</td><td><tr><td valign="top"><em>Enum</em>&nbsp;=&nbsp;0x800</td><td><tr><td valign="top"><em>Template</em>&nbsp;=&nbsp;0x1000</td><td><tr><td valign="top"><em>TypeAlias</em>&nbsp;=&nbsp;0x2000</td><td><tr><td valign="top"><em>Virtual</em>&nbsp;=&nbsp;0x4000</td><td><tr><td valign="top"><em>Override</em>&nbsp;=&nbsp;0x8000</td><td><tr><td valign="top"><em>Inline</em>&nbsp;=&nbsp;0x10000</td><td><tr><td valign="top"><em>Friend</em>&nbsp;=&nbsp;0x20000</td><td><tr><td valign="top"><em>Signal</em>&nbsp;=&nbsp;0x40000</td><td><tr><td valign="top"><em>Slot</em>&nbsp;=&nbsp;0x80000</td><td><tr><td valign="top"><em>LocalScope</em>&nbsp;=&nbsp;0x100000</td><td><tr><td valign="top"><em>NamespaceScope</em>&nbsp;=&nbsp;0x200000</td><td><tr><td valign="top"><em>GlobalScope</em>&nbsp;=&nbsp;0x400000</td><td><tr><td valign="top"><em>LastProperty</em>&nbsp;=&nbsp;GlobalScope</td><td></table>
+</dl>
+</div></div><p><a class="anchor" name="ExtraItemDataRoles"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">ExtraItemDataRoles</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>CompletionRole</em>&nbsp;=&nbsp;Qt::UserRole</td><td><tr><td valign="top"><em>ScopeIndex</em>&nbsp;</td><td><tr><td valign="top"><em>MatchQuality</em>&nbsp;</td><td><tr><td valign="top"><em>SetMatchContext</em>&nbsp;</td><td><tr><td valign="top"><em>HighlightingMethod</em>&nbsp;</td><td><tr><td valign="top"><em>CustomHighlight</em>&nbsp;</td><td><tr><td valign="top"><em>InheritanceDepth</em>&nbsp;</td><td><tr><td valign="top"><em>IsExpandable</em>&nbsp;</td><td><tr><td valign="top"><em>ExpandingWidget</em>&nbsp;</td><td><tr><td valign="top"><em>ItemSelected</em>&nbsp;</td><td><tr><td valign="top"><em>ArgumentHintDepth</em>&nbsp;</td><td><tr><td valign="top"><em>BestMatchesCount</em>&nbsp;</td><td><tr><td valign="top"><em>AccessibilityNext</em>&nbsp;</td><td><tr><td valign="top"><em>AccessibilityPrevious</em>&nbsp;</td><td><tr><td valign="top"><em>AccessibilityAccept</em>&nbsp;</td><td><tr><td valign="top"><em>GroupRole</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p><a class="anchor" name="HighlightMethod"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">HighlightMethod</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NoHighlighting</em>&nbsp;=&nbsp;0x0</td><td><tr><td valign="top"><em>InternalHighlighting</em>&nbsp;=&nbsp;0x1</td><td><tr><td valign="top"><em>CustomHighlighting</em>&nbsp;=&nbsp;0x2</td><td></table>
+</dl>
+</div></div><p><a class="anchor" name="InvocationType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">InvocationType</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>AutomaticInvocation</em>&nbsp;</td><td><tr><td valign="top"><em>UserInvocation</em>&nbsp;</td><td><tr><td valign="top"><em>ManualInvocation</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

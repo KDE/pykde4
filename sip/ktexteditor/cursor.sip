@@ -32,34 +32,34 @@ class Cursor
 
 
 public:
-                         Cursor ();
-                         Cursor (int, int);
-                         Cursor (const KTextEditor::Cursor&);
-    virtual bool         isValid () const;
-    virtual bool         isSmartCursor () const;
-    virtual KTextEditor::SmartCursor* toSmartCursor () const;
-    static KTextEditor::Cursor invalid ();
-    static KTextEditor::Cursor start ();
-    virtual void         setPosition (const KTextEditor::Cursor&);
-    void                 setPosition (int, int);
-    virtual int          line () const;
-    virtual void         setLine (int);
-    int                  column () const;
-    virtual void         setColumn (int);
-    bool                 atStartOfLine () const;
-    bool                 atStartOfDocument () const;
-    void                 position (int& /Out/, int& /Out/) const;
-    KTextEditor::Range*  range () const;
-//ig     KTextEditor::Cursor  operator + (const KTextEditor::Cursor&, const KTextEditor::Cursor&);
-//ig     KTextEditor::Cursor& operator += (KTextEditor::Cursor&, const KTextEditor::Cursor&);
-//ig     KTextEditor::Cursor  operator - (const KTextEditor::Cursor&, const KTextEditor::Cursor&);
-//ig     KTextEditor::Cursor& operator -= (KTextEditor::Cursor&, const KTextEditor::Cursor&);
-//ig     bool                 operator == (const KTextEditor::Cursor&, const KTextEditor::Cursor&);
-//ig     bool                 operator != (const KTextEditor::Cursor&, const KTextEditor::Cursor&);
-//ig     bool                 operator > (const KTextEditor::Cursor&, const KTextEditor::Cursor&);
-//ig     bool                 operator >= (const KTextEditor::Cursor&, const KTextEditor::Cursor&);
-//ig     bool                 operator < (const KTextEditor::Cursor&, const KTextEditor::Cursor&);
-//ig     bool                 operator <= (const KTextEditor::Cursor&, const KTextEditor::Cursor&);
+                            Cursor ();
+                            Cursor (int line, int column);
+                            Cursor (const KTextEditor::Cursor& copy);
+    virtual bool            isValid () const;
+    virtual bool            isSmartCursor () const;
+    virtual KTextEditor::SmartCursor*  toSmartCursor () const;
+    static KTextEditor::Cursor  invalid ();
+    static KTextEditor::Cursor  start ();
+    virtual void            setPosition (const KTextEditor::Cursor& position);
+    void                    setPosition (int line, int column);
+    virtual int             line () const;
+    virtual void            setLine (int line);
+    int                     column () const;
+    virtual void            setColumn (int column);
+    bool                    atStartOfLine () const;
+    bool                    atStartOfDocument () const;
+    void                    position (int& line, int& column) const;
+    KTextEditor::Range*     range () const;
+//ig    KTextEditor::Cursor     operator + (const KTextEditor::Cursor& c1, const KTextEditor::Cursor& c2);
+//ig    KTextEditor::Cursor&    operator += (KTextEditor::Cursor& c1, const KTextEditor::Cursor& c2);
+//ig    KTextEditor::Cursor     operator - (const KTextEditor::Cursor& c1, const KTextEditor::Cursor& c2);
+//ig    KTextEditor::Cursor&    operator -= (KTextEditor::Cursor& c1, const KTextEditor::Cursor& c2);
+//ig    bool                    operator == (const KTextEditor::Cursor& c1, const KTextEditor::Cursor& c2);
+//ig    bool                    operator != (const KTextEditor::Cursor& c1, const KTextEditor::Cursor& c2);
+//ig    bool                    operator > (const KTextEditor::Cursor& c1, const KTextEditor::Cursor& c2);
+//ig    bool                    operator >= (const KTextEditor::Cursor& c1, const KTextEditor::Cursor& c2);
+//ig    bool                    operator < (const KTextEditor::Cursor& c1, const KTextEditor::Cursor& c2);
+//ig    bool                    operator <= (const KTextEditor::Cursor& c1, const KTextEditor::Cursor& c2);
 
 
 //mt  undefined symbol: QDebug -- need mapped type?
@@ -68,14 +68,30 @@ public:
 
 
 protected:
-    virtual void         setRange (KTextEditor::Range*);
-    void                 cursorChangedDirectly (const KTextEditor::Cursor&);
+    virtual void            setRange (KTextEditor::Range* range);
+    void                    cursorChangedDirectly (const KTextEditor::Cursor& from);
+
+
+
 
 public:
+    virtual ~Cursor ();
+//ig    QDebug                  operator << (QDebug s, const KTextEditor::Cursor& cursor);
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'Cursor'
+    sipType = NULL;
 
+    if (dynamic_cast<KTextEditor::SmartCursor*>(sipCpp))
+        sipType = sipType_KTextEditor_SmartCursor;
+%End
+};
+// class Cursor
 
+};
+// namespace KTextEditor
 
-};  // class Cursor
-
-};  // namespace KTextEditor
-
+%ModuleHeaderCode
+//ctscc
+#include <ktexteditor/cursor.h>
+#include <ktexteditor/smartcursor.h>
+%End

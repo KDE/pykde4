@@ -23,14 +23,19 @@
 
 %ModuleHeaderCode
 //ctscc
+#include <ktexteditor/annotationinterface.h>
 #include <ktexteditor/codecompletionmodel.h>
 #include <ktexteditor/configpage.h>
+#include <ktexteditor/cursorfeedback.h>
 #include <ktexteditor/document.h>
 #include <ktexteditor/editor.h>
 #include <ktexteditor/editorchooser.h>
+#include <ktexteditor/loadsavefiltercheckplugin.h>
 #include <ktexteditor/plugin.h>
-#include <ktexteditor/cursorfeedback.h>
+#include <qobject.h>
 #include <ktexteditor/rangefeedback.h>
+#include <ktexteditor/smartcursornotifier.h>
+#include <ktexteditor/smartrangenotifier.h>
 #include <ktexteditor/view.h>
 %End
 
@@ -45,47 +50,47 @@ class CodeCompletionModel : QAbstractItemModel
 
 
 public:
-                         CodeCompletionModel (QObject*);
+                            CodeCompletionModel (QObject* parent /TransferThis/);
 
     enum Columns
     {
-        Prefix, 
-        Icon, 
-        Scope, 
-        Name, 
-        Arguments, 
+        Prefix,
+        Icon,
+        Scope,
+        Name,
+        Arguments,
         Postfix
     };
 
-    static const int     ColumnCount;
+    static const int ColumnCount;
 
     enum CompletionProperty
     {
-        NoProperty, 
-        FirstProperty, 
-        Public, 
-        Protected, 
-        Private, 
-        Static, 
-        Const, 
-        Namespace, 
-        Class, 
-        Struct, 
-        Union, 
-        Function, 
-        Variable, 
-        Enum, 
-        Template, 
-        TypeAlias, 
-        Virtual, 
-        Override, 
-        Inline, 
-        Friend, 
-        Signal, 
-        Slot, 
-        LocalScope, 
-        NamespaceScope, 
-        GlobalScope, 
+        NoProperty,
+        FirstProperty,
+        Public,
+        Protected,
+        Private,
+        Static,
+        Const,
+        Namespace,
+        Class,
+        Struct,
+        Union,
+        Function,
+        Variable,
+        Enum,
+        Template,
+        TypeAlias,
+        Virtual,
+        Override,
+        Inline,
+        Friend,
+        Signal,
+        Slot,
+        LocalScope,
+        NamespaceScope,
+        GlobalScope,
         LastProperty
     };
 
@@ -93,8 +98,8 @@ public:
 
     enum HighlightMethod
     {
-        NoHighlighting, 
-        InternalHighlighting, 
+        NoHighlighting,
+        InternalHighlighting,
         CustomHighlighting
     };
 
@@ -102,72 +107,101 @@ public:
 
     enum ExtraItemDataRoles
     {
-        CompletionRole, 
-        ScopeIndex, 
-        MatchQuality, 
-        SetMatchContext, 
-        HighlightingMethod, 
-        CustomHighlight, 
-        InheritanceDepth, 
-        IsExpandable, 
-        ExpandingWidget, 
-        ItemSelected, 
-        ArgumentHintDepth, 
-        BestMatchesCount, 
-        AccessibilityNext, 
-        AccessibilityPrevious, 
-        AccessibilityAccept
+        CompletionRole,
+        ScopeIndex,
+        MatchQuality,
+        SetMatchContext,
+        HighlightingMethod,
+        CustomHighlight,
+        InheritanceDepth,
+        IsExpandable,
+        ExpandingWidget,
+        ItemSelected,
+        ArgumentHintDepth,
+        BestMatchesCount,
+        AccessibilityNext,
+        AccessibilityPrevious,
+        AccessibilityAccept,
+        GroupRole
     };
 
-    static const int     LastItemDataRole;
-    void                 setRowCount (int);
+    static const int LastItemDataRole;
+    void                    setRowCount (int rowCount);
 
     enum InvocationType
     {
-        AutomaticInvocation, 
-        UserInvocation, 
+        AutomaticInvocation,
+        UserInvocation,
         ManualInvocation
     };
 
-    virtual void         completionInvoked (KTextEditor::View*, const KTextEditor::Range&, KTextEditor::CodeCompletionModel::InvocationType);
-    virtual void         executeCompletionItem (KTextEditor::Document*, const KTextEditor::Range&, int) const;
-    virtual int          columnCount (const QModelIndex& = QModelIndex ()) const;
-    virtual QModelIndex  index (int, int, const QModelIndex& = QModelIndex ()) const;
-    virtual QMap<int, QVariant> itemData (const QModelIndex&) const;
-    virtual QModelIndex  parent (const QModelIndex&) const;
-    virtual int          rowCount (const QModelIndex& = QModelIndex ()) const;
+    virtual void            completionInvoked (KTextEditor::View* view, const KTextEditor::Range& range, KTextEditor::CodeCompletionModel::InvocationType invocationType);
+    virtual void            executeCompletionItem (KTextEditor::Document* document, const KTextEditor::Range& word, int row) const;
+    virtual int             columnCount (const QModelIndex& parent = QModelIndex()) const;
+    virtual QModelIndex     index (int row, int column, const QModelIndex& parent = QModelIndex()) const;
+    virtual QMap<int,QVariant>  itemData (const QModelIndex& index) const;
+    virtual QModelIndex     parent (const QModelIndex& index) const;
+    virtual int             rowCount (const QModelIndex& parent = QModelIndex()) const;
 
 // Subclasses for QObject
 
-public:
 %ConvertToSubClassCode
+    // CTSCC for subclasses of 'QObject'
+    sipType = NULL;
 
-    if (dynamic_cast<KTextEditor::CodeCompletionModel*>(sipCpp))
-        sipClass = sipClass_KTextEditor_CodeCompletionModel;
-    else if (dynamic_cast<KTextEditor::ConfigPage*>(sipCpp))
-        sipClass = sipClass_KTextEditor_ConfigPage;
-    else if (dynamic_cast<KTextEditor::Document*>(sipCpp))
-        sipClass = sipClass_KTextEditor_Document;
+    if (dynamic_cast<KTextEditor::Document*>(sipCpp))
+        sipType = sipType_KTextEditor_Document;
+    else if (dynamic_cast<KTextEditor::AnnotationModel*>(sipCpp))
+        sipType = sipType_KTextEditor_AnnotationModel;
     else if (dynamic_cast<KTextEditor::Editor*>(sipCpp))
-        sipClass = sipClass_KTextEditor_Editor;
-    else if (dynamic_cast<KTextEditor::EditorChooser*>(sipCpp))
-        sipClass = sipClass_KTextEditor_EditorChooser;
+        sipType = sipType_KTextEditor_Editor;
+    else if (dynamic_cast<KTextEditor::LoadSaveFilterCheckPlugin*>(sipCpp))
+        sipType = sipType_KTextEditor_LoadSaveFilterCheckPlugin;
     else if (dynamic_cast<KTextEditor::Plugin*>(sipCpp))
-        sipClass = sipClass_KTextEditor_Plugin;
+        sipType = sipType_KTextEditor_Plugin;
     else if (dynamic_cast<KTextEditor::SmartCursorNotifier*>(sipCpp))
-        sipClass = sipClass_KTextEditor_SmartCursorNotifier;
+        sipType = sipType_KTextEditor_SmartCursorNotifier;
+    else if (dynamic_cast<KTextEditor::SmartCursorNotifier*>(sipCpp))
+        sipType = sipType_KTextEditor_SmartCursorNotifier;
     else if (dynamic_cast<KTextEditor::SmartRangeNotifier*>(sipCpp))
-        sipClass = sipClass_KTextEditor_SmartRangeNotifier;
+        sipType = sipType_KTextEditor_SmartRangeNotifier;
+    else if (dynamic_cast<KTextEditor::SmartRangeNotifier*>(sipCpp))
+        sipType = sipType_KTextEditor_SmartRangeNotifier;
+    else if (dynamic_cast<KTextEditor::CodeCompletionModel*>(sipCpp))
+        {
+        sipType = sipType_KTextEditor_CodeCompletionModel;
+        if (dynamic_cast<KTextEditor::CodeCompletionModel2*>(sipCpp))
+            sipType = sipType_KTextEditor_CodeCompletionModel2;
+        }
+    else if (dynamic_cast<KTextEditor::ConfigPage*>(sipCpp))
+        sipType = sipType_KTextEditor_ConfigPage;
+    else if (dynamic_cast<KTextEditor::EditorChooser*>(sipCpp))
+        sipType = sipType_KTextEditor_EditorChooser;
     else if (dynamic_cast<KTextEditor::View*>(sipCpp))
-        sipClass = sipClass_KTextEditor_View;
-    else if (dynamic_cast<KTextEditor::View*>(sipCpp))
-        sipClass = sipClass_KTextEditor_View;
-    else
-        sipClass = NULL;
+        sipType = sipType_KTextEditor_View;
 %End
 
 
-};  // class CodeCompletionModel
+    virtual ~CodeCompletionModel ();
+    bool                    hasGroups () const;
+signals:
+    void                    waitForReset ();
+    void                    hasGroupsChanged (KTextEditor::CodeCompletionModel* model, bool hasGroups);
+protected:
+    void                    setHasGroups (bool hasGroups);
+};
+// class CodeCompletionModel
 
-};  // namespace KTextEditor
+class CodeCompletionModel2 : KTextEditor::CodeCompletionModel
+{
+%TypeHeaderCode
+#include <ktexteditor/codecompletionmodel.h>
+%End
+
+public:
+                            CodeCompletionModel2 (QObject* parent /TransferThis/);
+    virtual void            executeCompletionItem2 (KTextEditor::Document* document, const KTextEditor::Range& word, const QModelIndex& index) const;
+};
+};
+// namespace KTextEditor
 

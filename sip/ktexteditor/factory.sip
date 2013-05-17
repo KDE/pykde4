@@ -32,11 +32,14 @@ class Factory : KParts::Factory
 %End
 
 public:
-                         Factory (QObject* /TransferThis/);
-    virtual KTextEditor::Editor* editor ()  = 0;
+                            Factory (QObject* parent /TransferThis/);
+    virtual KTextEditor::Editor*  editor ()=0;
 
-};  // class Factory
+    virtual ~Factory ();
+};
+// class Factory
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 
 

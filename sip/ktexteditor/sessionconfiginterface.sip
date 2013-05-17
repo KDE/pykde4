@@ -32,15 +32,36 @@ class SessionConfigInterface
 
 
 public:
-                         SessionConfigInterface ();
+                            SessionConfigInterface ();
+
+    virtual void            readSessionConfig (const KConfigGroup& config)=0;
+    virtual void            writeSessionConfig (KConfigGroup& config)=0;
+
+    virtual ~SessionConfigInterface ();
+};
+// class SessionConfigInterface
+
+class ParameterizedSessionConfigInterface
+{
+%TypeHeaderCode
+#include <ktexteditor/sessionconfiginterface.h>
+%End
 
 public:
-    virtual void         readSessionConfig (const KConfigGroup&)  = 0;
-    virtual void         writeSessionConfig (KConfigGroup&)  = 0;
-private:
-                         SessionConfigInterface (const KTextEditor::SessionConfigInterface &other);
-
-};  // class SessionConfigInterface
-
-};  // namespace KTextEditor
+                            ParameterizedSessionConfigInterface ();
+    virtual ~ParameterizedSessionConfigInterface ();
+    enum SessionConfigParameter
+    {
+        SkipNone,
+        SkipUrl,
+        SkipMode,
+        SkipHighlighting,
+        SkipEncoding,
+        SkipFolding
+    };
+    virtual void            readParameterizedSessionConfig (const KConfigGroup& config, unsigned long parameters)=0;
+    virtual void            writeParameterizedSessionConfig (KConfigGroup& config, unsigned long parameters)=0;
+};
+};
+// namespace KTextEditor
 

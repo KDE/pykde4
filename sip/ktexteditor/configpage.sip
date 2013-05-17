@@ -32,17 +32,20 @@ class ConfigPage : QWidget
 
 
 public:
-                         ConfigPage (QWidget*);
+                            ConfigPage (QWidget* parent /TransferThis/);
 
-public slots:
-    virtual void         apply ()  = 0;
-    virtual void         reset ()  = 0;
-    virtual void         defaults ()  = 0;
+    virtual void            apply ()=0;
+    virtual void            reset ()=0;
+    virtual void            defaults ()=0;
 
 signals:
-    void                 changed ();
+    void                    changed ();
 
-};  // class ConfigPage
+public:
+    virtual ~ConfigPage ();
+};
+// class ConfigPage
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 

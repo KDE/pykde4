@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KTextEditor.CodeCompletionModelControllerInterface3</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.9 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>CodeCompletionModelControllerInterface3 Class Reference</h1>
+<code>from PyKDE4.ktexteditor import *</code>
+<p>
+
+
+Namespace: <a href="../ktexteditor/KTextEditor.html">KTextEditor</a><br />
+<h2>Detailed Description</h2>
+
+<p>Controller interface for a CodeCompletionModel
+</p>
+<p>
+The CodeCompletionModelControllerInterface3 gives an CodeCompletionModel better
+control over the completion.
+</p>
+<p>
+By implementing methods defined in this interface you can:
+- control when automatic completion should start (shouldStartCompletion())
+- define a custom completion range (that will be replaced when the completion
+is executed) (completionRange())
+- dynamically modify the completion range during completion (updateCompletionRange())
+- specify the string used for filtering the completion (filterString())
+- control when completion should stop (shouldAbortCompletion())
+</p>
+<p>
+When the interface is not implemented, or no methods are overridden the
+default behaviour is used, which will be correct in many situations.
+</p>
+<p>
+<b>Implemeting the Interface </b>
+To use this class implement it in your CodeCompletionModel.
+</p>
+<p>
+<pre class="fragment">
+ class MyCodeCompletion : public KTextEditor.CodeCompletionTestModel,
+public KTextEditor.CodeCompletionModelControllerInterface3
+ {
+   Q_OBJECT
+   Q_INTERFACES(KTextEditor.CodeCompletionModelControllerInterface3)
+ public:
+   KTextEditor.Range completionRange(KTextEditor.View* view, const KTextEditor.Cursor &amp;position);
+ };
+</pre>
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> CodeCompletionModel
+</dd></dl> 
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Niko Sams &lt;niko.sams@gmail.com&gt; </dd></dl>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Joseph Wenninger </dd></dl>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#MatchReaction">MatchReaction</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;None, HideListIfAutomaticInvocation, ForExtension&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#CodeCompletionModelControllerInterface3">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aborted">aborted</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#completionRange">completionRange</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> position)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#filterString">filterString</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> range, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> position)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.CodeCompletionModelControllerInterface3.html#MatchReaction">KTextEditor.CodeCompletionModelControllerInterface3.MatchReaction</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#matchingItem">matchingItem</a> (self, QModelIndex matched)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#shouldAbortCompletion">shouldAbortCompletion</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> range, QString currentCompletion)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#shouldExecute">shouldExecute</a> (self, QModelIndex selected, QChar inserted)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#shouldStartCompletion">shouldStartCompletion</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, QString insertedText, bool userInsertion, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> position)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#updateCompletionRange">updateCompletionRange</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> range)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="CodeCompletionModelControllerInterface3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="aborted"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> aborted</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Notification that completion for this model has been aborted.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> The view in which the completion for this model was aborted
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="completionRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> completionRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>position</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This function returns the completion range that will be used for the
+current completion.
+</p>
+<p>
+This range will be used for filtering the completion list and will get
+replaced when executing the completion
+</p>
+<p>
+The default implementation will work for most languages that don't have
+special chars in identifiers.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> The view to generate completions for
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>position</em>&nbsp;</td><td> Current cursor position
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the completion range
+</dd></dl>
+</p></div></div><a class="anchor" name="filterString"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString filterString</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>range</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>position</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This function returns the filter-text used for the current completion.
+Can return an empty string to disable filtering.
+</p>
+<p>
+The default implementation will return the text from <b>range</b> start to
+the cursor <b>position.</b>
+</p>
+<p>
+The smart-mutex is not locked when this is called.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> The view to generate completions for
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>range</em>&nbsp;</td><td> The completion range
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>position</em>&nbsp;</td><td> Current cursor position
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the string used for filtering the completion list
+</dd></dl>
+</p></div></div><a class="anchor" name="matchingItem"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.CodeCompletionModelControllerInterface3.html#MatchReaction">KTextEditor.CodeCompletionModelControllerInterface3.MatchReaction</a> matchingItem</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QModelIndex&nbsp;</td>
+<td class="paramname"><em>matched</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Called whenever an item in the completion-list perfectly matches the current filter text.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>The</em>&nbsp;</td><td> index that is matched
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> Whether the completion-list should be hidden on this event. The default-implementation always returns HideListIfAutomaticInvocation
+</dd></dl>
+</p></div></div><a class="anchor" name="shouldAbortCompletion"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool shouldAbortCompletion</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>range</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>currentCompletion</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This function decides if the completion should be aborted.
+Called after every change to the range (eg. when user entered text)
+</p>
+<p>
+The default implementation will return true when any special character was entered, or when the range is empty.
+</p>
+<p>
+The smart-mutex is not locked when this is called.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> The view to generate completions for
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>range</em>&nbsp;</td><td> The completion range
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>currentCompletion</em>&nbsp;</td><td> The text typed so far
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true, if the completion should be aborted, otherwise false
+</dd></dl>
+</p></div></div><a class="anchor" name="shouldExecute"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool shouldExecute</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QModelIndex&nbsp;</td>
+<td class="paramname"><em>selected</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QChar&nbsp;</td>
+<td class="paramname"><em>inserted</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>When an item within this model is currently selected in the completion-list, and the user inserted the given character,
+should the completion-item be executed? This can be used to execute items from other inputs than the return-key.
+For example a function item could be executed by typing '(', or variable items by typing '.'.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>selected</em>&nbsp;</td><td> The currently selected index
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>inserted</em>&nbsp;</td><td> The character that was inserted by tue user
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="shouldStartCompletion"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool shouldStartCompletion</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>insertedText</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>userInsertion</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>position</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This function decides if the automatic completion should be started when
+the user entered some text.
+</p>
+<p>
+The default implementation will return true if the last character in
+<b>insertedText</b> is a letter, a number, '.', '_' or '&gt;'
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> The view to generate completions for
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>insertedText</em>&nbsp;</td><td> The text that was inserted by the user
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>userInsertion</em>&nbsp;</td><td> Whether the the text was inserted by the user using typing.
+If false, it may have been inserted for example by code-completion.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>position</em>&nbsp;</td><td> Current cursor position
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true, if the completion should be started, otherwise false
+</dd></dl>
+</p></div></div><a class="anchor" name="updateCompletionRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> updateCompletionRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>range</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This function lets the CompletionModel dynamically modify the range.
+Called after every change to the range (eg. when user entered text)
+</p>
+<p>
+The default implementation does nothing.
+</p>
+<p>
+The smart-mutex is not locked when this is called.
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> Make sure you lock it before you change the range
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> The view to generate completions for
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>range</em>&nbsp;</td><td> Reference to the current range
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the modified range
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="MatchReaction"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">MatchReaction</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>None</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>HideListIfAutomaticInvocation</em>&nbsp;=&nbsp;1</td><td><tr><td valign="top"><em>ForExtension</em>&nbsp;=&nbsp;0xffff</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

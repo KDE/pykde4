@@ -32,24 +32,25 @@ class Plugin : QObject
 
 
 public:
-                         Plugin (QObject* /TransferThis/);
+                            Plugin (QObject* parent /TransferThis/);
 
-public:
-    virtual void         addDocument (KTextEditor::Document*);
-    virtual void         removeDocument (KTextEditor::Document*);
-    virtual void         addView (KTextEditor::View*);
-    virtual void         removeView (KTextEditor::View*);
-
-public:
+    virtual void            addDocument (KTextEditor::Document* document);
+    virtual void            removeDocument (KTextEditor::Document* document);
+    virtual void            addView (KTextEditor::View* view);
+    virtual void            removeView (KTextEditor::View* view);
 
 
 
-};  // class Plugin
+
+    virtual ~Plugin ();
+};
+// class Plugin
 
 
-KTextEditor::Plugin* createPlugin (KService::Ptr, QObject*);
+KTextEditor::Plugin*    createPlugin (KService::Ptr service, QObject* parent /Transfer/);
 
 
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 

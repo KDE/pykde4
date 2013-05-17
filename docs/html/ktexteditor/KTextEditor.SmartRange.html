@@ -1,0 +1,1509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KTextEditor.SmartRange</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.9 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>SmartRange Class Reference</h1>
+<code>from PyKDE4.ktexteditor import *</code>
+<p>
+Inherits: <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a><br />
+
+Namespace: <a href="../ktexteditor/KTextEditor.html">KTextEditor</a><br />
+<h2>Detailed Description</h2>
+
+<p>A Range which is bound to a specific Document, and maintains its position.
+</p>
+<p>
+A SmartRange is an extension of the basic Range class. It maintains its
+position in the document and provides extra functionality,
+including:
+<li> convenience functions for accessing and manipulating the content </li>
+of the associated document,
+<li> adjusting behavior in response to text edits, </li>
+<li> forming a tree structure out of multiple SmartRange%s, </li>
+<li> providing attribute information for the arbitrary highlighting extension, </li>
+<li> allowing KAction%s to be bound to the range (note: not currently implemented), and </li>
+<li> providing notification of changes to 3rd party software. </li>
+</p>
+<p>
+As a result of a smart range's close association with a document, and the processing
+that occurrs as a result, smart ranges may not be copied.
+</p>
+<p>
+For simplicity of code, ranges always maintain their start position to
+be before or equal to their end position. Attempting to set either the
+start or end of the range beyond the respective end or start will result in
+both values being set to the specified position.
+</p>
+<p>
+Hierarchical range-trees maintain specific relationships:
+- When a child-range is changed, all parent-ranges are resized so the child-range fits in
+- When a parent-range is changed, all child-ranges are resized so they fit in
+</p>
+<p>
+This means that parent-ranges always completely contain all their child-ranges. However
+it may lead to unexpected range-changes from the perspective of your application, so keep
+this in mind.
+</p>
+<p>
+The child-ranges of one smart-range are allowed to overlap each other. However overlaps
+should be omitted where possible, for performance-reasons, and because each range can
+be overlapped by max. 63 sibling-ranges while still rendering correctly.
+</p>
+<p>
+Create a new SmartRange like this:
+<pre class="fragment">
+ // Retrieve the SmartInterface
+ KTextEditor.SmartInterface* smart =
+     qobject_cast&lt;KTextEditor.SmartInterface*&gt;( yourDocument );
+
+ if ( smart ) {
+     KTextEditor.SmartRange* range = smart-&gt;newSmartRange();
+ }
+</pre>
+</p>
+<p>
+When finished with a SmartRange, simply delete it.
+</p>
+<p>
+\sa Range, SmartRangeNotifier, SmartRangeWatcher, and SmartInterface
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Hamish Rodda &lt;rodda@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#InsertBehavior">InsertBehavior</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;DoNotExpand, ExpandLeft, ExpandRight&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#SmartRange">__init__</a> (self, <a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a> start, <a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a> end, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> parent=0, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a> insertBehavior=KTextEditor.SmartRange.DoNotExpand)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#SmartRange">__init__</a> (self, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addNotifier">addNotifier</a> (self, <a href="../ktexteditor/KTextEditor.SmartRangeNotifier.html">KTextEditor.SmartRangeNotifier</a> notifier)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addWatcher">addWatcher</a> (self, <a href="../ktexteditor/KTextEditor.SmartRangeWatcher.html">KTextEditor.SmartRangeWatcher</a> watcher)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#associateAction">associateAction</a> (self, <a href="../kdeui/KAction.html">KAction</a> action)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../kdeui/KAction.html">KAction</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#associatedActions">associatedActions</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">KSharedPtr<KTextEditor::Attribute>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#attribute">attribute</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#checkFeedback">checkFeedback</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#childAfter">childAfter</a> (self, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> range)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#childBefore">childBefore</a> (self, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> range)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#childRanges">childRanges</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearAndDeleteChildRanges">clearAndDeleteChildRanges</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearAssociatedActions">clearAssociatedActions</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearChildRanges">clearChildRanges</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#confineToRange">confineToRange</a> (self, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> range)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRangeNotifier.html">KTextEditor.SmartRangeNotifier</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#createNotifier">createNotifier</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deepestRangeContaining">deepestRangeContaining</a> (self, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> pos, QStack<KTextEditor::SmartRange> rangesEntered=0, QStack<KTextEditor::SmartRange> rangesExited=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deepestRangesContaining">deepestRangesContaining</a> (self, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> pos)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deleteChildRanges">deleteChildRanges</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deletePrimaryNotifier">deletePrimaryNotifier</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#depth">depth</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dissociateAction">dissociateAction</a> (self, <a href="../kdeui/KAction.html">KAction</a> action)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#document">document</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#expandToRange">expandToRange</a> (self, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> range)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#firstRangeContaining">firstRangeContaining</a> (self, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> pos)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#hasParent">hasParent</a> (self, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#insertBehavior">insertBehavior</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isSmartRange">isSmartRange</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mostSpecificRange">mostSpecificRange</a> (self, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> input)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../ktexteditor/KTextEditor.SmartRangeNotifier.html">KTextEditor.SmartRangeNotifier</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#notifiers">notifiers</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#overlapCount">overlapCount</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parentRange">parentRange</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRangeNotifier.html">KTextEditor.SmartRangeNotifier</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#primaryNotifier">primaryNotifier</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rangeChanged">rangeChanged</a> (self, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> cursor, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> from)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#rebuildChildStructure">rebuildChildStructure</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeNotifier">removeNotifier</a> (self, <a href="../ktexteditor/KTextEditor.SmartRangeNotifier.html">KTextEditor.SmartRangeNotifier</a> notifier)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeText">removeText</a> (self, bool block=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeWatcher">removeWatcher</a> (self, <a href="../ktexteditor/KTextEditor.SmartRangeWatcher.html">KTextEditor.SmartRangeWatcher</a> watcher)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#replaceText">replaceText</a> (self, QStringList text, bool block=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAttribute">setAttribute</a> (self, KSharedPtr<KTextEditor::Attribute> attribute)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setInsertBehavior">setInsertBehavior</a> (self, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a> behavior)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setParentRange">setParentRange</a> (self, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> r)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRange">setRange</a> (self, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> range)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#smartEnd">smartEnd</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#smartStart">smartStart</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QStringList&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#text">text</a> (self, bool block=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#toSmartRange">toSmartRange</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#topParentRange">topParentRange</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../ktexteditor/KTextEditor.SmartRangeWatcher.html">KTextEditor.SmartRangeWatcher</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#watchers">watchers</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="SmartRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a>&nbsp;</td>
+<td class="paramname"><em>start</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a>&nbsp;</td>
+<td class="paramname"><em>end</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a>&nbsp;</td>
+<td class="paramname"><em>insertBehavior=KTextEditor.SmartRange.DoNotExpand</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Constructor for subclasses to utilise. Protected to prevent direct
+instantiation.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> 3rd party developers: you do not (and should not) need to subclass
+the Smart* classes; instead, use the SmartInterface to create instances.
+</dd></dl> </p>
+<p>
+<dl class="internal" compact><dt><b>Internal:</b></dt><dd>
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>start</em>&nbsp;</td><td> the start cursor to use - ownership is taken
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>end</em>&nbsp;</td><td> the end cursor to use - ownership is taken
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent range if this is a subrange of another range
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>insertBehavior</em>&nbsp;</td><td> the behavior of this range when an insert happens
+immediately outside the range.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="SmartRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd>
+Copy constructor: Disable copying of this class.
+</dd></dl>
+</p></div></div><a class="anchor" name="addNotifier"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addNotifier</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRangeNotifier.html">KTextEditor.SmartRangeNotifier</a>&nbsp;</td>
+<td class="paramname"><em>notifier</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Register a notifier to receive signals indicating change of state of this range.
+</p>
+<p>
+NOTE: Make sure you call removeNotifier() when deleting the notifier before the range.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>notifier</em>&nbsp;</td><td> notifier to register. Ownership is not transferred.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addWatcher"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addWatcher</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRangeWatcher.html">KTextEditor.SmartRangeWatcher</a>&nbsp;</td>
+<td class="paramname"><em>watcher</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Register a SmartRangeWatcher to receive calls indicating change of state
+of this range. To finish receiving notifications, call removeWatcher().
+</p>
+<p>
+NOTE: Make sure you call removeWachter() when deleting the notifier before the range.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>watcher</em>&nbsp;</td><td> the instance of a class which is to receive
+notifications about changes to this range.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="associateAction"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> associateAction</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td>
+<td class="paramname"><em>action</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Associate an action with this range. The associated action(s) will be
+enabled when the caret enters the range, and disabled them on exit.
+The action is also added to the context menu when the mouse/caret is within
+an associated range.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>action</em>&nbsp;</td><td> KAction to associate with this range
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="associatedActions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../kdeui/KAction.html">KAction</a>] associatedActions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Access the list of currently associated KAction%s.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the list of associated actions
+</dd></dl>
+</p></div></div><a class="anchor" name="attribute"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">KSharedPtr<KTextEditor::Attribute> attribute</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Gets the active Attribute for this range.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a pointer to the active attribute
+</dd></dl>
+</p></div></div><a class="anchor" name="checkFeedback"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> checkFeedback</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd>
+</dd></dl> </p>
+<p>
+This routine is called when the range changes how much feedback it may need, eg. if it adds an action.
+</p></div></div><a class="anchor" name="childAfter"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> childAfter</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>range</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Find the child after <b>range,</b> if any.
+The order is determined by the range end-cursors.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>range</em>&nbsp;</td><td> to seach forwards from
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the range after <b>range</b> if one exists, otherwise null.
+</dd></dl>
+</p></div></div><a class="anchor" name="childBefore"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> childBefore</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>range</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Find the child before <b>range,</b> if any.
+The order is determined by the range end-cursors.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>range</em>&nbsp;</td><td> to seach backwards from
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the range before <b>range</b> if one exists, otherwise null.
+</dd></dl>
+</p></div></div><a class="anchor" name="childRanges"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>] childRanges</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the ordered list of child ranges.
+</p>
+<p>
+To insert a child range, simply set its parent to this range using setParentRange().
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a list of child ranges.
+</dd></dl>
+</p></div></div><a class="anchor" name="clearAndDeleteChildRanges"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearAndDeleteChildRanges</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Clears child ranges - i.e., clears the text that is covered by the ranges,
+and deletes the SmartRange objects.
+</p></div></div><a class="anchor" name="clearAssociatedActions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearAssociatedActions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Clears all associations between KAction%s and this range.
+</p></div></div><a class="anchor" name="clearChildRanges"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearChildRanges</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Clears child ranges - i.e., removes the text that is covered by the ranges.
+The ranges themselves are not deleted.
+</p>
+<p>
+\sa removeText()
+</p></div></div><a class="anchor" name="confineToRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool confineToRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>range</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>confineToRange(const Range&amp;)
+Overloaded version which confines child ranges as well.
+</p></div></div><a class="anchor" name="createNotifier"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRangeNotifier.html">KTextEditor.SmartRangeNotifier</a> createNotifier</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd>
+</dd></dl> </p>
+<p>
+Called to request creation of a new SmartRangeNotifier for this object.
+</p></div></div><a class="anchor" name="deepestRangeContaining"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> deepestRangeContaining</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>pos</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QStack<KTextEditor::SmartRange>&nbsp;</td>
+<td class="paramname"><em>rangesEntered=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QStack<KTextEditor::SmartRange>&nbsp;</td>
+<td class="paramname"><em>rangesExited=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Finds the deepest range in the heirachy which contains position <b>pos.</b>
+Allows the caller to determine which ranges were entered and exited
+by providing pointers to QStack&lt;SmartRange*&gt;.
+</p>
+<p>
+If child-ranges overlap in the given position,
+the first smallest one is returned.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>pos</em>&nbsp;</td><td> the cursor position to use in searching
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>rangesEntered</em>&nbsp;</td><td> provide a QStack&lt;SmartRange*&gt; here to find out
+which ranges were entered during the traversal.
+The top item was the first descended.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>rangesExited</em>&nbsp;</td><td> provide a QStack&lt;SmartRange*&gt; here to find out
+which ranges were exited during the traversal.
+The top item was the first exited.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the deepest range (from and including this range) which
+contains <b>pos,</b> or null if no ranges contain this position.
+</dd></dl>
+</p></div></div><a class="anchor" name="deepestRangesContaining"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>] deepestRangesContaining</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>pos</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="deleteChildRanges"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> deleteChildRanges</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Deletes child ranges - i.e., deletes the SmartRange objects only.
+The underlying text is not affected.
+</p></div></div><a class="anchor" name="deletePrimaryNotifier"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> deletePrimaryNotifier</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>When finished with the primaryNotifier(), call this method to save memory by
+having the SmartRangeNotifier deleted.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> If a notifier was first registered via addNotifier() rather than created inside
+primaryNotifier(), this method will delete that notifier. Text editor implementations
+should not use notifiers for internal purposes, instead use watchers (faster and
+has documentation to this effect)
+</dd></dl>
+</p></div></div><a class="anchor" name="depth"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int depth</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Calculate the current depth of this range.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the depth of this range, where 0 is no parent, 1 is one parent, etc.
+</dd></dl>
+</p></div></div><a class="anchor" name="dissociateAction"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> dissociateAction</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdeui/KAction.html">KAction</a>&nbsp;</td>
+<td class="paramname"><em>action</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Remove the association with an action from this range; it will no
+longer be managed.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>action</em>&nbsp;</td><td> KAction to dissociate from this range
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="document"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a> document</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Retrieve the document associated with this SmartRange.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a pointer to the associated document
+</dd></dl>
+</p></div></div><a class="anchor" name="expandToRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool expandToRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>range</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>expandToRange(const Range&amp;)
+Overloaded version which expands child ranges as well.
+</p></div></div><a class="anchor" name="firstRangeContaining"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> firstRangeContaining</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>pos</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Finds the first child range which contains position <b>pos.</b>
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>pos</em>&nbsp;</td><td> the cursor position to use in searching
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the most shallow range (from and including this range) which
+contains <b>pos</b>
+</dd></dl>
+</p></div></div><a class="anchor" name="hasParent"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool hasParent</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Determine whether <b>parent</b> is a parent of this range.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> range to check to see if it is a parent of this range.
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if <b>parent</b> is in the parent heirachy, otherwise false.
+</dd></dl>
+</p></div></div><a class="anchor" name="insertBehavior"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a> insertBehavior</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns how this range reacts to characters inserted immediately outside the range.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the current insert behavior.
+</dd></dl>
+</p></div></div><a class="anchor" name="isSmartRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isSmartRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns that this range is a SmartRange.
+</p></div></div><a class="anchor" name="mostSpecificRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> mostSpecificRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>input</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Finds the most specific range in a heirachy for the given input range
+(ie. the smallest range which wholly contains the input range)
+</p>
+<p>
+In case of overlaps, the smallest containing range is chosen,
+if there are multiple of the same size, then the first one.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>input</em>&nbsp;</td><td> the range to use in searching
+</td></tr>
+</table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the deepest range which contains <b>input</b>
+</dd></dl>
+</p></div></div><a class="anchor" name="notifiers"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../ktexteditor/KTextEditor.SmartRangeNotifier.html">KTextEditor.SmartRangeNotifier</a>] notifiers</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a list of notifiers which are receiving signals indicating change of state
+of this range. These notifiers may be receiving signals from other ranges as well.
+</p></div></div><a class="anchor" name="overlapCount"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int overlapCount</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the count of ranges within the parent-range
+that end behind this range, and that overlap this range.
+</p></div></div><a class="anchor" name="parentRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> parentRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns this range's parent range, if one exists.
+</p>
+<p>
+At all times, this range will be contained within parentRange().
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a pointer to the current parent range
+</dd></dl>
+</p></div></div><a class="anchor" name="primaryNotifier"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRangeNotifier.html">KTextEditor.SmartRangeNotifier</a> primaryNotifier</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Connect to a notifier to receive signals indicating change of state of this range.
+This function creates a notifier if none is already bound to this range; if one has
+already been assigned this will return the first notifier.
+</p>
+<p>
+If you have finished with notifications for a reasonable period of time you can
+save memory by calling deleteNotifier().
+</p></div></div><a class="anchor" name="rangeChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> rangeChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>cursor</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>from</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd>
+</dd></dl> </p>
+<p>
+Notify this range that one or both of the cursors' position has changed directly.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>cursor</em>&nbsp;</td><td> the cursor that changed. If null, both cursors have changed.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>from</em>&nbsp;</td><td> the previous position of this range
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="rebuildChildStructure"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> rebuildChildStructure</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Is called after child-ranges have changed internally without the rangeChanged() notification, for example
+after translations. It rebuilds the child-structure, so it is consistent again.
+</p></div></div><a class="anchor" name="removeNotifier"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeNotifier</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRangeNotifier.html">KTextEditor.SmartRangeNotifier</a>&nbsp;</td>
+<td class="paramname"><em>notifier</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Deregister a notifier and no longer deliver signals indicating change of state of this range.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>notifier</em>&nbsp;</td><td> notifier to deregister.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="removeText"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool removeText</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>block=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Remove text contained within this range.
+The range itself will not be deleted.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>block</em>&nbsp;</td><td> specify whether the text should be deleted from the range's visual block, rather
+than all the text within the range.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="removeWatcher"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeWatcher</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRangeWatcher.html">KTextEditor.SmartRangeWatcher</a>&nbsp;</td>
+<td class="paramname"><em>watcher</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Stop delivery of notifications to a SmartRangeWatcher.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>watcher</em>&nbsp;</td><td> the watcher that no longer wants notifications.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="replaceText"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool replaceText</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QStringList&nbsp;</td>
+<td class="paramname"><em>text</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>block=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Replace text in this range with <b>text</b>
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> text to use as a replacement
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>block</em>&nbsp;</td><td> insert this text as a visual block of text rather than a linear sequence
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true on success, otherwise false
+</dd></dl>
+</p></div></div><a class="anchor" name="setAttribute"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setAttribute</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KSharedPtr<KTextEditor::Attribute>&nbsp;</td>
+<td class="paramname"><em>attribute</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the currently active attribute for this range.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>attribute</em>&nbsp;</td><td> Attribute to assign to this range. If null, simply
+removes the previous Attribute.
+</td></tr>
+</table></dl>
+<p> <dl class="note" compact><dt><b>Note:</b></dt><dd> SmartInterface.addHighlightToDocument must be called with the top-range before
+the highlighting can work.
+</dd></dl>
+</p></div></div><a class="anchor" name="setInsertBehavior"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setInsertBehavior</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a>&nbsp;</td>
+<td class="paramname"><em>behavior</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Determine how the range should react to characters inserted immediately outside the range.
+</p>
+<p>
+To do: does this need a custom function to enable determining of the behavior based on the
+text that is inserted / deleted?
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>behavior</em>&nbsp;</td><td> the insertion behavior to use for future edits
+</td></tr>
+</table></dl>
+<p> \sa InsertBehavior
+</p></div></div><a class="anchor" name="setParentRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setParentRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>r</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set this range's parent range.
+</p>
+<p>
+At all times, this range will be contained within parentRange(). So, if it is outside of the
+new parent to begin with, it will be expanded automatically.
+</p>
+<p>
+When being inserted into the parent range, the parent range will be fit in between any other
+pre-existing child ranges, and may resize them so as not to overlap. However, once insertion
+has occurred, changing this range directly will only resize the others, it will not change
+the order of the ranges. To change the order, unset the parent range, change the range, and
+re-set the parent range.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>r</em>&nbsp;</td><td> range to become the new parent of this range
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>range</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>\copydoc Range.setRange(const Range&amp;)
+</p>
+<p>
+This function also provides any required adjustment of parent and child ranges,
+and notification of the change if required.
+</p></div></div><a class="anchor" name="smartEnd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a> smartEnd</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the end point of this range. This version returns a casted
+version of end(), as SmartRange%s always use SmartCursor%s as
+the start() and end().
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a const reference to the end of this range.
+</dd></dl>
+</p></div></div><a class="anchor" name="smartStart"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a> smartStart</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the start point of this range. This version returns a casted
+version of start(), as SmartRange%s always use SmartCursor%s as
+the start() and end().
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a const reference to the start of this range.
+</dd></dl>
+</p></div></div><a class="anchor" name="text"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QStringList text</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>block=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Retrieve the text which is contained within this range.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>block</em>&nbsp;</td><td> specify whether the text should be returned from the range's visual block, rather
+than all the text within the range.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="toSmartRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> toSmartRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns this range as a SmartRange, if it is one.
+</p></div></div><a class="anchor" name="topParentRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> topParentRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the range's top parent range, or this range if there are no parents.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a pointer to the top parent range
+</dd></dl>
+</p></div></div><a class="anchor" name="watchers"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../ktexteditor/KTextEditor.SmartRangeWatcher.html">KTextEditor.SmartRangeWatcher</a>] watchers</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns a list of registered SmartRangeWatchers.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> this function may return watchers internal to the text editor's implementation,
+eg. in the case of arbitrary highlighting and kate part. Removing these watchers
+with removeWatcher() will result in malfunction.
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="InsertBehavior"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">InsertBehavior</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>DoNotExpand</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>ExpandLeft</em>&nbsp;=&nbsp;0x1</td><td><tr><td valign="top"><em>ExpandRight</em>&nbsp;=&nbsp;0x2</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

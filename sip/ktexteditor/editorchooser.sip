@@ -32,15 +32,19 @@ class EditorChooser : QWidget
 
 
 public:
-                         EditorChooser (QWidget* = 0);
-    void                 readAppSetting (const QString& = QString ());
-    void                 writeAppSetting (const QString& = QString ());
-    static KTextEditor::Editor* editor (const QString& = QString (), bool = 1);
+                            EditorChooser (QWidget* parent /TransferThis/ = 0);
+    void                    readAppSetting (const QString& postfix = QString());
+    void                    writeAppSetting (const QString& postfix = QString());
+    static KTextEditor::Editor*  editor (const QString& postfix = QString(), bool fallBackToKatePart = 1);
 
 signals:
-    void                 changed ();
+    void                    changed ();
 
-};  // class EditorChooser
+public:
+    virtual ~EditorChooser ();
+};
+// class EditorChooser
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 

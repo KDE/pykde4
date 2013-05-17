@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KTextEditor.MdiContainer</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.9 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>MdiContainer Class Reference</h1>
+<code>from PyKDE4.ktexteditor import *</code>
+<p>
+
+
+Namespace: <a href="../ktexteditor/KTextEditor.html">KTextEditor</a><br />
+<h2>Detailed Description</h2>
+
+<p>A container for MDI-capable kpart hosts.
+</p>
+<p>
+The kpart container for the KTextEditor interface may have different
+capabilities. For example, inside KDevelop or Kate, the container can
+manage multiple views and multiple documents. However, if the kpart text
+is used inside konqueror as a replacement of the text entry in html
+forms, the container will only support one view with one document.
+</p>
+<p>
+This class allows the kpart component to create and delete views, create
+and delete documents, fetch and set the current view. Note that the
+ktexteditor framework already supports multiple document and views and
+that the kpart host can create them and delete them as it wishes. What
+this class provides is the ability for the &lt;i&gt;kpart component&lt;/i&gt; being
+hosted to do the same.
+</p>
+<p>
+An instance of this extension should be set with
+ContainerInterface.setContainerExtension().Check ContainerInterface() to
+see how to obtain an instance of ContainerInterface. The instance should
+inherit QObject, inherit MdiContainer, declare the Q_OBJECT macro and
+declare a Q_INTERFACES(KTextEditor.MdiContainer) .
+</p>
+<p>
+Code example to support MdiContainer (in the kpart host):
+<pre class="fragment">
+ class MyMdiContainer : public QObject,
+                        public MdiContainer
+ {
+   Q_OBJECT
+   Q_INTERFACES( KTextEditor.MdiContainer )
+
+   public:
+     // ...
+ }
+</pre>
+</p>
+<p>
+To check if the kpart hosts supports the MDI container:
+<pre class="fragment">
+ Editor * editor = KTextEditor.EditorChooser.editor();
+ ContainerInterface * iface = qobject_cast&lt;ContainerInterface *&gt;( editor );
+ if (iface) {
+   MdiContainer * mdiContainer = qobject_cast&lt;MdiContainer *&gt;( iface-&gt;container() );
+   if (MdiContainer != NULL ) {
+    // great, I can create additional views
+    // ...
+   }
+ }
+</pre>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MdiContainer">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#activeView">activeView</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#closeDocument">closeDocument</a> (self, <a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a> doc)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#closeView">closeView</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#createDocument">createDocument</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#createView">createView</a> (self, <a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a> doc)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setActiveView">setActiveView</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="MdiContainer"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Constructor
+</p></div></div><a class="anchor" name="activeView"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> activeView</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the current activew view.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the active view.
+</dd></dl> </p>
+<p>
+\sa setActiveView
+</p></div></div><a class="anchor" name="closeDocument"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool closeDocument</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a>&nbsp;</td>
+<td class="paramname"><em>doc</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Closes of document <b>doc</b> .
+</p>
+<p>
+The document is about to be closed but is still valid when this
+call is made. The Document does not contain any view when this
+call is made (closeView() has been called on all the views of the
+document previously).
+</p>
+<p>
+The signal aboutToClose() is emitted before this method is
+called.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the removal is authorized and acted, or
+false if removing documents by the kpart is not supported
+by the container.
+</dd></dl>
+</p></div></div><a class="anchor" name="closeView"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool closeView</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Closes the View <b>view</b> .
+</p>
+<p>
+The view is still valid when this call is made but will be deleted
+shortly after.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the removal is authorized and acted, or
+false if the container does not support view removing from
+the kpart, or
+</dd></dl>
+</p></div></div><a class="anchor" name="createDocument"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a> createDocument</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Create a new Document and return it to the kpart.
+</p>
+<p>
+Canonical implementation is:
+<pre class="fragment">
+ Document * createDocument()
+ {
+     Document * doc;
+     // set parentQObject to relevant value
+     doc = editor-&gt;createDocument( parentQObject );
+     // integrate the new document in the document list of the
+     // container, ...
+     return doc;
+ }
+</pre>
+</p>
+<p>
+The signal documentCreated() will be emitted during the creation.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a pointer to the new Document object.
+</dd></dl>
+</p></div></div><a class="anchor" name="createView"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> createView</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a>&nbsp;</td>
+<td class="paramname"><em>doc</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Creates a new View and return it to the kpart.
+</p>
+<p>
+Canonical implementation is:
+<pre class="fragment">
+ View * createView( Document * doc )
+ {
+     // set parentWidget to relevant value
+     return doc-&gt;createView( parentWidget );
+ }
+</pre>
+</p>
+<p>
+The signal viewCreated() will be emitted during the createView()
+call.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a pointer to the new View created.
+</dd></dl>
+</p></div></div><a class="anchor" name="setActiveView"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setActiveView</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Set the <b>view</b> requested by the part as the active view.
+</p>
+<p>
+\sa activeView
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

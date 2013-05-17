@@ -32,15 +32,15 @@ class VariableInterface
 
 
 public:
-                         VariableInterface ();
-    virtual QString      variable (const QString&) const = 0;
+                            VariableInterface ();
+    virtual QString         variable (const QString& name) const=0;
 
-public:
-    virtual void         variableChanged (KTextEditor::Document*, const QString&, const QString&)  = 0;
-private:
-                         VariableInterface (const KTextEditor::VariableInterface &other);
+    virtual void            variableChanged (KTextEditor::Document* document, const QString& variable, const QString& value)=0;
 
-};  // class VariableInterface
+    virtual ~VariableInterface ();
+};
+// class VariableInterface
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 

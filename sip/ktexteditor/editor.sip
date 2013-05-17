@@ -36,31 +36,37 @@ class Editor : QObject
 
 
 public:
-                         Editor (QObject*);
+                            Editor (QObject* parent /TransferThis/);
 
-public:
-    virtual KTextEditor::Document* createDocument (QObject*)  = 0;
-    virtual const QList<KTextEditor::Document*>& documents ()  = 0;
+    virtual KTextEditor::Document*  createDocument (QObject* parent /Transfer/)=0;
+    virtual const QList<KTextEditor::Document*>&  documents ()=0;
 
-public:
-    virtual const KAboutData* aboutData () const = 0;
+    virtual const KAboutData*  aboutData () const=0;
 
-public:
-    virtual void         readConfig (KConfig* = 0)  = 0;
-    virtual void         writeConfig (KConfig* = 0)  = 0;
-    virtual bool         configDialogSupported () const = 0;
-    virtual void         configDialog (QWidget*)  = 0;
-    virtual int          configPages () const = 0;
-    virtual KTextEditor::ConfigPage* configPage (int, QWidget*)  = 0;
-    virtual QString      configPageName (int) const = 0;
-    virtual QString      configPageFullName (int) const = 0;
-    virtual KIcon        configPageIcon (int) const = 0;
+    virtual void            readConfig (KConfig* config = 0)=0;
+    virtual void            writeConfig (KConfig* config = 0)=0;
+    virtual bool            configDialogSupported () const=0;
+    virtual void            configDialog (QWidget* parent /Transfer/)=0;
+    virtual int             configPages () const=0;
+    virtual KTextEditor::ConfigPage*  configPage (int number, QWidget* parent /Transfer/)=0;
+    virtual QString         configPageName (int number) const=0;
+    virtual QString         configPageFullName (int number) const=0;
+    virtual KIcon           configPageIcon (int number) const=0;
 
 signals:
-    void                 documentCreated (KTextEditor::Editor*, KTextEditor::Document*);
+    void                    documentCreated (KTextEditor::Editor* editor, KTextEditor::Document* document);
 
-};  // class Editor
+public:
+    virtual ~Editor ();
+    void                    setSimpleMode (bool on);
+    bool                    simpleMode () const;
+    const QString&          defaultEncoding () const;
+protected:
+    void                    setDefaultEncoding (const QString& defaultEncoding);
+};
+// class Editor
 
-KTextEditor::Editor* editor (const char*);
-};  // namespace KTextEditor
+KTextEditor::Editor*    editor (const char* libname);
+};
+// namespace KTextEditor
 

@@ -1,0 +1,702 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KTextEditor.Editor</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.9 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>Editor Class Reference</h1>
+<code>from PyKDE4.ktexteditor import *</code>
+<p>
+Inherits: QObject<br />
+
+Namespace: <a href="../ktexteditor/KTextEditor.html">KTextEditor</a><br />
+<h2>Detailed Description</h2>
+
+<p>Accessor interface for Editor part.
+</p>
+<p>
+Topics:
+- editor_intro
+- editor_config
+- editor_notes
+- editor_extensions
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+The Editor part can be accessed via the KTextEditor.Factory or the
+KTextEditor.EditorChooser and provides
+general information and configuration methods for the Editor
+implementation, for example KAboutData by using aboutData().
+</p>
+<p>
+The Editor implementation has a list of all opened documents. Get this
+list with documents(). To create a new Document call createDocument(). The
+signal documentCreated() is emitted whenever the Editor created a new
+document.
+</p>
+<p>
+<b>Editor Configuration </b>
+</p>
+<p>
+If the Editor implementation supports a config dialog
+configDialogSupported() returns true, then the config dialog can be
+shown with configDialog(). Instead of using the config dialog, the config
+pages can be embedded into the application's config dialog. To do this,
+configPages() returns the number of
+config pages the Editor implementation provides and configPage() returns
+the requested page. Further, a config page has a short descriptive name,
+get it with configPageName(). You can get more detailed name by using
+configPageFullName(). Also every config page has a pixmap, get it with
+configPagePixmap(). The configuration can be saved and loaded with
+readConfig() and writeConfig().
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> We recommend to embedd the config pages into the main application's
+config dialog instead of using a separate config dialog, if the config
+dialog does not look cluttered then. This way, all settings are grouped
+together in one place.
+</dd></dl> </p>
+<p>
+<b>Implementation Notes </b>
+</p>
+<p>
+Usually only one instance of the Editor exists. The Kate Part
+implementation internally uses a static accessor to make sure that only one
+Kate Part Editor object exists. So several factories still use the same
+Editor.
+</p>
+<p>
+readConfig() and writeConfig() should be forwarded to all loaded plugins
+as well, see KTextEditor.Plugin.readConfig() and
+KTextEditor.Plugin.writeConfig().
+</p>
+<p>
+<b>Editor Extension Interfaces </b>
+</p>
+<p>
+There is only a single extension interface for the Editor: the
+CommandInterface. With the CommandInterface it is possible to add and
+remove new command line commands which are valid for all documents. Common
+use cases are for example commands like find or setting document
+variables. For further details read the detailed descriptions in the class
+KTextEditor.CommandInterface.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KTextEditor.Factory, KTextEditor.Document, KTextEditor.ConfigPage
+KTextEditor.Plugin, KTextEditor.CommandInterface
+</dd></dl> 
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Christoph Cullmann &lt;cullmann@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#documentCreated">documentCreated</a> (<a href="../ktexteditor/KTextEditor.Editor.html">KTextEditor.Editor</a> editor, <a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a> document)</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#Editor">__init__</a> (self, QObject parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdecore/KAboutData.html">KAboutData</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aboutData">aboutData</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configDialog">configDialog</a> (self, QWidget parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configDialogSupported">configDialogSupported</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.ConfigPage.html">KTextEditor.ConfigPage</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configPage">configPage</a> (self, int number, QWidget parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configPageFullName">configPageFullName</a> (self, int number)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../kdeui/KIcon.html">KIcon</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configPageIcon">configPageIcon</a> (self, int number)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configPageName">configPageName</a> (self, int number)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#configPages">configPages</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#createDocument">createDocument</a> (self, QObject parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#defaultEncoding">defaultEncoding</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#documents">documents</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#readConfig">readConfig</a> (self, <a href="../kdecore/KConfig.html">KConfig</a> config=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDefaultEncoding">setDefaultEncoding</a> (self, QString defaultEncoding)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSimpleMode">setSimpleMode</a> (self, bool on)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#simpleMode">simpleMode</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#writeConfig">writeConfig</a> (self, <a href="../kdecore/KConfig.html">KConfig</a> config=0)</td></tr>
+</table>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="documentCreated"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> documentCreated</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Editor.html">KTextEditor.Editor</a>&nbsp;</td>
+<td class="paramname"><em>editor</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a>&nbsp;</td>
+<td class="paramname"><em>document</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>The <b>editor</b> emits this signal whenever a <b>document</b> was successfully
+created.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>editor</em>&nbsp;</td><td> editor which created the new document
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>document</em>&nbsp;</td><td> the newly created document instance
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> createDocument()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("documentCreated(KTextEditor::Editor*, KTextEditor::Document*)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="Editor"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QObject&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Constructor.
+</p>
+<p>
+Create the Editor object with <b>parent.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> parent object
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="aboutData"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdecore/KAboutData.html">KAboutData</a> aboutData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the about data of this Editor part.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> about data
+</dd></dl>
+</p></div></div><a class="anchor" name="configDialog"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> configDialog</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QWidget&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Show the editor's config dialog, changes will be applied to the
+editor, but not saved anywhere automagically, call <b>writeConfig()</b>
+to save them.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> Instead of using the config dialog, the config pages can be
+embedded into your own config dialog by using configPages() and
+configPage().
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> parent widget
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> configDialogSupported()
+</dd></dl>
+</p></div></div><a class="anchor" name="configDialogSupported"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool configDialogSupported</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Check, whether this editor has a configuration dialog.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true, if the editor has a configuration dialog,
+otherwise false
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> configDialog()
+</dd></dl>
+</p></div></div><a class="anchor" name="configPage"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.ConfigPage.html">KTextEditor.ConfigPage</a> configPage</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>number</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QWidget&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the config page with the <b>number,</b> config pages from 0 to
+configPages()-1 are available if configPages() &gt; 0.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>number</em>&nbsp;</td><td> index of config page
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> parent widget for config page
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> created config page or NULL, if the number is out of bounds
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> configPages()
+</dd></dl>
+</p></div></div><a class="anchor" name="configPageFullName"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString configPageFullName</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>number</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get a readable full name for the config page number. The name
+should be translated.
+</p>
+<p>
+Example: If the name is "Filetypes", the full name could be
+"Filetype Specific Settings". For "Shortcuts" the full name would be
+something like "Shortcut Configuration".
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>number</em>&nbsp;</td><td> index of config page
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> full name of given page index
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> configPageName(), configPagePixmap()
+</dd></dl>
+</p></div></div><a class="anchor" name="configPageIcon"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../kdeui/KIcon.html">KIcon</a> configPageIcon</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>number</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get a pixmap with <b>size</b> for the config page <b>number.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>number</em>&nbsp;</td><td> index of config page
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> pixmap for the given page index
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> configPageName(), configPageFullName()
+</dd></dl>
+</p></div></div><a class="anchor" name="configPageName"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString configPageName</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>number</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get a readable name for the config page <b>number.</b> The name should be
+translated.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>number</em>&nbsp;</td><td> index of config page
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> name of given page index
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> configPageFullName(), configPagePixmap()
+</dd></dl>
+</p></div></div><a class="anchor" name="configPages"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int configPages</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the number of available config pages.
+If the editor returns a number &lt; 1, it does not support config pages
+and the embedding application should use configDialog() instead.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> number of config pages
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> configPage(), configDialog()
+</dd></dl>
+</p></div></div><a class="anchor" name="createDocument"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a> createDocument</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QObject&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Create a new document object with <b>parent.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> parent object
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> new KTextEditor.Document object
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> documents()
+</dd></dl>
+</p></div></div><a class="anchor" name="defaultEncoding"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString defaultEncoding</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the current default encoding for this Editor part.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> default encoding
+</dd></dl> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="documents"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a>] documents</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get a list of all documents of this editor.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> list of all existing documents
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> createDocument()
+</dd></dl>
+</p></div></div><a class="anchor" name="readConfig"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> readConfig</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KConfig.html">KConfig</a>&nbsp;</td>
+<td class="paramname"><em>config=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Read editor configuration from KConfig <b>config.</b>
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> Implementation Notes: If <b>config</b> is NULL you should use
+kapp-&gt;config() as a fallback solution. Additionally the
+readConfig() call should be forwarded to every loaded plugin.
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>config</em>&nbsp;</td><td> config object
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> writeConfig()
+</dd></dl>
+</p></div></div><a class="anchor" name="setDefaultEncoding"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDefaultEncoding</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>defaultEncoding</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the current default encoding for this Editor part.
+Editor part implementation should call this internally on creation and config changes.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>defaultEncoding</em>&nbsp;</td><td> new default encoding
+</td></tr> </table></dl>
+<p> <dl class="since" compact><dt><b>Since:</b></dt><dd> 4.5
+</dd></dl>
+</p></div></div><a class="anchor" name="setSimpleMode"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setSimpleMode</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>on</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Switch the editor to a simple mode which will hide advanced
+stuff from average user or switch it back to normal mode.
+This mode will only affect documents/views created after the
+change.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>on</em>&nbsp;</td><td> turn simple mode on or not
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="simpleMode"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool simpleMode</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Query the editor whether simple mode is on or not.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if simple mode is on, otherwise false
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setSimpleMode()
+</dd></dl>
+</p></div></div><a class="anchor" name="writeConfig"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> writeConfig</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KConfig.html">KConfig</a>&nbsp;</td>
+<td class="paramname"><em>config=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Write editor configuration to KConfig <b>config.</b>
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> Implementation Notes: If <b>config</b> is NULL you should use
+kapp-&gt;config() as a fallback solution. Additionally the
+writeConfig() call should be forwarded to every loaded plugin.
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>config</em>&nbsp;</td><td> config object
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> readConfig()
+</dd></dl>
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

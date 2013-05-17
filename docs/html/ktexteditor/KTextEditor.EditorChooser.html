@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KTextEditor.EditorChooser</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.9 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>EditorChooser Class Reference</h1>
+<code>from PyKDE4.ktexteditor import *</code>
+<p>
+Inherits: QWidget &#x2192; QObject<br />
+
+Namespace: <a href="../ktexteditor/KTextEditor.html">KTextEditor</a><br />
+<h2>Detailed Description</h2>
+
+<p>Editor Component Chooser.
+</p>
+<p>
+Topics:
+- chooser_intro
+- chooser_gui
+- chooser_editor
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+The EditorChooser is responsible for two different tasks: It provides
+- a GUI, with which the user can choose the preferred editor part
+- a static accessor, with which the current selected editor part can be
+obtained.
+</p>
+<p>
+<b>The GUI Editor Chooser </b>
+The EditorChooser is a simple widget with a group box containing an
+information label and a combo box which lists all available KTextEditor
+implementations. To give the user the possibility to choose a text editor
+implementation, create an instance of this class and put it into the GUI:
+<pre class="fragment">
+ KTextEditor.EditorChooser* ec = new KTextEditor.EditorChooser(parent);
+ // read the settings from the application's KConfig object
+ ec-&gt;readAppSetting();
+ // optionally connect the signal changed()
+ // plug the widget into a layout
+ layout-&gt;addWidget(ec);
+</pre>
+Later, for example when the user clicks the Apply-button:
+<pre class="fragment">
+ // save the user's choice
+ ec-&gt;writeAppSetting();
+</pre>
+After this, the static accessor editor() will return the new editor part
+object. Now, either the application has to be restarted, or you need code
+that closes all current documents so that you can safely switch and use the
+new editor part. Restarting is probably much easier.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> If you do not put the EditorChooser into the GUI, the default editor
+component will be used. The default editor is configurable in KDE's
+control center in
+"KDE Components &gt; Component Chooser &gt; Embedded Text Editor".
+</dd></dl> </p>
+<p>
+<b>Accessing the Editor Part </b>
+The call of editor() will return the currently used editor part, either the
+KDE default or the one configured with the EditorChooser's GUI
+(see chooser_gui). Example:
+<pre class="fragment">
+ KTextEditor.Editor* editor = KTextEditor.EditorChooser.editor();
+</pre>
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KTextEditor.Editor
+</dd></dl> 
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Joseph Wenninger &lt;jowenn@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changed">changed</a> ()</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#EditorChooser">__init__</a> (self, QWidget parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#readAppSetting">readAppSetting</a> (self, QString postfix=QString())</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#writeAppSetting">writeAppSetting</a> (self, QString postfix=QString())</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.Editor.html">KTextEditor.Editor</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#editor">editor</a> (QString postfix=QString(), bool fallBackToKatePart=1)</td></tr>
+</table>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="changed"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> changed</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>This signal is emitted whenever the selected item in the combo box
+changed.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("changed()"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="EditorChooser"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QWidget&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Constructor.
+</p>
+<p>
+Create an editor chooser widget.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent widget
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="readAppSetting"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> readAppSetting</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>postfix=QString()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Read the configuration from the application's config file. The group
+is handeled internally (it is called "KTEXTEDITOR:", but it is possible
+to add a string to extend the group name with <b>postfix.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>postfix</em>&nbsp;</td><td> config group postfix string
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> writeAppSetting()
+</dd></dl>
+</p></div></div><a class="anchor" name="writeAppSetting"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> writeAppSetting</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>postfix=QString()</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Write the configuration to the application's config file.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>postfix</em>&nbsp;</td><td> config group postfix string
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> readAppSetting()
+</dd></dl>
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="editor"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.Editor.html">KTextEditor.Editor</a> editor</td>
+<td>(</td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>postfix=QString()</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>fallBackToKatePart=1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Static accessor to get the Editor instance of the currently used
+KTextEditor component.
+</p>
+<p>
+That Editor instance can be qobject-cast to specific extensions.
+If the result of the cast is not NULL, that extension is supported:
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>postfix</em>&nbsp;</td><td> config group postfix string
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>fallBackToKatePart</em>&nbsp;</td><td> if true, the returned Editor component
+will be a katepart if no other implementation can be found
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> Editor controller or NULL, if no editor component could be
+found
+</dd></dl>
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

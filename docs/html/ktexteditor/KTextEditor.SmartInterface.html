@@ -1,0 +1,1417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KTextEditor.SmartInterface</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.9 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>SmartInterface Class Reference</h1>
+<code>from PyKDE4.ktexteditor import *</code>
+<p>
+
+
+Namespace: <a href="../ktexteditor/KTextEditor.html">KTextEditor</a><br />
+<h2>Detailed Description</h2>
+<dl class="abstract" compact><dt><b>Abstract class:</b></dt>
+<dd>This class can be used as a base class for new classes, but can not be instantiated directly.</dd></dl>
+<p>A Document extension interface for handling SmartCursor%s and SmartRange%s.
+</p>
+<p>
+Topics:
+- smartiface_intro
+- smartiface_creation
+- smartiface_highlight
+- smartiface_action
+- smartiface_access
+</p>
+<p>
+<b>Introduction </b>
+Use this interface to:
+<li> create new SmartCursor%s and SmartRange%s; </li>
+<li> create arbitrary highlighting; and </li>
+<li> associate KAction%s with ranges of text </li>
+</p>
+<p>
+<b>Creation of SmartCursors and SmartRanges </b>
+These functions must be used to create SmartCursor%s and SmartRange%s. This
+means that these objects cannot be derived from by third party applications.
+</p>
+<p>
+You then own these objects; upon deletion they de-register themselves from
+the Document with which they were associated. Alternatively, they are all
+deleted with the deletion of the owning Document.
+</p>
+<p>
+<b>Arbitrary Highlighting </b>
+Arbitrary highlighting of text can be achieved by creating SmartRange%s in a
+tree structure, and assigning appropriate Attributes to these ranges.
+</p>
+<p>
+To highlight all views, use addHighlightToDocument(); to highlight one or some
+of the views, use addHighlightToView(). You only need to call this function once
+per tree; just supply the top range you want to have highlighted. Calling
+this function more than once with ranges from the same tree may give undefined results.
+</p>
+<p>
+<b>Action Binding </b>
+Action binding can be used to associate KAction%s with specific ranges of text.
+These bound actions are automatically enabled and disabled when the caret enters
+their associated ranges, and context menus are automatically populated with the
+relevant actions.
+</p>
+<p>
+As with the arbitrary highlighting interface, to enable bound actions to be active,
+call addActionsToDocument() or addActionsToView() on the top SmartRange of a tree.
+If only small branches of a tree contain actions, it may be more efficient to simply add
+each of these branches instead (but this is unlikely unless the tree is complex).
+</p>
+<p>
+Note that actions can be bound either directly to the range via
+SmartRange.associateAction(), or indirectly via
+Attribute.associateAction(). Using attributes may be more convenient when
+you want all ranges of a specific type to have the same action associated
+with them.
+</p>
+<p>
+To do: extend this to provide a signal from the action indicating which range was
+used to activate it (if possible)
+</p>
+<p>
+<b>Accessing the Interface </b>
+</p>
+<p>
+The SmartInterface is supposed to be an extension interface for a Document,
+i.e. the Document inherits the interface provided that the
+KTextEditor library in use implements the interface. Use dynamic_cast to access
+the interface:
+<pre class="fragment">
+ // doc is of type KTextEditor.Document*
+ KTextEditor.SmartInterface *iface =
+     qobject_cast&lt;KTextEditor.SmartInterface*&gt;( doc );
+
+ if( iface ) {
+     // the implementation supports the interface
+     // do stuff
+ }
+</pre>
+</p>
+<p>
+<b>Thread safety </b>
+The smart interface is designed to be usable in multithreaded environments.
+If you use the interface from threads other than the main thread, you must
+lock the smartMutex() whenever you are making a non-const call to a smart object.
+This allows the text editor to guarantee that the objects will not change
+when it locks the mutex (for example, when performing layout or rendering).
+The useRevision function has only effect for the thread calling it. It will
+store the selected revision in a thread local storage to allow multiple threads
+to have different views on the same document in respect to the smart interface.
+</p>
+<p>
+
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Hamish Rodda &lt;rodda@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#SmartInterface">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addActionsToDocument">addActionsToDocument</a> (self, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> topRange)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addActionsToView">addActionsToView</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> topRange)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addHighlightToDocument">addHighlightToDocument</a> (self, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> topRange, bool supportDynamic=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addHighlightToView">addHighlightToView</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> topRange, bool supportDynamic=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#attributeDynamic">attributeDynamic</a> (self, KSharedPtr<KTextEditor::Attribute> a)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#attributeNotDynamic">attributeNotDynamic</a> (self, KSharedPtr<KTextEditor::Attribute> a)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearDocumentActions">clearDocumentActions</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearDocumentHighlights">clearDocumentHighlights</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearOnDocumentReload">clearOnDocumentReload</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearRevision">clearRevision</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearSmartInterface">clearSmartInterface</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearViewActions">clearViewActions</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearViewHighlights">clearViewHighlights</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#currentRevision">currentRevision</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deleteCursors">deleteCursors</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#deleteRanges">deleteRanges</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#documentActions">documentActions</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#documentHighlights">documentHighlights</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newSmartCursor">newSmartCursor</a> (self, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> position=KTextEditor.Cursor.start(), <a href="../ktexteditor/KTextEditor.SmartCursor.html#InsertBehavior">KTextEditor.SmartCursor.InsertBehavior</a> insertBehavior=KTextEditor.SmartCursor.MoveOnInsert)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newSmartCursor">newSmartCursor</a> (self, int line, int column, <a href="../ktexteditor/KTextEditor.SmartCursor.html#InsertBehavior">KTextEditor.SmartCursor.InsertBehavior</a> insertBehavior=KTextEditor.SmartCursor.MoveOnInsert)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newSmartRange">newSmartRange</a> (self, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> range=KTextEditor.Range(), <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> parent=0, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a> insertBehavior=KTextEditor.SmartRange.DoNotExpand)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newSmartRange">newSmartRange</a> (self, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> startPosition, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> endPosition, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> parent=0, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a> insertBehavior=KTextEditor.SmartRange.DoNotExpand)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newSmartRange">newSmartRange</a> (self, int startLine, int startColumn, int endLine, int endColumn, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> parent=0, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a> insertBehavior=KTextEditor.SmartRange.DoNotExpand)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#newSmartRange">newSmartRange</a> (self, <a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a> start, <a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a> end, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> parent=0, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a> insertBehavior=KTextEditor.SmartRange.DoNotExpand)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#releaseRevision">releaseRevision</a> (self, int revision)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeActionsFromDocument">removeActionsFromDocument</a> (self, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> topRange)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeActionsFromView">removeActionsFromView</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> topRange)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeHighlightFromDocument">removeHighlightFromDocument</a> (self, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> topRange)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeHighlightFromView">removeHighlightFromView</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> topRange)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setClearOnDocumentReload">setClearOnDocumentReload</a> (self, bool clearOnReload)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QMutex&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#smartMutex">smartMutex</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#translateFromRevision">translateFromRevision</a> (self, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> cursor, <a href="../ktexteditor/KTextEditor.SmartCursor.html#InsertBehavior">KTextEditor.SmartCursor.InsertBehavior</a> insertBehavior=KTextEditor.SmartCursor.StayOnInsert)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#translateFromRevision">translateFromRevision</a> (self, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> range, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a> insertBehavior=KTextEditor.SmartRange.ExpandLeft|KTextEditor.SmartRange.ExpandRight)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#unbindSmartRange">unbindSmartRange</a> (self, <a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> range)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#useRevision">useRevision</a> (self, int revision)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#viewActions">viewActions</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#viewHighlights">viewHighlights</a> (self, <a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="SmartInterface"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="addActionsToDocument"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addActionsToDocument</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>topRange</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="addActionsToView"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addActionsToView</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>topRange</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="addHighlightToDocument"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addHighlightToDocument</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>topRange</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>supportDynamic=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Register a SmartRange tree as providing arbitrary highlighting information,
+and that it should be rendered on all of the views of a document.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>topRange</em>&nbsp;</td><td> the top range of the tree to add
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>supportDynamic</em>&nbsp;</td><td> support dynamic highlighting attributes
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="addHighlightToView"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addHighlightToView</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>topRange</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>supportDynamic=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Register a SmartRange tree as providing arbitrary highlighting information,
+and that it should be rendered on the specified <b>view.</b>
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view on which to render the highlight
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>topRange</em>&nbsp;</td><td> the top range of the tree to add
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>supportDynamic</em>&nbsp;</td><td> support dynamic highlighting attributes
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="attributeDynamic"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> attributeDynamic</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KSharedPtr<KTextEditor::Attribute>&nbsp;</td>
+<td class="paramname"><em>a</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd>
+Used to notify implementations that an Attribute has gained
+a dynamic component and needs to be included in mouse and/or cursor
+tracking.
+</dd></dl>
+</p></div></div><a class="anchor" name="attributeNotDynamic"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> attributeNotDynamic</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">KSharedPtr<KTextEditor::Attribute>&nbsp;</td>
+<td class="paramname"><em>a</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p><dl class="internal" compact><dt><b>Internal:</b></dt><dd>
+Used to notify implementations that an Attribute has lost
+all dynamic components and no longer needs to be included in mouse and cursor
+tracking.
+</dd></dl>
+</p></div></div><a class="anchor" name="clearDocumentActions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearDocumentActions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="clearDocumentHighlights"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearDocumentHighlights</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Clear the highlight ranges from a Document.
+</p></div></div><a class="anchor" name="clearOnDocumentReload"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool clearOnDocumentReload</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns whether the smart interface will be cleared on reload of the document.
+</p>
+<p>
+Defaults to true.
+</p></div></div><a class="anchor" name="clearRevision"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearRevision</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Clear any previous setting to use a specific revision.
+Convenience wrapper for useRevision (-1).
+</p></div></div><a class="anchor" name="clearSmartInterface"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearSmartInterface</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Clears or deletes all instances of smart objects, ie:
+<li> deletes all SmartCursor%s </li>
+<li> deletes all SmartRange%s </li>
+<li> clears all arbitrary highlight ranges </li>
+<li> clears all action binding </li>
+</p>
+<p>
+Deletion occurs without modification to the underlying text.
+</p></div></div><a class="anchor" name="clearViewActions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearViewActions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="clearViewHighlights"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearViewHighlights</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Clear the highlight ranges from a View.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view to clear highlights from
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="currentRevision"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int currentRevision</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Retrieve a token representing the current version of the document. This can
+be used later to create cursors and ranges as they would have been at this revision.
+</p>
+<p>
+Once you have finished with the token, release it with releaseRevision().
+</p></div></div><a class="anchor" name="deleteCursors"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> deleteCursors</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Delete all SmartCursor%s from this document, with the exception of those
+cursors currently bound to ranges.
+</p></div></div><a class="anchor" name="deleteRanges"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> deleteRanges</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Delete all SmartRange%s from this document. This will also delete all
+cursors currently bound to ranges.
+</p>
+<p>
+This will not affect any underlying text.
+</p></div></div><a class="anchor" name="documentActions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>] documentActions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="documentHighlights"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>] documentHighlights</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Return a list of SmartRange%s which are currently registered as
+providing arbitrary highlighting information to all of the views of a
+document.
+</p></div></div><a class="anchor" name="newSmartCursor"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a> newSmartCursor</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>position=KTextEditor.Cursor.start()</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartCursor.html#InsertBehavior">KTextEditor.SmartCursor.InsertBehavior</a>&nbsp;</td>
+<td class="paramname"><em>insertBehavior=KTextEditor.SmartCursor.MoveOnInsert</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>
+
+Creates a new SmartCursor.
+</p>
+<p>
+You own this object, and may delete it when you are finished with it.
+Alternatively, you may call the various clear methods, or wait for the Document
+to be destroyed.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>line</em>&nbsp;</td><td> the line number of the cursor's initial position
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>column</em>&nbsp;</td><td> the line number of the cursor's initial position
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>insertBehavior</em>&nbsp;</td><td> Define whether the cursor should move when text is inserted at the cursor position.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="newSmartCursor"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a> newSmartCursor</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>line</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>column</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartCursor.html#InsertBehavior">KTextEditor.SmartCursor.InsertBehavior</a>&nbsp;</td>
+<td class="paramname"><em>insertBehavior=KTextEditor.SmartCursor.MoveOnInsert</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>
+
+Creates a new SmartCursor.
+</p>
+<p>
+You own this object, and may delete it when you are finished with it.
+Alternatively, you may call the various clear methods, or wait for the Document
+to be destroyed.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>line</em>&nbsp;</td><td> the line number of the cursor's initial position
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>column</em>&nbsp;</td><td> the line number of the cursor's initial position
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>insertBehavior</em>&nbsp;</td><td> Define whether the cursor should move when text is inserted at the cursor position.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="newSmartRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> newSmartRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>range=KTextEditor.Range()</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a>&nbsp;</td>
+<td class="paramname"><em>insertBehavior=KTextEditor.SmartRange.DoNotExpand</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Creates a new SmartRange from pre-existing SmartCursor%s. The cursors must not be part of any other range.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>start</em>&nbsp;</td><td> Start SmartCursor
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>end</em>&nbsp;</td><td> End SmartCursor
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent SmartRange, if this is to be the child of an existing range.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>insertBehavior</em>&nbsp;</td><td> Define whether the range should expand when text is inserted at ends of the range.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="newSmartRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> newSmartRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>startPosition</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>endPosition</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a>&nbsp;</td>
+<td class="paramname"><em>insertBehavior=KTextEditor.SmartRange.DoNotExpand</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Creates a new SmartRange from pre-existing SmartCursor%s. The cursors must not be part of any other range.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>start</em>&nbsp;</td><td> Start SmartCursor
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>end</em>&nbsp;</td><td> End SmartCursor
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent SmartRange, if this is to be the child of an existing range.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>insertBehavior</em>&nbsp;</td><td> Define whether the range should expand when text is inserted at ends of the range.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="newSmartRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> newSmartRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>startLine</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>startColumn</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>endLine</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>endColumn</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a>&nbsp;</td>
+<td class="paramname"><em>insertBehavior=KTextEditor.SmartRange.DoNotExpand</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Creates a new SmartRange from pre-existing SmartCursor%s. The cursors must not be part of any other range.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>start</em>&nbsp;</td><td> Start SmartCursor
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>end</em>&nbsp;</td><td> End SmartCursor
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent SmartRange, if this is to be the child of an existing range.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>insertBehavior</em>&nbsp;</td><td> Define whether the range should expand when text is inserted at ends of the range.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="newSmartRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a> newSmartRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a>&nbsp;</td>
+<td class="paramname"><em>start</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartCursor.html">KTextEditor.SmartCursor</a>&nbsp;</td>
+<td class="paramname"><em>end</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a>&nbsp;</td>
+<td class="paramname"><em>insertBehavior=KTextEditor.SmartRange.DoNotExpand</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Creates a new SmartRange from pre-existing SmartCursor%s. The cursors must not be part of any other range.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>start</em>&nbsp;</td><td> Start SmartCursor
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>end</em>&nbsp;</td><td> End SmartCursor
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> The parent SmartRange, if this is to be the child of an existing range.
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>insertBehavior</em>&nbsp;</td><td> Define whether the range should expand when text is inserted at ends of the range.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="releaseRevision"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> releaseRevision</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>revision</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Release a revision token provided by currentRevision(). You will no longer be able to
+create cursors and ranges against this revision.
+</p></div></div><a class="anchor" name="removeActionsFromDocument"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeActionsFromDocument</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>topRange</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="removeActionsFromView"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeActionsFromView</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>topRange</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="removeHighlightFromDocument"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeHighlightFromDocument</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>topRange</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Remove a SmartRange tree from providing arbitrary highlighting information
+to all of the views of a document.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>topRange</em>&nbsp;</td><td> the top range of the tree to remove
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="removeHighlightFromView"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeHighlightFromView</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>topRange</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Remove a SmartRange tree from providing arbitrary highlighting information
+to a specific view of a document.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> implementations should not take into account document-bound
+highlighting ranges when calling this function; it is intended solely
+to be the counter of addHighlightToView()
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view on which the highlight was previously rendered
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>topRange</em>&nbsp;</td><td> the top range of the tree to remove
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="setClearOnDocumentReload"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setClearOnDocumentReload</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>clearOnReload</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Specify whether the smart interface should be cleared on reload of the document.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>clearOnReload</em>&nbsp;</td><td> set to true to enable clearing of the smart interface on reload (the default).
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="smartMutex"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QMutex smartMutex</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Provides access to the recursive mutex used to protect write access to
+smart interface objects (cursors + ranges and their associated properties).
+If you use this interface from a thread other than the main thread,
+you must lock this mutex whenever you call a non-const function on a smart object.
+</p></div></div><a class="anchor" name="translateFromRevision"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> translateFromRevision</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>cursor</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartCursor.html#InsertBehavior">KTextEditor.SmartCursor.InsertBehavior</a>&nbsp;</td>
+<td class="paramname"><em>insertBehavior=KTextEditor.SmartCursor.StayOnInsert</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Translate the given <b>range</b> against the revision specified through useRevision(),
+using the given <b>insertBehavior.</b>
+</p>
+<p>
+If no revision is set, simply returns the range.
+</p></div></div><a class="anchor" name="translateFromRevision"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> translateFromRevision</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>range</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange.InsertBehaviors</a>&nbsp;</td>
+<td class="paramname"><em>insertBehavior=KTextEditor.SmartRange.ExpandLeft|KTextEditor.SmartRange.ExpandRight</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Translate the given <b>range</b> against the revision specified through useRevision(),
+using the given <b>insertBehavior.</b>
+</p>
+<p>
+If no revision is set, simply returns the range.
+</p></div></div><a class="anchor" name="unbindSmartRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> unbindSmartRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>&nbsp;</td>
+<td class="paramname"><em>range</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Delete a SmartRange without deleting the SmartCursor%s which make up its start() and end().
+</p>
+<p>
+First, extract the cursors yourself using:
+<pre class="fragment">
+ SmartCursor* start = &amp;range-&gt;smartStart();
+ SmartCursor* end = &amp;range-&gt;smartEnd();
+</pre>
+</p>
+<p>
+Then, call this function to delete the SmartRange instance. The underlying text will not be affected.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>range</em>&nbsp;</td><td> the range to dissociate from its smart cursors, and delete
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="useRevision"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> useRevision</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>revision</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Tell the smart interface to work against the given <b>revision</b> when creating cursors and
+ranges. This has only an effect for the thread calling this function, as this property
+is stored thread locally. This is not allowed to be called in the main gui thread.
+If you call it in the main gui thread, fatal error will occur.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>revision</em>&nbsp;</td><td> the token representing a revision retrieved by currentRevision(), or -1 to
+clear any previous setting and use the current document revision.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="viewActions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>] viewActions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="viewHighlights"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[<a href="../ktexteditor/KTextEditor.SmartRange.html">KTextEditor.SmartRange</a>] viewHighlights</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Return a list of SmartRange%s which are currently registered as
+providing arbitrary highlighting information to a specific view of a
+document.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> implementations should not take into account document-bound
+highlighting ranges when returning the list; it is intended solely
+to show highlights added via addHighlightToView()
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view to query for the highlight list
+</td></tr>
+</table></dl>
+<p>
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

@@ -32,14 +32,15 @@ class TextHintInterface
 
 
 public:
-                         TextHintInterface ();
-    virtual void         enableTextHints (int)  = 0;
-    virtual void         disableTextHints ()  = 0;
-    virtual void         needTextHint (const KTextEditor::Cursor&, QString&)  = 0;
-private:
-                         TextHintInterface (const KTextEditor::TextHintInterface &other);
+                            TextHintInterface ();
+    virtual void            enableTextHints (int timeout)=0;
+    virtual void            disableTextHints ()=0;
+    virtual void            needTextHint (const KTextEditor::Cursor& position, QString& text)=0;
 
-};  // class TextHintInterface
+    virtual ~TextHintInterface ();
+};
+// class TextHintInterface
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 

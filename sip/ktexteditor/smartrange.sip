@@ -31,68 +31,78 @@ class SmartRange : KTextEditor::Range
 %End
 
 
-public:
 
+public:
     enum InsertBehavior
     {
-        DoNotExpand, 
-        ExpandLeft, 
+        DoNotExpand,
+        ExpandLeft,
         ExpandRight
     };
 
     typedef QFlags<KTextEditor::SmartRange::InsertBehavior> InsertBehaviors;
-    virtual bool         isSmartRange () const;
-    virtual KTextEditor::SmartRange* toSmartRange () const;
-    virtual void         setRange (const KTextEditor::Range&);
-    KTextEditor::SmartCursor& smartStart ();
-    KTextEditor::SmartCursor& smartEnd ();
-    virtual bool         confineToRange (const KTextEditor::Range&);
-    virtual bool         expandToRange (const KTextEditor::Range&);
-    KTextEditor::Document* document () const;
-    virtual QStringList  text (bool = 0) const;
-    virtual bool         replaceText (const QStringList&, bool = 0);
-    virtual bool         removeText (bool = 0);
-    KTextEditor::SmartRange::InsertBehaviors insertBehavior () const;
-    void                 setInsertBehavior (KTextEditor::SmartRange::InsertBehaviors);
-    KTextEditor::SmartRange* parentRange () const;
-    virtual void         setParentRange (KTextEditor::SmartRange*);
-    bool                 hasParent (KTextEditor::SmartRange*) const;
-    int                  depth () const;
-    KTextEditor::SmartRange* topParentRange () const;
-    const QList<KTextEditor::SmartRange*>& childRanges () const;
-    void                 clearChildRanges ();
-    void                 deleteChildRanges ();
-    void                 clearAndDeleteChildRanges ();
-    KTextEditor::SmartRange* childBefore (const KTextEditor::SmartRange*) const;
-    KTextEditor::SmartRange* childAfter (const KTextEditor::SmartRange*) const;
-    KTextEditor::SmartRange* mostSpecificRange (const KTextEditor::Range&) const;
-    KTextEditor::SmartRange* firstRangeContaining (const KTextEditor::Cursor&) const;
-    KTextEditor::SmartRange* deepestRangeContaining (const KTextEditor::Cursor&, QStack<KTextEditor::SmartRange*>* = 0, QStack<KTextEditor::SmartRange*>* = 0) const;
-    KTextEditor::Attribute::Ptr attribute () const;
-    void                 setAttribute (KTextEditor::Attribute::Ptr);
-    void                 associateAction (KAction*);
-    void                 dissociateAction (KAction*);
-    const QList<KAction*>& associatedActions () const;
-    void                 clearAssociatedActions ();
-    KTextEditor::SmartRangeNotifier* primaryNotifier ();
-    const QList<KTextEditor::SmartRangeNotifier*> notifiers () const;
-    void                 addNotifier (KTextEditor::SmartRangeNotifier*);
-    void                 removeNotifier (KTextEditor::SmartRangeNotifier*);
-    void                 deletePrimaryNotifier ();
-    const QList<KTextEditor::SmartRangeWatcher*>& watchers () const;
-    void                 addWatcher (KTextEditor::SmartRangeWatcher*);
-    void                 removeWatcher (KTextEditor::SmartRangeWatcher*);
+    virtual bool            isSmartRange () const;
+    virtual KTextEditor::SmartRange*  toSmartRange () const;
+    virtual void            setRange (const KTextEditor::Range& range);
+//ig    KTextEditor::SmartCursor&  smartStart ();
+//ig    KTextEditor::SmartCursor&  smartEnd ();
+    virtual bool            confineToRange (const KTextEditor::Range& range);
+    virtual bool            expandToRange (const KTextEditor::Range& range);
+    KTextEditor::Document*  document () const;
+    virtual QStringList     text (bool block = 0) const;
+    virtual bool            replaceText (const QStringList& text, bool block = 0);
+    virtual bool            removeText (bool block = 0);
+    KTextEditor::SmartRange::InsertBehaviors  insertBehavior () const;
+    void                    setInsertBehavior (KTextEditor::SmartRange::InsertBehaviors behavior);
+    KTextEditor::SmartRange*  parentRange () const;
+    virtual void            setParentRange (KTextEditor::SmartRange* r);
+    bool                    hasParent (KTextEditor::SmartRange* parent) const;
+    int                     depth () const;
+    KTextEditor::SmartRange*  topParentRange () const;
+    const QList<KTextEditor::SmartRange*>&  childRanges () const;
+    void                    clearChildRanges ();
+    void                    deleteChildRanges ();
+    void                    clearAndDeleteChildRanges ();
+    KTextEditor::SmartRange*  childBefore (const KTextEditor::SmartRange* range) const;
+    KTextEditor::SmartRange*  childAfter (const KTextEditor::SmartRange* range) const;
+    KTextEditor::SmartRange*  mostSpecificRange (const KTextEditor::Range& input) const;
+    KTextEditor::SmartRange*  firstRangeContaining (const KTextEditor::Cursor& pos) const;
+    KTextEditor::SmartRange*  deepestRangeContaining (const KTextEditor::Cursor& pos, QStack<KTextEditor::SmartRange*>* rangesEntered = 0, QStack<KTextEditor::SmartRange*>* rangesExited = 0) const;
+    KTextEditor::Attribute::Ptr  attribute () const;
+    void                    setAttribute (KTextEditor::Attribute::Ptr attribute);
+    void                    associateAction (KAction* action);
+    void                    dissociateAction (KAction* action);
+    const QList<KAction*>&  associatedActions () const;
+    void                    clearAssociatedActions ();
+    KTextEditor::SmartRangeNotifier*  primaryNotifier ();
+    const QList<KTextEditor::SmartRangeNotifier*>  notifiers () const;
+    void                    addNotifier (KTextEditor::SmartRangeNotifier* notifier);
+    void                    removeNotifier (KTextEditor::SmartRangeNotifier* notifier);
+    void                    deletePrimaryNotifier ();
+    const QList<KTextEditor::SmartRangeWatcher*>&  watchers () const;
+    void                    addWatcher (KTextEditor::SmartRangeWatcher* watcher);
+    void                    removeWatcher (KTextEditor::SmartRangeWatcher* watcher);
 
 protected:
-                         SmartRange (KTextEditor::SmartCursor*, KTextEditor::SmartCursor*, KTextEditor::SmartRange* = 0, KTextEditor::SmartRange::InsertBehaviors = KTextEditor::SmartRange::DoNotExpand );
-    virtual void         rangeChanged (KTextEditor::Cursor*, const KTextEditor::Range&);
-    virtual void         checkFeedback ();
-    virtual KTextEditor::SmartRangeNotifier* createNotifier ()  = 0;
+                            SmartRange (KTextEditor::SmartCursor* start, KTextEditor::SmartCursor* end, KTextEditor::SmartRange* parent = 0, KTextEditor::SmartRange::InsertBehaviors insertBehavior = KTextEditor::SmartRange::DoNotExpand);
+    virtual void            rangeChanged (KTextEditor::Cursor* cursor, const KTextEditor::Range& from);
+    virtual void            checkFeedback ();
+    virtual KTextEditor::SmartRangeNotifier*  createNotifier ()=0;
 
 private:
-                         SmartRange (const KTextEditor::SmartRange&);
+                            SmartRange (const KTextEditor::SmartRange&);
 
-};  // class SmartRange
+public:
+    virtual ~SmartRange ();
+    const KTextEditor::SmartCursor&  smartStart () const;
+    const KTextEditor::SmartCursor&  smartEnd () const;
+    QList<KTextEditor::SmartRange*>  deepestRangesContaining (const KTextEditor::Cursor& pos) const;
+    int                     overlapCount () const;
+protected:
+    void                    rebuildChildStructure ();
+};
+// class SmartRange
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 

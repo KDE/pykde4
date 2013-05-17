@@ -40,102 +40,97 @@ class Document : KParts::ReadWritePart
 
 
 public:
-                         Document (QObject* = 0);
+                            Document (QObject* parent /TransferThis/ = 0);
 
-public:
-    virtual KTextEditor::Editor* editor ()  = 0;
-    virtual KTextEditor::View* createView (QWidget*)  = 0;
-    virtual KTextEditor::View* activeView () const = 0;
-    virtual const QList<KTextEditor::View*>& views () const = 0;
-
-signals:
-    void                 viewCreated (KTextEditor::Document*, KTextEditor::View*);
-
-public:
-    virtual const QString& documentName () const = 0;
-    virtual QString      mimeType ()  = 0;
+    virtual KTextEditor::Editor*  editor ()=0;
+    virtual KTextEditor::View*  createView (QWidget* parent /Transfer/)=0;
+    virtual KTextEditor::View*  activeView () const=0;
+    virtual const QList<KTextEditor::View*>&  views () const=0;
 
 signals:
-    void                 documentNameChanged (KTextEditor::Document*);
-    void                 documentUrlChanged (KTextEditor::Document*);
-    void                 modifiedChanged (KTextEditor::Document*);
+    void                    viewCreated (KTextEditor::Document* document, KTextEditor::View* view);
 
 public:
-    virtual bool         setEncoding (const QString&)  = 0;
-    virtual const QString& encoding () const = 0;
-
-public:
-    virtual bool         documentReload ()  = 0;
-    virtual bool         documentSave ()  = 0;
-    virtual bool         documentSaveAs ()  = 0;
-
-public:
-    virtual bool         startEditing ()  = 0;
-    virtual bool         endEditing ()  = 0;
-
-public:
-    virtual QString      text () const = 0;
-    virtual QString      text (const KTextEditor::Range&, bool = 0) const = 0;
-    virtual QChar        character (const KTextEditor::Cursor&) const = 0;
-    virtual QStringList  textLines (const KTextEditor::Range&, bool = 0) const = 0;
-    virtual QString      line (int) const = 0;
-    virtual int          lines () const = 0;
-    virtual KTextEditor::Cursor documentEnd () const = 0;
-    KTextEditor::Range   documentRange () const;
-    virtual int          totalCharacters () const = 0;
-    virtual bool         isEmpty () const;
-    virtual int          lineLength (int) const = 0;
-    KTextEditor::Cursor  endOfLine (int) const;
-    virtual bool         setText (const QString&)  = 0;
-    virtual bool         setText (const QStringList&)  = 0;
-    virtual bool         clear ()  = 0;
-    virtual bool         insertText (const KTextEditor::Cursor&, const QString&, bool = 0)  = 0;
-    virtual bool         insertText (const KTextEditor::Cursor&, const QStringList&, bool = 0)  = 0;
-    virtual bool         replaceText (const KTextEditor::Range&, const QString&, bool = 0);
-    virtual bool         replaceText (const KTextEditor::Range&, const QStringList&, bool = 0);
-    virtual bool         removeText (const KTextEditor::Range&, bool = 0)  = 0;
-    virtual bool         cursorInText (const KTextEditor::Cursor&);
-    virtual bool         insertLine (int, const QString&)  = 0;
-    virtual bool         insertLines (int, const QStringList&)  = 0;
-    virtual bool         removeLine (int)  = 0;
+    virtual const QString&  documentName () const=0;
+    virtual QString         mimeType ()=0;
 
 signals:
-    void                 textChanged (KTextEditor::Document*);
-    void                 textInserted (KTextEditor::Document*, const KTextEditor::Range&);
-    void                 textRemoved (KTextEditor::Document*, const KTextEditor::Range&);
-    void                 textChanged (KTextEditor::Document*, const KTextEditor::Range&, const KTextEditor::Range&);
-    void                 aboutToClose (KTextEditor::Document*);
+    void                    documentNameChanged (KTextEditor::Document* document);
+    void                    documentUrlChanged (KTextEditor::Document* document);
+    void                    modifiedChanged (KTextEditor::Document* document);
 
 public:
-    virtual QString      mode () const = 0;
-    virtual QString      highlightingMode () const = 0;
-    virtual QStringList  modes () const = 0;
-    virtual QStringList  highlightingModes () const = 0;
-    virtual bool         setMode (const QString&)  = 0;
-    virtual bool         setHighlightingMode (const QString&)  = 0;
+    virtual bool            setEncoding (const QString& encoding)=0;
+    virtual const QString&  encoding () const=0;
 
-    virtual QString      highlightingModeSection (int) const = 0;
-    virtual QString      modeSection (int) const = 0;
+    virtual bool            documentReload ()=0;
+    virtual bool            documentSave ()=0;
+    virtual bool            documentSaveAs ()=0;
+
+    virtual bool            startEditing ()=0;
+    virtual bool            endEditing ()=0;
+
+    virtual QString         text () const=0;
+    virtual QString         text (const KTextEditor::Range& range, bool block = 0) const=0;
+    virtual QChar           character (const KTextEditor::Cursor& position) const=0;
+    virtual QStringList     textLines (const KTextEditor::Range& range, bool block = 0) const=0;
+    virtual QString         line (int line) const=0;
+    virtual int             lines () const=0;
+    virtual KTextEditor::Cursor  documentEnd () const=0;
+    KTextEditor::Range      documentRange () const;
+    virtual int             totalCharacters () const=0;
+    virtual bool            isEmpty () const;
+    virtual int             lineLength (int line) const=0;
+    KTextEditor::Cursor     endOfLine (int line) const;
+    virtual bool            setText (const QString& text)=0;
+    virtual bool            setText (const QStringList& text)=0;
+    virtual bool            clear ()=0;
+    virtual bool            insertText (const KTextEditor::Cursor& position, const QString& text, bool block = 0)=0;
+    virtual bool            insertText (const KTextEditor::Cursor& position, const QStringList& text, bool block = 0)=0;
+    virtual bool            replaceText (const KTextEditor::Range& range, const QString& text, bool block = 0);
+    virtual bool            replaceText (const KTextEditor::Range& range, const QStringList& text, bool block = 0);
+    virtual bool            removeText (const KTextEditor::Range& range, bool block = 0)=0;
+    virtual bool            cursorInText (const KTextEditor::Cursor& cursor);
+    virtual bool            insertLine (int line, const QString& text)=0;
+    virtual bool            insertLines (int line, const QStringList& text)=0;
+    virtual bool            removeLine (int line)=0;
+
+signals:
+    void                    textChanged (KTextEditor::Document* document);
+    void                    textInserted (KTextEditor::Document* document, const KTextEditor::Range& range);
+    void                    textRemoved (KTextEditor::Document* document, const KTextEditor::Range& range);
+    void                    textChanged (KTextEditor::Document* document, const KTextEditor::Range& oldRange, const KTextEditor::Range& newRange);
+    void                    aboutToClose (KTextEditor::Document* document);
+
+public:
+    virtual QString         mode () const=0;
+    virtual QString         highlightingMode () const=0;
+    virtual QStringList     modes () const=0;
+    virtual QStringList     highlightingModes () const=0;
+    virtual bool            setMode (const QString& name)=0;
+    virtual bool            setHighlightingMode (const QString& name)=0;
+
+    virtual QString         highlightingModeSection (int index) const=0;
+    virtual QString         modeSection (int index) const=0;
 
 
 signals:
-    void                 modeChanged (KTextEditor::Document*);
-    void                 highlightingModeChanged (KTextEditor::Document*);
+    void                    modeChanged (KTextEditor::Document* document);
+    void                    highlightingModeChanged (KTextEditor::Document* document);
 
 public:
-    void                 setSuppressOpeningErrorDialogs (bool);
-    bool                 suppressOpeningErrorDialogs () const;
-    bool                 openingError () const;
-    QString              openingErrorMessage () const;
+    void                    setSuppressOpeningErrorDialogs (bool suppress);
+    bool                    suppressOpeningErrorDialogs () const;
+    bool                    openingError () const;
+    QString                 openingErrorMessage () const;
 
 protected:
-    void                 setOpeningError (bool);
-    void                 setOpeningErrorMessage (const QString&);
+    void                    setOpeningError (bool errors);
+    void                    setOpeningErrorMessage (const QString& message);
 
-public:
-    // Python cannot dynamic_cast, so methods are provided that attempt
-    // to convert the Document to the required interface. They return
-    // None on failure.
+// Python cannot dynamic_cast, so methods are provided that attempt
+// to convert the Document to the required interface. They return
+// None on failure.
 //     Why no annotationinterface.sip?
 //     KTextEditor::AnnotationInterface *annotationInterface();
 // %MethodCode
@@ -144,56 +139,72 @@ public:
 //     Py_END_ALLOW_THREADS
 // %End
     
-    KTextEditor::MarkInterface *markInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::MarkInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
-%End
     
-    KTextEditor::ModificationInterface *modificationInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::ModificationInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
-%End
     
-    KTextEditor::SearchInterface *searchInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::SearchInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
-%End
     
-    KTextEditor::SmartInterface *smartInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::SmartInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
-%End
     
-    KTextEditor::TemplateInterface *templateInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::TemplateInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
-%End
     
-    KTextEditor::TextHintInterface *textHintInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::TextHintInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
-%End
     
-    KTextEditor::VariableInterface *variableInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::VariableInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
-%End
 
-};  // class Document
+public:
+    virtual ~Document ();
+signals:
+    void                    documentSavedOrUploaded (KTextEditor::Document* document, bool saveAs);
+    void                    textRemoved (KTextEditor::Document* document, const KTextEditor::Range& range, const QString& oldText);
+    void                    textChanged (KTextEditor::Document* document, const KTextEditor::Range& oldRange, const QString& oldText, const KTextEditor::Range& newRange);
+    void                    aboutToReload (KTextEditor::Document* document);
+    void                    reloaded (KTextEditor::Document* document);
+    void                    exclusiveEditStart (KTextEditor::Document* document);
+    void                    exclusiveEditEnd (KTextEditor::Document* document);
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'QObject'
+    sipType = NULL;
 
-};  // namespace KTextEditor
+    if (dynamic_cast<KTextEditor::Document*>(sipCpp))
+        sipType = sipType_KTextEditor_Document;
+    else if (dynamic_cast<KTextEditor::AnnotationModel*>(sipCpp))
+        sipType = sipType_KTextEditor_AnnotationModel;
+    else if (dynamic_cast<KTextEditor::Editor*>(sipCpp))
+        sipType = sipType_KTextEditor_Editor;
+    else if (dynamic_cast<KTextEditor::LoadSaveFilterCheckPlugin*>(sipCpp))
+        sipType = sipType_KTextEditor_LoadSaveFilterCheckPlugin;
+    else if (dynamic_cast<KTextEditor::Plugin*>(sipCpp))
+        sipType = sipType_KTextEditor_Plugin;
+    else if (dynamic_cast<KTextEditor::SmartCursorNotifier*>(sipCpp))
+        sipType = sipType_KTextEditor_SmartCursorNotifier;
+    else if (dynamic_cast<KTextEditor::SmartRangeNotifier*>(sipCpp))
+        sipType = sipType_KTextEditor_SmartRangeNotifier;
+    else if (dynamic_cast<KTextEditor::CodeCompletionModel*>(sipCpp))
+        {
+        sipType = sipType_KTextEditor_CodeCompletionModel;
+        if (dynamic_cast<KTextEditor::CodeCompletionModel2*>(sipCpp))
+            sipType = sipType_KTextEditor_CodeCompletionModel2;
+        }
+    else if (dynamic_cast<KTextEditor::ConfigPage*>(sipCpp))
+        sipType = sipType_KTextEditor_ConfigPage;
+    else if (dynamic_cast<KTextEditor::EditorChooser*>(sipCpp))
+        sipType = sipType_KTextEditor_EditorChooser;
+    else if (dynamic_cast<KTextEditor::View*>(sipCpp))
+        sipType = sipType_KTextEditor_View;
+%End
+};
+// class Document
 
+};
+// namespace KTextEditor
+
+%ModuleHeaderCode
+//ctscc
+#include <ktexteditor/annotationinterface.h>
+#include <ktexteditor/codecompletionmodel.h>
+#include <ktexteditor/configpage.h>
+#include <ktexteditor/document.h>
+#include <ktexteditor/editor.h>
+#include <ktexteditor/editorchooser.h>
+#include <ktexteditor/loadsavefiltercheckplugin.h>
+#include <ktexteditor/plugin.h>
+#include <qobject.h>
+#include <ktexteditor/smartcursornotifier.h>
+#include <ktexteditor/smartrangenotifier.h>
+#include <ktexteditor/view.h>
+%End

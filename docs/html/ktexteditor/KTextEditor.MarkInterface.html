@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KTextEditor.MarkInterface</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.9 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>MarkInterface Class Reference</h1>
+<code>from PyKDE4.ktexteditor import *</code>
+<p>
+
+
+Namespace: <a href="../ktexteditor/KTextEditor.html">KTextEditor</a><br />
+<h2>Detailed Description</h2>
+
+<p>Mark extension interface for the Document.
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+The MarkInterface provides methods to enable and disable marks in a
+Document, a marked line can be visualized for example with a shaded
+background color and/or a pixmap in the iconborder of the Document's View.
+There are a number of predefined mark types, specified in
+reservedMarkersCount(). Additionally it is possible to add custom marks
+and set custom pixmaps.
+</p>
+<p>
+<b>Accessing the Interface </b>
+</p>
+<p>
+The MarkInterface is supposed to be an extension interface for a Document,
+i.e. the Document inherits the interface provided that the
+KTextEditor library in use implements the interface. Use qobject_cast to access
+the interface:
+<pre class="fragment">
+ // doc is of type KTextEditor.Document*
+ KTextEditor.MarkInterface *iface =
+     qobject_cast&lt;KTextEditor.MarkInterface*&gt;( doc );
+
+ if( iface ) {
+     // the implementation supports the interface
+     // do stuff
+ }
+</pre>
+</p>
+<p>
+<b>Handling Marks </b>
+</p>
+<p>
+Get all marks in the document by calling marks(). Use clearMarks() to
+remove all marks in the entire document. A single mark can be retrieved
+with mark(). To remove all marks from a line call clearMark(). To add
+and remove marks from a given line use addMark() and removeMark(). It is
+also possible to replace all marks with setMark(), i.e. setMark() is the
+same as a call of clearMark() followed by addMark(). The signals
+marksChanged() and markChanged() are emitted whenever a line's marks
+changed.
+</p>
+<p>
+\attention A mark type is represented as an uint. An uint can have
+several mark types combined (see above: logical OR). That means for
+all functions/signals with an uint parameter, e.g. setMark(),
+removeMark(), etc, the uint may contain multiple marks, i.e.
+you can add and remove multiple marks simultaneously.
+</p>
+<p>
+<b>User Defined Marks </b>
+</p>
+<p>
+All marks that should be editable by the user can be specified with a mark
+mask via setEditableMarks(). To set a description and pixmap of a mark type
+call setMarkDescription() and setMarkPixmap().
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KTextEditor.Document, KTextEditor.Mark
+</dd></dl> 
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Christoph Cullmann &lt;cullmann@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#MarkChangeAction">MarkChangeAction</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;MarkAdded, MarkRemoved&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#MarkTypes">MarkTypes</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;markType01, markType02, markType03, markType04, markType05, markType06, markType07, markType08, markType09, markType10, markType11, markType12, markType13, markType14, markType15, markType16, markType17, markType18, markType19, markType20, markType21, markType22, markType23, markType24, markType25, markType26, markType27, markType28, markType29, markType30, markType31, markType32, Bookmark, BreakpointActive, BreakpointReached, BreakpointDisabled, Execution, Warning, Error&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#MarkInterface">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addMark">addMark</a> (self, int line, long markType)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearMark">clearMark</a> (self, int line)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#clearMarks">clearMarks</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#editableMarks">editableMarks</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mark">mark</a> (self, int line)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#markChanged">markChanged</a> (self, <a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a> document, <a href="../ktexteditor/KTextEditor.Mark.html">KTextEditor.Mark</a> mark, <a href="../ktexteditor/KTextEditor.MarkInterface.html#MarkChangeAction">KTextEditor.MarkInterface.MarkChangeAction</a> action)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#markDescription">markDescription</a> (self, <a href="../ktexteditor/KTextEditor.MarkInterface.html#MarkTypes">KTextEditor.MarkInterface.MarkTypes</a> mark)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QPixmap&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#markPixmap">markPixmap</a> (self, <a href="../ktexteditor/KTextEditor.MarkInterface.html#MarkTypes">KTextEditor.MarkInterface.MarkTypes</a> mark)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">{int:<a href="../ktexteditor/KTextEditor.Mark.html">KTextEditor.Mark</a>}&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#marks">marks</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#marksChanged">marksChanged</a> (self, <a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a> document)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeMark">removeMark</a> (self, int line, long markType)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setEditableMarks">setEditableMarks</a> (self, long markMask)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMark">setMark</a> (self, int line, long markType)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMarkDescription">setMarkDescription</a> (self, <a href="../ktexteditor/KTextEditor.MarkInterface.html#MarkTypes">KTextEditor.MarkInterface.MarkTypes</a> mark, QString text)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMarkPixmap">setMarkPixmap</a> (self, <a href="../ktexteditor/KTextEditor.MarkInterface.html#MarkTypes">KTextEditor.MarkInterface.MarkTypes</a> mark, QPixmap pixmap)</td></tr>
+<tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#reservedMarkersCount">reservedMarkersCount</a> ()</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="MarkInterface"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="addMark"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addMark</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>line</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>markType</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Add marks of type <b>markType</b> to <b>line.</b> Existing marks on this line
+are preserved. If the mark <b>markType</b> already is set, nothing
+happens.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>line</em>&nbsp;</td><td> line to set the mark
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>markType</em>&nbsp;</td><td> mark type
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> removeMark(), setMark()
+</dd></dl>
+</p></div></div><a class="anchor" name="clearMark"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearMark</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>line</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Clear all marks set in the <b>line.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>line</em>&nbsp;</td><td> line to clear marks
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> clearMarks(), removeMark(), addMark()
+</dd></dl>
+</p></div></div><a class="anchor" name="clearMarks"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearMarks</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Clear all marks in the entire document.
+<dl class="see" compact><dt><b>See also:</b></dt><dd> clearMark(), removeMark()
+</dd></dl>
+</p></div></div><a class="anchor" name="editableMarks"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">long editableMarks</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get, which marks can be toggled by the user.
+The returned value is a mark mask containing all editable marks combined
+with a logical OR.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> mark mask containing all editable marks
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setEditableMarks()
+</dd></dl>
+</p></div></div><a class="anchor" name="mark"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">long mark</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>line</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get all marks set on the <b>line.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>line</em>&nbsp;</td><td> requested line
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> a uint representing of the marks set in <b>line</b> concatenated
+by logical OR
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> addMark(), removeMark()
+</dd></dl>
+</p></div></div><a class="anchor" name="markChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> markChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a>&nbsp;</td>
+<td class="paramname"><em>document</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Mark.html">KTextEditor.Mark</a>&nbsp;</td>
+<td class="paramname"><em>mark</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.MarkInterface.html#MarkChangeAction">KTextEditor.MarkInterface.MarkChangeAction</a>&nbsp;</td>
+<td class="paramname"><em>action</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>The <b>document</b> emits this signal whenever the <b>mark</b> changes.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>document</em>&nbsp;</td><td> the document which emitted the signal
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mark</em>&nbsp;</td><td> changed mark
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>action</em>&nbsp;</td><td> action, either removed or added
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> marksChanged()
+</dd></dl>
+</p></div></div><a class="anchor" name="markDescription"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString markDescription</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.MarkInterface.html#MarkTypes">KTextEditor.MarkInterface.MarkTypes</a>&nbsp;</td>
+<td class="paramname"><em>mark</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the <b>mark's</b> description to text.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mark</em>&nbsp;</td><td> mark to set the description
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> text of the given <b>mark</b> or QString(), if the entry does not
+exist
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setMarkDescription(), setMarkPixmap()
+</dd></dl>
+</p></div></div><a class="anchor" name="markPixmap"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QPixmap markPixmap</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.MarkInterface.html#MarkTypes">KTextEditor.MarkInterface.MarkTypes</a>&nbsp;</td>
+<td class="paramname"><em>mark</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the <b>mark's</b> pixmap.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mark</em>&nbsp;</td><td> mark type. If the pixmap does not exist the resulting is null
+(check with QPixmap.isNull()).
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> setMarkDescription()
+</dd></dl>
+</p></div></div><a class="anchor" name="marks"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">{int:<a href="../ktexteditor/KTextEditor.Mark.html">KTextEditor.Mark</a>} marks</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get a hash holding all marks in the document.
+The hash key for a mark is its line.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> a hash holding all marks in the document
+</dd></dl>
+</p></div></div><a class="anchor" name="marksChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> marksChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a>&nbsp;</td>
+<td class="paramname"><em>document</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>The <b>document</b> emits this signal whenever a mark mask changed.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>document</em>&nbsp;</td><td> document which emitted this signal
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> markChanged()
+</dd></dl>
+</p></div></div><a class="anchor" name="removeMark"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> removeMark</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>line</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>markType</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Remove the mark mask of type <b>markType</b> from <b>line.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>line</em>&nbsp;</td><td> line to remove the mark
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>markType</em>&nbsp;</td><td> mark type to be removed
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> clearMark()
+</dd></dl>
+</p></div></div><a class="anchor" name="setEditableMarks"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setEditableMarks</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>markMask</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Set the mark mask the user is allowed to toggle to <b>markMask.</b>
+I.e. concatenate all editable marks with a logical OR. If the user should
+be able to add a bookmark and set a breakpoint with the context menu in
+the icon pane, you have to call
+<pre class="fragment">
+ // iface is of Type KTextEditor.MarkInterface*
+ // only make bookmark and breakpoint editable
+ iface-&gt;setEditableMarks( MarkInterface.Bookmark |
+                          MarkInterface.BreakpointActive );
+
+ // or preserve last settings, and add bookmark and breakpoint
+ iface-&gt;setEditableMarks( iface-&gt;editableMarks() |
+                          MarkInterface.Bookmark |
+                          MarkInterface.BreakpointActive );
+</pre>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>markMask</em>&nbsp;</td><td> bitmap pattern
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> editableMarks(), setMarkPixmap(), setMarkDescription()
+</dd></dl>
+</p></div></div><a class="anchor" name="setMark"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setMark</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>line</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>markType</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Set the <b>line's</b> mark types to <b>markType.</b>
+If <b>line</b> already contains a mark of the given type it has no effect.
+All other marks are deleted before the mark is set. You can achieve
+the same by calling
+<pre class="fragment">
+ clearMark(line);
+ addMark(line, markType);
+</pre>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>line</em>&nbsp;</td><td> line to set the mark
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>markType</em>&nbsp;</td><td> mark type
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> clearMark(), addMark(), mark()
+</dd></dl>
+</p></div></div><a class="anchor" name="setMarkDescription"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setMarkDescription</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.MarkInterface.html#MarkTypes">KTextEditor.MarkInterface.MarkTypes</a>&nbsp;</td>
+<td class="paramname"><em>mark</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>text</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Set the <b>mark's</b> description to <b>text.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mark</em>&nbsp;</td><td> mark to set the description
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> new descriptive text
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> markDescription(), setMarkPixmap()
+</dd></dl>
+</p></div></div><a class="anchor" name="setMarkPixmap"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setMarkPixmap</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.MarkInterface.html#MarkTypes">KTextEditor.MarkInterface.MarkTypes</a>&nbsp;</td>
+<td class="paramname"><em>mark</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QPixmap&nbsp;</td>
+<td class="paramname"><em>pixmap</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Set the <b>mark's</b> pixmap to <b>pixmap.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mark</em>&nbsp;</td><td> mark to which the pixmap will be attached
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>pixmap</em>&nbsp;</td><td> new pixmap
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> setMarkDescription()
+</dd></dl>
+</p></div></div><hr><h2>Static Method Documentation</h2><a class="anchor" name="reservedMarkersCount"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int reservedMarkersCount</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname">)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the number of predefined mark types we have so far.
+<dl class="note" compact><dt><b>Note:</b></dt><dd> FIXME: If you change this you have to make sure katepart
+supports the new size!
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> number of reserved marker types
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="MarkChangeAction"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">MarkChangeAction</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Possible actions on a mark.
+<dl class="see" compact><dt><b>See also:</b></dt><dd> markChanged()
+</dd></dl>
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>MarkAdded</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>MarkRemoved</em>&nbsp;=&nbsp;1</td><td></table>
+</dl>
+</div></div><p><a class="anchor" name="MarkTypes"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">MarkTypes</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Predefined mark types.
+</p>
+<p>
+To add a new standard mark type, edit this interface and document
+the type.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>markType01</em>&nbsp;=&nbsp;0x1</td><td><tr><td valign="top"><em>markType02</em>&nbsp;=&nbsp;0x2</td><td><tr><td valign="top"><em>markType03</em>&nbsp;=&nbsp;0x4</td><td><tr><td valign="top"><em>markType04</em>&nbsp;=&nbsp;0x8</td><td><tr><td valign="top"><em>markType05</em>&nbsp;=&nbsp;0x10</td><td><tr><td valign="top"><em>markType06</em>&nbsp;=&nbsp;0x20</td><td><tr><td valign="top"><em>markType07</em>&nbsp;=&nbsp;0x40</td><td><tr><td valign="top"><em>markType08</em>&nbsp;=&nbsp;0x80</td><td><tr><td valign="top"><em>markType09</em>&nbsp;=&nbsp;0x100</td><td><tr><td valign="top"><em>markType10</em>&nbsp;=&nbsp;0x200</td><td><tr><td valign="top"><em>markType11</em>&nbsp;=&nbsp;0x400</td><td><tr><td valign="top"><em>markType12</em>&nbsp;=&nbsp;0x800</td><td><tr><td valign="top"><em>markType13</em>&nbsp;=&nbsp;0x1000</td><td><tr><td valign="top"><em>markType14</em>&nbsp;=&nbsp;0x2000</td><td><tr><td valign="top"><em>markType15</em>&nbsp;=&nbsp;0x4000</td><td><tr><td valign="top"><em>markType16</em>&nbsp;=&nbsp;0x8000</td><td><tr><td valign="top"><em>markType17</em>&nbsp;=&nbsp;0x10000</td><td><tr><td valign="top"><em>markType18</em>&nbsp;=&nbsp;0x20000</td><td><tr><td valign="top"><em>markType19</em>&nbsp;=&nbsp;0x40000</td><td><tr><td valign="top"><em>markType20</em>&nbsp;=&nbsp;0x80000</td><td><tr><td valign="top"><em>markType21</em>&nbsp;=&nbsp;0x100000</td><td><tr><td valign="top"><em>markType22</em>&nbsp;=&nbsp;0x200000</td><td><tr><td valign="top"><em>markType23</em>&nbsp;=&nbsp;0x400000</td><td><tr><td valign="top"><em>markType24</em>&nbsp;=&nbsp;0x800000</td><td><tr><td valign="top"><em>markType25</em>&nbsp;=&nbsp;0x1000000</td><td><tr><td valign="top"><em>markType26</em>&nbsp;=&nbsp;0x2000000</td><td><tr><td valign="top"><em>markType27</em>&nbsp;=&nbsp;0x4000000</td><td><tr><td valign="top"><em>markType28</em>&nbsp;=&nbsp;0x8000000</td><td><tr><td valign="top"><em>markType29</em>&nbsp;=&nbsp;0x10000000</td><td><tr><td valign="top"><em>markType30</em>&nbsp;=&nbsp;0x20000000</td><td><tr><td valign="top"><em>markType31</em>&nbsp;=&nbsp;0x40000000</td><td><tr><td valign="top"><em>markType32</em>&nbsp;=&nbsp;0x80000000</td><td><tr><td valign="top"><em>Bookmark</em>&nbsp;=&nbsp;markType01</td><td><tr><td valign="top"><em>BreakpointActive</em>&nbsp;=&nbsp;markType02</td><td><tr><td valign="top"><em>BreakpointReached</em>&nbsp;=&nbsp;markType03</td><td><tr><td valign="top"><em>BreakpointDisabled</em>&nbsp;=&nbsp;markType04</td><td><tr><td valign="top"><em>Execution</em>&nbsp;=&nbsp;markType05</td><td><tr><td valign="top"><em>Warning</em>&nbsp;=&nbsp;markType06</td><td><tr><td valign="top"><em>Error</em>&nbsp;=&nbsp;markType07</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

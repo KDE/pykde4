@@ -33,62 +33,77 @@ class Attribute : QTextCharFormat
 
 public:
     typedef KSharedPtr<KTextEditor::Attribute> Ptr;
-                         Attribute ();
-                         Attribute (const KTextEditor::Attribute&);
-//ig     void                 changed () const;
+                            Attribute ();
+                            Attribute (const KTextEditor::Attribute& a);
+//ig    void                    changed () const;
 
     enum CustomProperties
     {
-        Outline, 
-        SelectedForeground, 
-        SelectedBackground, 
-        BackgroundFillWhitespace, 
-        AttributeDynamicEffect, 
-        AttributeInternalProperty, 
+        Outline,
+        SelectedForeground,
+        SelectedBackground,
+        BackgroundFillWhitespace,
+        AttributeDynamicEffect,
+        AttributeInternalProperty,
         AttributeUserProperty
     };
 
-    bool                 fontBold () const;
-    void                 setFontBold (bool = 1);
-    QBrush               outline () const;
-    void                 setOutline (const QBrush&);
-    QBrush               selectedForeground () const;
-    void                 setSelectedForeground (const QBrush&);
-    QBrush               selectedBackground () const;
-    void                 setSelectedBackground (const QBrush&);
-    bool                 backgroundFillWhitespace () const;
-    void                 setBackgroundFillWhitespace (bool);
-    void                 clear ();
-    bool                 hasAnyProperty () const;
-//ig     void                 associateAction (KAction*);
-//ig     void                 dissociateAction (KAction*);
-    const QList<KAction*>& associatedActions () const;
-    void                 clearAssociatedActions ();
+    bool                    fontBold () const;
+    void                    setFontBold (bool bold = 1);
+    QBrush                  outline () const;
+    void                    setOutline (const QBrush& brush);
+    QBrush                  selectedForeground () const;
+    void                    setSelectedForeground (const QBrush& foreground);
+    QBrush                  selectedBackground () const;
+    void                    setSelectedBackground (const QBrush& brush);
+    bool                    backgroundFillWhitespace () const;
+    void                    setBackgroundFillWhitespace (bool fillWhitespace);
+    void                    clear ();
+    bool                    hasAnyProperty () const;
+//ig    void                    associateAction (KAction* action);
+//ig    void                    dissociateAction (KAction* action);
+    const QList<KAction*>&  associatedActions () const;
+    void                    clearAssociatedActions ();
 
     enum ActivationType
     {
-        ActivateMouseIn, 
+        ActivateMouseIn,
         ActivateCaretIn
     };
 
 
     enum Effect
     {
-        EffectNone, 
-        EffectFadeIn, 
-        EffectFadeOut, 
-        EffectPulse, 
+        EffectNone,
+        EffectFadeIn,
+        EffectFadeOut,
+        EffectPulse,
         EffectCycleGradient
     };
 
     typedef QFlags<KTextEditor::Attribute::Effect> Effects;
-    KTextEditor::Attribute::Ptr dynamicAttribute (KTextEditor::Attribute::ActivationType) const;
-    void                 setDynamicAttribute (KTextEditor::Attribute::ActivationType, KTextEditor::Attribute::Ptr);
-    KTextEditor::Attribute::Effects effects () const;
-    void                 setEffects (KTextEditor::Attribute::Effects);
-    KTextEditor::Attribute& operator += (const KTextEditor::Attribute&);
+    KTextEditor::Attribute::Ptr  dynamicAttribute (KTextEditor::Attribute::ActivationType type) const;
+    void                    setDynamicAttribute (KTextEditor::Attribute::ActivationType type, KTextEditor::Attribute::Ptr attribute);
+    KTextEditor::Attribute::Effects  effects () const;
+    void                    setEffects (KTextEditor::Attribute::Effects effects);
+    KTextEditor::Attribute&  operator += (const KTextEditor::Attribute& a);
 
-};  // class Attribute
+    virtual ~Attribute ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'QTextFormat'
+    sipType = NULL;
 
-};  // namespace KTextEditor
+    if (dynamic_cast<KTextEditor::Attribute*>(sipCpp))
+        sipType = sipType_KTextEditor_Attribute;
+%End
+};
+// class Attribute
 
+};
+// namespace KTextEditor
+
+%ModuleHeaderCode
+//ctscc
+#include <ktexteditor/attribute.h>
+#include <qtextformat.h>
+%End

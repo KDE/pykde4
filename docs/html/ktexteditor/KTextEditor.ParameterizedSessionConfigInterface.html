@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KTextEditor.ParameterizedSessionConfigInterface</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.9 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>ParameterizedSessionConfigInterface Class Reference</h1>
+<code>from PyKDE4.ktexteditor import *</code>
+<p>
+
+
+Namespace: <a href="../ktexteditor/KTextEditor.html">KTextEditor</a><br />
+<h2>Detailed Description</h2>
+
+<p>Parameterized session config interface extension for the Document.
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+The ParameterizedSessionConfigInterface is an extension for Documents
+to add support for session-specific configuration settings with more fine-grained
+control over the settings that are manipulated.
+The readParameterizedSessionConfig() method is called whenever session-specific settings are to be
+read from the given KConfig* and the writeParameterizedSessionConfig() method whenever they are to
+be written, for example when a session changed or was closed.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> A session does not have anything to do with an X-session under Unix.
+What is meant is rather a context, think of sessions in Kate or
+projects in KDevelop for example.
+</dd></dl> </p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> ParameterizedSessionConfigInterface is meant to be an extension of SessionConfigInterface.
+Due to limitations with qobject_cast it is not possible in KDE4 to derive this interface
+from SessionConfigInterface.
+</dd></dl> </p>
+<p>
+<b>Adding Session Support </b>
+</p>
+<p>
+To add support for sessions a KTextEditor implementation has to derive the
+Document class from ParameterizedSessionConfigInterface and reimplement the methods defined
+in this class.
+</p>
+<p>
+<b>Accessing the ParameterizedSessionConfigInterface </b>
+</p>
+<p>
+The ParameterizedSessionConfigInterface is supposed to be an extension interface for a
+Document i.e. the Document inherits the
+interface provided that it implements the interface. Use qobject_cast to
+access the interface:
+<pre class="fragment">
+ // object is of type KTextEditor.Document*
+ KTextEditor.ParameterizedSessionConfigInterface *iface =
+     qobject_cast&lt;KTextEditor.ParameterizedSessionConfigInterface*&gt;( object );
+
+ if( iface ) {
+     // interface is supported
+     // do stuff
+ }
+</pre>
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KTextEditor.Document, KTextEditor.SessionConfigInterface
+</dd></dl> </p>
+<p>
+<dl class="since" compact><dt><b>Since:</b></dt><dd> 4.4
+</dd></dl> <dl class="note" compact><dt><b>Note:</b></dt><dd> KDE5: Rename to SessionConfigInterface, delete old SessionConfigInterface
+</dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#SessionConfigParameter">SessionConfigParameter</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;SkipNone, SkipUrl, SkipMode, SkipHighlighting, SkipEncoding, SkipFolding&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ParameterizedSessionConfigInterface">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#readParameterizedSessionConfig">readParameterizedSessionConfig</a> (self, <a href="../kdecore/KConfigGroup.html">KConfigGroup</a> config, long parameters)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#writeParameterizedSessionConfig">writeParameterizedSessionConfig</a> (self, <a href="../kdecore/KConfigGroup.html">KConfigGroup</a> config, long parameters)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="ParameterizedSessionConfigInterface"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="readParameterizedSessionConfig"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> readParameterizedSessionConfig</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KConfigGroup.html">KConfigGroup</a>&nbsp;</td>
+<td class="paramname"><em>config</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>parameters</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Read session settings from the given <b>config</b> excluding the settings specified in
+<b>parameters.</b>
+</p>
+<p>
+That means for example
+- a Document should reload the file, restore all marks etc...
+- a View should scroll to the last position and restore the cursor
+position etc...
+- a Plugin should restore session specific settings
+- If no file is being loaded, because an empty new document is going to be displayed or
+'SkipUrl' is set, this function should emit ReadOnlyPart.completed
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>config</em>&nbsp;</td><td> read the session settings from this KConfigGroup
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parameters</em>&nbsp;</td><td> settings that should not be read (i.e. a combination of flags from SessionConfigParameter)
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> writeParameterizedSessionConfig()
+</dd></dl>
+</p></div></div><a class="anchor" name="writeParameterizedSessionConfig"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> writeParameterizedSessionConfig</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../kdecore/KConfigGroup.html">KConfigGroup</a>&nbsp;</td>
+<td class="paramname"><em>config</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">long&nbsp;</td>
+<td class="paramname"><em>parameters</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Write session settings to the <b>config</b> excluding the settings specified in
+<b>parameters.</b>
+See readSessionConfig() for more details.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>config</em>&nbsp;</td><td> write the session settings to this KConfigGroup
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parameters</em>&nbsp;</td><td> settings that should not be written (i.e. a combination of flags from SessionConfigParameter)
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> readParameterizedSessionConfig()
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="SessionConfigParameter"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">SessionConfigParameter</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Flags for session restore.
+These flags allow to skip some parts of the configuration from restoration.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>SkipNone</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>SkipUrl</em>&nbsp;=&nbsp;1<<0</td><td><tr><td valign="top"><em>SkipMode</em>&nbsp;=&nbsp;1<<1</td><td><tr><td valign="top"><em>SkipHighlighting</em>&nbsp;=&nbsp;1<<2</td><td><tr><td valign="top"><em>SkipEncoding</em>&nbsp;=&nbsp;1<<3</td><td><tr><td valign="top"><em>SkipFolding</em>&nbsp;=&nbsp;1<<4</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

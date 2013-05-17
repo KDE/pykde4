@@ -32,31 +32,28 @@ class ModificationInterface
 
 
 public:
-                         ModificationInterface ();
+                            ModificationInterface ();
 
-public:
 
     enum ModifiedOnDiskReason
     {
-        OnDiskUnmodified, 
-        OnDiskModified, 
-        OnDiskCreated, 
+        OnDiskUnmodified,
+        OnDiskModified,
+        OnDiskCreated,
         OnDiskDeleted
     };
 
 
-public:
-    virtual void         setModifiedOnDisk (KTextEditor::ModificationInterface::ModifiedOnDiskReason)  = 0;
-    virtual void         setModifiedOnDiskWarning (bool)  = 0;
+    virtual void            setModifiedOnDisk (KTextEditor::ModificationInterface::ModifiedOnDiskReason reason)=0;
+    virtual void            setModifiedOnDiskWarning (bool on)=0;
 
-public:
-    virtual void         slotModifiedOnDisk (KTextEditor::View* = 0)  = 0;
+    virtual void            slotModifiedOnDisk (KTextEditor::View* view = 0)=0;
 
-public:
-    virtual void         modifiedOnDisk (KTextEditor::Document*, bool, KTextEditor::ModificationInterface::ModifiedOnDiskReason)  = 0;
-private:
-                         ModificationInterface (const KTextEditor::ModificationInterface &other);
-};  // class ModificationInterface
+    virtual void            modifiedOnDisk (KTextEditor::Document* document, bool isModified, KTextEditor::ModificationInterface::ModifiedOnDiskReason reason)=0;
+    virtual ~ModificationInterface ();
+};
+// class ModificationInterface
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 

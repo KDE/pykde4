@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KTextEditor.SearchInterface</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.9 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>SearchInterface Class Reference</h1>
+<code>from PyKDE4.ktexteditor import *</code>
+<p>
+
+
+Namespace: <a href="../ktexteditor/KTextEditor.html">KTextEditor</a><br />
+<h2>Detailed Description</h2>
+
+<p>Search interface extension for the Document.
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+The SearchInterface provides methods to search for a given text pattern in
+a Document. You can either search for a simple text or for a regular
+expression, see searchText.
+</p>
+<p>
+<b>Accessing the SearchInterface </b>
+</p>
+<p>
+The SearchInterface is supposed to be an extension interface for a
+Document, i.e. the Document inherits the interface provided that the
+used KTextEditor library implements the interface. Use qobject_cast to
+access the interface:
+<pre class="fragment">
+ // doc is of type KTextEditor.Document*
+ KTextEditor.SearchInterface *iface =
+     qobject_cast&lt;KTextEditor.SearchInterface*&gt;( doc );
+
+ if( iface ) {
+     // the implementation supports the interface
+     // do stuff
+ }
+</pre>
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KTextEditor.Document
+</dd></dl> 
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Christoph Cullmann &lt;cullmann@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#SearchInterface">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<KTextEditor::Range>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#searchText">searchText</a> (self, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> range, QString pattern, <a href="../ktexteditor/KTextEditor.Search.html">KTextEditor.Search.SearchOptions</a> options=KTextEditor.Search.Default)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.Search.html">KTextEditor.Search.SearchOptions</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#supportedSearchOptions">supportedSearchOptions</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="SearchInterface"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Constructor.
+</p></div></div><a class="anchor" name="searchText"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QVector<KTextEditor::Range> searchText</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>range</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>pattern</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Search.html">KTextEditor.Search.SearchOptions</a>&nbsp;</td>
+<td class="paramname"><em>options=KTextEditor.Search.Default</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Searches the given input range for a text pattern.
+</p>
+<p>
+Searches for a text pattern within the given input range.
+The kind of search performed depends on the &lt;code&gt;options&lt;/code&gt;
+used. Use this function for plaintext searches as well as
+regular expression searches. Query supportedSearchOptions
+to find out, which options the current implementation does
+support. If no match is found the first (and only) element
+in the vector return is the invalid range. When searching
+for regular expressions, the first element holds the
+range of the full match, the subsequent elements hold
+the ranges of the capturing parentheses.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>range</em>&nbsp;</td><td> Input range to search in
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>pattern</em>&nbsp;</td><td> Text pattern to search for
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>options</em>&nbsp;</td><td> Combination of search flags
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> List of ranges (length &gt;=1)
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> Search.SearchOptionsEnum
+</dd></dl> 
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Sebastian Pipping &lt;webmaster@hartwork.org&gt; </dd></dl>
+</p></div></div><a class="anchor" name="supportedSearchOptions"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.Search.html">KTextEditor.Search.SearchOptions</a> supportedSearchOptions</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Specifies all options supported by searchText.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> Combination of all flags supported by searchText
+</dd></dl> </p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> Search.SearchOptionsEnum
+</dd></dl> 
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Sebastian Pipping &lt;webmaster@hartwork.org&gt; </dd></dl>
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

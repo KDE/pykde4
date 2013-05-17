@@ -24,7 +24,7 @@
 namespace KTextEditor
 {
 
-class SmartInterface
+class SmartInterface /Abstract/
 {
 %TypeHeaderCode
 #include <ktexteditor/smartinterface.h>
@@ -32,50 +32,52 @@ class SmartInterface
 
 
 public:
-                         SmartInterface ();
-    QMutex*              smartMutex () const;
-    virtual void         clearSmartInterface ()  = 0;
-    bool                 clearOnDocumentReload () const;
-    void                 setClearOnDocumentReload (bool);
-    virtual int          currentRevision () const = 0;
-    virtual void         releaseRevision (int) const = 0;
-    virtual void         useRevision (int)  = 0;
-    void                 clearRevision ();
-    virtual KTextEditor::Cursor translateFromRevision (const KTextEditor::Cursor&, KTextEditor::SmartCursor::InsertBehavior = KTextEditor::SmartCursor::StayOnInsert ) const;
-    virtual KTextEditor::Range translateFromRevision (const KTextEditor::Range&, KTextEditor::SmartRange::InsertBehaviors) const;
-    virtual KTextEditor::SmartCursor* newSmartCursor (const KTextEditor::Cursor& = KTextEditor::Cursor::start (), KTextEditor::SmartCursor::InsertBehavior = KTextEditor::SmartCursor::MoveOnInsert )  = 0;
-    KTextEditor::SmartCursor* newSmartCursor (int, int, KTextEditor::SmartCursor::InsertBehavior = KTextEditor::SmartCursor::MoveOnInsert );
-    virtual void         deleteCursors ()  = 0;
-    virtual KTextEditor::SmartRange* newSmartRange (const KTextEditor::Range& = KTextEditor::Range (), KTextEditor::SmartRange* = 0, KTextEditor::SmartRange::InsertBehaviors = KTextEditor::SmartRange::DoNotExpand )  = 0;
-    KTextEditor::SmartRange* newSmartRange (const KTextEditor::Cursor&, const KTextEditor::Cursor&, KTextEditor::SmartRange* = 0, KTextEditor::SmartRange::InsertBehaviors = KTextEditor::SmartRange::DoNotExpand );
-    KTextEditor::SmartRange* newSmartRange (int, int, int, int, KTextEditor::SmartRange* = 0, KTextEditor::SmartRange::InsertBehaviors = KTextEditor::SmartRange::DoNotExpand );
-    virtual KTextEditor::SmartRange* newSmartRange (KTextEditor::SmartCursor*, KTextEditor::SmartCursor*, KTextEditor::SmartRange* = 0, KTextEditor::SmartRange::InsertBehaviors = KTextEditor::SmartRange::DoNotExpand )  = 0;
-    virtual void         unbindSmartRange (KTextEditor::SmartRange*)  = 0;
-    virtual void         deleteRanges ()  = 0;
-    virtual void         addHighlightToDocument (KTextEditor::SmartRange*, bool = 0)  = 0;
-    virtual void         removeHighlightFromDocument (KTextEditor::SmartRange*)  = 0;
-    virtual const QList<KTextEditor::SmartRange*> documentHighlights () const = 0;
-    virtual void         clearDocumentHighlights ()  = 0;
-    virtual void         addHighlightToView (KTextEditor::View*, KTextEditor::SmartRange*, bool = 0)  = 0;
-    virtual void         removeHighlightFromView (KTextEditor::View*, KTextEditor::SmartRange*)  = 0;
-    virtual const QList<KTextEditor::SmartRange*> viewHighlights (KTextEditor::View*) const = 0;
-    virtual void         clearViewHighlights (KTextEditor::View*)  = 0;
-    virtual void         addActionsToDocument (KTextEditor::SmartRange*)  = 0;
-    virtual void         removeActionsFromDocument (KTextEditor::SmartRange*)  = 0;
-    virtual const QList<KTextEditor::SmartRange*> documentActions () const = 0;
-    virtual void         clearDocumentActions ()  = 0;
-    virtual void         addActionsToView (KTextEditor::View*, KTextEditor::SmartRange*)  = 0;
-    virtual void         removeActionsFromView (KTextEditor::View*, KTextEditor::SmartRange*)  = 0;
-    virtual const QList<KTextEditor::SmartRange*> viewActions (KTextEditor::View*) const = 0;
-    virtual void         clearViewActions (KTextEditor::View*)  = 0;
+                            SmartInterface ();
+    QMutex*                 smartMutex () const;
+    virtual void            clearSmartInterface ()=0;
+    bool                    clearOnDocumentReload () const;
+    void                    setClearOnDocumentReload (bool clearOnReload);
+    virtual int             currentRevision () const=0;
+    virtual void            releaseRevision (int revision) const=0;
+    virtual void            useRevision (int revision)=0;
+    void                    clearRevision ();
+    virtual KTextEditor::Cursor  translateFromRevision (const KTextEditor::Cursor& cursor, KTextEditor::SmartCursor::InsertBehavior insertBehavior = KTextEditor::SmartCursor::StayOnInsert) const;
+    virtual KTextEditor::SmartCursor*  newSmartCursor (const KTextEditor::Cursor& position = KTextEditor::Cursor::start(), KTextEditor::SmartCursor::InsertBehavior insertBehavior = KTextEditor::SmartCursor::MoveOnInsert)=0;
+    KTextEditor::SmartCursor*  newSmartCursor (int line, int column, KTextEditor::SmartCursor::InsertBehavior insertBehavior = KTextEditor::SmartCursor::MoveOnInsert);
+    virtual void            deleteCursors ()=0;
+    virtual KTextEditor::SmartRange*  newSmartRange (const KTextEditor::Range& range = KTextEditor::Range(), KTextEditor::SmartRange* parent = 0, KTextEditor::SmartRange::InsertBehaviors insertBehavior = KTextEditor::SmartRange::DoNotExpand)=0;
+    KTextEditor::SmartRange*  newSmartRange (const KTextEditor::Cursor& startPosition, const KTextEditor::Cursor& endPosition, KTextEditor::SmartRange* parent = 0, KTextEditor::SmartRange::InsertBehaviors insertBehavior = KTextEditor::SmartRange::DoNotExpand);
+    KTextEditor::SmartRange*  newSmartRange (int startLine, int startColumn, int endLine, int endColumn, KTextEditor::SmartRange* parent = 0, KTextEditor::SmartRange::InsertBehaviors insertBehavior = KTextEditor::SmartRange::DoNotExpand);
+    virtual KTextEditor::SmartRange*  newSmartRange (KTextEditor::SmartCursor* start, KTextEditor::SmartCursor* end, KTextEditor::SmartRange* parent = 0, KTextEditor::SmartRange::InsertBehaviors insertBehavior = KTextEditor::SmartRange::DoNotExpand)=0;
+    virtual void            unbindSmartRange (KTextEditor::SmartRange* range)=0;
+    virtual void            deleteRanges ()=0;
+    virtual void            addHighlightToDocument (KTextEditor::SmartRange* topRange, bool supportDynamic = 0)=0;
+    virtual void            removeHighlightFromDocument (KTextEditor::SmartRange* topRange)=0;
+    virtual const QList<KTextEditor::SmartRange*>  documentHighlights () const=0;
+    virtual void            clearDocumentHighlights ()=0;
+    virtual void            addHighlightToView (KTextEditor::View* view, KTextEditor::SmartRange* topRange, bool supportDynamic = 0)=0;
+    virtual void            removeHighlightFromView (KTextEditor::View* view, KTextEditor::SmartRange* topRange)=0;
+    virtual const QList<KTextEditor::SmartRange*>  viewHighlights (KTextEditor::View* view) const=0;
+    virtual void            clearViewHighlights (KTextEditor::View* view)=0;
+    virtual void            addActionsToDocument (KTextEditor::SmartRange* topRange)=0;
+    virtual void            removeActionsFromDocument (KTextEditor::SmartRange* topRange)=0;
+    virtual const QList<KTextEditor::SmartRange*>  documentActions () const=0;
+    virtual void            clearDocumentActions ()=0;
+    virtual void            addActionsToView (KTextEditor::View* view, KTextEditor::SmartRange* topRange)=0;
+    virtual void            removeActionsFromView (KTextEditor::View* view, KTextEditor::SmartRange* topRange)=0;
+    virtual const QList<KTextEditor::SmartRange*>  viewActions (KTextEditor::View* view) const=0;
+    virtual void            clearViewActions (KTextEditor::View* view)=0;
 
 protected:
-    virtual void         attributeDynamic (KTextEditor::Attribute::Ptr)  = 0;
-    virtual void         attributeNotDynamic (KTextEditor::Attribute::Ptr)  = 0;
-private:
-                         SmartInterface (const KTextEditor::SmartInterface &other);
+    virtual void            attributeDynamic (KTextEditor::Attribute::Ptr a)=0;
+    virtual void            attributeNotDynamic (KTextEditor::Attribute::Ptr a)=0;
 
-};  // class SmartInterface
+public:
+    virtual ~SmartInterface ();
+    virtual KTextEditor::Range  translateFromRevision (const KTextEditor::Range& range, KTextEditor::SmartRange::InsertBehaviors insertBehavior = KTextEditor::SmartRange::ExpandLeft|KTextEditor::SmartRange::ExpandRight) const;
+};
+// class SmartInterface
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 

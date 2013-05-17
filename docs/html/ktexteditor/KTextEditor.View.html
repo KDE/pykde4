@@ -1,0 +1,1324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>KTextEditor.View</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.9 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>View Class Reference</h1>
+<code>from PyKDE4.ktexteditor import *</code>
+<p>
+Inherits: QWidget &#x2192; QObject,<a href="../kdeui/KXMLGUIClient.html">KXMLGUIClient</a><br />
+
+Namespace: <a href="../ktexteditor/KTextEditor.html">KTextEditor</a><br />
+<h2>Detailed Description</h2>
+<dl class="abstract" compact><dt><b>Abstract class:</b></dt>
+<dd>This class can be used as a base class for new classes, but can not be instantiated directly.</dd></dl>
+<p>A text widget with KXMLGUIClient that represents a Document.
+</p>
+<p>
+Topics:
+- view_intro
+- view_hook_into_gui
+- view_selection
+- view_cursors
+- view_mouse_tracking
+- view_modes
+- view_extensions
+</p>
+<p>
+<b>Introduction </b>
+</p>
+<p>
+The View class represents a single view of a KTextEditor.Document,
+get the document on which the view operates with document().
+A view provides both the graphical representation of the text and the
+KXMLGUIClient for the actions. The view itself does not provide
+text manipulation, use the methods from the Document instead. The only
+method to insert text is insertText(), which inserts the given text
+at the current cursor position and emits the signal textInserted().
+</p>
+<p>
+Usually a view is created by using Document.createView().
+Furthermore a view can have a context menu. Set it with setContextMenu()
+and get it with contextMenu().
+</p>
+<p>
+<b>Merging the View's GUI </b>
+</p>
+<p>
+A View is derived from the class KXMLGUIClient, so its GUI elements (like
+menu entries and toolbar items) can be merged into the application's GUI
+(or into a KXMLGUIFactory) by calling
+<pre class="fragment">
+ // view is of type KTextEditor.View*
+ mainWindow()-&gt;guiFactory()-&gt;addClient( view );
+</pre>
+You can add only one view as client, so if you have several views, you first
+have to remove the current view, and then add the new one, like this
+<pre class="fragment">
+ mainWindow()-&gt;guiFactory()-&gt;removeClient( currentView );
+ mainWindow()-&gt;guiFactory()-&gt;addClient( newView );
+</pre>
+</p>
+<p>
+<b>Text Selection </b>
+</p>
+<p>
+As the view is a graphical text editor it provides normal and block
+text selection. You can check with selection() whether a selection exists.
+removeSelection() will remove the selection without removing the text,
+whereas removeSelectionText() also removes both, the selection and the
+selected text. Use selectionText() to get the selected text and
+setSelection() to specify the selected textrange. The signal
+selectionChanged() is emitted whenever the selecteion changed.
+</p>
+<p>
+<b>Cursor Positions </b>
+</p>
+<p>
+A view has one Cursor which represents a line/column tuple. Two different
+kinds of cursor positions are supported: first is the real cursor
+position where a tab character only counts one character. Second is the
+virtual cursor position, where a tab character counts as many
+spaces as defined. Get the real position with cursorPosition() and the
+virtual position with cursorPositionVirtual(). Set the real cursor
+position with setCursorPosition(). You can even get the screen coordinates
+of the current cursor position in pixel by using
+cursorPositionCoordinates(). The signal cursorPositionChanged() is emitted
+whenever the cursor position changed.
+</p>
+<p>
+<b>Mouse Tracking </b>
+</p>
+<p>
+It is possible to get notified via the signal mousePositionChanged() for
+mouse move events, if mouseTrackingEnabled() returns true. Mouse tracking
+can be turned on/off by calling setMouseTrackingEnabled(). If an editor
+implementation does not support mouse tracking, mouseTrackingEnabled() will
+always return false.
+</p>
+<p>
+<b>Edit Modes </b>
+</p>
+<p>
+A view supports several edit modes (EditMode). Common edit modes are
+insert-mode (INS) and overwrite-mode (OVR). Which edit modes the
+editor supports depends on the implementation, another well-known mode is
+the command-mode for example in vim and yzis. The getter viewMode()
+returns a string like <b>INS</b> or <b>OVR</b> and is represented in the user
+interface for example in the status bar. Further you can get the edit
+mode as enum by using viewEditMode(). Whenever the edit mode changed the
+signals viewModeChanged() and viewEditModeChanged() are emitted.
+</p>
+<p>
+<b>View Extension Interfaces </b>
+</p>
+<p>
+A simple view represents the text of a Document and provides a text cursor,
+text selection, edit modes etc.
+Advanced concepts like code completion and text hints are defined in the
+extension interfaces. An KTextEditor implementation does not need to
+support all the extensions. To implement the interfaces multiple
+inheritance is used.
+</p>
+<p>
+More information about interfaces for the view can be found in
+kte_group_view_extensions.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> KTextEditor.Document, KTextEditor.TemplateInterface,
+KTextEditor.CodeCompletionInterface,
+KTextEditor.SessionConfigInterface, KTextEditor.TemplateInterface,
+KXMLGUIClient
+</dd></dl> 
+<dl class="author" compact><dt><b>Author:</b></dt><dd> Christoph Cullmann &lt;cullmann@kde.org&gt; </dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#EditMode">EditMode</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;EditInsert, EditOverwrite&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#contextMenuAboutToShow">contextMenuAboutToShow</a> (<a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, QMenu menu)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cursorPositionChanged">cursorPositionChanged</a> (<a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> newPosition)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#focusIn">focusIn</a> (<a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#focusOut">focusOut</a> (<a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#horizontalScrollPositionChanged">horizontalScrollPositionChanged</a> (<a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#informationMessage">informationMessage</a> (<a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, QString message)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mousePositionChanged">mousePositionChanged</a> (<a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> newPosition)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selectionChanged">selectionChanged</a> (<a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#textInserted">textInserted</a> (<a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> position, QString text)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#verticalScrollPositionChanged">verticalScrollPositionChanged</a> (<a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> newPos)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#viewEditModeChanged">viewEditModeChanged</a> (<a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view, <a href="../ktexteditor/KTextEditor.View.html#EditMode">KTextEditor.View.EditMode</a> mode)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#viewModeChanged">viewModeChanged</a> (<a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a> view)</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#View">__init__</a> (self, QWidget parent)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#blockSelection">blockSelection</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QMenu&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#contextMenu">contextMenu</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cursorPosition">cursorPosition</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QPoint&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cursorPositionCoordinates">cursorPositionCoordinates</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cursorPositionVirtual">cursorPositionVirtual</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QPoint&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#cursorToCoordinate">cursorToCoordinate</a> (self, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> cursor)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QMenu&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#defaultContextMenu">defaultContextMenu</a> (self, QMenu menu=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#document">document</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#insertText">insertText</a> (self, QString text)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isActiveView">isActiveView</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mouseTrackingEnabled">mouseTrackingEnabled</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeSelection">removeSelection</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#removeSelectionText">removeSelectionText</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selection">selection</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selectionRange">selectionRange</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#selectionText">selectionText</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setBlockSelection">setBlockSelection</a> (self, bool on)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setContextMenu">setContextMenu</a> (self, QMenu menu)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setCursorPosition">setCursorPosition</a> (self, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> position)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMouseTrackingEnabled">setMouseTrackingEnabled</a> (self, bool enable)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSelection">setSelection</a> (self, <a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> range)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setSelection">setSelection</a> (self, <a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> position, int length, bool wrap=1)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../ktexteditor/KTextEditor.View.html#EditMode">KTextEditor.View.EditMode</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#viewEditMode">viewEditMode</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">QString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#viewMode">viewMode</a> (self)</td></tr>
+</table>
+<hr><h2>Signal Documentation</h2><a class="anchor" name="contextMenuAboutToShow"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> contextMenuAboutToShow</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QMenu&nbsp;</td>
+<td class="paramname"><em>menu</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Signal which is emitted immediately prior to showing the current
+context <b>menu.</b>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("contextMenuAboutToShow(KTextEditor::View*, QMenu*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="cursorPositionChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> cursorPositionChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>newPosition</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted whenever the <b>view's</b> cursor position changed.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view which emitted the signal
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>newPosition</em>&nbsp;</td><td> new position of the cursor (Kate will pass the real
+cursor potition, not the virtual)
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> cursorPosition(), cursorPositionVirtual()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("cursorPositionChanged(KTextEditor::View*, const KTextEditor::Cursor&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="focusIn"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> focusIn</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted whenever the <b>view</b> gets the focus.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view which gets focus
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> focusOut()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("focusIn(KTextEditor::View*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="focusOut"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> focusOut</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted whenever the <b>view</b> loses the focus.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view which lost focus
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> focusIn()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("focusOut(KTextEditor::View*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="horizontalScrollPositionChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> horizontalScrollPositionChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal should be emitted whenever the <b>view</b> is scrolled horizontally.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view which emitted the signal
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("horizontalScrollPositionChanged(KTextEditor::View*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="informationMessage"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> informationMessage</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>message</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted whenever the <b>view</b> wants to display a
+information <b>message.</b> The <b>message</b> can be displayed in the status bar
+for example.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view which sends out information
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>message</em>&nbsp;</td><td> information message
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("informationMessage(KTextEditor::View*, const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="mousePositionChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> mousePositionChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>newPosition</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted whenever the position of the mouse changes over
+this <b>view.</b> If the mouse moves off the view, an invalid cursor position
+should be emitted, i.e. Cursor.invalid().
+<dl class="note" compact><dt><b>Note:</b></dt><dd> If mouseTrackingEnabled() returns false, this signal is never
+emitted.
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view which emitted the signal
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>newPosition</em>&nbsp;</td><td> new position of the mouse or Cursor.invalid(), if the
+mouse moved out of the <b>view.</b>
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> mouseTrackingEnabled()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("mousePositionChanged(KTextEditor::View*, const KTextEditor::Cursor&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="selectionChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> selectionChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted whenever the <b>view's</b> selection changes.
+<dl class="note" compact><dt><b>Note:</b></dt><dd> If the mode switches from block selection to normal selection
+or vice versa this signal should also be emitted.
+</dd></dl> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view in which the selection changed
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> selection(), selectionRange(), selectionText()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("selectionChanged(KTextEditor::View*)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="textInserted"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> textInserted</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>position</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>text</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted from <b>view</b> whenever the users inserts <b>text</b>
+at <b>position,</b> that means the user typed/pasted text.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view in which the text was inserted
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>position</em>&nbsp;</td><td> position where the text was inserted
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> the text the user has typed into the editor
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> insertText()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("textInserted(KTextEditor::View*, const KTextEditor::Cursor&, const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="verticalScrollPositionChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> verticalScrollPositionChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>newPos</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal should be emitted whenever the <b>view</b> is scrolled vertically.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view which emitted the signal
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>newPos</em>&nbsp;</td><td> the new scroll position
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("verticalScrollPositionChanged(KTextEditor::View*, const KTextEditor::Cursor&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="viewEditModeChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> viewEditModeChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html#EditMode">KTextEditor.View.EditMode</a>&nbsp;</td>
+<td class="paramname"><em>mode</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted whenever the <b>view's</b> edit <b>mode</b> changed from
+either EditInsert to EditOverwrite or vice versa.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> view which changed its edit mode
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>mode</em>&nbsp;</td><td> new edit mode
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> viewEditMode()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("viewEditModeChanged(KTextEditor::View*, KTextEditor::View::EditMode)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="viewModeChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> viewModeChanged</td>
+<td>(</td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.View.html">KTextEditor.View</a>&nbsp;</td>
+<td class="paramname"><em>view</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emitted whenever the view mode of <b>view</b> changes.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>view</em>&nbsp;</td><td> the view which changed its mode
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> viewMode()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("viewModeChanged(KTextEditor::View*)"), target_slot)</code></dd></dl></div></div><hr><h2>Method Documentation</h2><a class="anchor" name="View"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QWidget&nbsp;</td>
+<td class="paramname"><em>parent</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Constructor.
+</p>
+<p>
+Create a view attached to the widget <b>parent.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> parent widget
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> Document.createView()
+</dd></dl>
+</p></div></div><a class="anchor" name="blockSelection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool blockSelection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the status of the selection mode. true indicates that block
+selection mode is on. If this is true, selections applied via the
+SelectionInterface are handled as block selections and the Copy&amp;Paste
+functions work on rectangular blocks of text rather than normal.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true, if block selection mode is enabled, otherwise false
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setBlockSelection()
+</dd></dl>
+</p></div></div><a class="anchor" name="contextMenu"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QMenu contextMenu</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the context menu for this view. The return value can be NULL
+if no context menu object was set and kxmlgui is not initialized yet.
+If there is no user set menu, the kxmlgui menu is returned. Do not delete this menu, if
+if it is the xmlgui menu.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> context menu object
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setContextMenu()
+</dd></dl>
+</p></div></div><a class="anchor" name="cursorPosition"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> cursorPosition</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the view's current cursor position. A TAB character is
+handeled as only one character.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> current cursor position
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setCursorPosition()
+</dd></dl>
+</p></div></div><a class="anchor" name="cursorPositionCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QPoint cursorPositionCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the screen coordinates (x/y) of the cursor position in pixels.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> cursor screen coordinates
+</dd></dl>
+</p></div></div><a class="anchor" name="cursorPositionVirtual"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a> cursorPositionVirtual</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the current virtual cursor position, virtual means the
+tabulator character (TAB) counts multiple characters, as configured
+by the user (e.g. one TAB is 8 spaces). The virtual cursor
+position provides access to the user visible values of the current
+cursor position.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> virtual cursor position
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> cursorPosition()
+</dd></dl>
+</p></div></div><a class="anchor" name="cursorToCoordinate"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QPoint cursorToCoordinate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>cursor</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the screen coordinates (x, y) of the supplied <b>cursor</b> relative
+to the view widget in pixels. Thus, 0,0 represents the top left hand of
+the view widget.
+</p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>cursor</em>&nbsp;</td><td> cursor to determine coordinate for.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> cursor screen coordinates relative to the view widget
+</dd></dl>
+</p></div></div><a class="anchor" name="defaultContextMenu"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QMenu defaultContextMenu</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QMenu&nbsp;</td>
+<td class="paramname"><em>menu=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Populate <b>menu</b> with default text editor actions. If <b>menu</b> is
+null, a menu will be created with the view as its parent.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> to use this menu, you will next need to call setContextMenu(),
+as this does not assign the new context menu.
+</dd></dl> </p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> This contains only basic options from the editor component
+(katepart). Plugins are <b>not</b> merged/integrated into it!
+If you want to be a better citizen and take full advantage
+of KTextEditor plugins do something like:
+</dd></dl> <pre class="fragment">
+ KXMLGUIClient* client = view;
+ // search parent XmlGuiClient
+ while (client-&gt;parentClient()) {
+   client = client-&gt;parentClient();
+ }
+
+ if (client-&gt;factory()) {
+   QList&lt;QWidget*&gt; conts = client-&gt;factory()-&gt;containers("menu");
+   foreach (QWidget *w, conts) {
+     if (w-&gt;objectName() == "ktexteditor_popup") {
+       // do something with the menu (ie adding an onshow handler)
+       break;
+     }
+   }
+ }
+</pre>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> or simply use the aboutToShow, aboutToHide signals !!!!!
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>menu</em>&nbsp;</td><td> the menu to be populated, or null to create a new menu.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the menu, whether created or passed initially
+</dd></dl>
+</p></div></div><a class="anchor" name="document"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.Document.html">KTextEditor.Document</a> document</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the view's document, that means the view is a view of the
+returned document.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the view's document
+</dd></dl>
+</p></div></div><a class="anchor" name="insertText"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool insertText</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QString&nbsp;</td>
+<td class="paramname"><em>text</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This is a convenience function which inserts <b>text</b> at the view's
+current cursor position. You do not necessarily need to reimplement
+it, except you want to do some special things.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>text</em>&nbsp;</td><td> Text to be inserted
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true on success of insertion, otherwise false
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> textInserted()
+</dd></dl>
+</p></div></div><a class="anchor" name="isActiveView"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isActiveView</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Check whether this view is the document's active view.
+This is equal to the code:
+<pre class="fragment">
+ document()-&gt;activeView() == view
+</pre>
+</p></div></div><a class="anchor" name="mouseTrackingEnabled"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool mouseTrackingEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Check, whether mouse tracking is enabled.
+</p>
+<p>
+Mouse tracking is required to have the signal mousePositionChanged()
+emitted.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true, if mouse tracking is enabled, otherwise false
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setMouseTrackingEnabled(), mousePositionChanged()
+</dd></dl>
+</p></div></div><a class="anchor" name="removeSelection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool removeSelection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Remove the view's current selection, without deleting the selected
+text.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true on success, otherwise false
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> removeSelectionText()
+</dd></dl>
+</p></div></div><a class="anchor" name="removeSelectionText"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool removeSelectionText</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Remove the view's current selection including the selected text.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true on success, otherwise false
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> removeSelection()
+</dd></dl>
+</p></div></div><a class="anchor" name="selection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool selection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Query the view whether it has selected text, i.e. whether a selection
+exists.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true if a text selection exists, otherwise false
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setSelection(), selectionRange()
+</dd></dl>
+</p></div></div><a class="anchor" name="selectionRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a> selectionRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the range occupied by the current selection.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> selection range, valid only if a selection currently exists.
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setSelection()
+</dd></dl>
+</p></div></div><a class="anchor" name="selectionText"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString selectionText</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the view's selected text.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the selected text
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> setSelection()
+</dd></dl>
+</p></div></div><a class="anchor" name="setBlockSelection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool setBlockSelection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>on</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Set block selection mode to state <b>on.</b>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>on</em>&nbsp;</td><td> if true, block selection mode is turned on, otherwise off
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true on success, otherwise false
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> blockSelection()
+</dd></dl>
+</p></div></div><a class="anchor" name="setContextMenu"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setContextMenu</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">QMenu&nbsp;</td>
+<td class="paramname"><em>menu</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Set a context menu for this view to <b>menu.</b>
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> any previously assigned menu is not deleted. If you are finished
+with the previous menu, you may delete it.
+</dd></dl> </p>
+<p>
+<dl class="warning" compact><dt><b>Warning:</b></dt><dd> Use this with care! Plugin xml gui clients are not merged
+into this menu!
+</dd></dl> <dl class="warning" compact><dt><b>Warning:</b></dt><dd> !!!!!! DON'T USE THIS FUNCTION, UNLESS YOU ARE SURE YOU DON'T WANT PLUGINS TO WORK !!!!!!
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>menu</em>&nbsp;</td><td> new context menu object for this view
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> contextMenu()
+</dd></dl>
+</p></div></div><a class="anchor" name="setCursorPosition"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool setCursorPosition</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>position</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Set the view's new cursor to <b>position.</b> A TAB character
+is handeled as only on character.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>position</em>&nbsp;</td><td> new cursor position
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true on success, otherwise false
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> cursorPosition()
+</dd></dl>
+</p></div></div><a class="anchor" name="setMouseTrackingEnabled"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool setMouseTrackingEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>enable</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Try to enable or disable mouse tracking according to <b>enable.</b>
+The return value contains the state of mouse tracking after the
+request. Mouse tracking is required to have the mousePositionChanged()
+signal emitted.
+</p>
+<p>
+<dl class="note" compact><dt><b>Note:</b></dt><dd> Implementation Notes: An implementation is not forced to support
+this, and should always return false if it does not have
+support.
+</dd></dl> </p>
+<p>
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>enable</em>&nbsp;</td><td> if true, try to enable mouse tracking, otherwise disable
+it.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the current state of mouse tracking
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> mouseTrackingEnabled(), mousePositionChanged()
+</dd></dl>
+</p></div></div><a class="anchor" name="setSelection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool setSelection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Range.html">KTextEditor.Range</a>&nbsp;</td>
+<td class="paramname"><em>range</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>This is an overloaded member function, provided for convenience, it
+differs from the above function only in what argument(s) it accepts.
+An existing old selection will be discarded. If possible you should
+reimplement the default implementation with a more efficient one.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>position</em>&nbsp;</td><td> start or end position of the selection, depending
+on the <b>length</b> parameter
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>length</em>&nbsp;</td><td> if &gt;0 <b>position</b> defines the start of the selection,
+if &lt;0 <b>position</b> specifies the end
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>wrap</em>&nbsp;</td><td> if false the selection does not wrap lines and reaches
+only to start/end of the cursors line. Default: true
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> selectionRange(), selection()
+</dd></dl> </p>
+<p>
+To do: rodda - is this really needed? it can now be accomplished with
+SmartCursor.advance()
+</p></div></div><a class="anchor" name="setSelection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool setSelection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../ktexteditor/KTextEditor.Cursor.html">KTextEditor.Cursor</a>&nbsp;</td>
+<td class="paramname"><em>position</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>length</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>wrap=1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This is an overloaded member function, provided for convenience, it
+differs from the above function only in what argument(s) it accepts.
+An existing old selection will be discarded. If possible you should
+reimplement the default implementation with a more efficient one.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>position</em>&nbsp;</td><td> start or end position of the selection, depending
+on the <b>length</b> parameter
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>length</em>&nbsp;</td><td> if &gt;0 <b>position</b> defines the start of the selection,
+if &lt;0 <b>position</b> specifies the end
+</td></tr> </table></dl>
+<p> </p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>wrap</em>&nbsp;</td><td> if false the selection does not wrap lines and reaches
+only to start/end of the cursors line. Default: true
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> selectionRange(), selection()
+</dd></dl> </p>
+<p>
+To do: rodda - is this really needed? it can now be accomplished with
+SmartCursor.advance()
+</p></div></div><a class="anchor" name="viewEditMode"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../ktexteditor/KTextEditor.View.html#EditMode">KTextEditor.View.EditMode</a> viewEditMode</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the view's current edit mode.
+The current mode can be insert mode, replace mode or any other
+the editor supports, e.g. a vim like command mode. If in doubt
+return EditInsert.
+</p>
+<p>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the current edit mode of this view
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> viewEditModeChanged()
+</dd></dl>
+</p></div></div><a class="anchor" name="viewMode"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">QString viewMode</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the current view mode/state.
+This can be used to visually indicate the view's current mode, for
+example INSERT mode, OVERWRITE mode or COMMAND mode - or
+whatever other edit modes are supported. The string should be
+translated (i18n), as this is a user aimed representation of the view
+state, which should be shown in the GUI, for example in the status bar.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> viewModeChanged()
+</dd></dl>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="EditMode"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">EditMode</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Possible edit modes.
+These correspond to various modes the text editor might be in.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>EditInsert</em>&nbsp;=&nbsp;0</td><td><tr><td valign="top"><em>EditOverwrite</em>&nbsp;=&nbsp;1</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../akonadi/index.html">akonadi</a></li>
+<li><a href="../dnssd/index.html">dnssd</a></li>
+<li><a href="../kdecore/index.html">kdecore</a></li>
+<li><a href="../kdeui/index.html">kdeui</a></li>
+<li><a href="../khtml/index.html">khtml</a></li>
+<li><a href="../kio/index.html">kio</a></li>
+<li><a href="../knewstuff/index.html">knewstuff</a></li>
+<li><a href="../kparts/index.html">kparts</a></li>
+<li><a href="../kutils/index.html">kutils</a></li>
+<li><a href="../nepomuk/index.html">nepomuk</a></li>
+<li><a href="../phonon/index.html">phonon</a></li>
+<li><a href="../plasma/index.html">plasma</a></li>
+<li><a href="../polkitqt/index.html">polkitqt</a></li>
+<li><a href="../solid/index.html">solid</a></li>
+<li><a href="../soprano/index.html">soprano</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

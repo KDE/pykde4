@@ -32,52 +32,52 @@ class Range
 
 
 public:
-                         Range ();
-                         Range (const KTextEditor::Cursor&, const KTextEditor::Cursor&);
-                         Range (const KTextEditor::Cursor&, int);
-                         Range (const KTextEditor::Cursor&, int, int);
-                         Range (int, int, int, int);
-                         Range (const KTextEditor::Range&);
-    virtual bool         isValid () const;
-    static KTextEditor::Range invalid ();
-    virtual bool         isSmartRange () const;
-    virtual KTextEditor::SmartRange* toSmartRange () const;
-    KTextEditor::Cursor& start ();
-    KTextEditor::Cursor& end ();
-    void                 setBothLines (int);
-    void                 setBothColumns (int);
-    virtual void         setRange (const KTextEditor::Range&);
-    void                 setRange (const KTextEditor::Cursor&, const KTextEditor::Cursor&);
-    virtual bool         expandToRange (const KTextEditor::Range&);
-    virtual bool         confineToRange (const KTextEditor::Range&);
-    bool                 onSingleLine () const;
-    int                  numberOfLines () const;
-    int                  columnWidth () const;
-    bool                 isEmpty () const;
-    bool                 contains (const KTextEditor::Range&) const;
-    bool                 contains (const KTextEditor::Cursor&) const;
-    bool                 containsLine (int) const;
-//ig     bool                 containsColumn (int) const;
-    bool                 overlaps (const KTextEditor::Range&) const;
-    bool                 overlapsLine (int) const;
-    bool                 overlapsColumn (int) const;
-    int                  positionRelativeToCursor (const KTextEditor::Cursor&) const;
-    int                  positionRelativeToLine (int) const;
-    bool                 boundaryAtCursor (const KTextEditor::Cursor&) const;
-    bool                 boundaryOnLine (int) const;
-//ig     bool                 boundaryOnColumn (int) const;
-    KTextEditor::Range   intersect (const KTextEditor::Range&) const;
-    KTextEditor::Range   encompass (const KTextEditor::Range&) const;
-//ig     KTextEditor::Range   operator + (const KTextEditor::Range&, const KTextEditor::Range&);
-//ig     KTextEditor::Range&  operator += (KTextEditor::Range&, const KTextEditor::Range&);
-//ig     KTextEditor::Range   operator - (const KTextEditor::Range&, const KTextEditor::Range&);
-//ig     KTextEditor::Range&  operator -= (KTextEditor::Range&, const KTextEditor::Range&);
-//ig     KTextEditor::Range   operator & (const KTextEditor::Range&, const KTextEditor::Range&);
-//ig     KTextEditor::Range&  operator &= (KTextEditor::Range&, const KTextEditor::Range&);
-//ig     bool                 operator == (const KTextEditor::Range&, const KTextEditor::Range&);
-//ig     bool                 operator != (const KTextEditor::Range&, const KTextEditor::Range&);
-//ig     bool                 operator > (const KTextEditor::Range&, const KTextEditor::Range&);
-//ig     bool                 operator < (const KTextEditor::Range&, const KTextEditor::Range&);
+                            Range ();
+                            Range (const KTextEditor::Cursor& start, const KTextEditor::Cursor& end);
+                            Range (const KTextEditor::Cursor& start, int width);
+                            Range (const KTextEditor::Cursor& start, int endLine, int endColumn);
+                            Range (int startLine, int startColumn, int endLine, int endColumn);
+                            Range (const KTextEditor::Range& copy);
+    virtual bool            isValid () const;
+    static KTextEditor::Range  invalid ();
+    virtual bool            isSmartRange () const;
+    virtual KTextEditor::SmartRange*  toSmartRange () const;
+//ig    KTextEditor::Cursor&    start ();
+//ig    KTextEditor::Cursor&    end ();
+    void                    setBothLines (int line);
+    void                    setBothColumns (int column);
+    virtual void            setRange (const KTextEditor::Range& range);
+    void                    setRange (const KTextEditor::Cursor& start, const KTextEditor::Cursor& end);
+    virtual bool            expandToRange (const KTextEditor::Range& range);
+    virtual bool            confineToRange (const KTextEditor::Range& range);
+    bool                    onSingleLine () const;
+    int                     numberOfLines () const;
+    int                     columnWidth () const;
+    bool                    isEmpty () const;
+    bool                    contains (const KTextEditor::Range& range) const;
+    bool                    contains (const KTextEditor::Cursor& cursor) const;
+    bool                    containsLine (int line) const;
+//ig    bool                    containsColumn (int column) const;
+    bool                    overlaps (const KTextEditor::Range& range) const;
+    bool                    overlapsLine (int line) const;
+    bool                    overlapsColumn (int column) const;
+    int                     positionRelativeToCursor (const KTextEditor::Cursor& cursor) const;
+    int                     positionRelativeToLine (int line) const;
+    bool                    boundaryAtCursor (const KTextEditor::Cursor& cursor) const;
+    bool                    boundaryOnLine (int line) const;
+//ig    bool                    boundaryOnColumn (int column) const;
+    KTextEditor::Range      intersect (const KTextEditor::Range& range) const;
+    KTextEditor::Range      encompass (const KTextEditor::Range& range) const;
+//ig    KTextEditor::Range      operator + (const KTextEditor::Range& r1, const KTextEditor::Range& r2);
+//ig    KTextEditor::Range&     operator += (KTextEditor::Range& r1, const KTextEditor::Range& r2);
+//ig    KTextEditor::Range      operator - (const KTextEditor::Range& r1, const KTextEditor::Range& r2);
+//ig    KTextEditor::Range&     operator -= (KTextEditor::Range& r1, const KTextEditor::Range& r2);
+//ig    KTextEditor::Range      operator & (const KTextEditor::Range& r1, const KTextEditor::Range& r2);
+//ig    KTextEditor::Range&     operator &= (KTextEditor::Range& r1, const KTextEditor::Range& r2);
+//ig    bool                    operator == (const KTextEditor::Range& r1, const KTextEditor::Range& r2);
+//ig    bool                    operator != (const KTextEditor::Range& r1, const KTextEditor::Range& r2);
+//ig    bool                    operator > (const KTextEditor::Range& r1, const KTextEditor::Range& r2);
+//ig    bool                    operator < (const KTextEditor::Range& r1, const KTextEditor::Range& r2);
 
 
 //mt  undefined symbol: QDebug -- need mapped type?
@@ -86,14 +86,32 @@ public:
 
 
 protected:
-                         Range (KTextEditor::Cursor*, KTextEditor::Cursor*);
-    virtual void         rangeChanged (KTextEditor::Cursor*, const KTextEditor::Range&);
+                            Range (KTextEditor::Cursor* start, KTextEditor::Cursor* end);
+    virtual void            rangeChanged (KTextEditor::Cursor* cursor, const KTextEditor::Range& from);
+
+
+
 
 public:
+    virtual ~Range ();
+    const KTextEditor::Cursor&  start () const;
+    const KTextEditor::Cursor&  end () const;
+//ig    QDebug                  operator << (QDebug s, const KTextEditor::Range& range);
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'Range'
+    sipType = NULL;
 
+    if (dynamic_cast<KTextEditor::SmartRange*>(sipCpp))
+        sipType = sipType_KTextEditor_SmartRange;
+%End
+};
+// class Range
 
+};
+// namespace KTextEditor
 
-};  // class Range
-
-};  // namespace KTextEditor
-
+%ModuleHeaderCode
+//ctscc
+#include <ktexteditor/range.h>
+#include <ktexteditor/smartrange.h>
+%End

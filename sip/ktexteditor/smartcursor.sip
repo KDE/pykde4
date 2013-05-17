@@ -24,7 +24,7 @@
 namespace KTextEditor
 {
 
-class SmartCursor : KTextEditor::Cursor
+class SmartCursor : KTextEditor::Cursor /Abstract/
 {
 %TypeHeaderCode
 #include <ktexteditor/smartcursor.h>
@@ -32,45 +32,49 @@ class SmartCursor : KTextEditor::Cursor
 
 
 public:
-    virtual bool         isSmartCursor () const;
-    virtual KTextEditor::SmartCursor* toSmartCursor () const;
-    KTextEditor::SmartRange* smartRange () const;
-    KTextEditor::Document* document () const;
-    virtual bool         atEndOfLine () const;
-    virtual bool         atEndOfDocument () const;
-    virtual bool         isValid () const;
-    QChar                character () const;
-    virtual bool         insertText (const QStringList&, bool = 0);
+    virtual bool            isSmartCursor () const;
+    virtual KTextEditor::SmartCursor*  toSmartCursor () const;
+    KTextEditor::SmartRange*  smartRange () const;
+    KTextEditor::Document*  document () const;
+    virtual bool            atEndOfLine () const;
+    virtual bool            atEndOfDocument () const;
+    virtual bool            isValid () const;
+    QChar                   character () const;
+    virtual bool            insertText (const QStringList& text, bool block = 0);
 
     enum AdvanceMode
     {
-        ByCharacter, 
+        ByCharacter,
         ByCursorPosition
     };
 
-    virtual bool         advance (int, KTextEditor::SmartCursor::AdvanceMode = KTextEditor::SmartCursor::ByCharacter );
+    virtual bool            advance (int distance, KTextEditor::SmartCursor::AdvanceMode mode = KTextEditor::SmartCursor::ByCharacter);
 
     enum InsertBehavior
     {
-        StayOnInsert, 
+        StayOnInsert,
         MoveOnInsert
     };
 
-    KTextEditor::SmartCursor::InsertBehavior insertBehavior () const;
-    void                 setInsertBehavior (KTextEditor::SmartCursor::InsertBehavior);
-    virtual bool         hasNotifier () const = 0;
-    virtual KTextEditor::SmartCursorNotifier* notifier ()  = 0;
-    virtual void         deleteNotifier ()  = 0;
-    virtual KTextEditor::SmartCursorWatcher* watcher () const = 0;
-    virtual void         setWatcher (KTextEditor::SmartCursorWatcher* = 0)  = 0;
+    KTextEditor::SmartCursor::InsertBehavior  insertBehavior () const;
+    void                    setInsertBehavior (KTextEditor::SmartCursor::InsertBehavior insertBehavior);
+    virtual bool            hasNotifier () const=0;
+    virtual KTextEditor::SmartCursorNotifier*  notifier ()=0;
+    virtual void            deleteNotifier ()=0;
+    virtual KTextEditor::SmartCursorWatcher*  watcher () const=0;
+    virtual void            setWatcher (KTextEditor::SmartCursorWatcher* watcher = 0)=0;
 
 protected:
-                         SmartCursor (const KTextEditor::Cursor&, KTextEditor::Document*, KTextEditor::SmartCursor::InsertBehavior);
+                            SmartCursor (const KTextEditor::Cursor& position, KTextEditor::Document* doc, KTextEditor::SmartCursor::InsertBehavior insertBehavior);
 
 private:
-                         SmartCursor (const KTextEditor::SmartCursor&);
+                            SmartCursor (const KTextEditor::SmartCursor&);
 
-};  // class SmartCursor
+public:
+    virtual ~SmartCursor ();
+};
+// class SmartCursor
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 

@@ -32,16 +32,19 @@ class CodeCompletionInterface
 
 
 public:
-    virtual bool         isCompletionActive () const = 0;
-    virtual void         startCompletion (const KTextEditor::Range&, KTextEditor::CodeCompletionModel*)  = 0;
-    virtual void         abortCompletion ()  = 0;
-    virtual void         forceCompletion ()  = 0;
-    virtual void         registerCompletionModel (KTextEditor::CodeCompletionModel*)  = 0;
-    virtual void         unregisterCompletionModel (KTextEditor::CodeCompletionModel*)  = 0;
-    virtual bool         isAutomaticInvocationEnabled () const = 0;
-    virtual void         setAutomaticInvocationEnabled (bool = 1)  = 0;
+    virtual bool            isCompletionActive () const=0;
+    virtual void            startCompletion (const KTextEditor::Range& word, KTextEditor::CodeCompletionModel* model)=0;
+    virtual void            abortCompletion ()=0;
+    virtual void            forceCompletion ()=0;
+    virtual void            registerCompletionModel (KTextEditor::CodeCompletionModel* model)=0;
+    virtual void            unregisterCompletionModel (KTextEditor::CodeCompletionModel* model)=0;
+    virtual bool            isAutomaticInvocationEnabled () const=0;
+    virtual void            setAutomaticInvocationEnabled (bool enabled = 1)=0;
 
-};  // class CodeCompletionInterface
+    virtual ~CodeCompletionInterface ();
+};
+// class CodeCompletionInterface
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 

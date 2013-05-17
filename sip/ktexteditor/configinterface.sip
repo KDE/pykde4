@@ -32,15 +32,15 @@ class ConfigInterface
 
 
 public:
-                         ConfigInterface ();
+                            ConfigInterface ();
 
-public:
-    virtual QStringList  configKeys () const = 0;
-    virtual QVariant     configValue (const QString&)  = 0;
-    virtual void         setConfigValue (const QString&, const QVariant&)  = 0;
-private:
-                         ConfigInterface (const KTextEditor::ConfigInterface &other);
-};  // class ConfigInterface
+    virtual QStringList     configKeys () const=0;
+    virtual QVariant        configValue (const QString& key)=0;
+    virtual void            setConfigValue (const QString& key, const QVariant& value)=0;
+    virtual ~ConfigInterface ();
+};
+// class ConfigInterface
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 

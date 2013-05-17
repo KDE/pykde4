@@ -32,10 +32,11 @@ class Mark
 
 
 public:
-    int                  line;
-    uint                 type;
+    int line;
+    uint type;
 
-};  // class Mark
+};
+// class Mark
 
 
 class MarkInterface
@@ -46,87 +47,88 @@ class MarkInterface
 
 
 public:
-                         MarkInterface ();
+                            MarkInterface ();
 
-public:
-    virtual uint         mark (int)  = 0;
-    virtual void         setMark (int, uint)  = 0;
-    virtual void         clearMark (int)  = 0;
-    virtual void         addMark (int, uint)  = 0;
-    virtual void         removeMark (int, uint)  = 0;
-    virtual const QHash<int, KTextEditor::Mark*>& marks ()  = 0;
-    virtual void         clearMarks ()  = 0;
-    static int           reservedMarkersCount ();
+    virtual uint            mark (int line)=0;
+    virtual void            setMark (int line, uint markType)=0;
+    virtual void            clearMark (int line)=0;
+    virtual void            addMark (int line, uint markType)=0;
+    virtual void            removeMark (int line, uint markType)=0;
+    virtual const QHash<int,KTextEditor::Mark*>&  marks ()=0;
+    virtual void            clearMarks ()=0;
+    static int              reservedMarkersCount ();
 
     enum MarkTypes
     {
-        markType01, 
-        markType02, 
-        markType03, 
-        markType04, 
-        markType05, 
-        markType06, 
-        markType07, 
-        markType08, 
-        markType09, 
-        markType10, 
-        markType11, 
-        markType12, 
-        markType13, 
-        markType14, 
-        markType15, 
-        markType16, 
-        markType17, 
-        markType18, 
-        markType19, 
-        markType20, 
-        markType21, 
-        markType22, 
-        markType23, 
-        markType24, 
-        markType25, 
-        markType26, 
-        markType27, 
-        markType28, 
-        markType29, 
-        markType30, 
-        markType31, 
-        markType32, 
-        Bookmark, 
-        BreakpointActive, 
-        BreakpointReached, 
-        BreakpointDisabled, 
-        Execution, 
-        Warning, 
+        markType01,
+        markType02,
+        markType03,
+        markType04,
+        markType05,
+        markType06,
+        markType07,
+        markType08,
+        markType09,
+        markType10,
+        markType11,
+        markType12,
+        markType13,
+        markType14,
+        markType15,
+        markType16,
+        markType17,
+        markType18,
+        markType19,
+        markType20,
+        markType21,
+        markType22,
+        markType23,
+        markType24,
+        markType25,
+        markType26,
+        markType27,
+        markType28,
+        markType29,
+        markType30,
+        markType31,
+        markType32,
+        Bookmark,
+        BreakpointActive,
+        BreakpointReached,
+        BreakpointDisabled,
+        Execution,
+        Warning,
         Error
     };
 
 
-public:
-    virtual void         marksChanged (KTextEditor::Document*)  = 0;
+    virtual void            marksChanged (KTextEditor::Document* document)=0;
 
-public:
-    virtual void         setMarkPixmap (KTextEditor::MarkInterface::MarkTypes, const QPixmap&)  = 0;
-    virtual QPixmap      markPixmap (KTextEditor::MarkInterface::MarkTypes) const = 0;
-    virtual void         setMarkDescription (KTextEditor::MarkInterface::MarkTypes, const QString&)  = 0;
-    virtual QString      markDescription (KTextEditor::MarkInterface::MarkTypes) const = 0;
-    virtual void         setEditableMarks (uint)  = 0;
-    virtual uint         editableMarks () const = 0;
+    virtual void            setMarkPixmap (KTextEditor::MarkInterface::MarkTypes mark, const QPixmap& pixmap)=0;
+    virtual QPixmap         markPixmap (KTextEditor::MarkInterface::MarkTypes mark) const=0;
+    virtual void            setMarkDescription (KTextEditor::MarkInterface::MarkTypes mark, const QString& text)=0;
+    virtual QString         markDescription (KTextEditor::MarkInterface::MarkTypes mark) const=0;
+    virtual void            setEditableMarks (uint markMask)=0;
+    virtual uint            editableMarks () const=0;
 
     enum MarkChangeAction
     {
-        MarkAdded, 
+        MarkAdded,
         MarkRemoved
     };
 
 
-public:
-    virtual void         markChanged (KTextEditor::Document*, KTextEditor::Mark, KTextEditor::MarkInterface::MarkChangeAction)  = 0;
-private:
-                         MarkInterface (const KTextEditor::MarkInterface &other);
-};  // class MarkInterface
+    virtual void            markChanged (KTextEditor::Document* document, KTextEditor::Mark mark, KTextEditor::MarkInterface::MarkChangeAction action)=0;
+    virtual ~MarkInterface ();
+signals:
+//ig    void                    markToolTipRequested (KTextEditor::Document* document, KTextEditor::Mark mark, QPoint position, bool& handled);
+//ig    void                    markContextMenuRequested (KTextEditor::Document* document, KTextEditor::Mark mark, QPoint pos, bool& handled);
+//ig    void                    markClicked (KTextEditor::Document* document, KTextEditor::Mark mark, bool& handled);
+};
+// class MarkInterface
 
-};  // namespace KTextEditor
+};
+// namespace KTextEditor
 
 
 

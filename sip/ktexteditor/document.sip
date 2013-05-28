@@ -138,15 +138,58 @@ protected:
 //     sipRes = dynamic_cast<KTextEditor::AnnotationInterface*>(sipCpp);
 //     Py_END_ALLOW_THREADS
 // %End
-    
-    
-    
-    
-    
-    
-    
-
 public:
+//force
+    KTextEditor::MarkInterface *markInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::MarkInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::ModificationInterface *modificationInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::ModificationInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::SearchInterface *searchInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::SearchInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::SmartInterface *smartInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::SmartInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::TemplateInterface *templateInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::TemplateInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::TextHintInterface *textHintInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::TextHintInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::VariableInterface *variableInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::VariableInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+//end    
+
     virtual ~Document ();
 signals:
     void                    documentSavedOrUploaded (KTextEditor::Document* document, bool saveAs);

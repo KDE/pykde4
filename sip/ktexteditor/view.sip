@@ -103,12 +103,29 @@ signals:
 
 public:
     virtual bool            insertText (const QString& text);
-    
-    
-    
-    
-
     virtual ~View ();
+//force
+    KTextEditor::CodeCompletionInterface *codeCompletionInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::CodeCompletionInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::SessionConfigInterface *sessionConfigInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::SessionConfigInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+    
+    KTextEditor::TextHintInterface *textHintInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::TextHintInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+//end
 };
 // class View
 

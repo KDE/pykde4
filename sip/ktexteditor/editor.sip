@@ -32,8 +32,9 @@ class Editor : QObject
 {
 %TypeHeaderCode
 #include <ktexteditor/editor.h>
+#include <ktexteditor/commandinterface.h>
+#include <ktexteditor/containerinterface.h>
 %End
-
 
 public:
                             Editor (QObject* parent /TransferThis/);
@@ -61,6 +62,21 @@ public:
     void                    setSimpleMode (bool on);
     bool                    simpleMode () const;
     const QString&          defaultEncoding () const;
+
+    KTextEditor::CommandInterface *commandInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::CommandInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
+    KTextEditor::ContainerInterface *containerInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::ContainerInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
 protected:
     void                    setDefaultEncoding (const QString& defaultEncoding);
 };

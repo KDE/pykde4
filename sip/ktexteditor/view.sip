@@ -32,6 +32,10 @@ class View : QWidget, KXMLGUIClient /Abstract/
 #include <ktexteditor/codecompletioninterface.h>
 #include <ktexteditor/sessionconfiginterface.h>
 #include <ktexteditor/texthintinterface.h>
+#include <ktexteditor/annotationinterface.h>
+#include <ktexteditor/configinterface.h>
+#include <ktexteditor/templateinterface.h>
+#include <ktexteditor/templateinterface2.h>
 %End
 
 
@@ -125,6 +129,43 @@ public:
     sipRes = dynamic_cast<KTextEditor::TextHintInterface*>(sipCpp);
     Py_END_ALLOW_THREADS
 %End
+
+    KTextEditor::AnnotationInterface *annotationInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::AnnotationInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
+    KTextEditor::ConfigInterface *configInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::ConfigInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
+    KTextEditor::CoordinatesToCursorInterface *coordinatesToCursorInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::CoordinatesToCursorInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
+    KTextEditor::TemplateInterface *templateInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::TemplateInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
+    KTextEditor::TemplateInterface2 *templateInterface2();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::TemplateInterface2*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
+
 //end
 };
 // class View

@@ -36,6 +36,13 @@ class Document : KParts::ReadWritePart
 #include <ktexteditor/smartinterface.h>
 #include <ktexteditor/templateinterface.h>
 #include <ktexteditor/variableinterface.h>
+#include <ktexteditor/movinginterface.h>
+#include <ktexteditor/annotationinterface.h>
+#include <ktexteditor/highlightinterface.h>
+#include <ktexteditor/configinterface.h>
+#include <ktexteditor/modeinterface.h>
+#include <ktexteditor/sessionconfiginterface.h>
+#include <ktexteditor/recoveryinterface.h>
 %End
 
 
@@ -132,14 +139,16 @@ protected:
 // to convert the Document to the required interface. They return
 // None on failure.
 //     Why no annotationinterface.sip?
-//     KTextEditor::AnnotationInterface *annotationInterface();
-// %MethodCode
-//     Py_BEGIN_ALLOW_THREADS
-//     sipRes = dynamic_cast<KTextEditor::AnnotationInterface*>(sipCpp);
-//     Py_END_ALLOW_THREADS
-// %End
 public:
+
 //force
+    KTextEditor::AnnotationInterface *annotationInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::AnnotationInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
     KTextEditor::MarkInterface *markInterface();
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
@@ -158,13 +167,6 @@ public:
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
     sipRes = dynamic_cast<KTextEditor::SearchInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
-%End
-    
-    KTextEditor::SmartInterface *smartInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::SmartInterface*>(sipCpp);
     Py_END_ALLOW_THREADS
 %End
     
@@ -188,7 +190,57 @@ public:
     sipRes = dynamic_cast<KTextEditor::VariableInterface*>(sipCpp);
     Py_END_ALLOW_THREADS
 %End
-//end    
+
+    KTextEditor::MovingInterface *movingInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::MovingInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
+    KTextEditor::HighlightInterface *highlightInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::HighlightInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
+    KTextEditor::ConfigInterface *configInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::ConfigInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
+    KTextEditor::ModeInterface *modeInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::ModeInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
+    KTextEditor::ParameterizedSessionConfigInterface *parameterizedSessionConfigInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::ParameterizedSessionConfigInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
+    KTextEditor::SessionConfigInterface *sessionConfigInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::SessionConfigInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
+    KTextEditor::RecoveryInterface *recoveryInterface();
+%MethodCode
+    Py_BEGIN_ALLOW_THREADS
+    sipRes = dynamic_cast<KTextEditor::RecoveryInterface*>(sipCpp);
+    Py_END_ALLOW_THREADS
+%End
+
+//end
 
     virtual ~Document ();
 signals:

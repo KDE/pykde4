@@ -60,13 +60,6 @@
 %Include recoveryinterface.sip
 %Include searchinterface.sip
 %Include sessionconfiginterface.sip
-%Include smartcursor.sip
-%Include smartcursornotifier.sip
-%Include smartcursorwatcher.sip
-%Include smartinterface.sip
-%Include smartrange.sip
-%Include smartrangenotifier.sip
-%Include smartrangewatcher.sip
 %Include templateinterface.sip
 %Include templateinterface2.sip
 %Include texthintinterface.sip

@@ -159,14 +159,6 @@ public:
         sipType = sipType_KTextEditor_LoadSaveFilterCheckPlugin;
     else if (dynamic_cast<KTextEditor::Plugin*>(sipCpp))
         sipType = sipType_KTextEditor_Plugin;
-    else if (dynamic_cast<KTextEditor::SmartCursorNotifier*>(sipCpp))
-        sipType = sipType_KTextEditor_SmartCursorNotifier;
-    else if (dynamic_cast<KTextEditor::SmartCursorNotifier*>(sipCpp))
-        sipType = sipType_KTextEditor_SmartCursorNotifier;
-    else if (dynamic_cast<KTextEditor::SmartRangeNotifier*>(sipCpp))
-        sipType = sipType_KTextEditor_SmartRangeNotifier;
-    else if (dynamic_cast<KTextEditor::SmartRangeNotifier*>(sipCpp))
-        sipType = sipType_KTextEditor_SmartRangeNotifier;
     else if (dynamic_cast<KTextEditor::CodeCompletionModel*>(sipCpp))
         {
         sipType = sipType_KTextEditor_CodeCompletionModel;

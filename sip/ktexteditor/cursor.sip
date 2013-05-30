@@ -36,8 +36,6 @@ public:
                             Cursor (int line, int column);
                             Cursor (const KTextEditor::Cursor& copy);
     virtual bool            isValid () const;
-    virtual bool            isSmartCursor () const;
-    virtual KTextEditor::SmartCursor*  toSmartCursor () const;
     static KTextEditor::Cursor  invalid ();
     static KTextEditor::Cursor  start ();
     virtual void            setPosition (const KTextEditor::Cursor& position);
@@ -77,13 +75,6 @@ protected:
 public:
     virtual ~Cursor ();
 //ig    QDebug                  operator << (QDebug s, const KTextEditor::Cursor& cursor);
-%ConvertToSubClassCode
-    // CTSCC for subclasses of 'Cursor'
-    sipType = NULL;
-
-    if (dynamic_cast<KTextEditor::SmartCursor*>(sipCpp))
-        sipType = sipType_KTextEditor_SmartCursor;
-%End
 };
 // class Cursor
 
@@ -93,5 +84,4 @@ public:
 %ModuleHeaderCode
 //ctscc
 #include <ktexteditor/cursor.h>
-#include <ktexteditor/smartcursor.h>
 %End

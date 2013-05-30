@@ -40,8 +40,6 @@ public:
                             Range (const KTextEditor::Range& copy);
     virtual bool            isValid () const;
     static KTextEditor::Range  invalid ();
-    virtual bool            isSmartRange () const;
-    virtual KTextEditor::SmartRange*  toSmartRange () const;
 //ig    KTextEditor::Cursor&    start ();
 //ig    KTextEditor::Cursor&    end ();
     void                    setBothLines (int line);
@@ -97,13 +95,6 @@ public:
     const KTextEditor::Cursor&  start () const;
     const KTextEditor::Cursor&  end () const;
 //ig    QDebug                  operator << (QDebug s, const KTextEditor::Range& range);
-%ConvertToSubClassCode
-    // CTSCC for subclasses of 'Range'
-    sipType = NULL;
-
-    if (dynamic_cast<KTextEditor::SmartRange*>(sipCpp))
-        sipType = sipType_KTextEditor_SmartRange;
-%End
 };
 // class Range
 
@@ -113,5 +104,4 @@ public:
 %ModuleHeaderCode
 //ctscc
 #include <ktexteditor/range.h>
-#include <ktexteditor/smartrange.h>
 %End

@@ -130,10 +130,10 @@ public:
     Py_END_ALLOW_THREADS
 %End
 
-    KTextEditor::AnnotationInterface *annotationInterface();
+    KTextEditor::AnnotationViewInterface *annotationViewInterface();
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::AnnotationInterface*>(sipCpp);
+    sipRes = dynamic_cast<KTextEditor::AnnotationViewInterface*>(sipCpp);
     Py_END_ALLOW_THREADS
 %End
 

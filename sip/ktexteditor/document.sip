@@ -43,6 +43,7 @@ class Document : KParts::ReadWritePart
 #include <ktexteditor/modeinterface.h>
 #include <ktexteditor/sessionconfiginterface.h>
 #include <ktexteditor/recoveryinterface.h>
+
 %End
 
 
@@ -170,20 +171,6 @@ public:
     Py_END_ALLOW_THREADS
 %End
     
-    KTextEditor::TemplateInterface *templateInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::TemplateInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
-%End
-    
-    KTextEditor::TextHintInterface *textHintInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::TextHintInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
-%End
-    
     KTextEditor::VariableInterface *variableInterface();
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
@@ -209,13 +196,6 @@ public:
 %MethodCode
     Py_BEGIN_ALLOW_THREADS
     sipRes = dynamic_cast<KTextEditor::ConfigInterface*>(sipCpp);
-    Py_END_ALLOW_THREADS
-%End
-
-    KTextEditor::ModeInterface *modeInterface();
-%MethodCode
-    Py_BEGIN_ALLOW_THREADS
-    sipRes = dynamic_cast<KTextEditor::ModeInterface*>(sipCpp);
     Py_END_ALLOW_THREADS
 %End
 

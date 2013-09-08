@@ -105,6 +105,13 @@ public:
     ~KDirModel ();
     void                    setJobTransfersVisible (bool value);
     bool                    jobTransfersVisible () const;
+//force
+private:
+    virtual bool removeColumns(int, int, const QModelIndex&);
+    virtual bool removeRows(int, int, const QModelIndex&);
+    virtual bool insertColumns(int, int, const QModelIndex&);
+    virtual bool insertRows(int, int, const QModelIndex&);
+//end
 };
 // KDirModel
 

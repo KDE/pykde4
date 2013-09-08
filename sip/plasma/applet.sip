@@ -217,6 +217,10 @@ public:
     void                    showConfigurationInterface (QWidget* widget);
     bool                    isUserConfiguring () const;
     explicit                Applet (const KPluginInfo& info, QGraphicsItem* parent = 0, uint appletId = 0);
+//force
+private:
+    virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
+//end
 };
 // Applet
 

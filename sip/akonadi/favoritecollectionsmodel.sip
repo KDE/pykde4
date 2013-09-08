@@ -42,5 +42,9 @@ public:
     virtual bool            dropMimeData (const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent);
     virtual QStringList     mimeTypes () const;
     virtual Qt::ItemFlags   flags (const QModelIndex& index) const;
+//force
+private:
+    virtual void setSourceModel(QAbstractItemModel *);
+//end
 };
 };

@@ -31,4 +31,8 @@ protected:
     virtual bool            acceptRow (int sourceRow, const QModelIndex& sourceParent) const;
 public:
     virtual QModelIndexList  match (const QModelIndex& start, int role, const QVariant& value, int hits = 1, Qt::MatchFlags flags = Qt::MatchFlags(Qt::MatchStartsWith|Qt::MatchWrap)) const;
+//force
+private:
+    virtual bool filterAcceptsRow(int, const QModelIndex&) const;
+//end
 };

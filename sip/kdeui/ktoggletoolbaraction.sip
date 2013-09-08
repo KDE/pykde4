@@ -33,6 +33,10 @@ public:
     KToolBar*               toolBar ();
     virtual bool            eventFilter (QObject* watched, QEvent* event);
     ~KToggleToolBarAction ();
+//force
+private:
+    virtual void slotToggled( bool checked );
+//end
 };
 // KToggleToolBarAction
 

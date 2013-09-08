@@ -30,8 +30,10 @@ class KIntValidator : QValidator
 public:
     explicit                KIntValidator (QWidget* parent /TransferThis/, int base = 10);
                             KIntValidator (int bottom, int top, QWidget* parent /TransferThis/, int base = 10);
-    virtual QValidator::State  validate (QString&, int& /In/) const;
-    virtual void            fixup (QString&) const;
+    virtual QValidator::State validate(QString & /In,Out/, int & /In,Out/) const = 0 /API=QString:2 - /;
+    virtual QValidator::State validate(QString & /Constrained/, int & /In,Out/) const = 0 /API=QString: - 2/;
+    virtual void fixup(QString &input /In,Out/) const /API=QString:2 - /;
+    virtual void fixup(QString & /Constrained/) const /API=QString: - 2/;
     virtual void            setRange (int bottom, int top);
     virtual void            setBase (int base);
     virtual int             bottom () const;
@@ -53,8 +55,10 @@ public:
     explicit                KFloatValidator (QWidget* parent /TransferThis/);
                             KFloatValidator (double bottom, double top, QWidget* parent /TransferThis/);
                             KFloatValidator (double bottom, double top, bool localeAware, QWidget* parent /TransferThis/);
-    virtual QValidator::State  validate (QString&, int& /In/) const;
-    virtual void            fixup (QString&) const;
+    virtual QValidator::State validate(QString & /In,Out/, int & /In,Out/) const = 0 /API=QString:2 - /;
+    virtual QValidator::State validate(QString & /Constrained/, int & /In,Out/) const = 0 /API=QString: - 2/;
+    virtual void fixup(QString &input /In,Out/) const /API=QString:2 - /;
+    virtual void fixup(QString & /Constrained/) const /API=QString: - 2/;
     virtual void            setRange (double bottom, double top);
     virtual double          bottom () const;
     virtual double          top () const;
@@ -75,7 +79,8 @@ class KDoubleValidator : QDoubleValidator
 public:
     explicit                KDoubleValidator (QObject* parent /TransferThis/);
                             KDoubleValidator (double bottom, double top, int decimals, QObject* parent /TransferThis/);
-    virtual QValidator::State  validate (QString& input, int& pos /In/) const;
+    virtual QValidator::State validate(QString & /In,Out/, int & /In,Out/) const = 0 /API=QString:2 - /;
+    virtual QValidator::State validate(QString & /Constrained/, int & /In,Out/) const = 0 /API=QString: - 2/;
     bool                    acceptLocalizedNumbers () const;
     void                    setAcceptLocalizedNumbers (bool accept);
     ~KDoubleValidator ();

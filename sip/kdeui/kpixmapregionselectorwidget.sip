@@ -57,6 +57,7 @@ protected:
 private:
 //force
                             KPixmapRegionSelectorWidget (const KPixmapRegionSelectorWidget&);
+    virtual bool eventFilter(QObject*, QEvent*);
 //end
 public:
     ~KPixmapRegionSelectorWidget ();

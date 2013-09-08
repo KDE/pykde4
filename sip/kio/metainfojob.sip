@@ -51,7 +51,7 @@ protected:
 private:
 //force
                             MetaInfoJob ();
-
+    virtual void start();
 //end
 public:
     ~MetaInfoJob ();

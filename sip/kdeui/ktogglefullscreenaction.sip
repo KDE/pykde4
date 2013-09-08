@@ -37,7 +37,10 @@ protected:
     bool                    eventFilter (QObject* object, QEvent* event);
 public:
     ~KToggleFullScreenAction ();
+
+//force
+private:
+    virtual void slotToggled(bool);
+//end
 };
 // KToggleFullScreenAction
-
-

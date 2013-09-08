@@ -39,5 +39,3 @@ public:
     ~KShellCompletion ();
 };
 // KShellCompletion
-
-

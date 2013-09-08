@@ -70,6 +70,11 @@ private:
 public:
     ~Highlighter ();
     bool                    checkerEnabledByDefault () const;
+//force
+private:
+        virtual void connectNotify(const char* signal);
+        virtual void disconnectNotify(const char* signal);
+//end
 };
 // Highlighter
 

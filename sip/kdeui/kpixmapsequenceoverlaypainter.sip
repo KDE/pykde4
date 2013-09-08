@@ -39,4 +39,8 @@ public:
     void                    setOffset (const QPoint& offset);
     void                    start ();
     void                    stop ();
+//force
+private:
+    virtual bool eventFilter(QObject*, QEvent*);
+//end
 };

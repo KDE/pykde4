@@ -122,5 +122,12 @@ public:
     };
     bool                    includeUnsubscribed () const;
     void                    setIncludeUnsubscribed (bool show);
+//force
+private:
+    virtual bool removeColumns(int, int, const QModelIndex&);
+    virtual bool removeRows(int, int, const QModelIndex&);
+    virtual bool insertColumns(int, int, const QModelIndex&);
+    virtual bool insertRows(int, int, const QModelIndex&);
+//end
 };
 };

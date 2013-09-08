@@ -52,6 +52,10 @@ public:
     ~GLApplet ();
     GLuint                  bindTexture (const QImage& image, GLenum target = GL_TEXTURE_2D);
     void                    deleteTexture (GLuint texture_id);
+
+private:
+    virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
+    virtual void paintInterface(QPainter*, const QStyleOptionGraphicsItem*, const QRect&);
 //end
 };
 // GLApplet

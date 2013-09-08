@@ -61,8 +61,10 @@ class KDateValidator : QValidator
 
 public:
                             KDateValidator (QWidget* parent /TransferThis/ = 0);
-    virtual QValidator::State  validate (QString& text, int& e /In/) const;
-    virtual void            fixup (QString& input) const;
+    virtual QValidator::State validate(QString & /In,Out/, int & /In,Out/) const = 0 /API=QString:2 - /;
+    virtual QValidator::State validate(QString & /Constrained/, int & /In,Out/) const = 0 /API=QString: - 2/;
+    virtual void fixup(QString &input /In,Out/) const /API=QString:2 - /;
+    virtual void fixup(QString & /Constrained/) const /API=QString: - 2/;
     QValidator::State       date (const QString& text, QDate& date) const;
 };
 // KDateValidator

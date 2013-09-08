@@ -35,8 +35,10 @@ public:
     bool                    isFixupEnabled () const;
     void                    setStringList (const QStringList& list);
     QStringList             stringList () const;
-    virtual QValidator::State  validate (QString& input, int& pos /Out/) const;
-    virtual void            fixup (QString& input) const;
+    virtual QValidator::State validate(QString & /In,Out/, int & /In,Out/) const = 0 /API=QString:2 - /;
+    virtual QValidator::State validate(QString & /Constrained/, int & /In,Out/) const = 0 /API=QString: - 2/;
+    virtual void fixup(QString &input /In,Out/) const /API=QString:2 - /;
+    virtual void fixup(QString & /Constrained/) const /API=QString: - 2/;
     ~KStringListValidator ();
 };
 // KStringListValidator
@@ -51,8 +53,10 @@ class KMimeTypeValidator : QValidator
 
 public:
     explicit                KMimeTypeValidator (QObject* parent /TransferThis/ = 0);
-    virtual QValidator::State  validate (QString& input, int& pos /Out/) const;
-    virtual void            fixup (QString& input) const;
+    virtual QValidator::State validate(QString & /In,Out/, int & /In,Out/) const = 0 /API=QString:2 - /;
+    virtual QValidator::State validate(QString & /Constrained/, int & /In,Out/) const = 0 /API=QString: - 2/;
+    virtual void fixup(QString &input /In,Out/) const /API=QString:2 - /;
+    virtual void fixup(QString & /Constrained/) const /API=QString: - 2/;
     ~KMimeTypeValidator ();
 };
 // KMimeTypeValidator

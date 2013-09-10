@@ -127,7 +127,7 @@ else (PYTHON_VERSION_MAJOR GREATER 2)
     endif()
 endif ()
 
-add_definitions(-D_REENTRANT -DQT_CORE_LIB -DQT_GUI_LIB -DUSING_SOPRANO_NRLMODEL_UNSTABLE_API)
+add_definitions(-D_REENTRANT -DQT_CORE_LIB -DQT_GUI_LIB -DUSING_SOPRANO_NRLMODEL_UNSTABLE_API -DSIP_PROTECTED_IS_PUBLIC -Dprotected=public)
 
 file(GLOB kdecore_files_sip sip/kdecore/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${kdecore_files_sip})

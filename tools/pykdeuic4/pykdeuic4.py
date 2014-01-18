@@ -23,6 +23,7 @@ import sys
 import time
 import optparse
 
+from PyQt4 import QtCore
 from PyQt4.uic.Compiler import indenter, compiler
 from PyQt4.uic.Compiler import qtproxies
 from PyQt4.uic.objcreator import MATCH,NO_MATCH
@@ -101,7 +102,12 @@ def processUI(uifile, output_filename=None, exe=False, indent=4):
     output.write(HEADER % (uifile, time.ctime()))
     indenter.indentwidth = indent
     comp = compiler.UICompiler()
-    winfo = comp.compileUi(uifile, output, None)
+    pyqt_version_tuple = tuple(map(int, QtCore.PYQT_VERSION_STR.split(".")))
+    # the method signature for compileUI changed in 4.10.0
+    if pyqt_version_tuple < (4,10,0):
+        winfo = comp.compileUi(uifile, output, None)
+    else:
+        winfo = comp.compileUi(uifile, output, None, "")
 
     if exe:
         output.write(DISPLAY_CODE % winfo["uiclass"])

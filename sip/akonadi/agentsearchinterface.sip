@@ -19,6 +19,9 @@
 
 namespace Akonadi
 {
+
+class ImapSet;
+
 class AgentSearchInterface
 {
 %TypeHeaderCode
@@ -36,7 +39,7 @@ enum ResultScope {
     virtual void            removeSearch (const Akonadi::Collection& resultCollection)=0;
     virtual void            search (const QString &query, const Akonadi::Collection &collection)=0;
     void                 searchFinished (const QVector<qint64> result, ResultScope scope);
-//    void                 searchFinished (const Akonadi::ImapSet &result, ResultScope scope);
+    void                 searchFinished (const Akonadi::ImapSet &result, ResultScope scope);
     void                 searchFinished (const QVector<QByteArray> &result);
 };
 };

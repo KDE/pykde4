@@ -30,5 +30,9 @@ public:
     virtual ~AgentSearchInterface ();
     virtual void            addSearch (const QString& query, const QString& queryLanguage, const Akonadi::Collection& resultCollection)=0;
     virtual void            removeSearch (const Akonadi::Collection& resultCollection)=0;
+    virtual void            search (const QString &query, const Akonadi::Collection &collection)=0;
+    // void                 searchFinished (const QVector<qint64> result, resultScope scope);
+    // void                 searchFinished (const ImapSet &result, ResultScope scope);
+    // void                 searchFinished (const QVector<QByteArray> &result);
 };
 };

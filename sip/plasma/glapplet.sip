@@ -18,8 +18,13 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 //force
+
+%Feature PyKDE_GLuint
+
+%If (PyKDE_GLuint)
 typedef unsigned int GLuint;
 typedef unsigned int GLenum;
+%End
 
 namespace Plasma
 {

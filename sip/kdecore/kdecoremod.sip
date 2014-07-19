@@ -107,3 +107,6 @@
 %Include backgroundchecker.sip
 %Include globals.sip
 %Include speller.sip
+
+// This file is generated at configuration time.
+%Include pykde_config.sip

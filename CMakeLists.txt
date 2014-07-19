@@ -9,8 +9,6 @@ find_package(KDE4 4.9.4 REQUIRED)
 cmake_policy(SET CMP0002 OLD)
 find_package(PythonLibrary)
 
-
-
 include(KDE4Defaults)
 include(MacroLibrary)
 include(PythonMacros)
@@ -101,7 +99,7 @@ include_directories(
     ${KDEPIMLIBS_INCLUDE_DIRS}
 )
 
-set(SIP_INCLUDES ${PYQT4_SIP_DIR} sip)
+set(SIP_INCLUDES ${CMAKE_BINARY_DIR} ${PYQT4_SIP_DIR} sip)
 set(SIP_CONCAT_PARTS 8)
 if (WIN32)
     set(SIP_TAGS ALL WS_WIN ${PYQT4_VERSION_TAG})
@@ -109,6 +107,8 @@ else ()
     set(SIP_TAGS ALL WS_X11 ${PYQT4_VERSION_TAG})
 endif ()
 set(SIP_DISABLE_FEATURES VendorID PyQt_NoPrintRangeBug)
+
+set(SIP_FILES_INSTALL_DIR ${SHARE_INSTALL_PREFIX}/sip)
 
 # Use an extra option when compiling on Python 3.
 if (PYTHON_VERSION_MAJOR GREATER 2)
@@ -140,6 +140,17 @@ else (PYTHON_VERSION_MAJOR GREATER 2)
 endif ()
 
 add_definitions(-D_REENTRANT -DQT_CORE_LIB -DQT_GUI_LIB -DUSING_SOPRANO_NRLMODEL_UNSTABLE_API -DSIP_PROTECTED_IS_PUBLIC -Dprotected=public)
+
+include(PyKDEConfigurationInformation.cmake)
+
+# Only install pykdeconfig.py if PyQt itself has installed pyqtconfig.py, since
+# its absence indicates PyQt was built with the new build system and
+# pykdeconfig will not work.
+execute_process(COMMAND "${PYTHON_EXECUTABLE}" -c "import PyQt4.pyqtconfig"
+                RESULT_VARIABLE _exit_code OUTPUT_QUIET ERROR_QUIET)
+if (NOT _exit_code)
+    python_install(${CMAKE_CURRENT_BINARY_DIR}/pykdeconfig.py ${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4)
+endif ()
 
 file(GLOB kdecore_files_sip sip/kdecore/*.sip)
 set(SIP_EXTRA_FILES_DEPEND ${kdecore_files_sip})
@@ -237,50 +248,6 @@ if(POLKITQT_FOUND)
 endif()
 
 python_install(__init__.py ${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4)
-
-# Setup and install pykdeconfig.py
-
-# Turn these into formatted strings.
-set(_SIP_TAGS)
-foreach (_TAG ${SIP_TAGS})
-    set(_SIP_TAGS "${_SIP_TAGS} -t ${_TAG}")
-endforeach (_TAG)
-
-set(_SIP_X)
-foreach (_X ${SIP_DISABLE_FEATURES})
-    set(_SIP_X "${_SIP_X} -X ${_X}")
-endforeach (_X ${SIP_DISABLE_FEATURES})
-
-get_filename_component(LIB_DIR ${KDE4_LIB_DIR} NAME)
-
-set (SIP_FILES_INSTALL_DIR ${SHARE_INSTALL_PREFIX}/sip)
-
-set(SIP_CONFIGURATION "
-kde_version_parts = '${KDE_VERSION}'.split('.')
-kde_version_hex = int(kde_version_parts[0])*65536 + int(kde_version_parts[1])*256 + int(kde_version_parts[2])
-_pkg_config = {
-    'dist_name':            '',
-    'kde_version':          kde_version_hex,
-    'kde_version_extra':    '',
-    'kde_version_sfx':      '',
-    'kde_version_str':      '${KDE_VERSION}',
-    'kdebasedir':           '${CMAKE_INSTALL_PREFIX}',
-    'kdeincdir':            '${KDE4_INCLUDE_DIR}',
-    'kdelibdir':            '${KDE4_LIB_DIR}',
-    'konsolepart':          'False',
-    'libdir':               '${LIB_DIR}',
-    'pykde_kde_sip_flags':  '${_SIP_TAGS} ${_SIP_X} ${SIP_EXTRA_OPTIONS}',
-    'pykde_mod_dir':        '${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4',
-    'pykde_modules':        '${PYKDE_MODULES}',
-    'pykde_sip_dir':        '${SIP_FILES_INSTALL_DIR}/PyKDE4',
-    'pykde_version':        kde_version_hex,
-    'pykde_version_str':    '${KDE_VERSION}'
-}
-
-_default_macros = None")
-
-configure_file(pykdeconfig.py.in ${CMAKE_CURRENT_BINARY_DIR}/pykdeconfig.py)
-python_install(${CMAKE_CURRENT_BINARY_DIR}/pykdeconfig.py ${PYTHON_SITE_PACKAGES_INSTALL_DIR}/PyKDE4)
 
 # Install the .sip files for anyone that wants to build bindings on top of PyKDE4.
 # (Don't forget the / at the end of sip/.)

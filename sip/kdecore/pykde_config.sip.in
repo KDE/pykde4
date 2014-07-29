@@ -1,0 +1,56 @@
+// Copyright (c) 2014 Raphael Kubo da Costa <rakuco@FreeBSD.org>
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License as
+// published by the Free Software Foundation; either version 2 of
+// the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+// The purpose of this file is to create the PyKDE4.kdecore.PYKDE_CONFIGURATION
+// dict that describes how PyKDE was configured for Python modules built on top
+// of it.
+// It mimics PyQt's own PyQt4.QtCore.PYQT_CONFIGURATION, which was added in
+// PyQt 4.10 when its existing build system was deprecated and the pyqtconfig
+// module stopped being installed.
+//
+// PyKDE4.kdecore.PYKDE_CONFIGURATION contains the following items:
+// * sip_dir
+//   The directory where PyKDE4's sip files are installed.
+// * sip_flags
+//   SIP flags used to build PyKDE4 (similar to PyQt4's own `sip_flags').
+
+%PostInitialisationCode
+PyObject* pykde_config = PyDict_New();
+if (!pykde_config)
+    Py_FatalError("PyKDE4.kdecore: Failed to create PYKDE_CONFIGURATION.");
+
+// Note: PyUnicode_FromString() is only available on Python >= 2.6, but allows
+// us to use the same function for both Python 2 and Python 3.
+PyObject* pykde_sip_dir = PyUnicode_FromString("@PYKDE_SIP_DIR@");
+if (!pykde_sip_dir)
+    Py_FatalError("PyKDE4.kdecore: Failed to create PYKDE_CONFIGURATION['sip_dir'].");
+if (PyDict_SetItemString(pykde_config, "sip_dir", pykde_sip_dir) < 0)
+    Py_FatalError("PyKDE4.kdecore: Failed to set PYKDE_CONFIGURATION['sip_dir'].");
+Py_DECREF(pykde_sip_dir);
+
+// Note: PyUnicode_FromString() is only available on Python >= 2.6, but allows
+// us to use the same function for both Python 2 and Python 3.
+PyObject* pykde_sip_flags = PyUnicode_FromString("@PYKDE_SIP_FLAGS@");
+if (!pykde_sip_flags)
+    Py_FatalError("PyKDE4.kdecore: Failed to create PYKDE_CONFIGURATION['sip_flags'].");
+if (PyDict_SetItemString(pykde_config, "sip_flags", pykde_sip_flags) < 0)
+    Py_FatalError("PyKDE4.kdecore: Failed to set PYKDE_CONFIGURATION['sip_flags'].");
+Py_DECREF(pykde_sip_flags);
+
+if (PyDict_SetItemString(sipModuleDict, "PYKDE_CONFIGURATION", pykde_config) < 0)
+    Py_FatalError("PyKDE4.kdecore: Failed to set PYKDE_CONFIGURATION.");
+
+Py_DECREF(pykde_config);
+%End

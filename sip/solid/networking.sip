@@ -51,6 +51,20 @@ Solid::Networking::Status  status ();
 //ig void                    setDisconnectPolicy (Solid::Networking::ManagementPolicy policy);
 //ig Solid::Networking::ManagementPolicy  disconnectPolicy ();
 
+// SIP 4.16 renamed the PyQt4NoQMetaObject annotation to PyQtNoQMetaObject.
+// Since SIP does not have a preprocessor, we have to duplicate the class
+// definition with different annotations.
+%If (SIP_4_16 - )
+class Notifier : QObject /Abstract,PyQtNoQMetaObject/
+{
+    void                    statusChanged (Solid::Networking::Status status);
+    void                    shouldConnect ();
+    void                    shouldDisconnect ();
+protected:
+                            Notifier ();
+};
+%End
+%If ( - SIP_4_16)
 class Notifier : QObject /Abstract,PyQt4NoQMetaObject/
 {
     void                    statusChanged (Solid::Networking::Status status);
@@ -59,6 +73,7 @@ class Notifier : QObject /Abstract,PyQt4NoQMetaObject/
 protected:
                             Notifier ();
 };
+%End
 
 Solid::Networking::Notifier*  notifier ();
 };

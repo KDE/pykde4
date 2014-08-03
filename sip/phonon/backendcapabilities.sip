@@ -26,15 +26,28 @@ namespace Phonon
 {
 namespace BackendCapabilities
 {
-class Notifier : QObject /NoDefaultCtors,PyQt4NoQMetaObject/
-{
 
+// SIP 4.16 renamed the PyQt4NoQMetaObject annotation to PyQtNoQMetaObject.
+// Since SIP does not have a preprocessor, we have to duplicate the class
+// definition with different annotations.
+%If (SIP_4_16 - )
+class Notifier : QObject /NoDefaultCtors,PyQtNoQMetaObject/
+{
 signals:
     void                    capabilitiesChanged ();
     void                    availableAudioOutputDevicesChanged ();
     void                    availableAudioCaptureDevicesChanged ();
 };
-// Notifier
+%End
+%If ( - SIP_4_16)
+class Notifier : QObject /NoDefaultCtors,PyQt4NoQMetaObject/
+{
+signals:
+    void                    capabilitiesChanged ();
+    void                    availableAudioOutputDevicesChanged ();
+    void                    availableAudioCaptureDevicesChanged ();
+};
+%End
 
 Phonon::BackendCapabilities::Notifier*  notifier ();
 QStringList             availableMimeTypes ();

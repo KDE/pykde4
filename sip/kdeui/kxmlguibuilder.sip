@@ -49,10 +49,10 @@ QAction *containerAction;
     PyObject *pyWidget;
     PyObject *pyContainerAction;
 
-    if ((pyWidget = sipConvertFromNewInstance(res, sipClass_QWidget, NULL)) == NULL)
+    if ((pyWidget = sipConvertFromNewType(res, sipType_QWidget, NULL)) == NULL)
         return NULL;
 
-    if ((pyContainerAction = sipConvertFromNewInstance(containerAction, sipClass_QAction, NULL)) == NULL)
+    if ((pyContainerAction = sipConvertFromNewType(containerAction, sipType_QAction, NULL)) == NULL)
         return NULL;
 
     sipRes = Py_BuildValue ("NN", pyWidget, pyContainerAction);

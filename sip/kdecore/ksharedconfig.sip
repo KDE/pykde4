@@ -65,7 +65,7 @@ typedef KSharedConfig::Ptr KSharedConfigPtr;
     KSharedConfigPtr kcpp = *sipCpp;
     KSharedConfig *ksc    = kcpp.data ();
     ksc->ref.ref();
-    PyObject *pyKsc       = sipConvertFromInstance(ksc, sipClass_KSharedConfig, sipTransferObj);
+    PyObject *pyKsc       = sipConvertFromType(ksc, sipType_KSharedConfig, sipTransferObj);
     return pyKsc;
 %End
 
@@ -74,7 +74,7 @@ typedef KSharedConfig::Ptr KSharedConfigPtr;
         return 1;
 
     int state;
-    KSharedConfig* ksc = (KSharedConfig *)sipConvertToInstance(sipPy, sipClass_KSharedConfig, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr);
+    KSharedConfig* ksc = (KSharedConfig *)sipConvertToType(sipPy, sipType_KSharedConfig, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr);
     *sipCppPtr = new KSharedConfigPtr (ksc);
     ksc->ref.deref();
     return sipGetState(sipTransferObj);

@@ -73,7 +73,7 @@ public:
         Soprano::Backend* t = const_cast<Soprano::Backend*>(sipCpp->at(i));
         PyObject *tobj;
 
-        if ((tobj = sipConvertFromInstance(t, sipClass_Soprano_Backend, sipTransferObj)) == NULL)
+        if ((tobj = sipConvertFromType(t, sipType_Soprano_Backend, sipTransferObj)) == NULL)
         {
             Py_DECREF(l);
             return NULL;
@@ -93,7 +93,7 @@ public:
             return 0;
 
         for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
-            if (!sipCanConvertToInstance(PyList_GET_ITEM(sipPy, i), sipClass_Soprano_Backend, SIP_NOT_NONE))
+            if (!sipCanConvertToType(PyList_GET_ITEM(sipPy, i), sipType_Soprano_Backend, SIP_NOT_NONE))
                 return 0;
 
         return 1;
@@ -104,18 +104,18 @@ public:
     for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
     {
         int state;
-        const Soprano::Backend*t = reinterpret_cast<const Soprano::Backend*>(sipConvertToInstance(PyList_GET_ITEM(sipPy, i), sipClass_Soprano_Backend, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
+        const Soprano::Backend*t = reinterpret_cast<const Soprano::Backend*>(sipConvertToType(PyList_GET_ITEM(sipPy, i), sipType_Soprano_Backend, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
  
         if (*sipIsErr)
         {
-            sipReleaseInstance(const_cast<Soprano::Backend*>(t), sipClass_Soprano_Backend, state);
+            sipReleaseType(const_cast<Soprano::Backend*>(t), sipType_Soprano_Backend, state);
 
             delete ql;
             return 0;
         }
         ql->append(t);
 
-        sipReleaseInstance(const_cast<Soprano::Backend*>(t), sipClass_Soprano_Backend, state);
+        sipReleaseType(const_cast<Soprano::Backend*>(t), sipType_Soprano_Backend, state);
     }
  
     *sipCppPtr = ql;
@@ -144,7 +144,7 @@ public:
         Soprano::Parser* t = const_cast<Soprano::Parser*>(sipCpp->at(i));
         PyObject *tobj;
 
-        if ((tobj = sipConvertFromInstance(t, sipClass_Soprano_Parser, sipTransferObj)) == NULL)
+        if ((tobj = sipConvertFromType(t, sipType_Soprano_Parser, sipTransferObj)) == NULL)
         {
             Py_DECREF(l);
             return NULL;
@@ -164,7 +164,7 @@ public:
             return 0;
 
         for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
-            if (!sipCanConvertToInstance(PyList_GET_ITEM(sipPy, i), sipClass_Soprano_Parser, SIP_NOT_NONE))
+            if (!sipCanConvertToType(PyList_GET_ITEM(sipPy, i), sipType_Soprano_Parser, SIP_NOT_NONE))
                 return 0;
 
         return 1;
@@ -175,18 +175,18 @@ public:
     for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
     {
         int state;
-        const Soprano::Parser*t = reinterpret_cast<const Soprano::Parser*>(sipConvertToInstance(PyList_GET_ITEM(sipPy, i), sipClass_Soprano_Parser, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
+        const Soprano::Parser*t = reinterpret_cast<const Soprano::Parser*>(sipConvertToType(PyList_GET_ITEM(sipPy, i), sipType_Soprano_Parser, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
  
         if (*sipIsErr)
         {
-            sipReleaseInstance(const_cast<Soprano::Parser*>(t), sipClass_Soprano_Parser, state);
+            sipReleaseType(const_cast<Soprano::Parser*>(t), sipType_Soprano_Parser, state);
 
             delete ql;
             return 0;
         }
         ql->append(t);
 
-        sipReleaseInstance(const_cast<Soprano::Parser*>(t), sipClass_Soprano_Parser, state);
+        sipReleaseType(const_cast<Soprano::Parser*>(t), sipType_Soprano_Parser, state);
     }
  
     *sipCppPtr = ql;
@@ -215,7 +215,7 @@ public:
         Soprano::Serializer* t = const_cast<Soprano::Serializer*>(sipCpp->at(i));
         PyObject *tobj;
 
-        if ((tobj = sipConvertFromInstance(t, sipClass_Soprano_Serializer, sipTransferObj)) == NULL)
+        if ((tobj = sipConvertFromType(t, sipType_Soprano_Serializer, sipTransferObj)) == NULL)
         {
             Py_DECREF(l);
             return NULL;
@@ -235,7 +235,7 @@ public:
             return 0;
 
         for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
-            if (!sipCanConvertToInstance(PyList_GET_ITEM(sipPy, i), sipClass_Soprano_Serializer, SIP_NOT_NONE))
+            if (!sipCanConvertToType(PyList_GET_ITEM(sipPy, i), sipType_Soprano_Serializer, SIP_NOT_NONE))
                 return 0;
 
         return 1;
@@ -246,18 +246,18 @@ public:
     for (int i = 0; i < PyList_GET_SIZE(sipPy); ++i)
     {
         int state;
-        const Soprano::Serializer*t = reinterpret_cast<const Soprano::Serializer*>(sipConvertToInstance(PyList_GET_ITEM(sipPy, i), sipClass_Soprano_Serializer, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
+        const Soprano::Serializer*t = reinterpret_cast<const Soprano::Serializer*>(sipConvertToType(PyList_GET_ITEM(sipPy, i), sipType_Soprano_Serializer, sipTransferObj, SIP_NOT_NONE, &state, sipIsErr));
  
         if (*sipIsErr)
         {
-            sipReleaseInstance(const_cast<Soprano::Serializer*>(t), sipClass_Soprano_Serializer, state);
+            sipReleaseType(const_cast<Soprano::Serializer*>(t), sipType_Soprano_Serializer, state);
 
             delete ql;
             return 0;
         }
         ql->append(t);
 
-        sipReleaseInstance(const_cast<Soprano::Serializer*>(t), sipClass_Soprano_Serializer, state);
+        sipReleaseType(const_cast<Soprano::Serializer*>(t), sipType_Soprano_Serializer, state);
     }
  
     *sipCppPtr = ql;
